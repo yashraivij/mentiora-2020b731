@@ -21386,6 +21386,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q2',
+            question: 'How does Shakespeare present Lady Macbeth\'s character throughout the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare presents Lady Macbeth as initially manipulative and ruthless, using her understanding of masculinity to goad Macbeth into murder. Her descent into madness reveals the psychological cost of guilt, culminating in her sleepwalking scene where suppressed conscience emerges.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Language and dramatic techniques (8 marks)',
+                'Understanding of gender themes (7 marks)',
+                'Textual evidence and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q3',
+            question: 'Examine the role of the supernatural in Macbeth.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The supernatural serves as both catalyst and reflection of moral corruption. The witches\' prophecies exploit Macbeth\'s existing ambition, while apparitions and visions represent his psychological deterioration. The supernatural blurs reality and illusion, emphasizing themes of deception.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of supernatural elements (8 marks)',
+                'Connection to psychological themes (8 marks)',
+                'Understanding of dramatic function (7 marks)',
+                'Historical and cultural context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q4',
+            question: 'How does Shakespeare explore the theme of guilt and conscience in Macbeth?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare shows guilt as inescapable through imagery of blood and sleep. Macbeth\'s hallucinations and Lady Macbeth\'s sleepwalking reveal how conscience manifests despite attempts at suppression. The physical and psychological symptoms of guilt demonstrate its destructive power.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of guilt theme (8 marks)',
+                'Examination of imagery and symbolism (8 marks)',
+                'Character psychological analysis (7 marks)',
+                'Language and dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q5',
+            question: 'Analyse the significance of sleep imagery in Macbeth.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Sleep represents peace, innocence, and natural order that Macbeth destroys. "Sleep no more" reflects his loss of inner peace, while Duncan\'s murder in sleep violates sacred hospitality. Insomnia becomes both punishment and symbol of psychological torment.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of sleep symbolism (8 marks)',
+                'Analysis of imagery patterns (8 marks)',
+                'Connection to themes of guilt (7 marks)',
+                'Textual analysis and interpretation (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q6',
+            question: 'How does Shakespeare present the relationship between appearance and reality?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare explores deception through "fair is foul" motif, showing how appearances mislead. Macbeth\'s false face hides treacherous thoughts, while the witches\' equivocal prophecies demonstrate how truth can deceive. Reality becomes increasingly unstable as moral order collapses.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of appearance/reality theme (8 marks)',
+                'Understanding of dramatic irony (8 marks)',
+                'Examination of language and imagery (7 marks)',
+                'Connection to broader themes (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q7',
+            question: 'Examine how Shakespeare presents kingship and political order in Macbeth.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare contrasts Duncan\'s legitimate, benevolent rule with Macbeth\'s tyranny. The divine right of kings is emphasized through supernatural elements and natural imagery. Malcolm\'s restoration represents the return of rightful order and healing of the state.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of kingship themes (8 marks)',
+                'Understanding of political context (8 marks)',
+                'Character comparison and contrast (7 marks)',
+                'Historical and cultural awareness (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q8',
+            question: 'How does Shakespeare use dramatic irony throughout Macbeth?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Dramatic irony intensifies audience engagement through knowledge of Macbeth\'s plans while other characters remain unaware. Duncan\'s trust in Macbeth becomes tragically ironic, while the Porter scene provides dark comedy through unconscious truth-telling about damnation.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of dramatic irony technique (8 marks)',
+                'Analysis of specific examples (8 marks)',
+                'Examination of audience response (7 marks)',
+                'Connection to tragic structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q9',
+            question: 'Analyse the role of Banquo in Macbeth.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Banquo serves as Macbeth\'s moral foil, showing restraint where Macbeth shows ambition. His ghost represents Macbeth\'s guilt and fear, while his prophecied lineage threatens Macbeth\'s security. Banquo embodies the honor and loyalty Macbeth abandons.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and function (8 marks)',
+                'Comparison with Macbeth (8 marks)',
+                'Understanding of dramatic purpose (7 marks)',
+                'Symbolic and thematic significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'macbeth-q10',
+            question: 'How does Shakespeare explore the concept of fate versus free will in Macbeth?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare presents ambiguous causation through the witches\' prophecies, which may predict or influence events. Macbeth\'s choices drive the action, yet supernatural elements suggest predetermined fate. The tension between destiny and moral responsibility creates tragic complexity.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of fate vs free will theme (8 marks)',
+                'Understanding of tragic genre conventions (8 marks)',
+                'Examination of supernatural influence (7 marks)',
+                'Philosophical and moral implications (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
           }
         ]
       },
@@ -21405,6 +21549,150 @@ export const curriculum: Subject[] = [
                 'Analysis of dramatic techniques (8 marks)',
                 'Connection to broader themes (7 marks)',
                 'Textual support and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q2',
+            question: 'How does Shakespeare present Prospero\'s character development throughout The Tempest?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Prospero transforms from vengeful magician to forgiving father and ruler. His journey from anger to mercy reflects the play\'s themes of reconciliation, while his decision to break his staff symbolizes the choice between power and humanity.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Understanding of transformation theme (8 marks)',
+                'Analysis of dramatic structure (7 marks)',
+                'Symbolism and imagery examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q3',
+            question: 'Examine the theme of colonialism in The Tempest.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare explores colonial relationships through Prospero\'s control of Caliban and Ariel. The play reflects contemporary colonial attitudes while questioning the morality of conquest, cultural superiority, and the "civilizing" mission of European colonizers.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of colonial themes (8 marks)',
+                'Historical and cultural context (8 marks)',
+                'Character relationships examination (7 marks)',
+                'Critical interpretation and perspective (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q4',
+            question: 'How does Shakespeare present the relationship between Prospero and Caliban?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Their relationship embodies colonial power dynamics, with Prospero as master and Caliban as enslaved "other." Shakespeare presents both Prospero\'s justifications and Caliban\'s legitimate grievances, creating moral complexity around themes of ownership and belonging.',
+            markingCriteria: {
+              breakdown: [
+                'Character relationship analysis (8 marks)',
+                'Understanding of power dynamics (8 marks)',
+                'Colonial and cultural themes (7 marks)',
+                'Language and imagery analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q5',
+            question: 'Analyse the role of magic and the supernatural in The Tempest.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Magic represents both creative and destructive power, with Prospero\'s art enabling both revenge and reconciliation. The supernatural elements explore themes of illusion versus reality, while magic\'s renunciation symbolizes spiritual growth and humanity\'s triumph over power.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of magical elements (8 marks)',
+                'Thematic significance examination (8 marks)',
+                'Symbolism and metaphor analysis (7 marks)',
+                'Connection to character development (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q6',
+            question: 'How does Shakespeare explore themes of forgiveness and reconciliation?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Forgiveness emerges as the play\'s central virtue, with Prospero\'s journey from revenge to mercy modeling Christian forgiveness. The masque and final reconciliation demonstrate renewal and spiritual regeneration, though some characters remain unredeemed.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of forgiveness (8 marks)',
+                'Character transformation examination (8 marks)',
+                'Religious and moral context (7 marks)',
+                'Dramatic structure and resolution (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q7',
+            question: 'Examine the significance of the island setting in The Tempest.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The island functions as both paradise and prison, enabling transformation and revelation. Its isolation creates space for magic and moral testing, while its ambiguous nature reflects different characters\' perspectives and desires.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of setting significance (8 marks)',
+                'Symbolic and thematic function (8 marks)',
+                'Character perspective examination (7 marks)',
+                'Dramatic and structural importance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q8',
+            question: 'How does Shakespeare present the theme of nature versus nurture?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare explores whether character is innate or learned through Caliban\'s "natural" state versus Miranda\'s cultivation. The play questions assumptions about civilization and savagery, suggesting environment and education shape humanity more than birth.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of nature/nurture (8 marks)',
+                'Character comparison and contrast (8 marks)',
+                'Philosophical implications examination (7 marks)',
+                'Cultural and historical context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q9',
+            question: 'Analyse the role of Ariel in The Tempest.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Ariel represents art and imagination in service to power, executing Prospero\'s will while maintaining moral superiority. Their relationship explores themes of freedom and bondage, with Ariel\'s eventual liberation symbolizing art\'s transcendence of temporal power.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and function (8 marks)',
+                'Relationship with Prospero examination (8 marks)',
+                'Symbolic and thematic significance (7 marks)',
+                'Language and imagery analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'tempest-q10',
+            question: 'How does Shakespeare use The Tempest to reflect on art and creativity?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The play functions as Shakespeare\'s meditation on theatrical art, with Prospero as artist-creator whose magic parallels dramatic illusion. The masque within the play and final epilogue blur boundaries between art and reality, celebrating and questioning creative power.',
+            markingCriteria: {
+              breakdown: [
+                'Meta-theatrical analysis (8 marks)',
+                'Understanding of artistic themes (8 marks)',
+                'Examination of dramatic techniques (7 marks)',
+                'Biographical and literary context (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
@@ -21430,6 +21718,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q2',
+            question: 'Analyse how Shakespeare presents the theme of fate versus free will in Romeo and Juliet.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare creates tension between predestined tragedy ("star-crossed lovers") and character choices. The lovers\' impulsive decisions drive events, yet cosmic imagery and coincidences suggest inescapable destiny, creating tragic inevitability.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of fate theme (8 marks)',
+                'Character decision examination (8 marks)',
+                'Understanding of tragic structure (7 marks)',
+                'Language and imagery analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q3',
+            question: 'How does Shakespeare present the older generation in Romeo and Juliet?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The older generation embodies traditional values and ancient hatred, with Capulet and Montague representing patriarchal authority. Their inability to understand young love and insistence on feuding creates the tragic circumstances that destroy their children.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis of older generation (8 marks)',
+                'Generational conflict examination (8 marks)',
+                'Understanding of social context (7 marks)',
+                'Thematic significance analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q4',
+            question: 'Examine the role of the Nurse and Friar Lawrence in Romeo and Juliet.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Both characters serve as surrogate parents offering guidance, yet their well-intentioned interventions contribute to tragedy. The Nurse provides earthy wisdom but ultimately fails Juliet, while Friar Lawrence\'s schemes to unite the lovers prove disastrous.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and function (8 marks)',
+                'Relationship with young lovers (8 marks)',
+                'Understanding of dramatic irony (7 marks)',
+                'Moral and thematic implications (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q5',
+            question: 'How does Shakespeare use light and dark imagery in Romeo and Juliet?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Light/dark imagery reflects the lovers\' relationship existing outside normal time, with their meetings occurring in darkness while their love creates light. The inversion of traditional associations emphasizes their love\'s transcendent but doomed nature.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of light/dark imagery (8 marks)',
+                'Symbolic significance examination (8 marks)',
+                'Connection to character relationships (7 marks)',
+                'Understanding of poetic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q6',
+            question: 'Analyse Shakespeare\'s presentation of violence in Romeo and Juliet.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Violence permeates Verona society through the feuding families, with masculine honor demanding bloodshed. The escalating conflicts from verbal sparring to multiple deaths demonstrate how hatred perpetuates itself, requiring ultimate sacrifice to break the cycle.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of violence theme (8 marks)',
+                'Examination of social context (8 marks)',
+                'Character behavior analysis (7 marks)',
+                'Understanding of tragic structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q7',
+            question: 'How does Shakespeare present Juliet\'s character development?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Juliet transforms from obedient daughter to determined young woman, with love catalyzing her maturity. Her intelligence and resolve contrast with Romeo\'s emotional volatility, while her final courage in death demonstrates complete commitment to love.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Comparison with other characters (8 marks)',
+                'Understanding of gender themes (7 marks)',
+                'Language and dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q8',
+            question: 'Examine the significance of the balcony scene in Romeo and Juliet.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The balcony scene represents the height of romantic idealism, with elevated language and physical positioning reflecting spiritual love. The private intimacy contrasts with public hatred, while poetic dialogue establishes their relationship\'s transcendent quality.',
+            markingCriteria: {
+              breakdown: [
+                'Scene analysis and significance (8 marks)',
+                'Language and imagery examination (8 marks)',
+                'Symbolic and thematic function (7 marks)',
+                'Dramatic and structural importance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q9',
+            question: 'How does Shakespeare present the theme of youth versus age in Romeo and Juliet?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare contrasts youthful passion with aged prudence, showing how generational misunderstanding fuels tragedy. Young characters act impulsively while older ones cling to tradition, with the gap preventing communication and understanding.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of generational conflict (8 marks)',
+                'Character comparison and contrast (8 marks)',
+                'Social and cultural context (7 marks)',
+                'Understanding of tragic elements (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'romeo-juliet-q10',
+            question: 'Analyse the role of time in Romeo and Juliet.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Time creates dramatic tension through compressed action and missed connections. The lovers\' desire to transcend time conflicts with temporal urgency, while references to haste and delay emphasize how timing determines fate in tragedy.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of time theme (8 marks)',
+                'Understanding of dramatic structure (8 marks)',
+                'Examination of dramatic techniques (7 marks)',
+                'Connection to tragic genre (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
           }
         ]
       },
@@ -21449,6 +21881,150 @@ export const curriculum: Subject[] = [
                 'Analysis of dramatic techniques (8 marks)',
                 'Character analysis and development (7 marks)',
                 'Thematic exploration (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q2',
+            question: 'How does Shakespeare present the relationship between Beatrice and Benedick?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare presents their relationship as a battle of wits masking deeper attraction. Their verbal sparring demonstrates intellectual equality, while their eventual union represents the triumph of true understanding over superficial romanticism.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of character relationship (8 marks)',
+                'Examination of wit and language (8 marks)',
+                'Understanding of dramatic development (7 marks)',
+                'Comparison with other couples (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q3',
+            question: 'Examine Shakespeare\'s presentation of honour and reputation in the play.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Honour drives male behavior while female reputation proves fragile. Hero\'s disgrace demonstrates how women\'s worth depends on chastity, while male honour requires defending reputation through violence, creating tragic potential in comedy.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of honour theme (8 marks)',
+                'Gender and social context examination (8 marks)',
+                'Character behavior analysis (7 marks)',
+                'Understanding of dramatic tension (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q4',
+            question: 'How does Shakespeare use dramatic irony in Much Ado About Nothing?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Dramatic irony creates both comedy and tension as audiences know truths characters don\'t. The gulling scenes generate humor while Don John\'s plot creates anxiety, demonstrating how knowledge affects interpretation of events.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of dramatic irony technique (8 marks)',
+                'Analysis of comedic and dramatic effects (8 marks)',
+                'Examination of audience response (7 marks)',
+                'Connection to themes and plot (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q5',
+            question: 'Analyse the character of Don John in Much Ado About Nothing.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Don John functions as the malcontent villain whose motiveless malignity threatens social harmony. His bastard status reflects social exclusion, while his deception exposes the community\'s vulnerability to suspicion and prejudice.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and motivation (8 marks)',
+                'Understanding of villain function (8 marks)',
+                'Social context and status examination (7 marks)',
+                'Impact on plot and themes (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q6',
+            question: 'How does Shakespeare explore gender roles in Much Ado About Nothing?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare presents contrasting female models through Hero\'s passive virtue and Beatrice\'s active wit. Male characters struggle with expectations of honour and control, while the play questions traditional gender hierarchies through strong female voices.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of gender presentation (8 marks)',
+                'Character comparison and contrast (8 marks)',
+                'Social and historical context (7 marks)',
+                'Understanding of dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q7',
+            question: 'Examine the theme of appearance versus reality in Much Ado About Nothing.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Appearance consistently deceives in both positive and negative ways. Masking scenes highlight how identity can be fluid, while the slander plot shows how easily appearance can be manipulated to destroy truth.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of appearance/reality (8 marks)',
+                'Examination of masking and disguise (8 marks)',
+                'Connection to plot developments (7 marks)',
+                'Understanding of dramatic significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q8',
+            question: 'How does Shakespeare present the theme of love in its different forms?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare contrasts courtly love (Claudio/Hero) with mature love (Beatrice/Benedick). The play explores how different types of attraction and affection create relationships, questioning romantic ideals through realistic portrayal.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of love types (8 marks)',
+                'Character relationship comparison (8 marks)',
+                'Understanding of romantic conventions (7 marks)',
+                'Thematic development examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q9',
+            question: 'Analyse the role of wit and wordplay in Much Ado About Nothing.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Wit serves as both weapon and defense, particularly for Beatrice and Benedick. Verbal dexterity indicates intelligence and social status, while puns and wordplay create multiple layers of meaning that enrich character interaction.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of language and wit (8 marks)',
+                'Understanding of verbal techniques (8 marks)',
+                'Character function examination (7 marks)',
+                'Social and cultural significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'much-ado-q10',
+            question: 'How does Shakespeare resolve conflicts in Much Ado About Nothing?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Resolution comes through revelation and forgiveness, with truth ultimately prevailing over deception. The comic structure ensures harmony through marriage, though questions remain about the depth and permanence of reconciliation.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of conflict resolution (8 marks)',
+                'Understanding of comic structure (8 marks)',
+                'Examination of dramatic techniques (7 marks)',
+                'Assessment of thematic closure (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
@@ -21474,6 +22050,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q2',
+            question: 'Analyse how Shakespeare presents the character of Viola in Twelfth Night.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Viola emerges as the play\'s moral center, demonstrating loyalty, intelligence, and emotional honesty. Her male disguise as Cesario creates dramatic irony while highlighting gender performance, making her both active agent and passive victim of circumstances.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of gender themes (8 marks)',
+                'Examination of dramatic function (7 marks)',
+                'Analysis of language and behavior (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q3',
+            question: 'How does Shakespeare use the theme of disguise and deception in Twelfth Night?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Disguise reveals truth paradoxically, with Viola\'s male persona enabling authentic relationships while creating confusion. Multiple deceptions explore how appearance shapes identity and relationships, questioning the authenticity of social roles and romantic attraction.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of disguise theme (8 marks)',
+                'Understanding of dramatic irony (8 marks)',
+                'Examination of identity questions (7 marks)',
+                'Connection to romantic comedy genre (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q4',
+            question: 'Examine the role of the subplot involving Malvolio in Twelfth Night.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The Malvolio subplot provides comic counterpoint to romantic main plot while exploring themes of social ambition and cruel humor. His gulling reveals both his pretensions and the aristocrats\' callous treatment of social inferiors.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of subplot function (8 marks)',
+                'Character analysis of Malvolio (8 marks)',
+                'Understanding of social themes (7 marks)',
+                'Examination of comic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q5',
+            question: 'How does Shakespeare present different types of love in Twelfth Night?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare contrasts Orsino\'s self-indulgent romantic idealism with Viola\'s selfless devotion and Olivia\'s awakening passion. The play explores how love can be narcissistic, genuine, or misdirected, questioning romantic conventions and expectations.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of love types (8 marks)',
+                'Character comparison and development (8 marks)',
+                'Understanding of romantic themes (7 marks)',
+                'Examination of dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q6',
+            question: 'Analyse the significance of music and song in Twelfth Night.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Music reflects emotional states and themes throughout the play, with Feste\'s songs providing commentary on love and mortality. The opening emphasis on music\'s power establishes the play\'s concern with harmony, discord, and emotional manipulation.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of musical elements (8 marks)',
+                'Understanding of thematic significance (8 marks)',
+                'Character function examination (7 marks)',
+                'Connection to dramatic structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q7',
+            question: 'How does Shakespeare explore gender and sexuality in Twelfth Night?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare challenges gender binaries through Viola\'s cross-dressing and the resulting romantic confusion. The play explores same-sex attraction and fluid sexuality while questioning fixed gender roles and social expectations about masculine and feminine behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of gender themes (8 marks)',
+                'Understanding of sexuality presentation (8 marks)',
+                'Historical and cultural context (7 marks)',
+                'Examination of dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q8',
+            question: 'Examine the role of Feste in Twelfth Night.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Feste functions as wise fool whose songs and wordplay provide insight into the play\'s themes. His mobility between households and sharp observations make him both comic entertainer and moral commentator on the other characters\' follies.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and function (8 marks)',
+                'Understanding of fool tradition (8 marks)',
+                'Analysis of language and wit (7 marks)',
+                'Thematic significance examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q9',
+            question: 'How does Shakespeare present the theme of illusion versus reality?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Illusion pervades the play through disguise, mistaken identity, and self-deception. Characters create false realities through wishful thinking or deliberate deception, while true feelings often emerge through apparent falsehood, blurring distinctions between authentic and performed identity.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of illusion/reality (8 marks)',
+                'Understanding of dramatic techniques (8 marks)',
+                'Character behavior examination (7 marks)',
+                'Connection to comedy conventions (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'twelfth-night-q10',
+            question: 'Analyse how Shakespeare creates resolution in Twelfth Night.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Resolution comes through revelation and recognition, with Sebastian\'s arrival enabling multiple romantic pairings. However, the ending leaves questions about Malvolio\'s treatment and the sustainability of the romantic matches, creating both satisfaction and ambiguity.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of comic resolution (8 marks)',
+                'Understanding of dramatic structure (8 marks)',
+                'Examination of character outcomes (7 marks)',
+                'Assessment of thematic closure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
           }
         ]
       },
@@ -21496,6 +22216,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q2',
+            question: 'How does Shakespeare explore the theme of mercy versus justice in The Merchant of Venice?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare contrasts Old Testament justice with Christian mercy through the trial scene. Portia\'s "quality of mercy" speech advocates forgiveness, yet the resolution shows mercy\'s limits when applied selectively, questioning true versus performed virtue.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of mercy/justice (8 marks)',
+                'Understanding of religious context (8 marks)',
+                'Analysis of trial scene (7 marks)',
+                'Examination of dramatic irony (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q3',
+            question: 'Analyse the presentation of Portia in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Portia demonstrates intelligence and agency despite patriarchal constraints, using disguise to enter the male legal sphere. Her wealth and wit make her powerful, yet she operates within social expectations about feminine virtue and obedience.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of gender themes (8 marks)',
+                'Analysis of disguise and role-playing (7 marks)',
+                'Social and historical context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q4',
+            question: 'How does Shakespeare present attitudes towards money and commerce?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare explores tension between Christian and Jewish approaches to money, contrasting Antonio\'s "friendship" lending with Shylock\'s commercial practices. The play questions whether commerce corrupts human relationships or enables social mobility and justice.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of commerce theme (8 marks)',
+                'Religious and cultural context (8 marks)',
+                'Character motivation examination (7 marks)',
+                'Understanding of social commentary (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q5',
+            question: 'Examine the role of disguise and deception in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Disguise enables character agency, particularly for Portia and Nerissa who transcend gender limitations. However, deception also enables prejudice and creates moral ambiguity about the ethics of achieving justice through false means.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of disguise theme (8 marks)',
+                'Understanding of gender implications (8 marks)',
+                'Examination of moral questions (7 marks)',
+                'Dramatic function analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q6',
+            question: 'How does Shakespeare present the relationship between Antonio and Bassanio?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare presents intense male friendship that may suggest homoerotic undertones, with Antonio\'s devotion to Bassanio driving the plot. Their relationship explores themes of loyalty, sacrifice, and the tension between friendship and romantic love.',
+            markingCriteria: {
+              breakdown: [
+                'Character relationship analysis (8 marks)',
+                'Understanding of friendship themes (8 marks)',
+                'Plot significance examination (7 marks)',
+                'Cultural and social context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q7',
+            question: 'Analyse the significance of the casket scenes in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The casket test explores appearance versus reality, with correct choice requiring wisdom over material attraction. The scenes examine love, fortune, and worth while providing commentary on how society values external versus internal qualities.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of casket symbolism (8 marks)',
+                'Thematic significance examination (8 marks)',
+                'Character development function (7 marks)',
+                'Understanding of dramatic structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q8',
+            question: 'How does Shakespeare explore prejudice and discrimination in the play?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare exposes Christian hypocrisy through their treatment of Shylock while simultaneously reinforcing antisemitic stereotypes. The play critiques prejudice while potentially perpetuating it, creating complex moral questions about tolerance and justice.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of prejudice themes (8 marks)',
+                'Historical and cultural context (8 marks)',
+                'Character behavior examination (7 marks)',
+                'Understanding of moral complexity (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q9',
+            question: 'Examine the role of Jessica in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Jessica\'s elopement and conversion represent both liberation from paternal constraint and betrayal of cultural identity. Her subplot explores themes of generational conflict, religious conversion, and the costs of assimilation in Christian society.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of cultural themes (8 marks)',
+                'Relationship with other characters (7 marks)',
+                'Thematic significance examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'merchant-venice-q10',
+            question: 'How does Shakespeare create dramatic tension in the trial scene?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare builds tension through legal procedure, character revelation, and moral questions about justice. The scene\'s climax depends on literal interpretation of law, while emotional investment in Antonio\'s fate creates audience engagement with complex ethical issues.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of dramatic techniques (8 marks)',
+                'Understanding of legal/moral themes (8 marks)',
+                'Character function examination (7 marks)',
+                'Audience response analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
           }
         ]
       },
@@ -21515,6 +22379,150 @@ export const curriculum: Subject[] = [
                 'Analysis of dramatic techniques (8 marks)',
                 'Character analysis and class representation (7 marks)',
                 'Historical and social context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q2',
+            question: 'How does Priestley present the character of Inspector Goole?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Inspector Goole functions as Priestley\'s moral mouthpiece, representing conscience and social justice. His mysterious nature and final revelation question reality while his interrogation methods expose each character\'s complicity in social inequality.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and function (8 marks)',
+                'Understanding of dramatic technique (8 marks)',
+                'Thematic significance examination (7 marks)',
+                'Analysis of mysterious elements (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q3',
+            question: 'Examine how Priestley presents generational differences in An Inspector Calls.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Priestley contrasts the older generation\'s rigid attitudes with younger characters\' potential for change. Sheila and Eric show capacity for moral growth, while their parents remain entrenched in selfish individualism, suggesting hope for social progress.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of generational conflict (8 marks)',
+                'Character development comparison (8 marks)',
+                'Understanding of social themes (7 marks)',
+                'Dramatic structure examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q4',
+            question: 'How does Priestley use dramatic irony in An Inspector Calls?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Dramatic irony operates through audience knowledge of historical events that contradict Birling\'s predictions. This technique undermines capitalist confidence while reinforcing Priestley\'s socialist message about interconnectedness and collective responsibility.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of dramatic irony technique (8 marks)',
+                'Analysis of historical context (8 marks)',
+                'Character undermining examination (7 marks)',
+                'Political message analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q5',
+            question: 'Analyse Priestley\'s presentation of capitalism and socialism.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Priestley critiques capitalism through the Birlings\' exploitation of workers and prioritization of profit over people. The Inspector represents socialist values of collective responsibility, while the play advocates for social reform and workers\' rights.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of political themes (8 marks)',
+                'Understanding of economic context (8 marks)',
+                'Character representation examination (7 marks)',
+                'Dramatic techniques analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q6',
+            question: 'How does Priestley present women\'s roles in An Inspector Calls?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Priestley shows women as victims of patriarchal society through Eva Smith\'s exploitation, while Sheila represents potential for female empowerment. Mrs. Birling embodies traditional upper-class women\'s limitations and moral blindness.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of gender themes (8 marks)',
+                'Character comparison and development (8 marks)',
+                'Social context examination (7 marks)',
+                'Understanding of class implications (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q7',
+            question: 'Examine the significance of Eva Smith in An Inspector Calls.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Eva Smith represents the working class\'s vulnerability to bourgeois exploitation. Her absence makes her symbolic rather than individual, embodying all victims of social inequality while her multiple identities suggest universal suffering.',
+            markingCriteria: {
+              breakdown: [
+                'Character significance analysis (8 marks)',
+                'Symbolic function examination (8 marks)',
+                'Understanding of class themes (7 marks)',
+                'Dramatic technique analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q8',
+            question: 'How does Priestley create dramatic tension in An Inspector Calls?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Priestley builds tension through the Inspector\'s systematic revelation of each character\'s guilt, creating mounting anxiety. The play\'s unity of time and place intensifies pressure while secrets and lies create dramatic irony and suspense.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of dramatic techniques (8 marks)',
+                'Understanding of structural elements (8 marks)',
+                'Character reaction examination (7 marks)',
+                'Audience engagement analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q9',
+            question: 'Analyse the role of guilt and conscience in An Inspector Calls.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Guilt reveals character morality, with Sheila and Eric accepting responsibility while others deny or rationalize their actions. Conscience becomes a measure of humanity, with the Inspector serving as external moral voice awakening internal awareness.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of guilt (8 marks)',
+                'Character psychology examination (8 marks)',
+                'Moral development analysis (7 marks)',
+                'Understanding of dramatic function (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'inspector-calls-q10',
+            question: 'How does Priestley present the theme of justice in An Inspector Calls?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Priestley presents justice as social rather than legal, with the Inspector delivering moral rather than criminal judgment. True justice requires accepting collective responsibility and changing exploitative systems that create inequality and suffering.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of justice themes (8 marks)',
+                'Understanding of moral vs legal justice (8 marks)',
+                'Character response examination (7 marks)',
+                'Social commentary analysis (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
