@@ -1114,21 +1114,19 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'macbeth-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 MACBETH
+MACBETH
 
 Starting with this extract, explore how Shakespeare presents ambition and its consequences in Macbeth.
 
-📖 EXTRACT:
+EXTRACT:
 ${getShakespeareExtract('macbeth')}
 
 Write about:
 • how ambition is shown in this extract
-• how ambition is shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how ambition is shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1136,21 +1134,19 @@ Write about:
         {
           id: 'romeo-juliet-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 ROMEO AND JULIET
+ROMEO AND JULIET
 
 Starting with this extract, explore how Shakespeare presents love as a powerful force in Romeo and Juliet.
 
-📖 EXTRACT:
+EXTRACT:
 ${getShakespeareExtract('romeo-and-juliet')}
 
 Write about:
 • how love is shown in this extract
-• how love is shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how love is shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1158,21 +1154,19 @@ Write about:
         {
           id: 'tempest-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 THE TEMPEST
+THE TEMPEST
 
 Starting with this extract, explore how Shakespeare presents the theme of power and control in The Tempest.
 
-📖 EXTRACT:
+EXTRACT:
 ${getShakespeareExtract('the-tempest')}
 
 Write about:
 • how power is shown in this extract
-• how power is shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how power is shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1180,21 +1174,19 @@ Write about:
         {
           id: 'much-ado-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 MUCH ADO ABOUT NOTHING
+MUCH ADO ABOUT NOTHING
 
 Starting with this extract, explore how Shakespeare presents appearances and deception in Much Ado About Nothing.
 
-📖 EXTRACT:
+EXTRACT:
 ${getShakespeareExtract('much-ado-about-nothing')}
 
 Write about:
 • how deception is shown in this extract
-• how deception is shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how deception is shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1202,14 +1194,14 @@ Write about:
         {
           id: 'twelfth-night-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 TWELFTH NIGHT
+TWELFTH NIGHT
 
 Starting with this extract, explore how Shakespeare presents love and identity in Twelfth Night.
 
-📖 EXTRACT:
+EXTRACT:
 "If music be the food of love, play on,
 Give me excess of it, that surfeiting,
 The appetite may sicken and so die.
@@ -1228,9 +1220,7 @@ That it alone is high fantastical."
 
 Write about:
 • how love and identity are shown in this extract
-• how they are shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how they are shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1238,21 +1228,19 @@ Write about:
         {
           id: 'merchant-venice-2026',
           questionNumber: 1,
-          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+          text: `SECTION A - SHAKESPEARE
 Answer ONE question on the play you have studied.
 
-📚 THE MERCHANT OF VENICE
+THE MERCHANT OF VENICE
 
 Starting with this extract, explore how Shakespeare presents justice and mercy in The Merchant of Venice.
 
-📖 EXTRACT:
+EXTRACT:
 ${getShakespeareExtract('merchant-of-venice')}
 
 Write about:
 • how justice and mercy are shown in this extract
-• how they are shown in the play as a whole
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+• how they are shown in the play as a whole`,
           marks: 34,
           section: 'Section A - Shakespeare'
         },
@@ -1261,14 +1249,12 @@ Write about:
         {
           id: 'inspector-calls-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 AN INSPECTOR CALLS - J.B. Priestley
+AN INSPECTOR CALLS - J.B. Priestley
 
-How does Priestley present responsibility and social class in An Inspector Calls?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Priestley present responsibility and social class in An Inspector Calls?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1276,14 +1262,12 @@ How does Priestley present responsibility and social class in An Inspector Calls
         {
           id: 'hobsons-choice-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 HOBSON'S CHOICE - Harold Brighouse
+HOBSON'S CHOICE - Harold Brighouse
 
-How does Brighouse present independence and family expectations in Hobson's Choice?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Brighouse present independence and family expectations in Hobson's Choice?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1291,14 +1275,12 @@ How does Brighouse present independence and family expectations in Hobson's Choi
         {
           id: 'blood-brothers-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 BLOOD BROTHERS - Willy Russell
+BLOOD BROTHERS - Willy Russell
 
-How does Russell present class inequality and fate in Blood Brothers?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Russell present class inequality and fate in Blood Brothers?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1306,14 +1288,12 @@ How does Russell present class inequality and fate in Blood Brothers?
         {
           id: 'journeys-end-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 JOURNEY'S END - R.C. Sherriff
+JOURNEY'S END - R.C. Sherriff
 
-How does Sherriff present the effects of war on soldiers in Journey's End?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Sherriff present the effects of war on soldiers in Journey's End?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1321,14 +1301,12 @@ How does Sherriff present the effects of war on soldiers in Journey's End?
         {
           id: 'animal-farm-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 ANIMAL FARM - George Orwell
+ANIMAL FARM - George Orwell
 
-How does Orwell present corruption and power in Animal Farm?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Orwell present corruption and power in Animal Farm?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1336,14 +1314,12 @@ How does Orwell present corruption and power in Animal Farm?
         {
           id: 'lord-flies-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 LORD OF THE FLIES - William Golding
+LORD OF THE FLIES - William Golding
 
-How does Golding present human nature and civilisation in Lord of the Flies?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Golding present human nature and civilisation in Lord of the Flies?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1351,14 +1327,12 @@ How does Golding present human nature and civilisation in Lord of the Flies?
         {
           id: 'anita-me-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 ANITA AND ME - Meera Syal
+ANITA AND ME - Meera Syal
 
-How does Syal present identity and belonging in Anita and Me?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Syal present identity and belonging in Anita and Me?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1366,14 +1340,12 @@ How does Syal present identity and belonging in Anita and Me?
         {
           id: 'woman-black-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 THE WOMAN IN BLACK - Susan Hill
+THE WOMAN IN BLACK - Susan Hill
 
-How does Hill create fear and suspense in The Woman in Black?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Hill create fear and suspense in The Woman in Black?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1381,14 +1353,12 @@ How does Hill create fear and suspense in The Woman in Black?
         {
           id: 'empress-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 THE EMPRESS - Tanika Gupta
+THE EMPRESS - Tanika Gupta
 
-How does Gupta present race and power in the British Empire in The Empress?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Gupta present race and power in the British Empire in The Empress?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1396,14 +1366,12 @@ How does Gupta present race and power in the British Empire in The Empress?
         {
           id: 'refugee-boy-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 REFUGEE BOY - Benjamin Zephaniah (adapted by Lemn Sissay)
+REFUGEE BOY - Benjamin Zephaniah (adapted by Lemn Sissay)
 
-How does Zephaniah present conflict and belonging in Refugee Boy?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Zephaniah present conflict and belonging in Refugee Boy?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1411,14 +1379,12 @@ How does Zephaniah present conflict and belonging in Refugee Boy?
         {
           id: 'coram-boy-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 CORAM BOY - Jamila Gavin
+CORAM BOY - Jamila Gavin
 
-How does Gavin present social injustice and morality in Coram Boy?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Gavin present social injustice and morality in Coram Boy?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         },
@@ -1426,14 +1392,12 @@ How does Gavin present social injustice and morality in Coram Boy?
         {
           id: 'boys-dont-cry-2026',
           questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+          text: `SECTION B - POST-1914 BRITISH LITERATURE
 Answer ONE question on the modern text you have studied.
 
-📖 BOYS DON'T CRY - Malorie Blackman
+BOYS DON'T CRY - Malorie Blackman
 
-How does Blackman present gender and identity in Boys Don't Cry?
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+How does Blackman present gender and identity in Boys Don't Cry?`,
           marks: 34,
           section: 'Section B - Post-1914 Literature'
         }
