@@ -382,9 +382,9 @@ const PredictedQuestions = () => {
                    <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
                      Computer Science Paper 1
                    </CardTitle>
-                   <CardDescription className="text-muted-foreground text-sm">
-                     J277/01: Computer systems - Systems architecture, Memory and storage, Networks, Security
-                   </CardDescription>
+                          <CardDescription className="text-muted-foreground text-sm">
+                            J277/01: Computer systems - Systems architecture, Memory and storage, Computer networks, Network security, Systems software, Ethical impacts
+                          </CardDescription>
                  </CardHeader>
                  
                  <CardContent className="relative pt-0">
