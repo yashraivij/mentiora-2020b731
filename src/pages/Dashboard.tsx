@@ -203,7 +203,7 @@ const Dashboard = () => {
     let name = subject.name;
     
     // For subjects that already have exam board in their name, return as-is
-    if (name.includes('(AQA)') || name.includes('(Edexcel)')) {
+    if (name.includes('(AQA)') || name.includes('(Edexcel)') || name.includes('(OCR)')) {
       return name;
     }
     
@@ -218,6 +218,11 @@ const Dashboard = () => {
       return `Physics (Edexcel)`;
     } else if (subject.id === 'edexcel-english-language') {
       return `English Language (Edexcel)`;
+    }
+    
+    // For OCR subjects
+    if (subject.id === 'computer-science') {
+      return `${name} (OCR)`;
     }
     
     // For all other subjects (AQA), add (AQA)
