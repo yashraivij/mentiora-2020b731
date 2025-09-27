@@ -1634,7 +1634,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q3`,
           questionNumber: questionNumber++,
-          text: `Write the correct form of the verb "tener" for "yo" in the present tense.`,
+          text: `Write a short paragraph in Spanish describing what you did last weekend. Include at least 3 different activities and use the past tense.`,
           marks: 5,
           section: 'Q3'
         });
