@@ -4756,6 +4756,9 @@ Write a story about a moment of fear.
           `Compare the advantages and disadvantages of cloud computing versus local storage.`,
           `Explain how search engines work. Describe the algorithms used to rank web pages.`
         ];
+      } else if (subjectId === 'psychology-component-01') {
+        // Psychology questions are handled separately - return empty array here
+        questionPool = [];
       } else {
         // Generic questions - generate based on topics
         const topicNames = topics.map(t => t.name);
