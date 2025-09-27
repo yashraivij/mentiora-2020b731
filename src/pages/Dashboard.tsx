@@ -1051,34 +1051,13 @@ const Dashboard = () => {
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
 
-  // Available subjects from the same list used in onboarding
-  const AVAILABLE_SUBJECTS = [
-    { id: 'physics-edexcel', name: 'Physics', examBoard: 'Edexcel', topics: [] },
-    { id: 'chemistry-edexcel', name: 'Chemistry', examBoard: 'Edexcel', topics: [] },
-    { id: 'english-language', name: 'English Language', examBoard: 'AQA', topics: [] },
-    { id: 'religious-studies', name: 'Religious Studies', examBoard: 'AQA', topics: [] },
-    { id: 'history', name: 'History', examBoard: 'AQA', topics: [] },
-    { id: 'english-literature', name: 'English Literature', examBoard: 'AQA', topics: [] },
-    { id: 'physics', name: 'Physics', examBoard: 'AQA', topics: [] },
-    { id: 'geography', name: 'Geography', examBoard: 'AQA', topics: [] },
-    { id: 'geography-edexcel', name: 'Geography', examBoard: 'Edexcel', topics: [] },
-    { id: 'maths', name: 'Mathematics', examBoard: 'AQA', topics: [] },
-    { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel', topics: [] },
-    { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE', topics: [] },
-    { id: 'biology', name: 'Biology', examBoard: 'AQA', topics: [] },
-    { id: 'chemistry', name: 'Chemistry', examBoard: 'AQA', topics: [] },
-    { id: 'business', name: 'Business', examBoard: 'AQA', topics: [] },
-    { id: 'combined-science-aqa', name: 'Combined Science', examBoard: 'AQA', topics: [] },
-    { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel', topics: [] },
-  ];
-
-  const availableSubjects = AVAILABLE_SUBJECTS.filter((subject) => !userSubjects.includes(subject.id));
+  const availableSubjects = curriculum.filter((subject) => !userSubjects.includes(subject.id));
 
   // Add subject function
   const addSubject = async (subjectId: string) => {
     if (!user?.id) return;
     
-    const subject = AVAILABLE_SUBJECTS.find(s => s.id === subjectId);
+    const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) return;
 
     try {
@@ -1822,9 +1801,9 @@ const Dashboard = () => {
                                          <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
                                            {getSubjectDisplayName(subject)}
                                          </h3>
-                                          <p className="text-sm text-gray-600 mobile-text-wrap">
-                                            {subject.topics?.length || 0} topics available
-                                          </p>
+                                         <p className="text-sm text-gray-600 mobile-text-wrap">
+                                           {subject.topics.length} topics available
+                                         </p>
                                        </div>
                                        <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                                      </div>
