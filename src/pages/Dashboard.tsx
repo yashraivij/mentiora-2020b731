@@ -1283,6 +1283,135 @@ const Dashboard = () => {
               </div>
             </motion.div>
           </div>
+        ) : subject.id === 'spanish-aqa' ? (
+          // Spanish AQA has 4 papers: Foundation/Higher Reading & Writing
+          <div className="flex flex-col items-center mt-6 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Paper 3 Foundation Reading */}
+              <motion.div
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (subject.topics.length * 0.1) + 0.1 }}
+              >
+                <motion.button
+                  onClick={isPremium ? () => navigate("/predicted-exam/spanish-aqa-paper-3-foundation") : () => navigate("/pricing")}
+                  className="relative w-20 h-20 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="h-6 w-6 text-white absolute inset-0 m-auto">
+                    {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
+                  </div>
+                </motion.button>
+                
+                <div className="text-center mt-2">
+                  <p className="text-xs font-bold text-foreground">
+                    Paper 3: Reading
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Foundation
+                  </p>
+                  {!isPremium && (
+                    <p className="text-xs text-muted-foreground">Premium Required</p>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Paper 3 Higher Reading */}
+              <motion.div
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (subject.topics.length * 0.1) + 0.2 }}
+              >
+                <motion.button
+                  onClick={isPremium ? () => navigate("/predicted-exam/spanish-aqa-paper-3-higher") : () => navigate("/pricing")}
+                  className="relative w-20 h-20 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="h-6 w-6 text-white absolute inset-0 m-auto">
+                    {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
+                  </div>
+                </motion.button>
+                
+                <div className="text-center mt-2">
+                  <p className="text-xs font-bold text-foreground">
+                    Paper 3: Reading
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Higher
+                  </p>
+                  {!isPremium && (
+                    <p className="text-xs text-muted-foreground">Premium Required</p>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Paper 4 Foundation Writing */}
+              <motion.div
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (subject.topics.length * 0.1) + 0.3 }}
+              >
+                <motion.button
+                  onClick={isPremium ? () => navigate("/predicted-exam/spanish-aqa-paper-4-foundation") : () => navigate("/pricing")}
+                  className="relative w-20 h-20 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="h-6 w-6 text-white absolute inset-0 m-auto">
+                    {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
+                  </div>
+                </motion.button>
+                
+                <div className="text-center mt-2">
+                  <p className="text-xs font-bold text-foreground">
+                    Paper 4: Writing
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Foundation
+                  </p>
+                  {!isPremium && (
+                    <p className="text-xs text-muted-foreground">Premium Required</p>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Paper 4 Higher Writing */}
+              <motion.div
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (subject.topics.length * 0.1) + 0.4 }}
+              >
+                <motion.button
+                  onClick={isPremium ? () => navigate("/predicted-exam/spanish-aqa-paper-4-higher") : () => navigate("/pricing")}
+                  className="relative w-20 h-20 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="h-6 w-6 text-white absolute inset-0 m-auto">
+                    {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
+                  </div>
+                </motion.button>
+                
+                <div className="text-center mt-2">
+                  <p className="text-xs font-bold text-foreground">
+                    Paper 4: Writing
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Higher
+                  </p>
+                  {!isPremium && (
+                    <p className="text-xs text-muted-foreground">Premium Required</p>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          </div>
         ) : (
           // All other subjects have one exam
           <motion.div

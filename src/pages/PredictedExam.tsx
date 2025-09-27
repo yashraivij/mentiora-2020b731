@@ -50,7 +50,7 @@ const PredictedExam = () => {
     clearNotification
   } = usePersonalizedNotifications();
   
-  const subject = curriculum.find(s => s.id === subjectId);
+  const subject = curriculum.find(s => s.id === subjectId || subjectId?.startsWith(s.id + '-paper-'));
   
   if (!subject) {
     navigate('/predicted-questions');
@@ -1139,97 +1139,160 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     }
     
     // Special format for Spanish AQA GCSE - 4 papers (Foundation/Higher Reading & Writing)
-    if (subjectId === 'spanish-aqa') {
-      const papers = [
-        {
-          id: 'paper-3-foundation',
-          title: 'Paper 3: Reading – Foundation',
-          timeLimit: 45,
-          totalMarks: 50,
-          sections: [
-            { name: 'Section A', description: 'Reading comprehension questions in English (40 marks)', marks: 40 },
-            { name: 'Section B', description: 'Translation from Spanish into English (10 marks)', marks: 10 }
-          ]
-        },
-        {
-          id: 'paper-3-higher', 
-          title: 'Paper 3: Reading – Higher',
-          timeLimit: 60,
-          totalMarks: 50,
-          sections: [
-            { name: 'Section A', description: 'Reading comprehension questions in English (40 marks)', marks: 40 },
-            { name: 'Section B', description: 'Translation from Spanish into English (10 marks)', marks: 10 }
-          ]
-        },
-        {
-          id: 'paper-4-foundation',
-          title: 'Paper 4: Writing – Foundation', 
-          timeLimit: 70,
-          totalMarks: 50,
-          sections: [
-            { name: 'Q1', description: 'Five short sentences in response to text prompt (10 marks)', marks: 10 },
-            { name: 'Q2', description: 'Short piece of writing - five bullet points, ~50 words (10 marks)', marks: 10 },
-            { name: 'Q3', description: 'Five short grammar tasks (5 marks)', marks: 5 },
-            { name: 'Q4', description: 'Translation English to Spanish, minimum 35 words (10 marks)', marks: 10 },
-            { name: 'Q5', description: 'Writing task - three bullet points, ~90 words (15 marks)', marks: 15 }
-          ]
-        },
-        {
-          id: 'paper-4-higher',
-          title: 'Paper 4: Writing – Higher',
-          timeLimit: 75, 
-          totalMarks: 50,
-          sections: [
-            { name: 'Q1', description: 'Translation English to Spanish, minimum 50 words (10 marks)', marks: 10 },
-            { name: 'Q2', description: 'Writing task - three bullet points, ~90 words (15 marks)', marks: 15 },
-            { name: 'Q3', description: 'Open-ended writing task - two bullets, ~150 words (25 marks)', marks: 25 }
-          ]
-        }
-      ];
-
-      // Generate sample questions for each paper
-      papers.forEach(paper => {
-        // Add paper as section header
+    if (subjectId === 'spanish-aqa' || subjectId?.startsWith('spanish-aqa-paper-')) {
+      const paperType = subjectId?.includes('paper-3') ? 'reading' :
+                       subjectId?.includes('paper-4') ? 'writing' : 'general';
+      const tier = subjectId?.includes('foundation') ? 'foundation' :
+                  subjectId?.includes('higher') ? 'higher' : 'mixed';
+      
+      if (paperType === 'reading') {
+        // Paper 3: Reading questions
+        const timeLimit = tier === 'foundation' ? 45 : 60;
+        const totalMarks = 50;
+        
         questions.push({
-          id: `${paper.id}-header`,
-          questionNumber: questions.length + 1,
-          text: `${paper.title}\n\nTime: ${paper.timeLimit} minutes\nTotal marks: ${paper.totalMarks}\n\n${paper.sections.map(s => `${s.name}: ${s.description}`).join('\n')}`,
+          id: `${subjectId}-header`,
+          questionNumber: 0,
+          text: `Paper 3: Reading – ${tier === 'foundation' ? 'Foundation' : 'Higher'} Tier\n\nTime: ${timeLimit} minutes\nTotal marks: ${totalMarks}\n\nSection A: Reading comprehension questions in English (40 marks)\nSection B: Translation from Spanish into English (10 marks)`,
           marks: 0,
-          section: paper.id
+          section: 'Header'
         });
 
-        if (paper.id.includes('reading')) {
-          // Reading paper questions - sample from curriculum
-          const sampleQuestions = subject.topics.slice(0, 3).flatMap(topic => 
-            topic.questions.filter(q => q.question.includes('read') || q.question.includes('translate')).slice(0, 2)
-          );
-          
-          sampleQuestions.forEach(q => {
-            questions.push({
-              id: `${paper.id}-${q.id}`,
-              questionNumber: questions.length + 1,
-              text: q.question,
-              marks: q.marks,
-              section: paper.id
-            });
+        // Add reading comprehension questions from curriculum
+        let questionNumber = 1;
+        const readingQuestions = subject.topics.flatMap(topic => 
+          topic.questions.filter(q => 
+            q.question.toLowerCase().includes('read') || 
+            q.question.toLowerCase().includes('comprehension') ||
+            q.question.toLowerCase().includes('spanish') && q.question.toLowerCase().includes('english')
+          )
+        ).slice(0, tier === 'foundation' ? 6 : 8);
+
+        readingQuestions.forEach(q => {
+          questions.push({
+            id: `${subjectId}-q${questionNumber}`,
+            questionNumber: questionNumber++,
+            text: q.question,
+            marks: q.marks,
+            section: 'A'
           });
+        });
+
+        // Add translation question
+        const translationText = tier === 'foundation' ? 
+          'Translate the following passage from Spanish into English (minimum 35 words):\n\n"Mi familia es muy importante para mí. Vivimos en una casa pequeña pero cómoda. Mis padres trabajan mucho para darnos una buena educación. Los fines de semana visitamos a nuestros abuelos."' :
+          'Translate the following passage from Spanish into English (minimum 50 words):\n\n"La tecnología ha transformado completamente nuestra forma de comunicarnos. Las redes sociales permiten mantener contacto con personas de todo el mundo, pero también pueden crear problemas como la adicción digital y la pérdida de habilidades sociales presenciales."';
+
+        questions.push({
+          id: `${subjectId}-translation`,
+          questionNumber: questionNumber,
+          text: translationText,
+          marks: 10,
+          section: 'B'
+        });
+
+      } else if (paperType === 'writing') {
+        // Paper 4: Writing questions
+        const timeLimit = tier === 'foundation' ? 70 : 75;
+        const totalMarks = 50;
+        
+        questions.push({
+          id: `${subjectId}-header`,
+          questionNumber: 0,
+          text: `Paper 4: Writing – ${tier === 'foundation' ? 'Foundation' : 'Higher'} Tier\n\nTime: ${timeLimit} minutes\nTotal marks: ${totalMarks}`,
+          marks: 0,
+          section: 'Header'
+        });
+
+        let questionNumber = 1;
+
+        if (tier === 'foundation') {
+          // Foundation tier questions
+          questions.push({
+            id: `${subjectId}-q1`,
+            questionNumber: questionNumber++,
+            text: 'Describe five things you can see or experience at the fiesta in Sevilla. Write five short sentences in Spanish.\n\nExample: "Veo bailarines de flamenco."\n\n[10 marks]',
+            marks: 10,
+            section: 'Q1'
+          });
+
+          questions.push({
+            id: `${subjectId}-q2`,
+            questionNumber: questionNumber++,
+            text: 'You are writing about your school life. Write approximately 50 words in Spanish covering these five points:\n• Your favourite subject\n• What you do at break time\n• Your school uniform\n• Your best friend at school\n• Your plans for next year\n\n[10 marks]',
+            marks: 10,
+            section: 'Q2'
+          });
+
+          questions.push({
+            id: `${subjectId}-q3`,
+            questionNumber: questionNumber++,
+            text: 'Complete the following grammar tasks:\n(a) Write the correct form of "tener": Ella _____ quince años.\n(b) Choose the correct adjective: Mi hermana es muy (simpático/simpática)\n(c) Complete with the correct verb: Ayer _____ (comer - preterite) pizza.\n(d) Write in the plural: La casa → Las _____\n(e) Fill in the preposition: Voy _____ supermercado.\n\n[5 marks]',
+            marks: 5,
+            section: 'Q3'
+          });
+
+          questions.push({
+            id: `${subjectId}-q4`,
+            questionNumber: questionNumber++,
+            text: 'Translate the following from English into Spanish (minimum 35 words):\n\n"I live in a small town with my family. There is a market, a church and several shops. At weekends I like to go to the park with my friends. We play football and chat."\n\n[10 marks]',
+            marks: 10,
+            section: 'Q4'
+          });
+
+          questions.push({
+            id: `${subjectId}-q5`,
+            questionNumber: questionNumber,
+            text: 'You are discussing your hobbies and free time. Write approximately 90 words in Spanish covering:\n• What you like to do in your free time\n• A hobby you tried recently\n• Plans for this weekend\n\nYou must write something about each bullet point.\n\n[15 marks]',
+            marks: 15,
+            section: 'Q5'
+          });
+
         } else {
-          // Writing paper questions - sample from curriculum  
-          const sampleQuestions = subject.topics.slice(0, 3).flatMap(topic =>
-            topic.questions.filter(q => q.question.includes('write') || q.question.includes('translate')).slice(0, 2)
-          );
-          
-          sampleQuestions.forEach(q => {
-            questions.push({
-              id: `${paper.id}-${q.id}`,
-              questionNumber: questions.length + 1, 
-              text: q.question,
-              marks: q.marks,
-              section: paper.id
-            });
+          // Higher tier questions
+          questions.push({
+            id: `${subjectId}-q1`,
+            questionNumber: questionNumber++,
+            text: 'Translate the following from English into Spanish (minimum 50 words):\n\n"My city has changed a lot in recent years. They have built new shopping centers and improved public transport. However, traffic congestion remains a serious problem, especially during rush hours. The local government is trying to encourage people to use bicycles more."\n\n[10 marks]',
+            marks: 10,
+            section: 'Q1'
+          });
+
+          questions.push({
+            id: `${subjectId}-q2`,
+            questionNumber: questionNumber++,
+            text: 'You are discussing technology and social media. Write approximately 90 words in Spanish covering:\n• How you use technology in your daily life\n• The advantages and disadvantages of social media\n• Your opinion about the future of communication\n\nYou must write something about each bullet point.\n\n[15 marks]',
+            marks: 15,
+            section: 'Q2'
+          });
+
+          questions.push({
+            id: `${subjectId}-q3`,
+            questionNumber: questionNumber,
+            text: 'Write about environmental issues and your local area. Write approximately 150 words in Spanish about:\n• Environmental problems in your area\n• What you personally do to help the environment\n\nYou should express and justify opinions, and write in a variety of tenses.\n\n[25 marks]',
+            marks: 25,
+            section: 'Q3'
           });
         }
-      });
+      } else {
+        // General Spanish AQA - show all 4 papers
+        const papers = [
+          { name: 'Paper 3: Reading – Foundation', marks: 50, time: 45 },
+          { name: 'Paper 3: Reading – Higher', marks: 50, time: 60 },
+          { name: 'Paper 4: Writing – Foundation', marks: 50, time: 70 },
+          { name: 'Paper 4: Writing – Higher', marks: 50, time: 75 }
+        ];
+
+        papers.forEach((paper, index) => {
+          questions.push({
+            id: `spanish-aqa-paper-${index + 1}`,
+            questionNumber: index + 1,
+            text: `${paper.name}\n\nTime: ${paper.time} minutes\nTotal marks: ${paper.marks}\n\nClick to take this specific paper.`,
+            marks: paper.marks,
+            section: 'Overview'
+          });
+        });
+      }
 
       return questions;
     }
