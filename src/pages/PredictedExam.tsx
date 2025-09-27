@@ -3254,38 +3254,185 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return combinedScienceBiologyQuestions;
     }
 
-    // Special format for Geography B (OCR) - Use curriculum predicted exam questions
+    // Special format for Geography B (OCR) - Paper 1: Our Natural World
     if (subjectId === 'geography-b-ocr') {
-      console.log('Loading Geography B (OCR) predicted exam questions...');
+      console.log('Loading Geography B (OCR) Paper 1: Our Natural World questions...');
       
-      // Determine which paper based on subjectId suffix or default to Paper 01
-      let paperName = 'Paper 01: Our Natural World';
-      if (subjectId.includes('paper-02')) {
-        paperName = 'Paper 02: People and Society';
-      } else if (subjectId.includes('paper-03')) {
-        paperName = 'Paper 03: Geographical Exploration';
-      }
-      
-      // Find the specific paper topic in the curriculum
-      const paperTopic = subject.topics.find(topic => 
-        topic.name.includes(paperName)
-      );
-      
-      if (paperTopic) {
-        const questions = paperTopic.questions.map((q, index) => ({
-          id: q.id,
-          questionNumber: index + 1,
-          text: q.question,
-          marks: q.marks,
-          section: q.question.includes('DECISION MAKING EXERCISE') ? 'Decision Making Exercise' : 
-                   paperName === 'Paper 01: Our Natural World' ? 'Physical Geography' :
-                   paperName === 'Paper 02: People and Society' ? 'Human Geography' : 
-                   'Geographical Skills'
-        }));
+      const ocrGeographyQuestions: ExamQuestion[] = [
+        // Topic 1 – Global Hazards (20 marks)
+        {
+          id: 'ocr-geo-1a',
+          questionNumber: 1,
+          text: 'What is meant by the term natural hazard?',
+          marks: 1,
+          section: 'Global Hazards'
+        },
+        {
+          id: 'ocr-geo-1b',
+          questionNumber: 2,
+          text: 'Identify two types of natural hazards.',
+          marks: 2,
+          section: 'Global Hazards'
+        },
+        {
+          id: 'ocr-geo-1c',
+          questionNumber: 3,
+          text: 'Explain how convection currents cause tectonic plate movement.',
+          marks: 4,
+          section: 'Global Hazards'
+        },
+        {
+          id: 'ocr-geo-1d',
+          questionNumber: 4,
+          text: 'Study Figure 1, a map showing global tropical storm tracks.\nDescribe the distribution of tropical storms.',
+          marks: 3,
+          section: 'Global Hazards'
+        },
+        {
+          id: 'ocr-geo-1e',
+          questionNumber: 5,
+          text: 'Explain how the effects of tropical storms differ between LICs and HICs. Use examples.',
+          marks: 6,
+          section: 'Global Hazards'
+        },
+        {
+          id: 'ocr-geo-1f',
+          questionNumber: 6,
+          text: 'Evaluate how technology can reduce the impacts of tectonic hazards.',
+          marks: 4,
+          section: 'Global Hazards'
+        },
         
-        console.log(`Geography B (OCR) ${paperName} questions loaded:`, questions.length);
-        return questions;
-      }
+        // Topic 2 – Changing Climate (15 marks)
+        {
+          id: 'ocr-geo-2a',
+          questionNumber: 7,
+          text: 'Outline one piece of evidence that shows climate has changed since the Quaternary period.',
+          marks: 2,
+          section: 'Changing Climate'
+        },
+        {
+          id: 'ocr-geo-2b',
+          questionNumber: 8,
+          text: 'Explain two natural causes of climate change.',
+          marks: 4,
+          section: 'Changing Climate'
+        },
+        {
+          id: 'ocr-geo-2c',
+          questionNumber: 9,
+          text: 'Study Figure 2, a graph showing global CO₂ levels and temperature.\nDescribe the relationship between CO₂ levels and global temperatures.',
+          marks: 3,
+          section: 'Changing Climate'
+        },
+        {
+          id: 'ocr-geo-2d',
+          questionNumber: 10,
+          text: 'Explain how climate change could affect the UK.',
+          marks: 4,
+          section: 'Changing Climate'
+        },
+        {
+          id: 'ocr-geo-2e',
+          questionNumber: 11,
+          text: 'Evaluate the effectiveness of one strategy designed to reduce the impacts of climate change.',
+          marks: 2,
+          section: 'Changing Climate'
+        },
+        
+        // Topic 3 – Distinctive Landscapes (16 marks)
+        {
+          id: 'ocr-geo-3a',
+          questionNumber: 12,
+          text: 'Define the term landscape.',
+          marks: 1,
+          section: 'Distinctive Landscapes'
+        },
+        {
+          id: 'ocr-geo-3b',
+          questionNumber: 13,
+          text: 'Identify one upland and one lowland area in the UK.',
+          marks: 2,
+          section: 'Distinctive Landscapes'
+        },
+        {
+          id: 'ocr-geo-3c',
+          questionNumber: 14,
+          text: 'Explain how geology influences the formation of distinctive landscapes in the UK.',
+          marks: 4,
+          section: 'Distinctive Landscapes'
+        },
+        {
+          id: 'ocr-geo-3d',
+          questionNumber: 15,
+          text: 'Study Figure 3, a photograph of a coastal landscape.\nDescribe two landforms shown and explain how they were formed.',
+          marks: 5,
+          section: 'Distinctive Landscapes'
+        },
+        {
+          id: 'ocr-geo-3e',
+          questionNumber: 16,
+          text: 'Assess the effectiveness of one management strategy used to protect a UK coastal landscape.',
+          marks: 4,
+          section: 'Distinctive Landscapes'
+        },
+        
+        // Topic 4 – Sustaining Ecosystems (16 marks)
+        {
+          id: 'ocr-geo-4a',
+          questionNumber: 17,
+          text: 'Define the term ecosystem.',
+          marks: 1,
+          section: 'Sustaining Ecosystems'
+        },
+        {
+          id: 'ocr-geo-4b',
+          questionNumber: 18,
+          text: 'Identify two examples of biomes and describe one characteristic of each.',
+          marks: 3,
+          section: 'Sustaining Ecosystems'
+        },
+        {
+          id: 'ocr-geo-4c',
+          questionNumber: 19,
+          text: 'Explain how humans are affecting tropical rainforests.',
+          marks: 4,
+          section: 'Sustaining Ecosystems'
+        },
+        {
+          id: 'ocr-geo-4d',
+          questionNumber: 20,
+          text: 'Study Figure 4, an image showing deforestation in the Amazon Rainforest.\nDescribe the environmental impacts shown.',
+          marks: 3,
+          section: 'Sustaining Ecosystems'
+        },
+        {
+          id: 'ocr-geo-4e',
+          questionNumber: 21,
+          text: 'Evaluate how sustainable management strategies can protect rainforests for the future.',
+          marks: 5,
+          section: 'Sustaining Ecosystems'
+        },
+        
+        // Section B: Physical Geography Fieldwork (3 marks)
+        {
+          id: 'ocr-geo-5a',
+          questionNumber: 22,
+          text: 'State one physical geography fieldwork question you investigated.',
+          marks: 1,
+          section: 'Physical Geography Fieldwork'
+        },
+        {
+          id: 'ocr-geo-5b',
+          questionNumber: 23,
+          text: 'Explain how you collected and presented your data for this investigation.',
+          marks: 2,
+          section: 'Physical Geography Fieldwork'
+        }
+      ];
+      
+      console.log('OCR Geography B Paper 1 questions loaded:', ocrGeographyQuestions.length);
+      return ocrGeographyQuestions;
     }
 
     // Special format for Geography A (Edexcel) - Use curriculum predicted exam questions
