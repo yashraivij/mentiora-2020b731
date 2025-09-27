@@ -5548,7 +5548,7 @@ Write a story about a moment of fear.
                       subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
                       subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
                       subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
-                      subjectId === 'geography-b-ocr' ? 'Geography B (Geography for Enquiring Minds)' :
+                      subjectId === 'geography-b-ocr' ? 'Geography B (OCR)' :
                       subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                        subjectId === 'computer-science' ? 'Computer Science Paper 1' :
