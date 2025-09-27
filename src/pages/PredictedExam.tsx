@@ -4810,9 +4810,235 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
+    }
+    
+    // Special handling for OCR GCSE Psychology Paper 1 predicted exam format
+    if (subjectId === 'psychology') {
+      console.log('🧠 GENERATING OCR PSYCHOLOGY PAPER 1 QUESTIONS');
+      const psychologyQuestions: ExamQuestion[] = [
+        // Section A - Criminal Psychology (24 marks)
+        // Multiple Choice (3 marks)
+        {
+          id: 'psych-a-mc1',
+          questionNumber: 1,
+          text: 'Which of the following best describes a social construct?\nA. A behavior that is biologically determined.\nB. A behavior that is considered acceptable in all cultures.\nC. A behavior defined by society and cultural norms.\nD. A behavior resulting from genetic inheritance.\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'psych-a-mc2',
+          questionNumber: 2,
+          text: 'Which part of the brain is most linked to psychoticism in Eysenck\'s theory?\nA. The hippocampus\nB. The reticular activating system\nC. The visual cortex\nD. The cerebellum\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'psych-a-mc3',
+          questionNumber: 3,
+          text: 'Which research study investigated video games and aggression in children?\nA. Heaven (1996)\nB. Cooper and Mackie (1986)\nC. Piaget (1952)\nD. Bickman (1974)\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        
+        // Section A - Short Response (8 marks)
+        {
+          id: 'psych-a-sr1',
+          questionNumber: 4,
+          text: 'Outline two features of Eysenck\'s Criminal Personality Theory.\n\n[4 marks]',
+          marks: 4,
+          section: 'A'
+        },
+        {
+          id: 'psych-a-sr2',
+          questionNumber: 5,
+          text: 'Describe one criticism of the Social Learning Theory of criminality.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'psych-a-sr3',
+          questionNumber: 6,
+          text: 'Explain how positive role models can be used in rehabilitation to reduce criminal behaviour.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        
+        // Section A - Extended Response (13 marks)
+        {
+          id: 'psych-a-er1',
+          questionNumber: 7,
+          text: 'Discuss how the Social Learning Theory and Eysenck\'s Criminal Personality Theory explain criminal behaviour.\n\nIn your answer you should refer to:\n• The main features of each theory.\n• Evidence from psychological research.\n• Strengths and weaknesses of both explanations.\n\n[13 marks]',
+          marks: 13,
+          section: 'A'
+        },
+        
+        // Section B - Development (24 marks) - Multiple Choice (3 marks)
+        {
+          id: 'psych-b-mc1',
+          questionNumber: 8,
+          text: 'Which of the following is a key process in Piaget\'s theory?\nA. Rehearsal\nB. Assimilation\nC. Reinforcement\nD. Identification\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'psych-b-mc2',
+          questionNumber: 9,
+          text: 'Dweck\'s concept of a growth mindset suggests that:\nA. Intelligence is fixed and cannot change.\nB. Success depends entirely on genetics.\nC. Effort and persistence can improve ability.\nD. Learning styles determine academic outcomes.\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'psych-b-mc3',
+          questionNumber: 10,
+          text: 'Which research study tested fixed and growth mindsets?\nA. Piaget (1952)\nB. Blackwell et al. (2007)\nC. Freud (1918)\nD. Daniel et al. (1991)\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        
+        // Section B - Short/Medium Response (9 marks)
+        {
+          id: 'psych-b-sr1',
+          questionNumber: 11,
+          text: 'Explain what Piaget meant by object permanence.\n\n[2 marks]',
+          marks: 2,
+          section: 'B'
+        },
+        {
+          id: 'psych-b-sr2',
+          questionNumber: 12,
+          text: 'Describe one similarity and one difference between Piaget\'s and Willingham\'s theories of learning.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'psych-b-sr3',
+          questionNumber: 13,
+          text: 'Evaluate one strength and one weakness of Dweck\'s mindset theory.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
+        },
+        
+        // Section B - Application (12 marks)
+        {
+          id: 'psych-b-app1',
+          questionNumber: 14,
+          text: 'A teacher notices that some students give up quickly when challenged.\n\nUsing Dweck\'s mindset theory, explain two ways the teacher could help develop growth mindsets in the classroom.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'psych-b-app2',
+          questionNumber: 15,
+          text: 'Discuss how Piaget\'s theory has influenced modern education, referring to examples from classroom practice.\n\n[8 marks]',
+          marks: 8,
+          section: 'B'
+        },
+        
+        // Section C - Psychological Problems (24 marks) - Multiple Choice (3 marks)
+        {
+          id: 'psych-c-mc1',
+          questionNumber: 16,
+          text: 'Which of the following best describes the dopamine hypothesis of schizophrenia?\nA. Low dopamine levels cause hallucinations.\nB. Overactive dopamine systems cause high dopamine activity in the brain.\nC. Dopamine has no role in schizophrenia.\nD. Dopamine levels decrease after taking antipsychotic medication.\n\n[1 mark]',
+          marks: 1,
+          section: 'C'
+        },
+        {
+          id: 'psych-c-mc2',
+          questionNumber: 17,
+          text: 'The ABC model of depression suggests that:\nA. Behaviour always causes beliefs.\nB. Beliefs influence emotional consequences.\nC. Activating events are unrelated to emotions.\nD. Depression is caused by low serotonin.\n\n[1 mark]',
+          marks: 1,
+          section: 'C'
+        },
+        {
+          id: 'psych-c-mc3',
+          questionNumber: 18,
+          text: 'Which study investigated Facebook use, envy, and depression?\nA. Heaven (1996)\nB. Tandoc et al. (2015)\nC. Daniel et al. (1991)\nD. Cooper and Mackie (1986)\n\n[1 mark]',
+          marks: 1,
+          section: 'C'
+        },
+        
+        // Section C - Short/Medium Response (9 marks)
+        {
+          id: 'psych-c-sr1',
+          questionNumber: 19,
+          text: 'Describe the social drift theory of schizophrenia.\n\n[3 marks]',
+          marks: 3,
+          section: 'C'
+        },
+        {
+          id: 'psych-c-sr2',
+          questionNumber: 20,
+          text: 'Outline two symptoms of clinical depression according to the ICD.\n\n[2 marks]',
+          marks: 2,
+          section: 'C'
+        },
+        {
+          id: 'psych-c-sr3',
+          questionNumber: 21,
+          text: 'Explain one difference between the biological and psychological explanations of schizophrenia.\n\n[4 marks]',
+          marks: 4,
+          section: 'C'
+        },
+        
+        // Section C - Extended Response (12 marks)
+        {
+          id: 'psych-c-er1',
+          questionNumber: 22,
+          text: 'Evaluate the use of antipsychotic and antidepressant medications for treating mental health problems.\n\nIn your answer, refer to how these treatments work and their strengths and limitations.\n\n[12 marks]',
+          marks: 12,
+          section: 'C'
+        },
+        
+        // Section D - Research Methods (18 marks)
+        {
+          id: 'psych-d-sr1',
+          questionNumber: 23,
+          text: 'Write an alternative hypothesis for this study:\n\nA psychologist predicts that students who revise using flashcards will score higher than those who revise by rereading notes.\n\n[2 marks]',
+          marks: 2,
+          section: 'D'
+        },
+        {
+          id: 'psych-d-sr2',
+          questionNumber: 24,
+          text: 'Identify one independent variable and one dependent variable in the study above.\n\n[2 marks]',
+          marks: 2,
+          section: 'D'
+        },
+        {
+          id: 'psych-d-sr3',
+          questionNumber: 25,
+          text: 'Name one sampling method the researcher could use and explain one advantage of using it.\n\n[3 marks]',
+          marks: 3,
+          section: 'D'
+        },
+        {
+          id: 'psych-d-sr4',
+          questionNumber: 26,
+          text: 'Describe one ethical issue in psychological research and explain how it can be dealt with.\n\n[3 marks]',
+          marks: 3,
+          section: 'D'
+        },
+        {
+          id: 'psych-d-sr5',
+          questionNumber: 27,
+          text: 'Outline one strength and one weakness of using a laboratory experiment.\n\n[4 marks]',
+          marks: 4,
+          section: 'D'
+        },
+        {
+          id: 'psych-d-sr6',
+          questionNumber: 28,
+          text: 'A researcher finds a positive correlation between stress levels and time spent on social media.\n\nExplain what this means and give one limitation of correlation studies.\n\n[4 marks]',
+          marks: 4,
+          section: 'D'
+        }
+      ];
+      
+      questions.push(...psychologyQuestions);
+      console.log('✅ Generated', psychologyQuestions.length, 'OCR Psychology Paper 1 questions (90 marks total)');
     }
     
     return questions;
@@ -4852,7 +5078,7 @@ Write a story about a moment of fear.
       geography: 90, // 1h 30min
       "geography-a-edexcel": 90, // 1h 30min
       "computer-science": 120, // 2h
-      psychology: 135 // 2h 15min
+      psychology: 90, // 1h 30min
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
@@ -4905,6 +5131,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'physics-edexcel') {
       return 100; // Edexcel GCSE Physics Paper 1: 100 marks
+    }
+    if (subjectId === 'psychology') {
+      return 90; // OCR GCSE Psychology Paper 1: 90 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
@@ -5149,7 +5378,7 @@ Write a story about a moment of fear.
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -5284,6 +5513,7 @@ Write a story about a moment of fear.
                      subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                        subjectId === 'computer-science' ? 'Computer Science Paper 1' :
+                       subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
                        `${subject.name} Predicted Exam`}
                   </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
