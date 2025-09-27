@@ -21368,11 +21368,11 @@ export const curriculum: Subject[] = [
     name: 'English Literature (Edexcel)',
     topics: [
       {
-        id: 'shakespeare-texts',
-        name: 'Shakespeare Texts',
+        id: 'macbeth',
+        name: 'Macbeth',
         questions: [
           {
-            id: 'shakespeare-q1',
+            id: 'macbeth-q1',
             question: 'Analyse how Shakespeare presents the theme of ambition in Macbeth.',
             marks: 30,
             difficulty: 'hard',
@@ -21386,9 +21386,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
-          },
+          }
+        ]
+      },
+      {
+        id: 'the-tempest',
+        name: 'The Tempest',
+        questions: [
           {
-            id: 'shakespeare-q2',
+            id: 'tempest-q1',
             question: 'Explore the significance of the storm in The Tempest.',
             marks: 30,
             difficulty: 'hard',
@@ -21402,9 +21408,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
-          },
+          }
+        ]
+      },
+      {
+        id: 'romeo-and-juliet',
+        name: 'Romeo and Juliet',
+        questions: [
           {
-            id: 'shakespeare-q3',
+            id: 'romeo-juliet-q1',
             question: 'How does Shakespeare present the relationship between Romeo and Juliet?',
             marks: 30,
             difficulty: 'medium',
@@ -21418,9 +21430,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
-          },
+          }
+        ]
+      },
+      {
+        id: 'much-ado-about-nothing',
+        name: 'Much Ado About Nothing',
+        questions: [
           {
-            id: 'shakespeare-q4',
+            id: 'much-ado-q1',
             question: 'Analyse the role of deception in Much Ado About Nothing.',
             marks: 30,
             difficulty: 'medium',
@@ -21434,9 +21452,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
-          },
+          }
+        ]
+      },
+      {
+        id: 'twelfth-night',
+        name: 'Twelfth Night',
+        questions: [
           {
-            id: 'shakespeare-q5',
+            id: 'twelfth-night-q1',
             question: 'How does Shakespeare explore themes of love and identity in Twelfth Night?',
             marks: 30,
             difficulty: 'medium',
@@ -21450,9 +21474,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
-          },
+          }
+        ]
+      },
+      {
+        id: 'the-merchant-of-venice',
+        name: 'The Merchant of Venice',
+        questions: [
           {
-            id: 'shakespeare-q6',
+            id: 'merchant-venice-q1',
             question: 'Examine how Shakespeare presents the character of Shylock in The Merchant of Venice.',
             marks: 30,
             difficulty: 'hard',
@@ -21470,11 +21500,11 @@ export const curriculum: Subject[] = [
         ]
       },
       {
-        id: 'post-1914-british-literature',
-        name: 'Post-1914 British Play or Novel',
+        id: 'an-inspector-calls',
+        name: 'An Inspector Calls',
         questions: [
           {
-            id: 'british-lit-q1',
+            id: 'inspector-calls-q1',
             question: 'Analyse how Priestley presents social responsibility in An Inspector Calls.',
             marks: 30,
             difficulty: 'medium',
@@ -21488,9 +21518,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'hobsons-choice',
+        name: 'Hobson\'s Choice',
+        questions: [
           {
-            id: 'british-lit-q2',
+            id: 'hobsons-choice-q1',
             question: 'How does Brighouse explore themes of tradition versus progress in Hobson\'s Choice?',
             marks: 30,
             difficulty: 'medium',
@@ -21504,9 +21540,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'blood-brothers',
+        name: 'Blood Brothers',
+        questions: [
           {
-            id: 'british-lit-q3',
+            id: 'blood-brothers-q1',
             question: 'Examine how Russell presents class differences in Blood Brothers.',
             marks: 30,
             difficulty: 'medium',
@@ -21520,9 +21562,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'journeys-end',
+        name: 'Journey\'s End',
+        questions: [
           {
-            id: 'british-lit-q4',
+            id: 'journeys-end-q1',
             question: 'Analyse how Sherriff presents the horror of war in Journey\'s End.',
             marks: 30,
             difficulty: 'hard',
@@ -21536,9 +21584,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'animal-farm',
+        name: 'Animal Farm',
+        questions: [
           {
-            id: 'british-lit-q5',
+            id: 'animal-farm-q1',
             question: 'How does Orwell use allegory to critique totalitarianism in Animal Farm?',
             marks: 30,
             difficulty: 'hard',
@@ -21552,9 +21606,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
-          },
+          }
+        ]
+      },
+      {
+        id: 'lord-of-the-flies',
+        name: 'Lord of the Flies',
+        questions: [
           {
-            id: 'british-lit-q6',
+            id: 'lord-flies-q1',
             question: 'Examine how Golding explores the theme of civilization versus savagery in Lord of the Flies.',
             marks: 30,
             difficulty: 'hard',
@@ -21568,9 +21628,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
-          },
+          }
+        ]
+      },
+      {
+        id: 'anita-and-me',
+        name: 'Anita and Me',
+        questions: [
           {
-            id: 'british-lit-q7',
+            id: 'anita-me-q1',
             question: 'How does Syal explore themes of identity and belonging in Anita and Me?',
             marks: 30,
             difficulty: 'medium',
@@ -21584,9 +21650,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
-          },
+          }
+        ]
+      },
+      {
+        id: 'the-woman-in-black',
+        name: 'The Woman in Black',
+        questions: [
           {
-            id: 'british-lit-q8',
+            id: 'woman-black-q1',
             question: 'Analyse how Hill creates atmosphere and tension in The Woman in Black.',
             marks: 30,
             difficulty: 'medium',
@@ -21600,9 +21672,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
-          },
+          }
+        ]
+      },
+      {
+        id: 'the-empress',
+        name: 'The Empress',
+        questions: [
           {
-            id: 'british-lit-q9',
+            id: 'empress-q1',
             question: 'Examine how Gupta presents themes of power and resistance in The Empress.',
             marks: 30,
             difficulty: 'hard',
@@ -21616,9 +21694,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'refugee-boy',
+        name: 'Refugee Boy',
+        questions: [
           {
-            id: 'british-lit-q10',
+            id: 'refugee-boy-q1',
             question: 'How does the adaptation of Refugee Boy explore themes of displacement and belonging?',
             marks: 30,
             difficulty: 'medium',
@@ -21632,9 +21716,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
-          },
+          }
+        ]
+      },
+      {
+        id: 'coram-boy',
+        name: 'Coram Boy',
+        questions: [
           {
-            id: 'british-lit-q11',
+            id: 'coram-boy-q1',
             question: 'Analyse how Gavin explores themes of friendship and loyalty in Coram Boy.',
             marks: 30,
             difficulty: 'medium',
@@ -21648,9 +21738,15 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
-          },
+          }
+        ]
+      },
+      {
+        id: 'boys-dont-cry',
+        name: 'Boys Don\'t Cry',
+        questions: [
           {
-            id: 'british-lit-q12',
+            id: 'boys-cry-q1',
             question: 'Examine how Blackman addresses themes of masculinity and emotional expression in Boys Don\'t Cry.',
             marks: 30,
             difficulty: 'medium',
