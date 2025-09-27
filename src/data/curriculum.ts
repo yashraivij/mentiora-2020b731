@@ -3781,6 +3781,122 @@ export const curriculum: Subject[] = [
             specReference: 'AQA GCSE History 8145'
           }
         ]
+      },
+      {
+        id: 'elizabethan-england',
+        name: 'BC: Elizabethan England, c1568–1603',
+        questions: [
+          {
+            id: 'elizabeth-q1',
+            question: 'Describe the key features of Elizabeth I\'s court and the role of patronage.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Elizabeth\'s court was a centre of political power where she displayed wealth and authority. Patronage involved rewarding loyal nobles with positions, land, and titles to maintain control and loyalty.',
+            markingCriteria: {
+              breakdown: ['Description of court as political centre (1 mark)', 'Display of wealth/authority (1 mark)', 'Explanation of patronage system (1 mark)', 'Link to control and loyalty (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q2',
+            question: 'What problems did Elizabeth face as a female ruler in the 16th century?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'As a female ruler, Elizabeth faced expectations to marry and produce an heir, challenges to her authority from male nobles, religious divisions between Catholics and Protestants, and external threats from Catholic powers like Spain.',
+            markingCriteria: {
+              breakdown: ['Marriage and succession expectations (2 marks)', 'Challenges from male nobles (1 mark)', 'Religious divisions (2 marks)', 'External Catholic threats (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q3',
+            question: 'How did living standards change during Elizabeth\'s reign?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Living standards improved for the wealthy gentry through increased trade and prosperity. Fashion became more elaborate. However, the poor faced increased hardship due to population growth and inflation.',
+            markingCriteria: {
+              breakdown: ['Improved standards for wealthy (1 mark)', 'Increased trade/prosperity (1 mark)', 'Fashion changes (1 mark)', 'Problems for the poor (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q4',
+            question: 'What were the main reasons for the growth in poverty during Elizabeth\'s reign?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Population growth increased demand for food and work, leading to inflation and unemployment. Bad harvests caused food shortages. The dissolution of monasteries removed traditional poor relief. Enclosure of land displaced agricultural workers.',
+            markingCriteria: {
+              breakdown: ['Population growth effects (2 marks)', 'Bad harvests/food shortages (1 mark)', 'Loss of monastic poor relief (1 mark)', 'Enclosure displacement (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q5',
+            question: 'Describe the achievements of English sailors like Drake and Hawkins.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Drake completed the first English circumnavigation (1577-1580), raided Spanish treasure ships, and helped defeat the Spanish Armada. Hawkins developed the slave trade and improved English naval design.',
+            markingCriteria: {
+              breakdown: ['Drake\'s circumnavigation (1 mark)', 'Raiding Spanish ships (1 mark)', 'Role in Armada defeat (1 mark)', 'Hawkins\' contributions (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q6',
+            question: 'How did Elizabeth\'s government respond to the Catholic threat?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Elizabeth imposed fines on Catholics (recusants), used spies like Walsingham to uncover plots, executed Mary Queen of Scots after the Babington Plot, and passed laws against Catholic priests and missionaries.',
+            markingCriteria: {
+              breakdown: ['Recusant fines (1 mark)', 'Use of spies/Walsingham (2 marks)', 'Execution of Mary (1 mark)', 'Laws against priests (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q7',
+            question: 'What was the significance of Mary Queen of Scots to Elizabeth?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mary had a strong claim to the English throne as Elizabeth\'s Catholic cousin, was the focus of Catholic plots against Elizabeth, and her presence in England after 1568 created a constant security threat.',
+            markingCriteria: {
+              breakdown: ['Strong claim to throne (1 mark)', 'Catholic cousin status (1 mark)', 'Focus of Catholic plots (1 mark)', 'Security threat after 1568 (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q8',
+            question: 'What were the main causes of conflict between England and Spain?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Religious differences (Protestant England vs Catholic Spain), English privateering against Spanish treasure ships, English support for Dutch rebels against Spanish rule, and competition for trade and colonies.',
+            markingCriteria: {
+              breakdown: ['Religious differences (2 marks)', 'Privateering against Spain (1 mark)', 'Support for Dutch rebels (2 marks)', 'Trade competition (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q9',
+            question: 'How did the defeat of the Spanish Armada affect England?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The defeat established England as a major naval power, boosted national confidence and Elizabeth\'s reputation, reduced the Catholic threat, and opened up opportunities for overseas expansion.',
+            markingCriteria: {
+              breakdown: ['Established naval power (1 mark)', 'Boosted national confidence (1 mark)', 'Reduced Catholic threat (1 mark)', 'Overseas expansion opportunities (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'elizabeth-q10',
+            question: 'What was the significance of the Elizabethan theatre and its social impact?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The theatre, led by playwrights like Shakespeare, created a new form of entertainment for all social classes. It reflected contemporary issues, helped spread ideas, but faced opposition from Puritans who saw it as immoral.',
+            markingCriteria: {
+              breakdown: ['New entertainment form (1 mark)', 'All social classes (1 mark)', 'Reflected contemporary issues (2 marks)', 'Puritan opposition (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
       }
     ]
   },
