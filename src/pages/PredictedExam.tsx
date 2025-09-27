@@ -4819,8 +4819,7 @@ Write a story about a moment of fear.
     if (subjectId === 'psychology-ocr') {
       console.log('🧠 GENERATING OCR PSYCHOLOGY PAPER 1 QUESTIONS');
       const psychologyQuestions: ExamQuestion[] = [
-        // Section A - Criminal Psychology (24 marks)
-        // Multiple Choice (3 marks)
+        // Section A - Criminal Psychology (24 marks) - Multiple Choice (3 marks)
         {
           id: 'psych-a-mc1',
           questionNumber: 1,
@@ -4838,11 +4837,12 @@ Write a story about a moment of fear.
         {
           id: 'psych-a-mc3',
           questionNumber: 3,
-          text: 'Which research study investigated social learning and criminal behavior?\nA. Heaven (1996)\nB. Cooper and Mackie (1986)\nC. Piaget (1952)\nD. Bickman (1974)\n\n[1 mark]',
+          text: 'Which research study investigated video games and aggression in children?\nA. Heaven (1996)\nB. Cooper and Mackie (1986)\nC. Piaget (1952)\nD. Bickman (1974)\n\n[1 mark]',
           marks: 1,
           section: 'A'
         },
-        // Short Response (8 marks)
+        
+        // Section A - Short Response (8 marks)
         {
           id: 'psych-a-sr1',
           questionNumber: 4,
@@ -4864,17 +4864,17 @@ Write a story about a moment of fear.
           marks: 2,
           section: 'A'
         },
-        // Extended Response (13 marks)
+        
+        // Section A - Extended Response (13 marks)
         {
           id: 'psych-a-er1',
           questionNumber: 7,
-          text: 'Discuss how the Social Learning Theory and Eysenck\'s Criminal Personality Theory explain criminal behaviour.\n\nIn your answer you should refer to:\n• The main features of each theory\n• Evidence from psychological research\n• Strengths and weaknesses of both explanations\n\n[13 marks]',
+          text: 'Discuss how the Social Learning Theory and Eysenck\'s Criminal Personality Theory explain criminal behaviour.\n\nIn your answer you should refer to:\n• The main features of each theory.\n• Evidence from psychological research.\n• Strengths and weaknesses of both explanations.\n\n[13 marks]',
           marks: 13,
           section: 'A'
         },
         
-        // Section B - Development (24 marks)
-        // Multiple Choice (3 marks)
+        // Section B - Development (24 marks) - Multiple Choice (3 marks)
         {
           id: 'psych-b-mc1',
           questionNumber: 8,
@@ -4896,7 +4896,8 @@ Write a story about a moment of fear.
           marks: 1,
           section: 'B'
         },
-        // Short/Medium Response (9 marks)
+        
+        // Section B - Short/Medium Response (9 marks)
         {
           id: 'psych-b-sr1',
           questionNumber: 11,
@@ -4918,7 +4919,8 @@ Write a story about a moment of fear.
           marks: 3,
           section: 'B'
         },
-        // Application (12 marks)  
+        
+        // Section B - Application (12 marks)
         {
           id: 'psych-b-app1',
           questionNumber: 14,
@@ -4934,8 +4936,7 @@ Write a story about a moment of fear.
           section: 'B'
         },
         
-        // Section C - Psychological Problems (24 marks)
-        // Multiple Choice (3 marks)
+        // Section C - Psychological Problems (24 marks) - Multiple Choice (3 marks)
         {
           id: 'psych-c-mc1',
           questionNumber: 16,
@@ -4957,7 +4958,8 @@ Write a story about a moment of fear.
           marks: 1,
           section: 'C'
         },
-        // Short/Medium Response (9 marks)
+        
+        // Section C - Short/Medium Response (9 marks)
         {
           id: 'psych-c-sr1',
           questionNumber: 19,
@@ -4979,7 +4981,8 @@ Write a story about a moment of fear.
           marks: 4,
           section: 'C'
         },
-        // Extended Response (12 marks)
+        
+        // Section C - Extended Response (12 marks)
         {
           id: 'psych-c-er1',
           questionNumber: 22,
@@ -4992,7 +4995,7 @@ Write a story about a moment of fear.
         {
           id: 'psych-d-sr1',
           questionNumber: 23,
-          text: 'Write an alternative hypothesis for this study:\n\n"A psychologist predicts that students who revise using flashcards will score higher than those who revise by rereading notes."\n\n[2 marks]',
+          text: 'Write an alternative hypothesis for this study:\n\nA psychologist predicts that students who revise using flashcards will score higher than those who revise by rereading notes.\n\n[2 marks]',
           marks: 2,
           section: 'D'
         },
