@@ -1147,110 +1147,402 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       
       if (paperType === 'reading' && tier === 'foundation') {
         // Paper 3: Reading - Foundation
-        questions.push({
-          id: `${subjectId}-header`,
-          questionNumber: -1,
-          text: `Paper 3: Reading – Foundation Tier\n\nTime: 45 minutes\nTotal marks: 50\nWeighting: 25%\n\nAnswer Section A in English (or non-verbally, as indicated). Section B is a translation into English. No images are used.`,
-          marks: 0,
-          section: 'Header'
-        });
+        let questionNumber = 1;
 
         // Section A - Text 1: Short messages
         questions.push({
-          id: `${subjectId}-text1`,
-          questionNumber: 1,
-          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Short messages (non-verbal + English answers)\n\nA. Mensajes\n\n"Busco compañeros para un club de lectura los sábados por la tarde."\n\n"Cierro la tienda a las 17:00 hoy por una reunión."\n\n"Se necesitan voluntarios para limpiar el parque este domingo por la mañana."\n\n"Clases de guitarra para principiantes, precio económico."\n\nQuestions (6 marks):\n\n1. Which message is about a temporary early closing?\n2. Which message is about a cheap hobby class?\n3. Which message is about an activity on Sunday morning?\n4. Which message is about a book-related activity?\n5-6. Tick True/False:\na) The shop will stay open later than usual.\nb) The guitar lessons are only for experts.`,
-          marks: 6,
+          id: `${subjectId}-text1-intro`,
+          questionNumber: questionNumber++,
+          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Short messages (non-verbal + English answers)\n\nA. Mensajes\n\n"Busco compañeros para un club de lectura los sábados por la tarde."\n\n"Cierro la tienda a las 17:00 hoy por una reunión."\n\n"Se necesitan voluntarios para limpiar el parque este domingo por la mañana."\n\n"Clases de guitarra para principiantes, precio económico."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q1`,
+          questionNumber: questionNumber++,
+          text: `Which message is about a temporary early closing?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q2`,
+          questionNumber: questionNumber++,
+          text: `Which message is about a cheap hobby class?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q3`,
+          questionNumber: questionNumber++,
+          text: `Which message is about an activity on Sunday morning?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q4`,
+          questionNumber: questionNumber++,
+          text: `Which message is about a book-related activity?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q5`,
+          questionNumber: questionNumber++,
+          text: `Tick True/False:\na) The shop will stay open later than usual.\nb) The guitar lessons are only for experts.\n\n[2 marks]`,
+          marks: 2,
           section: 'A'
         });
 
         // Section A - Text 2: Social post
         questions.push({
-          id: `${subjectId}-text2`,
-          questionNumber: 2,
-          text: `Text 2: Social post (approx. 110 words)\n\nB. Entrada en red social\n"Este trimestre decidí cambiar mis hábitos. Antes pasaba horas con el móvil, pero ahora hago deporte tres veces por semana y preparo mi comida en casa. Me siento con más energía y duermo mejor. Mis amigos dicen que estoy más contento y menos estresado. A veces echo de menos los videojuegos, pero prefiero salir a correr por el parque o cocinar con mi hermana. El mes que viene quiero apuntarme a un club de tenis del instituto para conocer a gente nueva."\n\nQuestions (8 marks):\n\n1. What two changes has the writer made? (2)\n2. Give one benefit the writer mentions about sleep. (1)\n3. Why does the writer want to join the tennis club? (1)\n4. Choose the two correct statements: (2)\nA) The writer now plays more video games.\nB) The writer cooks at home.\nC) The writer feels more stressed.\nD) The writer runs in the park.\n5. Find a phrase meaning "sign up for". (1)\n6. In your own words, explain why the writer feels happier. (1)`,
-          marks: 8,
+          id: `${subjectId}-text2-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 2: Social post (approx. 110 words)\n\nB. Entrada en red social\n"Este trimestre decidí cambiar mis hábitos. Antes pasaba horas con el móvil, pero ahora hago deporte tres veces por semana y preparo mi comida en casa. Me siento con más energía y duermo mejor. Mis amigos dicen que estoy más contento y menos estresado. A veces echo de menos los videojuegos, pero prefiero salir a correr por el parque o cocinar con mi hermana. El mes que viene quiero apuntarme a un club de tenis del instituto para conocer a gente nueva."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q1`,
+          questionNumber: questionNumber++,
+          text: `What two changes has the writer made?\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q2`,
+          questionNumber: questionNumber++,
+          text: `Give one benefit the writer mentions about sleep.\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q3`,
+          questionNumber: questionNumber++,
+          text: `Why does the writer want to join the tennis club?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q4`,
+          questionNumber: questionNumber++,
+          text: `Choose the two correct statements:\nA) The writer now plays more video games.\nB) The writer cooks at home.\nC) The writer feels more stressed.\nD) The writer runs in the park.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q5`,
+          questionNumber: questionNumber++,
+          text: `Find a phrase meaning "sign up for".\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q6`,
+          questionNumber: questionNumber++,
+          text: `In your own words, explain why the writer feels happier.\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
         // Section A - Text 3: Email
         questions.push({
-          id: `${subjectId}-text3`,
-          questionNumber: 3,
-          text: `Text 3: Email (approx. 140 words)\n\nC. Correo electrónico\n"Hola Marta,\nEl intercambio a Valencia fue increíble. Mi familia anfitriona vivía cerca del centro y me enseñó muchos lugares de interés. Probé una paella auténtica y visité la Ciudad de las Artes y las Ciencias. El último día, hicimos una excursión a la playa; el agua estaba fría pero el sol brillaba. Lo mejor fue practicar español con chicos de mi edad. A veces me costaba entender los chistes, pero todos tuvieron paciencia. Quiero volver el año que viene y recomendar el programa a mis compañeros. ¿Te gustaría venir conmigo?\nUn abrazo,\nLucía"\n\nQuestions (8 marks):\n\n1. Where did the host family live? (1)\n2. Name two activities Lucía did. (2)\n3. What difficulty did Lucía have with Spanish? (1)\n4. What positive does Lucía mention about the people there? (1)\n5. What are Lucía's future plans about the program? (2)\n6. Who is invited to go next year? (1)`,
-          marks: 8,
+          id: `${subjectId}-text3-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 3: Email (approx. 140 words)\n\nC. Correo electrónico\n"Hola Marta,\nEl intercambio a Valencia fue increíble. Mi familia anfitriona vivía cerca del centro y me enseñó muchos lugares de interés. Probé una paella auténtica y visité la Ciudad de las Artes y las Ciencias. El último día, hicimos una excursión a la playa; el agua estaba fría pero el sol brillaba. Lo mejor fue practicar español con chicos de mi edad. A veces me costaba entender los chistes, pero todos tuvieron paciencia. Quiero volver el año que viene y recomendar el programa a mis compañeros. ¿Te gustaría venir conmigo?\nUn abrazo,\nLucía"`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q1`,
+          questionNumber: questionNumber++,
+          text: `Where did the host family live?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q2`,
+          questionNumber: questionNumber++,
+          text: `Name two activities Lucía did.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q3`,
+          questionNumber: questionNumber++,
+          text: `What difficulty did Lucía have with Spanish?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q4`,
+          questionNumber: questionNumber++,
+          text: `What positive does Lucía mention about the people there?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q5`,
+          questionNumber: questionNumber++,
+          text: `What are Lucía's future plans about the program?\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q6`,
+          questionNumber: questionNumber++,
+          text: `Who is invited to go next year?\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
         // Section A - Text 4: Noticeboard
         questions.push({
-          id: `${subjectId}-text4`,
-          questionNumber: 4,
-          text: `Text 4: Noticeboard (matching)\n\nD. Anuncios de actividades\n\n"Taller de reciclaje: aprende a separar residuos y reducir plástico."\n\n"Charla: cómo usar la tecnología de forma responsable."\n\n"Ruta a pie por el casco antiguo: historia local."\n\n"Taller de cocina saludable para estudiantes ocupados."\n\nQuestions (6 marks):\nMatch 1–4 to purposes A–F (two are extra):\nA meet local people B reduce waste C learn quick meals D improve exam grades E learn local history F safe tech use`,
+          id: `${subjectId}-text4-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 4: Noticeboard (matching)\n\nD. Anuncios de actividades\n\n"Taller de reciclaje: aprende a separar residuos y reducir plástico."\n\n"Charla: cómo usar la tecnología de forma responsable."\n\n"Ruta a pie por el casco antiguo: historia local."\n\n"Taller de cocina saludable para estudiantes ocupados."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q1`,
+          questionNumber: questionNumber++,
+          text: `Match 1–4 to purposes A–F (two are extra):\nA meet local people B reduce waste C learn quick meals D improve exam grades E learn local history F safe tech use\n\n[6 marks]`,
           marks: 6,
           section: 'A'
         });
 
         // Section A - Text 5: Short article
         questions.push({
-          id: `${subjectId}-text5`,
-          questionNumber: 5,
-          text: `Text 5: Short article (approx. 160 words, T/F/Not Given)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."\n\nQuestions (12 marks):\nState True (T), False (F) or Not Given (NG):\n\n1. Young people like trains because they can study or listen to music.\n2. Student passes have become more expensive.\n3. Evening buses are sometimes delayed.\n4. There is already a night service on weekends.\n5. Dedicated lanes are suggested as a solution.\n6. The council will build a new train line next year.\n\nThen answer in English:\n7. Give two benefits expected if the measures are approved. (2)\n8. Name one current problem with public transport mentioned. (1)`,
-          marks: 12,
+          id: `${subjectId}-text5-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 5: Short article (approx. 160 words, T/F/Not Given)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q1`,
+          questionNumber: questionNumber++,
+          text: `State True (T), False (F) or Not Given (NG):\n\n1. Young people like trains because they can study or listen to music.\n2. Student passes have become more expensive.\n3. Evening buses are sometimes delayed.\n4. There is already a night service on weekends.\n5. Dedicated lanes are suggested as a solution.\n6. The council will build a new train line next year.\n\n[6 marks]`,
+          marks: 6,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q2`,
+          questionNumber: questionNumber++,
+          text: `Give two benefits expected if the measures are approved.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q3`,
+          questionNumber: questionNumber++,
+          text: `Name one current problem with public transport mentioned.\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
         // Section B - Translation
         questions.push({
           id: `${subjectId}-translation`,
-          questionNumber: 6,
-          text: `Section B – Translation (Spanish → English) (10 marks)\n\nTranslate the following passage into English (about 40–45 words):\n\n"En mi instituto promovemos un estilo de vida sano. Muchos alumnos traen comida casera y participan en actividades deportivas después de clase. Yo prefiero correr con mis amigos los martes. Así descanso mejor por la noche y rindo más en los exámenes."`,
+          questionNumber: questionNumber++,
+          text: `Section B – Translation (Spanish → English) (10 marks)\n\nTranslate the following passage into English (about 40–45 words):\n\n"En mi instituto promovemos un estilo de vida sano. Muchos alumnos traen comida casera y participan en actividades deportivas después de clase. Yo prefiero correr con mis amigos los martes. Así descanso mejor por la noche y rindo más en los exámenes."\n\n[10 marks]`,
           marks: 10,
           section: 'B'
         });
 
       } else if (paperType === 'reading' && tier === 'higher') {
         // Paper 3: Reading - Higher
-        questions.push({
-          id: `${subjectId}-header`,
-          questionNumber: -1,
-          text: `Paper 3: Reading – Higher Tier\n\nTime: 1 hour\nTotal marks: 50\nWeighting: 25%\n\nAnswer Section A in English/non-verbally. Section B is a translation into English. No images are used.`,
-          marks: 0,
-          section: 'Header'
-        });
+        let questionNumber = 1;
 
         // Section A - Text 1: Blog post
         questions.push({
-          id: `${subjectId}-text1`,
-          questionNumber: 1,
-          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Blog post (approx. 170 words)\n\nVida digital equilibrada\n"Muchos adolescentes creen que desconectar del móvil significa perder contacto con sus amigos. En realidad, cuando limito mi tiempo en redes sociales, organizo mejor mis estudios y duermo sin interrupciones. La clave no es prohibir, sino utilizar la tecnología con intención: responder mensajes en momentos concretos, desactivar notificaciones innecesarias y reservar un rato para leer o salir al aire libre. En casa hemos acordado no usar dispositivos durante la cena. Al principio me costó; ahora disfruto conversando con mis padres. Además, mis notas han mejorado y tengo menos dolores de cabeza. No pienso abandonar las redes, pero sí continuar con hábitos que me hacen sentir bien."\n\nQuestions (8 marks):\n\n1. What misconception about disconnecting is mentioned? (1)\n2. Give two strategies the writer uses with technology. (2)\n3. What rule was introduced at home and with what effect? (2)\n4. Identify two benefits the writer reports. (2)\n5. What is the writer's final position on social media? (1)`,
-          marks: 8,
+          id: `${subjectId}-text1-intro`,
+          questionNumber: questionNumber++,
+          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Blog post (approx. 170 words)\n\nVida digital equilibrada\n"Muchos adolescentes creen que desconectar del móvil significa perder contacto con sus amigos. En realidad, cuando limito mi tiempo en redes sociales, organizo mejor mis estudios y duermo sin interrupciones. La clave no es prohibir, sino utilizar la tecnología con intención: responder mensajes en momentos concretos, desactivar notificaciones innecesarias y reservar un rato para leer o salir al aire libre. En casa hemos acordado no usar dispositivos durante la cena. Al principio me costó; ahora disfruto conversando con mis padres. Además, mis notas han mejorado y tengo menos dolores de cabeza. No pienso abandonar las redes, pero sí continuar con hábitos que me hacen sentir bien."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q1`,
+          questionNumber: questionNumber++,
+          text: `What misconception about disconnecting is mentioned?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q2`,
+          questionNumber: questionNumber++,
+          text: `Give two strategies the writer uses with technology.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q3`,
+          questionNumber: questionNumber++,
+          text: `What rule was introduced at home and with what effect?\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q4`,
+          questionNumber: questionNumber++,
+          text: `Identify two benefits the writer reports.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q5`,
+          questionNumber: questionNumber++,
+          text: `What is the writer's final position on social media?\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
         // Section A - Text 2: Formal email
         questions.push({
-          id: `${subjectId}-text2`,
-          questionNumber: 2,
-          text: `Text 2: Formal email to a council (approx. 160 words)\n\n"Estimados señores:\nMe dirijo a ustedes para proponer un proyecto juvenil de voluntariado ambiental. Muchos estudiantes desean colaborar los sábados por la mañana en tareas de limpieza de ríos y parques. Si el ayuntamiento ofrece material y formación básica, podemos coordinar grupos por barrios. También pedimos campañas informativas en los institutos para aumentar la participación. Estoy convencido de que esta iniciativa mejorará la imagen de la ciudad y reducirá la basura en espacios verdes. Agradezco su atención y quedo a la espera de su respuesta.\nAtentamente,\nCarlos Ruiz"\n\nQuestions (8 marks):\n\n1. What resources are requested from the council? (1)\n2. When would the volunteers work? (1)\n3. How do they plan to recruit more students? (1)\n4. Give two expected outcomes of the project. (2)\n5. What is the tone/register of this message? (1)\n6. Quote a phrase that shows politeness. (2)`,
-          marks: 8,
+          id: `${subjectId}-text2-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 2: Formal email to a council (approx. 160 words)\n\n"Estimados señores:\nMe dirijo a ustedes para proponer un proyecto juvenil de voluntariado ambiental. Muchos estudiantes desean colaborar los sábados por la mañana en tareas de limpieza de ríos y parques. Si el ayuntamiento ofrece material y formación básica, podemos coordinar grupos por barrios. También pedimos campañas informativas en los institutos para aumentar la participación. Estoy convencido de que esta iniciativa mejorará la imagen de la ciudad y reducirá la basura en espacios verdes. Agradezco su atención y quedo a la espera de su respuesta.\nAtentamente,\nCarlos Ruiz"`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q1`,
+          questionNumber: questionNumber++,
+          text: `What resources are requested from the council?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q2`,
+          questionNumber: questionNumber++,
+          text: `When would the volunteers work?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q3`,
+          questionNumber: questionNumber++,
+          text: `How do they plan to recruit more students?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q4`,
+          questionNumber: questionNumber++,
+          text: `Give two expected outcomes of the project.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q5`,
+          questionNumber: questionNumber++,
+          text: `What is the tone/register of this message?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text2-q6`,
+          questionNumber: questionNumber++,
+          text: `Quote a phrase that shows politeness.\n\n[2 marks]`,
+          marks: 2,
           section: 'A'
         });
 
         // Section A - Text 3: Opinion column
         questions.push({
-          id: `${subjectId}-text3`,
-          questionNumber: 3,
-          text: `Text 3: Opinion column (approx. 190 words, inference)\n\n"La cultura popular cambia rápido: lo que hoy es tendencia, mañana se olvida. Sin embargo, aprender a valorar las tradiciones nos da estabilidad. En mi barrio celebramos una feria cada primavera; algunos critican los gastos, pero la feria atrae visitantes, apoya a pequeños negocios y fortalece el sentido de comunidad. No propongo mantener costumbres por obligación, sino adaptarlas a la realidad actual: reducir residuos, incluir actividades accesibles para todos y ofrecer espacios para artistas jóvenes. Cuando los ciudadanos participan en la organización, el evento deja de ser un espectáculo para convertirse en un proyecto común. Así, la cultura no es solo entretenimiento: es una herramienta para construir barrios más justos y creativos."\n\nQuestions (12 marks):\n\n1. What tension does the author describe between trends and traditions? (2)\n2. Give two advantages of the spring fair. (2)\n3. What three adaptations are suggested to modernise the event? (3)\n4. Explain how citizen participation changes the nature of the event. (2)\n5. What is the author's overall view of culture? (3)`,
-          marks: 12,
+          id: `${subjectId}-text3-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 3: Opinion column (approx. 190 words, inference)\n\n"La cultura popular cambia rápido: lo que hoy es tendencia, mañana se olvida. Sin embargo, aprender a valorar las tradiciones nos da estabilidad. En mi barrio celebramos una feria cada primavera; algunos critican los gastos, pero la feria atrae visitantes, apoya a pequeños negocios y fortalece el sentido de comunidad. No propongo mantener costumbres por obligación, sino adaptarlas a la realidad actual: reducir residuos, incluir actividades accesibles para todos y ofrecer espacios para artistas jóvenes. Cuando los ciudadanos participan en la organización, el evento deja de ser un espectáculo para convertirse en un proyecto común. Así, la cultura no es solo entretenimiento: es una herramienta para construir barrios más justos y creativos."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q1`,
+          questionNumber: questionNumber++,
+          text: `What tension does the author describe between trends and traditions?\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q2`,
+          questionNumber: questionNumber++,
+          text: `Give two advantages of the spring fair.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q3`,
+          questionNumber: questionNumber++,
+          text: `What three adaptations are suggested to modernise the event?\n\n[3 marks]`,
+          marks: 3,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q4`,
+          questionNumber: questionNumber++,
+          text: `Explain how citizen participation changes the nature of the event.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text3-q5`,
+          questionNumber: questionNumber++,
+          text: `What is the author's overall view of culture?\n\n[3 marks]`,
+          marks: 3,
           section: 'A'
         });
 
         // Section A - Text 4: Short notices
         questions.push({
-          id: `${subjectId}-text4`,
-          questionNumber: 4,
-          text: `Text 4: Short notices (matching)\n\n"Se buscan mentores para ayudar con deberes de primaria."\n\n"Concurso de relatos cortos; fecha límite: 30 de marzo."\n\n"Venta solidaria de ropa usada; sábado, centro juvenil."\n\n"Curso intensivo de conversación para el intercambio internacional."\n\nQuestions (12 marks):\nMatch 1–4 to purposes A–F (two extra):\nA language practice B volunteering as tutors C donate clothes only D submit creative writing E fundraising sale F exam preparation`,
+          id: `${subjectId}-text4-intro`,
+          questionNumber: questionNumber++,
+          text: `Text 4: Short notices (matching)\n\n"Se buscan mentores para ayudar con deberes de primaria."\n\n"Concurso de relatos cortos; fecha límite: 30 de marzo."\n\n"Venta solidaria de ropa usada; sábado, centro juvenil."\n\n"Curso intensivo de conversación para el intercambio internacional."`,
+          marks: 0,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q1`,
+          questionNumber: questionNumber++,
+          text: `Match 1–4 to purposes A–F (two extra):\nA language practice B volunteering as tutors C donate clothes only D submit creative writing E fundraising sale F exam preparation\n\n[12 marks]`,
           marks: 12,
           section: 'A'
         });
@@ -1258,27 +1550,21 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Section B - Translation
         questions.push({
           id: `${subjectId}-translation`,
-          questionNumber: 5,
-          text: `Section B – Translation (Spanish → English) (10 marks)\n\nTranslate the following passage into English (≈55–70 words):\n\n"Antes pensaba que para sacar buenas notas había que estudiar muchas horas seguidas. Ahora sé que es más eficaz organizar el tiempo en bloques cortos, con descansos y objetivos claros. También me ayuda explicar en voz alta lo aprendido. Así detecto dudas y pido ayuda a tiempo. Desde que aplico esta técnica, me siento más tranquilo y he mejorado mis resultados."`,
+          questionNumber: questionNumber++,
+          text: `Section B – Translation (Spanish → English) (10 marks)\n\nTranslate the following passage into English (≈55–70 words):\n\n"Antes pensaba que para sacar buenas notas había que estudiar muchas horas seguidas. Ahora sé que es más eficaz organizar el tiempo en bloques cortos, con descansos y objetivos claros. También me ayuda explicar en voz alta lo aprendido. Así detecto dudas y pido ayuda a tiempo. Desde que aplico esta técnica, me siento más tranquilo y he mejorado mis resultados."\n\n[10 marks]`,
           marks: 10,
           section: 'B'
         });
 
       } else if (paperType === 'writing' && tier === 'foundation') {
         // Paper 4: Writing - Foundation
-        questions.push({
-          id: `${subjectId}-header`,
-          questionNumber: -1,
-          text: `Paper 4: Writing – Foundation Tier\n\nTime: 1 hour 10 minutes\nTotal marks: 50\nWeighting: 25%\n\nNo images are used. Replace the usual photo task with a clear text-only prompt.`,
-          marks: 0,
-          section: 'Header'
-        });
+        let questionNumber = 1;
 
         // Q1 - Five short sentences
         questions.push({
           id: `${subjectId}-q1`,
-          questionNumber: 1,
-          text: `Q1 (10 marks) – Five short sentences responding to a text prompt (approx. 5–8 words each).\n\nText-only prompt: Describe five things you can see or do at a local festival in Spain (music, food, place, people, activities).\n\nWrite five separate short sentences in Spanish.`,
+          questionNumber: questionNumber++,
+          text: `Q1 (10 marks) – Five short sentences responding to a text prompt (approx. 5–8 words each).\n\nText-only prompt: Describe five things you can see or do at a local festival in Spain (music, food, place, people, activities).\n\nWrite five separate short sentences in Spanish.\n\n[10 marks]`,
           marks: 10,
           section: 'Q1'
         });
@@ -1286,8 +1572,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q2 - 50 words, five bullet points
         questions.push({
           id: `${subjectId}-q2`,
-          questionNumber: 2,
-          text: `Q2 (10 marks) – ≈50 words, respond to five compulsory bullet points:\n\nTu vida sana.\n\nIncluye: (1) comidas habituales, (2) deporte que haces, (3) una actividad nueva que quieres probar, (4) cómo duermes, (5) por qué es importante para ti.`,
+          questionNumber: questionNumber++,
+          text: `Q2 (10 marks) – ≈50 words, respond to five compulsory bullet points:\n\nTu vida sana.\n\nIncluye: (1) comidas habituales, (2) deporte que haces, (3) una actividad nueva que quieres probar, (4) cómo duermes, (5) por qué es importante para ti.\n\n[10 marks]`,
           marks: 10,
           section: 'Q2'
         });
@@ -1295,8 +1581,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q3 - Grammar tasks
         questions.push({
           id: `${subjectId}-q3`,
-          questionNumber: 3,
-          text: `Q3 (5 marks) – Grammar tasks (5 items, 1 mark each):\n\na) Conjugate tener (yo) in Present.\nb) Choose correct: "Nosotros (vamos / fuimos) al centro."\nc) Make plural: "la actividad interesante".\nd) Fill with por/para: "Estudio ___ sacar buenas notas."\ne) Translate to Spanish: "I am going to visit my friend."`,
+          questionNumber: questionNumber++,
+          text: `Q3 (5 marks) – Grammar tasks (5 items, 1 mark each):\n\na) Conjugate tener (yo) in Present.\nb) Choose correct: "Nosotros (vamos / fuimos) al centro."\nc) Make plural: "la actividad interesante".\nd) Fill with por/para: "Estudio ___ sacar buenas notas."\ne) Translate to Spanish: "I am going to visit my friend."\n\n[5 marks]`,
           marks: 5,
           section: 'Q3'
         });
@@ -1304,8 +1590,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q4 - Translation English to Spanish
         questions.push({
           id: `${subjectId}-q4`,
-          questionNumber: 4,
-          text: `Q4 (10 marks) – Translation (English → Spanish), min 35 words:\n\n"On weekdays I get up early and go to school by bus. After classes I help at home and sometimes I cook dinner. At the weekend I like visiting my grandparents and watching a film with my sister."`,
+          questionNumber: questionNumber++,
+          text: `Q4 (10 marks) – Translation (English → Spanish), min 35 words:\n\n"On weekdays I get up early and go to school by bus. After classes I help at home and sometimes I cook dinner. At the weekend I like visiting my grandparents and watching a film with my sister."\n\n[10 marks]`,
           marks: 10,
           section: 'Q4'
         });
@@ -1313,27 +1599,21 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q5 - Choice writing task
         questions.push({
           id: `${subjectId}-q5`,
-          questionNumber: 5,
-          text: `Q5 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n5A. Tus vacaciones recientes — (1) dónde fuiste, (2) qué hiciste, (3) opinión.\n\n5B. Tu instituto — (1) asignaturas favoritas, (2) normas del cole, (3) mejoras que quieres.`,
+          questionNumber: questionNumber++,
+          text: `Q5 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n5A. Tus vacaciones recientes — (1) dónde fuiste, (2) qué hiciste, (3) opinión.\n\n5B. Tu instituto — (1) asignaturas favoritas, (2) normas del cole, (3) mejoras que quieres.\n\n[15 marks]`,
           marks: 15,
           section: 'Q5'
         });
 
       } else if (paperType === 'writing' && tier === 'higher') {
         // Paper 4: Writing - Higher
-        questions.push({
-          id: `${subjectId}-header`,
-          questionNumber: -1,
-          text: `Paper 4: Writing – Higher Tier\n\nTime: 1 hour 15 minutes\nTotal marks: 50\nWeighting: 25%\n\nNo images are used.`,
-          marks: 0,
-          section: 'Header'
-        });
+        let questionNumber = 1;
 
         // Q1 - Translation English to Spanish
         questions.push({
           id: `${subjectId}-q1`,
-          questionNumber: 1,
-          text: `Q1 (10 marks) – Translation (English → Spanish), min 50 words:\n\n"Last year I changed my routine because I was always tired. Now I plan my homework, take breaks and do sport three times a week. I have started cooking healthy meals at home. These changes help me sleep better and concentrate more in class."`,
+          questionNumber: questionNumber++,
+          text: `Q1 (10 marks) – Translation (English → Spanish), min 50 words:\n\n"Last year I changed my routine because I was always tired. Now I plan my homework, take breaks and do sport three times a week. I have started cooking healthy meals at home. These changes help me sleep better and concentrate more in class."\n\n[10 marks]`,
           marks: 10,
           section: 'Q1'
         });
@@ -1341,8 +1621,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q2 - Choice writing task
         questions.push({
           id: `${subjectId}-q2`,
-          questionNumber: 2,
-          text: `Q2 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n2A. Tecnología y vida personal — (1) cómo la usas, (2) ventajas y riesgos, (3) cambios que harás.\n\n2B. Trabajo y futuro — (1) empleo ideal, (2) habilidades necesarias, (3) planes de formación.`,
+          questionNumber: questionNumber++,
+          text: `Q2 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n2A. Tecnología y vida personal — (1) cómo la usas, (2) ventajas y riesgos, (3) cambios que harás.\n\n2B. Trabajo y futuro — (1) empleo ideal, (2) habilidades necesarias, (3) planes de formación.\n\n[15 marks]`,
           marks: 15,
           section: 'Q2'
         });
@@ -1350,8 +1630,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Q3 - Open-ended writing
         questions.push({
           id: `${subjectId}-q3`,
-          questionNumber: 3,
-          text: `Q3 (25 marks) – Open-ended writing, Choice of ONE, ≈150 words, two bullets each:\n\n3A. Viajes y medio ambiente — (1) experiencias positivas/negativas de tus viajes, (2) cómo viajar de forma más sostenible en el futuro.\n\n3B. La cultura en tu comunidad — (1) eventos que fortalecen la comunidad, (2) ideas para hacerlos más inclusivos y ecológicos.`,
+          questionNumber: questionNumber++,
+          text: `Q3 (25 marks) – Open-ended writing, Choice of ONE, ≈150 words, two bullets each:\n\n3A. Viajes y medio ambiente — (1) experiencias positivas/negativas de tus viajes, (2) cómo viajar de forma más sostenible en el futuro.\n\n3B. La cultura en tu comunidad — (1) eventos que fortalecen la comunidad, (2) ideas para hacerlos más inclusivos y ecológicos.\n\n[25 marks]`,
           marks: 25,
           section: 'Q3'
         });
@@ -4481,6 +4761,53 @@ Write a story about a moment of fear.
                     <li>• Each religion has two 5-part question sets (1+2+4+5+12 marks each)</li>
                     <li>• Total: 96 marks + 6 marks for spelling, punctuation and grammar</li>
                     <li>• You have {getExamDuration()} minutes to complete this paper</li>
+                  </ul>
+                ) : subjectId === 'spanish-aqa' || subjectId?.startsWith('spanish-aqa-paper-') ? (
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                    {subjectId?.includes('paper-3') && subjectId?.includes('foundation') && (
+                      <>
+                        <li>• <strong>Paper 3: Reading – Foundation Tier</strong></li>
+                        <li>• Time: 45 minutes | Total marks: 50 | Weighting: 25%</li>
+                        <li>• Answer Section A in English (or non-verbally, as indicated)</li>
+                        <li>• Section B is a translation into English</li>
+                        <li>• No images are used</li>
+                      </>
+                    )}
+                    {subjectId?.includes('paper-3') && subjectId?.includes('higher') && (
+                      <>
+                        <li>• <strong>Paper 3: Reading – Higher Tier</strong></li>
+                        <li>• Time: 1 hour | Total marks: 50 | Weighting: 25%</li>
+                        <li>• Answer Section A in English/non-verbally</li>
+                        <li>• Section B is a translation into English</li>
+                        <li>• No images are used</li>
+                      </>
+                    )}
+                    {subjectId?.includes('paper-4') && subjectId?.includes('foundation') && (
+                      <>
+                        <li>• <strong>Paper 4: Writing – Foundation Tier</strong></li>
+                        <li>• Time: 1 hour 10 minutes | Total marks: 50 | Weighting: 25%</li>
+                        <li>• No images are used</li>
+                        <li>• Read each question carefully before answering</li>
+                        <li>• Check your work before submitting</li>
+                      </>
+                    )}
+                    {subjectId?.includes('paper-4') && subjectId?.includes('higher') && (
+                      <>
+                        <li>• <strong>Paper 4: Writing – Higher Tier</strong></li>
+                        <li>• Time: 1 hour 15 minutes | Total marks: 50 | Weighting: 25%</li>
+                        <li>• No images are used</li>
+                        <li>• Read each question carefully before answering</li>
+                        <li>• Check your work before submitting</li>
+                      </>
+                    )}
+                    {(!subjectId?.includes('paper-') || subjectId === 'spanish-aqa') && (
+                      <>
+                        <li>• Choose from 4 predicted papers for AQA GCSE Spanish</li>
+                        <li>• Each paper matches official structure, timing and marks</li>
+                        <li>• Read each question carefully before answering</li>
+                        <li>• Check your work before submitting</li>
+                      </>
+                    )}
                   </ul>
                 ) : (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
