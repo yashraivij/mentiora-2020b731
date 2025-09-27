@@ -19755,144 +19755,151 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'gh-q1',
-            question: 'Define the term "global atmospheric circulation" and describe how it creates different climatic zones.',
-            marks: 4,
+            question: 'What is meant by the term natural hazard?',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'Global atmospheric circulation is the worldwide movement of air masses driven by temperature and pressure differences. It creates three main cells in each hemisphere (Hadley, Ferrel, and Polar cells) which produce distinct climatic zones: tropical (hot, wet), temperate (moderate temperatures, seasonal variation), and polar (cold, dry).',
+            modelAnswer: 'A natural hazard is a natural event that poses a threat to people and property.',
             markingCriteria: {
               breakdown: [
-                'Definition of global atmospheric circulation (2 marks)',
-                'Description of how it creates climatic zones (2 marks)'
+                'Natural event that threatens people/property (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q2',
-            question: 'Explain how high and low pressure systems create weather extremes.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'High pressure systems (anticyclones) create stable weather with clear skies, light winds, and extreme temperatures (hot in summer, cold in winter). Low pressure systems (depressions) create unstable weather with clouds, precipitation, and strong winds. These systems create extremes when they persist or intensify, leading to heatwaves, droughts (high pressure) or storms, flooding (low pressure).',
+            question: 'Identify two types of natural hazards.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Any two from: earthquakes, volcanoes, tropical storms, floods, drought, landslides, tsunamis.',
             markingCriteria: {
               breakdown: [
-                'High pressure system characteristics (2 marks)',
-                'Low pressure system characteristics (2 marks)',
-                'How they create weather extremes (2 marks)'
+                'Two correct natural hazards (2 marks - 1 mark each)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q3',
-            question: 'Describe the distribution and frequency of tropical storms globally.',
-            marks: 6,
+            question: 'Explain how convection currents cause tectonic plate movement.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Tropical storms occur in tropical oceans (5-30°N/S) where sea temperatures exceed 27°C. Main regions include the Atlantic (hurricanes), Pacific (typhoons/cyclones), and Indian Ocean (cyclones). They avoid the equator due to lack of Coriolis effect. Peak season varies by region but generally occurs when sea temperatures are highest.',
+            modelAnswer: 'Heat from the Earth\'s core heats the mantle, causing hot rock to rise. As it reaches the surface, it cools and sinks back down. This creates circular convection currents. These currents drag the tectonic plates above them, causing them to move very slowly.',
             markingCriteria: {
               breakdown: [
-                'Global distribution described (3 marks)',
-                'Frequency patterns explained (3 marks)'
+                'Heat from core/mantle (1 mark)',
+                'Hot rock rises, cool rock sinks (1 mark)',
+                'Creates circular currents (1 mark)',
+                'Currents drag plates causing movement (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q4',
-            question: 'Explain the causes of drought and its link to El Niño events.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Drought occurs when rainfall is significantly below average for extended periods. Causes include persistent high pressure systems, changes in ocean currents, and atmospheric circulation patterns. El Niño events disrupt normal weather patterns by warming Pacific waters, reducing rainfall in Australia, parts of Africa and South America, while increasing rainfall in other regions. This creates widespread drought conditions in affected areas.',
+            question: 'Describe the distribution of tropical storms globally.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical storms occur between 5° and 30° north and south of the equator. They form over warm oceans where sea temperatures are above 27°C. Main areas include the Atlantic Ocean (hurricanes), Pacific Ocean (typhoons), and Indian Ocean (cyclones). They do not occur at the equator.',
             markingCriteria: {
               breakdown: [
-                'Definition and causes of drought (4 marks)',
-                'El Niño explanation and drought link (4 marks)'
+                'Between 5° and 30° north and south (1 mark)',
+                'Over warm oceans above 27°C (1 mark)',
+                'Named regions/ocean basins (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q5',
-            question: 'Describe the structure of the Earth and explain how plate tectonics work.',
-            marks: 8,
-            difficulty: 'medium',
-            modelAnswer: 'The Earth has four layers: inner core (solid iron/nickel), outer core (liquid iron/nickel), mantle (semi-molten rock), and crust (solid rock). Plate tectonics involves the movement of crustal plates driven by convection currents in the mantle. Heat from the core creates convection currents that cause plates to move via slab pull (dense oceanic crust sinks) and ridge push (new crust pushes plates apart).',
+            question: 'Explain how the effects of tropical storms differ between LICs and HICs. Use examples.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'LICs like the Philippines suffer more deaths because buildings are poorly constructed and warning systems are limited. People cannot afford to evacuate or prepare properly. Recovery is slow due to lack of money for rebuilding. HICs like the USA have better building standards, early warning systems, and emergency services. They have insurance and government funds for rapid recovery. However, economic losses can be higher in HICs due to expensive infrastructure.',
             markingCriteria: {
               breakdown: [
-                'Earth structure description (4 marks)',
-                'Plate tectonic processes explanation (4 marks)'
+                'LIC effects with example (2 marks)',
+                'HIC effects with example (2 marks)',
+                'Comparison/contrast made (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q6',
-            question: 'Compare the processes occurring at constructive and destructive plate boundaries.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Constructive boundaries: plates move apart, magma rises to fill gaps, creating new oceanic crust and mid-ocean ridges, producing shield volcanoes and shallow earthquakes. Destructive boundaries: oceanic plate subducts beneath continental plate, creating deep ocean trenches, composite volcanoes, and deep-focus earthquakes. Destructive boundaries are more violent due to plate collision and subduction.',
+            question: 'Outline the structure of the Earth.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Earth has four main layers: the inner core (solid iron and nickel), outer core (liquid iron and nickel), mantle (semi-molten rock), and crust (solid rock). The crust is the thinnest layer where we live.',
             markingCriteria: {
               breakdown: [
-                'Constructive boundary processes (3 marks)',
-                'Destructive boundary processes (3 marks)'
+                'Four layers identified (1 mark)',
+                'Inner core - solid iron/nickel (1 mark)',
+                'Outer core - liquid iron/nickel (1 mark)',
+                'Mantle - semi-molten rock, Crust - solid rock (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q7',
-            question: 'Explain how earthquakes are caused and why they vary in depth.',
-            marks: 6,
+            question: 'Compare constructive and destructive plate boundaries.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Earthquakes occur when stored energy in rocks is suddenly released due to plate movement. Friction causes plates to stick until stress overcomes resistance, causing sudden movement and seismic waves. Shallow-focus earthquakes (0-70km) occur at all plate boundaries. Deep-focus earthquakes (300-700km) only occur at destructive boundaries where subducting plates generate stress at depth.',
+            modelAnswer: 'Constructive boundaries: plates move apart, magma rises to create new crust, shield volcanoes and shallow earthquakes occur. Destructive boundaries: plates move together, one sinks beneath the other, composite volcanoes and deep earthquakes occur.',
             markingCriteria: {
               breakdown: [
-                'Earthquake formation process (3 marks)',
-                'Explanation of depth variation (3 marks)'
+                'Constructive - plates move apart (1 mark)',
+                'Constructive - creates new crust/volcanoes (1 mark)',
+                'Destructive - plates move together (1 mark)',
+                'Destructive - subduction/different features (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q8',
-            question: 'Describe the characteristics of shield and composite volcanoes.',
-            marks: 6,
-            difficulty: 'easy',
-            modelAnswer: 'Shield volcanoes: broad, gently sloping sides, formed from runny basaltic lava, frequent but gentle eruptions, found at constructive boundaries and hotspots (e.g., Hawaii). Composite volcanoes: steep-sided cone shape, formed from thick acidic lava and pyroclastic material, explosive eruptions, found at destructive boundaries (e.g., Mount Vesuvius).',
+            question: 'Explain why some people choose to live in areas at risk from tectonic hazards.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Fertile soil around volcanoes is good for farming. Geothermal energy can be generated near tectonic activity. Tourism brings jobs and money. People may have always lived there and have family ties. Some people cannot afford to move away.',
             markingCriteria: {
               breakdown: [
-                'Shield volcano characteristics (3 marks)',
-                'Composite volcano characteristics (3 marks)'
+                'Fertile soil/farming opportunities (1 mark)',
+                'Geothermal energy/resources (1 mark)',
+                'Tourism/economic benefits (1 mark)',
+                'Social/cultural reasons or lack of choice (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q9',
-            question: 'Evaluate the effectiveness of technology in reducing tectonic hazard risks.',
-            marks: 9,
+            question: 'Evaluate how technology can reduce the impacts of tectonic hazards.',
+            marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Technology is highly effective for earthquake monitoring through seismographs and GPS systems that detect ground movement. Building design improvements (base isolation, cross-bracing) significantly reduce earthquake damage. Early warning systems provide crucial seconds to minutes for people to take cover. However, prediction remains impossible for earthquakes, and volcanic prediction is only partially successful. Technology is expensive and may not be available in poorer countries most at risk.',
+            modelAnswer: 'Technology helps through monitoring and prediction - seismographs detect earthquakes and GPS tracks ground movement. Early warning systems give people time to evacuate or take cover. Better building design with earthquake-resistant features saves lives. However, technology is expensive so poorer countries cannot afford it. Earthquake prediction is still not possible, only detection after they start.',
             markingCriteria: {
               breakdown: [
-                'Monitoring technology effectiveness (3 marks)',
-                'Building design improvements (3 marks)',
-                'Limitations and evaluation (3 marks)'
+                'Monitoring/detection technology (2 marks)',
+                'Early warning systems (1 mark)',
+                'Building design improvements (1 mark)',
+                'Limitations - cost/prediction issues (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
           },
           {
             id: 'gh-q10',
-            question: 'Using a case study, explain the causes, consequences, and responses to a tectonic hazard event.',
-            marks: 12,
+            question: 'For a named tectonic hazard event, explain the causes and effects.',
+            marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Case study: 2011 Tōhoku Earthquake, Japan. Causes: Magnitude 9.0 earthquake at destructive plate boundary where Pacific Plate subducts beneath North American Plate, 32km deep offshore. Consequences: 15,894 deaths, Fukushima nuclear disaster, 400,000 buildings destroyed, $235 billion damage, tsunami waves up to 40m high. Responses: Immediate - evacuation orders, international aid, search and rescue. Long-term - rebuilt sea walls, improved early warning systems, relocated communities to higher ground.',
+            modelAnswer: '2011 Japan Earthquake and Tsunami. Causes: Magnitude 9.0 earthquake caused by movement at destructive plate boundary where Pacific Plate moves under North American Plate. Effects: 15,894 people died, Fukushima nuclear power plant damaged, 400,000 buildings destroyed, cost $235 billion, tsunami waves reached 40m high and traveled 10km inland.',
             markingCriteria: {
               breakdown: [
-                'Specific causes identified (3 marks)',
-                'Social and economic consequences (4 marks)',
-                'Immediate and long-term responses (4 marks)',
-                'Case study specificity (1 mark)'
+                'Named example (1 mark)',
+                'Causes explained (2 marks)',
+                'Effects described with specific details (3 marks)'
               ]
             },
             specReference: 'OCR Geography B - Global Hazards'
@@ -19905,137 +19912,152 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'cc-q1',
-            question: 'Describe the evidence for climate change from the Quaternary period to present.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Evidence includes: ice core data showing CO2 levels and temperatures over 800,000 years, sea-ice positions from satellite data since 1979, global temperature records from weather stations since 1880, tree ring data, historical paintings and diaries showing changes in landscapes and weather patterns. This evidence shows natural fluctuations but rapid warming since 1950s.',
+            question: 'Outline one piece of evidence that shows climate has changed since the Quaternary period.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Ice core data shows CO2 levels and temperatures have changed over thousands of years, with ice ages and warmer periods.',
             markingCriteria: {
               breakdown: [
-                'Ice core and temperature data (2 marks)',
-                'Sea-ice and satellite evidence (2 marks)',
-                'Historical sources and tree rings (2 marks)'
+                'Identification of evidence source (1 mark)',
+                'Brief explanation of what it shows (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q2',
-            question: 'Evaluate the reliability of different sources of climate change evidence.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Ice cores are highly reliable as they provide direct atmospheric samples over hundreds of thousands of years. Temperature records are reliable for recent periods but limited geographically before 1880. Satellite data is very accurate but only available since 1979. Historical sources like paintings and diaries are less reliable due to subjective interpretation and limited coverage. Tree rings provide good local data but may be affected by non-climate factors.',
+            question: 'Explain two natural causes of climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Solar variations: Changes in the sun\'s energy output due to sunspot cycles affect global temperatures. Volcanic eruptions: Large eruptions release ash and gases that block sunlight and cause cooling.',
             markingCriteria: {
               breakdown: [
-                'Assessment of scientific evidence reliability (4 marks)',
-                'Assessment of historical evidence limitations (2 marks)',
-                'Overall evaluation with examples (2 marks)'
+                'First natural cause explained (2 marks)',
+                'Second natural cause explained (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q3',
-            question: 'Explain the natural causes of climate change.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Natural causes include: solar variations (sunspot cycles affecting energy output), volcanic eruptions (ash and gases block sunlight, causing cooling), Milankovitch cycles (changes in Earth\'s orbit and tilt affecting solar radiation received over 100,000-year cycles). These factors have caused ice ages and warm periods throughout Earth\'s history.',
+            question: 'Describe the relationship between CO₂ levels and global temperatures.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'As CO₂ levels increase, global temperatures also increase. There is a positive correlation between the two. When CO₂ levels rise rapidly, temperatures follow a similar pattern.',
             markingCriteria: {
               breakdown: [
-                'Solar variations explanation (2 marks)',
-                'Volcanic activity effects (2 marks)',
-                'Milankovitch cycles description (2 marks)'
+                'Positive relationship identified (1 mark)',
+                'Description of correlation (1 mark)',
+                'Reference to pattern/trend (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q4',
-            question: 'Compare the natural greenhouse effect with the enhanced greenhouse effect.',
-            marks: 6,
+            question: 'Explain how climate change could affect the UK.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Natural greenhouse effect: essential for life, involves water vapor, CO2, and methane trapping some solar radiation, maintaining Earth\'s temperature at 15°C instead of -18°C. Enhanced greenhouse effect: human activities increase greenhouse gas concentrations (burning fossil fuels, deforestation, agriculture), trapping more heat and causing global warming above natural levels.',
+            modelAnswer: 'Higher temperatures, especially in winter. Wetter winters and drier summers. More extreme weather events like floods and heatwaves. Sea level rise affecting coastal areas.',
             markingCriteria: {
               breakdown: [
-                'Natural greenhouse effect explanation (3 marks)',
-                'Enhanced greenhouse effect and human causes (3 marks)'
+                'Temperature changes (1 mark)',
+                'Precipitation changes (1 mark)',
+                'Extreme weather events (1 mark)',
+                'Sea level rise/coastal impacts (1 mark)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q5',
-            question: 'Describe the global impacts of climate change in the 21st century.',
-            marks: 8,
-            difficulty: 'medium',
-            modelAnswer: 'Environmental impacts: sea level rise (thermal expansion and ice melt), more frequent extreme weather events, changing precipitation patterns, ecosystem shifts. Social impacts: displacement of populations, food security threats, health issues from heat and disease. Economic impacts: infrastructure damage, agricultural losses, insurance costs, adaptation expenses. Arctic regions face ice loss and habitat destruction.',
+            question: 'State two greenhouse gases.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide (CO₂) and methane (CH₄).',
             markingCriteria: {
               breakdown: [
-                'Environmental impacts described (3 marks)',
-                'Social impacts explained (2 marks)',
-                'Economic impacts identified (3 marks)'
+                'Two correct greenhouse gases (2 marks - 1 mark each)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q6',
-            question: 'Explain how climate change is affecting the UK specifically.',
-            marks: 6,
-            difficulty: 'easy',
-            modelAnswer: 'UK impacts include: warmer temperatures (especially winter), changing precipitation patterns (wetter winters, drier summers), more frequent extreme weather events (floods, heatwaves), earlier spring seasons affecting agriculture and wildlife, sea level rise threatening coastal areas, and changes to traditional industries like skiing and winter tourism.',
+            question: 'Explain the difference between the natural and enhanced greenhouse effect.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Natural greenhouse effect: keeps Earth warm enough for life by trapping some heat naturally. Enhanced greenhouse effect: human activities increase greenhouse gases, trapping more heat and causing global warming.',
             markingCriteria: {
               breakdown: [
-                'Temperature and precipitation changes (3 marks)',
-                'Extreme weather and seasonal impacts (3 marks)'
+                'Natural greenhouse effect explanation (2 marks)',
+                'Enhanced greenhouse effect explanation (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q7',
-            question: 'Assess why climate change is considered a global issue.',
-            marks: 9,
-            difficulty: 'hard',
-            modelAnswer: 'Climate change is global because: greenhouse gases mix throughout the atmosphere affecting all regions, impacts cross national boundaries (sea level rise, migration, extreme weather), solutions require international cooperation as emissions from one country affect others, developing countries are most vulnerable despite contributing least to the problem, and economic effects disrupt global trade and markets. No single country can solve it alone.',
+            question: 'Describe how human activities increase greenhouse gas concentrations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Burning fossil fuels for energy and transport releases CO₂. Deforestation reduces trees that absorb CO₂. Agriculture produces methane from cattle and rice farming. Manufacturing and cement production release various greenhouse gases.',
             markingCriteria: {
               breakdown: [
-                'Atmospheric and physical global connections (3 marks)',
-                'Cross-boundary impacts and vulnerability (3 marks)',
-                'Need for international cooperation (3 marks)'
+                'Fossil fuel burning (2 marks)',
+                'Deforestation (2 marks)',
+                'Agriculture and industry (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q8',
-            question: 'Explain the role of human activities in increasing greenhouse gas concentrations.',
-            marks: 8,
-            difficulty: 'medium',
-            modelAnswer: 'Fossil fuel burning (coal, oil, gas) for energy and transport releases CO2. Deforestation reduces CO2 absorption and releases stored carbon. Agriculture produces methane from livestock and rice cultivation, plus N2O from fertilizers. Industrial processes release various greenhouse gases. Cement production and waste disposal also contribute. These activities have intensified since the Industrial Revolution.',
+            question: 'Explain why climate change is a global issue requiring international cooperation.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Greenhouse gases mix in the atmosphere affecting all countries. Climate impacts cross borders (sea level rise, storms). Some countries produce more emissions but others suffer more effects. Solutions like reducing emissions need all countries to work together. No single country can solve it alone.',
             markingCriteria: {
               breakdown: [
-                'Fossil fuel combustion impacts (3 marks)',
-                'Land use changes and agriculture (3 marks)',
-                'Industrial and other human activities (2 marks)'
+                'Global nature of atmosphere/impacts (2 marks)',
+                'Cross-border effects (2 marks)',
+                'Need for cooperation (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
           {
             id: 'cc-q9',
-            question: 'Describe how climate change affects extreme weather events.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Climate change increases the frequency and intensity of heatwaves, droughts, and heavy rainfall events. Warmer air holds more moisture, leading to more intense precipitation. Higher sea temperatures fuel stronger tropical storms. Changed atmospheric circulation patterns can cause weather systems to persist longer, intensifying their impacts. However, some regions may experience fewer but more severe storms.',
+            question: 'Assess one strategy designed to reduce the impacts of climate change.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Renewable energy (wind, solar) reduces CO₂ emissions by replacing fossil fuels. Advantages: clean energy, unlimited supply, creates jobs. Disadvantages: expensive to set up, unreliable (weather dependent), visual pollution.',
             markingCriteria: {
               breakdown: [
-                'Temperature-related extremes (2 marks)',
-                'Precipitation and storm changes (2 marks)',
-                'Atmospheric circulation effects (2 marks)'
+                'Strategy identified (1 mark)',
+                'How it works (1 mark)',
+                'Advantages and disadvantages (2 marks)'
               ]
             },
             specReference: 'OCR Geography B - Changing Climate'
           },
+          {
+            id: 'cc-q10',
+            question: 'Evaluate the challenges of managing climate change.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Economic challenges: expensive to switch to renewable energy and adapt infrastructure. Political challenges: countries disagree on who should reduce emissions most. Social challenges: people resist lifestyle changes. Technical challenges: renewable energy not yet reliable enough to replace all fossil fuels.',
+            markingCriteria: {
+              breakdown: [
+                'Economic challenges (2 marks)',
+                'Political/international challenges (2 marks)',
+                'Social/technical challenges (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          }
+        ]
+      },
           {
             id: 'cc-q10',
             question: 'Evaluate the challenges of predicting future climate change impacts.',
@@ -21109,4 +21131,4 @@ export const curriculum: Subject[] = [
       }
     ]
   }
-  ];
+];
