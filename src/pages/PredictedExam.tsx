@@ -1356,13 +1356,37 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         });
 
         // Section A - Text 5: Short article questions
-        const text5Passage = `Text 5: Short article (approx. 160 words, T/F/Not Given)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."`;
+        const text5Passage = `Text 5: Short article (approx. 160 words)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."`;
 
         questions.push({
           id: `${subjectId}-text5-q1`,
           questionNumber: questionNumber++,
-          text: `${text5Passage}\n\nState True (T), False (F) or Not Given (NG):\n\n1. Young people like trains because they can study or listen to music.\n2. Student passes have become more expensive.\n3. Evening buses are sometimes delayed.\n4. There is already a night service on weekends.\n5. Dedicated lanes are suggested as a solution.\n6. The council will build a new train line next year.\n\n[6 marks]`,
-          marks: 6,
+          text: `${text5Passage}\n\nWhy do young people prefer to travel by train? Give two reasons.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q2`,
+          questionNumber: questionNumber++,
+          text: `${text5Passage}\n\nWhat has happened to student pass prices? Quote the text to support your answer.\n\n[2 marks]`,
+          marks: 2,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q3`,
+          questionNumber: questionNumber++,
+          text: `${text5Passage}\n\nWhat problem is mentioned about evening buses?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text5-q4`,
+          questionNumber: questionNumber++,
+          text: `${text5Passage}\n\nWhat solution is proposed for public transport?\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
