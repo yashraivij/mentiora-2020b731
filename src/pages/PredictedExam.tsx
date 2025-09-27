@@ -1634,7 +1634,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q3`,
           questionNumber: questionNumber++,
-          text: `Complete these grammar tasks:\n\na) Conjugate tener (yo) in Present.\nb) Choose correct: "Nosotros (vamos / fuimos) al centro."\nc) Make plural: "la actividad interesante".\nd) Fill with por/para: "Estudio ___ sacar buenas notas."\ne) Translate to Spanish: "I am going to visit my friend."`,
+          text: `Write the correct form of the verb "tener" for "yo" in the present tense.`,
           marks: 5,
           section: 'Q3'
         });
