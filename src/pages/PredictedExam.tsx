@@ -1616,7 +1616,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q1`,
           questionNumber: questionNumber++,
-          text: `Q1 (10 marks) – Five short sentences responding to a text prompt (approx. 5–8 words each).\n\nText-only prompt: Describe five things you can see or do at a local festival in Spain (music, food, place, people, activities).\n\nWrite five separate short sentences in Spanish.\n\n[10 marks]`,
+          text: `Describe five things you can see or do at a local festival in Spain (music, food, place, people, activities).\n\nWrite five separate short sentences in Spanish.`,
           marks: 10,
           section: 'Q1'
         });
@@ -1625,7 +1625,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q2`,
           questionNumber: questionNumber++,
-          text: `Q2 (10 marks) – ≈50 words, respond to five compulsory bullet points:\n\nTu vida sana.\n\nIncluye: (1) comidas habituales, (2) deporte que haces, (3) una actividad nueva que quieres probar, (4) cómo duermes, (5) por qué es importante para ti.\n\n[10 marks]`,
+          text: `Tu vida sana.\n\nWrite approximately 50 words responding to these five points:\n(1) comidas habituales, (2) deporte que haces, (3) una actividad nueva que quieres probar, (4) cómo duermes, (5) por qué es importante para ti.`,
           marks: 10,
           section: 'Q2'
         });
@@ -1634,7 +1634,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q3`,
           questionNumber: questionNumber++,
-          text: `Q3 (5 marks) – Grammar tasks (5 items, 1 mark each):\n\na) Conjugate tener (yo) in Present.\nb) Choose correct: "Nosotros (vamos / fuimos) al centro."\nc) Make plural: "la actividad interesante".\nd) Fill with por/para: "Estudio ___ sacar buenas notas."\ne) Translate to Spanish: "I am going to visit my friend."\n\n[5 marks]`,
+          text: `Complete these grammar tasks:\n\na) Conjugate tener (yo) in Present.\nb) Choose correct: "Nosotros (vamos / fuimos) al centro."\nc) Make plural: "la actividad interesante".\nd) Fill with por/para: "Estudio ___ sacar buenas notas."\ne) Translate to Spanish: "I am going to visit my friend."`,
           marks: 5,
           section: 'Q3'
         });
@@ -1643,7 +1643,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q4`,
           questionNumber: questionNumber++,
-          text: `Q4 (10 marks) – Translation (English → Spanish), min 35 words:\n\n"On weekdays I get up early and go to school by bus. After classes I help at home and sometimes I cook dinner. At the weekend I like visiting my grandparents and watching a film with my sister."\n\n[10 marks]`,
+          text: `Translate this passage from English to Spanish (minimum 35 words):\n\n"On weekdays I get up early and go to school by bus. After classes I help at home and sometimes I cook dinner. At the weekend I like visiting my grandparents and watching a film with my sister."`,
           marks: 10,
           section: 'Q4'
         });
@@ -1652,7 +1652,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q5`,
           questionNumber: questionNumber++,
-          text: `Q5 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n5A. Tus vacaciones recientes — (1) dónde fuiste, (2) qué hiciste, (3) opinión.\n\n5B. Tu instituto — (1) asignaturas favoritas, (2) normas del cole, (3) mejoras que quieres.\n\n[15 marks]`,
+          text: `Choose ONE topic and write approximately 90 words covering all three points:\n\n5A. Tus vacaciones recientes — (1) dónde fuiste, (2) qué hiciste, (3) opinión.\n\n5B. Tu instituto — (1) asignaturas favoritas, (2) normas del cole, (3) mejoras que quieres.`,
           marks: 15,
           section: 'Q5'
         });
@@ -1665,7 +1665,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q1`,
           questionNumber: questionNumber++,
-          text: `Q1 (10 marks) – Translation (English → Spanish), min 50 words:\n\n"Last year I changed my routine because I was always tired. Now I plan my homework, take breaks and do sport three times a week. I have started cooking healthy meals at home. These changes help me sleep better and concentrate more in class."\n\n[10 marks]`,
+          text: `Translate this passage from English to Spanish (minimum 50 words):\n\n"Last year I changed my routine because I was always tired. Now I plan my homework, take breaks and do sport three times a week. I have started cooking healthy meals at home. These changes help me sleep better and concentrate more in class."`,
           marks: 10,
           section: 'Q1'
         });
@@ -1674,7 +1674,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q2`,
           questionNumber: questionNumber++,
-          text: `Q2 OVERLAP (15 marks) – Choice of ONE, ≈90 words, three compulsory bullets each:\n\n2A. Tecnología y vida personal — (1) cómo la usas, (2) ventajas y riesgos, (3) cambios que harás.\n\n2B. Trabajo y futuro — (1) empleo ideal, (2) habilidades necesarias, (3) planes de formación.\n\n[15 marks]`,
+          text: `Choose ONE topic and write approximately 90 words covering all three points:\n\n2A. Tecnología y vida personal — (1) cómo la usas, (2) ventajas y riesgos, (3) cambios que harás.\n\n2B. Trabajo y futuro — (1) empleo ideal, (2) habilidades necesarias, (3) planes de formación.`,
           marks: 15,
           section: 'Q2'
         });
@@ -1683,7 +1683,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-q3`,
           questionNumber: questionNumber++,
-          text: `Q3 (25 marks) – Open-ended writing, Choice of ONE, ≈150 words, two bullets each:\n\n3A. Viajes y medio ambiente — (1) experiencias positivas/negativas de tus viajes, (2) cómo viajar de forma más sostenible en el futuro.\n\n3B. La cultura en tu comunidad — (1) eventos que fortalecen la comunidad, (2) ideas para hacerlos más inclusivos y ecológicos.\n\n[25 marks]`,
+          text: `Choose ONE topic and write approximately 150 words covering both points:\n\n3A. Viajes y medio ambiente — (1) experiencias positivas/negativas de tus viajes, (2) cómo viajar de forma más sostenible en el futuro.\n\n3B. La cultura en tu comunidad — (1) eventos que fortalecen la comunidad, (2) ideas para hacerlos más inclusivos y ecológicos.`,
           marks: 25,
           section: 'Q3'
         });
