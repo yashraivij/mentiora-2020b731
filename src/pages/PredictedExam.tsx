@@ -1149,19 +1149,13 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Paper 3: Reading - Foundation
         let questionNumber = 1;
 
-        // Section A - Text 1: Short messages
-        questions.push({
-          id: `${subjectId}-text1-intro`,
-          questionNumber: questionNumber++,
-          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Short messages (non-verbal + English answers)\n\nA. Mensajes\n\n"Busco compañeros para un club de lectura los sábados por la tarde."\n\n"Cierro la tienda a las 17:00 hoy por una reunión."\n\n"Se necesitan voluntarios para limpiar el parque este domingo por la mañana."\n\n"Clases de guitarra para principiantes, precio económico."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 1: Short messages questions
+        const text1Passage = `Section A – Reading Comprehension (40 marks)\n\nText 1: Short messages (non-verbal + English answers)\n\nA. Mensajes\n\n"Busco compañeros para un club de lectura los sábados por la tarde."\n\n"Cierro la tienda a las 17:00 hoy por una reunión."\n\n"Se necesitan voluntarios para limpiar el parque este domingo por la mañana."\n\n"Clases de guitarra para principiantes, precio económico."`;
 
         questions.push({
           id: `${subjectId}-text1-q1`,
           questionNumber: questionNumber++,
-          text: `Which message is about a temporary early closing?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhich message is about a temporary early closing?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1169,7 +1163,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q2`,
           questionNumber: questionNumber++,
-          text: `Which message is about a cheap hobby class?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhich message is about a cheap hobby class?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1177,7 +1171,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q3`,
           questionNumber: questionNumber++,
-          text: `Which message is about an activity on Sunday morning?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhich message is about an activity on Sunday morning?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1185,7 +1179,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q4`,
           questionNumber: questionNumber++,
-          text: `Which message is about a book-related activity?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhich message is about a book-related activity?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1193,24 +1187,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q5`,
           questionNumber: questionNumber++,
-          text: `Tick True/False:\na) The shop will stay open later than usual.\nb) The guitar lessons are only for experts.\n\n[2 marks]`,
+          text: `${text1Passage}\n\nTick True/False:\na) The shop will stay open later than usual.\nb) The guitar lessons are only for experts.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
 
-        // Section A - Text 2: Social post
-        questions.push({
-          id: `${subjectId}-text2-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 2: Social post (approx. 110 words)\n\nB. Entrada en red social\n"Este trimestre decidí cambiar mis hábitos. Antes pasaba horas con el móvil, pero ahora hago deporte tres veces por semana y preparo mi comida en casa. Me siento con más energía y duermo mejor. Mis amigos dicen que estoy más contento y menos estresado. A veces echo de menos los videojuegos, pero prefiero salir a correr por el parque o cocinar con mi hermana. El mes que viene quiero apuntarme a un club de tenis del instituto para conocer a gente nueva."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 2: Social post questions
+        const text2Passage = `Text 2: Social post (approx. 110 words)\n\nB. Entrada en red social\n"Este trimestre decidí cambiar mis hábitos. Antes pasaba horas con el móvil, pero ahora hago deporte tres veces por semana y preparo mi comida en casa. Me siento con más energía y duermo mejor. Mis amigos dicen que estoy más contento y menos estresado. A veces echo de menos los videojuegos, pero prefiero salir a correr por el parque o cocinar con mi hermana. El mes que viene quiero apuntarme a un club de tenis del instituto para conocer a gente nueva."`;
 
         questions.push({
           id: `${subjectId}-text2-q1`,
           questionNumber: questionNumber++,
-          text: `What two changes has the writer made?\n\n[2 marks]`,
+          text: `${text2Passage}\n\nWhat two changes has the writer made?\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1218,7 +1206,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q2`,
           questionNumber: questionNumber++,
-          text: `Give one benefit the writer mentions about sleep.\n\n[1 mark]`,
+          text: `${text2Passage}\n\nGive one benefit the writer mentions about sleep.\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1226,7 +1214,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q3`,
           questionNumber: questionNumber++,
-          text: `Why does the writer want to join the tennis club?\n\n[1 mark]`,
+          text: `${text2Passage}\n\nWhy does the writer want to join the tennis club?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1234,7 +1222,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q4`,
           questionNumber: questionNumber++,
-          text: `Choose the two correct statements:\nA) The writer now plays more video games.\nB) The writer cooks at home.\nC) The writer feels more stressed.\nD) The writer runs in the park.\n\n[2 marks]`,
+          text: `${text2Passage}\n\nChoose the two correct statements:\nA) The writer now plays more video games.\nB) The writer cooks at home.\nC) The writer feels more stressed.\nD) The writer runs in the park.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1242,7 +1230,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q5`,
           questionNumber: questionNumber++,
-          text: `Find a phrase meaning "sign up for".\n\n[1 mark]`,
+          text: `${text2Passage}\n\nFind a phrase meaning "sign up for".\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1250,24 +1238,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q6`,
           questionNumber: questionNumber++,
-          text: `In your own words, explain why the writer feels happier.\n\n[1 mark]`,
+          text: `${text2Passage}\n\nIn your own words, explain why the writer feels happier.\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
 
-        // Section A - Text 3: Email
-        questions.push({
-          id: `${subjectId}-text3-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 3: Email (approx. 140 words)\n\nC. Correo electrónico\n"Hola Marta,\nEl intercambio a Valencia fue increíble. Mi familia anfitriona vivía cerca del centro y me enseñó muchos lugares de interés. Probé una paella auténtica y visité la Ciudad de las Artes y las Ciencias. El último día, hicimos una excursión a la playa; el agua estaba fría pero el sol brillaba. Lo mejor fue practicar español con chicos de mi edad. A veces me costaba entender los chistes, pero todos tuvieron paciencia. Quiero volver el año que viene y recomendar el programa a mis compañeros. ¿Te gustaría venir conmigo?\nUn abrazo,\nLucía"`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 3: Email questions
+        const text3Passage = `Text 3: Email (approx. 140 words)\n\nC. Correo electrónico\n"Hola Marta,\nEl intercambio a Valencia fue increíble. Mi familia anfitriona vivía cerca del centro y me enseñó muchos lugares de interés. Probé una paella auténtica y visité la Ciudad de las Artes y las Ciencias. El último día, hicimos una excursión a la playa; el agua estaba fría pero el sol brillaba. Lo mejor fue practicar español con chicos de mi edad. A veces me costaba entender los chistes, pero todos tuvieron paciencia. Quiero volver el año que viene y recomendar el programa a mis compañeros. ¿Te gustaría venir conmigo?\nUn abrazo,\nLucía"`;
 
         questions.push({
           id: `${subjectId}-text3-q1`,
           questionNumber: questionNumber++,
-          text: `Where did the host family live?\n\n[1 mark]`,
+          text: `${text3Passage}\n\nWhere did the host family live?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1275,7 +1257,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q2`,
           questionNumber: questionNumber++,
-          text: `Name two activities Lucía did.\n\n[2 marks]`,
+          text: `${text3Passage}\n\nName two activities Lucía did.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1283,7 +1265,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q3`,
           questionNumber: questionNumber++,
-          text: `What difficulty did Lucía have with Spanish?\n\n[1 mark]`,
+          text: `${text3Passage}\n\nWhat difficulty did Lucía have with Spanish?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1291,7 +1273,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q4`,
           questionNumber: questionNumber++,
-          text: `What positive does Lucía mention about the people there?\n\n[1 mark]`,
+          text: `${text3Passage}\n\nWhat positive does Lucía mention about the people there?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1299,7 +1281,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q5`,
           questionNumber: questionNumber++,
-          text: `What are Lucía's future plans about the program?\n\n[2 marks]`,
+          text: `${text3Passage}\n\nWhat are Lucía's future plans about the program?\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1307,41 +1289,29 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q6`,
           questionNumber: questionNumber++,
-          text: `Who is invited to go next year?\n\n[1 mark]`,
+          text: `${text3Passage}\n\nWho is invited to go next year?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
 
-        // Section A - Text 4: Noticeboard
-        questions.push({
-          id: `${subjectId}-text4-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 4: Noticeboard (matching)\n\nD. Anuncios de actividades\n\n"Taller de reciclaje: aprende a separar residuos y reducir plástico."\n\n"Charla: cómo usar la tecnología de forma responsable."\n\n"Ruta a pie por el casco antiguo: historia local."\n\n"Taller de cocina saludable para estudiantes ocupados."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 4: Noticeboard questions
+        const text4Passage = `Text 4: Noticeboard (matching)\n\nD. Anuncios de actividades\n\n"Taller de reciclaje: aprende a separar residuos y reducir plástico."\n\n"Charla: cómo usar la tecnología de forma responsable."\n\n"Ruta a pie por el casco antiguo: historia local."\n\n"Taller de cocina saludable para estudiantes ocupados."`;
 
         questions.push({
           id: `${subjectId}-text4-q1`,
           questionNumber: questionNumber++,
-          text: `Match 1–4 to purposes A–F (two are extra):\nA meet local people B reduce waste C learn quick meals D improve exam grades E learn local history F safe tech use\n\n[6 marks]`,
+          text: `${text4Passage}\n\nMatch 1–4 to purposes A–F (two are extra):\nA meet local people B reduce waste C learn quick meals D improve exam grades E learn local history F safe tech use\n\n[6 marks]`,
           marks: 6,
           section: 'A'
         });
 
-        // Section A - Text 5: Short article
-        questions.push({
-          id: `${subjectId}-text5-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 5: Short article (approx. 160 words, T/F/Not Given)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 5: Short article questions
+        const text5Passage = `Text 5: Short article (approx. 160 words, T/F/Not Given)\n\nE. Artículo breve\n"Muchos jóvenes prefieren viajar en tren porque es más cómodo para estudiar o escuchar música. En mi ciudad, el ayuntamiento ha bajado el precio de los abonos para estudiantes, lo que ha aumentado el número de usuarios. Sin embargo, algunos barrios aún no tienen buenas conexiones y los autobuses llegan tarde por las tardes. Una posible solución es crear carriles exclusivos para el transporte público. También se propone ampliar el horario nocturno los fines de semana. Si se aprueban estas medidas, se reducirá el tráfico y la contaminación."`;
 
         questions.push({
           id: `${subjectId}-text5-q1`,
           questionNumber: questionNumber++,
-          text: `State True (T), False (F) or Not Given (NG):\n\n1. Young people like trains because they can study or listen to music.\n2. Student passes have become more expensive.\n3. Evening buses are sometimes delayed.\n4. There is already a night service on weekends.\n5. Dedicated lanes are suggested as a solution.\n6. The council will build a new train line next year.\n\n[6 marks]`,
+          text: `${text5Passage}\n\nState True (T), False (F) or Not Given (NG):\n\n1. Young people like trains because they can study or listen to music.\n2. Student passes have become more expensive.\n3. Evening buses are sometimes delayed.\n4. There is already a night service on weekends.\n5. Dedicated lanes are suggested as a solution.\n6. The council will build a new train line next year.\n\n[6 marks]`,
           marks: 6,
           section: 'A'
         });
@@ -1349,7 +1319,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text5-q2`,
           questionNumber: questionNumber++,
-          text: `Give two benefits expected if the measures are approved.\n\n[2 marks]`,
+          text: `${text5Passage}\n\nGive two benefits expected if the measures are approved.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1357,7 +1327,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text5-q3`,
           questionNumber: questionNumber++,
-          text: `Name one current problem with public transport mentioned.\n\n[1 mark]`,
+          text: `${text5Passage}\n\nName one current problem with public transport mentioned.\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1375,19 +1345,13 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Paper 3: Reading - Higher
         let questionNumber = 1;
 
-        // Section A - Text 1: Blog post
-        questions.push({
-          id: `${subjectId}-text1-intro`,
-          questionNumber: questionNumber++,
-          text: `Section A – Reading Comprehension (40 marks)\n\nText 1: Blog post (approx. 170 words)\n\nVida digital equilibrada\n"Muchos adolescentes creen que desconectar del móvil significa perder contacto con sus amigos. En realidad, cuando limito mi tiempo en redes sociales, organizo mejor mis estudios y duermo sin interrupciones. La clave no es prohibir, sino utilizar la tecnología con intención: responder mensajes en momentos concretos, desactivar notificaciones innecesarias y reservar un rato para leer o salir al aire libre. En casa hemos acordado no usar dispositivos durante la cena. Al principio me costó; ahora disfruto conversando con mis padres. Además, mis notas han mejorado y tengo menos dolores de cabeza. No pienso abandonar las redes, pero sí continuar con hábitos que me hacen sentir bien."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 1: Blog post questions
+        const text1Passage = `Section A – Reading Comprehension (40 marks)\n\nText 1: Blog post (approx. 170 words)\n\nVida digital equilibrada\n"Muchos adolescentes creen que desconectar del móvil significa perder contacto con sus amigos. En realidad, cuando limito mi tiempo en redes sociales, organizo mejor mis estudios y duermo sin interrupciones. La clave no es prohibir, sino utilizar la tecnología con intención: responder mensajes en momentos concretos, desactivar notificaciones innecesarias y reservar un rato para leer o salir al aire libre. En casa hemos acordado no usar dispositivos durante la cena. Al principio me costó; ahora disfruto conversando con mis padres. Además, mis notas han mejorado y tengo menos dolores de cabeza. No pienso abandonar las redes, pero sí continuar con hábitos que me hacen sentir bien."`;
 
         questions.push({
           id: `${subjectId}-text1-q1`,
           questionNumber: questionNumber++,
-          text: `What misconception about disconnecting is mentioned?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhat misconception about disconnecting is mentioned?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1395,7 +1359,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q2`,
           questionNumber: questionNumber++,
-          text: `Give two strategies the writer uses with technology.\n\n[2 marks]`,
+          text: `${text1Passage}\n\nGive two strategies the writer uses with technology.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1403,7 +1367,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q3`,
           questionNumber: questionNumber++,
-          text: `What rule was introduced at home and with what effect?\n\n[2 marks]`,
+          text: `${text1Passage}\n\nWhat rule was introduced at home and with what effect?\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1411,7 +1375,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q4`,
           questionNumber: questionNumber++,
-          text: `Identify two benefits the writer reports.\n\n[2 marks]`,
+          text: `${text1Passage}\n\nIdentify two benefits the writer reports.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1419,24 +1383,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text1-q5`,
           questionNumber: questionNumber++,
-          text: `What is the writer's final position on social media?\n\n[1 mark]`,
+          text: `${text1Passage}\n\nWhat is the writer's final position on social media?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
 
-        // Section A - Text 2: Formal email
-        questions.push({
-          id: `${subjectId}-text2-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 2: Formal email to a council (approx. 160 words)\n\n"Estimados señores:\nMe dirijo a ustedes para proponer un proyecto juvenil de voluntariado ambiental. Muchos estudiantes desean colaborar los sábados por la mañana en tareas de limpieza de ríos y parques. Si el ayuntamiento ofrece material y formación básica, podemos coordinar grupos por barrios. También pedimos campañas informativas en los institutos para aumentar la participación. Estoy convencido de que esta iniciativa mejorará la imagen de la ciudad y reducirá la basura en espacios verdes. Agradezco su atención y quedo a la espera de su respuesta.\nAtentamente,\nCarlos Ruiz"`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 2: Formal email questions
+        const text2Passage = `Text 2: Formal email to a council (approx. 160 words)\n\n"Estimados señores:\nMe dirijo a ustedes para proponer un proyecto juvenil de voluntariado ambiental. Muchos estudiantes desean colaborar los sábados por la mañana en tareas de limpieza de ríos y parques. Si el ayuntamiento ofrece material y formación básica, podemos coordinar grupos por barrios. También pedimos campañas informativas en los institutos para aumentar la participación. Estoy convencido de que esta iniciativa mejorará la imagen de la ciudad y reducirá la basura en espacios verdes. Agradezco su atención y quedo a la espera de su respuesta.\nAtentamente,\nCarlos Ruiz"`;
 
         questions.push({
           id: `${subjectId}-text2-q1`,
           questionNumber: questionNumber++,
-          text: `What resources are requested from the council?\n\n[1 mark]`,
+          text: `${text2Passage}\n\nWhat resources are requested from the council?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1444,7 +1402,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q2`,
           questionNumber: questionNumber++,
-          text: `When would the volunteers work?\n\n[1 mark]`,
+          text: `${text2Passage}\n\nWhen would the volunteers work?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1452,7 +1410,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q3`,
           questionNumber: questionNumber++,
-          text: `How do they plan to recruit more students?\n\n[1 mark]`,
+          text: `${text2Passage}\n\nHow do they plan to recruit more students?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1460,7 +1418,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q4`,
           questionNumber: questionNumber++,
-          text: `Give two expected outcomes of the project.\n\n[2 marks]`,
+          text: `${text2Passage}\n\nGive two expected outcomes of the project.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1468,7 +1426,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q5`,
           questionNumber: questionNumber++,
-          text: `What is the tone/register of this message?\n\n[1 mark]`,
+          text: `${text2Passage}\n\nWhat is the tone/register of this message?\n\n[1 mark]`,
           marks: 1,
           section: 'A'
         });
@@ -1476,24 +1434,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q6`,
           questionNumber: questionNumber++,
-          text: `Quote a phrase that shows politeness.\n\n[2 marks]`,
+          text: `${text2Passage}\n\nQuote a phrase that shows politeness.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
 
-        // Section A - Text 3: Opinion column
-        questions.push({
-          id: `${subjectId}-text3-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 3: Opinion column (approx. 190 words, inference)\n\n"La cultura popular cambia rápido: lo que hoy es tendencia, mañana se olvida. Sin embargo, aprender a valorar las tradiciones nos da estabilidad. En mi barrio celebramos una feria cada primavera; algunos critican los gastos, pero la feria atrae visitantes, apoya a pequeños negocios y fortalece el sentido de comunidad. No propongo mantener costumbres por obligación, sino adaptarlas a la realidad actual: reducir residuos, incluir actividades accesibles para todos y ofrecer espacios para artistas jóvenes. Cuando los ciudadanos participan en la organización, el evento deja de ser un espectáculo para convertirse en un proyecto común. Así, la cultura no es solo entretenimiento: es una herramienta para construir barrios más justos y creativos."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 3: Opinion column questions
+        const text3Passage = `Text 3: Opinion column (approx. 190 words, inference)\n\n"La cultura popular cambia rápido: lo que hoy es tendencia, mañana se olvida. Sin embargo, aprender a valorar las tradiciones nos da estabilidad. En mi barrio celebramos una feria cada primavera; algunos critican los gastos, pero la feria atrae visitantes, apoya a pequeños negocios y fortalece el sentido de comunidad. No propongo mantener costumbres por obligación, sino adaptarlas a la realidad actual: reducir residuos, incluir actividades accesibles para todos y ofrecer espacios para artistas jóvenes. Cuando los ciudadanos participan en la organización, el evento deja de ser un espectáculo para convertirse en un proyecto común. Así, la cultura no es solo entretenimiento: es una herramienta para construir barrios más justos y creativos."`;
 
         questions.push({
           id: `${subjectId}-text3-q1`,
           questionNumber: questionNumber++,
-          text: `What tension does the author describe between trends and traditions?\n\n[2 marks]`,
+          text: `${text3Passage}\n\nWhat tension does the author describe between trends and traditions?\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1501,7 +1453,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q2`,
           questionNumber: questionNumber++,
-          text: `Give two advantages of the spring fair.\n\n[2 marks]`,
+          text: `${text3Passage}\n\nGive two advantages of the spring fair.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1509,7 +1461,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q3`,
           questionNumber: questionNumber++,
-          text: `What three adaptations are suggested to modernise the event?\n\n[3 marks]`,
+          text: `${text3Passage}\n\nWhat three adaptations are suggested to modernise the event?\n\n[3 marks]`,
           marks: 3,
           section: 'A'
         });
@@ -1517,7 +1469,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q4`,
           questionNumber: questionNumber++,
-          text: `Explain how citizen participation changes the nature of the event.\n\n[2 marks]`,
+          text: `${text3Passage}\n\nExplain how citizen participation changes the nature of the event.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1525,24 +1477,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text3-q5`,
           questionNumber: questionNumber++,
-          text: `What is the author's overall view of culture?\n\n[3 marks]`,
+          text: `${text3Passage}\n\nWhat is the author's overall view of culture?\n\n[3 marks]`,
           marks: 3,
           section: 'A'
         });
 
-        // Section A - Text 4: Short notices
-        questions.push({
-          id: `${subjectId}-text4-intro`,
-          questionNumber: questionNumber++,
-          text: `Text 4: Short notices (matching)\n\n"Se buscan mentores para ayudar con deberes de primaria."\n\n"Concurso de relatos cortos; fecha límite: 30 de marzo."\n\n"Venta solidaria de ropa usada; sábado, centro juvenil."\n\n"Curso intensivo de conversación para el intercambio internacional."`,
-          marks: 0,
-          section: 'A'
-        });
+        // Section A - Text 4: Short notices questions
+        const text4Passage = `Text 4: Short notices (matching)\n\n"Se buscan mentores para ayudar con deberes de primaria."\n\n"Concurso de relatos cortos; fecha límite: 30 de marzo."\n\n"Venta solidaria de ropa usada; sábado, centro juvenil."\n\n"Curso intensivo de conversación para el intercambio internacional."`;
 
         questions.push({
           id: `${subjectId}-text4-q1`,
           questionNumber: questionNumber++,
-          text: `Match 1–4 to purposes A–F (two extra):\nA language practice B volunteering as tutors C donate clothes only D submit creative writing E fundraising sale F exam preparation\n\n[12 marks]`,
+          text: `${text4Passage}\n\nMatch 1–4 to purposes A–F (two extra):\nA language practice B volunteering as tutors C donate clothes only D submit creative writing E fundraising sale F exam preparation\n\n[12 marks]`,
           marks: 12,
           section: 'A'
         });
