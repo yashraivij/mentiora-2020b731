@@ -166,14 +166,19 @@ const Dashboard = () => {
     "chemistry-edexcel": { bg: "bg-green-400", light: "bg-green-50", text: "text-green-700" },
     "biology": { bg: "bg-orange-400", light: "bg-orange-50", text: "text-orange-700" },
     "biology-edexcel": { bg: "bg-orange-400", light: "bg-orange-50", text: "text-orange-700" },
+    "biology-aqa-alevel": { bg: "bg-lime-400", light: "bg-lime-50", text: "text-lime-700" },
     "mathematics": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
     "maths-edexcel": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
+    "maths-aqa-alevel": { bg: "bg-indigo-400", light: "bg-indigo-50", text: "text-indigo-700" },
     "english-language": { bg: "bg-pink-400", light: "bg-pink-50", text: "text-pink-700" },
     "english-literature": { bg: "bg-rose-400", light: "bg-rose-50", text: "text-rose-700" },
     "geography": { bg: "bg-emerald-400", light: "bg-emerald-50", text: "text-emerald-700" },
+    "geography-paper-2": { bg: "bg-emerald-400", light: "bg-emerald-50", text: "text-emerald-700" },
     "history": { bg: "bg-amber-400", light: "bg-amber-50", text: "text-amber-700" },
     "religious-studies": { bg: "bg-violet-400", light: "bg-violet-50", text: "text-violet-700" },
     "business-edexcel-igcse": { bg: "bg-teal-400", light: "bg-teal-50", text: "text-teal-700" },
+    "computer-science": { bg: "bg-cyan-400", light: "bg-cyan-50", text: "text-cyan-700" },
+    "psychology": { bg: "bg-fuchsia-400", light: "bg-fuchsia-50", text: "text-fuchsia-700" },
   };
 
   // Subject icon mapping
@@ -185,8 +190,10 @@ const Dashboard = () => {
       "chemistry-edexcel": FlaskConical,
       "biology": Microscope,  
       "biology-edexcel": Microscope,
+      "biology-aqa-alevel": Dna,
       "mathematics": Calculator,
       "maths-edexcel": Calculator,
+      "maths-aqa-alevel": Brain,
       "english-language": PenTool,
       "english-literature": BookOpen,
       "geography": Globe,
@@ -194,6 +201,8 @@ const Dashboard = () => {
       "history": Clock,
       "religious-studies": Church,
       "business-edexcel-igcse": Building,
+      "computer-science": TestTube,
+      "psychology": Heart,
     };
     return iconMap[subjectId] || BookOpen;
   };
