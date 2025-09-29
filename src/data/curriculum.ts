@@ -46,43 +46,1367 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q2',
+            question: 'Explain why water is described as a good solvent and why this is important for organisms.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Water is a polar molecule with slight positive charge on hydrogen atoms and slight negative charge on oxygen. This allows water to dissolve ionic substances and polar molecules. This is important because it allows transport of dissolved substances in blood and enables metabolic reactions to occur in solution.',
+            markingCriteria: {
+              breakdown: [
+                'Water is polar (1 mark)',
+                'Dissolves ionic/polar substances (1 mark)',
+                'Importance for transport or reactions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q3',
+            question: 'The lock-and-key model has been replaced by the induced-fit model. Explain why the induced-fit model is a better representation of enzyme action.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'In the induced-fit model, the active site is not exactly complementary to the substrate initially. As the substrate enters the active site, the enzyme changes shape slightly to fit the substrate more closely. This puts strain on substrate bonds, lowering activation energy. This model better explains enzyme specificity and how enzymes can work with multiple similar substrates.',
+            markingCriteria: {
+              breakdown: [
+                'Active site not initially complementary (1 mark)',
+                'Enzyme changes shape to fit substrate (1 mark)',
+                'Strain on bonds/lowers activation energy (1 mark)',
+                'Better explains specificity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q4',
+            question: 'Describe the process of semi-conservative replication of DNA.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'DNA helicase breaks hydrogen bonds between base pairs, separating the two strands. Each strand acts as a template. Free DNA nucleotides align with complementary bases on each strand. DNA polymerase joins adjacent nucleotides by forming phosphodiester bonds. Two identical DNA molecules are formed, each with one original strand and one new strand.',
+            markingCriteria: {
+              breakdown: [
+                'DNA helicase separates strands (1 mark)',
+                'Each strand acts as template/free nucleotides align (1 mark)',
+                'DNA polymerase joins nucleotides (1 mark)',
+                'Two molecules each with one old and one new strand (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q5',
+            question: 'Explain how the structure of cellulose makes it suitable for forming cell walls.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Cellulose is made of long chains of beta-glucose joined by glycosidic bonds. Chains run parallel and are held together by many hydrogen bonds forming microfibrils. This creates a strong, rigid structure that provides support and prevents cells from bursting when turgid.',
+            markingCriteria: {
+              breakdown: [
+                'Long chains of beta-glucose (1 mark)',
+                'Hydrogen bonds between chains/microfibrils (1 mark)',
+                'Provides strength and support (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q6',
+            question: 'Describe the structure and function of ATP.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'ATP consists of adenine (nitrogenous base), ribose (pentose sugar), and three phosphate groups. Energy is stored in high-energy bonds between phosphate groups. When ATP is hydrolyzed to ADP and inorganic phosphate by ATP hydrolase, energy is released for cellular processes. ATP synthase catalyzes the condensation of ADP and Pi to reform ATP.',
+            markingCriteria: {
+              breakdown: [
+                'Structure: adenine, ribose, three phosphates (1 mark)',
+                'Energy stored in phosphate bonds (1 mark)',
+                'Hydrolysis releases energy (1 mark)',
+                'ATP synthase reforms ATP (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q7',
+            question: 'Compare the structure of triglycerides and phospholipids.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Both contain glycerol and fatty acids joined by ester bonds. Triglycerides have three fatty acids attached to glycerol, while phospholipids have two fatty acids and one phosphate group. Triglycerides are non-polar and hydrophobic, used for energy storage. Phospholipids are polar (hydrophilic head, hydrophobic tail) and form cell membranes.',
+            markingCriteria: {
+              breakdown: [
+                'Both contain glycerol and fatty acids (1 mark)',
+                'Triglycerides have 3 fatty acids, phospholipids have 2 and phosphate (1 mark)',
+                'Triglycerides are non-polar/hydrophobic (1 mark)',
+                'Phospholipids are polar/form membranes (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q8',
+            question: 'Describe the four levels of protein structure.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Primary structure is the sequence of amino acids joined by peptide bonds. Secondary structure is the folding of the chain into alpha-helix or beta-pleated sheet, held by hydrogen bonds. Tertiary structure is further folding into a 3D shape, held by ionic bonds, disulfide bridges and hydrogen bonds. Quaternary structure is two or more polypeptide chains combined.',
+            markingCriteria: {
+              breakdown: [
+                'Primary: sequence of amino acids (1 mark)',
+                'Secondary: alpha-helix/beta-pleated sheet with hydrogen bonds (1 mark)',
+                'Tertiary: 3D shape with various bonds (1 mark)',
+                'Quaternary: multiple polypeptides (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q9',
+            question: 'Explain the roles of inorganic ions in biological systems.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Hydrogen ions (H⁺) determine pH of solutions and affect enzyme activity. Iron ions (Fe²⁺) are components of haemoglobin for oxygen transport. Sodium ions (Na⁺) are involved in co-transport of glucose and amino acids in the small intestine. Phosphate ions (PO₄³⁻) are components of ATP and DNA/RNA. They help maintain pH and are involved in energy transfer.',
+            markingCriteria: {
+              breakdown: [
+                'H⁺ for pH control (1 mark)',
+                'Fe²⁺ in haemoglobin (1 mark)',
+                'Na⁺ in co-transport (1 mark)',
+                'PO₄³⁻ in ATP/DNA/RNA (1 mark)',
+                'Any additional role (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          },
+          {
+            id: 'bio-3.1-q10',
+            question: 'Describe how to test for reducing sugars and non-reducing sugars.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Reducing sugars: Add Benedict\'s reagent to the test solution and heat in a water bath. If reducing sugar is present, color changes from blue to brick-red precipitate. Non-reducing sugars: First perform Benedict\'s test (should remain blue). Then hydrolyze by heating with dilute hydrochloric acid, neutralize with sodium hydrogencarbonate, then repeat Benedict\'s test. If non-reducing sugar was present, color changes to brick-red.',
+            markingCriteria: {
+              breakdown: [
+                'Reducing: Add Benedict\'s and heat (1 mark)',
+                'Color change blue to brick-red (1 mark)',
+                'Non-reducing: hydrolyze with acid first (1 mark)',
+                'Neutralize (1 mark)',
+                'Then repeat Benedict\'s test (1 mark)',
+                'Positive result indicates non-reducing sugar (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
           }
         ]
       },
       {
         id: '3.2-cells',
         name: '3.2 Cells',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.2-q1',
+            question: 'Compare the structure of prokaryotic and eukaryotic cells.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Prokaryotic cells are smaller (1-5μm) with no membrane-bound organelles, while eukaryotic cells are larger (10-100μm) with membrane-bound organelles including nucleus, mitochondria. Prokaryotes have circular DNA in cytoplasm and plasmids, eukaryotes have linear DNA in nucleus. Prokaryotes have a cell wall made of murein, eukaryotes (plants) have cellulose walls.',
+            markingCriteria: {
+              breakdown: [
+                'Size difference (1 mark)',
+                'Membrane-bound organelles in eukaryotes only (1 mark)',
+                'DNA structure and location (1 mark)',
+                'Cell wall composition (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q2',
+            question: 'Describe the process of mitosis and explain its importance.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'During prophase, chromosomes condense and spindle forms. At metaphase, chromosomes align at the equator. During anaphase, sister chromatids separate and move to opposite poles. At telophase, nuclear envelopes reform and chromosomes decondense. Mitosis is important for growth, repair of tissues, and asexual reproduction, producing genetically identical daughter cells.',
+            markingCriteria: {
+              breakdown: [
+                'Description of at least two stages (2 marks)',
+                'Sister chromatids separate (1 mark)',
+                'Importance: growth/repair/asexual reproduction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q3',
+            question: 'Explain how substances move across cell membranes by co-transport, using the sodium-glucose example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sodium ions are actively transported out of epithelial cells into the blood by the sodium-potassium pump, creating a concentration gradient. Sodium ions diffuse back into the cell from the lumen down their concentration gradient via a co-transporter protein. Glucose molecules are carried into the cell at the same time by the same protein. Glucose then diffuses into the blood via facilitated diffusion.',
+            markingCriteria: {
+              breakdown: [
+                'Sodium actively transported out creating gradient (1 mark)',
+                'Sodium diffuses back in with glucose via co-transporter (1 mark)',
+                'Glucose enters against its gradient (1 mark)',
+                'Glucose then diffuses into blood (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q4',
+            question: 'Describe the fluid-mosaic model of cell membranes.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The membrane consists of a phospholipid bilayer with hydrophilic heads facing outwards and hydrophobic tails facing inwards. Proteins are embedded (intrinsic) or attached to surface (extrinsic). Cholesterol molecules are present between phospholipids for stability. Glycoproteins and glycolipids have carbohydrate chains attached. The structure is fluid because phospholipids and proteins can move, and mosaic because proteins are scattered throughout.',
+            markingCriteria: {
+              breakdown: [
+                'Phospholipid bilayer arrangement (1 mark)',
+                'Intrinsic and extrinsic proteins (1 mark)',
+                'Cholesterol for stability (1 mark)',
+                'Glycoproteins/glycolipids (1 mark)',
+                'Fluid and mosaic nature explained (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q5',
+            question: 'Explain how antibodies lead to the destruction of bacterial cells.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Antibodies have specific binding sites complementary to antigens on bacteria. They bind to antigens forming antigen-antibody complexes. This causes agglutination (clumping) of bacteria, making them easier for phagocytes to engulf. Antibodies also act as markers (opsonins) that attract phagocytes. Some antibodies activate complement proteins that create holes in bacterial cell walls, causing lysis.',
+            markingCriteria: {
+              breakdown: [
+                'Antibodies bind specifically to antigens (1 mark)',
+                'Agglutination occurs (1 mark)',
+                'Easier for phagocytes to engulf (1 mark)',
+                'Act as markers/opsonins (1 mark)',
+                'Complement activation causes lysis (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q6',
+            question: 'Describe the difference between optical microscopes and electron microscopes.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Optical microscopes use light and glass lenses with maximum magnification of ×1500 and resolution of 200nm. They can view living specimens in color. Electron microscopes (TEM/SEM) use electrons and electromagnets with magnification over ×500,000 and resolution of 0.5nm. They require dead specimens in a vacuum and produce black and white images.',
+            markingCriteria: {
+              breakdown: [
+                'Light vs electrons (1 mark)',
+                'Magnification and resolution values (1 mark)',
+                'Living vs dead specimens (1 mark)',
+                'Color vs black and white (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q7',
+            question: 'Explain the role of organelles in protein production and secretion.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'DNA in the nucleus contains the gene coding for the protein. mRNA is transcribed and leaves through nuclear pores. Ribosomes on rough endoplasmic reticulum (RER) translate mRNA to synthesize the protein. The protein enters the RER lumen where it is folded and modified. Vesicles pinch off from RER and carry protein to the Golgi apparatus. The Golgi modifies the protein further and packages it into secretory vesicles. Vesicles move to and fuse with the cell membrane, releasing protein by exocytosis.',
+            markingCriteria: {
+              breakdown: [
+                'DNA in nucleus codes for protein/transcription (1 mark)',
+                'Ribosomes on RER translate mRNA (1 mark)',
+                'Protein folded in RER (1 mark)',
+                'Vesicles transport to Golgi (1 mark)',
+                'Golgi modifies and packages (1 mark)',
+                'Exocytosis releases protein (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q8',
+            question: 'Describe the structure of viruses.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Viruses are acellular and consist of genetic material (DNA or RNA) surrounded by a protein coat called a capsid. Some viruses have an outer lipid envelope with attachment proteins (glycoproteins) that bind to host cell receptors. Viruses are extremely small (20-300nm) and can only reproduce inside host cells.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic material (DNA/RNA) and capsid (1 mark)',
+                'Some have lipid envelope with attachment proteins (1 mark)',
+                'Acellular/only reproduce in host cells (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q9',
+            question: 'Explain the role of the cell cycle in growth and cancer.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The cell cycle consists of interphase (G1, S, G2 phases) and mitosis. During interphase, the cell grows, DNA replicates, and organelles duplicate. Checkpoints control progression through the cycle. Normal growth requires controlled cell division. Cancer occurs when checkpoint controls fail, often due to mutations in genes that regulate the cell cycle (tumor suppressor genes like p53 or proto-oncogenes). This leads to uncontrolled cell division forming tumors.',
+            markingCriteria: {
+              breakdown: [
+                'Cell cycle phases described (1 mark)',
+                'DNA replication in S phase (1 mark)',
+                'Checkpoints control progression (1 mark)',
+                'Cancer from checkpoint failure/mutations (1 mark)',
+                'Uncontrolled division forms tumors (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          },
+          {
+            id: 'bio-3.2-q10',
+            question: 'Describe the immune response to a bacterial infection.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Phagocytes recognize foreign antigens and engulf bacteria by phagocytosis, forming a phagosome that fuses with a lysosome. Enzymes digest the bacteria. Phagocytes present antigens on their surface. T helper cells with complementary receptors bind to presented antigens and become activated. Activated T helper cells stimulate specific B cells that have complementary antibodies. B cells divide by clonal selection to form plasma cells and memory cells. Plasma cells secrete large quantities of specific antibodies that bind to bacterial antigens.',
+            markingCriteria: {
+              breakdown: [
+                'Phagocytosis by phagocytes (1 mark)',
+                'Antigen presentation (1 mark)',
+                'T helper cells activate (1 mark)',
+                'B cells undergo clonal selection (1 mark)',
+                'Plasma cells produce antibodies (1 mark)',
+                'Memory cells formed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.2)'
+          }
+        ]
       },
       {
         id: '3.3-exchange',
         name: '3.3 Organisms Exchange Substances with Their Environment',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.3-q1',
+            question: 'Explain why large organisms need specialised gas-exchange systems.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Large organisms have a small surface area to volume ratio. This means the surface area is not large enough for sufficient gas exchange by diffusion alone. The diffusion distance from the surface to inner cells is too great. Therefore, specialised gas-exchange surfaces with transport systems are required.',
+            markingCriteria: {
+              breakdown: [
+                'Small surface area to volume ratio (1 mark)',
+                'Surface area insufficient for diffusion (1 mark)',
+                'Large diffusion distance (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q2',
+            question: 'The lungs of a mammal are adapted for efficient gas exchange. Explain how.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alveoli provide a large surface area for gas exchange. The alveolar epithelium and capillary endothelium are only one cell thick, providing a short diffusion distance. Good blood supply maintains concentration gradient. Ventilation maintains concentration gradient of oxygen and carbon dioxide.',
+            markingCriteria: {
+              breakdown: [
+                'Large surface area (alveoli) (1 mark)',
+                'Short diffusion distance (thin walls) (1 mark)',
+                'Maintains concentration gradient (blood supply/ventilation) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q3',
+            question: 'Describe the processes that lead to the formation of tissue fluid.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'At the arteriole end of capillaries, blood pressure (hydrostatic pressure) is high. This forces water, glucose, amino acids, and ions out of the capillaries through gaps in the capillary walls. Large proteins and blood cells remain in the blood as they are too large. This fluid surrounding cells is tissue fluid. At the venule end, water potential is lower in the blood due to proteins, so water moves back into capillaries by osmosis.',
+            markingCriteria: {
+              breakdown: [
+                'High hydrostatic pressure at arteriole end (1 mark)',
+                'Forces out water and small solutes (1 mark)',
+                'Large proteins remain in blood (1 mark)',
+                'Water returns at venule end by osmosis (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q4',
+            question: 'Describe the roles of the components of blood in the transport of oxygen and carbon dioxide.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Haemoglobin in red blood cells binds to oxygen in the lungs forming oxyhaemoglobin. Each haemoglobin molecule can carry four oxygen molecules. In respiring tissues, oxygen dissociates from haemoglobin due to lower oxygen concentration. Carbon dioxide is transported in three ways: dissolved in plasma, as hydrogencarbonate ions in plasma, and combined with haemoglobin forming carbaminohaemoglobin.',
+            markingCriteria: {
+              breakdown: [
+                'Haemoglobin binds oxygen forming oxyhaemoglobin (1 mark)',
+                'Four oxygen molecules per haemoglobin (1 mark)',
+                'Oxygen dissociates in tissues (1 mark)',
+                'CO₂ dissolved in plasma (1 mark)',
+                'CO₂ as hydrogencarbonate or carbaminohaemoglobin (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q5',
+            question: 'Explain the Bohr effect.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Bohr effect describes how increased carbon dioxide concentration affects oxygen transport. In respiring tissues, CO₂ concentration is high, which lowers the pH. Lower pH reduces haemoglobin\'s affinity for oxygen, causing it to release oxygen more readily. This is shown by the oxygen dissociation curve shifting to the right. This ensures more oxygen is released where it is needed most.',
+            markingCriteria: {
+              breakdown: [
+                'Increased CO₂ lowers pH (1 mark)',
+                'Reduced affinity of haemoglobin for oxygen (1 mark)',
+                'Curve shifts right (1 mark)',
+                'More oxygen released in respiring tissues (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q6',
+            question: 'Describe how digestion and absorption of proteins occurs in mammals.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'In the stomach, endopeptidases (pepsin) hydrolyze peptide bonds within protein molecules, producing shorter polypeptides. In the small intestine, endopeptidases (trypsin) continue breaking internal bonds. Exopeptidases hydrolyze peptide bonds at the ends of polypeptides, releasing dipeptides and amino acids. Dipeptidases on the membrane of epithelial cells hydrolyze dipeptides into amino acids. Amino acids are absorbed by co-transport with sodium ions across the epithelial cell membrane, then diffuse into blood capillaries.',
+            markingCriteria: {
+              breakdown: [
+                'Endopeptidases break internal bonds (1 mark)',
+                'Exopeptidases break terminal bonds (1 mark)',
+                'Dipeptidases produce amino acids (1 mark)',
+                'Co-transport with sodium ions (1 mark)',
+                'Amino acids enter blood (1 mark)',
+                'Locations mentioned (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q7',
+            question: 'Explain how insects are adapted for gas exchange.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Insects have spiracles (pores) on their body surface that can open and close to reduce water loss. Air enters spiracles and travels through tracheae (tubes) that branch into smaller tracheoles. Tracheoles extend throughout the body tissues, bringing air close to cells. The ends of tracheoles contain fluid; when cells are active, lactate builds up lowering water potential, so water moves out by osmosis and more air enters. Some insects use abdominal pumping to ventilate the tracheal system.',
+            markingCriteria: {
+              breakdown: [
+                'Spiracles open/close (1 mark)',
+                'Tracheae and tracheoles bring air to tissues (1 mark)',
+                'Short diffusion distance (1 mark)',
+                'Fluid in tracheoles/lactate effect (1 mark)',
+                'Abdominal pumping for ventilation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q8',
+            question: 'Describe how fish gills are adapted for efficient gas exchange.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Gills have many gill filaments covered in lamellae, providing a large surface area. The lamellae have thin walls providing a short diffusion distance. A counter-current flow system maintains a concentration gradient along the whole length of the lamellae: blood flows in the opposite direction to water. Rich blood supply removes oxygen and brings carbon dioxide, maintaining concentration gradients.',
+            markingCriteria: {
+              breakdown: [
+                'Large surface area (lamellae/filaments) (1 mark)',
+                'Thin walls/short diffusion distance (1 mark)',
+                'Counter-current flow (1 mark)',
+                'Maintains concentration gradient (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q9',
+            question: 'Explain how water is transported through the xylem in plants.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Water evaporates from mesophyll cells and diffuses out of stomata (transpiration). This lowers water potential in mesophyll cells, so water moves in by osmosis from xylem. This creates tension in the xylem, pulling water up. Water molecules are cohesive (stick together) due to hydrogen bonding, forming a continuous column. Water molecules also adhere to xylem walls. This cohesion-tension theory explains how water can be pulled up tall plants.',
+            markingCriteria: {
+              breakdown: [
+                'Transpiration from leaves (1 mark)',
+                'Creates tension in xylem (1 mark)',
+                'Cohesion between water molecules (1 mark)',
+                'Adhesion to walls (1 mark)',
+                'Water pulled up as continuous column (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          },
+          {
+            id: 'bio-3.3-q10',
+            question: 'Describe the mass flow hypothesis for translocation in the phloem.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'At the source (e.g., leaf), sugars are actively loaded into sieve tube elements, lowering water potential. Water enters by osmosis from xylem, creating high hydrostatic pressure. At the sink (e.g., roots), sugars are actively unloaded and used or stored, raising water potential. Water leaves by osmosis, creating low hydrostatic pressure. The pressure gradient causes mass flow of sugars from source to sink through sieve tubes. Companion cells provide ATP for active loading and unloading.',
+            markingCriteria: {
+              breakdown: [
+                'Active loading at source (1 mark)',
+                'Water enters by osmosis creating high pressure (1 mark)',
+                'Active unloading at sink (1 mark)',
+                'Water leaves creating low pressure (1 mark)',
+                'Pressure gradient causes mass flow (1 mark)',
+                'Companion cells provide ATP (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.3)'
+          }
+        ]
       },
       {
         id: '3.4-genetics',
         name: '3.4 Genetic Information, Variation and Relationships',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.4-q1',
+            question: 'Explain what is meant by a gene and a locus.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A gene is a section of DNA that codes for a specific polypeptide or functional RNA. Each gene is made up of a sequence of nucleotide bases. A locus is the specific position of a gene on a chromosome. Different alleles of a gene occupy the same locus.',
+            markingCriteria: {
+              breakdown: [
+                'Gene codes for polypeptide/RNA (1 mark)',
+                'Gene is a sequence of bases (1 mark)',
+                'Locus is position on chromosome (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q2',
+            question: 'Describe the roles of mRNA and tRNA in translation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'mRNA carries the genetic code from DNA in the nucleus to ribosomes in the cytoplasm. Each triplet of bases (codon) on mRNA codes for a specific amino acid. tRNA molecules have an anticodon complementary to mRNA codons and carry specific amino acids. tRNA brings amino acids to the ribosome where anticodons bind to complementary codons. Adjacent amino acids are joined by peptide bonds.',
+            markingCriteria: {
+              breakdown: [
+                'mRNA carries code to ribosomes (1 mark)',
+                'Codons specify amino acids (1 mark)',
+                'tRNA has anticodon and carries amino acids (1 mark)',
+                'tRNA binds to mRNA/amino acids joined (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q3',
+            question: 'Explain how meiosis produces genetic variation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'During meiosis I, homologous chromosomes pair up. Independent segregation occurs when homologous pairs line up randomly at the equator, and either chromosome can go to either pole. This produces different combinations of maternal and paternal chromosomes. Crossing over occurs when non-sister chromatids exchange sections of DNA, producing new combinations of alleles on chromatids. Both processes create genetically different gametes.',
+            markingCriteria: {
+              breakdown: [
+                'Independent segregation of homologous pairs (1 mark)',
+                'Random alignment produces different combinations (1 mark)',
+                'Crossing over exchanges DNA sections (1 mark)',
+                'Produces new allele combinations (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q4',
+            question: 'Define the term species and explain how courtship behaviour ensures successful mating.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A species is a group of organisms with similar characteristics that can interbreed to produce fertile offspring. Courtship behaviour is species-specific, ensuring animals only mate with their own species. It also synchronises mating so both partners are ready to breed, and allows recognition of a mate capable of reproduction.',
+            markingCriteria: {
+              breakdown: [
+                'Species definition including fertile offspring (1 mark)',
+                'Courtship is species-specific (1 mark)',
+                'Synchronises mating or ensures recognition (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q5',
+            question: 'Describe the process of transcription.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'DNA helicase breaks hydrogen bonds between bases, separating the two strands. One strand acts as a template. Free RNA nucleotides align with complementary bases on the template strand (uracil pairs with adenine). RNA polymerase joins adjacent nucleotides by forming phosphodiester bonds. mRNA is formed and detaches from DNA. In eukaryotes, splicing removes introns, leaving only exons.',
+            markingCriteria: {
+              breakdown: [
+                'DNA helicase separates strands (1 mark)',
+                'RNA nucleotides align with template (1 mark)',
+                'RNA polymerase joins nucleotides (1 mark)',
+                'mRNA formed (1 mark)',
+                'Splicing removes introns (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q6',
+            question: 'Explain how a mutation can result in a non-functional enzyme.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A substitution or deletion of a base in DNA changes the sequence of bases in the gene. This changes the sequence of codons in mRNA. This results in a different amino acid sequence in the polypeptide (primary structure). The change affects the hydrogen bonds and ionic bonds that determine the tertiary structure. The active site shape changes and is no longer complementary to the substrate, so enzyme-substrate complexes cannot form.',
+            markingCriteria: {
+              breakdown: [
+                'Mutation changes base/codon sequence (1 mark)',
+                'Different amino acid sequence (1 mark)',
+                'Tertiary structure changes (1 mark)',
+                'Active site not complementary to substrate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q7',
+            question: 'Describe natural selection and explain how it leads to adaptation.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Mutations produce genetic variation in a population, resulting in different phenotypes. Some individuals have phenotypes better adapted to the environment. These individuals are more likely to survive and reproduce (differential survival). They pass on advantageous alleles to offspring. Over many generations, the frequency of advantageous alleles increases in the population. This is how populations become adapted to their environment.',
+            markingCriteria: {
+              breakdown: [
+                'Mutations create variation (1 mark)',
+                'Better adapted individuals survive (1 mark)',
+                'Reproduce and pass on alleles (1 mark)',
+                'Allele frequency increases (1 mark)',
+                'Population becomes adapted (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q8',
+            question: 'Explain how the use of antibiotics has led to antibiotic resistance in bacteria.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Random mutations in bacterial DNA produce alleles for antibiotic resistance. When antibiotics are used, bacteria without resistance are killed. Resistant bacteria survive and reproduce, passing on resistance alleles to offspring. The frequency of resistance alleles increases in the population over time. Overuse and misuse of antibiotics increases selection pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Mutation produces resistance allele (1 mark)',
+                'Non-resistant bacteria killed by antibiotic (1 mark)',
+                'Resistant bacteria survive and reproduce (1 mark)',
+                'Frequency of resistance increases (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q9',
+            question: 'Describe how biodiversity can be measured using species richness and a diversity index.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Species richness is the number of different species in a community. A higher number indicates greater biodiversity. However, it does not account for the number of individuals of each species. A diversity index (e.g., Simpson\'s) takes into account both species richness and evenness (relative abundance). It is calculated using the formula d = 1 - (Σ(n/N)²). A higher index value indicates greater biodiversity and a more stable ecosystem.',
+            markingCriteria: {
+              breakdown: [
+                'Species richness is number of species (1 mark)',
+                'Diversity index considers abundance (1 mark)',
+                'Reference to formula or calculation (1 mark)',
+                'Higher value = greater diversity (1 mark)',
+                'More stable ecosystem (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          },
+          {
+            id: 'bio-3.4-q10',
+            question: 'Explain how comparing DNA sequences can be used to investigate evolutionary relationships.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'DNA sequences are compared between different species. The more similar the DNA sequences, the more closely related the species. Closely related species diverged from a common ancestor more recently, so have had less time to accumulate mutations. The number of differences in base sequences indicates how long ago species diverged. Comparing sequences of specific genes (e.g., cytochrome c) or non-coding DNA can reveal evolutionary relationships and construct phylogenetic trees.',
+            markingCriteria: {
+              breakdown: [
+                'More similar DNA = more closely related (1 mark)',
+                'Recent divergence from common ancestor (1 mark)',
+                'Fewer mutations accumulated (1 mark)',
+                'Differences indicate time since divergence (1 mark)',
+                'Can construct phylogenetic trees (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.4)'
+          }
+        ]
       },
       {
         id: '3.5-energy',
         name: '3.5 Energy Transfers in and Between Organisms',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.5-q1',
+            question: 'Describe the light-dependent reactions of photosynthesis.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Light is absorbed by chlorophyll in photosystem II. Electrons in chlorophyll are excited to a higher energy level and leave chlorophyll (photoionisation). Electrons pass along electron transport chain, releasing energy. This energy is used to pump protons from stroma into thylakoid space. Protons move down concentration gradient through ATP synthase, which catalyses ATP production (chemiosmosis). Photolysis of water produces protons, electrons, and oxygen. Electrons from water replace those lost from PSII. In PSI, electrons are excited again and used to reduce NADP to reduced NADP.',
+            markingCriteria: {
+              breakdown: [
+                'Light absorbed by chlorophyll/photoionisation (1 mark)',
+                'Electrons along electron transport chain (1 mark)',
+                'Energy pumps protons/creates gradient (1 mark)',
+                'Chemiosmosis produces ATP (1 mark)',
+                'Photolysis of water (1 mark)',
+                'Reduced NADP produced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q2',
+            question: 'Explain the light-independent reactions (Calvin cycle) of photosynthesis.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Carbon dioxide combines with ribulose bisphosphate (RuBP), a 5-carbon compound, catalysed by rubisco. This produces two molecules of glycerate 3-phosphate (GP), a 3-carbon compound. GP is reduced to triose phosphate (TP) using reduced NADP and energy from ATP from the light-dependent reaction. Some TP is used to regenerate RuBP using ATP. Some TP is converted to glucose and other organic substances.',
+            markingCriteria: {
+              breakdown: [
+                'CO₂ combines with RuBP (1 mark)',
+                'Produces GP (1 mark)',
+                'GP reduced to TP using reduced NADP and ATP (1 mark)',
+                'TP regenerates RuBP (1 mark)',
+                'TP converted to glucose (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q3',
+            question: 'Describe the process of glycolysis in respiration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Glucose (6C) is phosphorylated using two ATP molecules, forming hexose bisphosphate. Hexose bisphosphate splits into two molecules of triose phosphate (3C). Triose phosphate is oxidised to pyruvate (3C), with NAD reduced to reduced NAD. Four ATP are produced by substrate-level phosphorylation, giving a net gain of 2 ATP. Glycolysis occurs in the cytoplasm and does not require oxygen.',
+            markingCriteria: {
+              breakdown: [
+                'Glucose phosphorylated using ATP (1 mark)',
+                'Splits into triose phosphate (1 mark)',
+                'Oxidised to pyruvate/NAD reduced (1 mark)',
+                'Net gain of 2 ATP (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q4',
+            question: 'Describe the link reaction and Krebs cycle in aerobic respiration.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Pyruvate from glycolysis is actively transported into the mitochondrial matrix. In the link reaction, pyruvate is decarboxylated (CO₂ removed) and dehydrogenated (H removed, reducing NAD), forming acetyl group. The acetyl group combines with coenzyme A to form acetyl CoA. In the Krebs cycle, acetyl (2C) combines with oxaloacetate (4C) to form citrate (6C). Citrate is decarboxylated and dehydrogenated in a series of reactions, regenerating oxaloacetate. For each turn: one ATP, three reduced NAD, and one reduced FAD are produced, and two CO₂ are released.',
+            markingCriteria: {
+              breakdown: [
+                'Link reaction: decarboxylation and dehydrogenation (1 mark)',
+                'Acetyl CoA formed (1 mark)',
+                'Acetyl combines with oxaloacetate (1 mark)',
+                'Decarboxylation and dehydrogenation in cycle (1 mark)',
+                'Products: ATP, reduced NAD/FAD (1 mark)',
+                'CO₂ released (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q5',
+            question: 'Explain the process of oxidative phosphorylation in mitochondria.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Reduced NAD and reduced FAD are oxidised, releasing electrons. Electrons pass along electron transport chain on inner mitochondrial membrane, releasing energy. Energy is used to pump protons from matrix into intermembrane space. This creates an electrochemical gradient. Protons flow back through ATP synthase down the gradient (chemiosmosis). ATP synthase catalyses the production of ATP from ADP and Pi. Oxygen is the final electron acceptor, combining with electrons and protons to form water.',
+            markingCriteria: {
+              breakdown: [
+                'Reduced NAD/FAD oxidised releasing electrons (1 mark)',
+                'Electrons along chain release energy (1 mark)',
+                'Protons pumped creating gradient (1 mark)',
+                'Chemiosmosis through ATP synthase makes ATP (1 mark)',
+                'Oxygen accepts electrons forming water (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q6',
+            question: 'Compare aerobic and anaerobic respiration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Aerobic respiration requires oxygen as the final electron acceptor, while anaerobic does not. Aerobic produces much more ATP (approximately 32-38) compared to anaerobic (2 ATP from glycolysis only). Aerobic completely oxidises glucose to CO₂ and water. Anaerobic in animals produces lactate, in yeast produces ethanol and CO₂. Aerobic involves glycolysis, link reaction, Krebs cycle, and oxidative phosphorylation; anaerobic only involves glycolysis.',
+            markingCriteria: {
+              breakdown: [
+                'Oxygen requirement difference (1 mark)',
+                'ATP yield difference (1 mark)',
+                'Different products (1 mark)',
+                'Stages involved (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q7',
+            question: 'Explain the role of limiting factors in photosynthesis.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'A limiting factor is a variable that limits the rate of photosynthesis when in short supply. Light intensity is a limiting factor: at low intensity, increasing light increases rate as more photoionisation occurs. CO₂ concentration is limiting: increased CO₂ increases rate of carbon fixation in Calvin cycle. Temperature affects enzyme activity: rate increases with temperature until optimum, then enzymes denature. At high light and CO₂, another factor (e.g., temperature) becomes limiting. The law of limiting factors states that the rate is determined by the factor in shortest supply.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of limiting factor (1 mark)',
+                'Light intensity affects photoionisation (1 mark)',
+                'CO₂ affects Calvin cycle (1 mark)',
+                'Temperature affects enzymes (1 mark)',
+                'Rate determined by factor in shortest supply (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q8',
+            question: 'Describe how energy is transferred through ecosystems.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Producers convert light energy to chemical energy through photosynthesis (gross primary production). Some energy is lost through respiration. Net primary production is energy available for growth and to next trophic level. Primary consumers (herbivores) obtain energy by eating producers. Energy is transferred to secondary consumers (carnivores). At each stage, energy is lost through respiration, excretion, and as heat. Only about 10% of energy is transferred to the next level. Not all biomass is consumed (e.g., roots, bones).',
+            markingCriteria: {
+              breakdown: [
+                'Producers fix light energy (1 mark)',
+                'Energy lost through respiration (1 mark)',
+                'Energy transferred through feeding (1 mark)',
+                'About 10% efficiency between levels (1 mark)',
+                'Not all biomass consumed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q9',
+            question: 'Explain the role of microorganisms in the nitrogen cycle.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Nitrogen-fixing bacteria (e.g., Rhizobium in root nodules, Azotobacter in soil) convert nitrogen gas into ammonia/ammonium ions. Nitrifying bacteria convert ammonium to nitrite (Nitrosomonas) then nitrite to nitrate (Nitrobacter), which plants absorb. Decomposers (saprobionts) break down dead organisms and waste, releasing ammonia (ammonification). Denitrifying bacteria in anaerobic conditions convert nitrate back to nitrogen gas, returning it to atmosphere. This maintains nitrogen balance in ecosystems.',
+            markingCriteria: {
+              breakdown: [
+                'Nitrogen-fixing bacteria convert N₂ to ammonia (1 mark)',
+                'Nitrifying bacteria produce nitrate (1 mark)',
+                'Two-step nitrification (1 mark)',
+                'Decomposers produce ammonia (1 mark)',
+                'Denitrifying bacteria return N₂ to atmosphere (1 mark)',
+                'Maintains nitrogen balance (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          },
+          {
+            id: 'bio-3.5-q10',
+            question: 'Explain how excessive use of fertiliser can lead to eutrophication.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Excess fertiliser is leached from soil into waterways. Increased nitrate and phosphate levels cause algal bloom (rapid algae growth). Algae block light from reaching plants below surface. Plants cannot photosynthesise and die. Aerobic bacteria decompose dead plants and algae, using oxygen in the water. Oxygen concentration decreases (biochemical oxygen demand increases). Aquatic organisms die from lack of oxygen. Anaerobic bacteria then decompose matter, producing toxic gases.',
+            markingCriteria: {
+              breakdown: [
+                'Fertiliser leached into water (1 mark)',
+                'Algal bloom occurs (1 mark)',
+                'Light blocked/plants die (1 mark)',
+                'Bacteria decompose using oxygen (1 mark)',
+                'Oxygen depleted (1 mark)',
+                'Aquatic life dies (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.5)'
+          }
+        ]
       },
       {
         id: '3.6-response',
         name: '3.6 Organisms Respond to Changes in Their Environment',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.6-q1',
+            question: 'Describe the structure and function of a sensory neurone.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A sensory neurone has a cell body with dendrites in the middle of the axon, not at the end. One long dendron carries impulses from receptor cells to the cell body. One axon carries impulses from cell body to the CNS. The axon is often myelinated with a myelin sheath for faster transmission. The function is to carry nerve impulses from receptors to the central nervous system.',
+            markingCriteria: {
+              breakdown: [
+                'Cell body in middle (1 mark)',
+                'Dendron from receptor to cell body (1 mark)',
+                'Axon to CNS (1 mark)',
+                'Carries impulses from receptors to CNS (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q2',
+            question: 'Explain how a resting potential is maintained in a neurone.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The sodium-potassium pump actively transports 3 sodium ions out and 2 potassium ions into the neurone, using ATP. This creates an electrochemical gradient. The membrane is more permeable to potassium ions, which diffuse out through potassium channels. More positive ions outside than inside creates a potential difference of about -70mV. The inside is negatively charged relative to the outside.',
+            markingCriteria: {
+              breakdown: [
+                'Sodium-potassium pump (3 Na⁺ out, 2 K⁺ in) (1 mark)',
+                'Uses ATP/active transport (1 mark)',
+                'K⁺ diffuses out (1 mark)',
+                'Creates -70mV potential difference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q3',
+            question: 'Describe how an action potential is generated.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'A stimulus causes sodium ion channels to open. Sodium ions diffuse in, depolarising the membrane. If threshold potential (-55mV) is reached, more sodium channels open causing rapid depolarisation to +40mV. Sodium channels close and potassium channels open. Potassium ions diffuse out, repolarising the membrane. Hyperpolarisation occurs as membrane becomes more negative than resting potential. The sodium-potassium pump restores resting potential.',
+            markingCriteria: {
+              breakdown: [
+                'Sodium channels open/Na⁺ enters (1 mark)',
+                'Depolarisation to threshold/+40mV (1 mark)',
+                'Sodium channels close/potassium channels open (1 mark)',
+                'Repolarisation/K⁺ leaves (1 mark)',
+                'Hyperpolarisation then return to resting (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q4',
+            question: 'Explain the role of the myelin sheath in nerve impulse transmission.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The myelin sheath is made of Schwann cells wrapped around the axon. It acts as an electrical insulator, preventing ion movement across the membrane. Action potentials only occur at nodes of Ranvier (gaps in myelin). The impulse jumps from node to node (saltatory conduction), which is much faster than continuous conduction along unmyelinated axons.',
+            markingCriteria: {
+              breakdown: [
+                'Electrical insulator (1 mark)',
+                'Action potentials at nodes of Ranvier (1 mark)',
+                'Saltatory conduction is faster (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q5',
+            question: 'Describe the events at a cholinergic synapse.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Action potential arrives at presynaptic neurone. Depolarisation causes voltage-gated calcium channels to open. Calcium ions diffuse into presynaptic neurone. Calcium causes synaptic vesicles to move to and fuse with presynaptic membrane. Acetylcholine (neurotransmitter) is released by exocytosis into synaptic cleft. Acetylcholine diffuses across cleft and binds to receptors on postsynaptic membrane. Sodium channels open, sodium enters postsynaptic neurone causing depolarisation. If threshold reached, action potential generated. Acetylcholinesterase breaks down acetylcholine to prevent continuous stimulation.',
+            markingCriteria: {
+              breakdown: [
+                'Calcium channels open/Ca²⁺ enters (1 mark)',
+                'Vesicles fuse/acetylcholine released (1 mark)',
+                'Acetylcholine diffuses across cleft (1 mark)',
+                'Binds to receptors/sodium channels open (1 mark)',
+                'Depolarisation/action potential if threshold reached (1 mark)',
+                'Acetylcholinesterase breaks down acetylcholine (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q6',
+            question: 'Explain how muscles contract according to the sliding filament theory.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Action potential arrives at neuromuscular junction, releasing acetylcholine. Calcium ions are released from sarcoplasmic reticulum. Calcium ions bind to troponin, causing it to change shape. Tropomyosin moves, exposing binding sites on actin. Myosin heads bind to actin forming cross-bridges. Myosin heads change angle (power stroke), pulling actin filaments towards centre of sarcomere. ATP binds to myosin head, causing it to detach. ATP is hydrolysed, providing energy to reset myosin head. The cycle repeats while calcium and ATP are available.',
+            markingCriteria: {
+              breakdown: [
+                'Calcium released/binds to troponin (1 mark)',
+                'Binding sites on actin exposed (1 mark)',
+                'Myosin binds to actin forming cross-bridges (1 mark)',
+                'Power stroke pulls actin (1 mark)',
+                'ATP causes detachment (1 mark)',
+                'ATP hydrolysis resets myosin (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q7',
+            question: 'Describe how heart rate is controlled.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The sinoatrial node (SAN) in the right atrium acts as a pacemaker, generating electrical impulses. These spread across both atria, causing atrial contraction. Impulses reach the atrioventricular node (AVN), which delays transmission. Impulses then pass down the bundle of His and Purkyne fibres to the apex. Ventricles contract from apex upwards. The medulla oblongata in the brain regulates heart rate via the autonomic nervous system. Sympathetic nerves increase heart rate, parasympathetic nerves decrease it.',
+            markingCriteria: {
+              breakdown: [
+                'SAN generates impulses (1 mark)',
+                'AVN delays transmission (1 mark)',
+                'Bundle of His/Purkyne fibres (1 mark)',
+                'Medulla controls rate (1 mark)',
+                'Sympathetic increases, parasympathetic decreases (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q8',
+            question: 'Explain how IAA (auxin) causes phototropism in plant shoots.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Light is detected by photoreceptors in shoot tip. IAA is produced in the shoot tip and moves down the shoot. IAA is redistributed to the shaded side of the shoot away from light. Higher concentration of IAA on shaded side causes cells to elongate more. This is because IAA promotes active transport of hydrogen ions into cell wall, loosening cellulose. Greater elongation on shaded side causes shoot to bend towards light (positive phototropism).',
+            markingCriteria: {
+              breakdown: [
+                'IAA produced in tip (1 mark)',
+                'IAA moves to shaded side (1 mark)',
+                'Higher IAA causes more cell elongation (1 mark)',
+                'IAA loosens cell wall (1 mark)',
+                'Shoot bends towards light (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q9',
+            question: 'Describe how blood glucose concentration is regulated.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Blood glucose concentration is monitored by receptors in the pancreas. When blood glucose is too high, beta cells in islets of Langerhans secrete insulin. Insulin binds to receptors on liver and muscle cells, activating enzymes. This increases uptake of glucose and its conversion to glycogen (glycogenesis). When blood glucose is too low, alpha cells secrete glucagon. Glucagon binds to liver cell receptors, activating enzymes that break down glycogen to glucose (glycogenolysis). This is an example of negative feedback control.',
+            markingCriteria: {
+              breakdown: [
+                'Receptors in pancreas detect glucose (1 mark)',
+                'High glucose: beta cells secrete insulin (1 mark)',
+                'Insulin promotes glycogenesis (1 mark)',
+                'Low glucose: alpha cells secrete glucagon (1 mark)',
+                'Glucagon promotes glycogenolysis (1 mark)',
+                'Negative feedback (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          },
+          {
+            id: 'bio-3.6-q10',
+            question: 'Explain how the body responds to a decrease in water potential of the blood.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Osmoreceptors in the hypothalamus detect decrease in water potential (blood too concentrated). The posterior pituitary gland is stimulated to release more ADH (antidiuretic hormone) into the blood. ADH travels to the kidneys and binds to receptors on cells of collecting duct. This triggers insertion of aquaporin channels into the membrane. The collecting duct becomes more permeable to water. More water is reabsorbed from the filtrate into the blood by osmosis. Less, more concentrated urine is produced.',
+            markingCriteria: {
+              breakdown: [
+                'Osmoreceptors in hypothalamus detect change (1 mark)',
+                'More ADH released from pituitary (1 mark)',
+                'ADH binds to collecting duct cells (1 mark)',
+                'Aquaporins inserted/increased permeability (1 mark)',
+                'More water reabsorbed by osmosis (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.6)'
+          }
+        ]
       },
       {
         id: '3.7-populations',
         name: '3.7 Genetics, Populations, Evolution and Ecosystems',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.7-q1',
+            question: 'Explain what is meant by genotype, phenotype, dominant, codominant, and recessive alleles.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Genotype is the genetic constitution of an organism (the alleles present). Phenotype is the observable characteristics resulting from genotype and environment. A dominant allele is always expressed in the phenotype, even when only one copy is present (heterozygous). A recessive allele is only expressed when two copies are present (homozygous). Codominant alleles are both expressed in the phenotype when present together (e.g., blood group AB).',
+            markingCriteria: {
+              breakdown: [
+                'Genotype: genetic constitution (1 mark)',
+                'Phenotype: observable characteristics (1 mark)',
+                'Dominant: expressed when one copy present (1 mark)',
+                'Recessive: expressed when two copies present (1 mark)',
+                'Codominant: both expressed together (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q2',
+            question: 'A genetic cross involves a characteristic controlled by a single gene with two alleles. Explain how you would use a genetic diagram to predict the offspring phenotypes.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Identify the alleles for each parent and their genotypes. Determine all possible gametes each parent can produce (each gamete contains one allele). Draw a Punnett square with one parent\'s gametes along the top and the other\'s down the side. Fill in the square to show all possible offspring genotypes. Use the genotypes to determine phenotypes based on dominant/recessive relationships.',
+            markingCriteria: {
+              breakdown: [
+                'Identify parental genotypes (1 mark)',
+                'Determine gametes (1 mark)',
+                'Use Punnett square (1 mark)',
+                'Determine offspring phenotypes (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q3',
+            question: 'Explain what is meant by sex-linkage and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sex-linkage occurs when a gene is located on a sex chromosome (usually the X chromosome). The Y chromosome is shorter and lacks many genes found on X. Males (XY) have only one X chromosome, so a single recessive allele will be expressed. Females (XX) need two recessive alleles for expression. Example: red-green colour blindness or haemophilia. Males are more likely to be affected than females.',
+            markingCriteria: {
+              breakdown: [
+                'Gene on sex chromosome (1 mark)',
+                'Males have one X, females two (1 mark)',
+                'Males more likely affected by recessive (1 mark)',
+                'Valid example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q4',
+            question: 'Explain the Hardy-Weinberg principle and its use.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The Hardy-Weinberg principle states that allele frequencies in a population will remain constant from generation to generation, assuming: no mutations, random mating, no selection, large population, no migration. The equations p + q = 1 and p² + 2pq + q² = 1 describe allele and genotype frequencies. p represents frequency of dominant allele, q represents frequency of recessive allele. p² is frequency of homozygous dominant, 2pq is heterozygous, q² is homozygous recessive. Used to predict genotype frequencies and detect evolutionary change.',
+            markingCriteria: {
+              breakdown: [
+                'Allele frequencies remain constant (1 mark)',
+                'Conditions: no mutation, random mating, etc. (1 mark)',
+                'Equations: p + q = 1, p² + 2pq + q² = 1 (1 mark)',
+                'p and q represent allele frequencies (1 mark)',
+                'Use: predict frequencies or detect change (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q5',
+            question: 'Describe how allopatric speciation occurs.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'A population becomes geographically isolated by a physical barrier (e.g., river, mountain). The two populations experience different selection pressures in their environments. Different mutations arise in each population. Natural selection acts differently in each environment, selecting for different advantageous alleles. Over time, genetic differences accumulate and the populations can no longer interbreed to produce fertile offspring. Two new species have formed.',
+            markingCriteria: {
+              breakdown: [
+                'Geographic isolation by barrier (1 mark)',
+                'Different selection pressures (1 mark)',
+                'Different mutations occur (1 mark)',
+                'Natural selection acts differently (1 mark)',
+                'Cannot interbreed/new species formed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q6',
+            question: 'Explain how genetic drift can lead to changes in allele frequency.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic drift is random change in allele frequency between generations. It has a greater effect in small populations. Alleles may be passed on or not by chance, not because of selection. Some alleles may be lost completely, reducing genetic diversity. Over time, this can lead to one allele becoming fixed in the population. Genetic drift is stronger after a bottleneck or founder effect reduces population size.',
+            markingCriteria: {
+              breakdown: [
+                'Random change in allele frequency (1 mark)',
+                'Greater effect in small populations (1 mark)',
+                'Alleles passed by chance not selection (1 mark)',
+                'Can lead to loss of alleles/reduced diversity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q7',
+            question: 'Describe how you would investigate population size using the mark-release-recapture method.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Capture a sample of organisms and count them (n₁). Mark them in a harmless way that doesn\'t affect survival or behavior. Release them back into the habitat and allow time to redistribute. Capture a second sample and count total caught (n₂) and how many are marked (m). Calculate population size using: N = (n₁ × n₂) / m. Assumptions: no deaths/births/migration between samples, marking doesn\'t affect survival, marks don\'t come off, random mixing occurs.',
+            markingCriteria: {
+              breakdown: [
+                'Capture, mark, and release first sample (1 mark)',
+                'Capture second sample (1 mark)',
+                'Count marked individuals in second sample (1 mark)',
+                'Use formula N = (n₁ × n₂) / m (1 mark)',
+                'State assumptions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q8',
+            question: 'Explain the role of competition in determining population size.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Organisms compete for limited resources such as food, water, light, space, and mates. Intraspecific competition occurs between members of the same species. As population increases, competition intensifies, limiting growth. Some individuals cannot obtain enough resources and die or fail to reproduce. This reduces population size. Interspecific competition occurs between different species for the same resources. The better adapted species is more successful.',
+            markingCriteria: {
+              breakdown: [
+                'Competition for limited resources (1 mark)',
+                'Intraspecific competition within species (1 mark)',
+                'Increased competition limits population growth (1 mark)',
+                'Interspecific competition between species (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q9',
+            question: 'Describe the process of succession.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Succession is the change in a community over time. Primary succession begins on bare rock or sand with no soil. Pioneer species (e.g., lichens) colonize first as they can tolerate harsh conditions. Pioneer species die and decompose, forming thin soil. This allows other species to colonize. As soil depth increases, larger plants can grow. Each stage changes the environment, making it more suitable for other species. Species diversity increases over time. Eventually a climax community is reached, which is stable and in equilibrium with the environment.',
+            markingCriteria: {
+              breakdown: [
+                'Change in community over time (1 mark)',
+                'Pioneer species colonize first (1 mark)',
+                'Death and decay forms soil (1 mark)',
+                'Environment changes/species diversity increases (1 mark)',
+                'New species replace previous (1 mark)',
+                'Climax community reached (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          },
+          {
+            id: 'bio-3.7-q10',
+            question: 'Explain the importance of conservation and describe methods used.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Conservation maintains biodiversity and protects endangered species. It preserves genetic diversity for future use and maintains ecosystem stability. Methods include: protecting habitats through nature reserves and national parks; legal protection of endangered species; captive breeding programs to increase population size; seed banks preserve genetic diversity of plants; education programs raise awareness. Management may involve controlling succession by grazing or burning, or reintroduction of species. International cooperation through treaties (e.g., CITES) regulates trade in endangered species.',
+            markingCriteria: {
+              breakdown: [
+                'Maintains biodiversity/protects species (1 mark)',
+                'Habitat protection (1 mark)',
+                'Captive breeding/seed banks (1 mark)',
+                'Education/raising awareness (1 mark)',
+                'Active management methods (1 mark)',
+                'International cooperation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.7)'
+          }
+        ]
       },
       {
         id: '3.8-gene-expression',
         name: '3.8 The Control of Gene Expression',
-        questions: []
+        questions: [
+          {
+            id: 'bio-3.8-q1',
+            question: 'Explain what is meant by totipotent, pluripotent, and multipotent stem cells.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Totipotent cells can differentiate into any type of body cell, including extra-embryonic tissue (placenta). Only the first few divisions of a fertilized egg produce totipotent cells. Pluripotent cells can differentiate into any body cell type but not extra-embryonic tissue (e.g., embryonic stem cells). Multipotent cells can only differentiate into a limited range of related cell types (e.g., adult stem cells in bone marrow can produce blood cells).',
+            markingCriteria: {
+              breakdown: [
+                'Totipotent: can form any cell including placenta (1 mark)',
+                'Pluripotent: can form any body cell (1 mark)',
+                'Multipotent: limited range of cell types (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q2',
+            question: 'Explain how induced pluripotent stem cells (iPS cells) are produced and their potential uses.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Adult somatic cells (e.g., skin cells) are taken from a patient. Transcription factors are introduced into the cells using viruses. These transcription factors activate genes associated with pluripotency. The cells revert to a pluripotent state and can differentiate into many cell types. Advantages: no embryos destroyed (fewer ethical issues), cells genetically matched to patient (no rejection). Uses include regenerative medicine, drug testing, and research into development and disease.',
+            markingCriteria: {
+              breakdown: [
+                'Adult cells used (1 mark)',
+                'Transcription factors introduced (1 mark)',
+                'Cells become pluripotent (1 mark)',
+                'Fewer ethical issues/no rejection (1 mark)',
+                'Uses: regenerative medicine/research (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q3',
+            question: 'Explain how transcription factors control gene expression.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transcription factors are proteins that bind to specific DNA sequences near genes. They bind to promoter regions upstream of genes. Some transcription factors activate transcription by helping RNA polymerase bind to DNA. Others inhibit transcription by preventing RNA polymerase binding. This controls which genes are expressed in different cells. Hormone-like molecules (e.g., oestrogen) can activate transcription factors by binding to receptors.',
+            markingCriteria: {
+              breakdown: [
+                'Proteins that bind to DNA (1 mark)',
+                'Bind to promoter regions (1 mark)',
+                'Activate or inhibit transcription (1 mark)',
+                'Control which genes are expressed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q4',
+            question: 'Explain how oestrogen affects gene transcription.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Oestrogen is a lipid-soluble hormone that diffuses through the cell membrane. In the cytoplasm, oestrogen binds to oestrogen receptors forming a hormone-receptor complex. The complex acts as a transcription factor. It enters the nucleus and binds to specific DNA sequences called oestrogen response elements. This stimulates transcription of genes by helping RNA polymerase bind. mRNA is produced and translated into proteins that affect cell function.',
+            markingCriteria: {
+              breakdown: [
+                'Oestrogen diffuses through membrane (1 mark)',
+                'Binds to receptor in cytoplasm (1 mark)',
+                'Complex acts as transcription factor (1 mark)',
+                'Enters nucleus and binds to DNA (1 mark)',
+                'Stimulates transcription (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q5',
+            question: 'Explain how epigenetic changes control gene expression.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Epigenetic changes alter gene expression without changing DNA sequence. DNA methylation involves adding methyl groups to cytosine bases, usually inhibiting transcription. Methylation can prevent transcription factors from binding. Histone modification involves acetylation or methylation of histone proteins. Acetylation of histones loosens DNA wrapping, making genes more accessible for transcription. Methylation of histones tightens DNA wrapping, inhibiting transcription. These changes can be inherited but are also influenced by environment.',
+            markingCriteria: {
+              breakdown: [
+                'Changes don\'t alter DNA sequence (1 mark)',
+                'Methylation of DNA inhibits transcription (1 mark)',
+                'Acetylation of histones increases transcription (1 mark)',
+                'Methylation of histones decreases transcription (1 mark)',
+                'Can be inherited/influenced by environment (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q6',
+            question: 'Explain how mutations in tumour suppressor genes and oncogenes can lead to cancer.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Tumour suppressor genes normally slow cell division and cause cell death (apoptosis). Mutation inactivates tumour suppressor genes (e.g., p53), so cell division is not inhibited. Proto-oncogenes stimulate cell division when growth is needed. Mutation converts proto-oncogenes to oncogenes, which permanently activate cell division. Increased oestrogen can increase transcription of proto-oncogenes. Cancer develops when both copies of tumour suppressor genes are mutated and oncogenes are activated. Cells divide uncontrollably forming tumours. Mutations may be inherited or caused by mutagens (e.g., UV radiation, chemicals).',
+            markingCriteria: {
+              breakdown: [
+                'Tumour suppressors normally slow division (1 mark)',
+                'Mutation inactivates them (1 mark)',
+                'Proto-oncogenes stimulate division (1 mark)',
+                'Mutation activates them to oncogenes (1 mark)',
+                'Both changes lead to uncontrolled division (1 mark)',
+                'Mutations inherited or caused by mutagens (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q7',
+            question: 'Describe different types of gene mutations and their effects.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Substitution: one base replaced by another. May result in different amino acid (missense), same amino acid (silent), or stop codon (nonsense). Deletion: one or more bases removed, causing frameshift where all subsequent codons are affected. Usually harmful. Insertion/addition: extra bases added, also causing frameshift. Inversion: sequence of bases reversed. Duplication: sequence of bases repeated. Translocation: section of one chromosome breaks off and joins another. Mutations may be beneficial (rare), neutral (silent), or harmful. Most occur in non-coding DNA.',
+            markingCriteria: {
+              breakdown: [
+                'Substitution: base replaced (1 mark)',
+                'Deletion/insertion: frameshift (1 mark)',
+                'Inversion/duplication/translocation described (1 mark)',
+                'Effects: beneficial/neutral/harmful (1 mark)',
+                'Frameshift affects all subsequent codons (1 mark)',
+                'Most in non-coding DNA/silent mutations (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q8',
+            question: 'Explain how genome sequencing projects can be useful.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Genome sequencing determines the complete DNA base sequence of an organism. Knowledge of the human genome allows identification of genes linked to diseases. This enables development of diagnostic tests for genetic disorders. Understanding gene function helps develop targeted therapies and personalized medicine. Proteome analysis (study of all proteins) shows which proteins are produced. Comparing genomes of different species reveals evolutionary relationships. Genomes of pathogens help develop vaccines and treatments.',
+            markingCriteria: {
+              breakdown: [
+                'Determines complete DNA sequence (1 mark)',
+                'Identifies disease-linked genes (1 mark)',
+                'Diagnostic tests/personalized medicine (1 mark)',
+                'Reveals evolutionary relationships (1 mark)',
+                'Helps develop treatments/vaccines (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q9',
+            question: 'Describe the process of producing recombinant DNA and inserting it into organisms.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The desired gene is isolated from source DNA using restriction enzymes, which cut at specific recognition sequences. The same restriction enzyme cuts plasmid vector DNA, creating complementary sticky ends. The gene and plasmid are mixed with DNA ligase, which joins them by forming phosphodiester bonds. This produces recombinant DNA. The plasmid is inserted into host cells (e.g., bacteria) by transformation. Marker genes (e.g., antibiotic resistance) identify successfully transformed cells. Transformed bacteria reproduce, expressing the desired gene and producing the protein.',
+            markingCriteria: {
+              breakdown: [
+                'Restriction enzymes cut DNA at specific sites (1 mark)',
+                'Produce complementary sticky ends (1 mark)',
+                'DNA ligase joins gene to vector (1 mark)',
+                'Plasmid inserted into host cells (1 mark)',
+                'Marker genes identify transformed cells (1 mark)',
+                'Bacteria express gene and produce protein (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          },
+          {
+            id: 'bio-3.8-q10',
+            question: 'Describe the process and uses of genetic fingerprinting.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'DNA sample is extracted and amplified using PCR (polymerase chain reaction). Restriction enzymes cut DNA at specific sites, including in variable number tandem repeats (VNTRs). Fragments are separated by gel electrophoresis: DNA loaded into wells, electric current applied, smaller fragments move further. Fragments transferred to nylon membrane (Southern blotting). Radioactive probes bind to specific sequences. X-ray film reveals pattern of bands unique to individual. Uses include: forensic science (crime scene analysis), paternity testing, identifying genetic relationships, selective breeding programs.',
+            markingCriteria: {
+              breakdown: [
+                'PCR amplifies DNA (1 mark)',
+                'Restriction enzymes cut at VNTRs (1 mark)',
+                'Gel electrophoresis separates fragments (1 mark)',
+                'Probes bind to create pattern (1 mark)',
+                'Pattern unique to individual (1 mark)',
+                'Uses: forensics/paternity/relationships (1 mark)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 2 (3.8)'
+          }
+        ]
       }
     ]
   },
