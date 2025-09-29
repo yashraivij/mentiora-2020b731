@@ -485,9 +485,12 @@ const PredictedQuestions = () => {
                  </CardContent>
                </Card>
 
-               {curriculum
-                  .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science')
-                  .map((subject) => renderSubjectCard(subject))}
+                {curriculum
+                   .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science' && subject.id !== 'maths-aqa-alevel')
+                   .map((subject) => renderSubjectCard(subject))}
+
+                {/* Maths AQA A-Level Card */}
+                {renderSubjectCard(curriculum.find(s => s.id === 'maths-aqa-alevel')!)}
             </div>
           </TabsContent>
 

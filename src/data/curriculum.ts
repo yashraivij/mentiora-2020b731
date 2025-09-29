@@ -28501,5 +28501,1688 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'maths-aqa-alevel',
+    name: 'Mathematics',
+    topics: [
+      {
+        id: 'A-proof',
+        name: 'A: Proof',
+        questions: [
+          {
+            id: 'maths-A-q1',
+            question: 'Prove by deduction that the sum of any two odd integers is even.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Let the two odd integers be 2m+1 and 2n+1. Their sum is (2m+1) + (2n+1) = 2m + 2n + 2 = 2(m+n+1). Since m+n+1 is an integer, the sum is 2 times an integer, therefore even.',
+            markingCriteria: {
+              breakdown: [
+                'Express odd integers in form 2m+1 and 2n+1 (1 mark)',
+                'Add and factorize to get 2(m+n+1) (1 mark)',
+                'State conclusion that sum is even (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q2',
+            question: 'Prove by exhaustion that n² - n is even for all positive integers n ≤ 4.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'n=1: 1²-1 = 0, which is even. n=2: 2²-2 = 2, which is even. n=3: 3²-3 = 6, which is even. n=4: 4²-4 = 12, which is even. Therefore n²-n is even for all positive integers n ≤ 4.',
+            markingCriteria: {
+              breakdown: [
+                'Test n=1 and n=2 correctly (1 mark)',
+                'Test n=3 and n=4 correctly (1 mark)',
+                'Identify each result as even (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q3',
+            question: 'Disprove by counterexample: "All prime numbers are odd".',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The number 2 is prime and 2 is even. Therefore the statement is false.',
+            markingCriteria: {
+              breakdown: [
+                'Identify 2 as a prime number (1 mark)',
+                'State that 2 is even, disproving the statement (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q4',
+            question: 'Use proof by contradiction to prove that √2 is irrational.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Assume √2 is rational, so √2 = a/b where a and b are integers with no common factors. Then 2 = a²/b², so 2b² = a². This means a² is even, so a is even. Let a = 2k. Then 2b² = 4k², so b² = 2k². This means b² is even, so b is even. But if both a and b are even, they share a common factor of 2, contradicting our assumption. Therefore √2 is irrational.',
+            markingCriteria: {
+              breakdown: [
+                'State assumption that √2 = a/b in lowest terms (1 mark)',
+                'Derive 2b² = a² and conclude a is even (2 marks)',
+                'Substitute a = 2k and derive b² = 2k² (1 mark)',
+                'Conclude b is even (1 mark)',
+                'State contradiction and conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q5',
+            question: 'Use proof by contradiction to show there are infinitely many prime numbers.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Assume there are finitely many primes p₁, p₂, ..., pₙ. Consider N = (p₁×p₂×...×pₙ) + 1. N is not divisible by any of the primes (leaves remainder 1). So either N is prime, or has a prime factor not in our list. Either way, we have found a prime not in our original list, contradicting the assumption. Therefore there are infinitely many primes.',
+            markingCriteria: {
+              breakdown: [
+                'State assumption of finitely many primes (1 mark)',
+                'Construct N = (p₁×p₂×...×pₙ) + 1 (1 mark)',
+                'Show N is not divisible by any listed prime (1 mark)',
+                'Explain N is prime or has unlisted prime factor (1 mark)',
+                'State contradiction and conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          }
+        ]
+      },
+      {
+        id: 'B-algebra-functions',
+        name: 'B: Algebra and Functions',
+        questions: [
+          {
+            id: 'maths-B-q1',
+            question: 'Simplify (27x⁶)^(2/3)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(27x⁶)^(2/3) = 27^(2/3) × (x⁶)^(2/3) = (3³)^(2/3) × x⁴ = 3² × x⁴ = 9x⁴',
+            markingCriteria: {
+              breakdown: [
+                'Apply power law correctly (1 mark)',
+                'Correct final answer 9x⁴ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q2',
+            question: 'Rationalize the denominator: 6/(3-√5)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '6/(3-√5) × (3+√5)/(3+√5) = 6(3+√5)/(9-5) = 6(3+√5)/4 = 3(3+√5)/2 = (9+3√5)/2',
+            markingCriteria: {
+              breakdown: [
+                'Multiply by conjugate (3+√5)/(3+√5) (1 mark)',
+                'Simplify denominator to 4 (1 mark)',
+                'Final answer (9+3√5)/2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q3',
+            question: 'Solve the quadratic equation 2x² - 5x - 3 = 0 by factorisation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: '2x² - 5x - 3 = (2x+1)(x-3) = 0. Therefore x = -1/2 or x = 3.',
+            markingCriteria: {
+              breakdown: [
+                'Correct factorisation (2x+1)(x-3) (2 marks)',
+                'Both solutions x = -1/2 and x = 3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q4',
+            question: 'Find the discriminant of 3x² + 7x + 2 = 0 and determine the nature of the roots.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Discriminant Δ = b² - 4ac = 7² - 4(3)(2) = 49 - 24 = 25. Since Δ > 0 and is a perfect square, there are two distinct real rational roots.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate discriminant = 25 (1 mark)',
+                'State Δ > 0 (1 mark)',
+                'State two distinct real rational roots (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q5',
+            question: 'Solve the simultaneous equations: y = 2x + 3 and x² + y² = 10',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Substitute y = 2x + 3 into x² + y² = 10: x² + (2x+3)² = 10. Expand: x² + 4x² + 12x + 9 = 10. Simplify: 5x² + 12x - 1 = 0. Using quadratic formula: x = (-12 ± √(144+20))/10 = (-12 ± √164)/10 = (-12 ± 2√41)/10 = (-6 ± √41)/5. When x = (-6+√41)/5, y = (2(-6+√41)+15)/5 = (3+2√41)/5. When x = (-6-√41)/5, y = (3-2√41)/5.',
+            markingCriteria: {
+              breakdown: [
+                'Substitute to get 5x² + 12x - 1 = 0 (2 marks)',
+                'Use quadratic formula correctly (1 mark)',
+                'Both x values (1 mark)',
+                'Both y values (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q6',
+            question: 'Solve the inequality x² - 7x + 10 < 0',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'x² - 7x + 10 = (x-2)(x-5) < 0. The quadratic equals zero at x = 2 and x = 5. Testing intervals: for x < 2, both factors negative so product positive; for 2 < x < 5, factors have opposite signs so product negative; for x > 5, both positive. Therefore 2 < x < 5.',
+            markingCriteria: {
+              breakdown: [
+                'Factorize to (x-2)(x-5) (1 mark)',
+                'Identify critical values x = 2 and x = 5 (1 mark)',
+                'Solution 2 < x < 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q7',
+            question: 'Use the factor theorem to show that (x-2) is a factor of f(x) = x³ - 3x² - 4x + 12. Hence fully factorise f(x).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'f(2) = 8 - 12 - 8 + 12 = 0, so (x-2) is a factor. Dividing: x³ - 3x² - 4x + 12 = (x-2)(x² - x - 6) = (x-2)(x-3)(x+2).',
+            markingCriteria: {
+              breakdown: [
+                'Calculate f(2) = 0 (1 mark)',
+                'Perform division to get x² - x - 6 (1 mark)',
+                'Factorise quadratic (1 mark)',
+                'Complete factorisation (x-2)(x-3)(x+2) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q8',
+            question: 'Simplify (x² - 9)/(x² + 6x + 9)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(x² - 9)/(x² + 6x + 9) = (x-3)(x+3)/(x+3)² = (x-3)/(x+3)',
+            markingCriteria: {
+              breakdown: [
+                'Factorise numerator and denominator (1 mark)',
+                'Cancel and simplify to (x-3)/(x+3) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q9',
+            question: 'Given f(x) = 2x + 1 and g(x) = x², find fg(x) and gf(x).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'fg(x) = f(g(x)) = f(x²) = 2x² + 1. gf(x) = g(f(x)) = g(2x+1) = (2x+1)² = 4x² + 4x + 1.',
+            markingCriteria: {
+              breakdown: [
+                'fg(x) = 2x² + 1 (1 mark)',
+                'Expand gf(x) correctly (1 mark)',
+                'gf(x) = 4x² + 4x + 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q10',
+            question: 'Find f⁻¹(x) if f(x) = (3x - 2)/5',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Let y = (3x - 2)/5. Then 5y = 3x - 2, so 3x = 5y + 2, giving x = (5y + 2)/3. Therefore f⁻¹(x) = (5x + 2)/3.',
+            markingCriteria: {
+              breakdown: [
+                'Set y = (3x-2)/5 and rearrange (1 mark)',
+                'Make x the subject (1 mark)',
+                'State f⁻¹(x) = (5x+2)/3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q11',
+            question: 'Describe the transformations that map y = x² to y = 2(x-3)² + 1',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Translation 3 units right (x-3), vertical stretch scale factor 2 (coefficient 2), translation 1 unit up (+1).',
+            markingCriteria: {
+              breakdown: [
+                'Translation 3 right (1 mark)',
+                'Vertical stretch factor 2 (1 mark)',
+                'Translation 1 up (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          },
+          {
+            id: 'maths-B-q12',
+            question: 'Express (3x² + 11x + 8)/((x+1)(x+2)²) in partial fractions.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: '(3x² + 11x + 8)/((x+1)(x+2)²) = A/(x+1) + B/(x+2) + C/(x+2)². Multiply through: 3x² + 11x + 8 = A(x+2)² + B(x+1)(x+2) + C(x+1). Let x = -1: 3 - 11 + 8 = A(1), so A = 0. Let x = -2: 12 - 22 + 8 = C(-1), so C = 2. Comparing x² coefficients: 3 = A + B = B, so B = 3. Therefore: 3/(x+2) + 2/(x+2)².',
+            markingCriteria: {
+              breakdown: [
+                'Set up correct form with A, B, C (1 mark)',
+                'Find A = 0 (1 mark)',
+                'Find C = 2 (1 mark)',
+                'Find B = 3 (1 mark)',
+                'Final answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Algebra'
+          }
+        ]
+      },
+      {
+        id: 'C-coordinate-geometry',
+        name: 'C: Coordinate Geometry',
+        questions: [
+          {
+            id: 'maths-C-q1',
+            question: 'Find the equation of the line passing through (2, 5) with gradient 3.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Using y - y₁ = m(x - x₁): y - 5 = 3(x - 2). Expanding: y - 5 = 3x - 6, so y = 3x - 1.',
+            markingCriteria: {
+              breakdown: [
+                'Apply formula y - 5 = 3(x - 2) (1 mark)',
+                'Simplify to y = 3x - 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q2',
+            question: 'Find the equation of the line perpendicular to y = 2x + 3 passing through (4, 1).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The gradient of y = 2x + 3 is 2. The perpendicular gradient is -1/2. Using y - 1 = -1/2(x - 4): y - 1 = -x/2 + 2, so y = -x/2 + 3 or 2y = -x + 6.',
+            markingCriteria: {
+              breakdown: [
+                'Find perpendicular gradient -1/2 (1 mark)',
+                'Apply point-slope formula (1 mark)',
+                'Correct equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q3',
+            question: 'Find the centre and radius of the circle x² + y² - 6x + 4y - 12 = 0',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Complete the square: (x² - 6x) + (y² + 4y) = 12. (x² - 6x + 9) + (y² + 4y + 4) = 12 + 9 + 4 = 25. (x - 3)² + (y + 2)² = 25. Centre (3, -2), radius 5.',
+            markingCriteria: {
+              breakdown: [
+                'Complete square for x: (x-3)² (1 mark)',
+                'Complete square for y: (y+2)² (1 mark)',
+                'Centre (3, -2) (1 mark)',
+                'Radius 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q4',
+            question: 'Show that the point (5, 6) lies on the circle (x-2)² + (y-2)² = 25',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Substitute x = 5, y = 6: (5-2)² + (6-2)² = 3² + 4² = 9 + 16 = 25. This equals the right side, so the point lies on the circle.',
+            markingCriteria: {
+              breakdown: [
+                'Substitute and calculate to get 25 (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q5',
+            question: 'Find the equation of the tangent to the circle x² + y² = 25 at the point (3, 4).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The radius from centre (0,0) to (3,4) has gradient 4/3. The tangent is perpendicular, so has gradient -3/4. Using y - 4 = -3/4(x - 3): 4y - 16 = -3x + 9, so 3x + 4y = 25.',
+            markingCriteria: {
+              breakdown: [
+                'Find radius gradient 4/3 (1 mark)',
+                'Find tangent gradient -3/4 (1 mark)',
+                'Apply point-slope formula (1 mark)',
+                'Final equation 3x + 4y = 25 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q6',
+            question: 'A curve has parametric equations x = 2t, y = t². Find the Cartesian equation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'From x = 2t, we get t = x/2. Substituting into y = t²: y = (x/2)² = x²/4.',
+            markingCriteria: {
+              breakdown: [
+                'Express t in terms of x (1 mark)',
+                'Substitute to get y = x²/4 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          }
+        ]
+      },
+      {
+        id: 'D-sequences-series',
+        name: 'D: Sequences and Series',
+        questions: [
+          {
+            id: 'maths-D-q1',
+            question: 'Expand (2 + x)⁴ using the binomial theorem.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: '(2 + x)⁴ = ⁴C₀(2⁴) + ⁴C₁(2³)x + ⁴C₂(2²)x² + ⁴C₃(2)x³ + ⁴C₄x⁴ = 16 + 32x + 24x² + 8x³ + x⁴',
+            markingCriteria: {
+              breakdown: [
+                'Apply binomial formula (1 mark)',
+                'Calculate all coefficients correctly (1 mark)',
+                'Final expanded form (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q2',
+            question: 'Find the coefficient of x³ in the expansion of (1 + 2x)⁶',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The term containing x³ is ⁶C₃(1)³(2x)³ = 20 × 8x³ = 160x³. The coefficient is 160.',
+            markingCriteria: {
+              breakdown: [
+                'Identify correct term ⁶C₃(2x)³ (1 mark)',
+                'Calculate ⁶C₃ = 20 (1 mark)',
+                'Find coefficient 160 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q3',
+            question: 'Find the first 4 terms in the binomial expansion of (1 + x)⁻² for |x| < 1.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '(1 + x)⁻² = 1 + (-2)x + [(-2)(-3)/2!]x² + [(-2)(-3)(-4)/3!]x³ + ... = 1 - 2x + 3x² - 4x³ + ...',
+            markingCriteria: {
+              breakdown: [
+                'First two terms 1 - 2x (1 mark)',
+                'Third term 3x² (1 mark)',
+                'Fourth term -4x³ (1 mark)',
+                'State validity |x| < 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q4',
+            question: 'The sequence is defined by uₙ₊₁ = 2uₙ - 3 with u₁ = 5. Find u₂, u₃, and u₄.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'u₂ = 2(5) - 3 = 7. u₃ = 2(7) - 3 = 11. u₄ = 2(11) - 3 = 19.',
+            markingCriteria: {
+              breakdown: [
+                'u₂ = 7 (1 mark)',
+                'u₃ = 11 (1 mark)',
+                'u₄ = 19 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q5',
+            question: 'Find the sum of the arithmetic series 3 + 7 + 11 + ... to 20 terms.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'First term a = 3, common difference d = 4, n = 20. Sₙ = n/2[2a + (n-1)d] = 10[6 + 19(4)] = 10[6 + 76] = 10(82) = 820.',
+            markingCriteria: {
+              breakdown: [
+                'Identify a = 3, d = 4 (1 mark)',
+                'Apply formula correctly (1 mark)',
+                'S₂₀ = 820 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q6',
+            question: 'A geometric series has first term 8 and common ratio 1/2. Find the sum to infinity.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'a = 8, r = 1/2. Since |r| < 1, S∞ = a/(1-r) = 8/(1-1/2) = 8/(1/2) = 16.',
+            markingCriteria: {
+              breakdown: [
+                'Identify a = 8, r = 1/2 (1 mark)',
+                'Apply S∞ = a/(1-r) (1 mark)',
+                'S∞ = 16 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q7',
+            question: 'Express the sum 1 + 4 + 9 + 16 + ... + 100 using sigma notation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '∑(r=1 to 10) r² or ∑(r²) for r from 1 to 10',
+            markingCriteria: {
+              breakdown: [
+                'Recognize pattern as r² (1 mark)',
+                'Write sigma notation with correct limits (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          }
+        ]
+      },
+      {
+        id: 'E-trigonometry',
+        name: 'E: Trigonometry',
+        questions: [
+          {
+            id: 'maths-E-q1',
+            question: 'Solve sin θ = 0.5 for 0° ≤ θ ≤ 360°',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'θ = 30° or θ = 150° (sin is positive in first and second quadrants)',
+            markingCriteria: {
+              breakdown: [
+                'θ = 30° (1 mark)',
+                'θ = 150° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q2',
+            question: 'A sector of a circle has radius 6 cm and angle 2 radians. Find the arc length and sector area.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Arc length = rθ = 6 × 2 = 12 cm. Sector area = 1/2 r²θ = 1/2 × 36 × 2 = 36 cm².',
+            markingCriteria: {
+              breakdown: [
+                'Apply arc length formula (1 mark)',
+                'Arc length = 12 cm (1 mark)',
+                'Apply area formula (1 mark)',
+                'Area = 36 cm² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q3',
+            question: 'Given sin θ = 0.6 and cos θ = 0.8, find tan θ and sec θ.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'tan θ = sin θ / cos θ = 0.6 / 0.8 = 3/4 = 0.75. sec θ = 1 / cos θ = 1 / 0.8 = 5/4 = 1.25.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate tan θ correctly (1 mark)',
+                'tan θ = 0.75 (1 mark)',
+                'sec θ = 1.25 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q4',
+            question: 'Prove the identity sec²θ = 1 + tan²θ',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Start with sin²θ + cos²θ = 1. Divide throughout by cos²θ: sin²θ/cos²θ + cos²θ/cos²θ = 1/cos²θ. This gives tan²θ + 1 = sec²θ.',
+            markingCriteria: {
+              breakdown: [
+                'Start with sin²θ + cos²θ = 1 (1 mark)',
+                'Divide by cos²θ (1 mark)',
+                'Arrive at required identity (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q5',
+            question: 'Use the double angle formula to find sin 120° given that sin 60° = √3/2.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'sin 120° = sin(2 × 60°) = 2 sin 60° cos 60° = 2 × (√3/2) × (1/2) = √3/2. Alternatively, sin 120° = sin(180° - 60°) = sin 60° = √3/2.',
+            markingCriteria: {
+              breakdown: [
+                'Apply double angle or supplementary angle (1 mark)',
+                'Substitute values correctly (1 mark)',
+                'sin 120° = √3/2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q6',
+            question: 'Express 3 cos θ + 4 sin θ in the form R cos(θ - α) where R > 0 and 0 < α < 90°.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'R cos(θ - α) = R cos θ cos α + R sin θ sin α. Comparing: R cos α = 3, R sin α = 4. R² = 9 + 16 = 25, so R = 5. tan α = 4/3, so α = 53.1°. Answer: 5 cos(θ - 53.1°).',
+            markingCriteria: {
+              breakdown: [
+                'Set up R cos α = 3, R sin α = 4 (1 mark)',
+                'Find R = 5 (1 mark)',
+                'Find α = 53.1° (1 mark)',
+                'Final form (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q7',
+            question: 'Solve 2 cos² θ + 3 sin θ - 3 = 0 for 0° ≤ θ ≤ 360°',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Use cos²θ = 1 - sin²θ: 2(1 - sin²θ) + 3 sin θ - 3 = 0. 2 - 2 sin²θ + 3 sin θ - 3 = 0. -2 sin²θ + 3 sin θ - 1 = 0. 2 sin²θ - 3 sin θ + 1 = 0. (2 sin θ - 1)(sin θ - 1) = 0. sin θ = 1/2 or sin θ = 1. θ = 30°, 150°, 90°.',
+            markingCriteria: {
+              breakdown: [
+                'Substitute cos²θ = 1 - sin²θ (1 mark)',
+                'Form quadratic in sin θ (1 mark)',
+                'Factorise correctly (1 mark)',
+                'Find sin θ = 1/2 and sin θ = 1 (1 mark)',
+                'All solutions: 30°, 90°, 150° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          }
+        ]
+      },
+      {
+        id: 'F-exponentials-logs',
+        name: 'F: Exponentials and Logarithms',
+        questions: [
+          {
+            id: 'maths-F-q1',
+            question: 'Solve 2ˣ = 32',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '2ˣ = 32 = 2⁵, therefore x = 5.',
+            markingCriteria: {
+              breakdown: [
+                'Recognize 32 = 2⁵ (1 mark)',
+                'x = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q2',
+            question: 'Write log₅ 125 = 3 in exponential form.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '5³ = 125',
+            markingCriteria: {
+              breakdown: [
+                '5³ = 125 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q3',
+            question: 'Simplify log₃ 27 + log₃ 9 - log₃ 81',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'log₃ 27 + log₃ 9 - log₃ 81 = log₃(27 × 9 / 81) = log₃(243 / 81) = log₃ 3 = 1.',
+            markingCriteria: {
+              breakdown: [
+                'Apply log laws to combine (1 mark)',
+                'Simplify to log₃ 3 (1 mark)',
+                'Answer = 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q4',
+            question: 'Solve 3ˣ = 50, giving your answer to 3 significant figures.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Take ln of both sides: x ln 3 = ln 50. x = ln 50 / ln 3 = 3.912 / 1.099 = 3.56 (3 s.f.)',
+            markingCriteria: {
+              breakdown: [
+                'Apply logarithms to both sides (1 mark)',
+                'Rearrange to x = ln 50 / ln 3 (1 mark)',
+                'x = 3.56 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q5',
+            question: 'A population grows according to P = 100e^(0.05t) where t is time in years. Find the population after 10 years.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P = 100e^(0.05×10) = 100e^0.5 = 100 × 1.649 = 164.9 ≈ 165',
+            markingCriteria: {
+              breakdown: [
+                'Substitute t = 10 (1 mark)',
+                'P = 165 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q6',
+            question: 'Solve log₂(x + 3) + log₂(x - 3) = 4',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'log₂[(x+3)(x-3)] = 4. (x+3)(x-3) = 2⁴ = 16. x² - 9 = 16. x² = 25. x = ±5. Since x - 3 must be positive, x = 5.',
+            markingCriteria: {
+              breakdown: [
+                'Combine logs: log₂(x²-9) = 4 (1 mark)',
+                'Convert to exponential: x² - 9 = 16 (1 mark)',
+                'Solve to get x = ±5 (1 mark)',
+                'Reject x = -5, final answer x = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          }
+        ]
+      },
+      {
+        id: 'G-differentiation',
+        name: 'G: Differentiation',
+        questions: [
+          {
+            id: 'maths-G-q1',
+            question: 'Differentiate y = x⁵ - 3x² + 7',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'dy/dx = 5x⁴ - 6x',
+            markingCriteria: {
+              breakdown: [
+                'Term 5x⁴ (1 mark)',
+                'Term -6x (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q2',
+            question: 'Differentiate y = e^(3x)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'dy/dx = 3e^(3x)',
+            markingCriteria: {
+              breakdown: [
+                'Apply chain rule (1 mark)',
+                'dy/dx = 3e^(3x) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q3',
+            question: 'Differentiate y = ln(2x + 1)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'dy/dx = 1/(2x+1) × 2 = 2/(2x+1)',
+            markingCriteria: {
+              breakdown: [
+                'Apply chain rule (1 mark)',
+                'dy/dx = 2/(2x+1) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q4',
+            question: 'Find the gradient of the curve y = x³ - 4x at the point where x = 2.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'dy/dx = 3x² - 4. When x = 2, dy/dx = 3(4) - 4 = 12 - 4 = 8.',
+            markingCriteria: {
+              breakdown: [
+                'Differentiate to get 3x² - 4 (1 mark)',
+                'Substitute x = 2 (1 mark)',
+                'Gradient = 8 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q5',
+            question: 'Find the equation of the tangent to y = x² + 3x at the point (1, 4).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'dy/dx = 2x + 3. At x = 1, dy/dx = 5. Using y - y₁ = m(x - x₁): y - 4 = 5(x - 1). y = 5x - 1.',
+            markingCriteria: {
+              breakdown: [
+                'Differentiate to get 2x + 3 (1 mark)',
+                'Find gradient = 5 at x = 1 (1 mark)',
+                'Apply point-slope formula (1 mark)',
+                'Equation y = 5x - 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q6',
+            question: 'Find stationary points of y = x³ - 6x² + 9x and determine their nature.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'dy/dx = 3x² - 12x + 9 = 3(x² - 4x + 3) = 3(x-1)(x-3). Stationary points at x = 1, 3. d²y/dx² = 6x - 12. At x = 1: d²y/dx² = -6 < 0, maximum. At x = 3: d²y/dx² = 6 > 0, minimum. When x = 1, y = 4. When x = 3, y = 0. Maximum at (1, 4), minimum at (3, 0).',
+            markingCriteria: {
+              breakdown: [
+                'dy/dx = 3x² - 12x + 9 (1 mark)',
+                'Find x = 1, 3 (1 mark)',
+                'd²y/dx² = 6x - 12 (1 mark)',
+                'Determine natures (1 mark)',
+                'Find y-coordinates (1 mark)',
+                'State final points (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q7',
+            question: 'Use the product rule to differentiate y = x² sin x',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Let u = x², v = sin x. du/dx = 2x, dv/dx = cos x. dy/dx = u(dv/dx) + v(du/dx) = x² cos x + 2x sin x.',
+            markingCriteria: {
+              breakdown: [
+                'Identify u and v correctly (1 mark)',
+                'Apply product rule (1 mark)',
+                'dy/dx = x² cos x + 2x sin x (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q8',
+            question: 'Use the quotient rule to differentiate y = (x+1)/(x²+1)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let u = x+1, v = x²+1. du/dx = 1, dv/dx = 2x. dy/dx = [v(du/dx) - u(dv/dx)]/v² = [(x²+1)(1) - (x+1)(2x)]/(x²+1)² = [x² + 1 - 2x² - 2x]/(x²+1)² = [1 - x² - 2x]/(x²+1)² = (-x² - 2x + 1)/(x²+1)².',
+            markingCriteria: {
+              breakdown: [
+                'Identify u, v and derivatives (1 mark)',
+                'Apply quotient rule (1 mark)',
+                'Expand numerator (1 mark)',
+                'Simplify (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q9',
+            question: 'Use the chain rule to differentiate y = (3x² + 2)⁵',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Let u = 3x² + 2, so y = u⁵. dy/du = 5u⁴, du/dx = 6x. dy/dx = dy/du × du/dx = 5u⁴ × 6x = 30x(3x² + 2)⁴.',
+            markingCriteria: {
+              breakdown: [
+                'Set up substitution (1 mark)',
+                'Find both derivatives (1 mark)',
+                'dy/dx = 30x(3x² + 2)⁴ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          },
+          {
+            id: 'maths-G-q10',
+            question: 'Find dy/dx if x² + y² = 25 (implicit differentiation).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Differentiate both sides: 2x + 2y(dy/dx) = 0. 2y(dy/dx) = -2x. dy/dx = -x/y.',
+            markingCriteria: {
+              breakdown: [
+                'Differentiate x² to get 2x (1 mark)',
+                'Differentiate y² to get 2y(dy/dx) (1 mark)',
+                'Solve to get dy/dx = -x/y (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Differentiation'
+          }
+        ]
+      },
+      {
+        id: 'H-integration',
+        name: 'H: Integration',
+        questions: [
+          {
+            id: 'maths-H-q1',
+            question: 'Integrate ∫(x³ + 2x - 5) dx',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '∫(x³ + 2x - 5) dx = x⁴/4 + x² - 5x + C',
+            markingCriteria: {
+              breakdown: [
+                'Correct integration of all terms (1 mark)',
+                'Include constant C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q2',
+            question: 'Evaluate ∫₀³ (2x + 1) dx',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: '∫(2x + 1) dx = x² + x. [x² + x]₀³ = (9 + 3) - (0) = 12.',
+            markingCriteria: {
+              breakdown: [
+                'Integrate to get x² + x (1 mark)',
+                'Substitute limits (1 mark)',
+                'Answer = 12 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q3',
+            question: 'Find ∫e^(2x) dx',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '∫e^(2x) dx = (1/2)e^(2x) + C',
+            markingCriteria: {
+              breakdown: [
+                'Correct coefficient 1/2 (1 mark)',
+                'Include constant C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q4',
+            question: 'Find ∫(3/x) dx',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '∫(3/x) dx = 3 ln|x| + C',
+            markingCriteria: {
+              breakdown: [
+                '3 ln|x| (1 mark)',
+                'Include constant C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q5',
+            question: 'Find the area bounded by y = x², the x-axis, and the lines x = 1 and x = 3.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Area = ∫₁³ x² dx = [x³/3]₁³ = 27/3 - 1/3 = 26/3.',
+            markingCriteria: {
+              breakdown: [
+                'Set up integral ∫₁³ x² dx (1 mark)',
+                'Integrate to x³/3 (1 mark)',
+                'Apply limits (1 mark)',
+                'Area = 26/3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q6',
+            question: 'Use integration by substitution to find ∫2x(x²+1)³ dx. Use u = x²+1.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let u = x²+1. Then du/dx = 2x, so du = 2x dx. ∫2x(x²+1)³ dx = ∫u³ du = u⁴/4 + C = (x²+1)⁴/4 + C.',
+            markingCriteria: {
+              breakdown: [
+                'Substitute u = x²+1 and find du (1 mark)',
+                'Rewrite as ∫u³ du (1 mark)',
+                'Integrate to u⁴/4 (1 mark)',
+                'Substitute back (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q7',
+            question: 'Use integration by parts to find ∫x cos x dx',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Let u = x, dv/dx = cos x. Then du/dx = 1, v = sin x. ∫x cos x dx = x sin x - ∫sin x dx = x sin x + cos x + C.',
+            markingCriteria: {
+              breakdown: [
+                'Choose u = x, dv/dx = cos x (1 mark)',
+                'Find du/dx = 1, v = sin x (1 mark)',
+                'Apply formula uv - ∫v du (1 mark)',
+                'Final answer x sin x + cos x + C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q8',
+            question: 'Find ∫(2x+3)/((x+1)(x+2)) dx using partial fractions.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: '(2x+3)/((x+1)(x+2)) = A/(x+1) + B/(x+2). 2x+3 = A(x+2) + B(x+1). Let x = -1: 1 = A(1), so A = 1. Let x = -2: -1 = B(-1), so B = 1. ∫(1/(x+1) + 1/(x+2)) dx = ln|x+1| + ln|x+2| + C = ln|(x+1)(x+2)| + C.',
+            markingCriteria: {
+              breakdown: [
+                'Set up partial fractions (1 mark)',
+                'Find A = 1, B = 1 (2 marks)',
+                'Integrate (1 mark)',
+                'Final answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q9',
+            question: 'Solve the differential equation dy/dx = y/x given that y = 2 when x = 1.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Separate variables: dy/y = dx/x. Integrate: ln|y| = ln|x| + C. y = Ax where A is constant. When x = 1, y = 2: 2 = A(1), so A = 2. Therefore y = 2x.',
+            markingCriteria: {
+              breakdown: [
+                'Separate variables (1 mark)',
+                'Integrate both sides (1 mark)',
+                'General solution y = Ax (1 mark)',
+                'Apply initial condition (1 mark)',
+                'Particular solution y = 2x (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
+          }
+        ]
+      },
+      {
+        id: 'I-numerical-methods',
+        name: 'I: Numerical Methods',
+        questions: [
+          {
+            id: 'maths-I-q1',
+            question: 'Show that the equation x³ - 2x - 5 = 0 has a root in the interval [2, 3].',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Let f(x) = x³ - 2x - 5. f(2) = 8 - 4 - 5 = -1 < 0. f(3) = 27 - 6 - 5 = 16 > 0. Since f(2) < 0 and f(3) > 0, and f is continuous, there is a root in [2, 3] by the change of sign method.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluate f(2) = -1 (1 mark)',
+                'Evaluate f(3) = 16 (1 mark)',
+                'State change of sign conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q2',
+            question: 'The equation x³ = 2x + 5 can be rearranged to x = ∛(2x + 5). Use the iteration xₙ₊₁ = ∛(2xₙ + 5) with x₀ = 2 to find x₁, x₂, and x₃ to 3 decimal places.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'x₁ = ∛(2(2) + 5) = ∛9 = 2.080. x₂ = ∛(2(2.080) + 5) = ∛9.160 = 2.093. x₃ = ∛(2(2.093) + 5) = ∛9.186 = 2.095.',
+            markingCriteria: {
+              breakdown: [
+                'x₁ = 2.080 (1 mark)',
+                'x₂ = 2.093 (1 mark)',
+                'x₃ = 2.095 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q3',
+            question: 'Use the trapezium rule with 4 strips to estimate ∫₀² x² dx. Give your answer to 2 decimal places.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'h = (2-0)/4 = 0.5. x-values: 0, 0.5, 1, 1.5, 2. y-values: 0, 0.25, 1, 2.25, 4. Area ≈ (0.5/2)[0 + 4 + 2(0.25 + 1 + 2.25)] = 0.25[4 + 2(3.5)] = 0.25[4 + 7] = 0.25(11) = 2.75.',
+            markingCriteria: {
+              breakdown: [
+                'Find h = 0.5 and calculate y-values (1 mark)',
+                'Apply trapezium rule formula (1 mark)',
+                'Calculate correctly (1 mark)',
+                'Answer = 2.75 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q4',
+            question: 'Explain why the iteration xₙ₊₁ = xₙ² - 3 with x₀ = 2 fails to converge to the root of x² - x - 3 = 0.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'x₁ = 4 - 3 = 1. x₂ = 1 - 3 = -2. x₃ = 4 - 3 = 1. The sequence oscillates between 1 and -2 and does not converge. This happens because the gradient of the iteration function near the root has magnitude greater than 1.',
+            markingCriteria: {
+              breakdown: [
+                'Show oscillating values (1 mark)',
+                'State non-convergence (1 mark)',
+                'Explain reason (gradient condition) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          }
+        ]
+      },
+      {
+        id: 'J-vectors',
+        name: 'J: Vectors',
+        questions: [
+          {
+            id: 'maths-J-q1',
+            question: 'Find the magnitude of the vector 3i + 4j.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '|v| = √(3² + 4²) = √(9 + 16) = √25 = 5.',
+            markingCriteria: {
+              breakdown: [
+                'Apply magnitude formula (1 mark)',
+                '|v| = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q2',
+            question: 'Given vectors a = 2i + 3j and b = i - 2j, find 2a + b.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '2a + b = 2(2i + 3j) + (i - 2j) = 4i + 6j + i - 2j = 5i + 4j.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate 2a correctly (1 mark)',
+                'Add to get 5i + 4j (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q3',
+            question: 'Find the distance between points A(1, 2, 3) and B(4, 6, 7).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'AB = √[(4-1)² + (6-2)² + (7-3)²] = √[9 + 16 + 16] = √41.',
+            markingCriteria: {
+              breakdown: [
+                'Find differences (3, 4, 4) (1 mark)',
+                'Apply distance formula (1 mark)',
+                'Distance = √41 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q4',
+            question: 'Find the position vector of point M, the midpoint of AB where A has position vector 2i + 3j - k and B has position vector 6i - j + 5k.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'M = (a + b)/2 = [(2i + 3j - k) + (6i - j + 5k)]/2 = (8i + 2j + 4k)/2 = 4i + j + 2k.',
+            markingCriteria: {
+              breakdown: [
+                'Add vectors (1 mark)',
+                'Divide by 2: 4i + j + 2k (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q5',
+            question: 'Given vector v = 5i + 12j, find the unit vector in the direction of v.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '|v| = √(25 + 144) = √169 = 13. Unit vector = v/|v| = (5i + 12j)/13 = (5/13)i + (12/13)j.',
+            markingCriteria: {
+              breakdown: [
+                'Find |v| = 13 (1 mark)',
+                'Divide by magnitude (1 mark)',
+                'Unit vector = (5/13)i + (12/13)j (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          }
+        ]
+      },
+      {
+        id: 'K-statistical-sampling',
+        name: 'K: Statistical Sampling',
+        questions: [
+          {
+            id: 'maths-K-q1',
+            question: 'Explain the difference between a population and a sample in statistics.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A population is the entire group being studied. A sample is a subset of the population selected for investigation. Samples are used to make inferences about populations when studying the whole population is impractical.',
+            markingCriteria: {
+              breakdown: [
+                'Define population (1 mark)',
+                'Define sample and explain relationship (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q2',
+            question: 'Describe simple random sampling and state one advantage and one disadvantage.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Simple random sampling gives every member of the population an equal chance of selection. Advantage: unbiased, representative. Disadvantage: requires complete sampling frame, may be time-consuming for large populations.',
+            markingCriteria: {
+              breakdown: [
+                'Correct description (1 mark)',
+                'One valid advantage (1 mark)',
+                'One valid disadvantage (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q3',
+            question: 'A researcher wants to sample 50 students from a school of 800 students. Describe how opportunity sampling could be used and give one criticism of this method.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Opportunity sampling involves selecting the first 50 students the researcher encounters, such as those in the cafeteria. Criticism: likely to be biased as it may not represent the whole population; certain groups may be over- or under-represented.',
+            markingCriteria: {
+              breakdown: [
+                'Describe method correctly (1 mark)',
+                'Give practical example (1 mark)',
+                'Valid criticism about bias (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          }
+        ]
+      },
+      {
+        id: 'L-data-presentation',
+        name: 'L: Data Presentation and Interpretation',
+        questions: [
+          {
+            id: 'maths-L-q1',
+            question: 'The following data shows heights (in cm) of 10 students: 165, 170, 168, 172, 166, 171, 169, 167, 170, 168. Calculate the mean and median.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Mean = (165+170+168+172+166+171+169+167+170+168)/10 = 1686/10 = 168.6 cm. Ordered data: 165, 166, 167, 168, 168, 169, 170, 170, 171, 172. Median = (168+169)/2 = 168.5 cm.',
+            markingCriteria: {
+              breakdown: [
+                'Mean = 168.6 cm (1 mark)',
+                'Order data (1 mark)',
+                'Median = 168.5 cm (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q2',
+            question: 'Calculate the standard deviation of the data: 2, 4, 6, 8, 10.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mean = 6. Deviations: -4, -2, 0, 2, 4. Squared deviations: 16, 4, 0, 4, 16. Variance = (16+4+0+4+16)/5 = 40/5 = 8. Standard deviation = √8 = 2√2 ≈ 2.83.',
+            markingCriteria: {
+              breakdown: [
+                'Find mean = 6 (1 mark)',
+                'Calculate squared deviations (1 mark)',
+                'Variance = 8 (1 mark)',
+                'Standard deviation = 2√2 or 2.83 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q3',
+            question: 'Explain what is meant by an outlier in a data set and give one method to identify outliers.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An outlier is a data value that lies significantly far from the other values in the dataset. Method: a value is an outlier if it lies more than 1.5 × IQR above Q₃ or below Q₁, where IQR is the interquartile range.',
+            markingCriteria: {
+              breakdown: [
+                'Define outlier (1 mark)',
+                'Give valid identification method (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q4',
+            question: 'Two variables show a positive correlation. Explain why this does not necessarily mean one causes the other.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Correlation measures association, not causation. Both variables might be influenced by a third variable (confounding variable), or the correlation could be coincidental. Causation requires controlled experimentation.',
+            markingCriteria: {
+              breakdown: [
+                'State correlation ≠ causation (1 mark)',
+                'Give valid explanation (confounding variables, etc.) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          }
+        ]
+      },
+      {
+        id: 'M-probability',
+        name: 'M: Probability',
+        questions: [
+          {
+            id: 'maths-M-q1',
+            question: 'A fair dice is rolled. Find the probability of rolling a number greater than 4.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'P(>4) = P(5 or 6) = 2/6 = 1/3.',
+            markingCriteria: {
+              breakdown: [
+                'P = 1/3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q2',
+            question: 'Events A and B are mutually exclusive with P(A) = 0.3 and P(B) = 0.4. Find P(A or B).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Since A and B are mutually exclusive, P(A or B) = P(A) + P(B) = 0.3 + 0.4 = 0.7.',
+            markingCriteria: {
+              breakdown: [
+                'State formula for mutually exclusive events (1 mark)',
+                'P(A or B) = 0.7 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q3',
+            question: 'Events A and B are independent with P(A) = 0.6 and P(B) = 0.3. Find P(A and B).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Since A and B are independent, P(A and B) = P(A) × P(B) = 0.6 × 0.3 = 0.18.',
+            markingCriteria: {
+              breakdown: [
+                'State formula for independent events (1 mark)',
+                'P(A and B) = 0.18 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q4',
+            question: 'A bag contains 5 red and 3 blue balls. Two balls are drawn without replacement. Find the probability both are red.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(1st red) = 5/8. P(2nd red | 1st red) = 4/7. P(both red) = 5/8 × 4/7 = 20/56 = 5/14.',
+            markingCriteria: {
+              breakdown: [
+                'P(1st red) = 5/8 (1 mark)',
+                'P(2nd red | 1st red) = 4/7 (1 mark)',
+                'P(both red) = 5/14 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q5',
+            question: 'Given P(A) = 0.5, P(B) = 0.4, and P(A∩B) = 0.2, find P(A|B).',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'P(A|B) = P(A∩B)/P(B) = 0.2/0.4 = 0.5.',
+            markingCriteria: {
+              breakdown: [
+                'Apply formula P(A|B) = P(A∩B)/P(B) (1 mark)',
+                'P(A|B) = 0.5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          }
+        ]
+      },
+      {
+        id: 'N-statistical-distributions',
+        name: 'N: Statistical Distributions',
+        questions: [
+          {
+            id: 'maths-N-q1',
+            question: 'X ~ B(10, 0.3). Find P(X = 2).',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'P(X = 2) = ¹⁰C₂(0.3)²(0.7)⁸ = 45 × 0.09 × 0.0576 ≈ 0.233.',
+            markingCriteria: {
+              breakdown: [
+                'Apply binomial formula (1 mark)',
+                'P(X = 2) ≈ 0.233 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q2',
+            question: 'X ~ N(50, 25). Find P(X < 55) using the standard normal distribution.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mean μ = 50, standard deviation σ = 5. z = (55-50)/5 = 1. P(X < 55) = P(Z < 1) = 0.8413 (from tables).',
+            markingCriteria: {
+              breakdown: [
+                'Calculate z = 1 (1 mark)',
+                'Use standard normal tables (1 mark)',
+                'P(X < 55) = 0.8413 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q3',
+            question: 'For a normal distribution with mean 100 and standard deviation 15, find the value of k such that P(X < k) = 0.95.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'From tables, P(Z < 1.645) = 0.95. So (k-100)/15 = 1.645. k = 100 + 15(1.645) = 100 + 24.675 = 124.675 ≈ 125.',
+            markingCriteria: {
+              breakdown: [
+                'Find z-value = 1.645 (1 mark)',
+                'Set up equation (k-100)/15 = 1.645 (1 mark)',
+                'k ≈ 125 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q4',
+            question: 'State the conditions under which a binomial distribution B(n, p) can be approximated by a normal distribution.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'n should be large, np > 5, and n(1-p) > 5.',
+            markingCriteria: {
+              breakdown: [
+                'n large (1 mark)',
+                'np > 5 and nq > 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          }
+        ]
+      },
+      {
+        id: 'O-hypothesis-testing',
+        name: 'O: Statistical Hypothesis Testing',
+        questions: [
+          {
+            id: 'maths-O-q1',
+            question: 'Define the null hypothesis and alternative hypothesis in hypothesis testing.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The null hypothesis (H₀) is a statement of no effect or no difference; it assumes the parameter takes a specific value. The alternative hypothesis (H₁) is what we accept if we reject H₀; it proposes a change or effect.',
+            markingCriteria: {
+              breakdown: [
+                'Define H₀ correctly (1 mark)',
+                'Define H₁ correctly (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q2',
+            question: 'A coin is suspected to be biased towards heads. It is tossed 20 times and shows 15 heads. Test at the 5% significance level whether the coin is biased towards heads.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'H₀: p = 0.5 (coin is fair). H₁: p > 0.5 (coin biased towards heads). X ~ B(20, 0.5). P(X ≥ 15) = P(X = 15) + P(X = 16) + ... + P(X = 20) = 0.0207 (from tables). Since 0.0207 < 0.05, we reject H₀. There is evidence at the 5% level that the coin is biased towards heads.',
+            markingCriteria: {
+              breakdown: [
+                'State H₀ and H₁ (1 mark)',
+                'Identify distribution X ~ B(20, 0.5) (1 mark)',
+                'Calculate p-value 0.0207 (2 marks)',
+                'Conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q3',
+            question: 'Explain what is meant by a Type I error and give the probability of making a Type I error.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A Type I error occurs when we reject H₀ when it is actually true (false positive). The probability of a Type I error equals the significance level α.',
+            markingCriteria: {
+              breakdown: [
+                'Define Type I error (1 mark)',
+                'State probability = α (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          }
+        ]
+      },
+      {
+        id: 'P-quantities-units',
+        name: 'P: Quantities and Units in Mechanics',
+        questions: [
+          {
+            id: 'maths-P-q1',
+            question: 'State the SI units for velocity, acceleration, and force.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Velocity: m/s (or m s⁻¹). Acceleration: m/s² (or m s⁻²). Force: Newton (N) or kg m/s² (or kg m s⁻²).',
+            markingCriteria: {
+              breakdown: [
+                'Velocity unit (1 mark)',
+                'Acceleration unit (1 mark)',
+                'Force unit (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q2',
+            question: 'A car has mass 1200 kg. Calculate its weight, taking g = 9.8 m/s².',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Weight = mg = 1200 × 9.8 = 11760 N.',
+            markingCriteria: {
+              breakdown: [
+                'Apply W = mg (1 mark)',
+                'W = 11760 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          }
+        ]
+      },
+      {
+        id: 'Q-kinematics',
+        name: 'Q: Kinematics',
+        questions: [
+          {
+            id: 'maths-Q-q1',
+            question: 'A particle moves in a straight line with constant acceleration 2 m/s². Its initial velocity is 3 m/s. Find its velocity after 5 seconds.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'v = u + at = 3 + 2(5) = 3 + 10 = 13 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Apply v = u + at (1 mark)',
+                'v = 13 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q2',
+            question: 'A car accelerates uniformly from 10 m/s to 30 m/s over a distance of 100 m. Find the acceleration.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using v² = u² + 2as: 30² = 10² + 2a(100). 900 = 100 + 200a. 800 = 200a. a = 4 m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Apply v² = u² + 2as (1 mark)',
+                'Substitute and rearrange (1 mark)',
+                'a = 4 m/s² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q3',
+            question: 'A particle has velocity v = 3t² - 2t m/s. Find its acceleration when t = 2 s.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'a = dv/dt = 6t - 2. When t = 2, a = 6(2) - 2 = 12 - 2 = 10 m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Differentiate to get a = 6t - 2 (1 mark)',
+                'a = 10 m/s² when t = 2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q4',
+            question: 'A ball is thrown vertically upward with initial speed 20 m/s. Taking g = 10 m/s², find the maximum height reached.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'At maximum height, v = 0. Using v² = u² - 2gh: 0 = 20² - 2(10)h. 0 = 400 - 20h. h = 20 m.',
+            markingCriteria: {
+              breakdown: [
+                'State v = 0 at max height (1 mark)',
+                'Apply v² = u² - 2gh (1 mark)',
+                'h = 20 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q5',
+            question: 'A projectile is launched at 25 m/s at an angle of 30° to the horizontal. Find the horizontal and vertical components of the initial velocity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Horizontal: 25 cos 30° = 25 × (√3/2) = 21.7 m/s. Vertical: 25 sin 30° = 25 × 0.5 = 12.5 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Horizontal component = 21.7 m/s (1 mark)',
+                'Vertical component = 12.5 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          }
+        ]
+      },
+      {
+        id: 'R-forces-newtons-laws',
+        name: 'R: Forces and Newton\'s Laws',
+        questions: [
+          {
+            id: 'maths-R-q1',
+            question: 'State Newton\'s second law of motion.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The resultant force on an object equals the rate of change of momentum, or F = ma for constant mass.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q2',
+            question: 'A block of mass 5 kg is pushed along a horizontal surface with a force of 30 N. If the block accelerates at 4 m/s², find the frictional force.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using F = ma: Resultant force = 5 × 4 = 20 N. Applied force - friction = 20. 30 - F = 20. F = 10 N.',
+            markingCriteria: {
+              breakdown: [
+                'Find resultant force = 20 N (1 mark)',
+                'Set up equation 30 - F = 20 (1 mark)',
+                'Friction = 10 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q3',
+            question: 'A particle of mass 2 kg is acted on by forces (3i + 4j) N and (-i + 2j) N. Find the resultant force and the acceleration.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Resultant force = (3i + 4j) + (-i + 2j) = 2i + 6j N. Acceleration = F/m = (2i + 6j)/2 = i + 3j m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Add forces to get 2i + 6j (1 mark)',
+                'Apply F = ma (1 mark)',
+                'a = i + 3j m/s² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q4',
+            question: 'A box of mass 8 kg rests on a rough horizontal plane with coefficient of friction μ = 0.4. Find the maximum frictional force that can act.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Normal reaction R = mg = 8 × 10 = 80 N. Maximum friction F = μR = 0.4 × 80 = 32 N.',
+            markingCriteria: {
+              breakdown: [
+                'Find R = 80 N (1 mark)',
+                'F = 32 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q5',
+            question: 'A particle of mass 3 kg is on a plane inclined at 30° to the horizontal. Find the component of weight acting down the plane. Take g = 10 m/s².',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Weight = mg = 30 N. Component down plane = 30 sin 30° = 30 × 0.5 = 15 N.',
+            markingCriteria: {
+              breakdown: [
+                'Find weight = 30 N (1 mark)',
+                'Component = 15 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          }
+        ]
+      },
+      {
+        id: 'S-moments',
+        name: 'S: Moments',
+        questions: [
+          {
+            id: 'maths-S-q1',
+            question: 'Define the moment of a force about a point.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The moment of a force about a point is the product of the force and the perpendicular distance from the point to the line of action of the force. Moment = Force × distance.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition (1 mark)',
+                'Formula (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q2',
+            question: 'A force of 20 N acts perpendicular to a rod at a distance of 0.5 m from a pivot. Calculate the moment about the pivot.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Moment = Force × distance = 20 × 0.5 = 10 N m.',
+            markingCriteria: {
+              breakdown: [
+                'Apply formula (1 mark)',
+                'Moment = 10 N m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q3',
+            question: 'A uniform rod of length 2 m and weight 30 N rests horizontally on a pivot 0.8 m from one end. A force F is applied at that end to keep the rod in equilibrium. Find F.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Taking moments about pivot: Weight acts at centre (1 m from pivot). Clockwise moment = 30 × (1 - 0.8) = 30 × 0.2 = 6 N m. Anticlockwise moment = F × 0.8. For equilibrium: F × 0.8 = 6. F = 7.5 N.',
+            markingCriteria: {
+              breakdown: [
+                'Identify weight acts at centre (1 mark)',
+                'Calculate moment of weight (1 mark)',
+                'Set up equilibrium equation (1 mark)',
+                'F = 7.5 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          }
+        ]
+      }
+    ]
   }
   ];
