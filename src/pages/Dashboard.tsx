@@ -1852,11 +1852,16 @@ const Dashboard = () => {
                                     <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
                                       <IconComponent className="h-6 w-6 text-white" />
                                     </div>
-                                    <div className="flex-1 min-w-0">
-                                      <h3 className="font-bold text-foreground">{subject.name}</h3>
-                                      <p className="text-sm text-muted-foreground">{subject.topics.length} topics</p>
-                                    </div>
-                                  </div>
+                                     <div className="flex-1 min-w-0">
+                                       <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
+                                         {getSubjectDisplayName(subject)}
+                                       </h3>
+                                       <p className="text-sm text-gray-600 mobile-text-wrap">
+                                         {subject.topics.length} topics available
+                                       </p>
+                                     </div>
+                                     <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                                   </div>
                                 </CardContent>
                               </Card>
                             </motion.div>
