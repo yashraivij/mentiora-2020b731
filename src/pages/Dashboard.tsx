@@ -1071,6 +1071,23 @@ const Dashboard = () => {
     if (!subject) return;
 
     try {
+      // Check if subject already exists
+      const { data: existing } = await supabase
+        .from("user_subjects")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("subject_name", subject.name)
+        .eq("exam_board", "AQA")
+        .maybeSingle();
+
+      if (existing) {
+        toast({
+          title: "Already Added",
+          description: `${subject.name} is already in your subjects`,
+        });
+        return;
+      }
+
       const { error } = await supabase
         .from("user_subjects")
         .insert({
