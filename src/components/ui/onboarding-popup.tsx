@@ -34,6 +34,7 @@ import {
   NotebookPen,
   User
 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 import { useSubscription } from "@/hooks/useSubscription";
@@ -59,7 +60,7 @@ const getTopicCount = (subjectId: string): number => {
   return subject?.topics.length || 0;
 };
 
-const AVAILABLE_SUBJECTS: Subject[] = [
+const GCSE_SUBJECTS: Subject[] = [
   { id: 'physics-edexcel', name: 'Physics', examBoard: 'Edexcel', topicCount: getTopicCount('physics-edexcel') },
   { id: 'chemistry-edexcel', name: 'Chemistry', examBoard: 'Edexcel', topicCount: getTopicCount('chemistry-edexcel') },
   { id: 'english-language', name: 'English Language', examBoard: 'AQA', topicCount: getTopicCount('english-language') },
@@ -79,6 +80,10 @@ const AVAILABLE_SUBJECTS: Subject[] = [
   { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel', topicCount: getTopicCount('edexcel-english-language') },
 ];
 
+const ALEVEL_SUBJECTS: Subject[] = [
+  { id: 'psychology-aqa-alevel', name: 'Psychology', examBoard: 'AQA', topicCount: getTopicCount('psychology-aqa-alevel') },
+];
+
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
@@ -87,6 +92,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const [showParentProgress, setShowParentProgress] = useState(false);
   const [parentEmail, setParentEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState<'gcse' | 'alevel'>('gcse');
   
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
@@ -126,7 +132,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
       // Convert subjects to the format expected by the database
       const subjectEntries = selectedSubjects.flatMap(subjectId => {
-        const subject = AVAILABLE_SUBJECTS.find(s => s.id === subjectId);
+        const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS];
+        const subject = allSubjects.find(s => s.id === subjectId);
         
         // Special handling for Geography - create separate entries for Paper 1 and Paper 2
         if (subjectId === 'geography') {
@@ -308,8 +315,76 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
-                  {AVAILABLE_SUBJECTS.map((subject, index) => (
+                <Tabs value={selectedLevel} onValueChange={(v) => setSelectedLevel(v as 'gcse' | 'alevel')} className="w-full">
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
+                    <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="gcse">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
+                      {GCSE_SUBJECTS.map((subject, index) => (
+                        <motion.div
+                          key={subject.id}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                        >
+                          <Card 
+                            className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
+                              selectedSubjects.includes(subject.id)
+                                ? 'ring-4 ring-sky-400 bg-sky-50 dark:bg-sky-950/30 shadow-xl transform scale-105'
+                                : 'hover:bg-muted/50 dark:hover:bg-muted/30 hover:shadow-lg hover:scale-102 border-2 border-border dark:border-border'
+                            }`}
+                            onClick={() => handleSubjectToggle(subject.id)}
+                          >
+                            {selectedSubjects.includes(subject.id) && (
+                              <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-purple-100 opacity-50" />
+                            )}
+                            
+                            <CardContent className="p-5">
+                              <div className="flex items-center space-x-3">
+                                <div className="relative">
+                                  <Checkbox 
+                                    checked={selectedSubjects.includes(subject.id)}
+                                    onChange={() => {}}
+                                    className="pointer-events-none"
+                                  />
+                                  {selectedSubjects.includes(subject.id) && (
+                                    <div className="absolute -top-1 -right-1">
+                                      <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
+                                  <p className="text-xs text-gray-600 dark:text-white mt-1">
+                                    {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} available
+                                  </p>
+                                   <Badge 
+                                    variant="secondary" 
+                                    className={`text-xs mt-1 ${
+                                      selectedSubjects.includes(subject.id)
+                                        ? 'bg-sky-400 text-white shadow-lg'
+                                        : 'bg-muted dark:bg-muted text-muted-foreground dark:text-muted-foreground'
+                                    }`}
+                                  >
+                                    {subject.examBoard}
+                                  </Badge>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="alevel">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
+                      {ALEVEL_SUBJECTS.map((subject, index) => (
                     <motion.div
                       key={subject.id}
                       whileHover={{ scale: 1.05 }}
@@ -363,9 +438,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           </div>
                         </CardContent>
                       </Card>
-                    </motion.div>
-                  ))}
-                </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                </Tabs>
 
                 <div className="flex justify-between items-center pt-6 border-t border-gray-200">
                   <div>

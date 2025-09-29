@@ -26,6 +26,640 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'psychology-aqa-alevel',
+    name: 'Psychology',
+    topics: [
+      {
+        id: 'social-influence',
+        name: 'Social Influence',
+        questions: [
+          {
+            id: 'si-q1',
+            question: 'Define internalisation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Internalisation is a type of conformity where an individual genuinely accepts group norms, resulting in both public and private change in behavior and attitudes. This change is permanent as the individual has internalized the group\'s views as their own.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of internalisation as genuine acceptance (1 mark)',
+                'Reference to public and private change being permanent (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.1)'
+          },
+          {
+            id: 'si-q2',
+            question: 'Outline informational social influence.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Informational social influence (ISI) occurs when an individual conforms because they want to be correct. They look to others for guidance in ambiguous situations, believing the group has more knowledge. This leads to internalisation.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of ISI as desire to be correct (1 mark)',
+                'Reference to looking to others in ambiguous situations (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.1)'
+          },
+          {
+            id: 'si-q3',
+            question: 'Explain how retrieval failure may cause forgetting.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Retrieval failure occurs when information is stored in long-term memory but cannot be accessed due to the absence of appropriate cues. According to the encoding specificity principle, cues present at encoding should also be present at retrieval. Context-dependent and state-dependent forgetting demonstrate this, where environmental or internal cues from encoding are absent during retrieval, making the memory inaccessible.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of retrieval failure (1 mark)',
+                'Reference to absence of cues (1 mark)',
+                'Encoding specificity principle (1 mark)',
+                'Example of context/state-dependent forgetting (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'si-q4',
+            question: 'Identify one difference between STM and LTM.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'STM has a limited capacity of 5-9 items while LTM has unlimited capacity.',
+            markingCriteria: {
+              breakdown: [
+                'Valid difference between STM and LTM (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'si-q5',
+            question: 'Outline one feature of the working memory model.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The central executive is the key component of the working memory model. It has a limited capacity and directs attention to different tasks, allocating resources to the slave systems (phonological loop and visuospatial sketchpad).',
+            markingCriteria: {
+              breakdown: [
+                'Identification of a component (1 mark)',
+                'Description of its function (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'si-q6',
+            question: 'Outline one finding from Lorenz\'s research.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Lorenz found that goslings imprinted on the first moving object they saw, which was usually their mother. When Lorenz was the first moving object, the goslings imprinted on him instead and followed him around. This demonstrated that imprinting occurs during a critical period shortly after birth.',
+            markingCriteria: {
+              breakdown: [
+                'Description of imprinting finding (1 mark)',
+                'Reference to critical period or goslings following Lorenz (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'si-q7',
+            question: 'Describe the procedure and findings of Ainsworth\'s Strange Situation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Procedure: Ainsworth observed infants aged 12-18 months in a controlled environment through a series of episodes involving separations and reunions with their caregiver. The infant\'s behavior was observed, particularly their response to separation and reunion. Findings: Ainsworth identified three attachment types: secure (60-75%), where infants showed distress at separation but were easily comforted on reunion; insecure-avoidant (20-25%), where infants showed indifference to separation and avoided contact on reunion; and insecure-resistant (3-5%), where infants showed intense distress at separation and resisted contact on reunion while seeking comfort.',
+            markingCriteria: {
+              breakdown: [
+                'Description of procedure including separations and reunions (2 marks)',
+                'Identification of three attachment types (1 mark)',
+                'Description of secure attachment findings (1 mark)',
+                'Description of insecure-avoidant findings (1 mark)',
+                'Description of insecure-resistant findings (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'si-q8',
+            question: 'Outline two definitions of abnormality.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Statistical infrequency: Behavior is considered abnormal if it is statistically rare or deviates significantly from the average. For example, an IQ below 70 is considered abnormal. Deviation from social norms: Behavior is abnormal if it violates unwritten social rules or cultural expectations. What is considered normal varies between cultures and over time.',
+            markingCriteria: {
+              breakdown: [
+                'Description of statistical infrequency (2 marks)',
+                'Description of deviation from social norms (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'si-q9',
+            question: 'Describe the behavioural characteristics of OCD.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Compulsions are repetitive behaviors that individuals feel compelled to perform to reduce anxiety caused by obsessions. These may include washing hands excessively, checking locks repeatedly, or arranging objects in a specific order. Avoidance is another behavioral characteristic, where individuals avoid situations that trigger their obsessions. Compulsions are often time-consuming and interfere with daily functioning.',
+            markingCriteria: {
+              breakdown: [
+                'Description of compulsions (2 marks)',
+                'Examples of compulsive behaviors (1 mark)',
+                'Reference to avoidance or interference with daily life (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'si-q10',
+            question: 'Describe and evaluate research into variables affecting conformity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Asch (1951) investigated variables affecting conformity including group size, unanimity, and task difficulty. Group size: conformity increased with group size up to 3-4 confederates, after which it leveled off. Unanimity: when one confederate gave the correct answer, conformity dropped to 5%. Task difficulty: when the task was made more difficult, conformity increased. Evaluation: Asch\'s research has been criticized for lacking ecological validity as the line judgment task was artificial. The study was conducted in the 1950s in America, limiting temporal and cultural validity. However, it has been replicated with similar findings, demonstrating reliability. The research also raises ethical concerns as participants were deceived.',
+            markingCriteria: {
+              breakdown: [
+                'Description of Asch\'s research (2 marks)',
+                'Description of variables: group size, unanimity, task difficulty (3 marks)',
+                'Evaluation points including validity, reliability, ethics (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.1)'
+          }
+        ]
+      },
+      {
+        id: 'memory',
+        name: 'Memory',
+        questions: [
+          {
+            id: 'mem-q1',
+            question: 'Describe the multi-store model of memory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The multi-store model (Atkinson & Shiffrin, 1968) proposes that memory consists of three separate stores: sensory register, short-term memory (STM), and long-term memory (LTM). Information from the environment enters the sensory register, which has a large capacity but very brief duration. If attention is paid, information transfers to STM, which has limited capacity (7±2 items) and duration (18-30 seconds) and is mainly acoustically encoded. Through rehearsal, information transfers to LTM, which has unlimited capacity and duration, and is mainly semantically encoded.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of three stores (1 mark)',
+                'Description of sensory register (1 mark)',
+                'Description of STM with capacity and duration (2 marks)',
+                'Description of LTM with capacity and duration (1 mark)',
+                'Reference to encoding or transfer process (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q2',
+            question: 'Outline the working memory model.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The working memory model (Baddeley & Hitch, 1974) consists of four components: the central executive, which directs attention and has limited capacity; the phonological loop, which processes acoustic information and has two parts (phonological store and articulatory process); the visuospatial sketchpad, which processes visual and spatial information; and the episodic buffer, which integrates information from all systems.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of four components (1 mark)',
+                'Description of central executive (1 mark)',
+                'Description of phonological loop and visuospatial sketchpad (1 mark)',
+                'Reference to episodic buffer or integration (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q3',
+            question: 'Explain proactive interference.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Proactive interference occurs when older memories interfere with the recall of newer memories. For example, when learning a new phone number, an old phone number may be recalled instead. This happens because the old information has been rehearsed more and is therefore stronger.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of proactive interference (1 mark)',
+                'Example (1 mark)',
+                'Explanation of why it occurs (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q4',
+            question: 'Discuss research into factors affecting eyewitness testimony.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Eyewitness testimony (EWT) can be affected by several factors including leading questions, post-event discussion, and anxiety. Leading questions: Loftus and Palmer (1974) found that the verb used in questions affected speed estimates of a car crash. When asked "How fast were the cars going when they smashed into each other?" participants gave higher estimates than when "hit" was used. This demonstrates the reconstructive nature of memory. Post-event discussion: Gabbert et al. (2003) found that when witnesses discussed an event, 71% mistakenly recalled information they had not seen but was mentioned by co-witnesses, demonstrating memory conformity. Anxiety: The Yerkes-Dodson law suggests moderate anxiety improves recall, but extreme anxiety impairs it. Deffenbacher (1983) supported this with a meta-analysis showing negative correlation between anxiety and EWT accuracy. However, Yuille and Cutshall (1986) found witnesses to a real shooting had accurate recall despite high anxiety, suggesting the weapon focus effect may be more important. Evaluation: Research has practical applications in the criminal justice system, leading to improved interviewing techniques like the cognitive interview. However, much research lacks ecological validity as it uses artificial scenarios rather than real crimes. Ethical concerns exist around causing distress to participants. Individual differences in memory ability and susceptibility to suggestion are often not considered.',
+            markingCriteria: {
+              breakdown: [
+                'Description of research into leading questions (3 marks)',
+                'Description of research into post-event discussion (3 marks)',
+                'Description of research into anxiety (3 marks)',
+                'Evaluation including validity, ethics, applications (7 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q5',
+            question: 'Outline the cognitive interview technique.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The cognitive interview (CI) is a technique developed by Geiselman et al. to improve eyewitness recall. It involves four main techniques: report everything (witnesses report every detail even if it seems irrelevant), reinstate the context (mentally recreate the environment and emotional state), reverse the order (recall events in different chronological orders), and change perspective (recall from different viewpoints). The enhanced CI also includes techniques for building rapport and reducing anxiety.',
+            markingCriteria: {
+              breakdown: [
+                'Identification as technique to improve recall (1 mark)',
+                'Description of at least two of the four main techniques (2 marks)',
+                'Reference to enhanced CI or overall purpose (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q6',
+            question: 'Evaluate the multi-store model of memory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Strengths: The model is supported by research evidence. HM case study showed that damage to the hippocampus impaired LTM but not STM, supporting the idea of separate stores. Brain scanning studies show different areas active for STM and LTM tasks. Weaknesses: The model oversimplifies memory by suggesting STM and LTM are single stores. The working memory model provides a better account of STM. Research on semantic and episodic LTM shows LTM is not unitary. The model overemphasizes rehearsal as the only means of transfer to LTM, when factors like levels of processing may be more important.',
+            markingCriteria: {
+              breakdown: [
+                'One strength with supporting evidence (2 marks)',
+                'One weakness with explanation (2 marks)',
+                'Additional evaluation point (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q7',
+            question: 'Describe retrieval failure as an explanation for forgetting.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Retrieval failure suggests that forgetting occurs not because memories are lost, but because appropriate cues are not available. The encoding specificity principle (Tulving) states that cues must be present at both encoding and retrieval for successful recall. Context-dependent forgetting occurs when the physical environment at recall differs from encoding. Godden and Baddeley (1975) found divers recalled words better when the learning and recall environments matched (both underwater or both on land). State-dependent forgetting occurs when the internal state differs, such as mood or drug state.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of retrieval failure and cues (1 mark)',
+                'Reference to encoding specificity principle (1 mark)',
+                'Context-dependent forgetting with example (1 mark)',
+                'State-dependent forgetting (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q8',
+            question: 'Compare the multi-store model and working memory model.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Similarities: Both models propose that STM and LTM are separate memory stores. Both suggest limited capacity of STM. Differences: MSM views STM as a single unitary store, while WMM proposes multiple components. MSM emphasizes rehearsal for transfer to LTM, while WMM focuses on active processing. WMM provides a more detailed account of STM processes. MSM is a linear model showing flow of information, while WMM shows parallel processing. WMM is supported by dual-task studies showing you can do visual and verbal tasks simultaneously, which MSM cannot explain.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of at least one similarity (2 marks)',
+                'Identification of at least two differences (3 marks)',
+                'Use of comparative language throughout (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q9',
+            question: 'Outline research into the capacity of short-term memory.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Miller (1956) reviewed research and concluded that STM has a capacity of 7±2 items (between 5 and 9). He noted that people can recall approximately 7 digits, letters, or words. Capacity can be increased through chunking - grouping items together into meaningful units.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to Miller and/or 7±2 (1 mark)',
+                'Description of capacity limitation (1 mark)',
+                'Reference to chunking (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          },
+          {
+            id: 'mem-q10',
+            question: 'Explain the role of the central executive in the working memory model.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The central executive is the most important component of the working memory model. It has a limited capacity and acts as an attention system that monitors and coordinates the other components (slave systems). It directs attention to particular tasks and determines how resources are allocated. It also deals with cognitive tasks such as mental arithmetic and problem-solving. The central executive can briefly store information but primarily acts as a supervisory system.',
+            markingCriteria: {
+              breakdown: [
+                'Description as attention/supervisory system (1 mark)',
+                'Limited capacity (1 mark)',
+                'Coordinates slave systems/allocates resources (1 mark)',
+                'Deals with cognitive tasks (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.2)'
+          }
+        ]
+      },
+      {
+        id: 'attachment',
+        name: 'Attachment',
+        questions: [
+          {
+            id: 'att-q1',
+            question: 'Define attachment.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Attachment is a strong emotional bond between two people, especially between an infant and caregiver. It is characterized by a desire to maintain proximity and distress upon separation.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of attachment as emotional bond (1 mark)',
+                'Reference to proximity/separation distress (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q2',
+            question: 'Outline Harlow\'s research into attachment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Harlow (1958) conducted research with rhesus monkeys, providing infant monkeys with two surrogate mothers: one made of wire that provided food, and one covered in soft cloth that provided comfort but no food. Harlow found that the monkeys spent most time with the cloth mother, only visiting the wire mother to feed. When frightened, they sought comfort from the cloth mother. This demonstrated that attachment is based on contact comfort rather than food.',
+            markingCriteria: {
+              breakdown: [
+                'Description of procedure with two surrogate mothers (2 marks)',
+                'Description of findings (1 mark)',
+                'Conclusion about contact comfort (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q3',
+            question: 'Discuss Bowlby\'s theory of maternal deprivation.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Bowlby\'s maternal deprivation hypothesis states that continuous care from a mother figure is essential for normal psychological development. Deprivation during the critical period (first 2.5 years) can have serious consequences for emotional, social, and intellectual development. Bowlby distinguished between separation (temporary absence) and deprivation (long-term loss of care), arguing that deprivation causes more harm. Research support: Bowlby\'s 44 thieves study found that juveniledlinquents who experienced early separation were more likely to be affectionless psychopaths. Goldfarb (1947) found children raised in institutions had lower IQs than those in foster care. Romanian orphan studies showed institutionalized children had developmental delays. Evaluation: The theory has been criticized for being deterministic, suggesting early deprivation inevitably leads to negative outcomes, when later studies show some children are resilient. Rutter challenged the concept, arguing that privation (never forming an attachment) is more harmful than deprivation. The theory has been accused of mother-blaming and may have prevented mothers from working. However, it had positive impact on hospital visiting policies and adoption practices. The research methodology has been questioned - the 44 thieves study was retrospective and based on interviews, lacking objectivity.',
+            markingCriteria: {
+              breakdown: [
+                'Description of maternal deprivation hypothesis (3 marks)',
+                'Research support (3 marks)',
+                'Evaluation including criticism and impact (10 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q4',
+            question: 'Outline the learning theory explanation of attachment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Learning theory suggests attachment develops through classical and operant conditioning. Classical conditioning: The caregiver (neutral stimulus) becomes associated with food (unconditioned stimulus) that produces pleasure (unconditioned response). Through repeated pairing, the caregiver becomes a conditioned stimulus producing pleasure (conditioned response). Operant conditioning: When an infant is fed, discomfort is reduced (negative reinforcement), making the infant repeat behaviors that brought the caregiver. The caregiver experiences pleasure from smiling baby (positive reinforcement).',
+            markingCriteria: {
+              breakdown: [
+                'Classical conditioning explanation (2 marks)',
+                'Operant conditioning explanation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q5',
+            question: 'Describe Bowlby\'s monotropic theory of attachment.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bowlby\'s monotropic theory proposes that infants have an innate tendency to form one special attachment bond, usually with the mother. This attachment figure provides a secure base for exploration. Key concepts include: monotropy (one primary attachment figure is more important than others), critical period (attachment must form in the first 2.5 years or development may be damaged), social releasers (innate behaviors like crying that elicit caregiving), and the internal working model (a mental representation of relationships that influences future relationships).',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of monotropy (2 marks)',
+                'Critical period (1 mark)',
+                'Social releasers (1 mark)',
+                'Internal working model (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q6',
+            question: 'Outline cultural variations in attachment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Van Ijzendoorn and Kroonenberg (1988) conducted a meta-analysis of Strange Situation studies across 8 countries. They found that secure attachment was the most common type in all cultures, though proportions varied. Individualist cultures (e.g., USA, Germany) showed more insecure-avoidant attachment, while collectivist cultures (e.g., Japan, Israel) showed more insecure-resistant attachment. However, there were greater variations within cultures than between them.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to van Ijzendoorn\'s research (1 mark)',
+                'Secure attachment most common across cultures (1 mark)',
+                'Differences between individualist and collectivist cultures (1 mark)',
+                'Greater variation within than between cultures (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q7',
+            question: 'Explain the effects of institutionalisation on child development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Rutter et al.\'s English and Romanian Adoptees (ERA) study followed Romanian orphans adopted by UK families. Children showed disinhibited attachment (overfriendliness to strangers), intellectual disability, and social/emotional difficulties. Effects were more severe for children adopted after 6 months. However, many children showed good recovery, especially those adopted early. Long-term effects included difficulty forming close relationships, attention-seeking behavior, and problems with peer relationships. The study demonstrated that early privation can be overcome with appropriate care, but a sensitive period exists.',
+            markingCriteria: {
+              breakdown: [
+                'Description of disinhibited attachment (2 marks)',
+                'Other effects: intellectual, social, emotional (2 marks)',
+                'Reference to recovery or critical period (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q8',
+            question: 'Discuss the influence of early attachment on later relationships.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Bowlby\'s internal working model suggests that the attachment type formed in infancy creates a template for future relationships. Secure infants develop positive working models, expecting relationships to be trusting and supportive. Insecure infants develop negative models, expecting rejection or inconsistency. Research support: Hazan and Shaver found correlations between attachment types in infancy and adult romantic relationships. Securely attached adults had longer-lasting relationships. Simpson et al. found attachment type in infancy predicted relationship quality 20 years later. However, the relationship is not deterministic. The temperament hypothesis suggests attachment type may reflect innate personality rather than learned patterns. Life events and later relationships can modify working models. Research is often correlational and cannot establish causation.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of internal working model (2 marks)',
+                'Research support (3 marks)',
+                'Evaluation/alternative explanations (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q9',
+            question: 'Compare the learning theory and Bowlby\'s theory of attachment.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Learning theory proposes attachment develops through association with food (conditioning), while Bowlby argues attachment is innate and based on evolutionary survival. Learning theory emphasizes the role of the caregiver providing food, whereas Bowlby emphasizes emotional comfort and security. Both theories recognize the importance of the caregiver-infant relationship, but disagree on the mechanism. Research by Harlow and Schaffer and Emerson contradicts learning theory, showing that attachment is not primarily based on feeding. Bowlby\'s theory has more research support and is more widely accepted today.',
+            markingCriteria: {
+              breakdown: [
+                'Key difference in mechanism (conditioning vs innate) (2 marks)',
+                'Difference in emphasis (food vs security) (2 marks)',
+                'Research support/evaluation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          },
+          {
+            id: 'att-q10',
+            question: 'Evaluate Ainsworth\'s Strange Situation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Strengths: The Strange Situation has good reliability - different observers reach similar classifications. It has predictive validity, with attachment type correlating with later development. The controlled procedure allows replication. Weaknesses: The procedure may lack validity in measuring attachment. It measures infant behavior in a specific context, which may not reflect broader attachment security. Cultural bias exists - the procedure is based on Western child-rearing practices and may not be appropriate for all cultures. Ethical concerns include potential distress to infants. Main and Solomon later identified a fourth type (disorganized), suggesting the original classification was incomplete.',
+            markingCriteria: {
+              breakdown: [
+                'Strengths including reliability and predictive validity (3 marks)',
+                'Weaknesses including validity, cultural bias, or ethics (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.3)'
+          }
+        ]
+      },
+      {
+        id: 'psychopathology',
+        name: 'Clinical Psychology and Mental Health',
+        questions: [
+          {
+            id: 'psy-q1',
+            question: 'Define deviation from social norms.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Deviation from social norms defines abnormality as behavior that violates implicit or explicit rules and expectations of society. What is considered normal varies between cultures and changes over time.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as violating social rules (1 mark)',
+                'Reference to cultural/temporal variation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q2',
+            question: 'Outline the behavioral characteristics of depression.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Behavioral characteristics of depression include reduced activity levels and withdrawal from social situations. Individuals may experience disruption to sleep (insomnia or hypersomnia) and eating patterns (increased or decreased appetite). They may also neglect personal hygiene and appearance.',
+            markingCriteria: {
+              breakdown: [
+                'Reduced activity/social withdrawal (1 mark)',
+                'Sleep and eating disruption (1 mark)',
+                'Neglect of personal care (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q3',
+            question: 'Describe the two-process model as an explanation for phobias.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The two-process model (Mowrer, 1947) explains phobia acquisition and maintenance through classical and operant conditioning. Acquisition (classical conditioning): A neutral stimulus becomes associated with a fearful experience (unconditioned stimulus), creating a conditioned fear response. For example, Watson and Rayner\'s Little Albert learned to fear white rats after the rat was paired with a loud noise. Maintenance (operant conditioning): The phobia is maintained through negative reinforcement. Avoiding the phobic stimulus reduces anxiety, reinforcing the avoidance behavior and preventing extinction of the fear.',
+            markingCriteria: {
+              breakdown: [
+                'Classical conditioning explanation with example (3 marks)',
+                'Operant conditioning/negative reinforcement explanation (2 marks)',
+                'Reference to maintenance of phobia (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q4',
+            question: 'Discuss the cognitive approach to explaining and treating depression.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Cognitive explanations: Beck\'s negative triad proposes that depression results from negative schemas developed in childhood, leading to systematic negative thinking about the self, world, and future. These create cognitive biases such as overgeneralization and catastrophizing. Ellis\'s ABC model suggests depression results from irrational thoughts. A (activating event) triggers B (irrational beliefs) leading to C (emotional consequences). For example, failing a test (A) + belief "I must succeed at everything" (B) = depression (C). CBT treatment: Based on these theories, CBT challenges negative and irrational thoughts. Patients identify negative thoughts and test their validity against reality. Therapist and client work collaboratively to replace maladaptive thoughts with more realistic ones. Behavioral activation encourages engagement in activities. Evaluation of explanations: Cognitive theories are supported by research showing depressed individuals do display negative thinking patterns. However, it\'s unclear if negative thoughts cause depression or result from it. The theories may be oversimplified - depression is likely caused by multiple factors including biological and social elements. The approach tends to blame the client for their depression. Evaluation of CBT: Research shows CBT is effective, with success rates of 60-80%. It has fewer side effects than drug therapy and addresses underlying causes. However, it requires commitment and motivation, which depressed patients may lack. It may not be suitable for severe depression. Some studies show relapse rates similar to medication. CBT is more expensive and time-consuming than drugs in the short term.',
+            markingCriteria: {
+              breakdown: [
+                'Description of Beck\'s negative triad (3 marks)',
+                'Description of Ellis\'s ABC model (2 marks)',
+                'Description of CBT treatment (3 marks)',
+                'Evaluation of explanations (4 marks)',
+                'Evaluation of treatment (4 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q5',
+            question: 'Outline systematic desensitisation as a treatment for phobias.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Systematic desensitisation is a behavioral therapy based on classical conditioning and reciprocal inhibition (you cannot be anxious and relaxed simultaneously). The therapist teaches relaxation techniques. Patient and therapist construct an anxiety hierarchy from least to most feared situations. The patient works through the hierarchy while relaxed, starting with the least anxiety-provoking situation. Progression continues until the most feared situation can be faced without anxiety.',
+            markingCriteria: {
+              breakdown: [
+                'Based on classical conditioning/reciprocal inhibition (1 mark)',
+                'Relaxation training (1 mark)',
+                'Anxiety hierarchy (1 mark)',
+                'Gradual exposure while relaxed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q6',
+            question: 'Explain the genetic explanation for OCD.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The genetic explanation suggests OCD is inherited through genes. Twin studies show higher concordance rates in identical (MZ) twins than fraternal (DZ) twins, suggesting genetic influence. Specific genes have been identified, including the COMT gene (regulates dopamine) and the SERT gene (affects serotonin transport). However, OCD is polygenic - multiple genes are involved. The diathesis-stress model suggests genetic vulnerability must be triggered by environmental factors.',
+            markingCriteria: {
+              breakdown: [
+                'OCD is inherited/twin study evidence (2 marks)',
+                'Specific genes identified (1 mark)',
+                'Polygenic/diathesis-stress reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q7',
+            question: 'Describe drug therapy as a treatment for OCD.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Drug therapy for OCD typically involves SSRIs (Selective Serotonin Reuptake Inhibitors) such as Fluoxetine. SSRIs work by blocking the reabsorption of serotonin at the synapse, increasing its availability in the brain. This is thought to normalize the "worry circuit" implicated in OCD. If SSRIs are ineffective, tricyclic antidepressants like Clomipramine may be used. These drugs typically take 3-4 months to show effects.',
+            markingCriteria: {
+              breakdown: [
+                'SSRIs as main treatment (1 mark)',
+                'Mechanism of action (blocking reuptake) (1 mark)',
+                'Alternative drugs/tricyclics (1 mark)',
+                'Time course or normalizing brain activity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q8',
+            question: 'Evaluate failure to function adequately as a definition of abnormality.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Strengths: The definition recognizes the patient\'s perspective and how they feel about their situation. It includes observable behaviors that can be objectively measured. It provides a practical checklist (Rosenhan & Seligman) for identifying when someone needs help. Weaknesses: Determining adequate functioning is subjective and culturally relative. Some behaviors considered dysfunctional (e.g., extreme sports) may not indicate abnormality. Conversely, some individuals with mental health issues may appear to function adequately (high-functioning depression). The definition may result in labeling non-conformist lifestyles as abnormal.',
+            markingCriteria: {
+              breakdown: [
+                'Strengths including patient perspective and objectivity (3 marks)',
+                'Weaknesses including subjectivity and cultural relativity (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q9',
+            question: 'Outline the emotional characteristics of phobias.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The primary emotional characteristic is anxiety and fear, which is disproportionate to the actual threat posed. The fear is experienced as an immediate and intense emotional response when encountering the phobic stimulus. Phobias also involve feelings of panic and dread.',
+            markingCriteria: {
+              breakdown: [
+                'Anxiety/fear (1 mark)',
+                'Disproportionate to threat (1 mark)',
+                'Panic/immediate response (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          },
+          {
+            id: 'psy-q10',
+            question: 'Compare biological and psychological explanations for mental disorders.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Biological explanations focus on physical factors such as genetics, neurochemistry, and brain structure. They view mental disorders as illnesses with biological causes requiring medical treatment. The approach is deterministic and reductionist. Psychological explanations focus on thoughts, learning, and experiences. They view mental disorders as resulting from maladaptive thinking patterns or learned behaviors that can be modified through therapy. Similarities: Both recognize that mental disorders are real conditions requiring treatment. Both are supported by research evidence. Differences: Biological approach leads to drug treatments while psychological approach uses therapies like CBT. Biological approach may ignore environmental factors, while psychological approach may underestimate biological contributions. The biological approach may provide quicker symptom relief but doesn\'t address underlying psychological issues. In reality, the biopsychosocial model suggests mental disorders result from interaction of biological, psychological, and social factors.',
+            markingCriteria: {
+              breakdown: [
+                'Description of biological approach (2 marks)',
+                'Description of psychological approach (2 marks)',
+                'Comparison including similarities (2 marks)',
+                'Differences in treatment/implications (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 1 (3.1.4)'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'physics-edexcel',
     name: 'Physics',
     topics: [

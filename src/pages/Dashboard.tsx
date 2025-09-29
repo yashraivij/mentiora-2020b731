@@ -1769,13 +1769,20 @@ const Dashboard = () => {
                     </div>
                     
                     <div className="p-6 overflow-y-auto max-h-[60vh]">
-                      {availableSubjects.length === 0 ? (
-                        <div className="text-center py-8">
-                          <p className="text-lg text-muted-foreground">You've already added all available subjects!</p>
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {availableSubjects.map((subject) => {
+                      <Tabs defaultValue="gcse" className="w-full">
+                        <TabsList className="grid w-full grid-cols-2 mb-6">
+                          <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
+                          <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
+                        </TabsList>
+                        
+                        <TabsContent value="gcse">
+                          {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
+                            <div className="text-center py-8">
+                              <p className="text-lg text-muted-foreground">You've already added all available GCSE subjects!</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {availableSubjects.filter(s => !s.id.includes('alevel')).map((subject) => {
                             const colors = subjectColors[subject.id] || subjectColors["physics"];
                             const IconComponent = getSubjectIcon(subject.id);
                             
@@ -1806,18 +1813,63 @@ const Dashboard = () => {
                                          </p>
                                        </div>
                                        <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                                     </div>
-                                   </CardContent>
-                                </Card>
-                              </motion.div>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </TabsContent>
+
+                  <TabsContent value="alevel">
+                    {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
+                      <div className="text-center py-8">
+                        <p className="text-lg text-muted-foreground">You've already added all available A-Level subjects!</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
+                          const colors = subjectColors[subject.id] || subjectColors["physics"];
+                          const IconComponent = getSubjectIcon(subject.id);
+                          
+                          return (
+                            <motion.div
+                              key={subject.id}
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <Card 
+                                className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
+                                onClick={() => {
+                                  addSubject(subject.id);
+                                  setShowAddSubjects(false);
+                                }}
+                              >
+                                <CardContent className="p-4">
+                                  <div className="flex items-center space-x-4">
+                                    <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                      <IconComponent className="h-6 w-6 text-white" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <h3 className="font-bold text-foreground">{subject.name}</h3>
+                                      <p className="text-sm text-muted-foreground">{subject.topics.length} topics</p>
+                                    </div>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </div>
+          </div>
+        )}
             </div>
           )}
 
