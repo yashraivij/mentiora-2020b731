@@ -656,6 +656,2132 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Psychology Paper 1 (3.1.4)'
           }
         ]
+      },
+      {
+        id: 'approaches',
+        name: 'Approaches in Psychology',
+        questions: [
+          {
+            id: 'app-q1',
+            question: 'Define classical conditioning.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Classical conditioning is learning through association. A neutral stimulus is repeatedly paired with an unconditioned stimulus that naturally produces a response, until the neutral stimulus alone can produce a conditioned response.',
+            markingCriteria: {
+              breakdown: [
+                'Learning through association (1 mark)',
+                'Reference to pairing neutral stimulus with unconditioned stimulus (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q2',
+            question: 'Outline Bandura\'s social learning theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Social learning theory suggests learning occurs through observation and imitation of role models. Four mediational processes are involved: attention (noticing the behavior), retention (remembering it), motor reproduction (being able to replicate it), and motivation (having reason to imitate). Vicarious reinforcement occurs when observing someone else being rewarded or punished influences our behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Learning through observation/imitation (1 mark)',
+                'Reference to role models (1 mark)',
+                'Mediational processes (1 mark)',
+                'Vicarious reinforcement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q3',
+            question: 'Describe the cognitive approach to explaining behavior.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The cognitive approach focuses on how internal mental processes affect behavior. It studies how people perceive, store, manipulate, and interpret information. Schemas are mental frameworks that help organize and interpret information based on past experience. The approach uses theoretical and computer models to understand mental processes, comparing the mind to a computer (information processing). The emergence of cognitive neuroscience has allowed researchers to study the biological basis of mental processes using brain scanning techniques.',
+            markingCriteria: {
+              breakdown: [
+                'Focus on internal mental processes (1 mark)',
+                'Definition and role of schemas (2 marks)',
+                'Computer/information processing models (2 marks)',
+                'Cognitive neuroscience reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q4',
+            question: 'Explain the biological approach to behavior.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The biological approach explains behavior in terms of genetics, neurochemistry, and evolutionary influences. Behavior is influenced by genetic inheritance (genotype) which interacts with environment to produce characteristics (phenotype). Neurochemistry examines the role of neurotransmitters and hormones in behavior. Evolution explains behavior in terms of adaptive advantages that increased survival and reproduction.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic basis including genotype/phenotype (2 marks)',
+                'Neurochemistry explanation (1 mark)',
+                'Evolutionary explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q5',
+            question: 'Outline the psychodynamic approach.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The psychodynamic approach emphasizes the role of the unconscious mind in determining behavior. Freud proposed personality has three parts: id (primitive desires), ego (reality principle), and superego (morality). Defense mechanisms like repression protect the ego from anxiety. Psychosexual stages in childhood (oral, anal, phallic, latency, genital) shape personality development.',
+            markingCriteria: {
+              breakdown: [
+                'Unconscious mind (1 mark)',
+                'Id, ego, superego (1 mark)',
+                'Defense mechanisms (1 mark)',
+                'Psychosexual stages (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q6',
+            question: 'Describe the humanistic approach to psychology.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The humanistic approach emphasizes free will and self-determination. Maslow\'s hierarchy of needs proposes humans are motivated to achieve self-actualisation (reaching full potential), after basic needs are met. Rogers emphasized the importance of the self-concept and congruence between self-concept and ideal self. Unconditional positive regard is necessary for psychological health, while conditions of worth create incongruence.',
+            markingCriteria: {
+              breakdown: [
+                'Free will and self-determination (1 mark)',
+                'Maslow\'s hierarchy/self-actualisation (1 mark)',
+                'Rogers\' self-concept/congruence (1 mark)',
+                'Unconditional positive regard/conditions of worth (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q7',
+            question: 'Evaluate the behaviorist approach.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Strengths: Scientific and objective methodology using controlled lab experiments. Practical applications including systematic desensitisation for phobias and token economies. Weaknesses: Ignores cognitive processes and the role of consciousness. Ethical concerns with animal research. Findings may not generalize from animals to humans. Deterministic view ignores free will. Reductionist by explaining complex behavior through simple stimulus-response associations.',
+            markingCriteria: {
+              breakdown: [
+                'Strengths including scientific method and applications (2 marks)',
+                'Weaknesses including ignoring cognition and ethics (2 marks)',
+                'Additional evaluation including determinism/reductionism (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q8',
+            question: 'Compare the biological and psychodynamic approaches.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Similarities: Both are deterministic, suggesting behavior is caused by factors outside conscious control. Both see abnormality as having internal causes. Differences: Biological approach focuses on genes, neurochemistry and evolution while psychodynamic focuses on unconscious conflicts and childhood experiences. Biological approach uses scientific methods like brain scans while psychodynamic uses case studies. Biological approach treats mental illness with drugs while psychodynamic uses psychoanalysis.',
+            markingCriteria: {
+              breakdown: [
+                'Similarities including determinism (2 marks)',
+                'Differences in focus/causes (2 marks)',
+                'Differences in methods/treatments (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q9',
+            question: 'Outline Pavlov\'s research into classical conditioning.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pavlov studied salivation in dogs. Before conditioning, food (UCS) naturally caused salivation (UCR). A bell (NS) produced no response. During conditioning, the bell was repeatedly presented with food. After conditioning, the bell alone (CS) produced salivation (CR). This demonstrated learning through association.',
+            markingCriteria: {
+              breakdown: [
+                'Before conditioning: UCS, UCR, NS (1 mark)',
+                'During conditioning: pairing (1 mark)',
+                'After conditioning: CS produces CR (1 mark)',
+                'Conclusion about association (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          },
+          {
+            id: 'app-q10',
+            question: 'Discuss the cognitive approach in psychology.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'The cognitive approach studies internal mental processes including perception, memory, and thinking. It assumes these processes can be studied scientifically despite not being directly observable. Key concepts: Schemas are mental frameworks developed through experience that help organize information. They enable quick processing but can lead to stereotyping. Information processing models compare the mind to a computer, with input, processing, and output stages. Cognitive neuroscience combines biology and cognition, using scanning techniques to study brain activity during mental tasks. Research methods include lab experiments and case studies of brain-damaged patients. Evaluation - Strengths: Scientific and objective using controlled experiments. Practical applications in cognitive behavioral therapy and artificial intelligence. Research is credible with supporting evidence. Weaknesses: Based on machine reductionism - humans are more complex than computers. Lacks external validity as experiments use artificial tasks. Ignores emotion and motivation. Cannot directly observe mental processes, only infer from behavior. May be culturally biased as most research is Western. The approach tends to be deterministic, suggesting thoughts control behavior, though soft determinism allows some free will.',
+            markingCriteria: {
+              breakdown: [
+                'Description of approach including mental processes (3 marks)',
+                'Explanation of schemas (2 marks)',
+                'Information processing/computer models (2 marks)',
+                'Cognitive neuroscience (2 marks)',
+                'Strengths including applications and scientific method (4 marks)',
+                'Weaknesses including reductionism and ecological validity (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.1)'
+          }
+        ]
+      },
+      {
+        id: 'biopsychology',
+        name: 'Biopsychology',
+        questions: [
+          {
+            id: 'bio-q1',
+            question: 'Outline the divisions of the nervous system.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The nervous system divides into central nervous system (CNS) and peripheral nervous system (PNS). CNS comprises brain and spinal cord. PNS divides into somatic nervous system (voluntary control of muscles) and autonomic nervous system (involuntary functions). Autonomic subdivides into sympathetic (fight or flight) and parasympathetic (rest and digest).',
+            markingCriteria: {
+              breakdown: [
+                'CNS and PNS identified (1 mark)',
+                'Components of CNS (1 mark)',
+                'Somatic and autonomic nervous systems (1 mark)',
+                'Sympathetic and parasympathetic (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q2',
+            question: 'Describe the structure and function of a neuron.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Neurons are nerve cells that transmit electrical impulses. Structure: The cell body contains the nucleus. Dendrites extend from the cell body and receive signals from other neurons. The axon is a long fiber covered in myelin sheath (fatty layer for insulation) with gaps called nodes of Ranvier. Terminal buttons at the axon end release neurotransmitters. Function: Electrical impulses travel from dendrites through cell body down the axon to terminal buttons, where neurotransmitters are released into the synapse to communicate with the next neuron.',
+            markingCriteria: {
+              breakdown: [
+                'Cell body and nucleus (1 mark)',
+                'Dendrites function (1 mark)',
+                'Axon and myelin sheath (2 marks)',
+                'Terminal buttons and neurotransmitters (1 mark)',
+                'Overall transmission process (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q3',
+            question: 'Explain synaptic transmission.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'When an electrical impulse reaches the presynaptic terminal, it triggers release of neurotransmitters from vesicles into the synaptic gap. Neurotransmitters diffuse across the synapse and bind to receptors on the postsynaptic neuron. This either excites (depolarizes) or inhibits (hyperpolarizes) the postsynaptic neuron. Excitation increases likelihood of firing, inhibition decreases it. Summation determines whether the neuron fires.',
+            markingCriteria: {
+              breakdown: [
+                'Release of neurotransmitters from vesicles (1 mark)',
+                'Diffusion across synapse and binding to receptors (1 mark)',
+                'Excitation and inhibition (1 mark)',
+                'Summation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q4',
+            question: 'Describe the fight or flight response.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'When a stressor is perceived, the hypothalamus activates the sympathetic nervous system. The adrenal medulla releases adrenaline into the bloodstream. Physical changes occur: increased heart rate and blood pressure to deliver oxygen to muscles, increased breathing rate, pupil dilation for better vision, digestion inhibited, glucose release for energy. These changes prepare the body for action. Once the threat passes, the parasympathetic nervous system returns the body to normal (rest and digest).',
+            markingCriteria: {
+              breakdown: [
+                'Hypothalamus and sympathetic activation (1 mark)',
+                'Adrenaline release (1 mark)',
+                'Description of physical changes (3 marks)',
+                'Parasympathetic return to normal (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q5',
+            question: 'Outline the endocrine system.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The endocrine system works alongside the nervous system to regulate body functions using hormones. Glands release hormones into the bloodstream which travel to target organs. The pituitary gland is the master gland, controlling other glands. Key glands include thyroid (metabolism), adrenal (stress response), and pineal (sleep-wake cycle). Hormones work slower but have longer-lasting effects than nervous system.',
+            markingCriteria: {
+              breakdown: [
+                'Hormones and glands (1 mark)',
+                'Pituitary as master gland (1 mark)',
+                'Examples of glands and functions (1 mark)',
+                'Comparison to nervous system (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q6',
+            question: 'Explain localisation of function in the brain.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Localisation suggests different brain areas are responsible for specific functions. Motor cortex in frontal lobe controls voluntary movement. Somatosensory cortex in parietal lobe processes sensory information. Visual cortex in occipital lobe processes visual information. Auditory cortex in temporal lobe processes sound. Language centers: Broca\'s area (speech production) and Wernicke\'s area (speech comprehension).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of localisation (1 mark)',
+                'Motor and somatosensory cortex (1 mark)',
+                'Visual and auditory cortex (1 mark)',
+                'Broca\'s and Wernicke\'s areas (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q7',
+            question: 'Describe split-brain research.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sperry studied patients who had corpus callosum (connecting the hemispheres) severed to treat epilepsy. Method: Images were presented to either left or right visual field. Right visual field connects to left hemisphere (language), left visual field to right hemisphere (visual-spatial). Findings: When image shown to right visual field, patients could describe it verbally. When shown to left visual field, they could not describe it but could select matching object with left hand. This demonstrated hemispheric lateralisation - left hemisphere specializes in language, right in visual-spatial tasks.',
+            markingCriteria: {
+              breakdown: [
+                'Corpus callosum severed (1 mark)',
+                'Method with visual fields (2 marks)',
+                'Findings about verbal description (1 mark)',
+                'Conclusion about lateralisation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q8',
+            question: 'Explain brain plasticity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Brain plasticity refers to the brain\'s ability to change and adapt throughout life. During childhood, the brain has high plasticity with rapid growth of synaptic connections (synaptic pruning removes unused connections). In adulthood, plasticity continues through learning and experience creating new neural pathways. Brain can reorganize itself following damage, with healthy areas taking over functions of damaged areas (functional recovery).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of plasticity as brain\'s ability to change (1 mark)',
+                'Childhood plasticity and synaptic pruning (1 mark)',
+                'Adult plasticity through learning (1 mark)',
+                'Functional recovery after damage (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q9',
+            question: 'Outline ways of studying the brain.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'fMRI (functional magnetic resonance imaging) detects changes in blood oxygenation to show brain activity - high spatial resolution but expensive. EEG (electroencephalogram) measures electrical activity using scalp electrodes - good temporal resolution but poor spatial resolution. ERP (event-related potentials) uses EEG to isolate responses to specific stimuli. Post-mortem examinations study physical brain structure after death - useful for establishing cause of behavior but cannot establish causation.',
+            markingCriteria: {
+              breakdown: [
+                'fMRI and blood oxygenation (2 marks)',
+                'EEG and electrical activity (2 marks)',
+                'ERP or post-mortem (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          },
+          {
+            id: 'bio-q10',
+            question: 'Discuss localisation of function in the brain.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Localisation theory proposes specific brain areas are responsible for specific cognitive functions. Evidence: Motor cortex in frontal lobe controls voluntary movement - damage causes loss of control on opposite side. Somatosensory cortex in parietal lobe processes sensory information from skin. Visual cortex in occipital lobe processes visual information - damage causes blindness. Auditory cortex in temporal lobe processes sound. Language areas: Broca\'s area in left frontal lobe controls speech production - damage causes Broca\'s aphasia (slow, effortful speech). Wernicke\'s area in left temporal lobe controls speech comprehension - damage causes Wernicke\'s aphasia (fluent but meaningless speech). Brain scan studies show specific areas activate during specific tasks, supporting localisation. Case studies like Phineas Gage show personality changes after frontal lobe damage. Evaluation - Strengths: Brain scan evidence supports localisation. Case study evidence from brain-damaged patients. Practical applications in understanding and treating brain damage. Has scientific credibility from objective methods. Weaknesses: May be oversimplified - neural processes are distributed. Lashley\'s research suggested equipotentiality - higher cognitive functions not localized. Plasticity shows brain can reorganize - other areas can take over damaged functions, contradicting strict localisation. Individual differences exist in brain organization. Language may not be as strictly lateralized as believed - right hemisphere has some language ability.',
+            markingCriteria: {
+              breakdown: [
+                'Description of localisation theory (2 marks)',
+                'Motor and somatosensory areas (2 marks)',
+                'Visual and auditory areas (2 marks)',
+                'Language areas including Broca\'s and Wernicke\'s (3 marks)',
+                'Supporting evidence from scans and case studies (2 marks)',
+                'Evaluation including plasticity and individual differences (5 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.2)'
+          }
+        ]
+      },
+      {
+        id: 'research-methods',
+        name: 'Research Methods',
+        questions: [
+          {
+            id: 'rm-q1',
+            question: 'Define operationalisation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Operationalisation means clearly defining variables in measurable terms so they can be tested. For example, defining "aggression" as "number of times child hits the Bobo doll" makes it measurable and testable.',
+            markingCriteria: {
+              breakdown: [
+                'Defining variables in measurable terms (1 mark)',
+                'Example or reference to testability (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q2',
+            question: 'Distinguish between qualitative and quantitative data.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Quantitative data is numerical data that can be statistically analyzed, such as test scores or reaction times. It is objective and allows for comparisons. Qualitative data is descriptive, non-numerical data such as interview transcripts or observations of behavior. It provides rich, detailed information about thoughts and feelings but is more difficult to analyze objectively.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of quantitative data with example (2 marks)',
+                'Definition of qualitative data with example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q3',
+            question: 'Describe the difference between a lab experiment and a field experiment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Lab experiments are conducted in controlled environments where the researcher manipulates the IV and controls extraneous variables. They have high internal validity but low ecological validity. Field experiments are conducted in natural environments where the IV is still manipulated by the researcher. They have higher ecological validity but lower control over extraneous variables.',
+            markingCriteria: {
+              breakdown: [
+                'Lab experiment: controlled environment and control (2 marks)',
+                'Field experiment: natural environment characteristics (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q4',
+            question: 'Explain random sampling and one weakness.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Random sampling means every member of the target population has an equal chance of being selected, often using a random number generator or picking names from a hat. Weakness: It is time-consuming and may be impossible to get details of all population members. Even with random selection, the sample may not be representative if some people refuse to participate.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of random sampling (1 mark)',
+                'Method description (1 mark)',
+                'Weakness explained (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q5',
+            question: 'Outline ethical guidelines in psychological research.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Informed consent: Participants must agree to take part after being given full information about the study. Right to withdraw: Participants can leave at any time without penalty. Protection from harm: Participants must not experience physical or psychological harm. Confidentiality: Participant data must be kept private. Deception: Participants should not be misled unless absolutely necessary and must be debriefed. Debriefing: Participants must be informed of true aims and have concerns addressed after the study.',
+            markingCriteria: {
+              breakdown: [
+                'Three ethical guidelines identified (3 marks)',
+                'Three explained with detail (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q6',
+            question: 'Explain the difference between validity and reliability.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Validity refers to whether a study measures what it intends to measure. Internal validity is whether the IV caused the change in DV. External validity is whether findings generalize beyond the study (ecological, temporal, population validity). Reliability refers to consistency - whether the study produces the same results when repeated. Test-retest reliability checks if the same results occur at different times.',
+            markingCriteria: {
+              breakdown: [
+                'Validity definition and types (2 marks)',
+                'Reliability definition and test-retest (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q7',
+            question: 'Describe correlational analysis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Correlational analysis examines the relationship between two co-variables without manipulation. Positive correlation means as one variable increases, so does the other. Negative correlation means as one increases, the other decreases. Zero correlation means no relationship. Strength shown by correlation coefficient from -1 to +1. Correlations cannot establish cause and effect.',
+            markingCriteria: {
+              breakdown: [
+                'Definition examining relationship between co-variables (1 mark)',
+                'Positive, negative, zero correlation (2 marks)',
+                'Cannot establish causation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q8',
+            question: 'Explain peer review in psychology.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Peer review is when research is evaluated by other experts in the field before publication. Reviewers assess the quality, validity, significance, and originality of the research. They check for methodological flaws, inappropriate conclusions, and plagiarism. Research may be accepted, revised, or rejected. This ensures published research meets quality standards and is credible.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as evaluation by experts (1 mark)',
+                'What reviewers assess (2 marks)',
+                'Purpose/outcome of process (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q9',
+            question: 'Outline observational design considerations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Behavioral categories must be defined clearly, observable, and measurable. Categories should be mutually exclusive and cover all possible behaviors. Sampling methods: Event sampling records every time behavior occurs - good for infrequent behaviors but may miss other behaviors. Time sampling records behavior at regular intervals - systematic but may miss important events. Observer training required to ensure reliability measured through inter-observer reliability (correlation between observers).',
+            markingCriteria: {
+              breakdown: [
+                'Behavioral categories characteristics (2 marks)',
+                'Event sampling (2 marks)',
+                'Time sampling and inter-observer reliability (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          },
+          {
+            id: 'rm-q10',
+            question: 'Discuss the use of experiments in psychological research.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Experiments involve manipulation of an independent variable (IV) to measure effect on dependent variable (DV), while controlling extraneous variables. This allows cause and effect relationships to be established. Types of experiments: Laboratory experiments offer high control in artificial settings - high internal validity but low ecological validity. Field experiments occur in natural settings - higher ecological validity but less control. Natural experiments use naturally occurring IVs - useful for studying variables that cannot ethically be manipulated, but lack random allocation. Quasi-experiments have pre-existing groups (e.g., age, gender) - useful but lack random allocation, reducing internal validity. Experimental designs: Repeated measures (same participants in all conditions) - controls participant variables but risks order effects. Independent groups (different participants per condition) - no order effects but participant variables may confound results. Matched pairs attempts to match participants on key variables - controls participant variables without order effects but time-consuming. Evaluation - Strengths: High control allows cause and effect to be established. Replicable due to standardized procedures, establishing reliability. Objective measurements reduce bias. Weaknesses: Artificial situations reduce ecological validity - findings may not generalize to real life. Demand characteristics may affect behavior. Participant variables may confound results in independent groups. Ethical issues with manipulation and deception. May not capture complexity of real behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Description of experimental method (2 marks)',
+                'Types of experiments with evaluation (4 marks)',
+                'Experimental designs (3 marks)',
+                'Strengths including control and replicability (4 marks)',
+                'Weaknesses including ecological validity and ethics (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 2 (3.2.3)'
+          }
+        ]
+      },
+      {
+        id: 'issues-debates',
+        name: 'Issues and Debates',
+        questions: [
+          {
+            id: 'id-q1',
+            question: 'Define gender bias in psychology.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gender bias occurs when psychological research or theories do not represent the experience of men and women equally. This can take the form of alpha bias (exaggerating differences) or beta bias (minimizing differences).',
+            markingCriteria: {
+              breakdown: [
+                'Unequal representation of genders (1 mark)',
+                'Alpha or beta bias reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q2',
+            question: 'Explain what is meant by cultural bias.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cultural bias occurs when research is influenced by cultural assumptions and may not apply to all cultures. Ethnocentrism judges other cultures by standards of one\'s own culture, viewing own culture as superior. Cultural relativism recognizes that behavior must be understood in context of the culture where it occurs. Imposed etic applies findings from one culture to another inappropriately.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of cultural bias (1 mark)',
+                'Ethnocentrism (1 mark)',
+                'Cultural relativism (1 mark)',
+                'Imposed etic or example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q3',
+            question: 'Distinguish between hard determinism and soft determinism.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hard determinism suggests all behavior is caused by factors outside our control - biological, environmental, or psychic forces. There is no free will. Soft determinism acknowledges that behavior is influenced by factors but suggests we still have some element of choice and can exercise free will within constraints. The cognitive approach exemplifies soft determinism.',
+            markingCriteria: {
+              breakdown: [
+                'Hard determinism: all behavior caused, no free will (2 marks)',
+                'Soft determinism: influenced but some choice (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q4',
+            question: 'Explain the nature-nurture debate.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The nature-nurture debate concerns whether behavior is inherited (nature) or learned through experience (nurture). Nature refers to genetic inheritance and biological factors - the biological approach emphasizes nature. Nurture refers to environmental influences and learning - behaviorism emphasizes nurture. The interactionist approach suggests behavior results from interaction between nature and nurture. Diathesis-stress model illustrates this: genetic vulnerability (nature) is triggered by environmental stressors (nurture) to produce behavior or mental disorders.',
+            markingCriteria: {
+              breakdown: [
+                'Nature: genetic/biological (1 mark)',
+                'Nurture: environment/learning (1 mark)',
+                'Approaches emphasizing each (2 marks)',
+                'Interactionist approach (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q5',
+            question: 'Outline the idiographic approach.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The idiographic approach focuses on the individual case rather than general laws. It provides in-depth, detailed understanding of individuals using qualitative methods like case studies, unstructured interviews, and thematic analysis. Humanistic and psychodynamic approaches are idiographic, studying unique experiences and subjective perceptions. Findings are rich and detailed but cannot be generalized.',
+            markingCriteria: {
+              breakdown: [
+                'Focus on individual case (1 mark)',
+                'In-depth understanding (1 mark)',
+                'Methods used (1 mark)',
+                'Approaches or limitation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q6',
+            question: 'Explain the nomothetic approach.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The nomothetic approach seeks to establish general laws of behavior applicable to all people. It uses quantitative methods including experiments and statistical analysis with large samples. The biological, behavioral, and cognitive approaches are nomothetic. Findings can be generalized and tested for reliability through replication. However, may lose depth and ignore individual differences.',
+            markingCriteria: {
+              breakdown: [
+                'Seeks general laws (1 mark)',
+                'Quantitative methods and large samples (1 mark)',
+                'Approaches and generalizability (1 mark)',
+                'Evaluation point (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q7',
+            question: 'Describe reductionism in psychology.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Reductionism explains complex phenomena by breaking them down into simpler components. Biological reductionism reduces behavior to genes, neurochemistry, and brain structure. Environmental reductionism (behaviorism) reduces behavior to stimulus-response associations. This allows controlled investigation but may oversimplify complex behavior and lose sight of the whole person.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as breaking down to simpler components (1 mark)',
+                'Biological reductionism (1 mark)',
+                'Environmental reductionism (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q8',
+            question: 'Explain holism in psychology.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Holism argues that behavior should be studied as a whole rather than breaking it down into components, as the whole is greater than the sum of parts. Humanistic psychology exemplifies holism by considering the whole person and subjective experience. Gestalt psychology emphasized perception of whole patterns. Holism provides complete understanding but is difficult to investigate scientifically.',
+            markingCriteria: {
+              breakdown: [
+                'Study behavior as whole (1 mark)',
+                'Whole greater than sum of parts (1 mark)',
+                'Humanistic or gestalt example (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q9',
+            question: 'Outline socially sensitive research.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Socially sensitive research has potential consequences for participants or the group they represent. Research into areas like race and IQ, sexual orientation, or gender differences can have social implications. Sieber and Stanley identified concerns: research question (who benefits?), methodology (treatment of participants), institutional context (who funds research?), and interpretation/application of findings (how might findings be used?). Researchers must consider potential misuse of findings and impact on participants and society.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as having social consequences (1 mark)',
+                'Examples of sensitive topics (1 mark)',
+                'Sieber and Stanley concerns (3 marks)',
+                'Researcher responsibilities (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          },
+          {
+            id: 'id-q10',
+            question: 'Discuss free will and determinism in psychology.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Free will is the idea that humans can make choices and are not determined by biological or external forces. People are self-determining and have personal responsibility. The humanistic approach emphasizes free will - people have choice and can self-actualize. Determinism is the view that behavior is caused by forces beyond our control. Hard determinism suggests no free will exists. Types: Biological determinism - behavior caused by genes, neurochemistry, brain structure (biological approach to mental illness). Environmental determinism - behavior shaped by conditioning and reinforcement (Skinner\'s behaviorism). Psychic determinism - behavior caused by unconscious drives and childhood experiences (Freud\'s psychodynamic approach). Soft determinism (cognitive approach) acknowledges influences but allows some element of choice. Scientific psychology tends toward determinism as science seeks causes of behavior. Free will difficult to test empirically. Evaluation of free will: Fits with legal system holding people responsible. Positive approach - empowering. Research shows people with internal locus of control are mentally healthier. However, Roberts et al. found believing in free will was associated with better academic performance but Libet\'s research suggested brain activity occurs before conscious awareness of decision. Evaluation of determinism: Consistent with science seeking causal explanations. Enables prediction and control. However, hard determinism inconsistent with legal system. Removes personal responsibility which may be damaging. The interactionist diathesis-stress model provides middle ground.',
+            markingCriteria: {
+              breakdown: [
+                'Description of free will and humanistic approach (3 marks)',
+                'Description of determinism and types (4 marks)',
+                'Soft determinism (2 marks)',
+                'Evaluation of free will (4 marks)',
+                'Evaluation of determinism (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.1)'
+          }
+        ]
+      },
+      {
+        id: 'relationships',
+        name: 'Relationships',
+        questions: [
+          {
+            id: 'rel-q1',
+            question: 'Define self-disclosure in relationships.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Self-disclosure is revealing personal information about yourself to another person. According to social penetration theory, romantic relationships develop through gradual increase in self-disclosure, moving from superficial to intimate information.',
+            markingCriteria: {
+              breakdown: [
+                'Revealing personal information (1 mark)',
+                'Reference to depth or gradual increase (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q2',
+            question: 'Outline the matching hypothesis.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The matching hypothesis suggests people choose romantic partners of similar physical attractiveness to themselves. This occurs because while we are attracted to the most physically attractive people, we settle for partners of similar attractiveness to avoid rejection. Research by Walster et al. supports this, finding couples tend to be matched in attractiveness.',
+            markingCriteria: {
+              breakdown: [
+                'Partners of similar attractiveness (1 mark)',
+                'Explanation about avoiding rejection (1 mark)',
+                'Research support reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q3',
+            question: 'Describe filter theory of relationships.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Filter theory (Kerckhoff and Davis) proposes relationship development involves a series of filters narrowing the field of potential partners. First filter: social demography - similarity in social background, education, location. Second filter: similarity in attitudes and values becomes important in early relationship. Third filter: complementarity of needs where partners meet each other\'s needs becomes important in longer relationships. Partners must pass through each filter for relationship to progress.',
+            markingCriteria: {
+              breakdown: [
+                'Three filters identified (3 marks)',
+                'Social demography explained (1 mark)',
+                'Similarity in attitudes (1 mark)',
+                'Complementarity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q4',
+            question: 'Explain social exchange theory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Social exchange theory (Thibaut and Kelley) views relationships as economic exchanges of rewards and costs. Rewards include companionship and support; costs include time and effort. People seek to maximize rewards and minimize costs. Comparison level (CL) is the standard against which relationships are judged based on past relationships. Comparison level for alternatives (CLalt) compares current relationship to alternatives. Relationships are maintained when rewards outweigh costs and alternatives are less attractive.',
+            markingCriteria: {
+              breakdown: [
+                'Economic exchange of rewards and costs (2 marks)',
+                'Maximizing rewards, minimizing costs (1 mark)',
+                'Comparison level (1 mark)',
+                'Comparison level for alternatives (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q5',
+            question: 'Outline equity theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Equity theory proposes fairness and balance in relationships are more important than rewards and costs. Partners should give and receive proportionally equal benefits. Inequity causes distress - being over-benefited or under-benefited. Under-benefited partners feel angry and resentful, over-benefited feel guilty. To restore equity, partners may change inputs/outputs or psychologically revise perceptions.',
+            markingCriteria: {
+              breakdown: [
+                'Fairness and balance (1 mark)',
+                'Equal benefits (1 mark)',
+                'Inequity causes distress (1 mark)',
+                'Restoring equity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q6',
+            question: 'Describe Rusbult\'s investment model.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The investment model proposes commitment depends on satisfaction, alternatives, and investment. Satisfaction derives from rewards and costs meeting or exceeding comparison level. Quality of alternatives - better alternatives reduce commitment. Investment size - resources put into relationship including time, effort, shared possessions, children. Greater investment increases commitment even if satisfaction is low. Commitment leads to relationship maintenance behaviors. The model predicts staying in relationships even when alternatives are better if investment is high.',
+            markingCriteria: {
+              breakdown: [
+                'Three factors: satisfaction, alternatives, investment (3 marks)',
+                'Explanation of each factor (2 marks)',
+                'Commitment and maintenance (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q7',
+            question: 'Outline Duck\'s phase model of relationship breakdown.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Duck proposed relationship breakdown occurs in phases. Intrapsychic phase: one partner becomes dissatisfied, thinking about problems privately. Dyadic phase: dissatisfaction communicated to partner, conflicts discussed. Social phase: breakdown made public to friends and family, seeking support and advice. Grave-dressing phase: partners create post-relationship narratives to protect self-esteem and move on. Resurrection phase: learning from experience and preparing for future relationships.',
+            markingCriteria: {
+              breakdown: [
+                'Intrapsychic phase (1 mark)',
+                'Dyadic phase (1 mark)',
+                'Social phase (1 mark)',
+                'Grave-dressing phase (2 marks)',
+                'Resurrection phase (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q8',
+            question: 'Explain parasocial relationships.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Parasocial relationships are one-sided relationships where one person invests emotional energy but the other (usually celebrity) is unaware. Absorption-addiction model suggests parasocial relationships develop due to deficits in real-life relationships. Three levels exist: entertainment-social (least intense), intense-personal (stronger attachment), borderline-pathological (obsessive). Attachment theory suggests insecure attachment types are more prone to parasocial relationships.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as one-sided (1 mark)',
+                'Absorption-addiction model or deficits (1 mark)',
+                'Three levels (1 mark)',
+                'Attachment theory explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q9',
+            question: 'Outline virtual relationships in social media.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Virtual relationships via social media differ from face-to-face relationships. Self-disclosure tends to be higher online due to anonymity and reduced risk (hyperpersonal model). Absence of gating - physical barriers like appearance are absent online, relationships based more on communication. However, deception is easier online. Reduced cues theory suggests lack of nonverbal cues makes relationships less emotionally satisfying.',
+            markingCriteria: {
+              breakdown: [
+                'Higher self-disclosure online (1 mark)',
+                'Absence of gating/physical barriers (1 mark)',
+                'Easier deception (1 mark)',
+                'Reduced cues (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          },
+          {
+            id: 'rel-q10',
+            question: 'Discuss factors affecting attraction in romantic relationships.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Physical attractiveness: The halo effect suggests attractive people are rated positively on other traits. Dion et al. found attractive people were seen as kind and successful. Matching hypothesis proposes we choose similarly attractive partners to avoid rejection. Research by Walster supported this. However, cultural differences exist in beauty standards, and importance of attractiveness may decrease over time. Self-disclosure: Social penetration theory (Altman and Taylor) suggests relationships develop through increasing breadth and depth of disclosure. Reciprocal disclosure builds trust and intimacy. Sprecher and Hendrick found strong correlation between disclosure and relationship satisfaction. However, inappropriate or premature disclosure can be off-putting. Cultural differences exist in appropriate disclosure levels. Filter theory: Kerckhoff and Davis proposed relationships develop through filters - social demography, similarity in attitudes, complementarity of needs. This explains how from many potential partners, we narrow to compatible ones. However, research support is inconsistent, and the theory doesn\'t account for all relationships. Evaluation: Physical attractiveness research mostly uses photographs lacking ecological validity. Individual differences exist in what people find attractive. Self-disclosure research is often correlational, not establishing causation. Most theories are reductionist, focusing on one factor. Real relationships involve complex interactions of multiple factors. Most research is Western and may not generalize to collectivist cultures. Some theories (like matching hypothesis) have evolutionary explanations - attractive partners indicate genetic fitness.',
+            markingCriteria: {
+              breakdown: [
+                'Physical attractiveness with research (4 marks)',
+                'Self-disclosure with research (4 marks)',
+                'Filter theory or other factor (3 marks)',
+                'Evaluation of theories and research (5 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.2)'
+          }
+        ]
+      },
+      {
+        id: 'gender',
+        name: 'Gender',
+        questions: [
+          {
+            id: 'gen-q1',
+            question: 'Define sex and gender.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Sex refers to biological status as male or female, determined by chromosomes, hormones, and anatomy. Gender refers to psychological status as masculine or feminine, influenced by social and cultural expectations.',
+            markingCriteria: {
+              breakdown: [
+                'Sex as biological (1 mark)',
+                'Gender as psychological/social (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q2',
+            question: 'Outline the role of chromosomes in gender development.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Biological sex is determined by the 23rd pair of chromosomes. Females have XX chromosomes, males have XY. The Y chromosome carries the SRY gene which triggers development of testes and male characteristics. Without the Y chromosome, female characteristics develop. Chromosomal abnormalities like Klinefelter\'s syndrome (XXY) can affect gender development.',
+            markingCriteria: {
+              breakdown: [
+                'XX female, XY male (1 mark)',
+                'Y chromosome and SRY gene (1 mark)',
+                'Abnormalities reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q3',
+            question: 'Describe the role of hormones in gender development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Testosterone is the male hormone produced by testes, causing development of male characteristics and influencing aggression. Higher levels in males from prenatal period onwards. Oestrogen is the female hormone produced by ovaries, causing development of female characteristics and affecting mood. Oxytocin is higher in females and promotes bonding and maternal behavior. Research on animals shows hormonal manipulation affects gender-typical behavior. Human research on hormonal abnormalities (e.g., congenital adrenal hyperplasia) shows females exposed to high testosterone show more masculine behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Testosterone role (2 marks)',
+                'Oestrogen role (1 mark)',
+                'Oxytocin role (1 mark)',
+                'Research evidence (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q4',
+            question: 'Explain Kohlberg\'s theory of gender development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Kohlberg proposed cognitive-developmental theory with three stages. Gender identity (age 2-3): child recognizes their own gender. Gender stability (age 4-5): child realizes gender remains stable over time but doesn\'t understand it\'s consistent across situations. Gender constancy (age 6-7): child understands gender is permanent despite changes in appearance or activity. Only after achieving constancy does the child actively seek same-gender models and gender-appropriate behavior. The theory is supported by research showing children\'s understanding progresses through stages.',
+            markingCriteria: {
+              breakdown: [
+                'Gender identity stage (1 mark)',
+                'Gender stability stage (1 mark)',
+                'Gender constancy stage (2 marks)',
+                'Active seeking after constancy (1 mark)',
+                'Research support (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q5',
+            question: 'Describe gender schema theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Gender schema theory (Martin and Halverson) proposes children develop gender schemas (organized clusters of information about gender) from observing their culture. By age 2-3, children have basic gender identity and form in-group and out-group schemas. In-group schemas contain information about their own gender; out-group about the other gender. Children pay attention to and remember in-group information better, actively seeking gender-appropriate activities and avoiding gender-inappropriate ones.',
+            markingCriteria: {
+              breakdown: [
+                'Gender schemas definition (1 mark)',
+                'In-group and out-group schemas (1 mark)',
+                'Attention to in-group information (1 mark)',
+                'Active seeking behavior (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q6',
+            question: 'Outline social learning theory as applied to gender.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Social learning theory proposes gender is learned through observation, imitation, and reinforcement. Children observe gender-appropriate behavior in role models (parents, peers, media). They imitate behavior of same-sex models through identification. Vicarious reinforcement occurs when children observe others being rewarded or punished for gender-typical behavior. Direct reinforcement when parents and peers reward gender-appropriate behavior and punish gender-inappropriate behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Observation and imitation (1 mark)',
+                'Same-sex models/identification (1 mark)',
+                'Vicarious reinforcement (1 mark)',
+                'Direct reinforcement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q7',
+            question: 'Explain cultural influences on gender roles.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Gender roles vary across cultures, showing environmental influence on gender. Mead\'s study of three tribes in New Guinea found gender roles differed markedly - Arapesh showed feminine traits in both sexes, Mundugumor showed masculine traits in both, Tchambuli showed role reversal. Bern\'s research on individualist vs collectivist cultures shows Western cultures emphasize gender differences while some other cultures have more flexible roles. Media representation varies by culture, influencing gender socialization.',
+            markingCriteria: {
+              breakdown: [
+                'Gender roles vary across cultures (1 mark)',
+                'Mead\'s research (2 marks)',
+                'Other cultural comparison (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q8',
+            question: 'Describe atypical gender development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Gender dysphoria (gender incongruence) occurs when biological sex doesn\'t match gender identity, causing significant distress. Biological explanations: Brain structure differences - transsexual individuals\' brains more similar to their experienced gender. Genetic factors may play a role. Hormonal exposure - unusual hormone levels in womb may affect development. Social explanations: Conditioning and reinforcement of opposite-gender behavior. Family dynamics. Cultural attitudes toward gender. Treatment includes psychological support, hormone therapy, and possibly gender reassignment surgery.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of gender dysphoria (1 mark)',
+                'Biological explanations (2 marks)',
+                'Social explanations (2 marks)',
+                'Treatment (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q9',
+            question: 'Outline the Bem Sex Role Inventory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Bem Sex Role Inventory (BSRI) measures masculinity and femininity using self-report questionnaire. Participants rate themselves on 60 traits (20 masculine, 20 feminine, 20 neutral) on 7-point scale. Four categories: masculine (high masculine, low feminine), feminine (high feminine, low masculine), androgynous (high both), undifferentiated (low both). Bem argued androgyny is psychologically healthiest, allowing flexibility.',
+            markingCriteria: {
+              breakdown: [
+                'Self-report questionnaire (1 mark)',
+                '60 traits rated (1 mark)',
+                'Four categories (1 mark)',
+                'Androgyny concept (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          },
+          {
+            id: 'gen-q10',
+            question: 'Discuss biological and social influences on gender.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Biological influences: Chromosomes determine sex - XX female, XY male. The SRY gene on Y chromosome triggers male development. Hormones affect development - testosterone promotes male characteristics and aggression, oestrogen promotes female characteristics. Brain structure differences exist, though overlap is significant. Evidence from atypical development (CAH, AIS) shows biological factors influence gender-typical behavior. Twin studies suggest genetic component to gender identity. Evolutionary psychology proposes gender roles evolved due to adaptive advantages. Social influences: Social learning theory explains gender through observation, imitation, and reinforcement of same-sex models. Parents, peers, and media provide models and reinforce gender-appropriate behavior. Cognitive approaches (Kohlberg, gender schema theory) emphasize role of understanding and mental representations. Cultural variation in gender roles (Mead\'s research) demonstrates environmental influence. Media representation shapes expectations and stereotypes. Family socialization differs for boys and girls. Evaluation: Biological evidence from hormones and chromosomes is strong, but doesn\'t account for all gender behavior. Social learning explains cultural differences and individual variation. However, most gender development likely involves interaction (biosocial approach). Diathesis-stress: biological predispositions activated by environment. Research limitations: biological studies often correlational, can\'t establish causation. Social theories may underestimate biological factors. Most research focuses on binary gender, ignoring diversity. Practical implications for gender dysphoria treatment and challenging stereotypes.',
+            markingCriteria: {
+              breakdown: [
+                'Biological influences including chromosomes and hormones (4 marks)',
+                'Evidence for biological influences (2 marks)',
+                'Social influences including learning and culture (4 marks)',
+                'Evidence for social influences (2 marks)',
+                'Evaluation including interaction and research limitations (4 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.3)'
+          }
+        ]
+      },
+      {
+        id: 'cognition-development',
+        name: 'Cognition and Development',
+        questions: [
+          {
+            id: 'cd-q1',
+            question: 'Define schema in Piaget\'s theory.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A schema is a mental framework or concept that organizes and interprets information. Schemas develop through experience and change through assimilation (adding new information to existing schema) and accommodation (changing schema to fit new information).',
+            markingCriteria: {
+              breakdown: [
+                'Mental framework organizing information (1 mark)',
+                'Reference to assimilation or accommodation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q2',
+            question: 'Outline Piaget\'s stages of cognitive development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sensorimotor stage (0-2 years): infant learns through senses and movement, develops object permanence. Preoperational stage (2-7 years): child can use symbols and language but thinking is egocentric, lacks conservation. Concrete operational stage (7-11 years): child can think logically about concrete objects, understands conservation and reversibility but not abstract concepts. Formal operational stage (11+ years): child can think abstractly and hypothetically, use deductive reasoning.',
+            markingCriteria: {
+              breakdown: [
+                'Sensorimotor stage (1.5 marks)',
+                'Preoperational stage (1.5 marks)',
+                'Concrete operational stage (1.5 marks)',
+                'Formal operational stage (1.5 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q3',
+            question: 'Explain egocentrism in children.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Egocentrism is the inability to see situations from another person\'s perspective. Piaget demonstrated this with the three mountains task where preoperational children could not identify what the scene looked like from a different viewpoint. Egocentrism decreases as children develop perspective-taking abilities.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as inability to see others\' perspective (1 mark)',
+                'Three mountains task (1 mark)',
+                'Decrease with development (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q4',
+            question: 'Describe Vygotsky\'s theory of cognitive development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Vygotsky emphasized social and cultural influences on development. Knowledge is first on the social level (interpsychological) then internalized (intrapsychological). The zone of proximal development (ZPD) is the gap between what a child can do alone and with expert help. Scaffolding is the support provided by more knowledgeable others that is gradually withdrawn. Language and culture are central to development. Vygotsky saw cognitive development as continuous rather than in stages.',
+            markingCriteria: {
+              breakdown: [
+                'Social and cultural emphasis (1 mark)',
+                'Zone of proximal development (2 marks)',
+                'Scaffolding (2 marks)',
+                'Language/culture or continuous development (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q5',
+            question: 'Outline Baillargeon\'s research on infant abilities.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Baillargeon challenged Piaget\'s view that infants lack object permanence. Using violation of expectation method, she showed infants look longer at impossible events. In the drawbridge study, infants looked longer when a box that should have blocked the drawbridge didn\'t, suggesting they understood the box still existed. This indicates object permanence develops earlier than Piaget proposed, possibly as early as 3.5 months.',
+            markingCriteria: {
+              breakdown: [
+                'Violation of expectation method (1 mark)',
+                'Drawbridge study procedure (1 mark)',
+                'Findings about object permanence (1 mark)',
+                'Challenges Piaget (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q6',
+            question: 'Explain theory of mind.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Theory of mind (ToM) is the ability to understand that others have thoughts, beliefs, and desires different from one\'s own. The Sally-Anne test assesses ToM: children watch Sally place a marble in a basket and leave. Anne moves it to a box. When asked where Sally will look, children with ToM say the basket (Sally\'s belief), while those without say the box. ToM typically develops around age 4.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of ToM (1 mark)',
+                'Sally-Anne test procedure (1 mark)',
+                'Correct response indicating ToM (1 mark)',
+                'Age of development (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q7',
+            question: 'Describe Selman\'s levels of perspective-taking.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Selman proposed five levels of perspective-taking ability. Level 0 (3-6 years): Undifferentiated - child doesn\'t distinguish own and others\' perspectives. Level 1 (6-8 years): Social-informational - realizes others may have different views but struggles to understand why. Level 2 (8-10 years): Self-reflective - can view own perspective from another\'s viewpoint. Level 3 (10-12 years): Mutual - can step outside interaction and view from third party perspective. Level 4 (12+ years): Societal - understands perspectives at societal level.',
+            markingCriteria: {
+              breakdown: [
+                'Level 0 described (1 mark)',
+                'Level 1 described (1 mark)',
+                'Level 2 described (1 mark)',
+                'Level 3 described (1 mark)',
+                'Level 4 described (1 mark)',
+                'Ages or progression noted (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q8',
+            question: 'Explain the role of mirror neurons in social cognition.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mirror neurons fire both when performing an action and when observing someone else perform it. Discovered in monkeys by Rizzolatti. In humans, mirror neurons may support imitation, empathy, and theory of mind. They provide a biological basis for understanding others\' intentions and emotions. Mirror neuron dysfunction may explain social difficulties in autism.',
+            markingCriteria: {
+              breakdown: [
+                'Fire when performing and observing actions (1 mark)',
+                'Rizzolatti\'s research (1 mark)',
+                'Role in imitation/empathy/ToM (1 mark)',
+                'Relevance to autism or other application (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q9',
+            question: 'Evaluate Piaget\'s theory of cognitive development.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Strengths: Influential theory generating extensive research. Practical applications in education emphasizing active discovery learning. Research methods including conservation tasks have been replicated. Recognizes children as active learners. Weaknesses: Underestimates children\'s abilities - Baillargeon and others show infants have more understanding than Piaget proposed. Overestimates role of maturation and underestimates culture and social factors (Vygotsky emphasized these). Stages may not be as distinct as proposed - abilities appear gradually. Research methods potentially confusing for children, possibly underestimating abilities. Sample issues - studied mostly his own children.',
+            markingCriteria: {
+              breakdown: [
+                'Strengths including influence and applications (3 marks)',
+                'Weaknesses including underestimating abilities (3 marks)',
+                'Research issues (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          },
+          {
+            id: 'cd-q10',
+            question: 'Discuss the development of social cognition.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Theory of mind (ToM) is central to social cognition - understanding others have different mental states. Sally-Anne test shows ToM develops around age 4. Baron-Cohen suggests autism involves ToM deficits. Mirror neurons may provide biological basis for understanding others\' actions and emotions. Perspective-taking: Selman\'s levels show gradual development from egocentric to societal perspectives. Research using Selman\'s dilemmas shows perspective-taking ability increases with age and relates to social competence. Piaget described egocentrism in preoperational stage, with three mountains task demonstrating inability to see others\' viewpoints. However, methodological issues may have led to underestimation. Role of biology: Mirror neurons fire when performing and observing actions, supporting imitation and empathy. Genetic factors influence ToM development. Brain areas including prefrontal cortex develop throughout childhood. Role of environment: Vygotsky emphasized social interaction and culture in cognitive development. Language development relates to ToM - discussing mental states helps children understand them. Sibling interactions provide opportunities to practice perspective-taking. Parenting style affects social cognitive development. Evaluation: Research has practical applications for understanding autism and improving social skills interventions. However, most research is correlational, not establishing causation. Cross-cultural studies show some universal development but cultural variation in timing and expression. Nature-nurture interaction likely - biological maturation enables development while experience shapes it. Individual differences exist in rate and extent of development.',
+            markingCriteria: {
+              breakdown: [
+                'Theory of mind with research evidence (4 marks)',
+                'Perspective-taking development (3 marks)',
+                'Biological factors including mirror neurons (3 marks)',
+                'Environmental factors including Vygotsky (3 marks)',
+                'Evaluation including applications and research issues (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.4)'
+          }
+        ]
+      },
+      {
+        id: 'schizophrenia',
+        name: 'Schizophrenia',
+        questions: [
+          {
+            id: 'scz-q1',
+            question: 'Define schizophrenia.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Schizophrenia is a severe mental disorder characterized by disruptions in thinking, perception, emotions, and behavior. Symptoms include hallucinations, delusions, disorganized speech, and negative symptoms such as avolition.',
+            markingCriteria: {
+              breakdown: [
+                'Severe mental disorder (1 mark)',
+                'Reference to symptoms (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q2',
+            question: 'Outline positive symptoms of schizophrenia.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Positive symptoms are experiences in addition to normal functioning. Hallucinations are false perceptions, most commonly auditory (hearing voices), but can be visual, tactile, olfactory, or gustatory. Delusions are false beliefs, including paranoid delusions (belief of being persecuted), delusions of grandeur (exaggerated self-importance), or delusions of control (belief external forces control thoughts/actions). Speech may become disorganized with word salad or derailment.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of positive symptoms (1 mark)',
+                'Hallucinations with examples (1 mark)',
+                'Delusions with types (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q3',
+            question: 'Describe negative symptoms of schizophrenia.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Negative symptoms involve loss of normal functioning. Speech poverty (alogia) involves reduced frequency and quality of speech. Avolition is loss of motivation to carry out purposeful activities, including poor hygiene, lack of persistence at work/school, and lack of energy. Affective flattening involves reduced emotional expression in voice tone, facial expressions, and body language. Social withdrawal and anhedonia (loss of pleasure) are also negative symptoms.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of negative symptoms (1 mark)',
+                'Speech poverty (1 mark)',
+                'Avolition with examples (1 mark)',
+                'Affective flattening or other negative symptom (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q4',
+            question: 'Explain reliability and validity issues in diagnosis of schizophrenia.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Reliability concerns consistency of diagnosis. Inter-rater reliability is agreement between clinicians. Cheniaux et al. found poor agreement, with one psychiatrist diagnosing 26% as schizophrenic using DSM and 44% using ICD. Test-retest reliability is consistency over time - symptoms must persist to confirm diagnosis. Validity concerns accuracy of diagnosis. Criterion validity: Cheniaux study shows low validity as different manuals give different diagnoses. Co-morbidity with depression and substance abuse makes diagnosis difficult. Symptom overlap with other disorders reduces validity.',
+            markingCriteria: {
+              breakdown: [
+                'Reliability definition and inter-rater (2 marks)',
+                'Research evidence for reliability (1 mark)',
+                'Validity definition and criterion validity (2 marks)',
+                'Co-morbidity or symptom overlap (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q5',
+            question: 'Describe the genetic explanation for schizophrenia.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Schizophrenia runs in families. Gottesman\'s family study found concordance rates increase with genetic similarity: 48% for identical twins, 17% for fraternal twins, 9% for siblings, 1% general population. Adoption studies by Tienari found biological children of schizophrenic mothers adopted into healthy families had higher risk than control adoptees. Candidate genes identified include PCM1, dopamine receptor genes (DRD2), and genes affecting glutamate. Ripke\'s genome-wide study found 108 genetic variations associated with schizophrenia. The disorder is polygenic (many genes) and aetiologically heterogeneous (different combinations in different people).',
+            markingCriteria: {
+              breakdown: [
+                'Family studies with concordance rates (2 marks)',
+                'Adoption studies (1 mark)',
+                'Candidate genes (2 marks)',
+                'Polygenic/heterogeneous nature (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q6',
+            question: 'Explain the dopamine hypothesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The dopamine hypothesis proposes schizophrenia is caused by abnormal dopamine function. Original version: hyperdopaminergia in subcortex - excess dopamine in mesolimbic pathway causes positive symptoms (hallucinations, delusions). Revised version added hypodopaminergia in cortex - low dopamine in mesocortical pathway causes negative symptoms. Evidence: amphetamines increase dopamine and worsen symptoms, antipsychotics block dopamine receptors and reduce symptoms.',
+            markingCriteria: {
+              breakdown: [
+                'Abnormal dopamine function (1 mark)',
+                'Hyperdopaminergia and positive symptoms (1 mark)',
+                'Hypodopaminergia and negative symptoms (1 mark)',
+                'Supporting evidence (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q7',
+            question: 'Describe drug therapy for schizophrenia.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Typical antipsychotics (e.g., Chlorpromazine) are dopamine antagonists blocking D2 receptors, reducing dopamine activity. Effective for positive symptoms but cause side effects including tardive dyskinesia. Atypical antipsychotics (e.g., Clozapine, Risperidone) act on dopamine and serotonin receptors. More effective for negative symptoms with fewer side effects. Clozapine is most effective but requires blood monitoring due to risk of agranulocytosis. Drug therapy is often combined with psychological therapy for better outcomes.',
+            markingCriteria: {
+              breakdown: [
+                'Typical antipsychotics mechanism (2 marks)',
+                'Atypical antipsychotics mechanism (2 marks)',
+                'Side effects or effectiveness (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q8',
+            question: 'Outline CBT for schizophrenia.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cognitive behavioral therapy helps patients identify and challenge irrational thoughts. Therapist helps patient understand how delusions and hallucinations affect feelings and behavior. Patient learns to test validity of thoughts against reality. Normalizing involves explaining symptoms are common, reducing anxiety. Coping strategies developed for managing symptoms. CBT challenges dysfunctional thought patterns and reduces distress even if symptoms don\'t fully disappear.',
+            markingCriteria: {
+              breakdown: [
+                'Identifying and challenging thoughts (1 mark)',
+                'Testing thoughts against reality (1 mark)',
+                'Normalizing or coping strategies (1 mark)',
+                'Reducing distress (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q9',
+            question: 'Explain the diathesis-stress model of schizophrenia.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The diathesis-stress model proposes schizophrenia results from interaction between genetic vulnerability (diathesis) and environmental stressors. Meehl\'s original model suggested genetic vulnerability creates schizotype, which develops into schizophrenia only if triggered by stress. Modern version recognizes diathesis can be biological or psychological. Stressors include family dysfunction, trauma, or drug use. This explains why people with genetic risk don\'t always develop schizophrenia.',
+            markingCriteria: {
+              breakdown: [
+                'Interaction between vulnerability and stress (1 mark)',
+                'Genetic diathesis (1 mark)',
+                'Environmental stressors (1 mark)',
+                'Explains variable outcomes (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          },
+          {
+            id: 'scz-q10',
+            question: 'Discuss biological explanations for schizophrenia.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Genetic explanation: Strong evidence from family, twin, and adoption studies. Gottesman found 48% concordance in identical twins vs 17% fraternal twins. Tienari\'s adoption study showed biological children of schizophrenic parents had higher risk even in adoptive families. Ripke identified 108 genetic variations. Schizophrenia is polygenic and aetiologically heterogeneous. However, concordance rates not 100% in identical twins, showing environment plays role. Dopamine hypothesis: Original version proposed hyperdopaminergia causes positive symptoms. Revised version added hypodopaminergia causing negative symptoms. Evidence: amphetamines worsen symptoms, antipsychotics blocking dopamine reduce symptoms. However, antipsychotics not effective for all patients. Glutamate may also be involved. Neural correlates: Brain structure abnormalities including enlarged ventricles and reduced frontal lobe volume. Abnormal activity in temporal and frontal lobes associated with symptoms. Evaluation - Strengths: Strong research evidence from multiple studies. Scientific credibility from objective biological measures. Practical applications in drug development. Twin studies show clear genetic influence. Weaknesses: Biological reductionism - ignores psychological and social factors. Genetic explanation is deterministic and probabilistic, not inevitable. Dopamine hypothesis may explain symptoms but not causes. Correlation doesn\'t prove causation in brain structure studies. Diathesis-stress model provides more complete explanation incorporating biological vulnerability and environmental triggers.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic explanation with research evidence (4 marks)',
+                'Dopamine hypothesis (3 marks)',
+                'Neural correlates (2 marks)',
+                'Strengths including evidence and applications (4 marks)',
+                'Weaknesses including reductionism and causation (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.5)'
+          }
+        ]
+      },
+      {
+        id: 'eating-behaviour',
+        name: 'Eating Behaviour',
+        questions: [
+          {
+            id: 'eb-q1',
+            question: 'Define neophobia.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Neophobia is the reluctance to try new foods. It has evolutionary basis as avoiding unfamiliar foods protected ancestors from poisonous substances. Neophobia is strongest in childhood and decreases with repeated exposure to novel foods.',
+            markingCriteria: {
+              breakdown: [
+                'Reluctance to try new foods (1 mark)',
+                'Evolutionary basis or childhood (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q2',
+            question: 'Outline the role of leptin in eating behavior.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Leptin is a hormone produced by fat cells that signals satiety. It binds to receptors in the hypothalamus to decrease appetite and increase metabolism. Higher body fat leads to more leptin production. Some obese individuals have leptin resistance where brain doesn\'t respond properly to leptin signals.',
+            markingCriteria: {
+              breakdown: [
+                'Hormone signaling satiety (1 mark)',
+                'Acts on hypothalamus to decrease appetite (1 mark)',
+                'Produced by fat cells or leptin resistance (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q3',
+            question: 'Explain evolutionary explanations for food preferences.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Evolutionary psychology suggests food preferences evolved to maximize survival and reproduction. Preference for sweet and fatty foods: High-calorie foods were scarce in ancestral environment; preference ensured energy intake for survival. This EEA preference persists despite modern abundance. Preference for protein: Meat provided essential nutrients; hunters who preferred protein were healthier. Neophobia: Avoiding unfamiliar foods protected against poisoning. Taste aversion: After illness following food consumption, strong avoidance develops - adaptive as protects from repeated poisoning. Pregnancy cravings and morning sickness may protect fetus from toxins.',
+            markingCriteria: {
+              breakdown: [
+                'Sweet and fatty food preference (2 marks)',
+                'Neophobia explanation (1 mark)',
+                'Taste aversion (2 marks)',
+                'Other evolutionary explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q4',
+            question: 'Describe neural mechanisms in eating behavior.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The hypothalamus regulates hunger and satiety. Lateral hypothalamus (LH) is the feeding center - damage causes aphagia (no eating). Ventromedial hypothalamus (VMH) is the satiety center - damage causes hyperphagia (overeating). Hormonal regulation: Ghrelin (hunger hormone) from stomach increases appetite. Leptin from fat cells suppresses appetite. Neurotransmitters: Serotonin affects mood and eating, low levels linked to binge eating. Dopamine in reward pathways reinforces eating pleasurable foods.',
+            markingCriteria: {
+              breakdown: [
+                'Lateral hypothalamus role (1 mark)',
+                'Ventromedial hypothalamus role (1 mark)',
+                'Ghrelin (1 mark)',
+                'Leptin (1 mark)',
+                'Serotonin or dopamine (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q5',
+            question: 'Explain biological explanations for obesity.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic factors: Twin and adoption studies show heritability of 40-70%. Thrifty gene hypothesis suggests genes promoting fat storage were adaptive but cause obesity in modern environment. Specific genes like FTO gene associated with obesity. Neural mechanisms: Hypothalamic dysfunction or leptin resistance leads to continued hunger despite adequate fat stores. Low metabolic rate means some people burn fewer calories at rest. Hormonal factors: Leptin resistance where brain doesn\'t respond to satiety signals. Ghrelin levels may remain high after eating in obese individuals.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic factors with evidence (2 marks)',
+                'Thrifty gene or specific genes (1 mark)',
+                'Neural mechanisms (2 marks)',
+                'Hormonal factors (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q6',
+            question: 'Describe psychological explanations for anorexia nervosa.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Family systems theory: Enmeshment (lack of boundaries), overprotection, and rigidity in family dynamics contribute to anorexia. Achieving thinness gives sense of control. Cognitive theory: Distorted thinking patterns including overvaluation of weight and shape, black-and-white thinking, and attentional bias toward weight-related information. Media influence: Exposure to thin ideal in media creates internalization of unrealistic beauty standards and body dissatisfaction. Social comparison with models and celebrities. Personality factors: Perfectionism, low self-esteem, and need for control associated with anorexia.',
+            markingCriteria: {
+              breakdown: [
+                'Family systems theory (2 marks)',
+                'Cognitive distortions (2 marks)',
+                'Media influence (1 mark)',
+                'Personality factors (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q7',
+            question: 'Explain restraint theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Restraint theory proposes that attempting to restrict food intake paradoxically leads to overeating. Restrained eaters have conflicting desires to eat and diet. The boundary model suggests restrained eaters have larger zone between satiety and hunger. When boundary is crossed (disinhibition), restrained eaters overeat. Disinhibition can be triggered by preload (starter), alcohol, stress, or belief diet is broken.',
+            markingCriteria: {
+              breakdown: [
+                'Restriction leads to overeating (1 mark)',
+                'Boundary model (1 mark)',
+                'Disinhibition (1 mark)',
+                'Triggers for disinhibition (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q8',
+            question: 'Outline the role of learning in food preferences.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Classical conditioning: Pairing food with pleasant contexts creates preference. Food with positive associations (birthday cake) becomes liked. Operant conditioning: Reinforcement shapes preferences. Parents reward eating healthy foods. Using dessert as reward can reduce preference for healthy food. Social learning: Children observe and imitate eating behaviors of role models (parents, peers, media figures). Vicarious reinforcement when models praised for eating certain foods.',
+            markingCriteria: {
+              breakdown: [
+                'Classical conditioning (1 mark)',
+                'Operant conditioning with example (1 mark)',
+                'Social learning (1 mark)',
+                'Vicarious reinforcement or modeling (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q9',
+            question: 'Evaluate biological explanations for obesity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Strengths: Twin studies provide strong evidence for genetic influence. Heritability estimates of 40-70% show substantial genetic component. Scientific credibility from objective biological measures. Identification of specific genes and mechanisms provides understanding. Some practical applications for drug development. Weaknesses: Genetic determinism - having genes doesn\'t inevitably cause obesity. Obesity rates increased dramatically in recent decades while genes remained constant, suggesting environmental factors important. Biological reductionism ignores psychological factors like restraint and social factors like food availability and marketing. Most obese people don\'t have identifiable genetic mutations. Leptin resistance may be effect rather than cause of obesity.',
+            markingCriteria: {
+              breakdown: [
+                'Strengths including genetic evidence (3 marks)',
+                'Scientific credibility and applications (1 mark)',
+                'Weaknesses including determinism (2 marks)',
+                'Environmental factors and reductionism (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          },
+          {
+            id: 'eb-q10',
+            question: 'Discuss explanations for food preferences.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Evolutionary explanations: Preferences for sweet, fatty, protein-rich foods evolved when these were scarce. EEA preference persists in modern environment of abundance. Neophobia protected ancestors from poisoning. Taste aversion develops after illness following food consumption - Garcia demonstrated this in rats. However, evolutionary explanations are post-hoc and untestable. Cannot explain recent changes in preferences or cultural differences. Learning explanations: Classical conditioning pairs foods with contexts - medicine with illness creates aversion, cake with celebrations creates preference. Operant conditioning through reward and punishment - parents reinforce healthy eating but using dessert as reward can backfire. Social learning through observation of models - children imitate parents\' and peers\' food choices. Birch showed repeated exposure increases liking. However, learning doesn\'t explain why some associations form easily (taste-illness) while others don\'t (taste-shock). Neural and hormonal mechanisms: Hypothalamus regulates hunger and satiety through LH and VMH. Ghrelin increases appetite, leptin suppresses it. Dopamine reward pathways reinforce eating pleasurable foods. This explains immediate regulation but not long-term preferences. Cultural influences: Different cultures have different food preferences showing environmental influence. Food availability, traditions, and social norms shape what is considered acceptable to eat. Media representations affect idealized body types and eating behaviors. Evaluation: Each explanation has supporting evidence. Real food preferences likely result from interaction of evolved predispositions, learning experiences, biological mechanisms, and cultural context. Practical applications for encouraging healthy eating in children through repeated exposure and positive modeling.',
+            markingCriteria: {
+              breakdown: [
+                'Evolutionary explanations with evaluation (4 marks)',
+                'Learning explanations with evidence (4 marks)',
+                'Neural and hormonal mechanisms (3 marks)',
+                'Cultural influences (2 marks)',
+                'Evaluation including interaction and applications (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.6)'
+          }
+        ]
+      },
+      {
+        id: 'stress',
+        name: 'Stress',
+        questions: [
+          {
+            id: 'str-q1',
+            question: 'Define stress.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Stress is the physiological and psychological response to a perceived threat or demand (stressor). It involves activation of the sympathetic nervous system and release of stress hormones preparing the body for fight or flight.',
+            markingCriteria: {
+              breakdown: [
+                'Response to threat or demand (1 mark)',
+                'Physiological and/or psychological response (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q2',
+            question: 'Outline the General Adaptation Syndrome.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Selye\'s GAS describes the body\'s response to prolonged stress in three stages. Alarm stage: Stressor perceived, sympathetic nervous system activated, adrenaline released, fight or flight response. Body\'s resources mobilized but resistance to stress drops. Resistance stage: Body adapts to sustained stress, parasympathetic attempts to return to normal while coping with stressor. Cortisol released, resources depleted. Exhaustion stage: Resources depleted, immune system compromised, stress-related illness develops. Can lead to cardiovascular problems, ulcers, or mental health issues.',
+            markingCriteria: {
+              breakdown: [
+                'Alarm stage (2 marks)',
+                'Resistance stage (2 marks)',
+                'Exhaustion stage (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q3',
+            question: 'Describe the role of cortisol in stress.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cortisol is released by adrenal cortex via HPA axis. Hypothalamus releases CRF, stimulating pituitary to release ACTH, which stimulates adrenal cortex to release cortisol. Cortisol provides energy by converting protein and fat to glucose, suppresses immune system to conserve energy, and maintains blood pressure. Chronic high cortisol causes negative health effects including impaired immune function and memory problems.',
+            markingCriteria: {
+              breakdown: [
+                'HPA axis activation (1 mark)',
+                'Effects of cortisol (2 marks)',
+                'Chronic effects (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q4',
+            question: 'Explain how stress affects the immune system.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stress suppresses immune function through cortisol, which reduces white blood cell production. Acute stress may temporarily enhance immune response, but chronic stress impairs it. Kiecolt-Glaser studied medical students during exams, finding decreased natural killer cell activity and reduced T-cell response. Cohen et al. gave participants cold virus - those with high stress were more likely to develop colds. Chronic stress associated with slower wound healing. Mechanisms include direct effects of cortisol and indirect effects through unhealthy behaviors.',
+            markingCriteria: {
+              breakdown: [
+                'Cortisol suppresses immune system (1 mark)',
+                'Acute vs chronic stress (1 mark)',
+                'Kiecolt-Glaser research (2 marks)',
+                'Cohen research or other evidence (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q5',
+            question: 'Describe stress and cardiovascular disorders.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Chronic stress increases risk of cardiovascular disease. Stress raises blood pressure and heart rate. Repeated stress causes wear and tear on cardiovascular system. Stress hormones increase blood clotting and arterial damage. Friedman and Rosenman found Type A personality (competitive, impatient, hostile) associated with higher CHD risk. However, later research suggested hostility is the key component. Chronic stress may lead to unhealthy behaviors (smoking, poor diet) increasing CVD risk.',
+            markingCriteria: {
+              breakdown: [
+                'Stress increases CVD risk (1 mark)',
+                'Physiological mechanisms (1 mark)',
+                'Type A personality research (1 mark)',
+                'Behavioral factors (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q6',
+            question: 'Outline life changes as a source of stress.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Holmes and Rahe developed Social Readjustment Rating Scale (SRRS) measuring stress from life events. Major life changes (death, divorce, job loss) assigned life change units. Scores above 300 indicate high stress and illness risk. Research found correlation between high SRRS scores and increased illness. However, fails to consider individual differences in perception. Doesn\'t distinguish between positive and negative changes. Retrospective method may involve recall bias.',
+            markingCriteria: {
+              breakdown: [
+                'SRRS scale (1 mark)',
+                'Life change units (1 mark)',
+                'Research findings (1 mark)',
+                'Evaluation point (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q7',
+            question: 'Explain daily hassles as a source of stress.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Kanner developed Hassles Scale measuring minor daily irritations like traffic, arguments, losing things. Daily hassles may be better predictor of stress-related illness than major life events. Accumulation of minor stressors has cumulative effect. DeLongis found daily hassles correlated with health problems even when life events controlled. Hassles interact with uplifts (positive experiences) - uplifts may buffer against hassles. However, hassles may be consequence rather than cause of stress.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of daily hassles (1 mark)',
+                'Better predictor than life events (1 mark)',
+                'Research evidence (1 mark)',
+                'Evaluation or uplifts (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q8',
+            question: 'Describe individual differences in stress response.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Type A personality: Competitive, time-pressured, hostile - higher stress and CHD risk. Type B: Relaxed, patient - lower risk. Type C: Difficulty expressing emotions, suppresses anger - linked to cancer risk (though evidence weak). Hardiness: Kobasa identified commitment (sense of purpose), control (belief in influence over events), and challenge (seeing change as opportunity). Hardy individuals experience less stress from same stressors. Locus of control: Internal LOC (belief in personal control) associated with better stress management than external LOC (belief external forces control outcomes).',
+            markingCriteria: {
+              breakdown: [
+                'Type A personality (2 marks)',
+                'Type B or C (1 mark)',
+                'Hardiness (2 marks)',
+                'Locus of control (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q9',
+            question: 'Outline drug therapy for managing stress.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Benzodiazepines (e.g., Valium) enhance GABA reducing anxiety. Fast-acting but risk of dependency and side effects including drowsiness. Beta-blockers (e.g., propranolol) reduce physical symptoms by blocking adrenaline receptors, lowering heart rate and blood pressure. Effective for performance anxiety but don\'t address psychological causes. Advantages: Provide quick relief, easy to use. Disadvantages: Side effects, addiction potential, treat symptoms not causes.',
+            markingCriteria: {
+              breakdown: [
+                'Benzodiazepines mechanism (1 mark)',
+                'Beta-blockers mechanism (1 mark)',
+                'Advantages (1 mark)',
+                'Disadvantages (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          },
+          {
+            id: 'str-q10',
+            question: 'Discuss stress management techniques.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Drug therapy: Benzodiazepines enhance GABA, reducing anxiety quickly. Beta-blockers reduce physical symptoms by blocking adrenaline. Effective for acute stress relief and easy to use. However, side effects include drowsiness and dependency. Treats symptoms not causes. Doesn\'t teach coping skills. Stress Inoculation Training: Meichenbaum\'s CBT-based approach. Three phases: conceptualization (understanding stress), skills acquisition (learning coping techniques like relaxation and positive self-talk), application (practicing skills in stressful situations). Addresses cognitive aspects of stress. Research shows effectiveness. However, time-consuming and requires commitment. May not suit all individuals. Biofeedback: Uses technology to provide real-time information about physiological processes (heart rate, muscle tension). Patients learn to control these responses through relaxation. Gives sense of control over stress response. Research support for effectiveness with some conditions. However, expensive equipment required. Effects may not generalize to real-world situations. Gender differences: Taylor proposed "tend and befriend" response in females (protecting offspring and seeking social support) vs fight-or-flight in males. Oxytocin promotes social bonding in females. Role of social support: Emotional and practical help buffers stress effects. Cohen found social support reduces illness from stress. Working mechanism unclear - may be direct effect or buffering effect. Evaluation: No single best stress management technique. Combination approaches often most effective. Individual differences affect technique suitability. Some techniques more appropriate for acute vs chronic stress. Important to address both physiological and psychological aspects. Cost-effectiveness varies. Effectiveness depends on implementation and individual engagement.',
+            markingCriteria: {
+              breakdown: [
+                'Drug therapy description and evaluation (4 marks)',
+                'Stress Inoculation Training description and evaluation (4 marks)',
+                'Biofeedback or other technique (3 marks)',
+                'Gender differences and social support (2 marks)',
+                'Overall evaluation including effectiveness and applications (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.7)'
+          }
+        ]
+      },
+      {
+        id: 'aggression',
+        name: 'Aggression',
+        questions: [
+          {
+            id: 'agg-q1',
+            question: 'Define aggression.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Aggression is behavior intended to harm another individual who is motivated to avoid that harm. It can be physical or verbal. Hostile aggression is driven by anger with goal of causing pain. Instrumental aggression is means to another goal.',
+            markingCriteria: {
+              breakdown: [
+                'Behavior intended to harm (1 mark)',
+                'Victim motivated to avoid harm (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q2',
+            question: 'Outline the role of the limbic system in aggression.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The limbic system, particularly the amygdala, plays key role in emotional responses including aggression. Damage to amygdala can result in reduced aggression. Raine found murderers had abnormal amygdala activity. The hypothalamus regulates autonomic responses in aggression. Prefrontal cortex normally inhibits limbic aggression responses - damage to prefrontal cortex increases aggression. Serotonin in the limbic system normally inhibits aggression.',
+            markingCriteria: {
+              breakdown: [
+                'Amygdala role (1 mark)',
+                'Research evidence (1 mark)',
+                'Hypothalamus or prefrontal cortex (1 mark)',
+                'Serotonin or other mechanism (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q3',
+            question: 'Explain the role of serotonin in aggression.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Serotonin normally inhibits aggression by reducing impulsivity and increasing self-control. Low serotonin levels associated with increased aggression. Virkkuhen found violent offenders had low serotonin turnover. Drugs increasing serotonin (SSRIs) can reduce aggression. Animal studies show depleting serotonin increases aggression.',
+            markingCriteria: {
+              breakdown: [
+                'Serotonin inhibits aggression (1 mark)',
+                'Low serotonin linked to aggression (1 mark)',
+                'Research evidence (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q4',
+            question: 'Describe the role of testosterone in aggression.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Testosterone is male hormone linked to aggression. Higher testosterone correlates with aggressive behavior. Castration studies in animals show reduced aggression. Dabbs found prisoners with violent crimes had higher testosterone. However, relationship is complex - testosterone may increase dominance-seeking rather than direct aggression. Testosterone interacts with cortisol - high testosterone with low cortisol most associated with aggression. Correlation doesn\'t prove causation.',
+            markingCriteria: {
+              breakdown: [
+                'Testosterone linked to aggression (1 mark)',
+                'Research evidence (1 mark)',
+                'Complex relationship/dominance (1 mark)',
+                'Interaction with cortisol or evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q5',
+            question: 'Explain genetic factors in aggression.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Twin studies show genetic influence - Coccaro found concordance for aggression higher in identical (50%) than fraternal twins (19%). Adoption studies by Hutchings and Mednick found biological parents\' criminality predicted adopted children\'s aggression better than adoptive parents. MAOA gene (warrior gene) regulates neurotransmitters including serotonin. Low-activity MAOA variant associated with aggression, especially when combined with childhood maltreatment (Caspi). However, genetic determinism problematic - genes interact with environment. Most people with MAOA variant not aggressive.',
+            markingCriteria: {
+              breakdown: [
+                'Twin study evidence (2 marks)',
+                'Adoption study evidence (1 mark)',
+                'MAOA gene (2 marks)',
+                'Evaluation including gene-environment interaction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q6',
+            question: 'Describe the frustration-aggression hypothesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Dollard proposed frustration (blocking of goal-directed behavior) always leads to aggression, and aggression always caused by frustration. Frustration creates drive toward aggression. Aggression may be displaced onto scapegoat if source of frustration unavailable. However, Berkowitz revised theory - frustration creates readiness for aggression but requires aggressive cue (weapon, insult) to trigger it. Not all frustration leads to aggression - some people respond differently.',
+            markingCriteria: {
+              breakdown: [
+                'Frustration leads to aggression (1 mark)',
+                'Blocking of goals (1 mark)',
+                'Berkowitz\'s revision (1 mark)',
+                'Evaluation point (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q7',
+            question: 'Outline social learning theory of aggression.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bandura proposed aggression is learned through observation and imitation. Bobo doll study: children observed adult model behaving aggressively or non-aggressively toward inflatable doll. Children who observed aggression were more likely to imitate it. Vicarious reinforcement: children imitated more when model was rewarded for aggression. Mediational processes: attention, retention, motor reproduction, motivation. Identification with same-sex models increased imitation. Real-world applications to media violence. However, lab study has low ecological validity. Demand characteristics may have influenced children.',
+            markingCriteria: {
+              breakdown: [
+                'Learned through observation and imitation (1 mark)',
+                'Bobo doll study procedure (2 marks)',
+                'Vicarious reinforcement (1 mark)',
+                'Mediational processes or identification (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q8',
+            question: 'Explain deindividuation as an explanation for aggression.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Deindividuation occurs when people lose sense of individual identity in groups, becoming anonymous. Zimbardo proposed this reduces self-awareness and increases impulsive, anti-social behavior including aggression. Anonymity reduces fear of negative evaluation and consequences. Crowd behavior, uniforms, or online anonymity can cause deindividuation. However, doesn\'t always lead to aggression - sometimes increases prosocial behavior. Individual differences exist in susceptibility.',
+            markingCriteria: {
+              breakdown: [
+                'Loss of individual identity in groups (1 mark)',
+                'Reduced self-awareness (1 mark)',
+                'Anonymity and consequences (1 mark)',
+                'Evaluation or factors causing it (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q9',
+            question: 'Describe institutional aggression.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aggression within institutions like prisons. Dispositional explanations: Importation model suggests prisoners bring aggressive tendencies from outside. Individual characteristics (personality, gang membership) predict prison violence. Situational explanations: Deprivation model proposes prison conditions (loss of freedom, autonomy, security) cause aggression. Sykes identified five deprivations. Overcrowding, heat, and poor conditions increase aggression. Research by Cunningham supports deprivation model - prisoners in better conditions showed less aggression. However, likely interaction of both factors. Some individuals more vulnerable to situational stressors.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of institutional aggression (1 mark)',
+                'Importation model (2 marks)',
+                'Deprivation model (2 marks)',
+                'Research evidence or evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          },
+          {
+            id: 'agg-q10',
+            question: 'Discuss media influences on aggression.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Observational learning: Social learning theory proposes children learn aggression from media models. Bandura\'s Bobo doll demonstrated imitation of aggressive models. Children identify with media characters and imitate behavior, especially when violence is rewarded. Meta-analyses by Anderson and Bushman found positive correlation between violent media and aggression. Desensitization: Repeated exposure reduces emotional response to violence. Carnagey found violent game players showed less physiological arousal to real violence. Reduced empathy for victims. Disinhibition: Media violence weakens learned inhibitions against aggression by showing violence as acceptable. Cognitive priming: Violent media activates aggressive schemas and scripts. Aggressive thoughts more accessible, influencing interpretation and behavior. Video games: Interactive nature may have stronger effect than passive viewing. However, longitudinal studies show mixed results. Games provide outlet for aggression (catharsis hypothesis) though evidence limited. Evaluation - Strengths: Extensive research evidence from correlational and experimental studies. Meta-analyses show consistent positive relationship. Real-world applications for parental guidance and regulation. Multiple mechanisms (learning, desensitization, priming) explain effects. Weaknesses: Lab studies lack ecological validity with artificial measures. Correlation doesn\'t prove causation - aggressive people may seek violent media. Effect sizes often small - many other factors influence aggression. Individual differences in susceptibility. Cultural differences in media effects. Publication bias toward positive findings. Most people exposed to media violence don\'t become aggressive, suggesting other factors more important. Practical implications for age ratings, parental supervision, and media literacy education.',
+            markingCriteria: {
+              breakdown: [
+                'Social learning and observational learning (3 marks)',
+                'Desensitization (2 marks)',
+                'Disinhibition and cognitive priming (2 marks)',
+                'Video games (2 marks)',
+                'Research evidence (2 marks)',
+                'Evaluation including methodological issues and applications (5 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.8)'
+          }
+        ]
+      },
+      {
+        id: 'forensic',
+        name: 'Forensic Psychology',
+        questions: [
+          {
+            id: 'for-q1',
+            question: 'Define offender profiling.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Offender profiling is an investigative tool used to identify characteristics of an unknown offender based on analysis of the crime scene, victim, and other evidence. It aims to narrow the field of potential suspects.',
+            markingCriteria: {
+              breakdown: [
+                'Identifying characteristics of unknown offender (1 mark)',
+                'Based on crime scene analysis (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q2',
+            question: 'Outline the top-down approach to offender profiling.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Top-down approach starts with pre-existing typology of offenders. FBI developed it based on interviews with serial killers. Two main types: organized offenders (planned crime, high intelligence, socially competent) and disorganized offenders (unplanned, low intelligence, socially inadequate). Profiler matches crime scene to type. However, limited to certain crimes (murder, rape). Many offenders don\'t fit neatly into categories. Based on small sample of serial killers.',
+            markingCriteria: {
+              breakdown: [
+                'Starts with typology (1 mark)',
+                'Organized and disorganized types (2 marks)',
+                'Evaluation point (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q3',
+            question: 'Describe the bottom-up approach to offender profiling.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Bottom-up approach builds profile from evidence without preconceptions. Data-driven and objective. Investigative psychology: Canter developed this, using statistical analysis to find patterns. Examines consistency in offender behavior across crimes. Identifies distinctive patterns (signature). Geographical profiling: Analyzes crime locations to predict offender residence. Based on spatial consistency - offenders operate near home. Circle hypothesis suggests crimes form circle around home base. More scientific than top-down approach.',
+            markingCriteria: {
+              breakdown: [
+                'Data-driven without preconceptions (1 mark)',
+                'Investigative psychology (1 mark)',
+                'Geographical profiling (1 mark)',
+                'Scientific approach (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q4',
+            question: 'Explain biological explanations for offending.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic factors: Twin studies show higher concordance for criminality in identical twins. Christiansen found 35% concordance in identical vs 13% fraternal. Adoption studies show biological parents\' criminality predicts adopted children\'s offending. Candidate genes include MAOA (warrior gene) and CDH13. Neural factors: Brain structure abnormalities in offenders. Raine\'s study found murderers had reduced activity in prefrontal cortex (impulsivity control) and abnormal limbic system (emotion regulation). However, biological determinism problematic. Not all with these factors offend.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic factors with twin studies (2 marks)',
+                'Candidate genes (1 mark)',
+                'Neural factors with Raine\'s research (2 marks)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q5',
+            question: 'Describe Eysenck\'s theory of criminal personality.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Eysenck proposed personality dimensions predict criminality. Three dimensions: Extraversion (E), Neuroticism (N), Psychoticism (P). Criminal personality high on all three: High E - seek excitement, take risks. High N - unstable, anxious, react strongly to stress. High P - aggressive, impulsive, lacking empathy. Personality has biological basis - inherited nervous system characteristics. High E due to underactive nervous system seeking stimulation. Criminal behavior results from interaction of personality and socialization - those high ENP harder to condition. However, research support mixed. Oversimplifies complex behavior.',
+            markingCriteria: {
+              breakdown: [
+                'Three personality dimensions (2 marks)',
+                'Criminal personality high on all (2 marks)',
+                'Biological basis and conditioning (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q6',
+            question: 'Explain cognitive explanations for offending.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Kohlberg\'s moral development: Offenders show lower moral reasoning, typically at preconventional level (avoiding punishment, self-interest) rather than conventional (social rules) or postconventional (universal ethics). Palmer and Hollin found offenders used less mature reasoning. Cognitive distortions: Hostile attribution bias - misinterpreting actions as aggressive when they\'re not. Schonenberg found offenders more likely to perceive hostility. Minimalisation - downplaying seriousness of crime. Bandura\'s moral disengagement allows offending without guilt through rationalization. However, direction of causation unclear - distortions may justify rather than cause offending.',
+            markingCriteria: {
+              breakdown: [
+                'Kohlberg\'s moral development (2 marks)',
+                'Cognitive distortions - hostile attribution (2 marks)',
+                'Minimalisation or moral disengagement (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q7',
+            question: 'Describe differential association theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sutherland proposed criminal behavior is learned through association with others. Learning occurs through interaction in intimate groups. Learn attitudes (definitions) favorable to crime and techniques for committing crimes. Frequency, duration, and intensity of associations affect learning. If pro-criminal associations outweigh anti-criminal, person likely to offend. Can explain white-collar crime and why crime runs in families. However, difficult to test scientifically. Doesn\'t explain spontaneous acts of crime.',
+            markingCriteria: {
+              breakdown: [
+                'Criminal behavior learned through association (1 mark)',
+                'Learning attitudes and techniques (1 mark)',
+                'Balance of associations (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q8',
+            question: 'Outline custodial sentencing.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Custodial sentencing is punishment involving imprisonment. Aims: Deterrence (discouraging reoffending), incapacitation (protecting public), retribution (making offender pay), rehabilitation (reforming offender). Psychological effects: Depression, suicide risk, institutionalization (inability to function outside prison). Recidivism rates high - about 45% reoffend within year. Overcrowding and conditions affect rehabilitation. May learn criminal behavior from other inmates. Alternatives like community sentences may be more effective.',
+            markingCriteria: {
+              breakdown: [
+                'Definition and aims (2 marks)',
+                'Psychological effects (1 mark)',
+                'Evaluation including recidivism (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q9',
+            question: 'Describe anger management as a treatment for offenders.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Anger management is CBT-based program teaching offenders to recognize and control anger. Novaco\'s three-phase program: Cognitive preparation - identify anger triggers, recognize signs of anger buildup, understand anger as response to perception not situation. Skill acquisition - learn cognitive and behavioral techniques including positive self-talk, relaxation, assertiveness. Application practice - role-play scenarios with increasing provocation to practice skills. Group setting provides social learning opportunities. Keen et al. found reduced aggression in prisoners. However, depends on offender motivation. May not address all causes of offending.',
+            markingCriteria: {
+              breakdown: [
+                'CBT-based approach (1 mark)',
+                'Cognitive preparation phase (1 mark)',
+                'Skill acquisition phase (1 mark)',
+                'Application practice phase (1 mark)',
+                'Research evidence (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          },
+          {
+            id: 'for-q10',
+            question: 'Discuss psychological explanations for offending behavior.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Eysenck\'s theory: Proposes criminal personality high on extraversion, neuroticism, and psychoticism. High E due to underactive nervous system seeking stimulation. High N creates instability and strong reactions. High P associated with aggression and lack of empathy. Biological basis in nervous system. However, research support inconsistent. Farrington found little difference between offenders and non-offenders on ENP. Oversimplifies complex behavior. Cognitive explanations: Kohlberg proposed offenders at lower moral reasoning levels, typically preconventional. Palmer and Hollin supported this. Cognitive distortions include hostile attribution bias (perceiving hostility when absent) and minimalisation (downplaying crime seriousness). Offenders show these patterns. However, causation unclear - may rationalize rather than cause offending. Differential association: Sutherland proposed crime is learned through association with others. Learn pro-criminal attitudes and techniques. Explains why crime runs in families and varies by culture. Can explain white-collar crime. However, difficult to test scientifically. Doesn\'t explain why people in same environment respond differently. Psychodynamic explanations: Freud proposed inadequate superego development leads to offending. Weak superego from absent same-sex parent, deviant superego from identification with criminal parent, or overly harsh superego causing guilt seeking punishment. Bowlby\'s maternal deprivation theory linked early separation to later delinquency. Little empirical support. Evaluation: Multiple factors contribute to offending - interaction likely most accurate. Diathesis-stress model incorporates biological vulnerability and environmental triggers. Practical applications for interventions targeting cognitive distortions and associations. Individual differences not well explained by single theories. Cultural bias - most research Western. Gender bias - theories based on male offenders. Reductionist to focus on single explanation. Real-world offending involves complex interaction of biological, psychological, and social factors.',
+            markingCriteria: {
+              breakdown: [
+                'Eysenck\'s theory with evaluation (4 marks)',
+                'Cognitive explanations with research (4 marks)',
+                'Differential association theory (3 marks)',
+                'Psychodynamic explanations (2 marks)',
+                'Overall evaluation including interaction and applications (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.9)'
+          }
+        ]
+      },
+      {
+        id: 'addiction',
+        name: 'Addiction',
+        questions: [
+          {
+            id: 'add-q1',
+            question: 'Define physical dependence.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Physical dependence is a state where the body has adapted to a substance, requiring it to function normally. Stopping use produces withdrawal symptoms such as tremors, nausea, or pain as the body readjusts.',
+            markingCriteria: {
+              breakdown: [
+                'Body adapted to substance (1 mark)',
+                'Withdrawal symptoms when stopping (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q2',
+            question: 'Distinguish between tolerance and withdrawal.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Tolerance occurs when repeated use of a substance leads to reduced effect, requiring higher doses to achieve the same effect. The body adapts to the substance\'s presence. Withdrawal is the negative physical and psychological symptoms that occur when substance use stops or is reduced. Symptoms can include anxiety, tremors, nausea, and pain. Withdrawal indicates physical dependence has developed.',
+            markingCriteria: {
+              breakdown: [
+                'Tolerance: reduced effect requiring higher doses (2 marks)',
+                'Withdrawal: negative symptoms when stopping (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q3',
+            question: 'Explain risk factors for addiction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic vulnerability: Twin studies show heritability of 40-60% for substance addiction. Specific genes affect dopamine receptors and metabolization. Stress: Traumatic experiences and chronic stress increase addiction risk. Self-medication hypothesis suggests people use substances to cope with negative emotions. Personality: Impulsivity, sensation-seeking, and neuroticism associated with higher risk. Social factors: Peer pressure, family modeling, availability, and cultural norms affect likelihood. Socioeconomic deprivation increases risk.',
+            markingCriteria: {
+              breakdown: [
+                'Genetic vulnerability (2 marks)',
+                'Stress and self-medication (2 marks)',
+                'Personality or social factors (2 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q4',
+            question: 'Describe the role of dopamine in addiction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The mesolimbic dopamine pathway (reward pathway) runs from ventral tegmental area to nucleus accumbens. All addictive substances increase dopamine in this pathway, creating pleasure and reinforcement. Repeated use causes neuroadaptation - brain reduces natural dopamine production and receptor sensitivity. This creates tolerance (need more for same effect) and withdrawal (dysphoria without substance). Cues associated with drug use trigger dopamine release, creating cravings. PET scans show reduced dopamine receptors in addicts. However, dopamine alone doesn\'t explain all addiction features.',
+            markingCriteria: {
+              breakdown: [
+                'Reward pathway and dopamine release (2 marks)',
+                'Neuroadaptation creating tolerance and withdrawal (2 marks)',
+                'Cues and cravings (1 mark)',
+                'Research evidence or evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q5',
+            question: 'Explain learning theory explanations for nicotine addiction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Classical conditioning: Smoking paired with stimuli (coffee, breaks, stress) which become conditioned stimuli triggering cravings. Cue reactivity - environmental cues trigger physiological responses and desire to smoke. Operant conditioning: Positive reinforcement from pleasure, stimulation, and social approval. Negative reinforcement from reducing withdrawal symptoms and stress. Immediate rewards more powerful than delayed health consequences. Social learning theory: Observing role models (parents, peers, media) smoking and being rewarded. Identification with smokers increases imitation. However, doesn\'t explain why many exposed don\'t become addicted.',
+            markingCriteria: {
+              breakdown: [
+                'Classical conditioning and cue reactivity (2 marks)',
+                'Operant conditioning including positive and negative reinforcement (2 marks)',
+                'Social learning theory (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q6',
+            question: 'Describe cognitive bias in gambling addiction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Gamblers\' fallacy: Believing past outcomes affect future independent events (thinking red is "due" after black streak in roulette). Near-miss bias: Almost winning is more reinforcing than clear loss, activating reward pathways similarly to actual wins. Illusion of control: Overestimating ability to influence random outcomes (throwing dice harder for higher number). Recall bias: Remembering wins more than losses, distorting perception of success rate. Attribution bias: Attributing wins to skill but losses to bad luck. These distortions maintain gambling despite overall losses.',
+            markingCriteria: {
+              breakdown: [
+                'Gamblers\' fallacy (1 mark)',
+                'Near-miss bias (1 mark)',
+                'Illusion of control (1 mark)',
+                'Recall bias (1 mark)',
+                'Attribution bias (1 mark)',
+                'Overall effect on gambling (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q7',
+            question: 'Outline drug therapy for addiction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Agonist substitution: Methadone for heroin addiction - activates same receptors but is safer and longer-lasting. Reduces withdrawal and cravings. Antagonist therapy: Naltrexone blocks opioid receptors, preventing effects of heroin. Reduces reward from using. Aversive agents: Disulfiram for alcohol - causes unpleasant reaction if alcohol consumed. However, compliance issues and side effects. Doesn\'t address psychological aspects of addiction.',
+            markingCriteria: {
+              breakdown: [
+                'Agonist substitution with example (1 mark)',
+                'Antagonist therapy with example (1 mark)',
+                'Aversive agents (1 mark)',
+                'Evaluation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q8',
+            question: 'Describe behavioral interventions for addiction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aversion therapy: Pairing addictive behavior with unpleasant stimulus to create negative association. Electric shock or nausea-inducing drug with alcohol. Based on classical conditioning. Ethical concerns and high relapse rates. Covert sensitization: Imagining aversive consequences while imagining engaging in addictive behavior. Less invasive than aversion therapy but requires vivid imagination. Token economy: Providing rewards (vouchers) for drug-free urine samples or attendance at treatment. Operant conditioning - reinforcing abstinence. Meta-analyses show effectiveness but effects may not maintain after program ends.',
+            markingCriteria: {
+              breakdown: [
+                'Aversion therapy (2 marks)',
+                'Covert sensitization (1 mark)',
+                'Token economy (2 marks)',
+                'Evaluation of effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q9',
+            question: 'Explain CBT for treating addiction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'CBT helps identify and change thoughts and behaviors maintaining addiction. Functional analysis identifies triggers and consequences of use. Developing coping strategies for high-risk situations and cravings. Challenging cognitive distortions about substance effects. Relapse prevention training recognizes warning signs. Mindfulness techniques reduce reactivity to cravings. More effective than some other therapies and addresses psychological aspects. However, requires motivation and cognitive ability.',
+            markingCriteria: {
+              breakdown: [
+                'Identifying thoughts and behaviors (1 mark)',
+                'Functional analysis and coping strategies (1 mark)',
+                'Challenging distortions or relapse prevention (1 mark)',
+                'Effectiveness or limitations (1 mark)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          },
+          {
+            id: 'add-q10',
+            question: 'Discuss the theory of planned behavior as applied to addiction prevention.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Theory of planned behavior (Ajzen) proposes intention to perform behavior is best predictor of actual behavior. Three factors influence intention: Attitudes: Beliefs about outcomes of behavior. For addiction, beliefs about substance effects (pleasure vs health harm). Favorable attitudes toward not using reduce likelihood of initiation. Subjective norms: Perception of what significant others think should be done. Social pressure from peers to use or family disapproval affects intention. Perceived behavioral control: Belief in ability to perform or avoid behavior. High self-efficacy for resisting peer pressure reduces addiction risk. Application to prevention: Interventions can target all three components. Changing attitudes through education about harms. Changing subjective norms through peer-led programs showing non-use is acceptable. Increasing perceived control through skills training for saying no. Prochaska\'s stages of change model: Related model proposing behavior change occurs through stages: precontemplation (not considering change), contemplation (thinking about change), preparation (planning change), action (implementing change), maintenance (sustaining change). Interventions should match individual\'s stage. Motivational interviewing helps move through stages. Evaluation - Strengths: Theory has research support. Meta-analyses show attitudes, norms, and control predict intentions and behavior. Practical applications for prevention programs. Can explain why education alone often insufficient - must address norms and control. Weaknesses: Intention-behavior gap - intentions don\'t always translate to behavior. Biological factors (genetics, dopamine) not considered. Past behavior predicts future behavior better than intentions. Ignores emotional and unconscious influences. Cultural differences in norm importance. Some behaviors (addiction) may bypass rational decision-making. Prevention programs based on theory show mixed effectiveness - behavior change is complex. Environmental factors (availability, cost, marketing) also important. Most research cross-sectional, not establishing causation. Individual differences in responsiveness to different factors.',
+            markingCriteria: {
+              breakdown: [
+                'Description of theory of planned behavior (3 marks)',
+                'Three factors: attitudes, norms, control (3 marks)',
+                'Application to addiction prevention (2 marks)',
+                'Prochaska\'s stages or related model (2 marks)',
+                'Strengths including research support and applications (3 marks)',
+                'Weaknesses including limitations and biological factors (3 marks)'
+              ]
+            },
+            specReference: 'AQA Psychology Paper 3 (3.3.10)'
+          }
+        ]
       }
     ]
   },
