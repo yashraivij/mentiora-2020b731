@@ -2502,7 +2502,289 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
       return questions;
     }
 
-    // AQA Biology Paper 1 format
+    // AQA A-Level Biology Paper 1 format (Topics 3.1-3.4)
+    if (subjectId === 'biology-aqa-alevel') {
+      let questionNumber = 1;
+      
+      const questions = [
+        // Section A - Multiple Choice (15 marks)
+        {
+          id: 'bio-alevel-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Which of the following bonds is formed during a condensation reaction between two amino acids?\nA) Glycosidic\nB) Ester\nC) Peptide\nD) Hydrogen\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q2',
+          questionNumber: questionNumber++,
+          text: 'Which statement correctly describes a phospholipid molecule?\nA) Three fatty acids and one glycerol\nB) Two fatty acids and one phosphate group attached to glycerol\nC) Three fatty acids and one phosphate group\nD) One fatty acid and one amino acid\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'Benedict\'s solution turns brick-red after heating with a solution. This indicates the presence of:\nA) Non-reducing sugar\nB) Reducing sugar\nC) Starch\nD) Protein\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'In the induced-fit model of enzyme action, the active site:\nA) is rigid and complementary before binding\nB) changes shape slightly to fit substrate\nC) is identical for all enzymes\nD) is denatured after each reaction\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Which of these organelles contains circular DNA?\nA) Nucleus\nB) Mitochondrion\nC) Lysosome\nD) Golgi apparatus\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'Which process requires ATP?\nA) Facilitated diffusion\nB) Osmosis\nC) Active transport\nD) Simple diffusion\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'In mitosis, sister chromatids separate during:\nA) Prophase\nB) Metaphase\nC) Anaphase\nD) Telophase\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'A virus differs from a bacterial cell because it:\nA) has a nucleus\nB) has ribosomes\nC) contains DNA or RNA but no cytoplasm\nD) has a cell wall made of murein\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Which component of blood carries oxygen?\nA) Platelets\nB) White cells\nC) Plasma\nD) Haemoglobin\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'Which feature increases the rate of diffusion in alveoli?\nA) Low surface area\nB) Thick walls\nC) High surface area to volume ratio\nD) Reduced blood flow\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Which base is found in RNA but not in DNA?\nA) Thymine\nB) Cytosine\nC) Uracil\nD) Adenine\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'The Bohr effect describes:\nA) increase in CO₂ shifts the oxyhaemoglobin curve to the right\nB) increase in CO₂ shifts it to the left\nC) effect of pH on enzyme activity\nD) effect of temperature on photosynthesis\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'During DNA replication, hydrogen bonds are broken by:\nA) DNA ligase\nB) DNA helicase\nC) DNA polymerase\nD) RNA polymerase\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'Which structure links adjacent plant cells for transport of water?\nA) Stomata\nB) Xylem vessels\nC) Plasmodesmata\nD) Sieve tubes\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+        {
+          id: 'bio-alevel-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'A mutation that changes one base but does not alter the amino acid sequence is called a:\nA) Frameshift\nB) Silent\nC) Nonsense\nD) Missense\n\n[1 mark]',
+          marks: 1,
+          section: 'Section A – Multiple-Choice'
+        },
+
+        // Section B - Short Answer (61 marks total)
+        {
+          id: 'bio-alevel-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'Describe how you would test a solution for the presence of starch.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Explain why water is described as a good solvent and why this is important for organisms.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'The lock-and-key model has been replaced by the induced-fit model. Explain why the induced-fit model is a better representation of enzyme action.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'Describe the process of semi-conservative replication of DNA.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'Explain how the structure of cellulose makes it suitable for forming cell walls.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'Compare the structure of prokaryotic and eukaryotic cells.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'Describe the process of mitosis and explain its importance.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'Explain how substances move across cell membranes by co-transport, using the sodium–glucose example.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q24',
+          questionNumber: questionNumber++,
+          text: 'Explain how antibodies lead to the destruction of bacterial cells.\n\n[5 marks]',
+          marks: 5,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q25',
+          questionNumber: questionNumber++,
+          text: 'Describe the roles of the components of blood in the transport of oxygen and carbon dioxide.\n\n[5 marks]',
+          marks: 5,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'A student investigates the effect of temperature on an enzyme-controlled reaction. Describe how the rate could be measured and how results should be plotted.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q27',
+          questionNumber: questionNumber++,
+          text: 'Explain how the structure of a chloroplast is related to its function in photosynthesis.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q28',
+          questionNumber: questionNumber++,
+          text: 'The lungs of a mammal are adapted for efficient gas exchange. Explain how.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q29',
+          questionNumber: questionNumber++,
+          text: 'Describe the processes that lead to the formation of tissue fluid.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q30',
+          questionNumber: questionNumber++,
+          text: 'Explain why large organisms need specialised gas-exchange systems.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q31',
+          questionNumber: questionNumber++,
+          text: 'Outline how the structures of starch and glycogen are related to their functions.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q32',
+          questionNumber: questionNumber++,
+          text: 'Explain what is meant by a gene and a locus.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q33',
+          questionNumber: questionNumber++,
+          text: 'Describe the roles of mRNA and tRNA in translation.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q34',
+          questionNumber: questionNumber++,
+          text: 'Explain how meiosis produces genetic variation.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q35',
+          questionNumber: questionNumber++,
+          text: 'Define the term species and explain how courtship behaviour ensures successful mating.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q36',
+          questionNumber: questionNumber++,
+          text: 'A farmer uses fertiliser on his crops. Explain how excessive use of fertiliser can lead to eutrophication.\n\n[4 marks]',
+          marks: 4,
+          section: 'Section B – Short Answer'
+        },
+        {
+          id: 'bio-alevel-p1-q37',
+          questionNumber: questionNumber++,
+          text: 'Explain why biodiversity is important for maintaining stable ecosystems.\n\n[3 marks]',
+          marks: 3,
+          section: 'Section B – Short Answer'
+        },
+
+        // Section C - Extended Response (15 marks)
+        {
+          id: 'bio-alevel-p1-q38',
+          questionNumber: questionNumber++,
+          text: 'A cycle is a repeated process in which the same substances are reused. Discuss how cycles involving biological molecules and organisms contribute to life on Earth.\n\nIn your answer include at least one example from each of topics 3.1 to 3.4 (e.g., ATP cycle, nitrogen cycle, cell division cycle, carbon cycle, DNA replication cycle).\n\n[15 marks]',
+          marks: 15,
+          section: 'Section C – Extended Response'
+        }
+      ];
+      
+      console.log('AQA A-Level Biology Paper 1 questions generated:', questions.length);
+      return questions;
+    }
+
+    // AQA GCSE Biology Paper 1 format
     if (subjectId === 'biology') {
       let questionNumber = 1;
       
