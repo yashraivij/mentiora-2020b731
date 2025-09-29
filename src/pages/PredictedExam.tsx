@@ -2502,6 +2502,135 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
       return questions;
     }
 
+    // AQA A-Level Maths Paper 1: Pure Mathematics
+    if (subjectId === 'maths-aqa-alevel') {
+      const questions = [
+        {
+          id: 'math-alevel-q1',
+          questionNumber: 1,
+          text: 'Proof\nProve by contradiction that there are infinitely many prime numbers.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-alevel-q2',
+          questionNumber: 2,
+          text: 'Indices and Surds\n(a) Simplify (a^(3/2) b^(-1))/(a^(-1/2) b^(1/3)).\n(b) Rationalise the denominator of (5√2)/(2-√3) and simplify.\n\n[4 marks total: 2, 2]',
+          marks: 4
+        },
+        {
+          id: 'math-alevel-q3',
+          questionNumber: 3,
+          text: 'Quadratics and Discriminant\nThe quadratic x² - (k+3)x + 2k = 0 has two distinct real roots.\n(a) Find the condition on k.\n(b) For the least integer k satisfying this, solve the quadratic.\n\n[5 marks total: 3, 2]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q4',
+          questionNumber: 4,
+          text: 'Simultaneous Equations\nSolve the system:\ny = 2x - 3\nx² + y² = 25\nGive exact solutions.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-alevel-q5',
+          questionNumber: 5,
+          text: 'Inequalities\nSolve the inequality (2x+3)/(x-1) ≤ 3 stating your final answer in interval notation.\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q6',
+          questionNumber: 6,
+          text: 'Polynomials & Factor Theorem\nA cubic f(x) = 2x³ + ax² + bx + 12 has a factor (x-2) and leaves remainder 6 when divided by (x+1).\n(a) Find a and b.\n(b) Factorise f(x) fully.\n\n[5 marks total: 3, 2]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q7',
+          questionNumber: 7,
+          text: 'Functions, Inverses & Transformations\nLet f(x) = (3x-1)/(x+2), x ≠ -2.\n(a) Find f⁻¹(x).\n(b) The graph of y = g(x) is obtained from y = f(x) by the transformation y = f(2x-4). Describe this transformation as a sequence of translations/stretches on the x-axis.\n\n[5 marks total: 3, 2]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q8',
+          questionNumber: 8,
+          text: 'Partial Fractions\nExpress (4x+7)/(x(x+2)²) in partial fractions in the form A/x + B/(x+2) + C/(x+2)². Find A, B, C.\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q9',
+          questionNumber: 9,
+          text: 'Coordinate Geometry – Line and Circle\nThe circle C has equation x² + y² - 6x + 8y - 11 = 0.\n(a) Find the centre and radius of C.\n(b) The line y = mx + 1 is tangent to C. Find m.\n\n[4 marks total: 2, 2]',
+          marks: 4
+        },
+        {
+          id: 'math-alevel-q10',
+          questionNumber: 10,
+          text: 'Parametric Curves\nA curve is defined parametrically by x = t² + 1, y = ln(t), t > 0.\n(a) Find dy/dx in terms of t.\n(b) Hence find the equation of the tangent at t = 1.\n\n[5 marks total: 3, 2]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q11',
+          questionNumber: 11,
+          text: 'Binomial Expansion & Approximation\n(a) Expand (1-2x)⁵ up to and including the term in x³.\n(b) Use a suitable binomial expansion to obtain an approximation to (1.02)⁻³, correct to 3 significant figures.\n\n[6 marks total: 4, 2]',
+          marks: 6
+        },
+        {
+          id: 'math-alevel-q12',
+          questionNumber: 12,
+          text: 'Sequences & Limits\nA sequence is defined by u₁ = 1 and u_(n+1) = (1 + 2u_n)/3.\n(a) Show that (u_n) is increasing and bounded above.\n(b) Find lim(n→∞) u_n.\n\n[5 marks total: 3, 2]',
+          marks: 5
+        },
+        {
+          id: 'math-alevel-q13',
+          questionNumber: 13,
+          text: 'Trigonometry – Identities & Equations\n(a) Prove the identity (1 - cos 2θ)/(sin 2θ) ≡ tan θ.\n(b) Solve 2sin(3x) = √3 for 0 ≤ x < 2π.\n\n[6 marks total: 3, 3]',
+          marks: 6
+        },
+        {
+          id: 'math-alevel-q14',
+          questionNumber: 14,
+          text: 'Exponentials & Logarithms\n(a) Solve e^(2x) - 5e^x + 6 = 0.\n(b) Given ln(a) = p, ln(b) = q, express ln(a²/√b) in terms of p and q.\n(c) A population follows P(t) = P₀e^(kt). It doubles in 6 years. Find k and hence the time to triple, to 3 s.f.\n\n[6 marks total: 2, 1, 3]',
+          marks: 6
+        },
+        {
+          id: 'math-alevel-q15',
+          questionNumber: 15,
+          text: 'Differentiation – Stationary Points\nLet y = x/(1+x²).\n(a) Find dy/dx.\n(b) Find the stationary points and determine their nature.\n\n[7 marks total: 3, 4]',
+          marks: 7
+        },
+        {
+          id: 'math-alevel-q16',
+          questionNumber: 16,
+          text: 'Implicit Differentiation\nGiven x² + xy + y² = 7, find dy/dx in terms of x and y.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-alevel-q17',
+          questionNumber: 17,
+          text: 'Integration – Substitution/Definite\nEvaluate ∫₀^(ln3) e^x/(1+e^x)² dx. Give an exact value.\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'math-alevel-q18',
+          questionNumber: 18,
+          text: 'Integration – By Parts & Area\n(a) Find ∫ xe^(2x) dx.\n(b) The curve y = xe^(2x) and the x-axis enclose a finite area on [a,0], where a < 0. Find a such that the area on [a,0] equals 1/4.\n\n[6 marks total: 3, 3]',
+          marks: 6
+        },
+        {
+          id: 'math-alevel-q19',
+          questionNumber: 19,
+          text: 'Differential Equations – Separable\nSolve the differential equation dy/dx = (2y+1) with y(0) = 0. Give your answer in the form y = f(x).\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-alevel-q20',
+          questionNumber: 20,
+          text: 'Numerical Methods\nConsider f(x) = x³ - 4x + 1.\n(a) Show that f(x) = 0 has a root in [0,1].\n(b) Using Newton–Raphson with initial guess x₀ = 1, compute x₁ and x₂ (3 s.f.).\n(c) Use the trapezium rule with n = 4 equal subintervals to approximate ∫₀¹ (x³ - 4x + 1) dx.\n\n[5 marks total: 1, 2, 2]',
+          marks: 5
+        }
+      ];
+
+      console.log('AQA A-Level Maths Paper 1 questions generated:', questions.length);
+      return questions;
+    }
+
     // AQA A-Level Biology Paper 1 format (Topics 3.1-3.4)
     if (subjectId === 'biology-aqa-alevel') {
       let questionNumber = 1;
@@ -5956,6 +6085,8 @@ Write a story about a moment of fear.
       "computer-science": 120, // 2h
       psychology: 90, // 1h 30min
       "psychology-aqa-alevel": 120, // 2h (AQA A-Level Psychology Paper 1)
+      "maths-aqa-alevel": 120, // 2h (AQA A-Level Maths Paper 1: Pure Mathematics)
+      "biology-aqa-alevel": 120, // 2h (AQA A-Level Biology Paper 1)
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
@@ -6017,6 +6148,12 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'psychology-aqa-alevel') {
       return 96; // AQA A-Level Psychology Paper 1: 96 marks
+    }
+    if (subjectId === 'maths-aqa-alevel') {
+      return 100; // AQA A-Level Maths Paper 1: Pure Mathematics: 100 marks
+    }
+    if (subjectId === 'biology-aqa-alevel') {
+      return 91; // AQA A-Level Biology Paper 1: 91 marks (15 + 61 + 15)
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
@@ -6261,7 +6398,7 @@ Write a story about a moment of fear.
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -6355,6 +6492,16 @@ Write a story about a moment of fear.
                       </>
                     )}
                   </ul>
+                ) : subjectId === 'maths-aqa-alevel' ? (
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• <strong>Time allowed:</strong> 2 hours | <strong>Total marks:</strong> 100</li>
+                    <li>• Use black ink or black ball-point pen</li>
+                    <li>• Answer all questions</li>
+                    <li>• You may use a scientific calculator</li>
+                    <li>• Give answers to an appropriate degree of accuracy (unless exact values are required)</li>
+                    <li>• State your methods clearly; unsupported answers may not receive full credit</li>
+                    <li>• Where a result is requested in exact form, leave surds, π, and rational terms exact</li>
+                  </ul>
                 ) : (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
                     <li>• Answer all questions in the spaces provided</li>
@@ -6396,6 +6543,7 @@ Write a story about a moment of fear.
                       subjectId === 'geography-b-ocr' ? 'Geography B (OCR)' :
                       subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
+                       subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' :
                        subjectId === 'computer-science' ? 'Computer Science Paper 1' :
                        subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
                        subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
