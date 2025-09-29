@@ -435,7 +435,8 @@ const Dashboard = () => {
       const { data, error } = await supabase
         .from("user_subjects")
         .select("subject_name, exam_board, predicted_grade, target_grade")
-        .eq("user_id", user.id);
+        .eq("user_id", user.id)
+        .order('created_at', { ascending: true });
 
       if (error) {
         console.error("Error loading user subjects:", error);
