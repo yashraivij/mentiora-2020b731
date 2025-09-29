@@ -1625,7 +1625,7 @@ const Dashboard = () => {
                 <div>
                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
                      <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
-                       Let's Smash {filteredSubjects.length > 0 && filteredSubjects[filteredSubjects.length - 1]?.id.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
+                       Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
                      </h2>
                     {filteredSubjects.length > 0 && (
                       <Button
