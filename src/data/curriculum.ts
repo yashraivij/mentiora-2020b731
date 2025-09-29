@@ -26,6 +26,67 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'biology-aqa-alevel',
+    name: 'Biology',
+    topics: [
+      {
+        id: '3.1-biological-molecules',
+        name: '3.1 Biological Molecules',
+        questions: [
+          {
+            id: 'bio-3.1-q1',
+            question: 'Describe how you would test a solution for the presence of starch.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Add iodine solution to the test solution. If starch is present, the solution will turn from orange-brown to blue-black.',
+            markingCriteria: {
+              breakdown: [
+                'Add iodine solution (1 mark)',
+                'Colour change from orange-brown to blue-black (2 marks)'
+              ]
+            },
+            specReference: 'AQA Biology Paper 1 (3.1)'
+          }
+        ]
+      },
+      {
+        id: '3.2-cells',
+        name: '3.2 Cells',
+        questions: []
+      },
+      {
+        id: '3.3-exchange',
+        name: '3.3 Organisms Exchange Substances with Their Environment',
+        questions: []
+      },
+      {
+        id: '3.4-genetics',
+        name: '3.4 Genetic Information, Variation and Relationships',
+        questions: []
+      },
+      {
+        id: '3.5-energy',
+        name: '3.5 Energy Transfers in and Between Organisms',
+        questions: []
+      },
+      {
+        id: '3.6-response',
+        name: '3.6 Organisms Respond to Changes in Their Environment',
+        questions: []
+      },
+      {
+        id: '3.7-populations',
+        name: '3.7 Genetics, Populations, Evolution and Ecosystems',
+        questions: []
+      },
+      {
+        id: '3.8-gene-expression',
+        name: '3.8 The Control of Gene Expression',
+        questions: []
+      }
+    ]
+  },
+  {
     id: 'psychology-aqa-alevel',
     name: 'Psychology',
     topics: [
