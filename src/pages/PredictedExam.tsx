@@ -5288,7 +5288,7 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology' && subjectId !== 'psychology-aqa-alevel') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
@@ -5519,6 +5519,121 @@ Write a story about a moment of fear.
       console.log('✅ Generated', psychologyQuestions.length, 'OCR Psychology Paper 1 questions (90 marks total)');
     }
     
+    // Special handling for AQA A-Level Psychology Paper 1 predicted exam format
+    if (subjectId === 'psychology-aqa-alevel') {
+      console.log('🧠 GENERATING AQA PSYCHOLOGY A-LEVEL PAPER 1 QUESTIONS');
+      const psychologyALevelQuestions: ExamQuestion[] = [
+        // Section A - Social Influence (24 marks)
+        {
+          id: 'psych-al-a-q1',
+          questionNumber: 1,
+          text: 'Define internalisation.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'psych-al-a-q2',
+          questionNumber: 2,
+          text: 'Outline informational social influence.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'psych-al-a-q3',
+          questionNumber: 3,
+          text: 'Describe and evaluate research into variables affecting conformity.\n\n[8 marks]',
+          marks: 8,
+          section: 'A'
+        },
+        {
+          id: 'psych-al-a-q4',
+          questionNumber: 4,
+          text: 'Discuss legitimacy of authority and agentic state in obedience.\n\n[16 marks]',
+          marks: 16,
+          section: 'A'
+        },
+        
+        // Section B - Memory (24 marks)
+        {
+          id: 'psych-al-b-q5',
+          questionNumber: 5,
+          text: 'Identify one difference between STM and LTM.\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'psych-al-b-q6',
+          questionNumber: 6,
+          text: 'Outline one feature of the working memory model.\n\n[2 marks]',
+          marks: 2,
+          section: 'B'
+        },
+        {
+          id: 'psych-al-b-q7',
+          questionNumber: 7,
+          text: 'Explain how retrieval failure may cause forgetting.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'psych-al-b-q8',
+          questionNumber: 8,
+          text: 'Discuss research into factors affecting eyewitness testimony.\n\n[16 marks]',
+          marks: 16,
+          section: 'B'
+        },
+        
+        // Section C - Attachment (24 marks)
+        {
+          id: 'psych-al-c-q9',
+          questionNumber: 9,
+          text: 'Outline one finding from Lorenz\'s research.\n\n[2 marks]',
+          marks: 2,
+          section: 'C'
+        },
+        {
+          id: 'psych-al-c-q10',
+          questionNumber: 10,
+          text: 'Describe the procedure and findings of Ainsworth\'s Strange Situation.\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        },
+        {
+          id: 'psych-al-c-q11',
+          questionNumber: 11,
+          text: 'Discuss Bowlby\'s theory of maternal deprivation.\n\n[16 marks]',
+          marks: 16,
+          section: 'C'
+        },
+        
+        // Section D - Psychopathology (24 marks)
+        {
+          id: 'psych-al-d-q12',
+          questionNumber: 12,
+          text: 'Outline two definitions of abnormality.\n\n[4 marks]',
+          marks: 4,
+          section: 'D'
+        },
+        {
+          id: 'psych-al-d-q13',
+          questionNumber: 13,
+          text: 'Describe the behavioural characteristics of OCD.\n\n[4 marks]',
+          marks: 4,
+          section: 'D'
+        },
+        {
+          id: 'psych-al-d-q14',
+          questionNumber: 14,
+          text: 'Discuss the cognitive approach to explaining and treating depression.\n\n[16 marks]',
+          marks: 16,
+          section: 'D'
+        }
+      ];
+      
+      questions.push(...psychologyALevelQuestions);
+      console.log('✅ Generated', psychologyALevelQuestions.length, 'AQA Psychology A-Level Paper 1 questions (96 marks total)');
+    }
+    
     return questions;
   };
 
@@ -5558,6 +5673,7 @@ Write a story about a moment of fear.
       "geography-b-ocr": 90, // 1h 30min
       "computer-science": 120, // 2h
       psychology: 90, // 1h 30min
+      "psychology-aqa-alevel": 120, // 2h (AQA A-Level Psychology Paper 1)
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
@@ -5616,6 +5732,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'psychology') {
       return 90; // OCR GCSE Psychology Paper 1: 90 marks
+    }
+    if (subjectId === 'psychology-aqa-alevel') {
+      return 96; // AQA A-Level Psychology Paper 1: 96 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
@@ -5860,7 +5979,7 @@ Write a story about a moment of fear.
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -5987,7 +6106,7 @@ Write a story about a moment of fear.
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                  <h1 className="text-lg font-bold text-foreground">
+                   <h1 className="text-lg font-bold text-foreground">
                      {subjectId === 'history' ? 'History Paper 1' : 
                       subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
                       subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
@@ -5997,8 +6116,9 @@ Write a story about a moment of fear.
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                        subjectId === 'computer-science' ? 'Computer Science Paper 1' :
                        subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
+                       subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
                        `${subject.name} Predicted Exam`}
-                  </h1>
+                   </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
