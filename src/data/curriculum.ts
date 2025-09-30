@@ -30449,6 +30449,80 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q6',
+            question: 'A fair coin is tossed 3 times. Find the probability of getting exactly 2 heads.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'P(exactly 2 heads) = ³C₂ × (1/2)² × (1/2)¹ = 3 × 1/4 × 1/2 = 3/8.',
+            markingCriteria: {
+              breakdown: [
+                'Use binomial coefficient ³C₂ = 3 (1 mark)',
+                'Apply probability formula (1 mark)',
+                'P = 3/8 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q7',
+            question: 'Events A and B are such that P(A) = 0.6, P(B) = 0.5, and P(A∪B) = 0.8. Find P(A∩B).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using P(A∪B) = P(A) + P(B) - P(A∩B): 0.8 = 0.6 + 0.5 - P(A∩B). P(A∩B) = 1.1 - 0.8 = 0.3.',
+            markingCriteria: {
+              breakdown: [
+                'State addition rule formula (1 mark)',
+                'Substitute values (1 mark)',
+                'P(A∩B) = 0.3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q8',
+            question: 'A box contains 3 red balls and 5 green balls. Two balls are selected with replacement. Find the probability that both balls are green.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P(1st green) = 5/8. P(2nd green) = 5/8 (with replacement). P(both green) = 5/8 × 5/8 = 25/64.',
+            markingCriteria: {
+              breakdown: [
+                'Recognize with replacement (1 mark)',
+                'P(both green) = 25/64 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q9',
+            question: 'A card is drawn at random from a standard deck of 52 cards. Find the probability that it is either a heart or a king.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(heart) = 13/52. P(king) = 4/52. P(king of hearts) = 1/52. P(heart or king) = 13/52 + 4/52 - 1/52 = 16/52 = 4/13.',
+            markingCriteria: {
+              breakdown: [
+                'Identify individual probabilities (1 mark)',
+                'Account for overlap (1 mark)',
+                'P = 4/13 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
+          },
+          {
+            id: 'maths-M-q10',
+            question: 'Events A and B are such that P(A) = 0.3, P(B|A) = 0.4. Find P(A∩B) and state whether A and B are independent.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(A∩B) = P(A) × P(B|A) = 0.3 × 0.4 = 0.12. For independence, we need P(B|A) = P(B). Without knowing P(B), if P(B) ≠ 0.4, events are not independent.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate P(A∩B) = 0.12 (1 mark)',
+                'State independence condition (1 mark)',
+                'Discuss whether independent (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Probability'
           }
         ]
       },
@@ -30513,6 +30587,95 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q5',
+            question: 'X ~ B(20, 0.4). Find P(X ≥ 10).',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'P(X ≥ 10) = 1 - P(X ≤ 9). Using binomial tables or calculator: P(X ≤ 9) ≈ 0.755. Therefore P(X ≥ 10) ≈ 1 - 0.755 = 0.245.',
+            markingCriteria: {
+              breakdown: [
+                'Use complement P(X ≥ 10) = 1 - P(X ≤ 9) (1 mark)',
+                'P(X ≥ 10) ≈ 0.245 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q6',
+            question: 'The random variable X has a Poisson distribution with mean 3. Find P(X = 4).',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'P(X = 4) = (e⁻³ × 3⁴)/4! = (0.0498 × 81)/24 ≈ 0.168.',
+            markingCriteria: {
+              breakdown: [
+                'Apply Poisson formula (1 mark)',
+                'P(X = 4) ≈ 0.168 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q7',
+            question: 'X ~ N(100, 16). Find P(X > 106).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mean μ = 100, standard deviation σ = 4. z = (106-100)/4 = 1.5. P(X > 106) = P(Z > 1.5) = 1 - 0.9332 = 0.0668.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate z = 1.5 (1 mark)',
+                'Use tables to find P(Z < 1.5) (1 mark)',
+                'P(X > 106) = 0.0668 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q8',
+            question: 'The heights of students are normally distributed with mean 170 cm and standard deviation 8 cm. Find the probability a randomly selected student has height between 165 cm and 180 cm.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'z₁ = (165-170)/8 = -0.625. z₂ = (180-170)/8 = 1.25. P(165 < X < 180) = P(-0.625 < Z < 1.25) = P(Z < 1.25) - P(Z < -0.625) = 0.8944 - 0.2660 = 0.6284.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate both z-values (1 mark)',
+                'Find both probabilities from tables (1 mark)',
+                'Subtract correctly (1 mark)',
+                'P ≈ 0.628 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q9',
+            question: 'State the mean and variance of a Poisson distribution with parameter λ.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mean = λ and Variance = λ.',
+            markingCriteria: {
+              breakdown: [
+                'Mean = λ (1 mark)',
+                'Variance = λ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-N-q10',
+            question: 'X ~ B(50, 0.3). Use a normal approximation to find P(X < 18).',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Check conditions: np = 15 > 5, nq = 35 > 5, so normal approximation valid. Mean μ = np = 15, variance σ² = npq = 10.5, σ = 3.24. Apply continuity correction: P(X < 18) ≈ P(X < 17.5). z = (17.5-15)/3.24 = 0.772. P(X < 18) ≈ P(Z < 0.772) ≈ 0.78.',
+            markingCriteria: {
+              breakdown: [
+                'Check conditions and find μ, σ (1 mark)',
+                'Apply continuity correction (1 mark)',
+                'Calculate z-value (1 mark)',
+                'Find probability ≈ 0.78 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
           }
         ]
       },
@@ -30560,6 +30723,104 @@ export const curriculum: Subject[] = [
               breakdown: [
                 'Define Type I error (1 mark)',
                 'State probability = α (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q4',
+            question: 'Explain what is meant by a Type II error.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A Type II error occurs when we fail to reject H₀ when it is actually false (false negative). This means we accept the null hypothesis when the alternative hypothesis is true.',
+            markingCriteria: {
+              breakdown: [
+                'Define Type II error (1 mark)',
+                'Explain as failing to reject false H₀ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q5',
+            question: 'State what is meant by the significance level in hypothesis testing.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The significance level is the probability of rejecting the null hypothesis when it is true (probability of Type I error), typically denoted by α.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q6',
+            question: 'Explain the difference between a one-tailed and a two-tailed test.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A one-tailed test checks for deviation in one specific direction (e.g., H₁: μ > μ₀ or μ < μ₀). A two-tailed test checks for any deviation in either direction (e.g., H₁: μ ≠ μ₀).',
+            markingCriteria: {
+              breakdown: [
+                'Define one-tailed test (1 mark)',
+                'Define two-tailed test (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q7',
+            question: 'A manufacturer claims that the mean weight of packets is 500g. A sample of 50 packets has mean 495g with standard deviation 12g. Test at the 5% level whether the mean weight is less than claimed.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'H₀: μ = 500. H₁: μ < 500. Test statistic z = (495-500)/(12/√50) = -5/1.697 = -2.95. Critical value at 5% (one-tailed) is -1.645. Since -2.95 < -1.645, reject H₀. There is evidence at 5% level that mean weight is less than 500g.',
+            markingCriteria: {
+              breakdown: [
+                'State hypotheses (1 mark)',
+                'Calculate test statistic z = -2.95 (2 marks)',
+                'Compare with critical value (1 mark)',
+                'Conclusion in context (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q8',
+            question: 'Define the p-value in hypothesis testing.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The p-value is the probability of obtaining results as extreme as, or more extreme than, the observed results, assuming the null hypothesis is true.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q9',
+            question: 'A test has p-value 0.03. State whether you would reject H₀ at: (i) 5% significance level, (ii) 1% significance level.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(i) At 5% level: Since 0.03 < 0.05, reject H₀. (ii) At 1% level: Since 0.03 > 0.01, do not reject H₀.',
+            markingCriteria: {
+              breakdown: [
+                'Correct decision at 5% level (1 mark)',
+                'Correct decision at 1% level (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-O-q10',
+            question: 'Explain what is meant by the critical region in hypothesis testing.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The critical region is the set of values of the test statistic that would lead to rejection of the null hypothesis. If the test statistic falls in this region, we reject H₀.',
+            markingCriteria: {
+              breakdown: [
+                'Define critical region (1 mark)',
+                'Explain leads to rejection of H₀ (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Statistics'
