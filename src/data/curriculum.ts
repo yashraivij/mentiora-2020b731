@@ -31427,5 +31427,2222 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'chemistry-aqa-alevel',
+    name: 'Chemistry',
+    topics: [
+      {
+        id: '3.1.1-atomic-structure',
+        name: '3.1.1 Atomic Structure',
+        questions: [
+          {
+            id: 'chem-3.1.1-q1',
+            question: 'Define relative atomic mass (Ar).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The weighted mean mass of an atom of an element compared to 1/12th the mass of an atom of carbon-12.',
+            markingCriteria: {
+              breakdown: [
+                'Weighted mean mass (1 mark)',
+                'Compared to 1/12th mass of C-12 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q2',
+            question: 'An atom of magnesium has 12 protons, 12 neutrons and 12 electrons. State the mass number and atomic number of this atom.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass number = 24 (protons + neutrons). Atomic number = 12 (number of protons).',
+            markingCriteria: {
+              breakdown: [
+                'Mass number = 24 (1 mark)',
+                'Atomic number = 12 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q3',
+            question: 'Explain what is meant by the term isotopes.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Atoms of the same element with the same number of protons but different numbers of neutrons. They have the same atomic number but different mass numbers.',
+            markingCriteria: {
+              breakdown: [
+                'Same element/same protons, different neutrons (1 mark)',
+                'Same atomic number, different mass number (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q4',
+            question: 'Describe how ions are formed in a time-of-flight (TOF) mass spectrometer.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sample is vaporised. High-energy electrons from an electron gun are fired at the atoms/molecules. This knocks off electrons to form positive ions with a 1+ charge.',
+            markingCriteria: {
+              breakdown: [
+                'Sample vaporised (1 mark)',
+                'High-energy electrons fired at sample (1 mark)',
+                'Electrons knocked off to form positive ions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q5',
+            question: 'Chlorine has two isotopes, ³⁵Cl and ³⁷Cl, with abundances 75% and 25% respectively. Calculate the relative atomic mass of chlorine.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Ar = (35 × 75 + 37 × 25) / 100 = (2625 + 925) / 100 = 3550 / 100 = 35.5',
+            markingCriteria: {
+              breakdown: [
+                'Multiply each mass by its abundance (1 mark)',
+                'Add products and divide by 100 (1 mark)',
+                'Correct answer 35.5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.1-q6',
+            question: 'Write the electron configuration for a sulfur atom (Z = 16).',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '1s² 2s² 2p⁶ 3s² 3p⁴',
+            markingCriteria: {
+              breakdown: [
+                'Correct electron configuration (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q7',
+            question: 'Define first ionisation energy.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The energy required to remove one electron from each atom in one mole of gaseous atoms to form one mole of gaseous 1+ ions. Example equation: Na(g) → Na⁺(g) + e⁻',
+            markingCriteria: {
+              breakdown: [
+                'Remove one electron from each atom (1 mark)',
+                'One mole of gaseous atoms (1 mark)',
+                'To form 1+ gaseous ions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q8',
+            question: 'Explain why the first ionisation energy of magnesium is higher than that of sodium.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Magnesium has more protons than sodium, so has a greater nuclear charge. Both have the same shielding (same number of inner shells). The outer electron in magnesium is more strongly attracted to the nucleus, so more energy is needed to remove it.',
+            markingCriteria: {
+              breakdown: [
+                'Greater nuclear charge in Mg (1 mark)',
+                'Same/similar shielding (1 mark)',
+                'Stronger attraction to nucleus/more energy needed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q9',
+            question: 'Explain why there is a decrease in first ionisation energy from magnesium to aluminium.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'In aluminium, the outer electron is in a 3p orbital, whereas in magnesium it is in a 3s orbital. The 3p orbital has a slightly higher energy than 3s. Additionally, there is extra shielding from the 3s² electrons in aluminium. Therefore, less energy is required to remove the 3p electron from aluminium.',
+            markingCriteria: {
+              breakdown: [
+                'Al outer electron in 3p, Mg in 3s (1 mark)',
+                '3p higher energy/extra shielding from 3s (1 mark)',
+                'Less energy needed to remove electron (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          },
+          {
+            id: 'chem-3.1.1-q10',
+            question: 'Explain why there is a large increase between the second and third ionisation energies of magnesium.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'After removing two electrons, the third electron is removed from a shell closer to the nucleus (inner shell). This electron experiences less shielding and greater attraction to the nucleus. Therefore, much more energy is required to remove it.',
+            markingCriteria: {
+              breakdown: [
+                'Third electron from inner shell/closer to nucleus (1 mark)',
+                'Less shielding/greater attraction (1 mark)',
+                'Much more energy needed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.1)'
+          }
+        ]
+      },
+      {
+        id: '3.1.2-amount-of-substance',
+        name: '3.1.2 Amount of Substance',
+        questions: [
+          {
+            id: 'chem-3.1.2-q1',
+            question: 'Define the mole.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The amount of substance that contains 6.02 × 10²³ particles (Avogadro constant).',
+            markingCriteria: {
+              breakdown: [
+                'Amount containing Avogadro constant particles (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)'
+          },
+          {
+            id: 'chem-3.1.2-q2',
+            question: 'Calculate the number of moles in 24.0 g of carbon. (Ar of C = 12.0)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'n = mass/Mr = 24.0/12.0 = 2.00 mol',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula used (1 mark)',
+                'Correct answer 2.00 mol (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.2-q3',
+            question: 'Calculate the concentration in mol dm⁻³ of a solution containing 0.50 moles of NaCl in 250 cm³ of solution.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Volume in dm³ = 250/1000 = 0.250 dm³. c = n/V = 0.50/0.250 = 2.0 mol dm⁻³',
+            markingCriteria: {
+              breakdown: [
+                'Convert cm³ to dm³ (1 mark)',
+                'Use c = n/V (1 mark)',
+                'Correct answer 2.0 mol dm⁻³ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.2-q4',
+            question: 'State the ideal gas equation and define all the terms.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'pV = nRT, where p = pressure in Pa, V = volume in m³, n = number of moles, R = gas constant (8.31 J K⁻¹ mol⁻¹), T = temperature in K.',
+            markingCriteria: {
+              breakdown: [
+                'pV = nRT stated (1 mark)',
+                'At least three terms correctly defined (1 mark)',
+                'All terms with correct units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)'
+          },
+          {
+            id: 'chem-3.1.2-q5',
+            question: 'A compound contains 40.0% carbon, 6.7% hydrogen and 53.3% oxygen by mass. Calculate its empirical formula. (Ar: C=12.0, H=1.0, O=16.0)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Divide by Ar: C: 40.0/12.0 = 3.33; H: 6.7/1.0 = 6.7; O: 53.3/16.0 = 3.33. Divide by smallest (3.33): C: 1, H: 2.01 ≈ 2, O: 1. Empirical formula = CH₂O',
+            markingCriteria: {
+              breakdown: [
+                'Divide percentages by Ar (1 mark)',
+                'Divide by smallest number (1 mark)',
+                'Obtain whole number ratio (1 mark)',
+                'Correct empirical formula CH₂O (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.2-q6',
+            question: 'Define percentage atom economy.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Atom economy = (Mr of desired product / sum of Mr of all reactants) × 100%',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Multiply by 100 for percentage (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)'
+          },
+          {
+            id: 'chem-3.1.2-q7',
+            question: 'In a reaction, 5.0 g of calcium carbonate (CaCO₃) was heated to produce calcium oxide (CaO). 2.5 g of CaO was obtained. Calculate the percentage yield. (Mr: CaCO₃ = 100, CaO = 56)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Moles CaCO₃ = 5.0/100 = 0.050 mol. Molar ratio 1:1, so theoretical moles CaO = 0.050 mol. Theoretical mass = 0.050 × 56 = 2.8 g. % yield = (2.5/2.8) × 100 = 89.3%',
+            markingCriteria: {
+              breakdown: [
+                'Calculate moles of CaCO₃ (1 mark)',
+                'Calculate theoretical mass of CaO (1 mark)',
+                'Use % yield formula (1 mark)',
+                'Correct answer 89.3% (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.2-q8',
+            question: 'Describe how to prepare a standard solution of sodium carbonate.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Weigh out the required mass of sodium carbonate accurately using a balance. Dissolve in distilled water in a beaker. Transfer to a volumetric flask using a funnel. Rinse the beaker and funnel with distilled water and add rinsings to flask. Add distilled water up to the graduation line. Stopper and invert to mix.',
+            markingCriteria: {
+              breakdown: [
+                'Weigh accurately (1 mark)',
+                'Dissolve and transfer to volumetric flask (1 mark)',
+                'Rinse beaker/funnel and add rinsings (1 mark)',
+                'Make up to mark and mix (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2) - RP1'
+          },
+          {
+            id: 'chem-3.1.2-q9',
+            question: 'In a titration, 25.0 cm³ of 0.100 mol dm⁻³ HCl was neutralised by 20.0 cm³ of NaOH. Calculate the concentration of NaOH. Equation: HCl + NaOH → NaCl + H₂O',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Moles HCl = c × V = 0.100 × (25.0/1000) = 0.00250 mol. Molar ratio 1:1, so moles NaOH = 0.00250 mol. Concentration = n/V = 0.00250/(20.0/1000) = 0.125 mol dm⁻³',
+            markingCriteria: {
+              breakdown: [
+                'Calculate moles of HCl (1 mark)',
+                'Use 1:1 ratio (1 mark)',
+                'Use c = n/V (1 mark)',
+                'Correct answer 0.125 mol dm⁻³ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.2-q10',
+            question: 'A sample of gas at 300 K and 100 kPa occupies 2.0 dm³. Calculate the number of moles. (R = 8.31 J K⁻¹ mol⁻¹)',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Convert: p = 100 kPa = 100,000 Pa; V = 2.0 dm³ = 0.002 m³. Use pV = nRT: n = pV/RT = (100,000 × 0.002)/(8.31 × 300) = 200/2493 = 0.0802 mol',
+            markingCriteria: {
+              breakdown: [
+                'Convert units to SI (1 mark)',
+                'Rearrange to n = pV/RT (1 mark)',
+                'Substitute correctly (1 mark)',
+                'Correct answer 0.0802 mol (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.2)',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.1.3-bonding',
+        name: '3.1.3 Bonding',
+        questions: [
+          {
+            id: 'chem-3.1.3-q1',
+            question: 'Describe the structure of an ionic compound such as sodium chloride.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Giant ionic lattice structure. Electrostatic attraction between oppositely charged ions. Regular arrangement of Na⁺ and Cl⁻ ions.',
+            markingCriteria: {
+              breakdown: [
+                'Giant lattice structure (1 mark)',
+                'Electrostatic attraction between ions (1 mark)',
+                'Regular arrangement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q2',
+            question: 'Explain what is meant by a covalent bond.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A shared pair of electrons between two atoms. The electrostatic attraction between the shared pair and the nuclei of both atoms.',
+            markingCriteria: {
+              breakdown: [
+                'Shared pair of electrons (1 mark)',
+                'Electrostatic attraction to nuclei (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q3',
+            question: 'Explain what is meant by a dative covalent bond. Give an example.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A dative (coordinate) covalent bond is where both electrons in the shared pair come from the same atom. Example: NH₄⁺ - the nitrogen lone pair is donated to H⁺. Can be shown with an arrow from the donor atom.',
+            markingCriteria: {
+              breakdown: [
+                'Both electrons from same atom (1 mark)',
+                'Suitable example given (1 mark)',
+                'Arrow notation or clear explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q4',
+            question: 'Describe metallic bonding.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A lattice of positive metal ions. Surrounded by a sea of delocalised electrons. Electrostatic attraction between the positive ions and delocalised electrons.',
+            markingCriteria: {
+              breakdown: [
+                'Positive ions in lattice (1 mark)',
+                'Delocalised electrons (1 mark)',
+                'Electrostatic attraction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q5',
+            question: 'Diamond and graphite are both forms of carbon. Explain why diamond has a higher melting point than graphite.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Both have giant covalent structures with strong covalent bonds. In diamond, each carbon forms four covalent bonds in a tetrahedral structure. In graphite, each carbon forms three bonds in layers. Diamond has more bonds per atom and no weak intermolecular forces between layers. Therefore more energy is needed to break the structure in diamond.',
+            markingCriteria: {
+              breakdown: [
+                'Both giant covalent with strong bonds (1 mark)',
+                'Diamond has 4 bonds per carbon, graphite 3 (1 mark)',
+                'Graphite has weak forces between layers (1 mark)',
+                'More energy needed to break diamond structure (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q6',
+            question: 'Predict the shape and bond angle of a molecule of ammonia (NH₃). Explain your answer.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Shape: trigonal pyramidal. Bond angle: 107°. NH₃ has 4 electron pairs (3 bonding, 1 lone pair). Electron pairs repel to be as far apart as possible. Lone pair repels more than bonding pairs, reducing bond angle from 109.5° to 107°.',
+            markingCriteria: {
+              breakdown: [
+                'Trigonal pyramidal shape (1 mark)',
+                'Bond angle 107° (1 mark)',
+                '4 electron pairs - 3 bonding, 1 lone (1 mark)',
+                'Lone pair repels more, reducing angle (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q7',
+            question: 'Explain what is meant by electronegativity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The ability of an atom to attract the bonding pair of electrons in a covalent bond towards itself.',
+            markingCriteria: {
+              breakdown: [
+                'Ability to attract bonding electrons (1 mark)',
+                'In a covalent bond (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q8',
+            question: 'Explain why HCl is a polar molecule but Cl₂ is non-polar.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'In HCl, chlorine is more electronegative than hydrogen, so the bonding electrons are pulled towards Cl, creating a dipole (δ+H-Clδ-). In Cl₂, both atoms have the same electronegativity, so electrons are shared equally and there is no dipole.',
+            markingCriteria: {
+              breakdown: [
+                'Cl more electronegative than H in HCl (1 mark)',
+                'Creates permanent dipole/unequal sharing (1 mark)',
+                'Cl₂ has equal sharing/no electronegativity difference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q9',
+            question: 'Describe hydrogen bonding in water and explain why it occurs.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen is much more electronegative than hydrogen, so O-H bonds are polar with δ+ on H and δ- on O. The δ+ hydrogen is attracted to the lone pair on δ- oxygen of another water molecule. This is hydrogen bonding - a strong permanent dipole-dipole attraction. Shown as H···O dotted line.',
+            markingCriteria: {
+              breakdown: [
+                'O-H bonds polar due to electronegativity difference (1 mark)',
+                'δ+ H attracted to lone pair on δ- O (1 mark)',
+                'Named as hydrogen bond (1 mark)',
+                'Strong permanent dipole-dipole attraction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q10',
+            question: 'Explain why the boiling point of NH₃ is higher than the boiling point of PH₃.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'NH₃ has hydrogen bonding between molecules because N is very electronegative. N-H bonds are polar and H attracted to lone pair on N of adjacent molecule. PH₃ only has weak London forces because P is not electronegative enough for hydrogen bonding. Hydrogen bonds are stronger than London forces, so more energy is needed to overcome them in NH₃, giving it a higher boiling point.',
+            markingCriteria: {
+              breakdown: [
+                'NH₃ has hydrogen bonding (1 mark)',
+                'PH₃ only has London forces (1 mark)',
+                'N electronegative enough for H-bonding, P is not (1 mark)',
+                'H-bonds stronger/more energy to overcome (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          }
+        ]
+      },
+      {
+        id: '3.1.4-energetics',
+        name: '3.1.4 Energetics',
+        questions: [
+          {
+            id: 'chem-3.1.4-q1',
+            question: 'Define standard enthalpy change of combustion.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of a substance is completely burned in oxygen under standard conditions of 100 kPa and a stated temperature (usually 298 K).',
+            markingCriteria: {
+              breakdown: [
+                'One mole of substance (1 mark)',
+                'Completely burned in oxygen (1 mark)',
+                'Standard conditions stated (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          },
+          {
+            id: 'chem-3.1.4-q2',
+            question: 'Define standard enthalpy change of formation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of a compound is formed from its elements in their standard states under standard conditions of 100 kPa and 298 K.',
+            markingCriteria: {
+              breakdown: [
+                'One mole of compound formed (1 mark)',
+                'From elements in standard states (1 mark)',
+                'Under standard conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          },
+          {
+            id: 'chem-3.1.4-q3',
+            question: 'When 50 cm³ of 1.0 mol dm⁻³ HCl is mixed with 50 cm³ of 1.0 mol dm⁻³ NaOH, the temperature rises by 6.8°C. Calculate the enthalpy change of neutralisation. (c = 4.18 J g⁻¹ K⁻¹, density = 1.0 g cm⁻³)',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Total volume = 100 cm³, mass = 100 g. q = mcΔT = 100 × 4.18 × 6.8 = 2842 J. Moles HCl = moles NaOH = 0.050 mol. ΔH = -2842/0.050 = -56.8 kJ mol⁻¹ (negative because exothermic).',
+            markingCriteria: {
+              breakdown: [
+                'Calculate q = mcΔT (1 mark)',
+                'Calculate moles of limiting reagent (1 mark)',
+                'Divide q by moles (1 mark)',
+                'Convert to kJ and include sign (1 mark)',
+                'Correct answer ≈ -57 kJ mol⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4) - RP2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.4-q4',
+            question: 'State Hess\'s law.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change for a reaction is independent of the route taken, provided the initial and final conditions are the same.',
+            markingCriteria: {
+              breakdown: [
+                'Enthalpy change independent of route (1 mark)',
+                'Same initial and final conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          },
+          {
+            id: 'chem-3.1.4-q5',
+            question: 'Use the following data to calculate the enthalpy change of formation of propane: ΔfH°[C(s)] = -394 kJ mol⁻¹, ΔfH°[H₂(g)] = -286 kJ mol⁻¹, ΔcH°[C₃H₈(g)] = -2220 kJ mol⁻¹. Formation: 3C(s) + 4H₂(g) → C₃H₈(g)',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Using Hess\'s law: ΔfH°[C₃H₈] = [3ΔcH°(C) + 4ΔcH°(H₂)] - ΔcH°(C₃H₈) = [3(-394) + 4(-286)] - (-2220) = [-1182 - 1144] + 2220 = -2326 + 2220 = -106 kJ mol⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Correct Hess cycle or method (1 mark)',
+                'Multiply combustion values by coefficients (1 mark)',
+                'Correct calculation steps (1 mark)',
+                'Answer -106 kJ mol⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.4-q6',
+            question: 'Define mean bond enthalpy.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The average enthalpy change required to break one mole of a specified type of bond in gaseous molecules, averaged over many different compounds.',
+            markingCriteria: {
+              breakdown: [
+                'Energy to break one mole of bonds (1 mark)',
+                'Averaged over many compounds/gaseous (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          },
+          {
+            id: 'chem-3.1.4-q7',
+            question: 'Calculate the enthalpy change for the reaction CH₄(g) + Cl₂(g) → CH₃Cl(g) + HCl(g) using the following mean bond enthalpies: C-H = +413 kJ mol⁻¹, Cl-Cl = +243 kJ mol⁻¹, C-Cl = +346 kJ mol⁻¹, H-Cl = +432 kJ mol⁻¹',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Bonds broken: 1 C-H + 1 Cl-Cl = 413 + 243 = 656 kJ. Bonds formed: 1 C-Cl + 1 H-Cl = 346 + 432 = 778 kJ. ΔH = bonds broken - bonds formed = 656 - 778 = -122 kJ mol⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Identify bonds broken (1 mark)',
+                'Calculate energy for bonds broken (1 mark)',
+                'Identify bonds formed (1 mark)',
+                'Calculate energy for bonds formed (1 mark)',
+                'ΔH = broken - formed, answer -122 kJ mol⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.4-q8',
+            question: 'Explain why bond enthalpy values calculated using mean bond enthalpies differ from values calculated using Hess\'s law.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mean bond enthalpies are averaged over many different compounds. The actual strength of a bond depends on its environment/the other atoms in the molecule. Mean values don\'t account for specific molecular environments, whereas Hess\'s law uses actual enthalpies for specific compounds.',
+            markingCriteria: {
+              breakdown: [
+                'Mean values are averages (1 mark)',
+                'Bond strength varies with environment (1 mark)',
+                'Hess uses specific compound values (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          },
+          {
+            id: 'chem-3.1.4-q9',
+            question: 'Describe how you would measure the enthalpy change of combustion of an alcohol using calorimetry.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Weigh spirit burner containing alcohol. Measure volume of water in copper calorimeter and record initial temperature. Burn alcohol to heat water. Stir and record maximum temperature. Reweigh spirit burner. Calculate: q = mcΔT, then divide by moles of alcohol burned to get ΔH.',
+            markingCriteria: {
+              breakdown: [
+                'Weigh before and after (1 mark)',
+                'Measure water volume and temperature change (1 mark)',
+                'Burn alcohol to heat water (1 mark)',
+                'Calculate using q = mcΔT and moles (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4) - RP2'
+          },
+          {
+            id: 'chem-3.1.4-q10',
+            question: 'Suggest two reasons why experimental values for enthalpy changes of combustion are less exothermic than data book values.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Heat loss to surroundings/apparatus. Incomplete combustion of the fuel.',
+            markingCriteria: {
+              breakdown: [
+                'Heat loss to surroundings (1 mark)',
+                'Incomplete combustion (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.4)'
+          }
+        ]
+      },
+      {
+        id: '3.1.5-kinetics',
+        name: '3.1.5 Kinetics',
+        questions: [
+          {
+            id: 'chem-3.1.5-q1',
+            question: 'Define activation energy.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The minimum energy required for a reaction to occur when particles collide.',
+            markingCriteria: {
+              breakdown: [
+                'Minimum energy (1 mark)',
+                'For reaction to occur/on collision (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q2',
+            question: 'Explain why most collisions between reactant molecules do not lead to a reaction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Most collisions do not have energy greater than or equal to the activation energy. Therefore, bonds are not broken and no reaction occurs.',
+            markingCriteria: {
+              breakdown: [
+                'Energy less than activation energy (1 mark)',
+                'Bonds not broken/no reaction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q3',
+            question: 'Sketch a Maxwell-Boltzmann distribution curve showing the number of molecules against energy. Label the activation energy.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Curve starts at origin, rises to a peak, then gradually decreases with a long tail. No molecules at zero energy. Activation energy marked on x-axis to the right of the peak. Area under curve to the right of Ea represents molecules with sufficient energy to react.',
+            markingCriteria: {
+              breakdown: [
+                'Correct shape - starts at origin, peak, long tail (1 mark)',
+                'Ea marked correctly on x-axis (1 mark)',
+                'Labels: axes and Ea (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q4',
+            question: 'Explain why a small increase in temperature causes a large increase in the rate of reaction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Increasing temperature increases the kinetic energy of particles. This causes more frequent collisions. More importantly, a much greater proportion of molecules now have energy ≥ Ea (shown by area under Maxwell-Boltzmann curve beyond Ea). Therefore, many more collisions are successful, causing a large increase in rate.',
+            markingCriteria: {
+              breakdown: [
+                'Particles have more kinetic energy (1 mark)',
+                'More frequent collisions (1 mark)',
+                'Much greater proportion with E ≥ Ea (1 mark)',
+                'Many more successful collisions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q5',
+            question: 'Describe an experiment to investigate the effect of temperature on reaction rate using sodium thiosulfate and hydrochloric acid.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Mix sodium thiosulfate solution with hydrochloric acid in a conical flask placed over a cross marked on paper. Start timer. Observe from above until the cross can no longer be seen through the cloudy solution. Record time. Repeat at different temperatures using a water bath to control temperature. Rate = 1/time. Plot graph of rate against temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Mix reactants over marked cross (1 mark)',
+                'Time until cross disappears (1 mark)',
+                'Control temperature using water bath (1 mark)',
+                'Repeat at different temperatures (1 mark)',
+                'Calculate rate = 1/time (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5) - RP3'
+          },
+          {
+            id: 'chem-3.1.5-q6',
+            question: 'Explain how increasing the concentration of a reactant increases the rate of reaction.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Increasing concentration increases the number of particles per unit volume. This leads to more frequent collisions between reactant particles. Therefore, more successful collisions per unit time, increasing the rate.',
+            markingCriteria: {
+              breakdown: [
+                'More particles per unit volume (1 mark)',
+                'More frequent collisions (1 mark)',
+                'More successful collisions/higher rate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q7',
+            question: 'Explain how increasing pressure increases the rate of a reaction involving gases.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Increasing pressure decreases the volume, so gas molecules are closer together. This increases the number of molecules per unit volume. More frequent collisions occur, leading to an increased rate of reaction.',
+            markingCriteria: {
+              breakdown: [
+                'Molecules closer together (1 mark)',
+                'More molecules per unit volume (1 mark)',
+                'More frequent collisions/higher rate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q8',
+            question: 'Define a catalyst.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A substance that increases the rate of a reaction without being used up. It provides an alternative reaction pathway with a lower activation energy.',
+            markingCriteria: {
+              breakdown: [
+                'Increases rate without being used up (1 mark)',
+                'Provides lower Ea pathway (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q9',
+            question: 'Use a Maxwell-Boltzmann distribution to explain how a catalyst increases the rate of reaction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A catalyst provides an alternative pathway with lower activation energy. On the Maxwell-Boltzmann distribution, the Ea moves to the left. This means a greater proportion of molecules now have energy ≥ Ea (larger area under curve beyond the new lower Ea). Therefore, more collisions are successful and the rate increases.',
+            markingCriteria: {
+              breakdown: [
+                'Catalyst lowers Ea (1 mark)',
+                'Ea shifts left on distribution (1 mark)',
+                'Greater proportion of molecules with E ≥ Ea (1 mark)',
+                'More successful collisions/higher rate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          },
+          {
+            id: 'chem-3.1.5-q10',
+            question: 'State two ways of monitoring the rate of a chemical reaction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Measure volume of gas produced over time. Measure mass loss over time. (Also acceptable: change in concentration, change in colour/light absorption, change in pH)',
+            markingCriteria: {
+              breakdown: [
+                'One valid method (1 mark)',
+                'Second valid method (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.5)'
+          }
+        ]
+      },
+      {
+        id: '3.1.6-equilibria',
+        name: '3.1.6 Equilibria, Le Chatelier, Kc',
+        questions: [
+          {
+            id: 'chem-3.1.6-q1',
+            question: 'State the characteristics of a dynamic equilibrium.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The forward and reverse reactions occur at the same rate. The concentrations of reactants and products remain constant. The equilibrium can only be achieved in a closed system.',
+            markingCriteria: {
+              breakdown: [
+                'Forward and reverse rates equal (1 mark)',
+                'Concentrations constant (1 mark)',
+                'Closed system (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q2',
+            question: 'State Le Chatelier\'s principle.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'If a system at equilibrium is subjected to a change, the position of equilibrium shifts to oppose/counteract that change.',
+            markingCriteria: {
+              breakdown: [
+                'System subjected to change (1 mark)',
+                'Equilibrium shifts to oppose change (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q3',
+            question: 'For the equilibrium N₂(g) + 3H₂(g) ⇌ 2NH₃(g) (ΔH = -92 kJ mol⁻¹), predict the effect of increasing temperature on the position of equilibrium. Explain your answer.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The reaction is exothermic (ΔH negative). Increasing temperature favours the endothermic direction (reverse reaction). The position of equilibrium shifts to the left, decreasing the yield of ammonia.',
+            markingCriteria: {
+              breakdown: [
+                'Identify exothermic forward reaction (1 mark)',
+                'Favours endothermic/reverse direction (1 mark)',
+                'Equilibrium shifts left/less NH₃ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q4',
+            question: 'For the equilibrium 2SO₂(g) + O₂(g) ⇌ 2SO₃(g), predict and explain the effect of increasing pressure.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'There are 3 moles of gas on the left and 2 moles on the right. Increasing pressure favours the side with fewer moles of gas. The equilibrium shifts to the right, increasing the yield of SO₃.',
+            markingCriteria: {
+              breakdown: [
+                'Count moles: 3 on left, 2 on right (1 mark)',
+                'Favours side with fewer moles (1 mark)',
+                'Shifts right/more SO₃ produced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q5',
+            question: 'Explain the effect of a catalyst on the position of equilibrium and on the value of Kc.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A catalyst has no effect on the position of equilibrium. It speeds up both forward and reverse reactions equally, so equilibrium is reached faster. Kc is unchanged because it depends only on temperature.',
+            markingCriteria: {
+              breakdown: [
+                'No effect on position (1 mark)',
+                'Speeds up both reactions equally/reaches equilibrium faster (1 mark)',
+                'Kc unchanged (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q6',
+            question: 'Write the expression for Kc for the equilibrium: H₂(g) + I₂(g) ⇌ 2HI(g)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Kc = [HI]² / ([H₂][I₂])',
+            markingCriteria: {
+              breakdown: [
+                'Correct form with products/reactants (1 mark)',
+                'Correct powers and format (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q7',
+            question: 'At equilibrium, a mixture contains 0.20 mol dm⁻³ H₂, 0.20 mol dm⁻³ I₂, and 1.6 mol dm⁻³ HI. Calculate Kc for H₂(g) + I₂(g) ⇌ 2HI(g).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Kc = [HI]² / ([H₂][I₂]) = (1.6)² / (0.20 × 0.20) = 2.56 / 0.04 = 64 (no units as moles cancel)',
+            markingCriteria: {
+              breakdown: [
+                'Correct Kc expression (1 mark)',
+                'Substitute values correctly (1 mark)',
+                'Answer 64, no units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.6-q8',
+            question: 'For a homogeneous equilibrium, explain what happens to the value of Kc when: (a) the concentration of a reactant is increased, (b) the temperature is increased.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: '(a) Kc remains constant. Increasing concentration shifts equilibrium position but doesn\'t change Kc. (b) Kc changes. For an exothermic reaction, Kc decreases with increasing temperature. For an endothermic reaction, Kc increases with increasing temperature. Kc only depends on temperature.',
+            markingCriteria: {
+              breakdown: [
+                '(a) Kc unchanged by concentration (1 mark)',
+                '(b) Kc changes with temperature (1 mark)',
+                'Direction depends on whether exo/endothermic (1 mark)',
+                'Kc only depends on temperature (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q9',
+            question: 'Industrial processes often use a compromise between yield and rate. Explain why high temperature and pressure are used in the Haber process despite equilibrium considerations.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The reaction N₂ + 3H₂ ⇌ 2NH₃ is exothermic, so low temperature favours products, but the rate would be too slow. High temperature is used as a compromise - lower yield but acceptable rate. High pressure favours products (fewer moles) and increases rate, so it\'s used despite high cost. A catalyst (iron) is used to increase rate at moderate temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Low T favours products but rate too slow (1 mark)',
+                'High T compromise - lower yield but faster (1 mark)',
+                'High p favours products and rate (1 mark)',
+                'Catalyst allows moderate conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)'
+          },
+          {
+            id: 'chem-3.1.6-q10',
+            question: '1.0 mol of ethanol and 1.0 mol of ethanoic acid are mixed. At equilibrium, 0.33 mol of ethyl ethanoate is formed. Calculate Kc. (C₂H₅OH + CH₃COOH ⇌ CH₃COOC₂H₅ + H₂O)',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'At equilibrium: ester = 0.33 mol, water = 0.33 mol. Ethanol = 1.0 - 0.33 = 0.67 mol, acid = 1.0 - 0.33 = 0.67 mol. Assuming volume V: Kc = (0.33/V)(0.33/V) / [(0.67/V)(0.67/V)] = 0.1089 / 0.4489 = 0.24 (V cancels, no units)',
+            markingCriteria: {
+              breakdown: [
+                'Calculate equilibrium moles of all species (1 mark)',
+                'Write Kc expression (1 mark)',
+                'Substitute equilibrium concentrations (1 mark)',
+                'Show volumes cancel (1 mark)',
+                'Answer ≈ 0.24, no units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.6)',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.1.7-redox',
+        name: '3.1.7 Redox',
+        questions: [
+          {
+            id: 'chem-3.1.7-q1',
+            question: 'Define oxidation in terms of electron transfer.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Oxidation is the loss of electrons.',
+            markingCriteria: {
+              breakdown: [
+                'Loss of electrons (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q2',
+            question: 'Define reduction in terms of electron transfer.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Reduction is the gain of electrons.',
+            markingCriteria: {
+              breakdown: [
+                'Gain of electrons (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q3',
+            question: 'State the rules for assigning oxidation states.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxidation state of an element is 0. Oxidation state of a simple ion equals its charge. Sum of oxidation states in a compound equals 0. Sum of oxidation states in an ion equals the charge on the ion. (Also: H usually +1 except in metal hydrides -1; O usually -2 except in peroxides -1 and F₂O +2)',
+            markingCriteria: {
+              breakdown: [
+                'Element = 0 (1 mark)',
+                'Ion = charge (1 mark)',
+                'Compound = 0 (1 mark)',
+                'Polyatomic ion = charge (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q4',
+            question: 'Determine the oxidation state of sulfur in H₂SO₄.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Let oxidation state of S = x. H = +1, O = -2. 2(+1) + x + 4(-2) = 0. 2 + x - 8 = 0. x = +6.',
+            markingCriteria: {
+              breakdown: [
+                'Set up equation correctly (1 mark)',
+                'Answer +6 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'chem-3.1.7-q5',
+            question: 'In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, identify which species is oxidised and which is reduced. Explain your answer.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Zn is oxidised (oxidation state goes from 0 to +2, loses electrons). Cu²⁺ is reduced (oxidation state goes from +2 to 0, gains electrons). Zn is the reducing agent. Cu²⁺ is the oxidising agent.',
+            markingCriteria: {
+              breakdown: [
+                'Zn oxidised (1 mark)',
+                'Zn loses electrons/0 to +2 (1 mark)',
+                'Cu²⁺ reduced (1 mark)',
+                'Cu²⁺ gains electrons/+2 to 0 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q6',
+            question: 'Write a half-equation for the oxidation of iron(II) ions to iron(III) ions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Fe²⁺ → Fe³⁺ + e⁻',
+            markingCriteria: {
+              breakdown: [
+                'Correct species (1 mark)',
+                'Balanced with electron (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q7',
+            question: 'Write a half-equation for the reduction of oxygen to oxide ions in acidic conditions.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'O₂ + 4H⁺ + 4e⁻ → 2H₂O (or ½O₂ + 2H⁺ + 2e⁻ → H₂O)',
+            markingCriteria: {
+              breakdown: [
+                'Correct species including H⁺ (1 mark)',
+                'Correctly balanced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q8',
+            question: 'Combine the half-equations Fe²⁺ → Fe³⁺ + e⁻ and MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O to give the overall redox equation.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Multiply first equation by 5: 5Fe²⁺ → 5Fe³⁺ + 5e⁻. Add to second equation: 5Fe²⁺ + MnO₄⁻ + 8H⁺ → 5Fe³⁺ + Mn²⁺ + 4H₂O',
+            markingCriteria: {
+              breakdown: [
+                'Balance electrons by multiplying (1 mark)',
+                'Add equations correctly (1 mark)',
+                'Final equation correct and balanced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q9',
+            question: 'Define an oxidising agent.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A substance that accepts electrons from another species. It is itself reduced.',
+            markingCriteria: {
+              breakdown: [
+                'Accepts electrons (1 mark)',
+                'Is itself reduced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          },
+          {
+            id: 'chem-3.1.7-q10',
+            question: 'Define a reducing agent.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A substance that donates electrons to another species. It is itself oxidised.',
+            markingCriteria: {
+              breakdown: [
+                'Donates electrons (1 mark)',
+                'Is itself oxidised (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.7)'
+          }
+        ]
+      },
+      {
+        id: '3.1.8-thermodynamics',
+        name: '3.1.8 Thermodynamics (A-level only)',
+        questions: [
+          {
+            id: 'chem-3.1.8-q1',
+            question: 'Define lattice enthalpy of formation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of an ionic compound is formed from its gaseous ions under standard conditions. Example: Na⁺(g) + Cl⁻(g) → NaCl(s). The value is always exothermic (negative).',
+            markingCriteria: {
+              breakdown: [
+                'One mole of ionic compound formed (1 mark)',
+                'From gaseous ions (1 mark)',
+                'Standard conditions/exothermic (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q2',
+            question: 'Define first electron affinity.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one electron is added to each atom in one mole of gaseous atoms to form one mole of gaseous 1- ions. Example: Cl(g) + e⁻ → Cl⁻(g). Usually exothermic.',
+            markingCriteria: {
+              breakdown: [
+                'One electron added to each atom (1 mark)',
+                'One mole gaseous atoms to 1- ions (1 mark)',
+                'Example equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q3',
+            question: 'Define enthalpy of atomisation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of gaseous atoms is formed from an element in its standard state. Example: ½Cl₂(g) → Cl(g). Always endothermic (bonds are broken).',
+            markingCriteria: {
+              breakdown: [
+                'One mole of gaseous atoms (1 mark)',
+                'From element in standard state (1 mark)',
+                'Endothermic/bonds broken (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q4',
+            question: 'Draw a Born-Haber cycle for the formation of sodium chloride from its elements.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Cycle should show: Na(s) + ½Cl₂(g) → NaCl(s) as the overall reaction (ΔfH°). Alternative route: Na(s) → Na(g) [atomisation]; Na(g) → Na⁺(g) + e⁻ [1st IE]; ½Cl₂(g) → Cl(g) [atomisation]; Cl(g) + e⁻ → Cl⁻(g) [1st EA]; Na⁺(g) + Cl⁻(g) → NaCl(s) [lattice enthalpy].',
+            markingCriteria: {
+              breakdown: [
+                'Correct overall reaction (1 mark)',
+                'All steps identified correctly (2 marks)',
+                'Correct direction of arrows (1 mark)',
+                'Cycle closes properly (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q5',
+            question: 'Use the following data to calculate the lattice enthalpy of NaCl: ΔfH°[NaCl] = -411 kJ mol⁻¹, ΔatH°[Na] = +107 kJ mol⁻¹, IE₁[Na] = +496 kJ mol⁻¹, ΔatH°[Cl] = +122 kJ mol⁻¹, EA₁[Cl] = -349 kJ mol⁻¹',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Using Born-Haber cycle: ΔfH° = ΔatH°[Na] + IE₁[Na] + ΔatH°[Cl] + EA₁[Cl] + ΔlatticeH°. -411 = +107 + 496 + 122 - 349 + ΔlatticeH°. -411 = 376 + ΔlatticeH°. ΔlatticeH° = -787 kJ mol⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Correct Born-Haber relationship (1 mark)',
+                'Substitute values correctly (1 mark)',
+                'Rearrange and calculate (1 mark)',
+                'Answer -787 kJ mol⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.8-q6',
+            question: 'Explain why the lattice enthalpy calculated from a Born-Haber cycle differs from the theoretical value calculated assuming perfect ionic bonding.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The theoretical model assumes perfect ionic bonding with no covalent character. In reality, there is some polarisation of the anion by the cation, introducing covalent character. The greater the covalent character, the larger the difference between experimental and theoretical values.',
+            markingCriteria: {
+              breakdown: [
+                'Theory assumes perfect ionic (1 mark)',
+                'Reality has covalent character/polarisation (1 mark)',
+                'Greater covalent character = larger difference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q7',
+            question: 'Define enthalpy change of solution.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of an ionic substance dissolves in water to form an infinitely dilute solution under standard conditions.',
+            markingCriteria: {
+              breakdown: [
+                'One mole dissolves (1 mark)',
+                'In water/to infinite dilution/standard conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q8',
+            question: 'Define enthalpy change of hydration.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The enthalpy change when one mole of gaseous ions dissolves in water to form an infinitely dilute solution. Example: Na⁺(g) → Na⁺(aq). Always exothermic.',
+            markingCriteria: {
+              breakdown: [
+                'One mole of gaseous ions (1 mark)',
+                'Dissolves in water (1 mark)',
+                'Exothermic (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q9',
+            question: 'Define entropy and state its units.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Entropy (S) is a measure of the disorder or number of ways of arranging particles and their energy. Units: J K⁻¹ mol⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Measure of disorder (1 mark)',
+                'Units J K⁻¹ mol⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)'
+          },
+          {
+            id: 'chem-3.1.8-q10',
+            question: 'Calculate ΔG for a reaction at 298 K where ΔH = -50 kJ mol⁻¹ and ΔS = +100 J K⁻¹ mol⁻¹. State whether the reaction is feasible.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'ΔG = ΔH - TΔS. Convert ΔS to kJ: +100 J K⁻¹ mol⁻¹ = +0.100 kJ K⁻¹ mol⁻¹. ΔG = -50 - (298 × 0.100) = -50 - 29.8 = -79.8 kJ mol⁻¹. ΔG is negative, so the reaction is feasible.',
+            markingCriteria: {
+              breakdown: [
+                'Use ΔG = ΔH - TΔS (1 mark)',
+                'Convert units correctly (1 mark)',
+                'Calculate ΔG = -79.8 kJ mol⁻¹ (1 mark)',
+                'State feasible because ΔG < 0 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.8)',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.1.9-rate-equations',
+        name: '3.1.9 Rate Equations (A-level only)',
+        questions: [
+          {
+            id: 'chem-3.1.9-q1',
+            question: 'Define rate of reaction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The change in concentration of a reactant or product per unit time. Units: mol dm⁻³ s⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Change in concentration per unit time (1 mark)',
+                'Units stated (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q2',
+            question: 'For the reaction A + B → C, the rate equation is rate = k[A]²[B]. State the order with respect to A, the order with respect to B, and the overall order.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Order with respect to A = 2 (second order). Order with respect to B = 1 (first order). Overall order = 2 + 1 = 3 (third order).',
+            markingCriteria: {
+              breakdown: [
+                'Order w.r.t. A = 2 (1 mark)',
+                'Order w.r.t. B = 1 (1 mark)',
+                'Overall order = 3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q3',
+            question: 'For a reaction with rate equation rate = k[A]²[B], what are the units of k?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Rearrange: k = rate/([A]²[B]) = (mol dm⁻³ s⁻¹) / [(mol dm⁻³)² × (mol dm⁻³)] = (mol dm⁻³ s⁻¹) / (mol³ dm⁻⁹) = mol⁻² dm⁶ s⁻¹',
+            markingCriteria: {
+              breakdown: [
+                'Rearrange for k (1 mark)',
+                'Substitute units (1 mark)',
+                'Answer mol⁻² dm⁶ s⁻¹ (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'chem-3.1.9-q4',
+            question: 'Describe how to determine the order of reaction with respect to a reactant using the initial rates method.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Carry out several experiments with different initial concentrations of the reactant, keeping other reactants constant. Measure initial rate for each experiment. Plot a graph or use data to find the relationship. If rate doubles when concentration doubles, order = 1. If rate quadruples when concentration doubles, order = 2. If rate unchanged, order = 0.',
+            markingCriteria: {
+              breakdown: [
+                'Vary one reactant, keep others constant (1 mark)',
+                'Measure initial rates (1 mark)',
+                'Compare rate changes to concentration changes (1 mark)',
+                'Deduce order from relationship (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9) - RP7'
+          },
+          {
+            id: 'chem-3.1.9-q5',
+            question: 'For a first order reaction, sketch a graph of concentration against time and explain its shape.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The graph shows an exponential decay curve starting high and decreasing more slowly over time. The rate of decrease is proportional to concentration, so as concentration falls, the rate falls. The curve never reaches zero but approaches it asymptotically.',
+            markingCriteria: {
+              breakdown: [
+                'Exponential decay curve (1 mark)',
+                'Rate proportional to concentration (1 mark)',
+                'Approaches zero asymptotically (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q6',
+            question: 'State the Arrhenius equation in its logarithmic form.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'ln k = -Ea/R × (1/T) + ln A, where k = rate constant, Ea = activation energy, R = gas constant, T = temperature (K), A = Arrhenius constant.',
+            markingCriteria: {
+              breakdown: [
+                'Correct equation ln k = -Ea/RT + ln A (1 mark)',
+                'Define terms (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q7',
+            question: 'Explain how a graph of ln k against 1/T can be used to determine the activation energy.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'From ln k = -Ea/R × (1/T) + ln A, this is in the form y = mx + c. Plot ln k on y-axis, 1/T on x-axis. The graph is a straight line with gradient = -Ea/R. Calculate gradient, then Ea = -gradient × R (R = 8.31 J K⁻¹ mol⁻¹).',
+            markingCriteria: {
+              breakdown: [
+                'ln k vs 1/T gives straight line (1 mark)',
+                'Gradient = -Ea/R (1 mark)',
+                'Calculate gradient (1 mark)',
+                'Ea = -gradient × R (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.9-q8',
+            question: 'Define the rate-determining step.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The slowest step in a multi-step reaction mechanism. It determines the overall rate of the reaction.',
+            markingCriteria: {
+              breakdown: [
+                'Slowest step (1 mark)',
+                'Determines overall rate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q9',
+            question: 'A reaction between A and B has the rate equation rate = k[A]²[B]. Suggest a possible rate-determining step.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: '2A + B → products (slow step). Or: A + A → intermediate (slow), then intermediate + B → products (fast).',
+            markingCriteria: {
+              breakdown: [
+                'Includes 2A and 1B (1 mark)',
+                'Identified as slow/RDS (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9)'
+          },
+          {
+            id: 'chem-3.1.9-q10',
+            question: 'Describe continuous monitoring methods to measure the rate of reaction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Measure a property that changes with concentration over time. Methods include: (1) Gas collection - measure volume of gas produced at intervals using gas syringe/inverted burette. (2) Mass loss - place reaction on balance and record mass loss over time. (3) Colorimetry - measure absorbance over time for coloured reactants/products. (4) Change in pH using a pH probe.',
+            markingCriteria: {
+              breakdown: [
+                'Monitor property over time (1 mark)',
+                'Gas volume method (1 mark)',
+                'Mass loss method (1 mark)',
+                'Other valid method e.g. colorimetry/pH (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.9) - RP7'
+          }
+        ]
+      },
+      {
+        id: '3.1.10-kp',
+        name: '3.1.10 Kp (A-level only)',
+        questions: [
+          {
+            id: 'chem-3.1.10-q1',
+            question: 'Define partial pressure.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The pressure that a gas in a mixture would exert if it occupied the volume alone. Calculated as: partial pressure = mole fraction × total pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Pressure gas would exert alone (1 mark)',
+                'Formula or calculation method (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q2',
+            question: 'Define mole fraction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The fraction of moles of one component in a mixture relative to the total moles. Mole fraction = moles of component / total moles.',
+            markingCriteria: {
+              breakdown: [
+                'Fraction of moles (1 mark)',
+                'Formula stated (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q3',
+            question: 'Write the expression for Kp for the equilibrium N₂(g) + 3H₂(g) ⇌ 2NH₃(g).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Kp = p(NH₃)² / [p(N₂) × p(H₂)³]',
+            markingCriteria: {
+              breakdown: [
+                'Correct form products/reactants (1 mark)',
+                'Correct powers (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q4',
+            question: 'At equilibrium, a mixture contains 0.20 mol N₂, 0.60 mol H₂, and 0.40 mol NH₃ at total pressure 100 kPa. Calculate Kp for N₂(g) + 3H₂(g) ⇌ 2NH₃(g).',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Total moles = 0.20 + 0.60 + 0.40 = 1.20. Mole fractions: N₂ = 0.20/1.20 = 0.167; H₂ = 0.60/1.20 = 0.5; NH₃ = 0.40/1.20 = 0.333. Partial pressures: p(N₂) = 0.167 × 100 = 16.7 kPa; p(H₂) = 0.5 × 100 = 50 kPa; p(NH₃) = 0.333 × 100 = 33.3 kPa. Kp = (33.3)² / [16.7 × (50)³] = 1109 / 2087500 = 5.31 × 10⁻⁴ kPa⁻²',
+            markingCriteria: {
+              breakdown: [
+                'Calculate mole fractions (1 mark)',
+                'Calculate partial pressures (2 marks)',
+                'Write Kp expression (1 mark)',
+                'Substitute and calculate (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.10-q5',
+            question: 'State what effect increasing temperature has on the value of Kp for an exothermic forward reaction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Kp decreases. Increasing temperature favours the endothermic (reverse) direction, so the equilibrium position shifts to the left, decreasing Kp.',
+            markingCriteria: {
+              breakdown: [
+                'Kp decreases (1 mark)',
+                'Explanation with reference to endothermic direction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q6',
+            question: 'State what effect increasing pressure has on the value of Kp.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Kp is unchanged. Kp only depends on temperature, not pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Kp unchanged (1 mark)',
+                'Only depends on temperature (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q7',
+            question: 'For the equilibrium PCl₅(g) ⇌ PCl₃(g) + Cl₂(g), explain qualitatively how increasing the total pressure affects the position of equilibrium.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'There is 1 mole of gas on the left and 2 moles on the right. Increasing pressure favours the side with fewer moles. The equilibrium shifts to the left, decreasing the yield of products.',
+            markingCriteria: {
+              breakdown: [
+                'Count moles: 1 left, 2 right (1 mark)',
+                'Favours fewer moles (1 mark)',
+                'Shifts left (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q8',
+            question: 'State the effect of a catalyst on Kp and on the time taken to reach equilibrium.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'No effect on Kp (only temperature affects Kp). Equilibrium is reached faster because both forward and reverse reactions are speeded up equally.',
+            markingCriteria: {
+              breakdown: [
+                'No effect on Kp (1 mark)',
+                'Equilibrium reached faster (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)'
+          },
+          {
+            id: 'chem-3.1.10-q9',
+            question: 'What are the units of Kp for the equilibrium H₂(g) + I₂(g) ⇌ 2HI(g)?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Kp = [p(HI)]² / [p(H₂) × p(I₂)]. Powers: 2 on top, 1+1=2 on bottom. 2-2=0. Kp has no units.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate powers (1 mark)',
+                'No units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'chem-3.1.10-q10',
+            question: 'For the dissociation of N₂O₄(g) ⇌ 2NO₂(g), 1.0 mol N₂O₄ is placed in a container at constant temperature and pressure 100 kPa. At equilibrium, 0.40 mol N₂O₄ remains. Calculate Kp.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'N₂O₄ dissociated = 1.0 - 0.40 = 0.60 mol. NO₂ formed = 2 × 0.60 = 1.20 mol. At equilibrium: N₂O₄ = 0.40 mol, NO₂ = 1.20 mol. Total moles = 0.40 + 1.20 = 1.60 mol. Mole fractions: N₂O₄ = 0.40/1.60 = 0.25; NO₂ = 1.20/1.60 = 0.75. Partial pressures: p(N₂O₄) = 25 kPa; p(NO₂) = 75 kPa. Kp = (75)² / 25 = 5625/25 = 225 kPa',
+            markingCriteria: {
+              breakdown: [
+                'Calculate equilibrium moles (1 mark)',
+                'Calculate mole fractions (1 mark)',
+                'Calculate partial pressures (1 mark)',
+                'Write Kp expression (1 mark)',
+                'Calculate Kp (1 mark)',
+                'Units kPa (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.10)',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.1.11-electrochemistry',
+        name: '3.1.11 Electrochemistry (A-level only)',
+        questions: [
+          {
+            id: 'chem-3.1.11-q1',
+            question: 'Define standard electrode potential.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The voltage measured under standard conditions (298 K, 100 kPa, 1.00 mol dm⁻³ solutions) when a half-cell is connected to a standard hydrogen electrode.',
+            markingCriteria: {
+              breakdown: [
+                'Voltage/potential measured (1 mark)',
+                'Standard conditions stated (1 mark)',
+                'Connected to standard hydrogen electrode (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q2',
+            question: 'Describe the standard hydrogen electrode.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Hydrogen gas at 100 kPa is bubbled over a platinum electrode immersed in 1.00 mol dm⁻³ H⁺ solution at 298 K. The electrode potential is defined as exactly 0.00 V.',
+            markingCriteria: {
+              breakdown: [
+                'H₂ gas over Pt electrode (1 mark)',
+                'Standard conditions (1 mark)',
+                'E° = 0.00 V (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q3',
+            question: 'Calculate the standard cell potential for a cell made from Zn²⁺/Zn (E° = -0.76 V) and Cu²⁺/Cu (E° = +0.34 V). Write the cell equation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'E°cell = E°(right) - E°(left) = E°(more positive) - E°(more negative) = +0.34 - (-0.76) = +1.10 V. Cell equation: Zn + Cu²⁺ → Zn²⁺ + Cu',
+            markingCriteria: {
+              breakdown: [
+                'Identify more positive electrode (1 mark)',
+                'E°cell = +0.34 - (-0.76) (1 mark)',
+                'Answer +1.10 V (1 mark)',
+                'Correct cell equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'chem-3.1.11-q4',
+            question: 'Explain how the standard electrode potential can be used to predict the direction of a redox reaction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A reaction is feasible if E°cell is positive. The species with the more positive E° will be reduced (acts as oxidising agent). The species with the more negative E° will be oxidised (acts as reducing agent). Electrons flow from more negative to more positive electrode.',
+            markingCriteria: {
+              breakdown: [
+                'Positive E°cell indicates feasibility (1 mark)',
+                'More positive E° is reduced (1 mark)',
+                'More negative E° is oxidised (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q5',
+            question: 'Write the cell notation for a cell made from a zinc half-cell and a copper half-cell.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Zn(s) | Zn²⁺(aq) || Cu²⁺(aq) | Cu(s)',
+            markingCriteria: {
+              breakdown: [
+                'Correct order and species (1 mark)',
+                'Correct notation with | and || (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q6',
+            question: 'Describe how to measure the standard electrode potential of a Cu²⁺/Cu half-cell.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Set up Cu electrode in 1.00 mol dm⁻³ CuSO₄ solution at 298 K. Connect via salt bridge to standard hydrogen electrode. Connect high-resistance voltmeter between electrodes. Measure voltage. Cu²⁺/Cu is positive terminal as E° is positive.',
+            markingCriteria: {
+              breakdown: [
+                'Set up half-cell with standard conditions (1 mark)',
+                'Connect to SHE via salt bridge (1 mark)',
+                'Use voltmeter (1 mark)',
+                'Measure voltage/identify polarity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11) - RP8'
+          },
+          {
+            id: 'chem-3.1.11-q7',
+            question: 'State two factors that affect the voltage of an electrochemical cell.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature. Concentration of ions in solution.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature (1 mark)',
+                'Concentration (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q8',
+            question: 'Write the half-equations for the reactions at each electrode in a hydrogen-oxygen fuel cell in alkaline conditions.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Negative electrode (anode): 2H₂ + 4OH⁻ → 4H₂O + 4e⁻ (or H₂ + 2OH⁻ → 2H₂O + 2e⁻). Positive electrode (cathode): O₂ + 2H₂O + 4e⁻ → 4OH⁻ (or ½O₂ + H₂O + 2e⁻ → 2OH⁻). Overall: 2H₂ + O₂ → 2H₂O',
+            markingCriteria: {
+              breakdown: [
+                'Anode half-equation correct (1 mark)',
+                'Cathode half-equation correct (1 mark)',
+                'Electrons balanced (1 mark)',
+                'Overall equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q9',
+            question: 'State two advantages of fuel cells over conventional batteries.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'They can be continuously supplied with fuel, so don\'t run down like batteries. They produce only water as a waste product.',
+            markingCriteria: {
+              breakdown: [
+                'Continuous fuel supply/don\'t run down (1 mark)',
+                'Clean/only water produced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          },
+          {
+            id: 'chem-3.1.11-q10',
+            question: 'Describe the structure and operation of a lithium cell.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Anode (negative): lithium metal. Cathode (positive): transition metal oxide (e.g., MnO₂, CoO₂). Electrolyte: lithium salt in organic solvent. During discharge, Li atoms are oxidised to Li⁺ at anode, electrons flow through external circuit, Li⁺ ions move through electrolyte to cathode where they are reduced/intercalated into metal oxide.',
+            markingCriteria: {
+              breakdown: [
+                'Li anode, metal oxide cathode (1 mark)',
+                'Lithium salt electrolyte (1 mark)',
+                'Li oxidised at anode (1 mark)',
+                'Li⁺ moves to cathode/reduced (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.11)'
+          }
+        ]
+      },
+      {
+        id: '3.1.12-acids-bases',
+        name: '3.1.12 Acids & Bases (A-level only)',
+        questions: [
+          {
+            id: 'chem-3.1.12-q1',
+            question: 'Define an acid and a base according to the Brønsted-Lowry theory.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Acid: a proton (H⁺) donor. Base: a proton (H⁺) acceptor.',
+            markingCriteria: {
+              breakdown: [
+                'Acid = proton donor (1 mark)',
+                'Base = proton acceptor (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          },
+          {
+            id: 'chem-3.1.12-q2',
+            question: 'Calculate the pH of a solution of 0.100 mol dm⁻³ HCl.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'HCl is a strong acid, fully dissociated. [H⁺] = 0.100 mol dm⁻³. pH = -log₁₀[H⁺] = -log₁₀(0.100) = 1.00',
+            markingCriteria: {
+              breakdown: [
+                '[H⁺] = 0.100 (1 mark)',
+                'pH = 1.00 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.12-q3',
+            question: 'Write the expression for Kw and state its value at 298 K.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Kw = [H⁺][OH⁻]. At 298 K, Kw = 1.0 × 10⁻¹⁴ mol² dm⁻⁶',
+            markingCriteria: {
+              breakdown: [
+                'Kw = [H⁺][OH⁻] (1 mark)',
+                'Value 1.0 × 10⁻¹⁴ mol² dm⁻⁶ at 298 K (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          },
+          {
+            id: 'chem-3.1.12-q4',
+            question: 'Calculate the pH of 0.100 mol dm⁻³ NaOH at 298 K. (Kw = 1.0 × 10⁻¹⁴ mol² dm⁻⁶)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '[OH⁻] = 0.100 mol dm⁻³. [H⁺] = Kw/[OH⁻] = 1.0 × 10⁻¹⁴ / 0.100 = 1.0 × 10⁻¹³ mol dm⁻³. pH = -log₁₀(1.0 × 10⁻¹³) = 13.00',
+            markingCriteria: {
+              breakdown: [
+                'Calculate [H⁺] from Kw (1 mark)',
+                '[H⁺] = 1.0 × 10⁻¹³ (1 mark)',
+                'pH = 13.00 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.12-q5',
+            question: 'Define Ka for a weak acid and write the expression for ethanoic acid (CH₃COOH).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Ka is the acid dissociation constant for a weak acid. Ka = [H⁺][CH₃COO⁻] / [CH₃COOH]',
+            markingCriteria: {
+              breakdown: [
+                'Define Ka (1 mark)',
+                'Correct expression (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          },
+          {
+            id: 'chem-3.1.12-q6',
+            question: 'Calculate the pH of 0.100 mol dm⁻³ ethanoic acid. (Ka = 1.7 × 10⁻⁵ mol dm⁻³)',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Assume [H⁺] = [CH₃COO⁻] = x, and [CH₃COOH] ≈ 0.100 (weak acid, little dissociation). Ka = x²/0.100. x² = 1.7 × 10⁻⁵ × 0.100 = 1.7 × 10⁻⁶. x = √(1.7 × 10⁻⁶) = 1.3 × 10⁻³ mol dm⁻³. pH = -log(1.3 × 10⁻³) = 2.89',
+            markingCriteria: {
+              breakdown: [
+                'Set up Ka expression with approximations (1 mark)',
+                'Rearrange to find [H⁺] (1 mark)',
+                '[H⁺] = 1.3 × 10⁻³ (1 mark)',
+                'pH = 2.89 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'chem-3.1.12-q7',
+            question: 'Sketch the pH curve for the titration of a strong acid with a strong base. Label the equivalence point and suggest a suitable indicator.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'pH starts low (around 1-2), remains fairly constant initially, then rises steeply around equivalence point (pH 7), then levels off at high pH (around 13-14). Equivalence point at pH 7 (vertical section of curve). Suitable indicators: methyl orange, phenolphthalein, or any indicator with range around pH 7.',
+            markingCriteria: {
+              breakdown: [
+                'Correct shape: low start, steep rise, high end (1 mark)',
+                'Equivalence point at pH 7 marked (1 mark)',
+                'Steep vertical section around pH 7 (1 mark)',
+                'Suitable indicator named (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12) - RP9'
+          },
+          {
+            id: 'chem-3.1.12-q8',
+            question: 'Explain why phenolphthalein is not a suitable indicator for the titration of a weak acid with a strong base.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'The equivalence point for weak acid-strong base is above pH 7 (around pH 8-10). Phenolphthalein changes colour in the range pH 8.3-10, which includes the steep section. Actually, phenolphthalein IS suitable. Methyl orange (pH 3.1-4.4) is NOT suitable as it changes colour in the wrong pH range.',
+            markingCriteria: {
+              breakdown: [
+                'Equivalence point is above pH 7 (1 mark)',
+                'Indicator range must match steep section (1 mark)',
+                'Correct indicator choice for weak acid-strong base (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          },
+          {
+            id: 'chem-3.1.12-q9',
+            question: 'Define a buffer solution and give an example.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A solution that resists changes in pH when small amounts of acid or base are added. Example: ethanoic acid (weak acid) and sodium ethanoate (its salt/conjugate base).',
+            markingCriteria: {
+              breakdown: [
+                'Resists pH change (1 mark)',
+                'When acid/base added (1 mark)',
+                'Valid example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          },
+          {
+            id: 'chem-3.1.12-q10',
+            question: 'Explain how a buffer solution made from ethanoic acid and sodium ethanoate resists changes in pH when a small amount of H⁺ is added.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The solution contains high concentrations of CH₃COOH and CH₃COO⁻. When H⁺ is added, it reacts with the ethanoate ion: CH₃COO⁻ + H⁺ → CH₃COOH. The ethanoate ion removes the added H⁺, so pH changes only slightly.',
+            markingCriteria: {
+              breakdown: [
+                'Contains weak acid and conjugate base (1 mark)',
+                'Added H⁺ reacts with CH₃COO⁻ (1 mark)',
+                'Forms weak acid/pH change minimised (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.12)'
+          }
+        ]
+      },
+      {
+        id: '3.2-inorganic',
+        name: '3.2 Inorganic Chemistry',
+        questions: [
+          {
+            id: 'chem-3.2-q1',
+            question: 'Explain the trend in atomic radius across Period 3 from Na to Ar.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Atomic radius decreases across the period. Nuclear charge increases as proton number increases. Electrons are added to the same shell (same shielding). The increased nuclear charge pulls the electrons closer to the nucleus, reducing atomic radius.',
+            markingCriteria: {
+              breakdown: [
+                'Atomic radius decreases (1 mark)',
+                'Increased nuclear charge/same shell (1 mark)',
+                'Stronger attraction pulls electrons closer (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.1)'
+          },
+          {
+            id: 'chem-3.2-q2',
+            question: 'Describe and explain the trend in first ionisation energy down Group 2 from Mg to Ba.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'First ionisation energy decreases down the group. Atomic radius increases as more shells are added. Increased shielding from inner electrons. Although nuclear charge increases, the increased distance and shielding outweigh this, so less energy is needed to remove the outer electron.',
+            markingCriteria: {
+              breakdown: [
+                'First IE decreases (1 mark)',
+                'Atomic radius increases/more shells (1 mark)',
+                'Increased shielding (1 mark)',
+                'Outweighs increased nuclear charge (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.2)'
+          },
+          {
+            id: 'chem-3.2-q3',
+            question: 'Write an equation for the reaction of magnesium with steam.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mg(s) + H₂O(g) → MgO(s) + H₂(g)',
+            markingCriteria: {
+              breakdown: [
+                'Correct species (1 mark)',
+                'Balanced equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.2)'
+          },
+          {
+            id: 'chem-3.2-q4',
+            question: 'Describe a use of calcium hydroxide in agriculture and explain why it is used.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Calcium hydroxide (slaked lime) is added to acidic soil to neutralise the acid and raise pH. This is called liming. It provides better conditions for plant growth as most plants prefer neutral or slightly alkaline soil.',
+            markingCriteria: {
+              breakdown: [
+                'Added to acidic soil (1 mark)',
+                'Neutralises/raises pH (1 mark)',
+                'Improves conditions for plant growth (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.2)'
+          },
+          {
+            id: 'chem-3.2-q5',
+            question: 'Describe how to test for sulfate ions in a solution.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Add dilute hydrochloric acid or nitric acid to remove any carbonates. Then add aqueous barium chloride. A white precipitate of barium sulfate forms if sulfate ions are present.',
+            markingCriteria: {
+              breakdown: [
+                'Add acid first (1 mark)',
+                'Add barium chloride solution (1 mark)',
+                'White precipitate indicates sulfate (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.2 & 3.2.3)'
+          },
+          {
+            id: 'chem-3.2-q6',
+            question: 'Describe the trend in electronegativity down Group 7.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Electronegativity decreases down the group. Atomic radius increases as more shells are added. The attraction between the nucleus and bonding electrons decreases due to increased distance and shielding.',
+            markingCriteria: {
+              breakdown: [
+                'Electronegativity decreases (1 mark)',
+                'Atomic radius increases (1 mark)',
+                'Weaker attraction due to distance/shielding (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.3)'
+          },
+          {
+            id: 'chem-3.2-q7',
+            question: 'Write an equation for the reaction of chlorine with cold dilute sodium hydroxide and state a use of the product.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Cl₂ + 2NaOH → NaCl + NaClO + H₂O (or NaOCl). Sodium chlorate(I) (bleach) is formed. Used as a bleach and disinfectant.',
+            markingCriteria: {
+              breakdown: [
+                'Correct equation (1 mark)',
+                'Identify NaClO/bleach formed (1 mark)',
+                'Use as bleach/disinfectant (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.3.2)'
+          },
+          {
+            id: 'chem-3.2-q8',
+            question: 'Define a transition metal.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A d-block element that forms at least one ion with an incomplete d sub-shell.',
+            markingCriteria: {
+              breakdown: [
+                'd-block element (1 mark)',
+                'Incomplete d sub-shell in at least one ion (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.5)'
+          },
+          {
+            id: 'chem-3.2-q9',
+            question: 'State four characteristic properties of transition metals.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Form complex ions. Form coloured compounds. Show variable oxidation states. Act as catalysts.',
+            markingCriteria: {
+              breakdown: [
+                'Form complexes (1 mark)',
+                'Coloured compounds (1 mark)',
+                'Variable oxidation states (1 mark)',
+                'Catalytic activity (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.5)'
+          },
+          {
+            id: 'chem-3.2-q10',
+            question: 'Explain why [Cu(H₂O)₆]²⁺ is blue.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Cu²⁺ has an incomplete d sub-shell (d⁹). Ligands cause d orbitals to split into two energy levels. Electrons absorb energy from visible light to move from lower to higher d orbitals (d-d transition). The energy gap corresponds to yellow/orange light being absorbed. The complementary colour (blue) is transmitted/observed.',
+            markingCriteria: {
+              breakdown: [
+                'Incomplete d sub-shell (1 mark)',
+                'd orbitals split by ligands (1 mark)',
+                'd-d transition absorbs visible light (1 mark)',
+                'Complementary colour observed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.2.5)'
+          }
+        ]
+      },
+      {
+        id: '3.3-organic',
+        name: '3.3 Organic Chemistry',
+        questions: [
+          {
+            id: 'chem-3.3-q1',
+            question: 'Draw the displayed formula and skeletal formula for propan-2-ol.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Displayed formula shows all atoms and bonds: CH₃-CH(OH)-CH₃ with all C-H bonds shown. Skeletal formula shows carbon skeleton as lines, OH shown, H atoms on C not shown: line with OH branch in middle.',
+            markingCriteria: {
+              breakdown: [
+                'Correct displayed formula (1 mark)',
+                'Correct skeletal formula (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.1)'
+          },
+          {
+            id: 'chem-3.3-q2',
+            question: 'Describe the process of fractional distillation of crude oil.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Crude oil is heated and vaporised. Vapours pass into a fractionating column which has a temperature gradient (hotter at bottom). Fractions condense at different heights depending on their boiling points. Smaller molecules (lower b.p.) condense near the top. Larger molecules (higher b.p.) condense near the bottom. Fractions are collected at different levels.',
+            markingCriteria: {
+              breakdown: [
+                'Oil heated/vaporised (1 mark)',
+                'Column has temperature gradient (1 mark)',
+                'Fractions condense at different heights (1 mark)',
+                'Based on boiling point/size (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.2)'
+          },
+          {
+            id: 'chem-3.3-q3',
+            question: 'Write an equation for the free radical substitution of methane with chlorine. Show the three stages: initiation, propagation, termination.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Initiation: Cl₂ → 2Cl• (uv light). Propagation: CH₄ + Cl• → •CH₃ + HCl; •CH₃ + Cl₂ → CH₃Cl + Cl•. Termination: •CH₃ + Cl• → CH₃Cl (or Cl• + Cl• → Cl₂ or •CH₃ + •CH₃ → C₂H₆)',
+            markingCriteria: {
+              breakdown: [
+                'Initiation with Cl• radicals (1 mark)',
+                'First propagation step (1 mark)',
+                'Second propagation step (1 mark)',
+                'At least one termination step (1 mark)',
+                'Correct radical notation (•) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.2)'
+          },
+          {
+            id: 'chem-3.3-q4',
+            question: 'Describe the mechanism for the nucleophilic substitution of bromoethane with hydroxide ions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'OH⁻ acts as nucleophile. The C-Br bond is polar (δ+C-Brδ-). Lone pair on OH⁻ attacks δ+C, forming new C-O bond. C-Br bond breaks heterolytically, with both electrons going to Br to form Br⁻. Curly arrow from lone pair on OH⁻ to C. Curly arrow from C-Br bond to Br.',
+            markingCriteria: {
+              breakdown: [
+                'OH⁻ is nucleophile attacking δ+C (1 mark)',
+                'C-O bond forms (1 mark)',
+                'C-Br bond breaks to give Br⁻ (1 mark)',
+                'Correct curly arrows (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.3)'
+          },
+          {
+            id: 'chem-3.3-q5',
+            question: 'Describe the test for unsaturation using bromine water.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Add bromine water (orange/brown solution) to the compound. If an alkene is present, the bromine adds across the C=C double bond. The solution decolourises from orange to colourless.',
+            markingCriteria: {
+              breakdown: [
+                'Add bromine water (1 mark)',
+                'Bromine adds to C=C (1 mark)',
+                'Decolourises orange to colourless (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.4)'
+          },
+          {
+            id: 'chem-3.3-q6',
+            question: 'Compare the production of ethanol by fermentation and by hydration of ethene. Include the conditions and the environmental impact.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Fermentation: uses glucose (renewable); yeast enzyme catalyst; 30-40°C; slow; produces dilute ethanol (distillation needed); batch process; carbon neutral if crops replanted. Hydration: uses ethene from crude oil (non-renewable); phosphoric acid catalyst; 300°C, 60 atm; fast; continuous process; produces pure ethanol. Environmental: fermentation is carbon neutral and sustainable. Hydration uses fossil fuels.',
+            markingCriteria: {
+              breakdown: [
+                'Fermentation conditions stated (1 mark)',
+                'Hydration conditions stated (1 mark)',
+                'Raw materials compared (1 mark)',
+                'Rate/purity compared (1 mark)',
+                'Sustainability/carbon neutral (1 mark)',
+                'Environmental comparison (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.5)'
+          },
+          {
+            id: 'chem-3.3-q7',
+            question: 'Describe how to oxidise a primary alcohol to an aldehyde without further oxidation to a carboxylic acid.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Use acidified potassium dichromate(VI) as oxidising agent. Heat the alcohol with the oxidising agent. Distil off the aldehyde as it forms (aldehyde has lower b.p. than alcohol). This prevents further oxidation to carboxylic acid.',
+            markingCriteria: {
+              breakdown: [
+                'Acidified dichromate oxidising agent (1 mark)',
+                'Heat with oxidising agent (1 mark)',
+                'Distil off aldehyde as formed (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.5) - RP5'
+          },
+          {
+            id: 'chem-3.3-q8',
+            question: 'Describe how to distinguish between an aldehyde and a ketone using Fehling\'s solution or Tollens\' reagent.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Fehling\'s solution: blue solution turns to red precipitate of Cu₂O with aldehydes. No change with ketones. Tollens\' reagent: forms silver mirror with aldehydes. No change with ketones. Both tests show aldehydes can be oxidised but ketones cannot.',
+            markingCriteria: {
+              breakdown: [
+                'Fehling\'s: blue to red with aldehyde (1 mark)',
+                'Tollens: silver mirror with aldehyde (1 mark)',
+                'No reaction with ketones (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.8)'
+          },
+          {
+            id: 'chem-3.3-q9',
+            question: 'Describe the mechanism for the electrophilic substitution of benzene with bromine.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Bromine reacts with FeBr₃ catalyst to form Br₂···FeBr₃, which generates Br⁺ electrophile. The Br⁺ attacks the benzene ring (electron-rich). Curly arrow from ring to Br⁺. Forms unstable carbocation intermediate. H⁺ is lost, regenerating aromatic system. FeBr₃ catalyst is regenerated. Product: bromobenzene + HBr.',
+            markingCriteria: {
+              breakdown: [
+                'Generation of Br⁺ electrophile (1 mark)',
+                'Br⁺ attacks ring (1 mark)',
+                'Forms carbocation intermediate (1 mark)',
+                'H⁺ lost, aromaticity restored (1 mark)',
+                'Correct curly arrows (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.10)'
+          },
+          {
+            id: 'chem-3.3-q10',
+            question: 'Explain what is meant by an optical isomer. Draw the two optical isomers of 2-hydroxyproanoic acid (lactic acid).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Optical isomers are non-superimposable mirror images. They contain a chiral centre (carbon with four different groups). They rotate plane-polarised light in opposite directions. Draw structure CH₃-CH(OH)-COOH showing tetrahedral arrangement at central C. Draw two mirror images as enantiomers.',
+            markingCriteria: {
+              breakdown: [
+                'Non-superimposable mirror images (1 mark)',
+                'Chiral centre with 4 different groups (1 mark)',
+                'Rotate plane-polarised light (1 mark)',
+                'Correct structures drawn (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.3.7)'
+          }
+        ]
+      }
+    ]
   }
   ];
