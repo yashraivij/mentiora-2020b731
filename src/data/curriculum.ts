@@ -30859,6 +30859,114 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q3',
+            question: 'Convert 72 km/h to m/s.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '72 km/h = 72 × 1000/3600 = 72000/3600 = 20 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Apply conversion factor (1 mark)',
+                '20 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q4',
+            question: 'State the unit for momentum.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'kg m/s or N s.',
+            markingCriteria: {
+              breakdown: [
+                'Correct unit (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q5',
+            question: 'State the unit for work and energy.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Joule (J) or N m.',
+            markingCriteria: {
+              breakdown: [
+                'Correct unit (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q6',
+            question: 'State the unit for power.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Watt (W) or J/s.',
+            markingCriteria: {
+              breakdown: [
+                'Correct unit (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q7',
+            question: 'A force of 50 N acts through a distance of 8 m. Calculate the work done.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Work = Force × distance = 50 × 8 = 400 J.',
+            markingCriteria: {
+              breakdown: [
+                'Apply formula (1 mark)',
+                'Work = 400 J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q8',
+            question: 'Convert 5 m/s² to km/h².',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: '5 m/s² = 5 × 3.6² km/h² = 5 × 12.96 = 64.8 km/h².',
+            markingCriteria: {
+              breakdown: [
+                'Apply conversion correctly (1 mark)',
+                '64.8 km/h² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q9',
+            question: 'State the SI base units for the Newton.',
+            marks: 1,
+            difficulty: 'medium',
+            modelAnswer: 'kg m s⁻².',
+            markingCriteria: {
+              breakdown: [
+                'Correct base units (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-P-q10',
+            question: 'A car engine produces 40 kW of power. How much work is done in 5 seconds?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Power = Work/time, so Work = Power × time = 40000 × 5 = 200000 J = 200 kJ.',
+            markingCriteria: {
+              breakdown: [
+                'Apply P = W/t (1 mark)',
+                'Work = 200 kJ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
           }
         ]
       },
@@ -30934,6 +31042,78 @@ export const curriculum: Subject[] = [
               breakdown: [
                 'Horizontal component = 21.7 m/s (1 mark)',
                 'Vertical component = 12.5 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q6',
+            question: 'A particle starts from rest and accelerates uniformly at 3 m/s² for 4 seconds. Find the distance travelled.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 's = ut + ½at² = 0 + ½(3)(4²) = ½(3)(16) = 24 m.',
+            markingCriteria: {
+              breakdown: [
+                'Apply s = ut + ½at² (1 mark)',
+                's = 24 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q7',
+            question: 'A stone is dropped from rest. How far does it fall in 3 seconds? Take g = 10 m/s².',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 's = ½gt² = ½(10)(3²) = 5 × 9 = 45 m.',
+            markingCriteria: {
+              breakdown: [
+                'Apply s = ½gt² (1 mark)',
+                's = 45 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q8',
+            question: 'A car travels 80 m in 8 seconds while decelerating uniformly from 15 m/s. Find the deceleration.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 's = ½(u + v)t: 80 = ½(15 + v)(8). 80 = 4(15 + v). 20 = 15 + v. v = 5 m/s. Using v = u + at: 5 = 15 + a(8). a = -10/8 = -1.25 m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Find final velocity v = 5 m/s (1 mark)',
+                'Apply v = u + at (1 mark)',
+                'a = -1.25 m/s² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q9',
+            question: 'A particle has displacement s = 2t³ - 3t² + 5 metres. Find the velocity at t = 2 s.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'v = ds/dt = 6t² - 6t. When t = 2, v = 6(4) - 6(2) = 24 - 12 = 12 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Differentiate to get v = 6t² - 6t (1 mark)',
+                'v = 12 m/s when t = 2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-Q-q10',
+            question: 'A particle moves with acceleration a = 4t m/s². If the particle starts from rest, find the velocity after 3 seconds.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'v = ∫a dt = ∫4t dt = 2t² + C. At t = 0, v = 0: C = 0. So v = 2t². When t = 3, v = 2(9) = 18 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Integrate a to get v = 2t² + C (1 mark)',
+                'Find C = 0 using initial condition (1 mark)',
+                'v = 18 m/s when t = 3 (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Mechanics'
@@ -31014,6 +31194,78 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q6',
+            question: 'State Newton\'s first law of motion.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'A body remains at rest or moves with constant velocity unless acted upon by a resultant external force.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q7',
+            question: 'State Newton\'s third law of motion.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'For every action, there is an equal and opposite reaction. Forces between two bodies are equal in magnitude and opposite in direction.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q8',
+            question: 'A lift of mass 500 kg accelerates upward at 2 m/s². Find the tension in the cable. Take g = 10 m/s².',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Upward forces: T. Downward forces: mg = 5000 N. Resultant = ma = 500 × 2 = 1000 N upward. T - 5000 = 1000. T = 6000 N.',
+            markingCriteria: {
+              breakdown: [
+                'Identify forces and direction (1 mark)',
+                'Apply F = ma (1 mark)',
+                'T = 6000 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q9',
+            question: 'Two masses, 3 kg and 5 kg, are connected by a string over a smooth pulley. Find the acceleration of the system. Take g = 10 m/s².',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Let T be tension, a be acceleration. For 5 kg: 50 - T = 5a. For 3 kg: T - 30 = 3a. Adding: 20 = 8a. a = 2.5 m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Set up equation for 5 kg mass (1 mark)',
+                'Set up equation for 3 kg mass (1 mark)',
+                'Solve simultaneous equations (1 mark)',
+                'a = 2.5 m/s² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-R-q10',
+            question: 'A particle of mass 4 kg moves under a force F = (6i - 8j) N. Find the magnitude of the acceleration.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'a = F/m = (6i - 8j)/4 = 1.5i - 2j m/s². Magnitude = √(1.5² + 2²) = √(2.25 + 4) = √6.25 = 2.5 m/s².',
+            markingCriteria: {
+              breakdown: [
+                'Find acceleration vector a = 1.5i - 2j (1 mark)',
+                'Apply magnitude formula (1 mark)',
+                '|a| = 2.5 m/s² (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
           }
         ]
       },
@@ -31061,6 +31313,113 @@ export const curriculum: Subject[] = [
                 'Calculate moment of weight (1 mark)',
                 'Set up equilibrium equation (1 mark)',
                 'F = 7.5 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q4',
+            question: 'State the principle of moments for a body in equilibrium.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'For a body in equilibrium, the sum of clockwise moments about any point equals the sum of anticlockwise moments about that point.',
+            markingCriteria: {
+              breakdown: [
+                'State equilibrium condition (1 mark)',
+                'Clockwise = anticlockwise moments (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q5',
+            question: 'A uniform ladder of length 5 m and mass 20 kg leans against a smooth wall at 60° to the horizontal. Find the normal reaction at the wall.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Let R be reaction at wall, N be reaction at ground. Taking moments about base: R × 5 sin 60° = 20g × 2.5 cos 60°. R × 5 × (√3/2) = 200 × 2.5 × 0.5. R × 4.33 = 250. R = 57.7 N.',
+            markingCriteria: {
+              breakdown: [
+                'Identify forces and distances (1 mark)',
+                'Take moments about base (1 mark)',
+                'Calculate perpendicular distances (1 mark)',
+                'Solve for R (1 mark)',
+                'R ≈ 57.7 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q6',
+            question: 'A light rod of length 3 m has masses of 2 kg and 5 kg attached at its ends. Where should it be supported to balance horizontally?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Let support be distance x from the 2 kg mass. Taking moments: 2gx = 5g(3-x). 2x = 5(3-x). 2x = 15 - 5x. 7x = 15. x = 15/7 ≈ 2.14 m from the 2 kg mass.',
+            markingCriteria: {
+              breakdown: [
+                'Set up moment equation (1 mark)',
+                'Solve for x (1 mark)',
+                'x = 2.14 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q7',
+            question: 'A force of 15 N acts at an angle of 60° to a rod at a distance of 0.4 m from a pivot. Calculate the moment.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Perpendicular component of force = 15 sin 60° = 15 × (√3/2) = 13.0 N. Moment = 13.0 × 0.4 = 5.2 N m.',
+            markingCriteria: {
+              breakdown: [
+                'Find perpendicular component (1 mark)',
+                'Apply moment formula (1 mark)',
+                'Moment = 5.2 N m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q8',
+            question: 'A seesaw is 4 m long. A child of mass 30 kg sits 1.5 m from the pivot. How far from the pivot must a child of mass 40 kg sit to balance?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Let distance be x. Taking moments: 30 × 1.5 = 40 × x. 45 = 40x. x = 1.125 m.',
+            markingCriteria: {
+              breakdown: [
+                'Set up moment equation (1 mark)',
+                'Solve for x (1 mark)',
+                'x = 1.125 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q9',
+            question: 'A uniform beam of length 6 m and mass 50 kg is supported at both ends. A load of 100 kg is placed 2 m from one end. Find the reaction forces at each support.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Let R₁ and R₂ be reactions at ends A and B. Vertical equilibrium: R₁ + R₂ = 50g + 100g = 1500 N. Taking moments about A: R₂ × 6 = 50g × 3 + 100g × 2. 6R₂ = 1500 + 2000 = 3500. R₂ = 583.3 N. R₁ = 1500 - 583.3 = 916.7 N.',
+            markingCriteria: {
+              breakdown: [
+                'Apply vertical equilibrium (1 mark)',
+                'Take moments about one end (1 mark)',
+                'Solve for R₂ (1 mark)',
+                'Find R₁ (1 mark)',
+                'Both reactions correct (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Mechanics'
+          },
+          {
+            id: 'maths-S-q10',
+            question: 'Explain what is meant by a couple.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A couple consists of two equal and opposite parallel forces whose lines of action do not coincide. The moment of a couple is the same about any point and equals one force times the perpendicular distance between the forces.',
+            markingCriteria: {
+              breakdown: [
+                'Define couple correctly (1 mark)',
+                'State property of moment (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Mechanics'
