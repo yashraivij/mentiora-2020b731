@@ -241,6 +241,11 @@ const Dashboard = () => {
   // Map database subject_id to curriculum subject_id for consistent icons
   const mapDatabaseSubjectToCurriculum = (dbSubjectId: string) => {
     const subjectMapping: { [key: string]: string } = {
+      // A-level subjects
+      "Mathematics (A-Level)": "maths-aqa-alevel",
+      "Biology (A-Level)": "biology-aqa-alevel",
+      
+      // GCSE/standard subjects
       "Mathematics": "maths-edexcel",
       "maths": "maths-edexcel", 
       "mathematics": "maths-edexcel",
@@ -463,6 +468,11 @@ const Dashboard = () => {
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
             
+            // Handle A-level subjects
+            if (record.subject_name === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
+            if (record.subject_name === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            
+            // Handle GCSE/standard subjects
             if (record.subject_name === "Physics" && examBoard === "aqa") return "physics";
             if (record.subject_name === "Physics" && examBoard === "edexcel") return "physics-edexcel";
             if (record.subject_name === "Mathematics") return "maths-edexcel";
@@ -1071,19 +1081,23 @@ const Dashboard = () => {
     if (!subject) return;
 
     try {
+      // Determine if this is an A-level subject and modify the name accordingly
+      const isALevel = subjectId.includes('alevel');
+      const subjectName = isALevel ? `${subject.name} (A-Level)` : subject.name;
+      
       // Check if subject already exists
       const { data: existing } = await supabase
         .from("user_subjects")
         .select("id")
         .eq("user_id", user.id)
-        .eq("subject_name", subject.name)
+        .eq("subject_name", subjectName)
         .eq("exam_board", "AQA")
         .maybeSingle();
 
       if (existing) {
         toast({
           title: "Already Added",
-          description: `${subject.name} is already in your subjects`,
+          description: `${subjectName} is already in your subjects`,
         });
         return;
       }
@@ -1092,8 +1106,8 @@ const Dashboard = () => {
         .from("user_subjects")
         .insert({
           user_id: user.id,
-          subject_name: subject.name,
-          exam_board: "AQA", // Default exam board
+          subject_name: subjectName,
+          exam_board: "AQA",
           predicted_grade: "5",
           target_grade: "7"
         });
@@ -1112,7 +1126,7 @@ const Dashboard = () => {
       setUserSubjects(prev => [...prev, subjectId]);
       toast({
         title: "Success",
-        description: `${subject.name} added to your subjects`,
+        description: `${subjectName} added to your subjects`,
       });
       
     } catch (error) {
@@ -1132,12 +1146,16 @@ const Dashboard = () => {
     const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) return;
 
+    // Determine if this is an A-level subject
+    const isALevel = subjectId.includes('alevel');
+    const subjectName = isALevel ? `${subject.name} (A-Level)` : subject.name;
+
     try {
       const { error } = await supabase
         .from("user_subjects")
         .delete()
         .eq("user_id", user.id)
-        .eq("subject_name", subject.name);
+        .eq("subject_name", subjectName);
 
       if (error) {
         console.error("Error removing subject:", error);
