@@ -28945,6 +28945,62 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q7',
+            question: 'Find the midpoint of the line segment joining points A(2, 5) and B(8, 13).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Midpoint = ((2+8)/2, (5+13)/2) = (5, 9).',
+            markingCriteria: {
+              breakdown: [
+                'Apply midpoint formula (1 mark)',
+                'Correct answer (5, 9) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q8',
+            question: 'Find the distance between points P(1, 2) and Q(4, 6).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Distance = √[(4-1)² + (6-2)²] = √[9 + 16] = √25 = 5.',
+            markingCriteria: {
+              breakdown: [
+                'Apply distance formula (1 mark)',
+                'Distance = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q9',
+            question: 'Find the gradient of the line joining (3, 7) and (9, 19).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gradient = (19-7)/(9-3) = 12/6 = 2.',
+            markingCriteria: {
+              breakdown: [
+                'Apply gradient formula (1 mark)',
+                'Gradient = 2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
+          },
+          {
+            id: 'maths-C-q10',
+            question: 'Write the equation of the circle with centre (4, -3) and radius 6.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(x - 4)² + (y + 3)² = 36.',
+            markingCriteria: {
+              breakdown: [
+                'Correct form with centre (1 mark)',
+                'Correct radius squared (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Coordinate Geometry'
           }
         ]
       },
@@ -29000,15 +29056,13 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'maths-D-q4',
-            question: 'The sequence is defined by uₙ₊₁ = 2uₙ - 3 with u₁ = 5. Find u₂, u₃, and u₄.',
-            marks: 3,
+            question: 'The sequence is defined by uₙ₊₁ = 2uₙ - 3 with u₁ = 5. Find u₂.',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'u₂ = 2(5) - 3 = 7. u₃ = 2(7) - 3 = 11. u₄ = 2(11) - 3 = 19.',
+            modelAnswer: 'u₂ = 2(5) - 3 = 7.',
             markingCriteria: {
               breakdown: [
-                'u₂ = 7 (1 mark)',
-                'u₃ = 11 (1 mark)',
-                'u₄ = 19 (1 mark)'
+                'u₂ = 7 (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Sequences and Series'
@@ -29056,6 +29110,49 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q8',
+            question: 'Find the nth term of the arithmetic sequence 5, 9, 13, 17, ...',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'First term a = 5, common difference d = 4. nth term = a + (n-1)d = 5 + 4(n-1) = 4n + 1.',
+            markingCriteria: {
+              breakdown: [
+                'Identify a = 5, d = 4 (1 mark)',
+                'nth term = 4n + 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q9',
+            question: 'Find the 10th term of the geometric sequence 2, 6, 18, 54, ...',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'First term a = 2, common ratio r = 3. 10th term = ar⁹ = 2 × 3⁹ = 2 × 19683 = 39366.',
+            markingCriteria: {
+              breakdown: [
+                'Identify a = 2, r = 3 (1 mark)',
+                'Calculate 10th term = 39366 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
+          },
+          {
+            id: 'maths-D-q10',
+            question: 'Find the sum of the first 8 terms of the geometric series 3 + 6 + 12 + ...',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'a = 3, r = 2, n = 8. Sₙ = a(rⁿ - 1)/(r - 1) = 3(2⁸ - 1)/(2 - 1) = 3(256 - 1) = 3(255) = 765.',
+            markingCriteria: {
+              breakdown: [
+                'Identify a = 3, r = 2 (1 mark)',
+                'Apply sum formula (1 mark)',
+                'S₈ = 765 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Sequences and Series'
           }
         ]
       },
@@ -29079,14 +29176,26 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'maths-E-q2',
-            question: 'A sector of a circle has radius 6 cm and angle 2 radians. Find the arc length and sector area.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Arc length = rθ = 6 × 2 = 12 cm. Sector area = 1/2 r²θ = 1/2 × 36 × 2 = 36 cm².',
+            question: 'A sector of a circle has radius 6 cm and angle 2 radians. Find the arc length.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Arc length = rθ = 6 × 2 = 12 cm.',
             markingCriteria: {
               breakdown: [
                 'Apply arc length formula (1 mark)',
-                'Arc length = 12 cm (1 mark)',
+                'Arc length = 12 cm (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q3',
+            question: 'A sector of a circle has radius 6 cm and angle 2 radians. Find the sector area.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Sector area = 1/2 r²θ = 1/2 × 36 × 2 = 36 cm².',
+            markingCriteria: {
+              breakdown: [
                 'Apply area formula (1 mark)',
                 'Area = 36 cm² (1 mark)'
               ]
@@ -29094,22 +29203,34 @@ export const curriculum: Subject[] = [
             specReference: 'AQA A-Level Maths - Trigonometry'
           },
           {
-            id: 'maths-E-q3',
-            question: 'Given sin θ = 0.6 and cos θ = 0.8, find tan θ and sec θ.',
-            marks: 3,
+            id: 'maths-E-q4',
+            question: 'Given sin θ = 0.6 and cos θ = 0.8, find tan θ.',
+            marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'tan θ = sin θ / cos θ = 0.6 / 0.8 = 3/4 = 0.75. sec θ = 1 / cos θ = 1 / 0.8 = 5/4 = 1.25.',
+            modelAnswer: 'tan θ = sin θ / cos θ = 0.6 / 0.8 = 3/4 = 0.75.',
             markingCriteria: {
               breakdown: [
-                'Calculate tan θ correctly (1 mark)',
-                'tan θ = 0.75 (1 mark)',
+                'Apply formula tan θ = sin θ / cos θ (1 mark)',
+                'tan θ = 0.75 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q5',
+            question: 'Given sin θ = 0.6 and cos θ = 0.8, find sec θ.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'sec θ = 1 / cos θ = 1 / 0.8 = 5/4 = 1.25.',
+            markingCriteria: {
+              breakdown: [
                 'sec θ = 1.25 (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Trigonometry'
           },
           {
-            id: 'maths-E-q4',
+            id: 'maths-E-q6',
             question: 'Prove the identity sec²θ = 1 + tan²θ',
             marks: 3,
             difficulty: 'medium',
@@ -29124,49 +29245,59 @@ export const curriculum: Subject[] = [
             specReference: 'AQA A-Level Maths - Trigonometry'
           },
           {
-            id: 'maths-E-q5',
-            question: 'Use the double angle formula to find sin 120° given that sin 60° = √3/2.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'sin 120° = sin(2 × 60°) = 2 sin 60° cos 60° = 2 × (√3/2) × (1/2) = √3/2. Alternatively, sin 120° = sin(180° - 60°) = sin 60° = √3/2.',
+            id: 'maths-E-q7',
+            question: 'Solve cos θ = 0.5 for 0° ≤ θ ≤ 360°',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'θ = 60° or θ = 300° (cos is positive in first and fourth quadrants)',
             markingCriteria: {
               breakdown: [
-                'Apply double angle or supplementary angle (1 mark)',
-                'Substitute values correctly (1 mark)',
-                'sin 120° = √3/2 (1 mark)'
+                'θ = 60° (1 mark)',
+                'θ = 300° (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Trigonometry'
           },
           {
-            id: 'maths-E-q6',
-            question: 'Express 3 cos θ + 4 sin θ in the form R cos(θ - α) where R > 0 and 0 < α < 90°.',
+            id: 'maths-E-q8',
+            question: 'Express 5 sin θ + 12 cos θ in the form R sin(θ + α) where R > 0.',
             marks: 4,
             difficulty: 'hard',
-            modelAnswer: 'R cos(θ - α) = R cos θ cos α + R sin θ sin α. Comparing: R cos α = 3, R sin α = 4. R² = 9 + 16 = 25, so R = 5. tan α = 4/3, so α = 53.1°. Answer: 5 cos(θ - 53.1°).',
+            modelAnswer: 'R sin(θ + α) = R sin θ cos α + R cos θ sin α. Comparing: R cos α = 5, R sin α = 12. R² = 25 + 144 = 169, so R = 13. tan α = 12/5, so α = 67.4°. Answer: 13 sin(θ + 67.4°).',
             markingCriteria: {
               breakdown: [
-                'Set up R cos α = 3, R sin α = 4 (1 mark)',
-                'Find R = 5 (1 mark)',
-                'Find α = 53.1° (1 mark)',
+                'Set up R cos α = 5, R sin α = 12 (1 mark)',
+                'Find R = 13 (1 mark)',
+                'Find α = 67.4° (1 mark)',
                 'Final form (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Trigonometry'
           },
           {
-            id: 'maths-E-q7',
-            question: 'Solve 2 cos² θ + 3 sin θ - 3 = 0 for 0° ≤ θ ≤ 360°',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Use cos²θ = 1 - sin²θ: 2(1 - sin²θ) + 3 sin θ - 3 = 0. 2 - 2 sin²θ + 3 sin θ - 3 = 0. -2 sin²θ + 3 sin θ - 1 = 0. 2 sin²θ - 3 sin θ + 1 = 0. (2 sin θ - 1)(sin θ - 1) = 0. sin θ = 1/2 or sin θ = 1. θ = 30°, 150°, 90°.',
+            id: 'maths-E-q9',
+            question: 'Solve sin 2θ = 0.5 for 0° ≤ θ ≤ 180°',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '2θ = 30°, 150°, 390°, 510°. Dividing by 2: θ = 15°, 75°, 195°, 255°. Within range 0° ≤ θ ≤ 180°: θ = 15°, 75°.',
             markingCriteria: {
               breakdown: [
-                'Substitute cos²θ = 1 - sin²θ (1 mark)',
-                'Form quadratic in sin θ (1 mark)',
-                'Factorise correctly (1 mark)',
-                'Find sin θ = 1/2 and sin θ = 1 (1 mark)',
-                'All solutions: 30°, 90°, 150° (1 mark)'
+                'Find 2θ values (1 mark)',
+                'Divide by 2 (1 mark)',
+                'Select valid solutions θ = 15°, 75° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Trigonometry'
+          },
+          {
+            id: 'maths-E-q10',
+            question: 'Convert 3π/4 radians to degrees.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '3π/4 × 180°/π = 3 × 180°/4 = 135°.',
+            markingCriteria: {
+              breakdown: [
+                '135° (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Trigonometry'
@@ -29260,6 +29391,63 @@ export const curriculum: Subject[] = [
                 'Convert to exponential: x² - 9 = 16 (1 mark)',
                 'Solve to get x = ±5 (1 mark)',
                 'Reject x = -5, final answer x = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q7',
+            question: 'Simplify 2 log₄ 8',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '2 log₄ 8 = log₄ 8² = log₄ 64. Since 4³ = 64, log₄ 64 = 3.',
+            markingCriteria: {
+              breakdown: [
+                'Apply log law: log₄ 64 (1 mark)',
+                'Answer = 3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q8',
+            question: 'Solve e^(2x) = 7, giving your answer to 3 significant figures.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Take ln of both sides: 2x = ln 7. x = ln 7 / 2 = 1.946 / 2 = 0.973 (3 s.f.)',
+            markingCriteria: {
+              breakdown: [
+                'Apply natural logarithm (1 mark)',
+                'Rearrange to x = ln 7 / 2 (1 mark)',
+                'x = 0.973 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q9',
+            question: 'Solve 5^(x+1) = 25',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '5^(x+1) = 5². Therefore x + 1 = 2, so x = 1.',
+            markingCriteria: {
+              breakdown: [
+                'Recognize 25 = 5² (1 mark)',
+                'x = 1 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
+          },
+          {
+            id: 'maths-F-q10',
+            question: 'Express log₃ 5 in terms of natural logarithms.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'log₃ 5 = ln 5 / ln 3',
+            markingCriteria: {
+              breakdown: [
+                'Apply change of base formula (1 mark)',
+                'ln 5 / ln 3 (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Exponentials and Logarithms'
@@ -29565,6 +29753,20 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Integration'
+          },
+          {
+            id: 'maths-H-q10',
+            question: 'Find ∫sin(3x) dx',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '∫sin(3x) dx = -(1/3)cos(3x) + C',
+            markingCriteria: {
+              breakdown: [
+                'Correct coefficient -1/3 (1 mark)',
+                'Include constant C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Integration'
           }
         ]
       },
@@ -29589,15 +29791,26 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'maths-I-q2',
-            question: 'The equation x³ = 2x + 5 can be rearranged to x = ∛(2x + 5). Use the iteration xₙ₊₁ = ∛(2xₙ + 5) with x₀ = 2 to find x₁, x₂, and x₃ to 3 decimal places.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'x₁ = ∛(2(2) + 5) = ∛9 = 2.080. x₂ = ∛(2(2.080) + 5) = ∛9.160 = 2.093. x₃ = ∛(2(2.093) + 5) = ∛9.186 = 2.095.',
+            question: 'The equation x³ = 2x + 5 can be rearranged to x = ∛(2x + 5). Use the iteration xₙ₊₁ = ∛(2xₙ + 5) with x₀ = 2 to find x₁ to 3 decimal places.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'x₁ = ∛(2(2) + 5) = ∛9 = 2.080.',
             markingCriteria: {
               breakdown: [
-                'x₁ = 2.080 (1 mark)',
-                'x₂ = 2.093 (1 mark)',
-                'x₃ = 2.095 (1 mark)'
+                'x₁ = 2.080 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q2b',
+            question: 'Continue the iteration xₙ₊₁ = ∛(2xₙ + 5) with x₁ = 2.080 to find x₂ to 3 decimal places.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'x₂ = ∛(2(2.080) + 5) = ∛9.160 = 2.093.',
+            markingCriteria: {
+              breakdown: [
+                'x₂ = 2.093 (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Numerical Methods'
@@ -29629,6 +29842,90 @@ export const curriculum: Subject[] = [
                 'Show oscillating values (1 mark)',
                 'State non-convergence (1 mark)',
                 'Explain reason (gradient condition) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q5',
+            question: 'Use Newton-Raphson method with x₀ = 1 to find one iteration x₁ for the equation x³ - x - 1 = 0.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'f(x) = x³ - x - 1, f\'(x) = 3x² - 1. xₙ₊₁ = xₙ - f(xₙ)/f\'(xₙ). f(1) = -1, f\'(1) = 2. x₁ = 1 - (-1)/2 = 1 + 0.5 = 1.5.',
+            markingCriteria: {
+              breakdown: [
+                'Find f\'(x) = 3x² - 1 (1 mark)',
+                'Apply Newton-Raphson formula (1 mark)',
+                'x₁ = 1.5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q6',
+            question: 'Show that x³ - 4x + 1 = 0 has a root between x = 0 and x = 1.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'f(0) = 1 > 0. f(1) = 1 - 4 + 1 = -2 < 0. Change of sign indicates a root exists in (0, 1).',
+            markingCriteria: {
+              breakdown: [
+                'Calculate f(0) and f(1) (1 mark)',
+                'State change of sign conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q7',
+            question: 'Use Simpson\'s rule with 4 strips to estimate ∫₀² (x² + 1) dx.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'h = 0.5. x: 0, 0.5, 1, 1.5, 2. y: 1, 1.25, 2, 3.25, 5. Area ≈ (h/3)[y₀ + 4(y₁ + y₃) + 2y₂ + y₄] = (0.5/3)[1 + 4(1.25 + 3.25) + 2(2) + 5] = (0.5/3)[1 + 18 + 4 + 5] = (0.5/3)(28) = 14/3 ≈ 4.67.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate y-values (1 mark)',
+                'Apply Simpson\'s rule formula (1 mark)',
+                'Calculate correctly (1 mark)',
+                'Answer = 14/3 or 4.67 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q8',
+            question: 'A sequence is defined by xₙ₊₁ = √(2xₙ + 3) with x₀ = 3. Find x₁.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'x₁ = √(2(3) + 3) = √9 = 3.',
+            markingCriteria: {
+              breakdown: [
+                'x₁ = 3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q9',
+            question: 'State one advantage of the trapezium rule over Simpson\'s rule.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The trapezium rule requires fewer calculations and can use any number of strips, while Simpson\'s rule requires an even number of strips.',
+            markingCriteria: {
+              breakdown: [
+                'Valid advantage (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Numerical Methods'
+          },
+          {
+            id: 'maths-I-q10',
+            question: 'Describe one limitation of using iteration methods to solve equations.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Iterations may not converge if the starting value is not close enough to the root, or if the gradient condition is not satisfied near the root.',
+            markingCriteria: {
+              breakdown: [
+                'Valid limitation (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Numerical Methods'
@@ -29710,6 +30007,78 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q6',
+            question: 'Find the scalar product a · b where a = 3i + 2j - k and b = i - 2j + 4k.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'a · b = (3)(1) + (2)(-2) + (-1)(4) = 3 - 4 - 4 = -5.',
+            markingCriteria: {
+              breakdown: [
+                'Multiply corresponding components (1 mark)',
+                'Sum to get -5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q7',
+            question: 'Find the angle between vectors a = 2i + j and b = i + 3j.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'a · b = (2)(1) + (1)(3) = 5. |a| = √5, |b| = √10. cos θ = (a · b)/(|a||b|) = 5/(√5 × √10) = 5/√50 = 1/√2. θ = 45°.',
+            markingCriteria: {
+              breakdown: [
+                'Find a · b = 5 (1 mark)',
+                'Find |a| = √5, |b| = √10 (1 mark)',
+                'Apply formula cos θ = (a · b)/(|a||b|) (1 mark)',
+                'θ = 45° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q8',
+            question: 'Show that vectors a = 2i + 3j and b = 6i - 4j are perpendicular.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'a · b = (2)(6) + (3)(-4) = 12 - 12 = 0. Since a · b = 0, the vectors are perpendicular.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate a · b = 0 (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q9',
+            question: 'A line passes through point A(2, 1, 3) with direction vector d = i + 2j - k. Write the vector equation of the line.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'r = (2i + j + 3k) + λ(i + 2j - k) or r = a + λd where a = 2i + j + 3k and d = i + 2j - k.',
+            markingCriteria: {
+              breakdown: [
+                'Correct position vector a (1 mark)',
+                'Correct form r = a + λd (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
+          },
+          {
+            id: 'maths-J-q10',
+            question: 'Express the vector AB where A = (1, 2, 4) and B = (3, 5, 7) in component form.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'AB = B - A = (3-1)i + (5-2)j + (7-4)k = 2i + 3j + 3k.',
+            markingCriteria: {
+              breakdown: [
+                'Find differences (1 mark)',
+                'AB = 2i + 3j + 3k (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Vectors'
           }
         ]
       },
@@ -29757,6 +30126,104 @@ export const curriculum: Subject[] = [
                 'Describe method correctly (1 mark)',
                 'Give practical example (1 mark)',
                 'Valid criticism about bias (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q4',
+            question: 'Describe stratified sampling and explain when it should be used.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Stratified sampling divides the population into groups (strata) based on characteristics, then samples proportionally from each stratum. It should be used when the population has clear subgroups that differ significantly, ensuring all subgroups are fairly represented.',
+            markingCriteria: {
+              breakdown: [
+                'Describe method correctly (1 mark)',
+                'Explain proportional sampling (1 mark)',
+                'State when to use it (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q5',
+            question: 'Explain systematic sampling and give one advantage.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Systematic sampling selects every kth member from a list. For example, select every 10th student. Advantage: simple to use and ensures even coverage across the population.',
+            markingCriteria: {
+              breakdown: [
+                'Correct description (1 mark)',
+                'Valid advantage (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q6',
+            question: 'A factory has 200 workers: 120 in production, 50 in quality control, 30 in administration. A stratified sample of 40 workers is needed. How many should be selected from each department?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Production: (120/200) × 40 = 24. Quality control: (50/200) × 40 = 10. Administration: (30/200) × 40 = 6.',
+            markingCriteria: {
+              breakdown: [
+                'Production = 24 (1 mark)',
+                'Quality control = 10 (1 mark)',
+                'Administration = 6 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q7',
+            question: 'Define quota sampling.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Quota sampling involves selecting a predetermined number of individuals from specific categories, but selection within categories is non-random.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q8',
+            question: 'State one disadvantage of using a census instead of sampling.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'A census is time-consuming and expensive, especially for large populations. It may also be impractical or impossible if testing destroys items.',
+            markingCriteria: {
+              breakdown: [
+                'Valid disadvantage (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q9',
+            question: 'Explain sampling bias and give one example.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Sampling bias occurs when certain groups are systematically over- or under-represented. Example: conducting a phone survey excludes people without phones.',
+            markingCriteria: {
+              breakdown: [
+                'Define sampling bias (1 mark)',
+                'Give valid example (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-K-q10',
+            question: 'Describe cluster sampling.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Cluster sampling divides the population into clusters (groups), randomly selects some clusters, then surveys all members within chosen clusters. Useful when population is geographically spread.',
+            markingCriteria: {
+              breakdown: [
+                'Describe method correctly (1 mark)',
+                'State when useful (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Statistics'
@@ -29814,6 +30281,59 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'maths-L-q4',
+            question: 'The following data shows ages: 22, 25, 28, 30, 32, 35, 38. Find the range.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Range = 38 - 22 = 16.',
+            markingCriteria: {
+              breakdown: [
+                'Range = 16 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q5',
+            question: 'Calculate the mode of the data: 3, 5, 7, 5, 9, 5, 8, 6.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Mode = 5 (appears most frequently, 3 times).',
+            markingCriteria: {
+              breakdown: [
+                'Mode = 5 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q6',
+            question: 'State one advantage of using the median over the mean as a measure of central tendency.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The median is not affected by extreme values (outliers), whereas the mean is.',
+            markingCriteria: {
+              breakdown: [
+                'Valid advantage (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q7',
+            question: 'Explain what is meant by a positively skewed distribution.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A positively skewed distribution has a long tail to the right. The mean is greater than the median, and most data values are concentrated on the left side.',
+            markingCriteria: {
+              breakdown: [
+                'Describe shape correctly (1 mark)',
+                'Relationship between mean and median (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q8',
             question: 'Two variables show a positive correlation. Explain why this does not necessarily mean one causes the other.',
             marks: 2,
             difficulty: 'easy',
@@ -29822,6 +30342,34 @@ export const curriculum: Subject[] = [
               breakdown: [
                 'State correlation ≠ causation (1 mark)',
                 'Give valid explanation (confounding variables, etc.) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q9',
+            question: 'Calculate the mean of the frequency distribution: values 1, 2, 3, 4 with frequencies 3, 5, 4, 2.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mean = Σfx/Σf = (1×3 + 2×5 + 3×4 + 4×2)/(3+5+4+2) = (3+10+12+8)/14 = 33/14 ≈ 2.36.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate Σfx (1 mark)',
+                'Calculate Σf (1 mark)',
+                'Mean = 2.36 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Statistics'
+          },
+          {
+            id: 'maths-L-q10',
+            question: 'State one limitation of using the range as a measure of spread.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The range only uses two values (minimum and maximum) and is heavily influenced by outliers, ignoring the distribution of other data.',
+            markingCriteria: {
+              breakdown: [
+                'Valid limitation (1 mark)'
               ]
             },
             specReference: 'AQA A-Level Maths - Statistics'
