@@ -28588,6 +28588,81 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q6',
+            question: 'Prove by deduction that the product of two consecutive integers is always even.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Let the two consecutive integers be n and n+1. Either n is even or n+1 is even. If n = 2k, then n(n+1) = 2k(n+1) which is even. If n = 2k+1, then n+1 = 2k+2 = 2(k+1), so n(n+1) = (2k+1)×2(k+1) = 2(2k+1)(k+1) which is even. In both cases, the product is even.',
+            markingCriteria: {
+              breakdown: [
+                'Identify two cases (1 mark)',
+                'Show product even in both cases (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q7',
+            question: 'Prove by exhaustion that n³ - n is divisible by 3 for all integers n where 1 ≤ n ≤ 4.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'n=1: 1³-1 = 0, divisible by 3. n=2: 8-2 = 6 = 3×2, divisible by 3. n=3: 27-3 = 24 = 3×8, divisible by 3. n=4: 64-4 = 60 = 3×20, divisible by 3. Therefore n³-n is divisible by 3 for all integers 1 ≤ n ≤ 4.',
+            markingCriteria: {
+              breakdown: [
+                'Test all four values (2 marks)',
+                'Show each is divisible by 3 (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q8',
+            question: 'Disprove by counterexample: "If n² is even, then n is divisible by 4".',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Let n = 2. Then n² = 4, which is even. However, 2 is not divisible by 4. Therefore the statement is false.',
+            markingCriteria: {
+              breakdown: [
+                'Provide counterexample n = 2 (1 mark)',
+                'Explain why it disproves the statement (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q9',
+            question: 'Use proof by contradiction to show that log₂3 is irrational.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Assume log₂3 is rational, so log₂3 = p/q where p and q are integers with no common factors. Then 2^(p/q) = 3. Raising both sides to power q: 2^p = 3^q. The left side is even, but the right side is odd. This is a contradiction. Therefore log₂3 is irrational.',
+            markingCriteria: {
+              breakdown: [
+                'State assumption log₂3 = p/q (1 mark)',
+                'Derive 2^p = 3^q (2 marks)',
+                'Identify contradiction (even ≠ odd) (1 mark)',
+                'State conclusion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
+          },
+          {
+            id: 'maths-A-q10',
+            question: 'Prove by deduction that if n is odd, then n² is odd.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'If n is odd, then n = 2k+1 for some integer k. Then n² = (2k+1)² = 4k²+4k+1 = 2(2k²+2k)+1. Since 2k²+2k is an integer, n² is of the form 2m+1, which is odd.',
+            markingCriteria: {
+              breakdown: [
+                'Express n as 2k+1 (1 mark)',
+                'Expand and simplify n² (1 mark)',
+                'Conclude n² is odd (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Maths - Proof'
           }
         ]
       },
