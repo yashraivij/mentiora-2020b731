@@ -3451,6 +3451,182 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
       return chemistryQuestions;
     }
 
+    // Special handling for AQA A-Level Chemistry Paper 1 predicted exam format
+    if (subjectId === 'chemistry-aqa-alevel') {
+      let questionNumber = 1;
+      
+      const alevelChemistryQuestions = [
+        // Section A – Physical Chemistry
+        
+        // 1. Atomic structure (6 marks)
+        {
+          id: 'chem-al-q1',
+          questionNumber: questionNumber++,
+          section: 'Section A – Physical Chemistry',
+          text: 'Define mass number and atomic number.\n\nA sample of magnesium contains three isotopes with mass numbers 24, 25 and 26 and relative abundances 79%, 10% and 11%. Calculate the relative atomic mass of magnesium to three significant figures and explain how a time-of-flight mass spectrometer could be used to obtain these data.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 2. Ionisation energy (6 marks)
+        {
+          id: 'chem-al-q2',
+          questionNumber: questionNumber++,
+          text: 'The first ionisation energies of sodium, magnesium and aluminium are 496, 738 and 578 kJ mol⁻¹ respectively. Explain the general trend across Period 3 and the drop between magnesium and aluminium.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 3. Amount of substance (6 marks)
+        {
+          id: 'chem-al-q3',
+          questionNumber: questionNumber++,
+          text: 'A student dissolves 1.48 g of pure potassium carbonate in water and makes the solution up to 250.0 cm³. Calculate the concentration of the solution in mol dm⁻³ and determine the volume of 0.200 mol dm⁻³ HCl needed to completely react with 25.0 cm³ of this carbonate solution.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 4. Bonding and structure (6 marks)
+        {
+          id: 'chem-al-q4',
+          questionNumber: questionNumber++,
+          text: 'Explain how the differences in bonding and structure account for the contrasting melting points and electrical conductivities of sodium, magnesium oxide and silicon dioxide.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 5. Shapes of molecules and polarity (5 marks)
+        {
+          id: 'chem-al-q5',
+          questionNumber: questionNumber++,
+          text: 'Draw and describe the shapes of NH₃ and BF₃ and explain why ammonia is polar but boron trifluoride is not.\n\n[5 marks]',
+          marks: 5
+        },
+        
+        // 6. Enthalpy changes (8 marks)
+        {
+          id: 'chem-al-q6',
+          questionNumber: questionNumber++,
+          text: 'When 2.00 g of ethanol (C₂H₅OH) burn completely, the temperature of 100.0 g of water rises by 10.5 °C. Calculate the enthalpy of combustion of ethanol in kJ mol⁻¹ and comment on two reasons why the experimental value differs from the data-book value.\n\n[8 marks]',
+          marks: 8
+        },
+        
+        // 7. Hess's law (5 marks)
+        {
+          id: 'chem-al-q7',
+          questionNumber: questionNumber++,
+          text: 'Given:\nCH₄ + 2 O₂ → CO₂ + 2 H₂O   ΔH = –890 kJ mol⁻¹\nC + O₂ → CO₂   ΔH = –394 kJ mol⁻¹\nH₂ + ½ O₂ → H₂O   ΔH = –286 kJ mol⁻¹\n\nUse these data to determine the enthalpy change for C + 2 H₂ → CH₄ and describe the principle of Hess\'s law.\n\n[5 marks]',
+          marks: 5
+        },
+        
+        // 8. Kinetics (7 marks)
+        {
+          id: 'chem-al-q8',
+          questionNumber: questionNumber++,
+          text: 'The decomposition of hydrogen peroxide is studied at several temperatures. A plot of ln k against 1/T gives a straight line. Explain how the activation energy and frequency factor can be obtained from this graph. Describe the shape of a Maxwell–Boltzmann distribution and explain, in terms of the distribution, why increasing the temperature increases the rate of reaction.\n\n[7 marks]',
+          marks: 7
+        },
+        
+        // 9. Equilibrium (6 marks)
+        {
+          id: 'chem-al-q9',
+          questionNumber: questionNumber++,
+          text: 'For the equilibrium\nN₂(g) + 3 H₂(g) ⇌ 2 NH₃(g)   ΔH = –92 kJ mol⁻¹\n\nExplain the effects of increasing pressure, temperature and adding a catalyst on yield and rate, referring to Le Chatelier\'s principle and collision theory.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 10. Equilibrium constant Kc (6 marks)
+        {
+          id: 'chem-al-q10',
+          questionNumber: questionNumber++,
+          text: 'At 400 °C, the equilibrium mixture for the reaction\n2 SO₂(g) + O₂(g) ⇌ 2 SO₃(g)\ncontains [SO₂] = 0.30 mol dm⁻³, [O₂] = 0.20 mol dm⁻³ and [SO₃] = 0.60 mol dm⁻³. Calculate Kc and state its units. Predict the effect on Kc if temperature is increased.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 11. Thermodynamics (7 marks)
+        {
+          id: 'chem-al-q11',
+          questionNumber: questionNumber++,
+          text: 'Define entropy and Gibbs free energy. For a reaction with ΔH = +85 kJ mol⁻¹ and ΔS = +250 J K⁻¹ mol⁻¹, calculate ΔG at 298 K and determine whether the reaction is feasible at this temperature. Calculate the temperature at which it becomes feasible.\n\n[7 marks]',
+          marks: 7
+        },
+        
+        // 12. Electrode potentials (7 marks)
+        {
+          id: 'chem-al-q12',
+          questionNumber: questionNumber++,
+          text: 'A cell is set up using the half-cells\nFe³⁺(aq) + e⁻ ⇌ Fe²⁺(aq)   E° = +0.77 V\nand Zn²⁺(aq) + 2 e⁻ ⇌ Zn(s)   E° = –0.76 V.\n\nWrite the overall cell equation and calculate the EMF of the cell. Explain what happens to the EMF if the concentration of Fe³⁺ is decreased. Describe how a hydrogen–oxygen fuel cell operates and state one advantage of using fuel cells in vehicles.\n\n[7 marks]',
+          marks: 7
+        },
+        
+        // Section B – Inorganic Chemistry
+        
+        // 13. Periodicity (6 marks)
+        {
+          id: 'chem-al-q13',
+          questionNumber: questionNumber++,
+          section: 'Section B – Inorganic Chemistry',
+          text: 'Describe and explain the trend in melting point across the elements sodium to argon in Period 3 and explain why aluminium has a higher melting point than sodium while argon has a very low melting point.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 14. Group 2 (6 marks)
+        {
+          id: 'chem-al-q14',
+          questionNumber: questionNumber++,
+          text: 'Describe how the reactivity of Group 2 metals with water changes down the group and write equations for the reactions of magnesium and barium with water. Explain this trend in terms of ionisation energy.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 15. Group 7 (6 marks)
+        {
+          id: 'chem-al-q15',
+          questionNumber: questionNumber++,
+          text: 'Describe and explain the trend in boiling points and oxidising power of the halogens from fluorine to iodine. Write ionic equations to show how chlorine can displace bromine and iodine from their salts and explain why chlorine acts as an oxidising agent.\n\n[6 marks]',
+          marks: 6
+        },
+        
+        // 16. Redox titration (8 marks)
+        {
+          id: 'chem-al-q16',
+          questionNumber: questionNumber++,
+          text: 'In an experiment, 25.0 cm³ of Fe²⁺ solution required 24.80 cm³ of 0.0200 mol dm⁻³ acidified KMnO₄ for complete oxidation. Write the ionic equation for the reaction and calculate the concentration of Fe²⁺ in mol dm⁻³ and g dm⁻³ as FeSO₄·7H₂O. Explain why no indicator is needed.\n\n[8 marks]',
+          marks: 8
+        },
+        
+        // 17. Transition metals (8 marks)
+        {
+          id: 'chem-al-q17',
+          questionNumber: questionNumber++,
+          text: 'Describe the bonding and structure of complex ions including the terms ligand, coordination number and dative covalent bond. Explain why transition metals form coloured ions, referring to the splitting of d orbitals. Describe and explain the ligand substitution when aqueous copper(II) ions react with excess ammonia.\n\n[8 marks]',
+          marks: 8
+        },
+        
+        // 18. Periodic trends in oxides (7 marks)
+        {
+          id: 'chem-al-q18',
+          questionNumber: questionNumber++,
+          text: 'Explain how the reactions of the Period 3 oxides with water show the change from basic to acidic character across the period. Write balanced equations for the reactions of sodium oxide, aluminium oxide and phosphorus(V) oxide with water and state the approximate pH of each resulting solution.\n\n[7 marks]',
+          marks: 7
+        },
+        
+        // 19. Qualitative analysis (5 marks)
+        {
+          id: 'chem-al-q19',
+          questionNumber: questionNumber++,
+          text: 'Describe chemical tests to distinguish between aqueous solutions containing chloride, bromide and iodide ions. Include observations and any further confirmatory tests required.\n\n[5 marks]',
+          marks: 5
+        },
+        
+        // 20. Extended response – industrial chemistry (10 marks)
+        {
+          id: 'chem-al-q20',
+          questionNumber: questionNumber++,
+          text: 'Discuss how principles of kinetics, equilibrium and thermodynamics are applied in large-scale industrial manufacture of ammonia by the Haber process. Include reference to operating conditions, energy efficiency, catalysts and the balance between economic and environmental considerations.\n\n[10 marks]',
+          marks: 10
+        }
+      ];
+      
+      console.log('AQA A-Level Chemistry Paper 1 questions generated:', alevelChemistryQuestions.length);
+      return alevelChemistryQuestions;
+    }
+
     // Special handling for AQA GCSE Business Paper 1 predicted exam format
     if (subjectId === 'business') {
       let questionNumber = 1;
@@ -6177,6 +6353,7 @@ Write a story about a moment of fear.
       "psychology-aqa-alevel": 120, // 2h (AQA A-Level Psychology Paper 1)
       "maths-aqa-alevel": 120, // 2h (AQA A-Level Maths Paper 1: Pure Mathematics)
       "biology-aqa-alevel": 120, // 2h (AQA A-Level Biology Paper 1)
+      "chemistry-aqa-alevel": 120, // 2h (AQA A-Level Chemistry Paper 1)
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
@@ -6193,6 +6370,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'chemistry') {
       return 100; // AQA Chemistry Paper 1: 100 marks
+    }
+    if (subjectId === 'chemistry-aqa-alevel') {
+      return 105; // AQA A-Level Chemistry Paper 1: 105 marks
     }
     if (subjectId === 'maths') {
       return 80; // AQA Maths Paper 1: 80 marks
