@@ -11,6 +11,7 @@ interface PublicProfile {
   display_name: string | null;
   avatar_url: string | null;
   mp_points: number;
+  streak_days: number;
 }
 
 export function PublicStreakProfiles() {
@@ -70,7 +71,8 @@ export function PublicStreakProfiles() {
                 username: profile.username,
                 display_name: profile.display_name,
                 avatar_url: profile.avatar_url,
-                mp_points: mp
+                mp_points: mp,
+                streak_days: profile.streak_days || 0
               });
             }
           }
@@ -242,8 +244,14 @@ export function PublicStreakProfiles() {
                         }`}>
                           {profile.mp_points}
                         </span>
-                        <span className="text-xs text-muted-foreground/70">Student MP</span>
+                        <span className="text-xs text-muted-foreground/70">MP</span>
                       </div>
+                      {profile.streak_days > 0 && (
+                        <div className="flex items-center justify-center space-x-1 text-xs">
+                          <Zap className="h-3 w-3 text-orange-500" />
+                          <span className="text-muted-foreground">{profile.streak_days} day streak</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
