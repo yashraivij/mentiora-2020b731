@@ -29,59 +29,67 @@ export function PublicStreakProfiles() {
 
   const fetchPublicProfiles = async () => {
     try {
-      // Get actual user profiles from profiles table
-      const { data: profilesData, error: profilesError } = await supabase
-        .from('profiles')
-        .select('id, email, full_name, username, avatar_url');
+      // Get user points first to see who has activity
+      const { data: userPoints, error: pointsError } = await supabase
+        .from('user_points')  
+        .select('user_id, total_points')
+        .gt('total_points', 0)
+        .order('total_points', { ascending: false });
 
-      if (profilesError) {
-        console.error('Error fetching profiles:', profilesError);
+      if (pointsError || !userPoints || userPoints.length === 0) {
+        console.log('No user points found');
         setProfiles([]);
+        setIsLoading(false);
         return;
       }
 
-      // Get user points for each profile
+      const userIds = userPoints.map(p => p.user_id);
+      
+      // Get actual user profiles from profiles table
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, email, full_name, username, avatar_url')
+        .in('id', userIds);
+
+      if (profilesError || !profilesData) {
+        console.error('Error fetching profiles:', profilesError);
+        setProfiles([]);
+        setIsLoading(false);
+        return;
+      }
+
+      // Create a map of profiles for easy lookup
+      const profilesMap = new Map(profilesData.map(p => [p.id, p]));
+      const pointsMap = new Map(userPoints.map(p => [p.user_id, p.total_points]));
+      
+      // Build profiles with MP, only for users that exist in profiles table
       const profilesWithMP = [];
       
-      if (profilesData && profilesData.length > 0) {
-        const userIds = profilesData.map(p => p.id);
+      for (const profile of profilesData) {
+        const mp = pointsMap.get(profile.id) || 0;
         
-        const { data: userPoints, error: pointsError } = await supabase
-          .from('user_points')  
-          .select('user_id, total_points')
-          .in('user_id', userIds);
-
-        if (!pointsError && userPoints) {
-          const pointsMap = new Map(userPoints.map(p => [p.user_id, p.total_points]));
+        if (mp > 0) {
+          // Get streak for this user
+          const { data: streakData } = await supabase
+            .rpc('get_user_streak', { user_uuid: profile.id });
           
-          // Get streak data
-          for (const profile of profilesData) {
-            const mp = pointsMap.get(profile.id) || 0;
-            
-            // Only include users with MP > 0 (users who have actually participated)
-            if (mp > 0) {
-              // Get streak for this user
-              const { data: streakData } = await supabase
-                .rpc('get_user_streak', { user_uuid: profile.id });
-              
-              const displayName = profile.full_name || profile.username || profile.email?.split('@')[0] || 'User';
-              
-              profilesWithMP.push({
-                id: profile.id,
-                username: displayName,
-                display_name: displayName,
-                avatar_url: profile.avatar_url,
-                mp_points: mp,
-                streak_days: streakData || 0
-              });
-            }
-          }
+          const displayName = profile.full_name || profile.username || profile.email?.split('@')[0] || 'User';
+          
+          profilesWithMP.push({
+            id: profile.id,
+            username: displayName,
+            display_name: displayName,
+            avatar_url: profile.avatar_url,
+            mp_points: mp,
+            streak_days: streakData || 0
+          });
         }
       }
 
       // Sort by MP points descending
       const sortedProfiles = profilesWithMP.sort((a, b) => b.mp_points - a.mp_points);
       
+      console.log('Loaded profiles:', sortedProfiles.length);
       setProfiles(sortedProfiles);
     } catch (error) {
       console.error('Error in fetchPublicProfiles:', error);
