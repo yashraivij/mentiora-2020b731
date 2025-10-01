@@ -29,20 +29,13 @@ export function PublicStreakProfiles() {
 
   const fetchPublicProfiles = async () => {
     try {
-      // Get real user profiles with their MP points
+      // Get actual user profiles from profiles table
       const { data: profilesData, error: profilesError } = await supabase
-        .from('public_profiles')
-        .select(`
-          id,
-          user_id,
-          username,
-          display_name,
-          avatar_url,
-          streak_days
-        `);
+        .from('profiles')
+        .select('id, email, full_name, username, avatar_url');
 
       if (profilesError) {
-        console.error('Error fetching public profiles:', profilesError);
+        console.error('Error fetching profiles:', profilesError);
         setProfiles([]);
         return;
       }
@@ -51,7 +44,7 @@ export function PublicStreakProfiles() {
       const profilesWithMP = [];
       
       if (profilesData && profilesData.length > 0) {
-        const userIds = profilesData.map(p => p.user_id);
+        const userIds = profilesData.map(p => p.id);
         
         const { data: userPoints, error: pointsError } = await supabase
           .from('user_points')  
@@ -61,18 +54,25 @@ export function PublicStreakProfiles() {
         if (!pointsError && userPoints) {
           const pointsMap = new Map(userPoints.map(p => [p.user_id, p.total_points]));
           
+          // Get streak data
           for (const profile of profilesData) {
-            const mp = pointsMap.get(profile.user_id) || 0;
+            const mp = pointsMap.get(profile.id) || 0;
             
             // Only include users with MP > 0 (users who have actually participated)
             if (mp > 0) {
+              // Get streak for this user
+              const { data: streakData } = await supabase
+                .rpc('get_user_streak', { user_uuid: profile.id });
+              
+              const displayName = profile.full_name || profile.username || profile.email?.split('@')[0] || 'User';
+              
               profilesWithMP.push({
                 id: profile.id,
-                username: profile.username,
-                display_name: profile.display_name,
+                username: displayName,
+                display_name: displayName,
                 avatar_url: profile.avatar_url,
                 mp_points: mp,
-                streak_days: profile.streak_days || 0
+                streak_days: streakData || 0
               });
             }
           }
