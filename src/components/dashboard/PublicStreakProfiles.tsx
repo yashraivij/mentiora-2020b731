@@ -58,15 +58,14 @@ export function PublicStreakProfiles() {
         return;
       }
 
-      // Create a map of profiles for easy lookup
-      const profilesMap = new Map(profilesData.map(p => [p.id, p]));
-      const pointsMap = new Map(userPoints.map(p => [p.user_id, p.total_points]));
-      
-      // Build profiles with MP, only for users that exist in profiles table
+      // Build profiles with MP, only for users that actually exist in profiles table
       const profilesWithMP = [];
       
       for (const profile of profilesData) {
-        const mp = pointsMap.get(profile.id) || 0;
+        // Only include if user has a valid email (real user account)
+        if (!profile.email) continue;
+        
+        const mp = userPoints.find(p => p.user_id === profile.id)?.total_points || 0;
         
         if (mp > 0) {
           // Get streak for this user
