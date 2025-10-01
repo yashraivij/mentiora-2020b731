@@ -766,7 +766,27 @@ const Dashboard = () => {
         publicProfiles.forEach(p => profilesMap.set(p.user_id, p));
       }
       
-      // Only users with public_profiles entries will appear on the leaderboard
+      // Get missing users from profiles table as fallback
+      const existingUserIds = Array.from(profilesMap.keys());
+      const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
+      
+      if (missingUserIds.length > 0) {
+        const { data: fallbackProfiles, error: fallbackError } = await supabase
+          .from('profiles')
+          .select('id, full_name, username, email')
+          .in('id', missingUserIds);
+        
+        if (!fallbackError && fallbackProfiles) {
+          for (const profile of fallbackProfiles) {
+            profilesMap.set(profile.id, {
+              user_id: profile.id,
+              username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
+              display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
+              streak_days: 0
+            });
+          }
+        }
+      }
       
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
@@ -860,7 +880,27 @@ const Dashboard = () => {
         publicProfiles.forEach(p => profilesMap.set(p.user_id, p));
       }
       
-      // Only users with public_profiles entries will appear on the leaderboard
+      // Get missing users from profiles table as fallback
+      const existingUserIds = Array.from(profilesMap.keys());
+      const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
+      
+      if (missingUserIds.length > 0) {
+        const { data: fallbackProfiles, error: fallbackError } = await supabase
+          .from('profiles')
+          .select('id, full_name, username, email')
+          .in('id', missingUserIds);
+        
+        if (!fallbackError && fallbackProfiles) {
+          for (const profile of fallbackProfiles) {
+            profilesMap.set(profile.id, {
+              user_id: profile.id,
+              username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
+              display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
+              streak_days: 0
+            });
+          }
+        }
+      }
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
       // Transform to leaderboard format
