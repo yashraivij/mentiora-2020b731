@@ -88,7 +88,7 @@ export function PublicStreakProfiles() {
       // Sort by MP points descending
       const sortedProfiles = profilesWithMP.sort((a, b) => b.mp_points - a.mp_points);
       
-      console.log('Loaded profiles:', sortedProfiles.length);
+      console.log('Loaded profiles:', sortedProfiles.length, sortedProfiles.map(p => ({ name: p.username, mp: p.mp_points })));
       setProfiles(sortedProfiles);
     } catch (error) {
       console.error('Error in fetchPublicProfiles:', error);
