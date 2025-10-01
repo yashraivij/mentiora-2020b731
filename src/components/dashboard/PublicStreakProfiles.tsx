@@ -45,11 +45,12 @@ export function PublicStreakProfiles() {
 
       const userIds = userPoints.map(p => p.user_id);
       
-      // Get actual user profiles from profiles table
+      // Get actual user profiles from profiles table - only those with valid emails
       const { data: profilesData, error: profilesError } = await supabase
         .from('profiles')
         .select('id, email, full_name, username, avatar_url')
-        .in('id', userIds);
+        .in('id', userIds)
+        .not('email', 'is', null);
 
       if (profilesError || !profilesData) {
         console.error('Error fetching profiles:', profilesError);
