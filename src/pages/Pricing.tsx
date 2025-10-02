@@ -155,7 +155,7 @@ const Pricing = () => {
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
                   <Star className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-400 font-medium text-xs">Best Deal</span>
+                  <span className="text-yellow-400 font-medium text-xs">Limited Time</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 font-sans">
                   Pay monthly
@@ -168,11 +168,11 @@ const Pricing = () => {
                     £9.99<span className="text-lg font-medium text-white/80">/month</span>
                   </div>
                   <div className="inline-flex items-center gap-1 bg-green-400/20 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-green-400 font-medium text-xs">50% OFF - Forever</span>
+                    <span className="text-green-400 font-medium text-xs">50% OFF Forever</span>
                   </div>
                 </div>
                 <p className="text-white/70 text-sm font-sans mt-2">
-                  Just £9.99 every month. Cancel any time.
+                  Cancel any time.
                 </p>
               </div>
               
