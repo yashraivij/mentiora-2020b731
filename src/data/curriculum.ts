@@ -33644,5 +33644,1148 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'history-edexcel-gcse',
+    name: 'History',
+    topics: [
+      {
+        id: 'crime-punishment-britain',
+        name: 'Crime and punishment in Britain, c1000–present (+ Whitechapel)',
+        questions: [
+          {
+            id: 'hist-crime-q1',
+            question: 'Give two examples of crimes against the person in medieval England.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Murder and assault. These crimes involved physical violence against individuals and were taken seriously by medieval communities, often dealt with through systems like hue and cry.',
+            markingCriteria: {
+              breakdown: [
+                'First valid crime identified (2 marks)',
+                'Second valid crime identified (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Crime and punishment c1000-1500'
+          },
+          {
+            id: 'hist-crime-q2',
+            question: 'Explain why the Normans introduced Forest Laws after 1066.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Normans introduced Forest Laws to assert royal authority and control over land. William I declared vast areas as royal forests where hunting rights were reserved for the king and nobility. This served multiple purposes: it demonstrated Norman power over the English population, provided revenue through fines for poaching, and supplied food and sport for the Norman elite. The laws were deeply unpopular because they restricted common rights that Anglo-Saxons had previously enjoyed, such as gathering wood and grazing animals. Punishments were severe, including mutilation and death, showing the harsh nature of Norman rule.',
+            markingCriteria: {
+              breakdown: [
+                'Demonstrate royal authority/power (2 marks)',
+                'Economic benefit through fines (2 marks)',
+                'Reserved hunting for nobility (2 marks)',
+                'Restricted Anglo-Saxon rights (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Norman changes to crime'
+          },
+          {
+            id: 'hist-crime-q3',
+            question: 'Describe how the Church influenced law enforcement in medieval England.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Church provided sanctuary for criminals fleeing justice, allowing them 40 days of protection. Clergy could claim Benefit of Clergy to be tried in Church courts rather than royal courts, which imposed lighter sentences. The Church also used trial by ordeal as a method of determining guilt, believing God would reveal the truth. Church courts dealt with moral crimes such as adultery.',
+            markingCriteria: {
+              breakdown: [
+                'Sanctuary explained (1 mark)',
+                'Benefit of Clergy explained (1 mark)',
+                'Trial by ordeal mentioned (1 mark)',
+                'Church courts for moral crimes (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Church influence on crime c1000-1500'
+          },
+          {
+            id: 'hist-crime-q4',
+            question: 'Explain why witchcraft became a serious crime in Early Modern England.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Witchcraft prosecutions increased dramatically between 1500-1700 due to religious and social changes. The Protestant Reformation created religious anxiety and fear of the Devil\'s influence. King James I was personally interested in witchcraft and wrote "Daemonologie," which encouraged prosecutions. The 1563 Witchcraft Act made it a capital crime. Social tensions meant vulnerable people, especially elderly women, were scapegoated during times of hardship. The printing press spread pamphlets about witch trials, creating moral panic. Matthew Hopkins, the "Witchfinder General," conducted intensive witch-hunts in 1645-47, using dubious methods like "swimming" and sleep deprivation to extract confessions.',
+            markingCriteria: {
+              breakdown: [
+                'Religious anxiety/Reformation impact (2 marks)',
+                'Royal interest/James I (2 marks)',
+                'Social scapegoating (2 marks)',
+                'Matthew Hopkins and methods (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Crime c1500-1700'
+          },
+          {
+            id: 'hist-crime-q5',
+            question: 'How far do you agree that Robert Peel transformed law enforcement in the 19th century?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Robert Peel fundamentally transformed British law enforcement through creating the Metropolitan Police in 1829. Before this, law enforcement relied on ineffective parish constables and watchmen. Peel\'s "Peelers" or "Bobbies" were full-time, uniformed officers paid a regular wage, making them less susceptible to corruption. They patrolled beats to prevent crime rather than just respond to it. The force expanded rapidly and became a model for police forces nationwide. However, transformation was gradual - initially there was public hostility and suspicion of a standing police force. The Met faced riots and criticism. County police forces were only made compulsory in 1856. Some areas resisted change, preferring traditional methods. Additionally, Peel\'s broader penal reforms, including reducing capital offenses in the Bloody Code, showed his influence extended beyond just policing. Overall, while Peel initiated fundamental change, the transformation was incomplete in his lifetime and faced significant resistance.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument with judgment (4 marks)',
+                'Analysis of Peel\'s police reforms (4 marks)',
+                'Analysis of limitations/resistance (4 marks)',
+                'Conclusion evaluating extent of transformation (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Law enforcement c1700-1900'
+          },
+          {
+            id: 'hist-crime-q6',
+            question: 'Explain one similarity and one difference between crime in medieval England and crime in modern Britain.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Similarity: Both periods recognize crimes against the person (murder, assault) and property (theft) as serious offenses requiring punishment. The fundamental categories of crime remain constant. Difference: Modern Britain prosecutes new categories of crime unknown in medieval times, such as driving offenses, drug crimes, and race hate crimes. These reflect technological and social changes. Medieval England prosecuted crimes like heresy and witchcraft that are no longer criminal in modern Britain, reflecting changed religious attitudes and scientific understanding.',
+            markingCriteria: {
+              breakdown: [
+                'Valid similarity identified (2 marks)',
+                'Similarity explained with evidence (2 marks)',
+                'Valid difference identified (2 marks)',
+                'Difference explained with evidence (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Continuity and change in crime'
+          },
+          {
+            id: 'hist-crime-q7',
+            question: 'Describe the living conditions in Whitechapel, c1870-1900, that contributed to high crime rates.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'Whitechapel suffered from severe overcrowding, with families cramped into single-room tenements and lodging houses. Rookeries (slum areas) had narrow, dark alleyways that made policing difficult and provided hiding places for criminals. Poverty was endemic, with widespread unemployment and low wages pushing people toward theft and prostitution. Lodging houses charged 4d per night, leaving many homeless if they couldn\'t pay. Workhouses were feared and avoided. The area experienced mass immigration, particularly Irish fleeing famine and Eastern European Jews fleeing pogroms in the 1880s, creating ethnic tensions. Sanitation was poor with shared outside toilets and contaminated water. Alcohol abuse was common, with numerous pubs fostering violence. The environment created desperation and lack of opportunity, making crime a survival strategy for many inhabitants.',
+            markingCriteria: {
+              breakdown: [
+                'Overcrowding and housing conditions (3 marks)',
+                'Poverty and unemployment (3 marks)',
+                'Immigration and population pressure (3 marks)',
+                'Impact on crime rates (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Whitechapel Historic Environment'
+          },
+          {
+            id: 'hist-crime-q8',
+            question: 'Explain the significance of Derek Bentley\'s case for the abolition of the death penalty.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Derek Bentley was hanged in 1953 for the murder of a policeman, though his accomplice Christopher Craig actually fired the gun. Bentley\'s case became significant because of several controversial factors: he had learning difficulties and was already under arrest when Craig fired. The evidence that he shouted "Let him have it" was disputed and ambiguous. His execution despite these circumstances sparked public outrage and debate. The case highlighted problems with capital punishment including the impossibility of correcting miscarriages of justice. It contributed to growing public opinion against hanging. The case became a rallying point for abolitionists in the 1950s-60s, contributing to the suspension of capital punishment in 1965 and eventual abolition in 1969. Bentley received a posthumous pardon in 1993.',
+            markingCriteria: {
+              breakdown: [
+                'Circumstances of the case explained (2 marks)',
+                'Controversial aspects identified (2 marks)',
+                'Public reaction and debate (2 marks)',
+                'Contribution to abolition movement (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Death penalty c1900-present'
+          },
+          {
+            id: 'hist-crime-q9',
+            question: 'Give two ways the Metropolitan Police tried to investigate the Jack the Ripper murders.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Police used house-to-house inquiries and interviews with witnesses and potential suspects. They employed early forensic methods including photography of crime scenes and victims. The police also coordinated between different departments - H Division, City Police, and Scotland Yard - though this coordination was often poor.',
+            markingCriteria: {
+              breakdown: [
+                'First investigation method identified (2 marks)',
+                'Second investigation method identified (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Whitechapel policing'
+          },
+          {
+            id: 'hist-crime-q10',
+            question: 'How useful are Sources A and B for an enquiry into the problems faced by police in Whitechapel? [Source A: Extract from H Division police report about difficulty patrolling rookeries. Source B: Newspaper article criticizing police failure to catch Jack the Ripper]',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Source A is useful because it provides direct evidence from police officers about the practical challenges they faced. As an internal report, it is likely honest about difficulties without concern for public image. It reveals specific problems like narrow alleyways and uncooperative residents. However, its usefulness is limited as it represents only police perspective and may emphasize difficulties to justify failures or request more resources. Source B is useful for showing public attitudes toward police and the pressure they faced from media criticism during the Ripper investigation. Newspapers shaped public opinion and increased demands on police. However, newspapers often sensationalized events for sales and may not accurately represent police capabilities or efforts. The source is more useful for understanding public perception than actual policing challenges. Together, the sources complement each other - one showing internal police view, the other external public pressure - but both need corroboration with other evidence like statistics, maps, and witness statements to fully understand Whitechapel policing problems.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of Source A content and provenance (3 marks)',
+                'Evaluation of Source A limitations (2 marks)',
+                'Analysis of Source B content and provenance (3 marks)',
+                'Evaluation of Source B limitations (2 marks)',
+                'Synthesis and judgment of combined utility (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Source utility question'
+          }
+        ]
+      },
+      {
+        id: 'medicine-britain',
+        name: 'Medicine in Britain, c1250–present (+ Western Front)',
+        questions: [
+          {
+            id: 'hist-med-q1',
+            question: 'Give two beliefs about the causes of disease in medieval England.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Theory of Four Humours - belief that imbalance of blood, phlegm, yellow bile and black bile caused disease. Supernatural causes - belief that disease was punishment from God for sin or caused by evil spirits.',
+            markingCriteria: {
+              breakdown: [
+                'Four Humours theory identified (2 marks)',
+                'Supernatural/religious causes identified (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Medicine c1250-1500'
+          },
+          {
+            id: 'hist-med-q2',
+            question: 'Explain why the Church had such influence over medieval medicine.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Church dominated medieval medicine through multiple channels. It controlled education and most literate people were clergy, so medical knowledge was preserved and taught in monasteries. The Church promoted Galen\'s ideas because they fit Christian beliefs about God creating a perfect body. Hospitals were run by monks and nuns who provided care alongside prayer. The Church taught that disease was divine punishment for sin, so prayer and pilgrimage were seen as treatments. Dissection was discouraged on religious grounds, preventing advancement of anatomical knowledge. The Church\'s authority meant questioning accepted medical ideas was seen as challenging God\'s design, limiting progress and innovation.',
+            markingCriteria: {
+              breakdown: [
+                'Church control of education and literacy (2 marks)',
+                'Promotion of Galen and religious compatibility (2 marks)',
+                'Church running hospitals (2 marks)',
+                'Religious explanations limiting progress (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Church influence on medicine'
+          },
+          {
+            id: 'hist-med-q3',
+            question: 'Describe the treatments used during the Black Death of 1348-49.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Religious treatments included prayer, fasting, and pilgrimages to holy sites, as people believed the plague was God\'s punishment. Flagellants whipped themselves to show penance. Medical treatments based on the Four Humours included bloodletting and purging. Miasma theory led people to carry posies of flowers or herbs, burn strong-smelling substances, and avoid "bad air." Quack remedies included wearing charms or drinking mixtures of herbs and mercury.',
+            markingCriteria: {
+              breakdown: [
+                'Religious responses described (1 mark)',
+                'Humoral treatments described (1 mark)',
+                'Miasma-based treatments described (1 mark)',
+                'Other remedies mentioned (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Black Death case study'
+          },
+          {
+            id: 'hist-med-q4',
+            question: 'Explain why there was change and continuity in medical ideas during the Renaissance.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Change occurred as new ideas challenged medieval thinking. Vesalius conducted systematic dissections and published "De Humani Corporis Fabrica" (1543), correcting over 300 of Galen\'s errors about anatomy. Harvey discovered blood circulation (1628), proving the heart pumped blood around the body. The printing press spread new ideas rapidly. The Royal Society (1660) promoted observation and experimentation. Thomas Sydenham advocated direct observation of patients rather than relying on ancient texts. However, continuity persisted because many physicians continued using Galen\'s treatments like bloodletting and purging. The Four Humours theory remained influential. Supernatural beliefs about disease continued. Limited practical impact on patient care meant most treatments remained ineffective. Universities were slow to adopt new ideas, continuing to teach Galen.',
+            markingCriteria: {
+              breakdown: [
+                'Changes - Vesalius/Harvey/new methods (2 marks)',
+                'Impact of printing press/Royal Society (2 marks)',
+                'Continuity - persistence of old ideas (2 marks)',
+                'Limited practical impact on treatment (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Medicine c1500-1700'
+          },
+          {
+            id: 'hist-med-q5',
+            question: 'How far do you agree that Pasteur\'s Germ Theory was the most important medical breakthrough of the 19th century?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Pasteur\'s Germ Theory (1861) was revolutionary, proving microorganisms caused disease and decay. This fundamentally changed medical understanding, replacing miasma theory and humoral ideas. It enabled Koch to identify specific bacteria causing particular diseases (1882 onwards), leading to targeted treatments. Germ Theory inspired Lister\'s antiseptic surgery, dramatically reducing infection deaths. It led to improved public health measures and vaccination development. However, other breakthroughs were also crucial. Anaesthetics (ether, chloroform) transformed surgery by eliminating pain, though initially increasing death rates until combined with antiseptics. Simpson\'s use of chloroform in childbirth saved many lives. Public Health Act 1875 improved sanitation and water supply, preventing disease spread more immediately than Germ Theory. Jenner\'s vaccination (1796) had already saved thousands from smallpox before Germ Theory explained why it worked. Nightingale\'s nursing reforms improved patient care dramatically. While Germ Theory provided the theoretical foundation, practical improvements like sanitation and anaesthetics had more immediate impact. Overall, Germ Theory was most important for long-term medical progress, enabling scientific medicine, but other breakthroughs had significant impact on 19th century health.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument about Germ Theory\'s importance (4 marks)',
+                'Analysis of Germ Theory impact with evidence (4 marks)',
+                'Analysis of other breakthroughs with evidence (4 marks)',
+                'Balanced conclusion with judgment (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Medicine c1700-1900'
+          },
+          {
+            id: 'hist-med-q6',
+            question: 'Explain one way in which prevention of disease in modern Britain is similar to prevention in the 19th century.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Both periods use government intervention and legislation to prevent disease spread. In the 19th century, the Public Health Act 1875 required local councils to provide clean water and proper sanitation. In modern Britain, the government mandates vaccination programs, enforces health and safety regulations, and conducts public health campaigns about lifestyle diseases. Both show the state taking responsibility for citizens\' health rather than leaving it to individuals.',
+            markingCriteria: {
+              breakdown: [
+                'Similarity identified - government role (1 mark)',
+                '19th century example explained (1 mark)',
+                'Modern example explained (1 mark)',
+                'Connection made between periods (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Similarity/difference question'
+          },
+          {
+            id: 'hist-med-q7',
+            question: 'Describe the challenges facing the RAMC in treating casualties on the Western Front.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'The RAMC (Royal Army Medical Corps) faced unprecedented challenges treating millions of casualties. The scale of war overwhelmed medical services - the Battle of the Somme produced hundreds of thousands of wounded. Transportation was difficult across muddy, shell-damaged terrain. Stretcher bearers risked their lives carrying wounded from trenches to Regimental Aid Posts. Horse-drawn ambulances struggled in mud, though motor ambulances were faster when roads permitted. The nature of injuries was devastating - high-explosive shells caused massive trauma and shrapnel wounds. Infection was rampant in filthy trench conditions. Gas attacks produced horrific lung damage requiring new treatments. Head injuries were common due to trench warfare. The evacuation chain had to be efficient - from Regimental Aid Post, to Field Ambulance (dressing station), to Casualty Clearing Station for surgery, to Base Hospital. Any delay meant death from blood loss or infection. Limited understanding of blood transfusion initially hampered treatment. However, the RAMC adapted, developing the Thomas splint for leg fractures, mobile X-ray units, and blood banks. Their work under extreme pressure saved countless lives despite overwhelming odds.',
+            markingCriteria: {
+              breakdown: [
+                'Scale and nature of casualties (3 marks)',
+                'Transportation difficulties (3 marks)',
+                'Infection and specific injuries (3 marks)',
+                'Evacuation chain and adaptations (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Western Front Historic Environment'
+          },
+          {
+            id: 'hist-med-q8',
+            question: 'Explain the significance of Fleming, Florey and Chain in the development of penicillin.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Fleming discovered penicillin by chance in 1928 when mold contaminated his bacterial cultures. He observed it killed bacteria but couldn\'t purify it for medical use and published his findings without developing it further. Florey and Chain, working at Oxford during WWII, saw penicillin\'s potential. They successfully purified it and conducted the first clinical trial in 1941, proving it could cure bacterial infections. They solved mass production problems by freeze-drying and using deep fermentation tanks. US pharmaceutical companies scaled up production using corn steep liquor. By D-Day 1944, enough penicillin existed to treat Allied wounded. The significance was enormous - penicillin became the first true antibiotic, saving millions from infections that had been death sentences. It inspired research into other antibiotics. Fleming\'s discovery was crucial but Florey and Chain\'s development work made penicillin usable.',
+            markingCriteria: {
+              breakdown: [
+                'Fleming\'s discovery explained (2 marks)',
+                'Florey and Chain\'s development work (2 marks)',
+                'Solving production problems (2 marks)',
+                'Impact and significance (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Penicillin case study'
+          },
+          {
+            id: 'hist-med-q9',
+            question: 'Give two ways the NHS improved access to healthcare after 1948.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The NHS provided free healthcare at the point of use, removing financial barriers that had prevented poor people accessing treatment. The NHS also provided free prescriptions, dental care, and eye tests (initially), ensuring comprehensive care regardless of ability to pay.',
+            markingCriteria: {
+              breakdown: [
+                'Free healthcare at point of use (2 marks)',
+                'Free prescriptions/additional services (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Medicine c1900-present'
+          },
+          {
+            id: 'hist-med-q10',
+            question: 'Study Sources A and B. How far do these sources suggest that trench conditions on the Western Front made treating casualties difficult? [Source A: Photograph of stretcher bearers in mud. Source B: Account from RAMC doctor about infection rates]',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Source A strongly suggests difficulties by showing stretcher bearers struggling through deep mud. The visual evidence demonstrates the physical challenge of casualty evacuation - wounded men would suffer further during transport, and delays could prove fatal. The photograph\'s authenticity makes it reliable evidence of terrain conditions, though it shows only one moment and location. Source B provides medical testimony about infection problems. An RAMC doctor would have direct knowledge of how trench dirt, shell fragments, and gas contamination caused wounds to become infected. The source suggests that even after reaching medical facilities, trench conditions\' legacy of contaminated wounds complicated treatment. However, we should consider the source\'s context - doctors might emphasize difficulties to explain death rates or highlight their achievement in saving lives despite obstacles. Together the sources suggest significant difficulties but don\'t show the full picture. We\'d need additional evidence about surgical techniques, success rates, and testimonies from soldiers and nurses. The sources don\'t address developments like the Thomas splint or blood transfusions that helped overcome some difficulties. On balance, the sources provide convincing evidence that trench conditions created major treatment obstacles, particularly during evacuation and regarding infection.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of Source A with inference (3 marks)',
+                'Evaluation of Source A provenance/limitations (2 marks)',
+                'Analysis of Source B with inference (3 marks)',
+                'Evaluation of Source B provenance/limitations (2 marks)',
+                'Judgment using both sources (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Source evaluation question'
+          }
+        ]
+      },
+      {
+        id: 'warfare-british-society',
+        name: 'Warfare and British society, c1250–present (+ London & WWII)',
+        questions: [
+          {
+            id: 'hist-war-q1',
+            question: 'Give two features of the feudal army in medieval England.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Knights owed military service to their lord in exchange for land, typically 40 days per year. The army composition reflected social hierarchy with mounted knights at the top, supported by infantry including archers.',
+            markingCriteria: {
+              breakdown: [
+                'Military service obligation explained (2 marks)',
+                'Social hierarchy/army composition (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Warfare c1250-1500'
+          },
+          {
+            id: 'hist-war-q2',
+            question: 'Explain why the longbow was effective at the Battle of Agincourt (1415).',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The longbow gave English archers significant advantages at Agincourt. Longbows had longer range than French crossbows, allowing English arrows to rain down on French forces before they could respond. Archers could shoot 10-12 arrows per minute compared to 2-3 crossbow bolts, creating a devastating barrage. Arrows could penetrate armor at close range. Henry V positioned archers on flanks protected by stakes, creating a killing ground. The narrow battlefield between woods funneled French cavalry and dismounted knights into concentrated English arrow fire. Muddy ground from rain slowed heavily-armored French knights, making them easy targets. The longbow\'s effectiveness was enhanced by English tactical use of terrain. Mounted French knights were particularly vulnerable - arrows killed horses causing chaos. The combination of weapon technology, tactics, terrain, and weather made the longbow decisive in Henry V\'s victory.',
+            markingCriteria: {
+              breakdown: [
+                'Range and rate of fire advantages (2 marks)',
+                'Tactical positioning and terrain use (2 marks)',
+                'Impact on French cavalry and armor (2 marks)',
+                'Combination with other factors (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Agincourt case study'
+          },
+          {
+            id: 'hist-war-q3',
+            question: 'Describe the impact of gunpowder weapons on medieval warfare.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Cannon could breach castle walls, making stone fortifications less effective and changing siege warfare. Handguns and early muskets began to appear, though initially unreliable. The psychological impact was significant - loud noise and smoke terrified soldiers and horses. Gunpowder weapons gradually reduced the dominance of mounted knights in armor, as firearms could penetrate armor that had protected knights for centuries.',
+            markingCriteria: {
+              breakdown: [
+                'Impact on fortifications (1 mark)',
+                'New weapons types (1 mark)',
+                'Psychological effects (1 mark)',
+                'Decline of mounted knights (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Change in warfare c1250-1500'
+          },
+          {
+            id: 'hist-war-q4',
+            question: 'Explain why Oliver Cromwell\'s New Model Army was successful at the Battle of Naseby (1645).',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The New Model Army represented revolutionary military organization that proved decisive at Naseby. Unlike Royalist forces, it was a professional standing army with regular pay, reducing desertion and improving discipline. Soldiers were promoted on merit rather than social rank, ensuring competent leadership. Cromwell trained his cavalry to maintain formation after charging, unlike Prince Rupert\'s cavalry which scattered in pursuit. At Naseby, Cromwell commanded the right cavalry wing which defeated Royalist cavalry then wheeled to attack Royalist infantry from behind. The infantry center held firm against Royalist attack. Unified red coat uniforms created unit cohesion. Religious motivation made soldiers fight with conviction. Parliamentary cause attracted committed volunteers. Superior numbers helped - 15,000 Parliamentarians against 9,000 Royalists. Cromwell\'s tactical skill and the army\'s discipline were crucial - maintaining formation and executing coordinated maneuvers won the battle.',
+            markingCriteria: {
+              breakdown: [
+                'Professional organization and discipline (2 marks)',
+                'Merit-based promotion and training (2 marks)',
+                'Cromwell\'s cavalry tactics at Naseby (2 marks)',
+                'Religious motivation and other factors (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Naseby case study'
+          },
+          {
+            id: 'hist-war-q5',
+            question: 'How far do you agree that industrialization transformed warfare in the 19th century?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Industrialization fundamentally transformed 19th century warfare through technology, logistics, and scale. Railways revolutionized troop movement and supply, as seen in the American Civil War where rail networks determined strategic advantage. Steamships replaced sailing vessels, enabling faster naval deployment. Telegraph communication allowed commanders to coordinate operations over vast distances. Mass production using factory methods supplied armies with standardized rifles, artillery shells, and uniforms in unprecedented quantities. Rifled barrels and breach-loading mechanisms increased firepower accuracy and rate of fire. Industrially-produced steel replaced iron in ship armor and guns. However, transformation was incomplete. At Waterloo (1815), tactics still resembled Napoleonic warfare with infantry lines and cavalry charges. The Charge of the Light Brigade at Balaclava (1854) showed cavalry was still used despite modern rifles. Military thinking lagged behind technology - commanders in the Crimean War misused new weapons. Social structure of the army remained aristocratic despite industrial society changes. Cardwell Reforms modernized the British Army but traditional regimental system persisted. Warfare in 1900 still featured colorful uniforms and formed infantry lines that would prove suicidal in WWI. Full transformation came only in the 20th century. Industrialization provided tools for transformed warfare but armies were slow to adapt tactics and organization. The foundation for transformation was laid in the 19th century but completion required the shock of mechanized warfare in WWI.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument about extent of transformation (4 marks)',
+                'Analysis of technological changes with evidence (4 marks)',
+                'Analysis of continuity/limitations with evidence (4 marks)',
+                'Sustained judgment and conclusion (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Warfare c1700-1900'
+          },
+          {
+            id: 'hist-war-q6',
+            question: 'Explain one way warfare in the 20th century differed from warfare in previous centuries.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Total war emerged in the 20th century, involving entire civilian populations. The Home Front became crucial - civilians worked in munitions factories, experienced rationing and propaganda, and were targeted by bombing. Previous centuries saw limited wars between armies with civilians largely uninvolved. WWII bombing of London and other cities showed civilians were legitimate targets. This represented fundamental change from earlier warfare where battles occurred away from civilian areas.',
+            markingCriteria: {
+              breakdown: [
+                'Total war concept identified (1 mark)',
+                '20th century evidence explained (1 mark)',
+                'Previous centuries contrasted (1 mark)',
+                'Significance of change (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Change in warfare'
+          },
+          {
+            id: 'hist-war-q7',
+            question: 'Describe the impact of the Blitz on London, 1940-41.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'The Blitz devastated London from September 1940 to May 1941. Black Saturday (7 September 1940) saw massive attacks on the Docks and East End - 430 dead, fires visible 100 miles away. Bombers returned for 57 consecutive nights. 43,000 civilians died in the UK during the Blitz, thousands in London. Incendiary bombs caused firestorms. High explosive bombs destroyed buildings and infrastructure. Civilian life was severely disrupted - families slept in Underground stations, 177,000 people sheltered there nightly at the peak. Anderson shelters in gardens and Morrison shelters indoors provided protection but many died when houses collapsed. Bethnal Green tube disaster (1943) killed 173 in a crush. South Hallsville School bombing (1940) killed residents using it as a shelter. The Blitz destroyed London\'s housing stock - entire neighborhoods flattened. Strategic targets included docks, railways, and factories, disrupting war production. However, morale generally held - the "Blitz spirit" saw communities support each other. ARP (Air Raid Precautions) wardens, fire services, and rescue workers risked their lives. Government propaganda emphasized resilience. The Royal Family stayed in London. Essential services continued despite damage. By May 1941, the Luftwaffe shifted focus to Russia, but V1 and V2 attacks resumed in 1944-45.',
+            markingCriteria: {
+              breakdown: [
+                'Scale of attacks and casualties (3 marks)',
+                'Impact on civilians and daily life (3 marks)',
+                'Destruction of property and infrastructure (3 marks)',
+                'Morale and response (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - London WWII Historic Environment'
+          },
+          {
+            id: 'hist-war-q8',
+            question: 'Explain why the Battle of the Somme (1916) resulted in such high British casualties.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Somme exemplified WWI\'s costly attritional warfare. On 1 July 1916, 57,000 British casualties occurred in one day, 19,000 killed. Several factors caused this disaster. British artillery bombardment for seven days failed to destroy German barbed wire or deep dugouts. German machine guns survived in concrete bunkers. When British infantry went "over the top," they walked in lines across no-man\'s land into machine gun fire - tactics were suicidal against modern weapons. Generals like Haig underestimated defensive strength. Communication was primitive - runners carried messages. Commanders couldn\'t respond to battlefield developments. The offensive continued for months despite appalling losses because Haig believed attrition would exhaust Germany. Terrain was difficult - mud, shell holes. British inexperience showed - many soldiers were Kitchener\'s volunteer "Pals Battalions" with limited training. German positions on higher ground gave defensive advantage. By November, 420,000 British casualties produced minimal territorial gain. The Somme revealed the horror of industrial warfare and cost of failed tactics.',
+            markingCriteria: {
+              breakdown: [
+                'Failed artillery preparation (2 marks)',
+                'Machine guns and defensive positions (2 marks)',
+                'Outdated tactics and poor leadership (2 marks)',
+                'Communication problems and attritional approach (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Somme case study'
+          },
+          {
+            id: 'hist-war-q9',
+            question: 'Give two ways modern warfare differs from WWI.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Modern warfare uses advanced technology including computers, drones, and precision-guided missiles, unlike WWI\'s rifles and artillery. Modern warfare emphasizes mobility and rapid deployment, contrasting with WWI\'s static trench warfare where front lines barely moved for years.',
+            markingCriteria: {
+              breakdown: [
+                'Technology difference identified (2 marks)',
+                'Mobility/tactical difference identified (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Warfare c1900-present'
+          },
+          {
+            id: 'hist-war-q10',
+            question: 'Study Source A. How useful is this source for understanding attitudes towards the Blitz? [Source: Government propaganda poster showing Londoners smiling in shelter with "Keep Calm and Carry On" message]',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'This source is useful for understanding government efforts to maintain morale during the Blitz. It shows the official message authorities wanted to promote - resilience, cheerfulness, and continuation of normal life despite bombing. The "Keep Calm and Carry On" campaign reveals government concerns about panic and collapse of civilian morale. However, the source is limited because it represents propaganda rather than actual attitudes. It shows what the government wanted people to feel, not necessarily what they felt. Real experiences included terror, grief, and exhaustion that propaganda posters ignored. The poster\'s optimistic tone doesn\'t reflect the reality of 43,000 civilian deaths, homelessness, and trauma. To understand actual attitudes, we\'d need Mass Observation reports, diaries, and letters showing genuine reactions. The source is most useful for studying government propaganda techniques and concerns rather than authentic civilian attitudes. It has value as evidence of official response but shouldn\'t be taken as reflecting real public mood.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of what source shows about attitudes (2 marks)',
+                'Analysis of provenance - government propaganda (2 marks)',
+                'Evaluation of limitations (2 marks)',
+                'Judgment of utility with justification (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Source utility'
+          }
+        ]
+      },
+      {
+        id: 'migrants-britain',
+        name: 'Migrants in Britain, c800–present (+ Notting Hill)',
+        questions: [
+          {
+            id: 'hist-migr-q1',
+            question: 'Give two reasons why Vikings settled in England during the medieval period.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Overpopulation and land shortage in Scandinavia pushed Vikings to seek new territories. England\'s rich farmland and monasteries with valuable treasures attracted Viking raiders who later became settlers.',
+            markingCriteria: {
+              breakdown: [
+                'Push factor explained (2 marks)',
+                'Pull factor explained (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Migrants c800-1500'
+          },
+          {
+            id: 'hist-migr-q2',
+            question: 'Explain why Jewish people were expelled from England in 1290.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Edward I expelled all Jews from England in 1290, ending four centuries of Jewish presence. Multiple factors caused this. Economic reasons were primary - Jews had traditionally been moneylenders (Christians were forbidden usury), but Edward was heavily indebted to Jewish financiers. Expulsion cancelled these debts. Edward could also seize Jewish property and wealth. Religious hostility was intense - Jews were scapegoated during hard times and blamed for disasters like the Black Death (though this was later). Blood libel accusations claimed Jews murdered Christian children in religious rituals, causing riots and massacres. The Church promoted anti-Jewish sentiment. Social tensions arose because Jews lived in separate communities and maintained distinct customs. Many were wealthy merchants or financiers, creating resentment. Political motives included Edward wanting Parliamentary support for his wars - expelling Jews was popular. Edward was not unique - France and other countries also expelled Jews. About 3,000 Jews were forced to leave England, not returning officially until Cromwell\'s time.',
+            markingCriteria: {
+              breakdown: [
+                'Economic factors - debts and wealth seizure (2 marks)',
+                'Religious hostility and blood libel (2 marks)',
+                'Social tensions and resentment (2 marks)',
+                'Political motives and context (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Medieval migration'
+          },
+          {
+            id: 'hist-migr-q3',
+            question: 'Describe the experience of Huguenots who migrated to England in the 16th-17th centuries.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Huguenots were French Protestant refugees fleeing religious persecution, especially after the St. Bartholomew\'s Day Massacre (1572) and the revocation of the Edict of Nantes (1685). They settled in areas like Spitalfields in London, bringing valuable skills in silk weaving, clock-making, and banking. Generally welcomed because they were Protestant and skilled, they integrated relatively well, though some English workers resented economic competition.',
+            markingCriteria: {
+              breakdown: [
+                'Reasons for migration - persecution (1 mark)',
+                'Settlement areas mentioned (1 mark)',
+                'Skills and contributions (1 mark)',
+                'Reception - welcomed but some tensions (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Huguenots case study'
+          },
+          {
+            id: 'hist-migr-q4',
+            question: 'Explain why Irish immigration to Britain increased dramatically in the 19th century.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Great Famine (1845-52) was the primary driver of Irish immigration. Potato blight destroyed Ireland\'s staple crop, causing mass starvation - one million died, two million emigrated. Britain, especially Liverpool and Glasgow, was the nearest destination. Industrialization created demand for labor in British factories, docks, and construction. Irish workers took low-paid, dangerous jobs British workers avoided. Railway building employed thousands of Irish laborers. The Industrial Revolution\'s timing coincided with Irish desperation. Religious factors played a role - many Irish were Catholic fleeing discrimination in Protestant-ruled Ireland, though they faced sectarian prejudice in Britain too. Established Irish communities in cities like Liverpool created chain migration - relatives followed earlier migrants. Cheap steamship passage made migration affordable. British rule of Ireland meant no legal barriers to movement. Economic opportunities, however limited, far exceeded prospects in famine-ravaged Ireland. Push factors (famine, poverty, oppression) combined with pull factors (jobs, existing communities) to create massive migration flow that transformed British cities.',
+            markingCriteria: {
+              breakdown: [
+                'Great Famine as primary cause (2 marks)',
+                'Industrial Revolution job opportunities (2 marks)',
+                'Chain migration and established communities (2 marks)',
+                'Combination of push and pull factors (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Liverpool Irish case study'
+          },
+          {
+            id: 'hist-migr-q5',
+            question: 'How far do you agree that migrants have made positive contributions to British society?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Throughout history, migrants have made overwhelmingly positive contributions to British society economically, culturally, and socially, though this has often been accompanied by tension and resistance. Economically, migrants filled crucial labor shortages. Huguenots brought silk-weaving and banking skills. Irish laborers built Victorian infrastructure including railways and canals. Post-WWII, Caribbean and Asian migrants filled NHS positions and staffed public transport - London\'s transport system depended on Caribbean workers. Jewish refugees contributed to finance, retail, and intellectual life. Culturally, migrants enriched British life. Flemish weavers improved textile quality. Jewish communities in the East End created vibrant cultural centers. Caribbean culture influenced British music, food, and arts. Post-1945 migration created multicultural Britain evident in cuisine, music, and festivals. Notting Hill Carnival, started by Claudia Jones in 1959, became Europe\'s largest street festival. However, migrants often faced hostility. Medieval Jewish people suffered persecution and expulsion. Irish migrants faced "No Irish" discrimination in housing and employment. The 1919 race riots targeted black workers. 1950s-60s saw "color bar" discrimination and housing restrictions. The 1958 Notting Hill riots revealed racist violence. Enoch Powell\'s 1968 "Rivers of Blood" speech inflamed tensions. Migrants often did work British workers rejected, yet were blamed for unemployment. Housing pressure in areas like Notting Hill created resentment toward newcomers. Despite resistance, evidence shows net positive impact. The NHS could not function without migrant workers. British economic growth has been partly driven by migrant labor and entrepreneurship. Cultural diversity has enriched British identity. While integration challenges exist and prejudice persists, migrants\' contributions to prosperity, innovation, and cultural vitality have been immense.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument with sustained judgment (4 marks)',
+                'Analysis of positive contributions with evidence (4 marks)',
+                'Analysis of tensions and challenges with evidence (4 marks)',
+                'Balanced conclusion evaluating overall impact (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Migration thematic study'
+          },
+          {
+            id: 'hist-migr-q6',
+            question: 'Explain one way migration in the 20th century differed from migration in earlier periods.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '20th century migration involved legal restrictions and immigration control that didn\'t exist earlier. The Aliens Act 1905 was the first major immigration restriction, targeting Eastern European Jewish refugees. Post-WWII saw Commonwealth immigration initially encouraged, then restricted by 1962 and 1968 Immigration Acts. Earlier periods had no passport requirements or quotas. Medieval and early modern migrants faced no legal entry barriers, though they might face local hostility.',
+            markingCriteria: {
+              breakdown: [
+                'Legal restrictions identified (1 mark)',
+                '20th century examples (1 mark)',
+                'Earlier periods contrasted (1 mark)',
+                'Significance explained (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Change and continuity'
+          },
+          {
+            id: 'hist-migr-q7',
+            question: 'Describe the living conditions and experiences of Caribbean migrants in Notting Hill, c1948-1970.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'Caribbean migrants arriving after 1948 (Empire Windrush brought first wave) faced severe housing problems in Notting Hill. The area had declining Victorian housing that landlords like Peter Rachman divided into overcrowded HMOs (Houses in Multiple Occupation). Rachman exploited migrants who faced discrimination elsewhere, charging extortionate rents for squalid rooms. Multiple families shared kitchens and bathrooms. Houses lacked proper heating and had crumbling infrastructure. However, migrants couldn\'t access council housing due to residency requirements and discrimination. Private landlords displayed "No Blacks" signs. Building societies refused mortgages to black applicants. This housing crisis prompted community responses - Bruce Kenrick founded Notting Hill Housing Trust to provide decent affordable housing. Migrants created mutual support networks including pardner schemes (saving circles) to pool money. Culturally, Caribbean communities established their own spaces. Shebeens (unlicensed bars) and clubs on All Saints Road provided social venues where Caribbean music, food, and culture flourished. Cafes and restaurants served Caribbean cuisine. Portobello Road market became a Caribbean cultural hub. Claudia Jones founded the West Indian Gazette newspaper and started the Caribbean Carnival in 1959 (indoor initially), which evolved into Notting Hill Carnival. However, racism was pervasive. The 1958 Notting Hill race riots saw white mobs attack black residents. Kelso Cochrane was murdered in 1959 in a racist attack. Oswald Mosley\'s Union Movement campaigned against immigration in the 1959 election. Police relations were poor - black youth faced harassment. The Mangrove restaurant, run by Frank Crichlow, became a community center but was repeatedly raided by police. The Mangrove Nine trial in 1970 highlighted police racism. Despite hardship, Caribbean migrants built vibrant communities and made vital contributions to British society.',
+            markingCriteria: {
+              breakdown: [
+                'Housing conditions and Rachman exploitation (3 marks)',
+                'Community responses and mutual support (3 marks)',
+                'Cultural life and institutions (3 marks)',
+                'Racism and police relations (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Notting Hill Historic Environment'
+          },
+          {
+            id: 'hist-migr-q8',
+            question: 'Explain the significance of the Notting Hill race riots (1958) for race relations in Britain.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The 1958 Notting Hill riots were a watershed moment exposing racial tensions in post-war Britain. Over several nights, white mobs of hundreds attacked black residents, their homes, and businesses. Teddy Boys and fascist agitators led violence. Police response was criticized as inadequate - some felt police sympathized with white attackers. The riots shocked the nation, revealing how fragile racial harmony was. They triggered both positive and negative consequences. Negatively, the riots encouraged anti-immigration sentiment. They provided evidence for those wanting immigration restrictions, contributing to the Commonwealth Immigrants Act 1962 which limited non-white immigration. Positively, the riots galvanized the black community to organize resistance. The murder of Kelso Cochrane in 1959 further mobilized Caribbean communities. Claudia Jones organized the 1959 Caribbean Carnival partly as a response to the riots, celebrating Caribbean culture and defying intimidation. The riots influenced the Race Relations Act 1965 (though limited) which began outlawing racial discrimination. They revealed police need for better community relations. The riots showed Caribbean migrants they couldn\'t rely on protection and must create their own institutions. Organizations like the West Indian Standing Conference formed. British Black Panthers emerged later. The riots marked a turning point where race became a major political issue in Britain.',
+            markingCriteria: {
+              breakdown: [
+                'Nature and impact of the riots explained (2 marks)',
+                'Negative consequences - immigration restrictions (2 marks)',
+                'Positive responses - community organization (2 marks)',
+                'Longer-term significance for race relations (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Notting Hill 1958'
+          },
+          {
+            id: 'hist-migr-q9',
+            question: 'Give two ways the government has tried to manage immigration to Britain in the 20th century.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Aliens Act 1905 introduced immigration controls for the first time, requiring immigrants to register and allowing deportation of criminals or those likely to become destitute. The Commonwealth Immigrants Act 1962 introduced work permits and limited the right of Commonwealth citizens to settle in Britain, responding to concerns about non-white immigration.',
+            markingCriteria: {
+              breakdown: [
+                'First Act/policy explained (2 marks)',
+                'Second Act/policy explained (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Immigration policy'
+          },
+          {
+            id: 'hist-migr-q10',
+            question: 'Study Sources A and B. How useful are these sources for understanding experiences of Caribbean migrants in Notting Hill? [Source A: Interview with Caribbean migrant about housing discrimination. Source B: Photograph of Notting Hill Carnival 1960s]',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Source A is highly useful for understanding discrimination Caribbean migrants faced. A first-person account provides direct evidence of lived experience, making it authentic and detailed about emotional impact of racism. The migrant would have personal knowledge of being refused housing, seeing "No Blacks" signs, and dealing with exploitative landlords like Rachman. Such testimony reveals social history that official records might omit. However, this represents one individual\'s experience which may not be typical. Memory can be unreliable, especially years later. The interview context matters - who conducted it and for what purpose could shape what was emphasized. Source B is useful for showing community resilience and cultural celebration. The photograph provides visual evidence of Caribbean culture in Notting Hill and the carnival\'s early development. It shows Caribbean migrants maintaining their identity and creating joyful public events despite hostile environment. Photography is reliable for showing what existed at a moment in time. However, the photograph shows only the positive side of experience - celebration rather than daily hardship. It doesn\'t show housing conditions, police harassment, or racist violence. A staged photo might not represent spontaneous reality. Together, the sources complement each other - one showing difficulties faced, the other showing community strength in response. For full understanding, we\'d need additional sources showing employment experiences, police records of the 1958 riots and later conflicts, housing statistics, and government policy documents. On balance, both sources are useful but each shows limited aspects of the complex migrant experience.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of Source A content and value (3 marks)',
+                'Evaluation of Source A limitations (2 marks)',
+                'Analysis of Source B content and value (3 marks)',
+                'Evaluation of Source B limitations (2 marks)',
+                'Synthesis and overall judgment (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Source utility'
+          }
+        ]
+      },
+      {
+        id: 'anglo-saxon-norman',
+        name: 'Anglo-Saxon & Norman England, c1060–88',
+        questions: [
+          {
+            id: 'hist-norman-q1',
+            question: 'Give two features of the Anglo-Saxon legal system before 1066.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Trial by jury where local men would decide guilt or innocence based on evidence and the accused\'s reputation. Use of wergild (compensation payments) where crimes could be resolved by the perpetrator paying money to the victim or their family rather than corporal punishment.',
+            markingCriteria: {
+              breakdown: [
+                'Trial by jury/local justice (2 marks)',
+                'Wergild system (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Anglo-Saxon England'
+          },
+          {
+            id: 'hist-norman-q2',
+            question: 'Explain why Harold Godwinson was crowned king in January 1066.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Harold Godwinson secured the throne due to multiple factors. As Earl of Wessex, he was the most powerful English noble and brother-in-law to Edward the Confessor, giving him political strength. The Witan (council of nobles) elected him, providing legitimacy under Anglo-Saxon tradition. Harold claimed Edward promised him the throne on his deathbed, though this was disputed. His military experience was crucial - he had recently defeated his brother Tostig and secured the Welsh borders. England faced immediate threats from Harald Hardrada and William of Normandy, requiring an experienced warrior-king. Harold\'s English birth and established power base made him acceptable to Anglo-Saxon nobility. The throne needed to be filled immediately for stability - William was abroad and Edgar Atheling was too young and inexperienced. Harold\'s coronation on 6 January, the day after Edward\'s death, showed urgency. However, his claim was controversial - William argued Edward had promised him the throne and Harold had sworn an oath to support this claim during his embassy to Normandy.',
+            markingCriteria: {
+              breakdown: [
+                'Witan election and legitimacy (2 marks)',
+                'Power and political position (2 marks)',
+                'Military necessity and experience (2 marks)',
+                'Immediate circumstances and timing (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Succession crisis 1066'
+          },
+          {
+            id: 'hist-norman-q3',
+            question: 'Describe the events of the Battle of Stamford Bridge.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'In September 1066, Harald Hardrada invaded northern England with 300 ships, joining forces with Tostig Godwinson. They defeated English forces at Gate Fulford near York. Harold Godwinson force-marched his army north, covering 190 miles in four days. He surprised the Vikings at Stamford Bridge on 25 September when they were unprepared (many without armor). Harold\'s army killed both Hardrada and Tostig, winning a decisive victory. Only 24 ships were needed to carry survivors back to Norway.',
+            markingCriteria: {
+              breakdown: [
+                'Hardrada\'s invasion and Gate Fulford (1 mark)',
+                'Harold\'s rapid march north (1 mark)',
+                'Surprise attack and Viking unpreparedness (1 mark)',
+                'Harold\'s victory and deaths of Hardrada/Tostig (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - 1066 battles'
+          },
+          {
+            id: 'hist-norman-q4',
+            question: 'Explain why William won the Battle of Hastings.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'William\'s victory at Hastings resulted from superior tactics, luck, and Harold\'s mistakes. Norman tactics were sophisticated - combining cavalry charges, archers, and infantry. The feigned retreat tactic twice drew English troops from their strong defensive position on Senlac Hill, allowing Norman cavalry to attack them in the open. Harold\'s exhausted army had just fought at Stamford Bridge and marched 250 miles south in days. Many experienced soldiers died at Stamford Bridge. Harold\'s troops were tired while William\'s were fresh. Harold chose defensive tactics, forming a shield wall, but this surrendered initiative. When undisciplined fyrd soldiers broke ranks chasing "fleeing" Normans, gaps appeared in the shield wall. William\'s diverse forces (cavalry, archers, armored knights) were better trained and equipped than the mainly infantry English army. Leadership was crucial - Harold\'s death (possibly from an arrow, definitely in final cavalry charge) demoralized English troops and ended their resistance. William showed tactical flexibility, adapting when frontal assaults failed. The battle lasted all day (9am-dusk), testing endurance - Harold\'s tired troops eventually broke.',
+            markingCriteria: {
+              breakdown: [
+                'Norman tactics - feigned retreat (2 marks)',
+                'Harold\'s exhausted army (2 marks)',
+                'Superior Norman forces and equipment (2 marks)',
+                'Harold\'s death and leadership (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Battle of Hastings'
+          },
+          {
+            id: 'hist-norman-q5',
+            question: 'How far do you agree that castles were the main way William secured control of England after 1066?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Castles were crucial to Norman control but were one element of a multi-faceted strategy. William immediately built castles at key strategic points - Pevensey, Hastings, Dover, Canterbury, Winchester, and London\'s Tower of London within months of Hastings. Motte and bailey castles could be constructed rapidly using English forced labor. By 1086, Domesday records over 500 castles across England. Castles served multiple purposes: military bases intimidating local populations, defensive strongholds against rebellion, and administrative centers for Norman lords. They symbolized Norman power and dominance. Marcher earldoms on Welsh and Scottish borders relied on castle networks. The Normans\' monopoly on castles (Anglo-Saxons hadn\'t used them) gave decisive military advantage during rebellions. However, castles alone couldn\'t secure control. The feudal system bound Norman lords to William through land grants in exchange for military service, creating loyal power structure. Replacing English aristocracy with Norman nobles ensured ruling class loyalty - by 1087, only two major English landowners remained. The Harrying of the North (1069-70) brutally suppressed resistance through scorched earth tactics, causing mass starvation and death. This terror deterred future rebellion more than castles. Military campaigns crushed specific uprisings - Edwin and Morcar (1068), Edgar Atheling in the North (1069), Hereward at Ely (1070-71). Norman control of the Church through appointing Lanfranc as Archbishop legitimized rule and reformed English Church along Norman lines. Keeping English administrative systems like sheriffs and shire courts while placing Normans in charge maintained governance efficiency. The Domesday Book (1086) catalogued resources for taxation and demonstrated state power. Castles were vital but functioned within comprehensive strategy combining military force, terror, feudal organization, land redistribution, and administrative continuity.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument about extent of castles\' importance (4 marks)',
+                'Analysis of castles\' role with evidence (4 marks)',
+                'Analysis of other methods with evidence (4 marks)',
+                'Sustained judgment and conclusion (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Norman Conquest'
+          },
+          {
+            id: 'hist-norman-q6',
+            question: 'Explain one way the Norman feudal system differed from Anglo-Saxon land ownership.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Under Anglo-Saxons, powerful earls like the Godwins owned vast hereditary estates with considerable independence from the king. Under Norman feudalism, all land belonged to the king who granted it to tenants-in-chief in exchange for military service. This land could be forfeited if service wasn\'t provided, giving the king much greater control. Norman lords held land conditionally through homage and fealty oaths, not as permanent family possessions.',
+            markingCriteria: {
+              breakdown: [
+                'Anglo-Saxon system described (1 mark)',
+                'Norman feudal system described (1 mark)',
+                'Difference identified (1 mark)',
+                'Significance/impact explained (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Feudal system'
+          },
+          {
+            id: 'hist-norman-q7',
+            question: 'Describe the causes and outcome of the Harrying of the North (1069-70).',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'The Harrying was William\'s brutal response to persistent northern rebellions. In 1069, Edgar Atheling led an uprising in the North supported by Danish invaders who sailed up the Humber. Northern English forces, never fully reconciled to Norman rule, joined the revolt. They captured York and killed the Norman garrison. This was the most serious threat to William\'s crown - combined English-Danish force controlling England\'s north. William marched north with his army in winter 1069-70 and systematically devastated Yorkshire and neighboring regions. Norman forces destroyed villages, crops, livestock, and farming tools. They burned homes and grain stores. Food supplies were poisoned or carried away. The aim was to create famine conditions making it impossible to support rebellion. The scale was genocidal - chroniclers described corpses littering roads and survivors eating dogs, cats, and even human flesh. Thousands died from starvation and exposure that winter. Entire villages were abandoned, some never reoccupied. Domesday Book (1086) records vast areas of northern England as "waste" - still uninhabited and unproductive 17 years later. The immediate outcome was total suppression of northern resistance. No further major rebellions occurred. Edgar fled to Scotland. The Danish fleet left. However, the brutality shocked contemporaries including Norman chroniclers. It demonstrated William\'s ruthlessness and the cost of resistance. Long-term economic consequences were severe - the North\'s economy took generations to recover. Modern historians estimate 100,000 deaths, making it one of medieval England\'s worst atrocities.',
+            markingCriteria: {
+              breakdown: [
+                'Causes - Edgar and Danish invasion (3 marks)',
+                'Methods - systematic destruction (3 marks)',
+                'Immediate impact - famine and death toll (3 marks)',
+                'Long-term consequences - economic/political (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Harrying of the North'
+          },
+          {
+            id: 'hist-norman-q8',
+            question: 'Explain why Lanfranc was important for William\'s control of England.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Lanfranc, appointed Archbishop of Canterbury in 1070, was crucial for religious and political control. He replaced the English Archbishop Stigand who had questionable legitimacy, giving William papal approval. Lanfranc reformed the English Church along Norman lines, holding councils that reorganized dioceses and enforced clerical discipline. This increased Church efficiency and tied it to Norman power. He replaced English bishops and abbots with Normans, ensuring Church hierarchy loyalty. Lanfranc strengthened the Church\'s legal authority through separate Church courts, but these remained subordinate to royal authority. He supported William\'s kingship theologically, providing religious legitimacy for the conquest - promoting the narrative that God favored William. During the Revolt of the Earls (1075), while William was in Normandy, Lanfranc helped suppress the rebellion, demonstrating political reliability. He mediated between William and his sons during family conflicts. Lanfranc\'s reforms modernized English Christianity, building new cathedrals in Norman Romanesque style that physically demonstrated Norman power. His intellectual reputation enhanced Norman rule\'s prestige. The combination of religious authority and political loyalty made Lanfranc essential to Norman consolidation.',
+            markingCriteria: {
+              breakdown: [
+                'Church reform and organization (2 marks)',
+                'Religious legitimization of Norman rule (2 marks)',
+                'Political support and loyalty (2 marks)',
+                'Appointment of Norman clergy (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Norman Church'
+          },
+          {
+            id: 'hist-norman-q9',
+            question: 'Give two reasons why the Revolt of the Earls (1075) failed.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Lanfranc and loyal Norman barons acted quickly to suppress the revolt while William was in Normandy, preventing the rebels from consolidating. The rebellion lacked widespread support - most Norman lords and the English population remained neutral or opposed it, isolating the rebel earls.',
+            markingCriteria: {
+              breakdown: [
+                'Quick action by loyalists (2 marks)',
+                'Lack of support/isolation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Revolt of the Earls'
+          },
+          {
+            id: 'hist-norman-q10',
+            question: 'Explain the significance of the Domesday Book.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Domesday survey, conducted in 1086, was an unprecedented administrative achievement demonstrating state power. William commissioned it to assess England\'s wealth for taxation, creating a comprehensive record of land ownership, resources, and population. Royal commissioners traveled throughout England questioning local communities about every manor\'s details - who held it, its value, how many ploughs, peasants, mills. The survey\'s comprehensiveness amazed contemporaries - nothing comparable existed in medieval Europe. Politically, Domesday established Norman ownership legally. It recorded the transfer of land from Anglo-Saxon to Norman hands, providing documentary evidence of the revolution in land ownership. 4,000 Anglo-Saxon thegns had been replaced by fewer than 200 Norman tenants-in-chief. Economically, the survey enabled efficient taxation. William knew exactly what resources England possessed and what taxes could be collected. The detailed information aided administration and feudal organization. Socially, Domesday provides invaluable evidence about medieval life, recording settlements, agriculture, and population. It shows England\'s economic condition 20 years after Conquest. Symbolically, the survey demonstrated total Norman control - the state\'s ability to investigate every village and demand answers showed power. The nickname "Domesday" reflected this - like the Last Judgment, no appeal was possible. The book preserved this information permanently, creating lasting record of the Norman Conquest\'s impact.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose - taxation and assessment (2 marks)',
+                'Recording Norman land ownership (2 marks)',
+                'Demonstration of state power (2 marks)',
+                'Historical significance and evidence (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Domesday Book'
+          }
+        ]
+      },
+      {
+        id: 'richard-john-reigns',
+        name: 'The reigns of Richard I and John, 1189–1216',
+        questions: [
+          {
+            id: 'hist-rj-q1',
+            question: 'Give two features of feudal services owed to the king in the late 12th century.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Knight service - barons owed the king a specified number of knights for military campaigns, typically 40 days per year. Financial payments - barons paid various feudal dues including scutage (payment instead of military service), relief (inheritance tax), and aids for special occasions like the king\'s ransom.',
+            markingCriteria: {
+              breakdown: [
+                'Military service obligation (2 marks)',
+                'Financial obligations (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Feudal system 1189-1216'
+          },
+          {
+            id: 'hist-rj-q2',
+            question: 'Explain why Richard I spent so little time in England during his reign.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Richard I spent only six months of his ten-year reign in England because his priorities lay elsewhere. Crusading was his primary concern - he took the cross in 1187 and departed for the Third Crusade in 1190, seeing this as his religious duty and path to glory. The crusade consumed three years (1190-92). After being captured returning from crusade, he spent 1192-94 imprisoned by Leopold of Austria and Henry VI of Germany, unable to return. Once ransomed for £100,000 (supplied by England), Richard devoted remaining years (1194-99) to defending and recovering his French territories. He spent most time in Normandy and Anjou fighting Philip II of France. These continental lands were more valuable than England and closer to his heart - Richard was more French than English, raised in Aquitaine, speaking French. He saw England primarily as a source of revenue to fund crusading and French wars. His absence was possible because England\'s administrative systems (exchequer, justiciars, sheriffs) functioned effectively without royal presence. Richard appointed capable officials like Hubert Walter to govern England. His lack of interest in England frustrated English barons who rarely saw their king.',
+            markingCriteria: {
+              breakdown: [
+                'Crusading commitment (2 marks)',
+                'Captivity 1192-94 (2 marks)',
+                'Defending French territories (2 marks)',
+                'English administration could function without him (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Richard I\'s kingship'
+          },
+          {
+            id: 'hist-rj-q3',
+            question: 'Describe the role of Jews in English society during the late 12th and early 13th centuries.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Jews were moneylenders because Christian religious laws forbade usury (lending money at interest). They financed major construction projects, trade, and noble expenses. Jews were under direct royal protection and paid taxes directly to the crown, making them valuable revenue sources. However, they faced severe discrimination and violence, including the 1190 York massacre where 150 Jews died. They lived in separate communities and were subject to special taxes. Anti-Jewish sentiment was widespread, fed by religious prejudice and resentment of debts owed to Jewish moneylenders.',
+            markingCriteria: {
+              breakdown: [
+                'Role as moneylenders (1 mark)',
+                'Royal protection and revenue (1 mark)',
+                'Discrimination and violence (1 mark)',
+                'Social separation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Jewish community'
+          },
+          {
+            id: 'hist-rj-q4',
+            question: 'Explain why the Third Crusade failed to recapture Jerusalem.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Despite military successes, the Third Crusade failed to achieve its primary objective of recapturing Jerusalem due to multiple factors. Richard I\'s quarrel with Philip II of France weakened crusader unity - Philip departed in 1191 after the siege of Acre, taking his forces. This left Richard with insufficient manpower for a sustained siege of Jerusalem. Saladin\'s military skill and defensive preparations made Jerusalem extremely difficult to capture. After losses at Arsuf, Saladin withdrew into Jerusalem, strengthened fortifications, and poisoned wells along the approach routes. Richard recognized that even if he captured Jerusalem, he couldn\'t hold it - he would eventually return to England leaving an isolated Christian garrison. Supply lines from the coast were vulnerable. Logistical challenges were immense - maintaining a siege in hostile territory far from Acre\'s port. Richard\'s army was exhausted after two years of campaigning. Political pressures demanded Richard\'s return - news from England of John\'s plotting and Philip II\'s attacks on Normandy forced Richard to negotiate rather than continue fighting. Internal crusader politics created friction between Richard and other leaders like Leopold of Austria. Time and resources were limited. Richard concluded a three-year treaty with Saladin allowing Christian pilgrims to visit Jerusalem unmolested. While this was pragmatic, it meant the crusade failed its stated goal. Richard achieved significant victories at Acre and Arsuf and reconquered the coastal strip, but Jerusalem remained in Muslim hands.',
+            markingCriteria: {
+              breakdown: [
+                'Loss of Philip II and insufficient forces (2 marks)',
+                'Saladin\'s defensive strength (2 marks)',
+                'Logistical and strategic problems (2 marks)',
+                'Political pressures forcing Richard\'s return (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Third Crusade'
+          },
+          {
+            id: 'hist-rj-q5',
+            question: 'How far do you agree that King John was a failure as king?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'John\'s reign (1199-1216) is traditionally seen as disastrous, but evaluation requires examining both failures and achievements. His failures were substantial. Militarily, John lost Normandy and most French territories by 1204, earning the nickname "Softsword." Chateau Gaillard fell despite being Richard\'s "beautiful castle." This loss devastated English barons who owned lands in Normandy and France. The 1214 Bouvines campaign, meant to recover territories, failed catastrophically. These losses diminished royal prestige and revenue. John\'s dispute with Pope Innocent III resulted in England being placed under Interdict (1208-14), closing churches and suspending religious services. John himself was excommunicated (1209). This isolated England diplomatically and offended religious sentiment. Financially, John\'s demands were excessive. Heavy taxation funded unsuccessful wars. The 1207 thirteenth tax was unprecedented. Arbitrary fines and manipulation of feudal incidents (reliefs, wardships) antagonized barons. Exploitation of Jews generated revenue but created resentment. John\'s arbitrary and suspicious nature destroyed trust - barons feared he would seize lands or imprison enemies without cause. He executed hostages during Welsh campaigns and was suspected in Arthur of Brittany\'s murder. These actions created fear and hatred. The baronial rebellion leading to Magna Carta (1215) showed how badly John alienated powerful subjects. Civil war and French invasion followed. However, John had strengths. Administratively, he was efficient and involved, personally overseeing governance. He developed the navy and legal system. His financial demands, while unpopular, reflected genuine need after Richard\'s expensive crusade and ransom. John faced extremely difficult circumstances - fighting Philip II who was powerful and clever. Some losses weren\'t entirely John\'s fault. Initially John showed military skill in 1199-1200 campaigns. Ultimately, despite administrative ability, John\'s tyrannical behavior, military defeats, loss of Normandy, and inability to maintain baronial loyalty make him one of England\'s least successful medieval kings.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument about extent of failure (4 marks)',
+                'Analysis of failures with evidence (4 marks)',
+                'Analysis of strengths/mitigating factors (4 marks)',
+                'Sustained judgment and conclusion (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - King John evaluation'
+          },
+          {
+            id: 'hist-rj-q6',
+            question: 'Explain one way in which John\'s government was similar to Richard\'s government.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Both kings heavily exploited feudal revenues and taxation to fund military campaigns. Richard imposed huge taxes to pay for the Third Crusade and his ransom (£100,000). John similarly imposed heavy taxation including the 1207 thirteenth tax to fund campaigns to recover Normandy. Both saw England primarily as a source of revenue rather than focusing on its internal affairs, prioritizing continental territories and warfare.',
+            markingCriteria: {
+              breakdown: [
+                'Similarity identified - financial exploitation (1 mark)',
+                'Richard\'s policies explained (1 mark)',
+                'John\'s policies explained (1 mark)',
+                'Connection/comparison made (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Continuity between reigns'
+          },
+          {
+            id: 'hist-rj-q7',
+            question: 'Describe the events leading to Magna Carta in 1215.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'Magna Carta resulted from escalating conflict between John and his barons over years of grievances. John\'s financial exactions were unprecedented - heavy scutage payments, arbitrary fines, and exploitation of feudal incidents. Barons who fell into debt to the crown faced harsh treatment. The 1207 thirteenth tax demanded 13% of moveable goods. John manipulated the legal system for profit and personal vengeance. The loss of Normandy (1204) cost barons their French estates without compensation. The Interdict (1208-14) and John\'s excommunication created religious crisis, though some barons profited from Church lands during the dispute. The failed Bouvines campaign (1214) was the final straw - enormous expense with no success. In late 1214, barons began organizing resistance. By early 1215, rebels formally renounced homage to John. In May 1215, rebel barons captured London, the kingdom\'s commercial heart. This forced John to negotiate. Meetings between rebels and royal representatives attempted to find compromise. Archbishop Stephen Langton mediated. On 15 June 1215 at Runnymede near Windsor, John accepted the Articles of the Barons, which became Magna Carta. The document contained 63 clauses limiting royal power. Key provisions included: no taxation without baronial consent, no imprisonment without legal judgment, protection of Church rights, limits on feudal payments, and access to justice. Clause 61 established a committee of 25 barons to enforce the charter, essentially supervising the king. John\'s acceptance was forced - he had no military option. However, he immediately repudiated Magna Carta, appealing to Pope Innocent III who declared it void. This triggered the First Barons\' War. Rebels invited Philip II\'s son Louis to take the English throne. John died in October 1216 during the civil war. Magna Carta would be reissued by John\'s son Henry III\'s regency government to restore peace.',
+            markingCriteria: {
+              breakdown: [
+                'Long-term grievances - finance and losses (3 marks)',
+                'Immediate trigger - Bouvines failure (3 marks)',
+                'Baronial rebellion and capture of London (3 marks)',
+                'Negotiations and Runnymede agreement (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Magna Carta'
+          },
+          {
+            id: 'hist-rj-q8',
+            question: 'Explain the significance of Chateau Gaillard for John\'s loss of Normandy.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Chateau Gaillard was crucial to Normandy\'s defense and its fall in 1204 was a turning point. Richard I built the castle (1196-98) to defend the Seine valley approach to Rouen, Normandy\'s capital. Richard considered it his masterpiece, supposedly saying "how beautiful is my one-year-old daughter." The castle incorporated the latest military architecture with multiple defensive walls, strategic position on a cliff, and innovative design. It blocked Philip II\'s advance toward Rouen. After Richard\'s death, Philip recognized that taking Normandy required capturing Chateau Gaillard. The siege began in August 1203. Philip blockaded the castle, cutting off supplies. John failed to relieve the garrison despite having superior forces, showing poor military leadership and indecision. The siege lasted eight months. Philip\'s forces eventually breached defenses through a chapel window leading to a latrine chute - showing that even the best castle could fall with persistence and ingenuity. When Chateau Gaillard fell in March 1204, the road to Rouen lay open. Rouen surrendered in June. By year\'s end, John had lost virtually all Angevin territories in France north of the Loire - Normandy, Anjou, Maine, Touraine. The castle\'s fall was both practical (removing defensive barrier) and symbolic (demonstrating John couldn\'t defend Richard\'s legacy). The loss devastated English barons\' morale and enriched Philip. John would spend years trying futilely to recover these territories. Chateau Gaillard\'s fall marked the end of the Angevin Empire.',
+            markingCriteria: {
+              breakdown: [
+                'Strategic importance of the castle (2 marks)',
+                'Events of the siege and fall (2 marks)',
+                'Consequences for Normandy (2 marks)',
+                'Wider significance for John\'s reign (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Loss of Normandy'
+          },
+          {
+            id: 'hist-rj-q9',
+            question: 'Give two provisions of Magna Carta that limited royal power.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Clause 12 stated that no scutage or aid (tax) could be levied without the consent of the common counsel (barons), limiting the king\'s ability to raise revenue arbitrarily. Clause 39 stated that no free man could be imprisoned, exiled, or punished except by lawful judgment of his peers or by the law of the land, protecting subjects from arbitrary royal justice.',
+            markingCriteria: {
+              breakdown: [
+                'First provision explained (2 marks)',
+                'Second provision explained (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Magna Carta content'
+          },
+          {
+            id: 'hist-rj-q10',
+            question: 'Explain the significance of William Marshal serving as Protector during Henry III\'s minority.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'William Marshal\'s appointment as Protector after John\'s death in October 1216 was crucial for the monarchy\'s survival. England was in civil war with rebel barons supporting Prince Louis of France\'s claim to the throne. London and much of the southeast were under rebel control. The new king, Henry III, was only nine years old and couldn\'t rule personally. Marshal, aged about 70, was the most respected knight in England, famous for military prowess and loyalty despite serving four kings. His reputation gave the regency government legitimacy. Marshal\'s first action was reissuing Magna Carta (1216 and 1217) in Henry\'s name. This was politically brilliant - it removed rebels\' main grievance and undercut Louis\'s support. By showing the young king accepted limits on royal power, Marshal won wavering barons back to royalist cause. Marshal demonstrated military skill at the Battle of Lincoln (1217) where his forces defeated rebel army. At age 70, he personally led cavalry charges. Louis\'s position collapsed. Marshal then negotiated Treaty of Lambeth (1217) where Louis renounced his claim and left England in exchange for payment. This ended the civil war and secured Henry III\'s throne. Marshal\'s brief regency (1216-19) restored stability and royal authority through combination of military victory, political compromise, and personal reputation. He provided continuity and experience during a critical transition. His death in 1219 was mourned as the loss of "the best knight who ever lived." Without Marshal\'s intervention, the Plantagenet dynasty might have ended. His legacy included securing Magna Carta\'s future as a foundation of English law.',
+            markingCriteria: {
+              breakdown: [
+                'Context - civil war and Henry\'s age (2 marks)',
+                'Reissuing Magna Carta politically (2 marks)',
+                'Military victory and Treaty of Lambeth (2 marks)',
+                'Overall significance for monarchy\'s survival (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - First Barons\' War resolution'
+          }
+        ]
+      },
+      {
+        id: 'early-elizabethan',
+        name: 'Early Elizabethan England, 1558–88',
+        questions: [
+          {
+            id: 'hist-eliz-q1',
+            question: 'Give two challenges Elizabeth I faced when she became queen in 1558.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Legitimacy - Elizabeth was declared illegitimate by her father Henry VIII, and many Catholics didn\'t recognize her right to rule as her parents\' marriage was not recognized by the Catholic Church. Religious division - England was deeply divided between Catholics and Protestants after the changes under Henry VIII, Edward VI, and Mary I, making religious settlement urgent.',
+            markingCriteria: {
+              breakdown: [
+                'Legitimacy issue explained (2 marks)',
+                'Religious division explained (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Elizabeth\'s accession 1558'
+          },
+          {
+            id: 'hist-eliz-q2',
+            question: 'Explain why the Religious Settlement of 1559 was significant.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Elizabeth\'s Religious Settlement attempted to create religious stability after decades of turmoil. The Act of Supremacy (1559) made Elizabeth "Supreme Governor" of the Church of England (not "Head" to avoid offending Catholics), establishing royal control over religious matters. The Act of Uniformity (1559) made attendance at Church of England services compulsory with fines for absence. The Book of Common Prayer was issued in English. The settlement aimed at a "middle way" between Catholic and Protestant extremes. Protestant features included: services in English, clergy could marry, Bible available in English. Catholic elements included: bishops retained, churches kept decoration, clergy wore traditional vestments. This compromise attempted to satisfy moderate opinion. However, it pleased nobody completely. Puritans wanted further Protestant reform, removing Catholic "remnants." Catholics opposed the break with Rome and Protestant theology. The settlement\'s significance was establishing the Church of England\'s character for centuries - Protestant theology with traditional hierarchy. It provided stability allowing Elizabeth to avoid religious civil war like France experienced. The Church became central to Elizabethan government and society. However, religious tensions persisted throughout her reign.',
+            markingCriteria: {
+              breakdown: [
+                'Acts of Supremacy and Uniformity explained (2 marks)',
+                'Middle way compromise described (2 marks)',
+                'Religious groups\' reactions (2 marks)',
+                'Long-term significance (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Religious Settlement'
+          },
+          {
+            id: 'hist-eliz-q3',
+            question: 'Describe Puritan challenges to the Religious Settlement.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Puritans were strict Protestants who wanted to "purify" the Church of Catholic remnants. They objected to bishops, clergy vestments, church decoration, and the Book of Common Prayer. Some Puritans refused to wear required vestments (Vestment Controversy). More radical Puritans wanted presbyterian church government without bishops. Puritan MPs attempted to pass legislation for further reform. Some Puritans held illegal secret religious meetings called conventicles. However, Elizabeth firmly resisted Puritan pressure, seeing bishops as essential to royal control of the Church.',
+            markingCriteria: {
+              breakdown: [
+                'Puritan beliefs and objections (1 mark)',
+                'Vestment Controversy (1 mark)',
+                'Pressure for further reform (1 mark)',
+                'Elizabeth\'s resistance (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Puritan challenge'
+          },
+          {
+            id: 'hist-eliz-q4',
+            question: 'Explain why Mary, Queen of Scots was a threat to Elizabeth I.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Mary Stuart posed multiple interconnected threats to Elizabeth. Dynastic threat: as Henry VII\'s great-granddaughter, Mary had a legitimate claim to the English throne. Catholics considered Mary the rightful queen because they viewed Elizabeth as illegitimate. Religious threat: Mary was Catholic and could become a figurehead for Catholic opposition. Her presence in England after fleeing Scotland (1568) gave conspirators an alternative monarch. Political threat: Mary\'s arrival coincided with increased Catholic plotting. The Revolt of the Northern Earls (1569) aimed to free Mary, marry her to the Duke of Norfolk, and put her on the throne. This showed nobles were willing to rebel for her. International threat: Spain and France, Catholic powers, might support Mary\'s claim and invade England. Pope Pius V excommunicated Elizabeth (1570), declaring her deposed and absolving Catholics of obedience - this made Mary the legitimate Catholic candidate. Plot after plot centered on Mary: Ridolfi (1571), Throckmorton (1583), Babington (1586). Walsingham\'s spies intercepted letters proving Mary\'s involvement in assassination plans. Personal threat: while imprisoned in England (1568-87), Mary became focus for assassination attempts against Elizabeth. Elizabeth\'s advisors, especially William Cecil and Walsingham, urged Mary\'s execution but Elizabeth hesitated, fearing setting a precedent for executing anointed monarchs. Eventually, after Babington Plot provided clear evidence, Elizabeth reluctantly agreed to Mary\'s execution (1587). This eliminated the immediate dynastic threat but outraged Catholic Europe.',
+            markingCriteria: {
+              breakdown: [
+                'Dynastic and legitimacy threat (2 marks)',
+                'Focus for plots and rebellion (2 marks)',
+                'International/foreign threat (2 marks)',
+                'Catholic figurehead role (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Mary Queen of Scots'
+          },
+          {
+            id: 'hist-eliz-q5',
+            question: 'How far do you agree that the Spanish Armada\'s defeat was due to English tactics and ship design?',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'The Armada\'s defeat (1588) resulted from multiple factors, of which English tactics and ships were important but not solely decisive. English advantages in naval warfare were significant. English ships were purpose-built fighting vessels - sleeker, faster, and more maneuverable than Spanish galleons. They had lower profiles making them harder to board. English ships carried more long-range cannons mounted on gun decks, enabling them to fire broadsides. Spanish ships relied more on boarding tactics with soldiers, reflecting their Mediterranean galley warfare experience. English gunnery training was superior. These design and tactical differences mattered in Channel battles. English commanders like Drake, Hawkins, and Howard used long-range bombardment tactics, staying out of boarding range. They harried the Armada up the Channel without allowing decisive engagement. The fireships at Calais (28-29 July) broke Spanish defensive formation, causing panic and forcing ships to cut anchors. This was an inspired tactical move. However, other factors were equally or more important. Weather was crucial - the "Protestant Wind" disrupted Spanish plans. Storms off Scotland and Ireland wrecked many ships on the return voyage, destroying more vessels than English action had. Poor Spanish planning hampered the campaign - coordination between Medina Sidonia\'s fleet and Parma\'s army in Netherlands failed. Parma wasn\'t ready when the Armada arrived. Without embarking Parma\'s troops, the invasion couldn\'t proceed. Spanish logistics were problematic - inadequate supplies, poor quality gunpowder, limited ammunition. English home advantage in supplies and bases helped. English intelligence through Walsingham\'s spy network gave strategic insight. Spanish mistakes included choosing Medina Sidonia, an inexperienced naval commander. Philip II\'s rigid battle plan allowed no flexibility. Spanish objectives were unrealistic given English naval strength and geographical challenges. Religious morale also factored - English saw it as Protestant deliverance from Catholic invasion. Propaganda portrayed divine intervention. In conclusion, English tactics and ship design gave tactical advantages in engagements, but Spanish planning failures, coordination breakdown, and especially weather were more decisive in the campaign\'s failure. Without the storms, more Spanish ships would have returned safely despite tactical setbacks.',
+            markingCriteria: {
+              breakdown: [
+                'Clear argument about extent of English factors (4 marks)',
+                'Analysis of English tactics and ships with evidence (4 marks)',
+                'Analysis of other factors with evidence (4 marks)',
+                'Sustained judgment and conclusion (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Spanish Armada'
+          },
+          {
+            id: 'hist-eliz-q6',
+            question: 'Explain one way poverty in Elizabethan England differed from poverty in medieval England.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Elizabethan England saw the emergence of "vagabonds" - wandering unemployed people - as a new social problem requiring legislation. Enclosure of common land, population growth, and economic changes created landless laborers seeking work. Medieval poverty was mainly local and addressed through Church charity, monasteries, and guilds. Elizabethan governments passed laws like the 1601 Poor Law creating parish responsibility for the poor, distinguishing deserving from undeserving poor, and punishing vagabondage - showing government taking responsibility for social welfare in new ways.',
+            markingCriteria: {
+              breakdown: [
+                'Difference identified - vagabondage and mobility (1 mark)',
+                'Elizabethan context explained (1 mark)',
+                'Medieval context explained (1 mark)',
+                'Significance of change (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Elizabethan society'
+          },
+          {
+            id: 'hist-eliz-q7',
+            question: 'Describe the causes of the conflict between England and Spain during Elizabeth\'s reign.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'English-Spanish conflict had religious, commercial, and political dimensions. Religious rivalry was fundamental - Spain was the leading Catholic power under Philip II (who had been married to Elizabeth\'s sister Mary I). Philip saw himself as defender of Catholicism. Elizabeth\'s Protestant England was ideological enemy. The Pope\'s excommunication of Elizabeth (1570) encouraged Spanish intervention. Philip supported Catholic plots against Elizabeth. Commercial rivalry centered on trade and New World riches. English privateers like Drake and Hawkins raided Spanish treasure fleets returning from Americas. Drake\'s circumnavigation (1577-80) included raiding Spanish settlements in Pacific. These attacks were essentially piracy, though Drake was knighted by Elizabeth, infuriating Philip. England challenged Spain\'s monopoly on New World trade. Spain controlled vast territories in Central and South America producing silver and gold. English merchants wanted access to lucrative markets and resources. Political conflict involved the Netherlands. Protestant Dutch were rebelling against Spanish rule (from 1566). Elizabeth secretly aided Dutch rebels, then openly (1585) sent Robert Dudley with 7,000 troops. This military intervention broke the uneasy peace. Drake\'s 1587 raid on Cadiz ("singeing the King of Spain\'s beard") destroyed ships being prepared for invasion, delaying but provoking the Armada. Elizabeth\'s execution of Mary Queen of Scots (1587) removed final restraint on Philip - he no longer needed to preserve Mary as alternative English Catholic monarch. Naval incidents escalated tensions. English rejection of Philip\'s marriage proposal to Elizabeth meant no diplomatic solution. By 1588, these accumulated grievances led Philip to launch the "Enterprise of England" - the Spanish Armada attempting to invade England, depose Elizabeth, and restore Catholicism.',
+            markingCriteria: {
+              breakdown: [
+                'Religious rivalry and Elizabeth\'s Protestantism (3 marks)',
+                'Commercial competition and privateering (3 marks)',
+                'Political conflict over Netherlands (3 marks)',
+                'Escalating incidents leading to Armada (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Anglo-Spanish relations'
+          },
+          {
+            id: 'hist-eliz-q8',
+            question: 'Explain the significance of Drake\'s circumnavigation (1577-80) for England.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Francis Drake\'s voyage around the world in the Golden Hind was England\'s first circumnavigation and had major consequences. Economically, the voyage was immensely profitable. Drake raided Spanish settlements and treasure ships in the Pacific where Spanish security was lax, seizing about £400,000 in treasure (some estimates higher). Elizabeth\'s investment returned approximately 4,700%. This windfall helped government finances. The success encouraged further privateering ventures. Politically, the voyage challenged Spanish power. Spain claimed exclusive rights to Pacific trade and American territories. Drake\'s presence demonstrated Spanish vulnerability and that England could reach their colonial possessions. Drake proved the Strait of Magellan was navigable, opening routes for English expansion. Diplomatically, tension increased with Spain. Philip II demanded Drake\'s execution as a pirate. Instead, Elizabeth knighted Drake aboard the Golden Hind (1581) in an act of deliberate provocation. This public approval of Drake\'s raids showed Elizabeth\'s defiance of Spanish claims. Strategically, Drake gathered intelligence about Spanish defenses and Pacific geography valuable for future ventures. His exploration of the Pacific coast of North America (reaching approximately modern California, which he claimed as "New Albion") suggested potential English settlements. Psychologically, the success boosted English confidence and national pride. Drake became a national hero symbolizing English seafaring prowess. It demonstrated England could compete globally despite being smaller than Spain. The voyage inspired other expeditions and exploration. Internationally, it enhanced England\'s naval reputation, showing English seamanship and ship design were world-class. Other nations took note of English capabilities. The circumnavigation\'s profits, propaganda value, and strategic insights made it one of the most significant voyages of the age.',
+            markingCriteria: {
+              breakdown: [
+                'Economic gain and profit (2 marks)',
+                'Challenge to Spanish power (2 marks)',
+                'Political/diplomatic significance (2 marks)',
+                'Psychological and strategic impact (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Exploration'
+          },
+          {
+            id: 'hist-eliz-q9',
+            question: 'Give two reasons why Raleigh\'s Virginia colony failed.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Poor planning and inadequate supplies - the colonists were unprepared for conditions and lacked sufficient food, with supply ships delayed by war with Spain. Hostile relations with Native Americans - initial friendly contact deteriorated into conflict, making survival difficult and trade impossible, leading to the mysterious disappearance of the "Lost Colony."',
+            markingCriteria: {
+              breakdown: [
+                'Supply/planning problems (2 marks)',
+                'Native American relations (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Virginia colonization'
+          },
+          {
+            id: 'hist-eliz-q10',
+            question: 'Explain the significance of the theatre in Elizabethan society.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Theatre flourished in Elizabethan England, becoming central to cultural life. Purpose-built theatres like the Globe (1599) and the Rose accommodated thousands of spectators from all social classes. Theatre was accessible entertainment - groundlings paid one penny to stand, while wealthy patrons sat in galleries. This social mixing was unusual and significant. Culturally, theatre produced some of history\'s greatest drama. Shakespeare\'s plays were performed for contemporary audiences, along with Marlowe, Jonson, and others. These works explored political, moral, and social themes, educating and entertaining. Theatre acted as social commentary, sometimes controversial - authorities censored plays considered seditious or immoral. Companies like the Lord Chamberlain\'s Men (later King\'s Men) operated under noble patronage, giving them protection from Puritan critics who considered theatre sinful. Economically, theatre was a thriving industry employing playwrights, actors, musicians, and craftsmen. Successful companies and theatres generated substantial income. Socially, theatre attendance was popular leisure activity. Performances occurred in afternoons to use natural light. The theatre\'s popularity worried some authorities - large crowds could spread disease or become unruly. Puritans especially opposed theatre as corrupting and frivolous. The fact that Elizabeth and her court patronized theatre gave it legitimacy and encouraged its development. The Globe\'s motto "Totus mundus agit histrionem" ("All the world\'s a stage") reflected theatre\'s centrality to Elizabethan life.',
+            markingCriteria: {
+              breakdown: [
+                'Social mixing and accessibility (2 marks)',
+                'Cultural significance and great works (2 marks)',
+                'Economic importance (2 marks)',
+                'Opposition and controversy (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE History - Elizabethan culture'
+          }
+        ]
+      }
+    ]
   }
   ];
