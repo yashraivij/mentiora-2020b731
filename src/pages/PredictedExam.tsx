@@ -323,7 +323,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'history-edexcel-gcse') {
       return 'Edexcel GCSE';
     }
     return 'AQA GCSE';
@@ -4773,6 +4773,213 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
       return questions;
     }
     
+    // Special format for History - Edexcel GCSE Paper 1 (52 marks total)
+    if (subjectId === 'history-edexcel-gcse') {
+      // Four thematic study options - student chooses ONE
+      const thematicOptions = {
+        'crime-punishment': {
+          name: 'Crime and punishment in Britain, c1000–present and Whitechapel, c1870–c1900',
+          questions: [
+            {
+              id: 'crime-q1',
+              questionNumber: 1,
+              text: 'Describe two features of law enforcement in medieval England.',
+              marks: 4,
+              section: 'Crime and Punishment'
+            },
+            {
+              id: 'crime-q2',
+              questionNumber: 2,
+              text: 'Explain why there was an increase in smuggling in the period c1700–1850.\n\nYou may use the following:\n• High taxes on imported goods\n• Coastal geography\n\nYou must also include information of your own.',
+              marks: 12,
+              section: 'Crime and Punishment'
+            },
+            {
+              id: 'crime-q3',
+              questionNumber: 3,
+              text: '"The main reason for changes in punishment between 1900 and the present was changing attitudes in society."\n\nHow far do you agree? Explain your answer.\n\nYou may use the following:\n• Abolition of the death penalty\n• Prison reforms\n• Alternative sentences\n\nYou must also include information of your own.\n\n[16 marks + 4 SPaG]',
+              marks: 20,
+              section: 'Crime and Punishment'
+            },
+            {
+              id: 'crime-q4',
+              questionNumber: 4,
+              text: 'Describe two features of housing conditions in Whitechapel, c1870–1900.',
+              marks: 4,
+              section: 'Whitechapel Historic Environment'
+            },
+            {
+              id: 'crime-q5',
+              questionNumber: 5,
+              text: 'Study Sources A and B below.\n\nSource A: Extract from H Division police report, 1888, describing difficulty patrolling the narrow alleyways and courtyards in Whitechapel rookeries.\n\nSource B: Newspaper article from The Times, November 1888, criticizing the Metropolitan Police for their failure to catch Jack the Ripper.\n\nHow useful are Sources A and B for an enquiry into the problems faced by police in Whitechapel?\n\nExplain your answer using Sources A and B and your knowledge of the historical context.',
+              marks: 8,
+              section: 'Whitechapel Historic Environment'
+            },
+            {
+              id: 'crime-q6',
+              questionNumber: 6,
+              text: 'How could you follow up Source A to find out more about living conditions in Whitechapel?\n\nIn your answer, you must give the question you would ask and the type of source you could use.\n\nComplete the table below.\n\n| Detail in Source A that I would follow up: | Question I would ask: | What type of source I could use: | How this might help answer my question: |\n\nYou must also explain how you would use the source to find out more about living conditions in Whitechapel.',
+              marks: 12,
+              section: 'Whitechapel Historic Environment'
+            }
+          ]
+        },
+        'medicine': {
+          name: 'Medicine in Britain, c1250–present and The British sector of the Western Front, 1914–18',
+          questions: [
+            {
+              id: 'med-q1',
+              questionNumber: 1,
+              text: 'Describe two features of medical care in medieval England.',
+              marks: 4,
+              section: 'Medicine in Britain'
+            },
+            {
+              id: 'med-q2',
+              questionNumber: 2,
+              text: 'Explain why there were significant improvements in surgery in the nineteenth century.\n\nYou may use the following:\n• Anaesthetics\n• Antiseptics\n\nYou must also include information of your own.',
+              marks: 12,
+              section: 'Medicine in Britain'
+            },
+            {
+              id: 'med-q3',
+              questionNumber: 3,
+              text: '"Scientific discoveries were the most important factor in the development of medicine after 1800."\n\nHow far do you agree? Explain your answer.\n\nYou may use the following:\n• Germ Theory\n• Pasteur and Koch\n• Government action\n\nYou must also include information of your own.\n\n[16 marks + 4 SPaG]',
+              marks: 20,
+              section: 'Medicine in Britain'
+            },
+            {
+              id: 'med-q4',
+              questionNumber: 4,
+              text: 'Describe two features of conditions for soldiers in the trenches on the Western Front.',
+              marks: 4,
+              section: 'Western Front Historic Environment'
+            },
+            {
+              id: 'med-q5',
+              questionNumber: 5,
+              text: 'Study Sources A and B below.\n\nSource A: Extract from a Royal Army Medical Corps (RAMC) report, 1916, describing the challenges of treating wounded soldiers at a Casualty Clearing Station.\n\nSource B: Photograph showing a mobile X-ray unit being used near the front line at Arras, 1917.\n\nHow useful are Sources A and B for an enquiry into the treatment of injuries on the Western Front?\n\nExplain your answer using Sources A and B and your knowledge of the historical context.',
+              marks: 8,
+              section: 'Western Front Historic Environment'
+            },
+            {
+              id: 'med-q6',
+              questionNumber: 6,
+              text: 'How could you follow up Source A to find out more about medical experiments and innovations on the Western Front?\n\nIn your answer, you must give the question you would ask and the type of source you could use.\n\nComplete the table below.\n\n| Detail in Source A that I would follow up: | Question I would ask: | What type of source I could use: | How this might help answer my question: |\n\nYou must also explain how you would use the source to find out more about medical developments on the Western Front.',
+              marks: 12,
+              section: 'Western Front Historic Environment'
+            }
+          ]
+        },
+        'warfare': {
+          name: 'Warfare and British Society, c1250–present and London and the Second World War, 1939–45',
+          questions: [
+            {
+              id: 'war-q1',
+              questionNumber: 1,
+              text: 'Describe two features of the experience of soldiers in medieval warfare.',
+              marks: 4,
+              section: 'Warfare and British Society'
+            },
+            {
+              id: 'war-q2',
+              questionNumber: 2,
+              text: 'Explain why the nature of warfare changed between 1500 and 1900.\n\nYou may use the following:\n• Introduction of gunpowder weapons\n• Industrialisation\n\nYou must also include information of your own.',
+              marks: 12,
+              section: 'Warfare and British Society'
+            },
+            {
+              id: 'war-q3',
+              questionNumber: 3,
+              text: '"Technology was the main reason for changes in warfare between 1900 and the present day."\n\nHow far do you agree? Explain your answer.\n\nYou may use the following:\n• Machine guns and tanks\n• Aircraft and nuclear weapons\n• Training and tactics\n\nYou must also include information of your own.\n\n[16 marks + 4 SPaG]',
+              marks: 20,
+              section: 'Warfare and British Society'
+            },
+            {
+              id: 'war-q4',
+              questionNumber: 4,
+              text: 'Describe two features of civilian life in London during the Blitz, 1940–41.',
+              marks: 4,
+              section: 'London WWII Historic Environment'
+            },
+            {
+              id: 'war-q5',
+              questionNumber: 5,
+              text: 'Study Sources A and B below.\n\nSource A: Government poster encouraging Londoners to "Keep Calm and Carry On", issued in 1939 but never widely distributed during the war.\n\nSource B: Mass Observation report from September 1940, documenting civilian reactions to the first night of heavy bombing in London\'s East End.\n\nHow useful are Sources A and B for an enquiry into the government\'s response to air raids in London?\n\nExplain your answer using Sources A and B and your knowledge of the historical context.',
+              marks: 8,
+              section: 'London WWII Historic Environment'
+            },
+            {
+              id: 'war-q6',
+              questionNumber: 6,
+              text: 'How could you follow up Source B to find out more about civilian morale during the Blitz?\n\nIn your answer, you must give the question you would ask and the type of source you could use.\n\nComplete the table below.\n\n| Detail in Source B that I would follow up: | Question I would ask: | What type of source I could use: | How this might help answer my question: |\n\nYou must also explain how you would use the source to find out more about civilian responses to the Blitz.',
+              marks: 12,
+              section: 'London WWII Historic Environment'
+            }
+          ]
+        },
+        'migrants': {
+          name: 'Migrants in Britain, c800–present and Notting Hill, c1948–c1970',
+          questions: [
+            {
+              id: 'mig-q1',
+              questionNumber: 1,
+              text: 'Describe two features of migration to Britain during the Viking period, c800–1000.',
+              marks: 4,
+              section: 'Migrants in Britain'
+            },
+            {
+              id: 'mig-q2',
+              questionNumber: 2,
+              text: 'Explain why migration from the Caribbean increased after 1945.\n\nYou may use the following:\n• Labour shortages in Britain\n• British Nationality Act 1948\n\nYou must also include information of your own.',
+              marks: 12,
+              section: 'Migrants in Britain'
+            },
+            {
+              id: 'mig-q3',
+              questionNumber: 3,
+              text: '"Government policies were the main influence on migration to Britain after 1945."\n\nHow far do you agree? Explain your answer.\n\nYou may use the following:\n• Commonwealth Immigrants Acts\n• Employment opportunities\n• Push factors from countries of origin\n\nYou must also include information of your own.\n\n[16 marks + 4 SPaG]',
+              marks: 20,
+              section: 'Migrants in Britain'
+            },
+            {
+              id: 'mig-q4',
+              questionNumber: 4,
+              text: 'Describe two features of the Notting Hill area in the 1950s and 1960s.',
+              marks: 4,
+              section: 'Notting Hill Historic Environment'
+            },
+            {
+              id: 'mig-q5',
+              questionNumber: 5,
+              text: 'Study Sources A and B below.\n\nSource A: Extract from the West Indian Gazette, published by Claudia Jones, 1959, describing the Notting Hill race riots of 1958.\n\nSource B: Photograph of the first Caribbean Carnival in Notting Hill, organised by Claudia Jones in 1959.\n\nHow useful are Sources A and B for an enquiry into race relations in Notting Hill in the 1960s?\n\nExplain your answer using Sources A and B and your knowledge of the historical context.',
+              marks: 8,
+              section: 'Notting Hill Historic Environment'
+            },
+            {
+              id: 'mig-q6',
+              questionNumber: 6,
+              text: 'How could you follow up Source A to find out more about community responses to racism in Notting Hill?\n\nIn your answer, you must give the question you would ask and the type of source you could use.\n\nComplete the table below.\n\n| Detail in Source A that I would follow up: | Question I would ask: | What type of source I could use: | How this might help answer my question: |\n\nYou must also explain how you would use the source to find out more about how the Caribbean community responded to racism.',
+              marks: 12,
+              section: 'Notting Hill Historic Environment'
+            }
+          ]
+        }
+      };
+
+      // Return all questions from all four options - students choose ONE complete option
+      const allQuestions: ExamQuestion[] = [];
+      
+      Object.entries(thematicOptions).forEach(([key, option]) => {
+        option.questions.forEach(q => {
+          allQuestions.push(q);
+        });
+      });
+
+      console.log('History Edexcel questions generated:', allQuestions.length);
+      return allQuestions;
+    }
+    
     // Special format for History - AQA GCSE Paper 1 (84 marks total)
     if (subjectId === 'history') {
       // Section A: Period Studies (44 marks total) - Choose ONE topic
@@ -6340,6 +6547,7 @@ Write a story about a moment of fear.
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
       history: 120, // 2h
+      "history-edexcel-gcse": 75, // 1h 15min (Edexcel GCSE History Paper 1)
       "religious-studies": 120, // 2h
       business: 105, // 1h 45min
       french: 120, // 2h
@@ -6388,6 +6596,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'geography-b-ocr') {
       return 70; // OCR Geography B Papers 01/02: 70 marks each, Paper 03: 60 marks
+    }
+    if (subjectId === 'history-edexcel-gcse') {
+      return 52; // History Edexcel Paper 1: 52 marks total (4+12+20+4+8+12)
     }
     if (subjectId === 'history') {
       return 84; // History Paper 1: Section A (44 marks) + Section B (40 marks)
@@ -6668,7 +6879,7 @@ Write a story about a moment of fear.
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -6706,6 +6917,15 @@ Write a story about a moment of fear.
                     <li>• Answer questions from your chosen topics only</li>
                     <li>• You have {getExamDuration()} minutes to complete this paper</li>
                     <li>• Questions range from 4-12 marks each</li>
+                  </ul>
+                ) : subjectId === 'history-edexcel-gcse' ? (
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• <strong>EDEXCEL GCSE HISTORY – PAPER 1</strong></li>
+                    <li>• <strong>Choose ONE</strong> Thematic Study option and answer ALL questions for that option</li>
+                    <li>• <strong>Options:</strong> Crime and punishment + Whitechapel | Medicine + Western Front | Warfare + London WWII | Migrants + Notting Hill</li>
+                    <li>• Time: {getExamDuration()} minutes | Total marks: {getTotalMarks()}</li>
+                    <li>• Questions include: 4, 12, 16+4 SPaG, 4, 8, and 12 marks</li>
+                    <li>• Use black ink or ball-point pen</li>
                   </ul>
                 ) : subjectId === 'religious-studies' ? (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
@@ -6806,7 +7026,8 @@ Write a story about a moment of fear.
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
                    <h1 className="text-lg font-bold text-foreground">
-                     {subjectId === 'history' ? 'History Paper 1' : 
+                     {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
+                      subjectId === 'history' ? 'History Paper 1' : 
                       subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
                       subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
                       subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :

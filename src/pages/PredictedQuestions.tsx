@@ -94,6 +94,7 @@ const PredictedQuestions = () => {
       "english-language": "1h 45min",
       "english-literature": "1h 45min",
       history: "1h 15min",
+      "history-edexcel-gcse": "1h 15min",
       geography: "1h 30min",
       "computer-science": "1h 30min",
       psychology: "1h 30min",
@@ -103,7 +104,7 @@ const PredictedQuestions = () => {
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'history-edexcel-gcse') {
       return 'Edexcel GCSE';
     }
     if (subjectId === 'computer-science' || subjectId === 'psychology') {
