@@ -33647,7 +33647,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'history-edexcel-gcse',
-    name: 'History',
+    name: 'History (Edexcel)',
     topics: [
       {
         id: 'crime-punishment-britain',
