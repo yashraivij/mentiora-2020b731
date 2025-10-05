@@ -31,14 +31,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isPremium, setIsPremium] = useState(false);
   const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
   
-  // Use MP rewards hook conditionally to avoid circular dependency
-  let showMPReward: ((amount: number, message: string) => void) | null = null;
-  try {
-    const mpRewards = useMPRewards();
-    showMPReward = mpRewards.showMPReward;
-  } catch {
-    // Hook not available yet, skip MP rewards
-  }
+  const { showMPReward } = useMPRewards();
 
 const refreshSubscription = async (userId?: string) => {
   const targetUserId = userId || user?.id;
@@ -112,10 +105,8 @@ const refreshSubscription = async (userId?: string) => {
             
             if (result.awarded > 0) {
               console.log(`Daily login bonus: +${result.awarded} MP`);
-              // Show MP reward toast for login
-              if (showMPReward) {
-                showMPReward(result.awarded, "Daily quest complete: Sign in today");
-              }
+              // Show MP reward toast with sound and progress animation
+              showMPReward(result.awarded, "Daily quest complete: Sign in today");
             } else {
               console.log('Daily login already awarded today');
             }

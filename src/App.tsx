@@ -36,8 +36,8 @@ const App: React.FC = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AuthProvider>
-          <MPRewardsProvider>
+        <MPRewardsProvider>
+          <AuthProvider>
             <BrowserRouter>
             <PromotionalStrip />
             <Routes>
@@ -104,8 +104,8 @@ const App: React.FC = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-          </MPRewardsProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </MPRewardsProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
