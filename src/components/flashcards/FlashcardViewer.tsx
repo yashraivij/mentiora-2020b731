@@ -19,6 +19,8 @@ import {
   Play,
   Pause,
   SkipForward,
+  Edit3,
+  List,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -82,6 +84,9 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
   const [completedCards, setCompletedCards] = useState<Set<number>>(new Set());
   const [sessionStarted, setSessionStarted] = useState(false);
   const [isSessionComplete, setIsSessionComplete] = useState(false);
+  const [learnMode, setLearnMode] = useState<"type" | "multiple-choice">("type");
+  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
+  const [multipleChoiceOptions, setMultipleChoiceOptions] = useState<string[]>([]);
   
   const isMobile = useIsMobile();
   const { toast } = useToast();
@@ -90,6 +95,33 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
     // Initialize with original order
     setShuffledCards([...flashcardSet.flashcards]);
   }, [flashcardSet]);
+
+  // Generate multiple choice options when card changes or mode switches
+  useEffect(() => {
+    if (mode === "learn" && learnMode === "multiple-choice" && currentCard) {
+      generateMultipleChoiceOptions();
+    }
+  }, [currentIndex, learnMode, mode]);
+
+  const generateMultipleChoiceOptions = () => {
+    if (!currentCard) return;
+    
+    const correctAnswer = currentCard.back;
+    const otherCards = shuffledCards
+      .filter((_, idx) => idx !== currentIndex)
+      .map(card => card.back);
+    
+    // Select 3 random wrong answers
+    const wrongAnswers = otherCards
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+    
+    // Combine and shuffle all options
+    const allOptions = [correctAnswer, ...wrongAnswers]
+      .sort(() => Math.random() - 0.5);
+    
+    setMultipleChoiceOptions(allOptions);
+  };
 
   const currentCard = shuffledCards[currentIndex];
   const progress = ((currentIndex + 1) / shuffledCards.length) * 100;
@@ -101,6 +133,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       setIsFlipped(false);
       setUserAnswer("");
       setShowAnswer(false);
+      setSelectedChoice(null);
     } else if (mode === "learn" && !isSessionComplete) {
       // Complete the session
       setIsSessionComplete(true);
@@ -117,6 +150,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       setIsFlipped(false);
       setUserAnswer("");
       setShowAnswer(false);
+      setSelectedChoice(null);
     }
   };
 
@@ -127,6 +161,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
     setIsFlipped(false);
     setUserAnswer("");
     setShowAnswer(false);
+    setSelectedChoice(null);
     toast({
       title: "Cards Shuffled",
       description: "Flashcards have been randomly shuffled",
@@ -142,6 +177,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
     setCompletedCards(new Set());
     setSessionStarted(false);
     setIsSessionComplete(false);
+    setSelectedChoice(null);
     setShuffledCards([...flashcardSet.flashcards]);
     toast({
       title: "Session Reset",
@@ -175,6 +211,30 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
     setTimeout(() => {
       handleNext();
     }, 1000);
+  };
+
+  const handleMultipleChoiceSelect = (choice: string) => {
+    if (showAnswer) return; // Already answered
+    
+    setSelectedChoice(choice);
+    setShowAnswer(true);
+    if (!sessionStarted) {
+      setSessionStarted(true);
+    }
+    
+    const isCorrect = choice === currentCard.back;
+    if (isCorrect) {
+      setCorrectAnswers(correctAnswers + 1);
+    }
+    
+    const newCompleted = new Set(completedCards);
+    newCompleted.add(currentIndex);
+    setCompletedCards(newCompleted);
+    
+    // Auto-advance after a short delay
+    setTimeout(() => {
+      handleNext();
+    }, 1500);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -269,6 +329,40 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
         </div>
       </div>
 
+      {/* Learn Mode Toggle */}
+      {mode === "learn" && (
+        <div className="bg-card border-b border-border p-4">
+          <div className="max-w-4xl mx-auto flex justify-center gap-2">
+            <Button
+              variant={learnMode === "type" ? "default" : "outline"}
+              size="sm"
+              onClick={() => {
+                setLearnMode("type");
+                setUserAnswer("");
+                setShowAnswer(false);
+                setSelectedChoice(null);
+              }}
+            >
+              <Edit3 className="h-4 w-4 mr-2" />
+              Type Answer
+            </Button>
+            <Button
+              variant={learnMode === "multiple-choice" ? "default" : "outline"}
+              size="sm"
+              onClick={() => {
+                setLearnMode("multiple-choice");
+                setUserAnswer("");
+                setShowAnswer(false);
+                setSelectedChoice(null);
+              }}
+            >
+              <List className="h-4 w-4 mr-2" />
+              Multiple Choice
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Progress Bar */}
       <div className="bg-card border-b border-border p-4">
         <div className="max-w-4xl mx-auto">
@@ -322,7 +416,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
               </AnimatePresence>
             </div>
           ) : (
-            // Learn Mode - Type Answer
+            // Learn Mode - Type Answer or Multiple Choice
             <div className="w-full max-w-2xl space-y-6">
               <Card>
                 <CardContent className="p-6">
@@ -331,52 +425,97 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                   </div>
                   <p className="text-lg mb-6">{currentCard.front}</p>
                   
-                  {!showAnswer ? (
-                    <div className="space-y-4">
-                      <Input
-                        placeholder="Type your answer here..."
-                        value={userAnswer}
-                        onChange={(e) => setUserAnswer(e.target.value)}
-                        onKeyPress={(e) => e.key === "Enter" && handleAnswerSubmit()}
-                        className="text-center"
-                        autoFocus
-                      />
-                      <Button 
-                        onClick={handleAnswerSubmit}
-                        disabled={!userAnswer.trim()}
-                        className="w-full"
-                      >
-                        <Check className="h-4 w-4 mr-2" />
-                        Check Answer
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="p-4 bg-muted rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-2">Your answer:</p>
-                        <p className="font-medium">{userAnswer}</p>
-                      </div>
-                      <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-                        <p className="text-sm text-muted-foreground mb-2">Correct answer:</p>
-                        <div className="font-medium text-green-800 dark:text-green-200">{formatFlashcardText(currentCard.back)}</div>
-                      </div>
-                      <div className="flex gap-3">
+                  {learnMode === "type" ? (
+                    // Type Answer Mode
+                    !showAnswer ? (
+                      <div className="space-y-4">
+                        <Input
+                          placeholder="Type your answer here..."
+                          value={userAnswer}
+                          onChange={(e) => setUserAnswer(e.target.value)}
+                          onKeyPress={(e) => e.key === "Enter" && handleAnswerSubmit()}
+                          className="text-center"
+                          autoFocus
+                        />
                         <Button 
-                          onClick={() => handleAnswerFeedback(true)}
-                          className="flex-1 bg-green-600 hover:bg-green-700"
+                          onClick={handleAnswerSubmit}
+                          disabled={!userAnswer.trim()}
+                          className="w-full"
                         >
                           <Check className="h-4 w-4 mr-2" />
-                          I got it right
-                        </Button>
-                        <Button 
-                          onClick={() => handleAnswerFeedback(false)}
-                          variant="destructive"
-                          className="flex-1"
-                        >
-                          <X className="h-4 w-4 mr-2" />
-                          I got it wrong
+                          Check Answer
                         </Button>
                       </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="p-4 bg-muted rounded-lg">
+                          <p className="text-sm text-muted-foreground mb-2">Your answer:</p>
+                          <p className="font-medium">{userAnswer}</p>
+                        </div>
+                        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                          <p className="text-sm text-muted-foreground mb-2">Correct answer:</p>
+                          <div className="font-medium text-green-800 dark:text-green-200">{formatFlashcardText(currentCard.back)}</div>
+                        </div>
+                        <div className="flex gap-3">
+                          <Button 
+                            onClick={() => handleAnswerFeedback(true)}
+                            className="flex-1 bg-green-600 hover:bg-green-700"
+                          >
+                            <Check className="h-4 w-4 mr-2" />
+                            I got it right
+                          </Button>
+                          <Button 
+                            onClick={() => handleAnswerFeedback(false)}
+                            variant="destructive"
+                            className="flex-1"
+                          >
+                            <X className="h-4 w-4 mr-2" />
+                            I got it wrong
+                          </Button>
+                        </div>
+                      </div>
+                    )
+                  ) : (
+                    // Multiple Choice Mode
+                    <div className="space-y-3">
+                      {multipleChoiceOptions.map((option, index) => {
+                        const isSelected = selectedChoice === option;
+                        const isCorrect = option === currentCard.back;
+                        const showFeedback = showAnswer;
+                        
+                        let buttonVariant: "outline" | "default" | "destructive" = "outline";
+                        let buttonClass = "";
+                        
+                        if (showFeedback) {
+                          if (isCorrect) {
+                            buttonVariant = "default";
+                            buttonClass = "bg-green-600 hover:bg-green-700 border-green-600";
+                          } else if (isSelected && !isCorrect) {
+                            buttonVariant = "destructive";
+                          }
+                        }
+                        
+                        return (
+                          <Button
+                            key={index}
+                            variant={buttonVariant}
+                            className={`w-full justify-start text-left h-auto py-4 px-6 ${buttonClass}`}
+                            onClick={() => handleMultipleChoiceSelect(option)}
+                            disabled={showAnswer}
+                          >
+                            <span className="flex items-center gap-3">
+                              <span className="font-semibold text-base">{String.fromCharCode(65 + index)}.</span>
+                              <span className="flex-1">{option}</span>
+                              {showFeedback && isCorrect && (
+                                <Check className="h-5 w-5 text-white" />
+                              )}
+                              {showFeedback && isSelected && !isCorrect && (
+                                <X className="h-5 w-5" />
+                              )}
+                            </span>
+                          </Button>
+                        );
+                      })}
                     </div>
                   )}
                 </CardContent>
