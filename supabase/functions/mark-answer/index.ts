@@ -68,12 +68,29 @@ serve(async (req) => {
     // Check if this is a multiple choice question (has options like a), b), c), d))
     const isMultipleChoice = /[a-d]\)\s/.test(question);
     
+    // Check if question requires explanation/description (not just a numerical answer)
+    const questionLower = question.toLowerCase();
+    const requiresExplanation = /\b(explain|describe|state the equation|distinguish|define|discuss|compare|evaluate|justify|suggest why)\b/.test(questionLower);
+    
     // Check if this is a numerical/mathematical answer (contains numbers, decimals, operators, etc.)
-    const isNumericalAnswer = /[\d.]/.test(trimmedAnswer) && trimmedAnswer.length >= 1;
+    // But if it's just a single digit with no context, it's not valid for explanation questions
+    const isPureNumber = /^[\d.]+$/.test(trimmedAnswer);
+    const isNumericalAnswer = /[\d.]/.test(trimmedAnswer) && trimmedAnswer.length >= 1 && !requiresExplanation;
     
     // For multiple choice, allow single letter answers
     // For numerical answers (calculations, rounding, etc.), allow pure numerical responses
+    // For explanation questions, reject pure numbers as they don't demonstrate understanding
     // For text answers, require at least some alphabetic content
+    if (!isMultipleChoice && (requiresExplanation && isPureNumber)) {
+      return new Response(JSON.stringify({ 
+        marksAwarded: 0,
+        feedback: "Your answer is too brief. Please provide a more detailed response that demonstrates your understanding.",
+        assessment: "Insufficient Detail"
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    
     if (!isMultipleChoice && !isNumericalAnswer && (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer))) {
       return new Response(JSON.stringify({ 
         marksAwarded: 0,
