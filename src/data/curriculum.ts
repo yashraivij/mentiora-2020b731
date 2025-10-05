@@ -34787,5 +34787,854 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'music-eduqas-gcse',
+    name: 'Music',
+    topics: [
+      {
+        id: 'music-forms-devices',
+        name: 'Musical Forms and Devices',
+        questions: [
+          {
+            id: 'music-fd-q1',
+            question: 'Identify and describe the structural form of the extract you have just heard.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The extract is in ternary form (ABA). The A section presents the main theme in the tonic key. The B section provides contrast through a different melody in the relative minor key. The A section returns with the original theme, creating a balanced three-part structure.',
+            markingCriteria: {
+              breakdown: [
+                'Correctly identifies ternary form (1 mark)',
+                'Describes A section characteristics (1 mark)',
+                'Describes contrasting B section (1 mark)',
+                'Explains return of A section (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q2',
+            question: 'Explain how Bach uses sequence in the Badinerie from Orchestral Suite No.2 in B minor.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bach employs melodic sequence extensively in the Badinerie. A short melodic pattern is stated and immediately repeated at a different pitch level, typically ascending or descending by step. This creates coherence and momentum in the flute melody. The sequences often occur in bars 1-4 where the opening motif is repeated sequentially upward. This technique builds excitement and showcases the virtuosity of the flute part while maintaining musical unity through repetition.',
+            markingCriteria: {
+              breakdown: [
+                'Defines sequence as repeated melodic pattern at different pitch (2 marks)',
+                'Identifies specific examples in Badinerie (2 marks)',
+                'Explains effect: coherence, momentum, unity (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q3',
+            question: 'Describe the features of binary form and give an example of where it might be used.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Binary form consists of two distinct sections, labeled A and B. Each section is usually repeated (AABB). The A section typically ends in a related key (often the dominant), while the B section returns to the tonic key. Binary form was commonly used in Baroque dance movements and keyboard works by composers like Bach and Handel.',
+            markingCriteria: {
+              breakdown: [
+                'Two sections A and B (1 mark)',
+                'Sections usually repeated (1 mark)',
+                'Modulation pattern described (1 mark)',
+                'Example of usage given (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q4',
+            question: 'Explain what is meant by an ostinato and describe its effect in music.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'An ostinato is a repeated musical pattern or phrase that persists throughout a section or entire piece. It can be melodic, rhythmic, or harmonic. Ostinatos create a sense of continuity and stability, providing a foundation over which other musical material can develop. They build tension through repetition and can create a hypnotic or driving effect. Common examples include ground bass in Baroque music and repeated bass lines in popular music.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as repeated pattern (1 mark)',
+                'Can be melodic/rhythmic/harmonic (1 mark)',
+                'Effect: continuity and stability (1 mark)',
+                'Effect: builds tension (1 mark)',
+                'Example given (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q5',
+            question: 'Describe the features of rondo form and explain why it was popular in Classical music.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Rondo form features a main theme (A) that returns multiple times, alternating with contrasting episodes (B, C, etc.). The most common pattern is ABACA or ABACABA. The A section always returns in the tonic key, providing unity. The episodes offer contrast through different keys, melodies, or moods. Rondo form was popular in Classical period finales because it is accessible and entertaining for audiences, with the recurring theme being easy to recognize. The balance between unity (returning A) and variety (contrasting episodes) exemplifies Classical aesthetic ideals.',
+            markingCriteria: {
+              breakdown: [
+                'Main theme returns alternating with episodes (2 marks)',
+                'Common patterns described (1 mark)',
+                'Contrast provided by episodes (1 mark)',
+                'Popularity due to accessibility and balance (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q6',
+            question: 'Identify and describe two different types of ornamentation used in Baroque music.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Trills involve rapid alternation between the main note and the note above, creating a decorative effect that adds brilliance and virtuosity. Mordents are quick ornaments consisting of the main note, the note above or below, and a return to the main note, adding subtle decoration without disrupting the melodic line. Both ornaments were extensively used in Baroque music to embellish melodies and demonstrate performer skill.',
+            markingCriteria: {
+              breakdown: [
+                'Trill described correctly (2 marks)',
+                'Mordent described correctly (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q7',
+            question: 'Explain what is meant by imitation and describe how it is used in contrapuntal music.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Imitation occurs when a melodic idea presented in one voice is immediately repeated in another voice, usually at a different pitch. In contrapuntal music, imitation creates polyphonic texture where independent melodic lines interweave. The imitating voice typically enters while the original voice continues with new material. Imitation is fundamental to fugues where the subject is imitated by different voices. It creates musical interest through dialogue between voices and demonstrates compositional skill.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: melody repeated in another voice (1 mark)',
+                'Creates polyphonic texture (1 mark)',
+                'Voices enter at different times (1 mark)',
+                'Used in fugues (1 mark)',
+                'Effect described (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q8',
+            question: 'Describe the characteristics of Alberti bass and explain its role in Classical period music.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'Alberti bass is an accompaniment pattern where the notes of a chord are played in a specific order: lowest, highest, middle, highest (e.g., C-G-E-G for a C major chord). This broken chord pattern creates continuous movement and harmonic support without being as heavy as block chords. Named after Domenico Alberti, it was extensively used in Classical piano music, particularly by Mozart and Haydn. It provides a light, elegant accompaniment texture that allows the melody to remain prominent.',
+            markingCriteria: {
+              breakdown: [
+                'Pattern described: lowest-highest-middle-highest (2 marks)',
+                'Creates movement and harmonic support (1 mark)',
+                'Used in Classical period piano music (1 mark)',
+                'Effect: light, elegant, allows melody prominence (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q9',
+            question: 'Explain what is meant by a perfect cadence and an imperfect cadence, giving the chord progressions for each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A perfect cadence is chord V moving to chord I (dominant to tonic), creating a strong sense of finality and resolution. It sounds conclusive and is used at the end of phrases and pieces. An imperfect cadence is any progression ending on chord V, most commonly I-V or ii-V. It sounds incomplete and creates expectation for continuation, often used at the end of phrases that are not final.',
+            markingCriteria: {
+              breakdown: [
+                'Perfect cadence V-I with sense of finality (2 marks)',
+                'Imperfect cadence ending on V with incomplete feeling (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-fd-q10',
+            question: 'Describe how Bach creates contrast in the Badinerie, referring to specific musical elements.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Bach creates contrast in the Badinerie through several means. Dynamically, terraced dynamics alternate between forte (full orchestra) and piano (solo flute or reduced forces). Melodically, virtuosic ascending flute passages contrast with descending sequences. Texturally, the flute\'s elaborate solo lines contrast with the simpler string accompaniment. Harmonically, movement between B minor (tonic) and related keys like D major (relative major) provides tonal contrast. Rhythmically, the continuous semiquaver movement in the flute contrasts with the simpler rhythms in the strings.',
+            markingCriteria: {
+              breakdown: [
+                'Dynamic contrast described (1 mark)',
+                'Melodic contrast described (1 mark)',
+                'Textural contrast described (1 mark)',
+                'Harmonic/tonal contrast described (1 mark)',
+                'Rhythmic contrast described (1 mark)',
+                'Specific examples from piece (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          }
+        ]
+      },
+      {
+        id: 'music-ensemble',
+        name: 'Music for Ensemble',
+        questions: [
+          {
+            id: 'music-ens-q1',
+            question: 'Describe the texture of the extract you have just heard, identifying specific textural features.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The extract features a homophonic texture with melody and accompaniment. The soprano voice carries the main melodic line while the alto, tenor, and bass voices provide harmonic support moving in similar rhythm. This creates a chordal texture where all parts move together, typical of hymn-style writing. The texture is primarily vertical with occasional moments of independence in the inner voices.',
+            markingCriteria: {
+              breakdown: [
+                'Correctly identifies homophonic texture (1 mark)',
+                'Melody and accompaniment described (1 mark)',
+                'Chordal movement explained (1 mark)',
+                'Additional detail about voice movement (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q2',
+            question: 'Explain the difference between monophonic and polyphonic texture, giving an example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Monophonic texture consists of a single melodic line with no accompaniment or harmony. Examples include plainchant, unaccompanied folk melody, or everyone singing the same tune in unison. Polyphonic texture features two or more independent melodic lines performed simultaneously, creating a complex interwoven sound. Examples include fugues, Renaissance motets, or jazz improvisation with multiple soloists.',
+            markingCriteria: {
+              breakdown: [
+                'Monophonic defined as single line (1 mark)',
+                'Example of monophonic texture (1 mark)',
+                'Polyphonic defined as independent lines (1 mark)',
+                'Example of polyphonic texture (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q3',
+            question: 'Describe the typical instrumentation of a string quartet and explain why this ensemble became important in the Classical period.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'A string quartet consists of two violins (first and second), one viola, and one cello. This combination provides a balanced range from high to low and allows for varied textures from unison to four independent lines. The string quartet became central to Classical chamber music because it offered intimate music-making for private settings. The equal importance of all four parts (rather than melody and accompaniment) allowed for sophisticated musical conversation. Composers like Haydn, Mozart, and Beethoven developed the genre, creating works of great depth. The quartet format became the ultimate test of compositional skill.',
+            markingCriteria: {
+              breakdown: [
+                'Instrumentation: 2 violins, viola, cello (2 marks)',
+                'Balanced range and texture possibilities (1 mark)',
+                'Intimate chamber music setting (1 mark)',
+                'Equal importance of parts (1 mark)',
+                'Development by major composers (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q4',
+            question: 'Explain what is meant by basso continuo and describe its role in Baroque ensemble music.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Basso continuo (or figured bass) is the Baroque accompaniment technique where a bass line is played by low instruments (cello, bassoon) while a keyboard instrument (harpsichord, organ) fills in the harmony above. Numbers written below the bass notes indicate which chords to play. The continuo provided harmonic foundation and rhythmic support for Baroque ensembles. It allowed flexibility as the keyboard player could improvise the exact realization. Continuo was standard in Baroque chamber music, orchestral works, and opera.',
+            markingCriteria: {
+              breakdown: [
+                'Bass line plus keyboard harmony (2 marks)',
+                'Figured bass notation explained (1 mark)',
+                'Role: harmonic foundation (1 mark)',
+                'Standard in Baroque music (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q5',
+            question: 'Describe the role of the rhythm section in a jazz trio and identify typical instruments.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A jazz trio typically consists of a melodic instrument (piano, saxophone, or guitar) plus bass and drums forming the rhythm section. The bass (usually double bass or electric bass) provides harmonic foundation by outlining chord progressions and maintains steady pulse through walking bass lines. The drums provide rhythmic foundation through ride cymbal patterns and bass drum, while adding color and dynamic variation. Together, the rhythm section creates the groove and harmonic framework over which soloists improvise.',
+            markingCriteria: {
+              breakdown: [
+                'Identifies typical trio instruments (1 mark)',
+                'Bass role: harmony and pulse (2 marks)',
+                'Drums role: rhythm and color (1 mark)',
+                'Overall function: groove and framework (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q6',
+            question: 'Explain the difference between a round and a canon, giving examples of how each is constructed.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A round is a specific type of canon where a melody is repeated exactly at the same pitch by multiple voices entering at different times. Once all voices have entered, the melody cycles continuously. Examples include "Frère Jacques" and "London\'s Burning." A canon is a broader term for any piece where a melody in one voice is strictly imitated by one or more voices, but canons can involve imitation at different intervals (not just unison) and may not repeat cyclically. Rounds are a subset of canons designed for continuous repetition.',
+            markingCriteria: {
+              breakdown: [
+                'Round defined as repeating at same pitch (1 mark)',
+                'Example of round given (1 mark)',
+                'Canon defined as strict imitation at any interval (1 mark)',
+                'Relationship between round and canon explained (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q7',
+            question: 'Describe how vocal ensembles use texture in musical theatre, referring to specific techniques.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Musical theatre employs varied textures to create dramatic effect. Solo numbers feature a single voice with accompaniment, allowing character development and emotional expression. Duets create dialogue or harmony between two characters, with texture ranging from parallel thirds to contrapuntal independence. Ensemble numbers use layered texture where different groups sing different material simultaneously, creating complex sound. Backing vocals provide harmonic support through sustained notes or repeated patterns behind lead vocalists. Choral sections employ homophonic texture for powerful moments or polyphonic texture for complexity. Unison singing creates strength and unity, often used for important statements.',
+            markingCriteria: {
+              breakdown: [
+                'Solo texture described (1 mark)',
+                'Duet texture described (1 mark)',
+                'Layered ensemble texture (1 mark)',
+                'Backing vocals role (1 mark)',
+                'Choral techniques (1 mark)',
+                'Effect/purpose explained (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q8',
+            question: 'Explain what is meant by a countermelody and describe its function in ensemble music.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A countermelody is a secondary melodic line that is performed simultaneously with the main melody. It provides melodic interest and harmonic richness while remaining subordinate to the principal tune. Countermelodies often move in contrary motion to the main melody or fill gaps where the main melody has longer notes. They add complexity to the texture without competing for attention, and are common in orchestral arrangements and choral music.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as secondary melodic line (1 mark)',
+                'Performed simultaneously with main melody (1 mark)',
+                'Function: adds interest while remaining subordinate (1 mark)',
+                'Relationship to main melody described (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q9',
+            question: 'Describe the characteristics of a Baroque trio sonata and explain why it was a popular form.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'A trio sonata features two melody instruments (typically violins or flutes) plus basso continuo (cello and harpsichord), creating four actual performers despite the name "trio." The two upper parts engage in imitative dialogue or move in parallel thirds and sixths. The continuo provides harmonic foundation and bass line. Trio sonatas were popular in the Baroque period because they were suitable for domestic performance by amateur musicians, required modest forces, and allowed elegant musical conversation. Composers like Corelli, Handel, and Bach wrote extensively in this genre. The form could be either sonata da chiesa (church sonata) or sonata da camera (chamber sonata).',
+            markingCriteria: {
+              breakdown: [
+                'Two melody instruments plus continuo (2 marks)',
+                'Musical interaction between upper parts (1 mark)',
+                'Popular due to domestic suitability (1 mark)',
+                'Reference to church/chamber types or composers (1 mark)',
+                'Overall characteristics (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-ens-q10',
+            question: 'Explain how texture is used differently in blues music compared to Classical chamber music.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Blues music typically features a clear distinction between melody and accompaniment with the vocal or instrumental lead supported by guitar, bass, and drums. The texture is predominantly homophonic with emphasis on groove and rhythmic feel. Improvisation creates spontaneous polyphonic moments. Classical chamber music employs more varied textures including genuine polyphony where all parts have equal melodic importance. The texture is more precisely notated with less improvisation. Blues texture prioritizes emotional expression and rhythmic drive, while Classical chamber texture emphasizes formal balance and contrapuntal sophistication.',
+            markingCriteria: {
+              breakdown: [
+                'Blues: melody and accompaniment with groove (1 mark)',
+                'Blues: improvisation featured (1 mark)',
+                'Classical: varied including polyphony (1 mark)',
+                'Classical: all parts equal importance (1 mark)',
+                'Comparison of purposes (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          }
+        ]
+      },
+      {
+        id: 'music-film',
+        name: 'Film Music',
+        questions: [
+          {
+            id: 'music-film-q1',
+            question: 'Describe how the composer uses timbre to create mood in the film extract you have just heard.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The composer creates a tense, ominous mood through careful choice of timbres. Low brass (trombones, tuba) provide dark, menacing tones in the bass register. String tremolo creates nervous energy and anticipation. The use of muted trumpets adds an eerie, distant quality. Synthesized sounds blend with acoustic instruments, creating an unsettling modern atmosphere. The absence of bright, warm timbres (no flutes or violins in high register) maintains the dark mood throughout the extract.',
+            markingCriteria: {
+              breakdown: [
+                'Identifies specific instruments/timbres (2 marks)',
+                'Describes mood created (1 mark)',
+                'Links timbre choices to mood (1 mark)',
+                'Reference to register or specific techniques (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q2',
+            question: 'Explain what is meant by a leitmotif and describe how it functions in film music.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A leitmotif is a recurring musical theme associated with a particular character, place, emotion, or idea. When the character appears or is mentioned, their leitmotif returns, helping the audience make connections. Leitmotifs can undergo thematic transformation - changing in character (major to minor, fast to slow) to reflect changing circumstances. For example, a character\'s heroic theme might become tragic when they face defeat. This technique was pioneered by Wagner in opera and adopted extensively by film composers like John Williams.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: recurring theme for character/place/idea (2 marks)',
+                'Function: helps audience make connections (1 mark)',
+                'Can undergo transformation (1 mark)',
+                'Example or historical context (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q3',
+            question: 'Describe how a film composer might respond to a commission for an action sequence, considering musical elements.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'For an action sequence, the composer would likely use fast tempo to match the pace of on-screen events. Loud dynamics (forte/fortissimo) create excitement and intensity. Driving, repetitive rhythms provide urgency and momentum, often with syncopation adding unpredictability. The orchestration might feature full orchestra with prominent brass and percussion for power. Harmonically, dissonance and rapid modulations create tension. The texture might be dense and layered to match visual complexity. Short, accented motifs rather than long melodies suit quick cuts and fast action. The music would be precisely synchronized to key action moments (hits, explosions) through "mickey-mousing."',
+            markingCriteria: {
+              breakdown: [
+                'Tempo and rhythm elements (1 mark)',
+                'Dynamic choices (1 mark)',
+                'Orchestration decisions (1 mark)',
+                'Harmonic approach (1 mark)',
+                'Structural considerations (1 mark)',
+                'Synchronization with action (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q4',
+            question: 'Explain how dynamics and contrast are used to create special effects in film music.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Sudden dynamic changes create shock and surprise, with sforzando accents emphasizing specific visual moments like impacts or revelations. Crescendos build tension and anticipation as scenes develop toward a climax. Long diminuendos can create a sense of something fading or disappearing. Extreme contrast between very quiet and very loud passages heightens emotional impact. Silence itself becomes an effective tool when used for contrast. Dynamics can support the narrative by matching emotional intensity or contradicting visuals for ironic effect.',
+            markingCriteria: {
+              breakdown: [
+                'Sudden changes for shock (1 mark)',
+                'Crescendos building tension (1 mark)',
+                'Extreme contrasts for effect (1 mark)',
+                'Use of silence (1 mark)',
+                'Overall dramatic function (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q5',
+            question: 'Describe minimalist techniques used in film music and explain why they are effective.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Minimalist film music employs repetitive patterns that gradually evolve through subtle changes. Common techniques include ostinatos providing continuous rhythmic or melodic cells, phase shifting where similar patterns move in and out of sync, and additive process where elements are gradually introduced. Dynamics often remain constant or change very gradually. Harmony may be static or move very slowly. Composers like Philip Glass and Hans Zimmer use minimalism effectively because repetition creates hypnotic or trance-like states, builds tension through accumulation, and doesn\'t distract from dialogue or visuals. The gradual evolution of patterns can mirror slow-burning narrative development.',
+            markingCriteria: {
+              breakdown: [
+                'Repetitive patterns/ostinatos (1 mark)',
+                'Gradual evolution/additive process (1 mark)',
+                'Specific techniques (phase shifting, static harmony) (1 mark)',
+                'Effect: hypnotic/tension building (1 mark)',
+                'Doesn\'t distract from visuals (1 mark)',
+                'Mirrors narrative development (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q6',
+            question: 'Explain how music technology may be used to enhance sonority in film music.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Music technology enhances film music sonority through various means. Synthesizers create sounds impossible with acoustic instruments, including otherworldly timbres for sci-fi or fantasy. Sampling allows realistic reproduction of any sound or rare instruments. Digital audio workstations (DAWs) enable precise editing and layering of multiple tracks. Effects like reverb create sense of space - large hall reverb for epic scenes, dry sound for intimacy. Delay and echo effects can create ghostly or disorienting atmospheres. Pitch shifting and time-stretching manipulate recorded sounds. Virtual orchestras provide full symphonic sound when live orchestra is unavailable.',
+            markingCriteria: {
+              breakdown: [
+                'Synthesizers for new timbres (1 mark)',
+                'Sampling techniques (1 mark)',
+                'Effects processing (reverb, delay) (1 mark)',
+                'Editing and layering capabilities (1 mark)',
+                'Specific examples of enhancement (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q7',
+            question: 'Describe how thematic transformation might be used across a film to reflect a character\'s development.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'A character\'s theme can transform to reflect their journey. Initially, a villain\'s theme might be in a minor key with dissonant harmony and aggressive orchestration. As the character shows vulnerability, the theme could shift to major mode with softer orchestration (strings instead of brass). Tempo changes reflect emotional state - faster when agitated, slower when reflective. If the character finds redemption, their theme might gain nobility through fuller orchestration and consonant harmonies. The melodic contour remains recognizable, maintaining connection while harmonic, timbral, and rhythmic elements transform to match character development.',
+            markingCriteria: {
+              breakdown: [
+                'Modal transformation (major/minor) (1 mark)',
+                'Orchestration changes (1 mark)',
+                'Tempo variations (1 mark)',
+                'Maintains melodic recognition (1 mark)',
+                'Reflects character development (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q8',
+            question: 'Explain how a performer\'s interpretation affects the final film music.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Performers make crucial interpretive decisions that shape the emotional impact of film music. They control subtle dynamics and phrasing not fully captured in notation. Expression and vibrato choices affect emotional warmth or coldness. Timing micro-adjustments create tension or relaxation. In improvised elements, performers create unique material within the composer\'s framework. The conductor\'s interpretation shapes ensemble timing and balance. Solo performers, particularly on featured instruments, bring personal artistry that becomes integral to the film\'s identity.',
+            markingCriteria: {
+              breakdown: [
+                'Dynamic and phrasing choices (1 mark)',
+                'Expressive techniques (1 mark)',
+                'Timing interpretation (1 mark)',
+                'Overall impact on emotional effect (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q9',
+            question: 'Describe how the audience and venue affect decisions in composing and performing film music.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Film music must work in multiple contexts - cinema theaters with sophisticated sound systems, home viewing with various audio setups, and streaming on mobile devices. Composers balance complexity with clarity, ensuring music remains effective regardless of playback quality. Target audience influences style - children\'s films might use simpler harmonies and memorable melodies, while adult dramas might employ more sophisticated techniques. For concert performance of film music, arrangements must work without visuals, requiring more complete musical statements. Cultural context matters - music for international release considers different musical expectations. The film\'s genre conventions also shape compositional choices.',
+            markingCriteria: {
+              breakdown: [
+                'Multiple playback contexts considered (1 mark)',
+                'Target audience influences style (1 mark)',
+                'Adaptation for concert performance (1 mark)',
+                'Cultural considerations (1 mark)',
+                'Genre conventions (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-film-q10',
+            question: 'Explain how tone colour is manipulated to create mood in descriptive music for film.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tone colour choices profoundly affect mood in film music. Dark moods employ low brass (trombone, tuba) and low strings (cello, double bass) in their lowest registers. Brightness uses flutes, violins, and high brass. Woodwind solos can suggest pastoral or innocent qualities - clarinet for warmth, oboe for melancholy, bassoon for mystery. Extended techniques create special effects - string col legno (hitting strings with bow stick) for eerie sounds, brass mutes for distance or irony. Combining acoustic and electronic timbres creates unique atmospheres. Sparse orchestration (single instruments) suggests isolation or intimacy, while full orchestra conveys power or epic scope.',
+            markingCriteria: {
+              breakdown: [
+                'Register choices for mood (1 mark)',
+                'Specific instrumental associations (1 mark)',
+                'Extended techniques (1 mark)',
+                'Acoustic/electronic combinations (1 mark)',
+                'Orchestral density affects mood (1 mark)',
+                'Examples of mood creation (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          }
+        ]
+      },
+      {
+        id: 'music-popular',
+        name: 'Popular Music',
+        questions: [
+          {
+            id: 'music-pop-q1',
+            question: 'Describe the structure of "Africa" by Toto, identifying key sections and their features.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: '"Africa" uses a standard popular song structure with distinctive features. The intro establishes the iconic synthesizer riff and drum pattern. Verses feature vocals with relatively restrained accompaniment telling the narrative. The pre-chorus ("I stopped an old man") builds anticipation. The powerful chorus ("I bless the rains down in Africa") provides the hook with fuller orchestration and memorable melody. The bridge offers contrast with different chord progression and introspective feel. An instrumental break features the keyboard solo. The outro repeats the chorus with ad-lib vocals and fadeout, typical of 1980s production.',
+            markingCriteria: {
+              breakdown: [
+                'Intro described (1 mark)',
+                'Verse and pre-chorus identified (1 mark)',
+                'Chorus as main hook (1 mark)',
+                'Bridge provides contrast (1 mark)',
+                'Instrumental break/solo (1 mark)',
+                'Outro structure (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q2',
+            question: 'Explain what is meant by 32-bar song form and describe where it is commonly used.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: '32-bar song form (AABA) consists of four 8-bar sections. The A section presents the main melody and is repeated. The B section (bridge or middle 8) provides contrast with different melody, often in a related key. The final A section returns to the original melody, creating a satisfying sense of return. This form was standard in American popular song from the 1920s-1950s (Tin Pan Alley, show tunes, jazz standards) and appears in songs like "I Got Rhythm" and "Over the Rainbow."',
+            markingCriteria: {
+              breakdown: [
+                'Structure AABA with 8-bar sections (2 marks)',
+                'Bridge provides contrast (1 mark)',
+                'Common usage/examples (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q3',
+            question: 'Describe the 12-bar blues structure and explain its harmonic progression.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The 12-bar blues is a fundamental popular music form consisting of three 4-bar phrases. The harmonic progression typically follows this pattern: bars 1-4 use chord I (tonic), bars 5-6 use chord IV (subdominant), bars 7-8 return to chord I, bars 9-10 use chord V (dominant), and bars 11-12 return to chord I (often with a turnaround in bar 12 leading back to the beginning). The structure repeats throughout the song. This progression underpins countless blues, rock, and jazz songs. Variations exist, such as "quick change" blues (chord IV in bar 2).',
+            markingCriteria: {
+              breakdown: [
+                'Three 4-bar phrases (1 mark)',
+                'Chord progression I-I-I-I (1 mark)',
+                'IV-IV-I-I (1 mark)',
+                'V-V-I-I pattern (1 mark)',
+                'Repeats and variations mentioned (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q4',
+            question: 'Explain how "Africa" by Toto uses synthesized and instrumental sounds typical of 1980s pop.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: '"Africa" exemplifies 1980s production through its sound palette. Synthesizers create the signature intro riff with bright, metallic timbre characteristic of the Yamaha CS-80 or similar analog synths. Layered synthesizer pads provide atmospheric background. The drums feature gated reverb - the distinctive 1980s effect where reverb cuts off sharply, creating a powerful, unnatural sound (pioneered by Phil Collins). Electronic percussion supplements the drum kit. The bass combines synthesized and electric bass sounds. Keyboards create string-like sounds and brass stabs. Despite electronic elements, acoustic instruments (guitars, drums) blend seamlessly. This hybrid approach typifies 1980s sophisticated pop production.',
+            markingCriteria: {
+              breakdown: [
+                'Signature synth riff (1 mark)',
+                'Gated reverb on drums (1 mark)',
+                'Layered synthesizer sounds (1 mark)',
+                'Electronic/acoustic blend (1 mark)',
+                'Specific timbres described (1 mark)',
+                '1980s production context (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q5',
+            question: 'Describe the role of riffs in popular music, giving examples of how they function.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A riff is a short, repeated melodic or rhythmic pattern that becomes a song\'s signature feature. Riffs provide memorable hooks that identify songs instantly. They often form the foundation of a song, repeated throughout. Guitar riffs are common in rock (e.g., "Smoke on the Water," "Satisfaction"), bass riffs drive funk and disco, synthesizer riffs define electronic pop. Riffs create momentum and energy through repetition. They serve as intros, main accompaniment figures, and instrumental breaks. Effective riffs are simple, memorable, and rhythmically strong.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: short repeated pattern (1 mark)',
+                'Function: memorable hook (1 mark)',
+                'Foundation repeated throughout (1 mark)',
+                'Examples given (1 mark)',
+                'Effect: momentum and energy (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q6',
+            question: 'Explain what is meant by strophic form and verse-chorus form in popular music.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Strophic form uses the same music repeated for each verse with changing lyrics, like hymns or folk songs (e.g., "The House of the Rising Sun"). There is no separate chorus - the verse contains the main melody. Verse-chorus form alternates between verse (narrative, changes each time) and chorus (repeated hook with same melody and lyrics). The chorus contains the song\'s main message or title. This form dominates contemporary pop because the repeated chorus creates memorable hooks while verses provide narrative variety.',
+            markingCriteria: {
+              breakdown: [
+                'Strophic: same music, different lyrics (1 mark)',
+                'No separate chorus in strophic (1 mark)',
+                'Verse-chorus: alternating sections (1 mark)',
+                'Chorus as repeated hook (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q7',
+            question: 'Describe how vocals are used in "Africa," including techniques and production.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: '"Africa" features sophisticated vocal arrangement typical of Toto\'s style. The lead vocal (Bobby Kimball) delivers verses with clear enunciation and emotional expression, using both syllabic (one note per syllable) and occasional melismatic (multiple notes per syllable) singing. The powerful chorus vocals feature multi-part harmony with backing vocals supporting the lead. Vocal production includes reverb creating spaciousness, subtle doubling thickening the sound, and compression evening dynamics. The bridge features more intimate, reflective vocal delivery. The outro includes ad-lib improvisations over repeating chorus. Vocal panning places backing vocals in the stereo field.',
+            markingCriteria: {
+              breakdown: [
+                'Lead vocal characteristics (1 mark)',
+                'Backing vocals/harmonies (1 mark)',
+                'Syllabic and melismatic techniques (1 mark)',
+                'Production effects (reverb, doubling) (1 mark)',
+                'Variation across sections (1 mark)',
+                'Stereo placement (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q8',
+            question: 'Explain the concept of a "middle 8" or bridge section and describe its function in popular songs.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A middle 8 (or bridge) is a contrasting section typically appearing after the second chorus, usually 8 bars long (hence the name). It provides relief from the repetition of verses and choruses by introducing new melodic, harmonic, or lyrical material. The bridge often uses different chords, moves to a different key, or presents a fresh perspective on the song\'s theme. It creates tension that makes the return to the final chorus more satisfying. In "Africa," the bridge ("Hurry boy, she\'s waiting there for you") provides harmonic and melodic contrast before the climactic final choruses.',
+            markingCriteria: {
+              breakdown: [
+                'Contrasting section after second chorus (1 mark)',
+                'Usually 8 bars (1 mark)',
+                'Provides relief from repetition (1 mark)',
+                'New material: melody/harmony/lyrics (1 mark)',
+                'Creates tension before final chorus (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q9',
+            question: 'Describe how samples and loops are used in modern popular music production.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Samples are recordings of existing sounds - from other songs, sound effects, or original recordings - manipulated and incorporated into new tracks. Loops are short sections of audio that repeat seamlessly, often forming rhythmic or harmonic foundations. Drum loops provide consistent beats, melodic loops create recurring patterns. Sampling allows producers to incorporate iconic sounds, paying homage or creating new contexts. Software and samplers enable pitch-shifting, time-stretching, and effects processing. Hip-hop pioneered sampling as an art form. Modern pop uses samples to add texture, create retro feels, or provide instant recognition. Legal considerations require clearing samples.',
+            markingCriteria: {
+              breakdown: [
+                'Samples: recordings incorporated into new tracks (1 mark)',
+                'Loops: repeating sections (1 mark)',
+                'Functions: rhythm, melody, texture (1 mark)',
+                'Manipulation techniques (1 mark)',
+                'Usage examples or considerations (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-pop-q10',
+            question: 'Explain how panning and phasing are used to create effects in popular music production.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Panning places sounds in the stereo field from left to right, creating width and separation. Drums might have cymbals panned wide while kick and snare stay centered. Backing vocals often spread across the stereo field while lead vocals remain center. Panning creates space for elements to coexist without masking each other. Automated panning can move sounds across the stereo field for special effects. Phasing is an effect where a signal is duplicated, one copy is slightly delayed and the delay time modulates, creating a sweeping, swirling sound as frequencies cancel and reinforce. Phasing creates psychedelic, spacey effects popular in 1960s rock and electronic music. It adds movement and interest to guitars, vocals, or synthesizers.',
+            markingCriteria: {
+              breakdown: [
+                'Panning: left-right placement in stereo field (2 marks)',
+                'Creates separation and width (1 mark)',
+                'Phasing: delayed signal with modulation (2 marks)',
+                'Effects created: sweeping, spacey sounds (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          }
+        ]
+      },
+      {
+        id: 'music-predicted-exam',
+        name: 'Predicted Exam Practice',
+        questions: [
+          {
+            id: 'music-exam-q1',
+            question: 'Listen to the extract and identify the key signature. Write the key signature on the staff provided.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The key signature is D major (two sharps: F# and C#). The sharps should be placed on the F and C lines in the treble clef, or on the F and C spaces in the bass clef.',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of D major (1 mark)',
+                'Correct placement of sharps (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q2',
+            question: 'Complete the rhythm of the following melody. The first bar is provided.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The rhythm continues the pattern established in bar 1, using a combination of crotchets, quavers, and semiquavers. The completed rhythm maintains the 4/4 meter and follows the melodic contour heard in the extract. Bar 2: quaver, quaver, crotchet, crotchet. Bar 3: semiquaver (×4), quaver, quaver, crotchet.',
+            markingCriteria: {
+              breakdown: [
+                'Bar 2 rhythm correct (2 marks)',
+                'Bar 3 rhythm correct (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q3',
+            question: 'Identify the cadence at the end of this phrase: (a) Perfect, (b) Imperfect, (c) Plagal, (d) Interrupted.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The correct answer is (a) Perfect. The phrase ends with a V-I (dominant to tonic) progression, creating a strong sense of conclusion.',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of perfect cadence (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q4',
+            question: 'Describe the texture in the Badinerie by J.S. Bach. Use appropriate musical terminology.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Badinerie features a melody and accompaniment texture. The flute plays the virtuosic solo melodic line with rapid semiquaver passages, while the strings and harpsichord provide harmonic accompaniment using simpler rhythms. The texture is predominantly homophonic with the flute clearly dominant. Occasionally, the strings engage in brief imitative responses to the flute\'s phrases, adding contrapuntal interest while maintaining the overall homophonic character.',
+            markingCriteria: {
+              breakdown: [
+                'Identifies melody and accompaniment (1 mark)',
+                'Describes flute role (1 mark)',
+                'Describes string accompaniment (1 mark)',
+                'Uses appropriate terminology (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q5',
+            question: 'Which of the following best describes the tempo of the extract? (a) Largo, (b) Andante, (c) Allegro, (d) Presto.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The correct answer is (c) Allegro. The extract moves at a fast, lively tempo characteristic of Bach\'s dance movements.',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of Allegro (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q6',
+            question: 'Complete the missing pitches in bars 3-4 of the melody. The rhythm is provided.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bar 3: C, D, E, D, C, B. Bar 4: A, B, C (concluding on the tonic). The melodic line descends stepwise (conjunct movement) from the dominant to the tonic, maintaining the diatonic scale of C major.',
+            markingCriteria: {
+              breakdown: [
+                'Bar 3 first three pitches correct (2 marks)',
+                'Bar 3 last three pitches correct (2 marks)',
+                'Bar 4 pitches correct (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q7',
+            question: 'Listen to "Africa" by Toto. Describe how synthesizers are used in the introduction and throughout the track.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'In "Africa," synthesizers create the distinctive opening riff using bright, metallic timbres typical of 1980s analog synthesis. The main riff consists of a repeating melodic pattern that establishes the song\'s identity. Throughout the track, synthesizer pads provide atmospheric background layers, creating depth and spaciousness. Synthesized bass sounds blend with or replace electric bass in certain sections. The synths use effects like reverb and chorus to enhance the polished 1980s production aesthetic. The combination of synthesizers with acoustic instruments (drums, guitars) creates the characteristic pop-rock fusion sound.',
+            markingCriteria: {
+              breakdown: [
+                'Opening riff described (2 marks)',
+                'Atmospheric pads mentioned (1 mark)',
+                'Timbral characteristics (1 mark)',
+                'Integration with other instruments (1 mark)',
+                'Effects and production style (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q8',
+            question: 'Which Roman numeral represents the dominant chord in the key of A major? (a) ii, (b) IV, (c) V, (d) vi.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The correct answer is (c) V. The dominant chord is always represented by Roman numeral V and in A major would be built on E (the fifth note of the scale).',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of V (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q9',
+            question: 'Describe the role of dynamics in creating mood in this film music extract. Consider how the composer uses changes in volume to enhance the dramatic effect.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'The composer uses dynamics strategically to heighten the dramatic impact of the scene. The extract begins pianissimo with sparse orchestration, creating tension and uncertainty. A gradual crescendo over 8 bars builds anticipation as more instruments join, increasing both volume and density. This leads to a sudden fortissimo climax at the moment of key visual action, with full orchestra and percussion creating maximum impact. Immediately following, a rapid diminuendo to piano creates contrast and relief, allowing the audience to process the dramatic moment. Throughout, sudden sforzando accents punctuate specific visual events, synchronizing music and image. The final section employs terraced dynamics, alternating between forte and piano to maintain interest. These dynamic contrasts prevent monotony and guide the audience\'s emotional response to the narrative.',
+            markingCriteria: {
+              breakdown: [
+                'Opening dynamics described (1 mark)',
+                'Crescendo and build-up (2 marks)',
+                'Climactic fortissimo moment (1 mark)',
+                'Contrasts and sudden changes (2 marks)',
+                'Effect on dramatic impact (1 mark)',
+                'Synchronization with visual elements (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          },
+          {
+            id: 'music-exam-q10',
+            question: 'Write a detailed evaluation of the musical extract you have heard, commenting on: melody, harmony, texture, instrumentation, and the effectiveness of the music in creating mood. Justify your comments with specific musical examples.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'The extract demonstrates sophisticated compositional technique across multiple elements. Melodically, the piece features a conjunct opening theme with stepwise movement, making it memorable and singable. This is contrasted by later disjunct passages with large leaps, adding drama and excitement. The use of sequence in bars 5-8 creates coherence while developing the material. The melody employs both regular four-bar phrasing and irregular phrase lengths for variety. Harmonically, the music establishes a tonal center through a clear chord progression using primary chords (I, IV, V). A modulation to the relative minor in the middle section provides tonal contrast before returning to the tonic. Chromatic notes add color and tension, particularly the use of diminished seventh chords approaching cadences. The perfect cadences provide strong punctuation, while imperfect cadences maintain forward momentum. Texturally, the piece moves between homophonic and polyphonic writing. The opening presents melody and accompaniment clearly, but the middle section introduces imitative entries between voices, creating polyphonic interest. This textural variety maintains listener engagement. The final section returns to homophonic texture, providing satisfying sense of return. Instrumentation choices effectively support the musical narrative. Strings carry the main melodic material with their warm, expressive timbre. Woodwind instruments provide both melodic countermelodies and harmonic filling. The brass section is reserved for climactic moments, creating powerful impact when deployed. The use of pizzicato strings in quieter sections creates delicate color contrast. Overall, the music effectively creates a mood that transitions from gentle and reflective to dramatic and powerful, before resolving peacefully. The composer\'s manipulation of musical elements - building from sparse to dense texture, quiet to loud dynamics, and stable to unstable harmony - creates a satisfying emotional arc. The music would work effectively in its intended context, whether concert performance or programmatic purpose.',
+            markingCriteria: {
+              breakdown: [
+                'Melody analysis with examples (3 marks)',
+                'Harmony analysis with examples (3 marks)',
+                'Texture analysis with examples (2 marks)',
+                'Instrumentation analysis (2 marks)',
+                'Overall effectiveness and mood (2 marks)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Component 3 Appraising'
+          }
+        ]
+      }
+    ]
   }
   ];
