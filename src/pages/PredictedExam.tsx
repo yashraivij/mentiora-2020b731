@@ -6181,228 +6181,93 @@ Write a story about a moment of fear.
         ];
       } else if (subjectId === 'statistics-edexcel-gcse') {
         questionPool = [
-          // Section A: The Collection of Data (20 marks)
-          `**Question 1: Planning and Hypothesis Testing (4 marks)**
+          // Section A: The Collection of Data (20 marks total)
+          `A student believes that "students who revise with AI tools achieve higher mock grades." Write a testable hypothesis for this investigation.`,
+          `State two factors that could affect the validity of a hypothesis about revision methods and exam results.`,
+          `A school wants to investigate if older teachers mark faster than younger teachers. Identify the explanatory and response variables in this study.`,
+          `Suggest one potential constraint that could affect data collection in a school-based survey.`,
+          `A university has 12,000 students and a researcher wants a random sample of 120. Explain how a simple random sample could be selected using a random number generator.`,
+          `Describe one advantage and one disadvantage of using a simple random sample.`,
+          `A researcher uses opportunity sampling to select participants. Explain one risk of bias with this method.`,
+          `A supermarket wants to conduct a stratified sample of 100 shoppers. Suggest two appropriate strata they could use.`,
+          `Explain how the sample size for each stratum would be determined in a stratified sample.`,
+          `You are designing a questionnaire to find out how much students spend on takeaways each week. Write one suitable open question and one suitable closed question.`,
+          `Explain two ways to avoid bias when designing a questionnaire.`,
+          `Give two reasons why a researcher might run a pilot survey before conducting the main study.`,
+          `A company wants to study how long customers spend on their website. Identify one primary data source and one secondary data source they could use.`,
+          `Explain what is meant by data cleaning and give one example of why it is necessary.`,
+          `Define what is meant by 'population' in a statistical context.`,
+          `Define what is meant by 'sampling frame' and explain why it might differ from the population.`,
+          `A researcher wants to study "all GCSE students in England." Explain one reason why identifying an accurate sampling frame could be difficult.`,
+          `Explain one advantage of using secondary data instead of collecting primary data.`,
+          `Explain one limitation of using secondary data for statistical research.`,
+          `State one reason for using a sample instead of conducting a census of an entire population.`,
 
-**Option A:**
-A student believes that "students who revise with AI tools achieve higher mock grades."
-(a) Write a testable hypothesis for this investigation. (1)
-(b) State two factors that could affect the validity of this hypothesis. (2)
-(c) Suggest one method the student could use to collect data. (1)
+          // Section B: Processing, Representing & Analysing Data (35 marks total)
+          `The table shows the number of hours 40 students revised in a week. Class intervals: 0-4 (freq 4), 5-9 (freq 10), 10-14 (freq 13), 15-19 (freq 8), 20-24 (freq 5). Calculate the estimated mean number of hours revised.`,
+          `Explain how to calculate frequency density for a histogram with unequal class widths.`,
+          `The following data shows weekly pocket money (£) of 10 students: 5, 7, 5, 10, 12, 8, 7, 9, 6, 11. Calculate the mean.`,
+          `For the data: 5, 7, 5, 10, 12, 8, 7, 9, 6, 11, calculate the median.`,
+          `For the data: 5, 7, 5, 10, 12, 8, 7, 9, 6, 11, calculate the range.`,
+          `State which measure of central tendency (mean, median, or mode) would be most appropriate for data containing extreme outliers, and explain why.`,
+          `A frequency table shows test scores in grouped classes: 0-10 (freq 4), 11-20 (freq 6), 21-30 (freq 10), 31-40 (freq 8), 41-50 (freq 2). Estimate the mean score using midpoints.`,
+          `Explain how to find the interquartile range (IQR) from a cumulative frequency curve.`,
+          `A dataset has a mean of 63 and median of 70. Comment on the skewness of this distribution.`,
+          `The data shows revision hours (x): 1, 3, 5, 7, 9 and test scores (y): 22, 35, 46, 50, 61. Describe the type of correlation shown.`,
+          `For the revision hours and test scores data, calculate the mean point (x̄, ȳ).`,
+          `Explain the difference between correlation and causation, using an example.`,
+          `Explain the difference between interpolation and extrapolation, and state which is more reliable.`,
+          `Two classes took the same test. Class A: mean = 63, SD = 7. Class B: mean = 66, SD = 2. Compare the performance of the two classes.`,
+          `What does the difference in standard deviation between Class A (SD = 7) and Class B (SD = 2) tell you about the consistency of results?`,
+          `Two machines produce bolts. Machine 1: mean length = 5.0 cm, SD = 0.2 cm. Machine 2: mean length = 4.9 cm, SD = 0.1 cm. Which machine is more reliable? Justify your answer.`,
+          `Calculate the range and interquartile range for the data: 12, 15, 18, 22, 25, 30, 35.`,
+          `Explain why IQR is often preferred over range as a measure of spread.`,
+          `A dataset has lower quartile (LQ) = 20 and upper quartile (UQ) = 40. Calculate the boundaries for identifying outliers using the 1.5 × IQR rule.`,
+          `The price of food (index) increased from 120 to 138, with base year = 2015 = 100. Calculate the percentage increase.`,
+          `Explain one advantage of using index numbers to compare prices over time.`,
+          `A time series shows sales data with a 3-month moving average of: 48, 50, 53, 55. Describe the trend shown.`,
+          `Time series data shows regular peaks every 12 months. Describe this pattern and suggest one possible cause.`,
+          `Calculate a 4-point moving average for the data: 12, 15, 18, 14, 16, 19, 17, 20 (show the first two values).`,
+          `Explain why moving averages are used when analysing time series data.`,
+          `A trend line on a time series graph has a gradient of 2.5 sales per month. Interpret what this means in context.`,
 
-**Option B:**
-A school wants to find out if older teachers mark faster than younger teachers.
-(a) Identify the explanatory and response variables. (2)
-(b) Suggest one potential constraint on collecting data. (1)
-(c) Explain why this hypothesis might not be valid. (1)`,
-
-          `**Question 2: Sampling Techniques (5 marks)**
-
-**Option A:**
-A university has 12,000 students. A researcher wants a random sample of 120.
-(a) Explain how a simple random sample could be selected. (2)
-(b) Describe one advantage and one disadvantage of using a random sample. (2)
-(c) The researcher instead uses opportunity sampling. Explain one risk of bias. (1)
-
-**Option B:**
-A supermarket wants to survey 100 shoppers.
-(a) Suggest two appropriate strata for a stratified sample. (2)
-(b) Explain how the sample size per stratum would be determined. (2)
-(c) State one benefit of stratification compared to random sampling. (1)`,
-
-          `**Question 3: Data Collection Design (6 marks)**
-
-**Option A:**
-You are designing a questionnaire to find out how much students spend on takeaways each week.
-(a) Write a suitable open question and a closed question. (2)
-(b) Explain how to avoid bias in the questionnaire. (2)
-(c) Give two reasons why you might run a pilot survey. (2)
-
-**Option B:**
-A company wants to study how long customers spend on their website.
-(a) Identify one primary and one secondary data source. (2)
-(b) Suggest one way to ensure data reliability. (2)
-(c) Explain what is meant by data cleaning and why it is necessary. (2)`,
-
-          `**Question 4: Populations and Sampling Frames (5 marks)**
-
-**Option A:**
-(a) Define:
-    i. Population
-    ii. Sampling frame
-    iii. Sample (3)
-(b) Give one example of a population that could be difficult to define accurately. (1)
-(c) Explain one reason for using a sample instead of a census. (1)
-
-**Option B:**
-A researcher wants to study "all GCSE students in England."
-(a) Explain why identifying a sampling frame could be difficult. (2)
-(b) Suggest one advantage and one limitation of using secondary data instead. (3)`,
-
-          // Section B: Processing, Representing & Analysing Data (35 marks)
-          `**Question 5: Data Representation (6 marks)**
-
-**Option A:**
-The table shows the number of hours 40 students revised in a week.
-
-| Hours Revised | 0–4 | 5–9 | 10–14 | 15–19 | 20–24 |
-|----------------|-----|-----|-------|-------|-------|
-| Frequency      | 4   | 10  | 13    | 8     | 5     |
-
-(a) Calculate the mean number of hours revised. (3)
-(b) Draw a histogram to represent the data. (3)
-
-**Option B:**
-The chart below shows the number of sales per week for two stores (data table provided).
-(a) Construct a time series graph with a 4-point moving average. (3)
-(b) Identify and describe any trends or patterns. (3)`,
-
-          `**Question 6: Averages and Spread (8 marks)**
-
-**Option A:**
-The following data shows weekly pocket money (£) of 10 students:
-5, 7, 5, 10, 12, 8, 7, 9, 6, 11
-(a) Calculate:
-    i. The mean (2)
-    ii. The median (2)
-    iii. The range (1)
-(b) State which measure of central tendency is most appropriate and why. (3)
-
-**Option B:**
-The frequency table shows test scores:
-
-| Score   | Frequency |
-|---------|-----------|
-| 0–10    | 4         |
-| 11–20   | 6         |
-| 21–30   | 10        |
-| 31–40   | 8         |
-| 41–50   | 2         |
-
-(a) Estimate the mean score. (3)
-(b) Find the interquartile range (IQR). (3)
-(c) Comment on the spread and skewness. (2)`,
-
-          `**Question 7: Scatter Diagrams & Correlation (6 marks)**
-
-**Option A:**
-The table shows revision hours (x) and test scores (y):
-
-| Hours (x) | 1  | 3  | 5  | 7  | 9  |
-|-----------|----|----|----|----|----| 
-| Score (y) | 22 | 35 | 46 | 50 | 61 |
-
-(a) Plot a scatter diagram and describe the correlation. (2)
-(b) Draw a line of best fit by eye and estimate the score for 6 hours. (2)
-(c) State whether there is causation. Explain. (2)
-
-**Option B:**
-Explain the difference between:
-(a) Correlation and causation (2)
-(b) Interpolation and extrapolation (2)
-(c) Spearman's rank and PMCC (2)`,
-
-          `**Question 8: Comparing Data Sets (5 marks)**
-
-**Option A:**
-Two classes took the same test.
-Class A: mean = 63, SD = 7
-Class B: mean = 66, SD = 2
-(a) Compare their performance. (3)
-(b) Suggest what the difference in standard deviation shows about consistency. (2)
-
-**Option B:**
-Two machines produce bolts:
-Machine 1 → mean length = 5.0 cm, SD = 0.2 cm
-Machine 2 → mean length = 4.9 cm, SD = 0.1 cm
-(a) Which machine is more reliable? Justify. (3)
-(b) Explain how standardisation (z-scores) could be used to compare them. (2)`,
-
-          `**Question 9: Index Numbers or Time Series (5 marks)**
-
-**Option A:**
-The price of food increased from 120 to 138 (index base year = 2015 = 100).
-(a) Calculate the percentage increase. (2)
-(b) Interpret what this means in context. (2)
-(c) Explain one advantage of using index numbers to compare prices. (1)
-
-**Option B:**
-A 3-month moving average for sales data is 48, 50, 53, 55.
-(a) Plot these on a time series graph. (2)
-(b) Describe the trend. (1)
-(c) Suggest a possible reason for this trend. (2)`,
-
-          // Section C: Probability (25 marks)
-          `**Question 10: Basic Probability (5 marks)**
-
-**Option A:**
-A bag contains 3 red, 5 blue, and 2 green counters.
-(a) Find the probability of selecting a red. (1)
-(b) Find the probability of not selecting blue. (1)
-(c) Two counters are chosen at random, one after the other without replacement. Find the probability both are green. (3)
-
-**Option B:**
-The probability of rain on Saturday is 0.3 and on Sunday is 0.4.
-(a) Find the probability it rains on both days. (1)
-(b) Find the probability it rains on neither day. (2)
-(c) Explain whether these events are independent. (2)`,
-
-          `**Question 11: Conditional Probability (6 marks)**
-
-**Option A:**
-The probability that a student studies Maths is 0.6, and the probability they study Physics is 0.4.
-The probability they study both is 0.2.
-(a) Draw a Venn diagram. (2)
-(b) Find P(M or P). (2)
-(c) Find P(M|P). (2)
-
-**Option B:**
-A factory has 80 workers. 30 are female, 20 of whom are full-time. 35 of the 50 male workers are full-time.
-(a) Find the probability a randomly chosen worker is:
-    i. Male and full-time (2)
-    ii. Female and part-time (2)
-(b) Find P(Female | Part-time). (2)`,
-
-          `**Question 12: Binomial and Normal Distributions (8 marks)**
-
-**Option A:**
-A biased coin shows heads with probability 0.6. The coin is tossed 5 times.
-(a) Find the probability of exactly 3 heads. (3)
-(b) Find the probability of at least 1 tail. (2)
-(c) State whether this distribution is binomial and why. (3)
-
-**Option B:**
-In a normal distribution, μ = 50, σ = 4.
-(a) Find the probability of a value between 46 and 54. (2)
-(b) Find the z-score for x = 58. (2)
-(c) Interpret what being "3σ above the mean" means. (2)
-(d) State one condition that must hold for normality to apply. (2)`,
-
-          `**Question 13: Relative Frequency & Risk (6 marks)**
-
-**Option A:**
-A driving instructor's students had 18 passes out of 24.
-(a) Estimate the probability of passing with this instructor. (1)
-(b) Another instructor has a pass rate of 70%. Find the relative risk of passing with the first instructor compared to the second. (3)
-(c) Comment on which instructor seems better. (2)
-
-**Option B:**
-A survey found that 20% of people use e-cigarettes.
-(a) Out of 800 people, how many would you expect to use them? (2)
-(b) The actual number was 140. Discuss possible reasons for this difference. (4)`,
-
-          `**Question 14: Quality Control & Sampling (5 marks)**
-
-**Option A:**
-In a factory, product lengths should have a mean of 10 cm and SD of 0.3 cm.
-(a) State the action limits for control if ±3σ applies. (2)
-(b) State the warning limits if ±2σ applies. (2)
-(c) Explain what the manager should do if a sample lies beyond an action limit. (1)
-
-**Option B:**
-A machine fills cereal boxes with a mean of 500g and SD of 10g.
-(a) Describe how a control chart can help maintain quality. (3)
-(b) Explain the difference between a warning limit and an action limit. (2)`
+          // Section C: Probability (25 marks total)
+          `A bag contains 3 red, 5 blue, and 2 green counters. Find the probability of selecting a red counter.`,
+          `A bag contains 3 red, 5 blue, and 2 green counters. Find the probability of not selecting a blue counter.`,
+          `A bag contains 3 red, 5 blue, and 2 green counters. Two counters are chosen at random without replacement. Calculate the probability that both are green.`,
+          `The probability of rain on Saturday is 0.3 and on Sunday is 0.4, and these events are independent. Find the probability it rains on both days.`,
+          `The probability of rain on Saturday is 0.3 and on Sunday is 0.4, and these events are independent. Find the probability it rains on neither day.`,
+          `The probability that a student studies Maths is 0.6, Physics is 0.4, and both subjects is 0.2. Calculate P(M or P) using the addition law.`,
+          `The probability that a student studies Maths is 0.6, Physics is 0.4, and both subjects is 0.2. Calculate P(M|P), the conditional probability of studying Maths given they study Physics.`,
+          `A factory has 80 workers: 30 are female (20 full-time, 10 part-time) and 50 are male (35 full-time, 15 part-time). Find the probability a randomly chosen worker is male and full-time.`,
+          `A factory has 80 workers: 30 are female (20 full-time, 10 part-time) and 50 are male (35 full-time, 15 part-time). Find the probability a randomly chosen worker is female and part-time.`,
+          `A factory has 80 workers: 30 are female (20 full-time, 10 part-time) and 50 are male (35 full-time, 15 part-time). Calculate P(Female | Part-time).`,
+          `A biased coin shows heads with probability 0.6. The coin is tossed 5 times. Find the probability of getting exactly 3 heads using the binomial distribution.`,
+          `A biased coin shows heads with probability 0.6 and is tossed 5 times. Find the probability of getting at least 1 tail.`,
+          `State the three conditions required for a binomial distribution to be appropriate.`,
+          `In a normal distribution with μ = 50 and σ = 4, approximately what percentage of values lie between 46 and 54 (within 1 standard deviation)?`,
+          `In a normal distribution with μ = 50 and σ = 4, calculate the z-score for x = 58.`,
+          `Interpret what it means for a value to be "3 standard deviations above the mean" in a normal distribution.`,
+          `State one condition that must be satisfied for data to be appropriately modelled by a normal distribution.`,
+          `A driving instructor's students had 18 passes out of 24 tests. Estimate the probability of passing with this instructor using relative frequency.`,
+          `One driving instructor has a pass rate of 75% (18 out of 24) and another has 70%. Calculate the relative risk of passing with the first instructor compared to the second.`,
+          `A survey found that 20% of people use e-cigarettes. Out of 800 people surveyed, how many would you expect to use e-cigarettes?`,
+          `In a survey, you expected 160 people to use e-cigarettes (20% of 800) but the actual number was 140. Suggest one possible reason for this difference.`,
+          `In a factory, product lengths should have a mean of 10 cm and standard deviation of 0.3 cm. Calculate the action limits using ±3σ.`,
+          `In a factory, product lengths should have a mean of 10 cm and standard deviation of 0.3 cm. Calculate the warning limits using ±2σ.`,
+          `Explain what a manager should do if a sample measurement on a control chart falls beyond the action limit.`,
+          `A machine fills cereal boxes with mean 500g and SD 10g. Explain the difference between a warning limit and an action limit on a control chart.`,
+          `Explain how a control chart can be used to maintain quality in a manufacturing process.`,
+          `Events A and B are independent with P(A) = 0.4 and P(B) = 0.3. Calculate P(A and B).`,
+          `If P(A|B) = P(A), what does this tell you about events A and B?`,
+          `Two events are mutually exclusive with P(A) = 0.3 and P(B) = 0.2. Calculate P(A or B).`,
+          `Events C and D are not mutually exclusive: P(C) = 0.5, P(D) = 0.4, P(C and D) = 0.2. Calculate P(C or D) using the general addition law.`,
+          `A coin is flipped 100 times and lands on heads 47 times. Estimate P(heads) using relative frequency.`,
+          `Explain the difference between experimental probability and theoretical probability.`,
+          `A sample of 50 items has a mean of 42. Explain how this could be used to estimate the population mean, and comment on reliability.`,
+          `In the Petersen capture-recapture method, 40 fish are tagged in the first capture. In the second capture, 50 fish are caught and 8 are tagged. Estimate the total population of fish.`,
+          `State two assumptions that must hold for the capture-recapture method to give accurate results.`,
+          `Explain how increasing sample size affects the reliability of population estimates.`
         ];
       } else {
         // Generic questions - generate based on topics
