@@ -150,6 +150,9 @@ const Dashboard = () => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
   const [questNotificationCount, setQuestNotificationCount] = useState(0);
+  const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
+  const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
+  const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -627,6 +630,32 @@ const Dashboard = () => {
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
       
+      // Get this week's flashcard count
+      const { weekStart } = getUKWeekBoundaries();
+      const { data: flashcards } = await supabase
+        .from('flashcards')
+        .select('id')
+        .eq('user_id', user.id)
+        .gte('created_at', weekStart.toISOString());
+      
+      setWeeklyFlashcardCount(flashcards?.length || 0);
+      
+      // Check if study time MP has been awarded today
+      const ukDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+      const todayInUK = new Date(ukDate);
+      const dayStart = new Date(todayInUK);
+      dayStart.setHours(0, 0, 0, 0);
+      
+      const { data: studyTimeActivity } = await supabase
+        .from('user_activities')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('activity_type', 'study_time_30min')
+        .gte('created_at', dayStart.toISOString())
+        .maybeSingle();
+      
+      setHasAwardedStudyTime(!!studyTimeActivity);
+      
       // Calculate today's earned MP
       await calculateTodayEarnedMP();
     } catch (error) {
@@ -1081,6 +1110,40 @@ const Dashboard = () => {
       setQuestNotificationCount(0);
     }
   }, [activeTab]);
+
+  // Study time tracker - increment every minute
+  useEffect(() => {
+    if (!user?.id || hasAwardedStudyTime) return;
+    
+    const interval = setInterval(() => {
+      setStudyTimeMinutes(prev => {
+        const newTime = prev + 1;
+        
+        // Award MP when reaching 30 minutes
+        if (newTime === 30 && !hasAwardedStudyTime) {
+          (async () => {
+            const { data } = await supabase.functions.invoke('award-mp', {
+              body: { 
+                action: 'study_time_30min', 
+                userId: user.id
+              }
+            });
+            
+            if (data?.success) {
+              setHasAwardedStudyTime(true);
+              showMPReward(35, 'Studied for 30 minutes! 📚');
+              setQuestNotificationCount(prev => prev + 1);
+              loadUserStats();
+            }
+          })();
+        }
+        
+        return newTime >= 30 ? 30 : newTime;
+      });
+    }, 60000); // Every minute
+    
+    return () => clearInterval(interval);
+  }, [user?.id, hasAwardedStudyTime, showMPReward]);
 
   const handleLogout = () => {
     logout();
@@ -2602,6 +2665,7 @@ const Dashboard = () => {
                         });
                         setFlashcardView("library");
                         loadFlashcardSets();
+                        loadUserStats(); // Refresh flashcard count
                       }} />
                     </div>
                   </div>
@@ -3059,24 +3123,24 @@ const Dashboard = () => {
                        isComplete: userStats?.practiceToday,
                        progress: userStats?.practiceToday ? 100 : 0
                      },
-                     {
-                       title: "Create 5 flashcards",
-                       description: "Build your flashcard collection",
-                       icon: NotebookPen,
-                       color: "indigo-400",
-                       reward: 30,
-                       isComplete: false, // TODO: Track flashcard creation
-                       progress: 0
-                     },
-                     {
-                       title: "Study for 30 minutes",
-                       description: "Focus on your learning goals",
-                       icon: Clock,
-                       color: "cyan-400",
-                       reward: 35,
-                       isComplete: false, // TODO: Track study time
-                       progress: 0
-                     },
+                      {
+                        title: "Create 5 flashcards",
+                        description: "Build your flashcard collection",
+                        icon: NotebookPen,
+                        color: "indigo-400",
+                        reward: 30,
+                        isComplete: weeklyFlashcardCount >= 5,
+                        progress: Math.min((weeklyFlashcardCount / 5) * 100, 100)
+                      },
+                      {
+                        title: "Study for 30 minutes",
+                        description: "Focus on your learning goals",
+                        icon: Clock,
+                        color: "cyan-400",
+                        reward: 35,
+                        isComplete: hasAwardedStudyTime,
+                        progress: (studyTimeMinutes / 30) * 100
+                      },
                      {
                        title: "Score 80%+ on any topic",
                        description: "Demonstrate topic mastery",
@@ -3206,13 +3270,13 @@ const Dashboard = () => {
                     },
                     {
                       title: "Create 20 flashcards",
-                      description: "{current}/20 flashcards this week",
+                      description: `${weeklyFlashcardCount}/20 flashcards this week`,
                       icon: NotebookPen,
                       color: "indigo-400",
                       reward: 250,
                       target: 20,
-                      current: 0, // TODO: Track weekly flashcard creation
-                      isComplete: false
+                      current: weeklyFlashcardCount,
+                      isComplete: weeklyFlashcardCount >= 20
                     }
                   ];
                   

@@ -29,6 +29,7 @@ const ACTIVITY_TYPES = {
   WEEKLY_3_TOPICS_AWARDED: 'weekly_3_topics_awarded',
   WEEKLY_5_PRACTICE_AWARDED: 'weekly_5_practice_awarded',
   STREAK_7_DAYS_AWARDED: 'streak_7_days_awarded',
+  STUDY_TIME_30MIN: 'study_time_30min',
 };
 
 // Get UK timezone date boundaries
@@ -397,6 +398,21 @@ serve(async (req) => {
             streak: currentStreak >= 7 && totalAwarded > (MP_REWARDS.PRACTICE_COMPLETION + (weeklyTopics >= 3 ? MP_REWARDS.WEEKLY_3_TOPICS : 0) + (weeklyPractice >= 5 ? MP_REWARDS.WEEKLY_5_PRACTICE : 0)) ? MP_REWARDS.STREAK_7_DAYS : 0
           }
         };
+        break;
+
+      case 'study_time_30min':
+        // Award 30 minutes study time MP (once per day)
+        if (await hasActivityToday(userId, ACTIVITY_TYPES.STUDY_TIME_30MIN)) {
+          result = { success: true, awarded: 0, message: 'Already awarded study time today' };
+        } else {
+          await recordActivity(userId, ACTIVITY_TYPES.STUDY_TIME_30MIN);
+          const awarded = await awardPoints(userId, 35, '30 minutes study time');
+          result = { 
+            success: awarded, 
+            awarded: awarded ? 35 : 0, 
+            message: awarded ? 'Study time bonus awarded' : 'Failed to award points' 
+          };
+        }
         break;
 
       default:
