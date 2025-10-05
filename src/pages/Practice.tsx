@@ -393,13 +393,13 @@ const Practice = () => {
             
             // Show additional toasts for weekly bonuses with proper delays
             if (result.breakdown.weeklyTopics > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly bonus"), 500);
+              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly quest: Practice 3 different topics"), 500);
             }
             if (result.breakdown.weeklyPractice > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly challenge"), 1000);
+              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly quest: Complete 5 practice sets"), 1000);
             }
             if (result.breakdown.streak > 0) {
-              setTimeout(() => showMPReward(result.breakdown.streak, "Streak achieved"), 1500);
+              setTimeout(() => showMPReward(result.breakdown.streak, "Epic quest: 7 day practice streak"), 1500);
             }
           }
         }

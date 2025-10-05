@@ -149,6 +149,7 @@ const Dashboard = () => {
   const [cardsLoading, setCardsLoading] = useState(false);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
+  const [hasQuestNotification, setHasQuestNotification] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -1051,6 +1052,36 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, [user?.id]);
 
+  // Track MP changes to show quest notification badge
+  useEffect(() => {
+    const previousMP = localStorage.getItem(`previousMP_${user?.id}`);
+    if (previousMP && userGems > parseInt(previousMP) && activeTab !== 'quests') {
+      setHasQuestNotification(true);
+    }
+    if (userGems > 0) {
+      localStorage.setItem(`previousMP_${user?.id}`, userGems.toString());
+    }
+  }, [userGems, user?.id, activeTab]);
+
+  // Listen for MP earned events
+  useEffect(() => {
+    const handleMPEarned = () => {
+      if (activeTab !== 'quests') {
+        setHasQuestNotification(true);
+      }
+    };
+
+    window.addEventListener('mpEarned', handleMPEarned);
+    return () => window.removeEventListener('mpEarned', handleMPEarned);
+  }, [activeTab]);
+
+  // Clear quest notification when viewing quests tab
+  useEffect(() => {
+    if (activeTab === 'quests') {
+      setHasQuestNotification(false);
+    }
+  }, [activeTab]);
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -1506,6 +1537,7 @@ const Dashboard = () => {
             <MobileNav>
               {sidebarItems.map((item) => {
                 const isActive = activeTab === item.id;
+                const showBadge = item.id === 'quests' && hasQuestNotification;
                 return (
                   <MobileNavItem
                     key={item.id}
@@ -1521,7 +1553,12 @@ const Dashboard = () => {
                       : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
                     }
                   >
-                    <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
+                    <div className="relative">
+                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
+                      {showBadge && (
+                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                      )}
+                    </div>
                     <span className="font-bold text-sm tracking-wide">{item.label}</span>
                   </MobileNavItem>
                 );
@@ -1594,6 +1631,7 @@ const Dashboard = () => {
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
+              const showBadge = item.id === 'quests' && hasQuestNotification;
               return (
                 <motion.button
                   key={item.id}
@@ -1605,8 +1643,11 @@ const Dashboard = () => {
                       : `${item.bgColor} ${item.textColor} hover:scale-105`
                   }`}
                 >
-                  <div className={`p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
+                  <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
                     <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
+                    {showBadge && (
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background animate-pulse" />
+                    )}
                   </div>
                   <span className="font-bold text-sm tracking-wide">{item.label}</span>
                 </motion.button>

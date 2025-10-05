@@ -83,6 +83,9 @@ export const MPRewardsProvider = ({ children }: MPRewardsProviderProps) => {
     };
 
     setToastQueue(prev => [...prev, reward]);
+    
+    // Trigger quest notification badge
+    window.dispatchEvent(new CustomEvent('mpEarned'));
   }, []);
 
   const handleToastClose = useCallback(() => {
