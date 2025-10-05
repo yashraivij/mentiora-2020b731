@@ -1595,6 +1595,15 @@ const Dashboard = () => {
               </div>
             </MobileNav>
             
+            <Button 
+              size="sm" 
+              variant="outline"
+              onClick={() => setHasQuestNotification(true)}
+              className="ml-2"
+            >
+              Test
+            </Button>
+            
             <div className="flex items-center gap-2">
               <img
                 src={mentioraLogo}
@@ -1658,6 +1667,14 @@ const Dashboard = () => {
 
         {/* Bottom Section */}
         <div className="px-4 pt-4 border-t border-border space-y-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setHasQuestNotification(true)}
+            className="w-full mb-2"
+          >
+            Test Notification
+          </Button>
           <button
             data-feedback-fish
             data-feedback-fish-userid={user?.email || ""}
