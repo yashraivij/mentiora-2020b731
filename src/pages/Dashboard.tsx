@@ -62,6 +62,7 @@ import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { toast } from "sonner";
+import { useMPRewards } from "@/hooks/useMPRewards";
 
 interface UserProgress {
   subjectId: string;
@@ -112,6 +113,7 @@ const Dashboard = () => {
   const { user, logout, isPremium } = useAuth();
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
+  const { showMPReward } = useMPRewards();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
@@ -2921,7 +2923,17 @@ const Dashboard = () => {
               {/* Header Bar */}
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-3xl font-bold text-foreground">Quests</h2>
-                <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-4">
+                  {/* Test MP Notification Button */}
+                  <Button
+                    onClick={() => showMPReward(10, "Daily quest complete: Sign in today")}
+                    variant="outline"
+                    size="sm"
+                    className="bg-primary/10 hover:bg-primary/20 border-primary/30"
+                  >
+                    Test MP Notification
+                  </Button>
+                  
                   {/* MP Balance */}
                   <div className="flex items-center space-x-2 bg-card rounded-2xl px-6 py-3 shadow-lg border-2 border-border">
                     <Gem className="h-6 w-6 text-cyan-400" />
