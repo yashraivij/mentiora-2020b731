@@ -78,6 +78,7 @@ const GCSE_SUBJECTS: Subject[] = [
   { id: 'business', name: 'Business', examBoard: 'AQA', topicCount: getTopicCount('business') },
   { id: 'combined-science-aqa', name: 'Combined Science', examBoard: 'AQA', topicCount: getTopicCount('combined-science-aqa') },
   { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel', topicCount: getTopicCount('edexcel-english-language') },
+  { id: 'music-eduqas-gcse', name: 'Music', examBoard: 'Eduqas', topicCount: getTopicCount('music-eduqas-gcse') },
 ];
 
 const ALEVEL_SUBJECTS: Subject[] = [

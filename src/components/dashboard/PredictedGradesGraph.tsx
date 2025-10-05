@@ -185,8 +185,10 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           let subjectName = curriculumSubject?.name || 
             subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
           
-          // Add (AQA) to all subjects except Mathematics Edexcel
-          if (subjectId !== 'maths-edexcel' && !subjectName.includes('Edexcel')) {
+          // Add exam board to subject names
+          if (subjectId === 'music-eduqas-gcse') {
+            subjectName = `${subjectName} (Eduqas)`;
+          } else if (subjectId !== 'maths-edexcel' && !subjectName.includes('Edexcel')) {
             subjectName = `${subjectName} (AQA)`;
           }
 
