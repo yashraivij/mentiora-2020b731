@@ -35477,6 +35477,225 @@ export const curriculum: Subject[] = [
             specReference: 'Eduqas GCSE Music - Area of Study 4'
           }
         ]
+      },
+      {
+        id: 'music-predicted-exam',
+        name: 'Predicted 2026 Exam',
+        questions: [
+          {
+            id: 'music-exam-q1',
+            question: 'Identify the form of Badinerie by J.S. Bach.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Binary form (AB)',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of binary form (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-exam-q2',
+            question: 'What is an anacrusis? Give one reason composers use it.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An anacrusis is one or more notes that occur before the first strong beat of a phrase (an upbeat). Composers use it to create forward momentum into the phrase and to emphasize the first strong beat when it arrives.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as upbeat/notes before first beat (1 mark)',
+                'Valid reason for use (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-exam-q3',
+            question: 'Explain how sequence and imitation are used in Baroque melodies.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sequence involves repeating a melodic pattern at a different pitch level, typically ascending or descending by step, creating coherence and development. Imitation occurs when one voice presents a melody that is immediately copied by another voice at a different pitch, creating polyphonic texture. Both techniques were fundamental to Baroque composition, particularly in fugues and contrapuntal writing, providing unity through repetition while maintaining interest through variation.',
+            markingCriteria: {
+              breakdown: [
+                'Sequence defined as repeated pattern at different pitch (1 mark)',
+                'Imitation defined as melody copied between voices (1 mark)',
+                'Explanation of effect or usage (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 1'
+          },
+          {
+            id: 'music-exam-q4',
+            question: 'Define the following textures: monophonic, homophonic, polyphonic.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Monophonic texture consists of a single melodic line with no accompaniment or harmony. Homophonic texture features a principal melody supported by chordal accompaniment, with all parts moving in similar rhythm. Polyphonic texture consists of two or more independent melodic lines performed simultaneously, each with equal importance.',
+            markingCriteria: {
+              breakdown: [
+                'Monophonic correctly defined (1 mark)',
+                'Homophonic correctly defined (1 mark)',
+                'Polyphonic correctly defined (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-exam-q5',
+            question: 'Explain how a melody and accompaniment texture differs from a layered one.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Melody and accompaniment texture has one clear principal melodic line supported by subordinate harmonic material. Layered texture involves multiple distinct musical lines or patterns that are independent but complementary, often with no single dominant melody - each layer contributes equally to the overall sound.',
+            markingCriteria: {
+              breakdown: [
+                'Melody and accompaniment described (1 mark)',
+                'Layered texture described as multiple equal parts (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-exam-q6',
+            question: 'Describe how a basso continuo functions in Baroque ensemble music.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Basso continuo (figured bass) provides harmonic foundation in Baroque music. A bass instrument (cello, bassoon) plays the written bass line while a keyboard instrument (harpsichord, organ) realizes the harmony above it. Numbers below the bass notes indicate which intervals to play. This allows flexibility as performers can improvise the exact realization while maintaining the harmonic structure.',
+            markingCriteria: {
+              breakdown: [
+                'Bass line played by bass instrument (1 mark)',
+                'Keyboard realizes harmony above (1 mark)',
+                'Provides harmonic foundation/allows improvisation (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 2'
+          },
+          {
+            id: 'music-exam-q7',
+            question: 'Define leitmotif and explain its purpose in film.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A leitmotif is a recurring musical theme associated with a particular character, place, emotion, or idea in film. Its purpose is to help the audience make connections and recognize when that character or idea appears, even when not visible on screen, creating musical continuity and deeper meaning.',
+            markingCriteria: {
+              breakdown: [
+                'Definition as recurring theme for character/idea (1 mark)',
+                'Purpose to create associations and connections (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-exam-q8',
+            question: 'Give two ways dynamics are used for dramatic effect in film music.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Sudden dynamic changes (sforzando or sudden forte) create shock, surprise, or emphasize dramatic moments like impacts or revelations. Gradual crescendos build tension and anticipation leading to climactic scenes, while diminuendos can create a sense of fading, distance, or resolution.',
+            markingCriteria: {
+              breakdown: [
+                'First valid dynamic technique (1 mark)',
+                'Second valid dynamic technique (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-exam-q9',
+            question: 'Explain how minimalism might be used to support a repetitive visual scene in film.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Minimalist music uses repetitive patterns and gradual evolution, which mirrors repetitive visual action without overpowering it. The unchanging or slowly changing musical material creates a hypnotic or trance-like state that can represent monotony, mechanical processes, or psychological states. The subtle variations in the repetition maintain interest while allowing the visuals to remain the focus, and the accumulation of small changes can build tension that matches gradual narrative development.',
+            markingCriteria: {
+              breakdown: [
+                'Repetitive patterns mirror visual repetition (1 mark)',
+                'Creates appropriate mood or psychological state (1 mark)',
+                'Gradual changes support narrative without overwhelming (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 3'
+          },
+          {
+            id: 'music-exam-q10',
+            question: 'Identify the main song structure used in "Africa" by Toto.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Verse-chorus form (with intro, pre-chorus, bridge, and outro)',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of verse-chorus form (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-exam-q11',
+            question: 'Define riff and hook, explaining their role in pop music.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A riff is a short, repeated melodic or rhythmic pattern that becomes a signature feature of a song. A hook is a memorable musical or lyrical phrase that catches the listener\'s attention. Both serve to create instant recognition, memorability, and commercial appeal in pop music, often becoming the most identifiable parts of songs.',
+            markingCriteria: {
+              breakdown: [
+                'Riff and hook correctly defined (1 mark)',
+                'Role in creating memorability/recognition (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-exam-q12',
+            question: 'Identify two common chord progressions in pop music using Roman numerals.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'I-V-vi-IV (often called the "pop progression" or "axis progression") and I-IV-V-I (the classic three-chord progression). Other acceptable answers include I-vi-IV-V, ii-V-I, or I-V-IV-V.',
+            markingCriteria: {
+              breakdown: [
+                'First valid chord progression (1 mark)',
+                'Second valid chord progression (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-exam-q13',
+            question: 'Describe how technology such as reverb, panning, and looping is used in pop production.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reverb adds space and depth to recordings, creating a sense of environment from intimate to vast hall sounds, and can enhance emotional impact. Panning places sounds across the stereo field from left to right, creating width and separation so instruments don\'t mask each other. Looping creates repeating patterns that form rhythmic or melodic foundations, allowing producers to build complex arrangements from simple repeated phrases.',
+            markingCriteria: {
+              breakdown: [
+                'Reverb use described (1 mark)',
+                'Panning use described (1 mark)',
+                'Looping use described (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-exam-q14',
+            question: 'Define fusion in music.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Fusion is the blending of two or more distinct musical styles, genres, or cultural traditions to create a new hybrid style.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition as blending of styles/traditions (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          },
+          {
+            id: 'music-exam-q15',
+            question: 'Explain how traditional and modern instruments can be combined in fusion music.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Traditional acoustic instruments from various cultures (such as sitar, tabla, or traditional drums) can be combined with modern electronic instruments (synthesizers, drum machines, electric bass) to create new timbral possibilities. The traditional instruments often provide authentic cultural identity and organic textures, while modern instruments add contemporary rhythmic drive, harmonic support, and production effects. This combination allows fusion artists to honor cultural heritage while appealing to modern audiences through accessible contemporary sounds.',
+            markingCriteria: {
+              breakdown: [
+                'Traditional instruments provide cultural identity (1 mark)',
+                'Modern instruments add contemporary elements (1 mark)',
+                'Effect: creates new hybrid sound (1 mark)'
+              ]
+            },
+            specReference: 'Eduqas GCSE Music - Area of Study 4'
+          }
+        ]
       }
     ]
   }
