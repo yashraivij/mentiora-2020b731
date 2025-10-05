@@ -34798,16 +34798,16 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'music-fd-q1',
-            question: 'Identify and describe the structural form of the extract you have just heard.',
+            question: 'Explain the key features of ternary form (ABA) and describe how composers use this structure to create musical interest.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'The extract is in ternary form (ABA). The A section presents the main theme in the tonic key. The B section provides contrast through a different melody in the relative minor key. The A section returns with the original theme, creating a balanced three-part structure.',
+            modelAnswer: 'Ternary form consists of three sections labeled ABA. The A section presents the main theme in the tonic key, establishing the primary musical material. The B section provides contrast through a different melody, often in the relative minor or dominant key, creating variety and maintaining listener interest. The return of the A section brings back the original theme, creating a satisfying sense of return and balance. This form is effective because it combines unity (through the returning A section) with variety (through the contrasting B section).',
             markingCriteria: {
               breakdown: [
-                'Correctly identifies ternary form (1 mark)',
+                'Identifies three-part ABA structure (1 mark)',
                 'Describes A section characteristics (1 mark)',
-                'Describes contrasting B section (1 mark)',
-                'Explains return of A section (1 mark)'
+                'Explains contrasting B section (1 mark)',
+                'Describes return and effect of structure (1 mark)'
               ]
             },
             specReference: 'Eduqas GCSE Music - Area of Study 1'
@@ -34963,16 +34963,16 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'music-ens-q1',
-            question: 'Describe the texture of the extract you have just heard, identifying specific textural features.',
+            question: 'Explain the difference between homophonic texture and polyphonic texture. Give an example of a musical context where each would typically be used.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'The extract features a homophonic texture with melody and accompaniment. The soprano voice carries the main melodic line while the alto, tenor, and bass voices provide harmonic support moving in similar rhythm. This creates a chordal texture where all parts move together, typical of hymn-style writing. The texture is primarily vertical with occasional moments of independence in the inner voices.',
+            modelAnswer: 'Homophonic texture features a clear melody supported by harmonic accompaniment, where all parts move together in similar rhythm creating a chordal effect. This is commonly used in hymns, popular songs, and many Classical period works where one melodic line dominates. Polyphonic texture consists of two or more independent melodic lines performed simultaneously, each with equal importance and different rhythms. This creates a complex interwoven sound typical of Renaissance motets, Baroque fugues, and jazz improvisation where multiple voices or instruments have independent melodies.',
             markingCriteria: {
               breakdown: [
-                'Correctly identifies homophonic texture (1 mark)',
-                'Melody and accompaniment described (1 mark)',
-                'Chordal movement explained (1 mark)',
-                'Additional detail about voice movement (1 mark)'
+                'Homophonic texture defined correctly (1 mark)',
+                'Example context for homophonic (1 mark)',
+                'Polyphonic texture defined correctly (1 mark)',
+                'Example context for polyphonic (1 mark)'
               ]
             },
             specReference: 'Eduqas GCSE Music - Area of Study 2'
@@ -35134,16 +35134,15 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'music-film-q1',
-            question: 'Describe how the composer uses timbre to create mood in the film extract you have just heard.',
+            question: 'Explain how film composers use different instrumental timbres to create contrasting moods. Describe specific instrumental choices for creating a tense, dramatic scene versus a peaceful, calm scene.',
             marks: 5,
             difficulty: 'medium',
-            modelAnswer: 'The composer creates a tense, ominous mood through careful choice of timbres. Low brass (trombones, tuba) provide dark, menacing tones in the bass register. String tremolo creates nervous energy and anticipation. The use of muted trumpets adds an eerie, distant quality. Synthesized sounds blend with acoustic instruments, creating an unsettling modern atmosphere. The absence of bright, warm timbres (no flutes or violins in high register) maintains the dark mood throughout the extract.',
+            modelAnswer: 'For tense, dramatic scenes, composers typically use low brass instruments (trombones, tuba) in their lower registers to create dark, menacing tones. String tremolo and col legno techniques create nervous energy and anticipation. Muted trumpets add eerie, unsettling qualities. Dissonant synthesized sounds can enhance tension. For peaceful, calm scenes, composers use warm timbres like strings in mid-range with legato bowing, soft woodwinds (flutes, clarinets) in their sweeter registers, gentle harp arpeggios, and consonant synthesizer pads. Register choice is crucial - lower registers suggest darkness or gravity, while higher registers can suggest lightness or brightness.',
             markingCriteria: {
               breakdown: [
-                'Identifies specific instruments/timbres (2 marks)',
-                'Describes mood created (1 mark)',
-                'Links timbre choices to mood (1 mark)',
-                'Reference to register or specific techniques (1 mark)'
+                'Identifies timbres for tense scenes (2 marks)',
+                'Identifies timbres for calm scenes (2 marks)',
+                'Explains effect of register or techniques (1 mark)'
               ]
             },
             specReference: 'Eduqas GCSE Music - Area of Study 3'
