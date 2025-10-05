@@ -1556,7 +1556,7 @@ const Dashboard = () => {
                     <div className="relative">
                       <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
                       {showBadge && (
-                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                        <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border border-background shadow-sm" />
                       )}
                     </div>
                     <span className="font-bold text-sm tracking-wide">{item.label}</span>
@@ -1646,7 +1646,7 @@ const Dashboard = () => {
                   <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
                     <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
                     {showBadge && (
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background animate-pulse" />
+                      <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-[1.5px] border-background shadow-sm" />
                     )}
                   </div>
                   <span className="font-bold text-sm tracking-wide">{item.label}</span>
