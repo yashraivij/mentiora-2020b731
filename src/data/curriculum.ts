@@ -35479,5 +35479,96 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'statistics-edexcel-gcse',
+    name: 'Statistics (Edexcel)',
+    topics: [
+      {
+        id: '1a-planning',
+        name: '1a Planning (The Collection of Data)',
+        questions: []
+      },
+      {
+        id: '1b-types-of-data',
+        name: '1b Types of Data',
+        questions: []
+      },
+      {
+        id: '1c-population-sampling',
+        name: '1c Population & Sampling',
+        questions: []
+      },
+      {
+        id: '1d-collecting-data',
+        name: '1d Collecting Data (Sources, Quality, Cleaning)',
+        questions: []
+      },
+      {
+        id: '2a-representation',
+        name: '2a Representation (Tabulation, Diagrams & Graphs)',
+        questions: []
+      },
+      {
+        id: '2b-central-tendency',
+        name: '2b Measures of Central Tendency',
+        questions: []
+      },
+      {
+        id: '2c-dispersion',
+        name: '2c Measures of Dispersion',
+        questions: []
+      },
+      {
+        id: '2d-summary-statistics',
+        name: '2d Further Summary Statistics (Index Numbers & Rates)',
+        questions: []
+      },
+      {
+        id: '2e-scatter-correlation',
+        name: '2e Scatter, Correlation & Regression',
+        questions: []
+      },
+      {
+        id: '2f-time-series',
+        name: '2f Time Series',
+        questions: []
+      },
+      {
+        id: '2g-quality-assurance',
+        name: '2g Quality Assurance (Control Charts)',
+        questions: []
+      },
+      {
+        id: '2h-estimation',
+        name: '2h Estimation',
+        questions: []
+      },
+      {
+        id: '3p-probability-foundations',
+        name: '3p Probability Foundations',
+        questions: []
+      },
+      {
+        id: '3p-probability-representations',
+        name: '3p Probability Representations (Up to 3 Events)',
+        questions: []
+      },
+      {
+        id: '3p-independence-conditional',
+        name: '3p Independence & Conditional Probability',
+        questions: []
+      },
+      {
+        id: '3p-binomial-distribution',
+        name: '3p Binomial Distribution B(n, p)',
+        questions: []
+      },
+      {
+        id: '3p-normal-distribution',
+        name: '3p Normal Distribution N(μ, σ²)',
+        questions: []
+      }
+    ]
   }
   ];

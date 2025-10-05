@@ -6179,6 +6179,212 @@ Write a story about a moment of fear.
           `Explain how improvisation adds spontaneity to performance.`,
           `Describe how software and digital effects influence sonority in popular music.`
         ];
+      } else if (subjectId === 'statistics-edexcel-gcse') {
+        questionPool = [
+          // Topic 1a: Planning (10 questions)
+          `Explain why a hypothesis such as "older motorcycles lose value" can only be tested through appropriate data collection and analysis.`,
+          `Describe three constraints that might limit a statistical enquiry and give an example of each.`,
+          `A student wants to investigate study habits. Identify two ethical considerations they must address.`,
+          `Explain the importance of identifying the population correctly before starting data collection.`,
+          `Describe two proactive strategies to handle non-response in a questionnaire-based study.`,
+          `Give an example of how time constraints might affect the design of a statistical investigation.`,
+          `Explain why confidentiality is important when collecting data about people's income.`,
+          `Describe how convenience might influence the choice of sampling method in a school survey.`,
+          `A researcher plans to study shopping habits. Suggest two unexpected outcomes they should prepare for.`,
+          `Explain how cost constraints could affect the sample size in a national survey.`,
+          
+          // Topic 1b: Types of Data (10 questions)
+          `Classify the following data types: shoe size, favourite colour, temperature. Explain your reasoning.`,
+          `Explain the difference between discrete and continuous data with two examples of each.`,
+          `Describe when data would be classified as both quantitative and ordinal. Give an example.`,
+          `A dataset shows height and weight of students. Identify the type of data and explain why it's bivariate.`,
+          `Explain two advantages and two disadvantages of grouping continuous data.`,
+          `Describe how class width affects the accuracy of calculations when data is grouped.`,
+          `In a scatter diagram studying revision time vs exam score, which is the explanatory variable? Explain.`,
+          `Compare primary and secondary data. Discuss advantages and disadvantages of each.`,
+          `Explain why secondary data might have issues with rounding or accuracy.`,
+          `Describe three access constraints that might affect the use of secondary data.`,
+          
+          // Topic 1c: Population & Sampling (10 questions)
+          `Define population, sampling frame, and sample. Explain how their meanings might vary by context.`,
+          `Explain why convenience sampling is quick but might introduce bias into a study.`,
+          `Describe cluster sampling and give one reason why it might be chosen over simple random sampling.`,
+          `A company uses quota sampling to survey customers. Explain the method and identify a potential bias risk.`,
+          `Compare systematic and random sampling, discussing advantages and disadvantages of each.`,
+          `Explain the concept of periodicity and how it could affect systematic sampling results.`,
+          `Describe how to select a simple random sample of 30 students from 200 using a calculator.`,
+          `Explain what to do if your random number generator produces repeats or out-of-range values.`,
+          `A school has 800 students: 400 boys and 400 girls. Calculate stratified sample sizes if n=50.`,
+          `Describe how to perform stratified sampling with multiple categories (e.g., year group and gender).`,
+          
+          // Topic 1d: Collecting Data (10 questions)
+          `Compare experimental, observational, and questionnaire methods for collecting data.`,
+          `Explain the difference between reliability and validity in data collection.`,
+          `Describe how sensitivity of questions can introduce bias. Suggest a method to reduce this distortion.`,
+          `Give two examples of leading questions and explain why they should be avoided.`,
+          `Explain the purpose of a pilot study and describe what should be tested.`,
+          `Describe how to handle missing data in a questionnaire response.`,
+          `A researcher finds several incomplete responses. Explain two ways to deal with this problem.`,
+          `Explain how data cleaning works in spreadsheets. Give two examples of what might need cleaning.`,
+          `Describe the difference between an outlier and an anomaly. How should each be handled?`,
+          `Explain the purpose of using control groups and matched pairs in experimental design.`,
+          
+          // Topic 2a: Representation (10 questions)
+          `Draw a stem-and-leaf diagram for the data: 23, 27, 31, 34, 38, 42, 45. Ensure it is ordered.`,
+          `Explain when a pie chart would be more appropriate than a bar chart for displaying data.`,
+          `A histogram has unequal class widths. Explain why frequency density must be used instead of frequency.`,
+          `Calculate frequency density for a class 20-30 with frequency 15.`,
+          `Describe how to identify skewness by inspection of a frequency distribution.`,
+          `A graph shows the x-axis starting at 50 instead of 0. Explain why this could be misleading.`,
+          `Compare the advantages of using software versus hand-drawing for creating statistical diagrams.`,
+          `Explain how to convert data from a cumulative frequency graph back to a frequency table.`,
+          `Describe what is meant by positive skew. Give an example of a dataset that would show this.`,
+          `A box plot shows median closer to lower quartile. What does this suggest about the distribution?`,
+          
+          // Topic 2b: Measures of Central Tendency (10 questions)
+          `Calculate the mean, median, and mode of: 3, 5, 7, 7, 9, 11, 15.`,
+          `A grouped frequency table has class 10-20 with frequency 8. Find the midpoint and explain its use.`,
+          `Explain how to use linear interpolation to estimate the median from grouped data.`,
+          `Calculate the weighted mean if scores 60, 70, 80 have weights 2, 3, 5 respectively.`,
+          `If 3 is added to every value in a dataset, what happens to the mean, median, and mode?`,
+          `Explain when you would use the geometric mean instead of the arithmetic mean.`,
+          `A dataset has mean 50. If one value of 30 is removed, describe whether the mean increases or decreases.`,
+          `Compare two datasets using appropriate measures of central tendency. Justify your choice.`,
+          `Explain how to calculate mean seasonal variation for quarterly sales data over two years.`,
+          `Describe the effect of multiplying every value in a dataset by 2 on the mean and median.`,
+          
+          // Topic 2c: Measures of Dispersion (10 questions)
+          `Calculate the range and interquartile range (IQR) for: 12, 15, 18, 22, 25, 30, 35.`,
+          `Explain why IQR is often preferred over range as a measure of spread.`,
+          `Calculate the lower and upper boundaries for outliers if LQ = 20, UQ = 40.`,
+          `A value lies at μ + 3.5σ. Using the 3σ rule, is this an outlier? Explain.`,
+          `Describe the difference between genuine outliers and errors. How should each be treated?`,
+          `Calculate the interdecile range if the 10th percentile is 15 and 90th percentile is 85.`,
+          `Compare two datasets: one with IQR = 10, another with IQR = 30. What does this tell you?`,
+          `Explain why standard deviation is paired with mean, and IQR is paired with median.`,
+          `Calculate z-score for x = 85 when μ = 70 and σ = 10. Interpret the result.`,
+          `A dataset has standard deviation 5. If all values are doubled, what is the new standard deviation?`,
+          
+          // Topic 2d: Further Summary Statistics (10 questions)
+          `Calculate a simple index number if the base value is 200 and current value is 250.`,
+          `Explain the difference between RPI and CPI. Why might they give different inflation rates?`,
+          `A chain index shows 105 in Year 1, 110 in Year 2. Calculate the overall change from base year.`,
+          `Calculate percentage change if house prices rise from £180,000 to £198,000.`,
+          `A population grows from 50,000 to 52,500. Calculate the percentage rate of change.`,
+          `Explain how to calculate crude birth rate. What information is needed?`,
+          `Given GDP index numbers for 2020-2023, predict the 2024 value assuming the trend continues.`,
+          `A table shows unemployment rates over 10 years. Describe how to identify periods of increase/decrease.`,
+          `Explain why standardised rates are more useful than crude rates when comparing populations.`,
+          `Calculate the index number for Year 3 if Year 1 = 100, and there's a 5% increase each year.`,
+          
+          // Topic 2e: Scatter, Correlation & Regression (10 questions)
+          `Describe the difference between positive, negative, and zero correlation using examples.`,
+          `Explain why correlation does not imply causation. Give an example of spurious correlation.`,
+          `Plot points (2,5), (4,8), (6,11), (8,14) and draw the line of best fit by eye.`,
+          `Calculate the mean point (x̄, ȳ) for data: x = 2,4,6,8 and y = 3,7,9,13.`,
+          `A regression line is y = 2x + 3. Interpret the gradient and y-intercept in context.`,
+          `Explain the difference between interpolation and extrapolation. Which is more reliable?`,
+          `Data shows height vs shoe size with positive correlation. Does height cause shoe size? Explain.`,
+          `Calculate Spearman's rank correlation coefficient for ranks: x = 1,2,3,4 and y = 1,3,2,4.`,
+          `A PMCC value of 0.85 is given. Interpret this value and compare it to Spearman's rank.`,
+          `Explain when you would use Spearman's rank correlation instead of PMCC.`,
+          
+          // Topic 2f: Time Series (10 questions)
+          `Describe how to identify a trend by inspection of a time series graph.`,
+          `Calculate a 4-point moving average for: 12, 15, 18, 14, 16, 19, 17, 20.`,
+          `Explain why moving averages are used to identify trends in time series data.`,
+          `A trend line has gradient 2.5. Interpret this in the context of monthly sales figures.`,
+          `Describe the difference between seasonal and cyclic effects in time series.`,
+          `Calculate the mean seasonal effect for Q1 if values are 8, 10, 12 over three years and trend is 15.`,
+          `Use seasonal effects to predict next quarter's value if the trend is 200 and Q2 effect is +15.`,
+          `Explain why extrapolation is risky when making predictions from time series data.`,
+          `A time series shows regular peaks every 12 months. Describe this pattern and suggest a cause.`,
+          `Compare time series graphs with and without seasonal adjustment. What does adjustment reveal?`,
+          
+          // Topic 2g: Quality Assurance (10 questions)
+          `Explain why sample means vary less than individual values in sampling distributions.`,
+          `A control chart shows warning limits at ±2σ. What action should be taken if a point falls outside?`,
+          `Describe the difference between warning limits and action limits on a control chart.`,
+          `A process has mean 50 and σ = 3. Calculate the action limits for a mean control chart.`,
+          `Three consecutive points fall between warning and action limits. What should the manager do?`,
+          `Explain why control charts are used in manufacturing to maintain quality.`,
+          `Describe typical actions taken when a point exceeds the upper action limit on a control chart.`,
+          `Compare mean, median, and range control charts. When would each type be most useful?`,
+          `A control chart for range shows increasing variability. What might this indicate about the process?`,
+          `Calculate warning limits if process mean is 100 and standard deviation is 5.`,
+          
+          // Topic 2h: Estimation (10 questions)
+          `A sample of 50 items has mean 42. Use this to estimate the population mean and discuss reliability.`,
+          `Explain how sample size affects the reliability of population estimates.`,
+          `In a sample of 200, 60 prefer Brand A. Estimate the population proportion preferring Brand A.`,
+          `Compare a sample mean of 30 (n=20) with population mean 35. Discuss the difference.`,
+          `Describe the Petersen capture-recapture method for estimating population size.`,
+          `First capture: 40 tagged. Second capture: 50 caught, 8 tagged. Estimate the population.`,
+          `State three assumptions of the capture-recapture method and discuss when they might not hold.`,
+          `Explain why increasing sample size generally improves estimate reliability.`,
+          `A researcher takes 3 samples of size 30 vs 1 sample of size 90. Compare the approaches.`,
+          `Discuss the relationship between sample size and the variability of sample estimates.`,
+          
+          // Topic 3p: Probability Foundations (10 questions)
+          `A coin is flipped 100 times, landing heads 47 times. Estimate P(heads) using relative frequency.`,
+          `Convert these probabilities to percentages: 0.25, 0.6, 0.05.`,
+          `Explain the difference between "certain", "likely", "unlikely", and "impossible" events.`,
+          `If P(rain) = 0.3, how many rainy days would you expect in 60 days?`,
+          `Explain the difference between absolute risk and relative risk using an example.`,
+          `Two groups have disease rates of 2% and 4%. Calculate the absolute and relative risk difference.`,
+          `Describe the difference between experimental and theoretical probability.`,
+          `An unfair die is rolled 60 times, showing 6 twelve times. Is there evidence of bias? Explain.`,
+          `Explain why probability estimates improve as the number of trials increases.`,
+          `A spinner is tested 500 times. Why is this better than testing it 50 times?`,
+          
+          // Topic 3p: Probability Representations (10 questions)
+          `Create a two-way table for 100 students: 60 girls (30 like maths), 40 boys (25 like maths).`,
+          `Draw a sample space diagram for rolling two dice. Use it to find P(sum = 7).`,
+          `Draw a tree diagram for tossing a coin twice. Calculate P(at least one head).`,
+          `Two events A and B are mutually exclusive with P(A)=0.3 and P(B)=0.2. Find P(A or B).`,
+          `Events C and D are not mutually exclusive: P(C)=0.5, P(D)=0.4, P(C and D)=0.2. Find P(C or D).`,
+          `Explain what it means for events to be mutually exclusive and give an example.`,
+          `Three events are exhaustive. If P(A)=0.3 and P(B)=0.5, find P(C).`,
+          `Use a Venn diagram to show P(A)=0.4, P(B)=0.5, P(A and B)=0.1. Calculate P(A or B).`,
+          `A bag contains 3 red, 4 blue, 5 green balls. Draw a sample space and find P(not red).`,
+          `Explain how to use the addition law when events are not mutually exclusive.`,
+          
+          // Topic 3p: Independence & Conditional Probability (10 questions)
+          `Events A and B are independent with P(A)=0.4 and P(B)=0.3. Calculate P(A and B).`,
+          `If P(A|B) = P(A), what does this tell you about events A and B?`,
+          `Explain the three equivalent conditions for independence between events A and B.`,
+          `A coin flip and die roll are independent. Find P(heads and rolling a 6).`,
+          `Calculate P(A|B) if P(A and B)=0.12 and P(B)=0.4.`,
+          `A survey shows P(dog owner)=0.3 and P(dog owner and cat owner)=0.1. Find P(cat owner | dog owner).`,
+          `Use a tree diagram to find P(B|A) for two dependent events.`,
+          `Explain conditional probability using formal notation with a real-world example.`,
+          `If A and B are independent and P(A)=0.5, P(B)=0.6, verify P(B|A) = P(B).`,
+          `Describe a scenario where two events would be dependent rather than independent.`,
+          
+          // Topic 3p: Binomial Distribution (10 questions)
+          `State the conditions required for a binomial distribution to be appropriate.`,
+          `Calculate the mean of B(10, 0.3).`,
+          `For B(8, 0.5), calculate P(X=3) using the binomial formula or calculator.`,
+          `A coin is flipped 10 times. Use binomial to find P(exactly 4 heads).`,
+          `Compare observed frequencies with expected frequencies under B(10, 0.4) to test for bias.`,
+          `Explain why B(n,p) requires fixed n, fixed p, and independent trials.`,
+          `A die is rolled 6 times. Is the number of sixes binomial? Justify your answer.`,
+          `For B(5, 0.2), use Pascal's triangle to find P(X=2).`,
+          `Calculate P(X≤2) for B(10, 0.25) using a calculator or spreadsheet.`,
+          `Given data deviates from B(n,p), discuss what this suggests about possible bias.`,
+          
+          // Topic 3p: Normal Distribution (10 questions)
+          `Sketch a normal distribution curve and label mean, median, and mode.`,
+          `Explain why approximately 68% of values lie within one standard deviation of the mean.`,
+          `A dataset has μ=50, σ=5. Within what range do approximately 95% of values lie?`,
+          `Is a value at μ+3.5σ unusual? Explain using the properties of normal distribution.`,
+          `Describe two conditions that suggest data might follow a normal distribution.`,
+          `A distribution has mean=median=mode and is symmetric. Could it be normal? Explain.`,
+          `Data shows mean 100, median 85. Is this likely to be normally distributed? Why or why not?`,
+          `Explain what is meant by "bell-shaped" when describing the normal curve.`,
+          `Calculate the range μ±2σ for a normal distribution with μ=75 and σ=8.`,
+          `Why would you check if data is approximately continuous before assuming normality?`
+        ];
       } else {
         // Generic questions - generate based on topics
         const topicNames = topics.map(t => t.name);

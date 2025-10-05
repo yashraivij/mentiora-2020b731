@@ -79,7 +79,8 @@ const PredictedQuestions = () => {
       history: "from-primary via-primary/80 to-primary/60",
       geography: "from-secondary via-secondary/80 to-secondary/60",
       "computer-science": "from-accent via-accent/80 to-accent/60",
-      psychology: "from-primary via-primary/80 to-primary/60"
+      psychology: "from-primary via-primary/80 to-primary/60",
+      "statistics-edexcel-gcse": "from-secondary via-secondary/80 to-secondary/60"
     };
     return colors[subjectId as keyof typeof colors] || "from-muted via-muted/80 to-muted/60";
   };
@@ -98,13 +99,14 @@ const PredictedQuestions = () => {
       geography: "1h 30min",
       "computer-science": "1h 30min",
       psychology: "1h 30min",
-      "combined-science-aqa": "1h 15min"
+      "combined-science-aqa": "1h 15min",
+      "statistics-edexcel-gcse": "1h 30min"
     };
     return durations[subjectId as keyof typeof durations] || "1h 30min";
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'history-edexcel-gcse') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'history-edexcel-gcse' || subjectId === 'statistics-edexcel-gcse') {
       return 'Edexcel GCSE';
     }
     if (subjectId === 'computer-science' || subjectId === 'psychology') {
@@ -130,6 +132,8 @@ const PredictedQuestions = () => {
       name = 'Chemistry';
     } else if (subject.id === 'combined-science-aqa') {
       name = 'Combined Science Biology';
+    } else if (subject.id === 'statistics-edexcel-gcse') {
+      name = 'Statistics';
     }
     
     // For coming soon cards in CCEA, OCR, WJEC - remove Paper 1
@@ -144,6 +148,8 @@ const PredictedQuestions = () => {
       return 'Geography Paper 2';
     } else if (subject.id === 'business-edexcel-igcse') {
       return 'IGCSE Business Paper 1';
+    } else if (subject.id === 'statistics-edexcel-gcse') {
+      return 'Statistics Paper 1';
     } else {
       return `${name} Paper 1`;
     }
@@ -622,8 +628,8 @@ const PredictedQuestions = () => {
 
                   {curriculum
                     .filter((subject) => {
-                       // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
-                       if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                       // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, physics-edexcel, and statistics-edexcel-gcse only in edexcel tab
+                       if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'statistics-edexcel-gcse') {
                         return examBoard === 'edexcel';
                       }
                       
@@ -638,10 +644,10 @@ const PredictedQuestions = () => {
                       }
                       
                         // For other exam boards, show all other subjects as coming soon
-                        return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';
+                        return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'statistics-edexcel-gcse' && subject.id !== 'edexcel-english-language';
                     })
                     .sort((a, b) => {
-                       // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
+                       // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel, then statistics-edexcel-gcse
                        if (examBoard === 'edexcel') {
                          if (a.id === 'maths-edexcel') return -1;
                          if (b.id === 'maths-edexcel') return 1;
@@ -651,13 +657,15 @@ const PredictedQuestions = () => {
                          if (b.id === 'chemistry-edexcel') return 1;
                          if (a.id === 'physics-edexcel') return -1;
                          if (b.id === 'physics-edexcel') return 1;
+                         if (a.id === 'statistics-edexcel-gcse') return -1;
+                         if (b.id === 'statistics-edexcel-gcse') return 1;
                        }
                       return 0;
                     })
                     .map((subject) => {
                        // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
                        const isAvailable = examBoard === 'edexcel' && 
-                         (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel');
+                         (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'statistics-edexcel-gcse');
                      
                      if (!isAvailable && examBoard !== 'edexcel') {
                        return (
