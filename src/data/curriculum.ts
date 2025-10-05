@@ -35487,47 +35487,846 @@ export const curriculum: Subject[] = [
       {
         id: '1a-planning',
         name: '1a Planning (The Collection of Data)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-1a-q1',
+            question: 'Explain why a hypothesis such as "older motorcycles lose value" can only be tested through appropriate data collection and analysis.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The hypothesis requires empirical evidence gathered through systematic data collection. You would need to collect data on motorcycle ages and their corresponding values, then analyse this data using appropriate statistical methods to identify any correlation or relationship.',
+            markingCriteria: {
+              breakdown: ['Needs empirical evidence (1 mark)', 'Systematic data collection required (1 mark)', 'Statistical analysis needed (1 mark)', 'To identify relationship/correlation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.01'
+          },
+          {
+            id: 'stats-1a-q2',
+            question: 'Describe three constraints that might limit a statistical enquiry and give an example of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Time constraint: Limited deadline may reduce sample size (e.g., survey must be completed in one week). Cost constraint: Budget limits may restrict data collection methods (e.g., cannot afford to survey nationally, only locally). Ethical constraint: Cannot collect sensitive data without consent (e.g., medical records require permission).',
+            markingCriteria: {
+              breakdown: ['Time constraint identified (1 mark)', 'Time example (1 mark)', 'Cost constraint identified (1 mark)', 'Cost example (1 mark)', 'Ethical constraint identified (1 mark)', 'Ethical example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          },
+          {
+            id: 'stats-1a-q3',
+            question: 'A student wants to investigate study habits. Identify two ethical considerations they must address.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Confidentiality: Student responses must be kept anonymous and private. Informed consent: Participants must be told the purpose of the study and agree to participate voluntarily.',
+            markingCriteria: {
+              breakdown: ['Confidentiality identified (1 mark)', 'Explanation of confidentiality (1 mark)', 'Informed consent identified (1 mark)', 'Explanation of consent (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          },
+          {
+            id: 'stats-1a-q4',
+            question: 'Explain the importance of identifying the population correctly before starting data collection.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Correct population identification ensures sampling is representative and results can be generalized accurately. Incorrect population definition leads to biased results that cannot be applied to the intended group.',
+            markingCriteria: {
+              breakdown: ['Ensures representative sampling (1 mark)', 'Results can be generalized (1 mark)', 'Prevents bias (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.03'
+          },
+          {
+            id: 'stats-1a-q5',
+            question: 'Describe two proactive strategies to handle non-response in a questionnaire-based study.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Follow-up reminders: Send reminder emails or letters to non-respondents after one week. Incentives: Offer small rewards or entry into a prize draw to encourage participation.',
+            markingCriteria: {
+              breakdown: ['Follow-up strategy identified (1 mark)', 'Follow-up explanation (1 mark)', 'Incentive strategy identified (1 mark)', 'Incentive explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.03'
+          },
+          {
+            id: 'stats-1a-q6',
+            question: 'Give an example of how time constraints might affect the design of a statistical investigation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'With limited time, a smaller sample size must be used, which may reduce the reliability of results and increase sampling error.',
+            markingCriteria: {
+              breakdown: ['Smaller sample size (1 mark)', 'Reduced reliability/increased error (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          },
+          {
+            id: 'stats-1a-q7',
+            question: 'Explain why confidentiality is important when collecting data about people\'s income.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Income is sensitive personal information. Maintaining confidentiality protects participants from embarrassment or discrimination, encourages honest responses, and complies with data protection laws.',
+            markingCriteria: {
+              breakdown: ['Protects from embarrassment/discrimination (1 mark)', 'Encourages honest responses (1 mark)', 'Legal compliance (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          },
+          {
+            id: 'stats-1a-q8',
+            question: 'Describe how convenience might influence the choice of sampling method in a school survey.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Convenience sampling might involve surveying only students in one classroom or during one lunch period because they are easily accessible, rather than randomly sampling from the whole school population.',
+            markingCriteria: {
+              breakdown: ['Easy accessibility mentioned (1 mark)', 'Example given (1 mark)', 'Rather than random sampling (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          },
+          {
+            id: 'stats-1a-q9',
+            question: 'A researcher plans to study shopping habits. Suggest two unexpected outcomes they should prepare for.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Seasonal variations: Shopping habits may differ significantly by season, requiring data collection across multiple seasons. External events: Economic changes or local events may impact shopping patterns during the study period.',
+            markingCriteria: {
+              breakdown: ['Seasonal variation identified (1 mark)', 'Explanation (1 mark)', 'External event identified (1 mark)', 'Explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.03'
+          },
+          {
+            id: 'stats-1a-q10',
+            question: 'Explain how cost constraints could affect the sample size in a national survey.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Limited budget restricts the number of participants that can be surveyed due to costs of postage, phone calls, or interviewer time. This results in a smaller sample size than would be statistically ideal.',
+            markingCriteria: {
+              breakdown: ['Limited budget identified (1 mark)', 'Costs listed (1 mark)', 'Smaller sample size result (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1a.02'
+          }
+        ]
       },
       {
         id: '1b-types-of-data',
         name: '1b Types of Data',
-        questions: []
+        questions: [
+          {
+            id: 'stats-1b-q1',
+            question: 'Classify the following data types: shoe size, favourite colour, temperature. Explain your reasoning.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Shoe size: discrete quantitative data (can only take whole number values). Favourite colour: qualitative categorical data (descriptive categories with no numerical value). Temperature: continuous quantitative data (can take any value within a range).',
+            markingCriteria: {
+              breakdown: ['Shoe size: discrete (1 mark)', 'Shoe size explanation (1 mark)', 'Colour: qualitative (1 mark)', 'Colour explanation (1 mark)', 'Temperature: continuous (1 mark)', 'Temperature explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.01'
+          },
+          {
+            id: 'stats-1b-q2',
+            question: 'Explain the difference between discrete and continuous data with two examples of each.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Discrete data can only take specific values, usually whole numbers. Examples: number of students in a class, number of goals scored. Continuous data can take any value within a range. Examples: height, time taken to run 100m.',
+            markingCriteria: {
+              breakdown: ['Discrete definition (1 mark)', 'Discrete example 1 (1 mark)', 'Discrete example 2 (1 mark)', 'Continuous definition (1 mark)', 'Continuous example 1 (1 mark)', 'Continuous example 2 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.01'
+          },
+          {
+            id: 'stats-1b-q3',
+            question: 'Describe when data would be classified as both quantitative and ordinal. Give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ordinal data has a natural order but the intervals between values are not necessarily equal. Survey ratings (1-5 stars) are quantitative as they use numbers, but ordinal because the difference between 1 and 2 stars may not equal the difference between 4 and 5 stars.',
+            markingCriteria: {
+              breakdown: ['Natural order mentioned (1 mark)', 'Unequal intervals (1 mark)', 'Example given (1 mark)', 'Explanation of example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.01'
+          },
+          {
+            id: 'stats-1b-q4',
+            question: 'A dataset shows height and weight of students. Identify the type of data and explain why it\'s bivariate.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Both height and weight are continuous quantitative data. It is bivariate because two variables are measured for each student, allowing investigation of relationships between the variables.',
+            markingCriteria: {
+              breakdown: ['Both continuous quantitative (1 mark)', 'Two variables (1 mark)', 'Can investigate relationships (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.01'
+          },
+          {
+            id: 'stats-1b-q5',
+            question: 'Explain two advantages and two disadvantages of grouping continuous data.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Advantages: Makes large datasets easier to analyze and display; Identifies patterns and trends more clearly. Disadvantages: Loses precision and detail from original data; Cannot calculate exact statistics like mean accurately.',
+            markingCriteria: {
+              breakdown: ['Advantage 1 (1 mark)', 'Advantage 2 (1 mark)', 'Disadvantage 1 (1 mark)', 'Disadvantage 2 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.02'
+          },
+          {
+            id: 'stats-1b-q6',
+            question: 'Describe how class width affects the accuracy of calculations when data is grouped.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Larger class widths group more values together, using the midpoint for calculations which increases inaccuracy. Smaller class widths maintain more precision but may result in too many groups to analyze effectively.',
+            markingCriteria: {
+              breakdown: ['Larger widths increase inaccuracy (1 mark)', 'Uses midpoints (1 mark)', 'Smaller widths more precise (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.02'
+          },
+          {
+            id: 'stats-1b-q7',
+            question: 'In a scatter diagram studying revision time vs exam score, which is the explanatory variable? Explain.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Revision time is the explanatory (independent) variable because it is thought to explain or influence the exam score. It goes on the x-axis. Exam score is the response (dependent) variable on the y-axis.',
+            markingCriteria: {
+              breakdown: ['Revision time is explanatory (1 mark)', 'Goes on x-axis (1 mark)', 'Explains/influences score (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.03'
+          },
+          {
+            id: 'stats-1b-q8',
+            question: 'Compare primary and secondary data. Discuss advantages and disadvantages of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Primary data: collected directly for specific purpose. Advantages: accurate, relevant, controlled. Disadvantages: time-consuming, expensive. Secondary data: already collected by others. Advantages: quick, cheap to access. Disadvantages: may not be directly relevant, accuracy uncertain, possible rounding errors.',
+            markingCriteria: {
+              breakdown: ['Primary advantage (1 mark)', 'Primary disadvantage (1 mark)', 'Secondary advantage (1 mark)', 'Secondary disadvantage (1 mark)', 'Additional advantage (1 mark)', 'Additional disadvantage (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.04'
+          },
+          {
+            id: 'stats-1b-q9',
+            question: 'Explain why secondary data might have issues with rounding or accuracy.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Secondary data may have been rounded for publication or simplified for the original purpose. The level of precision may not match current needs. Original measurement methods and accuracy are often unknown.',
+            markingCriteria: {
+              breakdown: ['Rounded for publication (1 mark)', 'Precision may not match needs (1 mark)', 'Original accuracy unknown (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.04'
+          },
+          {
+            id: 'stats-1b-q10',
+            question: 'Describe three access constraints that might affect the use of secondary data.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Cost: may need to pay for access to commercial databases. Permissions: may need authorization to access confidential or restricted data. Availability: data may not exist or may not cover the time period or location needed.',
+            markingCriteria: {
+              breakdown: ['Cost constraint (1 mark)', 'Permission constraint (1 mark)', 'Availability constraint (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1b.04'
+          }
+        ]
       },
       {
         id: '1c-population-sampling',
         name: '1c Population & Sampling',
-        questions: []
+        questions: [
+          {
+            id: 'stats-1c-q1',
+            question: 'Define population, sampling frame, and sample. Explain how their meanings might vary by context.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Population: complete set of items being studied (e.g., all UK adults). Sampling frame: list from which sample is selected (e.g., electoral register). Sample: subset actually selected (e.g., 1000 people surveyed). Context matters: for a school study, population might be all students, sampling frame could be class registers, sample is selected students.',
+            markingCriteria: {
+              breakdown: ['Population defined (1 mark)', 'Sampling frame defined (1 mark)', 'Sample defined (1 mark)', 'Population example (1 mark)', 'Frame example (1 mark)', 'Context explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.01'
+          },
+          {
+            id: 'stats-1c-q2',
+            question: 'Explain why convenience sampling is quick but might introduce bias into a study.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Convenience sampling selects easily accessible participants (e.g., people in one location at one time). This is quick and cheap but introduces bias because certain groups may be over or under-represented, leading to unrepresentative results.',
+            markingCriteria: {
+              breakdown: ['Quick/easy to conduct (1 mark)', 'Easily accessible participants (1 mark)', 'Over/under-representation (1 mark)', 'Unrepresentative results (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.02'
+          },
+          {
+            id: 'stats-1c-q3',
+            question: 'Describe cluster sampling and give one reason why it might be chosen over simple random sampling.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cluster sampling divides population into groups (clusters), randomly selects some clusters, then surveys all members within selected clusters. It might be chosen because it is more cost-effective when the population is geographically spread, reducing travel and administrative costs.',
+            markingCriteria: {
+              breakdown: ['Divides into clusters (1 mark)', 'Randomly select clusters (1 mark)', 'Survey all in selected clusters (1 mark)', 'Cost-effective reason (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.02'
+          },
+          {
+            id: 'stats-1c-q4',
+            question: 'A company uses quota sampling to survey customers. Explain the method and identify a potential bias risk.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Quota sampling sets quotas for different groups (e.g., 50 males, 50 females) and interviewers select participants until quotas are filled. Bias risk: interviewers may unconsciously select easier or more cooperative people, making the sample unrepresentative within each quota group.',
+            markingCriteria: {
+              breakdown: ['Sets quotas for groups (1 mark)', 'Fills quotas (1 mark)', 'Interviewer selection bias (1 mark)', 'Unrepresentative sample (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.02'
+          },
+          {
+            id: 'stats-1c-q5',
+            question: 'Compare systematic and random sampling, discussing advantages and disadvantages of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Systematic: select every nth item. Advantages: simple, spreads sample evenly. Disadvantages: periodicity risk if pattern in list. Random: every item has equal chance. Advantages: unbiased, statistically valid. Disadvantages: requires sampling frame, may cluster by chance.',
+            markingCriteria: {
+              breakdown: ['Systematic method (1 mark)', 'Systematic advantage (1 mark)', 'Systematic disadvantage (1 mark)', 'Random advantage (1 mark)', 'Random disadvantage (1 mark)', 'Comparison point (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.03'
+          },
+          {
+            id: 'stats-1c-q6',
+            question: 'Explain the concept of periodicity and how it could affect systematic sampling results.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Periodicity occurs when there is a regular pattern in the sampling frame that coincides with the sampling interval. For example, if sampling every 7th person from a weekly schedule where Mondays are always busy, the sample will over-represent Monday customers and be biased.',
+            markingCriteria: {
+              breakdown: ['Regular pattern in frame (1 mark)', 'Coincides with interval (1 mark)', 'Example given (1 mark)', 'Results in bias (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.03'
+          },
+          {
+            id: 'stats-1c-q7',
+            question: 'Describe how to select a simple random sample of 30 students from 200 using a calculator.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Number all students 1-200. Use calculator random number generator to generate numbers between 1 and 200. Select the student corresponding to each number. Repeat until 30 different students are selected, ignoring repeats and out-of-range values.',
+            markingCriteria: {
+              breakdown: ['Number all students (1 mark)', 'Random number generator (1 mark)', 'Generate 1-200 (1 mark)', 'Ignore repeats (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.04'
+          },
+          {
+            id: 'stats-1c-q8',
+            question: 'Explain what to do if your random number generator produces repeats or out-of-range values.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Ignore repeats and out-of-range values. Generate additional random numbers until the required sample size is achieved with unique, valid values.',
+            markingCriteria: {
+              breakdown: ['Ignore repeats/out-of-range (1 mark)', 'Generate more numbers (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.04'
+          },
+          {
+            id: 'stats-1c-q9',
+            question: 'A school has 800 students: 400 boys and 400 girls. Calculate stratified sample sizes if n=50.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Boys: (400/800) × 50 = 25. Girls: (400/800) × 50 = 25. Therefore, sample 25 boys and 25 girls.',
+            markingCriteria: {
+              breakdown: ['Correct calculation method (1 mark)', 'Boys = 25 (1 mark)', 'Girls = 25 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.05'
+          },
+          {
+            id: 'stats-1c-q10',
+            question: 'Describe how to perform stratified sampling with multiple categories (e.g., year group and gender).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Divide population into all combinations of categories (e.g., Year 7 boys, Year 7 girls, Year 8 boys, etc.). Calculate the proportion each group represents. Multiply each proportion by required sample size to get stratified sample for each combination.',
+            markingCriteria: {
+              breakdown: ['Divide into all combinations (1 mark)', 'Calculate proportions (1 mark)', 'Multiply by sample size (1 mark)', 'For each combination (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1c.05'
+          }
+        ]
       },
       {
         id: '1d-collecting-data',
         name: '1d Collecting Data (Sources, Quality, Cleaning)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-1d-q1',
+            question: 'Compare experimental, observational, and questionnaire methods for collecting data.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Experimental: researcher controls variables to test cause and effect (e.g., drug trials). Observational: researcher observes without interference (e.g., traffic flow studies). Questionnaire: participants self-report through surveys (e.g., customer satisfaction). Each has different levels of control, objectivity, and suitability for different research questions.',
+            markingCriteria: {
+              breakdown: ['Experimental defined (1 mark)', 'Observational defined (1 mark)', 'Questionnaire defined (1 mark)', 'Example for each (2 marks)', 'Comparison point (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.01'
+          },
+          {
+            id: 'stats-1d-q2',
+            question: 'Explain the difference between reliability and validity in data collection.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Reliability means results can be repeated consistently - if the study is repeated, similar results are obtained. Validity means the method actually measures what it claims to measure - the results are accurate and meaningful for the research question.',
+            markingCriteria: {
+              breakdown: ['Reliability: repeatability (1 mark)', 'Consistent results (1 mark)', 'Validity: measures intended construct (1 mark)', 'Accurate/meaningful results (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.02'
+          },
+          {
+            id: 'stats-1d-q3',
+            question: 'Describe how sensitivity of questions can introduce bias. Suggest a method to reduce this distortion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sensitive questions (about income, health, illegal behavior) may lead to dishonest answers or non-response due to embarrassment or fear. To reduce bias, use anonymous surveys, indirect questioning, or random response techniques where participants follow random instructions (e.g., flip a coin) to mask individual responses.',
+            markingCriteria: {
+              breakdown: ['Sensitive questions identified (1 mark)', 'Dishonest answers/non-response (1 mark)', 'Method suggested (1 mark)', 'Explanation of method (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.03'
+          },
+          {
+            id: 'stats-1d-q4',
+            question: 'Give two examples of leading questions and explain why they should be avoided.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Example 1: "Don\'t you agree that the new policy is excellent?" suggests the expected answer. Example 2: "How much do you love our product?" assumes love rather than allowing for negative opinions. Leading questions bias responses toward a particular answer and produce invalid results.',
+            markingCriteria: {
+              breakdown: ['Leading question 1 (1 mark)', 'Leading question 2 (1 mark)', 'Explanation of bias (1 mark)', 'Invalid results (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.04'
+          },
+          {
+            id: 'stats-1d-q5',
+            question: 'Explain the purpose of a pilot study and describe what should be tested.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A pilot study tests the data collection method on a small scale before the main study. Test: question clarity, survey length, response rates, data quality, practical logistics, and identify potential problems to fix before full implementation.',
+            markingCriteria: {
+              breakdown: ['Tests on small scale (1 mark)', 'Purpose: identify problems (1 mark)', 'Two aspects tested (2 marks)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.04'
+          },
+          {
+            id: 'stats-1d-q6',
+            question: 'Describe how to handle missing data in a questionnaire response.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Options include: exclude the entire response if too much is missing; use only completed sections if sufficient; contact participant for clarification if possible; analyze missing data patterns to understand why data is missing.',
+            markingCriteria: {
+              breakdown: ['Exclude response option (1 mark)', 'Use completed sections option (1 mark)', 'Contact/analyze option (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.05'
+          },
+          {
+            id: 'stats-1d-q7',
+            question: 'A researcher finds several incomplete responses. Explain two ways to deal with this problem.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Method 1: Partial analysis - use the data that is complete and note limitations. Method 2: Follow-up - contact participants to complete missing sections. Choose method based on how much data is missing and importance of completeness.',
+            markingCriteria: {
+              breakdown: ['Partial analysis method (1 mark)', 'Explanation (1 mark)', 'Follow-up method (1 mark)', 'Explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.05'
+          },
+          {
+            id: 'stats-1d-q8',
+            question: 'Explain how data cleaning works in spreadsheets. Give two examples of what might need cleaning.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Data cleaning removes errors and inconsistencies to prepare data for analysis. Example 1: Remove currency symbols (£, $) from numerical values. Example 2: Standardize text entries (e.g., "Male", "M", "male" all to "Male"). Use find/replace, formulas, or filters.',
+            markingCriteria: {
+              breakdown: ['Removes errors/inconsistencies (1 mark)', 'Example 1 (1 mark)', 'Example 2 (1 mark)', 'Method mentioned (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.05'
+          },
+          {
+            id: 'stats-1d-q9',
+            question: 'Describe the difference between an outlier and an anomaly. How should each be handled?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Outlier: genuine extreme value that doesn\'t fit the pattern but is real (keep, note in analysis). Anomaly: error in data collection or recording (investigate, correct if possible, or remove with justification). Always investigate before deciding.',
+            markingCriteria: {
+              breakdown: ['Outlier: genuine extreme value (1 mark)', 'Anomaly: error (1 mark)', 'Keep outlier (1 mark)', 'Remove/correct anomaly (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.05'
+          },
+          {
+            id: 'stats-1d-q10',
+            question: 'Explain the purpose of using control groups and matched pairs in experimental design.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Control groups receive no treatment, providing baseline comparison to measure treatment effect. Matched pairs match participants on key characteristics (age, gender, etc.) before assigning to treatment/control, reducing confounding variables and ensuring fair comparison.',
+            markingCriteria: {
+              breakdown: ['Control group: no treatment (1 mark)', 'Provides baseline comparison (1 mark)', 'Matched pairs: match characteristics (1 mark)', 'Reduces confounding (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 1d.06'
+          }
+        ]
       },
       {
         id: '2a-representation',
         name: '2a Representation (Tabulation, Diagrams & Graphs)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2a-q1',
+            question: 'Draw a stem-and-leaf diagram for the data: 23, 27, 31, 34, 38, 42, 45. Ensure it is ordered.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Stem | Leaf\n2 | 3 7\n3 | 1 4 8\n4 | 2 5\nKey: 2|3 means 23',
+            markingCriteria: {
+              breakdown: ['Correct structure (1 mark)', 'All values placed correctly (1 mark)', 'Key provided (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.01'
+          },
+          {
+            id: 'stats-2a-q2',
+            question: 'Explain when a pie chart would be more appropriate than a bar chart for displaying data.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Pie charts are better for showing proportions or percentages of a whole, when you want to emphasize how parts relate to the total. Bar charts are better for comparing absolute values between categories or when there are many categories.',
+            markingCriteria: {
+              breakdown: ['Pie chart for proportions (1 mark)', 'Shows parts of whole (1 mark)', 'Comparison with bar chart (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.01'
+          },
+          {
+            id: 'stats-2a-q3',
+            question: 'A histogram has unequal class widths. Explain why frequency density must be used instead of frequency.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Frequency density (frequency ÷ class width) must be used to make the areas of bars proportional to frequencies. Using frequency would make wider classes appear more frequent than they actually are, creating misleading visual representation.',
+            markingCriteria: {
+              breakdown: ['Frequency density = frequency ÷ width (1 mark)', 'Makes areas proportional (1 mark)', 'Prevents misrepresentation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.02'
+          },
+          {
+            id: 'stats-2a-q4',
+            question: 'Calculate frequency density for a class 20-30 with frequency 15.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Class width = 30 - 20 = 10. Frequency density = 15 ÷ 10 = 1.5',
+            markingCriteria: {
+              breakdown: ['Class width = 10 (1 mark)', 'Frequency density = 1.5 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.02'
+          },
+          {
+            id: 'stats-2a-q5',
+            question: 'Describe how to identify skewness by inspection of a frequency distribution.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Positive skew: tail extends right, most data on left (mean > median > mode). Negative skew: tail extends left, most data on right (mean < median < mode). Symmetric: balanced on both sides, mean ≈ median ≈ mode.',
+            markingCriteria: {
+              breakdown: ['Positive skew identified (1 mark)', 'Negative skew identified (1 mark)', 'Tail direction (1 mark)', 'Relationship of mean/median/mode (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.03'
+          },
+          {
+            id: 'stats-2a-q6',
+            question: 'A graph shows the x-axis starting at 50 instead of 0. Explain why this could be misleading.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Truncated axes exaggerate differences between values, making small changes appear much larger than they actually are. This can deceive viewers about the true scale of differences and create false impressions of significance.',
+            markingCriteria: {
+              breakdown: ['Exaggerates differences (1 mark)', 'Makes changes appear larger (1 mark)', 'Deceives about true scale (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.04'
+          },
+          {
+            id: 'stats-2a-q7',
+            question: 'Compare the advantages of using software versus hand-drawing for creating statistical diagrams.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Software advantages: faster, more accurate, easily modified, professional appearance. Hand-drawing advantages: understanding the process, no technology needed, suitable for simple diagrams. Software is generally preferred for complex or repeated work.',
+            markingCriteria: {
+              breakdown: ['Software advantage (1 mark)', 'Another software advantage (1 mark)', 'Hand-drawing advantage (1 mark)', 'Context for choice (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.05'
+          },
+          {
+            id: 'stats-2a-q8',
+            question: 'Explain how to convert data from a cumulative frequency graph back to a frequency table.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Read cumulative frequency values at each class boundary. Subtract consecutive cumulative frequencies to find the frequency for each class (e.g., if cumulative at 20 is 15 and at 30 is 28, frequency for 20-30 is 28-15=13).',
+            markingCriteria: {
+              breakdown: ['Read cumulative values (1 mark)', 'Subtract consecutive values (1 mark)', 'Example/method shown (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.05'
+          },
+          {
+            id: 'stats-2a-q9',
+            question: 'Describe what is meant by positive skew. Give an example of a dataset that would show this.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Positive skew: majority of data on left with long tail extending to the right (mean > median). Example: house prices (most houses moderately priced, few very expensive ones pulling mean up).',
+            markingCriteria: {
+              breakdown: ['Definition (1 mark)', 'Long right tail (1 mark)', 'Suitable example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.03'
+          },
+          {
+            id: 'stats-2a-q10',
+            question: 'A box plot shows median closer to lower quartile. What does this suggest about the distribution?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'This suggests positive skew - the data is bunched toward lower values with a long tail of higher values extending upward.',
+            markingCriteria: {
+              breakdown: ['Positive skew identified (1 mark)', 'Explanation of distribution (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2a.03'
+          }
+        ]
       },
       {
         id: '2b-central-tendency',
         name: '2b Measures of Central Tendency',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2b-q1',
+            question: 'Calculate the mean, median, and mode of: 3, 5, 7, 7, 9, 11, 15.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Mean = (3+5+7+7+9+11+15) ÷ 7 = 57 ÷ 7 = 8.14. Median = middle value = 7. Mode = most frequent = 7.',
+            markingCriteria: {
+              breakdown: ['Mean = 8.14 (1 mark)', 'Median = 7 (1 mark)', 'Mode = 7 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.01'
+          },
+          {
+            id: 'stats-2b-q2',
+            question: 'A grouped frequency table has class 10-20 with frequency 8. Find the midpoint and explain its use.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Midpoint = (10 + 20) ÷ 2 = 15. The midpoint represents all values in that class when calculating the mean from grouped data, assuming values are evenly distributed within the class.',
+            markingCriteria: {
+              breakdown: ['Midpoint = 15 (1 mark)', 'Represents all values in class (1 mark)', 'Used for calculating mean (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.02'
+          },
+          {
+            id: 'stats-2b-q3',
+            question: 'Explain how to use linear interpolation to estimate the median from grouped data.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Find the class containing the median (n/2 position). Use formula: L + [(n/2 - F) / f] × w, where L = lower boundary, F = cumulative frequency before median class, f = frequency of median class, w = class width.',
+            markingCriteria: {
+              breakdown: ['Identify median class (1 mark)', 'Formula components (2 marks)', 'Correct application (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.02'
+          },
+          {
+            id: 'stats-2b-q4',
+            question: 'Calculate the weighted mean if scores 60, 70, 80 have weights 2, 3, 5 respectively.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Weighted mean = (60×2 + 70×3 + 80×5) ÷ (2+3+5) = (120+210+400) ÷ 10 = 730 ÷ 10 = 73',
+            markingCriteria: {
+              breakdown: ['Multiply each by weight (1 mark)', 'Sum of products (1 mark)', 'Divide by total weight = 73 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.03'
+          },
+          {
+            id: 'stats-2b-q5',
+            question: 'If 3 is added to every value in a dataset, what happens to the mean, median, and mode?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'All three measures increase by exactly 3. Adding a constant to all values shifts the entire distribution by that amount.',
+            markingCriteria: {
+              breakdown: ['All increase by 3 (2 marks)', 'Explanation of shift (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.04'
+          },
+          {
+            id: 'stats-2b-q6',
+            question: 'Explain when you would use the geometric mean instead of the arithmetic mean.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Geometric mean is used for rates of change, growth rates, or ratios (e.g., average percentage increase over time, investment returns). It multiplies values and takes nth root, giving more appropriate average for multiplicative processes.',
+            markingCriteria: {
+              breakdown: ['Used for rates/growth (1 mark)', 'Example given (1 mark)', 'Multiplicative processes (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.03'
+          },
+          {
+            id: 'stats-2b-q7',
+            question: 'A dataset has mean 50. If one value of 30 is removed, describe whether the mean increases or decreases.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The mean will increase because removing a value below the mean (30 < 50) raises the average of remaining values.',
+            markingCriteria: {
+              breakdown: ['Mean increases (1 mark)', 'Explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.04'
+          },
+          {
+            id: 'stats-2b-q8',
+            question: 'Compare two datasets using appropriate measures of central tendency. Justify your choice.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'If data is symmetric with no outliers, use mean (most representative). If data is skewed or has outliers, use median (not affected by extremes). Mode is useful for categorical data or identifying most common value but may not exist or be representative.',
+            markingCriteria: {
+              breakdown: ['When to use mean (1 mark)', 'When to use median (1 mark)', 'When to use mode (1 mark)', 'Justification (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.01'
+          },
+          {
+            id: 'stats-2b-q9',
+            question: 'Explain how to calculate mean seasonal variation for quarterly sales data over two years.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Calculate moving average trend. For each quarter, find deviation from trend (actual - trend). Average all Q1 deviations for Q1 seasonal effect, all Q2 deviations for Q2 effect, etc. Seasonal effects should sum to zero.',
+            markingCriteria: {
+              breakdown: ['Calculate trend (1 mark)', 'Find deviations from trend (1 mark)', 'Average by quarter (1 mark)', 'Should sum to zero (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.05'
+          },
+          {
+            id: 'stats-2b-q10',
+            question: 'Describe the effect of multiplying every value in a dataset by 2 on the mean and median.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Both mean and median are multiplied by 2. Multiplying all values by a constant scales all measures of location by that same constant.',
+            markingCriteria: {
+              breakdown: ['Both multiplied by 2 (1 mark)', 'Scaling explanation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2b.04'
+          }
+        ]
       },
       {
         id: '2c-dispersion',
         name: '2c Measures of Dispersion',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2c-q1',
+            question: 'Calculate the range and interquartile range (IQR) for: 12, 15, 18, 22, 25, 30, 35.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Range = 35 - 12 = 23. LQ = 15, UQ = 30, IQR = 30 - 15 = 15.',
+            markingCriteria: {
+              breakdown: ['Range = 23 (1 mark)', 'Quartiles identified (1 mark)', 'IQR = 15 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.01'
+          },
+          {
+            id: 'stats-2c-q2',
+            question: 'Explain why IQR is often preferred over range as a measure of spread.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'IQR is resistant to outliers as it only considers middle 50% of data. Range is affected by extreme values which may be anomalies. IQR gives more stable measure of typical spread.',
+            markingCriteria: {
+              breakdown: ['IQR resistant to outliers (1 mark)', 'Range affected by extremes (1 mark)', 'More stable measure (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.01'
+          },
+          {
+            id: 'stats-2c-q3',
+            question: 'Calculate the lower and upper boundaries for outliers if LQ = 20, UQ = 40.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'IQR = 40 - 20 = 20. Lower boundary = 20 - 1.5×20 = 20 - 30 = -10. Upper boundary = 40 + 1.5×20 = 40 + 30 = 70. Values < -10 or > 70 are outliers.',
+            markingCriteria: {
+              breakdown: ['IQR = 20 (1 mark)', 'Lower boundary = -10 (1 mark)', 'Upper boundary = 70 (1 mark)', 'Correct method (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.02'
+          },
+          {
+            id: 'stats-2c-q4',
+            question: 'A value lies at μ + 3.5σ. Using the 3σ rule, is this an outlier? Explain.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Yes, it is an outlier. Values beyond μ ± 3σ are considered very unusual (outside 99.7% of data). At μ + 3.5σ, this value is extremely rare and should be investigated.',
+            markingCriteria: {
+              breakdown: ['Yes, outlier (1 mark)', '3σ rule explained (1 mark)', 'Beyond 99.7% (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.02'
+          },
+          {
+            id: 'stats-2c-q5',
+            question: 'Describe the difference between genuine outliers and errors. How should each be treated?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Genuine outliers: real extreme values (keep in analysis, note their presence). Errors: mistakes in recording/measurement (investigate, correct if possible, remove if proven error). Always investigate before deciding which type.',
+            markingCriteria: {
+              breakdown: ['Genuine outlier defined (1 mark)', 'Error defined (1 mark)', 'Treatment of each (2 marks)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.02'
+          },
+          {
+            id: 'stats-2c-q6',
+            question: 'Calculate the interdecile range if the 10th percentile is 15 and 90th percentile is 85.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Interdecile range = 90th percentile - 10th percentile = 85 - 15 = 70',
+            markingCriteria: {
+              breakdown: ['Correct method (1 mark)', '= 70 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.03'
+          },
+          {
+            id: 'stats-2c-q7',
+            question: 'Compare two datasets: one with IQR = 10, another with IQR = 30. What does this tell you?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The dataset with IQR = 30 has greater spread/variability in the middle 50% of data. The dataset with IQR = 10 is more tightly clustered around the median, showing more consistency.',
+            markingCriteria: {
+              breakdown: ['Greater spread identified (1 mark)', 'Middle 50% mentioned (1 mark)', 'Comparison of consistency (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.01'
+          },
+          {
+            id: 'stats-2c-q8',
+            question: 'Explain why standard deviation is paired with mean, and IQR is paired with median.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Standard deviation and mean both use all data values and are affected by outliers - use together for symmetric data. IQR and median are resistant to outliers, based on position not values - use together for skewed data or data with outliers.',
+            markingCriteria: {
+              breakdown: ['SD and mean affected by outliers (1 mark)', 'For symmetric data (1 mark)', 'IQR and median resistant (1 mark)', 'For skewed/outlier data (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.04'
+          },
+          {
+            id: 'stats-2c-q9',
+            question: 'Calculate z-score for x = 85 when μ = 70 and σ = 10. Interpret the result.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'z = (x - μ) / σ = (85 - 70) / 10 = 15 / 10 = 1.5. This means x is 1.5 standard deviations above the mean, which is moderately high but not unusual.',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'z = 1.5 (1 mark)', 'Interpretation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.04'
+          },
+          {
+            id: 'stats-2c-q10',
+            question: 'A dataset has standard deviation 5. If all values are doubled, what is the new standard deviation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'New standard deviation = 5 × 2 = 10. Multiplying all values by a constant multiplies the standard deviation by that same constant.',
+            markingCriteria: {
+              breakdown: ['= 10 (1 mark)', 'Scaling principle (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2c.04'
+          }
+        ]
       },
       {
         id: '2d-summary-statistics',
         name: '2d Further Summary Statistics (Index Numbers & Rates)',
-        questions: []
+        questions: [
+          { id: 'stats-2d-q1', question: 'Calculate a simple index number if the base value is 200 and current value is 250.', marks: 2, difficulty: 'easy', modelAnswer: 'Index = (250/200) × 100 = 125', markingCriteria: { breakdown: ['Correct method (1 mark)', '= 125 (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.01' },
+          { id: 'stats-2d-q2', question: 'Explain the difference between RPI and CPI.', marks: 3, difficulty: 'medium', modelAnswer: 'RPI includes housing costs like mortgage interest; CPI excludes these. CPI is used for inflation targeting by Bank of England.', markingCriteria: { breakdown: ['RPI includes housing (1 mark)', 'CPI excludes (1 mark)', 'Different uses (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.01' },
+          { id: 'stats-2d-q3', question: 'Calculate percentage change if house prices rise from £180,000 to £198,000.', marks: 2, difficulty: 'easy', modelAnswer: '((198000-180000)/180000) × 100 = 10%', markingCriteria: { breakdown: ['Method (1 mark)', '= 10% (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.02' },
+          { id: 'stats-2d-q4', question: 'A population grows from 50,000 to 52,500. Calculate the percentage rate of change.', marks: 2, difficulty: 'easy', modelAnswer: '((52500-50000)/50000) × 100 = 5%', markingCriteria: { breakdown: ['Method (1 mark)', '= 5% (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.02' },
+          { id: 'stats-2d-q5', question: 'Explain how to calculate crude birth rate.', marks: 3, difficulty: 'easy', modelAnswer: 'Crude birth rate = (Number of births / Total population) × 1000. Gives births per 1000 people.', markingCriteria: { breakdown: ['Formula (2 marks)', 'Per 1000 (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.02' },
+          { id: 'stats-2d-q6', question: 'Given GDP index for 2020-2023, predict 2024 value assuming trend continues.', marks: 3, difficulty: 'medium', modelAnswer: 'Calculate average annual change, apply to 2023 value. Show working.', markingCriteria: { breakdown: ['Average change (1 mark)', 'Apply to 2023 (1 mark)', 'Prediction (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.03' },
+          { id: 'stats-2d-q7', question: 'Why are standardised rates more useful than crude rates?', marks: 2, difficulty: 'easy', modelAnswer: 'Standardised rates adjust for population structure differences, allowing fair comparison between populations.', markingCriteria: { breakdown: ['Adjust for structure (1 mark)', 'Fair comparison (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.02' },
+          { id: 'stats-2d-q8', question: 'Calculate index for Year 3 if Year 1 = 100 and 5% increase each year.', marks: 3, difficulty: 'medium', modelAnswer: 'Year 2: 105, Year 3: 105 × 1.05 = 110.25', markingCriteria: { breakdown: ['Year 2 (1 mark)', 'Year 3 method (1 mark)', '= 110.25 (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.01' },
+          { id: 'stats-2d-q9', question: 'A chain index shows 105 in Year 1, 110 in Year 2. Calculate overall change.', marks: 2, difficulty: 'medium', modelAnswer: '1.05 × 1.10 = 1.155, so 15.5% increase overall', markingCriteria: { breakdown: ['Multiply (1 mark)', '15.5% (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.01' },
+          { id: 'stats-2d-q10', question: 'Describe how to identify periods of increase from unemployment rate table.', marks: 2, difficulty: 'easy', modelAnswer: 'Compare consecutive values; increase when later value exceeds earlier value.', markingCriteria: { breakdown: ['Compare consecutive (1 mark)', 'Later > earlier (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2d.02' }
+        ]
       },
       {
         id: '2e-scatter-correlation',
         name: '2e Scatter, Correlation & Regression',
-        questions: []
+        questions: [
+          { id: 'stats-2e-q1', question: 'Describe positive, negative, and zero correlation with examples.', marks: 4, difficulty: 'easy', modelAnswer: 'Positive: both increase together (height/weight). Negative: one increases as other decreases (speed/time). Zero: no relationship (shoe size/test score).', markingCriteria: { breakdown: ['Positive defined (1 mark)', 'Negative defined (1 mark)', 'Zero defined (1 mark)', 'Examples (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.01' },
+          { id: 'stats-2e-q2', question: 'Explain why correlation does not imply causation.', marks: 3, difficulty: 'medium', modelAnswer: 'Two variables may correlate due to coincidence, confounding variable, or both caused by third factor. Correlation alone doesn\'t prove one causes the other.', markingCriteria: { breakdown: ['Correlation ≠ causation (1 mark)', 'Confounding factors (1 mark)', 'Example/explanation (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.01' },
+          { id: 'stats-2e-q3', question: 'Calculate mean point for x = 2,4,6,8 and y = 3,7,9,13.', marks: 2, difficulty: 'easy', modelAnswer: 'x̄ = (2+4+6+8)/4 = 5, ȳ = (3+7+9+13)/4 = 8. Mean point (5, 8)', markingCriteria: { breakdown: ['Correct calculation (1 mark)', '(5, 8) (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.02' },
+          { id: 'stats-2e-q4', question: 'Interpret gradient and intercept of y = 2x + 3.', marks: 3, difficulty: 'easy', modelAnswer: 'Gradient 2: for every 1 unit increase in x, y increases by 2. Intercept 3: when x=0, y=3.', markingCriteria: { breakdown: ['Gradient interpretation (1 mark)', 'Intercept interpretation (1 mark)', 'Context (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.02' },
+          { id: 'stats-2e-q5', question: 'Explain difference between interpolation and extrapolation.', marks: 3, difficulty: 'easy', modelAnswer: 'Interpolation: predicting within data range (reliable). Extrapolation: predicting beyond data range (unreliable, assumes pattern continues).', markingCriteria: { breakdown: ['Interpolation defined (1 mark)', 'Extrapolation defined (1 mark)', 'Reliability difference (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.02' },
+          { id: 'stats-2e-q6', question: 'Calculate Spearman\'s rank for ranks x = 1,2,3,4 and y = 1,3,2,4.', marks: 4, difficulty: 'hard', modelAnswer: 'd values: 0,1,1,0. Σd² = 2. rs = 1 - (6×2)/(4³-4) = 1 - 12/60 = 0.8', markingCriteria: { breakdown: ['d values (1 mark)', 'Σd² (1 mark)', 'Formula (1 mark)', '= 0.8 (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.03' },
+          { id: 'stats-2e-q7', question: 'Interpret PMCC value of 0.85.', marks: 2, difficulty: 'easy', modelAnswer: 'Strong positive linear correlation. Variables closely related, increasing together.', markingCriteria: { breakdown: ['Strong positive (1 mark)', 'Linear relationship (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.03' },
+          { id: 'stats-2e-q8', question: 'When use Spearman\'s rank instead of PMCC?', marks: 2, difficulty: 'medium', modelAnswer: 'Use Spearman for ranked data, non-linear relationships, or when data has outliers.', markingCriteria: { breakdown: ['Ranked data (1 mark)', 'Non-linear/outliers (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.03' },
+          { id: 'stats-2e-q9', question: 'Give example of spurious correlation.', marks: 2, difficulty: 'easy', modelAnswer: 'Ice cream sales and drowning deaths correlate (both increase in summer) but don\'t cause each other.', markingCriteria: { breakdown: ['Valid example (1 mark)', 'Explanation (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.01' },
+          { id: 'stats-2e-q10', question: 'Explain judging correlation strength by eye on scatter diagram.', marks: 2, difficulty: 'easy', modelAnswer: 'Points close to straight line = strong. Points scattered widely = weak. No pattern = zero.', markingCriteria: { breakdown: ['Strong vs weak (1 mark)', 'Pattern description (1 mark)'] }, specReference: 'Edexcel GCSE Statistics 2e.01' }
+        ]
       },
       {
         id: '2f-time-series',
