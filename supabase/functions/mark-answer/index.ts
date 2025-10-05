@@ -68,8 +68,13 @@ serve(async (req) => {
     // Check if this is a multiple choice question (has options like a), b), c), d))
     const isMultipleChoice = /[a-d]\)\s/.test(question);
     
-    // For multiple choice, allow single letter answers; for other questions, require more detail
-    if (!isMultipleChoice && (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer))) {
+    // Check if this is a numerical/mathematical answer (contains numbers, decimals, operators, etc.)
+    const isNumericalAnswer = /[\d.]/.test(trimmedAnswer) && trimmedAnswer.length >= 1;
+    
+    // For multiple choice, allow single letter answers
+    // For numerical answers (calculations, rounding, etc.), allow pure numerical responses
+    // For text answers, require at least some alphabetic content
+    if (!isMultipleChoice && !isNumericalAnswer && (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer))) {
       return new Response(JSON.stringify({ 
         marksAwarded: 0,
         feedback: "Your answer is too brief. Please provide a more detailed response that demonstrates your understanding.",
@@ -79,8 +84,9 @@ serve(async (req) => {
       });
     }
     
-    // Basic validation for all answers
-    if (trimmedAnswer.length === 0 || !/[a-zA-Z0-9]/.test(trimmedAnswer)) {
+    // Basic validation for all answers - check for completely empty/invalid answers
+    // Allow purely numerical answers OR answers with alphanumeric characters
+    if (trimmedAnswer.length === 0 || (!/[a-zA-Z0-9]/.test(trimmedAnswer) && !/^[\d\s.+\-*/=()×÷^]+$/.test(trimmedAnswer))) {
       return new Response(JSON.stringify({ 
         marksAwarded: 0,
         feedback: "Please provide an answer to the question.",
