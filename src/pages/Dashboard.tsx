@@ -149,7 +149,7 @@ const Dashboard = () => {
   const [cardsLoading, setCardsLoading] = useState(false);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
-  const [hasQuestNotification, setHasQuestNotification] = useState(false);
+  const [questNotificationCount, setQuestNotificationCount] = useState(0);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -1056,7 +1056,7 @@ const Dashboard = () => {
   useEffect(() => {
     const previousMP = localStorage.getItem(`previousMP_${user?.id}`);
     if (previousMP && userGems > parseInt(previousMP) && activeTab !== 'quests') {
-      setHasQuestNotification(true);
+      setQuestNotificationCount(prev => prev + 1);
     }
     if (userGems > 0) {
       localStorage.setItem(`previousMP_${user?.id}`, userGems.toString());
@@ -1067,7 +1067,7 @@ const Dashboard = () => {
   useEffect(() => {
     const handleMPEarned = () => {
       if (activeTab !== 'quests') {
-        setHasQuestNotification(true);
+        setQuestNotificationCount(prev => prev + 1);
       }
     };
 
@@ -1078,7 +1078,7 @@ const Dashboard = () => {
   // Clear quest notification when viewing quests tab
   useEffect(() => {
     if (activeTab === 'quests') {
-      setHasQuestNotification(false);
+      setQuestNotificationCount(0);
     }
   }, [activeTab]);
 
@@ -1537,30 +1537,32 @@ const Dashboard = () => {
             <MobileNav>
               {sidebarItems.map((item) => {
                 const isActive = activeTab === item.id;
-                const showBadge = item.id === 'quests' && hasQuestNotification;
+                const showBadge = item.id === 'quests' && questNotificationCount > 0;
                 return (
-                  <MobileNavItem
-                    key={item.id}
-                    onClick={() => {
-                      if (item.id === "flashcards") {
-                        setActiveTab("flashcards");
-                      } else {
-                        setActiveTab(item.id);
+                  <div key={item.id} className="relative">
+                    <MobileNavItem
+                      onClick={() => {
+                        if (item.id === "flashcards") {
+                          setActiveTab("flashcards");
+                        } else {
+                          setActiveTab(item.id);
+                        }
+                        if (item.id === 'quests') setQuestNotificationCount(0);
+                      }}
+                      className={isActive 
+                        ? `${item.activeColor} text-white shadow-lg` 
+                        : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
                       }
-                    }}
-                    className={isActive 
-                      ? `${item.activeColor} text-white shadow-lg` 
-                      : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
-                    }
-                  >
-                    <div className="relative">
+                    >
                       <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
-                      {showBadge && (
-                        <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border border-background shadow-sm" />
-                      )}
-                    </div>
-                    <span className="font-bold text-sm tracking-wide">{item.label}</span>
-                  </MobileNavItem>
+                      <span className="font-bold text-sm tracking-wide">{item.label}</span>
+                    </MobileNavItem>
+                    {showBadge && (
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
+                        {questNotificationCount}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
               
@@ -1598,7 +1600,7 @@ const Dashboard = () => {
             <Button 
               size="sm" 
               variant="outline"
-              onClick={() => setHasQuestNotification(true)}
+              onClick={() => setQuestNotificationCount(prev => prev + 1)}
               className="ml-2"
             >
               Test
@@ -1640,26 +1642,32 @@ const Dashboard = () => {
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
-              const showBadge = item.id === 'quests' && hasQuestNotification;
+              const showBadge = item.id === 'quests' && questNotificationCount > 0;
               return (
-                <motion.button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  whileHover={{ scale: 1.02 }}
-                  className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
-                    isActive 
-                      ? `${item.activeColor} text-white shadow-lg` 
-                      : `${item.bgColor} ${item.textColor} hover:scale-105`
-                  }`}
-                >
-                  <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
-                    <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
-                    {showBadge && (
-                      <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-[1.5px] border-background shadow-sm" />
-                    )}
-                  </div>
-                  <span className="font-bold text-sm tracking-wide">{item.label}</span>
-                </motion.button>
+                <div key={item.id} className="relative">
+                  <motion.button
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      if (item.id === 'quests') setQuestNotificationCount(0);
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
+                      isActive 
+                        ? `${item.activeColor} text-white shadow-lg` 
+                        : `${item.bgColor} ${item.textColor} hover:scale-105`
+                    }`}
+                  >
+                    <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
+                      <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
+                    </div>
+                    <span className="font-bold text-sm tracking-wide">{item.label}</span>
+                  </motion.button>
+                  {showBadge && (
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
+                      {questNotificationCount}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -1670,7 +1678,7 @@ const Dashboard = () => {
           <Button
             size="sm"
             variant="outline"
-            onClick={() => setHasQuestNotification(true)}
+            onClick={() => setQuestNotificationCount(prev => prev + 1)}
             className="w-full mb-2"
           >
             Test Notification
