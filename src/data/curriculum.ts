@@ -36331,42 +36331,930 @@ export const curriculum: Subject[] = [
       {
         id: '2f-time-series',
         name: '2f Time Series',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2f-q1',
+            question: 'Explain how to identify a trend in a time series by inspection.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Look for overall direction of data over time - upward trend shows general increase, downward shows decrease, horizontal shows stability. Ignore short-term fluctuations and focus on long-term pattern.',
+            markingCriteria: {
+              breakdown: ['Overall direction (1 mark)', 'Upward/downward/horizontal (1 mark)', 'Ignore short-term fluctuations (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.01'
+          },
+          {
+            id: 'stats-2f-q2',
+            question: 'Calculate a 4-point moving average for: 20, 24, 28, 32, 36, 40.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '1st MA = (20+24+28+32)÷4 = 26. 2nd MA = (24+28+32+36)÷4 = 30. 3rd MA = (28+32+36+40)÷4 = 34.',
+            markingCriteria: {
+              breakdown: ['1st MA = 26 (1 mark)', '2nd MA = 30 (1 mark)', '3rd MA = 34 (1 mark)', 'Correct method (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.02'
+          },
+          {
+            id: 'stats-2f-q3',
+            question: 'Describe the purpose of calculating moving averages in time series analysis.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Moving averages smooth out short-term fluctuations and seasonal variations to reveal the underlying trend more clearly, making it easier to identify long-term patterns.',
+            markingCriteria: {
+              breakdown: ['Smooth fluctuations (1 mark)', 'Reveal trend (1 mark)', 'Identify long-term patterns (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.02'
+          },
+          {
+            id: 'stats-2f-q4',
+            question: 'Quarterly sales show values of 100, 120, 140, 160. Draw the trend line and interpret the gradient.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Plot moving averages or actual values, draw line of best fit through points. Gradient shows rate of increase per quarter (e.g., 20 units per quarter indicates steady growth).',
+            markingCriteria: {
+              breakdown: ['Plot points (1 mark)', 'Draw trend line (1 mark)', 'Calculate gradient (1 mark)', 'Interpret (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.03'
+          },
+          {
+            id: 'stats-2f-q5',
+            question: 'Explain what seasonal effects are in time series data. Give an example.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Seasonal effects are regular, repeating patterns that occur at specific intervals (e.g., quarterly, monthly). Example: ice cream sales peak in summer months and drop in winter, repeating annually.',
+            markingCriteria: {
+              breakdown: ['Regular repeating pattern (1 mark)', 'Specific intervals (1 mark)', 'Example given (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.04'
+          },
+          {
+            id: 'stats-2f-q6',
+            question: 'Calculate average seasonal effects if Q1 values are 85, 82, 88 and trend values are 90, 90, 90.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Deviations: 85-90=-5, 82-90=-8, 88-90=-2. Average Q1 seasonal effect = (-5-8-2)÷3 = -15÷3 = -5.',
+            markingCriteria: {
+              breakdown: ['Calculate deviations (1 mark)', 'Sum deviations (1 mark)', 'Average = -5 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.04'
+          },
+          {
+            id: 'stats-2f-q7',
+            question: 'Using trend value 200 and seasonal effect -15, predict the actual value.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Predicted value = trend + seasonal effect = 200 + (-15) = 185',
+            markingCriteria: {
+              breakdown: ['Correct method (1 mark)', '= 185 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.04'
+          },
+          {
+            id: 'stats-2f-q8',
+            question: 'Describe cyclic effects in time series and how they differ from seasonal effects.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cyclic effects are longer-term fluctuations that don\'t occur at fixed intervals (e.g., economic cycles lasting several years). Seasonal effects repeat at regular, predictable intervals (e.g., quarterly, monthly).',
+            markingCriteria: {
+              breakdown: ['Cyclic: longer-term (1 mark)', 'Not fixed intervals (1 mark)', 'Seasonal: regular intervals (1 mark)', 'Predictable (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.04'
+          },
+          {
+            id: 'stats-2f-q9',
+            question: 'Explain why extrapolation beyond observed data in time series can be unreliable.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Extrapolation assumes current trends continue unchanged. Future events, market changes, or external factors may alter the pattern. The further ahead you predict, the less reliable the forecast.',
+            markingCriteria: {
+              breakdown: ['Assumes trends continue (1 mark)', 'External factors may change (1 mark)', 'Less reliable further ahead (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.05'
+          },
+          {
+            id: 'stats-2f-q10',
+            question: 'A time series has trend equation y = 50 + 2x where x is quarter number. Predict value for quarter 12.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'y = 50 + 2(12) = 50 + 24 = 74',
+            markingCriteria: {
+              breakdown: ['Substitute x=12 (1 mark)', '= 74 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2f.03'
+          }
+        ]
       },
       {
         id: '2g-quality-assurance',
         name: '2g Quality Assurance (Control Charts)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2g-q1',
+            question: 'Explain why sample means vary less than individual values in sampling distributions.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sample means average out individual variations. Extreme high and low values cancel each other out, producing less variable results. This is the basis of the Central Limit Theorem.',
+            markingCriteria: {
+              breakdown: ['Average out variations (1 mark)', 'Extremes cancel (1 mark)', 'Less variable (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.01'
+          },
+          {
+            id: 'stats-2g-q2',
+            question: 'Define warning limits and action limits on a control chart.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Warning limits: typically at ±2σ from target mean, indicating process variation is increasing (caution needed). Action limits: at ±3σ from target mean, indicating process is out of control (immediate action required).',
+            markingCriteria: {
+              breakdown: ['Warning at ±2σ (1 mark)', 'Caution needed (1 mark)', 'Action at ±3σ (1 mark)', 'Immediate action (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q3',
+            question: 'A control chart shows a point outside the upper action limit. What should happen?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Stop the process immediately and investigate the cause. Check for equipment malfunction, operator error, or material defects. Take corrective action before resuming production.',
+            markingCriteria: {
+              breakdown: ['Stop process (1 mark)', 'Investigate cause (1 mark)', 'Corrective action (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q4',
+            question: 'Calculate warning and action limits if target mean is 100 and σ = 5.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Lower warning = 100 - 2(5) = 90. Upper warning = 100 + 2(5) = 110. Lower action = 100 - 3(5) = 85. Upper action = 100 + 3(5) = 115.',
+            markingCriteria: {
+              breakdown: ['Warning limits (2 marks)', 'Action limits (2 marks)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q5',
+            question: 'Describe what a mean control chart monitors in a manufacturing process.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Monitors the average (mean) of sample measurements over time to detect shifts in the process center. Helps identify if the process is producing items with correct average specifications.',
+            markingCriteria: {
+              breakdown: ['Monitors average/mean (1 mark)', 'Over time (1 mark)', 'Detects shifts in center (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q6',
+            question: 'Explain the difference between a mean chart and a range chart.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mean chart: monitors process center/location (whether average is on target). Range chart: monitors process spread/variability (whether consistency is maintained). Both needed for complete quality control.',
+            markingCriteria: {
+              breakdown: ['Mean monitors center (1 mark)', 'Range monitors spread (1 mark)', 'Different purposes (1 mark)', 'Both needed (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q7',
+            question: 'A point falls between warning and action limits. What action is appropriate?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Increase monitoring frequency and watch next samples closely. Investigate potential causes but don\'t stop process yet. If trend continues or worsens, take corrective action.',
+            markingCriteria: {
+              breakdown: ['Increase monitoring (1 mark)', 'Watch closely (1 mark)', 'Don\'t stop yet (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q8',
+            question: 'Describe a median control chart and when it might be used instead of a mean chart.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Median chart uses middle value instead of mean. Used when data has outliers or is not normally distributed. Quicker to calculate manually, more robust to extreme values.',
+            markingCriteria: {
+              breakdown: ['Uses middle value (1 mark)', 'When outliers present (1 mark)', 'More robust (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q9',
+            question: 'Explain why control charts use ±3σ for action limits rather than ±2σ.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '±3σ limits include 99.7% of normal variation, reducing false alarms (stopping process unnecessarily). ±2σ would trigger too many unnecessary stoppages. Balance between catching real problems and avoiding false positives.',
+            markingCriteria: {
+              breakdown: ['99.7% coverage (1 mark)', 'Reduces false alarms (1 mark)', 'Balance mentioned (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          },
+          {
+            id: 'stats-2g-q10',
+            question: 'Several consecutive points show an upward trend within control limits. What should be done?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Investigate even though within limits - a trend indicates systematic change. Process may be drifting out of control. Identify and correct cause before it reaches action limits.',
+            markingCriteria: {
+              breakdown: ['Investigate trend (1 mark)', 'Systematic change indicated (1 mark)', 'Correct before worse (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2g.02'
+          }
+        ]
       },
       {
         id: '2h-estimation',
         name: '2h Estimation',
-        questions: []
+        questions: [
+          {
+            id: 'stats-2h-q1',
+            question: 'A sample of 50 students has mean test score 68. Estimate the population mean and explain your reasoning.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Population mean is estimated as 68 (same as sample mean). Sample mean is the best unbiased estimator of population mean. Larger samples give more reliable estimates.',
+            markingCriteria: {
+              breakdown: ['Estimate = 68 (1 mark)', 'Sample mean estimates population (1 mark)', 'Larger samples more reliable (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.01'
+          },
+          {
+            id: 'stats-2h-q2',
+            question: 'In a sample of 200 people, 45 support a proposal. Estimate the population proportion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Estimated proportion = 45/200 = 0.225 or 22.5%',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', '= 0.225 or 22.5% (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.01'
+          },
+          {
+            id: 'stats-2h-q3',
+            question: 'Explain why a larger sample size provides more reliable population estimates.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Larger samples reduce sampling error and are more likely to be representative of the population. Random fluctuations have less impact. The law of large numbers ensures convergence to true population value.',
+            markingCriteria: {
+              breakdown: ['Reduces sampling error (1 mark)', 'More representative (1 mark)', 'Less impact of fluctuations (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.03'
+          },
+          {
+            id: 'stats-2h-q4',
+            question: 'Compare sample mean 75 (n=30) with population mean 80. What does this suggest?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sample mean is lower than population mean, which could be due to sampling variation (random chance), or the sample may not be fully representative. A larger sample would provide a better estimate.',
+            markingCriteria: {
+              breakdown: ['Sample lower than population (1 mark)', 'Could be sampling variation (1 mark)', 'May not be representative (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.02'
+          },
+          {
+            id: 'stats-2h-q5',
+            question: 'Describe the Petersen capture-recapture method for estimating population size.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Capture and tag n₁ individuals, release back. Later, capture n₂ individuals, count m tagged. Population estimate N = (n₁ × n₂) / m. Assumes: population closed (no births/deaths/migration), tags not lost, mixing occurs.',
+            markingCriteria: {
+              breakdown: ['Method described (2 marks)', 'Formula (1 mark)', 'Assumptions (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.04'
+          },
+          {
+            id: 'stats-2h-q6',
+            question: 'Apply Petersen method: 40 fish tagged initially, second catch of 50 has 8 tagged. Estimate population.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'N = (n₁ × n₂) / m = (40 × 50) / 8 = 2000 / 8 = 250 fish',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Substitution (1 mark)', '= 250 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.04'
+          },
+          {
+            id: 'stats-2h-q7',
+            question: 'State two assumptions required for the Petersen capture-recapture method to be valid.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Any two of: population is closed (no immigration/emigration/births/deaths); tags are not lost or overlooked; tagged and untagged individuals mix completely; all individuals have equal chance of capture.',
+            markingCriteria: {
+              breakdown: ['First assumption (1 mark)', 'Second assumption (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.04'
+          },
+          {
+            id: 'stats-2h-q8',
+            question: 'Explain why the Petersen method may be unsuitable for migratory bird populations.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Migration violates the closed population assumption. Birds may move in or out of the study area between captures, making the population size vary. Tagged birds may not mix with untagged birds across the entire range.',
+            markingCriteria: {
+              breakdown: ['Violates closed population (1 mark)', 'Movement in/out (1 mark)', 'Population size varies (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.04'
+          },
+          {
+            id: 'stats-2h-q9',
+            question: 'Describe how replication improves the reliability of population estimates.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Multiple samples allow calculation of average estimate, reducing impact of one unusual sample. Can assess variability between samples. Increases confidence in results and identifies inconsistent estimates.',
+            markingCriteria: {
+              breakdown: ['Average reduces unusual results (1 mark)', 'Assess variability (1 mark)', 'Increases confidence (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.03'
+          },
+          {
+            id: 'stats-2h-q10',
+            question: 'Three samples of size 100 give proportions 0.32, 0.35, 0.33. Estimate population proportion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Average = (0.32 + 0.35 + 0.33) / 3 = 1.00 / 3 = 0.333 or 33.3%',
+            markingCriteria: {
+              breakdown: ['Average method (1 mark)', '= 0.333 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 2h.03'
+          }
+        ]
       },
       {
         id: '3p-probability-foundations',
         name: '3p Probability Foundations',
-        questions: []
+        questions: [
+          {
+            id: 'stats-3p1-q1',
+            question: 'A coin is flipped 100 times, showing 58 heads. Calculate the relative frequency estimate of getting heads.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Relative frequency = 58/100 = 0.58 or 58%',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', '= 0.58 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.01'
+          },
+          {
+            id: 'stats-3p1-q2',
+            question: 'Express the probability 0.75 as a percentage and describe the likelihood in words.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '0.75 = 75%. This is a high probability, meaning the event is likely to occur (3 in 4 chance).',
+            markingCriteria: {
+              breakdown: ['75% (1 mark)', 'Likely/high probability (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.01'
+          },
+          {
+            id: 'stats-3p1-q3',
+            question: 'If P(rain) = 0.3, calculate the expected number of rainy days in a 30-day month.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Expected frequency = 0.3 × 30 = 9 days',
+            markingCriteria: {
+              breakdown: ['Correct method (1 mark)', '= 9 days (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.02'
+          },
+          {
+            id: 'stats-3p1-q4',
+            question: 'Explain the difference between absolute risk and relative risk with an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Absolute risk: actual probability of an event (e.g., 2% chance of disease). Relative risk: comparison between groups (e.g., smokers have 5 times the risk of non-smokers). Relative risk shows magnitude of difference, absolute shows actual likelihood.',
+            markingCriteria: {
+              breakdown: ['Absolute risk defined (1 mark)', 'Relative risk defined (1 mark)', 'Example (1 mark)', 'Difference explained (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.03'
+          },
+          {
+            id: 'stats-3p1-q5',
+            question: 'Group A has 5% disease rate, Group B has 1% rate. Calculate relative risk for Group A vs Group B.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Relative risk = 5% / 1% = 5. Group A has 5 times the risk of Group B.',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', '= 5 times (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.03'
+          },
+          {
+            id: 'stats-3p1-q6',
+            question: 'Distinguish between experimental and theoretical probability. Give an example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Experimental: based on actual trials/observations (e.g., flipping coin 50 times, getting 28 heads, P=0.56). Theoretical: based on assumptions/logic (e.g., fair coin has P(heads)=0.5).',
+            markingCriteria: {
+              breakdown: ['Experimental defined (1 mark)', 'Theoretical defined (1 mark)', 'Example 1 (1 mark)', 'Example 2 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.04'
+          },
+          {
+            id: 'stats-3p1-q7',
+            question: 'A die is rolled 60 times: 1 appears 8 times, 6 appears 12 times. Identify potential bias.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Fair die should show each face ~10 times (60÷6). 1 appears less (8), 6 appears more (12), suggesting possible bias toward 6 and against 1. Need more trials to confirm.',
+            markingCriteria: {
+              breakdown: ['Expected frequency identified (1 mark)', 'Bias identified (1 mark)', 'More trials needed (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.04'
+          },
+          {
+            id: 'stats-3p1-q8',
+            question: 'Explain why probability estimates improve with larger sample sizes (larger n).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Law of large numbers: as n increases, experimental probability converges to theoretical probability. Random fluctuations have less impact. More data provides more reliable estimates.',
+            markingCriteria: {
+              breakdown: ['Law of large numbers (1 mark)', 'Converges to theoretical (1 mark)', 'Reduces random fluctuation (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.04'
+          },
+          {
+            id: 'stats-3p1-q9',
+            question: 'A probability is given as 1 in 8. Express this on the 0-1 scale and as a percentage.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '1/8 = 0.125 = 12.5%',
+            markingCriteria: {
+              breakdown: ['0.125 (1 mark)', '12.5% (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.01'
+          },
+          {
+            id: 'stats-3p1-q10',
+            question: 'Compare the likelihood of events with probabilities 0.1, 0.5, and 0.9 using appropriate language.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: '0.1 (10%): unlikely/low chance. 0.5 (50%): equally likely as not/even chance. 0.9 (90%): very likely/high chance.',
+            markingCriteria: {
+              breakdown: ['0.1 described (1 mark)', '0.5 described (1 mark)', '0.9 described (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p.01'
+          }
+        ]
       },
       {
         id: '3p-probability-representations',
         name: '3p Probability Representations (Up to 3 Events)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-3p2-q1',
+            question: 'Complete a two-way table for 100 students: 60 study French, 40 study Spanish, 15 study both. Find those who study neither.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'French only: 60-15=45. Spanish only: 40-15=25. Both: 15. Neither: 100-(45+25+15)=15.',
+            markingCriteria: {
+              breakdown: ['French only = 45 (1 mark)', 'Spanish only = 25 (1 mark)', 'Total calculation (1 mark)', 'Neither = 15 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.01'
+          },
+          {
+            id: 'stats-3p2-q2',
+            question: 'Draw a sample space diagram for rolling two dice and find P(sum = 7).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sample space: 6×6 = 36 outcomes. Sum = 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 outcomes. P(sum=7) = 6/36 = 1/6.',
+            markingCriteria: {
+              breakdown: ['36 outcomes (1 mark)', '6 favorable outcomes (1 mark)', 'Probability calculation (1 mark)', '= 1/6 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.02'
+          },
+          {
+            id: 'stats-3p2-q3',
+            question: 'Draw a tree diagram for flipping a coin twice. Calculate P(at least one head).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Outcomes: HH, HT, TH, TT. At least one head: HH, HT, TH = 3 outcomes. P(at least one head) = 3/4 = 0.75.',
+            markingCriteria: {
+              breakdown: ['Tree diagram structure (1 mark)', 'Identify outcomes (1 mark)', 'Count favorable (1 mark)', '= 3/4 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.03'
+          },
+          {
+            id: 'stats-3p2-q4',
+            question: 'Use a Venn diagram: 50 people, 30 like tea (T), 25 like coffee (C), 10 like both. Find P(T only).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'T only = 30 - 10 = 20. P(T only) = 20/50 = 2/5 = 0.4.',
+            markingCriteria: {
+              breakdown: ['T only = 20 (1 mark)', 'Probability calculation (1 mark)', '= 0.4 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.04'
+          },
+          {
+            id: 'stats-3p2-q5',
+            question: 'Define mutually exclusive events and give an example involving a single die roll.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Mutually exclusive: events that cannot happen at the same time. Example: rolling a die cannot give both 3 and 5 in one roll.',
+            markingCriteria: {
+              breakdown: ['Cannot happen together (1 mark)', 'Definition (1 mark)', 'Valid example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.05'
+          },
+          {
+            id: 'stats-3p2-q6',
+            question: 'P(A) = 0.3, P(B) = 0.4. If A and B are mutually exclusive, find P(A or B).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P(A or B) = P(A) + P(B) = 0.3 + 0.4 = 0.7',
+            markingCriteria: {
+              breakdown: ['Correct formula for mutually exclusive (1 mark)', '= 0.7 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.05'
+          },
+          {
+            id: 'stats-3p2-q7',
+            question: 'P(A) = 0.5, P(B) = 0.3, P(A and B) = 0.1. Calculate P(A or B) using the general addition law.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(A or B) = P(A) + P(B) - P(A and B) = 0.5 + 0.3 - 0.1 = 0.7',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Substitution (1 mark)', '= 0.7 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.06'
+          },
+          {
+            id: 'stats-3p2-q8',
+            question: 'Explain what exhaustive events means. Give an example.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Exhaustive events: all possible outcomes are covered, at least one must occur. Example: when rolling a die, events "even" and "odd" are exhaustive (cover all numbers 1-6).',
+            markingCriteria: {
+              breakdown: ['All outcomes covered (1 mark)', 'At least one occurs (1 mark)', 'Valid example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.05'
+          },
+          {
+            id: 'stats-3p2-q9',
+            question: 'For three events A, B, C that are mutually exclusive and exhaustive with P(A)=0.2, P(B)=0.5, find P(C).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Exhaustive means P(A) + P(B) + P(C) = 1. Therefore P(C) = 1 - 0.2 - 0.5 = 0.3',
+            markingCriteria: {
+              breakdown: ['Sum equals 1 (1 mark)', 'P(C) = 0.3 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.05'
+          },
+          {
+            id: 'stats-3p2-q10',
+            question: 'A bag contains 3 red, 2 blue balls. Draw tree diagram for selecting 2 balls with replacement. Find P(both red).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'P(R then R) = P(R) × P(R) = 3/5 × 3/5 = 9/25 = 0.36',
+            markingCriteria: {
+              breakdown: ['P(R) = 3/5 identified (1 mark)', 'Multiply probabilities (1 mark)', 'Calculation (1 mark)', '= 9/25 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p2.03'
+          }
+        ]
       },
       {
         id: '3p-independence-conditional',
         name: '3p Independence & Conditional Probability',
-        questions: []
+        questions: [
+          {
+            id: 'stats-3p3-q1',
+            question: 'Define independent events and state the multiplication law for independent events.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Independent events: occurrence of one does not affect the probability of the other. Multiplication law: P(A and B) = P(A) × P(B).',
+            markingCriteria: {
+              breakdown: ['Definition (1 mark)', 'No effect on other (1 mark)', 'P(A and B) = P(A) × P(B) (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.01'
+          },
+          {
+            id: 'stats-3p3-q2',
+            question: 'P(A) = 0.4, P(B) = 0.3. If A and B are independent, calculate P(A and B).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P(A and B) = P(A) × P(B) = 0.4 × 0.3 = 0.12',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', '= 0.12 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.01'
+          },
+          {
+            id: 'stats-3p3-q3',
+            question: 'Show that if A and B are independent, then P(A|B) = P(A).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'By definition of conditional probability: P(A|B) = P(A and B) / P(B). For independent events: P(A and B) = P(A) × P(B). Therefore P(A|B) = P(A) × P(B) / P(B) = P(A).',
+            markingCriteria: {
+              breakdown: ['Conditional formula stated (1 mark)', 'Independence used (1 mark)', 'Proof completed (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.01'
+          },
+          {
+            id: 'stats-3p3-q4',
+            question: 'Explain what P(A|B) means in words using a real-world example.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'P(A|B) means "probability of A given that B has occurred" or "probability of A conditional on B". Example: P(late to work | raining) is the probability of being late given it is raining.',
+            markingCriteria: {
+              breakdown: ['Given that B occurred (1 mark)', 'Conditional on B (1 mark)', 'Valid example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.02'
+          },
+          {
+            id: 'stats-3p3-q5',
+            question: 'Of 100 students, 60 passed exam, 40 attended revision. 35 passed and attended revision. Calculate P(pass|attended).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(pass|attended) = P(pass and attended) / P(attended) = 35/100 ÷ 40/100 = 35/40 = 7/8 = 0.875',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Substitution (1 mark)', '= 7/8 or 0.875 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.02'
+          },
+          {
+            id: 'stats-3p3-q6',
+            question: 'P(A and B) = 0.15, P(A) = 0.3, P(B) = 0.5. Are A and B independent? Show working.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'If independent, P(A) × P(B) should equal P(A and B). 0.3 × 0.5 = 0.15 ✓. Since they are equal, A and B are independent.',
+            markingCriteria: {
+              breakdown: ['Calculate P(A) × P(B) (1 mark)', 'Compare with P(A and B) (1 mark)', 'Conclusion: independent (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.01'
+          },
+          {
+            id: 'stats-3p3-q7',
+            question: 'Calculate P(B|A) if P(A and B) = 0.12 and P(A) = 0.4.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P(B|A) = P(A and B) / P(A) = 0.12 / 0.4 = 0.3',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', '= 0.3 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.02'
+          },
+          {
+            id: 'stats-3p3-q8',
+            question: 'P(rain) = 0.3, P(late|rain) = 0.7, P(late|no rain) = 0.2. Find P(late).',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'P(late) = P(late|rain)×P(rain) + P(late|no rain)×P(no rain) = 0.7×0.3 + 0.2×0.7 = 0.21 + 0.14 = 0.35',
+            markingCriteria: {
+              breakdown: ['P(no rain) = 0.7 (1 mark)', 'Both products (2 marks)', '= 0.35 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.02'
+          },
+          {
+            id: 'stats-3p3-q9',
+            question: 'For independent events with P(A)=0.6, P(B)=0.5, calculate P(A or B).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(A and B) = 0.6 × 0.5 = 0.3. P(A or B) = P(A) + P(B) - P(A and B) = 0.6 + 0.5 - 0.3 = 0.8',
+            markingCriteria: {
+              breakdown: ['P(A and B) = 0.3 (1 mark)', 'Addition law (1 mark)', '= 0.8 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.01'
+          },
+          {
+            id: 'stats-3p3-q10',
+            question: 'Explain why P(A|B) ≠ P(B|A) in general, using a real example.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'They use different denominators (P(B) vs P(A)). Example: P(spotted|has measles) is high, but P(has measles|spotted) is low because spots have many causes.',
+            markingCriteria: {
+              breakdown: ['Different denominators (1 mark)', 'Example given (1 mark)', 'Explanation of example (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p3.02'
+          }
+        ]
       },
       {
         id: '3p-binomial-distribution',
         name: '3p Binomial Distribution B(n, p)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-3p4-q1',
+            question: 'State the conditions required for a binomial distribution to be appropriate.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Fixed number of trials (n). Two outcomes (success/failure). Constant probability of success (p). Trials are independent.',
+            markingCriteria: {
+              breakdown: ['Fixed n (1 mark)', 'Two outcomes (1 mark)', 'Constant p (1 mark)', 'Independence (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.01'
+          },
+          {
+            id: 'stats-3p4-q2',
+            question: 'Calculate the mean for binomial distribution B(20, 0.3).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mean = np = 20 × 0.3 = 6',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', '= 6 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.02'
+          },
+          {
+            id: 'stats-3p4-q3',
+            question: 'A coin is flipped 5 times. Calculate P(exactly 3 heads) using binomial probability.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'B(5, 0.5). P(X=3) = ⁵C₃ × (0.5)³ × (0.5)² = 10 × 0.125 × 0.25 = 0.3125',
+            markingCriteria: {
+              breakdown: ['⁵C₃ = 10 (1 mark)', 'Probability calculation (1 mark)', '= 0.3125 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.03'
+          },
+          {
+            id: 'stats-3p4-q4',
+            question: 'For B(8, 0.4), use calculator/spreadsheet to find P(X ≤ 3).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(X≤3) = P(X=0) + P(X=1) + P(X=2) + P(X=3). Using calculator: ≈ 0.594 (accept 0.59-0.60)',
+            markingCriteria: {
+              breakdown: ['Cumulative probability (1 mark)', 'Calculator used (1 mark)', 'Correct value (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.03'
+          },
+          {
+            id: 'stats-3p4-q5',
+            question: 'Explain why B(n, p) is not suitable if the probability changes between trials.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Binomial requires constant probability p. If p changes, trials are not identical and binomial conditions are violated.',
+            markingCriteria: {
+              breakdown: ['Constant p required (1 mark)', 'Conditions violated (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.01'
+          },
+          {
+            id: 'stats-3p4-q6',
+            question: 'A die is rolled 10 times. Model the number of sixes as binomial. State n and p.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'n = 10 (number of rolls), p = 1/6 (probability of six on each roll)',
+            markingCriteria: {
+              breakdown: ['n = 10 (1 mark)', 'p = 1/6 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.01'
+          },
+          {
+            id: 'stats-3p4-q7',
+            question: 'Use Pascal\'s triangle to find P(X=2) for B(4, 0.5).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Row 4 of Pascal\'s triangle: 1, 4, 6, 4, 1. Coefficient for 2 successes: 6. P(X=2) = 6 × (0.5)² × (0.5)² = 6 × 0.0625 = 0.375',
+            markingCriteria: {
+              breakdown: ['Coefficient = 6 (1 mark)', 'Probability calculation (1 mark)', '= 0.375 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.03'
+          },
+          {
+            id: 'stats-3p4-q8',
+            question: 'In 100 trials with p=0.4, observed frequency of success is 52. Compare with expected, discuss possible bias.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Expected = np = 100 × 0.4 = 40 successes. Observed 52 is higher than expected. This suggests possible bias toward success, though could be random variation. More trials needed to confirm.',
+            markingCriteria: {
+              breakdown: ['Expected = 40 (1 mark)', 'Observed > expected (1 mark)', 'Possible bias (1 mark)', 'Need more data (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.04'
+          },
+          {
+            id: 'stats-3p4-q9',
+            question: 'Calculate P(X=0) for B(6, 0.2).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P(X=0) = (0.8)⁶ = 0.262 (accept 0.26)',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', '≈ 0.262 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.03'
+          },
+          {
+            id: 'stats-3p4-q10',
+            question: 'For B(10, 0.3), find the most likely number of successes (mode).',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Mean = 10 × 0.3 = 3. Mode is typically near the mean, so most likely value is 3 successes.',
+            markingCriteria: {
+              breakdown: ['Calculate mean (1 mark)', 'Mode = 3 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p4.02'
+          }
+        ]
       },
       {
         id: '3p-normal-distribution',
         name: '3p Normal Distribution N(μ, σ²)',
-        questions: []
+        questions: [
+          {
+            id: 'stats-3p5-q1',
+            question: 'Describe the key properties of the normal distribution curve.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Symmetric about the mean. Bell-shaped. Mean = median = mode (all at center). Tails extend infinitely but never touch horizontal axis.',
+            markingCriteria: {
+              breakdown: ['Symmetric (1 mark)', 'Bell-shaped (1 mark)', 'Mean=median=mode (1 mark)', 'Infinite tails (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.01'
+          },
+          {
+            id: 'stats-3p5-q2',
+            question: 'State approximately what percentage of data lies within 1 standard deviation of the mean in a normal distribution.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Approximately 68%',
+            markingCriteria: {
+              breakdown: ['68% (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q3',
+            question: 'For N(50, 100), calculate the values one and two standard deviations above the mean.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'σ² = 100, so σ = 10. μ + σ = 50 + 10 = 60. μ + 2σ = 50 + 20 = 70.',
+            markingCriteria: {
+              breakdown: ['σ = 10 (1 mark)', 'μ + σ = 60 (1 mark)', 'μ + 2σ = 70 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q4',
+            question: 'Approximately what percentage of data lies within 2 standard deviations of the mean?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Approximately 95%',
+            markingCriteria: {
+              breakdown: ['95% (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q5',
+            question: 'A value lies at μ + 3.2σ. Explain why this is considered very unusual.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Values beyond μ ± 3σ contain only ~0.3% of data. At μ + 3.2σ, this value is in the extreme tail, occurring very rarely in a normal distribution.',
+            markingCriteria: {
+              breakdown: ['Beyond 3σ very rare (1 mark)', '~0.3% beyond 3σ (1 mark)', 'Extreme tail (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q6',
+            question: 'State two conditions that suggest a normal distribution might be suitable for modeling data.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Data is continuous. Distribution is approximately symmetric. Mean, median, and mode are approximately equal.',
+            markingCriteria: {
+              breakdown: ['Continuous data (1 mark)', 'Symmetric/central measures equal (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.03'
+          },
+          {
+            id: 'stats-3p5-q7',
+            question: 'Heights have μ = 170 cm, σ = 10 cm. Between what values do approximately 95% of heights lie?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: '95% within μ ± 2σ. Lower: 170 - 2(10) = 150 cm. Upper: 170 + 2(10) = 190 cm. Between 150 cm and 190 cm.',
+            markingCriteria: {
+              breakdown: ['μ ± 2σ rule (1 mark)', 'Lower = 150 (1 mark)', 'Upper = 190 (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q8',
+            question: 'Explain why a dataset with mean 50, median 60, mode 65 is not suitable for normal modeling.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'For normal distribution, mean = median = mode. Here they differ significantly (50, 60, 65), indicating skewness. This violates the symmetry assumption of normal distribution.',
+            markingCriteria: {
+              breakdown: ['Mean≠median≠mode (1 mark)', 'Indicates skewness (1 mark)', 'Violates symmetry (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.03'
+          },
+          {
+            id: 'stats-3p5-q9',
+            question: 'Scores on a test have μ = 65, σ = 8. A student scores 80. How many standard deviations above the mean?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'z = (80 - 65) / 8 = 15 / 8 = 1.875, approximately 1.9 standard deviations above mean.',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', '≈ 1.9 σ (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          },
+          {
+            id: 'stats-3p5-q10',
+            question: 'A normal distribution has μ = 100, σ = 15. Estimate the percentage of values below 70.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: '70 = μ - 2σ (100 - 30). Approximately 95% within ±2σ, so 5% outside. Half of 5% = 2.5% below μ - 2σ. Answer: approximately 2.5%.',
+            markingCriteria: {
+              breakdown: ['Identify μ - 2σ (1 mark)', '5% outside ±2σ (1 mark)', '2.5% in lower tail (1 mark)']
+            },
+            specReference: 'Edexcel GCSE Statistics 3p5.02'
+          }
+        ]
       }
     ]
   }
