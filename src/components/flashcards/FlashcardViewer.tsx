@@ -503,14 +503,14 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                             onClick={() => handleMultipleChoiceSelect(option)}
                             disabled={showAnswer}
                           >
-                            <span className="flex items-center gap-3">
-                              <span className="font-semibold text-base">{String.fromCharCode(65 + index)}.</span>
-                              <span className="flex-1">{option}</span>
+                            <span className="flex items-start gap-3 w-full">
+                              <span className="font-semibold text-base flex-shrink-0">{String.fromCharCode(65 + index)}.</span>
+                              <span className="flex-1 break-words whitespace-normal">{option}</span>
                               {showFeedback && isCorrect && (
-                                <Check className="h-5 w-5 text-white" />
+                                <Check className="h-5 w-5 text-white flex-shrink-0" />
                               )}
                               {showFeedback && isSelected && !isCorrect && (
-                                <X className="h-5 w-5" />
+                                <X className="h-5 w-5 flex-shrink-0" />
                               )}
                             </span>
                           </Button>
