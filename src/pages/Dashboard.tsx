@@ -3013,7 +3013,7 @@ const Dashboard = () => {
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-card-foreground">Today's Quests</h3>
                 
-                 {/* Quest 1 - Login */}
+                 {/* Quest 1 - Login (Always present) */}
                  <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                    <div className="flex items-center justify-between">
                      <div className="flex items-center space-x-4">
@@ -3044,42 +3044,91 @@ const Dashboard = () => {
                    </div>
                  </div>
 
-                 {/* Quest 2 - Practice */}
-                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
-                   <div className="flex items-center justify-between">
-                     <div className="flex items-center space-x-4">
-                       <div className={`w-12 h-12 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-2xl flex items-center justify-center`}>
-                         {userStats?.practiceToday ? (
-                           <Check className="w-6 h-6 text-green-600" />
-                         ) : (
-                           <BookOpen className="w-6 h-6 text-white" />
-                         )}
-                       </div>
-                       <div>
-                          <h4 className="text-lg font-bold text-card-foreground">Complete 1 practice set</h4>
-                           <p className="text-muted-foreground">Answer questions to earn MP</p>
-                       </div>
-                     </div>
-                     <div className="flex items-center space-x-2">
-                       <span className={`text-lg font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-500'}`}>
-                         +40 MP
-                       </span>
-                       {userStats?.practiceToday && (
-                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                           <Check className="w-4 h-4 text-white" />
+                 {/* Quest 2 - Rotating Daily Quest */}
+                 {(() => {
+                   const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+                   const questIndex = dayOfYear % 4;
+                   
+                   const dailyQuests = [
+                     {
+                       title: "Complete 1 practice set",
+                       description: "Answer questions to earn MP",
+                       icon: BookOpen,
+                       color: "blue-400",
+                       reward: 40,
+                       isComplete: userStats?.practiceToday,
+                       progress: userStats?.practiceToday ? 100 : 0
+                     },
+                     {
+                       title: "Create 5 flashcards",
+                       description: "Build your flashcard collection",
+                       icon: NotebookPen,
+                       color: "indigo-400",
+                       reward: 30,
+                       isComplete: false, // TODO: Track flashcard creation
+                       progress: 0
+                     },
+                     {
+                       title: "Study for 30 minutes",
+                       description: "Focus on your learning goals",
+                       icon: Clock,
+                       color: "cyan-400",
+                       reward: 35,
+                       isComplete: false, // TODO: Track study time
+                       progress: 0
+                     },
+                     {
+                       title: "Score 80%+ on any topic",
+                       description: "Demonstrate topic mastery",
+                       icon: Trophy,
+                       color: "amber-400",
+                       reward: 50,
+                       isComplete: false, // TODO: Track high scores
+                       progress: 0
+                     }
+                   ];
+                   
+                   const quest = dailyQuests[questIndex];
+                   const QuestIcon = quest.icon;
+                   
+                   return (
+                     <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                       <div className="flex items-center justify-between">
+                         <div className="flex items-center space-x-4">
+                           <div className={`w-12 h-12 ${quest.isComplete ? 'bg-green-100' : `bg-${quest.color}`} rounded-2xl flex items-center justify-center`}>
+                             {quest.isComplete ? (
+                               <Check className="w-6 h-6 text-green-600" />
+                             ) : (
+                               <QuestIcon className="w-6 h-6 text-white" />
+                             )}
+                           </div>
+                           <div>
+                              <h4 className="text-lg font-bold text-card-foreground">{quest.title}</h4>
+                               <p className="text-muted-foreground">{quest.description}</p>
+                           </div>
                          </div>
-                       )}
+                         <div className="flex items-center space-x-2">
+                           <span className={`text-lg font-bold ${quest.isComplete ? 'text-green-600' : 'text-blue-500'}`}>
+                             +{quest.reward} MP
+                           </span>
+                           {quest.isComplete && (
+                             <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                               <Check className="w-4 h-4 text-white" />
+                             </div>
+                           )}
+                         </div>
+                       </div>
+                       <div className="mt-4">
+                           <div className="w-full bg-muted rounded-full h-2">
+                             <div 
+                               className={`${quest.isComplete ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                               style={{width: `${quest.progress}%`}}
+                             ></div>
+                          </div>
+                       </div>
                      </div>
-                   </div>
-                   <div className="mt-4">
-                       <div className="w-full bg-muted rounded-full h-2">
-                         <div 
-                           className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                           style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '0%'}}
-                         ></div>
-                      </div>
-                   </div>
-                 </div>
+                   );
+                 })()}
 
                 {/* Quest 3 - Bonus Weekly */}
                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-purple-200">
@@ -3119,69 +3168,181 @@ const Dashboard = () => {
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-card-foreground">This Week's Challenges</h3>
                 
-                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center">
-                        <Trophy className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-card-foreground">Complete 5 practice sets</h4>
-                        <p className="text-muted-foreground">
-                          {Math.min(userStats?.weeklyPracticeCount || 0, 5)}/5 completed this week
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-orange-500">+250 MP</span>
-                      {(userStats?.weeklyPracticeCount || 0) >= 5 && (
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                {/* Rotating Weekly Challenge 1 */}
+                {(() => {
+                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                  const challenge1Index = weekOfYear % 4;
+                  
+                  const weeklyChallenges1 = [
+                    {
+                      title: "Complete 5 practice sets",
+                      description: "{current}/5 completed this week",
+                      icon: Trophy,
+                      color: "orange-400",
+                      reward: 250,
+                      target: 5,
+                      current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
+                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 5
+                    },
+                    {
+                      title: "Practice 8 different topics",
+                      description: "{current}/8 topics this week",
+                      icon: Brain,
+                      color: "purple-400",
+                      reward: 250,
+                      target: 8,
+                      current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
+                      isComplete: (userStats?.weeklyTopicsCount || 0) >= 8
+                    },
+                    {
+                      title: "Study for 3 hours total",
+                      description: "{current}/180 minutes this week",
+                      icon: Clock,
+                      color: "blue-400",
+                      reward: 250,
+                      target: 180,
+                      current: 0, // TODO: Track weekly study time
+                      isComplete: false
+                    },
+                    {
+                      title: "Create 20 flashcards",
+                      description: "{current}/20 flashcards this week",
+                      icon: NotebookPen,
+                      color: "indigo-400",
+                      reward: 250,
+                      target: 20,
+                      current: 0, // TODO: Track weekly flashcard creation
+                      isComplete: false
+                    }
+                  ];
+                  
+                  const challenge = weeklyChallenges1[challenge1Index];
+                  const ChallengeIcon = challenge.icon;
+                  
+                  return (
+                    <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-12 h-12 bg-${challenge.color} rounded-2xl flex items-center justify-center`}>
+                            <ChallengeIcon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-card-foreground">{challenge.title}</h4>
+                            <p className="text-muted-foreground">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
+                          </div>
                         </div>
-                      )}
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-bold ${challenge.isComplete ? 'text-green-500' : 'text-orange-500'}`}>
+                            +{challenge.reward} MP
+                          </span>
+                          {challenge.isComplete && (
+                            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="w-full bg-muted rounded-full h-3">
+                          <div 
+                            className={`bg-${challenge.color} h-3 rounded-full`}
+                            style={{width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%`}}
+                          ></div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="w-full bg-muted rounded-full h-3">
-                      <div 
-                        className="bg-orange-400 h-3 rounded-full" 
-                        style={{width: `${Math.min(((userStats?.weeklyPracticeCount || 0) / 5) * 100, 100)}%`}}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })()}
 
-                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center">
-                        <Flame className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-card-foreground">Maintain 7-day streak</h4>
-                        <p className="text-muted-foreground">
-                          {Math.min(userStats?.currentStreak || 0, 7)}/7 days completed
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-green-500">+500 MP</span>
-                      {(userStats?.currentStreak || 0) >= 7 && (
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                {/* Rotating Weekly Challenge 2 */}
+                {(() => {
+                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                  const challenge2Index = (weekOfYear + 2) % 4; // Offset to get different challenge
+                  
+                  const weeklyChallenges2 = [
+                    {
+                      title: "Maintain 7-day streak",
+                      description: "{current}/7 days completed",
+                      icon: Flame,
+                      color: "green-400",
+                      reward: 500,
+                      target: 7,
+                      current: Math.min(userStats?.currentStreak || 0, 7),
+                      isComplete: (userStats?.currentStreak || 0) >= 7
+                    },
+                    {
+                      title: "Complete 10 practice sets",
+                      description: "{current}/10 completed this week",
+                      icon: Zap,
+                      color: "yellow-400",
+                      reward: 500,
+                      target: 10,
+                      current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
+                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 10
+                    },
+                    {
+                      title: "Review 30 flashcards",
+                      description: "{current}/30 reviewed this week",
+                      icon: Eye,
+                      color: "pink-400",
+                      reward: 500,
+                      target: 30,
+                      current: 0, // TODO: Track flashcard reviews
+                      isComplete: false
+                    },
+                    {
+                      title: "Practice every day this week",
+                      description: "{current}/7 days with practice",
+                      icon: Calendar,
+                      color: "teal-400",
+                      reward: 500,
+                      target: 7,
+                      current: Math.min(userStats?.currentStreak || 0, 7),
+                      isComplete: (userStats?.currentStreak || 0) >= 7
+                    }
+                  ];
+                  
+                  const challenge = weeklyChallenges2[challenge2Index];
+                  const ChallengeIcon = challenge.icon;
+                  
+                  return (
+                    <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-12 h-12 bg-${challenge.color} rounded-2xl flex items-center justify-center`}>
+                            <ChallengeIcon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-card-foreground">{challenge.title}</h4>
+                            <p className="text-muted-foreground">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
+                          </div>
                         </div>
-                      )}
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-bold ${challenge.isComplete ? 'text-green-500' : 'text-purple-500'}`}>
+                            +{challenge.reward} MP
+                          </span>
+                          {challenge.isComplete && (
+                            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="w-full bg-muted rounded-full h-3">
+                          <div 
+                            className={`bg-${challenge.color} h-3 rounded-full`}
+                            style={{width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%`}}
+                          ></div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="w-full bg-muted rounded-full h-3">
-                      <div 
-                        className="bg-green-400 h-3 rounded-full" 
-                        style={{width: `${Math.min(((userStats?.currentStreak || 0) / 7) * 100, 100)}%`}}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })()}
               </div>
 
               {/* Leaderboard Preview */}
