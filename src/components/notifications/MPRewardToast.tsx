@@ -65,10 +65,10 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
           }}
           className="fixed top-6 right-6 z-50 max-w-sm"
         >
-          <Card className="relative overflow-hidden bg-card/95 backdrop-blur-sm border-primary/20 shadow-xl">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-primary/20 border-cyan-400/30 shadow-2xl backdrop-blur-md">
             {/* Animated accent line at top */}
             <motion.div 
-              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent"
+              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-primary"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -79,20 +79,20 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
               <motion.div
                 animate={{ 
                   scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3]
+                  opacity: [0.4, 0.7, 0.4]
                 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-3 right-3 w-5 h-5 text-accent/40"
+                className="absolute top-3 right-3 w-5 h-5 text-cyan-300"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
               <motion.div
                 animate={{ 
                   scale: [1.2, 1, 1.2],
-                  opacity: [0.2, 0.5, 0.2]
+                  opacity: [0.3, 0.6, 0.3]
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-3 left-3 w-4 h-4 text-primary/30"
+                className="absolute bottom-3 left-3 w-4 h-4 text-blue-400"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
@@ -104,7 +104,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                 variant="ghost"
                 size="sm"
                 onClick={handleClose}
-                className="absolute top-2 right-2 w-7 h-7 p-0 hover:bg-muted text-muted-foreground"
+                className="absolute top-2 right-2 w-7 h-7 p-0 hover:bg-cyan-400/20 text-cyan-700 dark:text-cyan-300"
               >
                 <X className="h-3.5 w-3.5" />
               </Button>
@@ -120,7 +120,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     duration: 0.8,
                     ease: "easeInOut"
                   }}
-                  className="w-11 h-11 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
+                  className="w-11 h-11 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-400/40 flex-shrink-0"
                 >
                   <Zap className="h-6 w-6 text-white fill-white" />
                 </motion.div>
@@ -130,29 +130,29 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.4, ease: "backOut" }}
-                    className="text-2xl font-bold text-foreground mb-1"
+                    className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-1"
                   >
                     +{amount} MP
                   </motion.div>
-                  <div className="text-sm text-muted-foreground leading-snug font-medium mb-3">
+                  <div className="text-sm text-cyan-900 dark:text-cyan-100 leading-snug font-medium mb-3">
                     {message}
                   </div>
                   
                   {/* Progress bar with smooth fill animation */}
                   <div className="space-y-1.5">
-                    <div className="relative h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="relative h-2.5 bg-cyan-100 dark:bg-cyan-950 rounded-full overflow-hidden shadow-inner">
                       <motion.div
-                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-accent to-primary rounded-full"
+                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-sm"
                         initial={{ width: "0%" }}
                         animate={{ width: `${progress}%` }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-muted-foreground font-medium">
+                      <div className="text-xs text-cyan-700 dark:text-cyan-300 font-semibold">
                         Quest Complete!
                       </div>
-                      <div className="text-xs text-primary font-semibold">
+                      <div className="text-xs text-cyan-600 dark:text-cyan-400 font-bold">
                         {Math.round(progress)}%
                       </div>
                     </div>
