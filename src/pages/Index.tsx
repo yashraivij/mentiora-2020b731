@@ -373,7 +373,7 @@ const Index = () => {
           <div className="mb-12">
             <h3 className="text-center text-xl font-semibold text-gray-700 mb-6">Supported Exam Boards</h3>
             <div className="flex flex-wrap justify-center gap-6">
-              {['AQA', 'Edexcel', 'OCR'].map((board, index) => (
+              {['AQA', 'Edexcel', 'OCR', 'Eduqas'].map((board, index) => (
                 <motion.div
                   key={board}
                   initial={{ opacity: 0, scale: 0.8 }}
