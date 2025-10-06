@@ -396,9 +396,14 @@ const Index = () => {
               { name: 'Biology', icon: '🧬', color: 'from-emerald-500 to-teal-500', bgColor: 'from-emerald-50 to-teal-50' },
               { name: 'Chemistry', icon: '⚗️', color: 'from-purple-500 to-pink-500', bgColor: 'from-purple-50 to-pink-50' },
               { name: 'Physics', icon: '⚛️', color: 'from-orange-500 to-red-500', bgColor: 'from-orange-50 to-red-50' },
+              { name: 'English Language', icon: '📖', color: 'from-rose-500 to-pink-500', bgColor: 'from-rose-50 to-pink-50' },
               { name: 'Computer Science', icon: '💻', color: 'from-indigo-500 to-blue-500', bgColor: 'from-indigo-50 to-blue-50' },
               { name: 'History', icon: '📚', color: 'from-amber-500 to-yellow-500', bgColor: 'from-amber-50 to-yellow-50' },
               { name: 'Geography', icon: '🌍', color: 'from-green-500 to-emerald-500', bgColor: 'from-green-50 to-emerald-50' },
+              { name: 'Business', icon: '💼', color: 'from-slate-500 to-gray-500', bgColor: 'from-slate-50 to-gray-50' },
+              { name: 'Psychology', icon: '🧠', color: 'from-violet-500 to-purple-500', bgColor: 'from-violet-50 to-purple-50' },
+              { name: 'Religious Studies', icon: '🕊️', color: 'from-sky-500 to-blue-500', bgColor: 'from-sky-50 to-blue-50' },
+              { name: 'Music', icon: '🎵', color: 'from-fuchsia-500 to-pink-500', bgColor: 'from-fuchsia-50 to-pink-50' },
             ].map((subject, index) => (
               <motion.div
                 key={subject.name}
