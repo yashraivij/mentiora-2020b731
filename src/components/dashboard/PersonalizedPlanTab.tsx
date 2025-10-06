@@ -130,7 +130,7 @@ export const PersonalizedPlanTab = () => {
 
       if (examsError) throw examsError;
 
-      const subjectsData = userSubjects?.map(subject => {
+      const subjectsData = await Promise.all(userSubjects?.map(async subject => {
         const perf = performance?.find(p => p.subject_id === subject.subject_name);
         const recentExam = exams?.find(e => e.subject_id === subject.subject_name);
         
@@ -143,6 +143,17 @@ export const PersonalizedPlanTab = () => {
           Math.min(Math.floor(perf.total_questions_answered / 10), totalTopics) : 0;
 
         const currentProgress = (topicsStudied / totalTopics) * 100;
+        
+        // Calculate actual accuracy from exam completions
+        const subjectExams = exams?.filter(e => e.subject_id === subject.subject_name) || [];
+        let calculatedAccuracy = 0;
+        
+        if (subjectExams.length > 0) {
+          const totalPercentage = subjectExams.reduce((sum, exam) => sum + (exam.percentage || 0), 0);
+          calculatedAccuracy = Math.round(totalPercentage / subjectExams.length);
+        } else if (perf?.accuracy_rate) {
+          calculatedAccuracy = Math.round(perf.accuracy_rate);
+        }
         
         const weekAgoExams = exams?.filter(e => 
           e.subject_id === subject.subject_name && 
@@ -160,21 +171,23 @@ export const PersonalizedPlanTab = () => {
           targetGrade: subject.target_grade || '9',
           predictedGrade: recentExam?.grade || subject.predicted_grade || '5',
           currentProgress: Math.round(currentProgress),
-          accuracy: Math.round(perf?.accuracy_rate || 0),
+          accuracy: calculatedAccuracy,
           topicsStudied,
           totalTopics,
           weeklyImprovement: Math.round(weeklyImprovement * 10) / 10
         };
-      }) || [];
+      }) || []);
 
       setSubjectsProgress(subjectsData);
 
-      // Create radar chart data
-      const radarChartData = subjectsData.map(s => ({
-        subject: s.subjectName.substring(0, 10),
-        score: s.accuracy,
-        fullMark: 100
-      }));
+      // Create radar chart data with accurate scores
+      const radarChartData = subjectsData
+        .filter(s => s.accuracy > 0) // Only show subjects with actual data
+        .map(s => ({
+          subject: s.subjectName.length > 12 ? s.subjectName.substring(0, 12) + '...' : s.subjectName,
+          score: s.accuracy,
+          fullMark: 100
+        }));
       setRadarData(radarChartData);
 
       if (subjectsData.length > 0) {
