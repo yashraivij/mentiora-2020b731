@@ -690,16 +690,6 @@ const Index = () => {
                   <div className="mt-4 text-gray-600 font-semibold">Personal tutoring</div>
                 </motion.div>
 
-                {/* Comparison text */}
-                <div className="text-center py-4">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-2">
-                    95% cheaper than
-                  </div>
-                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                    private tutoring
-                  </div>
-                </div>
-
                 {/* Mentiora card */}
                 <motion.div 
                   className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-center text-white shadow-xl"
@@ -716,6 +706,19 @@ const Index = () => {
                       />
                     </div>
                     <span className="font-bold text-lg">mentiora</span>
+                  </div>
+                  
+                  <div className="mt-6 pt-6 border-t border-blue-400/30">
+                    <div className="text-2xl font-bold mb-4">
+                      95% cheaper than private tutoring
+                    </div>
+                    <Button
+                      onClick={() => navigate('/register')}
+                      className="w-full bg-white text-blue-600 hover:bg-blue-50 font-bold py-3 px-6 rounded-xl shadow-lg transition-all duration-300"
+                    >
+                      Start Free Trial
+                    </Button>
+                    <p className="text-xs text-blue-100 mt-2">First 7 days free, then £9.99/month</p>
                   </div>
                 </motion.div>
               </div>
