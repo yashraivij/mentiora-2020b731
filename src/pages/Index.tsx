@@ -590,6 +590,139 @@ const Index = () => {
           </motion.div>
         </div>
 
+        {/* Price Comparison Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-32"
+        >
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Personalised tutoring{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                  at a fraction of the cost
+                </span>
+              </h3>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Trained to be more effective than personal tutoring, at just 5% of the cost of private tuition.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+              {/* Left side - Graph */}
+              <div className="lg:col-span-2 bg-white rounded-3xl p-8 shadow-xl">
+                <div className="mb-8">
+                  <h4 className="text-2xl font-bold mb-2">
+                    <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                      68% grade improvement
+                    </span>
+                  </h4>
+                </div>
+                
+                {/* Graph */}
+                <div className="relative h-80">
+                  {/* Y-axis label */}
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 text-sm text-gray-500 whitespace-nowrap origin-center">
+                    Average grades
+                  </div>
+                  
+                  {/* Graph area */}
+                  <div className="ml-12 h-full flex flex-col justify-end pb-12 relative">
+                    {/* Personalized education line */}
+                    <div className="absolute bottom-12 left-0 right-0 h-full">
+                      <svg viewBox="0 0 400 200" className="w-full h-full">
+                        <defs>
+                          <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 1 }} />
+                            <stop offset="100%" style={{ stopColor: '#06B6D4', stopOpacity: 1 }} />
+                          </linearGradient>
+                        </defs>
+                        {/* Personalized curve */}
+                        <path 
+                          d="M 0 180 Q 100 100, 200 40 T 400 20" 
+                          stroke="url(#blueGradient)" 
+                          strokeWidth="4" 
+                          fill="none"
+                          strokeLinecap="round"
+                        />
+                        {/* Non-personal curve */}
+                        <path 
+                          d="M 0 180 Q 100 140, 200 110 T 400 90" 
+                          stroke="#D1D5DB" 
+                          strokeWidth="4" 
+                          fill="none"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      
+                      {/* Labels */}
+                      <div className="absolute top-8 right-8 flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm border border-gray-100">
+                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+                        <span className="text-sm font-semibold text-gray-900">Personalised education</span>
+                      </div>
+                      
+                      <div className="absolute bottom-16 right-8 flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm border border-gray-100">
+                        <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+                        <span className="text-sm font-semibold text-gray-600">Non-personal education</span>
+                      </div>
+                    </div>
+                    
+                    {/* X-axis label */}
+                    <div className="text-center text-sm text-gray-500 mt-4">
+                      Hours spent learning
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right side - Price comparison */}
+              <div className="lg:col-span-1 space-y-6">
+                {/* Personal tutoring card */}
+                <motion.div 
+                  className="bg-gray-100 rounded-2xl p-6 text-center"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="text-5xl font-bold text-gray-400 mb-2">£500</div>
+                  <div className="text-gray-500 text-sm">/month</div>
+                  <div className="mt-4 text-gray-600 font-semibold">Personal tutoring</div>
+                </motion.div>
+
+                {/* Comparison text */}
+                <div className="text-center py-4">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-2">
+                    95% cheaper than
+                  </div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                    private tutoring
+                  </div>
+                </div>
+
+                {/* Mentiora card */}
+                <motion.div 
+                  className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-center text-white shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="text-5xl font-bold mb-2">£9.99</div>
+                  <div className="text-blue-100 text-sm">/month</div>
+                  <div className="mt-4 flex items-center justify-center gap-2">
+                    <div className="w-8 h-8 flex items-center justify-center">
+                      <img 
+                        src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
+                        alt="Mentiora" 
+                        className="w-6 h-6 object-contain brightness-0 invert"
+                      />
+                    </div>
+                    <span className="font-bold text-lg">mentiora</span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Final CTA */}
         <motion.div 
           ref={ctaRef}
