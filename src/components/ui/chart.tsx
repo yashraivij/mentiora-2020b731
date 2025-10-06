@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as React from "react"
-import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent"
 import * as RechartsPrimitive from "recharts"
 
 import { cn } from "@/lib/utils"
@@ -104,31 +100,35 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
-function ChartTooltipContent({
-  active,
-  className,
-  indicator = "dot",
-  hideLabel = false,
-  hideIndicator = false,
-  labelFormatter,
-  labelClassName,
-  formatter,
-  color,
-  nameKey,
-  labelKey,
-  payload,
-  label,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<"div"> & {
-    hideLabel?: boolean
-    hideIndicator?: boolean
-    indicator?: "line" | "dot" | "dashed"
-    nameKey?: string
-    labelKey?: string
-  } & Omit<
-    RechartsPrimitive.DefaultTooltipContentProps<ValueType, NameType>,
-    "accessibilityLayer"
-  >) {
+const ChartTooltipContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+    React.ComponentProps<"div"> & {
+      hideLabel?: boolean
+      hideIndicator?: boolean
+      indicator?: "line" | "dot" | "dashed"
+      nameKey?: string
+      labelKey?: string
+    }
+>(
+  (
+    {
+      active,
+      payload,
+      className,
+      indicator = "dot",
+      hideLabel = false,
+      hideIndicator = false,
+      label,
+      labelFormatter,
+      labelClassName,
+      formatter,
+      color,
+      nameKey,
+      labelKey,
+    },
+    ref
+  ) => {
     const { config } = useChart()
 
     const tooltipLabel = React.useMemo(() => {
@@ -175,6 +175,7 @@ function ChartTooltipContent({
 
     return (
       <div
+        ref={ref}
         className={cn(
           "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
           className
@@ -189,7 +190,7 @@ function ChartTooltipContent({
 
             return (
               <div
-                key={`item-${index}`}
+                key={item.dataKey}
                 className={cn(
                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                   indicator === "dot" && "items-center"
@@ -249,20 +250,24 @@ function ChartTooltipContent({
         </div>
       </div>
     )
-}
+  }
+)
+ChartTooltipContent.displayName = "ChartTooltip"
 
 const ChartLegend = RechartsPrimitive.Legend
 
-function ChartLegendContent({
-  className,
-  hideIcon = false,
-  nameKey,
-  payload,
-  verticalAlign,
-}: React.ComponentProps<"div"> & {
-  hideIcon?: boolean
-  nameKey?: string
-} & RechartsPrimitive.DefaultLegendContentProps) {
+const ChartLegendContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div"> &
+    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+      hideIcon?: boolean
+      nameKey?: string
+    }
+>(
+  (
+    { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
+    ref
+  ) => {
     const { config } = useChart()
 
     if (!payload?.length) {
@@ -271,6 +276,7 @@ function ChartLegendContent({
 
     return (
       <div
+        ref={ref}
         className={cn(
           "flex items-center justify-center gap-4",
           verticalAlign === "top" ? "pb-3" : "pt-3",
@@ -304,7 +310,9 @@ function ChartLegendContent({
         })}
       </div>
     )
-}
+  }
+)
+ChartLegendContent.displayName = "ChartLegend"
 
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(

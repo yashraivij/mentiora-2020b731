@@ -61,7 +61,6 @@ import { openManageBilling } from "@/lib/manageBilling";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
-import { PersonalizedPlanTab } from "@/components/dashboard/PersonalizedPlanTab";
 import { toast } from "sonner";
 import { useMPRewards } from "@/hooks/useMPRewards";
 
@@ -157,7 +156,6 @@ const Dashboard = () => {
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
-    { id: "my-plan", label: "MY PLAN", icon: Calendar, bgColor: "bg-pink-50 dark:bg-pink-900/20", textColor: "text-pink-700 dark:text-pink-300", activeColor: "bg-pink-400 dark:bg-pink-600" },
     { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
     { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-700 dark:text-orange-300", activeColor: "bg-orange-400 dark:bg-orange-600" },
@@ -2576,7 +2574,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && activeTab !== "flashcards" && activeTab !== "my-plan" && (
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && activeTab !== "flashcards" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-foreground mb-6 capitalize">
                 {activeTab}
@@ -3466,11 +3464,6 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-          )}
-
-          {/* My Plan Tab */}
-          {activeTab === "my-plan" && (
-            <PersonalizedPlanTab />
           )}
 
           {activeTab === "profile" && (
