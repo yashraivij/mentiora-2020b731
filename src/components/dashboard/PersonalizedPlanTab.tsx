@@ -442,9 +442,9 @@ export const PersonalizedPlanTab = () => {
   };
 
   const getConfidenceBadge = (accuracy: number) => {
-    if (accuracy >= 80) return { label: "🧠 Mastered", color: "bg-green-500" };
-    if (accuracy >= 60) return { label: "⚙️ Improving", color: "bg-yellow-500" };
-    return { label: "🚧 Needs Work", color: "bg-red-500" };
+    if (accuracy >= 80) return { label: "Mastered", color: "bg-green-500" };
+    if (accuracy >= 60) return { label: "Improving", color: "bg-yellow-500" };
+    return { label: "Needs Work", color: "bg-red-500" };
   };
 
   if (loading) {
@@ -509,21 +509,22 @@ export const PersonalizedPlanTab = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/10 to-teal-50/10 dark:from-background dark:via-purple-950/10 dark:to-teal-950/10 -m-8 p-8">
+    <div className="min-h-screen bg-background -m-8 p-8">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div className="mb-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-teal-500 mb-4 shadow-lg"
+          className="flex items-center gap-3 mb-2"
         >
-          <Sparkles className="h-8 w-8 text-white" />
+          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
+            <Sparkles className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Personalized Plan</h1>
+            <p className="text-muted-foreground text-sm">Your AI-powered revision journey</p>
+          </div>
         </motion.div>
-        <h1 className="text-4xl font-bold text-foreground mb-2">📈 Personalized Plan</h1>
-        <p className="text-muted-foreground text-lg flex items-center justify-center gap-2">
-          <Crown className="h-5 w-5 text-yellow-500" />
-          Your AI-powered revision journey
-        </p>
       </div>
 
       <div className="max-w-7xl mx-auto space-y-6">
@@ -533,55 +534,65 @@ export const PersonalizedPlanTab = () => {
           animate={{ opacity: 1, y: 0 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          <Card className="border-0 bg-gradient-to-br from-blue-50 to-cyan-100 dark:from-blue-950/40 dark:to-cyan-900/40 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
             <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">Average Score</span>
-                <Target className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div className="text-4xl font-bold text-blue-900 dark:text-blue-100 mb-1">{overallStats.avgScore}%</div>
-              <p className="text-xs text-blue-600 dark:text-blue-400">📊 {overallStats.avgScore >= 70 ? 'Excellent!' : 'Keep going!'}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950/40 dark:to-emerald-900/40 shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-green-700 dark:text-green-300">Subjects Studied</span>
-                <BookOpen className="h-5 w-5 text-green-600 dark:text-green-400" />
-              </div>
-              <div className="text-4xl font-bold text-green-900 dark:text-green-100 mb-1">{subjectsProgress.length}</div>
-              <p className="text-xs text-green-600 dark:text-green-400">📚 {overallStats.topicsStudied} topics total</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 bg-gradient-to-br from-orange-50 to-red-100 dark:from-orange-950/40 dark:to-red-900/40 shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-orange-700 dark:text-orange-300">Streak</span>
-                <Flame className="h-5 w-5 text-orange-600 dark:text-orange-400" />
-              </div>
-              <div className="text-4xl font-bold text-orange-900 dark:text-orange-100 mb-1">{streak}</div>
-              <p className="text-xs text-orange-600 dark:text-orange-400">🔥 Days active</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-950/40 dark:to-pink-900/40 shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">Predicted Grade</span>
-                <TrendingUp className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-              </div>
-              <div className="flex items-center gap-2 mb-1">
-                <div className="text-4xl font-bold text-purple-900 dark:text-purple-100">{overallStats.predictedGrade}</div>
-                <div className="flex items-center gap-1">
-                  {getTrendIcon(overallStats.weeklyChange)}
-                  <span className={`text-sm font-semibold ${overallStats.weeklyChange > 0 ? 'text-green-600' : overallStats.weeklyChange < 0 ? 'text-red-600' : 'text-muted-foreground'}`}>
-                    {Math.abs(overallStats.weeklyChange)}
-                  </span>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Average Score</span>
+                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Target className="h-4 w-4 text-primary" />
                 </div>
               </div>
-              <p className="text-xs text-purple-600 dark:text-purple-400">this week</p>
+              <div className="text-3xl font-bold text-foreground mb-1">{overallStats.avgScore}%</div>
+              <p className="text-xs text-muted-foreground">{overallStats.avgScore >= 70 ? 'Excellent progress' : 'Keep practicing'}</p>
+            </CardContent>
+          </Card>
+
+          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Subjects</span>
+                <div className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                  <BookOpen className="h-4 w-4 text-accent" />
+                </div>
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">{subjectsProgress.length}</div>
+              <p className="text-xs text-muted-foreground">{overallStats.topicsStudied} topics covered</p>
+            </CardContent>
+          </Card>
+
+          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Streak</span>
+                <div className="p-2 rounded-lg bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
+                  <Flame className="h-4 w-4 text-orange-500" />
+                </div>
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-1">{streak}</div>
+              <p className="text-xs text-muted-foreground">Days active</p>
+            </CardContent>
+          </Card>
+
+          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Predicted Grade</span>
+                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="text-3xl font-bold text-foreground">{overallStats.predictedGrade}</div>
+                {overallStats.weeklyChange !== 0 && (
+                  <div className="flex items-center gap-1">
+                    {getTrendIcon(overallStats.weeklyChange)}
+                    <span className={`text-sm font-semibold ${overallStats.weeklyChange > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                      {Math.abs(overallStats.weeklyChange)}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground">This week</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -593,10 +604,10 @@ export const PersonalizedPlanTab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="border-0 bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-sm shadow-lg">
+            <Card className="border bg-card shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Star className="h-5 w-5 text-yellow-500" />
+                  <Star className="h-5 w-5 text-primary" />
                   Strengths & Weakness Map
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">Dynamic performance across all subjects</p>
@@ -618,18 +629,18 @@ export const PersonalizedPlanTab = () => {
                     />
                   </RadarChart>
                 </ResponsiveContainer>
-                <div className="flex justify-center gap-6 mt-4">
+                <div className="flex flex-wrap justify-center gap-4 mt-6">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="text-sm">🟢 Strong (80%+)</span>
+                    <span className="text-sm text-muted-foreground">Strong (80%+)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <span className="text-sm">🟡 Moderate (60-79%)</span>
+                    <span className="text-sm text-muted-foreground">Moderate (60-79%)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <span className="text-sm">🔴 Weak (&lt;60%)</span>
+                    <span className="text-sm text-muted-foreground">Weak (&lt;60%)</span>
                   </div>
                 </div>
               </CardContent>
@@ -643,7 +654,7 @@ export const PersonalizedPlanTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="border-0 bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-sm shadow-lg">
+          <Card className="border bg-card shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-primary" />
@@ -665,37 +676,37 @@ export const PersonalizedPlanTab = () => {
                       transition={{ delay: index * 0.05 }}
                       onClick={() => handleTaskClick(task)}
                       className={`
-                        group flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer
+                        group flex items-center gap-4 p-4 rounded-lg border transition-all cursor-pointer
                         ${task.completed 
-                          ? 'bg-muted/50 opacity-60 border-border' 
-                          : 'bg-card hover:bg-accent/50 hover:border-primary hover:shadow-md border-border'
+                          ? 'bg-muted/30 opacity-60 border-border' 
+                          : 'bg-card hover:bg-accent/50 hover:border-primary hover:shadow-sm border-border'
                         }
-                        ${isToday ? 'ring-2 ring-primary shadow-lg' : ''}
+                        ${isToday ? 'ring-2 ring-primary' : ''}
                       `}
                     >
                       <div className={`
-                        flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0
+                        flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0
                         ${task.completed 
-                          ? 'bg-green-100 dark:bg-green-900/30' 
-                          : 'bg-gradient-to-br from-primary/20 to-primary/10'
+                          ? 'bg-green-500/10' 
+                          : 'bg-primary/10'
                         }
                       `}>
                         {task.completed ? (
-                          <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
+                          <CheckCircle className="h-5 w-5 text-green-500" />
                         ) : (
-                          <Icon className="h-6 w-6 text-primary" />
+                          <Icon className="h-5 w-5 text-primary" />
                         )}
                       </div>
                       
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="font-bold text-sm">📅 {task.day}</span>
+                          <span className="font-semibold text-sm text-foreground">{task.day}</span>
                           <Badge variant="outline" className="text-xs">{task.date}</Badge>
                           {isToday && (
-                            <Badge className="text-xs bg-primary">Today</Badge>
+                            <Badge className="text-xs bg-primary text-primary-foreground">Today</Badge>
                           )}
                         </div>
-                        <p className="font-semibold text-sm text-foreground truncate">{task.task}</p>
+                        <p className="font-medium text-sm text-foreground truncate">{task.task}</p>
                         <p className="text-xs text-muted-foreground">{task.description}</p>
                       </div>
                       
@@ -718,10 +729,11 @@ export const PersonalizedPlanTab = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
           {/* Top 3 to Improve */}
-          <Card className="border-0 bg-gradient-to-br from-red-50/80 to-orange-50/80 dark:from-red-950/30 dark:to-orange-950/30 shadow-lg">
+          <Card className="border border-red-200 dark:border-red-900/30 bg-card shadow-sm">
             <CardHeader>
-              <CardTitle className="text-red-700 dark:text-red-400 flex items-center gap-2">
-                🚧 Top 3 to Improve
+              <CardTitle className="flex items-center gap-2 text-foreground">
+                <Target className="h-5 w-5 text-red-500" />
+                Top 3 to Improve
               </CardTitle>
               <p className="text-sm text-muted-foreground">Focus here before mocks</p>
             </CardHeader>
@@ -731,14 +743,14 @@ export const PersonalizedPlanTab = () => {
                   {weakTopics.map((topic: any, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-4 rounded-lg bg-card/80 border-2 border-red-200 dark:border-red-800/40 hover:border-red-400 dark:hover:border-red-600 transition-all cursor-pointer hover:shadow-md"
+                      className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border hover:border-red-500 transition-all cursor-pointer hover:shadow-sm"
                       onClick={() => navigate(`/practice/${topic.subjectId}/${topic.topicId}`)}
                     >
                       <div className="flex-1">
                         <div className="font-semibold text-foreground">{topic.topicName}</div>
                         <div className="text-xs text-muted-foreground">{topic.subjectName}</div>
-                        <div className="text-xs text-red-600 dark:text-red-400 mt-1">
-                          💡 Revise this next — boost your grade
+                        <div className="text-xs text-red-500 mt-1">
+                          Revise this next to boost your grade
                         </div>
                       </div>
                       <ChevronRight className="h-5 w-5 text-muted-foreground flex-shrink-0" />
@@ -751,7 +763,7 @@ export const PersonalizedPlanTab = () => {
                         navigate(`/practice/${firstTopic.subjectId}/${firstTopic.topicId}`);
                       }
                     }}
-                    className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold"
+                    className="w-full bg-red-500 hover:bg-red-600 text-white"
                   >
                     <Zap className="h-4 w-4 mr-2" />
                     Improve My Weaknesses
@@ -760,19 +772,20 @@ export const PersonalizedPlanTab = () => {
               ) : (
                 <div className="text-center py-8">
                   <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
-                  <p className="text-muted-foreground">No weak areas — amazing work! 🎉</p>
+                  <p className="text-muted-foreground">No weak areas identified</p>
                 </div>
               )}
             </CardContent>
           </Card>
 
           {/* Mastered Topics */}
-          <Card className="border-0 bg-gradient-to-br from-green-50/80 to-emerald-50/80 dark:from-green-950/30 dark:to-emerald-950/30 shadow-lg">
+          <Card className="border border-green-200 dark:border-green-900/30 bg-card shadow-sm">
             <CardHeader>
-              <CardTitle className="text-green-700 dark:text-green-400 flex items-center gap-2">
-                🧠 Mastered Topics
+              <CardTitle className="flex items-center gap-2 text-foreground">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                Mastered Topics
               </CardTitle>
-              <p className="text-sm text-muted-foreground">You're crushing it here!</p>
+              <p className="text-sm text-muted-foreground">Areas of strength</p>
             </CardHeader>
             <CardContent>
               {strongTopics.length > 0 ? (
@@ -780,21 +793,21 @@ export const PersonalizedPlanTab = () => {
                   {strongTopics.map((topic: any, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-4 rounded-lg bg-card/80 border-2 border-green-200 dark:border-green-800/40"
+                      className="flex items-center justify-between p-4 rounded-lg bg-green-500/5 border border-green-200 dark:border-green-900/30"
                     >
                       <div className="flex-1">
                         <div className="font-semibold text-foreground">{topic.topicName}</div>
                         <div className="text-xs text-muted-foreground">{topic.subjectName}</div>
-                        <Badge className="mt-2 bg-green-600 dark:bg-green-700 text-xs">{topic.score}% accuracy</Badge>
+                        <Badge className="mt-2 bg-green-500 text-white text-xs">{topic.score}% accuracy</Badge>
                       </div>
-                      <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400 flex-shrink-0" />
+                      <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-8">
                   <Target className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
-                  <p className="text-muted-foreground">Keep practicing to build mastery! 💪</p>
+                  <p className="text-muted-foreground">Keep practicing to build mastery</p>
                 </div>
               )}
             </CardContent>
@@ -808,10 +821,10 @@ export const PersonalizedPlanTab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="border-0 bg-gradient-to-br from-card/90 to-card/50 backdrop-blur-sm shadow-lg">
+            <Card className="border bg-card shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-green-500" />
+                  <TrendingUp className="h-5 w-5 text-primary" />
                   Progress Over Time
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">Your improvement journey — week by week</p>
