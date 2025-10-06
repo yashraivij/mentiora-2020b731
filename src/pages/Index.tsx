@@ -399,7 +399,6 @@ const Index = () => {
               { name: 'Computer Science', icon: '💻', color: 'from-indigo-500 to-blue-500', bgColor: 'from-indigo-50 to-blue-50' },
               { name: 'History', icon: '📚', color: 'from-amber-500 to-yellow-500', bgColor: 'from-amber-50 to-yellow-50' },
               { name: 'Geography', icon: '🌍', color: 'from-green-500 to-emerald-500', bgColor: 'from-green-50 to-emerald-50' },
-              { name: 'English', icon: '📖', color: 'from-rose-500 to-pink-500', bgColor: 'from-rose-50 to-pink-50' },
             ].map((subject, index) => (
               <motion.div
                 key={subject.name}
