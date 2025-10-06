@@ -509,7 +509,7 @@ export const PersonalizedPlanTab = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background -m-8 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 dark:from-purple-950/20 dark:via-blue-950/20 dark:to-cyan-950/20 -m-8 p-8">
       {/* Header */}
       <div className="mb-8">
         <motion.div
@@ -517,11 +517,11 @@ export const PersonalizedPlanTab = () => {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-3 mb-2"
         >
-          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
-            <Sparkles className="h-6 w-6 text-primary" />
+          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 shadow-lg">
+            <Sparkles className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Personalized Plan</h1>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400 bg-clip-text text-transparent">Personalized Plan</h1>
             <p className="text-muted-foreground text-sm">Your AI-powered revision journey</p>
           </div>
         </motion.div>
@@ -534,55 +534,59 @@ export const PersonalizedPlanTab = () => {
           animate={{ opacity: 1, y: 0 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-6">
+          <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent dark:from-blue-500/20 dark:via-blue-500/10 shadow-lg hover:shadow-xl transition-all backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Average Score</span>
-                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Target className="h-4 w-4 text-primary" />
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg group-hover:scale-110 transition-transform">
+                  <Target className="h-4 w-4 text-white" />
                 </div>
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">{overallStats.avgScore}%</div>
-              <p className="text-xs text-muted-foreground">{overallStats.avgScore >= 70 ? 'Excellent progress' : 'Keep practicing'}</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent mb-1">{overallStats.avgScore}%</div>
+              <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">{overallStats.avgScore >= 70 ? 'Excellent progress' : 'Keep practicing'}</p>
             </CardContent>
           </Card>
 
-          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-6">
+          <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent dark:from-emerald-500/20 dark:via-emerald-500/10 shadow-lg hover:shadow-xl transition-all backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-green-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Subjects</span>
-                <div className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
-                  <BookOpen className="h-4 w-4 text-accent" />
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 shadow-lg group-hover:scale-110 transition-transform">
+                  <BookOpen className="h-4 w-4 text-white" />
                 </div>
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">{subjectsProgress.length}</div>
-              <p className="text-xs text-muted-foreground">{overallStats.topicsStudied} topics covered</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent mb-1">{subjectsProgress.length}</div>
+              <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{overallStats.topicsStudied} topics covered</p>
             </CardContent>
           </Card>
 
-          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-6">
+          <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-orange-500/10 via-orange-500/5 to-transparent dark:from-orange-500/20 dark:via-orange-500/10 shadow-lg hover:shadow-xl transition-all backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Streak</span>
-                <div className="p-2 rounded-lg bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
-                  <Flame className="h-4 w-4 text-orange-500" />
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg group-hover:scale-110 transition-transform">
+                  <Flame className="h-4 w-4 text-white" />
                 </div>
               </div>
-              <div className="text-3xl font-bold text-foreground mb-1">{streak}</div>
-              <p className="text-xs text-muted-foreground">Days active</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent mb-1">{streak}</div>
+              <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">Days active</p>
             </CardContent>
           </Card>
 
-          <Card className="group relative overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-6">
+          <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent dark:from-purple-500/20 dark:via-purple-500/10 shadow-lg hover:shadow-xl transition-all backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Predicted Grade</span>
-                <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <TrendingUp className="h-4 w-4 text-primary" />
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg group-hover:scale-110 transition-transform">
+                  <TrendingUp className="h-4 w-4 text-white" />
                 </div>
               </div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="text-3xl font-bold text-foreground">{overallStats.predictedGrade}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">{overallStats.predictedGrade}</div>
                 {overallStats.weeklyChange !== 0 && (
                   <div className="flex items-center gap-1">
                     {getTrendIcon(overallStats.weeklyChange)}
@@ -592,7 +596,7 @@ export const PersonalizedPlanTab = () => {
                   </div>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground">This week</p>
+              <p className="text-xs text-purple-600 dark:text-purple-400 font-medium">This week</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -604,11 +608,13 @@ export const PersonalizedPlanTab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="border bg-card shadow-sm">
+            <Card className="border-0 bg-gradient-to-br from-violet-500/10 via-card to-card dark:from-violet-500/10 shadow-lg backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Star className="h-5 w-5 text-primary" />
-                  Strengths & Weakness Map
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500 to-purple-500">
+                    <Star className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">Strengths & Weakness Map</span>
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">Dynamic performance across all subjects</p>
               </CardHeader>
@@ -654,11 +660,13 @@ export const PersonalizedPlanTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="border bg-card shadow-sm">
+          <Card className="border-0 bg-gradient-to-br from-indigo-500/10 via-card to-card dark:from-indigo-500/10 shadow-lg backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-primary" />
-                Weekly Improvement Plan
+                <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500">
+                  <Calendar className="h-4 w-4 text-white" />
+                </div>
+                <span className="bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">Weekly Improvement Plan</span>
               </CardTitle>
               <p className="text-sm text-muted-foreground">AI-personalized schedule — tap any task to begin</p>
             </CardHeader>
@@ -687,8 +695,8 @@ export const PersonalizedPlanTab = () => {
                       <div className={`
                         flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0
                         ${task.completed 
-                          ? 'bg-green-500/10' 
-                          : 'bg-primary/10'
+                          ? 'bg-green-500/20' 
+                          : 'bg-gradient-to-br from-primary/20 to-cyan-500/20'
                         }
                       `}>
                         {task.completed ? (
@@ -729,11 +737,13 @@ export const PersonalizedPlanTab = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
           {/* Top 3 to Improve */}
-          <Card className="border border-red-200 dark:border-red-900/30 bg-card shadow-sm">
+          <Card className="border-0 bg-gradient-to-br from-red-500/15 via-orange-500/10 to-card dark:from-red-500/20 dark:via-orange-500/15 shadow-lg backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-foreground">
-                <Target className="h-5 w-5 text-red-500" />
-                Top 3 to Improve
+                <div className="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-500">
+                  <Target className="h-4 w-4 text-white" />
+                </div>
+                <span className="bg-gradient-to-r from-red-600 to-orange-600 dark:from-red-400 dark:to-orange-400 bg-clip-text text-transparent">Top 3 to Improve</span>
               </CardTitle>
               <p className="text-sm text-muted-foreground">Focus here before mocks</p>
             </CardHeader>
@@ -763,7 +773,7 @@ export const PersonalizedPlanTab = () => {
                         navigate(`/practice/${firstTopic.subjectId}/${firstTopic.topicId}`);
                       }
                     }}
-                    className="w-full bg-red-500 hover:bg-red-600 text-white"
+                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl transition-all"
                   >
                     <Zap className="h-4 w-4 mr-2" />
                     Improve My Weaknesses
@@ -779,11 +789,13 @@ export const PersonalizedPlanTab = () => {
           </Card>
 
           {/* Mastered Topics */}
-          <Card className="border border-green-200 dark:border-green-900/30 bg-card shadow-sm">
+          <Card className="border-0 bg-gradient-to-br from-green-500/15 via-emerald-500/10 to-card dark:from-green-500/20 dark:via-emerald-500/15 shadow-lg backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-foreground">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                Mastered Topics
+                <div className="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
+                  <CheckCircle className="h-4 w-4 text-white" />
+                </div>
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">Mastered Topics</span>
               </CardTitle>
               <p className="text-sm text-muted-foreground">Areas of strength</p>
             </CardHeader>
@@ -821,11 +833,13 @@ export const PersonalizedPlanTab = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="border bg-card shadow-sm">
+            <Card className="border-0 bg-gradient-to-br from-teal-500/10 via-card to-card dark:from-teal-500/10 shadow-lg backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-primary" />
-                  Progress Over Time
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500">
+                    <TrendingUp className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="bg-gradient-to-r from-teal-600 to-cyan-600 dark:from-teal-400 dark:to-cyan-400 bg-clip-text text-transparent">Progress Over Time</span>
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">Your improvement journey — week by week</p>
               </CardHeader>
