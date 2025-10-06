@@ -779,11 +779,11 @@ const Index = () => {
                   onClick={() => navigate('/register')}
                   className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold py-6 text-lg rounded-2xl transition-all duration-300"
                 >
-                  Get Started for Free
+                  Start Free Trial
                 </Button>
 
                 <p className="text-center text-sm text-gray-500 mt-4">
-                  £9.99 billed monthly. Cancel anytime.
+                  First 7 days free, then £9.99/month. Cancel anytime.
                 </p>
               </motion.div>
 
@@ -814,11 +814,11 @@ const Index = () => {
                   onClick={() => navigate('/register')}
                   className="w-full bg-white hover:bg-blue-50 text-blue-600 font-semibold py-6 text-lg rounded-2xl transition-all duration-300"
                 >
-                  Get Started for Free
+                  Start Free Trial
                 </Button>
 
                 <p className="text-center text-sm text-blue-100 mt-4">
-                  £200 billed once. Offer ends 15/10/25.
+                  First 7 days free, then £200 billed once. Offer ends 15/10/25.
                 </p>
               </motion.div>
             </div>
