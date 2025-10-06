@@ -28,7 +28,7 @@ export const PromotionalStrip = () => {
           <div className="flex items-center gap-2 flex-1">
             <span className="text-sm">✨</span>
             <span className="font-medium text-xs md:text-sm">
-              Try Premium Free — No credit card required!
+              Try Premium Free for a Limited Time!
             </span>
             <span 
               className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium cursor-pointer hover:bg-white/30 transition-colors"
