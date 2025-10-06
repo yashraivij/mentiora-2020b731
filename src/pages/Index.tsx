@@ -723,6 +723,108 @@ const Index = () => {
           </div>
         </motion.div>
 
+        {/* All-in-one Revision Pricing Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-32"
+        >
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                All-in-one revision{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                  for just one subscription
+                </span>
+              </h3>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Try for free first. Then choose the plan that aligns with your exams.<br />
+                Everything you need to revise, all in one spot.
+              </p>
+              
+              {/* Exam year toggle */}
+              <div className="inline-flex bg-gray-100 rounded-full p-1 mb-12">
+                <button className="px-6 py-3 rounded-full bg-white text-gray-900 font-semibold shadow-sm">
+                  2026 Exams
+                </button>
+                <button className="px-6 py-3 rounded-full text-gray-600 font-semibold hover:text-gray-900">
+                  2027 Exams
+                </button>
+              </div>
+            </div>
+
+            {/* Pricing cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Monthly plan */}
+              <motion.div 
+                className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200"
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="mb-8">
+                  <h4 className="text-2xl font-bold text-gray-900 mb-2">Monthly</h4>
+                  <p className="text-gray-600">Monthly billing, full access, cancel anytime.</p>
+                </div>
+                
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-bold text-gray-900">£9.99</span>
+                    <span className="text-gray-500">/month</span>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={() => navigate('/register')}
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold py-6 text-lg rounded-2xl transition-all duration-300"
+                >
+                  Get Started for Free
+                </Button>
+
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  £9.99 billed monthly. Cancel anytime.
+                </p>
+              </motion.div>
+
+              {/* 2026 Exams plan */}
+              <motion.div 
+                className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl p-8 shadow-xl relative overflow-hidden"
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="absolute top-6 right-6 bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+                  Save 33%
+                </div>
+
+                <div className="mb-8 text-white">
+                  <h4 className="text-2xl font-bold mb-2">2026 Exams</h4>
+                  <p className="text-blue-100">One-time payment. Get unlimited access until 31st July 2026.</p>
+                </div>
+                
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-bold text-white">£200.00</span>
+                    <span className="text-blue-100">once</span>
+                  </div>
+                  <div className="text-blue-200 line-through text-lg mt-1">£300.00</div>
+                </div>
+
+                <Button
+                  onClick={() => navigate('/register')}
+                  className="w-full bg-white hover:bg-blue-50 text-blue-600 font-semibold py-6 text-lg rounded-2xl transition-all duration-300"
+                >
+                  Get Started for Free
+                </Button>
+
+                <p className="text-center text-sm text-blue-100 mt-4">
+                  £200 billed once. Offer ends 15/10/25.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Final CTA */}
         <motion.div 
           ref={ctaRef}
