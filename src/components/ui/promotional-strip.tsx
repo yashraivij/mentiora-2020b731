@@ -26,15 +26,15 @@ export const PromotionalStrip = () => {
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1">
-            <span className="text-sm">🔥</span>
+            <span className="text-sm">✨</span>
             <span className="font-medium text-xs md:text-sm">
-              Premium is 50% off for a limited time — Upgrade Now!
+              Try Premium Free — No credit card required!
             </span>
             <span 
               className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium cursor-pointer hover:bg-white/30 transition-colors"
               onClick={handleUpgradeClick}
             >
-              Ends Soon
+              Limited Time
             </span>
           </div>
           
@@ -45,7 +45,7 @@ export const PromotionalStrip = () => {
               size="sm"
               className="bg-white text-green-600 hover:bg-white/90 font-medium text-xs px-3 py-1 h-auto"
             >
-              Upgrade Now
+              Start Free Trial
             </Button>
           </div>
         </div>
