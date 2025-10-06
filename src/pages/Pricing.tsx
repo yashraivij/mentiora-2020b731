@@ -158,17 +158,17 @@ const Pricing = () => {
                   <span className="text-yellow-400 font-medium text-xs">Limited Time</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 font-sans">
-                  Pay monthly
+                  Start Free Trial
                 </h3>
                 <div className="space-y-2 mb-4">
-                  <div className="text-base text-white/70 line-through font-sans">
-                    Was £19.99/month
+                  <div className="text-base text-white/70 font-sans">
+                    First 7 days free
                   </div>
                   <div className="text-4xl font-bold text-white font-sans">
                     £9.99<span className="text-lg font-medium text-white/80">/month</span>
                   </div>
                   <div className="inline-flex items-center gap-1 bg-green-400/20 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-green-400 font-medium text-xs">50% OFF Forever</span>
+                    <span className="text-green-400 font-medium text-xs">After trial ends</span>
                   </div>
                 </div>
                 <p className="text-white/70 text-sm font-sans mt-2">
@@ -180,7 +180,7 @@ const Pricing = () => {
                 onClick={handleStartTrial}
                 className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
               >
-                Get Mentiora Premium
+                Get Free Trial
               </Button>
             </CardContent>
           </Card>
@@ -435,14 +435,14 @@ const Pricing = () => {
                       <span className="text-yellow-400 font-medium text-xs">Best Deal</span>
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4 font-sans">
-                      Pay monthly
+                      Start Free Trial
                     </h3>
-                    <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
+                    <p className="text-sm text-white/70 mb-2 font-sans">First 7 days free</p>
                     <div className="text-4xl font-bold text-white mb-4 font-sans">
                       £9.99<span className="text-lg font-medium text-white/80">/month</span>
                     </div>
                     <p className="text-white/70 text-sm font-sans">
-                      Recurring billing. Cancel any time.
+                      After trial ends. Cancel any time.
                     </p>
                   </div>
                   
@@ -450,7 +450,7 @@ const Pricing = () => {
                     onClick={handleStartTrial}
                     className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
                   >
-                    Get Mentiora Premium
+                    Get Free Trial
                   </Button>
                 </CardContent>
               </Card>
