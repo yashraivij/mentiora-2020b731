@@ -392,18 +392,18 @@ const Index = () => {
           {/* Subjects Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
-              { name: 'Mathematics', icon: '📐', color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50 to-cyan-50' },
-              { name: 'Biology', icon: '🧬', color: 'from-emerald-500 to-teal-500', bgColor: 'from-emerald-50 to-teal-50' },
-              { name: 'Chemistry', icon: '⚗️', color: 'from-purple-500 to-pink-500', bgColor: 'from-purple-50 to-pink-50' },
-              { name: 'Physics', icon: '⚛️', color: 'from-orange-500 to-red-500', bgColor: 'from-orange-50 to-red-50' },
-              { name: 'English Language', icon: '📖', color: 'from-rose-500 to-pink-500', bgColor: 'from-rose-50 to-pink-50' },
-              { name: 'Computer Science', icon: '💻', color: 'from-indigo-500 to-blue-500', bgColor: 'from-indigo-50 to-blue-50' },
-              { name: 'History', icon: '📚', color: 'from-amber-500 to-yellow-500', bgColor: 'from-amber-50 to-yellow-50' },
-              { name: 'Geography', icon: '🌍', color: 'from-green-500 to-emerald-500', bgColor: 'from-green-50 to-emerald-50' },
-              { name: 'Business', icon: '💼', color: 'from-slate-500 to-gray-500', bgColor: 'from-slate-50 to-gray-50' },
-              { name: 'Psychology', icon: '🧠', color: 'from-violet-500 to-purple-500', bgColor: 'from-violet-50 to-purple-50' },
-              { name: 'Religious Studies', icon: '🕊️', color: 'from-sky-500 to-blue-500', bgColor: 'from-sky-50 to-blue-50' },
-              { name: 'Music', icon: '🎵', color: 'from-fuchsia-500 to-pink-500', bgColor: 'from-fuchsia-50 to-pink-50' },
+              { name: 'Mathematics', icon: '📐', color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50 to-cyan-50', levels: 'GCSE & A-Level' },
+              { name: 'Biology', icon: '🧬', color: 'from-emerald-500 to-teal-500', bgColor: 'from-emerald-50 to-teal-50', levels: 'GCSE & A-Level' },
+              { name: 'Chemistry', icon: '⚗️', color: 'from-purple-500 to-pink-500', bgColor: 'from-purple-50 to-pink-50', levels: 'GCSE & A-Level' },
+              { name: 'Physics', icon: '⚛️', color: 'from-orange-500 to-red-500', bgColor: 'from-orange-50 to-red-50', levels: 'GCSE & A-Level' },
+              { name: 'Psychology', icon: '🧠', color: 'from-violet-500 to-purple-500', bgColor: 'from-violet-50 to-purple-50', levels: 'GCSE & A-Level' },
+              { name: 'English Language', icon: '📖', color: 'from-rose-500 to-pink-500', bgColor: 'from-rose-50 to-pink-50', levels: 'GCSE' },
+              { name: 'Computer Science', icon: '💻', color: 'from-indigo-500 to-blue-500', bgColor: 'from-indigo-50 to-blue-50', levels: 'GCSE' },
+              { name: 'History', icon: '📚', color: 'from-amber-500 to-yellow-500', bgColor: 'from-amber-50 to-yellow-50', levels: 'GCSE' },
+              { name: 'Geography', icon: '🌍', color: 'from-green-500 to-emerald-500', bgColor: 'from-green-50 to-emerald-50', levels: 'GCSE' },
+              { name: 'Business', icon: '💼', color: 'from-slate-500 to-gray-500', bgColor: 'from-slate-50 to-gray-50', levels: 'GCSE' },
+              { name: 'Religious Studies', icon: '🕊️', color: 'from-sky-500 to-blue-500', bgColor: 'from-sky-50 to-blue-50', levels: 'GCSE' },
+              { name: 'Music', icon: '🎵', color: 'from-fuchsia-500 to-pink-500', bgColor: 'from-fuchsia-50 to-pink-50', levels: 'GCSE' },
             ].map((subject, index) => (
               <motion.div
                 key={subject.name}
@@ -420,7 +420,7 @@ const Index = () => {
                 </h4>
                 <div className="mt-2 flex items-center justify-center gap-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                  <span className="text-xs text-gray-600">GCSE & A-Level</span>
+                  <span className="text-xs text-gray-600">{subject.levels}</span>
                 </div>
               </motion.div>
             ))}
