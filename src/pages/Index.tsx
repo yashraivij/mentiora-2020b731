@@ -132,44 +132,88 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 sm:py-24">
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+          {/* Partner Logos */}
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mb-12 opacity-60">
+            <div className="text-gray-600 font-semibold">Microsoft for Startups</div>
+            <div className="text-gray-600 font-semibold">UK Innovate</div>
+            <div className="text-gray-600 font-semibold">Google for Startups</div>
+          </div>
+
+          <div className="max-w-5xl mx-auto text-center">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
             >
-              Unlike any other app
-            </motion.h2>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
-              style={{ color: '#00A8FF' }}
-            >
-              A personalised AI tutor.
+              The world's first AI tutor for GCSE and A-Levels
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg sm:text-xl text-gray-600 mb-12 max-w-3xl mx-auto"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
             >
-              Mentiora AI teaches you how to answer every question in your exams to get full marks.
+              Boost grades with your AI Tutor and Examiner for all major GCSE, IGCSE, A-Level and IB subjects
             </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center gap-3"
+            >
+              <Button 
+                onClick={() => navigate('/register')}
+                size="lg"
+                className="font-semibold px-12 py-6 text-lg rounded-full"
+                style={{ backgroundColor: '#00A8FF' }}
+              >
+                Try now for free
+              </Button>
+              <p className="text-sm text-gray-500">No credit card required</p>
+            </motion.div>
           </div>
 
-          {/* Three Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16">
+          {/* Subject Cards Preview */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16 bg-gradient-to-b from-blue-50 to-white rounded-3xl p-8">
+            <Card className="bg-white border-none shadow-sm">
+              <CardContent className="p-6">
+                <div className="text-4xl mb-3">📐</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">GCSE Maths</h3>
+                <p className="text-gray-600 text-sm">Get step-by-step guidance to solve every problem</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white border-none shadow-sm">
+              <CardContent className="p-6">
+                <div className="text-4xl mb-3">✍️</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">GCSE English</h3>
+                <p className="text-gray-600 text-sm">Learn how to structure your answers for full marks</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white border-none shadow-sm">
+              <CardContent className="p-6">
+                <div className="text-4xl mb-3">🔬</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">GCSE Science</h3>
+                <p className="text-gray-600 text-sm">Apply your knowledge in 'Explain' questions</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Feature Cards Section */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="bg-gray-50 border-none shadow-none h-full">
                   <CardContent className="p-6 text-center">
