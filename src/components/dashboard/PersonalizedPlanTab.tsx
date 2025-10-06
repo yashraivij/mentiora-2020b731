@@ -180,14 +180,12 @@ export const PersonalizedPlanTab = () => {
 
       setSubjectsProgress(subjectsData);
 
-      // Create radar chart data with accurate scores
-      const radarChartData = subjectsData
-        .filter(s => s.accuracy > 0) // Only show subjects with actual data
-        .map(s => ({
-          subject: s.subjectName.length > 12 ? s.subjectName.substring(0, 12) + '...' : s.subjectName,
-          score: s.accuracy,
-          fullMark: 100
-        }));
+      // Create radar chart data with accurate scores - show all chosen subjects
+      const radarChartData = subjectsData.map(s => ({
+        subject: s.subjectName.length > 12 ? s.subjectName.substring(0, 12) + '...' : s.subjectName,
+        score: s.accuracy,
+        fullMark: 100
+      }));
       setRadarData(radarChartData);
 
       if (subjectsData.length > 0) {
