@@ -2182,7 +2182,7 @@ const Dashboard = () => {
                             {isPremium ? "Start Practice" : (
                               <div className="flex items-center space-x-2">
                                 <Crown className="h-4 w-4" />
-                                <span>Upgrade to Premium</span>
+                                <span>Start Free Trial</span>
                               </div>
                             )}
                           </Button>
@@ -2218,7 +2218,7 @@ const Dashboard = () => {
                         {isPremium ? "Start Practice" : (
                           <div className="flex items-center space-x-2">
                             <Crown className="h-4 w-4" />
-                            <span>Upgrade to Premium</span>
+                            <span>Start Free Trial</span>
                           </div>
                         )}
                       </Button>
@@ -3628,7 +3628,7 @@ const Dashboard = () => {
                   className="w-full bg-background text-primary hover:bg-accent font-bold py-3 rounded-2xl theme-transition mobile-text-wrap text-sm sm:text-base"
                   onClick={() => navigate("/pricing")}
                 >
-                  <span className="truncate">UPGRADE TO PREMIUM</span>
+                  <span className="truncate">START FREE TRIAL</span>
                 </Button>
               </CardContent>
             </Card>

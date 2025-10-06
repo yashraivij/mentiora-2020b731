@@ -146,14 +146,14 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               </h4>
             </div>
             <p className="text-white/90 text-xs sm:text-sm mb-3 break-words">
-              Upgrade to Premium to access complete revision notes and unlock all study features
+              Start your free trial to access complete revision notes and unlock all study features
             </p>
             <Button 
               onClick={() => navigate("/pricing")}
               size="sm" 
               className="w-full bg-card text-foreground hover:bg-muted font-bold py-3 rounded-2xl border border-border min-h-[44px]"
             >
-              Upgrade to Premium
+              Start Free Trial
             </Button>
           </div>
         )}
