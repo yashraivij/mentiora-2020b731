@@ -115,6 +115,14 @@ export const PersonalizedPlanTab = () => {
 
       if (subjectsError) throw subjectsError;
 
+      console.log('User subjects from database:', userSubjects);
+
+      if (!userSubjects || userSubjects.length === 0) {
+        console.log('No subjects found for user');
+        setRadarData([]);
+        return;
+      }
+
       const { data: performance, error: perfError } = await supabase
         .from('subject_performance')
         .select('*')
@@ -130,7 +138,7 @@ export const PersonalizedPlanTab = () => {
 
       if (examsError) throw examsError;
 
-      const subjectsData = await Promise.all(userSubjects?.map(async subject => {
+      const subjectsData = userSubjects.map(subject => {
         const perf = performance?.find(p => p.subject_id === subject.subject_name);
         const recentExam = exams?.find(e => e.subject_id === subject.subject_name);
         
@@ -176,16 +184,22 @@ export const PersonalizedPlanTab = () => {
           totalTopics,
           weeklyImprovement: Math.round(weeklyImprovement * 10) / 10
         };
-      }) || []);
+      });
 
       setSubjectsProgress(subjectsData);
 
-      // Create radar chart data with accurate scores - show all chosen subjects
-      const radarChartData = subjectsData.map(s => ({
-        subject: s.subjectName.length > 12 ? s.subjectName.substring(0, 12) + '...' : s.subjectName,
-        score: s.accuracy,
-        fullMark: 100
-      }));
+      // Create radar chart data - show ALL chosen subjects
+      const radarChartData = subjectsData.map(s => {
+        // Extract just the subject name without exam board for cleaner display
+        const displayName = s.subjectName.split(' (')[0];
+        return {
+          subject: displayName.length > 15 ? displayName.substring(0, 15) + '...' : displayName,
+          score: s.accuracy,
+          fullMark: 100
+        };
+      });
+      
+      console.log('Radar chart data:', radarChartData);
       setRadarData(radarChartData);
 
       if (subjectsData.length > 0) {
