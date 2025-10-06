@@ -347,7 +347,97 @@ const Index = () => {
           
         </motion.div>
 
+        {/* Subjects and Exam Boards Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-32 max-w-7xl mx-auto"
+        >
+          <div className="text-center mb-12">
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
+              whileHover={{ scale: 1.02 }}
+            >
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                All Your GCSE & A-Level Subjects
+              </span>
+            </motion.h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive coverage across all major exam boards
+            </p>
+          </div>
 
+          {/* Exam Boards */}
+          <div className="mb-12">
+            <h3 className="text-center text-xl font-semibold text-gray-700 mb-6">Supported Exam Boards</h3>
+            <div className="flex flex-wrap justify-center gap-6">
+              {['AQA', 'Edexcel', 'OCR'].map((board, index) => (
+                <motion.div
+                  key={board}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white rounded-2xl px-8 py-4 shadow-lg border-2 border-gray-100"
+                >
+                  <span className="text-2xl font-bold text-gray-900">{board}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Subjects Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'Mathematics', icon: '📐', color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50 to-cyan-50' },
+              { name: 'Biology', icon: '🧬', color: 'from-emerald-500 to-teal-500', bgColor: 'from-emerald-50 to-teal-50' },
+              { name: 'Chemistry', icon: '⚗️', color: 'from-purple-500 to-pink-500', bgColor: 'from-purple-50 to-pink-50' },
+              { name: 'Physics', icon: '⚛️', color: 'from-orange-500 to-red-500', bgColor: 'from-orange-50 to-red-50' },
+              { name: 'Computer Science', icon: '💻', color: 'from-indigo-500 to-blue-500', bgColor: 'from-indigo-50 to-blue-50' },
+              { name: 'History', icon: '📚', color: 'from-amber-500 to-yellow-500', bgColor: 'from-amber-50 to-yellow-50' },
+              { name: 'Geography', icon: '🌍', color: 'from-green-500 to-emerald-500', bgColor: 'from-green-50 to-emerald-50' },
+              { name: 'English', icon: '📖', color: 'from-rose-500 to-pink-500', bgColor: 'from-rose-50 to-pink-50' },
+            ].map((subject, index) => (
+              <motion.div
+                key={subject.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className={`bg-gradient-to-br ${subject.bgColor} rounded-2xl p-6 text-center shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300`}
+              >
+                <div className="text-4xl mb-3">{subject.icon}</div>
+                <h4 className={`text-lg font-bold bg-gradient-to-r ${subject.color} bg-clip-text text-transparent`}>
+                  {subject.name}
+                </h4>
+                <div className="mt-2 flex items-center justify-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                  <span className="text-xs text-gray-600">GCSE & A-Level</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Stats below subjects */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full px-8 py-4 border border-blue-100">
+              <CheckCircle className="h-6 w-6 text-emerald-600" />
+              <span className="text-lg font-semibold text-gray-900">
+                Thousands of exam-style questions across all subjects
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
 
 
 
