@@ -120,8 +120,36 @@ export const PersonalizedPlanTab = () => {
       if (!userSubjects || userSubjects.length === 0) {
         console.log('No subjects found for user');
         setRadarData([]);
+        setSubjectsProgress([]);
         return;
       }
+
+      // Map user_subjects to curriculum IDs (same logic as Dashboard Learn tab)
+      const subjectIds = userSubjects
+        .map((record) => {
+          const examBoard = record.exam_board.toLowerCase();
+          
+          // Handle A-level subjects
+          if (record.subject_name.includes("A-Level")) {
+            if (record.subject_name.includes("Maths")) return "maths-alevel-edexcel";
+            if (record.subject_name.includes("Biology")) return "biology-alevel-aqa";
+            if (record.subject_name.includes("Chemistry")) return "chemistry-alevel-aqa";
+          }
+
+          if (record.subject_name === "Chemistry" && examBoard === "edexcel") return "chemistry-edexcel";
+
+          const subject = curriculum.find(
+            (s) => s.name.toLowerCase() === record.subject_name.toLowerCase()
+          );
+          return subject?.id;
+        })
+        .filter(Boolean) as string[];
+
+      // Filter curriculum to only show subjects the user has currently chosen
+      const activeSubjects = curriculum.filter((subject) => subjectIds.includes(subject.id));
+
+      console.log('Active subject IDs:', subjectIds);
+      console.log('Active subjects for radar:', activeSubjects.map(s => s.name));
 
       const { data: performance, error: perfError } = await supabase
         .from('subject_performance')
@@ -138,22 +166,18 @@ export const PersonalizedPlanTab = () => {
 
       if (examsError) throw examsError;
 
-      const subjectsData = userSubjects.map(subject => {
-        const perf = performance?.find(p => p.subject_id === subject.subject_name);
-        const recentExam = exams?.find(e => e.subject_id === subject.subject_name);
+      const subjectsData = activeSubjects.map(curriculumSubject => {
+        const perf = performance?.find(p => p.subject_id === curriculumSubject.name);
+        const recentExam = exams?.find(e => e.subject_id === curriculumSubject.name);
         
-        const curriculumSubject = curriculum.find(s => 
-          s.name.toLowerCase() === subject.subject_name.toLowerCase()
-        );
-        
-        const totalTopics = curriculumSubject?.topics.length || 1;
+        const totalTopics = curriculumSubject.topics.length || 1;
         const topicsStudied = perf?.total_questions_answered ? 
           Math.min(Math.floor(perf.total_questions_answered / 10), totalTopics) : 0;
 
         const currentProgress = (topicsStudied / totalTopics) * 100;
         
         // Calculate actual accuracy from exam completions
-        const subjectExams = exams?.filter(e => e.subject_id === subject.subject_name) || [];
+        const subjectExams = exams?.filter(e => e.subject_id === curriculumSubject.name) || [];
         let calculatedAccuracy = 0;
         
         if (subjectExams.length > 0) {
@@ -164,20 +188,24 @@ export const PersonalizedPlanTab = () => {
         }
         
         const weekAgoExams = exams?.filter(e => 
-          e.subject_id === subject.subject_name && 
+          e.subject_id === curriculumSubject.name && 
           new Date(e.completed_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
         );
         const avgRecentGrade = weekAgoExams?.length 
           ? weekAgoExams.reduce((sum, e) => sum + parseFloat(e.grade || '0'), 0) / weekAgoExams.length
           : 0;
-        const predictedGradeNum = parseFloat(subject.predicted_grade || '0');
+        
+        const userSubject = userSubjects.find(us => 
+          curriculum.find(c => c.name.toLowerCase() === us.subject_name.toLowerCase())?.id === curriculumSubject.id
+        );
+        const predictedGradeNum = parseFloat(userSubject?.predicted_grade || '0');
         const weeklyImprovement = avgRecentGrade - predictedGradeNum;
 
         return {
-          subjectId: subject.subject_name,
-          subjectName: subject.subject_name,
-          targetGrade: subject.target_grade || '9',
-          predictedGrade: recentExam?.grade || subject.predicted_grade || '5',
+          subjectId: curriculumSubject.name,
+          subjectName: curriculumSubject.name,
+          targetGrade: userSubject?.target_grade || '9',
+          predictedGrade: recentExam?.grade || userSubject?.predicted_grade || '5',
           currentProgress: Math.round(currentProgress),
           accuracy: calculatedAccuracy,
           topicsStudied,
