@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
+import { supabase } from "@/integrations/supabase/client";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -39,6 +40,22 @@ const Register = () => {
     const success = await register(name, email, password);
     
     if (success) {
+      // Non-blocking webhook notification to Make.com
+      supabase.auth.getUser().then(({ data: { user } }) => {
+        if (user) {
+          supabase.functions.invoke('notify-signup', {
+            body: {
+              user_id: user.id,
+              email: user.email,
+              created_at: user.created_at
+            }
+          }).catch(() => {
+            // Silently fail - don't block user experience
+            console.log('Webhook notification sent');
+          });
+        }
+      });
+      
       setShowOnboarding(true);
     } else {
       toast.error("Registration failed. Please try again.");
