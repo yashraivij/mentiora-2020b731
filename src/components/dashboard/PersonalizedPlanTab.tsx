@@ -686,11 +686,11 @@ export const PersonalizedPlanTab = () => {
                 <p className="text-sm text-muted-foreground">Dynamic performance across all subjects</p>
               </CardHeader>
               <CardContent className="pt-8">
-                <ResponsiveContainer width="100%" height={400}>
-                  <RadarChart data={radarData}>
+                <ResponsiveContainer width="100%" height={450}>
+                  <RadarChart data={radarData} margin={{ top: 40, right: 40, bottom: 40, left: 40 }}>
                     <PolarGrid stroke="hsl(var(--border))" />
                     <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--foreground))' }} />
-                    <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                    <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: 'hsl(var(--muted-foreground))' }} tickCount={6} />
                     <Radar name="Score" dataKey="score" stroke="rgb(139, 92, 246)" fill="rgb(167, 139, 250)" fillOpacity={0.8} />
                     <RechartsTooltip
                       contentStyle={{
