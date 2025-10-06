@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award, Calendar, TrendingUp, Clock, Crown, GraduationCap, TimerIcon, TrendingUpIcon } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen, CheckCircle, BarChart3, UserCheck, ArrowRight, Target, Brain, GraduationCap, Sparkles, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
-import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,624 +23,432 @@ const Index = () => {
     const type = hashParams.get('type');
     
     if (accessToken && type === 'recovery') {
-      // Use navigate to properly redirect to reset password page
       navigate('/reset-password' + window.location.hash, { replace: true });
       return;
     }
   }, [navigate]);
-  
-  // Animation refs
-  const heroRef = useRef(null);
-  const statsRef = useRef(null);
-  const featuresRef = useRef(null);
-  const impactRef = useRef(null);
-  const ctaRef = useRef(null);
-  
-  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
-  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-  const featuresInView = useInView(featuresRef, { once: true, margin: "-100px" });
-  const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
-  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   const features = [
     {
-      icon: BookOpen,
-      title: "Expert Questions",
-      description: "Curated AQA GCSE questions from experienced teachers",
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "from-blue-50 to-cyan-50"
+      icon: "📚",
+      title: "Your Personal Tutor",
+      description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus."
     },
     {
-      icon: Brain,
-      title: "Smart Feedback", 
-      description: "Revolutionary insights that understand your learning style",
-      color: "from-purple-500 to-pink-500",
-      bgColor: "from-purple-50 to-pink-50"
+      icon: "✍️",
+      title: "Your Exam Guide",
+      description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks."
     },
     {
-      icon: BarChart3,
-      title: "Smart Analytics",
-      description: "Data-driven insights that predict your exam success",
-      color: "from-emerald-500 to-teal-500",
-      bgColor: "from-emerald-50 to-teal-50"
-    },
-    {
-      icon: Target,
-      title: "Personalized Path",
-      description: "Adaptive learning that evolves with your progress",
-      color: "from-orange-500 to-red-500",
-      bgColor: "from-orange-50 to-red-50"
+      icon: "🎯",
+      title: "Your Examiner",
+      description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer."
     }
   ];
 
-  const howItWorks = [
+  const testimonials = [
     {
-      step: "01",
-      title: "Pick Your Subject",
-      description: "Choose your subject and the exact topic you want to master.",
-      icon: Target,
-      color: "from-blue-500 to-purple-600",
-      accent: "text-blue-600"
+      name: "Sarah",
+      role: "Year 11 student",
+      content: "FANTASTIC! Easy to use and navigate and really good for understanding in more depth as if you get something wrong it will help you understand why! I love it so far :)",
+      highlight: "if you get something wrong it will help you understand why!"
     },
     {
-      step: "02",
-      title: "Answer Real Exam Questions",
-      description: "Get exam-style questions that match your spec and practice just like the real thing.",
-      icon: Zap,
-      color: "from-purple-500 to-pink-600",
-      accent: "text-purple-600"
+      name: "James",
+      role: "Year 10 student", 
+      content: "OMG it's like a real life science tutor that's teaching me, but available at any time!",
+      highlight: "available at any time!"
     },
     {
-      step: "03",
-      title: "Get Instant Marking & Feedback",
-      description: "See exactly what the examiner wants, where you lost marks, and how to improve.",
-      icon: Award,
-      color: "from-emerald-500 to-cyan-600",
-      accent: "text-emerald-600"
+      name: "Lisa K.",
+      role: "Parent of Year 11 student",
+      content: "My daughter is quite shy and never liked asking questions in class, now she just asks the AI tutor anything. She's becoming more confident in class too. It's been transformative for her learning.",
+      highlight: "she just asks the AI tutor anything"
     }
   ];
 
-  const reviews = [
+  const faqs = [
     {
-      name: "Sarah M.",
-      grade: "Year 11",
-      content: "This platform saved me £2,400 on private tutoring! The personalized feedback is incredible - it knows exactly what I struggle with and adapts to my learning style. Went from C grades to A* in just 3 months while studying 60% less time.",
-      rating: 5,
-      color: "from-blue-50 to-indigo-50",
-      accent: "border-blue-200"
+      question: "Is Mentiora specific to my exam board?",
+      answer: "Yes! Mentiora is tailored to AQA, Edexcel, and OCR GCSE specifications. We cover all the topics in your exam syllabus and mark your work according to your specific exam board's marking criteria."
     },
     {
-      name: "James K.",
-      grade: "Year 10", 
-      content: "The personalization is mind-blowing - it's like having a tutor who knows me better than I know myself. I'm saving 15 hours a week compared to traditional revision and my grades have jumped from grade 5s to 8s consistently.",
-      rating: 5,
-      color: "from-purple-50 to-pink-50",
-      accent: "border-purple-200"
+      question: "How are answers marked on Mentiora?",
+      answer: "Mentiora uses advanced AI to mark your answers according to your exam board's official marking schemes. You'll get instant, detailed feedback showing exactly where you gained or lost marks, and what examiners are looking for."
     },
     {
-      name: "Emma L.",
-      grade: "Year 11",
-      content: "My parents love that we're saving thousands on tutoring while I'm getting better results than ever. The platform personalizes everything to my weak spots - achieved grade 9 in Chemistry after struggling with grade 6s for months!",
-      rating: 5,
-      color: "from-emerald-50 to-teal-50",
-      accent: "border-emerald-200"
-    }
-  ];
-
-  const trustStats = [
-    { 
-      number: "2.3", 
-      label: "Grades Higher", 
-      color: "text-emerald-600", 
-      bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
-      description: "Average grade improvement",
-      icon: TrendingUpIcon
-    },
-    { 
-      number: "67%", 
-      label: "Study Time Saved", 
-      color: "text-blue-600", 
-      bg: "bg-gradient-to-br from-blue-50 to-blue-100",
-      description: "Efficient learning",
-      icon: TimerIcon
-    },
-    { 
-      number: "94%", 
-      label: "Achieve Target Grade", 
-      color: "text-purple-600", 
-      bg: "bg-gradient-to-br from-purple-50 to-purple-100",
-      description: "Student success rate",
-      icon: Target
-    },
-    { 
-      number: "£2,847", 
-      label: "Tuition Savings", 
-      color: "text-orange-600", 
-      bg: "bg-gradient-to-br from-orange-50 to-orange-100",
-      description: "vs private tutoring",
-      icon: Trophy
-    }
-  ];
-
-  const impactStats = [
-    { 
-      number: "£2,847", 
-      label: "Tuition Savings", 
-      color: "text-emerald-600", 
-      bg: "bg-gradient-to-br from-emerald-100 to-emerald-200",
-      description: "vs private tutoring",
-      icon: Trophy
-    },
-    { 
-      number: "89%", 
-      label: "Faster Learning", 
-      color: "text-blue-600", 
-      bg: "bg-gradient-to-br from-blue-100 to-blue-200",
-      description: "Compared to textbooks",
-      icon: Brain
-    },
-    { 
-      number: "Grade 9", 
-      label: "Typical Result", 
-      color: "text-purple-600", 
-      bg: "bg-gradient-to-br from-purple-100 to-purple-200",
-      description: "After 8 weeks",
-      icon: GraduationCap
-    },
-    { 
-      number: "24/7", 
-      label: "Support Availability", 
-      color: "text-orange-600", 
-      bg: "bg-gradient-to-br from-orange-100 to-orange-200",
-      description: "Never wait for help",
-      icon: Clock
-    }
-  ];
-
-  const premiumFeatures = [
-    {
-      icon: Target,
-      title: "What Should I Study?",
-      description: "Personalized study recommendations that tell you exactly what to focus on next",
-      badge: "Smart-Powered",
-      color: "from-violet-600 to-purple-600",
-      bgColor: "from-violet-50 to-purple-50",
-      premium: true
+      question: "How does Mentiora help students prepare for exams?",
+      answer: "Mentiora provides personalized study plans, practice questions from real past papers, instant AI marking and feedback, and tracks your progress to predict your exam grade. It's like having a personal tutor available 24/7."
     },
     {
-      icon: BookOpen,
-      title: "Smart Revision Notebook",
-      description: "Automatically generated notes tailored to your learning style and exam board requirements",
-      badge: "Personalized",
-      color: "from-emerald-600 to-teal-600",
-      bgColor: "from-emerald-50 to-teal-50",
-      premium: true
-    },
-    {
-      icon: Calendar,
-      title: "Predicted Exams",
-      description: "Access weekly refreshed predicted exam papers built from our advanced analysis of past papers",
-      badge: "Updated Weekly",
-      color: "from-blue-600 to-cyan-600",
-      bgColor: "from-blue-50 to-cyan-50",
-      premium: true
-    },
-    {
-      icon: Clock,
-      title: "Study Time Optimizer",
-      description: "Scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
-      badge: "Smart Planning",
-      color: "from-amber-600 to-orange-600",
-      bgColor: "from-amber-50 to-orange-50",
-      premium: true
+      question: "Can I cancel my subscription?",
+      answer: "Yes! You can cancel your subscription at any time from your account settings. There are no long-term commitments or cancellation fees."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 light">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-        {/* Header */}
-        <motion.header 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-between items-center mb-12 sm:mb-16 lg:mb-24 pt-12"
-        >
-          <motion.div 
-            className="flex items-center space-x-4"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <div className="w-12 h-12 flex items-center justify-center">
-              <motion.img 
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-3">
+              <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
-                className="w-10 h-10 object-contain"
-                whileHover={{ rotate: 12 }}
-                transition={{ duration: 0.3 }}
+                className="w-8 h-8 object-contain"
               />
+              <h1 className="text-xl font-bold text-gray-900">mentiora</h1>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Mentiora</h1>
-          </motion.div>
-          <div className="flex items-center gap-3 mt-6 sm:mt-0">
-            {user ? (
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <div className="flex items-center gap-3">
+              {user ? (
                 <Button 
                   onClick={() => navigate('/dashboard')} 
                   size="lg"
-                  className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-gray-900 hover:bg-gray-800 text-white font-medium px-6 py-2 rounded-lg"
                 >
                   Dashboard
                 </Button>
-              </motion.div>
-            ) : (
-              <>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              ) : (
+                <>
                   <Button 
                     variant="ghost" 
-                    size="lg"
                     onClick={() => navigate('/login')} 
-                    className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-8 py-3 rounded-2xl transition-all duration-300"
+                    className="text-gray-700 hover:text-gray-900 font-medium"
                   >
-                    Sign In
+                    Login
                   </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button 
-                    size="lg"
                     onClick={() => navigate('/register')} 
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-gray-900 hover:bg-gray-800 text-white font-medium px-6 py-2 rounded-lg"
                   >
-                    Start Free
+                    Try Mentiora
                   </Button>
-                </motion.div>
-              </>
-            )}
+                </>
+              )}
+            </div>
           </div>
-        </motion.header>
-
-        {/* Hero Section */}
-        <motion.div 
-          ref={heroRef}
-          className="text-center mb-32 max-w-5xl mx-auto"
-        >
-          
-          <motion.h2 
-            initial={{ opacity: 0, y: 40 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight"
-          >
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              The GCSE Tutor Built For You.
-            </span>
-          </motion.h2>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0"
-          >
-            Every <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent font-bold">top grades</span>.
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              onClick={() => navigate('/register')} 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl mobile-touch-target"
-            >
-              Try Now For Free
-            </Button>
-          </motion.div>
-          
-        </motion.div>
-
-
-
-
-
-
-        {/* Feature Showcase - Duolingo/Quizlet Style */}
-        <div className="mb-16 sm:mb-24 lg:mb-32">
-          {/* First Feature - Smart Practice */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-12 sm:mb-16 lg:mb-24"
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-                <div className="space-y-6 sm:space-y-8 px-2 sm:px-0">
-                  <motion.h3 
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    Every question, every answer,{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                      one ultimate study experience
-                    </span>
-                  </motion.h3>
-                  <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-                    Practice with real exam questions from past papers, get instant feedback, and watch your understanding grow with every answer.
-                  </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button 
-                      onClick={() => navigate('/register')} 
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mobile-touch-target w-full sm:w-auto"
-                    >
-                      Start Practicing Free
-                    </Button>
-                  </motion.div>
-                </div>
-                <motion.div 
-                  className="relative"
-                  whileHover={{ scale: 1.02, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-white rounded-2xl p-6 shadow-lg">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                        <div className="flex-1 bg-gray-100 rounded-full h-6 flex items-center px-4">
-                          <span className="text-sm text-gray-500">Chemistry Practice</span>
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="text-lg font-semibold text-gray-900">Question 1 of 12</div>
-                        <div className="bg-gray-50 rounded-xl p-4">
-                          <p className="text-gray-700">What is the formula for calculating the rate of reaction?</p>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-3 text-emerald-800">
-                            ✓ Rate = Change in concentration / Time
-                          </div>
-                          <div className="bg-gray-50 border rounded-lg p-3 text-gray-600">Rate = Time / Change in concentration</div>
-                        </div>
-                        <div className="bg-emerald-100 border border-emerald-200 rounded-lg p-3">
-                          <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-2">
-                            <CheckCircle className="h-5 w-5" />
-                            Correct! Well done.
-                          </div>
-                          <p className="text-sm text-emerald-600">You're mastering rate calculations. This type of question appears frequently in Paper 2.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Second Feature - Personalized Learning */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-24"
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <motion.div 
-                  className="relative lg:order-1"
-                  whileHover={{ scale: 1.02, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-white rounded-2xl p-6 shadow-lg">
-                      <div className="flex items-center justify-between mb-6">
-                        <h4 className="text-xl font-bold text-gray-900">Smart Revision Notebook</h4>
-                        <div className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">Auto-Generated</div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="bg-gray-50 rounded-xl p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <BookOpen className="h-4 w-4 text-emerald-600" />
-                            <div className="font-semibold text-gray-900">Chemical Bonding</div>
-                          </div>
-                          <div className="text-sm text-gray-700 leading-relaxed">
-                            <strong>Key Points:</strong> Ionic bonds form between metals and non-metals through electron transfer. The electrostatic attraction between oppositely charged ions creates the bond.
-                          </div>
-                        </div>
-                        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Brain className="h-4 w-4 text-blue-600" />
-                            <div className="font-semibold text-blue-900">Your Learning Style</div>
-                          </div>
-                          <div className="text-sm text-blue-700">
-                            Visual diagrams and step-by-step examples work best for you
-                          </div>
-                        </div>
-                        <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Target className="h-4 w-4 text-amber-600" />
-                            <div className="font-semibold text-amber-900">Exam Focus</div>
-                          </div>
-                          <div className="text-sm text-amber-700">
-                            Practice drawing dot-and-cross diagrams for ionic compounds
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
-                        <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-2">
-                          <Sparkles className="h-5 w-5" />
-                          Updated for Your Progress
-                        </div>
-                        <p className="text-sm text-emerald-600">Notes automatically updated based on your latest practice sessions and weak areas.</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-                <div className="space-y-8 lg:order-2">
-                  <motion.h3 
-                    className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    Your{" "}
-                    <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                      smart revision
-                    </span>{" "}
-                    notebook
-                  </motion.h3>
-                  <p className="text-xl text-gray-600 leading-relaxed">
-                    Get automatically generated, personalized revision notes tailored to your learning style and exam board. Save hours of note-taking and focus on what matters most for your exams.
-                  </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button 
-                      onClick={() => navigate('/register')} 
-                      className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      Generate My Notes
-                    </Button>
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Third Feature - Stay Motivated */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
-                  <motion.h3 
-                    className="text-5xl lg:text-6xl font-bold leading-tight"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      Stay motivated
-                    </span>{" "}
-                    with every question
-                  </motion.h3>
-                  <p className="text-xl text-gray-600 leading-relaxed">
-                    Track your progress, celebrate wins, and watch your grades improve with detailed analytics that show exactly how close you are to your target grades.
-                  </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button 
-                      onClick={() => navigate('/register')} 
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      Start Your Journey
-                    </Button>
-                  </motion.div>
-                </div>
-                <motion.div 
-                  className="relative"
-                  whileHover={{ scale: 1.02, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-white rounded-2xl p-6 shadow-lg">
-                      <div className="text-center mb-6">
-                        <div className="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                          <Trophy className="h-12 w-12 text-white" />
-                        </div>
-                        <h4 className="text-2xl font-bold text-gray-900 mb-2">Streak Master!</h4>
-                        <p className="text-gray-600">7 days in a row 🔥</p>
-                      </div>
-                      <div className="grid grid-cols-3 gap-4 mb-6">
-                        <div className="text-center p-3 bg-blue-50 rounded-xl">
-                          <div className="text-2xl font-bold text-blue-600">124</div>
-                          <div className="text-xs text-blue-500">Questions</div>
-                        </div>
-                        <div className="text-center p-3 bg-emerald-50 rounded-xl">
-                          <div className="text-2xl font-bold text-emerald-600">89%</div>
-                          <div className="text-xs text-emerald-500">Accuracy</div>
-                        </div>
-                        <div className="text-center p-3 bg-purple-50 rounded-xl">
-                          <div className="text-2xl font-bold text-purple-600">Grade 8</div>
-                          <div className="text-xs text-purple-500">Predicted</div>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-600">Progress to Grade 9</span>
-                          <span className="text-purple-600 font-semibold">87%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-3">
-                          <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full" style={{width: '87%'}}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
         </div>
+      </header>
 
-        {/* Final CTA */}
-        <motion.div 
-          ref={ctaRef}
-          initial={{ opacity: 0, y: 50 }}
-          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-          whileHover={{ scale: 1.02 }}
-          className="bg-gradient-to-r from-blue-600 via-purple-600 to-violet-600 rounded-3xl p-16 text-center text-white max-w-5xl mx-auto shadow-2xl relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-3xl" />
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl"
-            animate={{ 
-              background: [
-                "linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(147, 51, 234, 0.2))",
-                "linear-gradient(to right, rgba(147, 51, 234, 0.2), rgba(37, 99, 235, 0.2))",
-                "linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(147, 51, 234, 0.2))"
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-          <div className="relative z-10">
-            <motion.h3 
-              initial={{ opacity: 0, y: 30 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl lg:text-5xl font-bold mb-8 tracking-tight"
+      {/* Hero Section */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
             >
-              Ready to Unlock Your Potential?
-            </motion.h3>
+              Unlike any other app
+            </motion.h2>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
+              style={{ color: '#00A8FF' }}
+            >
+              A personalised AI tutor.
+            </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-gray-600 mb-12 max-w-3xl mx-auto"
             >
-              Join thousands of students who've improved their grades by an average of <span className="font-bold text-white">two full grade boundaries</span> with our smart platform.
+              Mentiora AI teaches you how to answer every question in your exams to get full marks.
             </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button 
-                onClick={() => navigate('/register')} 
-                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
-              >
-                Start Free Today
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
           </div>
-        </motion.div>
-      </div>
+
+          {/* Three Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              >
+                <Card className="bg-gray-50 border-none shadow-none h-full">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-5xl mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum Section */}
+      <section className="py-16 sm:py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+              The only AI tutor that's
+            </h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#00A8FF' }}>
+              specific to your exam curriculum
+            </h2>
+            <p className="text-lg text-gray-600 mb-4">
+              Other AI tutoring platforms are not based on Exam Board Curriculums.
+            </p>
+            <p className="text-lg text-gray-600">
+              Don't see your subject? <span className="underline cursor-pointer" style={{ color: '#00A8FF' }}>Request it here.</span>
+            </p>
+          </div>
+
+          {/* Exam Boards Grid */}
+          <div className="mt-16 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">GCSE</h3>
+                <div className="bg-white rounded-lg p-6 mb-4">
+                  <h4 className="font-semibold text-gray-900 mb-4">AQA</h4>
+                  <div className="space-y-2 text-left">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#10B981' }} />
+                      <span className="text-gray-700">Biology</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#F59E0B' }} />
+                      <span className="text-gray-700">Chemistry</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#10B981' }} />
+                      <span className="text-gray-700">Combined Biology</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#EF4444' }} />
+                      <span className="text-gray-700">Combined Physics</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">A-Level</h3>
+                <div className="bg-white rounded-lg p-6 mb-4">
+                  <h4 className="font-semibold text-gray-900 mb-4">AQA</h4>
+                  <div className="space-y-2 text-left">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#10B981' }} />
+                      <span className="text-gray-700">Biology</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#F59E0B' }} />
+                      <span className="text-gray-700">Chemistry</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: '#EF4444' }} />
+                      <span className="text-gray-700">Physics</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 opacity-0">Placeholder</h3>
+                <div className="bg-white rounded-lg p-6">
+                  <p className="text-gray-500 italic">More exam boards and subjects coming soon!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Value Proposition Section */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+              Personalised tutoring
+            </h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#00A8FF' }}>
+              at a fraction of the cost
+            </h2>
+            <p className="text-lg text-gray-600 mb-12">
+              Trained to be more effective than personal tutoring, at just 5% of the cost of private tuition.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto items-center">
+              <Card className="bg-gray-50 border-none p-8 text-center">
+                <div className="text-5xl font-bold text-gray-400 mb-2">£500</div>
+                <div className="text-sm text-gray-500">/month</div>
+                <div className="mt-6 text-gray-600">Personal tutoring</div>
+              </Card>
+              
+              <Card className="border-2" style={{ borderColor: '#00A8FF', backgroundColor: '#E6F7FF' }}>
+                <CardContent className="p-8 text-center">
+                  <div className="text-5xl font-bold mb-2" style={{ color: '#00A8FF' }}>£9.99</div>
+                  <div className="text-sm" style={{ color: '#00A8FF' }}>/month</div>
+                  <div className="mt-6 font-semibold" style={{ color: '#00A8FF' }}>
+                    95% cheaper than private tutoring
+                  </div>
+                  <div className="mt-4 flex items-center justify-center gap-1">
+                    <div className="w-8 h-8 rounded-full" style={{ backgroundColor: '#00A8FF' }} />
+                    <span className="font-bold" style={{ color: '#00A8FF' }}>mentiora</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 sm:py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+              Loved by <span style={{ color: '#00A8FF' }}>30,000+ students</span>
+            </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              from the UK's top schools
+            </h2>
+            <p className="text-lg text-gray-600">
+              Exam resources, from revision notes to predicted papers, written specifically for your Exam Board.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white border-gray-200">
+                <CardContent className="p-6">
+                  <p className="text-gray-700 mb-4 leading-relaxed">
+                    {testimonial.content.split(testimonial.highlight)[0]}
+                    <span style={{ color: '#00A8FF' }} className="underline">{testimonial.highlight}</span>
+                    {testimonial.content.split(testimonial.highlight)[1]}
+                  </p>
+                  <div className="font-semibold text-gray-900">{testimonial.name}, {testimonial.role}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All-in-one Section */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+              All-in-one revision
+            </h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#00A8FF' }}>
+              for just one subscription
+            </h2>
+            <p className="text-lg text-gray-600 mb-12">
+              Try for free first. Then choose the plan that aligns with your exams. Everything you need to revise, all in one spot.
+            </p>
+
+            <div className="flex justify-center">
+              <Card className="max-w-sm border-2 border-gray-200 bg-white">
+                <CardContent className="p-8">
+                  <div className="inline-flex items-center gap-2 bg-yellow-100 rounded-full px-3 py-1 mb-4">
+                    <Sparkles className="h-3 w-3 text-yellow-600" />
+                    <span className="text-yellow-700 font-medium text-xs">Limited Time</span>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Start Free Trial
+                  </h3>
+                  
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 mb-2">First 7 days free</p>
+                    <div className="text-5xl font-bold text-gray-900">
+                      £9.99<span className="text-lg font-medium text-gray-500">/month</span>
+                    </div>
+                    <div className="inline-flex items-center gap-1 bg-green-100 rounded-full px-2 py-1 mt-2">
+                      <span className="text-green-700 font-medium text-xs">After trial ends</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-600 text-sm mb-6">Cancel any time.</p>
+                  
+                  <Button 
+                    onClick={() => navigate('/pricing')}
+                    className="w-full font-semibold py-6 text-lg rounded-xl"
+                    style={{ backgroundColor: '#00A8FF' }}
+                  >
+                    Get Free Trial
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      <section className="py-16 sm:py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-12">FAQs</h2>
+            
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="bg-white border border-gray-200 rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline py-6">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 pb-6">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              Ready to achieve your best grades?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Join thousands of students using Mentiora to ace their exams.
+            </p>
+            <Button 
+              onClick={() => navigate('/register')}
+              size="lg"
+              className="font-semibold px-12 py-6 text-lg rounded-xl"
+              style={{ backgroundColor: '#00A8FF' }}
+            >
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
+                alt="Mentiora Logo" 
+                className="w-6 h-6"
+              />
+              <span className="text-sm text-gray-600">© 2025 Mentiora. All rights reserved.</span>
+            </div>
+            <div className="flex gap-6">
+              <button className="text-sm text-gray-600 hover:text-gray-900">Privacy Policy</button>
+              <button className="text-sm text-gray-600 hover:text-gray-900">Terms of Service</button>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
