@@ -740,9 +740,17 @@ const Practice = () => {
                 />
               ) : (
                 <div className="space-y-4">
-                  {/* User's answer */}
-                  <div className="p-5 bg-[#FEF2F2] rounded-[20px] shadow-sm border border-[#EF4444]/20">
-                    <h4 className="font-bold text-[#DC2626] mb-3 text-sm uppercase tracking-wide">Your Answer</h4>
+                  {/* User's answer - color based on performance */}
+                  <div className={`p-5 rounded-[20px] shadow-sm border ${
+                    currentAttempt.score <= currentQuestion.marks / 2
+                      ? 'bg-[#FEF2F2] border-[#EF4444]/20'
+                      : 'bg-[#FEF9C3] border-[#EAB308]/20'
+                  }`}>
+                    <h4 className={`font-bold mb-3 text-sm uppercase tracking-wide ${
+                      currentAttempt.score <= currentQuestion.marks / 2
+                        ? 'text-[#DC2626]'
+                        : 'text-[#CA8A04]'
+                    }`}>Your Answer</h4>
                     <p className="text-gray-800 font-medium leading-relaxed">{userAnswer}</p>
                   </div>
                   
@@ -753,13 +761,23 @@ const Practice = () => {
                         <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${
                           currentAttempt.score === currentQuestion.marks 
                             ? 'bg-emerald-50 border border-emerald-200' 
+                            : currentAttempt.score <= currentQuestion.marks / 2
+                            ? 'bg-red-50 border border-red-200'
                             : 'bg-amber-50 border border-amber-200'
                         }`}>
                           <span className={`font-bold text-base ${
-                            currentAttempt.score === currentQuestion.marks ? 'text-emerald-600' : 'text-amber-600'
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-600' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-600'
+                              : 'text-amber-600'
                           }`}>{currentAttempt.score}/{currentQuestion.marks}</span>
                           <span className={`text-sm font-medium ${
-                            currentAttempt.score === currentQuestion.marks ? 'text-emerald-600' : 'text-amber-600'
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-600' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-600'
+                              : 'text-amber-600'
                           }`}>marks</span>
                         </div>
                         <button 
@@ -770,6 +788,8 @@ const Practice = () => {
                           className={
                             currentAttempt.score === currentQuestion.marks 
                               ? 'text-emerald-500 hover:text-emerald-600' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-500 hover:text-red-600'
                               : 'text-amber-500 hover:text-amber-600'
                           }
                         >
@@ -916,7 +936,13 @@ const Practice = () => {
 
       {/* Fixed bottom bar for marks and next question */}
       {showFeedback && currentAttempt && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        <div className={`fixed bottom-0 left-0 right-0 border-t shadow-lg z-50 ${
+          currentAttempt.score === currentQuestion.marks
+            ? 'bg-emerald-50 border-emerald-200'
+            : currentAttempt.score <= currentQuestion.marks / 2
+            ? 'bg-red-50 border-red-200'
+            : 'bg-amber-50 border-amber-200'
+        }`}>
           <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -930,7 +956,11 @@ const Practice = () => {
                   ))}
                 </div>
                 <span className={`font-semibold ${
-                  currentAttempt.score === currentQuestion.marks ? 'text-emerald-500' : 'text-amber-500'
+                  currentAttempt.score === currentQuestion.marks 
+                    ? 'text-emerald-600' 
+                    : currentAttempt.score <= currentQuestion.marks / 2
+                    ? 'text-red-600'
+                    : 'text-amber-600'
                 }`}>Total: {currentAttempt.score}/{currentQuestion.marks} marks</span>
                 <button 
                   onClick={() => {
@@ -939,8 +969,10 @@ const Practice = () => {
                   }}
                   className={`flex items-center gap-2 font-medium ml-4 ${
                     currentAttempt.score === currentQuestion.marks 
-                      ? 'text-emerald-500 hover:text-emerald-600' 
-                      : 'text-amber-500 hover:text-amber-600'
+                      ? 'text-emerald-600 hover:text-emerald-700' 
+                      : currentAttempt.score <= currentQuestion.marks / 2
+                      ? 'text-red-600 hover:text-red-700'
+                      : 'text-amber-600 hover:text-amber-700'
                   }`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -951,7 +983,13 @@ const Practice = () => {
               </div>
               <Button
                 onClick={handleNextQuestion}
-                className="bg-[#3BAFDA] hover:bg-[#2A9BC7] text-white rounded-full px-10 py-6 text-base font-medium shadow-md"
+                className={`text-white rounded-full px-10 py-6 text-base font-medium shadow-md ${
+                  currentAttempt.score === currentQuestion.marks
+                    ? 'bg-emerald-500 hover:bg-emerald-600'
+                    : currentAttempt.score <= currentQuestion.marks / 2
+                    ? 'bg-red-500 hover:bg-red-600'
+                    : 'bg-amber-500 hover:bg-amber-600'
+                }`}
               >
                 Next question
               </Button>
