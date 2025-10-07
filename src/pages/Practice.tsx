@@ -370,9 +370,14 @@ const Practice = () => {
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < shuffledQuestions.length - 1) {
+      const nextQuestion = shuffledQuestions[currentQuestionIndex + 1];
+      const nextAttempts = attempts.filter(a => a.questionId === nextQuestion.id);
+      const nextAttempt = nextAttempts.length > 0 ? nextAttempts[nextAttempts.length - 1] : null;
+      
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setUserAnswer("");
-      setShowFeedback(false);
+      // Restore the saved answer if it exists
+      setUserAnswer(nextAttempt?.userAnswer || "");
+      setShowFeedback(nextAttempt ? true : false);
       setChatMessages([]);
       setHintCount(0);
       setChatStage('intro');
@@ -645,9 +650,14 @@ const Practice = () => {
                 size="icon"
                 onClick={() => {
                   if (currentQuestionIndex > 0) {
+                    const previousQuestion = shuffledQuestions[currentQuestionIndex - 1];
+                    const previousAttempts = attempts.filter(a => a.questionId === previousQuestion.id);
+                    const previousAttempt = previousAttempts.length > 0 ? previousAttempts[previousAttempts.length - 1] : null;
+                    
                     setCurrentQuestionIndex(currentQuestionIndex - 1);
-                    setUserAnswer("");
-                    setShowFeedback(false);
+                    // Restore the saved answer if it exists
+                    setUserAnswer(previousAttempt?.userAnswer || "");
+                    setShowFeedback(previousAttempt ? true : false);
                     setChatMessages([]);
                     setHintCount(0);
                     setChatStage('intro');
