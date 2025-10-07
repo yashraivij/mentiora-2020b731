@@ -892,11 +892,11 @@ const Practice = () => {
             ) : null}
           </div>
 
-          {/* Right Pane: Ask medly */}
+          {/* Right Pane: Ask mentiora */}
           <aside className="flex flex-col h-[600px]">
             {/* Header */}
             <div className="mb-4">
-              <h2 className="text-base font-semibold text-slate-700">Ask medly</h2>
+              <h2 className="text-base font-semibold text-slate-700">Ask mentiora</h2>
             </div>
 
             {/* Feedback content or chat messages */}
