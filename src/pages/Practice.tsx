@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, MessageCircleQuestion, BookOpenCheck, BookOpen } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -86,6 +86,7 @@ const Practice = () => {
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
+  // Save session state to localStorage
   const saveSessionState = () => {
     if (!user?.id || !subjectId || !topicId) return;
     
@@ -94,7 +95,7 @@ const Practice = () => {
       userAnswer,
       attempts,
       showFeedback,
-      shuffledQuestions: shuffledQuestions.map(q => q.id),
+      shuffledQuestions: shuffledQuestions.map(q => q.id), // Only save question IDs
       lastSaved: new Date().toISOString()
     };
     
@@ -102,6 +103,7 @@ const Practice = () => {
     localStorage.setItem(sessionKey, JSON.stringify(sessionState));
   };
 
+  // Load session state from localStorage
   const loadSessionState = () => {
     if (!user?.id || !subjectId || !topicId || !topic) return false;
     
@@ -112,6 +114,7 @@ const Practice = () => {
       try {
         const state = JSON.parse(savedState);
         
+        // Restore shuffled questions order and filter out diagram questions
         const restoredQuestions = state.shuffledQuestions
           .map((id: string) => topic.questions?.find(q => q.id === id))
           .filter((q: Question | undefined): q is Question => q !== undefined);
@@ -135,6 +138,7 @@ const Practice = () => {
     return false;
   };
 
+  // Clear session state
   const clearSessionState = () => {
     if (!user?.id || !subjectId || !topicId) return;
     
@@ -143,6 +147,7 @@ const Practice = () => {
   };
 
   useEffect(() => {
+    // Record activity when user visits practice page
     const recordVisit = async () => {
       if (user?.id) {
         try {
@@ -164,15 +169,38 @@ const Practice = () => {
       return;
     }
     
+    // Debug logging for Macbeth specifically
+    if (topicId === 'macbeth') {
+      console.log('DEBUG: Macbeth topic data:', topic);
+      console.log('DEBUG: Raw questions count:', topic.questions?.length || 0);
+      console.log('DEBUG: All questions:', topic.questions?.map(q => q.id) || []);
+    }
+    
+    // Try to load existing session first
     const sessionRestored = loadSessionState();
     
+    // Only shuffle questions if no session was restored
     if (!sessionRestored) {
       const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
+      
+      // More debug logging for Macbeth
+      if (topicId === 'macbeth') {
+        console.log('DEBUG: Filtered questions count:', filteredQuestions.length);
+        console.log('DEBUG: Filtered questions:', filteredQuestions.map(q => q.id));
+      }
+      
       const shuffled = shuffleArray(filteredQuestions);
+      
+      if (topicId === 'macbeth') {
+        console.log('DEBUG: Shuffled questions count:', shuffled.length);
+        console.log('DEBUG: Final shuffled questions:', shuffled.map(q => q.id));
+      }
+      
       setShuffledQuestions(shuffled);
     }
-  }, [subject, topic, navigate, user?.id]);
+  }, [subject, topic, navigate, topicId, user?.id]);
 
+  // Save state whenever important values change
   useEffect(() => {
     if (shuffledQuestions.length > 0) {
       saveSessionState();
@@ -181,6 +209,11 @@ const Practice = () => {
 
   const markAnswerWithSmart = async (question: Question, answer: string) => {
     try {
+      console.log('Calling Smart marking function with:', { 
+        question: question.question, 
+        answer: answer.substring(0, 100) + '...' 
+      });
+
       const { data, error } = await supabase.functions.invoke('mark-answer', {
         body: {
           question: question.question,
@@ -192,7 +225,12 @@ const Practice = () => {
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      console.log('Smart marking result:', data);
 
       return {
         marksAwarded: data.marksAwarded || 0,
@@ -204,13 +242,14 @@ const Practice = () => {
       console.error('Error calling Smart marking function:', error);
       toast.error("Failed to mark answer with Smart system. Please try again.");
       
+      // Fallback to basic marking - only give marks for substantial answers
       const isSubstantialAnswer = answer.trim().length >= 3 && 
         answer.trim().split(/\s+/).length >= 1 && 
         /[a-zA-Z]/.test(answer.trim());
       
       return {
         marksAwarded: isSubstantialAnswer ? Math.round(question.marks * 0.3) : 0,
-        feedback: "Good effort! Your answer shows you're thinking about this topic.",
+        feedback: "Good effort! Your answer shows you're thinking about this topic. While our Smart teacher is taking a quick break, I want to encourage you to keep practicing - every answer helps you learn and grow!",
         assessment: "Keep Going!"
       };
     }
@@ -224,6 +263,7 @@ const Practice = () => {
 
     setIsSubmitting(true);
     
+    // Record practice activity
     if (user?.id) {
       try {
         await supabase
@@ -238,6 +278,8 @@ const Practice = () => {
     }
     
     try {
+      console.log('Starting to mark answer...');
+      
       const markingResult = await markAnswerWithSmart(currentQuestion, userAnswer);
       
       const feedback = {
@@ -257,12 +299,15 @@ const Practice = () => {
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
       
+      // Play celebratory sound if user got marks (but not if they got zero)
       if (markingResult.marksAwarded > 0) {
         playCelebratorySound();
       }
       
+      // Generate notebook notes if marks were lost
       const marksLost = currentQuestion.marks - markingResult.marksAwarded;
       if (marksLost > 0 && user?.id) {
+        console.log('Generating notebook notes for lost marks:', marksLost);
         try {
           const notesGenerated = await NotebookGenerator.generateAndSaveNotes(
             user.id,
@@ -291,6 +336,7 @@ const Practice = () => {
         toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
       }
 
+      // Handle personalized notifications for practice results
       if (user?.id && subjectId && subject?.name) {
         await handlePracticeQuestionResult(
           subjectId,
@@ -325,25 +371,36 @@ const Practice = () => {
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
+    // Clear the current session state since it's completed
     clearSessionState();
     
+    // Handle MP rewards for practice completion server-side
     if (user?.id && subjectId && topicId) {
       try {
         const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
         const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId, marksEarned, totalMarks);
         
-        if (result.awarded > 0 && result.breakdown) {
-          if (result.breakdown.practice > 0) {
+        if (result.awarded > 0) {
+          console.log(`Practice completion rewards: +${result.awarded} MP`);
+          
+          // Show toast for practice completion (main reward)
+          if (result.breakdown?.practice > 0) {
             showMPReward(result.breakdown.practice, "Quest complete: Complete 1 practice set");
           }
-          if (result.breakdown.weeklyTopics > 0) {
-            setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly quest: Practice 3 different topics"), 500);
-          }
-          if (result.breakdown.weeklyPractice > 0) {
-            setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly quest: Complete 5 practice sets"), 1000);
-          }
-          if (result.breakdown.streak > 0) {
-            setTimeout(() => showMPReward(result.breakdown.streak, "Epic quest: 7 day practice streak"), 1500);
+          
+          if (result.breakdown) {
+            console.log('MP Breakdown:', result.breakdown);
+            
+            // Show additional toasts for weekly bonuses with proper delays
+            if (result.breakdown.weeklyTopics > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly quest: Practice 3 different topics"), 500);
+            }
+            if (result.breakdown.weeklyPractice > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly quest: Complete 5 practice sets"), 1000);
+            }
+            if (result.breakdown.streak > 0) {
+              setTimeout(() => showMPReward(result.breakdown.streak, "Epic quest: 7 day practice streak"), 1500);
+            }
           }
         }
       } catch (error) {
@@ -351,6 +408,7 @@ const Practice = () => {
       }
     }
     
+    // Save progress
     const progressKey = `mentiora_progress_${user?.id}`;
     const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');
     
@@ -376,6 +434,7 @@ const Practice = () => {
     
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
+    // Handle weak topics
     if (averagePercentage < 85) {
       const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
@@ -384,11 +443,13 @@ const Practice = () => {
         localStorage.setItem(weakTopicsKey, JSON.stringify(weakTopics));
       }
     } else {
+      // Remove from weak topics if score is good
       const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
       const filteredTopics = weakTopics.filter((id: string) => id !== topicId);
       localStorage.setItem(weakTopicsKey, JSON.stringify(filteredTopics));
       
+      // Track topic mastery (85%+ score)
       if (user?.id && subjectId && topicId) {
         try {
           await supabase
@@ -406,6 +467,7 @@ const Practice = () => {
               }
             );
           
+          // Show celebratory toast for mastery
           toast.success(`🎉 Topic mastered! Great work on ${topic?.name}!`, {
             duration: 3000,
           });
@@ -473,7 +535,14 @@ const Practice = () => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4 text-foreground">No questions available</h2>
-          <Button onClick={() => navigate('/dashboard')}>
+          <Button onClick={() => {
+            console.log('Back button clicked (no questions)');
+            if (window.history.length > 1) {
+              window.history.back();
+            } else {
+              window.location.href = '/dashboard';
+            }
+          }}>
             Back
           </Button>
         </div>
@@ -482,209 +551,292 @@ const Practice = () => {
   }
 
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
-  const progress = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
 
   return (
-    <>
-      
-      <div className="min-h-screen" style={{ backgroundColor: '#F6F9FC' }}>
-        <div className="max-w-6xl mx-auto p-6 md:p-8">
-          {/* Header */}
-          <div className="mb-6 flex justify-between items-center">
-            <Button
-              variant="ghost"
-              onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
-              className="text-sm hover:bg-white/50"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-            <div className="text-sm text-gray-600">
-              Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
+      {/* Header */}
+      <header className="bg-card shadow-sm border-b border-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  console.log('Back button clicked');
+                  navigate(`/dashboard?subject=${subjectId}`);
+                }}
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">{topic?.name}</h1>
+                <p className="text-sm text-muted-foreground">{subject?.name}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-muted-foreground">
+                Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
+              </span>
+              <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
             </div>
           </div>
+        </div>
+      </header>
 
-          <Progress value={progress} className="mb-8 h-2" />
-
-          {/* Two Column Layout */}
-          <div className="grid md:grid-cols-[2fr_1fr] gap-6">
-            {/* Left Panel - Question Area */}
-            <Card className="bg-white rounded-2xl shadow-sm border-0">
-              <CardHeader className="pb-4 border-b border-gray-100">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <CardTitle className="text-base font-semibold text-gray-900">
-                      Example {subject?.name} Question
-                    </CardTitle>
-                    <p className="text-sm text-gray-600 mt-1">{topic?.name}</p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Question Panel */}
+            <Card className="bg-card/80 backdrop-blur-sm border border-border">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg text-foreground">Question</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{currentQuestion.marks} marks</Badge>
+                     {currentQuestion.calculatorGuidance && (
+                       <Badge 
+                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
+                         className={`text-xs ${
+                           currentQuestion.calculatorGuidance === 'calc-recommended' 
+                             ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
+                             : 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
+                         }`}
+                       >
+                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
+                       </Badge>
+                     )}
                   </div>
-                  <Badge 
-                    variant="secondary" 
-                    className="bg-blue-50 text-blue-700 hover:bg-blue-50 font-semibold px-3 py-1.5 border-0"
-                  >
-                    {currentQuestion.marks} {currentQuestion.marks === 1 ? 'mark' : 'marks'}
-                  </Badge>
                 </div>
               </CardHeader>
-
-              <CardContent className="space-y-6 pt-6">
-                {/* Question Content */}
-                <div className="space-y-4">
-                  <h2 className="text-lg font-normal text-gray-900 leading-relaxed">
-                    {currentQuestion.question}
-                  </h2>
+              <CardContent>
+                {/* Question Text with Extract/Transcript Formatting */}
+                {(() => {
+                  const questionText = currentQuestion.question;
                   
-                  {/* Instructions box */}
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                    <p className="text-sm text-gray-700">
-                      {currentQuestion.markingCriteria.breakdown[0]}
-                    </p>
-                  </div>
-                </div>
-
-                {!showFeedback ? (
-                  <>
-                    {/* Answer Area */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">Your answer</label>
-                      <Textarea
-                        value={userAnswer}
-                        onChange={(e) => setUserAnswer(e.target.value)}
-                        placeholder="Type your answer here..."
-                        className="min-h-[200px] text-base resize-none border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg bg-gray-50"
-                        disabled={isSubmitting}
-                      />
-                    </div>
-
-                    <Button
-                      onClick={handleSubmitAnswer}
-                      disabled={!userAnswer.trim() || isSubmitting}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors"
-                      size="lg"
-                    >
-                      {isSubmitting ? "Marking..." : "Mark answer"}
-                    </Button>
-                  </>
-                ) : currentAttempt && (
-                  /* Feedback Section */
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-lg border border-blue-200">
-                      <div className="flex items-center gap-3">
-                        {currentAttempt.score >= currentQuestion.marks * 0.7 ? (
-                          <Trophy className="h-6 w-6 text-blue-600" />
-                        ) : (
-                          <Award className="h-6 w-6 text-blue-600" />
-                        )}
-                        <div>
-                          <p className="text-sm text-gray-600">Your Score</p>
-                          <p className="text-2xl font-bold text-gray-900">
-                            {currentAttempt.score}/{currentQuestion.marks}
+                  // Check for transcript or extract sections
+                  const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
+                  
+                  if (transcriptMatch) {
+                    const [, beforeText, markerText, afterText] = transcriptMatch;
+                    
+                    // Split the after text to separate the actual transcript/extract from any following text
+                    const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
+                    const extractContent = parts[0];
+                    const remainingText = parts.slice(1).join('\n');
+                    
+                    return (
+                      <div className="space-y-4">
+                        {beforeText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {beforeText.trim()}
                           </p>
+                        )}
+                        
+                        {/* Extract/Transcript Display */}
+                        <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                          <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                            <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                            {markerText.replace(':', '')}
+                          </h4>
+                          <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
+                            {extractContent.trim()}
+                          </div>
                         </div>
+                        
+                        {remainingText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {remainingText.trim()}
+                          </p>
+                        )}
                       </div>
-                      <Badge className={currentAttempt.score >= currentQuestion.marks * 0.7 ? "bg-green-100 text-green-700 hover:bg-green-100 border-0" : "bg-yellow-100 text-yellow-700 hover:bg-yellow-100 border-0"}>
-                        {currentAttempt.score >= currentQuestion.marks * 0.7 ? "Excellent" : "Good effort"}
-                      </Badge>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="p-4 rounded-lg bg-white border border-gray-200">
-                        <h4 className="font-semibold mb-2 text-gray-900">Feedback:</h4>
-                        <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                          {currentAttempt.feedback.whyYoursDidnt}
-                        </p>
+                    );
+                  }
+                  
+                  // For questions with embedded texts (Text A: / Text B: format)
+                  const textSections = questionText.split(/(Text [A-Z]:)/);
+                  if (textSections.length > 1) {
+                    return (
+                      <div className="space-y-4">
+                        {textSections.map((section, index) => {
+                          if (section.match(/Text [A-Z]:/)) {
+                            const nextSection = textSections[index + 1];
+                            if (nextSection) {
+                              return (
+                                <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
+                                    <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                                    {section}
+                                  </h4>
+                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
+                                    "{nextSection.trim()}"
+                                  </div>
+                                </div>
+                              );
+                            }
+                          } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
+                            return (
+                              <p key={index} className="text-foreground leading-relaxed">
+                                {section.trim()}
+                              </p>
+                            );
+                          }
+                          return null;
+                        })}
                       </div>
-
-                      <div className="p-4 rounded-lg bg-white border border-gray-200">
-                        <h4 className="font-semibold mb-2 text-gray-900">Model Answer:</h4>
-                        <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                          {currentAttempt.feedback.modelAnswer}
-                        </p>
-                      </div>
-
-                      <div className="p-4 rounded-lg bg-white border border-gray-200">
-                        <h4 className="font-semibold mb-2 text-gray-900">Why this gets full marks:</h4>
-                        <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                          {currentAttempt.feedback.whyThisGetsMark}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <Button
-                        onClick={handleNextQuestion}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors"
-                        size="lg"
-                      >
-                        {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
-                      </Button>
-                      <Button 
-                        onClick={() => navigate('/dashboard?tab=notes')}
-                        variant="outline"
-                        className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
-                      >
-                        📚 View Smart Notebook
-                      </Button>
-                    </div>
+                    );
+                  }
+                  
+                  // Default rendering for simple questions
+                  return (
+                    <p className="text-foreground mb-6 leading-relaxed">
+                      {questionText}
+                    </p>
+                  );
+                })()}
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Your Answer:
+                    </label>
+                    <Textarea
+                      value={userAnswer}
+                      onChange={(e) => setUserAnswer(e.target.value)}
+                      placeholder="Type your full answer here..."
+                      className="min-h-[200px]"
+                      disabled={showFeedback}
+                    />
                   </div>
-                )}
+                  
+                   {!showFeedback && (
+                     <div className="space-y-3">
+                       <Button 
+                         onClick={handleSubmitAnswer}
+                         disabled={isSubmitting || !userAnswer.trim()}
+                         className="w-full"
+                       >
+                         {isSubmitting ? "Marking your answer..." : "Submit Answer"}
+                       </Button>
+                       
+                       <Button
+                         variant="outline"
+                         onClick={() => setShowChatAssistant(true)}
+                         className="w-full"
+                         disabled={showChatAssistant}
+                       >
+                         <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
+                         Help me solve this step-by-step
+                       </Button>
+                     </div>
+                   )}
+                 </div>
               </CardContent>
             </Card>
 
-            {/* Right Panel - Chat Assistant */}
-            <div className="hidden md:block">
-              {!showChatAssistant ? (
-                <Button
-                  variant="outline"
-                  onClick={() => setShowChatAssistant(true)}
-                  className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 py-6 rounded-2xl h-auto"
-                >
-                  <div className="flex items-center justify-center gap-2">
-                    <MessageCircleQuestion className="h-5 w-5" />
-                    <span>Get step-by-step help</span>
+            {/* Feedback Panel */}
+            {showFeedback && currentAttempt && (
+              <Card className="bg-card/80 backdrop-blur-sm border border-border">
+                <CardHeader>
+                  <CardTitle className="flex items-center text-foreground">
+                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
+                    Your Feedback
+                  </CardTitle>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                      {currentAttempt.score}/{currentQuestion.marks}
+                    </span>
+                    <span className="text-sm text-muted-foreground">marks</span>
+                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
+                      {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
+                    </Badge>
                   </div>
-                </Button>
-              ) : (
-                <div className="sticky top-8">
-                  <ChatAssistant
-                    question={currentQuestion}
-                    subject={subject?.name || ''}
-                    isOpen={showChatAssistant}
-                    onClose={() => setShowChatAssistant(false)}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Model Answer */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                      Model Answer
+                    </h4>
+                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                      <div className="text-foreground space-y-2">
+                        {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                          <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
 
-          {/* Mobile Chat Button */}
-          <div className="md:hidden mt-4">
-            <Button
-              variant="outline"
-              onClick={() => setShowChatAssistant(!showChatAssistant)}
-              className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 py-4 rounded-lg"
-            >
-              <MessageCircleQuestion className="mr-2 h-4 w-4" />
-              {showChatAssistant ? 'Hide' : 'Get'} step-by-step help
-            </Button>
+                  {/* Why This Gets Marks */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <Award className="h-4 w-4 mr-2 text-blue-600" />
+                      Why This Gets Full Marks
+                    </h4>
+                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                      <pre className="text-foreground whitespace-pre-wrap font-sans">
+                        {currentAttempt.feedback.whyThisGetsMark}
+                      </pre>
+                    </div>
+                  </div>
+
+                  {/* Smart Feedback */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
+                      Teacher's Notes
+                    </h4>
+                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                      <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
+                    </div>
+                  </div>
+
+                  {/* Spec Reference */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
+                    <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Button onClick={handleNextQuestion} className="w-full">
+                      {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+                    </Button>
+                    <Button 
+                      onClick={() => navigate('/dashboard?tab=notes')}
+                      variant="outline"
+                      className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
+                    >
+                      <span className="font-medium">📚 View Smart Notebook</span>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Mobile Chat Overlay */}
-      {showChatAssistant && (
-        <div className="md:hidden fixed inset-0 bg-black/50 z-40" onClick={() => setShowChatAssistant(false)}>
-          <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white" onClick={(e) => e.stopPropagation()}>
-            <ChatAssistant
-              question={currentQuestion}
-              subject={subject?.name || ''}
-              isOpen={showChatAssistant}
-              onClose={() => setShowChatAssistant(false)}
-            />
-          </div>
-        </div>
+      
+      {/* Personalized Notification */}
+      {notification.isVisible && (
+        <PersonalizedNotification
+          type={notification.type!}
+          questionNumber={notification.questionNumber}
+          topicName={notification.topicName}
+          subjectName={notification.subjectName}
+          streakCount={notification.streakCount}
+          onClose={clearNotification}
+        />
       )}
-    </>
+
+      {/* Chat Assistant */}
+      <ChatAssistant
+        question={currentQuestion}
+        subject={subjectId || ''}
+        isOpen={showChatAssistant}
+        onClose={() => setShowChatAssistant(false)}
+      />
+    </div>
   );
 };
 

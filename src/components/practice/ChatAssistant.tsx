@@ -185,36 +185,35 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
   if (!isOpen) return null;
 
   return (
-    <Card className="bg-white rounded-2xl shadow-sm border-0 h-full flex flex-col">
-      <CardHeader className="border-b border-gray-200 pb-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-              <MessageCircle className="h-4 w-4 text-blue-600" />
-            </div>
-            <CardTitle className="text-base font-semibold text-gray-900">
-              Medly solve together
-            </CardTitle>
+    <Card className="fixed right-4 top-4 bottom-4 w-96 z-50 shadow-2xl border-2 border-border bg-card/95 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-border" style={{ background: 'var(--gradient-primary)' }}>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/30">
+            <MessageCircle className="h-4 w-4 text-white" />
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose} className="h-8 w-8 p-0 hover:bg-gray-100">
-            <X className="h-4 w-4 text-gray-500" />
-          </Button>
+          <CardTitle className="text-sm font-semibold text-white drop-shadow-sm">
+            Study Helper
+          </CardTitle>
         </div>
+        <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-white/20 text-white">
+          <X className="h-4 w-4" />
+        </Button>
       </CardHeader>
       
-      <CardContent className="flex flex-col flex-1 p-4 overflow-hidden">
-        <div className="text-sm mb-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
-          <p className="text-gray-700">
-            Let's solve this together, step-by-step.
-          </p>
+      <CardContent className="flex flex-col h-[calc(100vh-8rem)]">
+        <div className="text-xs mb-2 p-3 rounded-lg border border-border" style={{ background: 'var(--gradient-accent)' }}>
+          <div className="flex items-center gap-2 font-medium text-white drop-shadow-sm">
+            <Bot className="h-4 w-4 text-white" />
+            Let's work through this question together step by step!
+          </div>
         </div>
         
-        <ScrollArea className="flex-1 pr-2" ref={scrollAreaRef}>
-          <div className="space-y-3">
+        <ScrollArea className="flex-1 pr-4" ref={scrollAreaRef}>
+          <div className="space-y-4">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-2 ${
+                className={`flex gap-3 ${
                   message.role === 'user' ? 'justify-end' : 'justify-start'
                 }`}
               >
@@ -223,23 +222,24 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
                     message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                   }`}
                 >
-                  <div className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center ${
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 ${
                     message.role === 'user' 
-                      ? 'bg-blue-600' 
-                      : 'bg-gray-200'
-                  }`}>
+                      ? 'text-white' 
+                      : 'text-white'
+                  }`} style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-accent)' }}>
                     {message.role === 'user' ? (
-                      <User className="h-3.5 w-3.5 text-white" />
+                      <User className="h-4 w-4" />
                     ) : (
-                      <Bot className="h-3.5 w-3.5 text-gray-600" />
+                      <Bot className="h-4 w-4" />
                     )}
                   </div>
                   <div
-                    className={`px-3 py-2 rounded-xl text-sm whitespace-pre-wrap ${
+                    className={`px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-lg border border-white/20 ${
                       message.role === 'user'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-900'
+                        ? 'text-white'
+                        : 'text-card-foreground'
                     }`}
+                    style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-secondary)' }}
                   >
                     {message.content}
                   </div>
@@ -247,16 +247,16 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-2 justify-start">
+              <div className="flex gap-3 justify-start">
                 <div className="flex gap-2">
-                  <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-gray-200">
-                    <Bot className="h-3.5 w-3.5 text-gray-600" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
+                    <Bot className="h-4 w-4" />
                   </div>
-                  <div className="px-3 py-2 rounded-xl text-sm bg-gray-100">
+                  <div className="px-4 py-3 rounded-xl text-sm shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
                     <div className="flex gap-1">
-                      <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce"></div>
-                      <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)' }}></div>
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -265,14 +265,15 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
           </div>
         </ScrollArea>
 
-        <div className="border-t border-gray-200 pt-3 mt-3 space-y-2">
+        <div className="border-t border-border pt-3 mt-3 space-y-3 p-3 rounded-lg" style={{ background: 'var(--gradient-background)' }}>
           {stage !== 'final' && hintCount >= 2 && (
             <Button
               variant="outline"
               size="sm"
               onClick={showModelAnswer}
               disabled={isLoading}
-              className="w-full text-xs border-gray-200 hover:bg-gray-50"
+              className="w-full text-xs text-white border-white/30 hover:bg-white/20 transition-all duration-200"
+              style={{ background: 'var(--gradient-accent)' }}
             >
               <Bot className="h-3 w-3 mr-1" />
               Show me the answer
@@ -283,15 +284,16 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Reply..."
+              placeholder="Type your answer or ask for help..."
               disabled={isLoading}
-              className="text-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+              className="text-sm"
             />
             <Button
               type="submit"
               size="sm"
               disabled={!input.trim() || isLoading}
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+              className="shadow-lg text-white hover:opacity-90"
+              style={{ background: 'var(--gradient-primary)' }}
             >
               <Send className="h-4 w-4" />
             </Button>
