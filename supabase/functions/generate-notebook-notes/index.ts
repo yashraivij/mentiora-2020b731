@@ -77,7 +77,7 @@ serve(async (req) => {
 
     console.log('Generating notebook notes for:', { subject, topic, marksLost });
 
-    const prompt = `You are an expert GCSE tutor creating concise revision notes for a Grade 9 student who lost marks on a question.
+    const prompt = `You are an elite GCSE examiner and tutor creating comprehensive revision notes for a student who lost marks. Your notes must be crystal-clear, exam-focused, and help students achieve Grade 9.
 
 QUESTION: ${questionText}
 STUDENT ANSWER: ${userAnswer}
@@ -88,44 +88,52 @@ SUBJECT: ${subject}
 TOPIC: ${topic}
 SUBTOPIC: ${subtopic}
 
-Create ultra-clear, Grade 9-level revision notes in this EXACT format. Use proper grammar and start ALL sentences with capital letters:
+Create comprehensive, Grade 9-level revision notes in this EXACT format. Start ALL sentences with capital letters:
 
-1. WHAT TRIPPED ME UP (1 line): [Ultra-short diagnosis of the main mistake, starting with capital letter]
+1. WHAT TRIPPED ME UP (1-2 lines): [Clear diagnosis of the specific mistake - be precise about what concept, calculation, or understanding was wrong]
 
-2. FIX IN ONE SENTENCE: [The one rule that would have saved me marks, starting with capital letter]
+2. FIX IN ONE SENTENCE: [The single most important rule, principle, or method that would have prevented losing these marks - make it actionable]
 
-3. BULLETPROOF NOTES (3-5 short bullets):
-• [Key fact/definition with bold terms, starting with capital letter]
-• [Essential equation in symbols and words, starting with capital letter]
-• [Common mistake to avoid, starting with capital letter]
-• [Memory aid or comparison, starting with capital letter]
+3. BULLETPROOF NOTES (6-8 comprehensive bullets):
+• **[Key definition or principle]**: [Full explanation with context - why it matters for exams]
+• **[Essential equation or formula]**: [In symbols AND words, with units clearly stated and what each symbol represents]
+• **[Step-by-step method]**: [The exact approach to use for this type of question - numbered steps if needed]
+• **[Common pitfall to avoid]**: [What students typically get wrong → What to do instead]
+• **[Mark scheme insight]**: [What examiners specifically look for - keywords, units, significant figures, etc.]
+• **[Memory technique]**: [Acronym, analogy, or visual aid to remember this concept]
+• **[Link to other topics]**: [How this connects to related GCSE topics - helps with context questions]
+• **[Exam technique tip]**: [Command word interpretation or how to structure answers for full marks]
 
-4. MINI WORKED EXAMPLE (2-4 lines max):
-[Brief example showing correct method, starting with capital letter]
+4. MINI WORKED EXAMPLE (3-6 lines):
+[A clear, step-by-step example showing the CORRECT method with proper working out]
+[Show calculations with units, clearly label steps, highlight the key technique]
+[Use realistic GCSE-level numbers and include final answer with correct units]
 
-5. KEYWORDS: [5-8 key terms separated by commas]
+5. KEYWORDS: [8-12 essential exam keywords and technical terms that appear in mark schemes, separated by commas]
 
-6. NEXT STEP: [1 sentence suggesting what to practice next, starting with capital letter]
+6. NEXT STEP: [Specific actionable advice - which exact type of questions to practice next, which topic to revise, or which skill to develop]
 
 CRITICAL ACCURACY REQUIREMENTS:
-- MATHEMATICAL PRECISION: Ensure all calculations are 100% correct with proper notation
-- NO CALCULATION ERRORS: Verify all arithmetic, algebra, and numerical operations before including
-- PROPER NOTATION: Use correct mathematical symbols and avoid errors like "10^7 - -3" (should be "10^(7+3)" or "10^10")
-- SCIENTIFIC ACCURACY: Ensure all facts, formulas, and processes are scientifically correct
-- DOUBLE-CHECK: Always verify any calculations or worked examples before including them
-- FACTUAL VERIFICATION: Cross-check all statements against GCSE specifications
+- MATHEMATICAL PRECISION: Triple-check all calculations - no arithmetic errors allowed
+- PROPER NOTATION: Use correct mathematical symbols (e.g., × not x, proper fraction notation, correct indices)
+- SCIENTIFIC ACCURACY: Every fact must be 100% accurate to GCSE specifications
+- UNITS: Always include correct units in equations and answers
+- SIGNIFICANT FIGURES: Use appropriate significant figures (usually 2-3 for GCSE)
+- MARK SCHEME ALIGNMENT: Use exact terminology that appears in actual GCSE mark schemes
+- EXAM BOARD STANDARDS: Ensure content matches ${subject} GCSE specification requirements
 
-Style guide:
-- Grade 9 explaining to Grade 9 tone
-- Zero fluff, maximum clarity
-- Bold key definitions
-- Include units in equations
-- Use "Don't do this → ... / Do this → ..." for pitfalls
-- Keep it exam-focused and practical
+Style requirements:
+- Write as a top-performing GCSE student explaining to their friend
+- Be comprehensive but concise - every word must add value
+- Use **bold** for all key terms and definitions
+- Include specific numbers, values, and examples (not vague statements)
+- Format equations clearly: "Force (N) = Mass (kg) × Acceleration (m/s²)"
+- For pitfalls use: "❌ Don't: [wrong approach] → ✓ Do: [correct approach]"
+- Make it scannable - students should be able to revise this the night before the exam
 - ALWAYS start sentences with capital letters
-- Ensure complete factual and mathematical accuracy
+- Focus on WHAT to do, HOW to do it, and WHY it matters for marks
 
-Generate the notes now:`;
+Generate notes that will help this student never lose marks on this topic again:`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -138,12 +146,12 @@ Generate the notes now:`;
         messages: [
           { 
             role: 'system', 
-            content: 'You are an expert GCSE tutor who creates the most effective, concise revision notes for students who lost marks. Your notes are famous for being Grade 9 level but incredibly clear and practical.' 
+            content: 'You are an elite GCSE examiner and tutor with 15+ years of experience. You create the most comprehensive, accurate, and exam-focused revision notes that help students achieve Grade 9. Your notes are known for being thorough yet clear, with perfect accuracy and deep understanding of mark schemes. You never make calculation errors and always verify your work.' 
           },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.3,
-        max_tokens: 800
+        temperature: 0.2,
+        max_tokens: 1500
       }),
     });
 
