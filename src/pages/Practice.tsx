@@ -669,15 +669,11 @@ const Practice = () => {
                   {/* Marks display inline */}
                   {currentAttempt && (
                     <>
-                      <div className="flex items-center gap-3">
-                        <div className="flex gap-1">
-                          {Array.from({ length: currentQuestion.marks }).map((_, i) => (
-                            <span key={i} className="text-red-500 text-xl">
-                              {i < currentAttempt.score ? "✓" : "❌"}
-                            </span>
-                          ))}
+                      <div className="flex items-center gap-3 mt-4">
+                        <div className="inline-flex items-center gap-2 bg-red-50 border border-red-200 rounded-full px-4 py-2">
+                          <span className="text-red-600 font-bold text-base">{currentAttempt.score}/{currentQuestion.marks}</span>
+                          <span className="text-red-600 text-sm font-medium">marks</span>
                         </div>
-                        <span className="text-red-500 font-medium">{currentAttempt.score}/{currentQuestion.marks} marks</span>
                         <button 
                           onClick={() => {
                             setShowFeedback(false);
