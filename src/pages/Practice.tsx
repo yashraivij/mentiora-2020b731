@@ -381,14 +381,6 @@ const Practice = () => {
     }
   };
 
-  // Initialize chat conversation
-  const initializeChat = async () => {
-    if (chatMessages.length > 0) return; // Already initialized
-    
-    // Don't show initial message, just set up for conversation
-    setChatMessages([]);
-  };
-
   // Send chat message
   const sendChatMessage = async (message: string) => {
     if (!message.trim() || isChatLoading) return;
@@ -404,8 +396,11 @@ const Practice = () => {
     setIsChatLoading(true);
 
     try {
+      // If this is the first message, use 'intro' stage, otherwise determine stage
       let currentStage = chatStage;
-      if (hintCount >= 3 && chatStage !== 'final') {
+      if (chatMessages.length === 0) {
+        currentStage = 'intro';
+      } else if (hintCount >= 3 && chatStage !== 'final') {
         currentStage = 'struggling';
       } else if (chatStage === 'intro') {
         currentStage = 'guiding';
@@ -858,13 +853,13 @@ const Practice = () => {
                   <div className="flex-1" />
                   <div className="space-y-3">
                     <button
-                      onClick={initializeChat}
+                      onClick={() => sendChatMessage("I don't understand this problem")}
                       className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       I don&apos;t understand this problem
                     </button>
                     <button
-                      onClick={initializeChat}
+                      onClick={() => sendChatMessage("Can you walk me through this step by step")}
                       className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       Can you walk me through this step by step
@@ -882,7 +877,6 @@ const Practice = () => {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
                     e.preventDefault();
-                    initializeChat();
                     sendChatMessage(chatMessage);
                   }
                 }}
@@ -893,7 +887,6 @@ const Practice = () => {
               <Button 
                 onClick={() => {
                   if (chatMessage.trim()) {
-                    initializeChat();
                     sendChatMessage(chatMessage);
                   }
                 }}
