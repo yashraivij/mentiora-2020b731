@@ -67,69 +67,67 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   };
 
   return (
-    <Card className="mb-4 sm:mb-6 border-l-4 border-l-primary shadow-lg hover:shadow-xl transition-shadow duration-300 mx-2 sm:mx-0">
-      <CardHeader className="pb-3 sm:pb-4 px-4 sm:px-6 pt-4 sm:pt-6">
+    <Card className="bg-white border border-gray-200 hover:shadow-md transition-shadow duration-200">
+      <CardHeader className="pb-4 px-6 pt-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <CardTitle className="text-base sm:text-lg font-bold text-foreground mb-2 break-words">
+            <CardTitle className="text-lg font-bold text-gray-900 mb-2 break-words">
               {entry.subject} → {entry.topic}
             </CardTitle>
-            <CardDescription className="text-sm text-muted-foreground mb-3 break-words">
+            <CardDescription className="text-sm text-gray-600 mb-3 break-words">
               {entry.question_label}
             </CardDescription>
-            <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap">
               <Badge 
-                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium text-xs sm:text-sm`}
+                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium text-xs`}
               >
                 {entry.confidence_level} Confidence
               </Badge>
-              <Badge variant="outline" className="flex items-center gap-1 text-xs sm:text-sm">
+              <Badge className="bg-gray-100 text-gray-700 border-0 text-xs">
                 {getSkillIcon(entry.skill_type)}
-                <span className="hidden sm:inline">{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
-                <span className="sm:hidden">{entry.skill_type}</span>
+                <span className="ml-1">{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
               </Badge>
-              <Badge variant="secondary" className="text-xs sm:text-sm">
+              <Badge className="bg-red-50 text-red-700 border-0 text-xs">
                 -{entry.mark_loss} marks
               </Badge>
-              <Badge variant="outline" className="text-xs">
-                <Clock className="h-3 w-3 mr-1" />
-                <span className="hidden sm:inline">{format(new Date(entry.created_at), 'MMM d, yyyy')}</span>
-                <span className="sm:hidden">{format(new Date(entry.created_at), 'MMM d')}</span>
+              <Badge className="bg-gray-50 text-gray-600 border-0 text-xs flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {format(new Date(entry.created_at), 'MMM d, yyyy')}
               </Badge>
             </div>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6 pb-4 sm:pb-6">
+      <CardContent className="space-y-5 px-6 pb-6">
         {/* What Tripped Me Up */}
-        <div className="bg-red-50 dark:bg-red-950/20 p-3 sm:p-4 rounded-lg border border-red-200 dark:border-red-800/30">
-          <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+        <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+          <h4 className="font-semibold text-red-800 mb-2 flex items-center gap-2 text-sm">
             <AlertCircle className="h-4 w-4 flex-shrink-0" />
             What Tripped Me Up
           </h4>
-          <p className="text-red-700 dark:text-red-200 text-sm break-words"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
+          <p className="text-red-700 text-sm break-words"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
         </div>
 
         {/* Fix Sentence */}
-        <div className="bg-green-50 dark:bg-green-950/20 p-3 sm:p-4 rounded-lg border border-green-200 dark:border-green-800/30">
-          <h4 className="font-semibold text-green-800 dark:text-green-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+        <div className="bg-green-50 p-4 rounded-lg border border-green-100">
+          <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2 text-sm">
             <Lightbulb className="h-4 w-4 flex-shrink-0" />
             Fix in One Sentence
           </h4>
-          <p className="text-green-700 dark:text-green-200 text-sm font-medium break-words"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
+          <p className="text-green-700 text-sm font-medium break-words"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
         </div>
 
         {/* Bulletproof Notes */}
-        <div className="bg-blue-50 dark:bg-blue-950/20 p-3 sm:p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
-          <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2 text-sm sm:text-base">
+        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+          <h4 className="font-semibold text-blue-800 mb-3 flex items-center gap-2 text-sm">
             <BookOpen className="h-4 w-4 flex-shrink-0" />
             Bulletproof Notes
           </h4>
           <ul className="space-y-2">
             {entry.bulletproof_notes.map((note, index) => (
-              <li key={index} className="flex items-start gap-2 text-blue-700 dark:text-blue-200 text-sm">
-                <span className="text-blue-500 dark:text-blue-400 mt-1 flex-shrink-0">•</span>
+              <li key={index} className="flex items-start gap-2 text-blue-700 text-sm">
+                <span className="text-blue-500 mt-1 flex-shrink-0">•</span>
                 <span className="break-words"><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
               </li>
             ))}
@@ -138,20 +136,19 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
-          <div className="bg-gradient-to-br from-blue-400 to-purple-500 text-white p-4 rounded-lg border-0 shadow-lg text-center">
+          <div className="bg-[#3DB4E8] text-white p-4 rounded-lg text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Unlock className="h-4 w-4 text-white flex-shrink-0" />
-              <h4 className="font-semibold text-white text-sm sm:text-base">
+              <Unlock className="h-4 w-4 flex-shrink-0" />
+              <h4 className="font-semibold text-sm">
                 Unlock Full Notes
               </h4>
             </div>
-            <p className="text-white/90 text-xs sm:text-sm mb-3 break-words">
-              Start your free trial to access complete revision notes and unlock all study features
+            <p className="text-white/90 text-sm mb-3">
+              Start your free trial to access complete revision notes
             </p>
             <Button 
               onClick={() => navigate("/pricing")}
-              size="sm" 
-              className="w-full bg-card text-foreground hover:bg-muted font-bold py-3 rounded-2xl border border-border min-h-[44px]"
+              className="w-full bg-white text-[#3DB4E8] hover:bg-gray-100 font-semibold py-2 rounded-lg"
             >
               Start Free Trial
             </Button>
@@ -160,26 +157,26 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Mini Example */}
         {entry.mini_example && (
-          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30">
-            <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2 flex items-center gap-2">
+          <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
+            <h4 className="font-semibold text-purple-800 mb-2 flex items-center gap-2 text-sm">
               <Target className="h-4 w-4" />
               Mini Worked Example
             </h4>
-            <p className="text-purple-700 dark:text-purple-200 text-sm whitespace-pre-wrap">
+            <p className="text-purple-700 text-sm whitespace-pre-wrap">
               <BlurSpan>{entry.mini_example?.replace(/\*/g, '')}</BlurSpan>
             </p>
           </div>
         )}
 
         {/* Keywords */}
-        <div className="bg-gray-50 dark:bg-gray-950/20 p-3 sm:p-4 rounded-lg border border-gray-200 dark:border-gray-800/30">
-          <h4 className="font-semibold text-gray-800 dark:text-gray-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm">
             <Brain className="h-4 w-4 flex-shrink-0" />
             Keywords
           </h4>
-          <div className="flex flex-wrap gap-1 sm:gap-2">
+          <div className="flex flex-wrap gap-2">
             {entry.keywords.map((keyword, index) => (
-              <Badge key={index} variant="outline" className="text-xs break-words">
+              <Badge key={index} className="bg-white border border-gray-300 text-gray-700 text-xs">
                 <BlurSpan>{keyword}</BlurSpan>
               </Badge>
             ))}
@@ -187,12 +184,12 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Next Step */}
-        <div className="bg-amber-50 dark:bg-amber-950/20 p-3 sm:p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
-          <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2 text-sm sm:text-base">
+        <div className="bg-amber-50 p-4 rounded-lg border border-amber-100">
+          <h4 className="font-semibold text-amber-800 mb-2 flex items-center gap-2 text-sm">
             <Target className="h-4 w-4 flex-shrink-0" />
             Next Step
           </h4>
-          <p className="text-amber-700 dark:text-amber-200 text-sm break-words"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
+          <p className="text-amber-700 text-sm break-words"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
         </div>
 
       </CardContent>

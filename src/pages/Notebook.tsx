@@ -131,133 +131,84 @@ const Notebook = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
-          <div className="bg-card/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
-            <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
-            <p className="text-muted-foreground text-sm mt-2">Preparing your Smart Study notes</p>
-          </div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#3DB4E8] border-t-transparent mx-auto mb-6"></div>
+          <p className="text-gray-900 font-medium text-lg">Loading your Smart Revision Notebook...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Premium Header */}
-      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-xl">
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 py-4">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/dashboard')}
-                className="text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200 px-2 sm:px-3"
-              >
-                <ArrowLeft className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Dashboard</span>
-              </Button>
-              <div className="flex items-center space-x-2 sm:space-x-4">
-                <div className="relative">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
-                    <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
-                    <Crown className="h-2.5 w-2.5 text-accent-foreground" />
-                  </div>
-                </div>
-                <div>
-                  <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-                    Smart Revision Notebook
-                  </h1>
-                  <div className="flex items-center space-x-1 sm:space-x-2 flex-wrap">
-                    <div className="flex items-center space-x-1">
-                      <Crown className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
-                      <span className="text-xs sm:text-sm font-semibold text-accent-foreground">Premium Smart Feature</span>
-                    </div>
-                    <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-                    <span className="text-xs text-accent-foreground font-medium">Auto-Generated</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="flex items-center justify-between">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/dashboard')}
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200"
+            >
+              <ArrowLeft className="h-5 w-5 sm:mr-2" />
+              <span className="hidden sm:inline">Dashboard</span>
+            </Button>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              Smart Revision Notebook
+            </h1>
+            <div className="w-20"></div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 max-w-7xl">
-        {/* Premium Welcome Section */}
+      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-5xl">
+        {/* Welcome Section */}
         <div className="mb-8">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
               Your Smart Revision Notes
             </h2>
-            <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-              Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced Smart analysis
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
+              Ultra-clear, Grade 9-level notes for every mark you've lost
             </p>
-            <div className="flex items-center justify-center space-x-2 mt-4">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
-            </div>
           </div>
 
-          {/* Premium Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-10">
-            <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full"></div>
-              <CardContent className="p-6 text-center relative">
-                <div className="w-12 h-12 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
-                  <BookOpen className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <div className="text-3xl font-bold text-foreground mb-1"><BlurSpan>{stats.totalEntries}</BlurSpan></div>
-                <div className="text-sm font-medium text-primary">Total Notes</div>
-                <div className="text-xs text-muted-foreground mt-1">Smart Generated</div>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <BookOpen className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.totalEntries}</BlurSpan></div>
+                <div className="text-sm text-gray-600">Total Notes</div>
               </CardContent>
             </Card>
-            <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-secondary/10 rounded-bl-full"></div>
-              <CardContent className="p-6 text-center relative">
-                <div className="w-12 h-12 mx-auto mb-4 bg-secondary rounded-2xl flex items-center justify-center shadow-lg">
-                  <TrendingUp className="h-6 w-6 text-secondary-foreground" />
-                </div>
-                <div className="text-3xl font-bold text-foreground mb-1"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></div>
-                <div className="text-sm font-medium text-secondary-foreground">Time Saved</div>
-                <div className="text-xs text-muted-foreground mt-1">Auto Notes</div>
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <TrendingUp className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></div>
+                <div className="text-sm text-gray-600">Time Saved</div>
               </CardContent>
             </Card>
-            <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 rounded-bl-full"></div>
-              <CardContent className="p-6 text-center relative">
-                <div className="w-12 h-12 mx-auto mb-4 bg-accent rounded-2xl flex items-center justify-center shadow-lg">
-                  <Brain className="h-6 w-6 text-accent-foreground" />
-                </div>
-                <div className="text-3xl font-bold text-foreground mb-1"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></div>
-                <div className="text-sm font-medium text-accent-foreground">Subjects</div>
-                <div className="text-xs text-muted-foreground mt-1">Covered</div>
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <Brain className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></div>
+                <div className="text-sm text-gray-600">Subjects Covered</div>
               </CardContent>
             </Card>
           </div>
 
-
-          {/* Enhanced Filters */}
-          <div className="bg-card/80 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-2xl border border-border mb-6 sm:mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-              <div className="flex items-center space-x-2 sm:space-x-4">
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                    <Filter className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Revision Notes</h3>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+          {/* Filters */}
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 sm:space-x-4">
+              <h3 className="text-base font-semibold text-gray-900">Filter Notes</h3>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
                 <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                  <SelectTrigger className="w-full sm:w-44 bg-card/50 border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-200 min-h-[44px]">
+                  <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300">
                     <SelectValue placeholder="All Subjects" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card/95 backdrop-blur-xl border-border">
+                  <SelectContent className="bg-white border-gray-200">
                     <SelectItem value="all">All Subjects</SelectItem>
                     {getSubjects().map(subject => (
                       <SelectItem key={subject} value={subject}>{subject}</SelectItem>
@@ -266,10 +217,10 @@ const Notebook = () => {
                 </Select>
                 
                 <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                  <SelectTrigger className="w-full sm:w-44 bg-card/50 border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-200 min-h-[44px]">
+                  <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300">
                     <SelectValue placeholder="All Confidence" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card/95 backdrop-blur-xl border-border">
+                  <SelectContent className="bg-white border-gray-200">
                     <SelectItem value="all">All Confidence</SelectItem>
                     <SelectItem value="low">Low Confidence</SelectItem>
                     <SelectItem value="medium">Medium Confidence</SelectItem>
@@ -281,38 +232,37 @@ const Notebook = () => {
           </div>
         </div>
 
-        {/* Enhanced Notebook Entries */}
+        {/* Notebook Entries */}
         {sortedEntries.length === 0 ? (
-          <Card className="text-center py-16 bg-card/80 backdrop-blur-xl border border-border shadow-2xl">
+          <Card className="text-center py-16 bg-white border border-gray-200">
             <CardContent>
-              <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-3xl flex items-center justify-center">
-                <BookOpen className="h-10 w-10 text-muted-foreground" />
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
-              <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
+              <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">No Revision Notes Yet</h3>
+              <p className="text-gray-600 mb-6 max-w-md mx-auto">
                 Start practicing questions to generate your personalized Smart revision notes!
               </p>
-              <Button onClick={() => navigate('/dashboard')} className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+              <Button 
+                onClick={() => navigate('/dashboard')} 
+                className="bg-[#3DB4E8] hover:bg-[#2EA3D7] text-white px-6 py-3 rounded-lg"
+              >
                 Start Practicing
               </Button>
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-8">
-            {sortedEntries.map((entry, index) => (
-              <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} />
-              </div>
+          <div className="space-y-6">
+            {sortedEntries.map((entry) => (
+              <NotebookEntry key={entry.id} entry={entry} />
             ))}
           </div>
         )}
 
-        {/* Premium Action Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-6 mt-12 sm:mt-16 px-4 sm:px-0">
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mt-12">
           <Button 
             onClick={() => navigate(-1)} 
             variant="outline"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-xl border-2 border-border hover:border-primary hover:bg-muted transition-all duration-200 min-h-[44px]"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-gray-300 hover:bg-gray-100 text-gray-700"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
@@ -322,7 +272,7 @@ const Notebook = () => {
               navigate('/dashboard');
               window.scrollTo(0, 0);
             }}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 hover:from-primary/90 hover:via-primary/70 hover:to-primary/50 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 min-h-[44px]"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-[#3DB4E8] hover:bg-[#2EA3D7] text-white"
           >
             <BookOpen className="h-4 w-4 mr-2" />
             Practice More Questions
