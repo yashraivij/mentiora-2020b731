@@ -679,40 +679,43 @@ const Practice = () => {
 
             {/* Center: Progress indicator with fox */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="flex items-center gap-2">
-                {shuffledQuestions.map((_, index) => (
-                  <div key={index} className="relative flex flex-col items-center">
-                    {/* Question dot */}
-                    <div 
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        index < currentQuestionIndex 
-                          ? 'bg-emerald-500' 
-                          : index === currentQuestionIndex
-                          ? 'bg-orange-400'
-                          : 'bg-gray-300'
-                      }`}
-                    />
-                    {/* Fox on current question */}
-                    {index === currentQuestionIndex && (
-                      <div className="absolute -top-8">
-                        <span className="text-2xl">🦊</span>
-                      </div>
-                    )}
-                  </div>
-                ))}
+              <div className="flex items-center gap-3">
+                {shuffledQuestions.map((question, index) => {
+                  // Find the attempt for this question
+                  const questionAttempts = attempts.filter(a => a.questionId === question.id);
+                  const attempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : null;
+                  
+                  // Determine color based on marks
+                  let circleColor = 'bg-gray-300'; // Not attempted yet
+                  if (attempt) {
+                    if (attempt.score === question.marks) {
+                      circleColor = 'bg-emerald-500'; // Full marks
+                    } else if (attempt.score <= question.marks / 2) {
+                      circleColor = 'bg-red-500'; // Half or less
+                    } else {
+                      circleColor = 'bg-amber-500'; // In between
+                    }
+                  } else if (index === currentQuestionIndex) {
+                    circleColor = 'bg-orange-400'; // Current question (not attempted)
+                  }
+                  
+                  return (
+                    <div key={index} className="relative flex flex-col items-center">
+                      {/* Question dot */}
+                      <div 
+                        className={`w-5 h-5 rounded-full transition-colors ${circleColor}`}
+                      />
+                      {/* Fox on current question */}
+                      {index === currentQuestionIndex && (
+                        <div className="absolute -top-10">
+                          <span className="text-3xl">🦊</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
-
-            {/* Right: Textbook button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
-              className="border-gray-300"
-            >
-              <BookOpen className="h-4 w-4 mr-2" />
-              Textbook
-            </Button>
           </div>
         </div>
       </header>
