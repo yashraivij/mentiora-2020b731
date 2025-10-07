@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -553,270 +554,302 @@ const Practice = () => {
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
 
   return (
-    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4">
+    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+      {/* Medly-style Top Navigation */}
+      <header className="border-b border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button 
-                variant="outline" 
+            {/* Left: Topic name with navigation */}
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => {
-                  console.log('Back button clicked');
-                  navigate(`/dashboard?subject=${subjectId}`);
+                  if (currentQuestionIndex > 0) {
+                    setCurrentQuestionIndex(currentQuestionIndex - 1);
+                    setUserAnswer("");
+                    setShowFeedback(false);
+                    setShowChatAssistant(false);
+                  }
                 }}
+                disabled={currentQuestionIndex === 0}
+                className="h-9 w-9"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
+                <ArrowLeft className="h-4 w-4" />
               </Button>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">{topic?.name}</h1>
-                <p className="text-sm text-muted-foreground">{subject?.name}</p>
+              <div className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4 text-gray-600" />
+                <h1 className="text-lg font-semibold text-slate-900">{topic?.name}</h1>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => {
+                  if (currentQuestionIndex < shuffledQuestions.length - 1) {
+                    handleNextQuestion();
+                  }
+                }}
+                disabled={currentQuestionIndex >= shuffledQuestions.length - 1}
+                className="h-9 w-9"
+              >
+                <ArrowLeft className="h-4 w-4 rotate-180" />
+              </Button>
+            </div>
+
+            {/* Center: Avatar (using fox icon) */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <span className="text-2xl">🦊</span>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-muted-foreground">
-                Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
-              </span>
-              <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
-            </div>
+
+            {/* Right: Textbook button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
+              className="border-gray-300"
+            >
+              <BookOpen className="h-4 w-4 mr-2" />
+              Textbook
+            </Button>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Question Panel */}
-            <Card className="bg-card/80 backdrop-blur-sm border border-border">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg text-foreground">Question</CardTitle>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">{currentQuestion.marks} marks</Badge>
-                     {currentQuestion.calculatorGuidance && (
-                       <Badge 
-                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
-                         className={`text-xs ${
-                           currentQuestion.calculatorGuidance === 'calc-recommended' 
-                             ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
-                             : 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
-                         }`}
-                       >
-                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
-                       </Badge>
-                     )}
+      {/* Main Content Area */}
+      <main className="max-w-6xl mx-auto p-6 md:p-8">
+        <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
+          {/* Left Pane: Question Sheet */}
+          <div className="rounded-2xl bg-[#EAF2FF] p-5 md:p-6">
+            <div className="rounded-2xl bg-white shadow-[0_4px_30px_rgba(0,0,0,0.06)] border border-[#E7ECF5]">
+              {/* Question Header */}
+              <div className="p-6 border-b border-[#EEF2F7]">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    {/* Question reference numbers */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="inline-flex items-center gap-1">
+                        <span className="inline-block border border-slate-300 px-2 py-0.5 text-sm font-mono">0</span>
+                        <span className="inline-block border border-slate-300 px-2 py-0.5 text-sm font-mono">{currentQuestionIndex + 1}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Question text */}
+                    <h2 className="text-[22px] md:text-[26px] font-semibold tracking-tight text-slate-900 leading-tight">
+                      {currentQuestion.question.split('\n')[0]}
+                    </h2>
+                    <p className="text-sm text-slate-500 mt-1">
+                      {subject?.name} • Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
+                    </p>
+                  </div>
+                  
+                  {/* Marks pill */}
+                  <div className="text-[13px] font-medium rounded-full px-3 py-1 bg-[#EDF2FF] text-[#2E5BFF] border border-[#D6E0FF] whitespace-nowrap">
+                    [{currentQuestion.marks} marks]
                   </div>
                 </div>
-              </CardHeader>
-              <CardContent>
-                {/* Question Text with Extract/Transcript Formatting */}
-                {(() => {
-                  const questionText = currentQuestion.question;
-                  
-                  // Check for transcript or extract sections
-                  const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
-                  
-                  if (transcriptMatch) {
-                    const [, beforeText, markerText, afterText] = transcriptMatch;
-                    
-                    // Split the after text to separate the actual transcript/extract from any following text
-                    const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
-                    const extractContent = parts[0];
-                    const remainingText = parts.slice(1).join('\n');
-                    
-                    return (
-                      <div className="space-y-4">
-                        {beforeText.trim() && (
-                          <p className="text-foreground leading-relaxed">
-                            {beforeText.trim()}
-                          </p>
-                        )}
-                        
-                        {/* Extract/Transcript Display */}
-                        <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                          <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                            <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
-                            {markerText.replace(':', '')}
-                          </h4>
-                          <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
-                            {extractContent.trim()}
-                          </div>
-                        </div>
-                        
-                        {remainingText.trim() && (
-                          <p className="text-foreground leading-relaxed">
-                            {remainingText.trim()}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  }
-                  
-                  // For questions with embedded texts (Text A: / Text B: format)
-                  const textSections = questionText.split(/(Text [A-Z]:)/);
-                  if (textSections.length > 1) {
-                    return (
-                      <div className="space-y-4">
-                        {textSections.map((section, index) => {
-                          if (section.match(/Text [A-Z]:/)) {
-                            const nextSection = textSections[index + 1];
-                            if (nextSection) {
-                              return (
-                                <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
-                                    <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
-                                    {section}
-                                  </h4>
-                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
-                                    "{nextSection.trim()}"
-                                  </div>
-                                </div>
-                              );
-                            }
-                          } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
-                            return (
-                              <p key={index} className="text-foreground leading-relaxed">
-                                {section.trim()}
-                              </p>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
-                    );
-                  }
-                  
-                  // Default rendering for simple questions
-                  return (
-                    <p className="text-foreground mb-6 leading-relaxed">
-                      {questionText}
-                    </p>
-                  );
-                })()}
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Your Answer:
-                    </label>
-                    <Textarea
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      placeholder="Type your full answer here..."
-                      className="min-h-[200px]"
-                      disabled={showFeedback}
-                    />
-                  </div>
-                  
-                   {!showFeedback && (
-                     <div className="space-y-3">
-                       <Button 
-                         onClick={handleSubmitAnswer}
-                         disabled={isSubmitting || !userAnswer.trim()}
-                         className="w-full"
-                       >
-                         {isSubmitting ? "Marking your answer..." : "Submit Answer"}
-                       </Button>
-                       
-                       <Button
-                         variant="outline"
-                         onClick={() => setShowChatAssistant(true)}
-                         className="w-full"
-                         disabled={showChatAssistant}
-                       >
-                         <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
-                         Help me solve this step-by-step
-                       </Button>
-                     </div>
-                   )}
-                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Feedback Panel */}
-            {showFeedback && currentAttempt && (
-              <Card className="bg-card/80 backdrop-blur-sm border border-border">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-foreground">
-                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
-                    Your Feedback
-                  </CardTitle>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
-                      {currentAttempt.score}/{currentQuestion.marks}
-                    </span>
-                    <span className="text-sm text-muted-foreground">marks</span>
-                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
-                      {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
-                    </Badge>
+              {/* Question Content */}
+              <div className="p-6">
+                {/* Full question text if multi-line */}
+                {currentQuestion.question.split('\n').length > 1 && (
+                  <div className="prose prose-slate max-w-none text-[15px] leading-7 mt-4 mb-6">
+                    <p className="text-slate-800">{currentQuestion.question}</p>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Model Answer */}
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
-                      Model Answer
-                    </h4>
-                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
-                      <div className="text-foreground space-y-2">
-                        {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
-                          <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                )}
 
-                  {/* Why This Gets Marks */}
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Award className="h-4 w-4 mr-2 text-blue-600" />
-                      Why This Gets Full Marks
-                    </h4>
-                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
-                      <pre className="text-foreground whitespace-pre-wrap font-sans">
-                        {currentAttempt.feedback.whyThisGetsMark}
-                      </pre>
-                    </div>
+                {/* Instruction box */}
+                {currentQuestion.markingCriteria && (
+                  <div className="mt-5 rounded-xl bg-[#F6F8FB] border border-[#E6EBF2] p-4 text-[15px] text-slate-800">
+                    <p className="font-medium mb-1">Instructions:</p>
+                    <p className="text-sm text-slate-600">Provide a clear and detailed answer. Include all relevant points to earn full marks.</p>
                   </div>
+                )}
 
-                  {/* Smart Feedback */}
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
-                      Teacher's Notes
-                    </h4>
-                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
-                      <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
-                    </div>
+                {/* Answer input */}
+                <div className="mt-6">
+                  <label className="block text-[14px] text-slate-600 mb-2 font-medium">
+                    Your answer
+                  </label>
+                  <Textarea
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Type your answer here…"
+                    disabled={showFeedback}
+                    className="w-full min-h-[140px] rounded-xl border-[#E2E8F0] focus:ring-2 focus:ring-[#2E5BFF] text-[15px] resize-none"
+                  />
+                  <div className="text-[12px] text-slate-400 mt-1 text-right">
+                    {userAnswer.length} characters
                   </div>
+                </div>
+              </div>
 
-                  {/* Spec Reference */}
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
-                    <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
-                  </div>
-
-                  <div className="space-y-3">
-                    <Button onClick={handleNextQuestion} className="w-full">
-                      {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
-                    </Button>
-                    <Button 
-                      onClick={() => navigate('/dashboard?tab=notes')}
-                      variant="outline"
-                      className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
-                    >
-                      <span className="font-medium">📚 View Smart Notebook</span>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+              {/* Sticky action bar */}
+              <div className="flex items-center justify-end gap-3 border-t border-[#EEF2F7] p-4 sticky bottom-0 bg-white rounded-b-2xl">
+                <Button
+                  onClick={handleSubmitAnswer}
+                  disabled={isSubmitting || !userAnswer.trim() || showFeedback}
+                  className="bg-[#2E5BFF] hover:bg-[#254AE0] text-white rounded-xl px-5 py-2.5 font-medium disabled:opacity-50"
+                >
+                  {isSubmitting ? "Marking..." : showFeedback ? "Marked" : "Check answer"}
+                </Button>
+              </div>
+            </div>
           </div>
+
+          {/* Right Pane: Tutor Chat */}
+          <aside className="rounded-2xl bg-white shadow-[0_4px_30px_rgba(0,0,0,0.06)] border border-[#E7ECF5] p-4 md:p-5 sticky top-6 max-h-[80vh] flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="rounded-full bg-[#F2F6FF] text-[#2E5BFF] p-2">
+                  <MessageCircle className="h-4 w-4" />
+                </div>
+                <span className="text-sm font-medium text-slate-700">Ask medly</span>
+              </div>
+              {showChatAssistant && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowChatAssistant(false)}
+                  className="h-8 w-8"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+
+            {/* Chat content or suggestions */}
+            {!showChatAssistant ? (
+              <div className="flex-1 flex flex-col justify-end gap-3">
+                <button
+                  onClick={() => setShowChatAssistant(true)}
+                  className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  I don&apos;t understand this problem
+                </button>
+                <button
+                  onClick={() => setShowChatAssistant(true)}
+                  className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Can you walk me through this step by step
+                </button>
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1 overflow-y-auto space-y-3 pr-1 mb-3">
+                  {/* Initial assistant messages */}
+                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
+                    Let&apos;s solve this together, step-by-step.
+                  </div>
+                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
+                    Identify exactly what&apos;s being asked.
+                  </div>
+                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
+                    Write your first point; I&apos;ll check it.
+                  </div>
+                </div>
+
+                {/* Composer */}
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Reply..."
+                    className="h-11 px-4 flex-1 border border-[#E2E8F0] focus:ring-2 focus:ring-[#2E5BFF] rounded-xl"
+                  />
+                  <Button className="h-11 px-4 rounded-xl bg-[#2E5BFF] hover:bg-[#254AE0] text-white">
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            )}
+          </aside>
         </div>
-      </div>
-      
+      </main>
+
+      {/* Feedback Modal (shown after marking) */}
+      {showFeedback && currentAttempt && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center text-foreground">
+                <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
+                Your Feedback
+              </CardTitle>
+              <div className="flex items-center space-x-2">
+                <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                  {currentAttempt.score}/{currentQuestion.marks}
+                </span>
+                <span className="text-sm text-muted-foreground">marks</span>
+                <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
+                  {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Model Answer */}
+              <div>
+                <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                  <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                  Model Answer
+                </h4>
+                <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                  <div className="text-foreground space-y-2">
+                    {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                      <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Why This Gets Marks */}
+              <div>
+                <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                  <Award className="h-4 w-4 mr-2 text-blue-600" />
+                  Why This Gets Full Marks
+                </h4>
+                <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                  <pre className="text-foreground whitespace-pre-wrap font-sans">
+                    {currentAttempt.feedback.whyThisGetsMark}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Smart Feedback */}
+              <div>
+                <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                  <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
+                  Teacher&apos;s Notes
+                </h4>
+                <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                  <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
+                </div>
+              </div>
+
+              {/* Spec Reference */}
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
+                <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
+              </div>
+
+              <div className="space-y-3">
+                <Button onClick={handleNextQuestion} className="w-full">
+                  {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+                </Button>
+                <Button 
+                  onClick={() => navigate('/dashboard?tab=notes')}
+                  variant="outline"
+                  className="w-full"
+                >
+                  <span className="font-medium">📚 View Smart Notebook</span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
       {/* Personalized Notification */}
       {notification.isVisible && (
         <PersonalizedNotification
@@ -828,14 +861,6 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
-
-      {/* Chat Assistant */}
-      <ChatAssistant
-        question={currentQuestion}
-        subject={subjectId || ''}
-        isOpen={showChatAssistant}
-        onClose={() => setShowChatAssistant(false)}
-      />
     </div>
   );
 };
