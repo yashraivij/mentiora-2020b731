@@ -654,7 +654,7 @@ const Practice = () => {
                 onChange={(e) => setUserAnswer(e.target.value)}
                 placeholder=""
                 disabled={showFeedback}
-                className="w-full h-full min-h-[400px] border-0 focus:ring-0 text-base resize-none p-0 bg-transparent"
+                className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
               />
             </div>
 
