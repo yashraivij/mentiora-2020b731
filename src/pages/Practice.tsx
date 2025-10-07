@@ -385,32 +385,8 @@ const Practice = () => {
   const initializeChat = async () => {
     if (chatMessages.length > 0) return; // Already initialized
     
-    setIsChatLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('chat-assistant', {
-        body: {
-          question: currentQuestion.question,
-          subject: subjectId,
-          conversation: [],
-          stage: 'intro'
-        }
-      });
-
-      if (error) throw error;
-
-      const assistantMessage = {
-        id: Date.now().toString(),
-        role: 'assistant' as const,
-        content: data.response
-      };
-
-      setChatMessages([assistantMessage]);
-    } catch (error) {
-      console.error('Error initializing chat:', error);
-      toast.error("Failed to start chat. Please try again.");
-    } finally {
-      setIsChatLoading(false);
-    }
+    // Don't show initial message, just set up for conversation
+    setChatMessages([]);
   };
 
   // Send chat message
@@ -906,13 +882,8 @@ const Practice = () => {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
                     e.preventDefault();
-                    if (chatMessages.length === 0) {
-                      initializeChat().then(() => {
-                        if (chatMessage.trim()) sendChatMessage(chatMessage);
-                      });
-                    } else {
-                      sendChatMessage(chatMessage);
-                    }
+                    initializeChat();
+                    sendChatMessage(chatMessage);
                   }
                 }}
                 placeholder="Reply"
@@ -922,13 +893,8 @@ const Practice = () => {
               <Button 
                 onClick={() => {
                   if (chatMessage.trim()) {
-                    if (chatMessages.length === 0) {
-                      initializeChat().then(() => {
-                        if (chatMessage.trim()) sendChatMessage(chatMessage);
-                      });
-                    } else {
-                      sendChatMessage(chatMessage);
-                    }
+                    initializeChat();
+                    sendChatMessage(chatMessage);
                   }
                 }}
                 disabled={!chatMessage.trim() || isChatLoading}
