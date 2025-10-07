@@ -659,9 +659,9 @@ const Practice = () => {
                 />
               ) : (
                 <div className="space-y-4">
-                  {/* User's answer with strikethrough if wrong */}
+                  {/* User's answer */}
                   <div className="inline-block bg-[#FFE5E5] px-4 py-2 rounded-md">
-                    <span className={currentAttempt && currentAttempt.score < currentQuestion.marks ? "line-through text-gray-700" : "text-gray-700"}>
+                    <span className="text-gray-700">
                       {userAnswer}
                     </span>
                   </div>
@@ -784,14 +784,6 @@ const Practice = () => {
                   <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
                     Let&apos;s go through it together.
                   </div>
-                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
-                    {currentAttempt.feedback.whyYoursDidnt}
-                  </div>
-                  {currentAttempt.feedback.modelAnswer && (
-                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
-                      <strong>Model answer:</strong> {currentAttempt.feedback.modelAnswer}
-                    </div>
-                  )}
                 </div>
               ) : (
                 <>
