@@ -51,14 +51,6 @@ import {
   X,
   Eye,
   Play,
-  Target,
-  TrendingDown,
-  Download,
-  Share2,
-  Lightbulb,
-  Award,
-  CheckCircle2,
-  AlertCircle,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
@@ -71,8 +63,6 @@ import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { toast } from "sonner";
 import { useMPRewards } from "@/hooks/useMPRewards";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, LineChart, Line, CartesianGrid, Legend, Cell } from "recharts";
-import { Progress } from "@/components/ui/progress";
 
 interface UserProgress {
   subjectId: string;
@@ -2201,7 +2191,7 @@ const Dashboard = () => {
                   </Card>
                 </div>
               ) : (
-                <div className="max-w-6xl mx-auto space-y-8">
+                <div className="max-w-4xl mx-auto space-y-6">
                   {/* Overall Summary Card */}
                   <div className="bg-card rounded-3xl p-8 shadow-lg border-4 border-border">
                     <div className="flex items-center justify-between">
@@ -2235,410 +2225,108 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {/* 1. Performance Overview Section */}
-                  <section className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Target className="h-6 w-6 text-primary" />
-                      <h2 className="text-2xl font-bold">Performance Overview</h2>
-                    </div>
+                  {/* Subject Cards */}
+                  <div className="space-y-4">
+                    {predictedGrades.map((prediction, index) => {
+                      // Try to map the database subject to a curriculum subject for better icons/names
+                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
+                      const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
+                      const subjectKey = mappedSubjectId;
+                      const colors = subjectColors[subjectKey] || subjectColors["physics"];
+                      const subjectName = curriculumSubject?.name || prediction.subject_id;
+                      
+                      const getGradeColor = (grade: string) => {
+                        const gradeNum = parseInt(grade || '0');
+                        if (gradeNum >= 7) return "text-green-600";
+                        if (gradeNum >= 5) return "text-blue-600";
+                        if (gradeNum >= 4) return "text-orange-600";
+                        return "text-red-600";
+                      };
 
-                    <div className="grid lg:grid-cols-2 gap-6">
-                      {/* Radar Chart */}
-                      <Card className="overflow-hidden border-primary/20">
-                        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5">
-                          <CardTitle>Target vs Predicted Grades</CardTitle>
-                          <CardDescription>Visual comparison across subjects</CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-6">
-                          {isPremium ? (
-                            <ResponsiveContainer width="100%" height={300}>
-                              <RadarChart data={predictedGrades.slice(0, 6).map(s => ({
-                                subject: (curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(s.subject_id))?.name || s.subject_id).slice(0, 10),
-                                target: 77, // Assume target grade 7
-                                predicted: parseInt(s.grade) * 11,
-                              }))}>
-                                <PolarGrid strokeDasharray="3 3" className="stroke-muted" />
-                                <PolarAngleAxis dataKey="subject" className="text-xs" />
-                                <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                                <Radar name="Target Grade" dataKey="target" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
-                                <Radar name="Predicted Grade" dataKey="predicted" stroke="hsl(var(--chart-2))" fill="hsl(var(--chart-2))" fillOpacity={0.5} />
-                                <Legend />
-                              </RadarChart>
-                            </ResponsiveContainer>
-                          ) : (
-                            <div className="h-[300px] flex items-center justify-center">
-                              <div className="text-center space-y-4">
-                                <Lock className="h-12 w-12 text-muted-foreground mx-auto" />
-                                <p className="text-muted-foreground">Upgrade to view radar chart</p>
+                      const getProgressColor = (grade: string) => {
+                        const gradeNum = parseInt(grade || '0');
+                        if (gradeNum >= 7) return "bg-green-400";
+                        if (gradeNum >= 5) return "bg-blue-400";
+                        if (gradeNum >= 4) return "bg-orange-400";
+                        return "bg-red-400";
+                      };
+
+                      const getStatusChip = (grade: string, percentage: number) => {
+                        const gradeNum = parseInt(grade || '0');
+                        if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-emerald-100 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300" };
+                        if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300" };
+                        if (gradeNum >= 4) return { text: "Needs work", color: "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300" };
+                        return { text: "Keep trying", color: "bg-red-100 dark:bg-red-950/30 text-red-700 dark:text-red-300" };
+                      };
+
+                      const statusChip = getStatusChip(prediction.grade, prediction.percentage || 0);
+
+                      return (
+                        <motion.div
+                          key={prediction.subject_id + '-' + index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-border">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-4 flex-1">
+                                {/* Subject Icon - Using mapped subject ID for consistency */}
+                                <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
+                                  {(() => {
+                                    const IconComponent = getSubjectIcon(subjectKey);
+                                    return <IconComponent className="h-7 w-7 text-white" />;
+                                  })()}
+                                </div>
+
+                                {/* Subject Info */}
+                                <div className="flex-1">
+                                   <div className="flex items-center space-x-3 mb-2">
+                                      <h3 className="text-xl font-bold text-foreground">
+                                        {subjectName}
+                                      </h3>
+                                     {isPremium && (
+                                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
+                                         {statusChip.text}
+                                       </span>
+                                     )}
+                                   </div>
+                                  
+                                   {/* Progress Bar */}
+                                   <div className="w-full bg-muted rounded-full h-3 mb-2">
+                                     <div
+                                       className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
+                                       style={{ width: isPremium ? `${Math.min(prediction.percentage || 0, 100)}%` : '0%' }}
+                                     />
+                                   </div>
+                                  
+                                     <p className="text-sm text-muted-foreground">
+                                       {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
+                                         <span className="flex items-center">
+                                           <Lock size={16} className="inline text-muted-foreground mr-1" />% accuracy in practice
+                                         </span>
+                                       )}
+                                     </p>
+                                </div>
+                              </div>
+
+                              {/* Large Grade Display */}
+                              <div className="text-center ml-6">
+                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                                  {isPremium ? (prediction.grade || '0') : (
+                                    <Lock size={48} className="text-muted-foreground" />
+                                  )}
+                                </div>
+                                <div className="text-sm text-muted-foreground uppercase tracking-wide font-medium">
+                                  Predicted
+                                </div>
                               </div>
                             </div>
-                          )}
-                        </CardContent>
-                      </Card>
-
-                      {/* Subject Progress Cards */}
-                      <Card className="overflow-hidden">
-                        <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5">
-                          <CardTitle>Subject Progress</CardTitle>
-                          <CardDescription>Your progress toward target grades</CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-6 space-y-4 max-h-[350px] overflow-y-auto">
-                          {predictedGrades.map((prediction, index) => {
-                            const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
-                            const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
-                            const subjectName = curriculumSubject?.name || prediction.subject_id;
-                            const grade = parseInt(prediction.grade);
-                            const targetGrade = 7; // Assume target
-                            const progress = Math.min(100, (grade / targetGrade) * 100);
-                            
-                            return (
-                              <div key={prediction.subject_id + '-' + index} className="space-y-2 p-3 rounded-lg bg-muted/30 border border-border/50">
-                                <div className="flex items-center justify-between">
-                                  <div className="flex items-center space-x-2">
-                                    <div className={`w-10 h-10 rounded-lg ${
-                                      grade >= 7 ? "bg-gradient-to-br from-emerald-500 to-green-600" :
-                                      grade >= 5 ? "bg-gradient-to-br from-blue-500 to-cyan-600" :
-                                      grade >= 4 ? "bg-gradient-to-br from-amber-500 to-orange-600" :
-                                      "bg-gradient-to-br from-red-500 to-rose-600"
-                                    } flex items-center justify-center text-white font-bold`}>
-                                      {isPremium ? grade : <Lock className="h-5 w-5" />}
-                                    </div>
-                                    <div>
-                                      <h4 className="font-semibold">{subjectName}</h4>
-                                      <p className="text-xs text-muted-foreground">
-                                        Target: Grade {targetGrade}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <Badge variant={progress >= 100 ? "default" : "secondary"}>
-                                    {isPremium ? Math.round(progress) : "?"}%
-                                  </Badge>
-                                </div>
-                                <Progress value={isPremium ? progress : 0} className={
-                                  progress >= 100 ? "bg-emerald-500" :
-                                  progress >= 75 ? "bg-blue-500" :
-                                  progress >= 50 ? "bg-amber-500" :
-                                  "bg-red-500"
-                                } />
-                              </div>
-                            );
-                          })}
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </section>
-
-                  {/* 2. Strengths and Weaknesses Section */}
-                  <section className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <TrendingUp className="h-6 w-6 text-green-500" />
-                      <h2 className="text-2xl font-bold">Strengths & Weaknesses</h2>
-                    </div>
-
-                    <div className="grid lg:grid-cols-2 gap-6">
-                      {/* Topic Ranking Bar Chart */}
-                      <Card className="overflow-hidden">
-                        <CardHeader className="bg-gradient-to-r from-chart-1/10 to-chart-1/5">
-                          <CardTitle>Topic Performance Ranking</CardTitle>
-                          <CardDescription>From weakest to strongest topics</CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-6">
-                          {isPremium ? (
-                            <ResponsiveContainer width="100%" height={300}>
-                              <BarChart data={predictedGrades.slice(0, 8).map((p, i) => ({
-                                topic: (curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(p.subject_id))?.name || p.subject_id).slice(0, 15),
-                                score: Math.round(p.percentage || 0),
-                              })).sort((a, b) => a.score - b.score)} layout="horizontal">
-                                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                                <XAxis type="number" domain={[0, 100]} />
-                                <YAxis dataKey="topic" type="category" width={100} className="text-xs" />
-                                <RechartsTooltip />
-                                <Bar dataKey="score" radius={[0, 8, 8, 0]}>
-                                  {predictedGrades.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={
-                                      (entry.percentage || 0) < 50 ? "hsl(var(--destructive))" :
-                                      (entry.percentage || 0) < 70 ? "hsl(var(--chart-3))" :
-                                      "hsl(var(--chart-2))"
-                                    } />
-                                  ))}
-                                </Bar>
-                              </BarChart>
-                            </ResponsiveContainer>
-                          ) : (
-                            <div className="h-[300px] flex items-center justify-center">
-                              <div className="text-center space-y-4">
-                                <Lock className="h-12 w-12 text-muted-foreground mx-auto" />
-                                <p className="text-muted-foreground">Upgrade to view topic rankings</p>
-                              </div>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-
-                      {/* Strong and Weak Topics Panels */}
-                      <div className="space-y-4">
-                        {/* Strong Topics */}
-                        <Card className="border-green-200 dark:border-green-800">
-                          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30">
-                            <CardTitle className="flex items-center space-x-2 text-green-700 dark:text-green-300">
-                              <CheckCircle2 className="h-5 w-5" />
-                              <span>Strong Topics</span>
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="pt-4 space-y-2">
-                            {isPremium ? predictedGrades.filter(p => (p.percentage || 0) >= 75).slice(0, 3).map((p, i) => {
-                              const subjectName = curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(p.subject_id))?.name || p.subject_id;
-                              return (
-                                <div key={i} className="flex items-center space-x-2 p-2 rounded-lg bg-green-50 dark:bg-green-950/20">
-                                  <div className="w-2 h-2 bg-green-500 rounded-full" />
-                                  <span className="font-medium">{subjectName}</span>
-                                  <Badge variant="outline" className="ml-auto">{Math.round(p.percentage || 0)}%</Badge>
-                                </div>
-                              );
-                            }) : (
-                              <div className="text-center py-4">
-                                <Lock className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                                <p className="text-sm text-muted-foreground">Upgrade to view</p>
-                              </div>
-                            )}
-                            {isPremium && predictedGrades.filter(p => (p.percentage || 0) >= 75).length === 0 && (
-                              <p className="text-sm text-muted-foreground text-center py-4">Keep practicing to build strengths!</p>
-                            )}
-                          </CardContent>
-                        </Card>
-
-                        {/* Weak Topics */}
-                        <Card className="border-amber-200 dark:border-amber-800">
-                          <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30">
-                            <CardTitle className="flex items-center space-x-2 text-amber-700 dark:text-amber-300">
-                              <AlertCircle className="h-5 w-5" />
-                              <span>Areas for Improvement</span>
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="pt-4 space-y-3">
-                            {isPremium ? predictedGrades.filter(p => (p.percentage || 0) < 65).slice(0, 3).map((p, i) => {
-                              const subjectName = curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(p.subject_id))?.name || p.subject_id;
-                              const tips = [
-                                "Try 10-min daily recall sessions",
-                                "Review past paper questions",
-                                "Watch topic explainer videos",
-                                "Practice with flashcards",
-                              ];
-                              return (
-                                <div key={i} className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
-                                  <div className="flex items-center space-x-2 mb-2">
-                                    <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                                    <span className="font-medium">{subjectName}</span>
-                                    <Badge variant="outline" className="ml-auto">{Math.round(p.percentage || 0)}%</Badge>
-                                  </div>
-                                  <p className="text-xs text-muted-foreground pl-4">
-                                    <Lightbulb className="h-3 w-3 inline mr-1" />
-                                    {tips[i % tips.length]}
-                                  </p>
-                                </div>
-                              );
-                            }) : (
-                              <div className="text-center py-4">
-                                <Lock className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                                <p className="text-sm text-muted-foreground">Upgrade to view</p>
-                              </div>
-                            )}
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* 3. Study Insights Section */}
-                  <section className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Brain className="h-6 w-6 text-purple-500" />
-                      <h2 className="text-2xl font-bold">Study Insights</h2>
-                    </div>
-
-                    <div className="grid lg:grid-cols-3 gap-6">
-                      {/* Study Activity Chart */}
-                      <Card className="lg:col-span-2 overflow-hidden">
-                        <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30">
-                          <CardTitle>Recent Study Activity</CardTitle>
-                          <CardDescription>Your performance over the last 14 days</CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-6">
-                          {isPremium ? (
-                            <ResponsiveContainer width="100%" height={250}>
-                              <LineChart data={Array.from({length: 14}, (_, i) => ({
-                                date: new Date(Date.now() - (13 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
-                                hours: Math.random() * 2 + 0.5,
-                                accuracy: Math.random() * 30 + 60,
-                              }))}>
-                                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                                <XAxis dataKey="date" className="text-xs" />
-                                <YAxis yAxisId="left" />
-                                <YAxis yAxisId="right" orientation="right" />
-                                <RechartsTooltip />
-                                <Legend />
-                                <Line yAxisId="left" type="monotone" dataKey="hours" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Study Hours" />
-                                <Line yAxisId="right" type="monotone" dataKey="accuracy" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Accuracy %" />
-                              </LineChart>
-                            </ResponsiveContainer>
-                          ) : (
-                            <div className="h-[250px] flex items-center justify-center">
-                              <div className="text-center space-y-4">
-                                <Lock className="h-12 w-12 text-muted-foreground mx-auto" />
-                                <p className="text-muted-foreground">Upgrade to view study insights</p>
-                              </div>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-
-                      {/* Personalized Insights */}
-                      <Card className="overflow-hidden">
-                        <CardHeader className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30">
-                          <CardTitle className="flex items-center space-x-2">
-                            <Lightbulb className="h-5 w-5" />
-                            <span>Insights</span>
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="pt-6 space-y-4">
-                          {isPremium ? (
-                            <>
-                              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
-                                <div className="flex items-center space-x-2 mb-1">
-                                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                                  <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">Peak Study Time</p>
-                                </div>
-                                <p className="text-xs text-blue-700 dark:text-blue-300">7:00-9:00 PM</p>
-                              </div>
-                              <div className="p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800">
-                                <div className="flex items-center space-x-2 mb-1">
-                                  <Award className="h-4 w-4 text-green-600 dark:text-green-400" />
-                                  <p className="text-sm font-semibold text-green-900 dark:text-green-100">Retention Rate</p>
-                                </div>
-                                <p className="text-xs text-green-700 dark:text-green-300">82% - Great progress!</p>
-                              </div>
-                              <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800">
-                                <div className="flex items-center space-x-2 mb-1">
-                                  <Flame className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                                  <p className="text-sm font-semibold text-purple-900 dark:text-purple-100">Consistency</p>
-                                </div>
-                                <p className="text-xs text-purple-700 dark:text-purple-300">5 days this week</p>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="text-center py-8">
-                              <Lock className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-                              <p className="text-sm text-muted-foreground">Unlock AI insights</p>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </section>
-
-                  {/* 4. Weekly Improvement Plan */}
-                  <section className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="h-6 w-6 text-blue-500" />
-                      <h2 className="text-2xl font-bold">Weekly Improvement Plan</h2>
-                    </div>
-
-                    <Card className="overflow-hidden">
-                      <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30">
-                        <CardTitle>Your Optimized Study Plan</CardTitle>
-                        <CardDescription>Focus on these key areas this week to reach your target grades</CardDescription>
-                      </CardHeader>
-                      <CardContent className="pt-6">
-                        {isPremium ? (
-                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, i) => {
-                              const weakSubjects = predictedGrades.filter(p => (p.percentage || 0) < 70);
-                              const subject = weakSubjects[i % weakSubjects.length];
-                              const subjectName = subject ? (curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(subject.subject_id))?.name || subject.subject_id) : "Review";
-                              const resources = ['Past Paper', 'Video Tutorial', 'Practice Quiz', 'Flashcards'];
-                              
-                              return (
-                                <div key={day} className="p-4 rounded-lg border border-border bg-card hover:shadow-md transition-shadow">
-                                  <div className="flex items-center justify-between mb-3">
-                                    <h4 className="font-bold text-foreground">{day}</h4>
-                                    <Badge variant="outline">{45 + (i % 2) * 15} min</Badge>
-                                  </div>
-                                  <div className="space-y-2">
-                                    <div className="flex items-center space-x-2">
-                                      <BookOpen className="h-4 w-4 text-primary" />
-                                      <span className="text-sm font-medium">{subjectName}</span>
-                                    </div>
-                                    <p className="text-xs text-muted-foreground pl-6">
-                                      {resources[i % resources.length]}
-                                    </p>
-                                  </div>
-                                </div>
-                              );
-                            })}
                           </div>
-                        ) : (
-                          <div className="text-center py-12">
-                            <Lock className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                            <p className="text-muted-foreground mb-4">Unlock your personalized weekly plan</p>
-                            <Button onClick={() => navigate("/pricing")} className="bg-gradient-to-r from-amber-500 to-orange-500">
-                              <Crown className="h-4 w-4 mr-2" />
-                              Upgrade Now
-                            </Button>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </section>
-
-                  {/* 5. Personalized Summary */}
-                  <section>
-                    <Card className="border-2 border-primary/20 overflow-hidden">
-                      <CardHeader className="bg-gradient-to-r from-primary/10 via-chart-2/10 to-chart-3/10">
-                        <CardTitle className="flex items-center space-x-2">
-                          <Star className="h-6 w-6 text-primary" />
-                          <span>Your Progress Summary</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-6 space-y-4">
-                        {isPremium ? (
-                          <>
-                            <p className="text-foreground leading-relaxed">
-                              {predictedGrades.filter(p => (p.percentage || 0) >= 75).length > 0 ? (
-                                `Your strengths in ${curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(predictedGrades.filter(p => (p.percentage || 0) >= 75)[0].subject_id))?.name || predictedGrades.filter(p => (p.percentage || 0) >= 75)[0].subject_id} show strong conceptual understanding. `
-                              ) : ""}
-                              {predictedGrades.filter(p => (p.percentage || 0) < 65).length > 0 ? (
-                                `Focus on ${curriculum.find(c => c.id === mapDatabaseSubjectToCurriculum(predictedGrades.filter(p => (p.percentage || 0) < 65)[0].subject_id))?.name || predictedGrades.filter(p => (p.percentage || 0) < 65)[0].subject_id} to reach your target grade. `
-                              ) : ""}
-                              You're improving across all subjects — keep up the momentum!
-                            </p>
-                            <div className="flex flex-wrap gap-3 pt-2">
-                              <Button onClick={() => setActiveTab("learn")} className="bg-primary">
-                                <Play className="h-4 w-4 mr-2" />
-                                Start Practice
-                              </Button>
-                              <Button variant="outline">
-                                <Download className="h-4 w-4 mr-2" />
-                                Download Report
-                              </Button>
-                              <Button variant="outline">
-                                <Share2 className="h-4 w-4 mr-2" />
-                                Share Progress
-                              </Button>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-center py-8">
-                            <Lock className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                            <p className="text-muted-foreground mb-4">Get AI-powered insights about your progress</p>
-                            <Button onClick={() => navigate("/pricing")} className="bg-gradient-to-r from-amber-500 to-orange-500">
-                              <Crown className="h-4 w-4 mr-2" />
-                              Upgrade to Premium
-                            </Button>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </section>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
