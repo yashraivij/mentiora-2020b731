@@ -63,6 +63,11 @@ import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { toast } from "sonner";
 import { useMPRewards } from "@/hooks/useMPRewards";
+import { PerformanceOverview } from "@/components/dashboard/PerformanceOverview";
+import { StrengthsWeaknesses } from "@/components/dashboard/StrengthsWeaknesses";
+import { StudyInsights } from "@/components/dashboard/StudyInsights";
+import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
+import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
 
 interface UserProgress {
   subjectId: string;
@@ -2152,6 +2157,15 @@ const Dashboard = () => {
                 <p className="text-muted-foreground text-lg max-w-md mx-auto">
                   See where you stand — and how to improve.
                 </p>
+                
+                {predictedGrades.length > 0 && (
+                  <div className="mt-6">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-green-500 text-white text-lg px-6 py-2 shadow-lg">
+                      Your average grade is {Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length)}. Keep it up!
+                    </Badge>
+                    <p className="text-muted-foreground mt-2">You're making great progress</p>
+                  </div>
+                )}
               </div>
 
               {predictedGrades.length === 0 ? (
@@ -2167,7 +2181,7 @@ const Dashboard = () => {
                           No predictions yet
                         </h3>
                         <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                          Complete some practice sessions to see your predicted grades
+                          Complete some practice sessions to see your predicted grades and detailed analytics
                         </p>
                       </div>
 
@@ -2191,141 +2205,73 @@ const Dashboard = () => {
                   </Card>
                 </div>
               ) : (
-                <div className="max-w-4xl mx-auto space-y-6">
-                  {/* Overall Summary Card */}
-                  <div className="bg-card rounded-3xl p-8 shadow-lg border-4 border-border">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-                          <Trophy className="h-8 w-8 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-bold text-foreground">
-                            Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <Lock size={24} className="inline text-muted-foreground" />
-                            )}. Keep it up!
-                          </h3>
-                          <p className="text-muted-foreground">You're making great progress</p>
-                        </div>
-                      </div>
-                      <Button
-                        onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
-                        className={isPremium 
-                          ? "bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
-                          : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
-                        }
-                      >
-                        {isPremium ? "Start Practice" : (
-                          <div className="flex items-center space-x-2">
-                            <Crown className="h-4 w-4" />
-                            <span>Start Free Trial</span>
-                          </div>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
+                <div className="max-w-7xl mx-auto space-y-12">
+                  {/* 1. Performance Overview */}
+                  <PerformanceOverview 
+                    predictedGrades={predictedGrades}
+                    userSubjects={userSubjectsWithGrades}
+                  />
 
-                  {/* Subject Cards */}
-                  <div className="space-y-4">
-                    {predictedGrades.map((prediction, index) => {
-                      // Try to map the database subject to a curriculum subject for better icons/names
-                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
-                      const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
-                      const subjectKey = mappedSubjectId;
-                      const colors = subjectColors[subjectKey] || subjectColors["physics"];
-                      const subjectName = curriculumSubject?.name || prediction.subject_id;
-                      
-                      const getGradeColor = (grade: string) => {
-                        const gradeNum = parseInt(grade || '0');
-                        if (gradeNum >= 7) return "text-green-600";
-                        if (gradeNum >= 5) return "text-blue-600";
-                        if (gradeNum >= 4) return "text-orange-600";
-                        return "text-red-600";
-                      };
+                  {/* 2. Strengths and Weaknesses */}
+                  {userProgress.length > 0 && (
+                    <StrengthsWeaknesses
+                      userProgress={userProgress}
+                      onPractice={(subjectId, topicId) => {
+                        setSelectedSubject(subjectId);
+                        setActiveTab("learn");
+                        navigate(`/practice?subject=${subjectId}&topic=${topicId}`);
+                      }}
+                    />
+                  )}
 
-                      const getProgressColor = (grade: string) => {
-                        const gradeNum = parseInt(grade || '0');
-                        if (gradeNum >= 7) return "bg-green-400";
-                        if (gradeNum >= 5) return "bg-blue-400";
-                        if (gradeNum >= 4) return "bg-orange-400";
-                        return "bg-red-400";
-                      };
+                  {/* 3. Study Insights */}
+                  <StudyInsights
+                    currentStreak={currentStreak}
+                    weeklyData={[
+                      { day: "Mon", hours: 1.5, accuracy: 75 },
+                      { day: "Tue", hours: 2.0, accuracy: 82 },
+                      { day: "Wed", hours: 0.5, accuracy: 68 },
+                      { day: "Thu", hours: 2.5, accuracy: 88 },
+                      { day: "Fri", hours: 1.8, accuracy: 80 },
+                      { day: "Sat", hours: 3.0, accuracy: 85 },
+                      { day: "Sun", hours: 1.2, accuracy: 78 },
+                    ]}
+                  />
 
-                      const getStatusChip = (grade: string, percentage: number) => {
-                        const gradeNum = parseInt(grade || '0');
-                        if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-emerald-100 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300" };
-                        if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300" };
-                        if (gradeNum >= 4) return { text: "Needs work", color: "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300" };
-                        return { text: "Keep trying", color: "bg-red-100 dark:bg-red-950/30 text-red-700 dark:text-red-300" };
-                      };
+                  {/* 4. Weekly Improvement Plan */}
+                  {userProgress.length > 0 && (
+                    <WeeklyPlan
+                      weakTopics={userProgress
+                        .filter(p => p.averageScore < 70)
+                        .sort((a, b) => a.averageScore - b.averageScore)
+                        .map(p => ({
+                          topicId: p.topicId,
+                          subjectId: p.subjectId,
+                          score: p.averageScore
+                        }))}
+                      targetGrades={userSubjectsWithGrades.map(s => ({
+                        subject: s.subject_name,
+                        target: parseInt(s.target_grade || "7")
+                      }))}
+                    />
+                  )}
 
-                      const statusChip = getStatusChip(prediction.grade, prediction.percentage || 0);
+                  {/* 5. Personalized Summary */}
+                  <PersonalizedSummary
+                    predictedGrades={predictedGrades}
+                    userProgress={userProgress}
+                  />
 
-                      return (
-                        <motion.div
-                          key={prediction.subject_id + '-' + index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-border">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-4 flex-1">
-                                {/* Subject Icon - Using mapped subject ID for consistency */}
-                                <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
-                                  {(() => {
-                                    const IconComponent = getSubjectIcon(subjectKey);
-                                    return <IconComponent className="h-7 w-7 text-white" />;
-                                  })()}
-                                </div>
-
-                                {/* Subject Info */}
-                                <div className="flex-1">
-                                   <div className="flex items-center space-x-3 mb-2">
-                                      <h3 className="text-xl font-bold text-foreground">
-                                        {subjectName}
-                                      </h3>
-                                     {isPremium && (
-                                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
-                                         {statusChip.text}
-                                       </span>
-                                     )}
-                                   </div>
-                                  
-                                   {/* Progress Bar */}
-                                   <div className="w-full bg-muted rounded-full h-3 mb-2">
-                                     <div
-                                       className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
-                                       style={{ width: isPremium ? `${Math.min(prediction.percentage || 0, 100)}%` : '0%' }}
-                                     />
-                                   </div>
-                                  
-                                     <p className="text-sm text-muted-foreground">
-                                       {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
-                                         <span className="flex items-center">
-                                           <Lock size={16} className="inline text-muted-foreground mr-1" />% accuracy in practice
-                                         </span>
-                                       )}
-                                     </p>
-                                </div>
-                              </div>
-
-                              {/* Large Grade Display */}
-                              <div className="text-center ml-6">
-                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
-                                  {isPremium ? (prediction.grade || '0') : (
-                                    <Lock size={48} className="text-muted-foreground" />
-                                  )}
-                                </div>
-                                <div className="text-sm text-muted-foreground uppercase tracking-wide font-medium">
-                                  Predicted
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
+                  {/* CTA Section */}
+                  <div className="text-center py-8">
+                    <Button
+                      size="lg"
+                      onClick={() => setActiveTab("learn")}
+                      className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                    >
+                      <BookOpen className="h-5 w-5 mr-2" />
+                      Continue Practicing
+                    </Button>
                   </div>
                 </div>
               )}
