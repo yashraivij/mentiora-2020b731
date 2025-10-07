@@ -653,23 +653,8 @@ const Practice = () => {
 
               {/* Question Content */}
               <div className="p-6">
-                {/* Full question text if multi-line */}
-                {currentQuestion.question.split('\n').length > 1 && (
-                  <div className="prose prose-slate max-w-none text-[15px] leading-7 mt-4 mb-6">
-                    <p className="text-slate-800">{currentQuestion.question}</p>
-                  </div>
-                )}
-
-                {/* Instruction box */}
-                {currentQuestion.markingCriteria && (
-                  <div className="mt-5 rounded-xl bg-[#F6F8FB] border border-[#E6EBF2] p-4 text-[15px] text-slate-800">
-                    <p className="font-medium mb-1">Instructions:</p>
-                    <p className="text-sm text-slate-600">Provide a clear and detailed answer. Include all relevant points to earn full marks.</p>
-                  </div>
-                )}
-
                 {/* Answer input */}
-                <div className="mt-6">
+                <div className="mt-2">
                   <label className="block text-[14px] text-slate-600 mb-2 font-medium">
                     Your answer
                   </label>
@@ -721,49 +706,21 @@ const Practice = () => {
               )}
             </div>
 
-            {/* Chat content or suggestions */}
-            {!showChatAssistant ? (
-              <div className="flex-1 flex flex-col justify-end gap-3">
-                <button
-                  onClick={() => setShowChatAssistant(true)}
-                  className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  I don&apos;t understand this problem
-                </button>
-                <button
-                  onClick={() => setShowChatAssistant(true)}
-                  className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Can you walk me through this step by step
-                </button>
-              </div>
-            ) : (
-              <div className="flex-1 flex flex-col">
-                <div className="flex-1 overflow-y-auto space-y-3 pr-1 mb-3">
-                  {/* Initial assistant messages */}
-                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
-                    Let&apos;s solve this together, step-by-step.
-                  </div>
-                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
-                    Identify exactly what&apos;s being asked.
-                  </div>
-                  <div className="max-w-[92%] rounded-2xl bg-[#F6F8FB] border border-[#E6EBF2] px-4 py-3 text-[14px] text-slate-800 shadow-sm">
-                    Write your first point; I&apos;ll check it.
-                  </div>
-                </div>
-
-                {/* Composer */}
-                <div className="flex gap-2">
-                  <Input
-                    placeholder="Reply..."
-                    className="h-11 px-4 flex-1 border border-[#E2E8F0] focus:ring-2 focus:ring-[#2E5BFF] rounded-xl"
-                  />
-                  <Button className="h-11 px-4 rounded-xl bg-[#2E5BFF] hover:bg-[#254AE0] text-white">
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            )}
+            {/* Chat content - always show suggestions */}
+            <div className="flex-1 flex flex-col justify-end gap-3 pb-2">
+              <button
+                onClick={() => setShowChatAssistant(true)}
+                className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
+              >
+                I don&apos;t understand this problem
+              </button>
+              <button
+                onClick={() => setShowChatAssistant(true)}
+                className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
+              >
+                Can you walk me through this step by step
+              </button>
+            </div>
           </aside>
         </div>
       </main>
