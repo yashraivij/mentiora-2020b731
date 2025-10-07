@@ -677,10 +677,29 @@ const Practice = () => {
               </Button>
             </div>
 
-            {/* Center: Avatar (using fox icon) */}
+            {/* Center: Progress indicator with fox */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <span className="text-2xl">🦊</span>
+              <div className="flex items-center gap-2">
+                {shuffledQuestions.map((_, index) => (
+                  <div key={index} className="relative flex flex-col items-center">
+                    {/* Question dot */}
+                    <div 
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        index < currentQuestionIndex 
+                          ? 'bg-emerald-500' 
+                          : index === currentQuestionIndex
+                          ? 'bg-orange-400'
+                          : 'bg-gray-300'
+                      }`}
+                    />
+                    {/* Fox on current question */}
+                    {index === currentQuestionIndex && (
+                      <div className="absolute -top-8">
+                        <span className="text-2xl">🦊</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
 
