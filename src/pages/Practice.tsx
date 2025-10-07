@@ -749,6 +749,22 @@ const Practice = () => {
                   <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
                     Let&apos;s go through it together.
                   </div>
+                  
+                  {/* Suggestion buttons after feedback */}
+                  <div className="space-y-3 pt-4">
+                    <button
+                      onClick={() => setShowChatAssistant(true)}
+                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      I don&apos;t understand this problem
+                    </button>
+                    <button
+                      onClick={() => setShowChatAssistant(true)}
+                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      Can you walk me through this step by step
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <>
@@ -771,16 +787,14 @@ const Practice = () => {
               )}
             </div>
 
-            {/* Reply input at very bottom */}
+            {/* Reply input at very bottom - always available */}
             <div className="flex gap-2">
               <Input
                 placeholder="Reply"
                 className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
-                disabled
               />
               <Button 
                 className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center"
-                disabled
               >
                 <Send className="h-4 w-4 rotate-45" />
               </Button>
