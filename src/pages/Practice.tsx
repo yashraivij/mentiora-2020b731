@@ -751,16 +751,28 @@ const Practice = () => {
                   {currentAttempt && (
                     <>
                       <div className="flex items-center gap-3 mt-4">
-                        <div className="inline-flex items-center gap-2 bg-red-50 border border-red-200 rounded-full px-4 py-2">
-                          <span className="text-red-600 font-bold text-base">{currentAttempt.score}/{currentQuestion.marks}</span>
-                          <span className="text-red-600 text-sm font-medium">marks</span>
+                        <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${
+                          currentAttempt.score === currentQuestion.marks 
+                            ? 'bg-emerald-50 border border-emerald-200' 
+                            : 'bg-amber-50 border border-amber-200'
+                        }`}>
+                          <span className={`font-bold text-base ${
+                            currentAttempt.score === currentQuestion.marks ? 'text-emerald-600' : 'text-amber-600'
+                          }`}>{currentAttempt.score}/{currentQuestion.marks}</span>
+                          <span className={`text-sm font-medium ${
+                            currentAttempt.score === currentQuestion.marks ? 'text-emerald-600' : 'text-amber-600'
+                          }`}>marks</span>
                         </div>
                         <button 
                           onClick={() => {
                             setShowFeedback(false);
                             setUserAnswer("");
                           }}
-                          className="text-red-500 hover:text-red-600"
+                          className={
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-500 hover:text-emerald-600' 
+                              : 'text-amber-500 hover:text-amber-600'
+                          }
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -916,18 +928,26 @@ const Practice = () => {
               <div className="flex items-center gap-3">
                 <div className="flex gap-1">
                   {Array.from({ length: currentQuestion.marks }).map((_, i) => (
-                    <span key={i} className="text-red-500 text-xl font-bold">
-                      ❌
+                    <span key={i} className={`text-xl font-bold ${
+                      i < currentAttempt.score ? 'text-emerald-500' : 'text-gray-300'
+                    }`}>
+                      {i < currentAttempt.score ? '✓' : '✗'}
                     </span>
                   ))}
                 </div>
-                <span className="text-red-500 font-semibold">Total: {currentAttempt.score}/{currentQuestion.marks} marks</span>
+                <span className={`font-semibold ${
+                  currentAttempt.score === currentQuestion.marks ? 'text-emerald-500' : 'text-amber-500'
+                }`}>Total: {currentAttempt.score}/{currentQuestion.marks} marks</span>
                 <button 
                   onClick={() => {
                     setShowFeedback(false);
                     setUserAnswer("");
                   }}
-                  className="flex items-center gap-2 text-red-500 hover:text-red-600 font-medium ml-4"
+                  className={`flex items-center gap-2 font-medium ml-4 ${
+                    currentAttempt.score === currentQuestion.marks 
+                      ? 'text-emerald-500 hover:text-emerald-600' 
+                      : 'text-amber-500 hover:text-amber-600'
+                  }`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
