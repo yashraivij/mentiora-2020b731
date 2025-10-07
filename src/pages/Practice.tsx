@@ -679,71 +679,63 @@ const Practice = () => {
 
             {/* Center: Modern Progress indicator with fox */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="flex flex-col items-center gap-2">
-                {/* Progress text */}
-                <div className="text-xs font-medium text-gray-500 mb-1">
-                  Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
-                </div>
-                
-                {/* Progress bar with circles */}
-                <div className="flex items-center gap-2 relative">
-                  {shuffledQuestions.map((question, index) => {
-                    // Find the attempt for this question
-                    const questionAttempts = attempts.filter(a => a.questionId === question.id);
-                    const attempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : null;
-                    
-                    // Determine color based on marks
-                    let circleColor = 'bg-gray-200 border-gray-300'; // Not attempted yet
-                    const isAttempted = attempt !== null;
-                    
-                    if (isAttempted) {
-                      if (attempt.score === question.marks) {
-                        circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50'; // Full marks
-                      } else if (attempt.score <= question.marks / 2) {
-                        circleColor = 'bg-red-500 border-red-600 shadow-sm shadow-red-500/50'; // Half or less
-                      } else {
-                        circleColor = 'bg-amber-500 border-amber-600 shadow-sm shadow-amber-500/50'; // In between
-                      }
+              <div className="flex items-center gap-2 relative">
+                {shuffledQuestions.map((question, index) => {
+                  // Find the attempt for this question
+                  const questionAttempts = attempts.filter(a => a.questionId === question.id);
+                  const attempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : null;
+                  
+                  // Determine color based on marks
+                  let circleColor = 'bg-gray-200 border-gray-300'; // Not attempted yet
+                  const isAttempted = attempt !== null;
+                  
+                  if (isAttempted) {
+                    if (attempt.score === question.marks) {
+                      circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50'; // Full marks
+                    } else if (attempt.score <= question.marks / 2) {
+                      circleColor = 'bg-red-500 border-red-600 shadow-sm shadow-red-500/50'; // Half or less
+                    } else {
+                      circleColor = 'bg-amber-500 border-amber-600 shadow-sm shadow-amber-500/50'; // In between
                     }
-                    
-                    // Show fox only on current question if not attempted yet
-                    const showFox = index === currentQuestionIndex && !isAttempted;
-                    
-                    return (
-                      <div key={index} className="relative flex items-center">
-                        {/* Connecting line */}
-                        {index > 0 && (
-                          <div className={`absolute right-full w-2 h-0.5 ${
-                            attempts.filter(a => a.questionId === shuffledQuestions[index - 1].id).length > 0
-                              ? 'bg-gray-400'
-                              : 'bg-gray-200'
-                          }`} />
-                        )}
-                        
-                        {/* Question circle */}
-                        <div className="relative">
-                          <div 
-                            className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${circleColor} ${
-                              showFox ? 'ring-2 ring-orange-300 ring-offset-2' : ''
-                            }`}
-                          >
-                            {/* Show checkmark or X for attempted questions */}
-                            {isAttempted && (
-                              <span className="text-white text-sm font-bold">
-                                {attempt.score === question.marks ? '✓' : attempt.score === 0 ? '✗' : '◐'}
-                              </span>
-                            )}
-                            
-                            {/* Fox on current unattempted question */}
-                            {showFox && (
-                              <span className="text-lg">🦊</span>
-                            )}
-                          </div>
+                  }
+                  
+                  // Show fox only on current question if not attempted yet
+                  const showFox = index === currentQuestionIndex && !isAttempted;
+                  
+                  return (
+                    <div key={index} className="relative flex items-center">
+                      {/* Connecting line */}
+                      {index > 0 && (
+                        <div className={`absolute right-full w-2 h-0.5 ${
+                          attempts.filter(a => a.questionId === shuffledQuestions[index - 1].id).length > 0
+                            ? 'bg-gray-400'
+                            : 'bg-gray-200'
+                        }`} />
+                      )}
+                      
+                      {/* Question circle */}
+                      <div className="relative">
+                        <div 
+                          className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${circleColor} ${
+                            showFox ? 'ring-2 ring-orange-300 ring-offset-2' : ''
+                          }`}
+                        >
+                          {/* Show checkmark or X for attempted questions */}
+                          {isAttempted && (
+                            <span className="text-white text-sm font-bold">
+                              {attempt.score === question.marks ? '✓' : attempt.score === 0 ? '✗' : '◐'}
+                            </span>
+                          )}
+                          
+                          {/* Fox on current unattempted question */}
+                          {showFox && (
+                            <span className="text-lg">🦊</span>
+                          )}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
