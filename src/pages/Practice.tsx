@@ -742,12 +742,16 @@ const Practice = () => {
                 <div className="space-y-4">
                   {/* User's answer - color based on performance */}
                   <div className={`p-5 rounded-[20px] shadow-sm border ${
-                    currentAttempt.score <= currentQuestion.marks / 2
+                    currentAttempt.score === currentQuestion.marks
+                      ? 'bg-[#E8F8F0] border-[#10B981]/20'
+                      : currentAttempt.score <= currentQuestion.marks / 2
                       ? 'bg-[#FEF2F2] border-[#EF4444]/20'
                       : 'bg-[#FEF9C3] border-[#EAB308]/20'
                   }`}>
                     <h4 className={`font-bold mb-3 text-sm uppercase tracking-wide ${
-                      currentAttempt.score <= currentQuestion.marks / 2
+                      currentAttempt.score === currentQuestion.marks
+                        ? 'text-[#059669]'
+                        : currentAttempt.score <= currentQuestion.marks / 2
                         ? 'text-[#DC2626]'
                         : 'text-[#CA8A04]'
                     }`}>Your Answer</h4>
@@ -983,13 +987,7 @@ const Practice = () => {
               </div>
               <Button
                 onClick={handleNextQuestion}
-                className={`text-white rounded-full px-10 py-6 text-base font-medium shadow-md ${
-                  currentAttempt.score === currentQuestion.marks
-                    ? 'bg-emerald-500 hover:bg-emerald-600'
-                    : currentAttempt.score <= currentQuestion.marks / 2
-                    ? 'bg-red-500 hover:bg-red-600'
-                    : 'bg-amber-500 hover:bg-amber-600'
-                }`}
+                className="bg-[#3BAFDA] hover:bg-[#2A9BC7] text-white rounded-full px-10 py-6 text-base font-medium shadow-md"
               >
                 Next question
               </Button>
