@@ -1821,7 +1821,7 @@ const Dashboard = () => {
                         >
                            <Card 
                             className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
-                            onClick={() => navigate(`/subject/${subject.id}`)}
+                            onClick={() => setSelectedSubject(subject.id)}
                           >
                             <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
                               <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
