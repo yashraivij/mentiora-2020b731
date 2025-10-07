@@ -698,8 +698,8 @@ const Practice = () => {
                       
                       {/* Model answer */}
                       {currentAttempt.feedback?.modelAnswer && (
-                        <div className="mt-6 p-5 bg-gray-100 rounded-[20px] shadow-sm">
-                          <h4 className="font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
+                        <div className="mt-6 p-5 bg-[#E8F8F0] rounded-[20px] shadow-sm border border-[#10B981]/20">
+                          <h4 className="font-bold text-[#059669] mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
                           <p className="text-gray-800 font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                         </div>
                       )}
