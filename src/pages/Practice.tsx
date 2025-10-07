@@ -621,105 +621,94 @@ const Practice = () => {
       <main className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
           {/* Left Pane: Question Sheet */}
-          <div className="rounded-2xl bg-[#EAF2FF] p-5 md:p-6">
-            <div className="rounded-2xl bg-white shadow-[0_4px_30px_rgba(0,0,0,0.06)] border border-[#E7ECF5]">
-              {/* Question Header */}
-              <div className="p-6 border-b border-[#EEF2F7]">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    {/* Question reference numbers */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="inline-flex items-center gap-1">
-                        <span className="inline-block border border-slate-300 px-2 py-0.5 text-sm font-mono">0</span>
-                        <span className="inline-block border border-slate-300 px-2 py-0.5 text-sm font-mono">{currentQuestionIndex + 1}</span>
-                      </div>
+          <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
+            {/* Question Header */}
+            <div className="mb-6">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex-1">
+                  {/* Question reference numbers */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="inline-flex items-center gap-1">
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestionIndex + 1}</span>
                     </div>
-                    
-                    {/* Question text */}
-                    <h2 className="text-[22px] md:text-[26px] font-semibold tracking-tight text-slate-900 leading-tight">
-                      {currentQuestion.question.split('\n')[0]}
-                    </h2>
-                    <p className="text-sm text-slate-500 mt-1">
-                      {subject?.name} • Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
-                    </p>
                   </div>
                   
-                  {/* Marks pill */}
-                  <div className="text-[13px] font-medium rounded-full px-3 py-1 bg-[#EDF2FF] text-[#2E5BFF] border border-[#D6E0FF] whitespace-nowrap">
-                    [{currentQuestion.marks} marks]
-                  </div>
+                  {/* Question text */}
+                  <p className="text-base text-slate-900 leading-relaxed mb-2">
+                    {currentQuestion.question}
+                  </p>
+                </div>
+                
+                {/* Marks pill */}
+                <div className="text-sm font-semibold text-slate-900 whitespace-nowrap">
+                  [{currentQuestion.marks} marks]
                 </div>
               </div>
+            </div>
 
-              {/* Question Content */}
-              <div className="p-6">
-                {/* Answer input */}
-                <div className="mt-2">
-                  <label className="block text-[14px] text-slate-600 mb-2 font-medium">
-                    Your answer
-                  </label>
-                  <Textarea
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    placeholder="Type your answer here…"
-                    disabled={showFeedback}
-                    className="w-full min-h-[140px] rounded-xl border-[#E2E8F0] focus:ring-2 focus:ring-[#2E5BFF] text-[15px] resize-none"
-                  />
-                  <div className="text-[12px] text-slate-400 mt-1 text-right">
-                    {userAnswer.length} characters
-                  </div>
-                </div>
-              </div>
+            {/* Answer area - large white space */}
+            <div className="min-h-[400px] mb-6">
+              <Textarea
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder=""
+                disabled={showFeedback}
+                className="w-full h-full min-h-[400px] border-0 focus:ring-0 text-base resize-none p-0 bg-transparent"
+              />
+            </div>
 
-              {/* Sticky action bar */}
-              <div className="flex items-center justify-end gap-3 border-t border-[#EEF2F7] p-4 sticky bottom-0 bg-white rounded-b-2xl">
-                <Button
-                  onClick={handleSubmitAnswer}
-                  disabled={isSubmitting || !userAnswer.trim() || showFeedback}
-                  className="bg-[#2E5BFF] hover:bg-[#254AE0] text-white rounded-xl px-5 py-2.5 font-medium disabled:opacity-50"
-                >
-                  {isSubmitting ? "Marking..." : showFeedback ? "Marked" : "Check answer"}
-                </Button>
-              </div>
+            {/* Check answer button - bottom right */}
+            <div className="flex justify-end">
+              <Button
+                onClick={handleSubmitAnswer}
+                disabled={isSubmitting || !userAnswer.trim() || showFeedback}
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-3 font-medium text-base disabled:opacity-50 shadow-md"
+              >
+                {isSubmitting ? "Marking..." : showFeedback ? "Marked" : "Check answer"}
+              </Button>
             </div>
           </div>
 
-          {/* Right Pane: Tutor Chat */}
-          <aside className="rounded-2xl bg-white shadow-[0_4px_30px_rgba(0,0,0,0.06)] border border-[#E7ECF5] p-4 md:p-5 sticky top-6 max-h-[80vh] flex flex-col">
+          {/* Right Pane: Ask medly */}
+          <aside className="flex flex-col h-[600px]">
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="rounded-full bg-[#F2F6FF] text-[#2E5BFF] p-2">
-                  <MessageCircle className="h-4 w-4" />
-                </div>
-                <span className="text-sm font-medium text-slate-700">Ask medly</span>
-              </div>
-              {showChatAssistant && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowChatAssistant(false)}
-                  className="h-8 w-8"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
+            <div className="mb-4">
+              <h2 className="text-base font-semibold text-slate-700">Ask medly</h2>
             </div>
 
-            {/* Chat content - always show suggestions */}
-            <div className="flex-1 flex flex-col justify-end gap-3 pb-2">
+            {/* Spacer to push content to bottom */}
+            <div className="flex-1"></div>
+
+            {/* Chat suggestions at bottom */}
+            <div className="space-y-3 mb-4">
               <button
                 onClick={() => setShowChatAssistant(true)}
-                className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
+                className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 I don&apos;t understand this problem
               </button>
               <button
                 onClick={() => setShowChatAssistant(true)}
-                className="text-left text-sm text-slate-600 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
+                className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Can you walk me through this step by step
               </button>
+            </div>
+
+            {/* Reply input at very bottom */}
+            <div className="flex gap-2">
+              <Input
+                placeholder="Reply"
+                className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
+                disabled
+              />
+              <Button 
+                className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center"
+                disabled
+              >
+                <Send className="h-4 w-4 rotate-45" />
+              </Button>
             </div>
           </aside>
         </div>
