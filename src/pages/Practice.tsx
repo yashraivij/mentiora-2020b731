@@ -687,7 +687,9 @@ const Practice = () => {
                   
                   // Determine color based on marks
                   let circleColor = 'bg-gray-300'; // Not attempted yet
-                  if (attempt) {
+                  const isAttempted = attempt !== null;
+                  
+                  if (isAttempted) {
                     if (attempt.score === question.marks) {
                       circleColor = 'bg-emerald-500'; // Full marks
                     } else if (attempt.score <= question.marks / 2) {
@@ -695,22 +697,24 @@ const Practice = () => {
                     } else {
                       circleColor = 'bg-amber-500'; // In between
                     }
-                  } else if (index === currentQuestionIndex) {
-                    circleColor = 'bg-orange-400'; // Current question (not attempted)
                   }
+                  
+                  // Show fox only on current question if not attempted yet
+                  const showFox = index === currentQuestionIndex && !isAttempted;
                   
                   return (
                     <div key={index} className="relative flex flex-col items-center">
-                      {/* Question dot */}
+                      {/* Question dot with fox overlay */}
                       <div 
-                        className={`w-5 h-5 rounded-full transition-colors ${circleColor}`}
-                      />
-                      {/* Fox on current question */}
-                      {index === currentQuestionIndex && (
-                        <div className="absolute -top-10">
-                          <span className="text-3xl">🦊</span>
-                        </div>
-                      )}
+                        className={`w-5 h-5 rounded-full transition-colors ${circleColor} ${showFox ? 'relative' : ''}`}
+                      >
+                        {/* Fox on current unattempted question */}
+                        {showFox && (
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <span className="text-2xl">🦊</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
