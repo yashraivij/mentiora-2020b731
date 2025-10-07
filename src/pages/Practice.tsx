@@ -628,7 +628,9 @@ const Practice = () => {
     );
   }
 
-  const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
+  // Get the most recent attempt for this question (in case of retries)
+  const questionAttempts = attempts.filter(a => a.questionId === currentQuestion.id);
+  const currentAttempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : undefined;
 
   return (
     <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
