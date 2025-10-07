@@ -741,10 +741,9 @@ const Practice = () => {
               ) : (
                 <div className="space-y-4">
                   {/* User's answer */}
-                  <div className="inline-block bg-[#FFE5E5] px-4 py-2 rounded-md">
-                    <span className="text-gray-700">
-                      {userAnswer}
-                    </span>
+                  <div className="p-5 bg-[#FEF2F2] rounded-[20px] shadow-sm border border-[#EF4444]/20">
+                    <h4 className="font-bold text-[#DC2626] mb-3 text-sm uppercase tracking-wide">Your Answer</h4>
+                    <p className="text-gray-800 font-medium leading-relaxed">{userAnswer}</p>
                   </div>
                   
                   {/* Marks display inline */}
