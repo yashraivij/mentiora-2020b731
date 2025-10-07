@@ -659,9 +659,9 @@ const Practice = () => {
                 />
               ) : (
                 <div className="space-y-4">
-                  {/* User's answer */}
+                  {/* User's answer with strikethrough if wrong */}
                   <div className="inline-block bg-[#FFE5E5] px-4 py-2 rounded-md">
-                    <span className="text-gray-700">
+                    <span className={currentAttempt && currentAttempt.score < currentQuestion.marks ? "line-through text-gray-700" : "text-gray-700"}>
                       {userAnswer}
                     </span>
                   </div>
@@ -771,7 +771,30 @@ const Practice = () => {
 
             {/* Feedback content or suggestions */}
             <div className="flex-1 overflow-auto mb-4">
-              <>
+              {showFeedback && currentAttempt ? (
+                <div className="space-y-3">
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
+                  </div>
+                  {currentAttempt.score === 0 && (
+                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                      It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
+                    </div>
+                  )}
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    Let&apos;s go through it together.
+                  </div>
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    {currentAttempt.feedback.whyYoursDidnt}
+                  </div>
+                  {currentAttempt.feedback.modelAnswer && (
+                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                      <strong>Model answer:</strong> {currentAttempt.feedback.modelAnswer}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
                   <div className="flex-1" />
                   <div className="space-y-3">
                     <button
@@ -788,6 +811,7 @@ const Practice = () => {
                     </button>
                   </div>
                 </>
+              )}
             </div>
 
             {/* Reply input at very bottom */}
