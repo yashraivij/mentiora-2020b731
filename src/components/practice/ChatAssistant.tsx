@@ -1,14 +1,15 @@
-import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Star, MessageCircleQuestion } from "lucide-react";
-import { Question } from "@/data/curriculum";
+import { Input } from "@/components/ui/input";
+import { X, MessageCircle, Send, Bot, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Question } from "@/data/curriculum";
 
 interface Message {
+  id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
@@ -17,29 +18,16 @@ interface Message {
 interface ChatAssistantProps {
   question: Question;
   subject: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Let's solve this together, step by step.",
-      timestamp: new Date()
-    },
-    {
-      role: 'assistant',
-      content: "Identify what the question is asking first.",
-      timestamp: new Date()
-    },
-    {
-      role: 'assistant',
-      content: "Now, write your first idea and I'll check it.",
-      timestamp: new Date()
-    }
-  ]);
+export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssistantProps) => {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [conversationStage, setConversationStage] = useState<'initial' | 'guiding' | 'final'>('initial');
+  const [stage, setStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
+  const [hintCount, setHintCount] = useState(0);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -52,12 +40,50 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
     }
   }, [messages]);
 
-  const sendMessage = async (messageText: string) => {
-    if (!messageText.trim() || isLoading) return;
+  // Initialize conversation when opened
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      initializeConversation();
+    }
+  }, [isOpen]);
+
+  const initializeConversation = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('chat-assistant', {
+        body: {
+          question: question.question,
+          subject,
+          conversation: [],
+          stage: 'intro'
+        }
+      });
+
+      if (error) throw error;
+
+      const assistantMessage: Message = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: data.response,
+        timestamp: new Date()
+      };
+
+      setMessages([assistantMessage]);
+    } catch (error) {
+      console.error('Error initializing conversation:', error);
+      toast.error("Failed to start assistant. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const sendMessage = async (message: string) => {
+    if (!message.trim() || isLoading) return;
 
     const userMessage: Message = {
+      id: Date.now().toString(),
       role: 'user',
-      content: messageText,
+      content: message,
       timestamp: new Date()
     };
 
@@ -66,6 +92,14 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
     setIsLoading(true);
 
     try {
+      // Determine conversation stage based on progress
+      let currentStage = stage;
+      if (hintCount >= 3 && stage !== 'final') {
+        currentStage = 'struggling';
+      } else if (stage === 'intro') {
+        currentStage = 'guiding';
+      }
+
       const conversation = messages.map(msg => ({
         role: msg.role,
         content: msg.content
@@ -74,25 +108,29 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
       const { data, error } = await supabase.functions.invoke('chat-assistant', {
         body: {
           question: question.question,
-          studentAnswer: messageText,
+          studentAnswer: message,
           subject,
           conversation,
-          stage: conversationStage
+          stage: currentStage
         }
       });
 
       if (error) throw error;
 
       const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: data.response,
         timestamp: new Date()
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-      
-      if (conversationStage === 'initial') {
-        setConversationStage('guiding');
+      setStage(currentStage);
+      setHintCount(prev => prev + 1);
+
+      // If we've given several hints, progress towards showing the answer
+      if (hintCount >= 4 && currentStage !== 'final') {
+        setStage('final');
       }
 
     } catch (error) {
@@ -128,13 +166,14 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
       if (error) throw error;
 
       const assistantMessage: Message = {
+        id: Date.now().toString(),
         role: 'assistant',
-        content: `Here's the model answer:\n\n**Model Answer:** ${question.modelAnswer}\n\n**Why this gets marks:** ${question.markingCriteria.breakdown.join(' ')}\n\n${data.response}`,
+        content: `Here's the model answer and why it gets full marks:\n\n**Model Answer:** ${question.modelAnswer}\n\n**Why this gets marks:** ${question.markingCriteria.breakdown.join(' ')}\n\n${data.response}`,
         timestamp: new Date()
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-      setConversationStage('final');
+      setStage('final');
     } catch (error) {
       console.error('Error showing model answer:', error);
       toast.error("Failed to show model answer. Please try again.");
@@ -143,57 +182,82 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
     }
   };
 
-  return (
-    <Card className="w-full bg-white rounded-2xl shadow-lg border border-gray-200 h-[calc(100vh-12rem)] flex flex-col">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b border-gray-200 p-6">
-        <div className="space-y-1">
-          <CardTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <MessageCircleQuestion className="h-5 w-5" style={{ color: '#2663EB' }} />
-            Solve with your Tutor
-          </CardTitle>
-          <CardDescription className="text-xs text-gray-600">
-            Get step-by-step guidance
-          </CardDescription>
-        </div>
-      </CardHeader>
+  if (!isOpen) return null;
 
-      <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
-        {/* Chat Messages */}
-        <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
+  return (
+    <Card className="fixed right-4 top-4 bottom-4 w-96 z-50 shadow-2xl border-2 border-border bg-card/95 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-border" style={{ background: 'var(--gradient-primary)' }}>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/30">
+            <MessageCircle className="h-4 w-4 text-white" />
+          </div>
+          <CardTitle className="text-sm font-semibold text-white drop-shadow-sm">
+            Study Helper
+          </CardTitle>
+        </div>
+        <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-white/20 text-white">
+          <X className="h-4 w-4" />
+        </Button>
+      </CardHeader>
+      
+      <CardContent className="flex flex-col h-[calc(100vh-8rem)]">
+        <div className="text-xs mb-2 p-3 rounded-lg border border-border" style={{ background: 'var(--gradient-accent)' }}>
+          <div className="flex items-center gap-2 font-medium text-white drop-shadow-sm">
+            <Bot className="h-4 w-4 text-white" />
+            Let's work through this question together step by step!
+          </div>
+        </div>
+        
+        <ScrollArea className="flex-1 pr-4" ref={scrollAreaRef}>
           <div className="space-y-4">
-            {messages.map((message, index) => (
+            {messages.map((message) => (
               <div
-                key={index}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                key={message.id}
+                className={`flex gap-3 ${
+                  message.role === 'user' ? 'justify-end' : 'justify-start'
+                }`}
               >
                 <div
-                  className={`max-w-[85%] rounded-xl px-4 py-3 ${
-                    message.role === 'user'
-                      ? 'text-white shadow-sm'
-                      : 'bg-gray-100 text-gray-900 border border-gray-200'
+                  className={`flex gap-2 max-w-[85%] ${
+                    message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                   }`}
-                  style={message.role === 'user' ? { backgroundColor: '#2663EB' } : {}}
                 >
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-                  <p className={`text-xs mt-2 ${
-                    message.role === 'user' ? 'text-white/70' : 'text-gray-500'
-                  }`}>
-                    {new Date(message.timestamp).toLocaleTimeString([], { 
-                      hour: '2-digit', 
-                      minute: '2-digit' 
-                    })}
-                  </p>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 ${
+                    message.role === 'user' 
+                      ? 'text-white' 
+                      : 'text-white'
+                  }`} style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-accent)' }}>
+                    {message.role === 'user' ? (
+                      <User className="h-4 w-4" />
+                    ) : (
+                      <Bot className="h-4 w-4" />
+                    )}
+                  </div>
+                  <div
+                    className={`px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-lg border border-white/20 ${
+                      message.role === 'user'
+                        ? 'text-white'
+                        : 'text-card-foreground'
+                    }`}
+                    style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-secondary)' }}
+                  >
+                    {message.content}
+                  </div>
                 </div>
               </div>
             ))}
-            
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 rounded-xl px-4 py-3 border border-gray-200">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2663EB', animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2663EB', animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2663EB', animationDelay: '300ms' }} />
+              <div className="flex gap-3 justify-start">
+                <div className="flex gap-2">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
+                    <Bot className="h-4 w-4" />
+                  </div>
+                  <div className="px-4 py-3 rounded-xl text-sm shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)' }}></div>
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.2s' }}></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,46 +265,38 @@ export const ChatAssistant = ({ question, subject }: ChatAssistantProps) => {
           </div>
         </ScrollArea>
 
-        {/* Input Area */}
-        <div className="p-6 border-t border-gray-200 bg-white">
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="flex gap-2">
-              <Textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Reply…"
-                className="min-h-[60px] resize-none bg-white border-2 border-gray-300 focus:border-blue-500 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-                disabled={isLoading}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSubmit(e);
-                  }
-                }}
-              />
-              <Button 
-                type="submit" 
-                size="icon"
-                disabled={isLoading || !input.trim()}
-                className="h-[60px] w-[60px] rounded-xl text-white shadow-md hover:shadow-lg transition-all duration-200"
-                style={{ backgroundColor: '#2663EB' }}
-              >
-                <Send className="h-5 w-5" />
-              </Button>
-            </div>
-            
-            {conversationStage === 'initial' && (
-              <Button
-                type="button"
-                onClick={showModelAnswer}
-                variant="outline"
-                className="w-full bg-amber-50 border-amber-200 hover:bg-amber-100 text-amber-700 rounded-xl font-medium"
-                disabled={isLoading}
-              >
-                <Star className="h-4 w-4 mr-2" />
-                Show Model Answer
-              </Button>
-            )}
+        <div className="border-t border-border pt-3 mt-3 space-y-3 p-3 rounded-lg" style={{ background: 'var(--gradient-background)' }}>
+          {stage !== 'final' && hintCount >= 2 && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={showModelAnswer}
+              disabled={isLoading}
+              className="w-full text-xs text-white border-white/30 hover:bg-white/20 transition-all duration-200"
+              style={{ background: 'var(--gradient-accent)' }}
+            >
+              <Bot className="h-3 w-3 mr-1" />
+              Show me the answer
+            </Button>
+          )}
+          
+          <form onSubmit={handleSubmit} className="flex gap-2">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your answer or ask for help..."
+              disabled={isLoading}
+              className="text-sm"
+            />
+            <Button
+              type="submit"
+              size="sm"
+              disabled={!input.trim() || isLoading}
+              className="shadow-lg text-white hover:opacity-90"
+              style={{ background: 'var(--gradient-primary)' }}
+            >
+              <Send className="h-4 w-4" />
+            </Button>
           </form>
         </div>
       </CardContent>

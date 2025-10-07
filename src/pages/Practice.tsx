@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -85,10 +85,6 @@ const Practice = () => {
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
-
-  // Character counter
-  const characterCount = userAnswer.length;
-  const maxCharacters = 500;
 
   // Save session state to localStorage
   const saveSessionState = () => {
@@ -488,47 +484,46 @@ const Practice = () => {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
-
+    
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F6F9FC' }}>
-        <Card className="w-full max-w-lg bg-white rounded-2xl shadow-lg border border-gray-200">
-          <CardHeader className="text-center p-8">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#2663EB' }}>
-              <Trophy className="h-10 w-10 text-white" />
-            </div>
-            <CardTitle className="text-3xl text-gray-900">Session Complete!</CardTitle>
-            <CardDescription className="text-lg text-gray-600">
-              Well done on completing this practice session
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="max-w-md w-full">
+          <CardHeader className="text-center">
+            <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
+            <CardTitle className="text-foreground">Session Complete!</CardTitle>
+            <CardDescription className="text-muted-foreground">
+              {topic?.name} - {subject?.name}
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-center space-y-4 p-8 pt-0">
+          <CardContent className="text-center space-y-4">
             <div>
-              <div className="text-5xl font-bold mb-2" style={{ color: '#2663EB' }}>
+              <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {marksEarned}/{totalMarks}
               </div>
-              <p className="text-gray-600">Total Marks</p>
+              <p className="text-muted-foreground">Total Marks</p>
             </div>
             
             <div className="space-y-2">
-              <div className="flex justify-between text-gray-700">
+              <div className="flex justify-between">
                 <span>Questions Answered:</span>
                 <span className="font-medium">{attempts.length}</span>
               </div>
-              <div className="flex justify-between text-gray-700">
+              <div className="flex justify-between">
                 <span>Performance:</span>
-                <Badge className={averagePercentage >= 85 ? "bg-green-500 text-white" : averagePercentage >= 60 ? "bg-yellow-500 text-white" : "bg-red-500 text-white"}>
+                <Badge className={averagePercentage >= 85 ? "bg-green-500" : averagePercentage >= 60 ? "bg-yellow-500" : "bg-red-500"}>
                   {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Needs Work"}
                 </Badge>
               </div>
             </div>
             
-            <Button 
-              onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
-              className="w-full text-white font-semibold rounded-xl h-12 mt-6"
-              style={{ backgroundColor: '#2663EB' }}
-            >
-              Back to {subject?.name}
-            </Button>
+            <div className="flex flex-col space-y-2">
+              <Button 
+                onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
+                className="bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-semibold border-0"
+              >
+                Back to {subject?.name}
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -537,10 +532,17 @@ const Practice = () => {
 
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F6F9FC' }}>
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900">No questions available</h2>
-          <Button onClick={() => navigate('/dashboard')}>
+          <h2 className="text-2xl font-bold mb-4 text-foreground">No questions available</h2>
+          <Button onClick={() => {
+            console.log('Back button clicked (no questions)');
+            if (window.history.length > 1) {
+              window.history.back();
+            } else {
+              window.location.href = '/dashboard';
+            }
+          }}>
             Back
           </Button>
         </div>
@@ -548,200 +550,273 @@ const Practice = () => {
     );
   }
 
+  const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6F9FC' }}>
-      {/* Fixed Header */}
-      <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => navigate(`/dashboard?subject=${subjectId}&topic=${topicId}`)}
-              className="hover:bg-gray-100 rounded-full"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">
-                {subject?.name}
-              </h1>
-              <p className="text-sm text-gray-600">{topic?.name}</p>
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
+      {/* Header */}
+      <header className="bg-card shadow-sm border-b border-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  console.log('Back button clicked');
+                  navigate(`/dashboard?subject=${subjectId}`);
+                }}
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">{topic?.name}</h1>
+                <p className="text-sm text-muted-foreground">{subject?.name}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-muted-foreground">
+                Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
+              </span>
+              <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="bg-blue-50 border-blue-200 text-blue-700">
-              {currentQuestionIndex + 1} / {shuffledQuestions.length}
-            </Badge>
-            <Progress 
-              value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} 
-              className="w-32 h-2"
-            />
-          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Two Column Layout */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="grid md:grid-cols-[2fr_1fr] gap-8">
-          
-          {/* LEFT PANEL - Question Area */}
-          <div className="space-y-6">
-            <Card className="bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="space-y-4 p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="space-y-2 flex-1">
-                    <CardTitle className="text-2xl font-bold text-gray-900 leading-relaxed">
-                      {currentQuestion.question}
-                    </CardTitle>
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Question Panel */}
+            <Card className="bg-card/80 backdrop-blur-sm border border-border">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg text-foreground">Question</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{currentQuestion.marks} marks</Badge>
+                     {currentQuestion.calculatorGuidance && (
+                       <Badge 
+                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
+                         className={`text-xs ${
+                           currentQuestion.calculatorGuidance === 'calc-recommended' 
+                             ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
+                             : 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
+                         }`}
+                       >
+                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
+                       </Badge>
+                     )}
                   </div>
-                  <Badge 
-                    className="shrink-0 text-base px-4 py-1.5 rounded-full font-semibold"
-                    style={{ backgroundColor: '#2663EB', color: 'white' }}
-                  >
-                    {currentQuestion.marks} {currentQuestion.marks === 1 ? 'mark' : 'marks'}
-                  </Badge>
                 </div>
-                
-                {/* Spec Reference */}
-                {currentQuestion.specReference && (
-                  <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                    <p className="text-sm text-gray-700 flex items-center gap-2">
-                      <BookOpen className="h-4 w-4 text-blue-600" />
-                      <span className="font-medium">Specification:</span> {currentQuestion.specReference}
-                    </p>
-                  </div>
-                )}
               </CardHeader>
-
-              <CardContent className="space-y-6 p-8 pt-0">
-                {/* Instructions Box */}
-                <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                  <p className="text-sm text-gray-700 flex items-center gap-2">
-                    <StickyNote className="h-4 w-4" style={{ color: '#2663EB' }} />
-                    Write your answer below. Show all working where relevant.
-                  </p>
-                </div>
+              <CardContent>
+                {/* Question Text with Extract/Transcript Formatting */}
+                {(() => {
+                  const questionText = currentQuestion.question;
+                  
+                  // Check for transcript or extract sections
+                  const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
+                  
+                  if (transcriptMatch) {
+                    const [, beforeText, markerText, afterText] = transcriptMatch;
+                    
+                    // Split the after text to separate the actual transcript/extract from any following text
+                    const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
+                    const extractContent = parts[0];
+                    const remainingText = parts.slice(1).join('\n');
+                    
+                    return (
+                      <div className="space-y-4">
+                        {beforeText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {beforeText.trim()}
+                          </p>
+                        )}
+                        
+                        {/* Extract/Transcript Display */}
+                        <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                          <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                            <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                            {markerText.replace(':', '')}
+                          </h4>
+                          <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
+                            {extractContent.trim()}
+                          </div>
+                        </div>
+                        
+                        {remainingText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {remainingText.trim()}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }
+                  
+                  // For questions with embedded texts (Text A: / Text B: format)
+                  const textSections = questionText.split(/(Text [A-Z]:)/);
+                  if (textSections.length > 1) {
+                    return (
+                      <div className="space-y-4">
+                        {textSections.map((section, index) => {
+                          if (section.match(/Text [A-Z]:/)) {
+                            const nextSection = textSections[index + 1];
+                            if (nextSection) {
+                              return (
+                                <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
+                                    <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
+                                    {section}
+                                  </h4>
+                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
+                                    "{nextSection.trim()}"
+                                  </div>
+                                </div>
+                              );
+                            }
+                          } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
+                            return (
+                              <p key={index} className="text-foreground leading-relaxed">
+                                {section.trim()}
+                              </p>
+                            );
+                          }
+                          return null;
+                        })}
+                      </div>
+                    );
+                  }
+                  
+                  // Default rendering for simple questions
+                  return (
+                    <p className="text-foreground mb-6 leading-relaxed">
+                      {questionText}
+                    </p>
+                  );
+                })()}
                 
-                {/* Answer Input */}
-                <div className="space-y-2">
-                  <Textarea
-                    placeholder="Type your answer here…"
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    disabled={showFeedback}
-                    className="min-h-[200px] text-base resize-none bg-white border-2 border-gray-300 focus:border-blue-500 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-blue-200 focus:outline-none"
-                  />
-                  <div className="flex justify-end">
-                    <span className="text-sm text-gray-500">
-                      {characterCount} / {maxCharacters}
-                    </span>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Your Answer:
+                    </label>
+                    <Textarea
+                      value={userAnswer}
+                      onChange={(e) => setUserAnswer(e.target.value)}
+                      placeholder="Type your full answer here..."
+                      className="min-h-[200px]"
+                      disabled={showFeedback}
+                    />
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  {!showFeedback ? (
-                    <Button 
-                      onClick={handleSubmitAnswer} 
-                      disabled={isSubmitting || !userAnswer.trim()}
-                      className="flex-1 text-white font-semibold rounded-xl h-12 text-base shadow-md hover:shadow-lg transition-all duration-200"
-                      style={{ backgroundColor: '#2663EB' }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                          Marking...
-                        </>
-                      ) : (
-                        <>
-                          Mark answer
-                        </>
-                      )}
-                    </Button>
-                  ) : (
-                    <Button 
-                      onClick={handleNextQuestion}
-                      className="flex-1 text-white font-semibold rounded-xl h-12 text-base shadow-md hover:shadow-lg transition-all duration-200"
-                      style={{ backgroundColor: '#2663EB' }}
-                    >
-                      {currentQuestionIndex < shuffledQuestions.length - 1 ? (
-                        <>Next Question</>
-                      ) : (
-                        <>Finish Session</>
-                      )}
-                    </Button>
-                  )}
-                </div>
+                  
+                   {!showFeedback && (
+                     <div className="space-y-3">
+                       <Button 
+                         onClick={handleSubmitAnswer}
+                         disabled={isSubmitting || !userAnswer.trim()}
+                         className="w-full"
+                       >
+                         {isSubmitting ? "Marking your answer..." : "Submit Answer"}
+                       </Button>
+                       
+                       <Button
+                         variant="outline"
+                         onClick={() => setShowChatAssistant(true)}
+                         className="w-full"
+                         disabled={showChatAssistant}
+                       >
+                         <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
+                         Help me solve this step-by-step
+                       </Button>
+                     </div>
+                   )}
+                 </div>
               </CardContent>
             </Card>
 
-            {/* Feedback Section */}
-            {showFeedback && (
-              <Card className="bg-white rounded-2xl shadow-lg border border-gray-200 animate-in slide-in-from-bottom duration-500">
-                <CardHeader className="p-8">
-                  <CardTitle className="flex items-center gap-2 text-2xl text-gray-900">
-                    <Trophy className="h-6 w-6 text-amber-500" />
-                    Answer Feedback
+            {/* Feedback Panel */}
+            {showFeedback && currentAttempt && (
+              <Card className="bg-card/80 backdrop-blur-sm border border-border">
+                <CardHeader>
+                  <CardTitle className="flex items-center text-foreground">
+                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
+                    Your Feedback
                   </CardTitle>
-                  <CardDescription className="text-base text-gray-600">
-                    You scored {attempts[attempts.length - 1]?.score || 0} / {currentQuestion.marks} marks
-                  </CardDescription>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                      {currentAttempt.score}/{currentQuestion.marks}
+                    </span>
+                    <span className="text-sm text-muted-foreground">marks</span>
+                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
+                      {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
+                    </Badge>
+                  </div>
                 </CardHeader>
-                <CardContent className="space-y-6 p-8 pt-0">
+                <CardContent className="space-y-6">
                   {/* Model Answer */}
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg flex items-center gap-2 text-gray-900">
-                      <Star className="h-5 w-5" style={{ color: '#2663EB' }} />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
                       Model Answer
-                    </h3>
-                    <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-700">
-                        {attempts[attempts.length - 1]?.feedback.modelAnswer}
-                      </p>
+                    </h4>
+                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                      <div className="text-foreground space-y-2">
+                        {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                          <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Marking Criteria */}
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg flex items-center gap-2 text-gray-900">
-                      <BookOpenCheck className="h-5 w-5" style={{ color: '#2663EB' }} />
+                  {/* Why This Gets Marks */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <Award className="h-4 w-4 mr-2 text-blue-600" />
                       Why This Gets Full Marks
-                    </h3>
-                    <div className="bg-purple-50 rounded-xl p-4 border border-purple-100">
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-700">
-                        {attempts[attempts.length - 1]?.feedback.whyThisGetsMark}
-                      </p>
+                    </h4>
+                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                      <pre className="text-foreground whitespace-pre-wrap font-sans">
+                        {currentAttempt.feedback.whyThisGetsMark}
+                      </pre>
                     </div>
                   </div>
 
-                  {/* Teacher's Notes */}
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg flex items-center gap-2 text-gray-900">
-                      <StickyNote className="h-5 w-5" style={{ color: '#2663EB' }} />
-                      Teacher's Notes on Your Answer
-                    </h3>
-                    <div className="bg-pink-50 rounded-xl p-4 border border-pink-100">
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-700">
-                        {attempts[attempts.length - 1]?.feedback.whyYoursDidnt}
-                      </p>
+                  {/* Smart Feedback */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
+                      Teacher's Notes
+                    </h4>
+                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                      <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
+                  </div>
+
+                  {/* Spec Reference */}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
+                    <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Button onClick={handleNextQuestion} className="w-full">
+                      {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+                    </Button>
+                    <Button 
+                      onClick={() => navigate('/dashboard?tab=notes')}
+                      variant="outline"
+                      className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
+                    >
+                      <span className="font-medium">📚 View Smart Notebook</span>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             )}
           </div>
-
-          {/* RIGHT PANEL - Tutor Chat */}
-          <div className="md:sticky md:top-24 h-fit">
-            <ChatAssistant 
-              question={currentQuestion}
-              subject={subjectId || ''}
-            />
-          </div>
         </div>
       </div>
-
+      
       {/* Personalized Notification */}
       {notification.isVisible && (
         <PersonalizedNotification
@@ -753,6 +828,14 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
+
+      {/* Chat Assistant */}
+      <ChatAssistant
+        question={currentQuestion}
+        subject={subjectId || ''}
+        isOpen={showChatAssistant}
+        onClose={() => setShowChatAssistant(false)}
+      />
     </div>
   );
 };
