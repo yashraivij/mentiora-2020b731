@@ -67,7 +67,10 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   };
 
   return (
-    <Card className="bg-white border border-gray-200 hover:shadow-md transition-shadow duration-200">
+    <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+      {/* Gradient accent bar at top */}
+      <div className="h-1 bg-gradient-to-r from-[#3DB4E8] via-[#4AC3F7] to-[#5DD4FF]" />
+      
       <CardHeader className="pb-4 px-6 pt-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -83,11 +86,11 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               >
                 {entry.confidence_level} Confidence
               </Badge>
-              <Badge className="bg-gray-100 text-gray-700 border-0 text-xs">
+              <Badge className="bg-gradient-to-r from-[#3DB4E8]/10 to-[#5DD4FF]/10 text-[#3DB4E8] border-0 text-xs font-semibold flex items-center gap-1">
                 {getSkillIcon(entry.skill_type)}
-                <span className="ml-1">{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
+                <span>{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
               </Badge>
-              <Badge className="bg-red-50 text-red-700 border-0 text-xs">
+              <Badge className="bg-red-50 text-red-700 border-0 text-xs font-semibold">
                 -{entry.mark_loss} marks
               </Badge>
               <Badge className="bg-gray-50 text-gray-600 border-0 text-xs flex items-center gap-1">
@@ -136,19 +139,19 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
-          <div className="bg-[#3DB4E8] text-white p-4 rounded-lg text-center">
+          <div className="bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] text-white p-5 rounded-xl shadow-lg text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Unlock className="h-4 w-4 flex-shrink-0" />
-              <h4 className="font-semibold text-sm">
+              <Unlock className="h-5 w-5 flex-shrink-0" />
+              <h4 className="font-bold text-base">
                 Unlock Full Notes
               </h4>
             </div>
-            <p className="text-white/90 text-sm mb-3">
+            <p className="text-white/95 text-sm mb-4">
               Start your free trial to access complete revision notes
             </p>
             <Button 
               onClick={() => navigate("/pricing")}
-              className="w-full bg-white text-[#3DB4E8] hover:bg-gray-100 font-semibold py-2 rounded-lg"
+              className="w-full bg-white text-[#3DB4E8] hover:bg-gray-50 font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               Start Free Trial
             </Button>
