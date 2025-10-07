@@ -554,7 +554,7 @@ const Practice = () => {
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
 
   return (
-    <div className={`min-h-screen font-inter ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#F5F5F5' }}>
+    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
       {/* Medly-style Top Navigation */}
       <header className="border-b border-gray-200 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
@@ -578,8 +578,8 @@ const Practice = () => {
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-gray-700 border-2 border-gray-900 p-0.5" />
-                <h1 className="text-base font-semibold text-slate-900">{topic?.name}</h1>
+                <BookOpen className="h-4 w-4 text-gray-600" />
+                <h1 className="text-lg font-semibold text-slate-900">{topic?.name}</h1>
               </div>
               <Button
                 variant="ghost"
@@ -608,7 +608,7 @@ const Practice = () => {
               variant="outline"
               size="sm"
               onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
-              className="border-gray-900 border-2 font-medium text-sm"
+              className="border-gray-300"
             >
               <BookOpen className="h-4 w-4 mr-2" />
               Textbook
@@ -621,41 +621,40 @@ const Practice = () => {
       <main className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
           {/* Left Pane: Question Sheet */}
-          <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-10">
+          <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
             {/* Question Header */}
-            <div className="mb-8">
-              <div className="flex items-start justify-between gap-6 mb-6">
+            <div className="mb-6">
+              <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex-1">
-                  {/* Question reference numbers - two separate boxes */}
-                  <div className="flex items-center gap-2 mb-6">
-                    <span className="inline-block border-2 border-gray-900 px-3 py-1 text-base font-normal min-w-[40px] text-center">0</span>
-                    <span className="inline-block border-2 border-gray-900 px-3 py-1 text-base font-normal min-w-[40px] text-center">{currentQuestionIndex + 1}</span>
-                    <span className="inline-block border-2 border-gray-900 px-3 py-1 text-base font-normal min-w-[40px] text-center">.</span>
-                    <span className="inline-block border-2 border-gray-900 px-3 py-1 text-base font-normal min-w-[40px] text-center">1</span>
+                  {/* Question reference numbers */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="inline-flex items-center gap-1">
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestionIndex + 1}</span>
+                    </div>
                   </div>
                   
                   {/* Question text */}
-                  <p className="text-base text-slate-900 leading-relaxed">
+                  <p className="text-base text-slate-900 leading-relaxed mb-2">
                     {currentQuestion.question}
                   </p>
                 </div>
                 
-                {/* Marks - right aligned */}
-                <div className="text-base font-normal text-slate-900 whitespace-nowrap pt-8">
+                {/* Marks pill */}
+                <div className="text-sm font-semibold text-slate-900 whitespace-nowrap">
                   [{currentQuestion.marks} marks]
                 </div>
               </div>
             </div>
 
-            {/* Answer area - large white space with invisible textarea */}
-            <div className="min-h-[350px] mb-8">
+            {/* Answer area - large white space */}
+            <div className="min-h-[400px] mb-6">
               <Textarea
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
                 placeholder=""
                 disabled={showFeedback}
-                className="w-full h-full min-h-[350px] border-0 focus:ring-0 focus:outline-none text-base resize-none p-0 bg-transparent shadow-none"
-                style={{ boxShadow: 'none' }}
+                className="w-full h-full min-h-[400px] border-0 focus:ring-0 text-base resize-none p-0 bg-transparent"
               />
             </div>
 
@@ -674,7 +673,7 @@ const Practice = () => {
           {/* Right Pane: Ask medly */}
           <aside className="flex flex-col h-[600px]">
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-4">
               <h2 className="text-base font-semibold text-slate-700">Ask medly</h2>
             </div>
 
@@ -701,16 +700,14 @@ const Practice = () => {
             <div className="flex gap-2">
               <Input
                 placeholder="Reply"
-                className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm bg-white"
+                className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
                 disabled
               />
               <Button 
                 className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center"
                 disabled
               >
-                <div className="transform rotate-45">
-                  <Send className="h-4 w-4" />
-                </div>
+                <Send className="h-4 w-4 rotate-45" />
               </Button>
             </div>
           </aside>
