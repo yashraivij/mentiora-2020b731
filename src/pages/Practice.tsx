@@ -773,15 +773,15 @@ const Practice = () => {
             <div className="flex-1 overflow-auto mb-4">
               {showFeedback && currentAttempt ? (
                 <div className="space-y-3">
-                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                  <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
                     You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
                   </div>
                   {currentAttempt.score === 0 && (
-                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
                       It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
                     </div>
                   )}
-                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                  <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
                     Let&apos;s go through it together.
                   </div>
                 </div>
