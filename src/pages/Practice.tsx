@@ -649,25 +649,99 @@ const Practice = () => {
 
             {/* Answer area - large white space */}
             <div className="min-h-[400px] mb-6">
-              <Textarea
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                placeholder=""
-                disabled={showFeedback}
-                className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
-              />
+              {!showFeedback ? (
+                <Textarea
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  placeholder=""
+                  disabled={showFeedback}
+                  className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
+                />
+              ) : (
+                <div className="space-y-4">
+                  {/* User's answer with strikethrough if wrong */}
+                  <div className="inline-block bg-[#FFE5E5] px-4 py-2 rounded-md">
+                    <span className={currentAttempt && currentAttempt.score < currentQuestion.marks ? "line-through text-gray-700" : "text-gray-700"}>
+                      {userAnswer}
+                    </span>
+                  </div>
+                  
+                  {/* Marks display inline */}
+                  {currentAttempt && (
+                    <div className="flex items-center gap-3">
+                      <div className="flex gap-1">
+                        {Array.from({ length: currentQuestion.marks }).map((_, i) => (
+                          <span key={i} className="text-red-500 text-xl">
+                            {i < currentAttempt.score ? "✓" : "❌"}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-red-500 font-medium">{currentAttempt.score}/{currentQuestion.marks} marks</span>
+                      <button 
+                        onClick={() => {
+                          setShowFeedback(false);
+                          setUserAnswer("");
+                        }}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                      </button>
+                      <button className="text-red-500 hover:text-red-600">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Check answer button - bottom right */}
-            <div className="flex justify-end">
-              <Button
-                onClick={handleSubmitAnswer}
-                disabled={isSubmitting || !userAnswer.trim() || showFeedback}
-                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-3 font-medium text-base disabled:opacity-50 shadow-md"
-              >
-                {isSubmitting ? "Marking..." : showFeedback ? "Marked" : "Check answer"}
-              </Button>
-            </div>
+            {/* Bottom action area */}
+            {!showFeedback ? (
+              <div className="flex justify-end">
+                <Button
+                  onClick={handleSubmitAnswer}
+                  disabled={isSubmitting || !userAnswer.trim()}
+                  className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-3 font-medium text-base disabled:opacity-50 shadow-md"
+                >
+                  {isSubmitting ? "Marking..." : "Check answer"}
+                </Button>
+              </div>
+            ) : currentAttempt && (
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-1">
+                    {Array.from({ length: currentQuestion.marks }).map((_, i) => (
+                      <span key={i} className="text-red-500 text-lg">
+                        {i < currentAttempt.score ? "✓" : "❌"}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-gray-700 font-medium">Total: {currentAttempt.score}/{currentQuestion.marks} marks</span>
+                  <button 
+                    onClick={() => {
+                      setShowFeedback(false);
+                      setUserAnswer("");
+                    }}
+                    className="flex items-center gap-2 text-red-500 hover:text-red-600 font-medium"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Retry
+                  </button>
+                </div>
+                <Button
+                  onClick={handleNextQuestion}
+                  className="bg-[#3BAFDA] hover:bg-[#2A9BC7] text-white rounded-full px-8 py-3 text-base font-medium"
+                >
+                  Next question
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Right Pane: Ask medly */}
@@ -677,23 +751,49 @@ const Practice = () => {
               <h2 className="text-base font-semibold text-slate-700">Ask medly</h2>
             </div>
 
-            {/* Spacer to push content to bottom */}
-            <div className="flex-1"></div>
-
-            {/* Chat suggestions at bottom */}
-            <div className="space-y-3 mb-4">
-              <button
-                onClick={() => setShowChatAssistant(true)}
-                className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                I don&apos;t understand this problem
-              </button>
-              <button
-                onClick={() => setShowChatAssistant(true)}
-                className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Can you walk me through this step by step
-              </button>
+            {/* Feedback content or suggestions */}
+            <div className="flex-1 overflow-auto mb-4">
+              {showFeedback && currentAttempt ? (
+                <div className="space-y-3">
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
+                  </div>
+                  {currentAttempt.score === 0 && (
+                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                      It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
+                    </div>
+                  )}
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    Let&apos;s go through it together.
+                  </div>
+                  <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                    {currentAttempt.feedback.whyYoursDidnt}
+                  </div>
+                  {currentAttempt.feedback.modelAnswer && (
+                    <div className="bg-gray-100 rounded-lg p-4 text-sm text-gray-800">
+                      <strong>Model answer:</strong> {currentAttempt.feedback.modelAnswer}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="flex-1" />
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setShowChatAssistant(true)}
+                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      I don&apos;t understand this problem
+                    </button>
+                    <button
+                      onClick={() => setShowChatAssistant(true)}
+                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      Can you walk me through this step by step
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Reply input at very bottom */}
