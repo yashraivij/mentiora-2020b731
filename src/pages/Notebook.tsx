@@ -141,123 +141,109 @@ const Notebook = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#E8F5FD] via-white to-white">
-      {/* Premium Gradient Header */}
-      <div className="bg-gradient-to-r from-[#3DB4E8] via-[#4AC3F7] to-[#5DD4FF] text-white">
-        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="flex items-center gap-3 mb-4">
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
             <Button 
               variant="ghost" 
               onClick={() => navigate('/dashboard')}
-              className="text-white hover:text-white hover:bg-white/20 transition-all duration-200 -ml-2"
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200"
             >
               <ArrowLeft className="h-5 w-5 sm:mr-2" />
               <span className="hidden sm:inline">Dashboard</span>
             </Button>
-          </div>
-          <div className="flex items-center gap-4 mb-3">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
-              <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-4xl font-bold text-white mb-1">
-                Smart Revision Notebook
-              </h1>
-              <p className="text-white/90 text-sm sm:text-base">
-                Ultra-clear, Grade 9-level notes for every mark you've lost
-              </p>
-            </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              Smart Revision Notebook
+            </h1>
+            <div className="w-20"></div>
           </div>
         </div>
-      </div>
+      </header>
 
       <div className="container mx-auto px-4 sm:px-6 py-8 max-w-5xl">
-        {/* Stats Cards with Gradient Accents */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 -mt-16 relative z-10">
-          <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-            <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#5DD4FF] flex items-center justify-center shadow-lg">
-                <BookOpen className="h-6 w-6 text-white" />
-              </div>
-              <div className="text-3xl font-bold bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] bg-clip-text text-transparent mb-1">
-                <BlurSpan>{stats.totalEntries}</BlurSpan>
-              </div>
-              <div className="text-sm font-medium text-gray-600">Total Notes</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-            <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#5DD4FF] flex items-center justify-center shadow-lg">
-                <TrendingUp className="h-6 w-6 text-white" />
-              </div>
-              <div className="text-3xl font-bold bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] bg-clip-text text-transparent mb-1">
-                <BlurSpan>{stats.timeSavedHours}h</BlurSpan>
-              </div>
-              <div className="text-sm font-medium text-gray-600">Time Saved</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-            <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#5DD4FF] flex items-center justify-center shadow-lg">
-                <Brain className="h-6 w-6 text-white" />
-              </div>
-              <div className="text-3xl font-bold bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] bg-clip-text text-transparent mb-1">
-                <BlurSpan>{stats.subjectsWithNotes}</BlurSpan>
-              </div>
-              <div className="text-sm font-medium text-gray-600">Subjects Covered</div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Your Smart Revision Notes
+            </h2>
+            <p className="text-base text-gray-600 max-w-2xl mx-auto">
+              Ultra-clear, Grade 9-level notes for every mark you've lost
+            </p>
+          </div>
 
-        {/* Filters Section */}
-        <div className="bg-white rounded-xl p-5 shadow-sm border-0 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 sm:space-x-4">
-            <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5 text-[#3DB4E8]" />
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <BookOpen className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.totalEntries}</BlurSpan></div>
+                <div className="text-sm text-gray-600">Total Notes</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <TrendingUp className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></div>
+                <div className="text-sm text-gray-600">Time Saved</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6 text-center">
+                <Brain className="h-8 w-8 text-[#3DB4E8] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></div>
+                <div className="text-sm text-gray-600">Subjects Covered</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Filters */}
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 sm:space-x-4">
               <h3 className="text-base font-semibold text-gray-900">Filter Notes</h3>
-            </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
-              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300 hover:border-[#3DB4E8] transition-colors">
-                  <SelectValue placeholder="All Subjects" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200">
-                  <SelectItem value="all">All Subjects</SelectItem>
-                  {getSubjects().map(subject => (
-                    <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300 hover:border-[#3DB4E8] transition-colors">
-                  <SelectValue placeholder="All Confidence" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200">
-                  <SelectItem value="all">All Confidence</SelectItem>
-                  <SelectItem value="low">Low Confidence</SelectItem>
-                  <SelectItem value="medium">Medium Confidence</SelectItem>
-                  <SelectItem value="high">High Confidence</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                  <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300">
+                    <SelectValue placeholder="All Subjects" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-200">
+                    <SelectItem value="all">All Subjects</SelectItem>
+                    {getSubjects().map(subject => (
+                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                  <SelectTrigger className="w-full sm:w-44 bg-white border-gray-300">
+                    <SelectValue placeholder="All Confidence" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-200">
+                    <SelectItem value="all">All Confidence</SelectItem>
+                    <SelectItem value="low">Low Confidence</SelectItem>
+                    <SelectItem value="medium">Medium Confidence</SelectItem>
+                    <SelectItem value="high">High Confidence</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Notebook Entries */}
         {sortedEntries.length === 0 ? (
-          <Card className="text-center py-16 bg-white border-0 shadow-lg">
+          <Card className="text-center py-16 bg-white border border-gray-200">
             <CardContent>
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#3DB4E8]/10 to-[#5DD4FF]/10 flex items-center justify-center">
-                <BookOpen className="h-10 w-10 text-[#3DB4E8]" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">No Revision Notes Yet</h3>
-              <p className="text-gray-600 mb-8 max-w-md mx-auto">
+              <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">No Revision Notes Yet</h3>
+              <p className="text-gray-600 mb-6 max-w-md mx-auto">
                 Start practicing questions to generate your personalized Smart revision notes!
               </p>
               <Button 
                 onClick={() => navigate('/dashboard')} 
-                className="bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] hover:from-[#2EA3D7] hover:to-[#4AC3F7] text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-[#3DB4E8] hover:bg-[#2EA3D7] text-white px-6 py-3 rounded-lg"
               >
                 Start Practicing
               </Button>
@@ -276,7 +262,7 @@ const Notebook = () => {
           <Button 
             onClick={() => navigate(-1)} 
             variant="outline"
-            className="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-gray-300 hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 text-gray-700 transition-all duration-200"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg border-2 border-gray-300 hover:bg-gray-100 text-gray-700"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
@@ -286,7 +272,7 @@ const Notebook = () => {
               navigate('/dashboard');
               window.scrollTo(0, 0);
             }}
-            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-[#3DB4E8] to-[#5DD4FF] hover:from-[#2EA3D7] hover:to-[#4AC3F7] text-white shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-[#3DB4E8] hover:bg-[#2EA3D7] text-white"
           >
             <BookOpen className="h-4 w-4 mr-2" />
             Practice More Questions
