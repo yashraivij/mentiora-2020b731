@@ -818,20 +818,24 @@ const Practice = () => {
               {chatMessages.length > 0 ? (
                 <>
                   {chatMessages.map((msg) => (
-                    <div key={msg.id} className={`rounded-[20px] p-4 text-sm font-medium ${
-                      msg.role === 'user' 
-                        ? 'bg-[#3BAFDA] text-white ml-8' 
-                        : 'bg-gray-100 text-gray-800 mr-8'
-                    }`}>
-                      {msg.content}
+                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`rounded-[20px] p-4 text-sm font-medium max-w-[80%] ${
+                        msg.role === 'user' 
+                          ? 'bg-[#3BAFDA] text-white' 
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {msg.content}
+                      </div>
                     </div>
                   ))}
                   {isChatLoading && (
-                    <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium mr-8">
-                      <div className="flex gap-1">
-                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
-                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        </div>
                       </div>
                     </div>
                   )}
