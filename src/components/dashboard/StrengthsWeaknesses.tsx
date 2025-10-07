@@ -55,14 +55,12 @@ export const StrengthsWeaknesses = ({ userProgress, onPractice }: StrengthsWeakn
   return (
     <div className="space-y-6">
       {/* Bar Chart Section */}
-      <Card className="relative overflow-hidden border-0 shadow-[var(--shadow-lg)]">
-        <div className="absolute inset-0 bg-[var(--gradient-rainbow)] opacity-5" />
-        <div className="relative backdrop-blur-sm bg-card/90">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 bg-gradient-to-r from-primary to-success bg-clip-text text-transparent">
-              <TrendingUp className="h-6 w-6 text-primary animate-pulse" />
-              Topic Performance Ranking
-            </CardTitle>
+      <Card className="border-0 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm shadow-xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5 text-primary" />
+            Topic Performance Ranking
+          </CardTitle>
           <p className="text-sm text-muted-foreground">
             All topics ranked from weakest to strongest
           </p>
@@ -88,87 +86,77 @@ export const StrengthsWeaknesses = ({ userProgress, onPractice }: StrengthsWeakn
             </ResponsiveContainer>
           </ChartContainer>
         </CardContent>
-        </div>
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Strong Topics Panel */}
-        <Card className="relative overflow-hidden border-0 shadow-[var(--shadow-lg)]">
-          <div className="absolute inset-0 bg-[var(--gradient-success)]" />
-          <div className="relative backdrop-blur-sm bg-card/40">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-success">
-                <TrendingUp className="h-6 w-6 animate-bounce" />
-                Strong Topics
-              </CardTitle>
-              <p className="text-sm text-success/80">
-                Keep up the great work! 🌟
-              </p>
-            </CardHeader>
+        <Card className="border-0 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400">
+              <TrendingUp className="h-5 w-5" />
+              Strong Topics
+            </CardTitle>
+            <p className="text-sm text-emerald-600/80 dark:text-emerald-400/80">
+              Keep up the great work!
+            </p>
+          </CardHeader>
           <CardContent className="space-y-3">
             {strongTopics.map((topic) => (
               <div
                 key={topic.topicId}
-                className="p-4 rounded-xl bg-success/10 backdrop-blur-sm border border-success/30 hover:border-success/50 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--success)/0.3)]"
+                className="p-4 rounded-lg bg-white/50 dark:bg-card/50 border border-emerald-200/50 dark:border-emerald-800/30"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-semibold text-foreground">{topic.topicId}</h4>
-                  <Badge className="bg-success text-success-foreground shadow-[0_0_12px_hsl(var(--success)/0.5)]">
-                    {Math.round(topic.averageScore)}%
-                  </Badge>
+                  <h4 className="font-medium text-foreground">{topic.topicId}</h4>
+                  <Badge className="bg-emerald-500 text-white">{Math.round(topic.averageScore)}%</Badge>
                 </div>
-                <p className="text-xs text-muted-foreground font-medium">{topic.attempts} attempts</p>
+                <p className="text-xs text-muted-foreground">{topic.attempts} attempts</p>
               </div>
             ))}
           </CardContent>
-          </div>
         </Card>
 
         {/* Weak Topics Panel */}
-        <Card className="relative overflow-hidden border-0 shadow-[var(--shadow-lg)]">
-          <div className="absolute inset-0 bg-[var(--gradient-warning)]" />
-          <div className="relative backdrop-blur-sm bg-card/40">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-warning">
-                <TrendingDown className="h-6 w-6 animate-pulse" />
-                Focus Areas
-              </CardTitle>
-              <p className="text-sm text-warning/80">
-                Target these for maximum improvement 🎯
-              </p>
-            </CardHeader>
+        <Card className="border-0 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-700 dark:text-red-400">
+              <TrendingDown className="h-5 w-5" />
+              Weak Topics
+            </CardTitle>
+            <p className="text-sm text-red-600/80 dark:text-red-400/80">
+              Focus here for maximum improvement
+            </p>
+          </CardHeader>
           <CardContent className="space-y-3">
             {weakTopics.map((topic, index) => (
               <div
                 key={topic.topicId}
-                className="p-4 rounded-xl bg-warning/10 backdrop-blur-sm border border-warning/30 hover:border-warning/50 transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--warning)/0.3)]"
+                className="p-4 rounded-lg bg-white/50 dark:bg-card/50 border border-red-200/50 dark:border-red-800/30"
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex-1">
-                    <h4 className="font-semibold text-foreground mb-1">{topic.topicId}</h4>
-                    <div className="flex items-start gap-2 bg-info/10 p-2 rounded-lg border border-info/20">
-                      <Lightbulb className="h-4 w-4 text-info mt-0.5 flex-shrink-0 animate-pulse" />
-                      <p className="text-xs text-foreground font-medium">
+                    <h4 className="font-medium text-foreground mb-1">{topic.topicId}</h4>
+                    <div className="flex items-start gap-2">
+                      <Lightbulb className="h-3 w-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <p className="text-xs text-muted-foreground">
                         {improvementTips[index % improvementTips.length]}
                       </p>
                     </div>
                   </div>
-                  <Badge className="bg-warning text-warning-foreground shadow-[0_0_12px_hsl(var(--warning)/0.5)]">
-                    {Math.round(topic.averageScore)}%
-                  </Badge>
+                  <Badge variant="destructive">{Math.round(topic.averageScore)}%</Badge>
                 </div>
                 <Button
                   size="sm"
                   onClick={() => onPractice(topic.subjectId, topic.topicId)}
-                  className="w-full mt-2 bg-[var(--gradient-primary)] hover:shadow-[var(--shadow-glow)] transition-all duration-300"
+                  className="w-full mt-2"
+                  variant="outline"
                 >
                   Practice Now
-                  <ArrowRight className="h-4 w-4 ml-1" />
+                  <ArrowRight className="h-3 w-3 ml-1" />
                 </Button>
               </div>
             ))}
           </CardContent>
-          </div>
         </Card>
       </div>
     </div>

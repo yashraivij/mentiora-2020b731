@@ -63,105 +63,88 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
   return (
     <div className="space-y-6">
       {/* Radar Chart Section */}
-      <Card className="relative overflow-hidden border-0 shadow-[var(--shadow-lg)]">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-info/5 to-success/10" />
-        <div className="relative backdrop-blur-sm bg-card/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 bg-gradient-to-r from-primary via-info to-success bg-clip-text text-transparent">
-              <TrendingUp className="h-6 w-6 text-primary" />
-              Performance Comparison
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Compare your current grades with your targets
-            </p>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig} className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={radarData}>
-                  <PolarGrid stroke="hsl(var(--border))" />
-                  <PolarAngleAxis 
-                    dataKey="subject" 
-                    tick={{ fill: "hsl(var(--foreground))", fontSize: 12 }}
-                  />
-                  <PolarRadiusAxis angle={90} domain={[0, 9]} tick={{ fill: "hsl(var(--muted-foreground))" }} />
-                  <Radar
-                    name="Target"
-                    dataKey="target"
-                    stroke="hsl(var(--muted-foreground))"
-                    fill="hsl(var(--muted))"
-                    fillOpacity={0.3}
-                    strokeWidth={2}
-                  />
-                  <Radar
-                    name="Current"
-                    dataKey="current"
-                    stroke="hsl(var(--primary))"
-                    fill="hsl(var(--primary))"
-                    fillOpacity={0.6}
-                    strokeWidth={2}
-                  />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                </RadarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </CardContent>
-        </div>
+      <Card className="border-0 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm shadow-xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5 text-primary" />
+            Performance Overview
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Compare your predicted grades against your targets
+          </p>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart data={radarData}>
+                <PolarGrid stroke="hsl(var(--border))" />
+                <PolarAngleAxis 
+                  dataKey="subject" 
+                  tick={{ fill: "hsl(var(--foreground))", fontSize: 12 }}
+                />
+                <PolarRadiusAxis angle={90} domain={[0, 9]} tick={{ fill: "hsl(var(--muted-foreground))" }} />
+                <Radar
+                  name="Target"
+                  dataKey="target"
+                  stroke="hsl(var(--muted-foreground))"
+                  fill="hsl(var(--muted))"
+                  fillOpacity={0.3}
+                  strokeWidth={2}
+                />
+                <Radar
+                  name="Current"
+                  dataKey="current"
+                  stroke="hsl(var(--primary))"
+                  fill="hsl(var(--primary))"
+                  fillOpacity={0.6}
+                  strokeWidth={2}
+                />
+                <ChartTooltip content={<ChartTooltipContent />} />
+              </RadarChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
       </Card>
 
       {/* Subject Progress Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {predictedGrades.map((prediction, idx) => {
+        {predictedGrades.map((prediction) => {
           const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
           const targetGrade = parseInt(userSubject?.target_grade || "5");
           const currentGrade = parseInt(prediction.grade || "0");
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
-          
-          const gradients = [
-            'from-primary/20 to-info/10',
-            'from-success/20 to-primary/10',
-            'from-warning/20 to-success/10',
-            'from-info/20 to-warning/10',
-            'from-primary/20 to-success/10',
-          ];
 
           return (
-            <Card
-              key={prediction.subject_id}
-              className="relative overflow-hidden border-0 shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-300 group"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${gradients[idx % gradients.length]} opacity-50 group-hover:opacity-70 transition-opacity`} />
-              <div className="relative backdrop-blur-sm bg-card/70">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h3 className="font-bold text-foreground mb-2">{prediction.subject_id}</h3>
-                      <Badge className={getStatusColor(currentGrade, targetGrade)}>
-                        {getStatusIcon(currentGrade, targetGrade)}
-                        <span className="ml-1 font-semibold">{getStatusText(currentGrade, targetGrade)}</span>
-                      </Badge>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-4xl font-bold text-primary">{currentGrade}</div>
-                      <div className="text-sm text-muted-foreground font-medium">/ {targetGrade}</div>
-                    </div>
+            <Card key={prediction.subject_id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+              <CardContent className="p-6 space-y-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-foreground mb-1">{prediction.subject_id}</h3>
+                    <Badge className={getStatusColor(currentGrade, targetGrade)}>
+                      {getStatusIcon(currentGrade, targetGrade)}
+                      <span className="ml-1">{getStatusText(currentGrade, targetGrade)}</span>
+                    </Badge>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground font-medium">Progress</span>
-                      <span className="font-bold text-foreground">{Math.round(progressPercent)}%</span>
-                    </div>
-                    <Progress value={progressPercent} className="h-2 bg-muted/30" />
+                  <div className="text-right">
+                    <div className="text-3xl font-bold text-primary">{currentGrade}</div>
+                    <div className="text-xs text-muted-foreground">/ {targetGrade}</div>
                   </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="font-medium">{Math.round(progressPercent)}%</span>
+                  </div>
+                  <Progress value={progressPercent} className="h-2" />
+                </div>
 
-                  <div className="pt-2 border-t border-border/50">
-                    <div className="text-sm text-muted-foreground font-medium">
-                      Accuracy: <span className="font-bold text-success">{Math.round(prediction.percentage)}%</span>
-                    </div>
+                <div className="pt-2 border-t border-border">
+                  <div className="text-sm text-muted-foreground">
+                    Accuracy: <span className="font-medium text-foreground">{Math.round(prediction.percentage)}%</span>
                   </div>
-                </CardContent>
-              </div>
+                </div>
+              </CardContent>
             </Card>
           );
         })}
