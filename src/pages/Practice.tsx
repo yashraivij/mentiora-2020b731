@@ -698,16 +698,16 @@ const Practice = () => {
                       
                       {/* Model answer */}
                       {currentAttempt.feedback?.modelAnswer && (
-                        <div className="mt-6 p-5 bg-gradient-to-br from-emerald-50 to-green-50 rounded-[20px] shadow-sm border border-emerald-100">
-                          <h4 className="font-bold text-emerald-900 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
+                        <div className="mt-6 p-5 bg-gray-100 rounded-[20px] shadow-sm">
+                          <h4 className="font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
                           <p className="text-gray-800 font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                         </div>
                       )}
                       
                       {/* Teacher feedback */}
                       {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="mt-6 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-[20px] shadow-sm border border-blue-100">
-                          <h4 className="font-bold text-blue-900 mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
+                        <div className="mt-6 p-5 bg-[#E8F6FB] rounded-[20px] shadow-sm border border-[#3BAFDA]/20">
+                          <h4 className="font-bold text-[#2A9BC7] mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
                           <p className="text-gray-800 font-medium leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
                         </div>
                       )}
