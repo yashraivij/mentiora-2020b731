@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +17,6 @@ import { PersonalizedNotification } from "@/components/notifications/Personalize
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
-import { ChatAssistant } from "@/components/practice/ChatAssistant";
 import { useSubscription } from "@/hooks/useSubscription";
 
 interface QuestionAttempt {
@@ -74,7 +73,11 @@ const Practice = () => {
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
-  const [initialChatMessage, setInitialChatMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState<Array<{id: string, role: 'user' | 'assistant', content: string}>>([]);
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
+  const [hintCount, setHintCount] = useState(0);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
     notification,
@@ -209,6 +212,13 @@ const Practice = () => {
       saveSessionState();
     }
   }, [currentQuestionIndex, userAnswer, attempts, showFeedback, shuffledQuestions]);
+
+  // Auto-scroll chat messages
+  useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+    }
+  }, [chatMessages, isChatLoading]);
 
   const markAnswerWithSmart = async (question: Question, answer: string) => {
     try {
@@ -363,9 +373,103 @@ const Practice = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswer("");
       setShowFeedback(false);
-      setShowChatAssistant(false);
+      setChatMessages([]);
+      setHintCount(0);
+      setChatStage('intro');
     } else {
       finishSession();
+    }
+  };
+
+  // Initialize chat conversation
+  const initializeChat = async () => {
+    if (chatMessages.length > 0) return; // Already initialized
+    
+    setIsChatLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('chat-assistant', {
+        body: {
+          question: currentQuestion.question,
+          subject: subjectId,
+          conversation: [],
+          stage: 'intro'
+        }
+      });
+
+      if (error) throw error;
+
+      const assistantMessage = {
+        id: Date.now().toString(),
+        role: 'assistant' as const,
+        content: data.response
+      };
+
+      setChatMessages([assistantMessage]);
+    } catch (error) {
+      console.error('Error initializing chat:', error);
+      toast.error("Failed to start chat. Please try again.");
+    } finally {
+      setIsChatLoading(false);
+    }
+  };
+
+  // Send chat message
+  const sendChatMessage = async (message: string) => {
+    if (!message.trim() || isChatLoading) return;
+
+    const userMessage = {
+      id: Date.now().toString(),
+      role: 'user' as const,
+      content: message
+    };
+
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatMessage("");
+    setIsChatLoading(true);
+
+    try {
+      let currentStage = chatStage;
+      if (hintCount >= 3 && chatStage !== 'final') {
+        currentStage = 'struggling';
+      } else if (chatStage === 'intro') {
+        currentStage = 'guiding';
+      }
+
+      const conversation = chatMessages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
+      const { data, error } = await supabase.functions.invoke('chat-assistant', {
+        body: {
+          question: currentQuestion.question,
+          studentAnswer: message,
+          subject: subjectId,
+          conversation,
+          stage: currentStage
+        }
+      });
+
+      if (error) throw error;
+
+      const assistantMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant' as const,
+        content: data.response
+      };
+
+      setChatMessages(prev => [...prev, assistantMessage]);
+      setChatStage(currentStage);
+      setHintCount(prev => prev + 1);
+
+      if (hintCount >= 4 && currentStage !== 'final') {
+        setChatStage('final');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsChatLoading(false);
     }
   };
 
@@ -571,7 +675,9 @@ const Practice = () => {
                     setCurrentQuestionIndex(currentQuestionIndex - 1);
                     setUserAnswer("");
                     setShowFeedback(false);
-                    setShowChatAssistant(false);
+                    setChatMessages([]);
+                    setHintCount(0);
+                    setChatStage('intro');
                   }
                 }}
                 disabled={currentQuestionIndex === 0}
@@ -736,9 +842,28 @@ const Practice = () => {
               <h2 className="text-base font-semibold text-slate-700">Ask medly</h2>
             </div>
 
-            {/* Feedback content or suggestions */}
-            <div className="flex-1 overflow-auto mb-4">
-              {showFeedback && currentAttempt ? (
+            {/* Feedback content or chat messages */}
+            <div ref={chatScrollRef} className="flex-1 overflow-auto mb-4 space-y-3">
+              {chatMessages.length > 0 ? (
+                <>
+                  {chatMessages.map((msg) => (
+                    <div key={msg.id} className={`bg-gray-100 rounded-[20px] p-4 text-sm font-medium ${
+                      msg.role === 'user' ? 'bg-[#3BAFDA] text-white ml-8' : 'text-gray-800 mr-8'
+                    }`}>
+                      {msg.content}
+                    </div>
+                  ))}
+                  {isChatLoading && (
+                    <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium mr-8">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : showFeedback && currentAttempt ? (
                 <div className="space-y-3">
                   <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
                     You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
@@ -753,23 +878,23 @@ const Practice = () => {
                   </div>
                 </div>
               ) : (
-                <>
+                <div className="flex flex-col h-full">
                   <div className="flex-1" />
                   <div className="space-y-3">
                     <button
-                      onClick={() => setShowChatAssistant(true)}
+                      onClick={initializeChat}
                       className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       I don&apos;t understand this problem
                     </button>
                     <button
-                      onClick={() => setShowChatAssistant(true)}
+                      onClick={initializeChat}
                       className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       Can you walk me through this step by step
                     </button>
                   </div>
-                </>
+                </div>
               )}
             </div>
 
@@ -781,23 +906,32 @@ const Practice = () => {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
                     e.preventDefault();
-                    setInitialChatMessage(chatMessage);
-                    setShowChatAssistant(true);
-                    setChatMessage("");
+                    if (chatMessages.length === 0) {
+                      initializeChat().then(() => {
+                        if (chatMessage.trim()) sendChatMessage(chatMessage);
+                      });
+                    } else {
+                      sendChatMessage(chatMessage);
+                    }
                   }
                 }}
                 placeholder="Reply"
+                disabled={isChatLoading}
                 className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
               />
               <Button 
                 onClick={() => {
                   if (chatMessage.trim()) {
-                    setInitialChatMessage(chatMessage);
-                    setShowChatAssistant(true);
-                    setChatMessage("");
+                    if (chatMessages.length === 0) {
+                      initializeChat().then(() => {
+                        if (chatMessage.trim()) sendChatMessage(chatMessage);
+                      });
+                    } else {
+                      sendChatMessage(chatMessage);
+                    }
                   }
                 }}
-                disabled={!chatMessage.trim()}
+                disabled={!chatMessage.trim() || isChatLoading}
                 className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center disabled:opacity-50"
               >
                 <Send className="h-4 w-4 rotate-45" />
@@ -854,20 +988,6 @@ const Practice = () => {
           subjectName={notification.subjectName}
           streakCount={notification.streakCount}
           onClose={clearNotification}
-        />
-      )}
-
-      {/* Chat Assistant */}
-      {showChatAssistant && currentQuestion && subject && (
-        <ChatAssistant
-          question={currentQuestion}
-          subject={subject.name}
-          isOpen={showChatAssistant}
-          onClose={() => {
-            setShowChatAssistant(false);
-            setInitialChatMessage("");
-          }}
-          initialMessage={initialChatMessage}
         />
       )}
     </div>
