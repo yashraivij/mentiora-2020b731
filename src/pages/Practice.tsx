@@ -953,7 +953,11 @@ const Practice = () => {
                 <div className="flex gap-1">
                   {Array.from({ length: currentQuestion.marks }).map((_, i) => (
                     <span key={i} className={`text-xl font-bold ${
-                      i < currentAttempt.score ? 'text-emerald-500' : 'text-gray-300'
+                      i < currentAttempt.score 
+                        ? 'text-emerald-500' 
+                        : currentAttempt.score <= currentQuestion.marks / 2
+                        ? 'text-red-500'
+                        : 'text-gray-300'
                     }`}>
                       {i < currentAttempt.score ? '✓' : '✗'}
                     </span>
