@@ -20,14 +20,16 @@ interface ChatAssistantProps {
   subject: string;
   isOpen: boolean;
   onClose: () => void;
+  initialMessage?: string;
 }
 
-export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssistantProps) => {
+export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessage }: ChatAssistantProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [stage, setStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
+  const [hasProcessedInitialMessage, setHasProcessedInitialMessage] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -45,7 +47,20 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
     if (isOpen && messages.length === 0) {
       initializeConversation();
     }
+    
+    // Reset the flag when chat is closed
+    if (!isOpen) {
+      setHasProcessedInitialMessage(false);
+    }
   }, [isOpen]);
+
+  // Send initial message if provided
+  useEffect(() => {
+    if (isOpen && initialMessage && !hasProcessedInitialMessage && messages.length > 0) {
+      setHasProcessedInitialMessage(true);
+      sendMessage(initialMessage);
+    }
+  }, [isOpen, initialMessage, hasProcessedInitialMessage, messages.length]);
 
   const initializeConversation = async () => {
     setIsLoading(true);

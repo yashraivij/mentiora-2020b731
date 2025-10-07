@@ -73,6 +73,8 @@ const Practice = () => {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
+  const [initialChatMessage, setInitialChatMessage] = useState("");
   
   const {
     notification,
@@ -774,12 +776,29 @@ const Practice = () => {
             {/* Reply input at very bottom - always available */}
             <div className="flex gap-2">
               <Input
+                value={chatMessage}
+                onChange={(e) => setChatMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
+                    e.preventDefault();
+                    setInitialChatMessage(chatMessage);
+                    setShowChatAssistant(true);
+                    setChatMessage("");
+                  }
+                }}
                 placeholder="Reply"
                 className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
               />
               <Button 
-                onClick={() => setShowChatAssistant(true)}
-                className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center"
+                onClick={() => {
+                  if (chatMessage.trim()) {
+                    setInitialChatMessage(chatMessage);
+                    setShowChatAssistant(true);
+                    setChatMessage("");
+                  }
+                }}
+                disabled={!chatMessage.trim()}
+                className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center disabled:opacity-50"
               >
                 <Send className="h-4 w-4 rotate-45" />
               </Button>
@@ -835,6 +854,20 @@ const Practice = () => {
           subjectName={notification.subjectName}
           streakCount={notification.streakCount}
           onClose={clearNotification}
+        />
+      )}
+
+      {/* Chat Assistant */}
+      {showChatAssistant && currentQuestion && subject && (
+        <ChatAssistant
+          question={currentQuestion}
+          subject={subject.name}
+          isOpen={showChatAssistant}
+          onClose={() => {
+            setShowChatAssistant(false);
+            setInitialChatMessage("");
+          }}
+          initialMessage={initialChatMessage}
         />
       )}
     </div>
