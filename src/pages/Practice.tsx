@@ -703,6 +703,14 @@ const Practice = () => {
                           <p className="text-gray-800">{currentAttempt.feedback.modelAnswer}</p>
                         </div>
                       )}
+                      
+                      {/* Teacher feedback */}
+                      {currentAttempt.feedback?.whyYoursDidnt && (
+                        <div className="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                          <h4 className="font-semibold text-gray-900 mb-2">Teacher Feedback:</h4>
+                          <p className="text-gray-800">{currentAttempt.feedback.whyYoursDidnt}</p>
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
