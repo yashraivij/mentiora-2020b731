@@ -818,8 +818,10 @@ const Practice = () => {
               {chatMessages.length > 0 ? (
                 <>
                   {chatMessages.map((msg) => (
-                    <div key={msg.id} className={`bg-gray-100 rounded-[20px] p-4 text-sm font-medium ${
-                      msg.role === 'user' ? 'bg-[#3BAFDA] text-white ml-8' : 'text-gray-800 mr-8'
+                    <div key={msg.id} className={`rounded-[20px] p-4 text-sm font-medium ${
+                      msg.role === 'user' 
+                        ? 'bg-[#3BAFDA] text-white ml-8' 
+                        : 'bg-gray-100 text-gray-800 mr-8'
                     }`}>
                       {msg.content}
                     </div>
