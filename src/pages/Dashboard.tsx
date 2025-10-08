@@ -1388,19 +1388,21 @@ const Dashboard = () => {
   const removeSubject = async (subjectId: string) => {
     if (!user?.id) return;
     
-    const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) return;
-
-    // Determine if this is an A-level subject
-    const isALevel = subjectId.includes('alevel');
-    const subjectName = isALevel ? `${subject.name} (A-Level)` : subject.name;
+    // Find the index of this subject in userSubjects
+    const subjectIndex = userSubjects.findIndex(id => id === subjectId);
+    if (subjectIndex === -1) return;
+    
+    // Get the corresponding database record from userSubjectsWithGrades
+    const dbSubject = userSubjectsWithGrades[subjectIndex];
+    if (!dbSubject) return;
 
     try {
       const { error } = await supabase
         .from("user_subjects")
         .delete()
         .eq("user_id", user.id)
-        .eq("subject_name", subjectName);
+        .eq("subject_name", dbSubject.subject_name)
+        .eq("exam_board", dbSubject.exam_board);
 
       if (error) {
         console.error("Error removing subject:", error);
@@ -1416,7 +1418,7 @@ const Dashboard = () => {
       await loadUserSubjects();
       toast({
         title: "Success",
-        description: `${subject.name} removed from your subjects`,
+        description: `${dbSubject.subject_name} removed from your subjects`,
       });
       
     } catch (error) {
