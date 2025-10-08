@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle2, Lock, Sparkles, TrendingUp, Clock, Zap, Calendar, Flame, Trophy, Target, Brain, BarChart3, ArrowRight, Star, Award, Activity, BookOpen, LineChart, Battery } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, TrendingUp, Target } from "lucide-react";
 
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -122,30 +121,25 @@ const SubjectTopics = () => {
   // Target Grade Setup Modal
   if (showGradeSetup) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6">
-        <Card className="max-w-2xl w-full rounded-2xl shadow-2xl border-t-4 border-t-[#2E5BFF]">
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <Card className="max-w-xl w-full rounded-lg shadow-lg border">
           <CardContent className="p-12 text-center">
-            <div className="mb-8">
-              <div className="w-20 h-20 bg-[#2E5BFF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Target className="w-10 h-10 text-[#2E5BFF]" />
-              </div>
-              <h1 className="text-4xl font-bold mb-4">Set your target grade for {subject?.name}</h1>
-              <p className="text-lg text-gray-600">We'll personalise everything around your goal.</p>
-            </div>
+            <h1 className="text-3xl font-semibold mb-3 text-foreground">Set your target grade</h1>
+            <p className="text-muted-foreground mb-8">for {subject?.name}</p>
 
-            <div className="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
+            <div className="grid grid-cols-3 gap-3 mb-8 max-w-sm mx-auto">
               {[4, 5, 6, 7, 8, 9].map((grade) => (
                 <button
                   key={grade}
                   onClick={() => handleSetTargetGrade(grade)}
-                  className="h-24 rounded-2xl border-2 border-gray-200 hover:border-[#2E5BFF] hover:bg-[#2E5BFF]/5 hover:shadow-lg transition-all duration-200 flex items-center justify-center text-3xl font-bold text-gray-700 hover:text-[#2E5BFF] hover:scale-105"
+                  className="h-20 rounded-lg border-2 border-border hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 transition-all duration-200 flex items-center justify-center text-3xl font-semibold text-foreground"
                 >
                   {grade}
                 </button>
               ))}
             </div>
 
-            <p className="text-sm text-gray-500">You can change this anytime.</p>
+            <p className="text-sm text-muted-foreground">You can change this anytime</p>
           </CardContent>
         </Card>
       </div>
@@ -153,167 +147,140 @@ const SubjectTopics = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Minimal Header */}
-      <header className="border-b border-gray-100 bg-white">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center">
           <Button 
             variant="ghost" 
             onClick={() => navigate(-1)}
-            className="text-gray-600 hover:text-gray-900 -ml-3"
+            className="text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="h-5 w-5 mr-2" />
+            <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
-          <div className="text-3xl">
-            {subjectId?.includes('bio') ? '🧬' : subjectId?.includes('eng') ? '📖' : subjectId?.includes('math') ? '🔢' : subjectId?.includes('phys') ? '⚛️' : subjectId?.includes('chem') ? '🧪' : subjectId?.includes('geo') ? '🌍' : '📚'}
-          </div>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8 space-y-6">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Subject Title */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">
-            {subjectId?.includes('bio') ? '🧬' : subjectId?.includes('eng') ? '📖' : subjectId?.includes('math') ? '🔢' : subjectId?.includes('phys') ? '⚛️' : subjectId?.includes('chem') ? '🧪' : subjectId?.includes('geo') ? '🌍' : '📚'}
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">{subject?.name}</h1>
-          <p className="text-gray-600">Your personal revision hub</p>
+        <div className="mb-12">
+          <h1 className="text-4xl font-semibold text-foreground mb-2">{subject?.name}</h1>
+          <p className="text-muted-foreground">Track your progress and master every topic</p>
         </div>
 
-        {/* Hero Stats - Big Dopamine Hits */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* Current Grade */}
-          <Card className="rounded-2xl border-2 border-[#3DB4E8] bg-gradient-to-br from-blue-50 to-white shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <TrendingUp className="w-8 h-8 text-[#3DB4E8] mx-auto mb-2" />
-              <div className="text-5xl font-bold text-[#3DB4E8] mb-1">{predictedGradeDecimal.toFixed(1)}</div>
-              <p className="text-xs font-medium text-gray-600">Current Grade</p>
-            </CardContent>
-          </Card>
-
-          {/* Target - Editable */}
-          <Card className="rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-white shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <Target className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <div className="flex items-center justify-center gap-3 mb-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
-                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
-                  disabled={!targetGrade || targetGrade <= 4}
-                >
-                  -
-                </Button>
-                <div className="text-5xl font-bold text-green-600">{targetGrade}</div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
-                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
-                  disabled={!targetGrade || targetGrade >= 9}
-                >
-                  +
-                </Button>
+        {/* Grade Overview */}
+        <Card className="rounded-lg border shadow-sm mb-8">
+          <CardContent className="p-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Current Grade */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <TrendingUp className="w-5 h-5 text-[#3DB4E8]" />
+                  <span className="text-sm font-medium text-muted-foreground">Current Grade</span>
+                </div>
+                <div className="text-6xl font-semibold text-[#3DB4E8]">{predictedGradeDecimal.toFixed(1)}</div>
+                <p className="text-sm text-muted-foreground mt-2">Based on {topicProgress.length} completed topics</p>
               </div>
-              <p className="text-xs font-medium text-gray-600">Target Grade 🎯</p>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/* Progress to Target - Visual Motivation */}
-        <Card className="rounded-2xl border border-gray-200 shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-bold text-gray-900">Your Progress to Grade {targetGrade}</h2>
-              <span className="text-2xl font-bold text-[#3DB4E8]">{percentToTarget}%</span>
+              {/* Target Grade - Editable */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Target className="w-5 h-5 text-[#3DB4E8]" />
+                  <span className="text-sm font-medium text-muted-foreground">Target Grade</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
+                    disabled={!targetGrade || targetGrade <= 4}
+                    className="h-12 w-12 rounded-lg border-2"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </Button>
+                  <div className="text-6xl font-semibold text-foreground w-20 text-center">{targetGrade}</div>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
+                    disabled={!targetGrade || targetGrade >= 9}
+                    className="h-12 w-12 rounded-lg border-2"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </Button>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">Adjust your goal anytime</p>
+              </div>
             </div>
-            <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-[#3DB4E8] to-[#2E5BFF] rounded-full transition-all duration-1000"
-                style={{ width: `${percentToTarget}%` }}
-              />
+
+            {/* Progress Bar */}
+            <div className="mt-8 pt-6 border-t">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium text-muted-foreground">Progress to target</span>
+                <span className="text-2xl font-semibold text-[#3DB4E8]">{percentToTarget}%</span>
+              </div>
+              <Progress value={percentToTarget} className="h-3" />
+              <p className="text-sm text-muted-foreground mt-3">
+                {percentToTarget >= 90 ? "Almost there! Keep up the excellent work" : 
+                 percentToTarget >= 70 ? "Great progress, you're on track" : 
+                 percentToTarget >= 50 ? "Steady progress, keep going" : 
+                 "Every practice session moves you closer"}
+              </p>
             </div>
-            <p className="text-sm text-gray-600 mt-3 text-center italic">
-              {percentToTarget >= 90 ? "🎉 Almost there! Keep it up!" : percentToTarget >= 70 ? "💪 Great progress! You're on track!" : percentToTarget >= 50 ? "📈 Getting stronger every day!" : "🚀 Every session gets you closer!"}
-            </p>
           </CardContent>
         </Card>
 
-        {/* Next Action - BIGGEST CTA */}
+        {/* Next Topic Recommendation */}
         {nextTopic && (
-          <Card className="rounded-2xl border-2 border-[#3DB4E8] bg-gradient-to-br from-[#3DB4E8]/5 to-white shadow-lg">
+          <Card className="rounded-lg border border-[#3DB4E8] bg-[#3DB4E8]/5 shadow-sm mb-8">
             <CardContent className="p-8">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-[#3DB4E8]/10 flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-8 h-8 text-[#3DB4E8]" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-1">Ready to level up?</h2>
-                  <p className="text-gray-600">Next: <span className="font-semibold">{nextTopic.name}</span></p>
-                </div>
+              <div className="mb-6">
+                <h2 className="text-xl font-semibold text-foreground mb-2">Recommended next</h2>
+                <p className="text-lg text-muted-foreground">{nextTopic.name}</p>
               </div>
               <Button 
                 onClick={() => navigate(`/practice/${subjectId}/${nextTopic.id}`)}
-                className="w-full bg-gradient-to-r from-[#3DB4E8] to-[#2E5BFF] hover:from-[#2E5BFF] hover:to-[#1E4FEE] text-white rounded-xl py-6 text-lg font-semibold shadow-md hover:shadow-xl transition-all"
+                className="w-full bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white rounded-lg h-12 text-base font-medium"
               >
-                Start Practice Now →
+                Start Practice
               </Button>
             </CardContent>
           </Card>
         )}
 
-        {/* Quick Wins - 3 Key Insights */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5 text-purple-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Best Time</h4>
-                  <p className="text-xs text-gray-600">7–9 PM works best for you</p>
-                </div>
-              </div>
+        {/* Personalized Insights */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <Card className="rounded-lg border shadow-sm">
+            <CardContent className="p-6">
+              <div className="text-sm text-muted-foreground mb-2">Optimal study time</div>
+              <div className="text-2xl font-semibold text-foreground">7-9 PM</div>
+              <div className="text-sm text-muted-foreground mt-2">Based on your performance patterns</div>
             </CardContent>
           </Card>
 
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                  <Trophy className="w-5 h-5 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Mastered</h4>
-                  <p className="text-xs text-gray-600">{masteredTopics} of {totalTopics} topics complete</p>
-                </div>
-              </div>
+          <Card className="rounded-lg border shadow-sm">
+            <CardContent className="p-6">
+              <div className="text-sm text-muted-foreground mb-2">Topics mastered</div>
+              <div className="text-2xl font-semibold text-foreground">{masteredTopics} / {totalTopics}</div>
+              <div className="text-sm text-muted-foreground mt-2">{Math.round((masteredTopics / totalTopics) * 100)}% of curriculum complete</div>
             </CardContent>
           </Card>
 
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-5 h-5 text-orange-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Mock Exam</h4>
-                  <p className="text-xs text-gray-600">19 days • {examReadiness}% ready</p>
-                </div>
-              </div>
+          <Card className="rounded-lg border shadow-sm">
+            <CardContent className="p-6">
+              <div className="text-sm text-muted-foreground mb-2">Exam readiness</div>
+              <div className="text-2xl font-semibold text-foreground">{examReadiness}%</div>
+              <div className="text-sm text-muted-foreground mt-2">Mock exam in 19 days</div>
             </CardContent>
           </Card>
         </div>
 
-        {/* All Topics - Clean List */}
-        <Card className="rounded-2xl border border-gray-200 shadow-sm">
-          <CardHeader className="pb-4">
+        {/* All Topics */}
+        <Card className="rounded-lg border shadow-sm">
+          <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-xl font-bold">All Topics</CardTitle>
+              <CardTitle className="text-xl font-semibold">All Topics</CardTitle>
               <div className="flex gap-2">
                 {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
                   <Button
@@ -321,58 +288,44 @@ const SubjectTopics = () => {
                     variant={topicFilter === filter ? "default" : "ghost"}
                     size="sm"
                     onClick={() => setTopicFilter(filter)}
-                    className={topicFilter === filter ? "rounded-lg bg-[#3DB4E8] hover:bg-[#2E5BFF] text-white h-8 text-xs" : "rounded-lg h-8 text-xs"}
+                    className={topicFilter === filter ? "bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white" : ""}
                   >
-                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strong' : filter === 'focus' ? 'Focus' : 'New'}
+                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strong' : filter === 'focus' ? 'Needs work' : 'New'}
                   </Button>
                 ))}
               </div>
             </div>
           </CardHeader>
           
-          <CardContent className="pt-0">
-            <div className="space-y-2">
+          <CardContent>
+            <div className="space-y-3">
               {filteredTopics.map((topic) => {
                 const progress = getTopicProgress(topic.id);
                 const isMastered = progress.averageScore >= 85;
                 const needsPractice = progress.attempts > 0 && progress.averageScore < 60;
-                const inProgress = progress.attempts > 0 && !isMastered && !needsPractice;
                 
                 return (
                   <button
                     key={topic.id}
                     onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    className="w-full rounded-xl border border-gray-200 bg-white hover:border-[#3DB4E8] hover:bg-blue-50/50 p-4 transition-all duration-200 text-left group"
+                    className="w-full rounded-lg border bg-card hover:border-[#3DB4E8] hover:bg-accent/50 p-5 transition-all text-left group"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 flex-1">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                          isMastered ? 'bg-green-100' : 
-                          needsPractice ? 'bg-orange-100' : 
-                          inProgress ? 'bg-blue-100' : 
-                          'bg-gray-100'
-                        }`}>
-                          {isMastered ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          ) : needsPractice ? (
-                            <Zap className="w-5 h-5 text-orange-600" />
-                          ) : inProgress ? (
-                            <Clock className="w-5 h-5 text-blue-600" />
-                          ) : (
-                            <Lock className="w-5 h-5 text-gray-400" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
-                          <div className="flex items-center gap-2">
-                            <Progress value={progress.averageScore} className="h-1.5 flex-1 max-w-[200px]" />
-                            <span className="text-xs font-medium text-gray-500">
-                              {progress.attempts > 0 ? `${progress.averageScore}%` : 'Start'}
-                            </span>
-                          </div>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-foreground mb-2 group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
+                        <div className="flex items-center gap-3">
+                          <Progress value={progress.averageScore} className="h-2 flex-1" />
+                          <span className="text-sm font-medium text-muted-foreground min-w-[60px] text-right">
+                            {progress.attempts > 0 ? `${progress.averageScore}%` : 'Not started'}
+                          </span>
                         </div>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-[#3DB4E8] transition-colors" />
+                      {isMastered && (
+                        <div className="text-sm font-medium text-[#3DB4E8]">Mastered</div>
+                      )}
+                      {needsPractice && (
+                        <div className="text-sm font-medium text-orange-500">Needs work</div>
+                      )}
                     </div>
                   </button>
                 );
@@ -419,48 +372,25 @@ const SubjectTopics = () => {
           </CardContent>
         </Card>
 
-        {/* Insights */}
-        <Card className="rounded-2xl border border-gray-200 bg-gradient-to-br from-blue-50/50 to-white shadow-sm">
+        {/* Learning Insights */}
+        <Card className="rounded-lg border shadow-sm">
           <CardHeader>
-            <CardTitle className="text-xl font-bold flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#3DB4E8]" />
-              Your Learning Insights
-            </CardTitle>
+            <CardTitle className="text-xl font-semibold">Learning insights</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#3DB4E8]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Zap className="w-4 h-4 text-[#3DB4E8]" />
-                </div>
-                <p className="text-sm text-gray-700">Short 10-min sessions work best for you</p>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Short 10-minute sessions work best for you based on completion rates</p>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Clock className="w-4 h-4 text-purple-600" />
-                </div>
-                <p className="text-sm text-gray-700">Take breaks after 25 minutes for best retention</p>
+              <div>
+                <p className="text-sm text-muted-foreground">Consider taking breaks after 25 minutes for optimal retention</p>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
-                </div>
-                <p className="text-sm text-gray-700">You're improving steadily — up 12% this month</p>
+              <div>
+                <p className="text-sm text-muted-foreground">Your scores have improved by 12% this month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-
-        {/* Footer Motivation */}
-        <div className="text-center py-8">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#3DB4E8]/10 mb-4">
-            <Trophy className="w-5 h-5 text-[#3DB4E8]" />
-            <span className="text-sm font-semibold text-[#3DB4E8]">You're on the right path</span>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Keep showing up. Every session brings you closer to Grade {targetGrade}.
-          </p>
-        </div>
       </div>
     </div>
   );
