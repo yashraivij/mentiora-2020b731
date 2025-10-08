@@ -51,6 +51,7 @@ import {
   X,
   Eye,
   Play,
+  ArrowRight,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
@@ -1792,85 +1793,152 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-                     <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
-                       Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
-                     </h2>
-                    {filteredSubjects.length > 0 && (
-                      <Button
-                        onClick={() => setShowAddSubjects(true)}
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
-                      >
-                        <Plus className="h-4 w-4" />
-                        <span>Add Subject</span>
-                      </Button>
-                    )}
-                  </div>
-                  
-                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'} gap-6`}>
-                    {filteredSubjects.map((subject) => {
-                      const colors = subjectColors[subject.id] || subjectColors["physics"];
-                      const progress = getSubjectProgress(subject.id);
-                      
-                      return (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="relative"
-                        >
-                           <Card 
-                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
-                            onClick={() => navigate(`/subject/${subject.id}`)}
-                          >
-                            <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
-                              <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-3">
-                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full mobile-text-wrap`}>
-                                      {progress.completed} OF {progress.total} UNITS
-                                    </span>
-                                  </div>
-                                  
-                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-foreground mb-4 mobile-text-wrap`}>
-                                    {getSubjectDisplayName(subject)}
-                                  </h3>
-                                  
-                                  <div className="w-full bg-muted rounded-full h-3 mb-4">
-                                    <div
-                                      className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
-                                      style={{ width: `${(progress.completed / progress.total) * 100}%` }}
-                                    />
-                                  </div>
+                   {/* Premium Header Section */}
+                   <div className="flex flex-col mb-12">
+                     <motion.div
+                       initial={{ opacity: 0, y: -20 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       transition={{ duration: 0.5 }}
+                       className="space-y-4"
+                     >
+                       <h2 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif", letterSpacing: '-0.02em' }}>
+                         Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
+                       </h2>
+                       <p className="text-lg text-muted-foreground max-w-2xl" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}>
+                         Select a subject to continue your learning journey
+                       </p>
+                     </motion.div>
+                     
+                     {filteredSubjects.length > 0 && (
+                       <motion.div
+                         initial={{ opacity: 0 }}
+                         animate={{ opacity: 1 }}
+                         transition={{ delay: 0.2 }}
+                         className="mt-6"
+                       >
+                         <Button
+                           onClick={() => setShowAddSubjects(true)}
+                           className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                           style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+                         >
+                           <Plus className="h-5 w-5 mr-2" />
+                           Add Subject
+                         </Button>
+                       </motion.div>
+                     )}
+                   </div>
+                   
+                   {/* Premium Subject Cards Grid */}
+                   <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'} gap-8`}>
+                     {filteredSubjects.map((subject, index) => {
+                       const colors = subjectColors[subject.id] || subjectColors["physics"];
+                       const progress = getSubjectProgress(subject.id);
+                       const progressPercentage = (progress.completed / progress.total) * 100;
+                       
+                       return (
+                         <motion.div
+                           key={subject.id}
+                           initial={{ opacity: 0, y: 30 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{ 
+                             duration: 0.5, 
+                             delay: index * 0.1,
+                             ease: [0.21, 1.11, 0.81, 0.99]
+                           }}
+                           whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                           className="relative group"
+                         >
+                            <Card 
+                             className="cursor-pointer border-0 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card/80 backdrop-blur-sm"
+                             onClick={() => navigate(`/subject/${subject.id}`)}
+                             style={{ 
+                               borderRadius: '24px',
+                               background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%)',
+                             }}
+                           >
+                             {/* Premium Accent Bar */}
+                             <div className={`absolute top-0 left-0 right-0 h-1 ${colors.bg} opacity-80`} />
+                             
+                             {/* Remove Subject Button */}
+                             <button
+                               onClick={(e) => {
+                                 e.stopPropagation();
+                                 removeSubject(subject.id);
+                               }}
+                               className="absolute top-4 right-4 z-10 text-muted-foreground hover:text-destructive transition-all duration-200 opacity-0 group-hover:opacity-100 bg-background/80 backdrop-blur-sm rounded-full p-2 hover:bg-destructive/10"
+                             >
+                               <X className="h-4 w-4" />
+                             </button>
+                             
+                             <CardContent className={`${isMobile ? 'p-6' : 'p-8'} relative`}>
+                               <div className={`flex ${isMobile ? 'flex-col gap-6' : 'items-start justify-between gap-6'}`}>
+                                 {/* Left Content */}
+                                 <div className="flex-1 space-y-6">
+                                   {/* Subject Icon & Name */}
+                                   <div className="flex items-start gap-4">
+                                     <div className={`${isMobile ? 'w-14 h-14' : 'w-16 h-16'} ${colors.bg} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                       {(() => {
+                                         const IconComponent = getSubjectIcon(subject.id);
+                                         return <IconComponent className={`${isMobile ? 'h-7 w-7' : 'h-8 w-8'} text-white`} />;
+                                       })()}
+                                     </div>
+                                     
+                                     <div className="flex-1 min-w-0">
+                                       <h3 
+                                         className={`${isMobile ? 'text-2xl' : 'text-3xl'} font-bold text-foreground mb-2 leading-tight`}
+                                         style={{ 
+                                           fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
+                                           letterSpacing: '-0.03em'
+                                         }}
+                                       >
+                                         {getSubjectDisplayName(subject)}
+                                       </h3>
+                                       
+                                       <span className={`inline-block text-xs font-bold ${colors.text} bg-muted/80 px-3 py-1.5 rounded-full`}
+                                         style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+                                       >
+                                         {progress.completed} OF {progress.total} UNITS COMPLETED
+                                       </span>
+                                     </div>
+                                   </div>
+                                   
+                                   {/* Progress Section */}
+                                   <div className="space-y-3">
+                                     <div className="flex items-center justify-between">
+                                       <span className="text-sm font-semibold text-muted-foreground" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}>
+                                         Progress
+                                       </span>
+                                       <span className={`text-sm font-bold ${colors.text}`} style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}>
+                                         {Math.round(progressPercentage)}%
+                                       </span>
+                                     </div>
+                                     
+                                     <div className="relative w-full h-2 bg-muted/50 rounded-full overflow-hidden">
+                                       <motion.div
+                                         initial={{ width: 0 }}
+                                         animate={{ width: `${progressPercentage}%` }}
+                                         transition={{ duration: 1, delay: index * 0.1 + 0.3, ease: "easeOut" }}
+                                         className={`absolute left-0 top-0 h-full ${colors.bg} rounded-full`}
+                                         style={{
+                                           boxShadow: `0 0 10px ${colors.bg.includes('blue') ? 'rgba(59, 130, 246, 0.5)' : 'rgba(16, 185, 129, 0.5)'}`
+                                         }}
+                                       />
+                                     </div>
+                                   </div>
 
-                                  <Button
-                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-lg mobile-touch-target`}
-                                  >
-                                    {progress.completed === 0 ? "START" : "CONTINUE"}
-                                  </Button>
-                                </div>
-
-                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                  {(() => {
-                                    const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
-                                  })()}
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                          
-                          {/* Remove Subject Button */}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeSubject(subject.id);
-                            }}
-                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            <X className="h-4 w-4" />
-                          </button>
-                        </motion.div>
+                                   {/* Action Button */}
+                                   <Button
+                                     className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-8 rounded-2xl ${isMobile ? 'w-full' : ''} shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:translate-x-1`}
+                                     style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+                                   >
+                                     {progress.completed === 0 ? "START LEARNING" : "CONTINUE"}
+                                     <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                   </Button>
+                                 </div>
+                               </div>
+                             </CardContent>
+                           </Card>
+                         </motion.div>
                       );
                     })}
                   </div>
