@@ -2497,9 +2497,21 @@ const Dashboard = () => {
                               return baseName === selectedSubjectGroup;
                             })
                             .map((subject) => {
-                              // Extract exam board from subject ID
+                              // Extract exam board from subject name for better accuracy
                               let examBoard = 'AQA'; // default
-                              if (subject.id.includes('edexcel')) {
+                              
+                              // Check for specific patterns in the subject name
+                              if (subject.name.includes('Paper 2')) {
+                                examBoard = 'AQA Paper 2';
+                              } else if (subject.name.includes('A (Edexcel)')) {
+                                examBoard = 'Edexcel A';
+                              } else if (subject.name.includes('B (Edexcel)')) {
+                                examBoard = 'Edexcel B';
+                              } else if (subject.name.includes('B (OCR)')) {
+                                examBoard = 'OCR B';
+                              } else if (subject.name.includes('A (OCR)')) {
+                                examBoard = 'OCR A';
+                              } else if (subject.id.includes('edexcel')) {
                                 examBoard = 'Edexcel';
                               } else if (subject.id.includes('ocr')) {
                                 examBoard = 'OCR';
