@@ -2309,7 +2309,9 @@ const Dashboard = () => {
                               const groupedSubjects = new Map<string, typeof gcseSubjects>();
                               
                               gcseSubjects.forEach(subject => {
-                                const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                let baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                // Normalize "Maths" to "Mathematics" for consistent grouping
+                                if (baseName === 'Maths') baseName = 'Mathematics';
                                 if (!groupedSubjects.has(baseName)) {
                                   groupedSubjects.set(baseName, []);
                                 }
@@ -2400,7 +2402,9 @@ const Dashboard = () => {
                               const groupedSubjects = new Map<string, typeof alevelSubjects>();
                               
                               alevelSubjects.forEach(subject => {
-                                const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                let baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                // Normalize "Maths" to "Mathematics" for consistent grouping
+                                if (baseName === 'Maths') baseName = 'Mathematics';
                                 if (!groupedSubjects.has(baseName)) {
                                   groupedSubjects.set(baseName, []);
                                 }
