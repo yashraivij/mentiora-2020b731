@@ -1766,61 +1766,27 @@ const Dashboard = () => {
       </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col lg:flex-row">
           {/* Main Learning Area */}
-          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-5xl'} mx-auto`}>
+          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
-              {/* Weekly Streak Display */}
-              <div className="mb-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <Flame className="h-6 w-6 text-primary" />
-                    <h3 className="text-xl font-semibold text-foreground">{currentStreak} Day Streak</h3>
-                  </div>
+              {/* Header with stats */}
+              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-2">
+                  <Flame className="h-6 w-6 text-orange-400" />
+                  <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
                 </div>
-                <div className="flex gap-2 sm:gap-3">
-                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => {
-                    const today = new Date();
-                    const ukDate = new Date(today.toLocaleString("en-US", { timeZone: "Europe/London" }));
-                    const currentDayOfWeek = ukDate.getDay();
-                    const mondayOffset = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1;
-                    const monday = new Date(ukDate);
-                    monday.setDate(ukDate.getDate() - mondayOffset);
-                    const currentDate = new Date(monday);
-                    currentDate.setDate(monday.getDate() + index);
-                    
-                    const dateStr = currentDate.toISOString().split('T')[0];
-                    const hasActivity = userStats?.practiceToday && dateStr === ukDate.toISOString().split('T')[0];
-                    const isToday = dateStr === ukDate.toISOString().split('T')[0];
-                    const isPast = currentDate < ukDate && dateStr !== ukDate.toISOString().split('T')[0];
-                    
-                    return (
-                      <div key={day} className="flex-1 flex flex-col items-center gap-2">
-                        <div 
-                          className={`w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-200 ${
-                            hasActivity 
-                              ? 'bg-primary shadow-lg shadow-primary/20' 
-                              : isPast
-                              ? 'bg-muted/20 border-2 border-muted-foreground/10'
-                              : 'bg-muted/40 border-2 border-dashed border-muted-foreground/20'
-                          } ${isToday ? 'ring-2 ring-primary ring-offset-2' : ''}`}
-                        >
-                          {hasActivity ? (
-                            <Check className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
-                          ) : (
-                            <span className="text-muted-foreground/40 text-xs sm:text-sm font-medium">{currentDate.getDate()}</span>
-                          )}
-                        </div>
-                        <span className={`text-xs sm:text-sm font-medium ${
-                          isToday ? 'text-primary font-semibold' : 'text-muted-foreground'
-                        }`}>
-                          {day}
-                        </span>
-                      </div>
-                    );
-                  })}
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-6 w-6 text-blue-400" />
+                  <span className="text-xl font-bold text-blue-500">{userGems}</span>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <Gem className="h-6 w-6 text-cyan-400" />
+                  <span className="text-xl font-bold text-cyan-500">{userGems}</span>
+                </div>
+              </div>
               </div>
 
               {/* Subject Selection or Subject Path */}
@@ -3627,6 +3593,129 @@ const Dashboard = () => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Right Sidebar - Premium & Stats - Hidden on mobile and tablet */}
+        <div className={`hidden lg:block w-80 bg-muted/30 p-6 space-y-6`}>
+          {/* Premium Card */}
+          {isPremium ? (
+            <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="bg-primary/20 rounded-lg p-2">
+                    <Crown className="h-6 w-6" />
+                  </div>
+                  <span className="font-bold text-lg">Premium Active</span>
+                </div>
+                <p className="text-white/90 mb-4">
+                  You're enjoying all premium benefits!
+                </p>
+                <div className="space-y-2 text-sm text-white/80">
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Unlimited practice sessions</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Advanced grade predictions</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Predicted 2026 exam access</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Personalized revision notes</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="border-0 bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="bg-primary/20 rounded-lg p-2">
+                    <Crown className="h-6 w-6" />
+                  </div>
+                  <span className="font-bold text-lg">Go Premium</span>
+                </div>
+                <p className="text-white/90 mb-4 mobile-text-wrap">
+                  Unlock exclusive study features and advanced analytics!
+                </p>
+                <Button 
+                  className="w-full bg-background text-primary hover:bg-accent font-bold py-3 rounded-2xl theme-transition mobile-text-wrap text-sm sm:text-base"
+                  onClick={() => navigate("/pricing")}
+                >
+                  <span className="truncate">START FREE TRIAL</span>
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* League Card */}
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-foreground">Leaderboards</h3>
+                <button 
+                  className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
+                  onClick={() => setActiveTab("leaderboards")}
+                >
+                  VIEW LEAGUE
+                </button>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <Trophy className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">
+                    Complete a lesson to join this week's leaderboard and compete against other learners
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Daily Quests */}
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-foreground">Daily Quests</h3>
+                <button 
+                  className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
+                  onClick={() => setActiveTab("quests")}
+                >
+                  VIEW ALL
+                </button>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-8 h-8 ${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-100' : 'bg-blue-400'} rounded-lg flex items-center justify-center`}>
+                    {(userStats?.practiceToday || todayEarnedMP >= 40) ? (
+                      <Check className="h-4 w-4 text-green-600" />
+                    ) : (
+                      <BookOpen className="h-4 w-4 text-white" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-card-foreground mobile-text-wrap">Complete 1 practice set</p>
+                    <div className="w-full bg-muted rounded-full h-2 mt-1">
+                      <div 
+                        className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                        style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '20%'}}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2 flex-shrink-0`}>
+                    <span className={`text-xs font-bold ${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'text-green-600' : 'text-blue-600'}`}>
+                      {(userStats?.practiceToday || todayEarnedMP >= 40) ? '+40 MP' : '40 MP'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
           </div>
         </div>
       </div>
