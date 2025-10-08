@@ -1772,14 +1772,21 @@ const Dashboard = () => {
           {activeTab === "learn" && (
             <div>
               {/* Dynamic Streak Graphic */}
-              <div className="mb-8 flex items-center justify-center gap-2">
+              <div className="mb-8 flex items-center justify-start gap-2">
                 {Array.from({ length: 7 }).map((_, index) => {
-                  const dayOffset = 6 - index;
-                  const date = new Date();
-                  date.setDate(date.getDate() - dayOffset);
+                  const today = new Date();
+                  const currentDay = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+                  const daysFromMonday = currentDay === 0 ? 6 : currentDay - 1; // Adjust so Monday is 0
+                  const monday = new Date(today);
+                  monday.setDate(today.getDate() - daysFromMonday);
+                  
+                  const date = new Date(monday);
+                  date.setDate(monday.getDate() + index);
+                  
                   const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })[0];
-                  const isToday = dayOffset === 0;
-                  const hasActivity = dayOffset < currentStreak;
+                  const isToday = date.toDateString() === today.toDateString();
+                  const isPast = date < today || isToday;
+                  const hasActivity = isPast && (currentStreak > 0);
                   
                   return (
                     <motion.div
