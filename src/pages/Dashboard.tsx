@@ -1039,7 +1039,7 @@ const Dashboard = () => {
         loadNotebookEntries();
       }
       if (activeTab === "progress") {
-        navigate('/progress');
+        loadPredictedGrades(); // Refresh predicted grades when viewing progress tab
       }
       if (activeTab === "flashcards") {
         loadFlashcardSets();
@@ -1821,7 +1821,7 @@ const Dashboard = () => {
                         >
                            <Card 
                             className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
-                            onClick={() => navigate(`/subject/${subject.id}`)}
+                            onClick={() => setSelectedSubject(subject.id)}
                           >
                             <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
                               <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
@@ -2143,13 +2143,138 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Progress tab - Redirects to new Progress page via useEffect */}
+          {/* Progress tab */}
           {activeTab === "progress" && (
-            <div className="flex items-center justify-center min-h-[50vh]">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                <p className="text-muted-foreground">Loading your progress...</p>
+            <div className="bg-gradient-to-br from-background via-background to-muted/20 min-h-screen -m-8 p-8">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-6 shadow-lg">
+                  <TrendingUp className="h-8 w-8 text-white" />
+                </div>
+                <h1 className="text-4xl font-bold text-foreground mb-4">
+                  Your Predicted Grades
+                </h1>
+                <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                  See where you stand — and how to improve.
+                </p>
+                
+                {predictedGrades.length > 0 && (
+                  <div className="mt-6">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-green-500 text-white text-lg px-6 py-2 shadow-lg">
+                      Your average grade is {Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length)}. Keep it up!
+                    </Badge>
+                    <p className="text-muted-foreground mt-2">You're making great progress</p>
+                  </div>
+                )}
               </div>
+
+              {predictedGrades.length === 0 ? (
+                <div className="max-w-2xl mx-auto">
+                  <Card className="text-center py-16 px-8 border border-border shadow-xl bg-card/90 backdrop-blur-sm">
+                    <CardContent className="space-y-8">
+                      <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center shadow-lg">
+                        <Trophy className="h-12 w-12 text-blue-600" />
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-semibold text-foreground">
+                          No predictions yet
+                        </h3>
+                        <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                          Complete some practice sessions to see your predicted grades and detailed analytics
+                        </p>
+                      </div>
+
+                        <div className="pt-4">
+                          <Button
+                            onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
+                            className={isPremium 
+                              ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                              : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                            }
+                          >
+                            {isPremium ? "Start Practice" : (
+                              <div className="flex items-center space-x-2">
+                                <Crown className="h-4 w-4" />
+                                <span>Start Free Trial</span>
+                              </div>
+                            )}
+                          </Button>
+                        </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : (
+                <div className="max-w-7xl mx-auto space-y-12">
+                  {/* 1. Performance Overview */}
+                  <PerformanceOverview 
+                    predictedGrades={predictedGrades}
+                    userSubjects={userSubjectsWithGrades}
+                  />
+
+                  {/* 2. Strengths and Weaknesses */}
+                  {userProgress.length > 0 && (
+                    <StrengthsWeaknesses
+                      userProgress={userProgress}
+                      onPractice={(subjectId, topicId) => {
+                        setSelectedSubject(subjectId);
+                        setActiveTab("learn");
+                        navigate(`/practice?subject=${subjectId}&topic=${topicId}`);
+                      }}
+                    />
+                  )}
+
+                  {/* 3. Study Insights */}
+                  <StudyInsights
+                    currentStreak={currentStreak}
+                    weeklyData={[
+                      { day: "Mon", hours: 1.5, accuracy: 75 },
+                      { day: "Tue", hours: 2.0, accuracy: 82 },
+                      { day: "Wed", hours: 0.5, accuracy: 68 },
+                      { day: "Thu", hours: 2.5, accuracy: 88 },
+                      { day: "Fri", hours: 1.8, accuracy: 80 },
+                      { day: "Sat", hours: 3.0, accuracy: 85 },
+                      { day: "Sun", hours: 1.2, accuracy: 78 },
+                    ]}
+                  />
+
+                  {/* 4. Weekly Improvement Plan */}
+                  {userProgress.length > 0 && (
+                    <WeeklyPlan
+                      weakTopics={userProgress
+                        .filter(p => p.averageScore < 70)
+                        .sort((a, b) => a.averageScore - b.averageScore)
+                        .map(p => ({
+                          topicId: p.topicId,
+                          subjectId: p.subjectId,
+                          score: p.averageScore
+                        }))}
+                      targetGrades={userSubjectsWithGrades.map(s => ({
+                        subject: s.subject_name,
+                        target: parseInt(s.target_grade || "7")
+                      }))}
+                    />
+                  )}
+
+                  {/* 5. Personalized Summary */}
+                  <PersonalizedSummary
+                    predictedGrades={predictedGrades}
+                    userProgress={userProgress}
+                  />
+
+                  {/* CTA Section */}
+                  <div className="text-center py-8">
+                    <Button
+                      size="lg"
+                      onClick={() => setActiveTab("learn")}
+                      className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                    >
+                      <BookOpen className="h-5 w-5 mr-2" />
+                      Continue Practicing
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
