@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
-import { ArrowLeft, ChevronLeft, ChevronRight, TrendingUp, Target } from "lucide-react";
-
+import { ArrowLeft, Target, TrendingUp, Clock, Zap, Brain, Flame, CheckCircle2, Rocket, Send, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, BarChart, Bar, LineChart, Line } from "recharts";
+import { Input } from "@/components/ui/input";
 
 interface TopicProgress {
   topicId: string;
@@ -21,42 +23,47 @@ const SubjectTopics = () => {
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
   const [targetGrade, setTargetGrade] = useState<number | null>(null);
-  const [showGradeSetup, setShowGradeSetup] = useState(false);
-  const [topicFilter, setTopicFilter] = useState<'all' | 'strengths' | 'focus' | 'new'>('all');
+  const [showGradeSetup, setShowGradeSetup] = useState(true);
+  const [completedTasks, setCompletedTasks] = useState<boolean[]>([false, false, false]);
+  const [chatMessage, setChatMessage] = useState("");
 
   const subject = curriculum.find(s => s.id === subjectId);
 
   useEffect(() => {
-    if (user?.id && subjectId) {
-      // Load progress
+    if (user?.id) {
       const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
       if (savedProgress) {
         const allProgress = JSON.parse(savedProgress);
         const subjectProgress = allProgress.filter((p: any) => p.subjectId === subjectId);
         setTopicProgress(subjectProgress);
       }
-
-      // Load target grade
-      const savedTarget = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
-      if (savedTarget) {
-        setTargetGrade(parseInt(savedTarget));
-      } else {
-        setShowGradeSetup(true);
+      
+      // Check if target grade is already set
+      const savedGrade = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
+      if (savedGrade) {
+        setTargetGrade(parseInt(savedGrade));
+        setShowGradeSetup(false);
       }
     }
   }, [user?.id, subjectId]);
 
-  const handleSetTargetGrade = (grade: number) => {
-    if (user?.id && subjectId) {
+  const handleGradeSelect = (grade: number) => {
+    setTargetGrade(grade);
+    if (user?.id) {
       localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade.toString());
-      setTargetGrade(grade);
-      setShowGradeSetup(false);
     }
+    setShowGradeSetup(false);
+  };
+
+  const toggleTask = (index: number) => {
+    const newTasks = [...completedTasks];
+    newTasks[index] = !newTasks[index];
+    setCompletedTasks(newTasks);
   };
 
   if (!subject) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject not found</h1>
           <Button onClick={() => navigate(-1)}>
@@ -72,74 +79,73 @@ const SubjectTopics = () => {
     return progress || { attempts: 0, averageScore: 0, lastAttempt: new Date() };
   };
 
-  // Calculate statistics
-  const masteredTopics = topicProgress.filter(p => p.averageScore >= 85).length;
-  const inProgressTopics = topicProgress.filter(p => p.attempts > 0 && p.averageScore < 85 && p.averageScore >= 60).length;
-  const needsWorkTopics = topicProgress.filter(p => p.attempts > 0 && p.averageScore < 60);
-  const avgScore = topicProgress.length > 0 
-    ? Math.round(topicProgress.reduce((sum, p) => sum + p.averageScore, 0) / topicProgress.length)
-    : 0;
-  
-  const totalTopics = subject?.topics.length || 0;
-  const completionRate = totalTopics > 0 ? Math.round((masteredTopics / totalTopics) * 100) : 0;
-  
-  // Calculate predicted grade (simple formula based on avg score)
-  const predictedGrade = avgScore >= 90 ? 9 : avgScore >= 80 ? 8 : avgScore >= 70 ? 7 : avgScore >= 60 ? 6 : avgScore >= 50 ? 5 : avgScore >= 40 ? 4 : 3;
-  const predictedGradeDecimal = avgScore >= 40 ? 4 + ((avgScore - 40) / 10) : 3;
-  
-  // Study streak (mock for now)
-  const studyStreak = 7;
-  
-  // Progress to target
-  const percentToTarget = targetGrade ? Math.min(100, Math.round((predictedGrade / targetGrade) * 100)) : 0;
-  
-  // Exam readiness
-  const examReadiness = Math.min(100, Math.round((masteredTopics / totalTopics) * 100 + (avgScore * 0.2)));
-  
-  // Consistency score
-  const consistencyScore = Math.min(100, Math.round(studyStreak * 10 + (topicProgress.length > 0 ? 30 : 0)));
-  
-  // Filter topics
-  const filteredTopics = subject?.topics.filter(topic => {
+  // Mock data for charts
+  const progressData = [
+    { week: 'Week 1', score: 45 },
+    { week: 'Week 2', score: 52 },
+    { week: 'Week 3', score: 58 },
+    { week: 'Week 4', score: 65 },
+    { week: 'Week 5', score: 70 },
+    { week: 'Week 6', score: 75 },
+  ];
+
+  const hourlyPerformance = [
+    { hour: '6am', accuracy: 45 },
+    { hour: '9am', accuracy: 55 },
+    { hour: '12pm', accuracy: 50 },
+    { hour: '3pm', accuracy: 58 },
+    { hour: '6pm', accuracy: 72 },
+    { hour: '9pm', accuracy: 68 },
+  ];
+
+  // Calculate topic mastery
+  const topicMastery = subject?.topics.slice(0, 5).map(topic => {
     const progress = getTopicProgress(topic.id);
-    if (topicFilter === 'strengths') return progress.averageScore >= 85;
-    if (topicFilter === 'focus') return progress.attempts > 0 && progress.averageScore < 60;
-    if (topicFilter === 'new') return progress.attempts === 0;
-    return true;
+    return {
+      name: topic.name,
+      mastery: progress.averageScore || Math.floor(Math.random() * 40 + 40),
+      status: progress.averageScore >= 80 ? 'Strong' : progress.averageScore >= 60 ? 'Improving' : 'Needs review'
+    };
   }) || [];
 
-  // Find next recommended topic
-  const getNextTopic = () => {
-    if (needsWorkTopics.length > 0) {
-      return subject.topics.find(t => t.id === needsWorkTopics[0].topicId);
-    }
-    return subject.topics.find(t => !topicProgress.some(p => p.topicId === t.id));
-  };
+  const streakDays = 7;
+  const examReadiness = 82;
+  const currentEstimate = 6.5;
+  const confidenceLevel = "Building consistency";
+  const focusTopic = subject?.topics[0]?.name || "Core concepts";
 
-  const nextTopic = getNextTopic();
-
-  // Target Grade Setup Modal
+  // Target Grade Setup Screen
   if (showGradeSetup) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <Card className="max-w-xl w-full rounded-lg shadow-lg border">
-          <CardContent className="p-12 text-center">
-            <h1 className="text-3xl font-semibold mb-3 text-foreground">Set your target grade</h1>
-            <p className="text-muted-foreground mb-8">for {subject?.name}</p>
-
-            <div className="grid grid-cols-3 gap-3 mb-8 max-w-sm mx-auto">
-              {[4, 5, 6, 7, 8, 9].map((grade) => (
-                <button
+      <div className="min-h-screen bg-background flex items-center justify-center p-8">
+        <Card className="max-w-2xl w-full rounded-3xl border-[#E7ECF5] shadow-[0_8px_48px_rgba(15,23,42,0.08)]">
+          <CardHeader className="text-center space-y-4 pt-12 pb-8">
+            <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#2E5BFF] to-[#60A5FA] flex items-center justify-center mb-4">
+              <Target className="h-8 w-8 text-white" />
+            </div>
+            <CardTitle className="text-3xl font-semibold text-[#0F172A]">
+              Set your target grade for {subject?.name}
+            </CardTitle>
+            <p className="text-muted-foreground text-base">
+              Everything next adapts to your goal.
+            </p>
+          </CardHeader>
+          <CardContent className="pb-12">
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((grade) => (
+                <Button
                   key={grade}
-                  onClick={() => handleSetTargetGrade(grade)}
-                  className="h-20 rounded-lg border-2 border-border hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 transition-all duration-200 flex items-center justify-center text-3xl font-semibold text-foreground"
+                  onClick={() => handleGradeSelect(grade)}
+                  variant="outline"
+                  className="h-20 text-2xl font-semibold rounded-2xl border-[#E7ECF5] hover:border-[#2E5BFF] hover:bg-[#F7F9FC] hover:text-[#2E5BFF] transition-all duration-200 hover:shadow-[0_0_20px_rgba(46,91,255,0.15)]"
                 >
                   {grade}
-                </button>
+                </Button>
               ))}
             </div>
-
-            <p className="text-sm text-muted-foreground">You can change this anytime</p>
+            <p className="text-center text-sm text-muted-foreground">
+              You can change this later.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -148,192 +154,428 @@ const SubjectTopics = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate(-1)}
-            className="text-muted-foreground hover:text-foreground"
-          >
+      {/* Minimal Header */}
+      <header className="border-b border-[#E7ECF5] bg-background">
+        <div className="max-w-6xl mx-auto px-8 py-6">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="hover:bg-[#F7F9FC]">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Subject Title */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">{subject?.name}</h1>
-          <p className="text-muted-foreground">Your learning journey</p>
-        </div>
-
-        {/* Compact Grade Overview */}
-        <Card className="rounded-xl border shadow-sm mb-8">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between gap-8">
-              {/* Current Grade */}
-              <div className="flex items-center gap-4">
+      <div className="max-w-7xl mx-auto px-8 py-10">
+        <div className="grid lg:grid-cols-[2fr,1fr] gap-8">
+          {/* Main Content Column */}
+          <div className="space-y-8">
+            {/* Hero Card */}
+            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)] overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-[#2E5BFF]/5 to-transparent" />
+              <CardHeader className="relative space-y-6 pb-8">
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Current Grade</div>
-                  <div className="text-4xl font-bold text-[#3DB4E8]">{predictedGradeDecimal.toFixed(1)}</div>
+                  <h1 className="text-4xl font-semibold text-[#0F172A] mb-2">
+                    Your journey in {subject?.name}
+                  </h1>
+                  <p className="text-muted-foreground text-lg">
+                    We'll guide you step-by-step to Grade {targetGrade}.
+                  </p>
                 </div>
-              </div>
-
-              {/* Arrow */}
-              <div className="text-2xl text-muted-foreground">→</div>
-
-              {/* Target Grade */}
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
-                  disabled={!targetGrade || targetGrade <= 4}
-                  className="h-8 w-8"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <div>
-                  <div className="text-sm text-muted-foreground mb-1">Target Grade</div>
-                  <div className="text-4xl font-bold text-foreground">{targetGrade}</div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
-                  disabled={!targetGrade || targetGrade >= 9}
-                  className="h-8 w-8"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-
-              {/* Progress */}
-              <div className="flex-1 max-w-xs">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Progress</span>
-                  <span className="text-sm font-semibold text-[#3DB4E8]">{masteredTopics}/{totalTopics} topics</span>
-                </div>
-                <Progress value={Math.round((masteredTopics / totalTopics) * 100)} className="h-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* All Topics */}
-        <Card className="rounded-xl border shadow-sm">
-          <CardHeader className="pb-6 px-8 pt-8">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <CardTitle className="text-2xl font-bold mb-1">All Topics</CardTitle>
-                <p className="text-sm text-muted-foreground">{filteredTopics.length} available</p>
-              </div>
-              <div className="flex gap-2 flex-wrap">
-                {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
-                  <Button
-                    key={filter}
-                    variant={topicFilter === filter ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setTopicFilter(filter)}
-                    className={topicFilter === filter ? "bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white" : ""}
-                  >
-                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strengths' : filter === 'focus' ? 'Focus' : 'New'}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </CardHeader>
-          
-          <CardContent className="px-8 pb-8">
-            <div className="space-y-3">
-              {filteredTopics.map((topic) => {
-                const progress = getTopicProgress(topic.id);
-                const isMastered = progress.averageScore >= 85;
-                const needsPractice = progress.attempts > 0 && progress.averageScore < 60;
                 
-                return (
+                <div className="flex flex-wrap gap-3">
+                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                    🎯 Target: {targetGrade}
+                  </div>
+                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                    🌿 {confidenceLevel}
+                  </div>
+                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                    ⏰ Focus: {focusTopic}
+                  </div>
+                </div>
+              </CardHeader>
+              
+              <CardContent className="space-y-4">
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={progressData}>
+                      <defs>
+                        <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#2E5BFF" stopOpacity={0.2}/>
+                          <stop offset="95%" stopColor="#2E5BFF" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <XAxis dataKey="week" stroke="#94A3B8" fontSize={12} />
+                      <YAxis stroke="#94A3B8" fontSize={12} />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="score" stroke="#2E5BFF" strokeWidth={3} fillOpacity={1} fill="url(#colorScore)" />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-center text-sm text-muted-foreground">
+                  Your learning curve so far · You're right where you should be. Keep building on it.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Progress & Mastery - Side by Side */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Topic Mastery */}
+              <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-[#0F172A]">Topic Mastery</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {topicMastery.map((topic, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="font-medium text-[#0F172A]">{topic.name}</span>
+                        <span className="text-xs px-2 py-1 rounded-full bg-[#F7F9FC] text-muted-foreground">
+                          {topic.status}
+                        </span>
+                      </div>
+                      <div className="h-2 bg-[#E7ECF5] rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#2E5BFF] to-[#60A5FA] rounded-full transition-all duration-500"
+                          style={{ width: `${topic.mastery}%` }}
+                        />
+                      </div>
+                      <p className="text-xs text-muted-foreground">{topic.mastery}% strong</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              {/* Study Rhythm */}
+              <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-[#0F172A]">Best Study Time</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={hourlyPerformance}>
+                        <defs>
+                          <linearGradient id="colorAccuracy" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#2E5BFF" stopOpacity={0.2}/>
+                            <stop offset="95%" stopColor="#2E5BFF" stopOpacity={0}/>
+                          </linearGradient>
+                        </defs>
+                        <XAxis dataKey="hour" stroke="#94A3B8" fontSize={12} />
+                        <YAxis stroke="#94A3B8" fontSize={12} />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="accuracy" stroke="#2E5BFF" strokeWidth={3} fillOpacity={1} fill="url(#colorAccuracy)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p className="text-center text-sm text-muted-foreground mt-4">
+                    You're most accurate between 7–9 PM
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Personal Insights */}
+            <section className="bg-[#F7F9FF] rounded-3xl p-8 space-y-6">
+              <h2 className="text-2xl font-semibold text-[#0F172A] text-center">
+                How you learn best in {subject?.name}
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_2px_16px_rgba(15,23,42,0.04)]">
+                  <CardContent className="pt-6 text-center space-y-3">
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#2E5BFF]/10 flex items-center justify-center">
+                      <Zap className="h-6 w-6 text-[#2E5BFF]" />
+                    </div>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">
+                      Short 10-min sessions help you remember faster.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_2px_16px_rgba(15,23,42,0.04)]">
+                  <CardContent className="pt-6 text-center space-y-3">
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#2E5BFF]/10 flex items-center justify-center">
+                      <Clock className="h-6 w-6 text-[#2E5BFF]" />
+                    </div>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">
+                      You focus best right after dinner.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_2px_16px_rgba(15,23,42,0.04)]">
+                  <CardContent className="pt-6 text-center space-y-3">
+                    <div className="mx-auto w-12 h-12 rounded-full bg-[#2E5BFF]/10 flex items-center justify-center">
+                      <Brain className="h-6 w-6 text-[#2E5BFF]" />
+                    </div>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">
+                      Explaining answers aloud boosts your recall.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Weekly Focus Plan */}
+            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+              <CardHeader>
+                <CardTitle className="text-2xl font-semibold text-[#0F172A]">Your Focus for the Week</CardTitle>
+                <p className="text-muted-foreground text-sm">
+                  Each step helps move you closer to your grade goal.
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {[
+                  { icon: "🧬", title: `Revise ${focusTopic}`, time: "10 min quiz" },
+                  { icon: "💡", title: "Review Forces with flashcards", time: "5 mins" },
+                  { icon: "📝", title: "Practice a 6-marker on Photosynthesis", time: "15 mins" }
+                ].map((task, idx) => (
                   <button
-                    key={topic.id}
-                    onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    className="w-full rounded-lg border bg-card hover:border-[#3DB4E8] hover:shadow-md p-5 transition-all text-left group"
+                    key={idx}
+                    onClick={() => toggleTask(idx)}
+                    className="w-full flex items-center gap-4 p-4 rounded-xl bg-[#F7F9FC] hover:bg-[#E7ECF5] transition-all duration-200 text-left group"
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-3">
-                          <h3 className="text-base font-semibold text-foreground group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
-                          {isMastered && (
-                            <div className="px-2 py-1 rounded text-[#3DB4E8] text-xs font-medium border border-[#3DB4E8]/30 bg-[#3DB4E8]/10">Mastered</div>
-                          )}
-                          {needsPractice && (
-                            <div className="px-2 py-1 rounded text-orange-600 text-xs font-medium border border-orange-200 bg-orange-50">Focus</div>
-                          )}
+                    <div className="text-2xl">{task.icon}</div>
+                    <div className="flex-1">
+                      <p className="font-medium text-[#0F172A] group-hover:text-[#2E5BFF]">{task.title}</p>
+                      <p className="text-sm text-muted-foreground">({task.time})</p>
+                    </div>
+                    {completedTasks[idx] ? (
+                      <CheckCircle2 className="h-6 w-6 text-[#17B26A]" />
+                    ) : (
+                      <div className="h-6 w-6 rounded-full border-2 border-[#E7ECF5]" />
+                    )}
+                  </button>
+                ))}
+                <p className="text-center text-sm text-muted-foreground mt-6">
+                  Plan refreshes every Sunday.
+                </p>
+                <Button 
+                  className="w-full rounded-full bg-[#2E5BFF] hover:bg-[#254AE0] text-white py-6 text-base font-medium shadow-[0_4px_16px_rgba(46,91,255,0.25)]"
+                  onClick={() => navigate(`/practice/${subjectId}/${subject?.topics[0]?.id}`)}
+                >
+                  Start next task
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Momentum */}
+            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+              <CardContent className="grid md:grid-cols-2 gap-8 p-8">
+                {/* Streak */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Flame className="h-8 w-8 text-orange-500" />
+                    <div>
+                      <p className="text-3xl font-bold text-[#0F172A]">{streakDays}-day streak</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {Array.from({ length: 7 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-8 h-8 rounded-full ${
+                          i < streakDays ? 'bg-gradient-to-br from-orange-400 to-orange-600' : 'bg-[#E7ECF5]'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground">Consistency builds confidence.</p>
+                </div>
+
+                {/* Confidence Gauges */}
+                <div className="space-y-4">
+                  <p className="font-semibold text-[#0F172A]">Confidence</p>
+                  <div className="space-y-3">
+                    {[
+                      { label: 'Knowledge', value: 78, color: '#2E5BFF' },
+                      { label: 'Exam Skill', value: examReadiness, color: '#17B26A' },
+                      { label: 'Timing', value: 72, color: '#FDB022' }
+                    ].map((gauge, idx) => (
+                      <div key={idx} className="space-y-1">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">{gauge.label}</span>
+                          <span className="font-medium text-[#0F172A]">{gauge.value}%</span>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <Progress value={progress.averageScore} className="h-2 flex-1" />
-                          <div className="text-right min-w-[100px]">
-                            <div className="text-base font-semibold text-foreground">
-                              {progress.attempts > 0 ? `${progress.averageScore}%` : '—'}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              {progress.attempts > 0 ? `${progress.attempts} ${progress.attempts === 1 ? 'attempt' : 'attempts'}` : 'Not started'}
-                            </div>
-                          </div>
+                        <div className="h-2 bg-[#E7ECF5] rounded-full overflow-hidden">
+                          <div 
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{ width: `${gauge.value}%`, backgroundColor: gauge.color }}
+                          />
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Premium Insights */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Exam Readiness */}
+              <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+                <CardContent className="pt-8 text-center space-y-4">
+                  <div className="relative w-32 h-32 mx-auto">
+                    <svg className="w-full h-full transform -rotate-90">
+                      <circle
+                        cx="64"
+                        cy="64"
+                        r="56"
+                        stroke="#E7ECF5"
+                        strokeWidth="8"
+                        fill="none"
+                      />
+                      <circle
+                        cx="64"
+                        cy="64"
+                        r="56"
+                        stroke="url(#examGrad)"
+                        strokeWidth="8"
+                        fill="none"
+                        strokeDasharray={`${2 * Math.PI * 56}`}
+                        strokeDashoffset={`${2 * Math.PI * 56 * (1 - examReadiness / 100)}`}
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient id="examGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#2E5BFF" />
+                          <stop offset="100%" stopColor="#60A5FA" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-3xl font-bold text-[#0F172A]">{examReadiness}%</span>
                     </div>
-                  </button>
-                );
-              })}
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    You're {examReadiness}% ready for your next mock.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Retention Heatmap */}
+              <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+                <CardContent className="pt-8 space-y-4">
+                  <p className="text-sm font-semibold text-[#0F172A] text-center">Retention Pattern</p>
+                  <div className="grid grid-cols-7 gap-1">
+                    {Array.from({ length: 14 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="aspect-square rounded"
+                        style={{
+                          backgroundColor: i < 10 ? `hsl(217, 91%, ${60 + (i * 3)}%)` : '#E7ECF5'
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground text-center">
+                    Your memory pattern over the last two weeks.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Difficulty Trend */}
+              <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+                <CardContent className="pt-8 space-y-4">
+                  <p className="text-sm font-semibold text-[#0F172A] text-center">Difficulty Curve</p>
+                  <div className="h-32">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={progressData}>
+                        <Line type="monotone" dataKey="score" stroke="#2E5BFF" strokeWidth={2} dot={{ fill: '#2E5BFF', r: 4 }} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p className="text-xs text-muted-foreground text-center">
+                    Your questions are getting tougher — and you're keeping up.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Personalized Learning Insights */}
-        <Card className="rounded-2xl border-2 shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-500/5 to-transparent rounded-full blur-3xl" />
-          <CardHeader className="px-12 pt-10 pb-8 relative">
-            <CardTitle className="text-3xl font-bold mb-2">Your learning patterns</CardTitle>
-            <p className="text-base text-muted-foreground">Insights generated from your study behavior</p>
-          </CardHeader>
-          <CardContent className="px-12 pb-12 relative">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-5">
-                <div className="p-7 rounded-2xl bg-gradient-to-br from-[#3DB4E8]/10 to-background border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Session length</div>
-                  <div className="text-4xl font-black text-[#3DB4E8] mb-3">15-20 min</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Your sweet spot for maximum focus. Sessions in this range have a 94% completion rate.</p>
+            {/* Sticky Next Step */}
+            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)] bg-gradient-to-r from-[#EAF2FF] to-background">
+              <CardContent className="flex items-center gap-6 p-8">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2E5BFF] to-[#60A5FA] flex items-center justify-center flex-shrink-0">
+                  <Rocket className="h-6 w-6 text-white" />
                 </div>
-                
-                <div className="p-7 rounded-2xl bg-card border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Recovery time</div>
-                  <div className="text-4xl font-black text-foreground mb-3">5 min</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Taking short breaks between sessions improves your scores by 23% on average.</p>
+                <div className="flex-1">
+                  <p className="font-semibold text-[#0F172A] text-lg mb-1">
+                    Next up: 10-min {subject?.name} drill on {focusTopic}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Completing this keeps your streak alive.
+                  </p>
                 </div>
-              </div>
+                <Button 
+                  className="rounded-full bg-[#2E5BFF] hover:bg-[#254AE0] text-white px-8 py-6 text-base font-medium shadow-[0_4px_16px_rgba(46,91,255,0.25)] hover:shadow-[0_6px_24px_rgba(46,91,255,0.35)]"
+                  onClick={() => navigate(`/practice/${subjectId}/${subject?.topics[0]?.id}`)}
+                >
+                  Start now →
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
 
-              <div className="space-y-5">
-                <div className="p-7 rounded-2xl bg-card border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Monthly improvement</div>
-                  <div className="text-4xl font-black text-green-600 mb-3">+12%</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Your average scores have increased consistently. Keep up this momentum.</p>
+          {/* Right Column - Tutor Dock */}
+          <div className="lg:sticky lg:top-8 h-fit">
+            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)]">
+              <CardHeader className="border-b border-[#E7ECF5]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2E5BFF] to-[#60A5FA] flex items-center justify-center">
+                    <Sparkles className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg font-semibold text-[#0F172A]">Your Mentor</CardTitle>
+                    <p className="text-xs text-muted-foreground">I'll break things down and keep you on track.</p>
+                  </div>
+                </div>
+              </CardHeader>
+              
+              <CardContent className="p-6 space-y-4">
+                {/* Chat Messages */}
+                <div className="space-y-3">
+                  <div className="bg-[#F7F9FC] rounded-2xl rounded-tl-sm p-4 text-sm text-[#0F172A]">
+                    Let's make a plan for today.
+                  </div>
+                  <div className="bg-[#F7F9FC] rounded-2xl rounded-tl-sm p-4 text-sm text-[#0F172A]">
+                    Want help with {focusTopic}?
+                  </div>
+                  <div className="bg-[#F7F9FC] rounded-2xl rounded-tl-sm p-4 text-sm text-[#0F172A]">
+                    Prefer a 10-min or 20-min session?
+                  </div>
                 </div>
 
-                <div className="p-7 rounded-2xl bg-gradient-to-br from-purple-500/10 to-background border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Retention rate</div>
-                  <div className="text-4xl font-black text-foreground mb-3">87%</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">You retain information well. Topics practiced once are usually mastered within 2-3 sessions.</p>
+                {/* Suggestion Chips */}
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" className="rounded-full text-xs border-[#E7ECF5] hover:bg-[#F7F9FC] hover:border-[#2E5BFF] hover:text-[#2E5BFF]">
+                    Explain step-by-step
+                  </Button>
+                  <Button variant="outline" size="sm" className="rounded-full text-xs border-[#E7ECF5] hover:bg-[#F7F9FC] hover:border-[#2E5BFF] hover:text-[#2E5BFF]">
+                    Mark my answer
+                  </Button>
+                  <Button variant="outline" size="sm" className="rounded-full text-xs border-[#E7ECF5] hover:bg-[#F7F9FC] hover:border-[#2E5BFF] hover:text-[#2E5BFF]">
+                    Give me a quick drill
+                  </Button>
                 </div>
-              </div>
-            </div>
 
-            <div className="mt-8 p-8 rounded-2xl bg-gradient-to-r from-[#3DB4E8]/15 to-card border-2 border-[#3DB4E8]/30 shadow-xl">
-              <div className="text-sm font-bold text-foreground mb-4">Personalized recommendation</div>
-              <p className="text-base text-muted-foreground leading-relaxed">Based on your patterns, practicing <span className="font-bold text-foreground">Tuesday and Thursday evenings (7-9 PM)</span> for <span className="font-bold text-foreground">15-20 minutes</span> will maximize your progress toward grade {targetGrade}.</p>
-            </div>
-          </CardContent>
-        </Card>
+                {/* Chat Input */}
+                <div className="flex gap-2 pt-4 border-t border-[#E7ECF5]">
+                  <Input
+                    placeholder="Type to ask anything…"
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    className="rounded-full border-[#E7ECF5] focus:border-[#2E5BFF] focus:ring-[#2E5BFF]"
+                  />
+                  <Button 
+                    size="icon"
+                    className="rounded-full bg-[#2E5BFF] hover:bg-[#254AE0] text-white flex-shrink-0"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
