@@ -3662,6 +3662,11 @@ const Dashboard = () => {
             </div>
           )}
         </div>
+
+        {/* Right Sidebar - Premium & Stats - Hidden on mobile and tablet */}
+        <div className={`hidden lg:block w-80 bg-muted/30 p-6 space-y-6`}>
+          {/* Sidebar content removed */}
+        </div>
       </div>
       </div>
       
