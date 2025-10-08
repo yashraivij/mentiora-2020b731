@@ -1771,32 +1771,56 @@ const Dashboard = () => {
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-5xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
-              {/* Streak Banner */}
-              <div className="mb-10 rounded-3xl p-8 relative overflow-hidden" style={{
-                background: 'linear-gradient(135deg, #3BAFDA 0%, #2E9DBF 100%)'
-              }}>
-                <div className="flex items-center justify-between relative z-10">
-                  <div className="flex items-center space-x-6">
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)'
-                    }}>
-                      <Flame className="h-10 w-10 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-5xl font-bold text-white mb-1">{currentStreak}</div>
-                      <div className="text-lg font-semibold text-white/90">Day Streak</div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-white/90 text-sm font-medium mb-2">Keep it going!</div>
-                    <div className="text-white text-base font-semibold">Practice daily to maintain your streak</div>
+              {/* Weekly Streak Display */}
+              <div className="mb-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <Flame className="h-6 w-6 text-primary" />
+                    <h3 className="text-xl font-semibold text-foreground">{currentStreak} Day Streak</h3>
                   </div>
                 </div>
-                {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)',
-                  transform: 'translate(30%, -30%)'
-                }}></div>
+                <div className="flex gap-2 sm:gap-3">
+                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => {
+                    const today = new Date();
+                    const ukDate = new Date(today.toLocaleString("en-US", { timeZone: "Europe/London" }));
+                    const currentDayOfWeek = ukDate.getDay();
+                    const mondayOffset = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1;
+                    const monday = new Date(ukDate);
+                    monday.setDate(ukDate.getDate() - mondayOffset);
+                    const currentDate = new Date(monday);
+                    currentDate.setDate(monday.getDate() + index);
+                    
+                    const dateStr = currentDate.toISOString().split('T')[0];
+                    const hasActivity = userStats?.practiceToday && dateStr === ukDate.toISOString().split('T')[0];
+                    const isToday = dateStr === ukDate.toISOString().split('T')[0];
+                    const isPast = currentDate < ukDate && dateStr !== ukDate.toISOString().split('T')[0];
+                    
+                    return (
+                      <div key={day} className="flex-1 flex flex-col items-center gap-2">
+                        <div 
+                          className={`w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-200 ${
+                            hasActivity 
+                              ? 'bg-primary shadow-lg shadow-primary/20' 
+                              : isPast
+                              ? 'bg-muted/20 border-2 border-muted-foreground/10'
+                              : 'bg-muted/40 border-2 border-dashed border-muted-foreground/20'
+                          } ${isToday ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                        >
+                          {hasActivity ? (
+                            <Check className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
+                          ) : (
+                            <span className="text-muted-foreground/40 text-xs sm:text-sm font-medium">{currentDate.getDate()}</span>
+                          )}
+                        </div>
+                        <span className={`text-xs sm:text-sm font-medium ${
+                          isToday ? 'text-primary font-semibold' : 'text-muted-foreground'
+                        }`}>
+                          {day}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Subject Selection or Subject Path */}
