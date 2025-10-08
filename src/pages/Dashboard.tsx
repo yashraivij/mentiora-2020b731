@@ -1792,28 +1792,17 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
-                     <div>
-                       <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2" style={{ color: '#1a1a1a' }}>
-                         Your Subjects
-                       </h2>
-                       <p className="text-base font-medium" style={{ color: '#6B7280' }}>
-                         Choose which subjects you want to study and personalise.
-                       </p>
-                     </div>
+                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+                     <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
+                       Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
+                     </h2>
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
-                        className="font-bold py-2 px-6 rounded-full flex items-center space-x-2 transition-all duration-200 shadow-md"
-                        style={{ 
-                          backgroundColor: '#3BAFDA',
-                          color: '#FFFFFF'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
+                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
                       >
                         <Plus className="h-4 w-4" />
-                        <span>Add a new subject</span>
+                        <span>Add Subject</span>
                       </Button>
                     )}
                   </div>
@@ -1831,60 +1820,40 @@ const Dashboard = () => {
                           className="relative"
                         >
                            <Card 
-                            className="cursor-pointer border transition-all duration-300 mobile-no-overflow"
+                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
                             onClick={() => navigate(`/subject/${subject.id}`)}
-                            style={{
-                              backgroundColor: '#FFFFFF',
-                              borderColor: '#E7ECF5',
-                              borderRadius: '1rem',
-                              boxShadow: '0 6px 32px rgba(15,23,42,0.05)'
-                            }}
                           >
                             <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
                               <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
-                                    <span className="text-xs font-bold px-3 py-1 rounded-full mobile-text-wrap" style={{ 
-                                      color: '#3BAFDA',
-                                      backgroundColor: '#E8F7FC'
-                                    }}>
+                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full mobile-text-wrap`}>
                                       {progress.completed} OF {progress.total} UNITS
                                     </span>
                                   </div>
                                   
-                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold tracking-tight mb-4 mobile-text-wrap`} style={{ color: '#1a1a1a' }}>
+                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-foreground mb-4 mobile-text-wrap`}>
                                     {getSubjectDisplayName(subject)}
                                   </h3>
                                   
-                                  <div className="w-full rounded-full h-3 mb-4" style={{ backgroundColor: '#F7F9FC' }}>
+                                  <div className="w-full bg-muted rounded-full h-3 mb-4">
                                     <div
-                                      className="h-3 rounded-full transition-all duration-500"
-                                      style={{ 
-                                        width: `${(progress.completed / progress.total) * 100}%`,
-                                        backgroundColor: '#3BAFDA'
-                                      }}
+                                      className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
+                                      style={{ width: `${(progress.completed / progress.total) * 100}%` }}
                                     />
                                   </div>
 
                                   <Button
-                                    className={`font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-md transition-all duration-200 mobile-touch-target`}
-                                    style={{
-                                      backgroundColor: '#3BAFDA',
-                                      color: '#FFFFFF'
-                                    }}
-                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
-                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
+                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-lg mobile-touch-target`}
                                   >
                                     {progress.completed === 0 ? "START" : "CONTINUE"}
                                   </Button>
                                 </div>
 
-                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} rounded-full flex items-center justify-center flex-shrink-0`} style={{
-                                  backgroundColor: '#E8F7FC'
-                                }}>
+                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'}`} style={{ color: '#3BAFDA' }} />;
+                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
                                   })()}
                                 </div>
                               </div>
@@ -1897,10 +1866,7 @@ const Dashboard = () => {
                               e.stopPropagation();
                               removeSubject(subject.id);
                             }}
-                            className="absolute top-2 right-2 transition-colors"
-                            style={{ color: '#9CA3AF' }}
-                            onMouseEnter={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                            onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
+                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
                           >
                             <X className="h-4 w-4" />
                           </button>
@@ -1936,27 +1902,21 @@ const Dashboard = () => {
               {/* No subjects message */}
               {filteredSubjects.length === 0 && !selectedSubject && (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E8F7FC' }}>
-                    <BookOpen className="h-12 w-12" style={{ color: '#3BAFDA' }} />
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+                    <BookOpen className="h-12 w-12 text-muted-foreground" />
                   </div>
-                  <h3 className="text-2xl font-bold tracking-tight mb-4" style={{ color: '#1a1a1a' }}>
-                    No subjects added yet
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
+                    No subjects selected yet
                   </h3>
-                  <p className="text-lg font-medium mb-8" style={{ color: '#6B7280' }}>
-                    Add your GCSE or A-Level subjects to start your personalised revision.
+                  <p className="text-lg text-muted-foreground mb-8">
+                    Add subjects to your list to get started with GCSE revision
                   </p>
                   <Button
                     onClick={() => setShowAddSubjects(true)}
-                    className="font-bold py-4 px-8 rounded-full text-lg flex items-center space-x-2 shadow-md transition-all duration-200"
-                    style={{
-                      backgroundColor: '#3BAFDA',
-                      color: '#FFFFFF'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg flex items-center space-x-2"
                   >
                     <Plus className="h-5 w-5" />
-                    <span>Add my first subject</span>
+                    <span>Add Subjects</span>
                   </Button>
                 </div>
               )}
@@ -1964,17 +1924,13 @@ const Dashboard = () => {
               {/* Add Subjects Modal */}
               {showAddSubjects && (
                 <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                   <div className="rounded-3xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
-                     <div className="p-6 border-b" style={{ 
-                       background: 'linear-gradient(180deg, #E8F7FC 0%, #FFFFFF 100%)',
-                       borderColor: '#E7ECF5'
-                     }}>
+                   <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+                     <div className="p-6 border-b border-border">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-3xl font-bold tracking-tight" style={{ color: '#1a1a1a' }}>Add a new subject</h2>
+                        <h2 className="text-2xl font-bold text-foreground">Add Subjects</h2>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
-                          className="w-8 h-8 p-0 rounded-full transition-colors"
-                          style={{ backgroundColor: '#F7F9FC', color: '#6B7280' }}
+                          className="w-8 h-8 p-0 bg-muted hover:bg-accent text-muted-foreground rounded-full"
                         >
                           <X className="h-4 w-4" />
                         </Button>
@@ -1983,31 +1939,15 @@ const Dashboard = () => {
                     
                     <div className="p-6 overflow-y-auto max-h-[60vh]">
                       <Tabs defaultValue="gcse" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-6 p-1 rounded-full" style={{ backgroundColor: '#F7F9FC' }}>
-                          <TabsTrigger 
-                            value="gcse" 
-                            className="rounded-full font-bold data-[state=active]:shadow-sm transition-all"
-                            style={{ 
-                              color: '#6B7280'
-                            }}
-                          >
-                            GCSE Subjects
-                          </TabsTrigger>
-                          <TabsTrigger 
-                            value="alevel"
-                            className="rounded-full font-bold data-[state=active]:shadow-sm transition-all"
-                            style={{ 
-                              color: '#6B7280'
-                            }}
-                          >
-                            A-Level Subjects
-                          </TabsTrigger>
+                        <TabsList className="grid w-full grid-cols-2 mb-6">
+                          <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
+                          <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
                         </TabsList>
                         
                         <TabsContent value="gcse">
                           {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
                             <div className="text-center py-8">
-                              <p className="text-lg" style={{ color: '#6B7280' }}>You've already added all available GCSE subjects!</p>
+                              <p className="text-lg text-muted-foreground">You've already added all available GCSE subjects!</p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2021,33 +1961,27 @@ const Dashboard = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                               >
-                               <Card 
-                                  className="cursor-pointer border transition-all duration-200 hover:shadow-md"
+                                <Card 
+                                  className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
                                   onClick={() => {
                                     addSubject(subject.id);
                                     setShowAddSubjects(false);
                                   }}
-                                  style={{
-                                    backgroundColor: '#FFFFFF',
-                                    borderColor: '#E7ECF5',
-                                    borderRadius: '0.75rem'
-                                  }}
                                 >
                                    <CardContent className="p-4">
                                      <div className="flex items-center space-x-4">
-                                       <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{
-                                         backgroundColor: '#3BAFDA'
-                                       }}>
-                                         <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
+                                       <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                         <IconComponent className="h-6 w-6 text-white" />
                                        </div>
                                        <div className="flex-1 min-w-0">
-                                         <h3 className="text-lg font-bold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
+                                         <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
                                            {getSubjectDisplayName(subject)}
                                          </h3>
-                                         <p className="text-sm font-medium mobile-text-wrap" style={{ color: '#6B7280' }}>
+                                         <p className="text-sm text-gray-600 mobile-text-wrap">
                                            {subject.topics.length} topics available
                                          </p>
                                        </div>
+                                       <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                                   </div>
                                 </CardContent>
                               </Card>
@@ -2061,7 +1995,7 @@ const Dashboard = () => {
                   <TabsContent value="alevel">
                     {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
                       <div className="text-center py-8">
-                        <p className="text-lg" style={{ color: '#6B7280' }}>You've already added all available A-Level subjects!</p>
+                        <p className="text-lg text-muted-foreground">You've already added all available A-Level subjects!</p>
                       </div>
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2076,32 +2010,26 @@ const Dashboard = () => {
                               whileTap={{ scale: 0.98 }}
                             >
                               <Card 
-                                className="cursor-pointer border transition-all duration-200 hover:shadow-md"
+                                className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
                                 onClick={() => {
                                   addSubject(subject.id);
                                   setShowAddSubjects(false);
                                 }}
-                                style={{
-                                  backgroundColor: '#FFFFFF',
-                                  borderColor: '#E7ECF5',
-                                  borderRadius: '0.75rem'
-                                }}
                               >
                                 <CardContent className="p-4">
                                   <div className="flex items-center space-x-4">
-                                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{
-                                      backgroundColor: '#3BAFDA'
-                                    }}>
-                                      <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
+                                    <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                      <IconComponent className="h-6 w-6 text-white" />
                                     </div>
                                      <div className="flex-1 min-w-0">
-                                       <h3 className="text-lg font-bold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
+                                       <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
                                          {getSubjectDisplayName(subject)}
                                        </h3>
-                                       <p className="text-sm font-medium mobile-text-wrap" style={{ color: '#6B7280' }}>
+                                       <p className="text-sm text-gray-600 mobile-text-wrap">
                                          {subject.topics.length} topics available
                                        </p>
                                      </div>
+                                     <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                                    </div>
                                 </CardContent>
                               </Card>
