@@ -1221,12 +1221,71 @@ const Dashboard = () => {
     weekMinutes: 320 
   };
   
-  const mockSubjects = [
-    { id:"bio", name:"Biology (AQA)", icon:"🧬", predicted:7.4, target:8.0, trend:[60,64,68,70,72,74], strong:"Ecosystems", focus:"Genetics", status:"Needs push" },
-    { id:"chem", name:"Chemistry (Edexcel)", icon:"🧪", predicted:7.2, target:8.0, trend:[55,59,61,65,70,72], strong:"Quantitative", focus:"Energetics", status:"Needs push" },
-    { id:"phys", name:"Physics (AQA)", icon:"🧲", predicted:6.1, target:7.0, trend:[40,46,51,54,58,61], strong:"Waves", focus:"Forces", status:"Off target" },
-    { id:"math", name:"Mathematics (Edexcel)", icon:"📐", predicted:6.5, target:8.0, trend:[50,53,57,60,63,65], strong:"Number", focus:"Algebra", status:"Off target" }
-  ];
+  // Get subject icon emoji
+  const getSubjectIconEmoji = (subjectId: string): string => {
+    const emojiMap: { [key: string]: string } = {
+      "physics": "🧲",
+      "physics-edexcel": "🧲",
+      "chemistry": "🧪",
+      "chemistry-edexcel": "🧪",
+      "biology": "🧬",
+      "biology-edexcel": "🧬",
+      "biology-aqa-alevel": "🧬",
+      "mathematics": "📐",
+      "maths-edexcel": "📐",
+      "maths": "📐",
+      "maths-aqa-alevel": "📐",
+      "english-language": "✍️",
+      "english-literature": "📖",
+      "geography": "🌍",
+      "geography-paper-2": "🌍",
+      "history": "⏳",
+      "religious-studies": "⛪",
+      "business-edexcel-igcse": "💼",
+      "business": "💼",
+      "computer-science": "💻",
+      "psychology": "🧠",
+      "psychology-aqa-alevel": "🧠",
+      "spanish-aqa": "🇪🇸",
+    };
+    return emojiMap[subjectId] || "📚";
+  };
+
+  // Convert userSubjectsWithGrades to mockSubjects format
+  const mockSubjects = userSubjectsWithGrades.map((subject, index) => {
+    // Find corresponding subject ID from userSubjects
+    const subjectId = userSubjects[index] || `subject-${index}`;
+    
+    // Parse grades (they might be strings like "5" or numbers)
+    const predicted = typeof subject.predicted_grade === 'string' 
+      ? parseFloat(subject.predicted_grade) || 5 
+      : subject.predicted_grade || 5;
+    const target = typeof subject.target_grade === 'string'
+      ? parseFloat(subject.target_grade) || 7
+      : subject.target_grade || 7;
+    
+    // Generate trend based on predicted grade
+    const baseTrend = Math.floor((predicted / 9) * 100);
+    const trend = Array.from({ length: 6 }, (_, i) => baseTrend - 20 + (i * 4));
+    
+    // Determine status
+    const diff = predicted - target;
+    let status = "On track";
+    if (diff < -1) status = "Off target";
+    else if (diff < 0) status = "Needs push";
+    
+    return {
+      id: subjectId,
+      name: `${subject.subject_name} (${subject.exam_board})`,
+      icon: getSubjectIconEmoji(subjectId),
+      predicted: predicted,
+      target: target,
+      trend: trend,
+      strong: "Various topics",
+      focus: "Core concepts",
+      status: status
+    };
+  });
   
   const weekPlan = {
     Mon:[{s:"Biology",t:"Genetics",m:25},{s:"Maths",t:"Algebra",m:20}],
