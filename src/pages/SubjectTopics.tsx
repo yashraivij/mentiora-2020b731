@@ -162,300 +162,92 @@ const SubjectTopics = () => {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-8 py-16 space-y-12">
+      <div className="max-w-5xl mx-auto px-6 py-10">
         {/* Subject Title */}
-        <div className="mb-10">
-          <h1 className="text-5xl font-bold text-foreground mb-3 tracking-tight">{subject?.name}</h1>
-          <p className="text-xl text-muted-foreground">Your personalized learning journey</p>
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-foreground mb-2">{subject?.name}</h1>
+          <p className="text-muted-foreground">Your learning journey</p>
         </div>
 
-        {/* Grade Overview - Premium */}
-        <Card className="rounded-2xl border-2 shadow-2xl bg-gradient-to-br from-background via-[#3DB4E8]/5 to-background overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#3DB4E8]/10 to-transparent rounded-full blur-3xl" />
-          <CardContent className="p-12 relative">
-            <div className="grid md:grid-cols-2 gap-12">
+        {/* Compact Grade Overview */}
+        <Card className="rounded-xl border shadow-sm mb-8">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between gap-8">
               {/* Current Grade */}
-              <div>
-                <div className="flex items-center gap-2 mb-5">
-                  <TrendingUp className="w-6 h-6 text-[#3DB4E8]" />
-                  <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Current Grade</span>
-                </div>
-                <div className="text-8xl font-black text-[#3DB4E8] mb-4 tracking-tight">{predictedGradeDecimal.toFixed(1)}</div>
-                <p className="text-lg text-muted-foreground">Based on {topicProgress.length} completed {topicProgress.length === 1 ? 'topic' : 'topics'}</p>
-                <div className="mt-6 pt-6 border-t border-border/50">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Average score</span>
-                    <span className="text-2xl font-bold text-foreground">{avgScore}%</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Target Grade - Editable */}
-              <div>
-                <div className="flex items-center gap-2 mb-5">
-                  <Target className="w-6 h-6 text-[#3DB4E8]" />
-                  <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Target Grade</span>
-                </div>
-                <div className="flex items-center gap-5 mb-4">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
-                    disabled={!targetGrade || targetGrade <= 4}
-                    className="h-16 w-16 rounded-xl border-2 hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 transition-all"
-                  >
-                    <ChevronLeft className="h-7 w-7" />
-                  </Button>
-                  <div className="text-8xl font-black text-foreground w-28 text-center tracking-tight">{targetGrade}</div>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
-                    disabled={!targetGrade || targetGrade >= 9}
-                    className="h-16 w-16 rounded-xl border-2 hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 transition-all"
-                  >
-                    <ChevronRight className="h-7 w-7" />
-                  </Button>
-                </div>
-                <p className="text-lg text-muted-foreground mb-4">Your personalized goal</p>
-                <div className="mt-6 pt-6 border-t border-border/50">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Points needed</span>
-                    <span className="text-2xl font-bold text-foreground">{Math.max(0, Math.round((targetGrade || 0) - predictedGradeDecimal) * 10)}%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mt-12 pt-10 border-t">
-              <div className="flex items-center justify-between mb-5">
-                <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Progress to target</span>
-                <span className="text-4xl font-black text-[#3DB4E8]">{percentToTarget}%</span>
-              </div>
-              <div className="relative">
-                <Progress value={percentToTarget} className="h-5 shadow-lg" />
-              </div>
-              <p className="text-base text-muted-foreground mt-5">
-                {percentToTarget >= 90 ? "Outstanding! You're almost at your goal. One final push to achieve grade " + targetGrade : 
-                 percentToTarget >= 70 ? "Excellent momentum. You're well on track to hit grade " + targetGrade : 
-                 percentToTarget >= 50 ? "Solid progress. Keep this pace and you'll reach grade " + targetGrade : 
-                 "You're building towards grade " + targetGrade + ". Each session counts"}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Optimal Study Time - Premium Feature */}
-        <Card className="rounded-xl border-2 border-[#3DB4E8]/20 shadow-lg bg-gradient-to-br from-[#3DB4E8]/5 via-background to-background">
-          <CardContent className="p-10">
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3DB4E8]/10 text-[#3DB4E8] text-xs font-medium mb-4">
-                Personalized for you
-              </div>
-              <h2 className="text-2xl font-semibold text-foreground mb-2">Your optimal study window</h2>
-              <p className="text-muted-foreground">Based on your performance patterns across {topicProgress.length} practice sessions</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Peak Performance Time */}
-              <div>
-                <div className="mb-6">
-                  <div className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">Peak performance</div>
-                  <div className="text-5xl font-bold text-[#3DB4E8] mb-2">7-9 PM</div>
-                  <p className="text-muted-foreground">Your scores average <span className="font-semibold text-foreground">18% higher</span> during evening sessions</p>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border">
-                    <span className="text-sm text-muted-foreground">Morning (6-9 AM)</span>
-                    <div className="flex items-center gap-2">
-                      <Progress value={65} className="w-20 h-2" />
-                      <span className="text-sm font-medium text-foreground w-12">65%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border">
-                    <span className="text-sm text-muted-foreground">Afternoon (12-3 PM)</span>
-                    <div className="flex items-center gap-2">
-                      <Progress value={72} className="w-20 h-2" />
-                      <span className="text-sm font-medium text-foreground w-12">72%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-[#3DB4E8]/10 border-2 border-[#3DB4E8]/30">
-                    <span className="text-sm font-semibold text-foreground">Evening (7-9 PM)</span>
-                    <div className="flex items-center gap-2">
-                      <Progress value={88} className="w-20 h-2" />
-                      <span className="text-sm font-semibold text-[#3DB4E8] w-12">88%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border">
-                    <span className="text-sm text-muted-foreground">Night (9-11 PM)</span>
-                    <div className="flex items-center gap-2">
-                      <Progress value={58} className="w-20 h-2" />
-                      <span className="text-sm font-medium text-foreground w-12">58%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Study Patterns & Recommendations */}
-              <div className="space-y-6">
+              <div className="flex items-center gap-4">
                 <div>
-                  <div className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">Best days</div>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl font-bold text-[#3DB4E8]">Tue</div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-sm text-muted-foreground">Tuesday</span>
-                          <span className="text-sm font-semibold">92% avg</span>
-                        </div>
-                        <Progress value={92} className="h-2" />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl font-bold text-[#3DB4E8]">Thu</div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-sm text-muted-foreground">Thursday</span>
-                          <span className="text-sm font-semibold">89% avg</span>
-                        </div>
-                        <Progress value={89} className="h-2" />
-                      </div>
-                    </div>
-                  </div>
+                  <div className="text-sm text-muted-foreground mb-1">Current Grade</div>
+                  <div className="text-4xl font-bold text-[#3DB4E8]">{predictedGradeDecimal.toFixed(1)}</div>
                 </div>
+              </div>
 
-                <div className="p-5 rounded-lg bg-background/50 border">
-                  <div className="text-sm font-semibold text-foreground mb-2">Session recommendations</div>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#3DB4E8] mt-1">•</span>
-                      <span>15-20 minute sessions yield your best completion rates</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#3DB4E8] mt-1">•</span>
-                      <span>You perform 23% better when practicing after a 5-minute break</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#3DB4E8] mt-1">•</span>
-                      <span>Consistency boost: You're on a {studyStreak}-day streak</span>
-                    </li>
-                  </ul>
+              {/* Arrow */}
+              <div className="text-2xl text-muted-foreground">→</div>
+
+              {/* Target Grade */}
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
+                  disabled={!targetGrade || targetGrade <= 4}
+                  className="h-8 w-8"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <div>
+                  <div className="text-sm text-muted-foreground mb-1">Target Grade</div>
+                  <div className="text-4xl font-bold text-foreground">{targetGrade}</div>
                 </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
+                  disabled={!targetGrade || targetGrade >= 9}
+                  className="h-8 w-8"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* Progress */}
+              <div className="flex-1 max-w-xs">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Progress</span>
+                  <span className="text-sm font-semibold text-[#3DB4E8]">{masteredTopics}/{totalTopics} topics</span>
+                </div>
+                <Progress value={Math.round((masteredTopics / totalTopics) * 100)} className="h-2" />
               </div>
             </div>
           </CardContent>
         </Card>
-
-        {/* Next Topic Recommendation */}
-        {nextTopic && (
-          <Card className="rounded-xl border shadow-md bg-gradient-to-r from-[#3DB4E8]/10 via-background to-background">
-            <CardContent className="p-8">
-              <div className="flex items-start justify-between gap-6">
-                <div className="flex-1">
-                  <div className="text-sm text-[#3DB4E8] font-medium mb-2 uppercase tracking-wide">Recommended next</div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-3">{nextTopic.name}</h2>
-                  <p className="text-muted-foreground mb-6">
-                    {needsWorkTopics.length > 0 
-                      ? "This topic needs attention. Practicing now will boost your overall grade." 
-                      : "Based on your learning path, this is the ideal next step."}
-                  </p>
-                  <Button 
-                    onClick={() => navigate(`/practice/${subjectId}/${nextTopic.id}`)}
-                    className="bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white rounded-lg h-12 px-8 text-base font-medium"
-                  >
-                    Start Practice Session
-                  </Button>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm text-muted-foreground mb-1">Estimated impact</div>
-                  <div className="text-3xl font-bold text-[#3DB4E8]">+0.3</div>
-                  <div className="text-sm text-muted-foreground">grade points</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Performance Analytics */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="rounded-xl border shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="p-7">
-              <div className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">Mastery progress</div>
-              <div className="flex items-end gap-2 mb-2">
-                <div className="text-4xl font-bold text-foreground">{masteredTopics}</div>
-                <div className="text-2xl text-muted-foreground mb-1">/ {totalTopics}</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-3">topics mastered</div>
-              <Progress value={Math.round((masteredTopics / totalTopics) * 100)} className="h-2" />
-              <div className="mt-3 text-sm text-muted-foreground">
-                {totalTopics - masteredTopics} remaining to complete
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-xl border shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="p-7">
-              <div className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">Study consistency</div>
-              <div className="flex items-end gap-2 mb-2">
-                <div className="text-4xl font-bold text-[#3DB4E8]">{studyStreak}</div>
-                <div className="text-lg text-muted-foreground mb-1">days</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-3">current streak</div>
-              <div className="flex gap-1">
-                {[...Array(7)].map((_, i) => (
-                  <div key={i} className={`h-2 flex-1 rounded-full ${i < studyStreak ? 'bg-[#3DB4E8]' : 'bg-border'}`} />
-                ))}
-              </div>
-              <div className="mt-3 text-sm text-muted-foreground">
-                You're {studyStreak >= 7 ? 'crushing it' : `${7 - studyStreak} days to 1 week`}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-xl border shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="p-7">
-              <div className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">Exam readiness</div>
-              <div className="flex items-end gap-2 mb-2">
-                <div className="text-4xl font-bold text-foreground">{examReadiness}</div>
-                <div className="text-2xl text-muted-foreground mb-1">%</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-3">ready for exam</div>
-              <Progress value={examReadiness} className="h-2" />
-              <div className="mt-3 text-sm text-muted-foreground">
-                Mock exam in 19 days
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* All Topics */}
-        <Card className="rounded-xl border shadow-md">
-          <CardHeader className="pb-8 px-12 pt-10">
+        <Card className="rounded-xl border shadow-sm">
+          <CardHeader className="pb-6 px-8 pt-8">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
-                <CardTitle className="text-3xl font-bold mb-2">Start Learning</CardTitle>
-                <p className="text-base text-muted-foreground">{filteredTopics.length} {filteredTopics.length === 1 ? 'topic' : 'topics'} available</p>
+                <CardTitle className="text-2xl font-bold mb-1">All Topics</CardTitle>
+                <p className="text-sm text-muted-foreground">{filteredTopics.length} available</p>
               </div>
               <div className="flex gap-2 flex-wrap">
                 {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
                   <Button
                     key={filter}
                     variant={topicFilter === filter ? "default" : "outline"}
-                    size="default"
+                    size="sm"
                     onClick={() => setTopicFilter(filter)}
-                    className={topicFilter === filter ? "bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white border-2 border-[#3DB4E8] shadow-lg" : "border-2 hover:border-[#3DB4E8]/50"}
+                    className={topicFilter === filter ? "bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white" : ""}
                   >
-                    {filter === 'all' ? 'All Topics' : filter === 'strengths' ? 'Strengths' : filter === 'focus' ? 'Focus Areas' : 'New'}
+                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strengths' : filter === 'focus' ? 'Focus' : 'New'}
                   </Button>
                 ))}
               </div>
             </div>
           </CardHeader>
           
-          <CardContent className="px-12 pb-12">
-            <div className="space-y-4">
+          <CardContent className="px-8 pb-8">
+            <div className="space-y-3">
               {filteredTopics.map((topic) => {
                 const progress = getTopicProgress(topic.id);
                 const isMastered = progress.averageScore >= 85;
@@ -465,27 +257,27 @@ const SubjectTopics = () => {
                   <button
                     key={topic.id}
                     onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    className="w-full rounded-xl border-2 bg-card hover:border-[#3DB4E8] hover:shadow-xl hover:scale-[1.01] p-7 transition-all text-left group"
+                    className="w-full rounded-lg border bg-card hover:border-[#3DB4E8] hover:shadow-md p-5 transition-all text-left group"
                   >
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-4">
-                          <h3 className="text-lg font-bold text-foreground group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
+                        <div className="flex items-center gap-2 mb-3">
+                          <h3 className="text-base font-semibold text-foreground group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
                           {isMastered && (
-                            <div className="px-3 py-1.5 rounded-lg bg-[#3DB4E8]/15 text-[#3DB4E8] text-xs font-bold border border-[#3DB4E8]/30">Mastered</div>
+                            <div className="px-2 py-1 rounded text-[#3DB4E8] text-xs font-medium border border-[#3DB4E8]/30 bg-[#3DB4E8]/10">Mastered</div>
                           )}
                           {needsPractice && (
-                            <div className="px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200">Focus area</div>
+                            <div className="px-2 py-1 rounded text-orange-600 text-xs font-medium border border-orange-200 bg-orange-50">Focus</div>
                           )}
                         </div>
-                        <div className="flex items-center gap-5">
-                          <Progress value={progress.averageScore} className="h-3 flex-1 shadow-sm" />
-                          <div className="text-right min-w-[120px]">
-                            <div className="text-xl font-bold text-foreground">
+                        <div className="flex items-center gap-4">
+                          <Progress value={progress.averageScore} className="h-2 flex-1" />
+                          <div className="text-right min-w-[100px]">
+                            <div className="text-base font-semibold text-foreground">
                               {progress.attempts > 0 ? `${progress.averageScore}%` : '—'}
                             </div>
-                            <div className="text-sm text-muted-foreground">
-                              {progress.attempts > 0 ? `${progress.attempts} ${progress.attempts === 1 ? 'attempt' : 'attempts'}` : 'Start practicing'}
+                            <div className="text-xs text-muted-foreground">
+                              {progress.attempts > 0 ? `${progress.attempts} ${progress.attempts === 1 ? 'attempt' : 'attempts'}` : 'Not started'}
                             </div>
                           </div>
                         </div>
@@ -497,192 +289,6 @@ const SubjectTopics = () => {
             </div>
           </CardContent>
         </Card>
-
-        {/* Optimal Study Time - Premium Feature */}
-        <Card className="rounded-2xl border-2 border-[#3DB4E8]/30 shadow-2xl bg-gradient-to-br from-[#3DB4E8]/10 via-background to-background overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[#3DB4E8]/5 to-transparent" />
-          <CardContent className="p-12 relative">
-            <div className="mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3DB4E8]/15 text-[#3DB4E8] text-xs font-bold mb-5 border border-[#3DB4E8]/30">
-                Personalized for you
-              </div>
-              <h2 className="text-3xl font-bold text-foreground mb-3">Your optimal study window</h2>
-              <p className="text-base text-muted-foreground">Based on your performance patterns across {topicProgress.length} practice sessions</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-10">
-              {/* Peak Performance Time */}
-              <div>
-                <div className="mb-8">
-                  <div className="text-xs text-muted-foreground mb-4 uppercase tracking-wider font-bold">Peak performance</div>
-                  <div className="text-6xl font-black text-[#3DB4E8] mb-3 tracking-tight">7-9 PM</div>
-                  <p className="text-base text-muted-foreground">Your scores average <span className="font-bold text-foreground">18% higher</span> during evening sessions</p>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                    <span className="text-sm font-medium text-muted-foreground">Morning (6-9 AM)</span>
-                    <div className="flex items-center gap-3">
-                      <Progress value={65} className="w-24 h-2.5" />
-                      <span className="text-sm font-bold text-foreground w-12">65%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                    <span className="text-sm font-medium text-muted-foreground">Afternoon (12-3 PM)</span>
-                    <div className="flex items-center gap-3">
-                      <Progress value={72} className="w-24 h-2.5" />
-                      <span className="text-sm font-bold text-foreground w-12">72%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-[#3DB4E8]/15 border-2 border-[#3DB4E8]/40 shadow-lg backdrop-blur-sm">
-                    <span className="text-sm font-bold text-foreground">Evening (7-9 PM)</span>
-                    <div className="flex items-center gap-3">
-                      <Progress value={88} className="w-24 h-2.5" />
-                      <span className="text-sm font-black text-[#3DB4E8] w-12">88%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                    <span className="text-sm font-medium text-muted-foreground">Night (9-11 PM)</span>
-                    <div className="flex items-center gap-3">
-                      <Progress value={58} className="w-24 h-2.5" />
-                      <span className="text-sm font-bold text-foreground w-12">58%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Study Patterns & Recommendations */}
-              <div className="space-y-8">
-                <div>
-                  <div className="text-xs text-muted-foreground mb-4 uppercase tracking-wider font-bold">Best days</div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-[#3DB4E8]/30 backdrop-blur-sm">
-                      <div className="text-3xl font-black text-[#3DB4E8]">Tue</div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-muted-foreground">Tuesday</span>
-                          <span className="text-sm font-bold text-foreground">92% avg</span>
-                        </div>
-                        <Progress value={92} className="h-2.5" />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-[#3DB4E8]/30 backdrop-blur-sm">
-                      <div className="text-3xl font-black text-[#3DB4E8]">Thu</div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-muted-foreground">Thursday</span>
-                          <span className="text-sm font-bold text-foreground">89% avg</span>
-                        </div>
-                        <Progress value={89} className="h-2.5" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-xl bg-gradient-to-br from-card to-card/50 border-2 border-border backdrop-blur-sm">
-                  <div className="text-sm font-bold text-foreground mb-3">Session recommendations</div>
-                  <ul className="space-y-3 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#3DB4E8] mt-1 text-lg">•</span>
-                      <span className="leading-relaxed">15-20 minute sessions yield your best completion rates</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#3DB4E8] mt-1 text-lg">•</span>
-                      <span className="leading-relaxed">You perform 23% better when practicing after a 5-minute break</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#3DB4E8] mt-1 text-lg">•</span>
-                      <span className="leading-relaxed">Consistency boost: You're on a {studyStreak}-day streak</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Next Topic Recommendation */}
-        {nextTopic && (
-          <Card className="rounded-2xl border-2 shadow-2xl bg-gradient-to-r from-[#3DB4E8]/15 via-background to-card overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#3DB4E8]/10 rounded-full blur-3xl" />
-            <CardContent className="p-10 relative">
-              <div className="flex items-start justify-between gap-6">
-                <div className="flex-1">
-                  <div className="text-xs text-[#3DB4E8] font-bold mb-3 uppercase tracking-wider">Recommended next</div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">{nextTopic.name}</h2>
-                  <p className="text-base text-muted-foreground mb-8">
-                    {needsWorkTopics.length > 0 
-                      ? "This topic needs attention. Practicing now will boost your overall grade." 
-                      : "Based on your learning path, this is the ideal next step."}
-                  </p>
-                  <Button 
-                    onClick={() => navigate(`/practice/${subjectId}/${nextTopic.id}`)}
-                    className="bg-gradient-to-r from-[#3DB4E8] to-[#2E5BFF] hover:from-[#3DB4E8]/90 hover:to-[#2E5BFF]/90 text-white rounded-xl h-14 px-10 text-base font-bold shadow-lg"
-                  >
-                    Start Practice Session
-                  </Button>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm text-muted-foreground mb-2">Estimated impact</div>
-                  <div className="text-4xl font-black text-[#3DB4E8]">+0.3</div>
-                  <div className="text-sm text-muted-foreground">grade points</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Performance Analytics */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="rounded-2xl border-2 shadow-xl hover:shadow-2xl hover:border-[#3DB4E8]/30 transition-all">
-            <CardContent className="p-8">
-              <div className="text-xs text-muted-foreground mb-4 uppercase tracking-wider font-bold">Mastery progress</div>
-              <div className="flex items-end gap-2 mb-3">
-                <div className="text-5xl font-black text-foreground">{masteredTopics}</div>
-                <div className="text-3xl text-muted-foreground mb-1">/ {totalTopics}</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-4">topics mastered</div>
-              <Progress value={Math.round((masteredTopics / totalTopics) * 100)} className="h-3 shadow-sm" />
-              <div className="mt-4 text-sm text-muted-foreground">
-                {totalTopics - masteredTopics} remaining to complete
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl border-2 shadow-xl hover:shadow-2xl hover:border-[#3DB4E8]/30 transition-all">
-            <CardContent className="p-8">
-              <div className="text-xs text-muted-foreground mb-4 uppercase tracking-wider font-bold">Study consistency</div>
-              <div className="flex items-end gap-2 mb-3">
-                <div className="text-5xl font-black text-[#3DB4E8]">{studyStreak}</div>
-                <div className="text-xl text-muted-foreground mb-1">days</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-4">current streak</div>
-              <div className="flex gap-1.5">
-                {[...Array(7)].map((_, i) => (
-                  <div key={i} className={`h-3 flex-1 rounded-full shadow-sm ${i < studyStreak ? 'bg-gradient-to-t from-[#3DB4E8] to-[#2E5BFF]' : 'bg-border'}`} />
-                ))}
-              </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-                You're {studyStreak >= 7 ? 'crushing it' : `${7 - studyStreak} days to 1 week`}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-2xl border-2 shadow-xl hover:shadow-2xl hover:border-[#3DB4E8]/30 transition-all">
-            <CardContent className="p-8">
-              <div className="text-xs text-muted-foreground mb-4 uppercase tracking-wider font-bold">Exam readiness</div>
-              <div className="flex items-end gap-2 mb-3">
-                <div className="text-5xl font-black text-foreground">{examReadiness}</div>
-                <div className="text-3xl text-muted-foreground mb-1">%</div>
-              </div>
-              <div className="text-sm text-muted-foreground mb-4">ready for exam</div>
-              <Progress value={examReadiness} className="h-3 shadow-sm" />
-              <div className="mt-4 text-sm text-muted-foreground">
-                Mock exam in 19 days
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Personalized Learning Insights */}
         <Card className="rounded-2xl border-2 shadow-2xl overflow-hidden relative">
