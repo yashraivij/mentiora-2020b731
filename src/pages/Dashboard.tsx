@@ -1251,8 +1251,8 @@ const Dashboard = () => {
     return emojiMap[subjectId] || "📚";
   };
 
-  // Convert userSubjectsWithGrades to mockSubjects format
-  const mockSubjects = userSubjectsWithGrades.map((subject, index) => {
+  // Convert userSubjectsWithGrades to mockSubjects format - only show subjects user has added
+  const mockSubjects = userSubjectsWithGrades.length > 0 ? userSubjectsWithGrades.map((subject, index) => {
     // Find corresponding subject ID from userSubjects
     const subjectId = userSubjects[index] || `subject-${index}`;
     
@@ -1285,7 +1285,7 @@ const Dashboard = () => {
       focus: "Core concepts",
       status: status
     };
-  });
+  }) : [];
   
   const weekPlan = {
     Mon:[{s:"Biology",t:"Genetics",m:25},{s:"Maths",t:"Algebra",m:20}],
