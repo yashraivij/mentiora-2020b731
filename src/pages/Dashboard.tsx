@@ -1871,189 +1871,287 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer */}
               <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-                <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+                <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto bg-gradient-to-br from-white via-[#F8FAFC] to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
                   {selectedDrawerSubject && (
                     <>
-                      <SheetHeader className="space-y-4 pb-6 border-b border-border">
+                      <SheetHeader className="space-y-4 pb-6 border-b border-border/50">
                         <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-xl ${(subjectColors[selectedDrawerSubject.id] || subjectColors["physics"]).light}`}>
+                          <motion.div 
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className={`p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 via-[#0EA5E9]/10 to-[#0EA5E9]/5 dark:from-[#0EA5E9]/30 dark:via-[#0EA5E9]/15 dark:to-[#0EA5E9]/10 shadow-lg border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30`}
+                          >
                             {(() => {
                               const IconComponent = getSubjectIcon(selectedDrawerSubject.id);
-                              return <IconComponent className={`h-6 w-6 ${(subjectColors[selectedDrawerSubject.id] || subjectColors["physics"]).text}`} />;
+                              return <IconComponent className="h-7 w-7 text-[#0EA5E9]" />;
                             })()}
-                          </div>
+                          </motion.div>
                           <div className="flex-1">
-                            <SheetTitle className="text-2xl">{getSubjectDisplayName(selectedDrawerSubject)}</SheetTitle>
-                            <SheetDescription>Detailed performance insights</SheetDescription>
+                            <SheetTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                              {getSubjectDisplayName(selectedDrawerSubject)}
+                            </SheetTitle>
+                            <SheetDescription className="text-muted-foreground/80">Detailed performance insights</SheetDescription>
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <Badge variant="secondary" className="rounded-lg">Predicted 7.2</Badge>
-                          <Badge variant="outline" className="rounded-lg">Target 8.0</Badge>
+                          <Badge className="rounded-xl bg-gradient-to-r from-[#0EA5E9]/20 to-[#0EA5E9]/10 dark:from-[#0EA5E9]/30 dark:to-[#0EA5E9]/20 text-[#0EA5E9] border border-[#0EA5E9]/30 font-semibold px-3 py-1">
+                            Predicted 7.2
+                          </Badge>
+                          <Badge className="rounded-xl bg-gradient-to-r from-green-500/20 to-emerald-500/10 dark:from-green-500/30 dark:to-emerald-500/20 text-green-700 dark:text-green-400 border border-green-500/30 font-semibold px-3 py-1">
+                            Target 8.0
+                          </Badge>
                         </div>
                       </SheetHeader>
 
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-6">
-                        <TabsList className="grid w-full grid-cols-4 rounded-xl">
-                          <TabsTrigger value="overview" className="rounded-lg">Overview</TabsTrigger>
-                          <TabsTrigger value="topics" className="rounded-lg">Topics</TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-lg">Papers</TabsTrigger>
-                          <TabsTrigger value="plan" className="rounded-lg">Plan</TabsTrigger>
+                        <TabsList className="grid w-full grid-cols-4 rounded-2xl bg-gradient-to-r from-muted/80 to-muted/60 dark:from-muted/50 dark:to-muted/30 p-1.5 shadow-inner">
+                          <TabsTrigger 
+                            value="overview" 
+                            className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:shadow-lg data-[state=active]:text-[#0EA5E9] font-medium transition-all"
+                          >
+                            Overview
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="topics" 
+                            className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:shadow-lg data-[state=active]:text-[#0EA5E9] font-medium transition-all"
+                          >
+                            Topics
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="papers" 
+                            className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:shadow-lg data-[state=active]:text-[#0EA5E9] font-medium transition-all"
+                          >
+                            Papers
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="plan" 
+                            className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:shadow-lg data-[state=active]:text-[#0EA5E9] font-medium transition-all"
+                          >
+                            Plan
+                          </TabsTrigger>
                         </TabsList>
 
                         <TabsContent value="overview" className="space-y-6 mt-6">
                           {/* Performance Stats */}
                           <div className="grid grid-cols-3 gap-4">
-                            <Card className="rounded-xl">
-                              <CardContent className="p-4">
-                                <div className="text-xs text-muted-foreground mb-1">Last 7 days</div>
-                                <div className="text-2xl font-semibold text-accent flex items-center gap-1">
-                                  +0.3 <TrendingUp className="h-4 w-4" />
-                                </div>
-                              </CardContent>
-                            </Card>
-                            <Card className="rounded-xl">
-                              <CardContent className="p-4">
-                                <div className="text-xs text-muted-foreground mb-1">Accuracy</div>
-                                <div className="text-2xl font-semibold text-foreground">76%</div>
-                              </CardContent>
-                            </Card>
-                            <Card className="rounded-xl">
-                              <CardContent className="p-4">
-                                <div className="text-xs text-muted-foreground mb-1">Study Time</div>
-                                <div className="text-2xl font-semibold text-foreground">2h 15m</div>
-                              </CardContent>
-                            </Card>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                              <Card className="rounded-3xl bg-gradient-to-br from-green-50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/10 border-green-200/50 dark:border-green-700/30 shadow-lg shadow-green-100/50 dark:shadow-green-900/20">
+                                <CardContent className="p-4">
+                                  <div className="text-xs text-green-700 dark:text-green-400 font-medium mb-1">Last 7 days</div>
+                                  <div className="text-2xl font-bold text-green-600 dark:text-green-500 flex items-center gap-1">
+                                    +0.3 <TrendingUp className="h-5 w-5" />
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                              <Card className="rounded-3xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 dark:from-[#0EA5E9]/20 dark:to-[#0EA5E9]/10 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-lg shadow-[#0EA5E9]/10 dark:shadow-[#0EA5E9]/20">
+                                <CardContent className="p-4">
+                                  <div className="text-xs text-[#0EA5E9] font-medium mb-1">Accuracy</div>
+                                  <div className="text-2xl font-bold text-foreground">76%</div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                              <Card className="rounded-3xl bg-gradient-to-br from-purple-50 to-violet-50/50 dark:from-purple-900/20 dark:to-violet-900/10 border-purple-200/50 dark:border-purple-700/30 shadow-lg shadow-purple-100/50 dark:shadow-purple-900/20">
+                                <CardContent className="p-4">
+                                  <div className="text-xs text-purple-700 dark:text-purple-400 font-medium mb-1">Study Time</div>
+                                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-500">2h 15m</div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
                           </div>
 
                           {/* Performance Chart */}
-                          <Card className="rounded-xl">
-                            <CardHeader>
-                              <CardTitle className="text-lg">Performance Comparison</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="space-y-4">
-                                <div>
-                                  <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-muted-foreground">Predicted Grade</span>
-                                    <span className="text-sm font-medium">7.2</span>
+                          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                            <Card className="rounded-3xl bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-border/50 shadow-2xl">
+                              <CardHeader>
+                                <CardTitle className="text-lg font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                                  Performance Comparison
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="space-y-5">
+                                  <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                      <span className="text-sm font-medium text-muted-foreground">Predicted Grade</span>
+                                      <span className="text-sm font-bold text-[#0EA5E9]">7.2</span>
+                                    </div>
+                                    <div className="w-full h-3 bg-muted/50 rounded-full overflow-hidden">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "72%" }}
+                                        transition={{ duration: 0.8, delay: 0.5 }}
+                                        className="h-full bg-gradient-to-r from-[#0EA5E9] to-[#06B6D4] rounded-full"
+                                      />
+                                    </div>
                                   </div>
-                                  <Progress value={72} className="h-2" />
-                                </div>
-                                <div>
-                                  <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-muted-foreground">Target Grade</span>
-                                    <span className="text-sm font-medium">8.0</span>
+                                  <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                      <span className="text-sm font-medium text-muted-foreground">Target Grade</span>
+                                      <span className="text-sm font-bold text-green-600 dark:text-green-500">8.0</span>
+                                    </div>
+                                    <div className="w-full h-3 bg-muted/50 rounded-full overflow-hidden">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "80%" }}
+                                        transition={{ duration: 0.8, delay: 0.6 }}
+                                        className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"
+                                      />
+                                    </div>
                                   </div>
-                                  <Progress value={80} className="h-2" />
-                                </div>
-                                <div>
-                                  <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-muted-foreground">Class Median</span>
-                                    <span className="text-sm font-medium">6.5</span>
+                                  <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                      <span className="text-sm font-medium text-muted-foreground">Class Median</span>
+                                      <span className="text-sm font-bold text-purple-600 dark:text-purple-500">6.5</span>
+                                    </div>
+                                    <div className="w-full h-3 bg-muted/50 rounded-full overflow-hidden">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "65%" }}
+                                        transition={{ duration: 0.8, delay: 0.7 }}
+                                        className="h-full bg-gradient-to-r from-purple-500 to-violet-500 rounded-full"
+                                      />
+                                    </div>
                                   </div>
-                                  <Progress value={65} className="h-2" />
                                 </div>
-                              </div>
-                            </CardContent>
-                          </Card>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
                         </TabsContent>
 
                         <TabsContent value="topics" className="space-y-4 mt-6">
-                          <Card className="rounded-xl">
-                            <CardHeader>
-                              <CardTitle className="text-lg">Topic Mastery</CardTitle>
-                              <CardDescription>Ranked from weakest to strongest</CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                              {[
-                                { name: 'Energetics', mastery: 45, color: 'bg-red-500' },
-                                { name: 'Organic Chemistry', mastery: 62, color: 'bg-orange-500' },
-                                { name: 'Atomic Structure', mastery: 78, color: 'bg-amber-500' },
-                                { name: 'Quantitative Chemistry', mastery: 89, color: 'bg-accent' },
-                              ].map((topic) => (
-                                <div key={topic.name} className="space-y-2">
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium text-foreground">{topic.name}</span>
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-sm text-muted-foreground">{topic.mastery}%</span>
-                                      <Button size="sm" variant="outline" className="rounded-lg h-7 px-2 text-xs">
-                                        Revise
-                                      </Button>
+                          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                            <Card className="rounded-3xl bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-border/50 shadow-2xl">
+                              <CardHeader>
+                                <CardTitle className="text-lg font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                                  Topic Mastery
+                                </CardTitle>
+                                <CardDescription className="text-muted-foreground/80">Ranked from weakest to strongest</CardDescription>
+                              </CardHeader>
+                              <CardContent className="space-y-4">
+                                {[
+                                  { name: 'Energetics', mastery: 45, gradient: 'from-red-500 to-rose-500' },
+                                  { name: 'Organic Chemistry', mastery: 62, gradient: 'from-orange-500 to-amber-500' },
+                                  { name: 'Atomic Structure', mastery: 78, gradient: 'from-amber-500 to-yellow-500' },
+                                  { name: 'Quantitative Chemistry', mastery: 89, gradient: 'from-[#0EA5E9] to-[#06B6D4]' },
+                                ].map((topic, index) => (
+                                  <motion.div 
+                                    key={topic.name} 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 * index }}
+                                    className="space-y-2 p-3 rounded-2xl bg-gradient-to-r from-muted/30 to-muted/10 hover:from-muted/50 hover:to-muted/20 transition-all"
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-sm font-semibold text-foreground">{topic.name}</span>
+                                      <div className="flex items-center gap-2">
+                                        <span className="text-sm font-bold text-muted-foreground">{topic.mastery}%</span>
+                                        <Button size="sm" variant="outline" className="rounded-xl h-7 px-3 text-xs font-medium hover:bg-[#0EA5E9] hover:text-white hover:border-[#0EA5E9] transition-all">
+                                          Revise
+                                        </Button>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                                    <div className={`h-full ${topic.color} rounded-full transition-all`} style={{ width: `${topic.mastery}%` }} />
-                                  </div>
-                                </div>
-                              ))}
-                            </CardContent>
-                          </Card>
+                                    <div className="w-full h-2.5 bg-muted/50 rounded-full overflow-hidden">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${topic.mastery}%` }}
+                                        transition={{ duration: 0.8, delay: 0.2 + (0.1 * index) }}
+                                        className={`h-full bg-gradient-to-r ${topic.gradient} rounded-full`}
+                                      />
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </CardContent>
+                            </Card>
+                          </motion.div>
                         </TabsContent>
 
                         <TabsContent value="papers" className="space-y-4 mt-6">
-                          <Card className="rounded-xl">
-                            <CardHeader>
-                              <CardTitle className="text-lg">Past Paper Attempts</CardTitle>
-                              <CardDescription>Recent exam practice performance</CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                              {[
-                                { paper: '2023 Paper 1', score: '72%', time: '1h 30m', date: '2 days ago' },
-                                { paper: '2022 Paper 2', score: '68%', time: '1h 25m', date: '5 days ago' },
-                                { paper: '2023 Paper 2', score: '75%', time: '1h 28m', date: '1 week ago' },
-                              ].map((attempt, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                                  <div>
-                                    <div className="font-medium text-sm text-foreground">{attempt.paper}</div>
-                                    <div className="text-xs text-muted-foreground">{attempt.date} • {attempt.time}</div>
-                                  </div>
-                                  <div className="text-right">
-                                    <div className="text-lg font-semibold text-foreground">{attempt.score}</div>
-                                  </div>
-                                </div>
-                              ))}
-                            </CardContent>
-                          </Card>
+                          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                            <Card className="rounded-3xl bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-border/50 shadow-2xl">
+                              <CardHeader>
+                                <CardTitle className="text-lg font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                                  Past Paper Attempts
+                                </CardTitle>
+                                <CardDescription className="text-muted-foreground/80">Recent exam practice performance</CardDescription>
+                              </CardHeader>
+                              <CardContent className="space-y-3">
+                                {[
+                                  { paper: '2023 Paper 1', score: '72%', time: '1h 30m', date: '2 days ago', gradient: 'from-[#0EA5E9]/10 to-[#06B6D4]/5' },
+                                  { paper: '2022 Paper 2', score: '68%', time: '1h 25m', date: '5 days ago', gradient: 'from-purple-500/10 to-violet-500/5' },
+                                  { paper: '2023 Paper 2', score: '75%', time: '1h 28m', date: '1 week ago', gradient: 'from-green-500/10 to-emerald-500/5' },
+                                ].map((attempt, i) => (
+                                  <motion.div 
+                                    key={i} 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 * i }}
+                                    className={`flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r ${attempt.gradient} dark:${attempt.gradient.replace('/10', '/20').replace('/5', '/10')} border border-border/30 hover:shadow-lg transition-all`}
+                                  >
+                                    <div>
+                                      <div className="font-semibold text-sm text-foreground">{attempt.paper}</div>
+                                      <div className="text-xs text-muted-foreground font-medium">{attempt.date} • {attempt.time}</div>
+                                    </div>
+                                    <div className="text-right">
+                                      <div className="text-xl font-bold text-foreground">{attempt.score}</div>
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </CardContent>
+                            </Card>
+                          </motion.div>
                         </TabsContent>
 
                         <TabsContent value="plan" className="space-y-4 mt-6">
-                          <Card className="rounded-xl">
-                            <CardHeader className="flex flex-row items-center justify-between">
-                              <div>
-                                <CardTitle className="text-lg">7-Day Study Plan</CardTitle>
-                                <CardDescription>Focused on your weakest topics</CardDescription>
-                              </div>
-                              <Button size="sm" variant="outline" className="rounded-lg">
-                                Generate Plan
-                              </Button>
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
-                                <div key={day} className="p-4 rounded-xl border border-border hover:bg-muted/30 transition-colors">
-                                  <div className="flex items-center justify-between mb-3">
-                                    <span className="font-semibold text-foreground">{day}</span>
-                                    <Badge variant="outline" className="text-xs">25 mins</Badge>
-                                  </div>
-                                  <div className="text-sm text-muted-foreground mb-3">
-                                    Focus: Energetics • Calculations
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <Button size="sm" variant="default" className="rounded-lg flex-1">
-                                      <Play className="h-3 w-3 mr-1" />
-                                      Start
-                                    </Button>
-                                    <Button size="sm" variant="outline" className="rounded-lg">
-                                      Done
-                                    </Button>
-                                    <Button size="sm" variant="ghost" className="rounded-lg">
-                                      Reschedule
-                                    </Button>
-                                  </div>
+                          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                            <Card className="rounded-3xl bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-border/50 shadow-2xl">
+                              <CardHeader className="flex flex-row items-center justify-between">
+                                <div>
+                                  <CardTitle className="text-lg font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                                    7-Day Study Plan
+                                  </CardTitle>
+                                  <CardDescription className="text-muted-foreground/80">Focused on your weakest topics</CardDescription>
                                 </div>
-                              ))}
-                            </CardContent>
-                          </Card>
+                                <Button size="sm" className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#06B6D4] hover:from-[#0EA5E9]/90 hover:to-[#06B6D4]/90 text-white shadow-lg font-medium">
+                                  Generate Plan
+                                </Button>
+                              </CardHeader>
+                              <CardContent className="space-y-3">
+                                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
+                                  <motion.div 
+                                    key={day} 
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.05 * i }}
+                                    className="p-4 rounded-2xl bg-gradient-to-r from-muted/30 to-muted/10 hover:from-muted/50 hover:to-muted/20 border border-border/30 transition-all"
+                                  >
+                                    <div className="flex items-center justify-between mb-3">
+                                      <span className="font-bold text-foreground">{day}</span>
+                                      <Badge className="text-xs rounded-xl bg-[#0EA5E9]/10 text-[#0EA5E9] border-[#0EA5E9]/30 font-semibold">
+                                        25 mins
+                                      </Badge>
+                                    </div>
+                                    <div className="text-sm text-muted-foreground font-medium mb-3">
+                                      Focus: Energetics • Calculations
+                                    </div>
+                                    <div className="flex gap-2">
+                                      <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#06B6D4] hover:from-[#0EA5E9]/90 hover:to-[#06B6D4]/90 text-white shadow-md font-medium">
+                                        <Play className="h-3 w-3 mr-1" />
+                                        Start
+                                      </Button>
+                                      <Button size="sm" variant="outline" className="rounded-xl hover:bg-green-500/10 hover:text-green-600 hover:border-green-500/30 font-medium">
+                                        Done
+                                      </Button>
+                                      <Button size="sm" variant="ghost" className="rounded-xl hover:bg-muted font-medium">
+                                        Reschedule
+                                      </Button>
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </CardContent>
+                            </Card>
+                          </motion.div>
                         </TabsContent>
                       </Tabs>
                     </>
