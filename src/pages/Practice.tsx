@@ -884,7 +884,7 @@ const Practice = () => {
                 <Button
                   onClick={handleSubmitAnswer}
                   disabled={isSubmitting || !userAnswer.trim()}
-                  className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-3 font-medium text-base disabled:opacity-50 shadow-md"
+                  className="bg-[#1F6BFF] hover:bg-[#1456DA] text-white rounded-full px-10 py-6 font-semibold text-base disabled:opacity-50 shadow-[0_6px_24px_rgba(31,107,255,0.25)] hover:shadow-[0_8px_32px_rgba(31,107,255,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
                 >
                   {isSubmitting ? "Marking..." : "Check answer"}
                 </Button>
