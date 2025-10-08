@@ -1771,43 +1771,43 @@ const Dashboard = () => {
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-5xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
-              {/* Compact Streak Calendar */}
-              <div className="mb-8 rounded-2xl p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-200/50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Flame className="h-5 w-5 text-orange-500" />
-                    <span className="text-sm font-semibold text-foreground">{currentStreak} Day Streak</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {Array.from({ length: 7 }).map((_, index) => {
-                      const dayOffset = 6 - index;
-                      const date = new Date();
-                      date.setDate(date.getDate() - dayOffset);
-                      const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })[0];
-                      const isToday = dayOffset === 0;
-                      const hasActivity = dayOffset < currentStreak;
-                      
-                      return (
-                        <div key={index} className="flex flex-col items-center gap-1">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                            hasActivity 
-                              ? 'bg-orange-500 shadow-md' 
-                              : 'bg-muted border border-border'
-                          }`}>
-                            {hasActivity ? (
-                              <Flame className="h-4 w-4 text-white" />
-                            ) : (
-                              <span className="text-xs text-muted-foreground">·</span>
-                            )}
-                          </div>
-                          <span className={`text-xs font-medium ${isToday ? 'text-foreground' : 'text-muted-foreground'}`}>
-                            {dayName}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+              {/* Dynamic Streak Graphic */}
+              <div className="mb-8 flex items-center justify-center gap-2">
+                {Array.from({ length: 7 }).map((_, index) => {
+                  const dayOffset = 6 - index;
+                  const date = new Date();
+                  date.setDate(date.getDate() - dayOffset);
+                  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })[0];
+                  const isToday = dayOffset === 0;
+                  const hasActivity = dayOffset < currentStreak;
+                  
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
+                      className="flex flex-col items-center gap-1.5"
+                    >
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                        hasActivity 
+                          ? 'bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/50 scale-110' 
+                          : 'bg-muted/50 border border-border/50'
+                      }`}>
+                        {hasActivity ? (
+                          <Flame className="h-5 w-5 text-white drop-shadow-md" />
+                        ) : (
+                          <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
+                        )}
+                      </div>
+                      <span className={`text-xs font-semibold ${
+                        isToday ? 'text-orange-600' : hasActivity ? 'text-foreground' : 'text-muted-foreground/60'
+                      }`}>
+                        {dayName}
+                      </span>
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Subject Selection or Subject Path */}
