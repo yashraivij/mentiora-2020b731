@@ -2159,127 +2159,167 @@ const Dashboard = () => {
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
-                <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                   <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-                     <div className="p-6 border-b border-border">
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-gradient-to-br from-card via-background to-card/80 rounded-3xl shadow-2xl border border-border/50 max-w-4xl w-full max-h-[85vh] overflow-hidden backdrop-blur-xl"
+                  >
+                    {/* Header with gradient */}
+                    <div className="relative p-6 border-b border-border/50 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold text-foreground">Add Subjects</h2>
+                        <div>
+                          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-fade-in">
+                            Add Subjects
+                          </h2>
+                          <p className="text-sm text-muted-foreground mt-1">Choose subjects to add to your dashboard</p>
+                        </div>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
-                          className="w-8 h-8 p-0 bg-muted hover:bg-accent text-muted-foreground rounded-full"
+                          variant="ghost"
+                          size="icon"
+                          className="w-10 h-10 rounded-full bg-muted/50 hover:bg-destructive/20 hover:text-destructive transition-all duration-200"
                         >
-                          <X className="h-4 w-4" />
+                          <X className="h-5 w-5" />
                         </Button>
                       </div>
                     </div>
                     
-                    <div className="p-6 overflow-y-auto max-h-[60vh]">
+                    {/* Content */}
+                    <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)] scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
                       <Tabs defaultValue="gcse" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-6">
-                          <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
-                          <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
+                        <TabsList className="grid w-full grid-cols-2 mb-6 bg-muted/50 p-1 h-12">
+                          <TabsTrigger 
+                            value="gcse"
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground font-semibold rounded-lg transition-all duration-200"
+                          >
+                            GCSE Subjects
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="alevel"
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground font-semibold rounded-lg transition-all duration-200"
+                          >
+                            A-Level Subjects
+                          </TabsTrigger>
                         </TabsList>
                         
-                        <TabsContent value="gcse">
+                        <TabsContent value="gcse" className="animate-fade-in">
                           {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
-                            <div className="text-center py-8">
-                              <p className="text-lg text-muted-foreground">You've already added all available GCSE subjects!</p>
+                            <div className="text-center py-12 px-4">
+                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                                <Check className="h-8 w-8 text-accent" />
+                              </div>
+                              <p className="text-lg font-medium text-foreground">All GCSE subjects added!</p>
+                              <p className="text-sm text-muted-foreground mt-2">You've already added all available GCSE subjects to your dashboard.</p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {availableSubjects.filter(s => !s.id.includes('alevel')).map((subject) => {
-                            const colors = subjectColors[subject.id] || subjectColors["physics"];
-                            const IconComponent = getSubjectIcon(subject.id);
-                            
-                            return (
-                              <motion.div
-                                key={subject.id}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <Card 
-                                  className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
-                                  onClick={() => {
-                                    addSubject(subject.id);
-                                    setShowAddSubjects(false);
-                                  }}
-                                >
-                                   <CardContent className="p-4">
-                                     <div className="flex items-center space-x-4">
-                                       <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                         <IconComponent className="h-6 w-6 text-white" />
-                                       </div>
-                                       <div className="flex-1 min-w-0">
-                                         <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
-                                           {getSubjectDisplayName(subject)}
-                                         </h3>
-                                         <p className="text-sm text-gray-600 mobile-text-wrap">
-                                           {subject.topics.length} topics available
-                                         </p>
-                                       </div>
-                                       <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                                  </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </TabsContent>
+                                const colors = subjectColors[subject.id] || subjectColors["physics"];
+                                const IconComponent = getSubjectIcon(subject.id);
+                                
+                                return (
+                                  <motion.div
+                                    key={subject.id}
+                                    whileHover={{ scale: 1.03, y: -2 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <Card 
+                                      className="cursor-pointer border-2 border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group"
+                                      onClick={() => {
+                                        addSubject(subject.id);
+                                        setShowAddSubjects(false);
+                                      }}
+                                    >
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center space-x-4">
+                                          <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                            <IconComponent className="h-7 w-7 text-white" />
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <h3 className="text-lg font-bold text-foreground mobile-text-wrap group-hover:text-primary transition-colors duration-200">
+                                              {getSubjectDisplayName(subject)}
+                                            </h3>
+                                            <p className="text-sm text-muted-foreground mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                              <BookOpen className="h-3.5 w-3.5" />
+                                              {subject.topics.length} topics available
+                                            </p>
+                                          </div>
+                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 flex items-center justify-center transition-all duration-300">
+                                            <Plus className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </motion.div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </TabsContent>
 
-                  <TabsContent value="alevel">
-                    {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
-                      <div className="text-center py-8">
-                        <p className="text-lg text-muted-foreground">You've already added all available A-Level subjects!</p>
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
-                          const colors = subjectColors[subject.id] || subjectColors["physics"];
-                          const IconComponent = getSubjectIcon(subject.id);
-                          
-                          return (
-                            <motion.div
-                              key={subject.id}
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              <Card 
-                                className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
-                                onClick={() => {
-                                  addSubject(subject.id);
-                                  setShowAddSubjects(false);
-                                }}
-                              >
-                                <CardContent className="p-4">
-                                  <div className="flex items-center space-x-4">
-                                    <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                      <IconComponent className="h-6 w-6 text-white" />
-                                    </div>
-                                     <div className="flex-1 min-w-0">
-                                       <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
-                                         {getSubjectDisplayName(subject)}
-                                       </h3>
-                                       <p className="text-sm text-gray-600 mobile-text-wrap">
-                                         {subject.topics.length} topics available
-                                       </p>
-                                     </div>
-                                     <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                                   </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </TabsContent>
-                </Tabs>
-              </div>
-            </div>
-          </div>
-        )}
+                        <TabsContent value="alevel" className="animate-fade-in">
+                          {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
+                            <div className="text-center py-12 px-4">
+                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                                <Check className="h-8 w-8 text-accent" />
+                              </div>
+                              <p className="text-lg font-medium text-foreground">All A-Level subjects added!</p>
+                              <p className="text-sm text-muted-foreground mt-2">You've already added all available A-Level subjects to your dashboard.</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
+                                const colors = subjectColors[subject.id] || subjectColors["physics"];
+                                const IconComponent = getSubjectIcon(subject.id);
+                                
+                                return (
+                                  <motion.div
+                                    key={subject.id}
+                                    whileHover={{ scale: 1.03, y: -2 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <Card 
+                                      className="cursor-pointer border-2 border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group"
+                                      onClick={() => {
+                                        addSubject(subject.id);
+                                        setShowAddSubjects(false);
+                                      }}
+                                    >
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center space-x-4">
+                                          <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                            <IconComponent className="h-7 w-7 text-white" />
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <h3 className="text-lg font-bold text-foreground mobile-text-wrap group-hover:text-primary transition-colors duration-200">
+                                              {getSubjectDisplayName(subject)}
+                                            </h3>
+                                            <p className="text-sm text-muted-foreground mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                              <BookOpen className="h-3.5 w-3.5" />
+                                              {subject.topics.length} topics available
+                                            </p>
+                                          </div>
+                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 flex items-center justify-center transition-all duration-300">
+                                            <Plus className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </motion.div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </TabsContent>
+                      </Tabs>
+                    </div>
+                  </motion.div>
+                </div>
+              )}
             </div>
           )}
 
