@@ -2312,6 +2312,8 @@ const Dashboard = () => {
                                 let baseName = subject.name.split(' - ')[0].split(' (')[0];
                                 // Normalize "Maths" to "Mathematics" for consistent grouping
                                 if (baseName === 'Maths') baseName = 'Mathematics';
+                                // Normalize Geography variations (Geography Paper 2, Geography A, Geography B)
+                                if (baseName.startsWith('Geography')) baseName = 'Geography';
                                 if (!groupedSubjects.has(baseName)) {
                                   groupedSubjects.set(baseName, []);
                                 }
@@ -2405,6 +2407,8 @@ const Dashboard = () => {
                                 let baseName = subject.name.split(' - ')[0].split(' (')[0];
                                 // Normalize "Maths" to "Mathematics" for consistent grouping
                                 if (baseName === 'Maths') baseName = 'Mathematics';
+                                // Normalize Geography variations (Geography Paper 2, Geography A, Geography B)
+                                if (baseName.startsWith('Geography')) baseName = 'Geography';
                                 if (!groupedSubjects.has(baseName)) {
                                   groupedSubjects.set(baseName, []);
                                 }
