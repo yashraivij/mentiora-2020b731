@@ -38,9 +38,9 @@
 
     /* Medly gradients - clean and minimal */
     --gradient-primary: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 69% 48%));
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 100%));
     --gradient-accent: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 60% 60%));
-    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 100%));
 
     --sidebar-background: 0 0% 100%;
 
