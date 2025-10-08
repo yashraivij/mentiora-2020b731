@@ -1771,50 +1771,32 @@ const Dashboard = () => {
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-5xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
-              {/* Dynamic Streak Graphic */}
-              <div className="mb-8 flex items-center justify-start gap-2">
-                {Array.from({ length: 7 }).map((_, index) => {
-                  const today = new Date();
-                  const currentDay = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
-                  const daysFromMonday = currentDay === 0 ? 6 : currentDay - 1; // Adjust so Monday is 0
-                  const monday = new Date(today);
-                  monday.setDate(today.getDate() - daysFromMonday);
-                  
-                  const date = new Date(monday);
-                  date.setDate(monday.getDate() + index);
-                  
-                  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })[0];
-                  const isToday = date.toDateString() === today.toDateString();
-                  const isPast = date < today || isToday;
-                  const hasActivity = isPast && (currentStreak > 0);
-                  
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className="flex flex-col items-center gap-1.5"
-                    >
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                        hasActivity 
-                          ? 'bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/50 scale-110' 
-                          : 'bg-muted/50 border border-border/50'
-                      }`}>
-                        {hasActivity ? (
-                          <Flame className="h-5 w-5 text-white drop-shadow-md" />
-                        ) : (
-                          <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
-                        )}
-                      </div>
-                      <span className={`text-xs font-semibold ${
-                        isToday ? 'text-orange-600' : hasActivity ? 'text-foreground' : 'text-muted-foreground/60'
-                      }`}>
-                        {dayName}
-                      </span>
-                    </motion.div>
-                  );
-                })}
+              {/* Streak Banner */}
+              <div className="mb-10 rounded-3xl p-8 relative overflow-hidden" style={{
+                background: 'linear-gradient(135deg, #3BAFDA 0%, #2E9DBF 100%)'
+              }}>
+                <div className="flex items-center justify-between relative z-10">
+                  <div className="flex items-center space-x-6">
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)'
+                    }}>
+                      <Flame className="h-10 w-10 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-5xl font-bold text-white mb-1">{currentStreak}</div>
+                      <div className="text-lg font-semibold text-white/90">Day Streak</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-white/90 text-sm font-medium mb-2">Keep it going!</div>
+                    <div className="text-white text-base font-semibold">Practice daily to maintain your streak</div>
+                  </div>
+                </div>
+                {/* Decorative background elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)',
+                  transform: 'translate(30%, -30%)'
+                }}></div>
               </div>
 
               {/* Subject Selection or Subject Path */}
