@@ -1871,53 +1871,53 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer */}
               <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-background via-background/95 to-accent/10">
+                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-950 dark:to-gray-900">
                   {selectedDrawerSubject && (
                     <>
-                      <SheetHeader className="space-y-6 pb-8 border-b border-border/50">
+                      <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
                         <div className="flex items-center gap-5">
                           <motion.div 
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ type: "spring", stiffness: 200 }}
-                            className="p-4 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 shadow-lg shadow-primary/10"
+                            className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10"
                           >
                             {(() => {
                               const IconComponent = getSubjectIcon(selectedDrawerSubject.id);
-                              return <IconComponent className="h-8 w-8 text-primary" />;
+                              return <IconComponent className="h-8 w-8 text-[#0EA5E9]" />;
                             })()}
                           </motion.div>
                           <div className="flex-1">
-                            <SheetTitle className="text-3xl font-bold text-foreground tracking-tight">
+                            <SheetTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
                               {getSubjectDisplayName(selectedDrawerSubject)}
                             </SheetTitle>
-                            <SheetDescription className="text-base text-muted-foreground mt-1 font-medium">
+                            <SheetDescription className="text-base text-[#64748B] dark:text-gray-400 mt-1 font-medium">
                               Detailed performance insights
                             </SheetDescription>
                           </div>
                         </div>
                         <div className="flex gap-3">
-                          <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-md shadow-primary/25">
+                          <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
                             Predicted 7.2
                           </Badge>
-                          <Badge className="rounded-xl px-4 py-1.5 border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-400 bg-background font-semibold">
+                          <Badge className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold">
                             Target 8.0
                           </Badge>
                         </div>
                       </SheetHeader>
 
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
-                        <TabsList className="grid w-full grid-cols-4 rounded-2xl p-1.5 bg-muted/50 border border-border/50">
-                          <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary font-semibold">
+                        <TabsList className="grid w-full grid-cols-4 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
+                          <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Overview
                           </TabsTrigger>
-                          <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary font-semibold">
+                          <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Topics
                           </TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary font-semibold">
+                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Papers
                           </TabsTrigger>
-                          <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-md data-[state=active]:text-primary font-semibold">
+                          <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Plan
                           </TabsTrigger>
                         </TabsList>
@@ -1930,15 +1930,15 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.1 }}
                             >
-                              <Card className="rounded-3xl border border-green-500/20 bg-gradient-to-br from-background to-green-500/5 shadow-sm hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300">
+                              <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
                                 <CardContent className="p-5">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-green-500/10">
-                                      <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+                                    <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
+                                      <TrendingUp className="h-4 w-4 text-[#16A34A]" />
                                     </div>
-                                    <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Last 7 days</div>
+                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 flex items-center gap-2">
+                                  <div className="text-3xl font-bold text-[#16A34A] flex items-center gap-2">
                                     +0.3
                                   </div>
                                 </CardContent>
@@ -1949,15 +1949,15 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.15 }}
                             >
-                              <Card className="rounded-3xl border border-primary/20 bg-gradient-to-br from-background to-primary/5 shadow-sm hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
+                              <Card className="rounded-3xl border border-[#0EA5E9]/20 bg-gradient-to-br from-white to-[#0EA5E9]/5 dark:from-gray-900 dark:to-[#0EA5E9]/10 shadow-sm hover:shadow-lg hover:shadow-[#0EA5E9]/10 transition-all duration-300">
                                 <CardContent className="p-5">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-primary/10">
-                                      <Target className="h-4 w-4 text-primary" />
+                                    <div className="p-1.5 rounded-lg bg-[#0EA5E9]/10">
+                                      <Target className="h-4 w-4 text-[#0EA5E9]" />
                                     </div>
-                                    <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Accuracy</div>
+                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Accuracy</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-foreground">76%</div>
+                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">76%</div>
                                 </CardContent>
                               </Card>
                             </motion.div>
@@ -1966,65 +1966,65 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.2 }}
                             >
-                              <Card className="rounded-3xl border border-orange-500/20 bg-gradient-to-br from-background to-orange-500/5 shadow-sm hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300">
+                              <Card className="rounded-3xl border border-[#F59E0B]/20 bg-gradient-to-br from-white to-[#F59E0B]/5 dark:from-gray-900 dark:to-[#F59E0B]/10 shadow-sm hover:shadow-lg hover:shadow-[#F59E0B]/10 transition-all duration-300">
                                 <CardContent className="p-5">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-orange-500/10">
-                                      <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                                    <div className="p-1.5 rounded-lg bg-[#F59E0B]/10">
+                                      <Clock className="h-4 w-4 text-[#F59E0B]" />
                                     </div>
-                                    <div className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Study Time</div>
+                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Study Time</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-foreground">2h 15m</div>
+                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">2h 15m</div>
                                 </CardContent>
                               </Card>
                             </motion.div>
                           </div>
 
                           {/* Performance Chart */}
-                          <Card className="rounded-3xl border border-border/50 bg-gradient-to-br from-card via-card to-accent/5 shadow-lg">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-foreground tracking-tight">Performance Comparison</CardTitle>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Performance Comparison</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-6 p-6">
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border/50">
+                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                 <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                  <span className="text-lg font-bold text-foreground">7.2</span>
+                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
+                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">7.2</span>
                                 </div>
-                                <div className="w-full h-3 bg-muted rounded-full overflow-hidden shadow-inner">
+                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                   <motion.div 
                                     initial={{ width: 0 }}
                                     animate={{ width: "72%" }}
                                     transition={{ duration: 1, delay: 0.3 }}
-                                    className="h-full bg-gradient-to-r from-primary via-primary/90 to-primary rounded-full shadow-sm"
+                                    className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                                   />
                                 </div>
                               </div>
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border/50">
+                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                 <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">Target Grade</span>
-                                  <span className="text-lg font-bold text-foreground">8.0</span>
+                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target Grade</span>
+                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">8.0</span>
                                 </div>
-                                <div className="w-full h-3 bg-muted rounded-full overflow-hidden shadow-inner">
+                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                   <motion.div 
                                     initial={{ width: 0 }}
                                     animate={{ width: "80%" }}
                                     transition={{ duration: 1, delay: 0.4 }}
-                                    className="h-full bg-gradient-to-r from-green-600 to-green-500 dark:from-green-500 dark:to-green-400 rounded-full shadow-sm"
+                                    className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                                   />
                                 </div>
                               </div>
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border/50">
+                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                 <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">Class Median</span>
-                                  <span className="text-lg font-bold text-foreground">6.5</span>
+                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
+                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">6.5</span>
                                 </div>
-                                <div className="w-full h-3 bg-muted rounded-full overflow-hidden shadow-inner">
+                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                   <motion.div 
                                     initial={{ width: 0 }}
                                     animate={{ width: "65%" }}
                                     transition={{ duration: 1, delay: 0.5 }}
-                                    className="h-full bg-gradient-to-r from-muted-foreground to-muted-foreground/80 rounded-full shadow-sm"
+                                    className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
                                   />
                                 </div>
                               </div>
@@ -2033,35 +2033,35 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="topics" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-border/50 bg-gradient-to-br from-card via-card to-accent/5 shadow-lg">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-foreground tracking-tight">Topic Mastery</CardTitle>
-                              <CardDescription className="text-muted-foreground font-medium">Ranked from weakest to strongest</CardDescription>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Topic Mastery</CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Ranked from weakest to strongest</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
                               {[
-                                { name: 'Energetics', mastery: 45, color: 'from-red-600 to-red-500 dark:from-red-500 dark:to-red-400' },
-                                { name: 'Organic Chemistry', mastery: 62, color: 'from-orange-600 to-orange-500 dark:from-orange-500 dark:to-orange-400' },
-                                { name: 'Atomic Structure', mastery: 78, color: 'from-amber-600 to-orange-500 dark:from-amber-500 dark:to-orange-400' },
-                                { name: 'Quantitative Chemistry', mastery: 89, color: 'from-green-600 to-green-500 dark:from-green-500 dark:to-green-400' },
+                                { name: 'Energetics', mastery: 45, color: 'from-[#EF4444] to-[#DC2626]' },
+                                { name: 'Organic Chemistry', mastery: 62, color: 'from-[#F59E0B] to-[#D97706]' },
+                                { name: 'Atomic Structure', mastery: 78, color: 'from-[#F59E0B] to-[#F97316]' },
+                                { name: 'Quantitative Chemistry', mastery: 89, color: 'from-[#16A34A] to-[#22C55E]' },
                               ].map((topic, i) => (
                                 <motion.div 
                                   key={topic.name} 
                                   initial={{ opacity: 0, x: -20 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ delay: i * 0.1 }}
-                                  className="space-y-3 p-5 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border/50 hover:shadow-md transition-all duration-300"
+                                  className="space-y-3 p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300"
                                 >
                                   <div className="flex items-center justify-between">
-                                    <span className="text-base font-bold text-foreground">{topic.name}</span>
+                                    <span className="text-base font-bold text-[#0F172A] dark:text-white">{topic.name}</span>
                                     <div className="flex items-center gap-3">
-                                      <span className="text-base font-semibold text-muted-foreground">{topic.mastery}%</span>
-                                      <Button size="sm" className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-md shadow-primary/25">
+                                      <span className="text-base font-semibold text-[#64748B] dark:text-gray-400">{topic.mastery}%</span>
+                                      <Button size="sm" className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
                                         Revise
                                       </Button>
                                     </div>
                                   </div>
-                                  <div className="w-full h-3 bg-muted rounded-full overflow-hidden shadow-inner">
+                                  <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-800 rounded-full overflow-hidden shadow-inner">
                                     <motion.div 
                                       initial={{ width: 0 }}
                                       animate={{ width: `${topic.mastery}%` }}
@@ -2076,10 +2076,10 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="papers" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-border/50 bg-gradient-to-br from-card via-card to-accent/5 shadow-lg">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-foreground tracking-tight">Past Paper Attempts</CardTitle>
-                              <CardDescription className="text-muted-foreground font-medium">Recent exam practice performance</CardDescription>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Past Paper Attempts</CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Recent exam practice performance</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-3 p-6">
                               {[
@@ -2092,14 +2092,14 @@ const Dashboard = () => {
                                   initial={{ opacity: 0, y: 10 }}
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ delay: i * 0.1 }}
-                                  className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-muted/30 to-background border border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300 cursor-pointer"
+                                  className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer"
                                 >
                                   <div>
-                                    <div className="font-bold text-base text-foreground mb-1">{attempt.paper}</div>
-                                    <div className="text-sm text-muted-foreground font-medium">{attempt.date} • {attempt.time}</div>
+                                    <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{attempt.paper}</div>
+                                    <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">{attempt.date} • {attempt.time}</div>
                                   </div>
                                   <div className="text-right">
-                                    <div className="text-2xl font-bold text-primary">{attempt.score}</div>
+                                    <div className="text-2xl font-bold text-[#0EA5E9]">{attempt.score}</div>
                                   </div>
                                 </motion.div>
                               ))}
@@ -2108,13 +2108,13 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="plan" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-border/50 bg-gradient-to-br from-card via-card to-accent/5 shadow-lg">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="flex flex-row items-center justify-between pb-4">
                               <div>
-                                <CardTitle className="text-xl font-bold text-foreground tracking-tight">7-Day Study Plan</CardTitle>
-                                <CardDescription className="text-muted-foreground font-medium mt-1">Focused on your weakest topics</CardDescription>
+                                <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">7-Day Study Plan</CardTitle>
+                                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">Focused on your weakest topics</CardDescription>
                               </div>
-                              <Button size="sm" className="rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-md shadow-primary/25">
+                              <Button size="sm" className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
                                 Generate Plan
                               </Button>
                             </CardHeader>
@@ -2125,24 +2125,24 @@ const Dashboard = () => {
                                   initial={{ opacity: 0, x: -20 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ delay: i * 0.05 }}
-                                  className="p-5 rounded-2xl border border-border/50 bg-gradient-to-br from-muted/30 to-background hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                                  className="p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300"
                                 >
                                   <div className="flex items-center justify-between mb-4">
-                                    <span className="font-bold text-lg text-foreground">{day}</span>
-                                    <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-primary text-primary bg-background font-semibold">25 mins</Badge>
+                                    <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
+                                    <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">25 mins</Badge>
                                   </div>
-                                  <div className="text-sm text-muted-foreground mb-4 font-medium">
+                                  <div className="text-sm text-[#64748B] dark:text-gray-400 mb-4 font-medium">
                                     Focus: Energetics • Calculations
                                   </div>
                                   <div className="flex gap-2">
-                                    <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-md shadow-primary/25">
+                                    <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
                                       <Play className="h-3 w-3 mr-1" />
                                       Start
                                     </Button>
-                                    <Button size="sm" variant="outline" className="rounded-xl border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-400 hover:bg-green-600/10 dark:hover:bg-green-400/10 font-semibold">
+                                    <Button size="sm" variant="outline" className="rounded-xl border-2 border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10 font-semibold">
                                       Done
                                     </Button>
-                                    <Button size="sm" variant="ghost" className="rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted font-semibold">
+                                    <Button size="sm" variant="ghost" className="rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] dark:hover:bg-gray-800 font-semibold">
                                       Reschedule
                                     </Button>
                                   </div>
