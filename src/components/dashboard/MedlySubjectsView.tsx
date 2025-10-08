@@ -70,6 +70,7 @@ interface MedlySubjectsViewProps {
   setSubjectDrawerOpen: (open: boolean) => void;
   insightFilter: string | null;
   setInsightFilter: (filter: string | null) => void;
+  removeSubject: (subjectId: string) => void;
 }
 
 export function MedlySubjectsView({
@@ -84,6 +85,7 @@ export function MedlySubjectsView({
   setSubjectDrawerOpen,
   insightFilter,
   setInsightFilter,
+  removeSubject,
 }: MedlySubjectsViewProps) {
   
   const filteredMockSubjects = insightFilter
@@ -338,6 +340,20 @@ export function MedlySubjectsView({
               >
                 {/* Premium shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
+                {/* Remove button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-lg text-[#64748B] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all duration-200 opacity-0 group-hover:opacity-100"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeSubject(subject.id);
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+
                 <CardContent className="p-7 relative">
                   {/* Top Row: Icon + Badge */}
                   <div className="flex items-start justify-between mb-5">

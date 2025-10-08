@@ -1845,6 +1845,7 @@ const Dashboard = () => {
                   setSubjectDrawerOpen={setSubjectDrawerOpen}
                   insightFilter={insightFilter}
                   setInsightFilter={setInsightFilter}
+                  removeSubject={removeSubject}
                 />
               ) : (
                 // Subject Path View (when a subject is selected for practice)
