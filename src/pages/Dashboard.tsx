@@ -1289,8 +1289,8 @@ const Dashboard = () => {
         return;
       }
 
-      // Update local state
-      setUserSubjects(prev => [...prev, subjectId]);
+      // Reload subjects to update both userSubjects and userSubjectsWithGrades
+      await loadUserSubjects();
       toast({
         title: "Success",
         description: `${subjectName} added to your subjects`,
