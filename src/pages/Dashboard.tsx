@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { curriculum } from "@/data/curriculum";
@@ -51,6 +53,14 @@ import {
   X,
   Eye,
   Play,
+  ChevronRight,
+  Target,
+  TrendingDown,
+  BarChart3,
+  Download,
+  FileText,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
@@ -158,6 +168,11 @@ const Dashboard = () => {
   const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
   const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
   const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
+  
+  // Medly dashboard state
+  const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
+  const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
+  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan'>('overview');
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -1770,123 +1785,437 @@ const Dashboard = () => {
           {/* Main Learning Area */}
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
           {activeTab === "learn" && (
-            <div>
-              {/* Header with stats */}
-              <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2">
-                  <Flame className="h-6 w-6 text-orange-400" />
-                  <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Zap className="h-6 w-6 text-blue-400" />
-                  <span className="text-xl font-bold text-blue-500">{userGems}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Gem className="h-6 w-6 text-cyan-400" />
-                  <span className="text-xl font-bold text-cyan-500">{userGems}</span>
-                </div>
-              </div>
-              </div>
-
-              {/* Subject Selection or Subject Path */}
+            <div className="max-w-6xl mx-auto">
               {!selectedSubject ? (
-                <div>
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-                     <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
-                       Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
-                     </h2>
-                    {filteredSubjects.length > 0 && (
-                      <Button
-                        onClick={() => setShowAddSubjects(true)}
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
-                      >
-                        <Plus className="h-4 w-4" />
-                        <span>Add Subject</span>
-                      </Button>
-                    )}
-                  </div>
-                  
-                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'} gap-6`}>
-                    {filteredSubjects.map((subject) => {
-                      const colors = subjectColors[subject.id] || subjectColors["physics"];
-                      const progress = getSubjectProgress(subject.id);
-                      
-                      return (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="relative"
-                        >
-                           <Card 
-                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
-                            onClick={() => setSelectedSubject(subject.id)}
+                <div className="space-y-8">
+                  {/* Sticky Page Header */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm py-6 border-b border-border/40"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div>
+                        <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-2">Your Learning Dashboard</h1>
+                        <p className="text-base text-muted-foreground">Track your subjects, predicted grades and weekly plan.</p>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Button variant="outline" size="sm" className="rounded-xl">
+                          <Target className="h-4 w-4 mr-2" />
+                          Update Target Grades
+                        </Button>
+                        <Button variant="outline" size="sm" className="rounded-xl">
+                          <Download className="h-4 w-4 mr-2" />
+                          Export Report
+                        </Button>
+                        {filteredSubjects.length > 0 && (
+                          <Button 
+                            onClick={() => setShowAddSubjects(true)}
+                            size="sm" 
+                            className="rounded-xl bg-primary hover:bg-primary/90"
                           >
-                            <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
-                              <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-3">
-                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full mobile-text-wrap`}>
-                                      {progress.completed} OF {progress.total} UNITS
-                                    </span>
+                            <Plus className="h-4 w-4 mr-2" />
+                            Add Subject
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Overall Overview Hero Strip */}
+                  {filteredSubjects.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <Card className="rounded-2xl border-border/40 shadow-sm bg-gradient-to-br from-card to-muted/20">
+                        <CardContent className="p-6 md:p-8">
+                          <div className="space-y-6">
+                            <div>
+                              <div className="flex items-center justify-between mb-3">
+                                <span className="text-sm font-medium text-muted-foreground">Overall Progress</span>
+                                <span className="text-2xl font-semibold text-primary">
+                                  {(() => {
+                                    const totalCompleted = filteredSubjects.reduce((acc, s) => 
+                                      acc + getSubjectProgress(s.id).completed, 0);
+                                    const totalTopics = filteredSubjects.reduce((acc, s) => 
+                                      acc + getSubjectProgress(s.id).total, 0);
+                                    return totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
+                                  })()}%
+                                </span>
+                              </div>
+                              <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
+                                <motion.div 
+                                  initial={{ width: 0 }}
+                                  animate={{ 
+                                    width: `${(() => {
+                                      const totalCompleted = filteredSubjects.reduce((acc, s) => 
+                                        acc + getSubjectProgress(s.id).completed, 0);
+                                      const totalTopics = filteredSubjects.reduce((acc, s) => 
+                                        acc + getSubjectProgress(s.id).total, 0);
+                                      return totalTopics > 0 ? (totalCompleted / totalTopics) * 100 : 0;
+                                    })()}%` 
+                                  }}
+                                  transition={{ duration: 1, ease: "easeOut" }}
+                                  className="h-full bg-primary rounded-full"
+                                />
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
+                                <div className="p-2 rounded-lg bg-accent/10">
+                                  <Flame className="h-5 w-5 text-orange-500" />
+                                </div>
+                                <div>
+                                  <div className="text-xs text-muted-foreground">Retention</div>
+                                  <div className="text-lg font-semibold text-foreground">74%</div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
+                                <div className="p-2 rounded-lg bg-primary/10">
+                                  <Clock className="h-5 w-5 text-primary" />
+                                </div>
+                                <div>
+                                  <div className="text-xs text-muted-foreground">Best Study Time</div>
+                                  <div className="text-lg font-semibold text-foreground">7-9pm</div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
+                                <div className="p-2 rounded-lg bg-accent/10">
+                                  <Calendar className="h-5 w-5 text-accent" />
+                                </div>
+                                <div>
+                                  <div className="text-xs text-muted-foreground">This Week</div>
+                                  <div className="text-lg font-semibold text-foreground">5h 20m</div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
+                                <div className="p-2 rounded-lg bg-orange-500/10">
+                                  <Flame className="h-5 w-5 text-orange-500" />
+                                </div>
+                                <div>
+                                  <div className="text-xs text-muted-foreground">Streak</div>
+                                  <div className="text-lg font-semibold text-foreground">{currentStreak} days</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  )}
+
+                  {/* Subject Grid */}
+                  {filteredSubjects.length > 0 ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="space-y-4"
+                    >
+                      <h2 className="text-2xl font-semibold text-foreground">Your Subjects</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredSubjects.map((subject, index) => {
+                          const colors = subjectColors[subject.id] || subjectColors["physics"];
+                          const progress = getSubjectProgress(subject.id);
+                          const IconComponent = getSubjectIcon(subject.id);
+                          const predictedGrade = 7.2;
+                          const targetGrade = 8.0;
+                          const isOnTrack = predictedGrade >= targetGrade * 0.9;
+                          
+                          return (
+                            <motion.div
+                              key={subject.id}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 * index }}
+                            >
+                              <Card 
+                                className="group relative rounded-2xl border-border/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-br from-card to-muted/10"
+                                onClick={() => {
+                                  setSelectedDrawerSubject(subject);
+                                  setSubjectDrawerOpen(true);
+                                }}
+                              >
+                                <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
+                                  <IconComponent className="w-full h-full" />
+                                </div>
+                                <CardContent className="p-6 relative">
+                                  <div className="flex items-start justify-between mb-4">
+                                    <div className={`p-3 rounded-xl ${colors.light}`}>
+                                      <IconComponent className={`h-6 w-6 ${colors.text}`} />
+                                    </div>
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeSubject(subject.id);
+                                      }}
+                                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-muted rounded-lg"
+                                    >
+                                      <X className="h-4 w-4 text-muted-foreground" />
+                                    </button>
                                   </div>
                                   
-                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-foreground mb-4 mobile-text-wrap`}>
+                                  <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2">
                                     {getSubjectDisplayName(subject)}
                                   </h3>
                                   
-                                  <div className="w-full bg-muted rounded-full h-3 mb-4">
-                                    <div
-                                      className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
-                                      style={{ width: `${(progress.completed / progress.total) * 100}%` }}
-                                    />
+                                  <div className="flex items-center gap-2 mb-4">
+                                    <Badge variant="secondary" className="text-xs font-medium rounded-lg">
+                                      Predicted {predictedGrade}
+                                    </Badge>
+                                    <Badge variant="outline" className="text-xs rounded-lg">
+                                      Target {targetGrade}
+                                    </Badge>
                                   </div>
-
-                                  <Button
-                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-lg mobile-touch-target`}
+                                  
+                                  <div className="mb-4">
+                                    <div className="flex items-center justify-between mb-2">
+                                      <span className="text-xs text-muted-foreground">Confidence</span>
+                                      <span className={`text-xs font-medium ${isOnTrack ? 'text-accent' : 'text-orange-500'}`}>
+                                        {isOnTrack ? 'On Track' : 'Needs Focus'}
+                                      </span>
+                                    </div>
+                                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${(predictedGrade / targetGrade) * 100}%` }}
+                                        transition={{ duration: 1, delay: 0.2 * index }}
+                                        className={`h-full rounded-full ${isOnTrack ? 'bg-accent' : 'bg-orange-500'}`}
+                                      />
+                                    </div>
+                                  </div>
+                                  
+                                  <p className="text-xs text-muted-foreground mb-4">
+                                    <span className="font-medium text-foreground">Strong:</span> Quantitative Chemistry • 
+                                    <span className="font-medium text-foreground"> Focus:</span> Energetics
+                                  </p>
+                                  
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    className="w-full justify-between rounded-xl text-primary hover:bg-primary/5"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setSelectedDrawerSubject(subject);
+                                      setSubjectDrawerOpen(true);
+                                    }}
                                   >
-                                    {progress.completed === 0 ? "START" : "CONTINUE"}
+                                    View insights
+                                    <ChevronRight className="h-4 w-4" />
                                   </Button>
-                                </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          );
+                        })}
+                        
+                        {/* Add Subject Card */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 * filteredSubjects.length }}
+                        >
+                          <Card 
+                            className="rounded-2xl border-2 border-dashed border-border/60 hover:border-primary/40 hover:bg-muted/30 transition-all duration-300 cursor-pointer h-full"
+                            onClick={() => setShowAddSubjects(true)}
+                          >
+                            <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[280px]">
+                              <div className="p-4 rounded-full bg-muted/50 mb-4">
+                                <Plus className="h-8 w-8 text-muted-foreground" />
+                              </div>
+                              <h3 className="text-lg font-medium text-foreground mb-1">Add subject</h3>
+                              <p className="text-sm text-muted-foreground text-center">
+                                Start tracking a new subject
+                              </p>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    /* No subjects empty state */
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-center py-16"
+                    >
+                      <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted/50 flex items-center justify-center">
+                        <BookOpen className="h-12 w-12 text-muted-foreground" />
+                      </div>
+                      <h3 className="text-2xl font-semibold text-foreground mb-3">
+                        No subjects yet
+                      </h3>
+                      <p className="text-base text-muted-foreground mb-8 max-w-md mx-auto">
+                        Add your first subject to start tracking your progress and get personalized insights
+                      </p>
+                      <Button
+                        onClick={() => setShowAddSubjects(true)}
+                        className="rounded-xl bg-primary hover:bg-primary/90"
+                      >
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add your first subject
+                      </Button>
+                    </motion.div>
+                  )}
 
-                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                  {(() => {
-                                    const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
-                                  })()}
+                  {/* Insights Strip */}
+                  {filteredSubjects.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                      className="space-y-4"
+                    >
+                      <h2 className="text-2xl font-semibold text-foreground">Insights for You</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-accent/5 to-accent/10">
+                          <CardContent className="p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="p-2 rounded-lg bg-accent/20">
+                                <TrendingUp className="h-5 w-5 text-accent" />
+                              </div>
+                              <span className="text-sm font-medium text-muted-foreground">Strongest</span>
+                            </div>
+                            <div className="text-2xl font-semibold text-foreground mb-1">Chemistry</div>
+                            <p className="text-sm text-muted-foreground">0.8 from target</p>
+                          </CardContent>
+                        </Card>
+                        
+                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-orange-500/5 to-orange-500/10">
+                          <CardContent className="p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="p-2 rounded-lg bg-orange-500/20">
+                                <TrendingDown className="h-5 w-5 text-orange-500" />
+                              </div>
+                              <span className="text-sm font-medium text-muted-foreground">Focus Area</span>
+                            </div>
+                            <div className="text-2xl font-semibold text-foreground mb-1">Physics</div>
+                            <p className="text-sm text-muted-foreground">Try 20 mins today</p>
+                          </CardContent>
+                        </Card>
+                        
+                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-primary/5 to-primary/10">
+                          <CardContent className="p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="p-2 rounded-lg bg-primary/20">
+                                <Clock className="h-5 w-5 text-primary" />
+                              </div>
+                              <span className="text-sm font-medium text-muted-foreground">Best Study Time</span>
+                            </div>
+                            <div className="text-2xl font-semibold text-foreground mb-1">7-9 PM</div>
+                            <p className="text-sm text-muted-foreground">Most productive</p>
+                          </CardContent>
+                        </Card>
+                        
+                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-purple-500/5 to-purple-500/10">
+                          <CardContent className="p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="p-2 rounded-lg bg-purple-500/20">
+                                <Brain className="h-5 w-5 text-purple-500" />
+                              </div>
+                              <span className="text-sm font-medium text-muted-foreground">Retention</span>
+                            </div>
+                            <div className="text-2xl font-semibold text-foreground mb-1">74%</div>
+                            <p className="text-sm text-muted-foreground">Above average</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Weekly Plan */}
+                  {filteredSubjects.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-semibold text-foreground">Your weekly plan to reach your targets</h2>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="rounded-xl">
+                            Regenerate
+                          </Button>
+                          <Button variant="outline" size="sm" className="rounded-xl">
+                            <Download className="h-4 w-4 mr-2" />
+                            Export
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => (
+                          <Card key={day} className="min-w-[280px] rounded-2xl border-border/40 hover:shadow-md transition-shadow">
+                            <CardContent className="p-5">
+                              <div className="flex items-center justify-between mb-4">
+                                <h3 className="font-semibold text-foreground">{day}</h3>
+                                <span className="text-xs text-muted-foreground">Jan {22 + index}</span>
+                              </div>
+                              
+                              <div className="space-y-3">
+                                <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                  <input type="checkbox" className="mt-1 rounded border-border" />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="text-sm font-medium text-foreground mb-1">Chemistry • Energetics</div>
+                                    <div className="text-xs text-muted-foreground">25 mins</div>
+                                  </div>
+                                </div>
+                                
+                                <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                  <input type="checkbox" className="mt-1 rounded border-border" />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="text-sm font-medium text-foreground mb-1">Physics • Forces</div>
+                                    <div className="text-xs text-muted-foreground">30 mins</div>
+                                  </div>
+                                </div>
+                                
+                                <button className="w-full py-2 text-sm text-primary hover:bg-primary/5 rounded-xl transition-colors">
+                                  + Add task
+                                </button>
+                              </div>
+                              
+                              <div className="mt-4 pt-4 border-t border-border/40">
+                                <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                                  <div className="h-full w-1/3 bg-primary rounded-full" />
                                 </div>
                               </div>
                             </CardContent>
                           </Card>
-                          
-                          {/* Remove Subject Button */}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeSubject(subject.id);
-                            }}
-                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            <X className="h-4 w-4" />
-                          </button>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Footer Nudge */}
+                  {filteredSubjects.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="text-center py-8"
+                    >
+                      <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+                        Small, consistent study sessions beat cramming. You've got this.
+                      </p>
+                    </motion.div>
+                  )}
                 </div>
               ) : (
-                // Subject Path View
+                // Subject Path View (when a subject is selected for practice)
                 <div>
                   <div className="flex items-center mb-8">
                     <Button
                       variant="ghost"
                       onClick={() => setSelectedSubject(null)}
-                      className="text-muted-foreground hover:text-foreground mr-4"
+                      className="text-muted-foreground hover:text-foreground mr-4 rounded-xl"
                     >
                       ← Back
                     </Button>
-                     <h2 className="text-3xl font-bold text-foreground">
+                    <h2 className="text-3xl font-semibold text-foreground">
                       {curriculum.find(s => s.id === selectedSubject)?.name}
                     </h2>
                   </div>
@@ -1899,27 +2228,197 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {/* No subjects message */}
-              {filteredSubjects.length === 0 && !selectedSubject && (
-                <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-                    <BookOpen className="h-12 w-12 text-muted-foreground" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    No subjects selected yet
-                  </h3>
-                  <p className="text-lg text-muted-foreground mb-8">
-                    Add subjects to your list to get started with GCSE revision
-                  </p>
-                  <Button
-                    onClick={() => setShowAddSubjects(true)}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg flex items-center space-x-2"
-                  >
-                    <Plus className="h-5 w-5" />
-                    <span>Add Subjects</span>
-                  </Button>
-                </div>
-              )}
+              {/* Subject Detail Drawer */}
+              <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+                <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+                  {selectedDrawerSubject && (
+                    <>
+                      <SheetHeader className="space-y-4 pb-6 border-b border-border">
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl ${(subjectColors[selectedDrawerSubject.id] || subjectColors["physics"]).light}`}>
+                            {(() => {
+                              const IconComponent = getSubjectIcon(selectedDrawerSubject.id);
+                              return <IconComponent className={`h-6 w-6 ${(subjectColors[selectedDrawerSubject.id] || subjectColors["physics"]).text}`} />;
+                            })()}
+                          </div>
+                          <div className="flex-1">
+                            <SheetTitle className="text-2xl">{getSubjectDisplayName(selectedDrawerSubject)}</SheetTitle>
+                            <SheetDescription>Detailed performance insights</SheetDescription>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Badge variant="secondary" className="rounded-lg">Predicted 7.2</Badge>
+                          <Badge variant="outline" className="rounded-lg">Target 8.0</Badge>
+                        </div>
+                      </SheetHeader>
+
+                      <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-6">
+                        <TabsList className="grid w-full grid-cols-4 rounded-xl">
+                          <TabsTrigger value="overview" className="rounded-lg">Overview</TabsTrigger>
+                          <TabsTrigger value="topics" className="rounded-lg">Topics</TabsTrigger>
+                          <TabsTrigger value="papers" className="rounded-lg">Papers</TabsTrigger>
+                          <TabsTrigger value="plan" className="rounded-lg">Plan</TabsTrigger>
+                        </TabsList>
+
+                        <TabsContent value="overview" className="space-y-6 mt-6">
+                          {/* Performance Stats */}
+                          <div className="grid grid-cols-3 gap-4">
+                            <Card className="rounded-xl">
+                              <CardContent className="p-4">
+                                <div className="text-xs text-muted-foreground mb-1">Last 7 days</div>
+                                <div className="text-2xl font-semibold text-accent flex items-center gap-1">
+                                  +0.3 <TrendingUp className="h-4 w-4" />
+                                </div>
+                              </CardContent>
+                            </Card>
+                            <Card className="rounded-xl">
+                              <CardContent className="p-4">
+                                <div className="text-xs text-muted-foreground mb-1">Accuracy</div>
+                                <div className="text-2xl font-semibold text-foreground">76%</div>
+                              </CardContent>
+                            </Card>
+                            <Card className="rounded-xl">
+                              <CardContent className="p-4">
+                                <div className="text-xs text-muted-foreground mb-1">Study Time</div>
+                                <div className="text-2xl font-semibold text-foreground">2h 15m</div>
+                              </CardContent>
+                            </Card>
+                          </div>
+
+                          {/* Performance Chart */}
+                          <Card className="rounded-xl">
+                            <CardHeader>
+                              <CardTitle className="text-lg">Performance Comparison</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-4">
+                                <div>
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="text-sm text-muted-foreground">Predicted Grade</span>
+                                    <span className="text-sm font-medium">7.2</span>
+                                  </div>
+                                  <Progress value={72} className="h-2" />
+                                </div>
+                                <div>
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="text-sm text-muted-foreground">Target Grade</span>
+                                    <span className="text-sm font-medium">8.0</span>
+                                  </div>
+                                  <Progress value={80} className="h-2" />
+                                </div>
+                                <div>
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="text-sm text-muted-foreground">Class Median</span>
+                                    <span className="text-sm font-medium">6.5</span>
+                                  </div>
+                                  <Progress value={65} className="h-2" />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
+
+                        <TabsContent value="topics" className="space-y-4 mt-6">
+                          <Card className="rounded-xl">
+                            <CardHeader>
+                              <CardTitle className="text-lg">Topic Mastery</CardTitle>
+                              <CardDescription>Ranked from weakest to strongest</CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              {[
+                                { name: 'Energetics', mastery: 45, color: 'bg-red-500' },
+                                { name: 'Organic Chemistry', mastery: 62, color: 'bg-orange-500' },
+                                { name: 'Atomic Structure', mastery: 78, color: 'bg-amber-500' },
+                                { name: 'Quantitative Chemistry', mastery: 89, color: 'bg-accent' },
+                              ].map((topic) => (
+                                <div key={topic.name} className="space-y-2">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-sm font-medium text-foreground">{topic.name}</span>
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-sm text-muted-foreground">{topic.mastery}%</span>
+                                      <Button size="sm" variant="outline" className="rounded-lg h-7 px-2 text-xs">
+                                        Revise
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                                    <div className={`h-full ${topic.color} rounded-full transition-all`} style={{ width: `${topic.mastery}%` }} />
+                                  </div>
+                                </div>
+                              ))}
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
+
+                        <TabsContent value="papers" className="space-y-4 mt-6">
+                          <Card className="rounded-xl">
+                            <CardHeader>
+                              <CardTitle className="text-lg">Past Paper Attempts</CardTitle>
+                              <CardDescription>Recent exam practice performance</CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              {[
+                                { paper: '2023 Paper 1', score: '72%', time: '1h 30m', date: '2 days ago' },
+                                { paper: '2022 Paper 2', score: '68%', time: '1h 25m', date: '5 days ago' },
+                                { paper: '2023 Paper 2', score: '75%', time: '1h 28m', date: '1 week ago' },
+                              ].map((attempt, i) => (
+                                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                  <div>
+                                    <div className="font-medium text-sm text-foreground">{attempt.paper}</div>
+                                    <div className="text-xs text-muted-foreground">{attempt.date} • {attempt.time}</div>
+                                  </div>
+                                  <div className="text-right">
+                                    <div className="text-lg font-semibold text-foreground">{attempt.score}</div>
+                                  </div>
+                                </div>
+                              ))}
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
+
+                        <TabsContent value="plan" className="space-y-4 mt-6">
+                          <Card className="rounded-xl">
+                            <CardHeader className="flex flex-row items-center justify-between">
+                              <div>
+                                <CardTitle className="text-lg">7-Day Study Plan</CardTitle>
+                                <CardDescription>Focused on your weakest topics</CardDescription>
+                              </div>
+                              <Button size="sm" variant="outline" className="rounded-lg">
+                                Generate Plan
+                              </Button>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
+                                <div key={day} className="p-4 rounded-xl border border-border hover:bg-muted/30 transition-colors">
+                                  <div className="flex items-center justify-between mb-3">
+                                    <span className="font-semibold text-foreground">{day}</span>
+                                    <Badge variant="outline" className="text-xs">25 mins</Badge>
+                                  </div>
+                                  <div className="text-sm text-muted-foreground mb-3">
+                                    Focus: Energetics • Calculations
+                                  </div>
+                                  <div className="flex gap-2">
+                                    <Button size="sm" variant="default" className="rounded-lg flex-1">
+                                      <Play className="h-3 w-3 mr-1" />
+                                      Start
+                                    </Button>
+                                    <Button size="sm" variant="outline" className="rounded-lg">
+                                      Done
+                                    </Button>
+                                    <Button size="sm" variant="ghost" className="rounded-lg">
+                                      Reschedule
+                                    </Button>
+                                  </div>
+                                </div>
+                              ))}
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
+                      </Tabs>
+                    </>
+                  )}
+                </SheetContent>
+              </Sheet>
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
