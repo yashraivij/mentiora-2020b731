@@ -2497,7 +2497,11 @@ const Dashboard = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {availableSubjects
                             .filter(subject => {
-                              const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                              let baseName = subject.name.split(' - ')[0].split(' (')[0];
+                              // Normalize Geography variations for matching
+                              if (baseName.startsWith('Geography')) baseName = 'Geography';
+                              // Normalize Maths to Mathematics for matching
+                              if (baseName === 'Maths') baseName = 'Mathematics';
                               return baseName === selectedSubjectGroup;
                             })
                             .map((subject) => {
