@@ -1768,11 +1768,11 @@ const Dashboard = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row">
           {/* Main Learning Area */}
-          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
+          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-0' : 'p-0'} bg-white`}>
           {activeTab === "learn" && (
-            <div>
-              {/* Header with stats */}
-              <div className="flex items-center justify-between mb-8">
+            <div className="max-w-5xl mx-auto px-8 py-10">
+              {/* Header with stats - hidden for Medly design */}
+              <div className="hidden">
               <div className="flex items-center space-x-6">
                 <div className="flex items-center space-x-2">
                   <Flame className="h-6 w-6 text-orange-400" />
@@ -1791,89 +1791,123 @@ const Dashboard = () => {
 
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
-                <div>
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-                     <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
-                       Let's Smash {userSubjects.length > 0 && userSubjects[userSubjects.length - 1]?.includes('alevel') ? 'A Levels' : 'GCSEs'}, {getFirstName()}!
-                     </h2>
+                <div className="space-y-8">
+                  {/* Hero Header */}
+                  <div className="flex items-center justify-between mb-12">
+                    <div>
+                      <h1 className="text-4xl font-semibold text-[#0F172A] mb-2">
+                        Your Subjects
+                      </h1>
+                      <p className="text-lg text-[#64748B]">
+                        Choose which subjects you want to study and personalise.
+                      </p>
+                    </div>
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
+                        className="bg-[#2E5BFF] hover:bg-[#254AE0] text-white font-medium py-3 px-6 rounded-full shadow-lg transition-all duration-200"
                       >
-                        <Plus className="h-4 w-4" />
-                        <span>Add Subject</span>
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add a new subject
                       </Button>
                     )}
                   </div>
-                  
-                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'} gap-6`}>
-                    {filteredSubjects.map((subject) => {
-                      const colors = subjectColors[subject.id] || subjectColors["physics"];
-                      const progress = getSubjectProgress(subject.id);
-                      
-                      return (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="relative"
+
+                  {/* Subjects Grid */}
+                  {filteredSubjects.length > 0 && (
+                    <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
+                      {filteredSubjects.map((subject) => {
+                        const colors = subjectColors[subject.id] || subjectColors["physics"];
+                        const progress = getSubjectProgress(subject.id);
+                        const IconComponent = getSubjectIcon(subject.id);
+                        
+                        return (
+                          <motion.div
+                            key={subject.id}
+                            whileHover={{ scale: 1.02, y: -4 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative"
+                          >
+                            <Card 
+                              className="cursor-pointer bg-white border border-[#E7ECF5] rounded-2xl shadow-[0_6px_32px_rgba(15,23,42,0.05)] hover:shadow-[0_12px_40px_rgba(46,91,255,0.12)] transition-all duration-300"
+                              onClick={() => navigate(`/subject/${subject.id}`)}
+                            >
+                              <CardContent className="p-6">
+                                {/* Icon */}
+                                <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center mb-4`}>
+                                  <IconComponent className="h-7 w-7 text-white" />
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-xl font-semibold text-[#0F172A] mb-2">
+                                  {getSubjectDisplayName(subject)}
+                                </h3>
+
+                                {/* Subtext */}
+                                <p className="text-sm text-[#64748B] mb-4">
+                                  {progress.completed === 0 
+                                    ? "Not started yet" 
+                                    : progress.completed === progress.total 
+                                    ? "All topics complete!" 
+                                    : "In progress"}
+                                </p>
+
+                                {/* Progress pill */}
+                                <div className="inline-flex items-center space-x-2 bg-[#EAF2FF] rounded-full px-3 py-1.5 mb-4">
+                                  <div className="w-2 h-2 bg-[#2E5BFF] rounded-full"></div>
+                                  <span className="text-xs font-medium text-[#2E5BFF]">
+                                    {progress.completed} of {progress.total} units · {Math.round((progress.completed / progress.total) * 100)}%
+                                  </span>
+                                </div>
+
+                                {/* Progress bar */}
+                                <div className="w-full bg-[#F7F9FC] rounded-full h-2">
+                                  <div
+                                    className="bg-gradient-to-r from-[#2E5BFF] to-[#60A5FA] h-2 rounded-full transition-all duration-500"
+                                    style={{ width: `${(progress.completed / progress.total) * 100}%` }}
+                                  />
+                                </div>
+                              </CardContent>
+                            </Card>
+                            
+                            {/* Remove Subject Button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeSubject(subject.id);
+                              }}
+                              className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white border border-[#E7ECF5] text-[#64748B] hover:text-[#F97066] hover:border-[#F97066] transition-all duration-200 shadow-sm"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
+                          </motion.div>
+                        );
+                      })}
+
+                      {/* Add another subject card */}
+                      <motion.div
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Card 
+                          className="cursor-pointer bg-white border-2 border-dashed border-[#E7ECF5] rounded-2xl hover:border-[#2E5BFF] hover:shadow-[0_12px_40px_rgba(46,91,255,0.08)] transition-all duration-300"
+                          onClick={() => setShowAddSubjects(true)}
                         >
-                           <Card 
-                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
-                            onClick={() => navigate(`/subject/${subject.id}`)}
-                          >
-                            <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
-                              <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-3">
-                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full mobile-text-wrap`}>
-                                      {progress.completed} OF {progress.total} UNITS
-                                    </span>
-                                  </div>
-                                  
-                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-foreground mb-4 mobile-text-wrap`}>
-                                    {getSubjectDisplayName(subject)}
-                                  </h3>
-                                  
-                                  <div className="w-full bg-muted rounded-full h-3 mb-4">
-                                    <div
-                                      className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
-                                      style={{ width: `${(progress.completed / progress.total) * 100}%` }}
-                                    />
-                                  </div>
-
-                                  <Button
-                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-lg mobile-touch-target`}
-                                  >
-                                    {progress.completed === 0 ? "START" : "CONTINUE"}
-                                  </Button>
-                                </div>
-
-                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                  {(() => {
-                                    const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
-                                  })()}
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                          
-                          {/* Remove Subject Button */}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeSubject(subject.id);
-                            }}
-                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            <X className="h-4 w-4" />
-                          </button>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
+                          <CardContent className="p-6 h-full flex flex-col items-center justify-center text-center min-h-[240px]">
+                            <div className="w-14 h-14 bg-[#EAF2FF] rounded-2xl flex items-center justify-center mb-4">
+                              <Plus className="h-7 w-7 text-[#2E5BFF]" />
+                            </div>
+                            <h3 className="text-lg font-medium text-[#0F172A] mb-1">
+                              Add another subject
+                            </h3>
+                            <p className="text-sm text-[#64748B]">
+                              Build your subject list
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 // Subject Path View
@@ -1899,151 +1933,199 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {/* No subjects message */}
+              {/* Empty state - no subjects */}
               {filteredSubjects.length === 0 && !selectedSubject && (
-                <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-                    <BookOpen className="h-12 w-12 text-muted-foreground" />
+                <div className="text-center py-24">
+                  {/* Illustration */}
+                  <div className="w-32 h-32 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-[#EAF2FF] to-[#F7F9FC] flex items-center justify-center shadow-[0_6px_32px_rgba(15,23,42,0.05)]">
+                    <BookOpen className="h-16 w-16 text-[#2E5BFF]" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    No subjects selected yet
+
+                  {/* Title */}
+                  <h3 className="text-3xl font-semibold text-[#0F172A] mb-4">
+                    No subjects added yet
                   </h3>
-                  <p className="text-lg text-muted-foreground mb-8">
-                    Add subjects to your list to get started with GCSE revision
+
+                  {/* Subtext */}
+                  <p className="text-lg text-[#64748B] mb-10 max-w-md mx-auto">
+                    Add your GCSE or A-Level subjects to start your personalised revision.
                   </p>
+
+                  {/* CTA Button */}
                   <Button
                     onClick={() => setShowAddSubjects(true)}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg flex items-center space-x-2"
+                    className="bg-gradient-to-r from-[#2E5BFF] to-[#2563EB] hover:from-[#254AE0] hover:to-[#1E40AF] text-white font-medium py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200"
                   >
-                    <Plus className="h-5 w-5" />
-                    <span>Add Subjects</span>
+                    <Plus className="h-5 w-5 mr-2" />
+                    Add my first subject
                   </Button>
+
+                  {/* Microcopy */}
+                  <p className="text-sm text-[#94A3B8] mt-6">
+                    We'll personalise your plan for each subject you add.
+                  </p>
                 </div>
               )}
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
-                <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                   <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-                     <div className="p-6 border-b border-border">
+                <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden"
+                  >
+                    {/* Header with blue accent */}
+                    <div className="p-8 border-b border-[#E7ECF5] bg-gradient-to-r from-[#EAF2FF] to-white">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold text-foreground">Add Subjects</h2>
-                        <Button
+                        <div>
+                          <h2 className="text-3xl font-semibold text-[#0F172A] mb-1">
+                            Add a new subject
+                          </h2>
+                          <p className="text-[#64748B]">
+                            Select from the list below
+                          </p>
+                        </div>
+                        <button
                           onClick={() => setShowAddSubjects(false)}
-                          className="w-8 h-8 p-0 bg-muted hover:bg-accent text-muted-foreground rounded-full"
+                          className="w-10 h-10 flex items-center justify-center bg-white rounded-full hover:bg-[#F7F9FC] text-[#64748B] hover:text-[#0F172A] transition-all duration-200 shadow-sm"
                         >
-                          <X className="h-4 w-4" />
-                        </Button>
+                          <X className="h-5 w-5" />
+                        </button>
                       </div>
                     </div>
                     
-                    <div className="p-6 overflow-y-auto max-h-[60vh]">
+                    <div className="p-8 overflow-y-auto max-h-[calc(85vh-140px)]">
                       <Tabs defaultValue="gcse" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-6">
-                          <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
-                          <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
+                        <TabsList className="grid w-full grid-cols-2 mb-8 bg-[#F7F9FC] p-1 rounded-full">
+                          <TabsTrigger 
+                            value="gcse"
+                            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#2E5BFF] data-[state=active]:shadow-sm transition-all duration-200"
+                          >
+                            GCSE Subjects
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="alevel"
+                            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-[#2E5BFF] data-[state=active]:shadow-sm transition-all duration-200"
+                          >
+                            A-Level Subjects
+                          </TabsTrigger>
                         </TabsList>
                         
                         <TabsContent value="gcse">
                           {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
-                            <div className="text-center py-8">
-                              <p className="text-lg text-muted-foreground">You've already added all available GCSE subjects!</p>
+                            <div className="text-center py-12">
+                              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#F7F9FC] flex items-center justify-center">
+                                <Check className="h-10 w-10 text-[#17B26A]" />
+                              </div>
+                              <p className="text-lg text-[#64748B]">
+                                You've already added all available GCSE subjects!
+                              </p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {availableSubjects.filter(s => !s.id.includes('alevel')).map((subject) => {
-                            const colors = subjectColors[subject.id] || subjectColors["physics"];
-                            const IconComponent = getSubjectIcon(subject.id);
-                            
-                            return (
-                              <motion.div
-                                key={subject.id}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <Card 
-                                  className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
-                                  onClick={() => {
-                                    addSubject(subject.id);
-                                    setShowAddSubjects(false);
-                                  }}
-                                >
-                                   <CardContent className="p-4">
-                                     <div className="flex items-center space-x-4">
-                                       <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                         <IconComponent className="h-6 w-6 text-white" />
-                                       </div>
-                                       <div className="flex-1 min-w-0">
-                                         <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
-                                           {getSubjectDisplayName(subject)}
-                                         </h3>
-                                         <p className="text-sm text-gray-600 mobile-text-wrap">
-                                           {subject.topics.length} topics available
-                                         </p>
-                                       </div>
-                                       <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                                  </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </TabsContent>
+                                const colors = subjectColors[subject.id] || subjectColors["physics"];
+                                const IconComponent = getSubjectIcon(subject.id);
+                                
+                                return (
+                                  <motion.div
+                                    key={subject.id}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                  >
+                                    <Card 
+                                      className="cursor-pointer border border-[#E7ECF5] hover:border-[#2E5BFF] hover:shadow-md rounded-2xl transition-all duration-200 bg-white"
+                                      onClick={() => {
+                                        addSubject(subject.id);
+                                        setShowAddSubjects(false);
+                                      }}
+                                    >
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center space-x-4">
+                                          <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                                            <IconComponent className="h-6 w-6 text-white" />
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <h3 className="text-base font-semibold text-[#0F172A] mb-0.5">
+                                              {getSubjectDisplayName(subject)}
+                                            </h3>
+                                            <p className="text-sm text-[#64748B]">
+                                              {subject.topics.length} topics available
+                                            </p>
+                                          </div>
+                                          <div className="w-8 h-8 rounded-full bg-[#EAF2FF] flex items-center justify-center flex-shrink-0">
+                                            <Plus className="h-4 w-4 text-[#2E5BFF]" />
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </motion.div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </TabsContent>
 
-                  <TabsContent value="alevel">
-                    {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
-                      <div className="text-center py-8">
-                        <p className="text-lg text-muted-foreground">You've already added all available A-Level subjects!</p>
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
-                          const colors = subjectColors[subject.id] || subjectColors["physics"];
-                          const IconComponent = getSubjectIcon(subject.id);
-                          
-                          return (
-                            <motion.div
-                              key={subject.id}
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              <Card 
-                                className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
-                                onClick={() => {
-                                  addSubject(subject.id);
-                                  setShowAddSubjects(false);
-                                }}
-                              >
-                                <CardContent className="p-4">
-                                  <div className="flex items-center space-x-4">
-                                    <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
-                                      <IconComponent className="h-6 w-6 text-white" />
-                                    </div>
-                                     <div className="flex-1 min-w-0">
-                                       <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
-                                         {getSubjectDisplayName(subject)}
-                                       </h3>
-                                       <p className="text-sm text-gray-600 mobile-text-wrap">
-                                         {subject.topics.length} topics available
-                                       </p>
-                                     </div>
-                                     <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                                   </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </TabsContent>
-                </Tabs>
-              </div>
-            </div>
-          </div>
-        )}
+                        <TabsContent value="alevel">
+                          {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
+                            <div className="text-center py-12">
+                              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#F7F9FC] flex items-center justify-center">
+                                <Check className="h-10 w-10 text-[#17B26A]" />
+                              </div>
+                              <p className="text-lg text-[#64748B]">
+                                You've already added all available A-Level subjects!
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
+                                const colors = subjectColors[subject.id] || subjectColors["physics"];
+                                const IconComponent = getSubjectIcon(subject.id);
+                                
+                                return (
+                                  <motion.div
+                                    key={subject.id}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                  >
+                                    <Card 
+                                      className="cursor-pointer border border-[#E7ECF5] hover:border-[#2E5BFF] hover:shadow-md rounded-2xl transition-all duration-200 bg-white"
+                                      onClick={() => {
+                                        addSubject(subject.id);
+                                        setShowAddSubjects(false);
+                                      }}
+                                    >
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center space-x-4">
+                                          <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                                            <IconComponent className="h-6 w-6 text-white" />
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <h3 className="text-base font-semibold text-[#0F172A] mb-0.5">
+                                              {getSubjectDisplayName(subject)}
+                                            </h3>
+                                            <p className="text-sm text-[#64748B]">
+                                              {subject.topics.length} topics available
+                                            </p>
+                                          </div>
+                                          <div className="w-8 h-8 rounded-full bg-[#EAF2FF] flex items-center justify-center flex-shrink-0">
+                                            <Plus className="h-4 w-4 text-[#2E5BFF]" />
+                                          </div>
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  </motion.div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </TabsContent>
+                      </Tabs>
+                    </div>
+                  </motion.div>
+                </div>
+              )}
             </div>
           )}
 
