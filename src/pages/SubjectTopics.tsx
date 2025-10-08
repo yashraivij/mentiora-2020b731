@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
-import { ArrowLeft, ChevronLeft, ChevronRight, TrendingUp, Target } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, TrendingUp } from "lucide-react";
 
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -20,43 +21,39 @@ const SubjectTopics = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
-  const [targetGrade, setTargetGrade] = useState<number | null>(null);
-  const [showGradeSetup, setShowGradeSetup] = useState(false);
-  const [topicFilter, setTopicFilter] = useState<'all' | 'strengths' | 'focus' | 'new'>('all');
 
   const subject = curriculum.find(s => s.id === subjectId);
 
   useEffect(() => {
-    if (user?.id && subjectId) {
-      // Load progress
+    if (user?.id) {
       const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
       if (savedProgress) {
         const allProgress = JSON.parse(savedProgress);
         const subjectProgress = allProgress.filter((p: any) => p.subjectId === subjectId);
         setTopicProgress(subjectProgress);
       }
-
-      // Load target grade
-      const savedTarget = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
-      if (savedTarget) {
-        setTargetGrade(parseInt(savedTarget));
-      } else {
-        setShowGradeSetup(true);
-      }
     }
   }, [user?.id, subjectId]);
 
-  const handleSetTargetGrade = (grade: number) => {
-    if (user?.id && subjectId) {
-      localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade.toString());
-      setTargetGrade(grade);
-      setShowGradeSetup(false);
-    }
+  const getSubjectColor = (subjectId: string | undefined) => {
+    if (!subjectId) return 'bg-slate-500';
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500',
+      'bg-purple-500', 
+      'bg-red-500',
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
   };
 
   if (!subject) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject not found</h1>
           <Button onClick={() => navigate(-1)}>
@@ -72,268 +69,219 @@ const SubjectTopics = () => {
     return progress || { attempts: 0, averageScore: 0, lastAttempt: new Date() };
   };
 
-  // Calculate statistics
-  const masteredTopics = topicProgress.filter(p => p.averageScore >= 85).length;
-  const inProgressTopics = topicProgress.filter(p => p.attempts > 0 && p.averageScore < 85 && p.averageScore >= 60).length;
-  const needsWorkTopics = topicProgress.filter(p => p.attempts > 0 && p.averageScore < 60);
-  const avgScore = topicProgress.length > 0 
-    ? Math.round(topicProgress.reduce((sum, p) => sum + p.averageScore, 0) / topicProgress.length)
-    : 0;
-  
-  const totalTopics = subject?.topics.length || 0;
-  const completionRate = totalTopics > 0 ? Math.round((masteredTopics / totalTopics) * 100) : 0;
-  
-  // Calculate predicted grade (simple formula based on avg score)
-  const predictedGrade = avgScore >= 90 ? 9 : avgScore >= 80 ? 8 : avgScore >= 70 ? 7 : avgScore >= 60 ? 6 : avgScore >= 50 ? 5 : avgScore >= 40 ? 4 : 3;
-  const predictedGradeDecimal = avgScore >= 40 ? 4 + ((avgScore - 40) / 10) : 3;
-  
-  // Study streak (mock for now)
-  const studyStreak = 7;
-  
-  // Progress to target
-  const percentToTarget = targetGrade ? Math.min(100, Math.round((predictedGrade / targetGrade) * 100)) : 0;
-  
-  // Exam readiness
-  const examReadiness = Math.min(100, Math.round((masteredTopics / totalTopics) * 100 + (avgScore * 0.2)));
-  
-  // Consistency score
-  const consistencyScore = Math.min(100, Math.round(studyStreak * 10 + (topicProgress.length > 0 ? 30 : 0)));
-  
-  // Filter topics
-  const filteredTopics = subject?.topics.filter(topic => {
-    const progress = getTopicProgress(topic.id);
-    if (topicFilter === 'strengths') return progress.averageScore >= 85;
-    if (topicFilter === 'focus') return progress.attempts > 0 && progress.averageScore < 60;
-    if (topicFilter === 'new') return progress.attempts === 0;
-    return true;
-  }) || [];
-
-  // Find next recommended topic
-  const getNextTopic = () => {
-    if (needsWorkTopics.length > 0) {
-      return subject.topics.find(t => t.id === needsWorkTopics[0].topicId);
+  const getPhysicsTopicYear = (topicName: string) => {
+    const year10Topics = ['Energy', 'Electricity', 'Particle Model of Matter', 'Atomic Structure'];
+    const year11Topics = ['Forces', 'Waves', 'Magnetism and Electromagnetism', 'Space Physics'];
+    
+    if (year10Topics.some(y10Topic => topicName.toLowerCase().includes(y10Topic.toLowerCase()))) {
+      return 'Year 10';
     }
-    return subject.topics.find(t => !topicProgress.some(p => p.topicId === t.id));
+    if (year11Topics.some(y11Topic => topicName.toLowerCase().includes(y11Topic.toLowerCase()))) {
+      return 'Year 11';
+    }
+    return null;
   };
 
-  const nextTopic = getNextTopic();
+  const getMathsTopicYears = (topicName: string) => {
+    // Number is only Year 10
+    if (topicName.toLowerCase().includes('number')) {
+      return ['Year 10'];
+    }
+    // All other maths topics are both Year 10 and Year 11
+    return ['Year 10', 'Year 11'];
+  };
 
-  // Target Grade Setup Modal
-  if (showGradeSetup) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <Card className="max-w-xl w-full rounded-lg shadow-lg border">
-          <CardContent className="p-12 text-center">
-            <h1 className="text-3xl font-semibold mb-3 text-foreground">Set your target grade</h1>
-            <p className="text-muted-foreground mb-8">for {subject?.name}</p>
-
-            <div className="grid grid-cols-3 gap-3 mb-8 max-w-sm mx-auto">
-              {[4, 5, 6, 7, 8, 9].map((grade) => (
-                <button
-                  key={grade}
-                  onClick={() => handleSetTargetGrade(grade)}
-                  className="h-20 rounded-lg border-2 border-border hover:border-[#3DB4E8] hover:bg-[#3DB4E8]/5 transition-all duration-200 flex items-center justify-center text-3xl font-semibold text-foreground"
-                >
-                  {grade}
-                </button>
-              ))}
-            </div>
-
-            <p className="text-sm text-muted-foreground">You can change this anytime</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  const getGeographyTopicYear = (topicName: string) => {
+    // Glacial and River landscapes are Year 11
+    if (topicName.toLowerCase().includes('glacial') || topicName.toLowerCase().includes('river')) {
+      return 'Year 11';
+    }
+    // Human Environment topics are Year 11
+    if (topicName.toLowerCase().includes('urban issues') || 
+        topicName.toLowerCase().includes('changing economic') || 
+        topicName.toLowerCase().includes('resource management')) {
+      return 'Year 11';
+    }
+    // All other geography topics are Year 10
+    return 'Year 10';
+  };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate(-1)}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
+      <header className="bg-card shadow-sm border-b border-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" onClick={() => navigate(-1)}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <div className="flex items-center space-x-2">
+                <div className={`w-6 h-6 rounded-full ${getSubjectColor(subject.id)}`}></div>
+                <h1 className="text-2xl font-bold text-foreground">{subject.name}</h1>
+              </div>
+            </div>
+            
+          </div>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Subject Title */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">{subject?.name}</h1>
-          <p className="text-muted-foreground">Your learning journey</p>
+      <div className="container mx-auto px-4 py-8">
+        {/* Subject Overview */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <BookOpen className="h-5 w-5 mr-2" />
+                Total Topics
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold">{subject.topics.length}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
+                Mastered
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-green-600">
+                {topicProgress.filter(p => p.averageScore >= 85).length}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Clock className="h-5 w-5 mr-2 text-blue-600" />
+                In Progress
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-blue-600">
+                {topicProgress.filter(p => p.attempts > 0 && p.averageScore < 85).length}
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Compact Grade Overview */}
-        <Card className="rounded-xl border shadow-sm mb-8">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between gap-8">
-              {/* Current Grade */}
-              <div className="flex items-center gap-4">
-                <div>
-                  <div className="text-sm text-muted-foreground mb-1">Current Grade</div>
-                  <div className="text-4xl font-bold text-[#3DB4E8]">{predictedGradeDecimal.toFixed(1)}</div>
-                </div>
-              </div>
+        {/* Topic Learning Path */}
+        <div className="bg-card rounded-lg p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
+          <div className="relative overflow-x-auto min-h-[300px] bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4">
+            <div className="relative h-[250px]" style={{ minWidth: `${subject.topics.length * 220}px` }}>
+              {/* SVG for curved connecting lines */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                {subject.topics.map((_, index) => {
+                  if (index === subject.topics.length - 1) return null;
+                  
+                  const startX = 220 * index + 110;
+                  const endX = 220 * (index + 1) + 110;
+                  const startY = index % 2 === 0 ? 80 : 160;
+                  const endY = (index + 1) % 2 === 0 ? 80 : 160;
+                  const midX = (startX + endX) / 2;
+                  
+                  return (
+                    <path
+                      key={index}
+                      d={`M ${startX} ${startY} Q ${midX} ${startY > endY ? startY - 50 : startY + 50} ${endX} ${endY}`}
+                      stroke="#3B82F6"
+                      strokeWidth="4"
+                      fill="none"
+                      opacity="0.6"
+                      strokeDasharray="5,5"
+                    />
+                  );
+                })}
+                
+                {/* Gradient definition for exam line */}
+                <defs>
+                  <linearGradient id="examGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: "#9333EA", stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: "#EC4899", stopOpacity: 1 }} />
+                  </linearGradient>
+                </defs>
+              </svg>
 
-              {/* Arrow */}
-              <div className="text-2xl text-muted-foreground">→</div>
-
-              {/* Target Grade */}
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
-                  disabled={!targetGrade || targetGrade <= 4}
-                  className="h-8 w-8"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <div>
-                  <div className="text-sm text-muted-foreground mb-1">Target Grade</div>
-                  <div className="text-4xl font-bold text-foreground">{targetGrade}</div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
-                  disabled={!targetGrade || targetGrade >= 9}
-                  className="h-8 w-8"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-
-              {/* Progress */}
-              <div className="flex-1 max-w-xs">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Progress</span>
-                  <span className="text-sm font-semibold text-[#3DB4E8]">{masteredTopics}/{totalTopics} topics</span>
-                </div>
-                <Progress value={Math.round((masteredTopics / totalTopics) * 100)} className="h-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* All Topics */}
-        <Card className="rounded-xl border shadow-sm">
-          <CardHeader className="pb-6 px-8 pt-8">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <CardTitle className="text-2xl font-bold mb-1">All Topics</CardTitle>
-                <p className="text-sm text-muted-foreground">{filteredTopics.length} available</p>
-              </div>
-              <div className="flex gap-2 flex-wrap">
-                {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
-                  <Button
-                    key={filter}
-                    variant={topicFilter === filter ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setTopicFilter(filter)}
-                    className={topicFilter === filter ? "bg-[#3DB4E8] hover:bg-[#3DB4E8]/90 text-white" : ""}
-                  >
-                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strengths' : filter === 'focus' ? 'Focus' : 'New'}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </CardHeader>
-          
-          <CardContent className="px-8 pb-8">
-            <div className="space-y-3">
-              {filteredTopics.map((topic) => {
+              {/* Topic nodes */}
+              {subject.topics.map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
+                const isUnlocked = true; // All topics are always unlocked
                 const isMastered = progress.averageScore >= 85;
-                const needsPractice = progress.attempts > 0 && progress.averageScore < 60;
+                const needsWork = progress.attempts > 0 && progress.averageScore < 60;
+                
+                // Alternating high/low positions for swinging effect
+                const isHigh = index % 2 === 0;
+                const topPosition = isHigh ? 40 : 120; // Pixel values for better control
                 
                 return (
-                  <button
-                    key={topic.id}
-                    onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    className="w-full rounded-lg border bg-card hover:border-[#3DB4E8] hover:shadow-md p-5 transition-all text-left group"
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-3">
-                          <h3 className="text-base font-semibold text-foreground group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
-                          {isMastered && (
-                            <div className="px-2 py-1 rounded text-[#3DB4E8] text-xs font-medium border border-[#3DB4E8]/30 bg-[#3DB4E8]/10">Mastered</div>
+                  <div key={topic.id} className="absolute" style={{ left: `${220 * index + 60}px`, top: `${topPosition}px`, zIndex: 10 }}>
+                    <div className="flex flex-col items-center">
+                      {/* Topic circle */}
+                      <div 
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 shadow-xl border-4 border-white bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                        onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                      >
+                        {index + 1}
+                      </div>
+                      
+                      {/* Topic name */}
+                      <div className="mt-3 text-center max-w-[120px]">
+                        <h3 className="text-sm font-medium leading-tight mb-1">{topic.name}</h3>
+                        
+                        {/* Year badges */}
+                        <div className="flex flex-wrap justify-center gap-1 mb-2">
+                          {subjectId === 'physics' && getPhysicsTopicYear(topic.name) && (
+                            <Badge className={`text-xs ${getPhysicsTopicYear(topic.name) === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
+                              {getPhysicsTopicYear(topic.name)}
+                            </Badge>
                           )}
-                          {needsPractice && (
-                            <div className="px-2 py-1 rounded text-orange-600 text-xs font-medium border border-orange-200 bg-orange-50">Focus</div>
+                          {subjectId === 'maths' && getMathsTopicYears(topic.name).map((year, yearIndex) => (
+                            <Badge key={yearIndex} className={`text-xs ${year === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
+                              {year}
+                            </Badge>
+                          ))}
+                          {subjectId === 'geography' && getGeographyTopicYear(topic.name) && (
+                            <Badge className={`text-xs ${getGeographyTopicYear(topic.name) === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
+                              {getGeographyTopicYear(topic.name)}
+                            </Badge>
                           )}
                         </div>
-                        <div className="flex items-center gap-4">
-                          <Progress value={progress.averageScore} className="h-2 flex-1" />
-                          <div className="text-right min-w-[100px]">
-                            <div className="text-base font-semibold text-foreground">
-                              {progress.attempts > 0 ? `${progress.averageScore}%` : '—'}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              {progress.attempts > 0 ? `${progress.attempts} ${progress.attempts === 1 ? 'attempt' : 'attempts'}` : 'Not started'}
-                            </div>
+                        
+                        {/* Progress indicator */}
+                        {progress.attempts > 0 && (
+                          <div className="text-xs text-muted-foreground mb-1">
+                            {progress.averageScore}% avg
                           </div>
-                        </div>
+                        )}
+                        
+                        {/* Status badge */}
+                        {isMastered && <Badge className="bg-green-500 text-xs mb-2">Mastered</Badge>}
+                        {needsWork && <Badge variant="destructive" className="text-xs mb-2">Needs Work</Badge>}
+                        {isUnlocked && !isMastered && !needsWork && <Badge className="bg-blue-500 text-xs mb-2">Unlocked</Badge>}
+                        
+                        {/* Practice button */}
+                        <Button 
+                          size="sm" 
+                          className="text-xs px-3 py-1"
+                          onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                        >
+                          {progress.attempts === 0 ? 'Start' : 'Practice'}
+                        </Button>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Personalized Learning Insights */}
-        <Card className="rounded-2xl border-2 shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-500/5 to-transparent rounded-full blur-3xl" />
-          <CardHeader className="px-12 pt-10 pb-8 relative">
-            <CardTitle className="text-3xl font-bold mb-2">Your learning patterns</CardTitle>
-            <p className="text-base text-muted-foreground">Insights generated from your study behavior</p>
-          </CardHeader>
-          <CardContent className="px-12 pb-12 relative">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-5">
-                <div className="p-7 rounded-2xl bg-gradient-to-br from-[#3DB4E8]/10 to-background border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Session length</div>
-                  <div className="text-4xl font-black text-[#3DB4E8] mb-3">15-20 min</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Your sweet spot for maximum focus. Sessions in this range have a 94% completion rate.</p>
-                </div>
-                
-                <div className="p-7 rounded-2xl bg-card border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Recovery time</div>
-                  <div className="text-4xl font-black text-foreground mb-3">5 min</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Taking short breaks between sessions improves your scores by 23% on average.</p>
-                </div>
-              </div>
-
-              <div className="space-y-5">
-                <div className="p-7 rounded-2xl bg-card border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Monthly improvement</div>
-                  <div className="text-4xl font-black text-green-600 mb-3">+12%</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Your average scores have increased consistently. Keep up this momentum.</p>
-                </div>
-
-                <div className="p-7 rounded-2xl bg-gradient-to-br from-purple-500/10 to-background border-2 shadow-lg">
-                  <div className="text-sm font-bold text-foreground mb-3">Retention rate</div>
-                  <div className="text-4xl font-black text-foreground mb-3">87%</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">You retain information well. Topics practiced once are usually mastered within 2-3 sessions.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-8 rounded-2xl bg-gradient-to-r from-[#3DB4E8]/15 to-card border-2 border-[#3DB4E8]/30 shadow-xl">
-              <div className="text-sm font-bold text-foreground mb-4">Personalized recommendation</div>
-              <p className="text-base text-muted-foreground leading-relaxed">Based on your patterns, practicing <span className="font-bold text-foreground">Tuesday and Thursday evenings (7-9 PM)</span> for <span className="font-bold text-foreground">15-20 minutes</span> will maximize your progress toward grade {targetGrade}.</p>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
