@@ -2493,11 +2493,17 @@ const Dashboard = () => {
                               return baseName === selectedSubjectGroup;
                             })
                             .map((subject) => {
-                              const examBoard = subject.name.includes('AQA') ? 'AQA' : 
-                                              subject.name.includes('Edexcel') ? 'Edexcel' : 
-                                              subject.name.includes('OCR') ? 'OCR' :
-                                              subject.name.includes('WJEC') ? 'WJEC' :
-                                              subject.name.includes('CCEA') ? 'CCEA' : 'General';
+                              // Extract exam board from subject ID
+                              let examBoard = 'AQA'; // default
+                              if (subject.id.includes('edexcel')) {
+                                examBoard = 'Edexcel';
+                              } else if (subject.id.includes('ocr')) {
+                                examBoard = 'OCR';
+                              } else if (subject.id.includes('wjec') || subject.id.includes('eduqas')) {
+                                examBoard = 'Eduqas';
+                              } else if (subject.id.includes('ccea')) {
+                                examBoard = 'CCEA';
+                              }
                               
                               return (
                                 <motion.div
