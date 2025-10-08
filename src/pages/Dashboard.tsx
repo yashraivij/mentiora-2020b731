@@ -1792,10 +1792,15 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: '#1a1a1a' }}>
-                       Your Subjects
-                     </h2>
+                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
+                     <div>
+                       <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-2" style={{ color: '#1a1a1a' }}>
+                         Your Subjects
+                       </h2>
+                       <p className="text-base" style={{ color: '#6B7280' }}>
+                         Choose which subjects you want to study and personalise.
+                       </p>
+                     </div>
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
@@ -1874,10 +1879,12 @@ const Dashboard = () => {
                                   </Button>
                                 </div>
 
-                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} rounded-full flex items-center justify-center flex-shrink-0`} style={{
+                                  backgroundColor: '#E8F7FC'
+                                }}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
+                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'}`} style={{ color: '#3BAFDA' }} />;
                                   })()}
                                 </div>
                               </div>
@@ -1890,7 +1897,10 @@ const Dashboard = () => {
                               e.stopPropagation();
                               removeSubject(subject.id);
                             }}
-                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
+                            className="absolute top-2 right-2 transition-colors"
+                            style={{ color: '#9CA3AF' }}
+                            onMouseEnter={(e) => e.currentTarget.style.color = '#1a1a1a'}
+                            onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
                           >
                             <X className="h-4 w-4" />
                           </button>
@@ -1926,8 +1936,8 @@ const Dashboard = () => {
               {/* No subjects message */}
               {filteredSubjects.length === 0 && !selectedSubject && (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-                    <BookOpen className="h-12 w-12 text-muted-foreground" />
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E8F7FC' }}>
+                    <BookOpen className="h-12 w-12" style={{ color: '#3BAFDA' }} />
                   </div>
                   <h3 className="text-2xl font-semibold tracking-tight mb-4" style={{ color: '#1a1a1a' }}>
                     No subjects added yet
@@ -1997,7 +2007,7 @@ const Dashboard = () => {
                         <TabsContent value="gcse">
                           {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
                             <div className="text-center py-8">
-                              <p className="text-lg text-muted-foreground">You've already added all available GCSE subjects!</p>
+                              <p className="text-lg" style={{ color: '#6B7280' }}>You've already added all available GCSE subjects!</p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2051,7 +2061,7 @@ const Dashboard = () => {
                   <TabsContent value="alevel">
                     {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
                       <div className="text-center py-8">
-                        <p className="text-lg text-muted-foreground">You've already added all available A-Level subjects!</p>
+                        <p className="text-lg" style={{ color: '#6B7280' }}>You've already added all available A-Level subjects!</p>
                       </div>
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
