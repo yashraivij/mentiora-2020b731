@@ -172,31 +172,51 @@ const SubjectTopics = () => {
       </header>
 
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-6">
-        {/* Hero Stats - Big Dopamine Hits */}
-        <div className="grid grid-cols-3 gap-4">
-          {/* Streak */}
-          <Card className="rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <Flame className="w-8 h-8 text-orange-500 mx-auto mb-2" />
-              <div className="text-4xl font-bold text-orange-600 mb-1">{studyStreak}</div>
-              <p className="text-xs font-medium text-gray-600">Day Streak 🔥</p>
-            </CardContent>
-          </Card>
+        {/* Subject Title */}
+        <div className="text-center mb-8">
+          <div className="text-6xl mb-4">
+            {subjectId?.includes('bio') ? '🧬' : subjectId?.includes('eng') ? '📖' : subjectId?.includes('math') ? '🔢' : subjectId?.includes('phys') ? '⚛️' : subjectId?.includes('chem') ? '🧪' : subjectId?.includes('geo') ? '🌍' : '📚'}
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">{subject?.name}</h1>
+          <p className="text-gray-600">Your personal revision hub</p>
+        </div>
 
+        {/* Hero Stats - Big Dopamine Hits */}
+        <div className="grid grid-cols-2 gap-4">
           {/* Current Grade */}
           <Card className="rounded-2xl border-2 border-[#3DB4E8] bg-gradient-to-br from-blue-50 to-white shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="p-6 text-center">
               <TrendingUp className="w-8 h-8 text-[#3DB4E8] mx-auto mb-2" />
-              <div className="text-4xl font-bold text-[#3DB4E8] mb-1">{predictedGradeDecimal.toFixed(1)}</div>
+              <div className="text-5xl font-bold text-[#3DB4E8] mb-1">{predictedGradeDecimal.toFixed(1)}</div>
               <p className="text-xs font-medium text-gray-600">Current Grade</p>
             </CardContent>
           </Card>
 
-          {/* Target */}
+          {/* Target - Editable */}
           <Card className="rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-white shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="p-6 text-center">
               <Target className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <div className="text-4xl font-bold text-green-600 mb-1">{targetGrade}</div>
+              <div className="flex items-center justify-center gap-3 mb-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
+                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
+                  disabled={!targetGrade || targetGrade <= 4}
+                >
+                  -
+                </Button>
+                <div className="text-5xl font-bold text-green-600">{targetGrade}</div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
+                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
+                  disabled={!targetGrade || targetGrade >= 9}
+                >
+                  +
+                </Button>
+              </div>
               <p className="text-xs font-medium text-gray-600">Target Grade 🎯</p>
             </CardContent>
           </Card>
