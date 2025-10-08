@@ -502,20 +502,39 @@ const Dashboard = () => {
         const subjectIds = data
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
+            const subjectName = record.subject_name;
             
             // Handle A-level subjects
-            if (record.subject_name === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
-            if (record.subject_name === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            if (subjectName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
+            if (subjectName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            if (subjectName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
             
-            // Handle GCSE/standard subjects
-            if (record.subject_name === "Physics" && examBoard === "aqa") return "physics";
-            if (record.subject_name === "Physics" && examBoard === "edexcel") return "physics-edexcel";
-            if (record.subject_name === "Mathematics") return "maths-edexcel";
-            if (record.subject_name === "IGCSE Business") return "business-edexcel-igcse";
-            if (record.subject_name === "Chemistry" && examBoard === "edexcel") return "chemistry-edexcel";
+            // Handle subjects with exam board in name
+            if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
+            if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
+            if (subjectName === "English Language (Edexcel)") return "edexcel-english-language";
+            if (subjectName === "History (Edexcel)") return "history"; // Map to general history for now
+            
+            // Handle GCSE/standard subjects with exam board detection
+            if (subjectName === "Mathematics") return examBoard === "edexcel" ? "maths-edexcel" : "maths";
+            if (subjectName === "Physics") return examBoard === "edexcel" ? "physics-edexcel" : "physics";
+            if (subjectName === "Chemistry") return examBoard === "edexcel" ? "chemistry-edexcel" : "chemistry";
+            if (subjectName === "Biology") return examBoard === "edexcel" ? "biology" : "biology";
+            if (subjectName === "IGCSE Business") return "business-edexcel-igcse";
+            if (subjectName === "Business") return "business";
+            if (subjectName === "English Language") return "english-language";
+            if (subjectName === "English Literature") return "english-literature";
+            if (subjectName === "Geography") return "geography";
+            if (subjectName === "Geography Paper 1") return "geography";
+            if (subjectName === "Geography Paper 2") return "geography";
+            if (subjectName === "History") return "history";
+            if (subjectName === "Religious Studies") return "religious-studies";
+            if (subjectName === "Computer Science") return "computer-science";
+            if (subjectName === "Spanish") return "spanish-aqa";
 
+            // Fallback: try to find by name in curriculum
             const subject = curriculum.find(
-              (s) => s.name.toLowerCase() === record.subject_name.toLowerCase()
+              (s) => s.name.toLowerCase() === subjectName.toLowerCase()
             );
             return subject?.id;
           })
