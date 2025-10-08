@@ -147,6 +147,7 @@ const Dashboard = () => {
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
   const [showAddSubjects, setShowAddSubjects] = useState(false);
+  const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
   const isMobile = useIsMobile();
 
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -2170,13 +2171,29 @@ const Dashboard = () => {
                     <div className="relative p-6 border-b border-[#E2E8F0]/50">
                       <div className="flex items-center justify-between">
                         <div>
+                          {selectedSubjectGroup && (
+                            <Button
+                              onClick={() => setSelectedSubjectGroup(null)}
+                              variant="ghost"
+                              size="sm"
+                              className="mb-2 text-[#64748B] hover:text-[#0F172A]"
+                            >
+                              <ChevronRight className="h-4 w-4 rotate-180 mr-1" />
+                              Back to subjects
+                            </Button>
+                          )}
                           <h2 className="text-3xl font-bold text-[#0F172A] tracking-tight">
-                            Add Subjects
+                            {selectedSubjectGroup ? `Choose Exam Board` : 'Add Subjects'}
                           </h2>
-                          <p className="text-sm text-[#64748B] mt-1 font-light">Choose subjects to add to your dashboard</p>
+                          <p className="text-sm text-[#64748B] mt-1 font-light">
+                            {selectedSubjectGroup ? 'Select your exam board for ' + selectedSubjectGroup : 'Choose subjects to add to your dashboard'}
+                          </p>
                         </div>
                         <Button
-                          onClick={() => setShowAddSubjects(false)}
+                          onClick={() => {
+                            setShowAddSubjects(false);
+                            setSelectedSubjectGroup(null);
+                          }}
                           variant="ghost"
                           size="icon"
                           className="w-10 h-10 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-all duration-200"
@@ -2188,172 +2205,256 @@ const Dashboard = () => {
                     
                     {/* Content */}
                     <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
-                      <Tabs defaultValue="gcse" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] p-1 h-12 rounded-xl">
-                          <TabsTrigger 
-                            value="gcse"
-                            className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
-                          >
-                            GCSE Subjects
-                          </TabsTrigger>
-                          <TabsTrigger 
-                            value="alevel"
-                            className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
-                          >
-                            A-Level Subjects
-                          </TabsTrigger>
-                        </TabsList>
-                        
-                        <TabsContent value="gcse" className="animate-fade-in">
-                          {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
-                            <div className="text-center py-12 px-4">
-                              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 flex items-center justify-center">
-                                <Check className="h-8 w-8 text-[#16A34A]" />
-                              </div>
-                              <p className="text-lg font-bold text-[#0F172A]">All GCSE subjects added!</p>
-                              <p className="text-sm text-[#64748B] mt-2">You&apos;ve already added all available GCSE subjects to your dashboard.</p>
-                            </div>
-                          ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              {availableSubjects.filter(s => !s.id.includes('alevel')).map((subject) => {
-                                const colors = subjectColors[subject.id] || subjectColors["physics"];
-                                const subjectEmojis: { [key: string]: string } = {
-                                  "physics": "⚛️",
-                                  "physics-edexcel": "⚛️",
-                                  "chemistry": "🧪",
-                                  "chemistry-edexcel": "🧪",
-                                  "biology": "🔬",
-                                  "biology-edexcel": "🔬",
-                                  "biology-aqa-alevel": "🧬",
-                                  "mathematics": "🔢",
-                                  "maths-edexcel": "🔢",
-                                  "maths-aqa-alevel": "📐",
-                                  "english-language": "✍️",
-                                  "english-literature": "📖",
-                                  "geography": "🌍",
-                                  "geography-paper-2": "🌍",
-                                  "history": "🕰️",
-                                  "religious-studies": "⛪",
-                                  "business-edexcel-igcse": "💼",
-                                  "computer-science": "💻",
-                                  "psychology": "🧠",
-                                };
-                                const emoji = subjectEmojis[subject.id] || "📚";
-                                
-                                return (
-                                  <motion.div
-                                    key={subject.id}
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    transition={{ duration: 0.2 }}
-                                  >
-                                    <Card 
-                                      className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
-                                      onClick={() => {
-                                        addSubject(subject.id);
-                                        setShowAddSubjects(false);
-                                      }}
-                                    >
-                                      <CardContent className="p-5">
-                                        <div className="flex items-center space-x-4">
-                                          <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
-                                          <div className="flex-1 min-w-0">
-                                            <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
-                                              {getSubjectDisplayName(subject)}
-                                            </h3>
-                                            <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
-                                              <BookOpen className="h-3.5 w-3.5" />
-                                              {subject.topics.length} topics available
-                                            </p>
-                                          </div>
-                                          <div className="flex-shrink-0">
-                                            <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
-                                          </div>
-                                        </div>
-                                      </CardContent>
-                                    </Card>
-                                  </motion.div>
-                                );
-                              })}
-                            </div>
-                          )}
-                        </TabsContent>
+                      {!selectedSubjectGroup ? (
+                        <Tabs defaultValue="gcse" className="w-full">
+                          <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] p-1 h-12 rounded-xl">
+                            <TabsTrigger 
+                              value="gcse"
+                              className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
+                            >
+                              GCSE Subjects
+                            </TabsTrigger>
+                            <TabsTrigger 
+                              value="alevel"
+                              className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
+                            >
+                              A-Level Subjects
+                            </TabsTrigger>
+                          </TabsList>
+                          
+                          <TabsContent value="gcse" className="animate-fade-in">
+                            {(() => {
+                              const gcseSubjects = availableSubjects.filter(s => !s.id.includes('alevel'));
+                              const groupedSubjects = new Map<string, typeof gcseSubjects>();
+                              
+                              gcseSubjects.forEach(subject => {
+                                const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                if (!groupedSubjects.has(baseName)) {
+                                  groupedSubjects.set(baseName, []);
+                                }
+                                groupedSubjects.get(baseName)!.push(subject);
+                              });
 
-                        <TabsContent value="alevel" className="animate-fade-in">
-                          {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
-                            <div className="text-center py-12 px-4">
-                              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 flex items-center justify-center">
-                                <Check className="h-8 w-8 text-[#16A34A]" />
-                              </div>
-                              <p className="text-lg font-bold text-[#0F172A]">All A-Level subjects added!</p>
-                              <p className="text-sm text-[#64748B] mt-2">You&apos;ve already added all available A-Level subjects to your dashboard.</p>
-                            </div>
-                          ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
-                                const colors = subjectColors[subject.id] || subjectColors["physics"];
-                                const subjectEmojis: { [key: string]: string } = {
-                                  "physics": "⚛️",
-                                  "physics-edexcel": "⚛️",
-                                  "chemistry": "🧪",
-                                  "chemistry-edexcel": "🧪",
-                                  "biology": "🔬",
-                                  "biology-edexcel": "🔬",
-                                  "biology-aqa-alevel": "🧬",
-                                  "mathematics": "🔢",
-                                  "maths-edexcel": "🔢",
-                                  "maths-aqa-alevel": "📐",
-                                  "english-language": "✍️",
-                                  "english-literature": "📖",
-                                  "geography": "🌍",
-                                  "geography-paper-2": "🌍",
-                                  "history": "🕰️",
-                                  "religious-studies": "⛪",
-                                  "business-edexcel-igcse": "💼",
-                                  "computer-science": "💻",
-                                  "psychology": "🧠",
-                                };
-                                const emoji = subjectEmojis[subject.id] || "📚";
-                                
+                              if (groupedSubjects.size === 0) {
                                 return (
-                                  <motion.div
-                                    key={subject.id}
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    transition={{ duration: 0.2 }}
-                                  >
-                                    <Card 
-                                      className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
-                                      onClick={() => {
-                                        addSubject(subject.id);
-                                        setShowAddSubjects(false);
-                                      }}
-                                    >
-                                      <CardContent className="p-5">
-                                        <div className="flex items-center space-x-4">
-                                          <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
-                                          <div className="flex-1 min-w-0">
-                                            <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
-                                              {getSubjectDisplayName(subject)}
-                                            </h3>
-                                            <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
-                                              <BookOpen className="h-3.5 w-3.5" />
-                                              {subject.topics.length} topics available
-                                            </p>
-                                          </div>
-                                          <div className="flex-shrink-0">
-                                            <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
-                                          </div>
-                                        </div>
-                                      </CardContent>
-                                    </Card>
-                                  </motion.div>
+                                  <div className="text-center py-12 px-4">
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 flex items-center justify-center">
+                                      <Check className="h-8 w-8 text-[#16A34A]" />
+                                    </div>
+                                    <p className="text-lg font-bold text-[#0F172A]">All GCSE subjects added!</p>
+                                    <p className="text-sm text-[#64748B] mt-2">You&apos;ve already added all available GCSE subjects to your dashboard.</p>
+                                  </div>
                                 );
-                              })}
-                            </div>
-                          )}
-                        </TabsContent>
-                      </Tabs>
+                              }
+
+                              const subjectEmojis: { [key: string]: string } = {
+                                "Physics": "⚛️",
+                                "Chemistry": "🧪",
+                                "Biology": "🔬",
+                                "Mathematics": "🔢",
+                                "Maths": "🔢",
+                                "English Language": "✍️",
+                                "English Literature": "📖",
+                                "Geography": "🌍",
+                                "History": "🕰️",
+                                "Religious Studies": "⛪",
+                                "Business": "💼",
+                                "Computer Science": "💻",
+                                "Psychology": "🧠",
+                              };
+
+                              return (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  {Array.from(groupedSubjects.entries()).map(([baseName, subjects]) => {
+                                    const emoji = subjectEmojis[baseName] || "📚";
+                                    const totalTopics = subjects.reduce((sum, s) => sum + s.topics.length, 0);
+                                    
+                                    return (
+                                      <motion.div
+                                        key={baseName}
+                                        whileHover={{ scale: 1.02, y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        transition={{ duration: 0.2 }}
+                                      >
+                                        <Card 
+                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                          onClick={() => {
+                                            if (subjects.length === 1) {
+                                              addSubject(subjects[0].id);
+                                              setShowAddSubjects(false);
+                                            } else {
+                                              setSelectedSubjectGroup(baseName);
+                                            }
+                                          }}
+                                        >
+                                          <CardContent className="p-5">
+                                            <div className="flex items-center space-x-4">
+                                              <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
+                                              <div className="flex-1 min-w-0">
+                                                <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
+                                                  {baseName}
+                                                </h3>
+                                                <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                                  <BookOpen className="h-3.5 w-3.5" />
+                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `${totalTopics} topics available`}
+                                                </p>
+                                              </div>
+                                              <div className="flex-shrink-0">
+                                                <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
+                                              </div>
+                                            </div>
+                                          </CardContent>
+                                        </Card>
+                                      </motion.div>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            })()}
+                          </TabsContent>
+
+                          <TabsContent value="alevel" className="animate-fade-in">
+                            {(() => {
+                              const alevelSubjects = availableSubjects.filter(s => s.id.includes('alevel'));
+                              const groupedSubjects = new Map<string, typeof alevelSubjects>();
+                              
+                              alevelSubjects.forEach(subject => {
+                                const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                                if (!groupedSubjects.has(baseName)) {
+                                  groupedSubjects.set(baseName, []);
+                                }
+                                groupedSubjects.get(baseName)!.push(subject);
+                              });
+
+                              if (groupedSubjects.size === 0) {
+                                return (
+                                  <div className="text-center py-12 px-4">
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 flex items-center justify-center">
+                                      <Check className="h-8 w-8 text-[#16A34A]" />
+                                    </div>
+                                    <p className="text-lg font-bold text-[#0F172A]">All A-Level subjects added!</p>
+                                    <p className="text-sm text-[#64748B] mt-2">You&apos;ve already added all available A-Level subjects to your dashboard.</p>
+                                  </div>
+                                );
+                              }
+
+                              const subjectEmojis: { [key: string]: string } = {
+                                "Physics": "⚛️",
+                                "Chemistry": "🧪",
+                                "Biology": "🔬",
+                                "Mathematics": "🔢",
+                                "Maths": "🔢",
+                                "English Language": "✍️",
+                                "English Literature": "📖",
+                                "Geography": "🌍",
+                                "History": "🕰️",
+                                "Religious Studies": "⛪",
+                                "Business": "💼",
+                                "Computer Science": "💻",
+                                "Psychology": "🧠",
+                              };
+
+                              return (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  {Array.from(groupedSubjects.entries()).map(([baseName, subjects]) => {
+                                    const emoji = subjectEmojis[baseName] || "📚";
+                                    const totalTopics = subjects.reduce((sum, s) => sum + s.topics.length, 0);
+                                    
+                                    return (
+                                      <motion.div
+                                        key={baseName}
+                                        whileHover={{ scale: 1.02, y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        transition={{ duration: 0.2 }}
+                                      >
+                                        <Card 
+                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                          onClick={() => {
+                                            if (subjects.length === 1) {
+                                              addSubject(subjects[0].id);
+                                              setShowAddSubjects(false);
+                                            } else {
+                                              setSelectedSubjectGroup(baseName);
+                                            }
+                                          }}
+                                        >
+                                          <CardContent className="p-5">
+                                            <div className="flex items-center space-x-4">
+                                              <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
+                                              <div className="flex-1 min-w-0">
+                                                <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
+                                                  {baseName}
+                                                </h3>
+                                                <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                                  <BookOpen className="h-3.5 w-3.5" />
+                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `${totalTopics} topics available`}
+                                                </p>
+                                              </div>
+                                              <div className="flex-shrink-0">
+                                                <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
+                                              </div>
+                                            </div>
+                                          </CardContent>
+                                        </Card>
+                                      </motion.div>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            })()}
+                          </TabsContent>
+                        </Tabs>
+                      ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {availableSubjects
+                            .filter(subject => {
+                              const baseName = subject.name.split(' - ')[0].split(' (')[0];
+                              return baseName === selectedSubjectGroup;
+                            })
+                            .map((subject) => {
+                              const examBoard = subject.name.includes('AQA') ? 'AQA' : 
+                                              subject.name.includes('Edexcel') ? 'Edexcel' : 
+                                              subject.name.includes('OCR') ? 'OCR' :
+                                              subject.name.includes('WJEC') ? 'WJEC' :
+                                              subject.name.includes('CCEA') ? 'CCEA' : 'General';
+                              
+                              return (
+                                <motion.div
+                                  key={subject.id}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  whileHover={{ scale: 1.02, y: -2 }}
+                                  whileTap={{ scale: 0.98 }}
+                                >
+                                  <Card 
+                                    className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                    onClick={() => {
+                                      addSubject(subject.id);
+                                      setShowAddSubjects(false);
+                                      setSelectedSubjectGroup(null);
+                                    }}
+                                  >
+                                    <CardContent className="p-6">
+                                      <div className="text-center">
+                                        <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                          <span className="text-4xl font-bold text-[#0EA5E9]">{examBoard}</span>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-[#0F172A] mb-2">
+                                          {examBoard}
+                                        </h3>
+                                        <p className="text-sm text-[#64748B] flex items-center justify-center gap-1.5">
+                                          <BookOpen className="h-3.5 w-3.5" />
+                                          {subject.topics.length} topics available
+                                        </p>
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                </motion.div>
+                              );
+                            })}
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 </div>
