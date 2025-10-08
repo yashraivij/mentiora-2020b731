@@ -156,310 +156,167 @@ const SubjectTopics = () => {
     <div className="min-h-screen bg-white">
       {/* Minimal Header */}
       <header className="border-b border-gray-100 bg-white">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-8 py-5 flex items-center justify-between">
           <Button 
             variant="ghost" 
             onClick={() => navigate(-1)}
-            className="text-gray-600 hover:text-gray-900 -ml-3"
+            className="text-gray-600 hover:text-gray-900 -ml-3 font-medium"
           >
-            <ArrowLeft className="h-5 w-5 mr-2" />
+            <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
-          <div className="text-3xl">
-            {subjectId?.includes('bio') ? '🧬' : subjectId?.includes('eng') ? '📖' : subjectId?.includes('math') ? '🔢' : subjectId?.includes('phys') ? '⚛️' : subjectId?.includes('chem') ? '🧪' : subjectId?.includes('geo') ? '🌍' : '📚'}
-          </div>
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8 space-y-6">
+      <div className="max-w-4xl mx-auto px-8 py-12 space-y-12">
         {/* Subject Title */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">
-            {subjectId?.includes('bio') ? '🧬' : subjectId?.includes('eng') ? '📖' : subjectId?.includes('math') ? '🔢' : subjectId?.includes('phys') ? '⚛️' : subjectId?.includes('chem') ? '🧪' : subjectId?.includes('geo') ? '🌍' : '📚'}
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">{subject?.name}</h1>
-          <p className="text-gray-600">Your personal revision hub</p>
+        <div className="text-center space-y-3">
+          <h1 className="text-5xl font-bold text-gray-900">{subject?.name}</h1>
+          <p className="text-lg text-gray-600">Your personal revision hub</p>
         </div>
 
-        {/* Hero Stats - Big Dopamine Hits */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Grade Stats - Clean Medly Style */}
+        <div className="grid grid-cols-2 gap-6">
           {/* Current Grade */}
-          <Card className="rounded-2xl border-2 border-[#3DB4E8] bg-gradient-to-br from-blue-50 to-white shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <TrendingUp className="w-8 h-8 text-[#3DB4E8] mx-auto mb-2" />
-              <div className="text-5xl font-bold text-[#3DB4E8] mb-1">{predictedGradeDecimal.toFixed(1)}</div>
-              <p className="text-xs font-medium text-gray-600">Current Grade</p>
-            </CardContent>
-          </Card>
+          <div className="text-center py-12 px-8 rounded-2xl border-2 border-gray-100 bg-white hover:border-gray-200 transition-colors">
+            <div className="text-7xl font-bold text-gray-900 mb-3">{predictedGradeDecimal.toFixed(1)}</div>
+            <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Current Grade</p>
+          </div>
 
-          {/* Target - Editable */}
-          <Card className="rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-white shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <Target className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <div className="flex items-center justify-center gap-3 mb-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
-                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
-                  disabled={!targetGrade || targetGrade <= 4}
-                >
-                  -
-                </Button>
-                <div className="text-5xl font-bold text-green-600">{targetGrade}</div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
-                  className="h-8 w-8 p-0 rounded-full hover:bg-green-200"
-                  disabled={!targetGrade || targetGrade >= 9}
-                >
-                  +
-                </Button>
-              </div>
-              <p className="text-xs font-medium text-gray-600">Target Grade 🎯</p>
-            </CardContent>
-          </Card>
+          {/* Target Grade - Editable */}
+          <div className="text-center py-12 px-8 rounded-2xl border-2 border-[#3DB4E8] bg-white hover:border-[#2E5BFF] transition-colors">
+            <div className="flex items-center justify-center gap-4 mb-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => targetGrade && targetGrade > 4 && handleSetTargetGrade(targetGrade - 1)}
+                className="h-10 w-10 p-0 rounded-full text-gray-400 hover:text-gray-900 hover:bg-gray-100 text-xl font-bold"
+                disabled={!targetGrade || targetGrade <= 4}
+              >
+                −
+              </Button>
+              <div className="text-7xl font-bold text-[#3DB4E8]">{targetGrade}</div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => targetGrade && targetGrade < 9 && handleSetTargetGrade(targetGrade + 1)}
+                className="h-10 w-10 p-0 rounded-full text-gray-400 hover:text-gray-900 hover:bg-gray-100 text-xl font-bold"
+                disabled={!targetGrade || targetGrade >= 9}
+              >
+                +
+              </Button>
+            </div>
+            <p className="text-sm font-medium text-gray-600 uppercase tracking-wide">Target Grade</p>
+          </div>
         </div>
 
-        {/* Progress to Target - Visual Motivation */}
-        <Card className="rounded-2xl border border-gray-200 shadow-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-bold text-gray-900">Your Progress to Grade {targetGrade}</h2>
-              <span className="text-2xl font-bold text-[#3DB4E8]">{percentToTarget}%</span>
-            </div>
-            <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-[#3DB4E8] to-[#2E5BFF] rounded-full transition-all duration-1000"
-                style={{ width: `${percentToTarget}%` }}
-              />
-            </div>
-            <p className="text-sm text-gray-600 mt-3 text-center italic">
-              {percentToTarget >= 90 ? "🎉 Almost there! Keep it up!" : percentToTarget >= 70 ? "💪 Great progress! You're on track!" : percentToTarget >= 50 ? "📈 Getting stronger every day!" : "🚀 Every session gets you closer!"}
-            </p>
-          </CardContent>
-        </Card>
+        {/* Progress Bar */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-900">Progress to Grade {targetGrade}</h2>
+            <span className="text-2xl font-bold text-[#3DB4E8]">{percentToTarget}%</span>
+          </div>
+          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-[#3DB4E8] rounded-full transition-all duration-1000"
+              style={{ width: `${percentToTarget}%` }}
+            />
+          </div>
+        </div>
 
-        {/* Next Action - BIGGEST CTA */}
+        {/* Next Action - Primary CTA */}
         {nextTopic && (
-          <Card className="rounded-2xl border-2 border-[#3DB4E8] bg-gradient-to-br from-[#3DB4E8]/5 to-white shadow-lg">
-            <CardContent className="p-8">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-[#3DB4E8]/10 flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-8 h-8 text-[#3DB4E8]" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-1">Ready to level up?</h2>
-                  <p className="text-gray-600">Next: <span className="font-semibold">{nextTopic.name}</span></p>
-                </div>
-              </div>
-              <Button 
-                onClick={() => navigate(`/practice/${subjectId}/${nextTopic.id}`)}
-                className="w-full bg-gradient-to-r from-[#3DB4E8] to-[#2E5BFF] hover:from-[#2E5BFF] hover:to-[#1E4FEE] text-white rounded-xl py-6 text-lg font-semibold shadow-md hover:shadow-xl transition-all"
-              >
-                Start Practice Now →
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="text-center py-12 px-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white border border-gray-200">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">What's next?</h2>
+            <p className="text-lg text-gray-600 mb-8">Practice: <span className="font-semibold">{nextTopic.name}</span></p>
+            <Button 
+              onClick={() => navigate(`/practice/${subjectId}/${nextTopic.id}`)}
+              className="bg-[#3DB4E8] hover:bg-[#2E5BFF] text-white rounded-xl px-12 py-6 text-lg font-semibold shadow-none hover:shadow-lg transition-all"
+            >
+              Start Practice
+            </Button>
+          </div>
         )}
 
-        {/* Quick Wins - 3 Key Insights */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5 text-purple-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Best Time</h4>
-                  <p className="text-xs text-gray-600">7–9 PM works best for you</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Topic List - Clean Medly Style */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-900">All Topics</h2>
+            <div className="flex gap-2">
+              {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
+                <Button
+                  key={filter}
+                  variant={topicFilter === filter ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setTopicFilter(filter)}
+                  className={topicFilter === filter 
+                    ? "rounded-lg bg-[#3DB4E8] hover:bg-[#2E5BFF] text-white font-medium" 
+                    : "rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium"
+                  }
+                >
+                  {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strong' : filter === 'focus' ? 'Needs Work' : 'New'}
+                </Button>
+              ))}
+            </div>
+          </div>
 
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                  <Trophy className="w-5 h-5 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Mastered</h4>
-                  <p className="text-xs text-gray-600">{masteredTopics} of {totalTopics} topics complete</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <CardContent className="p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-5 h-5 text-orange-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Mock Exam</h4>
-                  <p className="text-xs text-gray-600">19 days • {examReadiness}% ready</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="space-y-3">
+            {filteredTopics.map((topic) => {
+              const progress = getTopicProgress(topic.id);
+              const isMastered = progress.averageScore >= 85;
+              const needsPractice = progress.attempts > 0 && progress.averageScore < 60;
+              const inProgress = progress.attempts > 0 && !isMastered && !needsPractice;
+              
+              return (
+                <button
+                  key={topic.id}
+                  onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                  className="w-full rounded-xl border border-gray-200 bg-white hover:border-[#3DB4E8] hover:bg-blue-50/30 p-6 transition-all duration-200 text-left group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
+                    <div className="flex items-center gap-3">
+                      {progress.attempts > 0 && (
+                        <span className="text-sm font-bold text-gray-600">{progress.averageScore}%</span>
+                      )}
+                      <div className={`w-3 h-3 rounded-full ${
+                        isMastered ? 'bg-green-500' : 
+                        needsPractice ? 'bg-orange-400' : 
+                        inProgress ? 'bg-[#3DB4E8]' : 
+                        'bg-gray-300'
+                      }`} />
+                    </div>
+                  </div>
+                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all ${
+                        isMastered ? 'bg-green-500' : 
+                        needsPractice ? 'bg-orange-400' : 
+                        'bg-[#3DB4E8]'
+                      }`}
+                      style={{ width: `${progress.averageScore}%` }}
+                    />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* All Topics - Clean List */}
-        <Card className="rounded-2xl border border-gray-200 shadow-sm">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-xl font-bold">All Topics</CardTitle>
-              <div className="flex gap-2">
-                {(['all', 'strengths', 'focus', 'new'] as const).map((filter) => (
-                  <Button
-                    key={filter}
-                    variant={topicFilter === filter ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => setTopicFilter(filter)}
-                    className={topicFilter === filter ? "rounded-lg bg-[#3DB4E8] hover:bg-[#2E5BFF] text-white h-8 text-xs" : "rounded-lg h-8 text-xs"}
-                  >
-                    {filter === 'all' ? 'All' : filter === 'strengths' ? 'Strong' : filter === 'focus' ? 'Focus' : 'New'}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </CardHeader>
-          
-          <CardContent className="pt-0">
-            <div className="space-y-2">
-              {filteredTopics.map((topic) => {
-                const progress = getTopicProgress(topic.id);
-                const isMastered = progress.averageScore >= 85;
-                const needsPractice = progress.attempts > 0 && progress.averageScore < 60;
-                const inProgress = progress.attempts > 0 && !isMastered && !needsPractice;
-                
-                return (
-                  <button
-                    key={topic.id}
-                    onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    className="w-full rounded-xl border border-gray-200 bg-white hover:border-[#3DB4E8] hover:bg-blue-50/50 p-4 transition-all duration-200 text-left group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 flex-1">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                          isMastered ? 'bg-green-100' : 
-                          needsPractice ? 'bg-orange-100' : 
-                          inProgress ? 'bg-blue-100' : 
-                          'bg-gray-100'
-                        }`}>
-                          {isMastered ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          ) : needsPractice ? (
-                            <Zap className="w-5 h-5 text-orange-600" />
-                          ) : inProgress ? (
-                            <Clock className="w-5 h-5 text-blue-600" />
-                          ) : (
-                            <Lock className="w-5 h-5 text-gray-400" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#3DB4E8] transition-colors">{topic.name}</h3>
-                          <div className="flex items-center gap-2">
-                            <Progress value={progress.averageScore} className="h-1.5 flex-1 max-w-[200px]" />
-                            <span className="text-xs font-medium text-gray-500">
-                              {progress.attempts > 0 ? `${progress.averageScore}%` : 'Start'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-[#3DB4E8] transition-colors" />
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Weekly Plan */}
-        <Card className="rounded-2xl border border-gray-200 shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-xl font-bold">This Week's Plan</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-[#3DB4E8]/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">📝</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">Quick Quiz — 10 min</h4>
-                  <p className="text-xs text-gray-600">Your weak areas</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🌿</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">Flashcards — 15 min</h4>
-                  <p className="text-xs text-gray-600">Memory boost</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">📊</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">Practice Paper — 20 min</h4>
-                  <p className="text-xs text-gray-600">Exam conditions</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Insights */}
-        <Card className="rounded-2xl border border-gray-200 bg-gradient-to-br from-blue-50/50 to-white shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-xl font-bold flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#3DB4E8]" />
-              Your Learning Insights
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#3DB4E8]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Zap className="w-4 h-4 text-[#3DB4E8]" />
-                </div>
-                <p className="text-sm text-gray-700">Short 10-min sessions work best for you</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Clock className="w-4 h-4 text-purple-600" />
-                </div>
-                <p className="text-sm text-gray-700">Take breaks after 25 minutes for best retention</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
-                </div>
-                <p className="text-sm text-gray-700">You're improving steadily — up 12% this month</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Footer Motivation */}
-        <div className="text-center py-8">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#3DB4E8]/10 mb-4">
-            <Trophy className="w-5 h-5 text-[#3DB4E8]" />
-            <span className="text-sm font-semibold text-[#3DB4E8]">You're on the right path</span>
+        {/* Stats Grid - Minimal */}
+        <div className="grid grid-cols-3 gap-6 pt-6">
+          <div className="text-center py-8 px-6 rounded-xl border border-gray-200 bg-white">
+            <div className="text-4xl font-bold text-gray-900 mb-2">{masteredTopics}</div>
+            <p className="text-sm font-medium text-gray-600">Topics Mastered</p>
           </div>
-          <p className="text-gray-600 text-sm">
-            Keep showing up. Every session brings you closer to Grade {targetGrade}.
-          </p>
+          <div className="text-center py-8 px-6 rounded-xl border border-gray-200 bg-white">
+            <div className="text-4xl font-bold text-gray-900 mb-2">{avgScore}%</div>
+            <p className="text-sm font-medium text-gray-600">Average Score</p>
+          </div>
+          <div className="text-center py-8 px-6 rounded-xl border border-gray-200 bg-white">
+            <div className="text-4xl font-bold text-gray-900 mb-2">{examReadiness}%</div>
+            <p className="text-sm font-medium text-gray-600">Exam Ready</p>
+          </div>
         </div>
       </div>
     </div>
