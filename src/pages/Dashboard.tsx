@@ -3668,6 +3668,7 @@ const Dashboard = () => {
           {/* Sidebar content removed */}
         </div>
       </div>
+      </div>
       
       {/* Floating Feedback Button - Repositioned for mobile */}
       <button
