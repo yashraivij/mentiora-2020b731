@@ -115,11 +115,8 @@ export function MedlySubjectsView({
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#EAF2FF] to-white p-8 md:p-10 shadow-[0_6px_24px_rgba(31,107,255,0.08)]"
+        className="relative overflow-hidden rounded-2xl bg-white p-8 md:p-10 shadow-[0_6px_24px_rgba(31,107,255,0.08)]"
       >
-        {/* Subtle blob decoration */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1F6BFF]/5 rounded-full blur-3xl -z-0" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#1F6BFF]/5 rounded-full blur-3xl -z-0" />
         
         <div className="relative z-10">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
@@ -281,7 +278,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className="group relative rounded-2xl border-border/40 hover:shadow-[0_12px_32px_rgba(31,107,255,0.12)] hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-[radial-gradient(60%_120%_at_0%_0%,#EAF2FF_0%,#FFFFFF_55%)]"
+                className="group relative rounded-2xl border-border/40 hover:shadow-[0_12px_32px_rgba(31,107,255,0.12)] hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-white"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -380,7 +377,7 @@ export function MedlySubjectsView({
             transition={{ delay: 0.1 * filteredMockSubjects.length }}
           >
             <Card 
-              className="rounded-2xl border-2 border-dashed border-[#1F6BFF]/30 hover:border-[#1F6BFF]/60 hover:bg-[#EAF2FF]/30 transition-all duration-300 cursor-pointer h-full"
+              className="rounded-2xl border-2 border-dashed border-[#1F6BFF]/30 hover:border-[#1F6BFF]/60 hover:bg-white transition-all duration-300 cursor-pointer h-full"
               onClick={() => setShowAddSubjects(true)}
             >
               <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[400px]">
@@ -402,7 +399,7 @@ export function MedlySubjectsView({
         <h2 className="text-2xl font-semibold text-[#0F172A]">Insights for You</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card 
-            className="rounded-xl border-border/40 bg-gradient-to-br from-[#16A34A]/5 to-[#16A34A]/10 cursor-pointer hover:shadow-lg transition-shadow"
+            className="rounded-xl border-border/40 bg-white cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => setInsightFilter("strong")}
           >
             <CardContent className="p-5">
@@ -418,7 +415,7 @@ export function MedlySubjectsView({
           </Card>
           
           <Card 
-            className="rounded-xl border-border/40 bg-gradient-to-br from-[#EF4444]/5 to-[#EF4444]/10 cursor-pointer hover:shadow-lg transition-shadow"
+            className="rounded-xl border-border/40 bg-white cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => setInsightFilter("weak")}
           >
             <CardContent className="p-5">
@@ -433,7 +430,7 @@ export function MedlySubjectsView({
             </CardContent>
           </Card>
           
-          <Card className="rounded-xl border-border/40 bg-gradient-to-br from-[#1F6BFF]/5 to-[#1F6BFF]/10">
+          <Card className="rounded-xl border-border/40 bg-white">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-[#1F6BFF]/20">
@@ -446,7 +443,7 @@ export function MedlySubjectsView({
             </CardContent>
           </Card>
           
-          <Card className="rounded-xl border-border/40 bg-gradient-to-br from-[#F59E0B]/5 to-[#F59E0B]/10">
+          <Card className="rounded-xl border-border/40 bg-white">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-[#F59E0B]/20">
