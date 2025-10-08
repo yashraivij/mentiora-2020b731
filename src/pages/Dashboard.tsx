@@ -1799,11 +1799,13 @@ const Dashboard = () => {
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
-                        className="font-semibold py-2 px-6 rounded-full flex items-center space-x-2 transition-all duration-200 shadow-sm hover:shadow-md"
+                        className="font-semibold py-2 px-6 rounded-full flex items-center space-x-2 transition-all duration-200 shadow-md"
                         style={{ 
-                          background: 'linear-gradient(135deg, #2E5BFF 0%, #2563EB 100%)',
+                          backgroundColor: '#3BAFDA',
                           color: '#FFFFFF'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
                       >
                         <Plus className="h-4 w-4" />
                         <span>Add a new subject</span>
@@ -1838,8 +1840,8 @@ const Dashboard = () => {
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
                                     <span className="text-xs font-semibold px-3 py-1 rounded-full mobile-text-wrap" style={{ 
-                                      color: '#2E5BFF',
-                                      backgroundColor: '#EAF2FF'
+                                      color: '#3BAFDA',
+                                      backgroundColor: '#E8F7FC'
                                     }}>
                                       {progress.completed} OF {progress.total} UNITS
                                     </span>
@@ -1854,17 +1856,19 @@ const Dashboard = () => {
                                       className="h-3 rounded-full transition-all duration-500"
                                       style={{ 
                                         width: `${(progress.completed / progress.total) * 100}%`,
-                                        background: 'linear-gradient(90deg, #2E5BFF 0%, #2563EB 100%)'
+                                        backgroundColor: '#3BAFDA'
                                       }}
                                     />
                                   </div>
 
                                   <Button
-                                    className={`font-semibold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-sm transition-all duration-200 hover:shadow-md mobile-touch-target`}
+                                    className={`font-semibold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-md transition-all duration-200 mobile-touch-target`}
                                     style={{
-                                      background: 'linear-gradient(135deg, #2E5BFF 0%, #2563EB 100%)',
+                                      backgroundColor: '#3BAFDA',
                                       color: '#FFFFFF'
                                     }}
+                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
+                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
                                   >
                                     {progress.completed === 0 ? "START" : "CONTINUE"}
                                   </Button>
@@ -1933,11 +1937,13 @@ const Dashboard = () => {
                   </p>
                   <Button
                     onClick={() => setShowAddSubjects(true)}
-                    className="font-semibold py-4 px-8 rounded-full text-lg flex items-center space-x-2 shadow-md hover:shadow-lg transition-all duration-200"
+                    className="font-semibold py-4 px-8 rounded-full text-lg flex items-center space-x-2 shadow-md transition-all duration-200"
                     style={{
-                      background: 'linear-gradient(135deg, #2E5BFF 0%, #2563EB 100%)',
+                      backgroundColor: '#3BAFDA',
                       color: '#FFFFFF'
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2E9DBF'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3BAFDA'}
                   >
                     <Plus className="h-5 w-5" />
                     <span>Add my first subject</span>
@@ -1950,7 +1956,7 @@ const Dashboard = () => {
                 <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                    <div className="rounded-3xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
                      <div className="p-6 border-b" style={{ 
-                       background: 'linear-gradient(180deg, #EAF2FF 0%, #FFFFFF 100%)',
+                       background: 'linear-gradient(180deg, #E8F7FC 0%, #FFFFFF 100%)',
                        borderColor: '#E7ECF5'
                      }}>
                       <div className="flex items-center justify-between">
@@ -2020,7 +2026,7 @@ const Dashboard = () => {
                                    <CardContent className="p-4">
                                      <div className="flex items-center space-x-4">
                                        <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{
-                                         background: 'linear-gradient(135deg, #2E5BFF 0%, #2563EB 100%)'
+                                         backgroundColor: '#3BAFDA'
                                        }}>
                                          <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
                                        </div>
@@ -2074,7 +2080,7 @@ const Dashboard = () => {
                                 <CardContent className="p-4">
                                   <div className="flex items-center space-x-4">
                                     <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{
-                                      background: 'linear-gradient(135deg, #2E5BFF 0%, #2563EB 100%)'
+                                      backgroundColor: '#3BAFDA'
                                     }}>
                                       <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
                                     </div>
