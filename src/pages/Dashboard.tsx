@@ -78,6 +78,7 @@ import { StrengthsWeaknesses } from "@/components/dashboard/StrengthsWeaknesses"
 import { StudyInsights } from "@/components/dashboard/StudyInsights";
 import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
+import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 
 interface UserProgress {
   subjectId: string;
@@ -173,6 +174,8 @@ const Dashboard = () => {
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
   const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan'>('overview');
+  const [insightFilter, setInsightFilter] = useState<string | null>(null);
+  const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -1187,6 +1190,48 @@ const Dashboard = () => {
     }
     return user.email?.split("@")[0] || "there";
   };
+  
+  // Mock data for Medly dashboard
+  const profile = { 
+    name: getFirstName(), 
+    overallPred: 6.8, 
+    overallTarget: 8.0, 
+    retention: 0.74, 
+    bestWindow: "7–9pm", 
+    weekMinutes: 320 
+  };
+  
+  const mockSubjects = [
+    { id:"bio", name:"Biology (AQA)", icon:"🧬", predicted:7.4, target:8.0, trend:[60,64,68,70,72,74], strong:"Ecosystems", focus:"Genetics", status:"Needs push" },
+    { id:"chem", name:"Chemistry (Edexcel)", icon:"🧪", predicted:7.2, target:8.0, trend:[55,59,61,65,70,72], strong:"Quantitative", focus:"Energetics", status:"Needs push" },
+    { id:"phys", name:"Physics (AQA)", icon:"🧲", predicted:6.1, target:7.0, trend:[40,46,51,54,58,61], strong:"Waves", focus:"Forces", status:"Off target" },
+    { id:"math", name:"Mathematics (Edexcel)", icon:"📐", predicted:6.5, target:8.0, trend:[50,53,57,60,63,65], strong:"Number", focus:"Algebra", status:"Off target" }
+  ];
+  
+  const weekPlan = {
+    Mon:[{s:"Biology",t:"Genetics",m:25},{s:"Maths",t:"Algebra",m:20}],
+    Tue:[{s:"Physics",t:"Forces",m:20}],
+    Wed:[{s:"Chemistry",t:"Energetics",m:25}],
+    Thu:[{s:"Maths",t:"Algebra (quiz)",m:20}],
+    Fri:[{s:"Biology",t:"Cell Biology (recall)",m:15}],
+    Sat:[{s:"Chemistry",t:"Quantitative (quiz)",m:20}],
+    Sun:[{s:"Physics",t:"Electricity (flashcards)",m:15}]
+  };
+  
+  const getStatusColor = (status: string) => {
+    switch(status) {
+      case "On track": return "bg-[#16A34A] text-white";
+      case "Needs push": return "bg-[#F59E0B] text-white";
+      case "Off target": return "bg-[#EF4444] text-white";
+      default: return "bg-gray-500 text-white";
+    }
+  };
+  
+  const calculateStatus = (predicted: number, target: number) => {
+    if (predicted >= target) return "On track";
+    if (predicted >= target - 0.5) return "Needs push";
+    return "Off target";
+  };
 
   const filteredSubjects = userSubjects.length > 0
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
@@ -1785,425 +1830,21 @@ const Dashboard = () => {
           {/* Main Learning Area */}
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
           {activeTab === "learn" && (
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
-                <div className="space-y-8">
-                  {/* Sticky Page Header */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm py-6 border-b border-border/40"
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div>
-                        <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-2">Your Learning Dashboard</h1>
-                        <p className="text-base text-muted-foreground">Track your subjects, predicted grades and weekly plan.</p>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Button variant="outline" size="sm" className="rounded-xl">
-                          <Target className="h-4 w-4 mr-2" />
-                          Update Target Grades
-                        </Button>
-                        <Button variant="outline" size="sm" className="rounded-xl">
-                          <Download className="h-4 w-4 mr-2" />
-                          Export Report
-                        </Button>
-                        {filteredSubjects.length > 0 && (
-                          <Button 
-                            onClick={() => setShowAddSubjects(true)}
-                            size="sm" 
-                            className="rounded-xl bg-primary hover:bg-primary/90"
-                          >
-                            <Plus className="h-4 w-4 mr-2" />
-                            Add Subject
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Overall Overview Hero Strip */}
-                  {filteredSubjects.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <Card className="rounded-2xl border-border/40 shadow-sm bg-gradient-to-br from-card to-muted/20">
-                        <CardContent className="p-6 md:p-8">
-                          <div className="space-y-6">
-                            <div>
-                              <div className="flex items-center justify-between mb-3">
-                                <span className="text-sm font-medium text-muted-foreground">Overall Progress</span>
-                                <span className="text-2xl font-semibold text-primary">
-                                  {(() => {
-                                    const totalCompleted = filteredSubjects.reduce((acc, s) => 
-                                      acc + getSubjectProgress(s.id).completed, 0);
-                                    const totalTopics = filteredSubjects.reduce((acc, s) => 
-                                      acc + getSubjectProgress(s.id).total, 0);
-                                    return totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
-                                  })()}%
-                                </span>
-                              </div>
-                              <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
-                                <motion.div 
-                                  initial={{ width: 0 }}
-                                  animate={{ 
-                                    width: `${(() => {
-                                      const totalCompleted = filteredSubjects.reduce((acc, s) => 
-                                        acc + getSubjectProgress(s.id).completed, 0);
-                                      const totalTopics = filteredSubjects.reduce((acc, s) => 
-                                        acc + getSubjectProgress(s.id).total, 0);
-                                      return totalTopics > 0 ? (totalCompleted / totalTopics) * 100 : 0;
-                                    })()}%` 
-                                  }}
-                                  transition={{ duration: 1, ease: "easeOut" }}
-                                  className="h-full bg-primary rounded-full"
-                                />
-                              </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
-                                <div className="p-2 rounded-lg bg-accent/10">
-                                  <Flame className="h-5 w-5 text-orange-500" />
-                                </div>
-                                <div>
-                                  <div className="text-xs text-muted-foreground">Retention</div>
-                                  <div className="text-lg font-semibold text-foreground">74%</div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
-                                <div className="p-2 rounded-lg bg-primary/10">
-                                  <Clock className="h-5 w-5 text-primary" />
-                                </div>
-                                <div>
-                                  <div className="text-xs text-muted-foreground">Best Study Time</div>
-                                  <div className="text-lg font-semibold text-foreground">7-9pm</div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
-                                <div className="p-2 rounded-lg bg-accent/10">
-                                  <Calendar className="h-5 w-5 text-accent" />
-                                </div>
-                                <div>
-                                  <div className="text-xs text-muted-foreground">This Week</div>
-                                  <div className="text-lg font-semibold text-foreground">5h 20m</div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background/60 border border-border/40">
-                                <div className="p-2 rounded-lg bg-orange-500/10">
-                                  <Flame className="h-5 w-5 text-orange-500" />
-                                </div>
-                                <div>
-                                  <div className="text-xs text-muted-foreground">Streak</div>
-                                  <div className="text-lg font-semibold text-foreground">{currentStreak} days</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  )}
-
-                  {/* Subject Grid */}
-                  {filteredSubjects.length > 0 ? (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                      className="space-y-4"
-                    >
-                      <h2 className="text-2xl font-semibold text-foreground">Your Subjects</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredSubjects.map((subject, index) => {
-                          const colors = subjectColors[subject.id] || subjectColors["physics"];
-                          const progress = getSubjectProgress(subject.id);
-                          const IconComponent = getSubjectIcon(subject.id);
-                          const predictedGrade = 7.2;
-                          const targetGrade = 8.0;
-                          const isOnTrack = predictedGrade >= targetGrade * 0.9;
-                          
-                          return (
-                            <motion.div
-                              key={subject.id}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.1 * index }}
-                            >
-                              <Card 
-                                className="group relative rounded-2xl border-border/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-gradient-to-br from-card to-muted/10"
-                                onClick={() => {
-                                  setSelectedDrawerSubject(subject);
-                                  setSubjectDrawerOpen(true);
-                                }}
-                              >
-                                <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
-                                  <IconComponent className="w-full h-full" />
-                                </div>
-                                <CardContent className="p-6 relative">
-                                  <div className="flex items-start justify-between mb-4">
-                                    <div className={`p-3 rounded-xl ${colors.light}`}>
-                                      <IconComponent className={`h-6 w-6 ${colors.text}`} />
-                                    </div>
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        removeSubject(subject.id);
-                                      }}
-                                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-muted rounded-lg"
-                                    >
-                                      <X className="h-4 w-4 text-muted-foreground" />
-                                    </button>
-                                  </div>
-                                  
-                                  <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2">
-                                    {getSubjectDisplayName(subject)}
-                                  </h3>
-                                  
-                                  <div className="flex items-center gap-2 mb-4">
-                                    <Badge variant="secondary" className="text-xs font-medium rounded-lg">
-                                      Predicted {predictedGrade}
-                                    </Badge>
-                                    <Badge variant="outline" className="text-xs rounded-lg">
-                                      Target {targetGrade}
-                                    </Badge>
-                                  </div>
-                                  
-                                  <div className="mb-4">
-                                    <div className="flex items-center justify-between mb-2">
-                                      <span className="text-xs text-muted-foreground">Confidence</span>
-                                      <span className={`text-xs font-medium ${isOnTrack ? 'text-accent' : 'text-orange-500'}`}>
-                                        {isOnTrack ? 'On Track' : 'Needs Focus'}
-                                      </span>
-                                    </div>
-                                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                                      <motion.div 
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${(predictedGrade / targetGrade) * 100}%` }}
-                                        transition={{ duration: 1, delay: 0.2 * index }}
-                                        className={`h-full rounded-full ${isOnTrack ? 'bg-accent' : 'bg-orange-500'}`}
-                                      />
-                                    </div>
-                                  </div>
-                                  
-                                  <p className="text-xs text-muted-foreground mb-4">
-                                    <span className="font-medium text-foreground">Strong:</span> Quantitative Chemistry • 
-                                    <span className="font-medium text-foreground"> Focus:</span> Energetics
-                                  </p>
-                                  
-                                  <Button 
-                                    variant="ghost" 
-                                    size="sm" 
-                                    className="w-full justify-between rounded-xl text-primary hover:bg-primary/5"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setSelectedDrawerSubject(subject);
-                                      setSubjectDrawerOpen(true);
-                                    }}
-                                  >
-                                    View insights
-                                    <ChevronRight className="h-4 w-4" />
-                                  </Button>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          );
-                        })}
-                        
-                        {/* Add Subject Card */}
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 * filteredSubjects.length }}
-                        >
-                          <Card 
-                            className="rounded-2xl border-2 border-dashed border-border/60 hover:border-primary/40 hover:bg-muted/30 transition-all duration-300 cursor-pointer h-full"
-                            onClick={() => setShowAddSubjects(true)}
-                          >
-                            <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[280px]">
-                              <div className="p-4 rounded-full bg-muted/50 mb-4">
-                                <Plus className="h-8 w-8 text-muted-foreground" />
-                              </div>
-                              <h3 className="text-lg font-medium text-foreground mb-1">Add subject</h3>
-                              <p className="text-sm text-muted-foreground text-center">
-                                Start tracking a new subject
-                              </p>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    /* No subjects empty state */
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-16"
-                    >
-                      <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted/50 flex items-center justify-center">
-                        <BookOpen className="h-12 w-12 text-muted-foreground" />
-                      </div>
-                      <h3 className="text-2xl font-semibold text-foreground mb-3">
-                        No subjects yet
-                      </h3>
-                      <p className="text-base text-muted-foreground mb-8 max-w-md mx-auto">
-                        Add your first subject to start tracking your progress and get personalized insights
-                      </p>
-                      <Button
-                        onClick={() => setShowAddSubjects(true)}
-                        className="rounded-xl bg-primary hover:bg-primary/90"
-                      >
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add your first subject
-                      </Button>
-                    </motion.div>
-                  )}
-
-                  {/* Insights Strip */}
-                  {filteredSubjects.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.3 }}
-                      className="space-y-4"
-                    >
-                      <h2 className="text-2xl font-semibold text-foreground">Insights for You</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-accent/5 to-accent/10">
-                          <CardContent className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 rounded-lg bg-accent/20">
-                                <TrendingUp className="h-5 w-5 text-accent" />
-                              </div>
-                              <span className="text-sm font-medium text-muted-foreground">Strongest</span>
-                            </div>
-                            <div className="text-2xl font-semibold text-foreground mb-1">Chemistry</div>
-                            <p className="text-sm text-muted-foreground">0.8 from target</p>
-                          </CardContent>
-                        </Card>
-                        
-                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-orange-500/5 to-orange-500/10">
-                          <CardContent className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 rounded-lg bg-orange-500/20">
-                                <TrendingDown className="h-5 w-5 text-orange-500" />
-                              </div>
-                              <span className="text-sm font-medium text-muted-foreground">Focus Area</span>
-                            </div>
-                            <div className="text-2xl font-semibold text-foreground mb-1">Physics</div>
-                            <p className="text-sm text-muted-foreground">Try 20 mins today</p>
-                          </CardContent>
-                        </Card>
-                        
-                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-primary/5 to-primary/10">
-                          <CardContent className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 rounded-lg bg-primary/20">
-                                <Clock className="h-5 w-5 text-primary" />
-                              </div>
-                              <span className="text-sm font-medium text-muted-foreground">Best Study Time</span>
-                            </div>
-                            <div className="text-2xl font-semibold text-foreground mb-1">7-9 PM</div>
-                            <p className="text-sm text-muted-foreground">Most productive</p>
-                          </CardContent>
-                        </Card>
-                        
-                        <Card className="rounded-xl border-border/40 bg-gradient-to-br from-purple-500/5 to-purple-500/10">
-                          <CardContent className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 rounded-lg bg-purple-500/20">
-                                <Brain className="h-5 w-5 text-purple-500" />
-                              </div>
-                              <span className="text-sm font-medium text-muted-foreground">Retention</span>
-                            </div>
-                            <div className="text-2xl font-semibold text-foreground mb-1">74%</div>
-                            <p className="text-sm text-muted-foreground">Above average</p>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Weekly Plan */}
-                  {filteredSubjects.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.4 }}
-                      className="space-y-4"
-                    >
-                      <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-semibold text-foreground">Your weekly plan to reach your targets</h2>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="rounded-xl">
-                            Regenerate
-                          </Button>
-                          <Button variant="outline" size="sm" className="rounded-xl">
-                            <Download className="h-4 w-4 mr-2" />
-                            Export
-                          </Button>
-                        </div>
-                      </div>
-                      
-                      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => (
-                          <Card key={day} className="min-w-[280px] rounded-2xl border-border/40 hover:shadow-md transition-shadow">
-                            <CardContent className="p-5">
-                              <div className="flex items-center justify-between mb-4">
-                                <h3 className="font-semibold text-foreground">{day}</h3>
-                                <span className="text-xs text-muted-foreground">Jan {22 + index}</span>
-                              </div>
-                              
-                              <div className="space-y-3">
-                                <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                                  <input type="checkbox" className="mt-1 rounded border-border" />
-                                  <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-medium text-foreground mb-1">Chemistry • Energetics</div>
-                                    <div className="text-xs text-muted-foreground">25 mins</div>
-                                  </div>
-                                </div>
-                                
-                                <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                                  <input type="checkbox" className="mt-1 rounded border-border" />
-                                  <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-medium text-foreground mb-1">Physics • Forces</div>
-                                    <div className="text-xs text-muted-foreground">30 mins</div>
-                                  </div>
-                                </div>
-                                
-                                <button className="w-full py-2 text-sm text-primary hover:bg-primary/5 rounded-xl transition-colors">
-                                  + Add task
-                                </button>
-                              </div>
-                              
-                              <div className="mt-4 pt-4 border-t border-border/40">
-                                <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                                  <div className="h-full w-1/3 bg-primary rounded-full" />
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Footer Nudge */}
-                  {filteredSubjects.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                      className="text-center py-8"
-                    >
-                      <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-                        Small, consistent study sessions beat cramming. You've got this.
-                      </p>
-                    </motion.div>
-                  )}
-                </div>
+                <MedlySubjectsView
+                  profile={profile}
+                  mockSubjects={mockSubjects}
+                  weekPlan={weekPlan}
+                  getStatusColor={getStatusColor}
+                  weekTasksCompleted={weekTasksCompleted}
+                  setWeekTasksCompleted={setWeekTasksCompleted}
+                  setShowAddSubjects={setShowAddSubjects}
+                  setSelectedDrawerSubject={setSelectedDrawerSubject}
+                  setSubjectDrawerOpen={setSubjectDrawerOpen}
+                  insightFilter={insightFilter}
+                  setInsightFilter={setInsightFilter}
+                />
               ) : (
                 // Subject Path View (when a subject is selected for practice)
                 <div>
