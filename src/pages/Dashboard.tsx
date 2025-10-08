@@ -1794,17 +1794,17 @@ const Dashboard = () => {
                 <div>
                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
                      <div>
-                       <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-2" style={{ color: '#1a1a1a' }}>
+                       <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2" style={{ color: '#1a1a1a' }}>
                          Your Subjects
                        </h2>
-                       <p className="text-base" style={{ color: '#6B7280' }}>
+                       <p className="text-base font-medium" style={{ color: '#6B7280' }}>
                          Choose which subjects you want to study and personalise.
                        </p>
                      </div>
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
-                        className="font-semibold py-2 px-6 rounded-full flex items-center space-x-2 transition-all duration-200 shadow-md"
+                        className="font-bold py-2 px-6 rounded-full flex items-center space-x-2 transition-all duration-200 shadow-md"
                         style={{ 
                           backgroundColor: '#3BAFDA',
                           color: '#FFFFFF'
@@ -1844,7 +1844,7 @@ const Dashboard = () => {
                               <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
-                                    <span className="text-xs font-semibold px-3 py-1 rounded-full mobile-text-wrap" style={{ 
+                                    <span className="text-xs font-bold px-3 py-1 rounded-full mobile-text-wrap" style={{ 
                                       color: '#3BAFDA',
                                       backgroundColor: '#E8F7FC'
                                     }}>
@@ -1852,7 +1852,7 @@ const Dashboard = () => {
                                     </span>
                                   </div>
                                   
-                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-semibold tracking-tight mb-4 mobile-text-wrap`} style={{ color: '#1a1a1a' }}>
+                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold tracking-tight mb-4 mobile-text-wrap`} style={{ color: '#1a1a1a' }}>
                                     {getSubjectDisplayName(subject)}
                                   </h3>
                                   
@@ -1867,7 +1867,7 @@ const Dashboard = () => {
                                   </div>
 
                                   <Button
-                                    className={`font-semibold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-md transition-all duration-200 mobile-touch-target`}
+                                    className={`font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-md transition-all duration-200 mobile-touch-target`}
                                     style={{
                                       backgroundColor: '#3BAFDA',
                                       color: '#FFFFFF'
@@ -1939,15 +1939,15 @@ const Dashboard = () => {
                   <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E8F7FC' }}>
                     <BookOpen className="h-12 w-12" style={{ color: '#3BAFDA' }} />
                   </div>
-                  <h3 className="text-2xl font-semibold tracking-tight mb-4" style={{ color: '#1a1a1a' }}>
+                  <h3 className="text-2xl font-bold tracking-tight mb-4" style={{ color: '#1a1a1a' }}>
                     No subjects added yet
                   </h3>
-                  <p className="text-lg mb-8" style={{ color: '#6B7280' }}>
+                  <p className="text-lg font-medium mb-8" style={{ color: '#6B7280' }}>
                     Add your GCSE or A-Level subjects to start your personalised revision.
                   </p>
                   <Button
                     onClick={() => setShowAddSubjects(true)}
-                    className="font-semibold py-4 px-8 rounded-full text-lg flex items-center space-x-2 shadow-md transition-all duration-200"
+                    className="font-bold py-4 px-8 rounded-full text-lg flex items-center space-x-2 shadow-md transition-all duration-200"
                     style={{
                       backgroundColor: '#3BAFDA',
                       color: '#FFFFFF'
@@ -1970,7 +1970,7 @@ const Dashboard = () => {
                        borderColor: '#E7ECF5'
                      }}>
                       <div className="flex items-center justify-between">
-                        <h2 className="text-3xl font-semibold tracking-tight" style={{ color: '#1a1a1a' }}>Add a new subject</h2>
+                        <h2 className="text-3xl font-bold tracking-tight" style={{ color: '#1a1a1a' }}>Add a new subject</h2>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
                           className="w-8 h-8 p-0 rounded-full transition-colors"
@@ -1986,7 +1986,7 @@ const Dashboard = () => {
                         <TabsList className="grid w-full grid-cols-2 mb-6 p-1 rounded-full" style={{ backgroundColor: '#F7F9FC' }}>
                           <TabsTrigger 
                             value="gcse" 
-                            className="rounded-full font-semibold data-[state=active]:shadow-sm transition-all"
+                            className="rounded-full font-bold data-[state=active]:shadow-sm transition-all"
                             style={{ 
                               color: '#6B7280'
                             }}
@@ -1995,7 +1995,7 @@ const Dashboard = () => {
                           </TabsTrigger>
                           <TabsTrigger 
                             value="alevel"
-                            className="rounded-full font-semibold data-[state=active]:shadow-sm transition-all"
+                            className="rounded-full font-bold data-[state=active]:shadow-sm transition-all"
                             style={{ 
                               color: '#6B7280'
                             }}
@@ -2041,10 +2041,10 @@ const Dashboard = () => {
                                          <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
                                        </div>
                                        <div className="flex-1 min-w-0">
-                                         <h3 className="text-lg font-semibold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
+                                         <h3 className="text-lg font-bold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
                                            {getSubjectDisplayName(subject)}
                                          </h3>
-                                         <p className="text-sm mobile-text-wrap" style={{ color: '#6B7280' }}>
+                                         <p className="text-sm font-medium mobile-text-wrap" style={{ color: '#6B7280' }}>
                                            {subject.topics.length} topics available
                                          </p>
                                        </div>
@@ -2095,10 +2095,10 @@ const Dashboard = () => {
                                       <Plus className="h-6 w-6" style={{ color: '#FFFFFF' }} />
                                     </div>
                                      <div className="flex-1 min-w-0">
-                                       <h3 className="text-lg font-semibold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
+                                       <h3 className="text-lg font-bold mobile-text-wrap" style={{ color: '#1a1a1a' }}>
                                          {getSubjectDisplayName(subject)}
                                        </h3>
-                                       <p className="text-sm mobile-text-wrap" style={{ color: '#6B7280' }}>
+                                       <p className="text-sm font-medium mobile-text-wrap" style={{ color: '#6B7280' }}>
                                          {subject.topics.length} topics available
                                        </p>
                                      </div>
