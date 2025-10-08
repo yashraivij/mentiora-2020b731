@@ -115,7 +115,7 @@ export function MedlySubjectsView({
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-white p-8 md:p-10 shadow-[0_6px_24px_rgba(31,107,255,0.08)]"
+        className="relative overflow-hidden rounded-2xl bg-white p-8 md:p-10 shadow-[0_6px_24px_rgba(14,165,233,0.08)]"
       >
         
         <div className="relative z-10">
@@ -127,16 +127,16 @@ export function MedlySubjectsView({
             <div className="flex flex-wrap items-center gap-2">
               <Button 
                 onClick={() => setShowAddSubjects(true)}
-                className="rounded-xl bg-[#1F6BFF] hover:bg-[#1456DA] text-white shadow-lg"
+                className="rounded-xl bg-[#0EA5E9] hover:bg-[#0284C7] text-white shadow-lg"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
               </Button>
-              <Button variant="ghost" className="rounded-xl text-[#1F6BFF] hover:bg-[#1F6BFF]/5">
+              <Button variant="ghost" className="rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/5">
                 <Target className="h-4 w-4 mr-2" />
                 Update Targets
               </Button>
-              <Button variant="ghost" className="rounded-xl text-[#1F6BFF] hover:bg-[#1F6BFF]/5">
+              <Button variant="ghost" className="rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/5">
                 <Download className="h-4 w-4 mr-2" />
                 Export PDF
               </Button>
@@ -149,11 +149,11 @@ export function MedlySubjectsView({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#1F6BFF]/10"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#0EA5E9]/10"
             >
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 rounded-lg bg-[#1F6BFF]/10">
-                  <Target className="h-5 w-5 text-[#1F6BFF]" />
+                <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                  <Target className="h-5 w-5 text-[#0EA5E9]" />
                 </div>
                 <span className="text-xs font-medium text-[#5D6470]">Overall Progress</span>
               </div>
@@ -167,7 +167,7 @@ export function MedlySubjectsView({
                   {profile.overallPred}
                 </motion.span>
                 <span className="text-sm text-[#5D6470]">→</span>
-                <span className="text-lg font-medium text-[#1F6BFF]">{profile.overallTarget}</span>
+                <span className="text-lg font-medium text-[#0EA5E9]">{profile.overallTarget}</span>
               </div>
               <div className="mt-2 flex gap-2">
                 <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
@@ -175,7 +175,7 @@ export function MedlySubjectsView({
                     initial={{ width: 0 }}
                     animate={{ width: `${(profile.overallPred / 10) * 100}%` }}
                     transition={{ duration: 1, delay: 0.4 }}
-                    className="h-full bg-[#1F6BFF] rounded-full"
+                    className="h-full bg-[#0EA5E9] rounded-full"
                   />
                 </div>
               </div>
@@ -208,7 +208,7 @@ export function MedlySubjectsView({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#1F6BFF]/10"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#0EA5E9]/10"
             >
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 rounded-lg bg-[#F59E0B]/10">
@@ -231,11 +231,11 @@ export function MedlySubjectsView({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.25 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#1F6BFF]/10"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-[#0EA5E9]/10"
             >
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 rounded-lg bg-[#1F6BFF]/10">
-                  <Calendar className="h-5 w-5 text-[#1F6BFF]" />
+                <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                  <Calendar className="h-5 w-5 text-[#0EA5E9]" />
                 </div>
                 <span className="text-xs font-medium text-[#5D6470]">This Week</span>
               </div>
@@ -278,7 +278,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className="group relative rounded-2xl border-border/40 hover:shadow-[0_12px_32px_rgba(31,107,255,0.12)] hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-white"
+                className="group relative rounded-2xl border-border/40 hover:shadow-[0_12px_32px_rgba(14,165,233,0.12)] hover:-translate-y-1 transition-all duration-300 cursor-pointer overflow-hidden bg-white"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -312,7 +312,7 @@ export function MedlySubjectsView({
                           initial={{ width: 0 }}
                           animate={{ width: `${(subject.predicted / 10) * 100}%` }}
                           transition={{ duration: 1, delay: 0.2 * index }}
-                          className="h-full bg-[#1F6BFF] rounded-full"
+                          className="h-full bg-[#0EA5E9] rounded-full"
                         />
                       </div>
                     </div>
@@ -333,7 +333,7 @@ export function MedlySubjectsView({
                   {/* Sparkline */}
                   <div className="mb-4">
                     <div className="text-xs text-[#5D6470] mb-1">Last 6 attempts</div>
-                    <Sparkline data={subject.trend} className="text-[#1F6BFF]" />
+                    <Sparkline data={subject.trend} className="text-[#0EA5E9]" />
                   </div>
                   
                   {/* Strong / Focus */}
@@ -347,7 +347,7 @@ export function MedlySubjectsView({
                     <Button 
                       size="sm"
                       variant="ghost"
-                      className="flex-1 rounded-lg text-[#1F6BFF] hover:bg-[#1F6BFF]/5 justify-between"
+                      className="flex-1 rounded-lg text-[#0EA5E9] hover:bg-[#0EA5E9]/5 justify-between"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -359,7 +359,7 @@ export function MedlySubjectsView({
                     </Button>
                     <Button 
                       size="sm"
-                      className="rounded-lg bg-[#1F6BFF] hover:bg-[#1456DA] text-white px-3"
+                      className="rounded-lg bg-[#0EA5E9] hover:bg-[#0284C7] text-white px-3"
                       onClick={(e) => e.stopPropagation()}
                     >
                       Quiz
@@ -377,12 +377,12 @@ export function MedlySubjectsView({
             transition={{ delay: 0.1 * filteredMockSubjects.length }}
           >
             <Card 
-              className="rounded-2xl border-2 border-dashed border-[#1F6BFF]/30 hover:border-[#1F6BFF]/60 hover:bg-white transition-all duration-300 cursor-pointer h-full"
+              className="rounded-2xl border-2 border-dashed border-[#0EA5E9]/30 hover:border-[#0EA5E9]/60 hover:bg-[#0EA5E9]/5 transition-all duration-300 cursor-pointer h-full"
               onClick={() => setShowAddSubjects(true)}
             >
               <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[400px]">
-                <div className="p-4 rounded-full bg-[#1F6BFF]/5 mb-4">
-                  <Plus className="h-8 w-8 text-[#1F6BFF]" />
+                <div className="p-4 rounded-full bg-[#0EA5E9]/5 mb-4">
+                  <Plus className="h-8 w-8 text-[#0EA5E9]" />
                 </div>
                 <h3 className="text-lg font-semibold text-[#0F172A] mb-1">Add subject</h3>
                 <p className="text-sm text-[#5D6470] text-center">
@@ -404,8 +404,8 @@ export function MedlySubjectsView({
           >
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-[#16A34A]/20">
-                  <TrendingUp className="h-5 w-5 text-[#16A34A]" />
+                <div className="p-2 rounded-lg bg-[#0EA5E9]/20">
+                  <TrendingUp className="h-5 w-5 text-[#0EA5E9]" />
                 </div>
                 <span className="text-sm font-medium text-[#5D6470]">Strongest</span>
               </div>
@@ -420,8 +420,8 @@ export function MedlySubjectsView({
           >
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-[#EF4444]/20">
-                  <TrendingDown className="h-5 w-5 text-[#EF4444]" />
+                <div className="p-2 rounded-lg bg-[#F59E0B]/20">
+                  <TrendingDown className="h-5 w-5 text-[#F59E0B]" />
                 </div>
                 <span className="text-sm font-medium text-[#5D6470]">Focus Area</span>
               </div>
@@ -433,8 +433,8 @@ export function MedlySubjectsView({
           <Card className="rounded-xl border-border/40 bg-white">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-lg bg-[#1F6BFF]/20">
-                  <TrendingUp className="h-5 w-5 text-[#1F6BFF]" />
+                <div className="p-2 rounded-lg bg-[#0EA5E9]/20">
+                  <TrendingUp className="h-5 w-5 text-[#0EA5E9]" />
                 </div>
                 <span className="text-sm font-medium text-[#5D6470]">Weekly Gain</span>
               </div>
@@ -465,7 +465,7 @@ export function MedlySubjectsView({
             <h2 className="text-2xl font-semibold text-[#0F172A]">This week to hit your targets</h2>
             <p className="text-sm text-[#5D6470] mt-1">{completedTasks} of {totalTasks} tasks completed</p>
           </div>
-          <Button variant="outline" className="rounded-xl border-[#1F6BFF] text-[#1F6BFF] hover:bg-[#1F6BFF]/5">
+          <Button variant="outline" className="rounded-xl border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/5">
             Generate plan
           </Button>
         </div>
@@ -505,7 +505,7 @@ export function MedlySubjectsView({
                           type="checkbox" 
                           checked={isCompleted}
                           onChange={() => {}}
-                          className="mt-1 rounded border-gray-300 text-[#1F6BFF] focus:ring-[#1F6BFF]" 
+                          className="mt-1 rounded border-gray-300 text-[#0EA5E9] focus:ring-[#0EA5E9]" 
                         />
                         <div className="flex-1 min-w-0">
                           <div className={`text-sm font-medium ${isCompleted ? 'text-[#5D6470] line-through' : 'text-[#0F172A]'} mb-1`}>
@@ -517,16 +517,16 @@ export function MedlySubjectsView({
                     );
                   })}
                   
-                  <button className="w-full py-2 text-sm text-[#1F6BFF] hover:bg-[#1F6BFF]/5 rounded-xl transition-colors">
+                  <button className="w-full py-2 text-sm text-[#0EA5E9] hover:bg-[#0EA5E9]/5 rounded-xl transition-colors">
                     + Add task
                   </button>
                 </div>
                 
                 {/* Day Progress */}
-                <div className="mt-4 pt-4 border-t border-border/40">
+                  <div className="mt-4 pt-4 border-t border-border/40">
                   <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-[#1F6BFF] rounded-full transition-all duration-300"
+                      className="h-full bg-[#0EA5E9] rounded-full transition-all duration-300"
                       style={{ 
                         width: `${(tasks.filter((_, i) => weekTasksCompleted.has(`${day}-${i}`)).length / tasks.length) * 100}%` 
                       }}
