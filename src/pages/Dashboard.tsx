@@ -1771,50 +1771,135 @@ const Dashboard = () => {
           <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-5xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
-              {/* Dynamic Streak Graphic */}
-              <div className="mb-8 flex items-center justify-start gap-2">
-                {Array.from({ length: 7 }).map((_, index) => {
-                  const today = new Date();
-                  const currentDay = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
-                  const daysFromMonday = currentDay === 0 ? 6 : currentDay - 1; // Adjust so Monday is 0
-                  const monday = new Date(today);
-                  monday.setDate(today.getDate() - daysFromMonday);
-                  
-                  const date = new Date(monday);
-                  date.setDate(monday.getDate() + index);
-                  
-                  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })[0];
-                  const isToday = date.toDateString() === today.toDateString();
-                  const isPast = date < today || isToday;
-                  const hasActivity = isPast && (currentStreak > 0);
-                  
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className="flex flex-col items-center gap-1.5"
-                    >
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                        hasActivity 
-                          ? 'bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/50 scale-110' 
-                          : 'bg-muted/50 border border-border/50'
-                      }`}>
-                        {hasActivity ? (
-                          <Flame className="h-5 w-5 text-white drop-shadow-md" />
-                        ) : (
-                          <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
-                        )}
-                      </div>
-                      <span className={`text-xs font-semibold ${
-                        isToday ? 'text-orange-600' : hasActivity ? 'text-foreground' : 'text-muted-foreground/60'
-                      }`}>
-                        {dayName}
+              {/* Premium Streak Header Bar */}
+              <div 
+                className="mb-8 rounded-2xl p-8 transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(135deg, #EAF2FF 0%, #FFFFFF 100%)',
+                  boxShadow: '0 2px 20px rgba(15, 23, 42, 0.05)'
+                }}
+              >
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+                  {/* Left Section - Encouragement Copy */}
+                  <div className="flex-shrink-0 text-center lg:text-left">
+                    <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
+                      <span className="text-3xl font-bold" style={{ color: '#0F172A' }}>
+                        {currentStreak === 0 ? '🌟 Start Your Streak!' : `🔥 ${currentStreak}-Day Streak!`}
                       </span>
-                    </motion.div>
-                  );
-                })}
+                    </div>
+                    <p className="text-sm font-medium max-w-xs" style={{ color: '#64748B' }}>
+                      {currentStreak === 0 && "Begin your journey — consistency is key to success."}
+                      {currentStreak >= 1 && currentStreak <= 3 && `Nice start — let's build your streak!`}
+                      {currentStreak >= 4 && currentStreak <= 9 && `You're building real consistency — ${currentStreak} days strong.`}
+                      {currentStreak >= 10 && `Consistency like this changes your grades — ${currentStreak} days in a row!`}
+                    </p>
+                  </div>
+
+                  {/* Middle Section - Visual Streak Tracker */}
+                  <div className="flex items-center gap-3">
+                    {Array.from({ length: 7 }).map((_, index) => {
+                      const today = new Date();
+                      const currentDay = today.getDay();
+                      const daysFromMonday = currentDay === 0 ? 6 : currentDay - 1;
+                      const monday = new Date(today);
+                      monday.setDate(today.getDate() - daysFromMonday);
+                      
+                      const date = new Date(monday);
+                      date.setDate(monday.getDate() + index);
+                      
+                      const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+                      const isToday = date.toDateString() === today.toDateString();
+                      const isPast = date < today || isToday;
+                      const hasActivity = isPast && (currentStreak > 0);
+                      const isLatest = hasActivity && isToday;
+                      
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: index * 0.08, duration: 0.3, ease: "easeOut" }}
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          className="group relative flex flex-col items-center gap-2 cursor-pointer"
+                        >
+                          <div 
+                            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
+                              hasActivity 
+                                ? 'shadow-lg' 
+                                : 'border-2'
+                            } ${isLatest ? 'animate-pulse' : ''}`}
+                            style={{
+                              background: hasActivity 
+                                ? 'linear-gradient(135deg, #2E5BFF 0%, #5B8FFF 100%)'
+                                : 'transparent',
+                              borderColor: hasActivity ? 'transparent' : '#E2E8F0',
+                              boxShadow: hasActivity ? '0 4px 12px rgba(46, 91, 255, 0.3)' : 'none'
+                            }}
+                          >
+                            {hasActivity ? (
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.2 + index * 0.08 }}
+                              >
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                  <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </motion.div>
+                            ) : (
+                              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#CBD5E1' }} />
+                            )}
+                          </div>
+                          <span 
+                            className={`text-xs font-semibold transition-colors duration-200 ${
+                              isToday ? 'opacity-100' : 'opacity-60'
+                            }`}
+                            style={{ 
+                              color: isToday ? '#2E5BFF' : '#64748B'
+                            }}
+                          >
+                            {dayName.slice(0, 1)}
+                          </span>
+                          
+                          {/* Tooltip on hover */}
+                          <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                            <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-1.5 whitespace-nowrap shadow-lg">
+                              {dayName}
+                              {hasActivity && " ✓"}
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right Section - CTA Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex-shrink-0 px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
+                    style={{
+                      background: 'linear-gradient(135deg, #2E5BFF 0%, #5B8FFF 100%)',
+                      color: '#FFFFFF'
+                    }}
+                    onClick={() => {
+                      // Optional: Add navigation or action
+                    }}
+                  >
+                    {currentStreak >= 10 ? (
+                      <>
+                        <span>🔥 You're on fire!</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Keep it going</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </>
+                    )}
+                  </motion.button>
+                </div>
               </div>
 
               {/* Subject Selection or Subject Path */}
