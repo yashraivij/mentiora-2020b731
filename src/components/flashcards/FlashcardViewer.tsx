@@ -440,7 +440,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                         <Button 
                           onClick={handleAnswerSubmit}
                           disabled={!userAnswer.trim()}
-                          className="w-full bg-[#1F6BFF] hover:bg-[#1456DA] text-white font-semibold py-6 disabled:opacity-50 shadow-[0_6px_24px_rgba(31,107,255,0.25)] hover:shadow-[0_8px_32px_rgba(31,107,255,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
+                          className="w-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white font-semibold py-6 disabled:opacity-50 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
                         >
                           <Check className="h-4 w-4 mr-2" />
                           Check Answer

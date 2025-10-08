@@ -7,56 +7,56 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 195 69% 54%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 142 76% 55%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 195 69% 54%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 195 69% 54%;
 
     --radius: 0.5rem;
 
-    /* Premium gradients for light mode */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 70% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--muted)));
-    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 85% 65%));
-    --gradient-background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)/0.1));
+    /* Medly gradients - clean and minimal */
+    --gradient-primary: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 69% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-accent: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 60% 60%));
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 0 0% 100%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 0 0% 10%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 195 69% 54%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 0 0% 96%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 0 0% 10%;
 
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 0 0% 90%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 195 69% 54%;
   }
 
   /* Color Theme Variants */
@@ -230,56 +230,48 @@
   }
 
   .dark {
-    /* True dark mode - consistent across entire app */
-    --background: 0 0% 7%;         /* #121212 - main background */
-    --foreground: 0 0% 100%;       /* #FFFFFF - primary text */
+    /* Medly dark mode - clean black with cyan accents */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 100%;
 
-    /* Cards and content sections */
-    --card: 0 0% 12%;              /* #1E1E1E - content containers */
-    --card-foreground: 0 0% 100%;  /* #FFFFFF - card text */
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 12%;           /* #1E1E1E - popovers */
-    --popover-foreground: 0 0% 100%; /* #FFFFFF - popover text */
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    /* Primary keeps Mentiora's gradient accent */
-    --primary: 217 91% 60%;
+    --primary: 195 69% 54%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary elements */
-    --secondary: 0 0% 15%;         /* Slightly lighter than cards */
-    --secondary-foreground: 0 0% 93%; /* #EDEDED - off-white */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 90%;
 
-    /* Muted elements */
-    --muted: 0 0% 15%;             /* Muted backgrounds */
-    --muted-foreground: 0 0% 63%;  /* #A0A0A0 - secondary text */
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    /* Accent for interactive elements */
-    --accent: 0 0% 18%;            /* Hover states */
+    --accent: 195 69% 54%;
     --accent-foreground: 0 0% 100%;
 
-    /* Destructive actions */
-    --destructive: 0 78% 60%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs */
-    --border: 0 0% 18%;            /* Subtle borders */
-    --input: 0 0% 15%;             /* Input backgrounds */
-    --ring: 217 91% 60%;           /* Focus rings keep brand color */
+    --border: 0 0% 18%;
+    --input: 0 0% 15%;
+    --ring: 195 69% 54%;
     
-    /* Sidebar consistent with main theme */
-    --sidebar-background: 0 0% 12%; /* #1E1E1E */
-    --sidebar-foreground: 0 0% 93%; /* #EDEDED */
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 195 69% 54%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-ring: 195 69% 54%;
 
-    /* Dark mode gradients - no light gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 70% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 15%));
-    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 85% 65%));
+    /* Medly dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 69% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 10%), hsl(0 0% 12%));
+    --gradient-accent: linear-gradient(135deg, hsl(195 69% 54%), hsl(195 60% 60%));
     --gradient-background: linear-gradient(135deg, hsl(0 0% 7%), hsl(0 0% 10%));
   }
 }
