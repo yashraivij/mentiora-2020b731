@@ -2164,22 +2164,22 @@ const Dashboard = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-gradient-to-br from-card via-background to-card/80 rounded-3xl shadow-2xl border border-border/50 max-w-4xl w-full max-h-[85vh] overflow-hidden backdrop-blur-xl"
+                    className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20 rounded-3xl shadow-2xl border-2 border-blue-200 dark:border-purple-700/50 max-w-4xl w-full max-h-[85vh] overflow-hidden"
                   >
                     {/* Header with gradient */}
-                    <div className="relative p-6 border-b border-border/50 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+                    <div className="relative p-6 border-b-2 border-blue-200 dark:border-purple-700/50 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-fade-in">
-                            Add Subjects
+                          <h2 className="text-3xl font-bold text-white animate-fade-in">
+                            Add Subjects 📚
                           </h2>
-                          <p className="text-sm text-muted-foreground mt-1">Choose subjects to add to your dashboard</p>
+                          <p className="text-sm text-white/90 mt-1">Choose subjects to add to your dashboard</p>
                         </div>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
                           variant="ghost"
                           size="icon"
-                          className="w-10 h-10 rounded-full bg-muted/50 hover:bg-destructive/20 hover:text-destructive transition-all duration-200"
+                          className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all duration-200"
                         >
                           <X className="h-5 w-5" />
                         </Button>
@@ -2187,37 +2187,58 @@ const Dashboard = () => {
                     </div>
                     
                     {/* Content */}
-                    <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)] scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                    <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)] scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-transparent">
                       <Tabs defaultValue="gcse" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-6 bg-muted/50 p-1 h-12">
+                        <TabsList className="grid w-full grid-cols-2 mb-6 bg-white dark:bg-gray-800 p-1 h-12 shadow-md">
                           <TabsTrigger 
                             value="gcse"
-                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground font-semibold rounded-lg transition-all duration-200"
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white font-semibold rounded-lg transition-all duration-200"
                           >
-                            GCSE Subjects
+                            🎓 GCSE Subjects
                           </TabsTrigger>
                           <TabsTrigger 
                             value="alevel"
-                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground font-semibold rounded-lg transition-all duration-200"
+                            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white font-semibold rounded-lg transition-all duration-200"
                           >
-                            A-Level Subjects
+                            🎯 A-Level Subjects
                           </TabsTrigger>
                         </TabsList>
                         
                         <TabsContent value="gcse" className="animate-fade-in">
                           {availableSubjects.filter(s => !s.id.includes('alevel')).length === 0 ? (
                             <div className="text-center py-12 px-4">
-                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
-                                <Check className="h-8 w-8 text-accent" />
+                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
                               </div>
-                              <p className="text-lg font-medium text-foreground">All GCSE subjects added!</p>
-                              <p className="text-sm text-muted-foreground mt-2">You've already added all available GCSE subjects to your dashboard.</p>
+                              <p className="text-lg font-medium text-gray-900 dark:text-white">All GCSE subjects added! 🎉</p>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">You&apos;ve already added all available GCSE subjects to your dashboard.</p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {availableSubjects.filter(s => !s.id.includes('alevel')).map((subject) => {
                                 const colors = subjectColors[subject.id] || subjectColors["physics"];
-                                const IconComponent = getSubjectIcon(subject.id);
+                                const subjectEmojis: { [key: string]: string } = {
+                                  "physics": "⚛️",
+                                  "physics-edexcel": "⚛️",
+                                  "chemistry": "🧪",
+                                  "chemistry-edexcel": "🧪",
+                                  "biology": "🔬",
+                                  "biology-edexcel": "🔬",
+                                  "biology-aqa-alevel": "🧬",
+                                  "mathematics": "🔢",
+                                  "maths-edexcel": "🔢",
+                                  "maths-aqa-alevel": "📐",
+                                  "english-language": "✍️",
+                                  "english-literature": "📖",
+                                  "geography": "🌍",
+                                  "geography-paper-2": "🌍",
+                                  "history": "🕰️",
+                                  "religious-studies": "⛪",
+                                  "business-edexcel-igcse": "💼",
+                                  "computer-science": "💻",
+                                  "psychology": "🧠",
+                                };
+                                const emoji = subjectEmojis[subject.id] || "📚";
                                 
                                 return (
                                   <motion.div
@@ -2227,7 +2248,7 @@ const Dashboard = () => {
                                     transition={{ duration: 0.2 }}
                                   >
                                     <Card 
-                                      className="cursor-pointer border-2 border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group"
+                                      className="cursor-pointer border-2 border-blue-200 dark:border-purple-700/50 hover:border-blue-400 dark:hover:border-purple-500 hover:shadow-xl hover:shadow-blue-200 dark:hover:shadow-purple-900/30 transition-all duration-300 bg-white dark:bg-gray-800 group"
                                       onClick={() => {
                                         addSubject(subject.id);
                                         setShowAddSubjects(false);
@@ -2236,19 +2257,19 @@ const Dashboard = () => {
                                       <CardContent className="p-5">
                                         <div className="flex items-center space-x-4">
                                           <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                            <IconComponent className="h-7 w-7 text-white" />
+                                            <span className="text-3xl">{emoji}</span>
                                           </div>
                                           <div className="flex-1 min-w-0">
-                                            <h3 className="text-lg font-bold text-foreground mobile-text-wrap group-hover:text-primary transition-colors duration-200">
+                                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mobile-text-wrap group-hover:text-blue-600 dark:group-hover:text-purple-400 transition-colors duration-200">
                                               {getSubjectDisplayName(subject)}
                                             </h3>
-                                            <p className="text-sm text-muted-foreground mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                            <p className="text-sm text-gray-600 dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                               <BookOpen className="h-3.5 w-3.5" />
                                               {subject.topics.length} topics available
                                             </p>
                                           </div>
-                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 flex items-center justify-center transition-all duration-300">
-                                            <Plus className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-purple-900/30 group-hover:bg-blue-500 dark:group-hover:bg-purple-500 group-hover:scale-110 flex items-center justify-center transition-all duration-300">
+                                            <Plus className="h-5 w-5 text-blue-600 dark:text-purple-400 group-hover:text-white transition-colors duration-300" />
                                           </div>
                                         </div>
                                       </CardContent>
@@ -2263,17 +2284,38 @@ const Dashboard = () => {
                         <TabsContent value="alevel" className="animate-fade-in">
                           {availableSubjects.filter(s => s.id.includes('alevel')).length === 0 ? (
                             <div className="text-center py-12 px-4">
-                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
-                                <Check className="h-8 w-8 text-accent" />
+                              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
                               </div>
-                              <p className="text-lg font-medium text-foreground">All A-Level subjects added!</p>
-                              <p className="text-sm text-muted-foreground mt-2">You've already added all available A-Level subjects to your dashboard.</p>
+                              <p className="text-lg font-medium text-gray-900 dark:text-white">All A-Level subjects added! 🎉</p>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">You&apos;ve already added all available A-Level subjects to your dashboard.</p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {availableSubjects.filter(s => s.id.includes('alevel')).map((subject) => {
                                 const colors = subjectColors[subject.id] || subjectColors["physics"];
-                                const IconComponent = getSubjectIcon(subject.id);
+                                const subjectEmojis: { [key: string]: string } = {
+                                  "physics": "⚛️",
+                                  "physics-edexcel": "⚛️",
+                                  "chemistry": "🧪",
+                                  "chemistry-edexcel": "🧪",
+                                  "biology": "🔬",
+                                  "biology-edexcel": "🔬",
+                                  "biology-aqa-alevel": "🧬",
+                                  "mathematics": "🔢",
+                                  "maths-edexcel": "🔢",
+                                  "maths-aqa-alevel": "📐",
+                                  "english-language": "✍️",
+                                  "english-literature": "📖",
+                                  "geography": "🌍",
+                                  "geography-paper-2": "🌍",
+                                  "history": "🕰️",
+                                  "religious-studies": "⛪",
+                                  "business-edexcel-igcse": "💼",
+                                  "computer-science": "💻",
+                                  "psychology": "🧠",
+                                };
+                                const emoji = subjectEmojis[subject.id] || "📚";
                                 
                                 return (
                                   <motion.div
@@ -2283,7 +2325,7 @@ const Dashboard = () => {
                                     transition={{ duration: 0.2 }}
                                   >
                                     <Card 
-                                      className="cursor-pointer border-2 border-border/50 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group"
+                                      className="cursor-pointer border-2 border-purple-200 dark:border-pink-700/50 hover:border-purple-400 dark:hover:border-pink-500 hover:shadow-xl hover:shadow-purple-200 dark:hover:shadow-pink-900/30 transition-all duration-300 bg-white dark:bg-gray-800 group"
                                       onClick={() => {
                                         addSubject(subject.id);
                                         setShowAddSubjects(false);
@@ -2292,19 +2334,19 @@ const Dashboard = () => {
                                       <CardContent className="p-5">
                                         <div className="flex items-center space-x-4">
                                           <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                            <IconComponent className="h-7 w-7 text-white" />
+                                            <span className="text-3xl">{emoji}</span>
                                           </div>
                                           <div className="flex-1 min-w-0">
-                                            <h3 className="text-lg font-bold text-foreground mobile-text-wrap group-hover:text-primary transition-colors duration-200">
+                                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mobile-text-wrap group-hover:text-purple-600 dark:group-hover:text-pink-400 transition-colors duration-200">
                                               {getSubjectDisplayName(subject)}
                                             </h3>
-                                            <p className="text-sm text-muted-foreground mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                            <p className="text-sm text-gray-600 dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                               <BookOpen className="h-3.5 w-3.5" />
                                               {subject.topics.length} topics available
                                             </p>
                                           </div>
-                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 flex items-center justify-center transition-all duration-300">
-                                            <Plus className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 dark:bg-pink-900/30 group-hover:bg-purple-500 dark:group-hover:bg-pink-500 group-hover:scale-110 flex items-center justify-center transition-all duration-300">
+                                            <Plus className="h-5 w-5 text-purple-600 dark:text-pink-400 group-hover:text-white transition-colors duration-300" />
                                           </div>
                                         </div>
                                       </CardContent>
