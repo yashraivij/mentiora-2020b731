@@ -9,7 +9,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, Target, Zap } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
-import { motion } from "framer-motion";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -81,11 +80,6 @@ const Practice = () => {
   const [hintCount, setHintCount] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const chatScrollRef = useRef<HTMLDivElement>(null);
-  
-  // Grade animation states
-  const [oldGrade, setOldGrade] = useState<string | null>(null);
-  const [newGrade, setNewGrade] = useState<string | null>(null);
-  const [showGradeAnimation, setShowGradeAnimation] = useState(false);
   
   const {
     notification,
@@ -228,71 +222,6 @@ const Practice = () => {
       chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
     }
   }, [chatMessages, isChatLoading]);
-
-  // Fetch and calculate predicted grade change when session completes
-  useEffect(() => {
-    if (!sessionComplete || !user?.id || !subjectId) return;
-    
-    const fetchGradeData = async () => {
-      const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
-      const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
-      const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
-      
-      // Fetch current subject performance
-      const { data: perfData } = await supabase
-        .from('subject_performance')
-        .select('accuracy_rate')
-        .eq('user_id', user.id)
-        .eq('subject_id', subjectId)
-        .single();
-      
-      if (perfData?.accuracy_rate) {
-        // Calculate old grade from existing accuracy
-        const currentAccuracy = Number(perfData.accuracy_rate) || 0;
-        let oldCalculatedGrade = 'U';
-        if (currentAccuracy >= 90) oldCalculatedGrade = 'A*';
-        else if (currentAccuracy >= 80) oldCalculatedGrade = 'A';
-        else if (currentAccuracy >= 70) oldCalculatedGrade = 'B';
-        else if (currentAccuracy >= 60) oldCalculatedGrade = 'C';
-        else if (currentAccuracy >= 50) oldCalculatedGrade = 'D';
-        else if (currentAccuracy >= 40) oldCalculatedGrade = 'E';
-        
-        setOldGrade(oldCalculatedGrade);
-        
-        // Calculate new predicted grade based on session performance
-        const sessionWeight = 0.15; // This session contributes 15% to overall
-        const newAccuracy = (currentAccuracy * (1 - sessionWeight)) + (averagePercentage * sessionWeight);
-        
-        // Map accuracy to grade
-        let calculatedGrade = 'U';
-        if (newAccuracy >= 90) calculatedGrade = 'A*';
-        else if (newAccuracy >= 80) calculatedGrade = 'A';
-        else if (newAccuracy >= 70) calculatedGrade = 'B';
-        else if (newAccuracy >= 60) calculatedGrade = 'C';
-        else if (newAccuracy >= 50) calculatedGrade = 'D';
-        else if (newAccuracy >= 40) calculatedGrade = 'E';
-        
-        setNewGrade(calculatedGrade);
-        
-        // Trigger animation after a short delay
-        setTimeout(() => setShowGradeAnimation(true), 500);
-      } else {
-        // First session - show new grade
-        let calculatedGrade = 'U';
-        if (averagePercentage >= 90) calculatedGrade = 'A*';
-        else if (averagePercentage >= 80) calculatedGrade = 'A';
-        else if (averagePercentage >= 70) calculatedGrade = 'B';
-        else if (averagePercentage >= 60) calculatedGrade = 'C';
-        else if (averagePercentage >= 50) calculatedGrade = 'D';
-        else if (averagePercentage >= 40) calculatedGrade = 'E';
-        
-        setNewGrade(calculatedGrade);
-        setTimeout(() => setShowGradeAnimation(true), 500);
-      }
-    };
-    
-    fetchGradeData();
-  }, [sessionComplete, user?.id, subjectId, shuffledQuestions, attempts]);
 
   const markAnswerWithSmart = async (question: Question, answer: string) => {
     try {
@@ -762,320 +691,302 @@ const Practice = () => {
     }).length;
     const incorrectAnswers = attempts.length - correctAnswers - partialAnswers;
     
+    // Dynamic grade states for animation
+    const [oldGrade, setOldGrade] = useState<string | null>(null);
+    const [newGrade, setNewGrade] = useState<string | null>(null);
+    const [showGradeAnimation, setShowGradeAnimation] = useState(false);
+
+    // Fetch and calculate predicted grade change
+    useEffect(() => {
+      const fetchGradeData = async () => {
+        if (!user?.id || !subjectId) return;
+        
+        // Fetch current subject performance
+        const { data: perfData } = await supabase
+          .from('subject_performance')
+          .select('accuracy_rate')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .single();
+        
+        if (perfData?.accuracy_rate) {
+          // Calculate old grade from existing accuracy
+          const currentAccuracy = Number(perfData.accuracy_rate) || 0;
+          let oldCalculatedGrade = 'U';
+          if (currentAccuracy >= 90) oldCalculatedGrade = 'A*';
+          else if (currentAccuracy >= 80) oldCalculatedGrade = 'A';
+          else if (currentAccuracy >= 70) oldCalculatedGrade = 'B';
+          else if (currentAccuracy >= 60) oldCalculatedGrade = 'C';
+          else if (currentAccuracy >= 50) oldCalculatedGrade = 'D';
+          else if (currentAccuracy >= 40) oldCalculatedGrade = 'E';
+          
+          setOldGrade(oldCalculatedGrade);
+          
+          // Calculate new predicted grade based on session performance
+          const sessionWeight = 0.15; // This session contributes 15% to overall
+          const newAccuracy = (currentAccuracy * (1 - sessionWeight)) + (averagePercentage * sessionWeight);
+          
+          // Map accuracy to grade
+          let calculatedGrade = 'U';
+          if (newAccuracy >= 90) calculatedGrade = 'A*';
+          else if (newAccuracy >= 80) calculatedGrade = 'A';
+          else if (newAccuracy >= 70) calculatedGrade = 'B';
+          else if (newAccuracy >= 60) calculatedGrade = 'C';
+          else if (newAccuracy >= 50) calculatedGrade = 'D';
+          else if (newAccuracy >= 40) calculatedGrade = 'E';
+          
+          setNewGrade(calculatedGrade);
+          
+          // Trigger animation after a short delay
+          setTimeout(() => setShowGradeAnimation(true), 500);
+        } else {
+          // First session - show new grade
+          let calculatedGrade = 'U';
+          if (averagePercentage >= 90) calculatedGrade = 'A*';
+          else if (averagePercentage >= 80) calculatedGrade = 'A';
+          else if (averagePercentage >= 70) calculatedGrade = 'B';
+          else if (averagePercentage >= 60) calculatedGrade = 'C';
+          else if (averagePercentage >= 50) calculatedGrade = 'D';
+          else if (averagePercentage >= 40) calculatedGrade = 'E';
+          
+          setNewGrade(calculatedGrade);
+          setTimeout(() => setShowGradeAnimation(true), 500);
+        }
+      };
+      
+      fetchGradeData();
+    }, [user?.id, subjectId, averagePercentage]);
+    
     return (
-      <div className="min-h-screen bg-[#F8FAFC] dark:bg-gray-950">
-        {/* Header with Medly Blue */}
-        <motion.header 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="border-b bg-white dark:bg-gray-900 shadow-sm"
-        >
-          <div className="max-w-4xl mx-auto px-6 md:px-8 py-5">
-            <div className="flex items-center gap-3">
-              <motion.div 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", delay: 0.2 }}
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/20"
-              >
-                <CheckCircle2 className="h-6 w-6 text-white" />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <h1 className="text-xl font-bold text-[#0F172A] dark:text-white">Session Complete</h1>
-                <p className="text-sm text-[#64748B] dark:text-gray-400">{topic?.name}</p>
-              </motion.div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+        {/* Premium Header with Gradient */}
+        <header className="border-b border-white/20 dark:border-gray-800/50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl">
+          <div className="max-w-5xl mx-auto px-6 md:px-8 py-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0EA5E9] via-[#38BDF8] to-[#7DD3FC] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/30 animate-scale-in">
+                <CheckCircle2 className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-[#0F172A] to-[#334155] dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                  Session Complete!
+                </h1>
+                <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-medium">{topic?.name}</p>
+              </div>
             </div>
           </div>
-        </motion.header>
+        </header>
 
-        <main className="max-w-4xl mx-auto px-6 md:px-8 py-8 space-y-5">
-          {/* Predicted Grade Card with Animation */}
+        <main className="max-w-5xl mx-auto px-6 md:px-8 py-10">
+          {/* Premium Predicted Grade Card with Animation */}
           {(oldGrade || newGrade) && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(14,165,233,0.18)] transition-shadow duration-300">
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 via-transparent to-[#38BDF8]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <CardHeader className="pb-4 relative z-10">
-                  <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
-                    <motion.div 
-                      className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring" }}
-                    >
-                      <Award className="h-5 w-5 text-[#0EA5E9]" />
-                    </motion.div>
-                    Predicted Grade Impact
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="relative z-10">
-                  <div className="flex items-center justify-center gap-8 py-2">
-                    {oldGrade && (
-                      <motion.div 
-                        className="text-center"
-                        initial={{ opacity: 1, scale: 1 }}
-                        animate={{ 
-                          opacity: showGradeAnimation ? 0.5 : 1,
-                          scale: showGradeAnimation ? 0.9 : 1 
-                        }}
-                        transition={{ duration: 0.7 }}
-                      >
-                        <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">Previous</p>
-                        <div className="text-5xl font-black text-[#94A3B8] dark:text-gray-500">
-                          {oldGrade}
+            <div className="mb-8 animate-fade-in">
+              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-[2px] shadow-2xl shadow-indigo-500/50">
+                <div className="relative bg-white dark:bg-gray-950 rounded-3xl p-8">
+                  {/* Animated background gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-purple-50/50 to-pink-50/50 dark:from-indigo-950/20 dark:via-purple-950/20 dark:to-pink-950/20 rounded-3xl" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <Award className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                      <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">Predicted Grade Impact</h2>
+                    </div>
+                    
+                    <div className="flex items-center justify-center gap-8 mt-8">
+                      {oldGrade && (
+                        <div className="text-center">
+                          <p className="text-sm text-[#64748B] dark:text-gray-400 mb-2 font-medium">Previous</p>
+                          <div className={`text-6xl font-black transition-all duration-700 ${
+                            showGradeAnimation ? 'opacity-50 scale-90' : 'opacity-100 scale-100'
+                          }`}>
+                            <span className="bg-gradient-to-br from-gray-600 to-gray-800 dark:from-gray-400 dark:to-gray-600 bg-clip-text text-transparent">
+                              {oldGrade}
+                            </span>
+                          </div>
                         </div>
-                      </motion.div>
+                      )}
+                      
+                      {oldGrade && newGrade && (
+                        <div className="flex flex-col items-center">
+                          <TrendingUp className={`h-10 w-10 transition-all duration-700 ${
+                            showGradeAnimation 
+                              ? 'text-emerald-500 scale-110' 
+                              : 'text-gray-400 scale-100'
+                          }`} />
+                        </div>
+                      )}
+                      
+                      {newGrade && (
+                        <div className="text-center">
+                          <p className="text-sm text-[#64748B] dark:text-gray-400 mb-2 font-medium">
+                            {oldGrade ? 'Updated' : 'Current'}
+                          </p>
+                          <div className={`text-6xl font-black transition-all duration-700 ${
+                            showGradeAnimation ? 'opacity-100 scale-110' : 'opacity-50 scale-90'
+                          }`}>
+                            <span className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent animate-pulse">
+                              {newGrade}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {oldGrade && newGrade && oldGrade !== newGrade && showGradeAnimation && (
+                      <div className="mt-6 text-center animate-fade-in">
+                        <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 px-6 py-2 text-base font-semibold shadow-lg">
+                          🎉 Grade Improved!
+                        </Badge>
+                      </div>
                     )}
                     
-                    {oldGrade && newGrade && (
-                      <motion.div
-                        animate={{ 
-                          scale: showGradeAnimation ? [1, 1.2, 1] : 1,
-                          rotate: showGradeAnimation ? [0, 5, -5, 0] : 0
-                        }}
-                        transition={{ duration: 0.7, ease: "easeOut" }}
-                      >
-                        <TrendingUp className={`h-8 w-8 transition-colors duration-700 ${
-                          showGradeAnimation ? 'text-[#0EA5E9]' : 'text-[#CBD5E1]'
-                        }`} />
-                      </motion.div>
-                    )}
-                    
-                    {newGrade && (
-                      <motion.div 
-                        className="text-center"
-                        initial={{ opacity: 0.5, scale: 0.9 }}
-                        animate={{ 
-                          opacity: showGradeAnimation ? 1 : 0.5,
-                          scale: showGradeAnimation ? 1.1 : 0.9 
-                        }}
-                        transition={{ duration: 0.7 }}
-                      >
-                        <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">
-                          {oldGrade ? 'Updated' : 'Current'}
-                        </p>
-                        <motion.div 
-                          className="text-5xl font-black text-[#0EA5E9]"
-                          animate={showGradeAnimation ? { scale: [1, 1.1, 1] } : {}}
-                          transition={{ duration: 0.5, repeat: 2 }}
-                        >
-                          {newGrade}
-                        </motion.div>
-                      </motion.div>
+                    {oldGrade && newGrade && oldGrade === newGrade && showGradeAnimation && (
+                      <div className="mt-6 text-center animate-fade-in">
+                        <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 px-6 py-2 text-base font-semibold">
+                          ⭐ Maintaining Excellence
+                        </Badge>
+                      </div>
                     )}
                   </div>
-                  
-                  {oldGrade && newGrade && oldGrade !== newGrade && showGradeAnimation && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-5 text-center"
-                    >
-                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 px-4 py-1.5">
-                        🎉 Grade Improved!
-                      </Badge>
-                    </motion.div>
-                  )}
-                  
-                  {oldGrade && newGrade && oldGrade === newGrade && showGradeAnimation && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-5 text-center"
-                    >
-                      <Badge className="bg-[#0EA5E9] text-white border-0 px-4 py-1.5">
-                        ⭐ Maintaining Excellence
-                      </Badge>
-                    </motion.div>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
+                </div>
+              </div>
+            </div>
           )}
 
-          {/* Performance Overview Card with Animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(14,165,233,0.18)] transition-shadow duration-300">
-              {/* Floating orbs */}
-              <motion.div 
-                className="absolute top-0 right-0 w-40 h-40 bg-[#0EA5E9]/10 rounded-full blur-3xl"
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              
-              <CardHeader className="pb-4 relative z-10">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
-                    <motion.div 
-                      className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: -5 }}
-                      transition={{ type: "spring" }}
-                    >
-                      <Trophy className="h-5 w-5 text-[#0EA5E9]" />
-                    </motion.div>
-                    Session Performance
-                  </CardTitle>
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", delay: 0.7 }}
-                  >
-                    <Badge className={
-                      averagePercentage >= 85 
-                        ? 'bg-emerald-500 text-white border-0' 
-                        : averagePercentage >= 60 
-                        ? 'bg-amber-500 text-white border-0' 
-                        : 'bg-rose-500 text-white border-0'
-                    }>
-                      {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Keep Practicing"}
-                    </Badge>
-                  </motion.div>
+          {/* Premium Performance Overview Card */}
+          <div className="relative overflow-hidden rounded-3xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-gray-800/50 p-10 mb-8 shadow-2xl animate-fade-in">
+            {/* Decorative gradient orbs */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-br from-[#7DD3FC]/20 to-[#0EA5E9]/20 rounded-full blur-3xl" />
+            
+            <div className="relative z-10">
+              <div className="text-center mb-10">
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-[#0EA5E9] via-[#38BDF8] to-[#7DD3FC] mb-6 shadow-2xl shadow-[#0EA5E9]/40 animate-scale-in">
+                  <Trophy className="h-12 w-12 text-white animate-pulse" />
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-5 relative z-10">
-                <div className="text-center py-3">
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", delay: 0.8 }}
-                    className="text-6xl font-black text-[#0EA5E9] mb-2"
-                  >
-                    {Math.round(averagePercentage)}%
-                  </motion.div>
-                  <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">Overall Score</p>
+                <div className="text-7xl font-black bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] bg-clip-text text-transparent mb-3 animate-fade-in">
+                  {Math.round(averagePercentage)}%
                 </div>
+                <p className="text-xl text-[#64748B] dark:text-gray-400 font-semibold">Session Score</p>
+              </div>
 
-                {/* Score Breakdown with stagger animation */}
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: marksEarned, label: "Marks Earned" },
-                    { value: totalMarks, label: "Total Marks" },
-                    { value: attempts.length, label: "Questions" }
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.9 + idx * 0.1 }}
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10 cursor-default"
-                    >
-                      <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
-                        {item.value}
-                      </div>
-                      <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">{item.label}</p>
-                    </motion.div>
-                  ))}
+              {/* Premium Score Breakdown */}
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-gray-900 border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="text-4xl font-black text-[#0EA5E9] mb-2 animate-fade-in">
+                    {marksEarned}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wide">Marks Earned</p>
                 </div>
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-white to-indigo-50/50 dark:from-gray-800 dark:to-gray-900 border border-indigo-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="text-4xl font-black text-indigo-600 dark:text-indigo-400 mb-2 animate-fade-in">
+                    {totalMarks}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wide">Total Marks</p>
+                </div>
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-white to-purple-50/50 dark:from-gray-800 dark:to-gray-900 border border-purple-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <div className="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2 animate-fade-in">
+                    {attempts.length}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wide">Questions</p>
+                </div>
+              </div>
 
-                {/* Animated Progress Bar */}
-                <div className="relative h-2 bg-[#E2E8F0] dark:bg-gray-800 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${averagePercentage}%` }}
-                    transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full"
+              {/* Premium Progress Bar */}
+              <div className="mb-8">
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+                  <div 
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#7DD3FC] rounded-full transition-all duration-1000 ease-out shadow-lg"
+                    style={{ width: `${averagePercentage}%` }}
                   />
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
 
-          {/* Detailed Analytics with stagger */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { icon: CheckCircle2, value: correctAnswers, title: "Fully Correct", desc: "Perfect answers", color: "emerald", delay: 1.2 },
-              { icon: TrendingUp, value: partialAnswers, title: "Partially Correct", desc: "Some marks earned", color: "amber", delay: 1.3 },
-              { icon: Target, value: incorrectAnswers, title: "Needs Review", desc: "Focus areas", color: "rose", delay: 1.4 }
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: item.delay }}
-                  whileHover={{ scale: 1.05, y: -4 }}
-                >
-                  <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-xl transition-all duration-300 cursor-default">
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-3">
-                        <motion.div 
-                          className={`w-11 h-11 rounded-xl bg-${item.color}-500/10 flex items-center justify-center`}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <Icon className={`h-6 w-6 text-${item.color}-600 dark:text-${item.color}-400`} />
-                        </motion.div>
-                        <motion.div 
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", delay: item.delay + 0.2 }}
-                          className="text-3xl font-bold text-[#0F172A] dark:text-white"
-                        >
-                          {item.value}
-                        </motion.div>
-                      </div>
-                      <p className="text-sm font-semibold text-[#0F172A] dark:text-white">{item.title}</p>
-                      <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">{item.desc}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
+              {/* Premium Performance Badge */}
+              <div className="flex justify-center">
+                <Badge className={`text-base px-8 py-3 rounded-2xl font-bold shadow-xl ${
+                  averagePercentage >= 85 
+                    ? 'bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white border-0 shadow-emerald-500/50' 
+                    : averagePercentage >= 60 
+                    ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white border-0 shadow-amber-500/50' 
+                    : 'bg-gradient-to-r from-rose-500 via-red-500 to-pink-500 text-white border-0 shadow-rose-500/50'
+                } animate-scale-in`}>
+                  {averagePercentage >= 85 ? "🎉 Excellent Performance!" : averagePercentage >= 60 ? "⭐ Good Work!" : "💪 Keep Practicing!"}
+                </Badge>
+              </div>
+            </div>
           </div>
 
-          {/* Action Buttons with Animation */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="flex flex-col sm:flex-row gap-3 pt-3"
-          >
-            <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button 
-                onClick={() => navigate('/dashboard', { 
-                  state: { 
-                    openSubjectDrawer: true, 
-                    subjectId: subjectId,
-                    drawerTab: 'overview'
-                  } 
-                })}
-                className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-xl py-6 text-base font-semibold shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all"
-              >
-                <Zap className="h-5 w-5 mr-2" />
-                View Insights
-              </Button>
-            </motion.div>
-            <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button 
-                onClick={() => window.location.reload()}
-                variant="outline"
-                className="w-full border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/5 rounded-xl py-6 text-base font-semibold"
-              >
-                Practice Again
-              </Button>
-            </motion.div>
-          </motion.div>
+          {/* Premium Detailed Analytics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Correct Answers */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-900/30 dark:via-green-900/30 dark:to-teal-900/30 border-2 border-emerald-200 dark:border-emerald-800/50 p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 animate-fade-in">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-500/50">
+                    <CheckCircle2 className="h-7 w-7 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-emerald-700 dark:text-emerald-400">{correctAnswers}</div>
+                </div>
+                <p className="text-base text-emerald-800 dark:text-emerald-300 font-bold mb-1">Fully Correct</p>
+                <p className="text-sm text-emerald-600 dark:text-emerald-500">Perfect answers</p>
+              </div>
+            </div>
+
+            {/* Partial Answers */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-900/30 dark:via-orange-900/30 dark:to-yellow-900/30 border-2 border-amber-200 dark:border-amber-800/50 p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 animate-fade-in">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-500/20 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/50">
+                    <TrendingUp className="h-7 w-7 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-amber-700 dark:text-amber-400">{partialAnswers}</div>
+                </div>
+                <p className="text-base text-amber-800 dark:text-amber-300 font-bold mb-1">Partially Correct</p>
+                <p className="text-sm text-amber-600 dark:text-amber-500">Some marks earned</p>
+              </div>
+            </div>
+
+            {/* Incorrect Answers */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-50 via-red-50 to-pink-50 dark:from-rose-900/30 dark:via-red-900/30 dark:to-pink-900/30 border-2 border-rose-200 dark:border-rose-800/50 p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 animate-fade-in">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-rose-500/20 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center shadow-lg shadow-rose-500/50">
+                    <Target className="h-7 w-7 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-rose-700 dark:text-rose-400">{incorrectAnswers}</div>
+                </div>
+                <p className="text-base text-rose-800 dark:text-rose-300 font-bold mb-1">Needs Review</p>
+                <p className="text-sm text-rose-600 dark:text-rose-500">Focus areas</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Premium Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 animate-fade-in">
+            <Button 
+              onClick={() => navigate('/dashboard', { 
+                state: { 
+                  openSubjectDrawer: true, 
+                  subjectId: subjectId,
+                  drawerTab: 'overview'
+                } 
+              })}
+              className="flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] hover:from-[#0284C7] hover:via-[#0EA5E9] hover:to-[#0284C7] text-white rounded-2xl py-7 text-lg font-bold shadow-2xl shadow-[#0EA5E9]/50 hover:shadow-[#0EA5E9]/70 transition-all duration-300 hover:scale-105 border-0"
+            >
+              <Zap className="h-6 w-6 mr-3" />
+              View Insights
+            </Button>
+            <Button 
+              onClick={() => window.location.reload()}
+              variant="outline"
+              className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9] hover:text-white rounded-2xl py-7 text-lg font-bold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              Practice Again
+            </Button>
+          </div>
         </main>
       </div>
     );
