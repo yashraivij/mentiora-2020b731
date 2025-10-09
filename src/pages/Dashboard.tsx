@@ -2459,12 +2459,7 @@ const Dashboard = () => {
                                         <Card 
                                           className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
                                           onClick={() => {
-                                            if (subjects.length === 1) {
-                                              addSubject(subjects[0].id);
-                                              setShowAddSubjects(false);
-                                            } else {
-                                              setSelectedSubjectGroup(baseName);
-                                            }
+                                            setSelectedSubjectGroup(baseName);
                                           }}
                                         >
                                           <CardContent className="p-5">
