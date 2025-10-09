@@ -7169,11 +7169,11 @@ Write a story about a moment of fear.
   }
 
   return (
-    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+    <div className={`min-h-screen ${isPremium ? 'pt-2' : 'pt-16'}`} style={{ backgroundColor: '#ffffff' }}>
       {/* Medly-style Top Navigation */}
-      <header className="border-b border-gray-200 bg-white">
-        <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-40 shadow-sm">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 py-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Left: Exam name with navigation */}
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <Button
@@ -7215,8 +7215,8 @@ Write a story about a moment of fear.
             </div>
 
             {/* Center: Modern Progress indicator */}
-            <div className="flex justify-center md:justify-end">
-              <div className="flex items-center gap-2">
+            <div className="flex justify-center md:justify-end mt-2 md:mt-0">
+              <div className="flex items-center gap-2 flex-wrap justify-center">
                 {examQuestions.map((question, index) => {
                   // Find the answer for this question
                   const hasAnswer = answers.find(a => a.questionId === question.id);
@@ -7269,7 +7269,7 @@ Write a story about a moment of fear.
           </div>
           
           {/* Timer and progress row */}
-          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-5 pt-5 border-t border-gray-200">
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-destructive/10 dark:bg-destructive/5 border-destructive/50 dark:border-destructive/30' : 'bg-card border-border'}`}>
               <Clock className={`h-4 w-4 ${isTimeUp ? 'text-destructive' : 'text-muted-foreground'}`} />
               <span className={`font-mono font-bold ${isTimeUp ? 'text-destructive' : 'text-foreground'}`}>
