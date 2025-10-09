@@ -1258,47 +1258,49 @@ const Dashboard = () => {
   };
 
   // Convert userSubjectsWithGrades to mockSubjects format - only show subjects user has added
-  const mockSubjects = userSubjectsWithGrades.length > 0 ? userSubjectsWithGrades.map((subject, index) => {
-    // Find corresponding subject ID from userSubjects
-    const subjectId = userSubjects[index] || `subject-${index}`;
-    
-    // Parse grades (they might be strings like "5" or numbers)
-    const predicted = typeof subject.predicted_grade === 'string' 
-      ? parseFloat(subject.predicted_grade) || 5 
-      : subject.predicted_grade || 5;
-    const target = typeof subject.target_grade === 'string'
-      ? parseFloat(subject.target_grade) || 7
-      : subject.target_grade || 7;
-    
-    // Generate trend based on predicted grade
-    const baseTrend = Math.floor((predicted / 9) * 100);
-    const trend = Array.from({ length: 6 }, (_, i) => baseTrend - 20 + (i * 4));
-    
-    // Determine status
-    const diff = predicted - target;
-    let status = "On track";
-    if (diff < -1) status = "Off target";
-    else if (diff < 0) status = "Needs push";
-    
-    return {
-      id: subjectId,
-      name: (() => {
-        // Override exam board display for specific subjects
-        if (subjectId === 'music-eduqas-gcse') {
-          return `${subject.subject_name} (Eduqas)`;
-        }
-        // Use database exam board for others
-        return `${subject.subject_name} (${subject.exam_board})`;
-      })(),
-      icon: getSubjectIconEmoji(subjectId),
-      predicted: predicted,
-      target: target,
-      trend: trend,
-      strong: "Various topics",
-      focus: "Core concepts",
-      status: status
-    };
-  }) : [];
+  const mockSubjects = userSubjectsWithGrades.length > 0 ? userSubjectsWithGrades
+    .map((subject, index) => {
+      // Find corresponding subject ID from userSubjects
+      const subjectId = userSubjects[index] || `subject-${index}`;
+      
+      // Parse grades (they might be strings like "5" or numbers)
+      const predicted = typeof subject.predicted_grade === 'string' 
+        ? parseFloat(subject.predicted_grade) || 5 
+        : subject.predicted_grade || 5;
+      const target = typeof subject.target_grade === 'string'
+        ? parseFloat(subject.target_grade) || 7
+        : subject.target_grade || 7;
+      
+      // Generate trend based on predicted grade
+      const baseTrend = Math.floor((predicted / 9) * 100);
+      const trend = Array.from({ length: 6 }, (_, i) => baseTrend - 20 + (i * 4));
+      
+      // Determine status
+      const diff = predicted - target;
+      let status = "On track";
+      if (diff < -1) status = "Off target";
+      else if (diff < 0) status = "Needs push";
+      
+      return {
+        id: subjectId,
+        name: (() => {
+          // Override exam board display for specific subjects
+          if (subjectId === 'music-eduqas-gcse') {
+            return `${subject.subject_name} (Eduqas)`;
+          }
+          // Use database exam board for others
+          return `${subject.subject_name} (${subject.exam_board})`;
+        })(),
+        icon: getSubjectIconEmoji(subjectId),
+        predicted: predicted,
+        target: target,
+        trend: trend,
+        strong: "Various topics",
+        focus: "Core concepts",
+        status: status
+      };
+    })
+    .filter(subject => subject.id !== 'geography-paper-2') : [];
   
   const weekPlan = {
     Mon:[{s:"Biology",t:"Genetics",m:25},{s:"Maths",t:"Algebra",m:20}],
@@ -2289,10 +2291,14 @@ const Dashboard = () => {
                         <TabsContent value="papers" className="space-y-4 mt-8">
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Predicted 2026 Exam</CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Practice with AI-generated predicted exam paper</CardDescription>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                                Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
+                              </CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
+                                Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
+                              </CardDescription>
                             </CardHeader>
-                            <CardContent className="p-6">
+                            <CardContent className="space-y-3 p-6">
                               {(() => {
                                 const Icon = getSubjectIcon(selectedDrawerSubject.id);
                                 const subjectName = getSubjectDisplayName(selectedDrawerSubject);
@@ -2303,13 +2309,65 @@ const Dashboard = () => {
                                   'maths': 'from-orange-500 to-red-600',
                                   'english': 'from-pink-500 to-rose-600',
                                   'computer': 'from-violet-500 to-purple-600',
+                                  'geography': 'from-teal-500 to-emerald-600',
                                 };
                                 const colorKey = Object.keys(subjectColorMap).find(key => 
                                   selectedDrawerSubject.id.toLowerCase().includes(key)
                                 ) || 'biology';
                                 const color = subjectColorMap[colorKey];
                                 
-                                // Extract paper number from subject ID
+                                // For Geography, show both Paper 1 and Paper 2
+                                if (selectedDrawerSubject.id === 'geography') {
+                                  return (
+                                    <>
+                                      <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        onClick={() => navigate('/predicted-exam/geography')}
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                      >
+                                        <div className="flex items-center gap-4">
+                                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                                            <Icon className="w-6 h-6 text-white" />
+                                          </div>
+                                          <div>
+                                            <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
+                                            <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">2026 Predicted Paper 1</div>
+                                          </div>
+                                        </div>
+                                        <div className="text-right">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                            Start
+                                          </Badge>
+                                        </div>
+                                      </motion.div>
+                                      <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.1 }}
+                                        onClick={() => navigate('/predicted-exam/geography-paper-2')}
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                      >
+                                        <div className="flex items-center gap-4">
+                                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                                            <Icon className="w-6 h-6 text-white" />
+                                          </div>
+                                          <div>
+                                            <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
+                                            <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">2026 Predicted Paper 2</div>
+                                          </div>
+                                        </div>
+                                        <div className="text-right">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                            Start
+                                          </Badge>
+                                        </div>
+                                      </motion.div>
+                                    </>
+                                  );
+                                }
+                                
+                                // For other subjects, show single paper
                                 const paperMatch = selectedDrawerSubject.id.match(/paper-(\d+)/i);
                                 const paperNumber = paperMatch ? paperMatch[1] : '1';
                                 
