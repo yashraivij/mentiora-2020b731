@@ -180,6 +180,7 @@ const Dashboard = () => {
   const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan'>('overview');
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
+  const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -584,6 +585,63 @@ const Dashboard = () => {
       setPredictedGrades(Object.values(latestGrades || {}));
     } catch (error) {
       console.error('Error loading predicted grades:', error);
+    }
+  };
+
+  // Load class median grades (average predicted grade across all users for each subject)
+  const loadClassMedianGrades = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('subject_id, grade, percentage');
+
+      if (error) {
+        console.error('Error loading class median grades:', error);
+        return;
+      }
+
+      // Calculate average grade for each subject across all users
+      const subjectGrades: {[key: string]: number[]} = {};
+      
+      data?.forEach((completion: any) => {
+        if (!subjectGrades[completion.subject_id]) {
+          subjectGrades[completion.subject_id] = [];
+        }
+        
+        // Parse grade - it might be a string like "7" or a letter grade
+        let gradeValue: number;
+        if (typeof completion.grade === 'string') {
+          // Try to parse as number first
+          const numGrade = parseFloat(completion.grade);
+          if (!isNaN(numGrade)) {
+            gradeValue = numGrade;
+          } else {
+            // Convert letter grade to number (A*=9, A=8, B=7, etc)
+            const gradeMap: {[key: string]: number} = {
+              'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
+            };
+            gradeValue = gradeMap[completion.grade.toUpperCase()] || 5;
+          }
+        } else {
+          gradeValue = completion.grade || 5;
+        }
+        
+        subjectGrades[completion.subject_id].push(gradeValue);
+      });
+
+      // Calculate median for each subject
+      const medianGrades: {[key: string]: number} = {};
+      Object.keys(subjectGrades).forEach(subjectId => {
+        const grades = subjectGrades[subjectId].sort((a, b) => a - b);
+        const mid = Math.floor(grades.length / 2);
+        medianGrades[subjectId] = grades.length % 2 !== 0 
+          ? grades[mid] 
+          : (grades[mid - 1] + grades[mid]) / 2;
+      });
+
+      setClassMedianGrades(medianGrades);
+    } catch (error) {
+      console.error('Error loading class median grades:', error);
     }
   };
 
@@ -1076,6 +1134,7 @@ const Dashboard = () => {
       loadUserProgress();
       loadLeaderboardData();
       loadPredictedGrades(); // Load predicted grades on user load
+      loadClassMedianGrades(); // Load class median grades on user load
       if (activeTab === "notes") {
         loadNotebookEntries();
       }
@@ -2230,48 +2289,95 @@ const Dashboard = () => {
                               <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Performance Comparison</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-6 p-6">
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">7.2</span>
-                                </div>
-                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                  <motion.div 
-                                    initial={{ width: 0 }}
-                                    animate={{ width: "72%" }}
-                                    transition={{ duration: 1, delay: 0.3 }}
-                                    className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
-                                  />
-                                </div>
-                              </div>
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target Grade</span>
-                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">{selectedDrawerSubject.target}</span>
-                                </div>
-                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                  <motion.div 
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${(selectedDrawerSubject.target / 10) * 100}%` }}
-                                    transition={{ duration: 1, delay: 0.4 }}
-                                    className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
-                                  />
-                                </div>
-                              </div>
-                              <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
-                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">6.5</span>
-                                </div>
-                                <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                  <motion.div 
-                                    initial={{ width: 0 }}
-                                    animate={{ width: "65%" }}
-                                    transition={{ duration: 1, delay: 0.5 }}
-                                    className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
-                                  />
-                                </div>
-                              </div>
+                              {(() => {
+                                const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
+                                const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                
+                                // Get user's predicted grade for this subject
+                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === mappedSubjectId);
+                                let predictedGradeValue = 5; // default
+                                
+                                if (userPredictedGrade) {
+                                  // Parse the grade
+                                  if (typeof userPredictedGrade.grade === 'string') {
+                                    const numGrade = parseFloat(userPredictedGrade.grade);
+                                    if (!isNaN(numGrade)) {
+                                      predictedGradeValue = numGrade;
+                                    } else {
+                                      // Convert letter grade to number
+                                      const gradeMap: {[key: string]: number} = {
+                                        'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
+                                      };
+                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 5;
+                                    }
+                                  } else {
+                                    predictedGradeValue = userPredictedGrade.grade || 5;
+                                  }
+                                } else {
+                                  // Fallback: calculate from subject performance
+                                  const subjectPerf = userSubjectsWithGrades.find(s => {
+                                    return curriculumSubject && s.subject_name === curriculumSubject.name;
+                                  });
+                                  
+                                  if (subjectPerf?.accuracy_rate) {
+                                    // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
+                                    predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
+                                  }
+                                }
+                                
+                                // Get class median for this subject
+                                const classMedianValue = classMedianGrades[mappedSubjectId] || 5;
+                                
+                                // Get target grade
+                                const targetGradeValue = selectedDrawerSubject.target || 7;
+                                
+                                return (
+                                  <>
+                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                                      <div className="flex items-center justify-between mb-2">
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{predictedGradeValue.toFixed(1)}</span>
+                                      </div>
+                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                        <motion.div 
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${(predictedGradeValue / 10) * 100}%` }}
+                                          transition={{ duration: 1, delay: 0.3 }}
+                                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                                      <div className="flex items-center justify-between mb-2">
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target Grade</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{targetGradeValue}</span>
+                                      </div>
+                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                        <motion.div 
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${(targetGradeValue / 10) * 100}%` }}
+                                          transition={{ duration: 1, delay: 0.4 }}
+                                          className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                                      <div className="flex items-center justify-between mb-2">
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
+                                      </div>
+                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                        <motion.div 
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${(classMedianValue / 10) * 100}%` }}
+                                          transition={{ duration: 1, delay: 0.5 }}
+                                          className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              })()}
                             </CardContent>
                           </Card>
                         </TabsContent>
