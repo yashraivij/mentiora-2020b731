@@ -2103,8 +2103,67 @@ const Dashboard = () => {
                                     </div>
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-[#16A34A] flex items-center gap-2">
-                                    +0.3
+                                  <div className={`text-3xl font-bold flex items-center gap-2 ${
+                                    (() => {
+                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
+                                      const subjectPerf = userSubjectsWithGrades.find(s => {
+                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
+                                      });
+                                      
+                                      const progress = userProgress.filter(p => p.subjectId === mappedSubjectId);
+                                      const now = new Date();
+                                      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                                      const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+                                      
+                                      const last7Days = progress.filter(p => new Date(p.lastAttempt) >= sevenDaysAgo);
+                                      const prev7Days = progress.filter(p => {
+                                        const date = new Date(p.lastAttempt);
+                                        return date >= fourteenDaysAgo && date < sevenDaysAgo;
+                                      });
+                                      
+                                      const last7Accuracy = last7Days.length > 0 
+                                        ? last7Days.reduce((sum, p) => sum + p.averageScore, 0) / last7Days.length 
+                                        : (subjectPerf?.accuracy_rate || 0);
+                                      
+                                      const prev7Accuracy = prev7Days.length > 0
+                                        ? prev7Days.reduce((sum, p) => sum + p.averageScore, 0) / prev7Days.length
+                                        : last7Accuracy;
+                                      
+                                      const change = last7Accuracy - prev7Accuracy;
+                                      return change >= 0 ? 'text-[#16A34A]' : 'text-[#EF4444]';
+                                    })()
+                                  }`}>
+                                    {(() => {
+                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
+                                      const progress = userProgress.filter(p => p.subjectId === mappedSubjectId);
+                                      const now = new Date();
+                                      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                                      const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+                                      
+                                      const last7Days = progress.filter(p => new Date(p.lastAttempt) >= sevenDaysAgo);
+                                      const prev7Days = progress.filter(p => {
+                                        const date = new Date(p.lastAttempt);
+                                        return date >= fourteenDaysAgo && date < sevenDaysAgo;
+                                      });
+                                      
+                                      const subjectPerf = userSubjectsWithGrades.find(s => {
+                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
+                                      });
+                                      
+                                      const last7Accuracy = last7Days.length > 0 
+                                        ? last7Days.reduce((sum, p) => sum + p.averageScore, 0) / last7Days.length 
+                                        : (subjectPerf?.accuracy_rate || 0);
+                                      
+                                      const prev7Accuracy = prev7Days.length > 0
+                                        ? prev7Days.reduce((sum, p) => sum + p.averageScore, 0) / prev7Days.length
+                                        : last7Accuracy;
+                                      
+                                      const change = last7Accuracy - prev7Accuracy;
+                                      const sign = change >= 0 ? '+' : '';
+                                      return `${sign}${change.toFixed(1)}%`;
+                                    })()}
                                   </div>
                                 </CardContent>
                               </Card>
@@ -2122,7 +2181,16 @@ const Dashboard = () => {
                                     </div>
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Accuracy</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">76%</div>
+                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                                    {(() => {
+                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
+                                      const subjectPerf = userSubjectsWithGrades.find(s => {
+                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
+                                      });
+                                      return Math.round(subjectPerf?.accuracy_rate || 0);
+                                    })()}%
+                                  </div>
                                 </CardContent>
                               </Card>
                             </motion.div>
@@ -2139,7 +2207,18 @@ const Dashboard = () => {
                                     </div>
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Study Time</div>
                                   </div>
-                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">2h 15m</div>
+                                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                                    {(() => {
+                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
+                                      const subjectPerf = userSubjectsWithGrades.find(s => {
+                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
+                                      });
+                                      const hours = Math.floor(subjectPerf?.study_hours || 0);
+                                      const minutes = Math.round(((subjectPerf?.study_hours || 0) % 1) * 60);
+                                      return `${hours}h ${minutes}m`;
+                                    })()}
+                                  </div>
                                 </CardContent>
                               </Card>
                             </motion.div>
