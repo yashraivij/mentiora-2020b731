@@ -2682,8 +2682,8 @@ const Dashboard = () => {
                                       setSubjectDrawerOpen(false);
                                     } else if (activity.action === 'practice' && activity.topicId) {
                                       setSubjectDrawerOpen(false);
-                                      // Navigate directly to practice page with subject and topic
-                                      navigate(`/practice?subject=${subjectId}&topic=${activity.topicId}`);
+                                      // Navigate directly to practice page with subject and topic as path params
+                                      navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       setActiveTab('notebook');
                                       setSubjectDrawerOpen(false);
