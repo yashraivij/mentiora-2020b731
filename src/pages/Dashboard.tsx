@@ -2544,12 +2544,9 @@ const Dashboard = () => {
                                   >
                                     <CardContent className="p-6">
                                       <div className="text-center">
-                                        <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                          <span className="text-4xl font-bold text-[#0EA5E9]">{examBoard}</span>
+                                        <div className="inline-block px-6 py-2 mb-4 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] group-hover:scale-105 transition-transform duration-300">
+                                          <span className="text-2xl font-bold text-white">{examBoard}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-[#0F172A] mb-2">
-                                          {examBoard}
-                                        </h3>
                                         <p className="text-sm text-[#64748B] flex items-center justify-center gap-1.5">
                                           <BookOpen className="h-3.5 w-3.5" />
                                           {subject.topics.length} topics available
