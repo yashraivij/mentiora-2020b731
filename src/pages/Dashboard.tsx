@@ -2438,10 +2438,9 @@ const Dashboard = () => {
                                   }
                                 }
                                 
-                                // Sort by mastery (weakest first)
-                                const sortedTopics = topicsList.sort((a, b) => a.mastery - b.mastery);
+                                // Keep topics in original curriculum order
                                 
-                                if (sortedTopics.length === 0) {
+                                if (topicsList.length === 0) {
                                   return (
                                     <div className="text-center py-8 text-muted-foreground">
                                       No topics available. Add subjects to see topic mastery.
@@ -2449,7 +2448,7 @@ const Dashboard = () => {
                                   );
                                 }
                                 
-                                return sortedTopics.map((topic, i) => (
+                                return topicsList.map((topic, i) => (
                                   <motion.div 
                                     key={`${topic.subjectId}-${topic.topicId}`}
                                     initial={{ opacity: 0, x: -20 }}
