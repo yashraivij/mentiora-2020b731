@@ -765,9 +765,8 @@ const Practice = () => {
                   {/* Question reference numbers */}
                   <div className="flex items-center gap-2 mb-4">
                     <div className="inline-flex items-center gap-1">
-                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">
-                        {(currentQuestionIndex + 1).toString().padStart(2, '0')}
-                      </span>
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
+                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestionIndex + 1}</span>
                     </div>
                   </div>
                   
