@@ -2703,6 +2703,9 @@ const Dashboard = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {availableSubjects
                             .filter(subject => {
+                              // Exclude geography-paper-2 from exam board selection
+                              if (subject.id === 'geography-paper-2') return false;
+                              
                               // Filter by level first
                               const isCorrectLevel = activeSubjectLevel === 'gcse' 
                                 ? !subject.id.includes('alevel') 
