@@ -2300,17 +2300,17 @@ const Dashboard = () => {
                                 const subjectEmoji = getSubjectIconEmoji(selectedDrawerSubject.id);
                                 const subjectName = getSubjectDisplayName(selectedDrawerSubject);
                                 const subjectColorMap: { [key: string]: string } = {
-                                  'biology': 'from-emerald-500 to-green-600',
-                                  'chemistry': 'from-purple-500 to-indigo-600',
-                                  'physics': 'from-blue-500 to-cyan-600',
-                                  'maths': 'from-orange-500 to-red-600',
-                                  'english': 'from-pink-500 to-rose-600',
-                                  'computer': 'from-violet-500 to-purple-600',
+                                  'biology': 'from-cyan-500 to-blue-600',
+                                  'chemistry': 'from-blue-500 to-indigo-600',
+                                  'physics': 'from-sky-500 to-cyan-600',
+                                  'maths': 'from-blue-600 to-indigo-700',
+                                  'english': 'from-indigo-500 to-blue-600',
+                                  'computer': 'from-cyan-600 to-blue-700',
                                   'geography': 'from-sky-500 to-blue-600',
                                 };
                                 const colorKey = Object.keys(subjectColorMap).find(key => 
                                   selectedDrawerSubject.id.toLowerCase().includes(key)
-                                ) || 'biology';
+                                ) || 'from-blue-500 to-cyan-600';
                                 const color = subjectColorMap[colorKey];
                                 
                                 // For Geography, show both Paper 1 and Paper 2
