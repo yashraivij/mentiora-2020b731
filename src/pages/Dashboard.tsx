@@ -2640,7 +2640,7 @@ const Dashboard = () => {
                                     ],
                                     // Tuesday - Strengthen Recall
                                     [
-                                      { text: `Review flashcards for ${topicName}`, mins: 10, action: 'flashcards' },
+                                      { text: `Make and review flashcards on ${topicName}`, mins: 10, action: 'flashcards' },
                                       { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
                                     ],
                                     // Wednesday - Mid-week Mastery
@@ -2658,7 +2658,7 @@ const Dashboard = () => {
                                     ],
                                     // Saturday - Light Review
                                     [
-                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15, action: 'flashcards' }
+                                      { text: `Make and review flashcards on ${topicName}`, mins: 15, action: 'flashcards' }
                                     ],
                                     // Sunday - Reset & Plan
                                     [
