@@ -2306,7 +2306,7 @@ const Dashboard = () => {
                                   'maths': 'from-orange-500 to-red-600',
                                   'english': 'from-pink-500 to-rose-600',
                                   'computer': 'from-violet-500 to-purple-600',
-                                  'geography': 'from-teal-500 to-emerald-600',
+                                  'geography': 'from-sky-500 to-blue-600',
                                 };
                                 const colorKey = Object.keys(subjectColorMap).find(key => 
                                   selectedDrawerSubject.id.toLowerCase().includes(key)
