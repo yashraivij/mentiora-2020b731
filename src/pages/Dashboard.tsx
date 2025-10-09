@@ -2567,48 +2567,20 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="plan" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                            <CardHeader className="flex flex-row items-center justify-between pb-4">
-                              <div>
-                                <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">7-Day Study Plan</CardTitle>
-                                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">Focused on your weakest topics</CardDescription>
-                              </div>
-                              <Button size="sm" className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
-                                Generate Plan
-                              </Button>
-                            </CardHeader>
-                            <CardContent className="space-y-3 p-6">
-                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
-                                <motion.div 
-                                  key={day}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: i * 0.05 }}
-                                  className="p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300"
-                                >
-                                  <div className="flex items-center justify-between mb-4">
-                                    <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
-                                    <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">25 mins</Badge>
-                                  </div>
-                                  <div className="text-sm text-[#64748B] dark:text-gray-400 mb-4 font-medium">
-                                    Focus: Energetics • Calculations
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
-                                      <Play className="h-3 w-3 mr-1" />
-                                      Start
-                                    </Button>
-                                    <Button size="sm" variant="outline" className="rounded-xl border-2 border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10 font-semibold">
-                                      Done
-                                    </Button>
-                                    <Button size="sm" variant="ghost" className="rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] dark:hover:bg-gray-800 font-semibold">
-                                      Reschedule
-                                    </Button>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </CardContent>
-                          </Card>
+                          <WeeklyPlan
+                            weakTopics={userProgress
+                              .filter(p => p.subjectId === selectedDrawerSubject.id && p.averageScore < 70)
+                              .sort((a, b) => a.averageScore - b.averageScore)
+                              .map(p => ({
+                                topicId: p.topicId,
+                                subjectId: p.subjectId,
+                                score: p.averageScore
+                              }))}
+                            targetGrades={[{
+                              subject: getSubjectDisplayName(selectedDrawerSubject).split(' (')[0],
+                              target: selectedDrawerSubject.target
+                            }]}
+                          />
                         </TabsContent>
                       </Tabs>
                     </>
@@ -3208,25 +3180,7 @@ const Dashboard = () => {
                     ]}
                   />
 
-                  {/* 4. Weekly Improvement Plan */}
-                  {userProgress.length > 0 && (
-                    <WeeklyPlan
-                      weakTopics={userProgress
-                        .filter(p => p.averageScore < 70)
-                        .sort((a, b) => a.averageScore - b.averageScore)
-                        .map(p => ({
-                          topicId: p.topicId,
-                          subjectId: p.subjectId,
-                          score: p.averageScore
-                        }))}
-                      targetGrades={userSubjectsWithGrades.map(s => ({
-                        subject: s.subject_name,
-                        target: parseInt(s.target_grade || "7")
-                      }))}
-                    />
-                  )}
-
-                  {/* 5. Personalized Summary */}
+                  {/* 4. Personalized Summary */}
                   <PersonalizedSummary
                     predictedGrades={predictedGrades}
                     userProgress={userProgress}
