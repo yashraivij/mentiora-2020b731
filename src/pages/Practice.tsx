@@ -726,8 +726,17 @@ const Practice = () => {
                       
                       {/* Question circle */}
                       <div className="relative">
-                        <div 
-                          className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${circleColor} ${
+                        <button
+                          onClick={() => {
+                            setCurrentQuestionIndex(index);
+                            const targetAttempt = attempts.filter(a => a.questionId === question.id)[0];
+                            setUserAnswer(targetAttempt?.userAnswer || "");
+                            setShowFeedback(targetAttempt ? true : false);
+                            setChatMessages([]);
+                            setHintCount(0);
+                            setChatStage('intro');
+                          }}
+                          className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center cursor-pointer hover:scale-110 ${circleColor} ${
                             showFox ? 'ring-2 ring-orange-300 ring-offset-2' : ''
                           }`}
                         >
@@ -742,7 +751,7 @@ const Practice = () => {
                           {showFox && (
                             <img src={mentioraLogo} alt="Current question" className="w-5 h-5 object-contain" />
                           )}
-                        </div>
+                        </button>
                       </div>
                     </div>
                   );
