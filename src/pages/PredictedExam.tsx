@@ -7315,8 +7315,10 @@ Write a story about a moment of fear.
               <div className="flex-1">
               {/* Question reference numbers */}
               <div className="flex items-center gap-2 mb-4">
-                <div className="inline-flex items-center">
-                  <span className="text-2xl font-bold text-[#3BAFDA]">{(currentQuestion + 1).toString().padStart(2, '0')}</span>
+                <div className="inline-flex items-center gap-1">
+                  {(currentQuestion + 1).toString().padStart(2, '0').split('').map((digit, idx) => (
+                    <span key={idx} className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{digit}</span>
+                  ))}
                 </div>
                   {examQuestions[currentQuestion].section && (
                     <Badge variant="outline" className="ml-2">
