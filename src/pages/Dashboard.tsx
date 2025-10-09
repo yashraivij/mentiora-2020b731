@@ -2361,7 +2361,7 @@ const Dashboard = () => {
                                     </div>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
-                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">All Students Average</span>
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Mentiora Average</span>
                                         <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
