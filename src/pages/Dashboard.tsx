@@ -1232,10 +1232,13 @@ const Dashboard = () => {
       "biology": "🧬",
       "biology-edexcel": "🧬",
       "biology-aqa-alevel": "🧬",
+      "combined-science-aqa": "⚗️",
       "mathematics": "📐",
       "maths-edexcel": "📐",
       "maths": "📐",
       "maths-aqa-alevel": "📐",
+      "m6-statistics": "📊",
+      "me6-statistics": "📊",
       "english-language": "✍️",
       "english-literature": "📖",
       "geography": "🌍",
@@ -1247,7 +1250,7 @@ const Dashboard = () => {
       "computer-science": "💻",
       "psychology": "🧠",
       "psychology-aqa-alevel": "🧠",
-      "spanish-aqa": "🇪🇸",
+      "spanish-aqa": "🌮",
     };
     return emojiMap[subjectId] || "📚";
   };
@@ -2337,8 +2340,10 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
+                                "Combined Science": "⚗️",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
+                                "Statistics": "📊",
                                 "English Language": "✍️",
                                 "English Literature": "📖",
                                 "Geography": "🌍",
@@ -2347,6 +2352,7 @@ const Dashboard = () => {
                                 "Business": "💼",
                                 "Computer Science": "💻",
                                 "Psychology": "🧠",
+                                "Spanish": "🌮",
                               };
 
                               return (
@@ -2427,8 +2433,10 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
+                                "Combined Science": "⚗️",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
+                                "Statistics": "📊",
                                 "English Language": "✍️",
                                 "English Literature": "📖",
                                 "Geography": "🌍",
@@ -2437,6 +2445,7 @@ const Dashboard = () => {
                                 "Business": "💼",
                                 "Computer Science": "💻",
                                 "Psychology": "🧠",
+                                "Spanish": "🌮",
                               };
 
                               return (
