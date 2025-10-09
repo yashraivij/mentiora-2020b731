@@ -357,7 +357,7 @@ const Practice = () => {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentQuestionIndex < shuffledQuestions.length - 1) {
       const nextQuestion = shuffledQuestions[currentQuestionIndex + 1];
       const nextAttempts = attempts.filter(a => a.questionId === nextQuestion.id);
@@ -371,7 +371,7 @@ const Practice = () => {
       setHintCount(0);
       setChatStage('intro');
     } else {
-      finishSession();
+      await finishSession();
     }
   };
 
@@ -439,9 +439,14 @@ const Practice = () => {
   };
 
   const finishSession = async () => {
+    console.log('🏁 finishSession called');
+    console.log('User ID:', user?.id, 'Subject ID:', subjectId, 'Topic ID:', topicId);
+    
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
+    
+    console.log('Session stats:', { totalMarks, marksEarned, averagePercentage, attemptsCount: attempts.length });
     
     // Clear the current session state since it's completed
     clearSessionState();
