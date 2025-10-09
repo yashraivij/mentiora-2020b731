@@ -2126,15 +2126,15 @@ const Dashboard = () => {
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
                               {(() => {
-                                // Get all topics from user subjects with their mastery scores
+                                // Get topics only from the selected drawer subject
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
-                                userSubjects.forEach(subjectId => {
-                                  const subject = curriculum.find(s => s.id === subjectId);
+                                if (selectedDrawerSubject) {
+                                  const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
                                   if (subject) {
                                     subject.topics.forEach(topic => {
                                       const topicProgress = userProgress.find(
-                                        p => p.subjectId === subjectId && p.topicId === topic.id
+                                        p => p.subjectId === selectedDrawerSubject.id && p.topicId === topic.id
                                       );
                                       const mastery = topicProgress?.averageScore || 0;
                                       
@@ -2152,12 +2152,12 @@ const Dashboard = () => {
                                         name: topic.name,
                                         mastery,
                                         color,
-                                        subjectId,
+                                        subjectId: selectedDrawerSubject.id,
                                         topicId: topic.id
                                       });
                                     });
                                   }
-                                });
+                                }
                                 
                                 // Sort by mastery (weakest first)
                                 const sortedTopics = topicsList.sort((a, b) => a.mastery - b.mastery);
