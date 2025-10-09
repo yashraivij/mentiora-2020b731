@@ -81,6 +81,11 @@ const Practice = () => {
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
+  // Grade animation states
+  const [oldGrade, setOldGrade] = useState<string | null>(null);
+  const [newGrade, setNewGrade] = useState<string | null>(null);
+  const [showGradeAnimation, setShowGradeAnimation] = useState(false);
+  
   const {
     notification,
     handlePracticeQuestionResult,
@@ -222,6 +227,71 @@ const Practice = () => {
       chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
     }
   }, [chatMessages, isChatLoading]);
+
+  // Fetch and calculate predicted grade change when session completes
+  useEffect(() => {
+    if (!sessionComplete || !user?.id || !subjectId) return;
+    
+    const fetchGradeData = async () => {
+      const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+      const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+      const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
+      
+      // Fetch current subject performance
+      const { data: perfData } = await supabase
+        .from('subject_performance')
+        .select('accuracy_rate')
+        .eq('user_id', user.id)
+        .eq('subject_id', subjectId)
+        .single();
+      
+      if (perfData?.accuracy_rate) {
+        // Calculate old grade from existing accuracy
+        const currentAccuracy = Number(perfData.accuracy_rate) || 0;
+        let oldCalculatedGrade = 'U';
+        if (currentAccuracy >= 90) oldCalculatedGrade = 'A*';
+        else if (currentAccuracy >= 80) oldCalculatedGrade = 'A';
+        else if (currentAccuracy >= 70) oldCalculatedGrade = 'B';
+        else if (currentAccuracy >= 60) oldCalculatedGrade = 'C';
+        else if (currentAccuracy >= 50) oldCalculatedGrade = 'D';
+        else if (currentAccuracy >= 40) oldCalculatedGrade = 'E';
+        
+        setOldGrade(oldCalculatedGrade);
+        
+        // Calculate new predicted grade based on session performance
+        const sessionWeight = 0.15; // This session contributes 15% to overall
+        const newAccuracy = (currentAccuracy * (1 - sessionWeight)) + (averagePercentage * sessionWeight);
+        
+        // Map accuracy to grade
+        let calculatedGrade = 'U';
+        if (newAccuracy >= 90) calculatedGrade = 'A*';
+        else if (newAccuracy >= 80) calculatedGrade = 'A';
+        else if (newAccuracy >= 70) calculatedGrade = 'B';
+        else if (newAccuracy >= 60) calculatedGrade = 'C';
+        else if (newAccuracy >= 50) calculatedGrade = 'D';
+        else if (newAccuracy >= 40) calculatedGrade = 'E';
+        
+        setNewGrade(calculatedGrade);
+        
+        // Trigger animation after a short delay
+        setTimeout(() => setShowGradeAnimation(true), 500);
+      } else {
+        // First session - show new grade
+        let calculatedGrade = 'U';
+        if (averagePercentage >= 90) calculatedGrade = 'A*';
+        else if (averagePercentage >= 80) calculatedGrade = 'A';
+        else if (averagePercentage >= 70) calculatedGrade = 'B';
+        else if (averagePercentage >= 60) calculatedGrade = 'C';
+        else if (averagePercentage >= 50) calculatedGrade = 'D';
+        else if (averagePercentage >= 40) calculatedGrade = 'E';
+        
+        setNewGrade(calculatedGrade);
+        setTimeout(() => setShowGradeAnimation(true), 500);
+      }
+    };
+    
+    fetchGradeData();
+  }, [sessionComplete, user?.id, subjectId, shuffledQuestions, attempts]);
 
   const markAnswerWithSmart = async (question: Question, answer: string) => {
     try {
@@ -690,72 +760,6 @@ const Practice = () => {
       return a.score > 0 && a.score < questionMarks;
     }).length;
     const incorrectAnswers = attempts.length - correctAnswers - partialAnswers;
-    
-    // Dynamic grade states for animation
-    const [oldGrade, setOldGrade] = useState<string | null>(null);
-    const [newGrade, setNewGrade] = useState<string | null>(null);
-    const [showGradeAnimation, setShowGradeAnimation] = useState(false);
-
-    // Fetch and calculate predicted grade change
-    useEffect(() => {
-      const fetchGradeData = async () => {
-        if (!user?.id || !subjectId) return;
-        
-        // Fetch current subject performance
-        const { data: perfData } = await supabase
-          .from('subject_performance')
-          .select('accuracy_rate')
-          .eq('user_id', user.id)
-          .eq('subject_id', subjectId)
-          .single();
-        
-        if (perfData?.accuracy_rate) {
-          // Calculate old grade from existing accuracy
-          const currentAccuracy = Number(perfData.accuracy_rate) || 0;
-          let oldCalculatedGrade = 'U';
-          if (currentAccuracy >= 90) oldCalculatedGrade = 'A*';
-          else if (currentAccuracy >= 80) oldCalculatedGrade = 'A';
-          else if (currentAccuracy >= 70) oldCalculatedGrade = 'B';
-          else if (currentAccuracy >= 60) oldCalculatedGrade = 'C';
-          else if (currentAccuracy >= 50) oldCalculatedGrade = 'D';
-          else if (currentAccuracy >= 40) oldCalculatedGrade = 'E';
-          
-          setOldGrade(oldCalculatedGrade);
-          
-          // Calculate new predicted grade based on session performance
-          const sessionWeight = 0.15; // This session contributes 15% to overall
-          const newAccuracy = (currentAccuracy * (1 - sessionWeight)) + (averagePercentage * sessionWeight);
-          
-          // Map accuracy to grade
-          let calculatedGrade = 'U';
-          if (newAccuracy >= 90) calculatedGrade = 'A*';
-          else if (newAccuracy >= 80) calculatedGrade = 'A';
-          else if (newAccuracy >= 70) calculatedGrade = 'B';
-          else if (newAccuracy >= 60) calculatedGrade = 'C';
-          else if (newAccuracy >= 50) calculatedGrade = 'D';
-          else if (newAccuracy >= 40) calculatedGrade = 'E';
-          
-          setNewGrade(calculatedGrade);
-          
-          // Trigger animation after a short delay
-          setTimeout(() => setShowGradeAnimation(true), 500);
-        } else {
-          // First session - show new grade
-          let calculatedGrade = 'U';
-          if (averagePercentage >= 90) calculatedGrade = 'A*';
-          else if (averagePercentage >= 80) calculatedGrade = 'A';
-          else if (averagePercentage >= 70) calculatedGrade = 'B';
-          else if (averagePercentage >= 60) calculatedGrade = 'C';
-          else if (averagePercentage >= 50) calculatedGrade = 'D';
-          else if (averagePercentage >= 40) calculatedGrade = 'E';
-          
-          setNewGrade(calculatedGrade);
-          setTimeout(() => setShowGradeAnimation(true), 500);
-        }
-      };
-      
-      fetchGradeData();
-    }, [user?.id, subjectId, averagePercentage]);
     
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
