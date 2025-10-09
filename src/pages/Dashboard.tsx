@@ -2592,43 +2592,51 @@ const Dashboard = () => {
                                   "Reset & Plan"
                                 ];
 
-                                const getActivityForDay = (dayIndex: number, topic: any) => {
-                                  const activities = [
+                                const getActivitiesForDay = (dayIndex: number, topic: any) => {
+                                  const topicName = topic?.topicId || "General Topics";
+                                  const activitiesMap = [
                                     // Monday - Kickstart
-                                    topic 
-                                      ? `${topic.topicId}: Create 10 flashcards + do 5-Q quiz`
-                                      : "Review smart revision notes + create flashcards",
+                                    [
+                                      { text: `Create 10 flashcards on ${topicName}`, mins: 15 },
+                                      { text: `Do 5-question quiz on ${topicName}`, mins: 10 }
+                                    ],
                                     // Tuesday - Strengthen Recall
-                                    topic
-                                      ? `${topic.topicId}: Practice questions + mark scheme review`
-                                      : "Review flashcards + do topic quiz",
+                                    [
+                                      { text: `Practice questions on ${topicName}`, mins: 15 },
+                                      { text: `Review mark scheme for ${topicName}`, mins: 10 }
+                                    ],
                                     // Wednesday - Mid-week Mastery
-                                    topic
-                                      ? `${topic.topicId}: Re-test (10 Qs) — target ≥ 70%`
-                                      : "Do exam paper section + review answers",
+                                    [
+                                      { text: `Re-test on ${topicName} (10 Qs) — target ≥ 70%`, mins: 25 }
+                                    ],
                                     // Thursday - Apply & Connect
-                                    topic
-                                      ? `${topic.topicId}: Problem set (12 Qs) + review notes`
-                                      : "Complete past paper questions + analysis",
+                                    [
+                                      { text: `Problem set on ${topicName} (12 Qs)`, mins: 20 },
+                                      { text: `Review smart revision notes`, mins: 10 }
+                                    ],
                                     // Friday - Checkpoint
-                                    topic
-                                      ? `${topic.topicId}: Joint test (15 Qs) + AI feedback`
-                                      : "Do full exam paper + detailed review",
+                                    [
+                                      { text: `Joint test on ${topicName} (15 Qs)`, mins: 25 },
+                                      { text: `Review AI feedback`, mins: 10 }
+                                    ],
                                     // Saturday - Light Review
-                                    topic
-                                      ? `${topic.topicId}: Quick flashcard recap (15 mins)`
-                                      : "Review flashcards + light topic practice",
+                                    [
+                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15 },
+                                      { text: `Light topic practice`, mins: 10 }
+                                    ],
                                     // Sunday - Reset & Plan
-                                    topic
-                                      ? `${topic.topicId}: Weekly recap quiz (25 Qs)`
-                                      : "Full week review + plan next week"
+                                    [
+                                      { text: `Weekly recap quiz on ${topicName} (25 Qs)`, mins: 35 },
+                                      { text: `Plan next week's focus areas`, mins: 10 }
+                                    ]
                                   ];
-                                  return activities[dayIndex];
+                                  return activitiesMap[dayIndex];
                                 };
 
                                 return weekDays.map((day, i) => {
                                   const topic = subjectWeakTopics[i % Math.max(subjectWeakTopics.length, 1)];
-                                  const duration = i === 0 || i === 3 ? 30 : i === 4 ? 35 : i === 5 ? 20 : i === 6 ? 45 : 25;
+                                  const activities = getActivitiesForDay(i, topic);
+                                  const totalDuration = activities.reduce((sum, act) => sum + act.mins, 0);
                                   
                                   return (
                                     <motion.div 
@@ -2638,27 +2646,36 @@ const Dashboard = () => {
                                       transition={{ delay: i * 0.05 }}
                                       className="p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300"
                                     >
-                                      <div className="flex items-center justify-between mb-4">
+                                      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                                         <div>
                                           <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
                                           <span className="text-xs text-[#64748B] dark:text-gray-400 ml-2">— {dayThemes[i]}</span>
                                         </div>
-                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{duration} mins</Badge>
+                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
                                       </div>
-                                      <div className="text-sm text-[#64748B] dark:text-gray-400 mb-4 font-medium">
-                                        {getActivityForDay(i, topic)}
-                                      </div>
-                                      <div className="flex gap-2">
-                                        <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
-                                          <Play className="h-3 w-3 mr-1" />
-                                          Start
-                                        </Button>
-                                        <Button size="sm" variant="outline" className="rounded-xl border-2 border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10 font-semibold">
-                                          Done
-                                        </Button>
-                                        <Button size="sm" variant="ghost" className="rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] dark:hover:bg-gray-800 font-semibold">
-                                          Reschedule
-                                        </Button>
+                                      
+                                      <div className="space-y-3">
+                                        {activities.map((activity, actIdx) => (
+                                          <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
+                                            <div className="flex-1 min-w-0">
+                                              <p className="text-sm text-[#0F172A] dark:text-white font-medium truncate">
+                                                {activity.text}
+                                              </p>
+                                              <p className="text-xs text-[#64748B] dark:text-gray-400 mt-0.5">
+                                                {activity.mins} mins
+                                              </p>
+                                            </div>
+                                            <div className="flex gap-2 flex-shrink-0">
+                                              <Button size="sm" className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8">
+                                                <Play className="h-3 w-3 mr-1" />
+                                                Start
+                                              </Button>
+                                              <Button size="sm" variant="outline" className="rounded-lg border-2 border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10 font-semibold text-xs px-3 h-8">
+                                                Done
+                                              </Button>
+                                            </div>
+                                          </div>
+                                        ))}
                                       </div>
                                     </motion.div>
                                   );
