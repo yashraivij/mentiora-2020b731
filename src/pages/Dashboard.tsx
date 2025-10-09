@@ -2755,9 +2755,6 @@ const Dashboard = () => {
                             <div className="text-4xl font-bold text-[#0F172A] group-hover:text-[#0EA5E9] transition-colors">
                               {grade}
                             </div>
-                            <div className="text-xs text-[#64748B] mt-1 font-medium">
-                              Grade {grade}
-                            </div>
                           </motion.button>
                         ))}
                       </div>
