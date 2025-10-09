@@ -2130,7 +2130,7 @@ const Dashboard = () => {
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
                               <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Topic Mastery</CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Ranked from weakest to strongest</CardDescription>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Track your progress across all topics</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
                               {(() => {
