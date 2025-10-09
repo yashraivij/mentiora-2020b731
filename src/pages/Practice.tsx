@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send } from "lucide-react";
+import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -737,9 +738,9 @@ const Practice = () => {
                             </span>
                           )}
                           
-                          {/* Fox on current unattempted question */}
+                          {/* Mentiora logo on current unattempted question */}
                           {showFox && (
-                            <span className="text-lg">🦊</span>
+                            <img src={mentioraLogo} alt="Current question" className="w-5 h-5 object-contain" />
                           )}
                         </div>
                       </div>
