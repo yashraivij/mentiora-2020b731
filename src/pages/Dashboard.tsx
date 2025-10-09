@@ -2587,40 +2587,80 @@ const Dashboard = () => {
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="flex flex-row items-center justify-between pb-4">
                               <div>
-                                <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">7-Day Study Plan</CardTitle>
-                                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">Focused on your weakest topics</CardDescription>
+                                <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Adaptive 7-Day Study Plan</CardTitle>
+                                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">
+                                  Automatically adjusts based on your performance and practice history
+                                </CardDescription>
                               </div>
                             </CardHeader>
                             <CardContent className="space-y-3 p-6">
                               {(() => {
-                                // Generate plan data using WeeklyPlan logic
+                                // Generate adaptive plan based on user progress
                                 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+                                const now = new Date();
                                 
-                                // Get weak topics for this subject (score < 70)
-                                let subjectWeakTopics = userProgress
-                                  .filter(p => p.subjectId === selectedDrawerSubject.id && p.averageScore < 70)
-                                  .sort((a, b) => a.averageScore - b.averageScore);
+                                // Calculate priority score for each topic based on performance and recency
+                                const calculateTopicPriority = (progress: UserProgress) => {
+                                  const daysSinceLastAttempt = progress.lastAttempt 
+                                    ? (now.getTime() - new Date(progress.lastAttempt).getTime()) / (1000 * 60 * 60 * 24)
+                                    : 999;
+                                  
+                                  // Priority factors:
+                                  // 1. Lower score = higher priority (weight: 2x)
+                                  // 2. More days since last attempt = higher priority
+                                  // 3. Few attempts = higher priority (need more practice)
+                                  const scorePriority = (100 - progress.averageScore) * 2;
+                                  const recencyPriority = Math.min(daysSinceLastAttempt * 10, 100);
+                                  const attemptsPriority = Math.max(50 - (progress.attempts * 5), 0);
+                                  
+                                  return scorePriority + recencyPriority + attemptsPriority;
+                                };
                                 
-                                // If no weak topics, use all attempted topics for this subject
-                                if (subjectWeakTopics.length === 0) {
-                                  subjectWeakTopics = userProgress
-                                    .filter(p => p.subjectId === selectedDrawerSubject.id)
-                                    .sort((a, b) => a.averageScore - b.averageScore);
-                                }
+                                // Get all topics for this subject from user progress
+                                let subjectTopics = userProgress
+                                  .filter(p => p.subjectId === selectedDrawerSubject.id)
+                                  .map(p => ({
+                                    ...p,
+                                    priority: calculateTopicPriority(p)
+                                  }))
+                                  .sort((a, b) => b.priority - a.priority);
                                 
-                                // If still no topics, get topics from curriculum
-                                if (subjectWeakTopics.length === 0) {
+                                // If no progress data, initialize from curriculum
+                                if (subjectTopics.length === 0) {
                                   const curriculumSubject = curriculum.find(s => s.id === selectedDrawerSubject.id);
                                   if (curriculumSubject?.topics) {
-                                    subjectWeakTopics = curriculumSubject.topics.map(t => ({
+                                    subjectTopics = curriculumSubject.topics.slice(0, 7).map(t => ({
                                       subjectId: selectedDrawerSubject.id,
                                       topicId: t.id,
                                       averageScore: 0,
                                       attempts: 0,
-                                      lastAttempt: new Date()
+                                      lastAttempt: new Date(0),
+                                      priority: 999
                                     }));
                                   }
                                 }
+                                
+                                // Identify weak topics (score < 70) for focused practice
+                                const weakTopics = subjectTopics.filter(t => t.averageScore < 70 && t.attempts > 0);
+                                const needsAttention = subjectTopics.filter(t => t.attempts === 0 || t.averageScore < 50);
+                                
+                                // Distribute topics across the week intelligently
+                                const getTopicForDay = (dayIndex: number) => {
+                                  // For early week (Mon-Wed), focus on weakest topics
+                                  if (dayIndex < 3) {
+                                    return needsAttention[dayIndex % needsAttention.length] || subjectTopics[dayIndex % subjectTopics.length];
+                                  }
+                                  // Mid-week (Thu-Fri), mix weak and moderate topics
+                                  else if (dayIndex < 5) {
+                                    return weakTopics.length > 0 
+                                      ? weakTopics[dayIndex % weakTopics.length]
+                                      : subjectTopics[dayIndex % subjectTopics.length];
+                                  }
+                                  // Weekend (Sat-Sun), review and consolidate
+                                  else {
+                                    return subjectTopics[dayIndex % subjectTopics.length];
+                                  }
+                                };
                                 
                                 const dayThemes = [
                                   "Kickstart Week",
@@ -2686,10 +2726,8 @@ const Dashboard = () => {
                                 };
 
                                 return weekDays.map((day, i) => {
-                                  // Cycle through available topics
-                                  const topic = subjectWeakTopics.length > 0 
-                                    ? subjectWeakTopics[i % subjectWeakTopics.length]
-                                    : null;
+                                  // Get adaptive topic for this day based on priority
+                                  const topic = getTopicForDay(i);
                                   const { activities, subjectId } = getActivitiesForDay(i, topic);
                                   const totalDuration = activities.reduce((sum, act) => sum + act.mins, 0);
                                   
@@ -2731,11 +2769,26 @@ const Dashboard = () => {
                                           return (
                                             <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
                                               <div className="flex-1 min-w-0">
-                                                <p className={`text-sm text-[#0F172A] dark:text-white font-medium truncate ${isCompleted ? 'line-through opacity-50' : ''}`}>
-                                                  {activity.text}
-                                                </p>
+                                                <div className="flex items-center gap-2">
+                                                  <p className={`text-sm text-[#0F172A] dark:text-white font-medium truncate ${isCompleted ? 'line-through opacity-50' : ''}`}>
+                                                    {activity.text}
+                                                  </p>
+                                                  {topic && topic.averageScore < 50 && topic.attempts > 0 && !isCompleted && (
+                                                    <Badge className="text-[10px] px-1.5 py-0.5 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-0">
+                                                      Priority
+                                                    </Badge>
+                                                  )}
+                                                  {topic && topic.attempts === 0 && !isCompleted && (
+                                                    <Badge className="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-0">
+                                                      New
+                                                    </Badge>
+                                                  )}
+                                                </div>
                                                 <p className={`text-xs text-[#64748B] dark:text-gray-400 mt-0.5 ${isCompleted ? 'line-through opacity-50' : ''}`}>
                                                   {activity.mins} mins
+                                                  {topic && topic.averageScore > 0 && !isCompleted && (
+                                                    <span className="ml-2">• Current: {Math.round(topic.averageScore)}%</span>
+                                                  )}
                                                 </p>
                                               </div>
                                               <div className="flex gap-2 flex-shrink-0">
@@ -2762,9 +2815,30 @@ const Dashboard = () => {
                                                         newSet.delete(activityId);
                                                       } else {
                                                         newSet.add(activityId);
+                                                        
+                                                        // Update last attempt date for this topic to reflect completion
+                                                        if (topic && activity.topicId) {
+                                                          const updatedProgress = userProgress.map(p => 
+                                                            p.subjectId === topic.subjectId && p.topicId === activity.topicId
+                                                              ? { ...p, lastAttempt: new Date() }
+                                                              : p
+                                                          );
+                                                          setUserProgress(updatedProgress);
+                                                          if (user?.id) {
+                                                            localStorage.setItem(`mentiora_progress_${user.id}`, JSON.stringify(updatedProgress));
+                                                          }
+                                                        }
                                                       }
                                                       return newSet;
                                                     });
+                                                    
+                                                    // Show encouraging toast
+                                                    if (!isCompleted) {
+                                                      toast({
+                                                        title: "Great work! 🎉",
+                                                        description: "Activity completed. Your study plan is adapting to your progress.",
+                                                      });
+                                                    }
                                                   }}
                                                 >
                                                   {isCompleted ? <Check className="h-3 w-3 mr-1" /> : null}
