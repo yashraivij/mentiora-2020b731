@@ -2364,12 +2364,7 @@ const Dashboard = () => {
                                         <Card 
                                           className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
                                           onClick={() => {
-                                            if (subjects.length === 1) {
-                                              addSubject(subjects[0].id);
-                                              setShowAddSubjects(false);
-                                            } else {
-                                              setSelectedSubjectGroup(baseName);
-                                            }
+                                            setSelectedSubjectGroup(baseName);
                                           }}
                                         >
                                           <CardContent className="p-5">
@@ -2381,7 +2376,7 @@ const Dashboard = () => {
                                                 </h3>
                                                 <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                                   <BookOpen className="h-3.5 w-3.5" />
-                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `${totalTopics} topics available`}
+                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
                                                 </p>
                                               </div>
                                               <div className="flex-shrink-0">
