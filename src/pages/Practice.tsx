@@ -439,8 +439,11 @@ const Practice = () => {
   };
 
   const finishSession = async () => {
-    console.log('🏁 finishSession called');
-    console.log('User ID:', user?.id, 'Subject ID:', subjectId, 'Topic ID:', topicId);
+    console.log('🏁 finishSession START');
+    console.log('User:', user);
+    console.log('Subject ID:', subjectId);
+    console.log('Topic ID:', topicId);
+    console.log('Attempts:', attempts);
     
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
@@ -448,8 +451,8 @@ const Practice = () => {
     
     console.log('Session stats:', { totalMarks, marksEarned, averagePercentage, attemptsCount: attempts.length });
     
-    // Clear the current session state since it's completed
-    clearSessionState();
+    // DON'T clear session state yet - need user data for saving
+    // clearSessionState();
     
     // Handle MP rewards for practice completion server-side
     if (user?.id && subjectId && topicId) {
@@ -668,6 +671,11 @@ const Practice = () => {
     }
     
     setSessionComplete(true);
+    
+    // Clear session state AFTER setting sessionComplete
+    setTimeout(() => clearSessionState(), 100);
+    
+    console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
   if (sessionComplete) {
