@@ -2299,19 +2299,6 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectEmoji = getSubjectIconEmoji(selectedDrawerSubject.id);
                                 const subjectName = getSubjectDisplayName(selectedDrawerSubject);
-                                const subjectColorMap: { [key: string]: string } = {
-                                  'biology': 'from-cyan-500 to-blue-600',
-                                  'chemistry': 'from-blue-500 to-indigo-600',
-                                  'physics': 'from-sky-500 to-cyan-600',
-                                  'maths': 'from-blue-600 to-indigo-700',
-                                  'english': 'from-indigo-500 to-blue-600',
-                                  'computer': 'from-cyan-600 to-blue-700',
-                                  'geography': 'from-sky-500 to-blue-600',
-                                };
-                                const colorKey = Object.keys(subjectColorMap).find(key => 
-                                  selectedDrawerSubject.id.toLowerCase().includes(key)
-                                ) || 'from-blue-500 to-cyan-600';
-                                const color = subjectColorMap[colorKey];
                                 
                                 // For Geography, show both Paper 1 and Paper 2
                                 if (selectedDrawerSubject.id === 'geography') {
@@ -2324,7 +2311,7 @@ const Dashboard = () => {
                                         className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl`}>
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -2346,7 +2333,7 @@ const Dashboard = () => {
                                         className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl`}>
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -2376,7 +2363,7 @@ const Dashboard = () => {
                                     className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                   >
                                     <div className="flex items-center gap-4">
-                                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl`}>
+                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                         {subjectEmoji}
                                       </div>
                                       <div>
