@@ -149,6 +149,8 @@ const Dashboard = () => {
   const [showAddSubjects, setShowAddSubjects] = useState(false);
   const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
   const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
+  const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
+  const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -1330,7 +1332,7 @@ const Dashboard = () => {
   const availableSubjects = curriculum.filter((subject) => !userSubjects.includes(subject.id));
 
   // Add subject function
-  const addSubject = async (subjectId: string) => {
+  const addSubject = async (subjectId: string, targetGrade: string, examBoard: string = "AQA") => {
     if (!user?.id) return;
     
     const subject = curriculum.find(s => s.id === subjectId);
@@ -1347,7 +1349,7 @@ const Dashboard = () => {
         .select("id")
         .eq("user_id", user.id)
         .eq("subject_name", subjectName)
-        .eq("exam_board", "AQA")
+        .eq("exam_board", examBoard)
         .maybeSingle();
 
       if (existing) {
@@ -1363,9 +1365,9 @@ const Dashboard = () => {
         .insert({
           user_id: user.id,
           subject_name: subjectName,
-          exam_board: "AQA",
+          exam_board: examBoard,
           predicted_grade: "5",
-          target_grade: "7"
+          target_grade: targetGrade
         });
 
       if (error) {
@@ -1390,6 +1392,43 @@ const Dashboard = () => {
       toast({
         title: "Error", 
         description: "Failed to add subject",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const updateTargetGrade = async (subjectName: string, examBoard: string, newTargetGrade: string) => {
+    if (!user?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from("user_subjects")
+        .update({ target_grade: newTargetGrade })
+        .eq("user_id", user.id)
+        .eq("subject_name", subjectName)
+        .eq("exam_board", examBoard);
+
+      if (error) {
+        console.error("Error updating target grade:", error);
+        toast({
+          title: "Error",
+          description: "Failed to update target grade",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      await loadUserSubjects();
+      toast({
+        title: "Success",
+        description: "Target grade updated",
+      });
+      setEditingTargetGrade(false);
+    } catch (error) {
+      console.error("Error updating target grade:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update target grade",
         variant: "destructive"
       });
     }
@@ -1992,11 +2031,43 @@ const Dashboard = () => {
                         </div>
                         <div className="flex gap-3">
                           <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
-                            Predicted 7.2
+                            Predicted {selectedDrawerSubject.predicted}
                           </Badge>
-                          <Badge className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold">
-                            Target 8.0
-                          </Badge>
+                          {!editingTargetGrade ? (
+                            <Badge 
+                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A]/10 transition-colors"
+                              onClick={() => setEditingTargetGrade(true)}
+                            >
+                              Target {selectedDrawerSubject.target} ✏️
+                            </Badge>
+                          ) : (
+                            <div className="flex gap-2 items-center">
+                              <select
+                                className="rounded-xl px-3 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold"
+                                defaultValue={selectedDrawerSubject.target}
+                                onChange={(e) => {
+                                  const subjectData = userSubjectsWithGrades.find(
+                                    s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
+                                  );
+                                  if (subjectData) {
+                                    updateTargetGrade(subjectData.subject_name, subjectData.exam_board, e.target.value);
+                                  }
+                                }}
+                              >
+                                {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
+                                  <option key={grade} value={grade}>{grade}</option>
+                                ))}
+                              </select>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => setEditingTargetGrade(false)}
+                                className="h-8 w-8 p-0"
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          )}
                         </div>
                       </SheetHeader>
 
@@ -2097,12 +2168,12 @@ const Dashboard = () => {
                               <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                 <div className="flex items-center justify-between mb-2">
                                   <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target Grade</span>
-                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">8.0</span>
+                                  <span className="text-lg font-bold text-[#0F172A] dark:text-white">{selectedDrawerSubject.target}</span>
                                 </div>
                                 <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                   <motion.div 
                                     initial={{ width: 0 }}
-                                    animate={{ width: "80%" }}
+                                    animate={{ width: `${(selectedDrawerSubject.target / 10) * 100}%` }}
                                     transition={{ duration: 1, delay: 0.4 }}
                                     className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                                   />
@@ -2608,11 +2679,13 @@ const Dashboard = () => {
                                   whileTap={{ scale: 0.98 }}
                                 >
                                   <Card 
-                                    className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                    className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
                                     onClick={() => {
-                                      addSubject(subject.id);
-                                      setShowAddSubjects(false);
-                                      setSelectedSubjectGroup(null);
+                                      setSelectedSubjectForGrade({
+                                        id: subject.id,
+                                        name: subject.name,
+                                        examBoard: examBoard
+                                      });
                                     }}
                                   >
                                     <CardContent className="p-6">
@@ -2632,6 +2705,62 @@ const Dashboard = () => {
                             })}
                         </div>
                       )}
+                    </div>
+                  </motion.div>
+                </div>
+              )}
+
+              {/* Target Grade Selection Modal */}
+              {selectedSubjectForGrade && (
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 max-w-2xl w-full"
+                  >
+                    <div className="p-6 border-b border-[#E2E8F0]/50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h2 className="text-3xl font-bold text-[#0F172A] tracking-tight">Set Target Grade</h2>
+                          <p className="text-sm text-[#64748B] mt-1 font-light">
+                            What grade are you aiming for in {selectedSubjectForGrade.name}?
+                          </p>
+                        </div>
+                        <Button
+                          onClick={() => setSelectedSubjectForGrade(null)}
+                          variant="ghost"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-all duration-200"
+                        >
+                          <X className="h-5 w-5" />
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="p-8">
+                      <div className="grid grid-cols-3 gap-3">
+                        {[9, 8, 7, 6, 5, 4, 3, 2, 1].map((grade) => (
+                          <motion.button
+                            key={grade}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
+                              setSelectedSubjectForGrade(null);
+                              setShowAddSubjects(false);
+                              setSelectedSubjectGroup(null);
+                            }}
+                            className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] border-2 border-[#E2E8F0] hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+                          >
+                            <div className="text-4xl font-bold text-[#0F172A] group-hover:text-[#0EA5E9] transition-colors">
+                              {grade}
+                            </div>
+                            <div className="text-xs text-[#64748B] mt-1 font-medium">
+                              Grade {grade}
+                            </div>
+                          </motion.button>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 </div>
