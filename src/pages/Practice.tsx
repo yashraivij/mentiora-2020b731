@@ -673,19 +673,6 @@ const Practice = () => {
                 <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
                 <h1 className="text-lg font-semibold text-slate-900 truncate">{topic?.name}</h1>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  if (currentQuestionIndex < shuffledQuestions.length - 1) {
-                    handleNextQuestion();
-                  }
-                }}
-                disabled={currentQuestionIndex >= shuffledQuestions.length - 1}
-                className="h-9 w-9 flex-shrink-0"
-              >
-                <ArrowLeft className="h-4 w-4 rotate-180" />
-              </Button>
             </div>
 
             {/* Center: Modern Progress indicator with fox */}
