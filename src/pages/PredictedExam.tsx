@@ -7174,22 +7174,32 @@ Write a story about a moment of fear.
       <header className="border-b border-gray-200 bg-white sticky top-0 z-40 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* Left: Exam name */}
-            <div className="flex items-center min-w-0 flex-1">
+            {/* Left: Back button and Exam name */}
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate('/dashboard')}
+                className="h-9 w-9 flex-shrink-0"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
               <h1 className="text-lg font-semibold text-slate-900 truncate">
                 {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
-                 subjectId === 'history' ? 'History Paper 1' : 
-                 subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
-                 subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
-                 subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
-                 subjectId === 'geography-b-ocr' ? 'Geography B (OCR)' :
-                 subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
-                 subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
-                 subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' :
-                 subjectId === 'computer-science' ? 'Computer Science Paper 1' :
-                 subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
-                 subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
-                 `${subject.name} Predicted Exam`}
+                 subjectId === 'history' ? 'History – Paper 1' : 
+                 subjectId === 'religious-studies' ? 'Religious Studies – Component 1' : 
+                 subjectId === 'geography' ? `Geography – ${geographyPaperType}` : 
+                 subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) – Paper 1' :
+                 subjectId === 'geography-b-ocr' ? 'Geography B (OCR) – Paper 1' :
+                 subjectId === 'geography-paper-2' ? 'Geography – Paper 2' :
+                 subjectId === 'maths' ? 'AQA Maths – Paper 1 (Non-Calculator)' :
+                 subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) – Paper 1: Pure Mathematics' :
+                 subjectId === 'computer-science' ? 'Computer Science – Paper 1' :
+                 subjectId === 'psychology' ? 'Psychology – Component 01' :
+                 subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level – Paper 1' :
+                 subjectId?.includes('-paper-2') ? `${subject.name} – Paper 2` :
+                 subjectId?.includes('-paper-3') ? `${subject.name} – Paper 3` :
+                 `${subject.name} – Paper 1`}
               </h1>
             </div>
 
