@@ -2592,6 +2592,40 @@ const Dashboard = () => {
                                   "Reset & Plan"
                                 ];
 
+                                const getActivityForDay = (dayIndex: number, topic: any) => {
+                                  const activities = [
+                                    // Monday - Kickstart
+                                    topic 
+                                      ? `${topic.topicId}: Create 10 flashcards + do 5-Q quiz`
+                                      : "Review smart revision notes + create flashcards",
+                                    // Tuesday - Strengthen Recall
+                                    topic
+                                      ? `${topic.topicId}: Practice questions + mark scheme review`
+                                      : "Review flashcards + do topic quiz",
+                                    // Wednesday - Mid-week Mastery
+                                    topic
+                                      ? `${topic.topicId}: Re-test (10 Qs) — target ≥ 70%`
+                                      : "Do exam paper section + review answers",
+                                    // Thursday - Apply & Connect
+                                    topic
+                                      ? `${topic.topicId}: Problem set (12 Qs) + review notes`
+                                      : "Complete past paper questions + analysis",
+                                    // Friday - Checkpoint
+                                    topic
+                                      ? `${topic.topicId}: Joint test (15 Qs) + AI feedback`
+                                      : "Do full exam paper + detailed review",
+                                    // Saturday - Light Review
+                                    topic
+                                      ? `${topic.topicId}: Quick flashcard recap (15 mins)`
+                                      : "Review flashcards + light topic practice",
+                                    // Sunday - Reset & Plan
+                                    topic
+                                      ? `${topic.topicId}: Weekly recap quiz (25 Qs)`
+                                      : "Full week review + plan next week"
+                                  ];
+                                  return activities[dayIndex];
+                                };
+
                                 return weekDays.map((day, i) => {
                                   const topic = subjectWeakTopics[i % Math.max(subjectWeakTopics.length, 1)];
                                   const duration = i === 0 || i === 3 ? 30 : i === 4 ? 35 : i === 5 ? 20 : i === 6 ? 45 : 25;
@@ -2612,7 +2646,7 @@ const Dashboard = () => {
                                         <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{duration} mins</Badge>
                                       </div>
                                       <div className="text-sm text-[#64748B] dark:text-gray-400 mb-4 font-medium">
-                                        {topic ? `Focus: ${topic.topicId}` : `Review: General Topics`}
+                                        {getActivityForDay(i, topic)}
                                       </div>
                                       <div className="flex gap-2">
                                         <Button size="sm" className="rounded-xl flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
