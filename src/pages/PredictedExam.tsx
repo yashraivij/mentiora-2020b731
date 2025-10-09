@@ -7027,11 +7027,11 @@ Write a story about a moment of fear.
           <div className="space-y-6">
             {/* Title Section with Premium Badge */}
             <div className="relative">
-              <div className="absolute -top-2 -left-2 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-2xl"></div>
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-[#3BAFDA]/20 rounded-full blur-2xl"></div>
               <div className="relative">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 animate-pulse"></div>
-                  <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Predicted Exam</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3BAFDA]/10 border border-[#3BAFDA]/20 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-[#3BAFDA] animate-pulse"></div>
+                  <span className="text-sm font-medium text-[#3BAFDA]">Predicted Exam</span>
                 </div>
                 <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
                 <p className="text-muted-foreground text-lg">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
@@ -7040,28 +7040,28 @@ Write a story about a moment of fear.
 
             {/* Premium Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Card className="border-2 border-blue-500/20 bg-gradient-to-br from-card to-blue-50/30 dark:to-blue-950/30 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <FileText className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{examQuestions.length}</p>
+                      <p className="text-3xl font-bold text-[#3BAFDA]">{examQuestions.length}</p>
                       <p className="text-sm text-muted-foreground font-medium">Questions</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="border-2 border-cyan-500/20 bg-gradient-to-br from-card to-cyan-50/30 dark:to-cyan-950/30 hover:border-cyan-500/40 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <Clock className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">{getExamDuration()}min</p>
+                      <p className="text-3xl font-bold text-[#3BAFDA]">{getExamDuration()}min</p>
                       <p className="text-sm text-muted-foreground font-medium">Time Limit</p>
                     </div>
                   </div>
@@ -7070,13 +7070,13 @@ Write a story about a moment of fear.
             </div>
 
             {/* Instructions Card */}
-            <Card className="border-blue-500/20 bg-gradient-to-br from-card to-blue-50/20 dark:to-blue-950/20 shadow-lg">
-              <CardHeader className="border-b border-blue-500/10 bg-gradient-to-r from-blue-50/50 to-cyan-50/50 dark:from-blue-950/30 dark:to-cyan-950/30">
+            <Card className="border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/5 shadow-lg">
+              <CardHeader className="border-b border-[#3BAFDA]/10 bg-[#3BAFDA]/5">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 shadow-md">
+                  <div className="p-2 rounded-lg bg-[#3BAFDA] shadow-md">
                     <AlertCircle className="h-5 w-5 text-white" />
                   </div>
-                  <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Exam Instructions</span>
+                  <span className="text-[#3BAFDA]">Exam Instructions</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
@@ -7185,7 +7185,7 @@ Write a story about a moment of fear.
             <Button 
               onClick={startExam}
               size="lg"
-              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 hover:scale-[1.02] transition-all duration-300"
+              className="w-full h-14 text-lg font-semibold bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white border-0 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] hover:scale-[1.02] transition-all duration-300"
             >
               <span className="flex items-center gap-2">
                 Start Exam
