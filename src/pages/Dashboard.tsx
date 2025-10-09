@@ -181,6 +181,7 @@ const Dashboard = () => {
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
   const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
+  const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -2707,31 +2708,56 @@ const Dashboard = () => {
                                       </div>
                                       
                                       <div className="space-y-3">
-                                        {activities.map((activity, actIdx) => (
-                                          <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
-                                            <div className="flex-1 min-w-0">
-                                              <p className="text-sm text-[#0F172A] dark:text-white font-medium truncate">
-                                                {activity.text}
-                                              </p>
-                                              <p className="text-xs text-[#64748B] dark:text-gray-400 mt-0.5">
-                                                {activity.mins} mins
-                                              </p>
+                                        {activities.map((activity, actIdx) => {
+                                          const activityId = `${day}-${actIdx}`;
+                                          const isCompleted = completedActivities.has(activityId);
+                                          
+                                          return (
+                                            <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
+                                              <div className="flex-1 min-w-0">
+                                                <p className={`text-sm text-[#0F172A] dark:text-white font-medium truncate ${isCompleted ? 'line-through opacity-50' : ''}`}>
+                                                  {activity.text}
+                                                </p>
+                                                <p className={`text-xs text-[#64748B] dark:text-gray-400 mt-0.5 ${isCompleted ? 'line-through opacity-50' : ''}`}>
+                                                  {activity.mins} mins
+                                                </p>
+                                              </div>
+                                              <div className="flex gap-2 flex-shrink-0">
+                                                <Button 
+                                                  size="sm" 
+                                                  className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
+                                                  onClick={() => handleStartActivity(activity)}
+                                                >
+                                                  <Play className="h-3 w-3 mr-1" />
+                                                  Start
+                                                </Button>
+                                                <Button 
+                                                  size="sm" 
+                                                  variant="outline" 
+                                                  className={`rounded-lg border-2 font-semibold text-xs px-3 h-8 ${
+                                                    isCompleted 
+                                                      ? 'border-[#16A34A] bg-[#16A34A] text-white hover:bg-[#16A34A]/90' 
+                                                      : 'border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10'
+                                                  }`}
+                                                  onClick={() => {
+                                                    setCompletedActivities(prev => {
+                                                      const newSet = new Set(prev);
+                                                      if (isCompleted) {
+                                                        newSet.delete(activityId);
+                                                      } else {
+                                                        newSet.add(activityId);
+                                                      }
+                                                      return newSet;
+                                                    });
+                                                  }}
+                                                >
+                                                  {isCompleted ? <Check className="h-3 w-3 mr-1" /> : null}
+                                                  Done
+                                                </Button>
+                                              </div>
                                             </div>
-                                            <div className="flex gap-2 flex-shrink-0">
-                                              <Button 
-                                                size="sm" 
-                                                className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
-                                                onClick={() => handleStartActivity(activity)}
-                                              >
-                                                <Play className="h-3 w-3 mr-1" />
-                                                Start
-                                              </Button>
-                                              <Button size="sm" variant="outline" className="rounded-lg border-2 border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10 font-semibold text-xs px-3 h-8">
-                                                Done
-                                              </Button>
-                                            </div>
-                                          </div>
-                                        ))}
+                                          );
+                                        })}
                                       </div>
                                     </motion.div>
                                   );
