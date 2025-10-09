@@ -2309,6 +2309,10 @@ const Dashboard = () => {
                                 ) || 'biology';
                                 const color = subjectColorMap[colorKey];
                                 
+                                // Extract paper number from subject ID
+                                const paperMatch = selectedDrawerSubject.id.match(/paper-(\d+)/i);
+                                const paperNumber = paperMatch ? paperMatch[1] : '1';
+                                
                                 return (
                                   <motion.div 
                                     initial={{ opacity: 0, y: 10 }}
@@ -2322,7 +2326,7 @@ const Dashboard = () => {
                                       </div>
                                       <div>
                                         <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
-                                        <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">2026 Predicted Paper</div>
+                                        <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">2026 Predicted Paper {paperNumber}</div>
                                       </div>
                                     </div>
                                     <div className="text-right">
