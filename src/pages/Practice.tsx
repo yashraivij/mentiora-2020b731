@@ -9,6 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, Target, Zap } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { motion } from "framer-motion";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -764,215 +765,317 @@ const Practice = () => {
     return (
       <div className="min-h-screen bg-[#F8FAFC] dark:bg-gray-950">
         {/* Header with Medly Blue */}
-        <header className="border-b bg-white dark:bg-gray-900 shadow-sm">
+        <motion.header 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="border-b bg-white dark:bg-gray-900 shadow-sm"
+        >
           <div className="max-w-4xl mx-auto px-6 md:px-8 py-5">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/20">
+              <motion.div 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.2 }}
+                className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/20"
+              >
                 <CheckCircle2 className="h-6 w-6 text-white" />
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
                 <h1 className="text-xl font-bold text-[#0F172A] dark:text-white">Session Complete</h1>
                 <p className="text-sm text-[#64748B] dark:text-gray-400">{topic?.name}</p>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </header>
+        </motion.header>
 
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-8 space-y-5">
-          {/* Predicted Grade Card with Medly Blue */}
+          {/* Predicted Grade Card with Animation */}
           {(oldGrade || newGrade) && (
-            <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
-                  <div className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center">
-                    <Award className="h-5 w-5 text-[#0EA5E9]" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(14,165,233,0.18)] transition-shadow duration-300">
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 via-transparent to-[#38BDF8]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <CardHeader className="pb-4 relative z-10">
+                  <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
+                    <motion.div 
+                      className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring" }}
+                    >
+                      <Award className="h-5 w-5 text-[#0EA5E9]" />
+                    </motion.div>
+                    Predicted Grade Impact
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="relative z-10">
+                  <div className="flex items-center justify-center gap-8 py-2">
+                    {oldGrade && (
+                      <motion.div 
+                        className="text-center"
+                        initial={{ opacity: 1, scale: 1 }}
+                        animate={{ 
+                          opacity: showGradeAnimation ? 0.5 : 1,
+                          scale: showGradeAnimation ? 0.9 : 1 
+                        }}
+                        transition={{ duration: 0.7 }}
+                      >
+                        <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">Previous</p>
+                        <div className="text-5xl font-black text-[#94A3B8] dark:text-gray-500">
+                          {oldGrade}
+                        </div>
+                      </motion.div>
+                    )}
+                    
+                    {oldGrade && newGrade && (
+                      <motion.div
+                        animate={{ 
+                          scale: showGradeAnimation ? [1, 1.2, 1] : 1,
+                          rotate: showGradeAnimation ? [0, 5, -5, 0] : 0
+                        }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                      >
+                        <TrendingUp className={`h-8 w-8 transition-colors duration-700 ${
+                          showGradeAnimation ? 'text-[#0EA5E9]' : 'text-[#CBD5E1]'
+                        }`} />
+                      </motion.div>
+                    )}
+                    
+                    {newGrade && (
+                      <motion.div 
+                        className="text-center"
+                        initial={{ opacity: 0.5, scale: 0.9 }}
+                        animate={{ 
+                          opacity: showGradeAnimation ? 1 : 0.5,
+                          scale: showGradeAnimation ? 1.1 : 0.9 
+                        }}
+                        transition={{ duration: 0.7 }}
+                      >
+                        <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">
+                          {oldGrade ? 'Updated' : 'Current'}
+                        </p>
+                        <motion.div 
+                          className="text-5xl font-black text-[#0EA5E9]"
+                          animate={showGradeAnimation ? { scale: [1, 1.1, 1] } : {}}
+                          transition={{ duration: 0.5, repeat: 2 }}
+                        >
+                          {newGrade}
+                        </motion.div>
+                      </motion.div>
+                    )}
                   </div>
-                  Predicted Grade Impact
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-center gap-8 py-2">
-                  {oldGrade && (
-                    <div className="text-center">
-                      <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">Previous</p>
-                      <div className={`text-5xl font-black transition-all duration-700 ${
-                        showGradeAnimation ? 'opacity-50 scale-90' : 'opacity-100 scale-100'
-                      }`}>
-                        <span className="text-[#94A3B8] dark:text-gray-500">{oldGrade}</span>
-                      </div>
-                    </div>
+                  
+                  {oldGrade && newGrade && oldGrade !== newGrade && showGradeAnimation && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-5 text-center"
+                    >
+                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 px-4 py-1.5">
+                        🎉 Grade Improved!
+                      </Badge>
+                    </motion.div>
                   )}
                   
-                  {oldGrade && newGrade && (
-                    <div className="flex flex-col items-center">
-                      <TrendingUp className={`h-8 w-8 transition-all duration-700 ${
-                        showGradeAnimation ? 'text-[#0EA5E9]' : 'text-[#CBD5E1]'
-                      }`} />
-                    </div>
+                  {oldGrade && newGrade && oldGrade === newGrade && showGradeAnimation && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-5 text-center"
+                    >
+                      <Badge className="bg-[#0EA5E9] text-white border-0 px-4 py-1.5">
+                        ⭐ Maintaining Excellence
+                      </Badge>
+                    </motion.div>
                   )}
-                  
-                  {newGrade && (
-                    <div className="text-center">
-                      <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">
-                        {oldGrade ? 'Updated' : 'Current'}
-                      </p>
-                      <div className={`text-5xl font-black transition-all duration-700 ${
-                        showGradeAnimation ? 'opacity-100 scale-110' : 'opacity-50 scale-90'
-                      }`}>
-                        <span className="text-[#0EA5E9]">{newGrade}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                
-                {oldGrade && newGrade && oldGrade !== newGrade && showGradeAnimation && (
-                  <div className="mt-5 text-center">
-                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 px-4 py-1.5">
-                      🎉 Grade Improved!
-                    </Badge>
-                  </div>
-                )}
-                
-                {oldGrade && newGrade && oldGrade === newGrade && showGradeAnimation && (
-                  <div className="mt-5 text-center">
-                    <Badge className="bg-[#0EA5E9] text-white border-0 px-4 py-1.5">
-                      ⭐ Maintaining Excellence
-                    </Badge>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           )}
 
-          {/* Performance Overview Card */}
-          <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
-                  <div className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center">
-                    <Trophy className="h-5 w-5 text-[#0EA5E9]" />
-                  </div>
-                  Session Performance
-                </CardTitle>
-                <Badge className={
-                  averagePercentage >= 85 
-                    ? 'bg-emerald-500 text-white border-0' 
-                    : averagePercentage >= 60 
-                    ? 'bg-amber-500 text-white border-0' 
-                    : 'bg-rose-500 text-white border-0'
-                }>
-                  {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Keep Practicing"}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              <div className="text-center py-3">
-                <div className="text-6xl font-black text-[#0EA5E9] mb-2">
-                  {Math.round(averagePercentage)}%
+          {/* Performance Overview Card with Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(14,165,233,0.18)] transition-shadow duration-300">
+              {/* Floating orbs */}
+              <motion.div 
+                className="absolute top-0 right-0 w-40 h-40 bg-[#0EA5E9]/10 rounded-full blur-3xl"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              <CardHeader className="pb-4 relative z-10">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
+                    <motion.div 
+                      className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      transition={{ type: "spring" }}
+                    >
+                      <Trophy className="h-5 w-5 text-[#0EA5E9]" />
+                    </motion.div>
+                    Session Performance
+                  </CardTitle>
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", delay: 0.7 }}
+                  >
+                    <Badge className={
+                      averagePercentage >= 85 
+                        ? 'bg-emerald-500 text-white border-0' 
+                        : averagePercentage >= 60 
+                        ? 'bg-amber-500 text-white border-0' 
+                        : 'bg-rose-500 text-white border-0'
+                    }>
+                      {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Keep Practicing"}
+                    </Badge>
+                  </motion.div>
                 </div>
-                <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">Overall Score</p>
-              </div>
+              </CardHeader>
+              <CardContent className="space-y-5 relative z-10">
+                <div className="text-center py-3">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", delay: 0.8 }}
+                    className="text-6xl font-black text-[#0EA5E9] mb-2"
+                  >
+                    {Math.round(averagePercentage)}%
+                  </motion.div>
+                  <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">Overall Score</p>
+                </div>
 
-              {/* Score Breakdown with Medly Blue */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
-                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
-                    {marksEarned}
-                  </div>
-                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Marks Earned</p>
+                {/* Score Breakdown with stagger animation */}
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { value: marksEarned, label: "Marks Earned" },
+                    { value: totalMarks, label: "Total Marks" },
+                    { value: attempts.length, label: "Questions" }
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 + idx * 0.1 }}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10 cursor-default"
+                    >
+                      <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
+                        {item.value}
+                      </div>
+                      <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">{item.label}</p>
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
-                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
-                    {totalMarks}
-                  </div>
-                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Total Marks</p>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
-                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
-                    {attempts.length}
-                  </div>
-                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Questions</p>
-                </div>
-              </div>
 
-              {/* Progress Bar with Medly Blue */}
-              <div className="relative h-2 bg-[#E2E8F0] dark:bg-gray-800 rounded-full overflow-hidden">
-                <div 
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full transition-all duration-1000"
-                  style={{ width: `${averagePercentage}%` }}
-                />
-              </div>
-            </CardContent>
-          </Card>
+                {/* Animated Progress Bar */}
+                <div className="relative h-2 bg-[#E2E8F0] dark:bg-gray-800 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${averagePercentage}%` }}
+                    transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          {/* Detailed Analytics with Color */}
+          {/* Detailed Analytics with stagger */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Correct Answers */}
-            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                    <CheckCircle2 className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
-                  </div>
-                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{correctAnswers}</div>
-                </div>
-                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Fully Correct</p>
-                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Perfect answers</p>
-              </CardContent>
-            </Card>
-
-            {/* Partial Answers */}
-            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                    <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{partialAnswers}</div>
-                </div>
-                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Partially Correct</p>
-                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Some marks earned</p>
-              </CardContent>
-            </Card>
-
-            {/* Incorrect Answers */}
-            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-xl bg-rose-500/10 flex items-center justify-center">
-                    <Target className="h-6 w-6 text-rose-600 dark:text-rose-400" />
-                  </div>
-                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{incorrectAnswers}</div>
-                </div>
-                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Needs Review</p>
-                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Focus areas</p>
-              </CardContent>
-            </Card>
+            {[
+              { icon: CheckCircle2, value: correctAnswers, title: "Fully Correct", desc: "Perfect answers", color: "emerald", delay: 1.2 },
+              { icon: TrendingUp, value: partialAnswers, title: "Partially Correct", desc: "Some marks earned", color: "amber", delay: 1.3 },
+              { icon: Target, value: incorrectAnswers, title: "Needs Review", desc: "Focus areas", color: "rose", delay: 1.4 }
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: item.delay }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                >
+                  <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-xl transition-all duration-300 cursor-default">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <motion.div 
+                          className={`w-11 h-11 rounded-xl bg-${item.color}-500/10 flex items-center justify-center`}
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <Icon className={`h-6 w-6 text-${item.color}-600 dark:text-${item.color}-400`} />
+                        </motion.div>
+                        <motion.div 
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", delay: item.delay + 0.2 }}
+                          className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                        >
+                          {item.value}
+                        </motion.div>
+                      </div>
+                      <p className="text-sm font-semibold text-[#0F172A] dark:text-white">{item.title}</p>
+                      <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">{item.desc}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Action Buttons with Medly Blue */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-3">
-            <Button 
-              onClick={() => navigate('/dashboard', { 
-                state: { 
-                  openSubjectDrawer: true, 
-                  subjectId: subjectId,
-                  drawerTab: 'overview'
-                } 
-              })}
-              className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-xl py-6 text-base font-semibold shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all"
-            >
-              <Zap className="h-5 w-5 mr-2" />
-              View Insights
-            </Button>
-            <Button 
-              onClick={() => window.location.reload()}
-              variant="outline"
-              className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/5 rounded-xl py-6 text-base font-semibold"
-            >
-              Practice Again
-            </Button>
-          </div>
+          {/* Action Buttons with Animation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5 }}
+            className="flex flex-col sm:flex-row gap-3 pt-3"
+          >
+            <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                onClick={() => navigate('/dashboard', { 
+                  state: { 
+                    openSubjectDrawer: true, 
+                    subjectId: subjectId,
+                    drawerTab: 'overview'
+                  } 
+                })}
+                className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-xl py-6 text-base font-semibold shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all"
+              >
+                <Zap className="h-5 w-5 mr-2" />
+                View Insights
+              </Button>
+            </motion.div>
+            <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                onClick={() => window.location.reload()}
+                variant="outline"
+                className="w-full border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/5 rounded-xl py-6 text-base font-semibold"
+              >
+                Practice Again
+              </Button>
+            </motion.div>
+          </motion.div>
         </main>
       </div>
     );
