@@ -2125,38 +2125,83 @@ const Dashboard = () => {
                               <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Ranked from weakest to strongest</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
-                              {[
-                                { name: 'Energetics', mastery: 45, color: 'from-[#EF4444] to-[#DC2626]' },
-                                { name: 'Organic Chemistry', mastery: 62, color: 'from-[#F59E0B] to-[#D97706]' },
-                                { name: 'Atomic Structure', mastery: 78, color: 'from-[#F59E0B] to-[#F97316]' },
-                                { name: 'Quantitative Chemistry', mastery: 89, color: 'from-[#16A34A] to-[#22C55E]' },
-                              ].map((topic, i) => (
-                                <motion.div 
-                                  key={topic.name} 
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: i * 0.1 }}
-                                  className="space-y-3 p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300"
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-base font-bold text-[#0F172A] dark:text-white">{topic.name}</span>
-                                    <div className="flex items-center gap-3">
-                                      <span className="text-base font-semibold text-[#64748B] dark:text-gray-400">{topic.mastery}%</span>
-                                      <Button size="sm" className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
-                                        Revise
-                                      </Button>
+                              {(() => {
+                                // Get all topics from user subjects with their mastery scores
+                                const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
+                                
+                                userSubjects.forEach(subjectId => {
+                                  const subject = curriculum.find(s => s.id === subjectId);
+                                  if (subject) {
+                                    subject.topics.forEach(topic => {
+                                      const topicProgress = userProgress.find(
+                                        p => p.subjectId === subjectId && p.topicId === topic.id
+                                      );
+                                      const mastery = topicProgress?.averageScore || 0;
+                                      
+                                      // Determine color based on mastery
+                                      let color = 'from-[#EF4444] to-[#DC2626]'; // Red for low
+                                      if (mastery >= 85) {
+                                        color = 'from-[#16A34A] to-[#22C55E]'; // Green for high
+                                      } else if (mastery >= 70) {
+                                        color = 'from-[#F59E0B] to-[#F97316]'; // Orange for medium
+                                      } else if (mastery >= 50) {
+                                        color = 'from-[#F59E0B] to-[#D97706]'; // Yellow-orange
+                                      }
+                                      
+                                      topicsList.push({
+                                        name: topic.name,
+                                        mastery,
+                                        color,
+                                        subjectId,
+                                        topicId: topic.id
+                                      });
+                                    });
+                                  }
+                                });
+                                
+                                // Sort by mastery (weakest first)
+                                const sortedTopics = topicsList.sort((a, b) => a.mastery - b.mastery);
+                                
+                                if (sortedTopics.length === 0) {
+                                  return (
+                                    <div className="text-center py-8 text-muted-foreground">
+                                      No topics available. Add subjects to see topic mastery.
                                     </div>
-                                  </div>
-                                  <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-800 rounded-full overflow-hidden shadow-inner">
-                                    <motion.div 
-                                      initial={{ width: 0 }}
-                                      animate={{ width: `${topic.mastery}%` }}
-                                      transition={{ duration: 1, delay: i * 0.1 + 0.3 }}
-                                      className={`h-full bg-gradient-to-r ${topic.color} rounded-full shadow-sm`}
-                                    />
-                                  </div>
-                                </motion.div>
-                              ))}
+                                  );
+                                }
+                                
+                                return sortedTopics.map((topic, i) => (
+                                  <motion.div 
+                                    key={`${topic.subjectId}-${topic.topicId}`}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="space-y-3 p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300"
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-base font-bold text-[#0F172A] dark:text-white">{topic.name}</span>
+                                      <div className="flex items-center gap-3">
+                                        <span className="text-base font-semibold text-[#64748B] dark:text-gray-400">{topic.mastery}%</span>
+                                        <Button 
+                                          size="sm" 
+                                          onClick={() => navigate(`/practice/${topic.subjectId}/${topic.topicId}`)}
+                                          className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25"
+                                        >
+                                          Revise
+                                        </Button>
+                                      </div>
+                                    </div>
+                                    <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-800 rounded-full overflow-hidden shadow-inner">
+                                      <motion.div 
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${topic.mastery}%` }}
+                                        transition={{ duration: 1, delay: i * 0.1 + 0.3 }}
+                                        className={`h-full bg-gradient-to-r ${topic.color} rounded-full shadow-sm`}
+                                      />
+                                    </div>
+                                  </motion.div>
+                                ));
+                              })()}
                             </CardContent>
                           </Card>
                         </TabsContent>
