@@ -2313,7 +2313,7 @@ const Dashboard = () => {
                                   <motion.div 
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    onClick={() => navigate(`/predicted-exam?subject=${encodeURIComponent(selectedDrawerSubject.id)}`)}
+                                    onClick={() => navigate(`/predicted-exam/${selectedDrawerSubject.id}`)}
                                     className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                   >
                                     <div className="flex items-center gap-4">
