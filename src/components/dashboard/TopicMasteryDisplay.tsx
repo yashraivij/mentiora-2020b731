@@ -194,30 +194,37 @@ export function TopicMasteryDisplay() {
                 className="h-2 bg-muted/50"
               />
               
-              {progress.masteredTopics.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {progress.masteredTopics.slice(0, 3).map((topicId, index) => {
-                    // Find topic name from curriculum
-                    const subject = curriculum.find(s => s.id === progress.subjectId);
-                    const topic = subject?.topics.find(t => t.id === topicId);
-                    
-                    return (
-                      <Badge 
-                        key={topicId} 
-                        variant="outline" 
-                        className="text-xs px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300"
-                      >
-                        ✓ {topic?.name || topicId}
-                      </Badge>
-                    );
-                  })}
-                  {progress.masteredTopics.length > 3 && (
-                    <Badge variant="outline" className="text-xs px-2 py-0.5">
-                      +{progress.masteredTopics.length - 3} more
-                    </Badge>
-                  )}
-                </div>
-              )}
+              {/* Show all topics with mastery status */}
+              {(() => {
+                const subject = curriculum.find(s => s.id === progress.subjectId);
+                if (!subject || subject.topics.length === 0) return null;
+                
+                return (
+                  <div className="mt-4 space-y-2">
+                    <p className="text-xs font-medium text-muted-foreground">Topics:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {subject.topics.map((topic) => {
+                        const isMastered = progress.masteredTopics.includes(topic.id);
+                        
+                        return (
+                          <Badge 
+                            key={topic.id} 
+                            variant="outline" 
+                            className={`text-xs px-3 py-1 transition-all ${
+                              isMastered
+                                ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 shadow-sm'
+                                : 'bg-muted/30 border-muted-foreground/20 text-muted-foreground hover:bg-muted/50'
+                            }`}
+                          >
+                            {isMastered && <CheckCircle className="h-3 w-3 mr-1 inline" />}
+                            {topic.name}
+                          </Badge>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           );
         })}
