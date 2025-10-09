@@ -547,16 +547,25 @@ const Practice = () => {
         }
         
         if (currentPerf) {
-          // Update existing record
+          // Update existing record - calculate accuracy based on marks earned, not just perfect answers
           const newTotalQuestions = (currentPerf.total_questions_answered || 0) + attempts.length;
-          const newCorrectAnswers = (currentPerf.correct_answers || 0) + attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
-          const newAccuracy = newTotalQuestions > 0 ? (newCorrectAnswers / newTotalQuestions) * 100 : 0;
+          const totalMarksAvailable = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+          const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+          
+          // Get previous marks data
+          const prevTotalMarks = (currentPerf.total_questions_answered || 0) * 5; // Assume 5 marks per question average
+          const prevMarksEarned = prevTotalMarks * ((currentPerf.accuracy_rate || 0) / 100);
+          
+          const newTotalMarks = prevTotalMarks + totalMarksAvailable;
+          const newMarksEarned = prevMarksEarned + marksEarned;
+          const newAccuracy = newTotalMarks > 0 ? (newMarksEarned / newTotalMarks) * 100 : 0;
           const newStudyHours = (currentPerf.study_hours || 0) + (timeSpentMinutes / 60);
           
           console.log('Updating existing record with:', {
             newTotalQuestions,
-            newCorrectAnswers,
-            newAccuracy,
+            totalMarksAvailable,
+            marksEarned,
+            newAccuracy: newAccuracy.toFixed(1) + '%',
             newStudyHours
           });
           
@@ -564,7 +573,7 @@ const Practice = () => {
             .from('subject_performance')
             .update({
               total_questions_answered: newTotalQuestions,
-              correct_answers: newCorrectAnswers,
+              correct_answers: Math.round(newMarksEarned), // Store total marks earned
               accuracy_rate: newAccuracy,
               study_hours: newStudyHours,
               last_activity_date: new Date().toISOString().split('T')[0],
@@ -578,17 +587,19 @@ const Practice = () => {
             console.log('✅ Subject performance updated successfully');
           }
         } else {
-          // Insert new record
-          const correctAnswers = attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
-          const accuracy = attempts.length > 0 ? (correctAnswers / attempts.length) * 100 : 0;
+          // Insert new record - calculate accuracy based on marks earned
+          const totalMarksAvailable = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+          const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+          const accuracy = totalMarksAvailable > 0 ? (marksEarned / totalMarksAvailable) * 100 : 0;
           
           console.log('Inserting new record with:', {
             userId: user.id,
             subjectId,
             examBoard,
             totalQuestions: attempts.length,
-            correctAnswers,
-            accuracy,
+            totalMarksAvailable,
+            marksEarned,
+            accuracy: accuracy.toFixed(1) + '%',
             studyHours: timeSpentMinutes / 60
           });
           
@@ -599,7 +610,7 @@ const Practice = () => {
               subject_id: subjectId,
               exam_board: examBoard,
               total_questions_answered: attempts.length,
-              correct_answers: correctAnswers,
+              correct_answers: marksEarned, // Store total marks earned
               accuracy_rate: accuracy,
               study_hours: timeSpentMinutes / 60,
               last_activity_date: new Date().toISOString().split('T')[0]
