@@ -173,7 +173,11 @@ const Practice = () => {
     };
     
     recordVisit();
+    
+    console.log('Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
+    
     if (!subject || !topic) {
+      console.error('Subject or topic not found, redirecting to dashboard');
       navigate('/dashboard');
       return;
     }
@@ -829,11 +833,25 @@ const Practice = () => {
     );
   }
 
+  // Handle loading state
+  if (!subject || !topic) {
+    console.log('Waiting for subject/topic data...');
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Loading...</h2>
+        </div>
+      </div>
+    );
+  }
+
   if (!currentQuestion) {
+    console.log('No current question available:', { shuffledQuestionsLength: shuffledQuestions.length, currentQuestionIndex });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4 text-foreground">No questions available</h2>
+          <p className="text-muted-foreground mb-4">This topic doesn't have any practice questions yet.</p>
           <Button onClick={() => {
             console.log('Back button clicked (no questions)');
             if (window.history.length > 1) {
@@ -842,7 +860,7 @@ const Practice = () => {
               window.location.href = '/dashboard';
             }
           }}>
-            Back
+            Back to Dashboard
           </Button>
         </div>
       </div>
