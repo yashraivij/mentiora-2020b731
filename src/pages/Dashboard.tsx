@@ -1232,7 +1232,7 @@ const Dashboard = () => {
       "biology": "🧬",
       "biology-edexcel": "🧬",
       "biology-aqa-alevel": "🧬",
-      "combined-science-aqa": "⚗️",
+      "combined-science-aqa": "💻",
       "mathematics": "📐",
       "maths-edexcel": "📐",
       "maths": "📐",
@@ -1250,7 +1250,7 @@ const Dashboard = () => {
       "computer-science": "💻",
       "psychology": "🧠",
       "psychology-aqa-alevel": "🧠",
-      "spanish-aqa": "🌮",
+      "spanish-aqa": "🇪🇸",
     };
     return emojiMap[subjectId] || "📚";
   };
@@ -2340,7 +2340,7 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
-                                "Combined Science": "⚗️",
+                                "Combined Science": "💻",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
                                 "Statistics": "📊",
@@ -2352,7 +2352,7 @@ const Dashboard = () => {
                                 "Business": "💼",
                                 "Computer Science": "💻",
                                 "Psychology": "🧠",
-                                "Spanish": "🌮",
+                                "Spanish": "🇪🇸",
                               };
 
                               return (
@@ -2433,7 +2433,7 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
-                                "Combined Science": "⚗️",
+                                "Combined Science": "💻",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
                                 "Statistics": "📊",
@@ -2445,7 +2445,7 @@ const Dashboard = () => {
                                 "Business": "💼",
                                 "Computer Science": "💻",
                                 "Psychology": "🧠",
-                                "Spanish": "🌮",
+                                "Spanish": "🇪🇸",
                               };
 
                               return (
