@@ -2035,43 +2035,39 @@ const Dashboard = () => {
                           </Badge>
                           {!editingTargetGrade ? (
                             <Badge 
-                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A] hover:text-white hover:shadow-lg transition-all duration-200"
+                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A] hover:text-white hover:shadow-lg transition-all duration-200 flex items-center gap-2"
                               onClick={() => setEditingTargetGrade(true)}
                             >
-                              Target {selectedDrawerSubject.target}
+                              <span>Target {selectedDrawerSubject.target}</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                                <path d="m15 5 4 4"/>
+                              </svg>
                             </Badge>
                           ) : (
-                            <div className="flex gap-2 items-center">
-                              <select
-                                className="rounded-xl px-3 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer"
-                                defaultValue={selectedDrawerSubject.target}
-                                onChange={(e) => {
-                                  const subjectData = userSubjectsWithGrades.find(
-                                    s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
-                                  );
-                                  if (subjectData) {
-                                    updateTargetGrade(subjectData.subject_name, subjectData.exam_board, e.target.value);
-                                    // Update the drawer subject state to reflect the change
-                                    setSelectedDrawerSubject({
-                                      ...selectedDrawerSubject,
-                                      target: parseInt(e.target.value)
-                                    });
-                                  }
-                                }}
-                              >
-                                {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
-                                  <option key={grade} value={grade}>{grade}</option>
-                                ))}
-                              </select>
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                onClick={() => setEditingTargetGrade(false)}
-                                className="h-8 w-8 p-0 hover:bg-[#EF4444]/10"
-                              >
-                                <X className="h-4 w-4 text-[#EF4444]" />
-                              </Button>
-                            </div>
+                            <select
+                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer"
+                              defaultValue={selectedDrawerSubject.target}
+                              onChange={(e) => {
+                                const subjectData = userSubjectsWithGrades.find(
+                                  s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
+                                );
+                                if (subjectData) {
+                                  updateTargetGrade(subjectData.subject_name, subjectData.exam_board, e.target.value);
+                                  // Update the drawer subject state to reflect the change
+                                  setSelectedDrawerSubject({
+                                    ...selectedDrawerSubject,
+                                    target: parseInt(e.target.value)
+                                  });
+                                }
+                              }}
+                              onBlur={() => setEditingTargetGrade(false)}
+                              autoFocus
+                            >
+                              {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
+                                <option key={grade} value={grade}>Target {grade}</option>
+                              ))}
+                            </select>
                           )}
                         </div>
                       </SheetHeader>
