@@ -7006,8 +7006,8 @@ Write a story about a moment of fear.
 
   if (!examStarted) {
     return (
-      <div className={`min-h-screen bg-gradient-to-br from-background via-primary/5 to-background ${isPremium ? '' : 'pt-12'}`}>
-        <header className="bg-card/80 backdrop-blur-sm border-b sticky top-0 z-50">
+      <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
+        <header className="bg-card border-b sticky top-0 z-50">
           <div className="container mx-auto px-6 py-4">
             <Button variant="ghost" onClick={() => {
               console.log('Back button clicked (predicted exam)');
@@ -7023,42 +7023,38 @@ Write a story about a moment of fear.
           </div>
         </header>
 
-        <div className="container mx-auto px-6 py-8 max-w-4xl animate-fade-in">
+        <div className="container mx-auto px-6 py-8 max-w-4xl">
           <div className="space-y-6">
             {/* Title Section */}
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">
-                <Crown className="h-4 w-4" />
-                Predicted Exam
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
-              <p className="text-muted-foreground text-lg">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
+            <div>
+              <h1 className="text-3xl font-bold mb-2">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
+              <p className="text-muted-foreground">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Card className="hover-lift border-primary/20 transition-all duration-300">
+              <Card>
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 transition-all duration-300 group-hover:scale-110">
-                      <FileText className="h-6 w-6 text-primary" />
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <FileText className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-primary">{examQuestions.length}</p>
+                      <p className="text-2xl font-bold">{examQuestions.length}</p>
                       <p className="text-sm text-muted-foreground">Questions</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="hover-lift border-primary/20 transition-all duration-300">
+              <Card>
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 transition-all duration-300 group-hover:scale-110">
-                      <Clock className="h-6 w-6 text-primary" />
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Clock className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-primary">{getExamDuration()}<span className="text-sm">min</span></p>
+                      <p className="text-2xl font-bold">{getExamDuration()}min</p>
                       <p className="text-sm text-muted-foreground">Time Limit</p>
                     </div>
                   </div>
@@ -7067,16 +7063,14 @@ Write a story about a moment of fear.
             </div>
 
             {/* Instructions Card */}
-            <Card className="border-primary/20">
-              <CardHeader className="bg-primary/5">
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <AlertCircle className="h-5 w-5 text-primary" />
-                  </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5" />
                   Exam Instructions
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-6">
+              <CardContent>
                 {subjectId === 'english-literature' ? (
                   <ul className="text-sm space-y-2">
                     <li>• <strong>Section A:</strong> Choose ONE Shakespeare question to answer</li>
@@ -7182,9 +7176,8 @@ Write a story about a moment of fear.
             <Button 
               onClick={startExam}
               size="lg"
-              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+              className="w-full"
             >
-              <Clock className="h-5 w-5 mr-2" />
               Start Exam
             </Button>
           </div>
