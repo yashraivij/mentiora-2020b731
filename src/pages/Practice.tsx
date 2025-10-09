@@ -505,15 +505,36 @@ const Practice = () => {
     const progressKey = `mentiora_progress_${user?.id}`;
     const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');
     
+    console.log('💾 SAVING SCORE - Before:', {
+      subjectId,
+      topicId,
+      newScore: Math.round(averagePercentage),
+      existingProgress: existingProgress.find((p: any) => p.subjectId === subjectId && p.topicId === topicId)
+    });
+    
     const topicProgressIndex = existingProgress.findIndex(
       (p: any) => p.subjectId === subjectId && p.topicId === topicId
     );
     
     if (topicProgressIndex >= 0) {
+      const oldScore = existingProgress[topicProgressIndex].averageScore;
+      const newScore = Math.round(averagePercentage);
+      
+      // Only update if new score is better OR if it's a significant attempt (not 0%)
+      if (newScore > oldScore) {
+        existingProgress[topicProgressIndex].averageScore = newScore;
+        console.log('✅ Score IMPROVED - updating from', oldScore, 'to', newScore);
+      } else if (newScore > 0) {
+        // Average with existing score only if new score is not 0
+        existingProgress[topicProgressIndex].averageScore = Math.round(
+          (oldScore + newScore) / 2
+        );
+        console.log('📊 Score AVERAGED - from', oldScore, 'and', newScore, 'to', existingProgress[topicProgressIndex].averageScore);
+      } else {
+        console.log('⚠️ Score NOT UPDATED - new score is 0%, keeping', oldScore);
+      }
+      
       existingProgress[topicProgressIndex].attempts += 1;
-      existingProgress[topicProgressIndex].averageScore = Math.round(
-        (existingProgress[topicProgressIndex].averageScore + averagePercentage) / 2
-      );
       existingProgress[topicProgressIndex].lastAttempt = new Date();
     } else {
       existingProgress.push({
@@ -523,7 +544,12 @@ const Practice = () => {
         averageScore: Math.round(averagePercentage),
         lastAttempt: new Date()
       });
+      console.log('🆕 NEW SCORE - created entry with', Math.round(averagePercentage) + '%');
     }
+    
+    console.log('💾 SAVING SCORE - After:', {
+      saved: existingProgress.find((p: any) => p.subjectId === subjectId && p.topicId === topicId)
+    });
     
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
