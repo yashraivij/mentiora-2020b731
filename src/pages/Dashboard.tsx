@@ -2015,12 +2015,9 @@ const Dashboard = () => {
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ type: "spring", stiffness: 200 }}
-                            className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10"
+                            className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10 text-4xl"
                           >
-                            {(() => {
-                              const IconComponent = getSubjectIcon(selectedDrawerSubject.id);
-                              return <IconComponent className="h-8 w-8 text-[#0EA5E9]" />;
-                            })()}
+                            {getSubjectIconEmoji(selectedDrawerSubject.id)}
                           </motion.div>
                           <div className="flex-1">
                             <SheetTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
