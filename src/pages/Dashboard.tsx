@@ -2289,31 +2289,45 @@ const Dashboard = () => {
                         <TabsContent value="papers" className="space-y-4 mt-8">
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Past Paper Attempts</CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Recent exam practice performance</CardDescription>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Predicted 2026 Exams</CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">Practice with AI-generated predicted exam papers</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-3 p-6">
                               {[
-                                { paper: '2023 Paper 1', score: '72%', time: '1h 30m', date: '2 days ago' },
-                                { paper: '2022 Paper 2', score: '68%', time: '1h 25m', date: '5 days ago' },
-                                { paper: '2023 Paper 2', score: '75%', time: '1h 28m', date: '1 week ago' },
-                              ].map((attempt, i) => (
-                                <motion.div 
-                                  key={i} 
-                                  initial={{ opacity: 0, y: 10 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: i * 0.1 }}
-                                  className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer"
-                                >
-                                  <div>
-                                    <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{attempt.paper}</div>
-                                    <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">{attempt.date} • {attempt.time}</div>
-                                  </div>
-                                  <div className="text-right">
-                                    <div className="text-2xl font-bold text-[#0EA5E9]">{attempt.score}</div>
-                                  </div>
-                                </motion.div>
-                              ))}
+                                { subject: 'Biology', icon: Microscope, color: 'from-emerald-500 to-green-600' },
+                                { subject: 'Chemistry', icon: FlaskConical, color: 'from-purple-500 to-indigo-600' },
+                                { subject: 'Physics', icon: Atom, color: 'from-blue-500 to-cyan-600' },
+                                { subject: 'Maths', icon: Calculator, color: 'from-orange-500 to-red-600' },
+                                { subject: 'English Language', icon: PenTool, color: 'from-pink-500 to-rose-600' },
+                                { subject: 'Computer Science', icon: Brain, color: 'from-violet-500 to-purple-600' },
+                              ].map((exam, i) => {
+                                const Icon = exam.icon;
+                                return (
+                                  <motion.div 
+                                    key={i} 
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    onClick={() => navigate('/predicted-questions')}
+                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                  >
+                                    <div className="flex items-center gap-4">
+                                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${exam.color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                                        <Icon className="w-6 h-6 text-white" />
+                                      </div>
+                                      <div>
+                                        <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{exam.subject}</div>
+                                        <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">2026 Predicted Paper</div>
+                                      </div>
+                                    </div>
+                                    <div className="text-right">
+                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                        Available
+                                      </Badge>
+                                    </div>
+                                  </motion.div>
+                                );
+                              })}
                             </CardContent>
                           </Card>
                         </TabsContent>
