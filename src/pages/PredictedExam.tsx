@@ -7169,9 +7169,9 @@ Write a story about a moment of fear.
   }
 
   return (
-    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+    <div className={`min-h-screen ${isPremium ? 'pt-2' : 'pt-14'}`} style={{ backgroundColor: '#ffffff' }}>
       {/* Medly-style Top Navigation */}
-      <header className="border-b border-gray-200 bg-white">
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             {/* Left: Exam name with navigation */}
