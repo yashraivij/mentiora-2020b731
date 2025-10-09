@@ -7026,34 +7026,27 @@ Write a story about a moment of fear.
           </div>
         </header>
 
-        <div className="container mx-auto px-6 py-16 max-w-3xl">
-          <Card className="relative overflow-hidden border-0 backdrop-blur-sm shadow-2xl rounded-3xl bg-card/80">
-            {/* Premium Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-500/5 opacity-50" />
-            
-            <CardHeader className="relative z-10 text-center pb-6">
-              <div className="flex flex-col items-center space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg">
-                  <Crown className="h-8 w-8 text-white" />
-                </div>
+        <div className="container mx-auto px-6 py-16 max-w-2xl">
+          <Card className="text-center border-primary/20 bg-gradient-to-br from-primary/5 to-background shadow-lg">
+            <CardHeader>
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-3xl font-bold text-foreground mb-2">
-                    {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}
-                  </CardTitle>
-                  <CardDescription className="text-base font-medium">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
             </CardHeader>
             
-            <CardContent className="space-y-6 relative z-10">
+            <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 rounded-2xl border bg-emerald-50/50 border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-800/30 text-center">
-                  <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{examQuestions.length}</div>
-                  <div className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mt-1">Questions</div>
+                <div className="p-4 bg-card rounded-xl border">
+                  <div className="text-2xl font-bold text-primary">{examQuestions.length}</div>
+                  <div className="text-sm text-muted-foreground">Questions</div>
                 </div>
-                <div className="p-6 rounded-2xl border bg-blue-50/50 border-blue-100 dark:bg-blue-950/20 dark:border-blue-800/30 text-center">
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{getExamDuration()}min</div>
-                  <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mt-1">Time Limit</div>
+                <div className="p-4 bg-card rounded-xl border">
+                  <div className="text-2xl font-bold text-primary">{getExamDuration()}min</div>
+                  <div className="text-sm text-muted-foreground">Time Limit</div>
                 </div>
               </div>
               
@@ -7164,9 +7157,9 @@ Write a story about a moment of fear.
               
               <Button 
                 onClick={startExam}
-                className="w-full bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-base"
+                className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 py-3 font-semibold"
               >
-                <Clock className="h-5 w-5 mr-2" />
+                <Clock className="h-4 w-4 mr-2" />
                 Start Exam
               </Button>
             </CardContent>
