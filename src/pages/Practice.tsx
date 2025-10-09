@@ -762,13 +762,14 @@ const Practice = () => {
             <div className="mb-6">
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex-1">
-                  {/* Question reference numbers */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="inline-flex items-center gap-1">
-                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
-                      <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestionIndex + 1}</span>
-                    </div>
+                {/* Question reference numbers */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1">
+                    {(currentQuestionIndex + 1).toString().padStart(2, '0').split('').map((digit, idx) => (
+                      <span key={idx} className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{digit}</span>
+                    ))}
                   </div>
+                </div>
                   
                   {/* Question text */}
                   <p className="text-base text-slate-900 leading-relaxed mb-2">
