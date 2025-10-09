@@ -60,7 +60,11 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 const Practice = () => {
+  console.log('🚀 Practice Component START - Component is rendering');
+  
   const { subjectId, topicId } = useParams();
+  console.log('📍 URL params extracted:', { subjectId, topicId });
+  
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
@@ -187,10 +191,17 @@ const Practice = () => {
     
     recordVisit();
     
-    console.log('Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
+    console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
     
     if (!subject || !topic) {
-      console.error('Subject or topic not found, redirecting to dashboard');
+      console.error('❌ REDIRECT: Subject or topic not found');
+      console.error('Looking for subjectId:', subjectId);
+      console.error('Looking for topicId:', topicId);
+      console.error('Subject found:', !!subject, subject?.name);
+      console.error('Topic found:', !!topic);
+      if (subject) {
+        console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
+      }
       setIsLoadingQuestions(false);
       navigate('/dashboard');
       return;
