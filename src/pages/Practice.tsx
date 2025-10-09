@@ -762,74 +762,82 @@ const Practice = () => {
     const incorrectAnswers = attempts.length - correctAnswers - partialAnswers;
     
     return (
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <header className="border-b bg-card">
-          <div className="max-w-4xl mx-auto px-6 md:px-8 py-4">
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-gray-950">
+        {/* Header with Medly Blue */}
+        <header className="border-b bg-white dark:bg-gray-900 shadow-sm">
+          <div className="max-w-4xl mx-auto px-6 md:px-8 py-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/20">
+                <CheckCircle2 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Session Complete</h1>
-                <p className="text-sm text-muted-foreground">{topic?.name}</p>
+                <h1 className="text-xl font-bold text-[#0F172A] dark:text-white">Session Complete</h1>
+                <p className="text-sm text-[#64748B] dark:text-gray-400">{topic?.name}</p>
               </div>
             </div>
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-6 md:px-8 py-6 space-y-4">
-          {/* Predicted Grade Card */}
+        <main className="max-w-4xl mx-auto px-6 md:px-8 py-8 space-y-5">
+          {/* Predicted Grade Card with Medly Blue */}
           {(oldGrade || newGrade) && (
-            <Card className="border shadow-lg">
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Award className="h-5 w-5 text-primary" />
+            <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
+                  <div className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center">
+                    <Award className="h-5 w-5 text-[#0EA5E9]" />
+                  </div>
                   Predicted Grade Impact
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-center gap-6">
+                <div className="flex items-center justify-center gap-8 py-2">
                   {oldGrade && (
                     <div className="text-center">
-                      <p className="text-xs text-muted-foreground mb-1">Previous</p>
-                      <div className={`text-4xl font-bold transition-all duration-700 ${
+                      <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">Previous</p>
+                      <div className={`text-5xl font-black transition-all duration-700 ${
                         showGradeAnimation ? 'opacity-50 scale-90' : 'opacity-100 scale-100'
                       }`}>
-                        <span className="text-muted-foreground">{oldGrade}</span>
+                        <span className="text-[#94A3B8] dark:text-gray-500">{oldGrade}</span>
                       </div>
                     </div>
                   )}
                   
                   {oldGrade && newGrade && (
-                    <TrendingUp className={`h-8 w-8 transition-all duration-700 ${
-                      showGradeAnimation ? 'text-emerald-500' : 'text-muted-foreground'
-                    }`} />
+                    <div className="flex flex-col items-center">
+                      <TrendingUp className={`h-8 w-8 transition-all duration-700 ${
+                        showGradeAnimation ? 'text-[#0EA5E9]' : 'text-[#CBD5E1]'
+                      }`} />
+                    </div>
                   )}
                   
                   {newGrade && (
                     <div className="text-center">
-                      <p className="text-xs text-muted-foreground mb-1">
+                      <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-medium">
                         {oldGrade ? 'Updated' : 'Current'}
                       </p>
-                      <div className={`text-4xl font-bold transition-all duration-700 ${
+                      <div className={`text-5xl font-black transition-all duration-700 ${
                         showGradeAnimation ? 'opacity-100 scale-110' : 'opacity-50 scale-90'
                       }`}>
-                        <span className="text-primary">{newGrade}</span>
+                        <span className="text-[#0EA5E9]">{newGrade}</span>
                       </div>
                     </div>
                   )}
                 </div>
                 
                 {oldGrade && newGrade && oldGrade !== newGrade && showGradeAnimation && (
-                  <div className="mt-4 text-center">
-                    <Badge className="bg-emerald-500 text-white">Grade Improved!</Badge>
+                  <div className="mt-5 text-center">
+                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 px-4 py-1.5">
+                      🎉 Grade Improved!
+                    </Badge>
                   </div>
                 )}
                 
                 {oldGrade && newGrade && oldGrade === newGrade && showGradeAnimation && (
-                  <div className="mt-4 text-center">
-                    <Badge className="bg-primary text-primary-foreground">Maintaining Excellence</Badge>
+                  <div className="mt-5 text-center">
+                    <Badge className="bg-[#0EA5E9] text-white border-0 px-4 py-1.5">
+                      ⭐ Maintaining Excellence
+                    </Badge>
                   </div>
                 )}
               </CardContent>
@@ -837,103 +845,113 @@ const Practice = () => {
           )}
 
           {/* Performance Overview Card */}
-          <Card className="border shadow-lg">
-            <CardHeader className="pb-3">
+          <Card className="border-0 shadow-[0_8px_32px_rgba(14,165,233,0.12)] bg-white dark:bg-gray-900">
+            <CardHeader className="pb-4">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Session Performance</CardTitle>
+                <CardTitle className="flex items-center gap-2 text-lg text-[#0F172A] dark:text-white">
+                  <div className="w-9 h-9 rounded-lg bg-[#0EA5E9]/10 flex items-center justify-center">
+                    <Trophy className="h-5 w-5 text-[#0EA5E9]" />
+                  </div>
+                  Session Performance
+                </CardTitle>
                 <Badge className={
                   averagePercentage >= 85 
-                    ? 'bg-emerald-500 text-white' 
+                    ? 'bg-emerald-500 text-white border-0' 
                     : averagePercentage >= 60 
-                    ? 'bg-amber-500 text-white' 
-                    : 'bg-rose-500 text-white'
+                    ? 'bg-amber-500 text-white border-0' 
+                    : 'bg-rose-500 text-white border-0'
                 }>
                   {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Keep Practicing"}
                 </Badge>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center py-4">
-                <div className="text-5xl font-bold text-primary mb-2">
+            <CardContent className="space-y-5">
+              <div className="text-center py-3">
+                <div className="text-6xl font-black text-[#0EA5E9] mb-2">
                   {Math.round(averagePercentage)}%
                 </div>
-                <p className="text-sm text-muted-foreground">Overall Score</p>
+                <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">Overall Score</p>
               </div>
 
-              {/* Score Breakdown */}
+              {/* Score Breakdown with Medly Blue */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="text-center p-3 rounded-lg bg-muted">
-                  <div className="text-2xl font-bold text-foreground mb-1">
+                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
+                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
                     {marksEarned}
                   </div>
-                  <p className="text-xs text-muted-foreground">Marks Earned</p>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Marks Earned</p>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-muted">
-                  <div className="text-2xl font-bold text-foreground mb-1">
+                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
+                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
                     {totalMarks}
                   </div>
-                  <p className="text-xs text-muted-foreground">Total Marks</p>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Total Marks</p>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-muted">
-                  <div className="text-2xl font-bold text-foreground mb-1">
+                <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/5 to-[#38BDF8]/5 border border-[#0EA5E9]/10">
+                  <div className="text-3xl font-bold text-[#0EA5E9] mb-1">
                     {attempts.length}
                   </div>
-                  <p className="text-xs text-muted-foreground">Questions</p>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">Questions</p>
                 </div>
               </div>
 
-              {/* Progress Bar */}
-              <Progress value={averagePercentage} className="h-2" />
+              {/* Progress Bar with Medly Blue */}
+              <div className="relative h-2 bg-[#E2E8F0] dark:bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full transition-all duration-1000"
+                  style={{ width: `${averagePercentage}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
 
-          {/* Detailed Analytics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* Detailed Analytics with Color */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Correct Answers */}
-            <Card className="border shadow-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                    <CheckCircle2 className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <div className="text-2xl font-bold text-foreground">{correctAnswers}</div>
+                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{correctAnswers}</div>
                 </div>
-                <p className="text-sm font-medium text-foreground">Fully Correct</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Perfect answers</p>
+                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Fully Correct</p>
+                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Perfect answers</p>
               </CardContent>
             </Card>
 
             {/* Partial Answers */}
-            <Card className="border shadow-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                    <TrendingUp className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                    <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                   </div>
-                  <div className="text-2xl font-bold text-foreground">{partialAnswers}</div>
+                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{partialAnswers}</div>
                 </div>
-                <p className="text-sm font-medium text-foreground">Partially Correct</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Some marks earned</p>
+                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Partially Correct</p>
+                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Some marks earned</p>
               </CardContent>
             </Card>
 
             {/* Incorrect Answers */}
-            <Card className="border shadow-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-rose-600 dark:text-rose-400" />
+            <Card className="border-0 shadow-md bg-white dark:bg-gray-900 hover:shadow-lg transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-rose-500/10 flex items-center justify-center">
+                    <Target className="h-6 w-6 text-rose-600 dark:text-rose-400" />
                   </div>
-                  <div className="text-2xl font-bold text-foreground">{incorrectAnswers}</div>
+                  <div className="text-3xl font-bold text-[#0F172A] dark:text-white">{incorrectAnswers}</div>
                 </div>
-                <p className="text-sm font-medium text-foreground">Needs Review</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Focus areas</p>
+                <p className="text-sm font-semibold text-[#0F172A] dark:text-white">Needs Review</p>
+                <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1">Focus areas</p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          {/* Action Buttons with Medly Blue */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-3">
             <Button 
               onClick={() => navigate('/dashboard', { 
                 state: { 
@@ -942,15 +960,15 @@ const Practice = () => {
                   drawerTab: 'overview'
                 } 
               })}
-              className="flex-1"
+              className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-xl py-6 text-base font-semibold shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all"
             >
-              <Zap className="h-4 w-4 mr-2" />
+              <Zap className="h-5 w-5 mr-2" />
               View Insights
             </Button>
             <Button 
               onClick={() => window.location.reload()}
               variant="outline"
-              className="flex-1"
+              className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/5 rounded-xl py-6 text-base font-semibold"
             >
               Practice Again
             </Button>
