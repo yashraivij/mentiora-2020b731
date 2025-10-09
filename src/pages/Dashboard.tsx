@@ -2616,7 +2616,19 @@ const Dashboard = () => {
                                 ];
 
                                 const getActivitiesForDay = (dayIndex: number, topic: any) => {
-                                  const topicName = topic?.topicId || "Review Topics";
+                                  // Format topic name: remove prefixes like "c1-", "b2-" etc and capitalize
+                                  const formatTopicName = (topicId: string) => {
+                                    if (!topicId) return "Review Topics";
+                                    // Remove prefix patterns like c1-, b2-, p3- etc
+                                    const withoutPrefix = topicId.replace(/^[a-z]\d+-/i, '');
+                                    // Replace hyphens with spaces and capitalize each word
+                                    return withoutPrefix
+                                      .split('-')
+                                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                      .join(' ');
+                                  };
+                                  
+                                  const topicName = formatTopicName(topic?.topicId);
                                   const activitiesMap = [
                                     // Monday - Kickstart
                                     [
