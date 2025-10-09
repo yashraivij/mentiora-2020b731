@@ -78,6 +78,7 @@ const Practice = () => {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -103,6 +104,7 @@ const Practice = () => {
       attempts,
       showFeedback,
       shuffledQuestions: shuffledQuestions.map(q => q.id), // Only save question IDs
+      sessionStartTime,
       lastSaved: new Date().toISOString()
     };
     
@@ -133,6 +135,7 @@ const Practice = () => {
           setUserAnswer(state.userAnswer || "");
           setAttempts(state.attempts || []);
           setShowFeedback(state.showFeedback || false);
+          setSessionStartTime(state.sessionStartTime || Date.now());
           
           return true;
         }
@@ -511,8 +514,9 @@ const Practice = () => {
                          subjectId.includes('edexcel') ? 'Edexcel' : 
                          subjectId.includes('ocr') ? 'OCR' : 'AQA';
         
-        // Calculate time spent (assume 2 minutes per question)
-        const timeSpentMinutes = shuffledQuestions.length * 2;
+        // Calculate actual time spent in minutes
+        const timeSpentMs = Date.now() - sessionStartTime;
+        const timeSpentMinutes = Math.max(1, Math.round(timeSpentMs / 60000)); // At least 1 minute
         
         // Get current performance data
         const { data: currentPerf } = await supabase
