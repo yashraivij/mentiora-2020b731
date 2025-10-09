@@ -1153,6 +1153,7 @@ const Dashboard = () => {
     const handleFocus = () => {
       if (user?.id && document.hasFocus()) {
         loadUserStats();
+        loadPredictedGrades();
       }
     };
 
