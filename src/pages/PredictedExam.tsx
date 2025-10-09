@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,6 +36,7 @@ const PredictedExam = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  const mainContentRef = useRef<HTMLDivElement>(null);
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -57,6 +58,13 @@ const PredictedExam = () => {
     navigate('/predicted-questions');
     return null;
   }
+
+  // Auto-scroll to top when question changes
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [currentQuestion]);
 
 
   // Function to determine tier based on question difficulty and content
@@ -7275,7 +7283,7 @@ Write a story about a moment of fear.
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-6xl mx-auto p-6 md:p-8">
+      <main ref={mainContentRef} className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
           {/* Question Header */}
           <div className="mb-6">
@@ -7317,13 +7325,18 @@ Write a story about a moment of fear.
             </div>
           </div>
 
-          {/* Answer area - large white space */}
-          <div className="min-h-[400px] mb-6">
+          {/* Answer area - dynamic size based on marks */}
+          <div className="mb-6">
             <Textarea
               value={getAnswer(examQuestions[currentQuestion].id)}
               onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
               placeholder=""
-              className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
+              className={`w-full border border-gray-300 focus:ring-0 text-base resize-y p-4 bg-transparent rounded-md ${
+                examQuestions[currentQuestion].marks <= 2 ? 'min-h-[150px]' :
+                examQuestions[currentQuestion].marks <= 4 ? 'min-h-[250px]' :
+                examQuestions[currentQuestion].marks <= 6 ? 'min-h-[350px]' :
+                'min-h-[400px]'
+              }`}
             />
           </div>
 
