@@ -65,6 +65,11 @@ const Practice = () => {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   
+  // Debug logging at component entry
+  console.log('=== Practice Component Rendered ===');
+  console.log('URL params:', { subjectId, topicId });
+  console.log('Available subjects:', curriculum.map(s => ({ id: s.id, name: s.name })));
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
@@ -94,6 +99,13 @@ const Practice = () => {
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  
+  // Log subject/topic lookup results
+  console.log('Subject lookup:', { found: !!subject, subjectId, subjectName: subject?.name });
+  if (subject) {
+    console.log('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
+    console.log('Topic lookup:', { found: !!topic, topicId, topicName: topic?.name });
+  }
 
   // Save session state to localStorage
   const saveSessionState = () => {
