@@ -2576,12 +2576,14 @@ const Dashboard = () => {
                                 examBoard = nameMatch[1];
                               } else if (subject.name.includes('Paper 2')) {
                                 examBoard = 'AQA Paper 2';
+                              } else if (subject.id.includes('eduqas')) {
+                                examBoard = 'Eduqas';
+                              } else if (subject.id.includes('wjec')) {
+                                examBoard = 'Eduqas';
                               } else if (subject.id.includes('edexcel')) {
                                 examBoard = 'Edexcel';
                               } else if (subject.id.includes('ocr')) {
                                 examBoard = 'OCR';
-                              } else if (subject.id.includes('wjec') || subject.id.includes('eduqas')) {
-                                examBoard = 'Eduqas';
                               } else if (subject.id.includes('ccea')) {
                                 examBoard = 'CCEA';
                               } else if (subject.id.includes('aqa')) {
