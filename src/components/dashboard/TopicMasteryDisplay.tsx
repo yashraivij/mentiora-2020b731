@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle, Brain } from "lucide-react";
+import { CheckCircle, Brain, BookOpen } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
+import { useNavigate } from "react-router-dom";
 
 interface TopicMasteryGoal {
   id: string;
@@ -24,6 +26,7 @@ interface MasteryProgress {
 
 export function TopicMasteryDisplay() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [masteryProgress, setMasteryProgress] = useState<MasteryProgress[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -194,31 +197,54 @@ export function TopicMasteryDisplay() {
                 className="h-2 bg-muted/50"
               />
               
-              {/* Show all topics with mastery status */}
+              {/* Show all topics with mastery status and Revise buttons */}
               {(() => {
                 const subject = curriculum.find(s => s.id === progress.subjectId);
                 if (!subject || subject.topics.length === 0) return null;
                 
                 return (
-                  <div className="mt-4 space-y-2">
+                  <div className="mt-4 space-y-3">
                     <p className="text-xs font-medium text-muted-foreground">Topics:</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="space-y-2">
                       {subject.topics.map((topic) => {
                         const isMastered = progress.masteredTopics.includes(topic.id);
                         
                         return (
-                          <Badge 
-                            key={topic.id} 
-                            variant="outline" 
-                            className={`text-xs px-3 py-1 transition-all ${
+                          <div 
+                            key={topic.id}
+                            className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
                               isMastered
-                                ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 shadow-sm'
-                                : 'bg-muted/30 border-muted-foreground/20 text-muted-foreground hover:bg-muted/50'
+                                ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800'
+                                : 'bg-muted/20 border-muted-foreground/20 hover:bg-muted/40'
                             }`}
                           >
-                            {isMastered && <CheckCircle className="h-3 w-3 mr-1 inline" />}
-                            {topic.name}
-                          </Badge>
+                            <div className="flex items-center space-x-2 flex-1">
+                              {isMastered ? (
+                                <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                              ) : (
+                                <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40 flex-shrink-0" />
+                              )}
+                              <span className={`text-sm font-medium ${
+                                isMastered
+                                  ? 'text-emerald-700 dark:text-emerald-300'
+                                  : 'text-foreground'
+                              }`}>
+                                {topic.name}
+                              </span>
+                            </div>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/practice/${progress.subjectId}/${topic.id}`);
+                              }}
+                              className="ml-2 flex-shrink-0 h-8 px-3 text-xs bg-background/50 hover:bg-background"
+                            >
+                              <BookOpen className="h-3 w-3 mr-1" />
+                              Revise
+                            </Button>
+                          </div>
                         );
                       })}
                     </div>
