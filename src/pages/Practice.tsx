@@ -506,10 +506,24 @@ const Practice = () => {
     // Update subject_performance table in Supabase
     if (user?.id && subjectId) {
       try {
+        // Get the subject to determine exam board
         const subject = curriculum.find(s => s.id === subjectId);
-        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
-                         subjectId.includes('edexcel') ? 'Edexcel' : 
-                         subjectId.includes('ocr') ? 'OCR' : 'AQA';
+        if (!subject) {
+          console.error('Subject not found:', subjectId);
+          return;
+        }
+
+        // Determine exam board from subject
+        let examBoard = 'AQA'; // Default
+        if (subjectId.includes('edexcel') || subject.name.includes('Edexcel')) {
+          examBoard = 'Edexcel';
+        } else if (subjectId.includes('ocr') || subject.name.includes('OCR')) {
+          examBoard = 'OCR';
+        } else if (subjectId.includes('eduqas') || subject.name.includes('Eduqas')) {
+          examBoard = 'Eduqas';
+        }
+        
+        console.log('Updating subject_performance for:', subjectId, examBoard);
         
         // Calculate time spent (assume 2 minutes per question)
         const timeSpentMinutes = shuffledQuestions.length * 2;
@@ -523,6 +537,8 @@ const Practice = () => {
           .eq('exam_board', examBoard)
           .maybeSingle();
         
+        console.log('Current performance:', currentPerf);
+        
         if (currentPerf) {
           // Update existing record
           const newTotalQuestions = (currentPerf.total_questions_answered || 0) + attempts.length;
@@ -530,7 +546,9 @@ const Practice = () => {
           const newAccuracy = newTotalQuestions > 0 ? (newCorrectAnswers / newTotalQuestions) * 100 : 0;
           const newStudyHours = (currentPerf.study_hours || 0) + (timeSpentMinutes / 60);
           
-          await supabase
+          console.log('Updating with:', { newTotalQuestions, newCorrectAnswers, newAccuracy, newStudyHours });
+          
+          const { error: updateError } = await supabase
             .from('subject_performance')
             .update({
               total_questions_answered: newTotalQuestions,
@@ -541,12 +559,20 @@ const Practice = () => {
               updated_at: new Date().toISOString()
             })
             .eq('id', currentPerf.id);
+          
+          if (updateError) {
+            console.error('Error updating subject_performance:', updateError);
+          } else {
+            console.log('Successfully updated subject_performance');
+          }
         } else {
           // Insert new record
           const correctAnswers = attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
           const accuracy = attempts.length > 0 ? (correctAnswers / attempts.length) * 100 : 0;
           
-          await supabase
+          console.log('Inserting new record:', { subjectId, examBoard, accuracy, study_hours: timeSpentMinutes / 60 });
+          
+          const { error: insertError } = await supabase
             .from('subject_performance')
             .insert({
               user_id: user.id,
@@ -558,6 +584,12 @@ const Practice = () => {
               study_hours: timeSpentMinutes / 60,
               last_activity_date: new Date().toISOString().split('T')[0]
             });
+          
+          if (insertError) {
+            console.error('Error inserting subject_performance:', insertError);
+          } else {
+            console.log('Successfully inserted subject_performance');
+          }
         }
       } catch (error) {
         console.error('Error updating subject performance:', error);
