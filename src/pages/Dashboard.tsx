@@ -2681,12 +2681,9 @@ const Dashboard = () => {
                                       setActiveTab('flashcards');
                                       setSubjectDrawerOpen(false);
                                     } else if (activity.action === 'practice' && activity.topicId) {
-                                      setSelectedSubject(subjectId);
                                       setSubjectDrawerOpen(false);
-                                      // Small delay to allow drawer to close before navigating
-                                      setTimeout(() => {
-                                        navigate(`/practice?subject=${subjectId}&topic=${activity.topicId}`);
-                                      }, 300);
+                                      // Navigate directly to practice page with subject and topic
+                                      navigate(`/practice?subject=${subjectId}&topic=${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       setActiveTab('notebook');
                                       setSubjectDrawerOpen(false);
