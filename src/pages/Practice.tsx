@@ -72,6 +72,7 @@ const Practice = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<Array<{id: string, role: 'user' | 'assistant', content: string}>>([]);
@@ -178,16 +179,15 @@ const Practice = () => {
     
     if (!subject || !topic) {
       console.error('Subject or topic not found, redirecting to dashboard');
+      setIsLoadingQuestions(false);
       navigate('/dashboard');
       return;
     }
     
-    // Debug logging for Macbeth specifically
-    if (topicId === 'macbeth') {
-      console.log('DEBUG: Macbeth topic data:', topic);
-      console.log('DEBUG: Raw questions count:', topic.questions?.length || 0);
-      console.log('DEBUG: All questions:', topic.questions?.map(q => q.id) || []);
-    }
+    // Debug logging
+    console.log('Topic data:', topic);
+    console.log('Raw questions count:', topic.questions?.length || 0);
+    console.log('All questions:', topic.questions?.map(q => q.id) || []);
     
     // Try to load existing session first
     const sessionRestored = loadSessionState();
@@ -196,21 +196,18 @@ const Practice = () => {
     if (!sessionRestored) {
       const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
       
-      // More debug logging for Macbeth
-      if (topicId === 'macbeth') {
-        console.log('DEBUG: Filtered questions count:', filteredQuestions.length);
-        console.log('DEBUG: Filtered questions:', filteredQuestions.map(q => q.id));
-      }
+      console.log('Filtered questions count:', filteredQuestions.length);
+      console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
       const shuffled = shuffleArray(filteredQuestions);
       
-      if (topicId === 'macbeth') {
-        console.log('DEBUG: Shuffled questions count:', shuffled.length);
-        console.log('DEBUG: Final shuffled questions:', shuffled.map(q => q.id));
-      }
+      console.log('Shuffled questions count:', shuffled.length);
+      console.log('Final shuffled questions:', shuffled.map(q => q.id));
       
       setShuffledQuestions(shuffled);
     }
+    
+    setIsLoadingQuestions(false);
   }, [subject, topic, navigate, topicId, user?.id]);
 
   // Save state whenever important values change
@@ -834,8 +831,8 @@ const Practice = () => {
   }
 
   // Handle loading state
-  if (!subject || !topic) {
-    console.log('Waiting for subject/topic data...');
+  if (isLoadingQuestions || !subject || !topic) {
+    console.log('Loading questions...', { isLoadingQuestions, hasSubject: !!subject, hasTopic: !!topic });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -845,8 +842,12 @@ const Practice = () => {
     );
   }
 
-  if (!currentQuestion) {
-    console.log('No current question available:', { shuffledQuestionsLength: shuffledQuestions.length, currentQuestionIndex });
+  if (!currentQuestion && shuffledQuestions.length === 0) {
+    console.log('No questions available after loading:', { 
+      shuffledQuestionsLength: shuffledQuestions.length, 
+      currentQuestionIndex,
+      topicQuestionsCount: topic?.questions?.length || 0 
+    });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
