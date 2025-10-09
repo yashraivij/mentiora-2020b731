@@ -642,9 +642,9 @@ const Practice = () => {
       {/* Medly-style Top Navigation */}
       <header className="border-b border-gray-200 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             {/* Left: Topic name with navigation */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
               <Button
                 variant="ghost"
                 size="icon"
@@ -664,13 +664,13 @@ const Practice = () => {
                   }
                 }}
                 disabled={currentQuestionIndex === 0}
-                className="h-9 w-9"
+                className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-gray-600" />
-                <h1 className="text-lg font-semibold text-slate-900">{topic?.name}</h1>
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                <h1 className="text-lg font-semibold text-slate-900 truncate">{topic?.name}</h1>
               </div>
               <Button
                 variant="ghost"
@@ -681,15 +681,15 @@ const Practice = () => {
                   }
                 }}
                 disabled={currentQuestionIndex >= shuffledQuestions.length - 1}
-                className="h-9 w-9"
+                className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4 rotate-180" />
               </Button>
             </div>
 
             {/* Center: Modern Progress indicator with fox */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="flex items-center gap-2 relative">
+            <div className="flex justify-center md:justify-end">
+              <div className="flex items-center gap-2">
                 {shuffledQuestions.map((question, index) => {
                   // Find the attempt for this question
                   const questionAttempts = attempts.filter(a => a.questionId === question.id);
