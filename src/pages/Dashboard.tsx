@@ -2295,9 +2295,11 @@ const Dashboard = () => {
                                 
                                 // Get user's predicted grade for this subject
                                 const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === mappedSubjectId);
-                                let predictedGradeValue = 5; // default
+                                let predictedGradeValue: number | null = null;
+                                let hasPredictedGradeData = false;
                                 
                                 if (userPredictedGrade) {
+                                  hasPredictedGradeData = true;
                                   // Parse the grade
                                   if (typeof userPredictedGrade.grade === 'string') {
                                     const numGrade = parseFloat(userPredictedGrade.grade);
@@ -2308,25 +2310,26 @@ const Dashboard = () => {
                                       const gradeMap: {[key: string]: number} = {
                                         'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
                                       };
-                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 5;
+                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || null;
                                     }
                                   } else {
-                                    predictedGradeValue = userPredictedGrade.grade || 5;
+                                    predictedGradeValue = userPredictedGrade.grade || null;
                                   }
                                 } else {
-                                  // Fallback: calculate from subject performance
+                                  // Check if there's subject performance data
                                   const subjectPerf = userSubjectsWithGrades.find(s => {
                                     return curriculumSubject && s.subject_name === curriculumSubject.name;
                                   });
                                   
-                                  if (subjectPerf?.accuracy_rate) {
+                                  if (subjectPerf?.accuracy_rate && subjectPerf.accuracy_rate > 0) {
+                                    hasPredictedGradeData = true;
                                     // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
                                     predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
                                   }
                                 }
                                 
                                 // Get class median for this subject
-                                const classMedianValue = classMedianGrades[mappedSubjectId] || 5;
+                                const classMedianValue = classMedianGrades[mappedSubjectId];
                                 
                                 // Get target grade
                                 const targetGradeValue = selectedDrawerSubject.target || 7;
@@ -2336,15 +2339,23 @@ const Dashboard = () => {
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{predictedGradeValue.toFixed(1)}</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">
+                                          {hasPredictedGradeData && predictedGradeValue !== null ? predictedGradeValue.toFixed(1) : 'N/A'}
+                                        </span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                        <motion.div 
-                                          initial={{ width: 0 }}
-                                          animate={{ width: `${(predictedGradeValue / 10) * 100}%` }}
-                                          transition={{ duration: 1, delay: 0.3 }}
-                                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
-                                        />
+                                        {hasPredictedGradeData && predictedGradeValue !== null ? (
+                                          <motion.div 
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${(predictedGradeValue / 10) * 100}%` }}
+                                            transition={{ duration: 1, delay: 0.3 }}
+                                            className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                                          />
+                                        ) : (
+                                          <div className="h-full flex items-center justify-center">
+                                            <span className="text-xs text-[#94A3B8]">Complete practice to see prediction</span>
+                                          </div>
+                                        )}
                                       </div>
                                     </div>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
@@ -2361,20 +2372,22 @@ const Dashboard = () => {
                                         />
                                       </div>
                                     </div>
-                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                      <div className="flex items-center justify-between mb-2">
-                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
+                                    {classMedianValue !== undefined && (
+                                      <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                                        <div className="flex items-center justify-between mb-2">
+                                          <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
+                                          <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
+                                        </div>
+                                        <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                          <motion.div 
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${(classMedianValue / 10) * 100}%` }}
+                                            transition={{ duration: 1, delay: 0.5 }}
+                                            className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
+                                          />
+                                        </div>
                                       </div>
-                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                        <motion.div 
-                                          initial={{ width: 0 }}
-                                          animate={{ width: `${(classMedianValue / 10) * 100}%` }}
-                                          transition={{ duration: 1, delay: 0.5 }}
-                                          className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
-                                        />
-                                      </div>
-                                    </div>
+                                    )}
                                   </>
                                 );
                               })()}
