@@ -2035,10 +2035,11 @@ const Dashboard = () => {
                           </Badge>
                           {!editingTargetGrade ? (
                             <Badge 
-                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A]/10 transition-colors"
+                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A]/10 transition-colors relative group"
                               onClick={() => setEditingTargetGrade(true)}
                             >
-                              Target {selectedDrawerSubject.target} ✏️
+                              Target {selectedDrawerSubject.target}
+                              <span className="ml-2 text-xs opacity-60 group-hover:opacity-100">Click to edit</span>
                             </Badge>
                           ) : (
                             <div className="flex gap-2 items-center">
@@ -2051,6 +2052,11 @@ const Dashboard = () => {
                                   );
                                   if (subjectData) {
                                     updateTargetGrade(subjectData.subject_name, subjectData.exam_board, e.target.value);
+                                    // Update the drawer subject state to reflect the change
+                                    setSelectedDrawerSubject({
+                                      ...selectedDrawerSubject,
+                                      target: parseInt(e.target.value)
+                                    });
                                   }
                                 }}
                               >
