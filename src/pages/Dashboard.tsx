@@ -2633,36 +2633,33 @@ const Dashboard = () => {
                                     // Monday - Kickstart
                                     [
                                       { text: `Create 10 flashcards on ${topicName}`, mins: 15 },
-                                      { text: `Do 5-question quiz on ${topicName}`, mins: 10 }
+                                      { text: `Practice questions on ${topicName}`, mins: 15 }
                                     ],
                                     // Tuesday - Strengthen Recall
                                     [
-                                      { text: `Practice questions on ${topicName}`, mins: 15 },
-                                      { text: `Review mark scheme for ${topicName}`, mins: 10 }
+                                      { text: `Review flashcards for ${topicName}`, mins: 10 },
+                                      { text: `Practice questions on ${topicName}`, mins: 15 }
                                     ],
                                     // Wednesday - Mid-week Mastery
                                     [
-                                      { text: `Re-test on ${topicName} (10 Qs) — target ≥ 70%`, mins: 25 }
+                                      { text: `Complete practice test on ${topicName} (10 Qs)`, mins: 25 }
                                     ],
                                     // Thursday - Apply & Connect
                                     [
-                                      { text: `Problem set on ${topicName} (12 Qs)`, mins: 20 },
+                                      { text: `Practice set on ${topicName} (12 Qs)`, mins: 20 },
                                       { text: `Review smart revision notes`, mins: 10 }
                                     ],
                                     // Friday - Checkpoint
                                     [
-                                      { text: `Joint test on ${topicName} (15 Qs)`, mins: 25 },
-                                      { text: `Review AI feedback`, mins: 10 }
+                                      { text: `Complete practice test on ${topicName} (15 Qs)`, mins: 35 }
                                     ],
                                     // Saturday - Light Review
                                     [
-                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15 },
-                                      { text: `Light topic practice`, mins: 10 }
+                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15 }
                                     ],
                                     // Sunday - Reset & Plan
                                     [
-                                      { text: `Weekly recap quiz on ${topicName} (25 Qs)`, mins: 35 },
-                                      { text: `Plan next week's focus areas`, mins: 10 }
+                                      { text: `Weekly recap practice on ${topicName} (20 Qs)`, mins: 35 }
                                     ]
                                   ];
                                   return activitiesMap[dayIndex];
