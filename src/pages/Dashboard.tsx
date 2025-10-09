@@ -2629,40 +2629,43 @@ const Dashboard = () => {
                                   };
                                   
                                   const topicName = formatTopicName(topic?.topicId);
+                                  const topicId = topic?.topicId;
+                                  const subjectId = topic?.subjectId || selectedDrawerSubject.id;
+                                  
                                   const activitiesMap = [
                                     // Monday - Kickstart
                                     [
-                                      { text: `Create 10 flashcards on ${topicName}`, mins: 15 },
-                                      { text: `Practice questions on ${topicName}`, mins: 15 }
+                                      { text: `Create 10 flashcards on ${topicName}`, mins: 15, action: 'flashcards' },
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
                                     ],
                                     // Tuesday - Strengthen Recall
                                     [
-                                      { text: `Review flashcards for ${topicName}`, mins: 10 },
-                                      { text: `Practice questions on ${topicName}`, mins: 15 }
+                                      { text: `Review flashcards for ${topicName}`, mins: 10, action: 'flashcards' },
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
                                     ],
                                     // Wednesday - Mid-week Mastery
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 25 }
+                                      { text: `Complete practice test on ${topicName}`, mins: 25, action: 'practice', topicId }
                                     ],
                                     // Thursday - Apply & Connect
                                     [
-                                      { text: `Practice questions on ${topicName}`, mins: 20 },
-                                      { text: `Review smart revision notes`, mins: 10 }
+                                      { text: `Practice questions on ${topicName}`, mins: 20, action: 'practice', topicId },
+                                      { text: `Review smart revision notes`, mins: 10, action: 'notebook' }
                                     ],
                                     // Friday - Checkpoint
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 35 }
+                                      { text: `Complete practice test on ${topicName}`, mins: 35, action: 'practice', topicId }
                                     ],
                                     // Saturday - Light Review
                                     [
-                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15 }
+                                      { text: `Quick flashcard recap on ${topicName}`, mins: 15, action: 'flashcards' }
                                     ],
                                     // Sunday - Reset & Plan
                                     [
-                                      { text: `Weekly recap practice on ${topicName}`, mins: 35 }
+                                      { text: `Weekly recap practice on ${topicName}`, mins: 35, action: 'practice', topicId }
                                     ]
                                   ];
-                                  return activitiesMap[dayIndex];
+                                  return { activities: activitiesMap[dayIndex], subjectId };
                                 };
 
                                 return weekDays.map((day, i) => {
@@ -2670,8 +2673,25 @@ const Dashboard = () => {
                                   const topic = subjectWeakTopics.length > 0 
                                     ? subjectWeakTopics[i % subjectWeakTopics.length]
                                     : null;
-                                  const activities = getActivitiesForDay(i, topic);
+                                  const { activities, subjectId } = getActivitiesForDay(i, topic);
                                   const totalDuration = activities.reduce((sum, act) => sum + act.mins, 0);
+                                  
+                                  const handleStartActivity = (activity: any) => {
+                                    if (activity.action === 'flashcards') {
+                                      setActiveTab('flashcards');
+                                      setSubjectDrawerOpen(false);
+                                    } else if (activity.action === 'practice' && activity.topicId) {
+                                      setSelectedSubject(subjectId);
+                                      setSubjectDrawerOpen(false);
+                                      // Small delay to allow drawer to close before navigating
+                                      setTimeout(() => {
+                                        navigate(`/practice?subject=${subjectId}&topic=${activity.topicId}`);
+                                      }, 300);
+                                    } else if (activity.action === 'notebook') {
+                                      setActiveTab('notebook');
+                                      setSubjectDrawerOpen(false);
+                                    }
+                                  };
                                   
                                   return (
                                     <motion.div 
@@ -2701,7 +2721,11 @@ const Dashboard = () => {
                                               </p>
                                             </div>
                                             <div className="flex gap-2 flex-shrink-0">
-                                              <Button size="sm" className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8">
+                                              <Button 
+                                                size="sm" 
+                                                className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
+                                                onClick={() => handleStartActivity(activity)}
+                                              >
                                                 <Play className="h-3 w-3 mr-1" />
                                                 Start
                                               </Button>
