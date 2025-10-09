@@ -499,62 +499,8 @@ const Dashboard = () => {
       }
 
       if (data) {
-        // Load subject_performance data to get study_hours and accuracy_rate
-        const { data: perfData } = await supabase
-          .from("subject_performance")
-          .select("subject_id, exam_board, study_hours, accuracy_rate")
-          .eq("user_id", user.id);
-        
-        // Helper to get subject_id from name and exam board
-        const getSubjectId = (subjectName: string, examBoard: string): string => {
-          const board = examBoard.toLowerCase();
-          
-          // Handle A-level subjects
-          if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-          if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-          if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
-          
-          // Handle subjects with exam board in name
-          if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
-          if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
-          if (subjectName === "English Language (Edexcel)") return "edexcel-english-language";
-          
-          // Handle standard subjects
-          if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
-          if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
-          if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
-          if (subjectName === "Biology") return "biology";
-          if (subjectName === "IGCSE Business") return "business-edexcel-igcse";
-          if (subjectName === "Business") return "business";
-          if (subjectName === "English Language") return "english-language";
-          if (subjectName === "English Literature") return "english-literature";
-          if (subjectName === "Geography") return "geography";
-          if (subjectName === "History") return "history";
-          if (subjectName === "Religious Studies") return "religious-studies";
-          if (subjectName === "Computer Science") return "computer-science";
-          if (subjectName === "Spanish") return "spanish-aqa";
-          
-          // Fallback: try to find by name in curriculum
-          const subject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
-          return subject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
-        };
-        
-        // Merge performance data with subject data
-        const enrichedData = data.map(subject => {
-          const expectedSubjectId = getSubjectId(subject.subject_name, subject.exam_board);
-          const perf = perfData?.find(p => 
-            p.subject_id === expectedSubjectId && 
-            p.exam_board.toLowerCase() === subject.exam_board.toLowerCase()
-          );
-          return {
-            ...subject,
-            study_hours: perf?.study_hours || 0,
-            accuracy_rate: perf?.accuracy_rate || 0
-          };
-        });
-        
         // Store full subject data for progress tab
-        setUserSubjectsWithGrades(enrichedData);
+        setUserSubjectsWithGrades(data);
         
         // Load predicted grades
         loadPredictedGrades();
@@ -1208,8 +1154,6 @@ const Dashboard = () => {
       if (user?.id && document.hasFocus()) {
         loadUserStats();
         loadPredictedGrades();
-        loadUserSubjects(); // Reload subject performance data
-        loadUserProgress(); // Reload progress data
       }
     };
 
@@ -1257,7 +1201,6 @@ const Dashboard = () => {
         calculateTodayEarnedMP(); // Refresh today's earned MP
         loadLeaderboardData(); // Refresh leaderboard every 30 seconds for live updates
         loadPredictedGrades(); // Refresh predicted grades to catch new completions
-        loadUserSubjects(); // Refresh subject performance data
       }
     }, 30000);
 
