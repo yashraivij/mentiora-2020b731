@@ -650,7 +650,7 @@ const Practice = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => {
-                  navigate('/', { 
+                  navigate('/dashboard', { 
                     state: { 
                       openSubjectDrawer: true, 
                       subjectId: subjectId,
