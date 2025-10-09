@@ -7169,27 +7169,25 @@ Write a story about a moment of fear.
   }
 
   return (
-    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#fafafa' }}>
-      {/* Premium Header with Subtle Shadow */}
-      <header className="border-b border-gray-200 bg-white shadow-sm backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 md:px-8 py-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+      {/* Medly-style Top Navigation */}
+      <header className="border-b border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             {/* Left: Exam name with navigation */}
-            <div className="flex items-center gap-4 flex-1 min-w-0">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
                 disabled={currentQuestion === 0}
-                className="h-10 w-10 flex-shrink-0 hover:bg-gray-100 transition-all duration-200 rounded-lg disabled:opacity-40"
+                className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="p-2 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg">
-                  <BookOpen className="h-4 w-4 text-primary flex-shrink-0" />
-                </div>
-                <h1 className="text-lg font-bold text-slate-900 truncate tracking-tight">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                <h1 className="text-lg font-semibold text-slate-900 truncate">
                   {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
                    subjectId === 'history' ? 'History Paper 1' : 
                    subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
@@ -7210,55 +7208,57 @@ Write a story about a moment of fear.
                 size="icon"
                 onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
                 disabled={currentQuestion >= examQuestions.length - 1}
-                className="h-10 w-10 flex-shrink-0 hover:bg-gray-100 transition-all duration-200 rounded-lg disabled:opacity-40"
+                className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4 rotate-180" />
               </Button>
             </div>
 
-            {/* Premium Progress Indicator */}
+            {/* Center: Modern Progress indicator */}
             <div className="flex justify-center md:justify-end">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 {examQuestions.map((question, index) => {
+                  // Find the answer for this question
                   const hasAnswer = answers.find(a => a.questionId === question.id);
                   
-                  let circleColor = 'bg-gray-100 border-gray-300'; 
+                  // Determine color based on status
+                  let circleColor = 'bg-gray-200 border-gray-300'; // Not attempted yet
                   
                   if (hasAnswer) {
-                    circleColor = 'bg-gradient-to-br from-emerald-500 to-emerald-600 border-emerald-600 shadow-lg shadow-emerald-500/30'; 
+                    circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50'; // Answered
                   }
                   
+                  // Show logo only on current question if not answered yet
                   const showLogo = index === currentQuestion && !hasAnswer;
                   
                   return (
                     <div key={index} className="relative flex items-center">
+                      {/* Connecting line */}
                       {index > 0 && (
-                        <div className={`absolute right-full w-2.5 h-0.5 ${
+                        <div className={`absolute right-full w-2 h-0.5 ${
                           answers.find(a => a.questionId === examQuestions[index - 1].id)
-                            ? 'bg-gradient-to-r from-gray-400 to-gray-300'
+                            ? 'bg-gray-400'
                             : 'bg-gray-200'
                         }`} />
                       )}
                       
-                      <div className="relative group">
+                      {/* Question circle */}
+                      <div className="relative">
                         <div 
-                          className={`w-8 h-8 rounded-full border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${circleColor} ${
-                            showLogo ? 'ring-2 ring-orange-400 ring-offset-2 ring-offset-white scale-110' : 'hover:scale-105'
+                          className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${circleColor} ${
+                            showLogo ? 'ring-2 ring-orange-300 ring-offset-2' : ''
                           }`}
                           onClick={() => setCurrentQuestion(index)}
                         >
+                          {/* Show checkmark for answered questions */}
                           {hasAnswer && (
-                            <span className="text-white text-sm font-bold drop-shadow-sm">✓</span>
+                            <span className="text-white text-sm font-bold">✓</span>
                           )}
                           
+                          {/* Mentiora logo on current unanswered question */}
                           {showLogo && (
                             <img src={mentioraLogo} alt="Current question" className="w-5 h-5 object-contain" />
                           )}
-                        </div>
-                        
-                        {/* Tooltip on hover */}
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
-                          Question {index + 1}
                         </div>
                       </div>
                     </div>
@@ -7268,105 +7268,96 @@ Write a story about a moment of fear.
             </div>
           </div>
           
-          {/* Premium Timer and Action Row */}
-          <div className="flex items-center justify-between mt-5 pt-5 border-t border-gray-200">
-            <div className={`flex items-center space-x-3 px-5 py-3 rounded-xl border-2 shadow-sm transition-all duration-300 ${isTimeUp ? 'bg-red-50 border-red-200 shadow-red-100' : 'bg-gradient-to-r from-gray-50 to-white border-gray-200'}`}>
-              <Clock className={`h-5 w-5 ${isTimeUp ? 'text-red-600' : 'text-gray-600'}`} />
-              <span className={`font-mono font-bold text-lg tracking-wide ${isTimeUp ? 'text-red-600' : 'text-gray-900'}`}>
+          {/* Timer and progress row */}
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+            <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-destructive/10 dark:bg-destructive/5 border-destructive/50 dark:border-destructive/30' : 'bg-card border-border'}`}>
+              <Clock className={`h-4 w-4 ${isTimeUp ? 'text-destructive' : 'text-muted-foreground'}`} />
+              <span className={`font-mono font-bold ${isTimeUp ? 'text-destructive' : 'text-foreground'}`}>
                 {formatTime(timeLeft)}
               </span>
             </div>
             <Button
               onClick={handleSubmit}
-              className="bg-gradient-to-r from-[#3BAFDA] to-[#2E9DBF] hover:from-[#2E9DBF] hover:to-[#2590B8] text-white rounded-xl px-10 py-6 font-bold text-base shadow-[0_8px_30px_rgba(59,175,218,0.3)] hover:shadow-[0_12px_40px_rgba(59,175,218,0.4)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+              className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Target className="h-5 w-5 mr-2" />
+              <Target className="h-4 w-4 mr-2" />
               Submit for Marking
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Premium Main Content */}
-      <main className="max-w-6xl mx-auto p-6 md:p-10">
-        <div className="rounded-2xl bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-200/80 p-10 backdrop-blur-sm">
-          {/* Premium Question Header */}
-          <div className="mb-8">
-            <div className="flex items-start justify-between gap-6 mb-6">
+      {/* Main Content Area */}
+      <main className="max-w-6xl mx-auto p-6 md:p-8">
+        <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
+          {/* Question Header */}
+          <div className="mb-6">
+            <div className="flex items-start justify-between gap-4 mb-4">
               <div className="flex-1">
-                {/* Enhanced Question Numbers */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="inline-flex items-center gap-1.5 shadow-sm">
-                    <span className="inline-block border-[2.5px] border-slate-900 px-4 py-1.5 text-base font-mono font-bold bg-white">0</span>
-                    <span className="inline-block border-[2.5px] border-slate-900 px-4 py-1.5 text-base font-mono font-bold bg-white">{currentQuestion + 1}</span>
+                {/* Question reference numbers */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1">
+                    <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
+                    <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestion + 1}</span>
                   </div>
                   {examQuestions[currentQuestion].section && (
-                    <Badge variant="outline" className="ml-2 px-3 py-1 text-xs font-semibold border-gray-300 shadow-sm">
+                    <Badge variant="outline" className="ml-2">
                       Section {examQuestions[currentQuestion].section}
                     </Badge>
                   )}
                   {getTierLabel(examQuestions[currentQuestion]) && (
-                    <Badge variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} className="text-xs ml-2 px-3 py-1 font-semibold shadow-sm">
+                    <Badge variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} className="text-xs ml-2">
                       {getTierLabel(examQuestions[currentQuestion])}
                     </Badge>
                   )}
                   {getHistoryTopicInfo(examQuestions[currentQuestion].id) && (
-                    <Badge className={`${getHistoryTopicInfo(examQuestions[currentQuestion].id)?.color} text-xs font-semibold ml-2 px-3 py-1 shadow-sm`}>
+                    <Badge className={`${getHistoryTopicInfo(examQuestions[currentQuestion].id)?.color} text-xs font-medium ml-2`}>
                       {getHistoryTopicInfo(examQuestions[currentQuestion].id)?.name}
                     </Badge>
                   )}
                 </div>
                 
-                {/* Enhanced Question Text */}
-                <p className="text-base text-slate-900 leading-[1.8] mb-2 whitespace-pre-wrap font-medium">
+                {/* Question text */}
+                <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
                   {examQuestions[currentQuestion].text}
                 </p>
               </div>
               
-              {/* Premium Marks Badge */}
-              <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-300 rounded-lg shadow-sm">
-                <span className="text-sm font-bold text-slate-900 whitespace-nowrap">
-                  [{examQuestions[currentQuestion].marks} {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}]
-                </span>
+              {/* Marks pill */}
+              <div className="text-sm font-semibold text-slate-900 whitespace-nowrap">
+                [{examQuestions[currentQuestion].marks} {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}]
               </div>
             </div>
           </div>
 
-          {/* Premium Answer Area */}
-          <div className="min-h-[450px] mb-8">
+          {/* Answer area - large white space */}
+          <div className="min-h-[400px] mb-6">
             <Textarea
               value={getAnswer(examQuestions[currentQuestion].id)}
               onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
               placeholder=""
-              className="w-full h-full min-h-[450px] border-2 border-gray-300 focus:border-primary/40 focus:ring-2 focus:ring-primary/10 text-base resize-none p-6 bg-white rounded-xl transition-all duration-200 shadow-inner"
-              style={{ lineHeight: '1.75' }}
+              className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
             />
           </div>
 
-          {/* Premium Bottom Action Area */}
-          <div className="flex justify-between items-center pt-6 border-t border-gray-200">
-            <div className="flex items-center gap-3">
-              <div className="text-sm font-semibold text-slate-900">
-                Question {currentQuestion + 1} of {examQuestions.length}
-              </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
-              <div className="text-sm font-medium text-emerald-600">
-                {answers.length} answered
-              </div>
+          {/* Bottom action area */}
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-muted-foreground">
+              Question {currentQuestion + 1} of {examQuestions.length} • {answers.length} answered
             </div>
             
             {currentQuestion === examQuestions.length - 1 ? (
               <Button
                 onClick={handleSubmit}
-                className="bg-gradient-to-r from-[#3BAFDA] to-[#2E9DBF] hover:from-[#2E9DBF] hover:to-[#2590B8] text-white rounded-xl px-12 py-6 font-bold text-base shadow-[0_8px_30px_rgba(59,175,218,0.3)] hover:shadow-[0_12px_40px_rgba(59,175,218,0.4)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
               >
-                <Target className="h-5 w-5 mr-2" />
+                <Target className="h-4 w-4 mr-2" />
                 Submit for Marking
               </Button>
             ) : (
               <Button
                 onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
-                className="bg-gradient-to-r from-[#3BAFDA] to-[#2E9DBF] hover:from-[#2E9DBF] hover:to-[#2590B8] text-white rounded-xl px-12 py-6 font-bold text-base shadow-[0_8px_30px_rgba(59,175,218,0.3)] hover:shadow-[0_12px_40px_rgba(59,175,218,0.4)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Next Question
               </Button>
