@@ -1154,6 +1154,8 @@ const Dashboard = () => {
       if (user?.id && document.hasFocus()) {
         loadUserStats();
         loadPredictedGrades();
+        loadUserSubjects(); // Reload subject performance data
+        loadUserProgress(); // Reload progress data
       }
     };
 
@@ -1201,6 +1203,7 @@ const Dashboard = () => {
         calculateTodayEarnedMP(); // Refresh today's earned MP
         loadLeaderboardData(); // Refresh leaderboard every 30 seconds for live updates
         loadPredictedGrades(); // Refresh predicted grades to catch new completions
+        loadUserSubjects(); // Refresh subject performance data
       }
     }, 30000);
 

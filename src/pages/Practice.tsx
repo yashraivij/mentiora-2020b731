@@ -503,6 +503,67 @@ const Practice = () => {
     
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
+    // Update subject_performance table in Supabase
+    if (user?.id && subjectId) {
+      try {
+        const subject = curriculum.find(s => s.id === subjectId);
+        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
+                         subjectId.includes('edexcel') ? 'Edexcel' : 
+                         subjectId.includes('ocr') ? 'OCR' : 'AQA';
+        
+        // Calculate time spent (assume 2 minutes per question)
+        const timeSpentMinutes = shuffledQuestions.length * 2;
+        
+        // Get current performance data
+        const { data: currentPerf } = await supabase
+          .from('subject_performance')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .eq('exam_board', examBoard)
+          .maybeSingle();
+        
+        if (currentPerf) {
+          // Update existing record
+          const newTotalQuestions = (currentPerf.total_questions_answered || 0) + attempts.length;
+          const newCorrectAnswers = (currentPerf.correct_answers || 0) + attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
+          const newAccuracy = newTotalQuestions > 0 ? (newCorrectAnswers / newTotalQuestions) * 100 : 0;
+          const newStudyHours = (currentPerf.study_hours || 0) + (timeSpentMinutes / 60);
+          
+          await supabase
+            .from('subject_performance')
+            .update({
+              total_questions_answered: newTotalQuestions,
+              correct_answers: newCorrectAnswers,
+              accuracy_rate: newAccuracy,
+              study_hours: newStudyHours,
+              last_activity_date: new Date().toISOString().split('T')[0],
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', currentPerf.id);
+        } else {
+          // Insert new record
+          const correctAnswers = attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
+          const accuracy = attempts.length > 0 ? (correctAnswers / attempts.length) * 100 : 0;
+          
+          await supabase
+            .from('subject_performance')
+            .insert({
+              user_id: user.id,
+              subject_id: subjectId,
+              exam_board: examBoard,
+              total_questions_answered: attempts.length,
+              correct_answers: correctAnswers,
+              accuracy_rate: accuracy,
+              study_hours: timeSpentMinutes / 60,
+              last_activity_date: new Date().toISOString().split('T')[0]
+            });
+        }
+      } catch (error) {
+        console.error('Error updating subject performance:', error);
+      }
+    }
+    
     // Handle weak topics
     if (averagePercentage < 85) {
       const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
