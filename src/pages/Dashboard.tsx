@@ -2495,20 +2495,15 @@ const Dashboard = () => {
                               return baseName === selectedSubjectGroup;
                             })
                             .map((subject) => {
-                              // Extract exam board from subject name for better accuracy
+                              // Extract exam board from subject name or ID
                               let examBoard = 'AQA'; // default
                               
-                              // Check for specific patterns in the subject name
-                              if (subject.name.includes('Paper 2')) {
+                              // First check if exam board is in parentheses in the name
+                              const nameMatch = subject.name.match(/\(([^)]+)\)/);
+                              if (nameMatch) {
+                                examBoard = nameMatch[1];
+                              } else if (subject.name.includes('Paper 2')) {
                                 examBoard = 'AQA Paper 2';
-                              } else if (subject.name.includes('A (Edexcel)')) {
-                                examBoard = 'Edexcel A';
-                              } else if (subject.name.includes('B (Edexcel)')) {
-                                examBoard = 'Edexcel B';
-                              } else if (subject.name.includes('B (OCR)')) {
-                                examBoard = 'OCR B';
-                              } else if (subject.name.includes('A (OCR)')) {
-                                examBoard = 'OCR A';
                               } else if (subject.id.includes('edexcel')) {
                                 examBoard = 'Edexcel';
                               } else if (subject.id.includes('ocr')) {
@@ -2517,6 +2512,8 @@ const Dashboard = () => {
                                 examBoard = 'Eduqas';
                               } else if (subject.id.includes('ccea')) {
                                 examBoard = 'CCEA';
+                              } else if (subject.id.includes('aqa')) {
+                                examBoard = 'AQA';
                               }
                               
                               return (
