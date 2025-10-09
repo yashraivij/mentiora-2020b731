@@ -7174,48 +7174,27 @@ Write a story about a moment of fear.
       <header className="border-b border-gray-200 bg-white sticky top-0 z-40 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* Left: Exam name with navigation */}
-            <div className="flex items-center gap-4 flex-1 min-w-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
-                disabled={currentQuestion === 0}
-                className="h-9 w-9 flex-shrink-0"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </Button>
-              <div className="flex items-center min-w-0 flex-1">
-                <h1 className="text-lg font-semibold text-slate-900 truncate">
-                  {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
-                   subjectId === 'history' ? 'History Paper 1' : 
-                   subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
-                   subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
-                   subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
-                   subjectId === 'geography-b-ocr' ? 'Geography B (OCR)' :
-                   subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
-                   subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
-                   subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' :
-                   subjectId === 'computer-science' ? 'Computer Science Paper 1' :
-                   subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
-                   subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
-                   `${subject.name} Predicted Exam`}
-                </h1>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
-                disabled={currentQuestion >= examQuestions.length - 1}
-                className="h-9 w-9 flex-shrink-0"
-              >
-                <ArrowLeft className="h-4 w-4 rotate-180" />
-              </Button>
+            {/* Left: Exam name */}
+            <div className="flex items-center min-w-0 flex-1">
+              <h1 className="text-lg font-semibold text-slate-900 truncate">
+                {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
+                 subjectId === 'history' ? 'History Paper 1' : 
+                 subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
+                 subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                 subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
+                 subjectId === 'geography-b-ocr' ? 'Geography B (OCR)' :
+                 subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
+                 subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
+                 subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' :
+                 subjectId === 'computer-science' ? 'Computer Science Paper 1' :
+                 subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
+                 subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
+                 `${subject.name} Predicted Exam`}
+              </h1>
             </div>
 
-            {/* Center: Modern Progress indicator */}
-            <div className="flex justify-center md:justify-end mt-2 md:mt-0">
-              <div className="flex items-center gap-2 flex-wrap justify-center">
+            {/* Right: Progress indicator - single line */}
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-shrink-0 max-w-full md:max-w-md">
                 {examQuestions.map((question, index) => {
                   // Find the answer for this question
                   const hasAnswer = answers.find(a => a.questionId === question.id);
@@ -7265,7 +7244,6 @@ Write a story about a moment of fear.
                 })}
               </div>
             </div>
-          </div>
           
           {/* Timer and progress row */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-5 pt-5 border-t border-gray-200">
