@@ -2035,16 +2035,15 @@ const Dashboard = () => {
                           </Badge>
                           {!editingTargetGrade ? (
                             <Badge 
-                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A]/10 transition-colors relative group"
+                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A] hover:text-white hover:shadow-lg transition-all duration-200"
                               onClick={() => setEditingTargetGrade(true)}
                             >
                               Target {selectedDrawerSubject.target}
-                              <span className="ml-2 text-xs opacity-60 group-hover:opacity-100">Click to edit</span>
                             </Badge>
                           ) : (
                             <div className="flex gap-2 items-center">
                               <select
-                                className="rounded-xl px-3 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold"
+                                className="rounded-xl px-3 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer"
                                 defaultValue={selectedDrawerSubject.target}
                                 onChange={(e) => {
                                   const subjectData = userSubjectsWithGrades.find(
@@ -2068,9 +2067,9 @@ const Dashboard = () => {
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => setEditingTargetGrade(false)}
-                                className="h-8 w-8 p-0"
+                                className="h-8 w-8 p-0 hover:bg-[#EF4444]/10"
                               >
-                                <X className="h-4 w-4" />
+                                <X className="h-4 w-4 text-[#EF4444]" />
                               </Button>
                             </div>
                           )}
