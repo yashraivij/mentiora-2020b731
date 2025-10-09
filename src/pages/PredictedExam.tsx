@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,7 +36,6 @@ const PredictedExam = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const mainContentRef = useRef<HTMLDivElement>(null);
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -59,12 +58,6 @@ const PredictedExam = () => {
     return null;
   }
 
-  // Auto-scroll to top when question changes
-  useEffect(() => {
-    if (mainContentRef.current) {
-      mainContentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [currentQuestion]);
 
 
   // Function to determine tier based on question difficulty and content
@@ -7283,7 +7276,7 @@ Write a story about a moment of fear.
       </header>
 
       {/* Main Content Area */}
-      <main ref={mainContentRef} className="max-w-6xl mx-auto p-6 md:p-8">
+      <main className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
           {/* Question Header */}
           <div className="mb-6">
