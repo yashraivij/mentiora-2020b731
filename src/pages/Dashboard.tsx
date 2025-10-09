@@ -1934,6 +1934,7 @@ const Dashboard = () => {
                   setShowAddSubjects={setShowAddSubjects}
                   setSelectedDrawerSubject={setSelectedDrawerSubject}
                   setSubjectDrawerOpen={setSubjectDrawerOpen}
+                  setDrawerTab={setDrawerTab}
                   insightFilter={insightFilter}
                   setInsightFilter={setInsightFilter}
                   removeSubject={removeSubject}

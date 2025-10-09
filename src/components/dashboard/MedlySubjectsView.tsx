@@ -68,6 +68,7 @@ interface MedlySubjectsViewProps {
   setShowAddSubjects: (show: boolean) => void;
   setSelectedDrawerSubject: (subject: any) => void;
   setSubjectDrawerOpen: (open: boolean) => void;
+  setDrawerTab: (tab: 'overview' | 'topics' | 'papers' | 'plan') => void;
   insightFilter: string | null;
   setInsightFilter: (filter: string | null) => void;
   removeSubject: (subjectId: string) => void;
@@ -83,6 +84,7 @@ export function MedlySubjectsView({
   setShowAddSubjects,
   setSelectedDrawerSubject,
   setSubjectDrawerOpen,
+  setDrawerTab,
   insightFilter,
   setInsightFilter,
   removeSubject,
@@ -440,9 +442,14 @@ export function MedlySubjectsView({
                     <Button 
                       size="sm"
                       className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white px-5 font-semibold shadow-md shadow-[#0EA5E9]/25 hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all duration-300"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedDrawerSubject(subject);
+                        setDrawerTab('topics');
+                        setSubjectDrawerOpen(true);
+                      }}
                     >
-                      Quiz
+                      Topics
                     </Button>
                   </div>
                 </CardContent>
