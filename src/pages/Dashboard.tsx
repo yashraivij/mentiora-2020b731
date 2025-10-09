@@ -2578,9 +2578,32 @@ const Dashboard = () => {
                               {(() => {
                                 // Generate plan data using WeeklyPlan logic
                                 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-                                const subjectWeakTopics = userProgress
+                                
+                                // Get weak topics for this subject (score < 70)
+                                let subjectWeakTopics = userProgress
                                   .filter(p => p.subjectId === selectedDrawerSubject.id && p.averageScore < 70)
                                   .sort((a, b) => a.averageScore - b.averageScore);
+                                
+                                // If no weak topics, use all attempted topics for this subject
+                                if (subjectWeakTopics.length === 0) {
+                                  subjectWeakTopics = userProgress
+                                    .filter(p => p.subjectId === selectedDrawerSubject.id)
+                                    .sort((a, b) => a.averageScore - b.averageScore);
+                                }
+                                
+                                // If still no topics, get topics from curriculum
+                                if (subjectWeakTopics.length === 0) {
+                                  const curriculumSubject = curriculum.find(s => s.id === selectedDrawerSubject.id);
+                                  if (curriculumSubject?.topics) {
+                                    subjectWeakTopics = curriculumSubject.topics.map(t => ({
+                                      subjectId: selectedDrawerSubject.id,
+                                      topicId: t.id,
+                                      averageScore: 0,
+                                      attempts: 0,
+                                      lastAttempt: new Date()
+                                    }));
+                                  }
+                                }
                                 
                                 const dayThemes = [
                                   "Kickstart Week",
@@ -2593,7 +2616,7 @@ const Dashboard = () => {
                                 ];
 
                                 const getActivitiesForDay = (dayIndex: number, topic: any) => {
-                                  const topicName = topic?.topicId || "General Topics";
+                                  const topicName = topic?.topicId || "Review Topics";
                                   const activitiesMap = [
                                     // Monday - Kickstart
                                     [
@@ -2634,7 +2657,10 @@ const Dashboard = () => {
                                 };
 
                                 return weekDays.map((day, i) => {
-                                  const topic = subjectWeakTopics[i % Math.max(subjectWeakTopics.length, 1)];
+                                  // Cycle through available topics
+                                  const topic = subjectWeakTopics.length > 0 
+                                    ? subjectWeakTopics[i % subjectWeakTopics.length]
+                                    : null;
                                   const activities = getActivitiesForDay(i, topic);
                                   const totalDuration = activities.reduce((sum, act) => sum + act.mins, 0);
                                   
