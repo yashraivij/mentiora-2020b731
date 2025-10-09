@@ -26,7 +26,7 @@ import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
-import { PromotionalStrip } from "./components/ui/promotional-strip";
+
 
 const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ const App: React.FC = () => (
         <MPRewardsProvider>
           <AuthProvider>
             <BrowserRouter>
-            <PromotionalStrip />
+            
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
