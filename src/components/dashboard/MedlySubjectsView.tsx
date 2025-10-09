@@ -425,23 +425,22 @@ export function MedlySubjectsView({
                   </div>
                   
                   {/* Actions */}
-                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                  <div className="flex gap-2 pt-2 px-1">
                     <Button 
                       size="sm"
                       variant="ghost"
-                      className="flex-1 rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 justify-center sm:justify-between font-semibold border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200"
+                      className="flex-1 rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 justify-center font-semibold border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200 min-w-0"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
                         setSubjectDrawerOpen(true);
                       }}
                     >
-                      <span>View insights</span>
-                      <ChevronRight className="h-4 w-4 hidden sm:block" />
+                      <span className="truncate">View insights</span>
                     </Button>
                     <Button 
                       size="sm"
-                      className="flex-1 sm:flex-initial rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white px-4 sm:px-5 font-semibold shadow-md shadow-[#0EA5E9]/25 hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all duration-300"
+                      className="flex-1 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25 hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all duration-300 min-w-0"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -449,7 +448,7 @@ export function MedlySubjectsView({
                         setSubjectDrawerOpen(true);
                       }}
                     >
-                      Topics
+                      <span className="truncate">Topics</span>
                     </Button>
                   </div>
                 </CardContent>
