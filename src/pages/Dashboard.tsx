@@ -2512,6 +2512,15 @@ const Dashboard = () => {
                               if (baseName === 'Maths') baseName = 'Mathematics';
                               return baseName === selectedSubjectGroup;
                             })
+                            .sort((a, b) => {
+                              // AQA always comes first
+                              const aIsAQA = a.id.includes('aqa') || (!a.id.includes('edexcel') && !a.id.includes('ocr') && !a.id.includes('wjec') && !a.id.includes('eduqas') && !a.id.includes('ccea'));
+                              const bIsAQA = b.id.includes('aqa') || (!b.id.includes('edexcel') && !b.id.includes('ocr') && !b.id.includes('wjec') && !b.id.includes('eduqas') && !b.id.includes('ccea'));
+                              
+                              if (aIsAQA && !bIsAQA) return -1;
+                              if (!aIsAQA && bIsAQA) return 1;
+                              return 0;
+                            })
                             .map((subject) => {
                               // Extract exam board from subject name or ID
                               let examBoard = 'AQA'; // default
