@@ -7006,8 +7006,8 @@ Write a story about a moment of fear.
 
   if (!examStarted) {
     return (
-      <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
-        <header className="bg-card border-b sticky top-0 z-50">
+      <div className={`min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 ${isPremium ? '' : 'pt-12'}`}>
+        <header className="bg-card/80 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm">
           <div className="container mx-auto px-6 py-4">
             <Button variant="ghost" onClick={() => {
               console.log('Back button clicked (predicted exam)');
@@ -7023,39 +7023,46 @@ Write a story about a moment of fear.
           </div>
         </header>
 
-        <div className="container mx-auto px-6 py-8 max-w-4xl">
+        <div className="container mx-auto px-6 py-8 max-w-4xl animate-fade-in">
           <div className="space-y-6">
-            {/* Title Section */}
-            <div>
-              <h1 className="text-3xl font-bold mb-2">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
-              <p className="text-muted-foreground">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
+            {/* Title Section with Premium Badge */}
+            <div className="relative">
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-2xl"></div>
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 animate-pulse"></div>
+                  <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Predicted Exam</span>
+                </div>
+                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
+                <p className="text-muted-foreground text-lg">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
+              </div>
             </div>
 
-            {/* Stats Grid */}
+            {/* Premium Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Card>
+              <Card className="border-2 border-blue-500/20 bg-gradient-to-br from-card to-blue-50/30 dark:to-blue-950/30 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 group">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <FileText className="h-5 w-5 text-primary" />
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <FileText className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold">{examQuestions.length}</p>
-                      <p className="text-sm text-muted-foreground">Questions</p>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{examQuestions.length}</p>
+                      <p className="text-sm text-muted-foreground font-medium">Questions</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="border-2 border-cyan-500/20 bg-gradient-to-br from-card to-cyan-50/30 dark:to-cyan-950/30 hover:border-cyan-500/40 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Clock className="h-5 w-5 text-primary" />
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold">{getExamDuration()}min</p>
-                      <p className="text-sm text-muted-foreground">Time Limit</p>
+                      <p className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">{getExamDuration()}min</p>
+                      <p className="text-sm text-muted-foreground font-medium">Time Limit</p>
                     </div>
                   </div>
                 </CardContent>
@@ -7063,14 +7070,16 @@ Write a story about a moment of fear.
             </div>
 
             {/* Instructions Card */}
-            <Card>
-              <CardHeader>
+            <Card className="border-blue-500/20 bg-gradient-to-br from-card to-blue-50/20 dark:to-blue-950/20 shadow-lg">
+              <CardHeader className="border-b border-blue-500/10 bg-gradient-to-r from-blue-50/50 to-cyan-50/50 dark:from-blue-950/30 dark:to-cyan-950/30">
                 <CardTitle className="flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5" />
-                  Exam Instructions
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 shadow-md">
+                    <AlertCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Exam Instructions</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-6">
                 {subjectId === 'english-literature' ? (
                   <ul className="text-sm space-y-2">
                     <li>• <strong>Section A:</strong> Choose ONE Shakespeare question to answer</li>
@@ -7172,13 +7181,18 @@ Write a story about a moment of fear.
               </CardContent>
             </Card>
 
-            {/* Start Button */}
+            {/* Premium Start Button */}
             <Button 
               onClick={startExam}
               size="lg"
-              className="w-full"
+              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 hover:scale-[1.02] transition-all duration-300"
             >
-              Start Exam
+              <span className="flex items-center gap-2">
+                Start Exam
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
             </Button>
           </div>
         </div>
