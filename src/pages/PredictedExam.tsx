@@ -7010,12 +7010,13 @@ Write a story about a moment of fear.
         <header className="bg-card/80 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm">
           <div className="container mx-auto px-6 py-4">
             <Button variant="ghost" onClick={() => {
-              console.log('Back button clicked (predicted exam)');
-              if (window.history.length > 1) {
-                window.history.back();
-              } else {
-                window.location.href = '/dashboard';
-              }
+              navigate('/dashboard', { 
+                state: { 
+                  openSubjectDrawer: true, 
+                  subjectId: subjectId,
+                  drawerTab: 'overview'
+                } 
+              });
             }} className="text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back
@@ -7211,7 +7212,13 @@ Write a story about a moment of fear.
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/dashboard', { 
+                  state: { 
+                    openSubjectDrawer: true, 
+                    subjectId: subjectId,
+                    drawerTab: 'overview'
+                  } 
+                })}
                 className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4" />
