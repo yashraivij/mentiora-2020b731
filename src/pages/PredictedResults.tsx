@@ -324,7 +324,6 @@ const PredictedResults = () => {
         toast.error("Failed to save exam results to database");
       } else {
         console.log('Exam completion saved successfully');
-        toast.success("Exam results saved successfully!");
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
@@ -459,19 +458,10 @@ const PredictedResults = () => {
             }
           }
           
-          if (notesGenerated > 0) {
-            toast.success(`Exam marked successfully! ${notesGenerated} revision notes added to your Smart Notebook.`, {
-              action: {
-                label: "View Notes",
-                onClick: () => navigate('/notebook')
-              }
-            });
-          } else {
-            toast.success("Exam marked successfully!");
-          }
+          // Notebook notes generation completed
         }
       } else {
-        toast.success("Exam marked successfully!");
+        // No notebook notes needed
       }
       
     } catch (error) {

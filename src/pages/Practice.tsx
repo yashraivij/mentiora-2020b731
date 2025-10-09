@@ -134,7 +134,6 @@ const Practice = () => {
           setAttempts(state.attempts || []);
           setShowFeedback(state.showFeedback || false);
           
-          toast.success("Previous session restored! Continuing from where you left off.");
           return true;
         }
       } catch (error) {
@@ -323,7 +322,7 @@ const Practice = () => {
       if (marksLost > 0 && user?.id) {
         console.log('Generating notebook notes for lost marks:', marksLost);
         try {
-          const notesGenerated = await NotebookGenerator.generateAndSaveNotes(
+          await NotebookGenerator.generateAndSaveNotes(
             user.id,
             currentQuestion,
             userAnswer,
@@ -331,23 +330,9 @@ const Practice = () => {
             subjectId || '',
             topicId || ''
           );
-          
-          if (notesGenerated) {
-            toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. Smart notes added to your Notebook!`, {
-              action: {
-                label: "View Notebook",
-                onClick: () => navigate('/dashboard?tab=notes')
-              }
-            });
-          } else {
-            toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
-          }
         } catch (error) {
           console.error('Error generating notebook notes:', error);
-          toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
         }
-      } else {
-        toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
       }
 
       // Handle personalized notifications for practice results
@@ -551,10 +536,7 @@ const Practice = () => {
               }
             );
           
-          // Show celebratory toast for mastery
-          toast.success(`🎉 Topic mastered! Great work on ${topic?.name}!`, {
-            duration: 3000,
-          });
+          // Celebratory feedback removed - keeping it clean
         } catch (error) {
           console.error('Error tracking topic mastery:', error);
         }
