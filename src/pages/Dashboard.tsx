@@ -2642,16 +2642,16 @@ const Dashboard = () => {
                                     ],
                                     // Wednesday - Mid-week Mastery
                                     [
-                                      { text: `Complete practice test on ${topicName} (10 Qs)`, mins: 25 }
+                                      { text: `Complete practice test on ${topicName}`, mins: 25 }
                                     ],
                                     // Thursday - Apply & Connect
                                     [
-                                      { text: `Practice set on ${topicName} (12 Qs)`, mins: 20 },
+                                      { text: `Practice questions on ${topicName}`, mins: 20 },
                                       { text: `Review smart revision notes`, mins: 10 }
                                     ],
                                     // Friday - Checkpoint
                                     [
-                                      { text: `Complete practice test on ${topicName} (15 Qs)`, mins: 35 }
+                                      { text: `Complete practice test on ${topicName}`, mins: 35 }
                                     ],
                                     // Saturday - Light Review
                                     [
@@ -2659,7 +2659,7 @@ const Dashboard = () => {
                                     ],
                                     // Sunday - Reset & Plan
                                     [
-                                      { text: `Weekly recap practice on ${topicName} (20 Qs)`, mins: 35 }
+                                      { text: `Weekly recap practice on ${topicName}`, mins: 35 }
                                     ]
                                   ];
                                   return activitiesMap[dayIndex];
