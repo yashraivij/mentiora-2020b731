@@ -588,7 +588,7 @@ const Dashboard = () => {
     }
   };
 
-  // Load class median grades (average predicted grade across all users for each subject)
+  // Load platform average grades (average predicted grade across all users for each subject)
   const loadClassMedianGrades = async () => {
     try {
       const { data, error } = await supabase
@@ -596,7 +596,7 @@ const Dashboard = () => {
         .select('subject_id, grade, percentage');
 
       if (error) {
-        console.error('Error loading class median grades:', error);
+        console.error('Error loading platform average grades:', error);
         return;
       }
 
@@ -620,28 +620,26 @@ const Dashboard = () => {
             const gradeMap: {[key: string]: number} = {
               'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
             };
-            gradeValue = gradeMap[completion.grade.toUpperCase()] || 5;
+            gradeValue = gradeMap[completion.grade.toUpperCase()] || 0;
           }
         } else {
-          gradeValue = completion.grade || 5;
+          gradeValue = completion.grade || 0;
         }
         
         subjectGrades[completion.subject_id].push(gradeValue);
       });
 
-      // Calculate median for each subject
-      const medianGrades: {[key: string]: number} = {};
+      // Calculate average (mean) for each subject
+      const averageGrades: {[key: string]: number} = {};
       Object.keys(subjectGrades).forEach(subjectId => {
-        const grades = subjectGrades[subjectId].sort((a, b) => a - b);
-        const mid = Math.floor(grades.length / 2);
-        medianGrades[subjectId] = grades.length % 2 !== 0 
-          ? grades[mid] 
-          : (grades[mid - 1] + grades[mid]) / 2;
+        const grades = subjectGrades[subjectId];
+        const sum = grades.reduce((acc, val) => acc + val, 0);
+        averageGrades[subjectId] = grades.length > 0 ? sum / grades.length : 0;
       });
 
-      setClassMedianGrades(medianGrades);
+      setClassMedianGrades(averageGrades);
     } catch (error) {
-      console.error('Error loading class median grades:', error);
+      console.error('Error loading platform average grades:', error);
     }
   };
 
@@ -2295,7 +2293,7 @@ const Dashboard = () => {
                                 
                                 // Get user's predicted grade for this subject
                                 const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === mappedSubjectId);
-                                let predictedGradeValue = 5; // default
+                                let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 if (userPredictedGrade) {
                                   // Parse the grade
@@ -2308,10 +2306,10 @@ const Dashboard = () => {
                                       const gradeMap: {[key: string]: number} = {
                                         'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
                                       };
-                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 5;
+                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
                                     }
                                   } else {
-                                    predictedGradeValue = userPredictedGrade.grade || 5;
+                                    predictedGradeValue = userPredictedGrade.grade || 0;
                                   }
                                 } else {
                                   // Fallback: calculate from subject performance
@@ -2319,14 +2317,14 @@ const Dashboard = () => {
                                     return curriculumSubject && s.subject_name === curriculumSubject.name;
                                   });
                                   
-                                  if (subjectPerf?.accuracy_rate) {
+                                  if (subjectPerf?.accuracy_rate && subjectPerf.accuracy_rate > 0) {
                                     // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
                                     predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
                                   }
                                 }
                                 
-                                // Get class median for this subject
-                                const classMedianValue = classMedianGrades[mappedSubjectId] || 5;
+                                // Get platform average for this subject (average of all students)
+                                const classMedianValue = classMedianGrades[mappedSubjectId] || 0;
                                 
                                 // Get target grade
                                 const targetGradeValue = selectedDrawerSubject.target || 7;
@@ -2363,7 +2361,7 @@ const Dashboard = () => {
                                     </div>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
-                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Class Median</span>
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">All Students Average</span>
                                         <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
