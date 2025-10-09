@@ -2306,11 +2306,12 @@ const Dashboard = () => {
                             </CardHeader>
                             <CardContent className="space-y-6 p-6">
                               {(() => {
-                                const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
+                                // Use the subject ID directly instead of mapping from name
+                                const subjectIdToMatch = selectedDrawerSubject?.id || '';
+                                const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
-                                // Get user's predicted grade for this subject
-                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === mappedSubjectId);
+                                // Get user's predicted grade for this subject using the direct subject ID
+                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 if (userPredictedGrade) {
@@ -2342,7 +2343,7 @@ const Dashboard = () => {
                                 }
                                 
                                 // Get platform average for this subject (average of all students)
-                                const classMedianValue = classMedianGrades[mappedSubjectId] || 0;
+                                const classMedianValue = classMedianGrades[subjectIdToMatch] || 0;
                                 
                                 // Get target grade
                                 const targetGradeValue = selectedDrawerSubject.target || 7;
