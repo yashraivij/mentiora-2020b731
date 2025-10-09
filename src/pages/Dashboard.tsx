@@ -1280,7 +1280,14 @@ const Dashboard = () => {
     
     return {
       id: subjectId,
-      name: `${subject.subject_name} (${subject.exam_board})`,
+      name: (() => {
+        // Override exam board display for specific subjects
+        if (subjectId === 'music-eduqas-gcse') {
+          return `${subject.subject_name} (Eduqas)`;
+        }
+        // Use database exam board for others
+        return `${subject.subject_name} (${subject.exam_board})`;
+      })(),
       icon: getSubjectIconEmoji(subjectId),
       predicted: predicted,
       target: target,
