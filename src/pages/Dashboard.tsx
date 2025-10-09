@@ -2471,7 +2471,7 @@ const Dashboard = () => {
                                                 </h3>
                                                 <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                                   <BookOpen className="h-3.5 w-3.5" />
-                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `${totalTopics} topics available`}
+                                                  {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
                                                 </p>
                                               </div>
                                               <div className="flex-shrink-0">
