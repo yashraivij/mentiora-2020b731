@@ -148,6 +148,7 @@ const Dashboard = () => {
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
   const [showAddSubjects, setShowAddSubjects] = useState(false);
   const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
+  const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const isMobile = useIsMobile();
 
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -2287,7 +2288,7 @@ const Dashboard = () => {
                     {/* Content */}
                     <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
                       {!selectedSubjectGroup ? (
-                        <Tabs defaultValue="gcse" className="w-full">
+                        <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel')} className="w-full">
                           <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] p-1 h-12 rounded-xl">
                             <TabsTrigger 
                               value="gcse"
@@ -2487,6 +2488,14 @@ const Dashboard = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {availableSubjects
                             .filter(subject => {
+                              // Filter by level first
+                              const isCorrectLevel = activeSubjectLevel === 'gcse' 
+                                ? !subject.id.includes('alevel') 
+                                : subject.id.includes('alevel');
+                              
+                              if (!isCorrectLevel) return false;
+                              
+                              // Then filter by base name
                               let baseName = subject.name.split(' - ')[0].split(' (')[0];
                               // Normalize Geography variations for matching
                               if (baseName.startsWith('Geography')) baseName = 'Geography';
