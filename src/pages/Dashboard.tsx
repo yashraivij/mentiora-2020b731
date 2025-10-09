@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { curriculum } from "@/data/curriculum";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MobileNav, MobileNavItem } from "@/components/ui/mobile-nav";
@@ -131,6 +131,7 @@ const Dashboard = () => {
   const { toast } = useToast();
   const { showMPReward } = useMPRewards();
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("learn");
@@ -1176,6 +1177,21 @@ const Dashboard = () => {
       window.scrollTo(0, 0);
     }
   }, [searchParams]);
+
+  // Handle navigation state from practice page
+  useEffect(() => {
+    if (location.state?.openSubjectDrawer && location.state?.subjectId) {
+      const subject = curriculum.find(s => s.id === location.state.subjectId);
+      if (subject) {
+        setSelectedDrawerSubject(subject);
+        setSubjectDrawerOpen(true);
+        setDrawerTab(location.state.drawerTab || 'overview');
+        setActiveTab('learn');
+        // Clear the state to prevent reopening on subsequent renders
+        navigate(location.pathname, { replace: true, state: {} });
+      }
+    }
+  }, [location.state]);
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -650,21 +650,14 @@ const Practice = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => {
-                  if (currentQuestionIndex > 0) {
-                    const previousQuestion = shuffledQuestions[currentQuestionIndex - 1];
-                    const previousAttempts = attempts.filter(a => a.questionId === previousQuestion.id);
-                    const previousAttempt = previousAttempts.length > 0 ? previousAttempts[previousAttempts.length - 1] : null;
-                    
-                    setCurrentQuestionIndex(currentQuestionIndex - 1);
-                    // Restore the saved answer if it exists
-                    setUserAnswer(previousAttempt?.userAnswer || "");
-                    setShowFeedback(previousAttempt ? true : false);
-                    setChatMessages([]);
-                    setHintCount(0);
-                    setChatStage('intro');
-                  }
+                  navigate('/', { 
+                    state: { 
+                      openSubjectDrawer: true, 
+                      subjectId: subjectId,
+                      drawerTab: 'overview'
+                    } 
+                  });
                 }}
-                disabled={currentQuestionIndex === 0}
                 className="h-9 w-9 flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4" />
