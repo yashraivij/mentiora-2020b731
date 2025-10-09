@@ -891,7 +891,7 @@ const Practice = () => {
     );
   }
 
-  if (!currentQuestion && shuffledQuestions.length === 0) {
+  if (!currentQuestion) {
     console.log('No questions available after loading:', { 
       shuffledQuestionsLength: shuffledQuestions.length, 
       currentQuestionIndex,
