@@ -60,10 +60,19 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 const Practice = () => {
+  console.log('🚀 Practice Component START - Component is rendering');
+  
   const { subjectId, topicId } = useParams();
+  console.log('📍 URL params extracted:', { subjectId, topicId });
+  
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  
+  // Debug logging at component entry
+  console.log('=== Practice Component Rendered ===');
+  console.log('URL params:', { subjectId, topicId });
+  console.log('Available subjects:', curriculum.map(s => ({ id: s.id, name: s.name })));
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -72,12 +81,14 @@ const Practice = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<Array<{id: string, role: 'user' | 'assistant', content: string}>>([]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -92,6 +103,13 @@ const Practice = () => {
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  
+  // Log subject/topic lookup results
+  console.log('Subject lookup:', { found: !!subject, subjectId, subjectName: subject?.name });
+  if (subject) {
+    console.log('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
+    console.log('Topic lookup:', { found: !!topic, topicId, topicName: topic?.name });
+  }
 
   // Save session state to localStorage
   const saveSessionState = () => {
@@ -103,6 +121,7 @@ const Practice = () => {
       attempts,
       showFeedback,
       shuffledQuestions: shuffledQuestions.map(q => q.id), // Only save question IDs
+      sessionStartTime,
       lastSaved: new Date().toISOString()
     };
     
@@ -133,6 +152,7 @@ const Practice = () => {
           setUserAnswer(state.userAnswer || "");
           setAttempts(state.attempts || []);
           setShowFeedback(state.showFeedback || false);
+          setSessionStartTime(state.sessionStartTime || Date.now());
           
           return true;
         }
@@ -170,17 +190,27 @@ const Practice = () => {
     };
     
     recordVisit();
+    
+    console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
+    
     if (!subject || !topic) {
+      console.error('❌ REDIRECT: Subject or topic not found');
+      console.error('Looking for subjectId:', subjectId);
+      console.error('Looking for topicId:', topicId);
+      console.error('Subject found:', !!subject, subject?.name);
+      console.error('Topic found:', !!topic);
+      if (subject) {
+        console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
+      }
+      setIsLoadingQuestions(false);
       navigate('/dashboard');
       return;
     }
     
-    // Debug logging for Macbeth specifically
-    if (topicId === 'macbeth') {
-      console.log('DEBUG: Macbeth topic data:', topic);
-      console.log('DEBUG: Raw questions count:', topic.questions?.length || 0);
-      console.log('DEBUG: All questions:', topic.questions?.map(q => q.id) || []);
-    }
+    // Debug logging
+    console.log('Topic data:', topic);
+    console.log('Raw questions count:', topic.questions?.length || 0);
+    console.log('All questions:', topic.questions?.map(q => q.id) || []);
     
     // Try to load existing session first
     const sessionRestored = loadSessionState();
@@ -189,21 +219,18 @@ const Practice = () => {
     if (!sessionRestored) {
       const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
       
-      // More debug logging for Macbeth
-      if (topicId === 'macbeth') {
-        console.log('DEBUG: Filtered questions count:', filteredQuestions.length);
-        console.log('DEBUG: Filtered questions:', filteredQuestions.map(q => q.id));
-      }
+      console.log('Filtered questions count:', filteredQuestions.length);
+      console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
       const shuffled = shuffleArray(filteredQuestions);
       
-      if (topicId === 'macbeth') {
-        console.log('DEBUG: Shuffled questions count:', shuffled.length);
-        console.log('DEBUG: Final shuffled questions:', shuffled.map(q => q.id));
-      }
+      console.log('Shuffled questions count:', shuffled.length);
+      console.log('Final shuffled questions:', shuffled.map(q => q.id));
       
       setShuffledQuestions(shuffled);
     }
+    
+    setIsLoadingQuestions(false);
   }, [subject, topic, navigate, topicId, user?.id]);
 
   // Save state whenever important values change
@@ -354,7 +381,7 @@ const Practice = () => {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentQuestionIndex < shuffledQuestions.length - 1) {
       const nextQuestion = shuffledQuestions[currentQuestionIndex + 1];
       const nextAttempts = attempts.filter(a => a.questionId === nextQuestion.id);
@@ -368,7 +395,7 @@ const Practice = () => {
       setHintCount(0);
       setChatStage('intro');
     } else {
-      finishSession();
+      await finishSession();
     }
   };
 
@@ -436,12 +463,20 @@ const Practice = () => {
   };
 
   const finishSession = async () => {
+    console.log('🏁 finishSession START');
+    console.log('User:', user);
+    console.log('Subject ID:', subjectId);
+    console.log('Topic ID:', topicId);
+    console.log('Attempts:', attempts);
+    
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
-    // Clear the current session state since it's completed
-    clearSessionState();
+    console.log('Session stats:', { totalMarks, marksEarned, averagePercentage, attemptsCount: attempts.length });
+    
+    // DON'T clear session state yet - need user data for saving
+    // clearSessionState();
     
     // Handle MP rewards for practice completion server-side
     if (user?.id && subjectId && topicId) {
@@ -481,15 +516,36 @@ const Practice = () => {
     const progressKey = `mentiora_progress_${user?.id}`;
     const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');
     
+    console.log('💾 SAVING SCORE - Before:', {
+      subjectId,
+      topicId,
+      newScore: Math.round(averagePercentage),
+      existingProgress: existingProgress.find((p: any) => p.subjectId === subjectId && p.topicId === topicId)
+    });
+    
     const topicProgressIndex = existingProgress.findIndex(
       (p: any) => p.subjectId === subjectId && p.topicId === topicId
     );
     
     if (topicProgressIndex >= 0) {
+      const oldScore = existingProgress[topicProgressIndex].averageScore;
+      const newScore = Math.round(averagePercentage);
+      
+      // Only update if new score is better OR if it's a significant attempt (not 0%)
+      if (newScore > oldScore) {
+        existingProgress[topicProgressIndex].averageScore = newScore;
+        console.log('✅ Score IMPROVED - updating from', oldScore, 'to', newScore);
+      } else if (newScore > 0) {
+        // Average with existing score only if new score is not 0
+        existingProgress[topicProgressIndex].averageScore = Math.round(
+          (oldScore + newScore) / 2
+        );
+        console.log('📊 Score AVERAGED - from', oldScore, 'and', newScore, 'to', existingProgress[topicProgressIndex].averageScore);
+      } else {
+        console.log('⚠️ Score NOT UPDATED - new score is 0%, keeping', oldScore);
+      }
+      
       existingProgress[topicProgressIndex].attempts += 1;
-      existingProgress[topicProgressIndex].averageScore = Math.round(
-        (existingProgress[topicProgressIndex].averageScore + averagePercentage) / 2
-      );
       existingProgress[topicProgressIndex].lastAttempt = new Date();
     } else {
       existingProgress.push({
@@ -499,9 +555,130 @@ const Practice = () => {
         averageScore: Math.round(averagePercentage),
         lastAttempt: new Date()
       });
+      console.log('🆕 NEW SCORE - created entry with', Math.round(averagePercentage) + '%');
     }
     
+    console.log('💾 SAVING SCORE - After:', {
+      saved: existingProgress.find((p: any) => p.subjectId === subjectId && p.topicId === topicId)
+    });
+    
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
+    
+    // Update subject_performance table in Supabase
+    if (user?.id && subjectId) {
+      try {
+        const subject = curriculum.find(s => s.id === subjectId);
+        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
+                         subjectId.includes('edexcel') ? 'Edexcel' : 
+                         subjectId.includes('ocr') ? 'OCR' : 'AQA';
+        
+        // Calculate actual time spent in minutes
+        const timeSpentMs = Date.now() - sessionStartTime;
+        const timeSpentMinutes = Math.max(1, Math.round(timeSpentMs / 60000)); // At least 1 minute
+        
+        console.log('📊 Saving subject performance:', {
+          userId: user.id,
+          subjectId,
+          examBoard,
+          timeSpentMinutes,
+          questionsCount: attempts.length
+        });
+        
+        // Get current performance data
+        const { data: currentPerf, error: fetchError } = await supabase
+          .from('subject_performance')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .eq('exam_board', examBoard)
+          .maybeSingle();
+        
+        if (fetchError) {
+          console.error('Error fetching subject performance:', fetchError);
+        } else {
+          console.log('Current performance data:', currentPerf);
+        }
+        
+        if (currentPerf) {
+          // Update existing record - calculate accuracy based on marks earned, not just perfect answers
+          const newTotalQuestions = (currentPerf.total_questions_answered || 0) + attempts.length;
+          const totalMarksAvailable = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+          const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+          
+          // Get previous marks data
+          const prevTotalMarks = (currentPerf.total_questions_answered || 0) * 5; // Assume 5 marks per question average
+          const prevMarksEarned = prevTotalMarks * ((currentPerf.accuracy_rate || 0) / 100);
+          
+          const newTotalMarks = prevTotalMarks + totalMarksAvailable;
+          const newMarksEarned = prevMarksEarned + marksEarned;
+          const newAccuracy = newTotalMarks > 0 ? (newMarksEarned / newTotalMarks) * 100 : 0;
+          const newStudyHours = (currentPerf.study_hours || 0) + (timeSpentMinutes / 60);
+          
+          console.log('Updating existing record with:', {
+            newTotalQuestions,
+            totalMarksAvailable,
+            marksEarned,
+            newAccuracy: newAccuracy.toFixed(1) + '%',
+            newStudyHours
+          });
+          
+          const { error: updateError } = await supabase
+            .from('subject_performance')
+            .update({
+              total_questions_answered: newTotalQuestions,
+              correct_answers: Math.round(newMarksEarned), // Store total marks earned
+              accuracy_rate: newAccuracy,
+              study_hours: newStudyHours,
+              last_activity_date: new Date().toISOString().split('T')[0],
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', currentPerf.id);
+          
+          if (updateError) {
+            console.error('❌ Error updating subject performance:', updateError);
+          } else {
+            console.log('✅ Subject performance updated successfully');
+          }
+        } else {
+          // Insert new record - calculate accuracy based on marks earned
+          const totalMarksAvailable = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+          const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+          const accuracy = totalMarksAvailable > 0 ? (marksEarned / totalMarksAvailable) * 100 : 0;
+          
+          console.log('Inserting new record with:', {
+            userId: user.id,
+            subjectId,
+            examBoard,
+            totalQuestions: attempts.length,
+            totalMarksAvailable,
+            marksEarned,
+            accuracy: accuracy.toFixed(1) + '%',
+            studyHours: timeSpentMinutes / 60
+          });
+          
+          const { error: insertError } = await supabase
+            .from('subject_performance')
+            .insert({
+              user_id: user.id,
+              subject_id: subjectId,
+              exam_board: examBoard,
+              total_questions_answered: attempts.length,
+              correct_answers: marksEarned, // Store total marks earned
+              accuracy_rate: accuracy,
+              study_hours: timeSpentMinutes / 60,
+              last_activity_date: new Date().toISOString().split('T')[0]
+            });
+          
+          if (insertError) {
+            console.error('❌ Error inserting subject performance:', insertError);
+          } else {
+            console.log('✅ Subject performance inserted successfully');
+          }
+        }
+      } catch (error) {
+        console.error('Error updating subject performance:', error);
+      }
+    }
     
     // Handle weak topics
     if (averagePercentage < 85) {
@@ -544,6 +721,11 @@ const Practice = () => {
     }
     
     setSessionComplete(true);
+    
+    // Clear session state AFTER setting sessionComplete
+    setTimeout(() => clearSessionState(), 100);
+    
+    console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
   if (sessionComplete) {
@@ -697,11 +879,29 @@ const Practice = () => {
     );
   }
 
-  if (!currentQuestion) {
+  // Handle loading state
+  if (isLoadingQuestions || !subject || !topic) {
+    console.log('Loading questions...', { isLoadingQuestions, hasSubject: !!subject, hasTopic: !!topic });
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Loading...</h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentQuestion && shuffledQuestions.length === 0) {
+    console.log('No questions available after loading:', { 
+      shuffledQuestionsLength: shuffledQuestions.length, 
+      currentQuestionIndex,
+      topicQuestionsCount: topic?.questions?.length || 0 
+    });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4 text-foreground">No questions available</h2>
+          <p className="text-muted-foreground mb-4">This topic doesn't have any practice questions yet.</p>
           <Button onClick={() => {
             console.log('Back button clicked (no questions)');
             if (window.history.length > 1) {
@@ -710,7 +910,7 @@ const Practice = () => {
               window.location.href = '/dashboard';
             }
           }}>
-            Back
+            Back to Dashboard
           </Button>
         </div>
       </div>
