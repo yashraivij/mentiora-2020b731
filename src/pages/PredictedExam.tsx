@@ -7194,7 +7194,7 @@ Write a story about a moment of fear.
             </div>
 
             {/* Right: Progress indicator - single line */}
-            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-shrink-0 max-w-full md:max-w-md">
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-shrink-0 max-w-full md:max-w-md py-2 px-1">
                 {examQuestions.map((question, index) => {
                   // Find the answer for this question
                   const hasAnswer = answers.find(a => a.questionId === question.id);
