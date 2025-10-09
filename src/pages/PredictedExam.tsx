@@ -7169,18 +7169,25 @@ Write a story about a moment of fear.
   }
 
   return (
-    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'} bg-gradient-to-br from-slate-50 via-white to-blue-50/30`}>
-      {/* Premium Exam Header */}
-      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-xl sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-5">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* Left: Premium Exam Title */}
-            <div className="flex items-center gap-4 flex-1 min-w-0">
-              <div className="flex items-center gap-3 bg-gradient-to-br from-amber-50 to-amber-100/50 px-4 py-2.5 rounded-xl border border-amber-200/50 shadow-sm">
-                <Crown className="h-5 w-5 text-amber-600" />
-                <div className="flex items-center gap-2 min-w-0">
-                  <BookOpen className="h-4 w-4 text-slate-600 flex-shrink-0" />
-                  <h1 className="text-lg font-bold text-slate-900 truncate">
+    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+      {/* Medly-style Top Navigation */}
+      <header className="border-b border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* Left: Exam name with navigation */}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
+                disabled={currentQuestion === 0}
+                className="h-9 w-9 flex-shrink-0"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                <h1 className="text-lg font-semibold text-slate-900 truncate">
                   {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
                    subjectId === 'history' ? 'History Paper 1' : 
                    subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
@@ -7194,216 +7201,168 @@ Write a story about a moment of fear.
                    subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
                    subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' :
                    `${subject.name} Predicted Exam`}
-                  </h1>
-                </div>
+                </h1>
               </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
+                disabled={currentQuestion >= examQuestions.length - 1}
+                className="h-9 w-9 flex-shrink-0"
+              >
+                <ArrowLeft className="h-4 w-4 rotate-180" />
+              </Button>
             </div>
 
-            {/* Right: Timer Display */}
-            <div className="flex items-center gap-3">
-              <div className={`flex items-center gap-2.5 px-5 py-2.5 rounded-xl border-2 transition-all duration-300 ${
-                isTimeUp 
-                  ? 'bg-red-50 border-red-300 shadow-lg shadow-red-500/20' 
-                  : timeLeft < 600 
-                  ? 'bg-amber-50 border-amber-300 shadow-md shadow-amber-500/15'
-                  : 'bg-slate-50 border-slate-200 shadow-sm'
-              }`}>
-                <Clock className={`h-5 w-5 ${isTimeUp ? 'text-red-600 animate-pulse' : timeLeft < 600 ? 'text-amber-600' : 'text-slate-600'}`} />
-                <span className={`font-mono font-bold text-lg ${isTimeUp ? 'text-red-600' : timeLeft < 600 ? 'text-amber-600' : 'text-slate-900'}`}>
-                  {formatTime(timeLeft)}
-                </span>
+            {/* Center: Modern Progress indicator */}
+            <div className="flex justify-center md:justify-end">
+              <div className="flex items-center gap-2">
+                {examQuestions.map((question, index) => {
+                  // Find the answer for this question
+                  const hasAnswer = answers.find(a => a.questionId === question.id);
+                  
+                  // Determine color based on status
+                  let circleColor = 'bg-gray-200 border-gray-300'; // Not attempted yet
+                  
+                  if (hasAnswer) {
+                    circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50'; // Answered
+                  }
+                  
+                  // Show logo only on current question if not answered yet
+                  const showLogo = index === currentQuestion && !hasAnswer;
+                  
+                  return (
+                    <div key={index} className="relative flex items-center">
+                      {/* Connecting line */}
+                      {index > 0 && (
+                        <div className={`absolute right-full w-2 h-0.5 ${
+                          answers.find(a => a.questionId === examQuestions[index - 1].id)
+                            ? 'bg-gray-400'
+                            : 'bg-gray-200'
+                        }`} />
+                      )}
+                      
+                      {/* Question circle */}
+                      <div className="relative">
+                        <div 
+                          className={`w-7 h-7 rounded-full border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${circleColor} ${
+                            showLogo ? 'ring-2 ring-orange-300 ring-offset-2' : ''
+                          }`}
+                          onClick={() => setCurrentQuestion(index)}
+                        >
+                          {/* Show checkmark for answered questions */}
+                          {hasAnswer && (
+                            <span className="text-white text-sm font-bold">✓</span>
+                          )}
+                          
+                          {/* Mentiora logo on current unanswered question */}
+                          {showLogo && (
+                            <img src={mentioraLogo} alt="Current question" className="w-5 h-5 object-contain" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
           
-          {/* Premium Progress Bar */}
-          <div className="mt-5 pt-4 border-t border-slate-200/80">
-            <div className="flex items-center gap-2 mb-3">
-              {examQuestions.map((question, index) => {
-                const hasAnswer = answers.find(a => a.questionId === question.id);
-                const isCurrent = index === currentQuestion;
-                
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentQuestion(index)}
-                    className={`relative group transition-all duration-300 ${
-                      isCurrent ? 'scale-110' : 'hover:scale-105'
-                    }`}
-                  >
-                    <div className={`w-8 h-8 rounded-lg border-2 flex items-center justify-center font-semibold text-xs transition-all duration-300 ${
-                      hasAnswer
-                        ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-500/30'
-                        : isCurrent
-                        ? 'bg-gradient-to-br from-blue-500 to-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/40 ring-2 ring-blue-300 ring-offset-2'
-                        : 'bg-white border-slate-300 text-slate-600 hover:border-blue-400 hover:shadow-md'
-                    }`}>
-                      {hasAnswer ? (
-                        <CheckCircle className="h-4 w-4" />
-                      ) : (
-                        <span>{index + 1}</span>
-                      )}
-                    </div>
-                    
-                    {/* Tooltip */}
-                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-xl">
-                      Question {index + 1}
-                      {hasAnswer && ' ✓'}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-slate-600 font-medium">
-                Progress: <span className="text-slate-900 font-bold">{answers.length}/{examQuestions.length}</span> answered
+          {/* Timer and progress row */}
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+            <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-destructive/10 dark:bg-destructive/5 border-destructive/50 dark:border-destructive/30' : 'bg-card border-border'}`}>
+              <Clock className={`h-4 w-4 ${isTimeUp ? 'text-destructive' : 'text-muted-foreground'}`} />
+              <span className={`font-mono font-bold ${isTimeUp ? 'text-destructive' : 'text-foreground'}`}>
+                {formatTime(timeLeft)}
               </span>
-              <div className="w-64 h-2 bg-slate-200 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-500 ease-out shadow-sm"
-                  style={{ width: `${(answers.length / examQuestions.length) * 100}%` }}
-                />
-              </div>
             </div>
+            <Button
+              onClick={handleSubmit}
+              className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Target className="h-4 w-4 mr-2" />
+              Submit for Marking
+            </Button>
           </div>
         </div>
       </header>
 
-      {/* Premium Exam Area */}
-      <main className="max-w-5xl mx-auto p-6 md:p-8 animate-fade-in">
-        <div className="rounded-2xl bg-white shadow-xl border border-slate-200/80 p-10 md:p-12 backdrop-blur-sm relative overflow-hidden">
-          {/* Premium background pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:24px_24px] opacity-40 pointer-events-none" />
-          
-          <div className="relative z-10">
-            {/* Question Header */}
-            <div className="mb-8 pb-6 border-b border-slate-200">
-              <div className="flex items-start justify-between gap-6 mb-5">
-                <div className="flex-1">
-                  {/* Question Number Badge */}
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="inline-flex items-center gap-0.5 shadow-md">
-                      <span className="inline-block bg-slate-900 text-white px-4 py-2 text-lg font-mono font-bold border-2 border-slate-900">
-                        {Math.floor(currentQuestion / 10)}
-                      </span>
-                      <span className="inline-block bg-slate-900 text-white px-4 py-2 text-lg font-mono font-bold border-2 border-slate-900">
-                        {currentQuestion % 10 + 1}
-                      </span>
-                    </div>
-                    
-                    {/* Badges */}
-                    <div className="flex items-center gap-2 flex-wrap">
-                      {examQuestions[currentQuestion].section && (
-                        <Badge variant="outline" className="px-3 py-1 text-xs font-semibold border-slate-300 bg-slate-50">
-                          Section {examQuestions[currentQuestion].section}
-                        </Badge>
-                      )}
-                      {getTierLabel(examQuestions[currentQuestion]) && (
-                        <Badge 
-                          variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} 
-                          className="px-3 py-1 text-xs font-semibold"
-                        >
-                          {getTierLabel(examQuestions[currentQuestion])}
-                        </Badge>
-                      )}
-                      {getHistoryTopicInfo(examQuestions[currentQuestion].id) && (
-                        <Badge className={`${getHistoryTopicInfo(examQuestions[currentQuestion].id)?.color} px-3 py-1 text-xs font-semibold shadow-sm`}>
-                          {getHistoryTopicInfo(examQuestions[currentQuestion].id)?.name}
-                        </Badge>
-                      )}
-                    </div>
+      {/* Main Content Area */}
+      <main className="max-w-6xl mx-auto p-6 md:p-8">
+        <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
+          {/* Question Header */}
+          <div className="mb-6">
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="flex-1">
+                {/* Question reference numbers */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1">
+                    <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">0</span>
+                    <span className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{currentQuestion + 1}</span>
                   </div>
-                  
-                  {/* Question Text */}
-                  <div className="prose prose-slate max-w-none">
-                    <p className="text-base md:text-lg text-slate-800 leading-relaxed whitespace-pre-wrap font-medium">
-                      {examQuestions[currentQuestion].text}
-                    </p>
-                  </div>
+                  {examQuestions[currentQuestion].section && (
+                    <Badge variant="outline" className="ml-2">
+                      Section {examQuestions[currentQuestion].section}
+                    </Badge>
+                  )}
+                  {getTierLabel(examQuestions[currentQuestion]) && (
+                    <Badge variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} className="text-xs ml-2">
+                      {getTierLabel(examQuestions[currentQuestion])}
+                    </Badge>
+                  )}
+                  {getHistoryTopicInfo(examQuestions[currentQuestion].id) && (
+                    <Badge className={`${getHistoryTopicInfo(examQuestions[currentQuestion].id)?.color} text-xs font-medium ml-2`}>
+                      {getHistoryTopicInfo(examQuestions[currentQuestion].id)?.name}
+                    </Badge>
+                  )}
                 </div>
                 
-                {/* Marks Badge */}
-                <div className="flex-shrink-0">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl px-4 py-3 shadow-sm">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-900">
-                        {examQuestions[currentQuestion].marks}
-                      </div>
-                      <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide">
-                        {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Question text */}
+                <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
+                  {examQuestions[currentQuestion].text}
+                </p>
               </div>
-            </div>
-
-            {/* Answer Area */}
-            <div className="mb-8">
-              <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">
-                Your Answer
-              </label>
-              <div className="relative">
-                <Textarea
-                  value={getAnswer(examQuestions[currentQuestion].id)}
-                  onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
-                  placeholder="Write your answer here..."
-                  className="w-full min-h-[450px] border-2 border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-base md:text-lg leading-relaxed resize-none p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-inner transition-all duration-200 font-['Georgia',serif]"
-                  style={{ lineHeight: '2rem' }}
-                />
-                <div className="absolute bottom-4 right-4 text-xs text-slate-400 font-medium">
-                  {getAnswer(examQuestions[currentQuestion].id).length} characters
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-6 border-t border-slate-200">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
-                disabled={currentQuestion === 0}
-                className="px-6 py-3 rounded-xl border-2 border-slate-300 hover:border-slate-400 hover:bg-slate-50 disabled:opacity-40 transition-all duration-200 font-semibold"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Previous
-              </Button>
               
-              <div className="flex items-center gap-3">
-                {currentQuestion === examQuestions.length - 1 ? (
-                  <Button
-                    onClick={handleSubmit}
-                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl px-8 py-3 font-bold text-base shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105 active:scale-95"
-                  >
-                    <Target className="h-5 w-5 mr-2" />
-                    Submit for Marking
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl px-8 py-3 font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95"
-                  >
-                    Next Question
-                    <ArrowLeft className="h-4 w-4 ml-2 rotate-180" />
-                  </Button>
-                )}
+              {/* Marks pill */}
+              <div className="text-sm font-semibold text-slate-900 whitespace-nowrap">
+                [{examQuestions[currentQuestion].marks} {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}]
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Quick Actions Footer */}
-        <div className="mt-6 flex items-center justify-center gap-4">
-          <button
-            onClick={handleSubmit}
-            className="group flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl transition-all duration-200 hover:shadow-md"
-          >
-            <Target className="h-4 w-4 text-slate-600 group-hover:text-slate-900 transition-colors" />
-            <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-900">
-              Finish & Submit Exam
-            </span>
-          </button>
+
+          {/* Answer area - large white space */}
+          <div className="min-h-[400px] mb-6">
+            <Textarea
+              value={getAnswer(examQuestions[currentQuestion].id)}
+              onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
+              placeholder=""
+              className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
+            />
+          </div>
+
+          {/* Bottom action area */}
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-muted-foreground">
+              Question {currentQuestion + 1} of {examQuestions.length} • {answers.length} answered
+            </div>
+            
+            {currentQuestion === examQuestions.length - 1 ? (
+              <Button
+                onClick={handleSubmit}
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
+              >
+                <Target className="h-4 w-4 mr-2" />
+                Submit for Marking
+              </Button>
+            ) : (
+              <Button
+                onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Next Question
+              </Button>
+            )}
+          </div>
         </div>
       </main>
       
