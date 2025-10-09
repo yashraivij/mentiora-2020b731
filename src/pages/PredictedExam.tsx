@@ -7175,7 +7175,7 @@ Write a story about a moment of fear.
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Left: Exam name with navigation */}
-            <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className="flex items-center gap-4 flex-1 min-w-0">
               <Button
                 variant="ghost"
                 size="icon"
@@ -7185,8 +7185,7 @@ Write a story about a moment of fear.
               >
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-              <div className="flex items-center gap-2 min-w-0 flex-1">
-                <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
+              <div className="flex items-center min-w-0 flex-1">
                 <h1 className="text-lg font-semibold text-slate-900 truncate">
                   {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' :
                    subjectId === 'history' ? 'History Paper 1' : 
