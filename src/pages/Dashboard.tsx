@@ -2373,78 +2373,70 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.1 }}
                             >
-                              <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
-                                <CardContent className="p-5">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
-                                      <TrendingUp className="h-4 w-4 text-[#16A34A]" />
-                                    </div>
-                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
-                                  </div>
-                                  <div className={`text-3xl font-bold flex items-center gap-2 ${
-                                    (() => {
-                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                      const subjectPerf = userSubjectsWithGrades.find(s => {
-                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
-                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
-                                      });
-                                      
-                                      const progress = userProgress.filter(p => p.subjectId === mappedSubjectId);
-                                      const now = new Date();
-                                      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                                      const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
-                                      
-                                      const last7Days = progress.filter(p => new Date(p.lastAttempt) >= sevenDaysAgo);
-                                      const prev7Days = progress.filter(p => {
-                                        const date = new Date(p.lastAttempt);
-                                        return date >= fourteenDaysAgo && date < sevenDaysAgo;
-                                      });
-                                      
-                                      const last7Accuracy = last7Days.length > 0 
-                                        ? last7Days.reduce((sum, p) => sum + p.averageScore, 0) / last7Days.length 
-                                        : (subjectPerf?.accuracy_rate || 0);
-                                      
-                                      const prev7Accuracy = prev7Days.length > 0
-                                        ? prev7Days.reduce((sum, p) => sum + p.averageScore, 0) / prev7Days.length
-                                        : last7Accuracy;
-                                      
-                                      const change = last7Accuracy - prev7Accuracy;
-                                      return change >= 0 ? 'text-[#16A34A]' : 'text-[#EF4444]';
-                                    })()
+                              {(() => {
+                                const subjectId = selectedDrawerSubject?.id || '';
+                                
+                                // Get predicted grades from last 7 days and 7-14 days ago
+                                const now = new Date();
+                                const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                                const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+                                
+                                // Get predicted exam completions for this subject
+                                const subjectPredictions = predictedGrades.filter(g => g.subject_id === subjectId);
+                                
+                                const last7DaysGrades = subjectPredictions.filter(g => 
+                                  new Date(g.created_at) >= sevenDaysAgo
+                                );
+                                const prev7DaysGrades = subjectPredictions.filter(g => {
+                                  const date = new Date(g.created_at);
+                                  return date >= fourteenDaysAgo && date < sevenDaysAgo;
+                                });
+                                
+                                // Calculate average predicted grade for each period
+                                const parseGrade = (grade: any) => {
+                                  if (typeof grade === 'number') return grade;
+                                  const parsed = parseFloat(grade);
+                                  return isNaN(parsed) ? 0 : parsed;
+                                };
+                                
+                                const currentGrade = last7DaysGrades.length > 0
+                                  ? last7DaysGrades.reduce((sum, g) => sum + parseGrade(g.grade), 0) / last7DaysGrades.length
+                                  : 0;
+                                  
+                                const previousGrade = prev7DaysGrades.length > 0
+                                  ? prev7DaysGrades.reduce((sum, g) => sum + parseGrade(g.grade), 0) / prev7DaysGrades.length
+                                  : currentGrade;
+                                
+                                const change = currentGrade - previousGrade;
+                                const isPositive = change >= 0;
+                                const sign = isPositive ? '+' : '';
+                                
+                                return (
+                                  <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
+                                    isPositive 
+                                      ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
+                                      : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
                                   }`}>
-                                    {(() => {
-                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                      const progress = userProgress.filter(p => p.subjectId === mappedSubjectId);
-                                      const now = new Date();
-                                      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                                      const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
-                                      
-                                      const last7Days = progress.filter(p => new Date(p.lastAttempt) >= sevenDaysAgo);
-                                      const prev7Days = progress.filter(p => {
-                                        const date = new Date(p.lastAttempt);
-                                        return date >= fourteenDaysAgo && date < sevenDaysAgo;
-                                      });
-                                      
-                                      const subjectPerf = userSubjectsWithGrades.find(s => {
-                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
-                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
-                                      });
-                                      
-                                      const last7Accuracy = last7Days.length > 0 
-                                        ? last7Days.reduce((sum, p) => sum + p.averageScore, 0) / last7Days.length 
-                                        : (subjectPerf?.accuracy_rate || 0);
-                                      
-                                      const prev7Accuracy = prev7Days.length > 0
-                                        ? prev7Days.reduce((sum, p) => sum + p.averageScore, 0) / prev7Days.length
-                                        : last7Accuracy;
-                                      
-                                      const change = last7Accuracy - prev7Accuracy;
-                                      const sign = change >= 0 ? '+' : '';
-                                      return `${sign}${change.toFixed(1)}%`;
-                                    })()}
-                                  </div>
-                                </CardContent>
-                              </Card>
+                                    <CardContent className="p-5">
+                                      <div className="flex items-center gap-2 mb-2">
+                                        <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
+                                          {isPositive ? (
+                                            <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
+                                          ) : (
+                                            <TrendingDown className="h-4 w-4 text-[#EF4444]" />
+                                          )}
+                                        </div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
+                                      </div>
+                                      <div className={`text-3xl font-bold flex items-center gap-2 ${
+                                        isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
+                                      }`}>
+                                        {sign}{change.toFixed(1)}%
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                );
+                              })()}
                             </motion.div>
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
