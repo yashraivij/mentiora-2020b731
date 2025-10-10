@@ -1063,16 +1063,41 @@ const Practice = () => {
                 <div className="space-y-4">
                   {(attempts.length - correctAnswers) > 0 ? (
                     <>
+                      {/* Show multiple focus areas based on wrong answers */}
                       {(attempts.length - correctAnswers - partialAnswers) > 0 && (
                         <div className="flex items-center gap-4 group">
                           <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Complex problem solving</span>
+                          <span className="text-base text-foreground font-medium">Key concept understanding</span>
                         </div>
                       )}
                       {partialAnswers > 0 && (
                         <div className="flex items-center gap-4 group">
                           <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
                           <span className="text-base text-foreground font-medium">Detail accuracy refinement</span>
+                        </div>
+                      )}
+                      {averagePercentage < 50 && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Question comprehension skills</span>
+                        </div>
+                      )}
+                      {avgTimePerQuestion > 60 && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Time management under exam conditions</span>
+                        </div>
+                      )}
+                      {attempts.length > 2 && (attempts.length - correctAnswers) >= attempts.length * 0.5 && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Exam technique and structure</span>
+                        </div>
+                      )}
+                      {partialAnswers > 0 && averagePercentage >= 50 && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Marking criteria precision</span>
                         </div>
                       )}
                     </>
