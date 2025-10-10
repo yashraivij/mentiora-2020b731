@@ -816,38 +816,105 @@ const Practice = () => {
             </Card>
 
             {/* Predicted Grade Animation */}
-            <Card className="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 dark:from-blue-950/30 dark:via-cyan-950/30 dark:to-blue-950/30 border-blue-200/50 dark:border-blue-800/50 rounded-3xl shadow-xl relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
-              <CardContent className="py-10 relative">
-                <div className="space-y-6">
-                  <p className="text-base font-semibold text-blue-900 dark:text-blue-100 tracking-tight">
-                    Your predicted grade improved from
-                  </p>
-                  <div className="flex items-center justify-center gap-6">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-blue-600/20 dark:bg-blue-400/20 blur-xl rounded-full" />
-                      <div className="relative text-5xl font-bold bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-400 dark:to-blue-500 bg-clip-text text-transparent">
-                        {oldPredictedGrade.toFixed(1)}
+            <Card className="bg-white dark:bg-gray-900 border-0 shadow-xl rounded-3xl overflow-hidden relative">
+              {/* Animated background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-cyan-500/5 to-blue-500/5" />
+              
+              <CardContent className="py-12 relative">
+                <div className="space-y-8">
+                  <div className="text-center">
+                    <p className="text-lg font-semibold text-foreground mb-2">
+                      Predicted Grade Improvement
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Based on your recent performance
+                    </p>
+                  </div>
+
+                  {/* Grade visualization with progress bar */}
+                  <div className="space-y-6">
+                    <div className="flex items-end justify-center gap-12">
+                      {/* Old Grade */}
+                      <div className="text-center space-y-2">
+                        <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                          Before
+                        </div>
+                        <div className="text-6xl font-bold text-blue-600 dark:text-blue-400">
+                          {oldPredictedGrade.toFixed(1)}
+                        </div>
+                      </div>
+
+                      {/* Arrow with improvement badge */}
+                      <div className="flex flex-col items-center justify-center gap-3 pb-4">
+                        <div className="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg">
+                          <div className="flex items-center gap-2 text-white">
+                            <TrendingUp className="h-4 w-4" />
+                            <span className="text-sm font-bold">+{gradeImprovement.toFixed(1)}</span>
+                          </div>
+                        </div>
+                        <ArrowRight className="h-6 w-6 text-muted-foreground" />
+                      </div>
+
+                      {/* New Grade */}
+                      <div className="text-center space-y-2">
+                        <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                          Now
+                        </div>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl animate-pulse" />
+                          <div className="relative text-6xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+                            {newPredictedGrade.toFixed(1)}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <ArrowRight className="h-8 w-8 text-blue-600 dark:text-blue-400 animate-pulse" />
-                      <div className="px-3 py-1 rounded-full bg-emerald-500/20 dark:bg-emerald-400/20 border border-emerald-500/30 dark:border-emerald-400/30">
-                        <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">
-                          +{gradeImprovement.toFixed(1)}
-                        </span>
+
+                    {/* Dynamic Progress Bar */}
+                    <div className="space-y-3 px-8">
+                      <div className="flex justify-between items-center text-xs text-muted-foreground">
+                        <span>Grade 4.0</span>
+                        <span>Grade 9.0</span>
                       </div>
-                    </div>
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-cyan-600/20 dark:bg-cyan-400/20 blur-xl rounded-full animate-pulse" />
-                      <div className="relative text-5xl font-bold bg-gradient-to-br from-cyan-600 to-cyan-700 dark:from-cyan-400 dark:to-cyan-500 bg-clip-text text-transparent">
-                        {newPredictedGrade.toFixed(1)}
+                      <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                        {/* Old grade position */}
+                        <div 
+                          className="absolute top-0 bottom-0 bg-blue-300 dark:bg-blue-700 rounded-full transition-all duration-1000 ease-out"
+                          style={{ 
+                            left: 0,
+                            width: `${((oldPredictedGrade - 4) / 5) * 100}%`
+                          }}
+                        />
+                        {/* New grade position with gradient */}
+                        <div 
+                          className="absolute top-0 bottom-0 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 rounded-full transition-all duration-1000 ease-out delay-300"
+                          style={{ 
+                            left: 0,
+                            width: `${((newPredictedGrade - 4) / 5) * 100}%`,
+                            backgroundSize: '200% 100%',
+                            animation: 'shimmer 2s infinite'
+                          }}
+                        />
+                        {/* Animated shine effect */}
+                        <div 
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                          style={{
+                            animation: 'slide 2s infinite',
+                            animationDelay: '1s'
+                          }}
+                        />
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-muted-foreground">
+                          Progress: <span className="font-semibold text-foreground">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> to grade 9
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-blue-200/50 dark:border-blue-800/50">
-                    <p className="text-sm text-blue-800 dark:text-blue-200 text-center font-medium">
-                      👏 You scored better than <span className="font-bold text-blue-900 dark:text-blue-100">{percentileRank}%</span> of students this week
+
+                  {/* Stats footer */}
+                  <div className="pt-6 border-t border-border">
+                    <p className="text-sm text-center text-muted-foreground">
+                      👏 You scored better than <span className="font-bold text-blue-600 dark:text-blue-400">{percentileRank}%</span> of students this week
                     </p>
                   </div>
                 </div>
@@ -860,117 +927,135 @@ const Practice = () => {
             <h2 className="text-lg font-semibold text-foreground mb-4">Performance Summary</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {/* Accuracy */}
-              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
-                <CardContent className="p-6 space-y-3">
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                      <Target className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Accuracy
-                    </p>
-                    <Target className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    </span>
                   </div>
-                  <div className="text-3xl font-bold text-foreground">
-                    {Math.round(averagePercentage)}%
-                  </div>
-                  {/* Simple sparkline */}
-                  <div className="h-8 flex items-end gap-1">
-                    {[65, 72, 78, averagePercentage].map((val, i) => (
-                      <div 
-                        key={i}
-                        className="flex-1 bg-gradient-to-t from-blue-600 to-cyan-600 rounded-t transition-all duration-500"
-                        style={{ 
-                          height: `${(val / 100) * 100}%`,
-                          transitionDelay: `${i * 100}ms`
-                        }}
-                      />
-                    ))}
+                  <div>
+                    <div className="text-4xl font-bold text-foreground mb-1">
+                      {Math.round(averagePercentage)}%
+                    </div>
+                    {/* Simple sparkline */}
+                    <div className="h-6 flex items-end gap-1 mt-3">
+                      {[65, 72, 78, averagePercentage].map((val, i) => (
+                        <div 
+                          key={i}
+                          className="flex-1 bg-gradient-to-t from-blue-500 to-cyan-500 rounded-t transition-all duration-700 hover:opacity-80"
+                          style={{ 
+                            height: `${(val / 100) * 100}%`,
+                            transitionDelay: `${i * 100}ms`
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Speed */}
-              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
-                <CardContent className="p-6 space-y-3">
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                      Speed
-                    </p>
-                    <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div className="text-3xl font-bold text-foreground">
-                    {sessionDuration}m
-                  </div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full transition-all duration-700"
-                        style={{ width: `${Math.min((avgTimePerQuestion / 60) * 100, 100)}%` }}
-                      />
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                      <Clock className="h-5 w-5 text-white" />
                     </div>
-                    <p className="text-xs text-muted-foreground">{avgTimePerQuestion}s per question</p>
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      Speed
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-foreground mb-1">
+                      {sessionDuration}m
+                    </div>
+                    <div className="space-y-2 mt-3">
+                      <div className="h-2 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000"
+                          style={{ width: `${Math.min((avgTimePerQuestion / 60) * 100, 100)}%` }}
+                        />
+                      </div>
+                      <p className="text-xs text-muted-foreground">{avgTimePerQuestion}s avg</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Retention */}
-              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
-                <CardContent className="p-6 space-y-3">
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
+                      <Brain className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Retention
-                    </p>
-                    <Brain className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    </span>
                   </div>
-                  <div className="text-3xl font-bold text-foreground">
-                    {Math.round(averagePercentage * 0.85)}%
-                  </div>
-                  {/* Circular indicator */}
-                  <div className="flex justify-center">
-                    <svg className="w-16 h-16 transform -rotate-90">
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        fill="none"
-                        className="text-slate-100 dark:text-gray-800"
-                      />
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        stroke="url(#gradient)"
-                        strokeWidth="4"
-                        fill="none"
-                        strokeDasharray={`${2 * Math.PI * 28}`}
-                        strokeDashoffset={`${2 * Math.PI * 28 * (1 - (averagePercentage * 0.85 / 100))}`}
-                        className="transition-all duration-1000"
-                        strokeLinecap="round"
-                      />
-                      <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#2563eb" />
-                          <stop offset="100%" stopColor="#06b6d4" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                  <div>
+                    <div className="text-4xl font-bold text-foreground mb-1">
+                      {Math.round(averagePercentage * 0.85)}%
+                    </div>
+                    {/* Circular indicator */}
+                    <div className="flex justify-center mt-2">
+                      <svg className="w-14 h-14 transform -rotate-90">
+                        <circle
+                          cx="28"
+                          cy="28"
+                          r="24"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                          className="text-slate-100 dark:text-gray-800"
+                        />
+                        <circle
+                          cx="28"
+                          cy="28"
+                          r="24"
+                          stroke="url(#retention-gradient)"
+                          strokeWidth="4"
+                          fill="none"
+                          strokeDasharray={`${2 * Math.PI * 24}`}
+                          strokeDashoffset={`${2 * Math.PI * 24 * (1 - (averagePercentage * 0.85 / 100))}`}
+                          className="transition-all duration-1000"
+                          strokeLinecap="round"
+                        />
+                        <defs>
+                          <linearGradient id="retention-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#10b981" />
+                            <stop offset="100%" stopColor="#14b8a6" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Improvement */}
-              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
-                <CardContent className="p-6 space-y-3">
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg">
+                      <TrendingUp className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Improvement
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-1">
+                      +{gradeImprovement.toFixed(1)}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-3">
+                      Grade change
                     </p>
-                    <TrendingUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-                    +{gradeImprovement.toFixed(1)}
-                  </div>
-                  <p className="text-xs text-muted-foreground">Grade change since last attempt</p>
                 </CardContent>
               </Card>
             </div>
