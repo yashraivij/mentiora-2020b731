@@ -829,7 +829,64 @@ const Practice = () => {
       }
     }
     
-    // Handle weak topics
+      // Save predicted grade to database
+    if (user?.id && subjectId) {
+      try {
+        // Calculate new predicted grade
+        const storedGrade = (window as any).__lastFetchedPredictedGrade;
+        const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
+        
+        let gradeImprovement: number;
+        if (averagePercentage >= 100) {
+          gradeImprovement = 1.0;
+        } else if (averagePercentage >= 90) {
+          gradeImprovement = 0.7 + ((averagePercentage - 90) / 10) * 0.3;
+        } else if (averagePercentage >= 80) {
+          gradeImprovement = 0.5 + ((averagePercentage - 80) / 10) * 0.2;
+        } else if (averagePercentage >= 70) {
+          gradeImprovement = 0.3 + ((averagePercentage - 70) / 10) * 0.2;
+        } else if (averagePercentage >= 60) {
+          gradeImprovement = 0.1 + ((averagePercentage - 60) / 10) * 0.2;
+        } else if (averagePercentage >= 50) {
+          gradeImprovement = 0.0 + ((averagePercentage - 50) / 10) * 0.1;
+        } else if (averagePercentage >= 30) {
+          gradeImprovement = -0.2 + ((averagePercentage - 30) / 20) * 0.2;
+        } else if (averagePercentage >= 10) {
+          gradeImprovement = -0.4 + ((averagePercentage - 10) / 20) * 0.2;
+        } else {
+          gradeImprovement = -0.5 + (averagePercentage / 10) * 0.1;
+        }
+        
+        const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
+        
+        // Insert new predicted grade record
+        const { error: gradeError } = await supabase
+          .from('predicted_exam_completions')
+          .insert({
+            user_id: user.id,
+            subject_id: subjectId,
+            grade: newPredictedGrade.toFixed(1),
+            percentage: averagePercentage,
+            total_marks: shuffledQuestions.reduce((sum, q) => sum + q.marks, 0),
+            achieved_marks: attempts.reduce((sum, a) => sum + a.score, 0),
+            questions: [],
+            answers: [],
+            results: {},
+            exam_date: new Date().toISOString().split('T')[0],
+            time_taken_seconds: Math.floor((Date.now() - sessionStartTime) / 1000)
+          });
+        
+        if (gradeError) {
+          console.error('❌ Error saving predicted grade:', gradeError);
+        } else {
+          console.log('✅ Predicted grade saved:', newPredictedGrade.toFixed(1));
+        }
+      } catch (error) {
+        console.error('Error saving predicted grade:', error);
+      }
+    }
+
+      // Handle weak topics
     if (averagePercentage < 85) {
       const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
