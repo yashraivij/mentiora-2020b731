@@ -1407,36 +1407,52 @@ const Dashboard = () => {
         pg.subject_id === subjectId
       );
       
-      // Use actual predicted grade if available, otherwise fall back to target
-      let predicted = target;
+      // Use actual predicted grade if available, otherwise check if any practice done
+      let predicted: number | string = target;
+      let hasCompletedQuestions = false;
+      
       if (actualPredictedGrade) {
         const gradeValue = typeof actualPredictedGrade.grade === 'string'
           ? parseFloat(actualPredictedGrade.grade)
           : actualPredictedGrade.grade;
         if (!isNaN(gradeValue) && gradeValue > 0) {
           predicted = gradeValue;
+          hasCompletedQuestions = true;
         }
       }
-      // If no actual predicted grade, check if subject has a non-default predicted_grade
-      if (predicted === target && subject.predicted_grade) {
+      
+      // Check if subject has any activity
+      if (!hasCompletedQuestions && subject.total_questions_answered === 0) {
+        predicted = 'U'; // Ungraded - no questions completed
+      }
+      // If no actual predicted grade but has activity, check if subject has a non-default predicted_grade
+      else if (!hasCompletedQuestions && subject.predicted_grade) {
         const subjectPredicted = typeof subject.predicted_grade === 'string' 
           ? parseFloat(subject.predicted_grade) 
           : subject.predicted_grade;
         // Only use it if it's not the default "5" value
         if (!isNaN(subjectPredicted) && subjectPredicted !== 5) {
           predicted = subjectPredicted;
+        } else if (subject.total_questions_answered === 0) {
+          predicted = 'U';
         }
       }
       
-      // Generate trend based on predicted grade
-      const baseTrend = Math.floor((predicted / 9) * 100);
+      // Generate trend based on predicted grade (only if numeric)
+      const numericPredicted = typeof predicted === 'number' ? predicted : 0;
+      const baseTrend = Math.floor((numericPredicted / 9) * 100);
       const trend = Array.from({ length: 6 }, (_, i) => baseTrend - 20 + (i * 4));
       
       // Determine status
-      const diff = predicted - target;
+      const diff = typeof predicted === 'number' ? predicted - target : -999;
       let status = "On track";
-      if (diff < -1) status = "Off target";
-      else if (diff < 0) status = "Needs push";
+      if (predicted === 'U') {
+        status = "Not started";
+      } else if (diff < -1) {
+        status = "Off target";
+      } else if (diff < 0) {
+        status = "Needs push";
+      }
       
       return {
         id: subjectId,
@@ -1474,6 +1490,7 @@ const Dashboard = () => {
       case "On track": return "bg-[#16A34A] text-white";
       case "Needs push": return "bg-[#F59E0B] text-white";
       case "Off target": return "bg-[#EF4444] text-white";
+      case "Not started": return "bg-[#64748B] text-white";
       default: return "bg-gray-500 text-white";
     }
   };

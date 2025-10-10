@@ -54,7 +54,7 @@ interface MedlySubjectsViewProps {
     id: string;
     name: string;
     icon: string;
-    predicted: number;
+    predicted: number | string;
     target: number;
     trend: number[];
     strong: string;
@@ -386,7 +386,7 @@ export function MedlySubjectsView({
                       <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] rounded-full overflow-hidden shadow-inner">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: `${(subject.predicted / 10) * 100}%` }}
+                          animate={{ width: typeof subject.predicted === 'number' ? `${(subject.predicted / 10) * 100}%` : '0%' }}
                           transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                         />
