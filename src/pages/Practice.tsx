@@ -751,190 +751,224 @@ const Practice = () => {
     const gradeChanged = newGradeIndex > currentGradeIndex;
     
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-950">
-        {/* Clean Header */}
-        <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-          <div className="max-w-4xl mx-auto px-8 py-6">
+      <div className="min-h-screen bg-[#FAFAFA] dark:bg-gray-950">
+        {/* Premium Header */}
+        <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+          <div className="max-w-5xl mx-auto px-8 py-8">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+                <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2">
                   Session complete
                 </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{topic?.name}</p>
+                <p className="text-base text-gray-600 dark:text-gray-400">{topic?.name}</p>
               </div>
-              <img src={mentioraLogo} alt="Mentiora" className="h-7 opacity-70" />
+              <div className="flex items-center gap-6">
+                <div className="text-right">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Your score</div>
+                  <div className="text-3xl font-semibold text-gray-900 dark:text-white">
+                    {Math.round(averagePercentage)}%
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-8 py-12">
-          {/* Main Score Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-10 mb-8">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#0EA5E9] mb-6">
-                <Trophy className="h-8 w-8 text-white" />
+        <main className="max-w-5xl mx-auto px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Column - Main Content */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Performance Overview */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-8">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                  Performance overview
+                </h2>
+                
+                {/* Progress Bar */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Overall completion</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">{Math.round(averagePercentage)}%</span>
+                  </div>
+                  <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-[#0EA5E9] rounded-full transition-all duration-1000"
+                      style={{ width: `${averagePercentage}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-3 gap-6 pt-6 border-t border-gray-100 dark:border-gray-800">
+                  <div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {marksEarned}/{totalMarks}
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Marks scored</p>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {attempts.length}
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Questions answered</p>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {correctAnswers}
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Fully correct</p>
+                  </div>
+                </div>
               </div>
-              
-              <div className="text-6xl font-semibold text-gray-900 dark:text-white mb-3">
-                {Math.round(averagePercentage)}%
+
+              {/* Predicted Grade Impact */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-8">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  Predicted grade impact
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">
+                  Based on your current performance trajectory
+                </p>
+
+                {/* Grade Visualization */}
+                <div className="flex items-center justify-center gap-16 py-8">
+                  {/* Current Grade */}
+                  <div className="text-center">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider">
+                      Current
+                    </div>
+                    <div className="w-24 h-24 rounded-xl border-2 border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+                      <span className="text-3xl font-semibold text-gray-700 dark:text-gray-300">{oldGrade}</span>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex flex-col items-center">
+                    {gradeChanged ? (
+                      <>
+                        <TrendingUp className="h-8 w-8 text-[#0EA5E9] mb-2" strokeWidth={2} />
+                        <span className="text-xs font-medium text-[#0EA5E9]">
+                          +{gradeImprovement} {gradeImprovement > 1 ? 'grades' : 'grade'}
+                        </span>
+                      </>
+                    ) : (
+                      <div className="h-0.5 w-12 bg-gray-300 dark:bg-gray-700 rounded" />
+                    )}
+                  </div>
+
+                  {/* Projected Grade */}
+                  <div className="text-center">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-4 uppercase tracking-wider">
+                      Projected
+                    </div>
+                    <div className={`w-24 h-24 rounded-xl flex items-center justify-center border-2 transition-all ${
+                      gradeChanged 
+                        ? 'border-[#0EA5E9] bg-[#0EA5E9] shadow-lg shadow-[#0EA5E9]/20' 
+                        : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
+                    }`}>
+                      <span className={`text-3xl font-semibold ${
+                        gradeChanged ? 'text-white' : 'text-gray-700 dark:text-gray-300'
+                      }`}>
+                        {newGrade}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 text-center">
+                    {gradeChanged ? (
+                      <>Maintain this level of performance to achieve a grade <span className="font-semibold">{newGrade}</span></>
+                    ) : (
+                      <>Continue practicing consistently to see grade improvements</>
+                    )}
+                  </p>
+                </div>
               </div>
-              
-              <p className="text-base text-gray-600 dark:text-gray-400">Overall performance</p>
             </div>
 
-            {/* Simple Progress Bar */}
-            <div className="mb-8">
-              <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-[#0EA5E9] rounded-full transition-all duration-700"
-                  style={{ width: `${averagePercentage}%` }}
-                />
-              </div>
-            </div>
+            {/* Right Column - Quick Stats */}
+            <div className="space-y-6">
+              {/* Question Breakdown */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+                  Question breakdown
+                </h3>
+                
+                <div className="space-y-4">
+                  {/* Correct */}
+                  <div className="flex items-center justify-between p-4 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-200 dark:border-green-900/30">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center">
+                        <CheckCircle2 className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">Fully correct</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Perfect answers</div>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      {correctAnswers}
+                    </div>
+                  </div>
 
-            {/* Simple Stats Grid */}
-            <div className="grid grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-gray-900 dark:text-white mb-1">
-                  {marksEarned}
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Marks earned</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-gray-900 dark:text-white mb-1">
-                  {totalMarks}
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Total marks</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-gray-900 dark:text-white mb-1">
-                  {attempts.length}
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Questions</p>
-              </div>
-            </div>
+                  {/* Partial */}
+                  <div className="flex items-center justify-between p-4 bg-amber-50 dark:bg-amber-900/10 rounded-lg border border-amber-200 dark:border-amber-900/30">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center">
+                        <TrendingUp className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">Partial credit</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Almost there</div>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      {partialAnswers}
+                    </div>
+                  </div>
 
-            {/* Simple Performance Badge */}
-            <div className="flex justify-center">
-              <div className={`text-sm px-5 py-2 rounded-full font-medium ${
-                averagePercentage >= 85 
-                  ? 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400' 
-                  : averagePercentage >= 60 
-                  ? 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400' 
-                  : 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
-              }`}>
-                {averagePercentage >= 85 ? "Excellent work" : averagePercentage >= 60 ? "Good progress" : "Keep practicing"}
+                  {/* Incorrect */}
+                  <div className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-200 dark:border-red-900/30">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center">
+                        <Target className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">To review</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Focus areas</div>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      {incorrectAnswers}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievement Badge */}
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-[#0EA5E9] flex items-center justify-center mx-auto mb-4">
+                    <Trophy className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-base font-semibold text-gray-900 dark:text-white mb-2">
+                    {averagePercentage >= 85 ? "Excellent work" : averagePercentage >= 60 ? "Good progress" : "Keep practicing"}
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {averagePercentage >= 85 
+                      ? "Outstanding performance on this topic" 
+                      : averagePercentage >= 60 
+                      ? "You're making solid progress" 
+                      : "More practice will help you improve"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Predicted Grade Impact - Clean Design */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-8 mb-8">
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                Predicted grade impact
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Based on your performance</p>
-            </div>
-
-            {/* Clean Grade Transition */}
-            <div className="flex items-center justify-center gap-12 py-6">
-              {/* Current Grade */}
-              <div className="text-center">
-                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wide">
-                  Current
-                </div>
-                <div className="w-20 h-20 rounded-lg border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
-                  <span className="text-3xl font-semibold text-gray-700 dark:text-gray-300">{oldGrade}</span>
-                </div>
-              </div>
-
-              {/* Arrow */}
-              <div className="flex flex-col items-center">
-                {gradeChanged ? (
-                  <>
-                    <TrendingUp className="h-8 w-8 text-[#0EA5E9] mb-2" strokeWidth={2} />
-                    <span className="text-xs font-medium text-[#0EA5E9]">
-                      +{gradeImprovement} {gradeImprovement > 1 ? 'grades' : 'grade'}
-                    </span>
-                  </>
-                ) : (
-                  <div className="h-0.5 w-8 bg-gray-300 dark:bg-gray-700 rounded" />
-                )}
-              </div>
-
-              {/* Projected Grade */}
-              <div className="text-center">
-                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wide">
-                  Projected
-                </div>
-                <div className={`w-20 h-20 rounded-lg flex items-center justify-center border-2 ${
-                  gradeChanged 
-                    ? 'border-[#0EA5E9] bg-[#0EA5E9]' 
-                    : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
-                }`}>
-                  <span className={`text-3xl font-semibold ${
-                    gradeChanged ? 'text-white' : 'text-gray-700 dark:text-gray-300'
-                  }`}>
-                    {newGrade}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Context Text */}
-            <div className="text-center mt-6">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {gradeChanged ? (
-                  <>Keep this momentum to move from {oldGrade} to {newGrade}</>
-                ) : (
-                  <>Continue practicing to improve your grade</>
-                )}
-              </p>
-            </div>
-          </div>
-
-          {/* Clean Analytics Grid */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            {/* Correct */}
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">{correctAnswers}</div>
-              </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Fully correct</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Perfect answers</p>
-            </div>
-
-            {/* Partial */}
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">{partialAnswers}</div>
-              </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Partial credit</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Almost there</p>
-            </div>
-
-            {/* Review */}
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">{incorrectAnswers}</div>
-              </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">To review</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Growth areas</p>
-            </div>
-          </div>
-
-          {/* Clean Action Buttons */}
-          <div className="flex gap-4">
+          {/* Action Buttons */}
+          <div className="flex gap-4 mt-12">
             <Button 
               onClick={() => navigate('/dashboard', { 
                 state: { 
@@ -943,14 +977,14 @@ const Practice = () => {
                   drawerTab: 'overview'
                 } 
               })}
-              className="flex-1 bg-[#0EA5E9] hover:bg-[#0284C7] text-white rounded-lg h-12 text-base font-medium shadow-sm"
+              className="flex-1 bg-[#0EA5E9] hover:bg-[#0284C7] text-white rounded-xl h-12 text-base font-medium"
             >
-              View insights
+              View detailed insights
             </Button>
             <Button 
               onClick={() => window.location.reload()}
               variant="outline"
-              className="flex-1 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg h-12 text-base font-medium"
+              className="flex-1 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl h-12 text-base font-medium"
             >
               Practice again
             </Button>
