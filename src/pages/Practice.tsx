@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -960,9 +960,13 @@ const Practice = () => {
                     </div>
 
                     <div className="flex flex-col items-center gap-2">
-                      <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
-                        <TrendingUp className="h-4 w-4" />
-                        <span>+{gradeImprovement.toFixed(1)}</span>
+                      <div className={`px-5 py-2 rounded-2xl ${gradeImprovement >= 0 ? 'bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30' : 'bg-gradient-to-r from-red-500 to-rose-500 shadow-red-500/30'} text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300`}>
+                        {gradeImprovement >= 0 ? (
+                          <TrendingUp className="h-4 w-4" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4" />
+                        )}
+                        <span>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
                       </div>
                       <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                     </div>
