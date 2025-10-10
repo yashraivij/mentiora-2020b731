@@ -282,41 +282,44 @@ const Dashboard = () => {
 
   // Map database subject_id to curriculum subject_id for consistent icons
   const mapDatabaseSubjectToCurriculum = (dbSubjectId: string) => {
+    const normalized = dbSubjectId.toLowerCase().trim();
+    
     const subjectMapping: { [key: string]: string } = {
       // A-level subjects
-      "Mathematics (A-Level)": "maths-aqa-alevel",
-      "Biology (A-Level)": "biology-aqa-alevel",
+      "mathematics (a-level)": "maths-aqa-alevel",
+      "biology (a-level)": "biology-aqa-alevel",
       
       // GCSE/standard subjects with exam board in name
-      "Physics (Edexcel)": "physics-edexcel",
-      "Chemistry (Edexcel)": "chemistry-edexcel",
-      "Biology (Edexcel)": "biology-edexcel",
+      "physics (edexcel)": "physics-edexcel",
+      "chemistry (edexcel)": "chemistry-edexcel",
+      "biology (edexcel)": "biology-edexcel",
       
       // GCSE/standard subjects
-      "Mathematics": "maths-edexcel",
-      "maths": "maths-edexcel", 
       "mathematics": "maths-edexcel",
-      "Physics": "physics-edexcel",
+      "maths": "maths-edexcel", 
       "physics": "physics-edexcel",
-      "Chemistry": "chemistry-edexcel",
       "chemistry": "chemistry-edexcel",
-      "Biology": "biology-edexcel", 
       "biology": "biology-edexcel",
-      "English Language": "english-language",
-      "english-language": "english-language",
-      "English Literature": "english-literature", 
+      
+      // English subjects - map all variations to the AQA version
+      "english language": "english-language-aqa",
+      "english-language": "english-language-aqa",
+      "english language (aqa)": "english-language-aqa",
+      "edexcel-english-language": "edexcel-english-language",
+      
+      "english literature": "english-literature", 
       "english-literature": "english-literature",
-      "Geography": "geography",
+      "english-literature-edexcel": "english-literature-edexcel",
+      
       "geography": "geography",
-      "History": "history",
       "history": "history",
-      "Religious Studies": "religious-studies",
+      "religious studies": "religious-studies",
       "religious-studies": "religious-studies",
-      "Business Studies": "business-edexcel-igcse",
+      "business studies": "business-edexcel-igcse",
       "business": "business-edexcel-igcse",
     };
     
-    return subjectMapping[dbSubjectId] || dbSubjectId;
+    return subjectMapping[normalized] || dbSubjectId;
   };
 
   // Load flashcard sets
@@ -1563,9 +1566,8 @@ const Dashboard = () => {
       // Get most recent predicted exam completion for this subject
       const recentExamCompletion = predictedGrades
         .filter(pg => {
-          // Map database subject_id to curriculum subject_id for matching
-          const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
-          return mappedSubjectId === subjectId;
+          // Directly match using subject_id since Practice.tsx now saves with subjectId
+          return pg.subject_id === subjectId;
         })
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       

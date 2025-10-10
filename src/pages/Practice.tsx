@@ -674,7 +674,7 @@ const Practice = () => {
           .from('predicted_exam_completions')
           .select('grade, percentage')
           .eq('user_id', user.id)
-          .eq('subject_id', subjectName)
+          .eq('subject_id', subjectId) // Match using subjectId for consistency
           .order('completed_at', { ascending: false })
           .limit(1)
           .maybeSingle();
@@ -703,7 +703,7 @@ const Practice = () => {
           .from('predicted_exam_completions')
           .insert({
             user_id: user.id,
-            subject_id: subjectName,
+            subject_id: subjectId, // Use subjectId (e.g., "english-language-aqa") not subjectName
             grade: newPredictedGrade.toString(),
             percentage: newPercentage,
             total_marks: 100,
