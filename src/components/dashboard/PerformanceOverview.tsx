@@ -23,7 +23,8 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
     const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
     const targetGrade = parseInt(userSubject?.target_grade || "7");
     // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
-    const currentGrade = parseInt(prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0");
+    const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
+    const currentGrade = gradeValue === 'U' ? 0 : parseInt(gradeValue);
 
     return {
       subject: prediction.subject_id.slice(0, 12),
@@ -113,7 +114,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
           const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
           const targetGrade = parseInt(userSubject?.target_grade || "7");
           // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
-          const currentGrade = parseInt(prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0");
+          const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
+          const isUngraded = gradeValue === 'U';
+          const currentGrade = isUngraded ? 0 : parseInt(gradeValue);
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
 
           return (
@@ -128,7 +131,7 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
                     </Badge>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-primary">{currentGrade}</div>
+                    <div className="text-3xl font-bold text-primary">{isUngraded ? 'U' : currentGrade}</div>
                     <div className="text-xs text-muted-foreground">/ {targetGrade}</div>
                   </div>
                 </div>
