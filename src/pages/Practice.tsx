@@ -113,6 +113,7 @@ const Practice = () => {
   const [hintCount, setHintCount] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
+  const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -635,6 +636,39 @@ const Practice = () => {
                          subjectId.includes('edexcel') ? 'Edexcel' : 
                          subjectId.includes('ocr') ? 'OCR' : 'AQA';
         
+        // Fetch actual predicted grade from user_subjects
+        // Map subject ID to database subject name format
+        let subjectName = subject?.name || '';
+        
+        // Handle A-Level subjects - they are stored with "(A-Level)" suffix in database
+        if (subjectId.includes('alevel')) {
+          subjectName = `${subjectName} (A-Level)`;
+        }
+        // Handle subjects with exam board in name like "Chemistry (Edexcel)"
+        else if (subjectId.includes('edexcel') && !subjectName.includes('Edexcel')) {
+          // Only add if it's a subject that uses this naming convention in DB
+          if (subjectName === 'Chemistry' || subjectName === 'Physics') {
+            subjectName = `${subjectName} (Edexcel)`;
+          }
+        }
+        
+        const { data: userSubjectData } = await supabase
+          .from('user_subjects')
+          .select('predicted_grade')
+          .eq('user_id', user.id)
+          .eq('subject_name', subjectName)
+          .eq('exam_board', examBoard)
+          .maybeSingle();
+        
+        if (userSubjectData?.predicted_grade) {
+          const grade = typeof userSubjectData.predicted_grade === 'string' 
+            ? parseFloat(userSubjectData.predicted_grade) 
+            : userSubjectData.predicted_grade;
+          if (!isNaN(grade)) {
+            setActualPredictedGrade(grade);
+          }
+        }
+        
         // Calculate actual time spent in minutes
         const timeSpentMs = Date.now() - sessionStartTime;
         const timeSpentMinutes = Math.max(1, Math.round(timeSpentMs / 60000)); // At least 1 minute
@@ -807,8 +841,8 @@ const Practice = () => {
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
-    // Grade improvement calculation
-    const oldPredictedGrade = 7.4;
+    // Grade improvement calculation - use actual predicted grade from database
+    const oldPredictedGrade = actualPredictedGrade || 7.0; // Default to 7.0 if not found
     const gradeImprovement = averagePercentage >= 85 ? 0.6 : averagePercentage >= 70 ? 0.4 : averagePercentage >= 50 ? 0.3 : 0.1;
     const newPredictedGrade = Math.min(oldPredictedGrade + gradeImprovement, 9.0);
     
