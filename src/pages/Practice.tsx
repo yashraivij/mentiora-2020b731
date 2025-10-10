@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -832,45 +832,80 @@ const Practice = () => {
       // Save predicted grade to database
     if (user?.id && subjectId) {
       try {
-        // Calculate new predicted grade
-        const storedGrade = (window as any).__lastFetchedPredictedGrade;
-        const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
+        // Check if user has existing predicted grade for this subject
+        const { data: existingGrades } = await supabase
+          .from('predicted_exam_completions')
+          .select('grade, created_at')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        
+        const hasExistingGrade = existingGrades && existingGrades.length > 0;
+        const currentGrade = hasExistingGrade ? parseFloat(existingGrades[0].grade) : null;
         
         console.log('🔢 Grade Save - Input values:', {
           subjectId,
-          storedGrade,
-          actualPredictedGrade,
-          oldPredictedGrade,
+          hasExistingGrade,
+          currentGrade,
           averagePercentage
         });
         
-        let gradeImprovement: number;
-        if (averagePercentage >= 100) {
-          gradeImprovement = 1.0;
-        } else if (averagePercentage >= 90) {
-          gradeImprovement = 0.7 + ((averagePercentage - 90) / 10) * 0.3;
-        } else if (averagePercentage >= 80) {
-          gradeImprovement = 0.5 + ((averagePercentage - 80) / 10) * 0.2;
-        } else if (averagePercentage >= 70) {
-          gradeImprovement = 0.3 + ((averagePercentage - 70) / 10) * 0.2;
-        } else if (averagePercentage >= 60) {
-          gradeImprovement = 0.1 + ((averagePercentage - 60) / 10) * 0.2;
-        } else if (averagePercentage >= 50) {
-          gradeImprovement = 0.0 + ((averagePercentage - 50) / 10) * 0.1;
-        } else if (averagePercentage >= 30) {
-          gradeImprovement = -0.2 + ((averagePercentage - 30) / 20) * 0.2;
-        } else if (averagePercentage >= 10) {
-          gradeImprovement = -0.4 + ((averagePercentage - 10) / 20) * 0.2;
+        let newPredictedGrade: number;
+        
+        if (!hasExistingGrade) {
+          // First time practicing this subject - calculate initial grade based on performance
+          // Map percentage to grade: 90%+ = 9, 80%+ = 8, 70%+ = 7, etc.
+          if (averagePercentage >= 95) {
+            newPredictedGrade = 9.0;
+          } else if (averagePercentage >= 85) {
+            newPredictedGrade = 8.0 + ((averagePercentage - 85) / 10) * 1.0;
+          } else if (averagePercentage >= 75) {
+            newPredictedGrade = 7.0 + ((averagePercentage - 75) / 10) * 1.0;
+          } else if (averagePercentage >= 65) {
+            newPredictedGrade = 6.0 + ((averagePercentage - 65) / 10) * 1.0;
+          } else if (averagePercentage >= 55) {
+            newPredictedGrade = 5.0 + ((averagePercentage - 55) / 10) * 1.0;
+          } else if (averagePercentage >= 45) {
+            newPredictedGrade = 4.0 + ((averagePercentage - 45) / 10) * 1.0;
+          } else if (averagePercentage >= 35) {
+            newPredictedGrade = 3.0 + ((averagePercentage - 35) / 10) * 1.0;
+          } else if (averagePercentage >= 25) {
+            newPredictedGrade = 2.0 + ((averagePercentage - 25) / 10) * 1.0;
+          } else {
+            newPredictedGrade = 1.0 + (averagePercentage / 25) * 1.0;
+          }
+          
+          console.log('🆕 First predicted grade:', newPredictedGrade.toFixed(1));
         } else {
-          gradeImprovement = -0.5 + (averagePercentage / 10) * 0.1;
+          // Has existing grade - make small incremental adjustments
+          // Good performance (80%+) = small increase, poor performance (<60%) = small decrease
+          let adjustment: number;
+          
+          if (averagePercentage >= 90) {
+            adjustment = 0.2; // Excellent: +0.2
+          } else if (averagePercentage >= 80) {
+            adjustment = 0.1; // Good: +0.1
+          } else if (averagePercentage >= 70) {
+            adjustment = 0.05; // Above average: +0.05
+          } else if (averagePercentage >= 60) {
+            adjustment = 0.0; // Average: no change
+          } else if (averagePercentage >= 50) {
+            adjustment = -0.05; // Below average: -0.05
+          } else if (averagePercentage >= 40) {
+            adjustment = -0.1; // Poor: -0.1
+          } else {
+            adjustment = -0.2; // Very poor: -0.2
+          }
+          
+          newPredictedGrade = Math.max(1.0, Math.min(currentGrade! + adjustment, 9.0));
+          
+          console.log('📈 Incremental adjustment:', {
+            currentGrade,
+            adjustment: adjustment.toFixed(2),
+            newGrade: newPredictedGrade.toFixed(1)
+          });
         }
-        
-        const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
-        
-        console.log('🔢 Grade calculation:', {
-          gradeImprovement: gradeImprovement.toFixed(2),
-          newPredictedGrade: newPredictedGrade.toFixed(1)
-        });
         
         // Insert new predicted grade record
         const insertData = {
@@ -968,41 +1003,82 @@ const Practice = () => {
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
-    // Grade improvement calculation - use actual predicted grade from database
-    const storedGrade = (window as any).__lastFetchedPredictedGrade;
-    const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
+    // Fetch existing grade from database to determine if this is first practice
+    const [existingGradeData, setExistingGradeData] = React.useState<{ grade: string; isFirst: boolean } | null>(null);
     
-    // Calculate grade change based on performance - proportional to score
-    // 100% = +1.0, 90% = +0.8, 80% = +0.6, 70% = +0.4, 60% = +0.2, 50% = 0, below 50% = negative
-    let gradeImprovement: number;
-    if (averagePercentage >= 100) {
-      gradeImprovement = 1.0;  // Perfect score - full grade increase
-    } else if (averagePercentage >= 90) {
-      gradeImprovement = 0.7 + ((averagePercentage - 90) / 10) * 0.3;  // 90-99% = +0.7 to +0.9
-    } else if (averagePercentage >= 80) {
-      gradeImprovement = 0.5 + ((averagePercentage - 80) / 10) * 0.2;  // 80-89% = +0.5 to +0.7
-    } else if (averagePercentage >= 70) {
-      gradeImprovement = 0.3 + ((averagePercentage - 70) / 10) * 0.2;  // 70-79% = +0.3 to +0.5
-    } else if (averagePercentage >= 60) {
-      gradeImprovement = 0.1 + ((averagePercentage - 60) / 10) * 0.2;  // 60-69% = +0.1 to +0.3
-    } else if (averagePercentage >= 50) {
-      gradeImprovement = 0.0 + ((averagePercentage - 50) / 10) * 0.1;  // 50-59% = 0 to +0.1
-    } else if (averagePercentage >= 30) {
-      gradeImprovement = -0.2 + ((averagePercentage - 30) / 20) * 0.2; // 30-49% = -0.2 to 0
-    } else if (averagePercentage >= 10) {
-      gradeImprovement = -0.4 + ((averagePercentage - 10) / 20) * 0.2; // 10-29% = -0.4 to -0.2
-    } else {
-      gradeImprovement = -0.5 + (averagePercentage / 10) * 0.1;        // 0-9% = -0.5 to -0.4
+    React.useEffect(() => {
+      const fetchExistingGrade = async () => {
+        if (user?.id && subjectId) {
+          const { data } = await supabase
+            .from('predicted_exam_completions')
+            .select('grade, created_at')
+            .eq('user_id', user.id)
+            .eq('subject_id', subjectId)
+            .order('created_at', { ascending: false })
+            .limit(1);
+          
+          if (data && data.length > 0) {
+            setExistingGradeData({ grade: data[0].grade, isFirst: false });
+          } else {
+            setExistingGradeData({ grade: '0', isFirst: true });
+          }
+        }
+      };
+      fetchExistingGrade();
+    }, []);
+    
+    if (!existingGradeData) {
+      return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
     }
     
-    const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
+    const isFirstPractice = existingGradeData.isFirst;
+    const oldPredictedGrade = isFirstPractice ? 0 : parseFloat(existingGradeData.grade);
     
-    console.log('📈 Grade calculation:', { 
-      oldPredictedGrade, 
-      averagePercentage, 
-      gradeImprovement: gradeImprovement.toFixed(2), 
-      newPredictedGrade 
-    });
+    // Calculate new grade using same logic as save
+    let newPredictedGrade: number;
+    let gradeImprovement: number;
+    
+    if (isFirstPractice) {
+      // First time - calculate initial grade
+      if (averagePercentage >= 95) {
+        newPredictedGrade = 9.0;
+      } else if (averagePercentage >= 85) {
+        newPredictedGrade = 8.0 + ((averagePercentage - 85) / 10) * 1.0;
+      } else if (averagePercentage >= 75) {
+        newPredictedGrade = 7.0 + ((averagePercentage - 75) / 10) * 1.0;
+      } else if (averagePercentage >= 65) {
+        newPredictedGrade = 6.0 + ((averagePercentage - 65) / 10) * 1.0;
+      } else if (averagePercentage >= 55) {
+        newPredictedGrade = 5.0 + ((averagePercentage - 55) / 10) * 1.0;
+      } else if (averagePercentage >= 45) {
+        newPredictedGrade = 4.0 + ((averagePercentage - 45) / 10) * 1.0;
+      } else if (averagePercentage >= 35) {
+        newPredictedGrade = 3.0 + ((averagePercentage - 35) / 10) * 1.0;
+      } else if (averagePercentage >= 25) {
+        newPredictedGrade = 2.0 + ((averagePercentage - 25) / 10) * 1.0;
+      } else {
+        newPredictedGrade = 1.0 + (averagePercentage / 25) * 1.0;
+      }
+      gradeImprovement = newPredictedGrade;
+    } else {
+      // Incremental adjustment
+      if (averagePercentage >= 90) {
+        gradeImprovement = 0.2;
+      } else if (averagePercentage >= 80) {
+        gradeImprovement = 0.1;
+      } else if (averagePercentage >= 70) {
+        gradeImprovement = 0.05;
+      } else if (averagePercentage >= 60) {
+        gradeImprovement = 0.0;
+      } else if (averagePercentage >= 50) {
+        gradeImprovement = -0.05;
+      } else if (averagePercentage >= 40) {
+        gradeImprovement = -0.1;
+      } else {
+        gradeImprovement = -0.2;
+      }
+      newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
+    }
     
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
