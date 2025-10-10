@@ -1458,44 +1458,44 @@ const Dashboard = () => {
       
       const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       
-      // Parse grades (they might be strings like "5" or numbers)
-      // Use target grade as fallback for predicted grade if not yet calculated
+      // Parse target grade
       const target = typeof subject.target_grade === 'string'
         ? parseFloat(subject.target_grade) || 7
         : subject.target_grade || 7;
       
-      // Get actual predicted grade from performance data (predictedGrades array)
-      const actualPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectId);
-      
-      // Use actual predicted grade if available, otherwise check if any practice done
+      // Calculate predicted grade using same logic as PredictedGradesGraph
       let predicted: number | string = target;
-      let hasCompletedQuestions = false;
       
-      if (actualPredictedGrade) {
-        const gradeValue = typeof actualPredictedGrade.grade === 'string'
-          ? parseFloat(actualPredictedGrade.grade)
-          : actualPredictedGrade.grade;
-        if (!isNaN(gradeValue) && gradeValue >= 0) {
-          predicted = gradeValue;
-          hasCompletedQuestions = true;
-        }
-      }
+      // Get practice progress for this subject
+      const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+      const currSubject = curriculum.find(s => s.id === subjectId);
+      const totalTopics = currSubject?.topics.length || 1;
+      const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+      const practicePercentage = Math.round(totalScore / totalTopics);
       
-      // Check if subject has any activity
-      if (!hasCompletedQuestions && subject.total_questions_answered === 0) {
-        predicted = 'U'; // Ungraded - no questions completed
-      }
-      // If no actual predicted grade but has activity, check if subject has a non-default predicted_grade
-      else if (!hasCompletedQuestions && subject.predicted_grade) {
-        const subjectPredicted = typeof subject.predicted_grade === 'string' 
-          ? parseFloat(subject.predicted_grade) 
-          : subject.predicted_grade;
-        // Only use it if it's not the default "5" value
-        if (!isNaN(subjectPredicted) && subjectPredicted !== 5) {
-          predicted = subjectPredicted;
-        } else if (subject.total_questions_answered === 0) {
-          predicted = 'U';
-        }
+      // Get most recent predicted exam completion for this subject
+      const recentExamCompletion = predictedGrades
+        .filter(pg => pg.subject_id === subjectId)
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+      
+      const hasPracticeData = subjectProgress.length > 0;
+      
+      // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
+      if (recentExamCompletion && hasPracticeData) {
+        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseInt(recentExamCompletion.grade) || 0;
+        const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
+        predicted = combinedGrade === 0 ? 'U' : combinedGrade;
+      } else if (recentExamCompletion) {
+        // Only exam completion exists
+        predicted = recentExamCompletion.grade === 'U' ? 'U' : parseInt(recentExamCompletion.grade) || 0;
+      } else if (hasPracticeData) {
+        // Only practice data exists
+        const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        predicted = practiceGrade === 0 ? 'U' : practiceGrade;
+      } else {
+        // No data at all
+        predicted = 'U';
       }
       
       // Get actual trend from last 6 exam attempts for this subject
