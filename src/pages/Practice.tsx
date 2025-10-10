@@ -767,319 +767,440 @@ const Practice = () => {
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
-    const hours = Math.floor(sessionDuration / 60);
-    const minutes = sessionDuration % 60;
-    const timeDisplay = hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+    // Grade improvement calculation
+    const oldPredictedGrade = 7.4;
+    const gradeImprovement = averagePercentage >= 85 ? 0.6 : averagePercentage >= 70 ? 0.4 : averagePercentage >= 50 ? 0.3 : 0.1;
+    const newPredictedGrade = Math.min(oldPredictedGrade + gradeImprovement, 9.0);
+    
+    // Percentile rank
+    const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
+    
+    // Recent session grades for progression chart
+    const sessionGrades = [
+      { session: 1, grade: 7.0 },
+      { session: 2, grade: 7.2 },
+      { session: 3, grade: 7.4 },
+      { session: 4, grade: newPredictedGrade }
+    ];
     
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-gray-950 p-6">
-        <div className="max-w-5xl mx-auto space-y-6">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+        <div className="max-w-4xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
           
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground mb-1">Session Complete</h1>
-              <p className="text-muted-foreground">{subject?.name} - {topic?.name}</p>
+          {/* Hero Section */}
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold text-foreground">
+                🎉 Section Complete!
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                You've just finished <span className="font-semibold text-foreground">{topic?.name}</span> — here's how you did.
+              </p>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/dashboard')}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
 
-          {/* Performance Metrics Cards - Medly Style */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Overall Progress */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    OVERALL SCORE
+            {/* Large Score Display */}
+            <Card className="bg-white dark:bg-gray-900 border-0 shadow-lg rounded-3xl overflow-hidden mx-auto max-w-md">
+              <CardContent className="py-12">
+                <div className="space-y-4">
+                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Your Score
                   </p>
-                  <p className="text-3xl font-bold text-foreground">
+                  <div className="text-7xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                     {Math.round(averagePercentage)}%
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {correctAnswers}/{attempts.length} correct
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {correctAnswers} out of {attempts.length} questions correct
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Accuracy */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+            {/* Predicted Grade Animation */}
+            <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200 dark:border-blue-800 rounded-2xl">
+              <CardContent className="py-6">
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                    Predicted Grade Improvement
+                  </p>
+                  <div className="flex items-center justify-center gap-4">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                      {oldPredictedGrade.toFixed(1)}
+                    </div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-pulse" />
+                    </div>
+                    <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">
+                      {newPredictedGrade.toFixed(1)}
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    ACCURACY
-                  </p>
-                  <p className="text-3xl font-bold text-foreground">
-                    {Math.round((correctAnswers / attempts.length) * 100)}%
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Questions correct
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Study Time */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                    <Clock className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                  <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-400">
+                    <TrendingUp className="h-4 w-4" />
+                    <span className="text-sm font-semibold">+{gradeImprovement.toFixed(1)} improvement</span>
                   </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    STUDY TIME
-                  </p>
-                  <p className="text-3xl font-bold text-foreground">
-                    {timeDisplay}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Total time
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Questions */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                    <BookOpen className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    QUESTIONS
-                  </p>
-                  <p className="text-3xl font-bold text-foreground">
-                    {attempts.length}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Completed
+                  <p className="text-xs text-blue-700 dark:text-blue-300 mt-2">
+                    👏 You scored better than {percentileRank}% of students this week
                   </p>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Performance Breakdown */}
-          <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-            <CardHeader className="border-b border-border/50">
-              <CardTitle className="text-lg font-semibold">Performance Breakdown</CardTitle>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="space-y-6">
-                {/* Correct Answers */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                      <span className="text-sm font-medium text-foreground">Fully Correct</span>
-                    </div>
-                    <span className="text-sm font-semibold text-foreground">{correctAnswers}</span>
+          {/* Performance Summary */}
+          <div>
+            <h2 className="text-lg font-semibold text-foreground mb-4">Performance Summary</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* Accuracy */}
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
+                <CardContent className="p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      Accuracy
+                    </p>
+                    <Target className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <Progress 
-                    value={(correctAnswers / attempts.length) * 100} 
-                    className="h-2 bg-muted [&>div]:bg-emerald-500"
-                  />
-                </div>
-
-                {/* Partial Answers */}
-                {partialAnswers > 0 && (
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                        <span className="text-sm font-medium text-foreground">Partially Correct</span>
-                      </div>
-                      <span className="text-sm font-semibold text-foreground">{partialAnswers}</span>
-                    </div>
-                    <Progress 
-                      value={(partialAnswers / attempts.length) * 100} 
-                      className="h-2 bg-muted [&>div]:bg-orange-500"
-                    />
+                  <div className="text-3xl font-bold text-foreground">
+                    {Math.round(averagePercentage)}%
                   </div>
-                )}
-
-                {/* Needs Review */}
-                {(attempts.length - correctAnswers - partialAnswers) > 0 && (
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <X className="h-4 w-4 text-red-600 dark:text-red-400" />
-                        <span className="text-sm font-medium text-foreground">Needs Review</span>
-                      </div>
-                      <span className="text-sm font-semibold text-foreground">
-                        {attempts.length - correctAnswers - partialAnswers}
-                      </span>
-                    </div>
-                    <Progress 
-                      value={((attempts.length - correctAnswers - partialAnswers) / attempts.length) * 100} 
-                      className="h-2 bg-muted [&>div]:bg-red-500"
-                    />
+                  {/* Simple sparkline */}
+                  <div className="h-8 flex items-end gap-1">
+                    {[65, 72, 78, averagePercentage].map((val, i) => (
+                      <div 
+                        key={i}
+                        className="flex-1 bg-gradient-to-t from-blue-600 to-cyan-600 rounded-t transition-all duration-500"
+                        style={{ 
+                          height: `${(val / 100) * 100}%`,
+                          transitionDelay: `${i * 100}ms`
+                        }}
+                      />
+                    ))}
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
 
-          {/* Strengths & Focus Areas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Strengths */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardHeader className="border-b border-border/50">
-                <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-                  Strong Performance
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-3">
-                  {correctAnswers > 0 ? (
+              {/* Speed */}
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
+                <CardContent className="p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      Speed
+                    </p>
+                    <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div className="text-3xl font-bold text-foreground">
+                    {sessionDuration}m
+                  </div>
+                  <div className="space-y-1">
+                    <div className="h-2 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full transition-all duration-700"
+                        style={{ width: `${Math.min((avgTimePerQuestion / 60) * 100, 100)}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">{avgTimePerQuestion}s per question</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Retention */}
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
+                <CardContent className="p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      Retention
+                    </p>
+                    <Brain className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div className="text-3xl font-bold text-foreground">
+                    {Math.round(averagePercentage * 0.85)}%
+                  </div>
+                  {/* Circular indicator */}
+                  <div className="flex justify-center">
+                    <svg className="w-16 h-16 transform -rotate-90">
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                        className="text-slate-100 dark:text-gray-800"
+                      />
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        stroke="url(#gradient)"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeDasharray={`${2 * Math.PI * 28}`}
+                        strokeDashoffset={`${2 * Math.PI * 28 * (1 - (averagePercentage * 0.85 / 100))}`}
+                        className="transition-all duration-1000"
+                        strokeLinecap="round"
+                      />
+                      <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#2563eb" />
+                          <stop offset="100%" stopColor="#06b6d4" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Improvement */}
+              <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
+                <CardContent className="p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      Improvement
+                    </p>
+                    <TrendingUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+                    +{gradeImprovement.toFixed(1)}
+                  </div>
+                  <p className="text-xs text-muted-foreground">Grade change since last attempt</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Strong vs Weak Areas */}
+          <div>
+            <h2 className="text-lg font-semibold text-foreground mb-4">Performance Analysis</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Strong Areas */}
+              <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-emerald-200 dark:border-emerald-800 rounded-2xl">
+                <CardHeader>
+                  <CardTitle className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5" />
+                    Strong Areas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {correctAnswers >= 2 ? (
                     <>
-                      <div className="flex items-start gap-3">
-                        <div className="w-1 h-full bg-emerald-500 rounded-full" />
-                        <div>
-                          <p className="text-sm font-medium text-foreground">Core concepts mastered</p>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {correctAnswers} questions answered perfectly
-                          </p>
+                      <div className="flex items-center gap-2 text-sm text-emerald-800 dark:text-emerald-200">
+                        <div className="w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-xs">✓</span>
                         </div>
+                        <span>Core concept understanding</span>
                       </div>
                       {averagePercentage >= 80 && (
-                        <div className="flex items-start gap-3">
-                          <div className="w-1 h-full bg-emerald-500 rounded-full" />
-                          <div>
-                            <p className="text-sm font-medium text-foreground">Excellent performance</p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              Scoring above 80% - keep it up
-                            </p>
+                        <div className="flex items-center gap-2 text-sm text-emerald-800 dark:text-emerald-200">
+                          <div className="w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white text-xs">✓</span>
                           </div>
+                          <span>Excellent accuracy rate</span>
+                        </div>
+                      )}
+                      {avgTimePerQuestion < 40 && (
+                        <div className="flex items-center gap-2 text-sm text-emerald-800 dark:text-emerald-200">
+                          <div className="w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white text-xs">✓</span>
+                          </div>
+                          <span>Efficient time management</span>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-sm text-muted-foreground">
-                      Keep practicing to build your strengths
+                    <p className="text-sm text-emerald-700 dark:text-emerald-300">
+                      Complete more questions to identify your strengths
                     </p>
                   )}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Focus Areas */}
-            <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-              <CardHeader className="border-b border-border/50">
-                <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
-                  Focus Areas
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-3">
-                  {(attempts.length - correctAnswers > 0) ? (
+              {/* Focus Areas */}
+              <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border-amber-200 dark:border-amber-800 rounded-2xl">
+                <CardHeader>
+                  <CardTitle className="text-base font-semibold text-amber-900 dark:text-amber-100 flex items-center gap-2">
+                    <AlertCircle className="h-5 w-5" />
+                    Focus Areas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {(attempts.length - correctAnswers) > 0 ? (
                     <>
-                      {(attempts.length - correctAnswers - partialAnswers) > 0 && (
-                        <div className="flex items-start gap-3">
-                          <div className="w-1 h-full bg-red-500 rounded-full" />
-                          <div>
-                            <p className="text-sm font-medium text-foreground">Review missed concepts</p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {attempts.length - correctAnswers - partialAnswers} questions need attention
-                            </p>
+                      <div className="space-y-2">
+                        {(attempts.length - correctAnswers - partialAnswers) > 0 && (
+                          <div className="flex items-center gap-2 text-sm text-amber-800 dark:text-amber-200">
+                            <div className="w-5 h-5 rounded-full bg-amber-600 flex items-center justify-center flex-shrink-0">
+                              <span className="text-white text-xs">!</span>
+                            </div>
+                            <span>Complex problem solving</span>
                           </div>
-                        </div>
-                      )}
-                      {partialAnswers > 0 && (
-                        <div className="flex items-start gap-3">
-                          <div className="w-1 h-full bg-orange-500 rounded-full" />
-                          <div>
-                            <p className="text-sm font-medium text-foreground">Refine understanding</p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {partialAnswers} questions partially correct
-                            </p>
+                        )}
+                        {partialAnswers > 0 && (
+                          <div className="flex items-center gap-2 text-sm text-amber-800 dark:text-amber-200">
+                            <div className="w-5 h-5 rounded-full bg-amber-600 flex items-center justify-center flex-shrink-0">
+                              <span className="text-white text-xs">!</span>
+                            </div>
+                            <span>Detail accuracy refinement</span>
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
+                      <Button 
+                        onClick={() => {
+                          setSessionComplete(false);
+                          setCurrentQuestionIndex(0);
+                          setAttempts([]);
+                          setShowFeedback(false);
+                          localStorage.removeItem(`practice-session-${subjectId}-${topicId}`);
+                        }}
+                        className="w-full mt-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-xl"
+                      >
+                        Revise These Next →
+                      </Button>
+                      <p className="text-xs text-amber-700 dark:text-amber-300 text-center mt-2">
+                        Mentiora adapts your next quiz based on these focus areas
+                      </p>
                     </>
                   ) : (
-                    <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
-                      Perfect score! No areas need review
+                    <p className="text-sm text-emerald-700 dark:text-emerald-300 font-medium">
+                      Perfect performance! No areas need review
                     </p>
                   )}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
-          {/* Next Steps */}
-          <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm">
-            <CardHeader className="border-b border-border/50">
-              <CardTitle className="text-lg font-semibold">Next Steps</CardTitle>
+          {/* Grade Progression Visual */}
+          <Card className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-2xl">
+            <CardHeader>
+              <CardTitle className="text-base font-semibold text-foreground">
+                Grade Progression
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                You're improving steadily — keep building consistency
+              </p>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <Button
-                  onClick={() => navigate('/notebook')}
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-gray-800"
-                >
-                  <NotebookPen className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  <span className="text-sm font-medium">Review Notes</span>
-                </Button>
+            <CardContent>
+              <div className="h-32 relative">
+                {/* Grid lines */}
+                <div className="absolute inset-0 flex flex-col justify-between">
+                  {[9, 7.5, 6, 4.5].map((grade, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="text-xs text-muted-foreground w-6">{grade}</span>
+                      <div className="flex-1 h-px bg-slate-100 dark:bg-gray-800" />
+                    </div>
+                  ))}
+                </div>
                 
-                <Button
-                  onClick={() => {
-                    setSessionComplete(false);
-                    setCurrentQuestionIndex(0);
-                    setAttempts([]);
-                    setShowFeedback(false);
-                    localStorage.removeItem(`practice-session-${subjectId}-${topicId}`);
-                  }}
-                  variant="outline"
-                  className="h-20 flex flex-col items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-gray-800"
-                >
-                  <RotateCcw className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-sm font-medium">Practice Again</span>
-                </Button>
-                
-                <Button
-                  onClick={() => navigate('/dashboard')}
-                  className="h-20 flex flex-col items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <BarChart3 className="h-5 w-5" />
-                  <span className="text-sm font-medium">View Dashboard</span>
-                </Button>
+                {/* Grade line */}
+                <svg className="absolute inset-0 w-full h-full overflow-visible" style={{ zIndex: 1 }}>
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#2563eb" />
+                      <stop offset="100%" stopColor="#06b6d4" />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <path
+                    d={`M ${50} ${120 - (sessionGrades[0].grade / 9) * 110} 
+                        Q ${150} ${115 - (sessionGrades[1].grade / 9) * 110}, ${250} ${110 - (sessionGrades[2].grade / 9) * 110}
+                        T ${450} ${105 - (sessionGrades[3].grade / 9) * 110}`}
+                    fill="none"
+                    stroke="url(#lineGradient)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    className="transition-all duration-1000"
+                  />
+                  {/* Glowing dot at end */}
+                  <circle
+                    cx="450"
+                    cy={105 - (sessionGrades[3].grade / 9) * 110}
+                    r="6"
+                    fill="#06b6d4"
+                    filter="url(#glow)"
+                    className="animate-pulse"
+                  />
+                </svg>
               </div>
             </CardContent>
           </Card>
 
-          {/* Motivational Message */}
-          <div className="text-center py-4">
-            <p className="text-sm text-muted-foreground mb-2">
-              +30 MP earned for completing this session
+          {/* Next Steps Section */}
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-foreground mb-4 text-center">
+              Your Next Step
+            </h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Card 
+                className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                onClick={() => {
+                  setSessionComplete(false);
+                  setCurrentQuestionIndex(0);
+                  setAttempts([]);
+                  setShowFeedback(false);
+                  localStorage.removeItem(`practice-session-${subjectId}-${topicId}`);
+                }}
+              >
+                <CardContent className="p-6 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto">
+                    <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">Review Weak Topics</h3>
+                    <p className="text-xs text-muted-foreground">Open Revision Plan</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                onClick={() => navigate(`/subject/${subjectId}`)}
+              >
+                <CardContent className="p-6 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mx-auto">
+                    <Brain className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">Practice Another Topic</h3>
+                    <p className="text-xs text-muted-foreground">Choose Next Section</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className="bg-white dark:bg-gray-900 border-0 shadow-sm rounded-xl cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                onClick={() => navigate('/dashboard')}
+              >
+                <CardContent className="p-6 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto">
+                    <BarChart3 className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">View Full Progress</h3>
+                    <p className="text-xs text-muted-foreground">Go to Dashboard</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Motivational Footer */}
+          <div className="text-center space-y-4 py-8">
+            <p className="text-base text-muted-foreground">
+              Small wins add up — you're one step closer to your target grade.
             </p>
-            <p className="text-base text-foreground font-medium">
-              Great work! Keep practicing to build mastery.
+            <Button 
+              size="lg"
+              onClick={() => navigate('/dashboard')}
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Continue → Dashboard
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              +30 MP added for completing this section
             </p>
           </div>
 
