@@ -820,7 +820,7 @@ const Practice = () => {
         <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
           
           {/* Hero Header */}
-          <div className="text-center space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '0ms', animationFillMode: 'forwards' }}>
+          <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
             <h1 className="text-3xl font-bold text-foreground">
               Section Complete!
             </h1>
@@ -830,7 +830,7 @@ const Practice = () => {
           </div>
 
           {/* Performance Summary Card - Overall Score Only */}
-          <div className="flex justify-center opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+          <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
@@ -857,7 +857,7 @@ const Practice = () => {
           </div>
 
           {/* Predicted Grade Improvement - Premium Card */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+          <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
             <Card className="bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 dark:from-gray-900 dark:via-cyan-950/10 dark:to-blue-950/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -960,7 +960,7 @@ const Practice = () => {
           </div>
 
           {/* Performance Comparison */}
-          <div className="space-y-5 opacity-0 animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
+          <div className="space-y-5 animate-fade-in" style={{ animationDelay: '600ms' }}>
             <h2 className="text-2xl font-bold text-foreground">Performance Comparison</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
