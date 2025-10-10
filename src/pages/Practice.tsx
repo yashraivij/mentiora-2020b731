@@ -891,12 +891,28 @@ const Practice = () => {
   };
 
   if (sessionComplete) {
-    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
-    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+    console.log('📊 Rendering section complete page');
+    
+    // Safety check - if no topic, questions or attempts, redirect to dashboard
+    if (!topic || shuffledQuestions.length === 0 || attempts.length === 0) {
+      console.error('Session complete but missing data:', {
+        hasTopic: !!topic,
+        questionsCount: shuffledQuestions.length,
+        attemptsCount: attempts.length
+      });
+      navigate('/dashboard');
+      return null;
+    }
+    
+    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + (q.marks || 0), 0);
+    const marksEarned = attempts.reduce((sum, a) => sum + (a.score || 0), 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
     // Calculate performance metrics
-    const correctAnswers = attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
+    const correctAnswers = attempts.filter(a => {
+      const question = shuffledQuestions.find(q => q.id === a.questionId);
+      return question && a.score === question.marks;
+    }).length;
     const partialAnswers = attempts.filter(a => {
       const questionMarks = shuffledQuestions.find(q => q.id === a.questionId)?.marks || 0;
       return a.score > 0 && a.score < questionMarks;
