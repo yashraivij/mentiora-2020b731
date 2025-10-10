@@ -864,18 +864,27 @@ const Practice = () => {
     const storedGrade = (window as any).__lastFetchedPredictedGrade;
     const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
     
-    // Calculate grade change based on performance - decrease for poor scores
+    // Calculate grade change based on performance - proportional to score
+    // 100% = +1.0, 90% = +0.8, 80% = +0.6, 70% = +0.4, 60% = +0.2, 50% = 0, below 50% = negative
     let gradeImprovement: number;
-    if (averagePercentage >= 85) {
-      gradeImprovement = 0.6;  // Excellent performance
+    if (averagePercentage >= 100) {
+      gradeImprovement = 1.0;  // Perfect score - full grade increase
+    } else if (averagePercentage >= 90) {
+      gradeImprovement = 0.7 + ((averagePercentage - 90) / 10) * 0.3;  // 90-99% = +0.7 to +0.9
+    } else if (averagePercentage >= 80) {
+      gradeImprovement = 0.5 + ((averagePercentage - 80) / 10) * 0.2;  // 80-89% = +0.5 to +0.7
     } else if (averagePercentage >= 70) {
-      gradeImprovement = 0.4;  // Good performance
+      gradeImprovement = 0.3 + ((averagePercentage - 70) / 10) * 0.2;  // 70-79% = +0.3 to +0.5
+    } else if (averagePercentage >= 60) {
+      gradeImprovement = 0.1 + ((averagePercentage - 60) / 10) * 0.2;  // 60-69% = +0.1 to +0.3
     } else if (averagePercentage >= 50) {
-      gradeImprovement = 0.2;  // Average performance
+      gradeImprovement = 0.0 + ((averagePercentage - 50) / 10) * 0.1;  // 50-59% = 0 to +0.1
     } else if (averagePercentage >= 30) {
-      gradeImprovement = -0.1; // Below average - decrease
+      gradeImprovement = -0.2 + ((averagePercentage - 30) / 20) * 0.2; // 30-49% = -0.2 to 0
+    } else if (averagePercentage >= 10) {
+      gradeImprovement = -0.4 + ((averagePercentage - 10) / 20) * 0.2; // 10-29% = -0.4 to -0.2
     } else {
-      gradeImprovement = -0.3; // Poor performance - larger decrease
+      gradeImprovement = -0.5 + (averagePercentage / 10) * 0.1;        // 0-9% = -0.5 to -0.4
     }
     
     const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
@@ -883,7 +892,7 @@ const Practice = () => {
     console.log('📈 Grade calculation:', { 
       oldPredictedGrade, 
       averagePercentage, 
-      gradeImprovement, 
+      gradeImprovement: gradeImprovement.toFixed(2), 
       newPredictedGrade 
     });
     
