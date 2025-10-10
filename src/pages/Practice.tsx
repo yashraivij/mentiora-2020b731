@@ -831,26 +831,36 @@ const Practice = () => {
 
           {/* Performance Summary Card - Overall Score Only */}
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-6 relative">
-                <div className="text-center space-y-3">
-                  <div className="flex justify-center mb-2">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
-                      <Target className="h-7 w-7 text-white" />
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <Card className="bg-gradient-to-br from-white via-white to-cyan-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-cyan-950/20 rounded-3xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
+              {/* Animated background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10 opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+              
+              <CardContent className="p-10 relative">
+                <div className="text-center space-y-6">
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em]">
                       Overall Score
                     </p>
-                    <p className="text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      {Math.round(averagePercentage)}%
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {correctAnswers} out of {attempts.length} questions correct
-                    </p>
+                    <div className="relative inline-block">
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
+                      <p className="relative text-7xl font-black bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        {Math.round(averagePercentage)}%
+                      </p>
+                    </div>
                   </div>
+                  
+                  {/* Decorative divider */}
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="h-px w-12 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500/50" />
+                    <div className="h-px w-12 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+                  </div>
+                  
+                  <p className="text-base text-muted-foreground font-medium">
+                    {correctAnswers} out of {attempts.length} questions correct
+                  </p>
                 </div>
               </CardContent>
             </Card>
