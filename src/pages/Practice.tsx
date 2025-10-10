@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, Target, Zap, AlertCircle } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -68,6 +68,29 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  
+  // Subject colors mapping
+  const subjectColors: { [key: string]: { bg: string } } = {
+    "physics": { bg: "bg-blue-400" },
+    "physics-edexcel": { bg: "bg-blue-400" },
+    "chemistry": { bg: "bg-green-400" },
+    "chemistry-edexcel": { bg: "bg-green-400" },
+    "biology": { bg: "bg-orange-400" },
+    "biology-edexcel": { bg: "bg-orange-400" },
+    "biology-aqa-alevel": { bg: "bg-lime-400" },
+    "mathematics": { bg: "bg-purple-400" },
+    "maths-edexcel": { bg: "bg-purple-400" },
+    "maths-aqa-alevel": { bg: "bg-indigo-400" },
+    "english-language": { bg: "bg-pink-400" },
+    "english-literature": { bg: "bg-rose-400" },
+    "geography": { bg: "bg-emerald-400" },
+    "geography-paper-2": { bg: "bg-emerald-400" },
+    "history": { bg: "bg-amber-400" },
+    "religious-studies": { bg: "bg-violet-400" },
+    "business-edexcel-igcse": { bg: "bg-teal-400" },
+    "computer-science": { bg: "bg-cyan-400" },
+    "psychology": { bg: "bg-fuchsia-400" },
+  };
   
   // Debug logging at component entry
   console.log('=== Practice Component Rendered ===');
@@ -750,216 +773,262 @@ const Practice = () => {
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
+    const subjectColor = subjectColors[subjectId]?.bg || 'bg-blue-400';
+    
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-950">
-        {/* Clean Header */}
-        <header className="border-b border-gray-100 dark:border-gray-900">
-          <div className="max-w-6xl mx-auto px-8 lg:px-12 py-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2">
-                  Section complete
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400">{topic?.name}</p>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-white dark:from-gray-950 dark:to-gray-900">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+          
+          {/* Header Card */}
+          <Card className="border-0 shadow-lg rounded-3xl overflow-hidden backdrop-blur-sm bg-card/80 relative group">
+            <div className={`absolute inset-0 ${subjectColor} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+            <CardHeader className="relative pb-6">
+              <div className="flex items-center justify-between mb-4">
+                <Badge variant="secondary" className="px-4 py-2 bg-background/50 text-sm font-medium rounded-xl">
+                  Section Complete
+                </Badge>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate('/dashboard')}
+                  className="text-muted-foreground hover:text-foreground rounded-xl"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Overall score</div>
-                <div className="text-4xl font-semibold text-gray-900 dark:text-white">
-                  {Math.round(averagePercentage)}%
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+              
+              <CardTitle className="text-3xl font-bold text-foreground mb-2">
+                {subject?.name || 'Subject'}
+              </CardTitle>
+              <CardDescription className="text-base text-muted-foreground">
+                {topic?.name || 'Practice Session'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
 
-        <main className="max-w-6xl mx-auto px-8 lg:px-12 py-16">
-          {/* Predicted Grade Card - Featured */}
-          <div className="bg-gradient-to-br from-[#1F6BFF] to-[#0D47A1] rounded-3xl p-12 mb-12 text-white">
-            <div className="max-w-3xl mx-auto">
-              <p className="text-white/80 text-lg mb-8">Your predicted grade</p>
-              
-              <div className="flex items-center justify-center gap-12 mb-8">
-                <div className="text-center">
-                  <div className="text-white/60 text-sm mb-3 uppercase tracking-wider">Before</div>
-                  <div className="text-6xl font-bold">{oldPredictedGrade.toFixed(1)}</div>
+          {/* Score Card */}
+          <Card className="border-0 shadow-lg rounded-3xl overflow-hidden backdrop-blur-sm bg-card/80 relative">
+            <div className={`absolute inset-0 bg-gradient-to-br ${
+              averagePercentage >= 80 ? 'from-emerald-400/10 to-cyan-500/10' : 
+              averagePercentage >= 60 ? 'from-blue-400/10 to-purple-500/10' : 
+              'from-amber-400/10 to-orange-500/10'
+            }`} />
+            <CardContent className="relative pt-8 pb-8">
+              <div className="text-center space-y-4">
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                    Your Score
+                  </p>
+                  <div className={`text-7xl font-bold ${
+                    averagePercentage >= 80 ? 'text-emerald-600 dark:text-emerald-400' : 
+                    averagePercentage >= 60 ? 'text-blue-600 dark:text-blue-400' : 
+                    'text-amber-600 dark:text-amber-400'
+                  }`}>
+                    {Math.round(averagePercentage)}%
+                  </div>
                 </div>
                 
-                <div className="flex flex-col items-center">
-                  <TrendingUp className="h-12 w-12 mb-2" />
-                  <div className="text-lg font-semibold">+{(newPredictedGrade - oldPredictedGrade).toFixed(1)}</div>
+                <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground">
+                  <span className="font-medium">{correctAnswers} / {attempts.length} correct</span>
+                  <span>•</span>
+                  <span>{avgTimePerQuestion}s avg per question</span>
                 </div>
-                
-                <div className="text-center">
-                  <div className="text-white/60 text-sm mb-3 uppercase tracking-wider">After</div>
-                  <div className="text-6xl font-bold">{newPredictedGrade.toFixed(1)}</div>
+
+                {/* Predicted Grade Change */}
+                <div className="pt-4">
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border border-blue-100 dark:border-blue-800/30">
+                    <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    <span className="text-sm font-medium text-muted-foreground">
+                      Predicted Grade:
+                    </span>
+                    <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                      {oldPredictedGrade.toFixed(1)} → {newPredictedGrade.toFixed(1)}
+                    </span>
+                    <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                      +{(newPredictedGrade - oldPredictedGrade).toFixed(1)}
+                    </span>
+                  </div>
                 </div>
               </div>
-              
-              <p className="text-center text-white/90 text-lg">
-                Keep this momentum to achieve a higher grade
-              </p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Performance Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Accuracy */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-              <div className="flex items-start justify-between mb-6">
+            <Card className="border-0 shadow-md rounded-2xl bg-card/80 backdrop-blur-sm">
+              <CardContent className="pt-6 pb-6 text-center space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center">
+                  <Target className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                </div>
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Accuracy</p>
-                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
-                    {Math.round(averagePercentage)}%
-                  </p>
+                  <p className="text-2xl font-bold text-foreground">{Math.round(averagePercentage)}%</p>
+                  <p className="text-xs text-muted-foreground font-medium mt-1">Accuracy</p>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-                  <Target className="h-6 w-6 text-green-600 dark:text-green-400" />
-                </div>
-              </div>
-              <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-green-500 rounded-full transition-all duration-1000"
-                  style={{ width: `${averagePercentage}%` }}
-                />
-              </div>
-            </div>
+                <Progress value={averagePercentage} className="h-2 rounded-full bg-muted/50" />
+              </CardContent>
+            </Card>
 
-            {/* Questions Answered */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Questions answered</p>
-                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
-                    {attempts.length}
-                  </p>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
-                  <BookOpen className="h-6 w-6 text-[#1F6BFF]" />
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <div className="text-lg font-semibold text-green-600 dark:text-green-400">{correctAnswers}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Correct</div>
+            {/* Speed */}
+            <Card className="border-0 shadow-md rounded-2xl bg-card/80 backdrop-blur-sm">
+              <CardContent className="pt-6 pb-6 text-center space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-2xl bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <div className="text-lg font-semibold text-amber-600 dark:text-amber-400">{partialAnswers}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Partial</div>
+                  <p className="text-2xl font-bold text-foreground">{sessionDuration}m</p>
+                  <p className="text-xs text-muted-foreground font-medium mt-1">Total Time</p>
                 </div>
-                <div>
-                  <div className="text-lg font-semibold text-red-600 dark:text-red-400">{incorrectAnswers}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Incorrect</div>
+                <div className="text-xs text-muted-foreground">
+                  {avgTimePerQuestion}s per question
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Time Spent */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-              <div className="flex items-start justify-between mb-6">
+            {/* Retention */}
+            <Card className="border-0 shadow-md rounded-2xl bg-card/80 backdrop-blur-sm">
+              <CardContent className="pt-6 pb-6 text-center space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-2xl bg-purple-50 dark:bg-purple-950/30 flex items-center justify-center">
+                  <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                </div>
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Time spent</p>
-                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
-                    {sessionDuration}m
-                  </p>
+                  <p className="text-2xl font-bold text-foreground">{Math.round(averagePercentage * 0.85)}%</p>
+                  <p className="text-xs text-muted-foreground font-medium mt-1">Retention</p>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                <div className="w-16 h-16 mx-auto">
+                  <svg className="transform -rotate-90" viewBox="0 0 36 36">
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      className="text-muted/30"
+                    />
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeDasharray={`${Math.round(averagePercentage * 0.85)}, 100`}
+                      className="text-purple-600 dark:text-purple-400"
+                    />
+                  </svg>
                 </div>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Avg {avgTimePerQuestion}s per question
-              </p>
-            </div>
+              </CardContent>
+            </Card>
+
+            {/* Improvement */}
+            <Card className="border-0 shadow-md rounded-2xl bg-card/80 backdrop-blur-sm">
+              <CardContent className="pt-6 pb-6 text-center space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-50 dark:bg-amber-950/30 flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">+{gradeImprovement.toFixed(1)}</p>
+                  <p className="text-xs text-muted-foreground font-medium mt-1">Grade Change</p>
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Since last attempt
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Detailed Breakdown */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {/* Strong Areas */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Strong areas
-              </h3>
-              
-              {correctAnswers >= 2 ? (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 p-4 bg-green-50 dark:bg-green-900/10 rounded-xl">
-                    <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="h-5 w-5 text-white" />
+          {/* Strengths & Weaknesses */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Strong Topics */}
+            <Card className="border-0 shadow-lg rounded-3xl bg-card/80 backdrop-blur-sm overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-cyan-500/5" />
+              <CardHeader className="relative">
+                <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                  Strong Areas
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="relative space-y-2">
+                {correctAnswers >= 2 ? (
+                  <>
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-800/30">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                      <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                        Core concepts
+                      </span>
                     </div>
-                    <div>
-                      <p className="font-medium text-gray-900 dark:text-white">Core concepts</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Strong understanding</p>
-                    </div>
-                  </div>
-                  
-                  {correctAnswers >= 4 && (
-                    <div className="flex items-center gap-4 p-4 bg-green-50 dark:bg-green-900/10 rounded-xl">
-                      <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle2 className="h-5 w-5 text-white" />
+                    {correctAnswers >= 4 && (
+                      <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-800/30">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                        <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                          Application skills
+                        </span>
                       </div>
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Application skills</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Excellent progress</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="text-gray-600 dark:text-gray-400">
-                  Complete more questions to identify your strong areas
-                </p>
-              )}
-            </div>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-sm text-muted-foreground text-center py-4">
+                    Keep practicing to build your strengths
+                  </p>
+                )}
+              </CardContent>
+            </Card>
 
-            {/* Areas to Review */}
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Areas to review
-              </h3>
-              
-              {incorrectAnswers > 0 || partialAnswers > 0 ? (
-                <div className="space-y-4">
-                  {incorrectAnswers > 0 && (
-                    <div className="flex items-center gap-4 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl">
-                      <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
-                        <Target className="h-5 w-5 text-white" />
+            {/* Weak Topics */}
+            <Card className="border-0 shadow-lg rounded-3xl bg-card/80 backdrop-blur-sm overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-400/5 to-orange-500/5" />
+              <CardHeader className="relative">
+                <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
+                  Areas to Improve
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="relative space-y-2">
+                {incorrectAnswers > 0 || partialAnswers > 0 ? (
+                  <>
+                    {incorrectAnswers > 0 && (
+                      <div className="flex items-center gap-3 p-3 rounded-xl bg-red-50/50 dark:bg-red-950/20 border border-red-100 dark:border-red-800/30">
+                        <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400 flex-shrink-0" />
+                        <span className="text-sm font-medium text-red-700 dark:text-red-300">
+                          Complex problems
+                        </span>
                       </div>
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Complex problems</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Needs more practice</p>
+                    )}
+                    {partialAnswers > 1 && (
+                      <div className="flex items-center gap-3 p-3 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-800/30">
+                        <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+                        <span className="text-sm font-medium text-amber-700 dark:text-amber-300">
+                          Detail accuracy
+                        </span>
                       </div>
-                    </div>
-                  )}
-                  
-                  {partialAnswers > 1 && (
-                    <div className="flex items-center gap-4 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl">
-                      <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
-                        <Target className="h-5 w-5 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Detail accuracy</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Almost there</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="p-6 bg-green-50 dark:bg-green-900/10 rounded-xl text-center">
-                  <p className="font-medium text-gray-900 dark:text-white mb-1">Excellent work</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">No areas need review</p>
-                </div>
-              )}
-            </div>
+                    )}
+                    <Button 
+                      className="w-full mt-4 bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      onClick={() => window.location.reload()}
+                    >
+                      Practice Again
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </>
+                ) : (
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400 text-center py-4 font-medium">
+                    Excellent work — no areas need review
+                  </p>
+                )}
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Progress Trend */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-12 border border-gray-100 dark:border-gray-800 mb-16">
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
-              Your progress trend
-            </h3>
-            
-            <div className="relative h-64">
-              <div className="absolute inset-0 flex items-end justify-around gap-4">
+          {/* Grade Progress Chart */}
+          <Card className="border-0 shadow-lg rounded-3xl bg-card/80 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                Grade Progression
+              </CardTitle>
+              <CardDescription className="text-sm text-muted-foreground">
+                Consistent upward trend — keep building on this momentum
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-48 flex items-end gap-2">
                 {[
                   { session: 1, grade: 6.2 },
                   { session: 2, grade: 6.5 },
@@ -971,12 +1040,12 @@ const Practice = () => {
                   const height = (data.grade / 9) * 100;
                   
                   return (
-                    <div key={idx} className="flex-1 flex flex-col items-center gap-3">
+                    <div key={idx} className="flex-1 flex flex-col items-center gap-2">
                       <div 
                         className={`w-full rounded-t-lg transition-all duration-700 ${
                           isToday 
-                            ? 'bg-[#1F6BFF]' 
-                            : 'bg-gray-200 dark:bg-gray-800'
+                            ? 'bg-gradient-to-t from-blue-500 to-purple-500' 
+                            : 'bg-muted/50'
                         }`}
                         style={{ 
                           height: `${height}%`,
@@ -984,57 +1053,104 @@ const Practice = () => {
                         }}
                       >
                         {isToday && (
-                          <div className="flex items-center justify-center h-full">
-                            <TrendingUp className="h-5 w-5 text-white" />
-                          </div>
+                          <div className="w-3 h-3 rounded-full bg-blue-600 dark:bg-blue-400 mx-auto -mt-2 ring-4 ring-blue-200 dark:ring-blue-900 animate-pulse" />
                         )}
                       </div>
-                      <div className="text-center">
-                        <div className={`text-sm font-medium ${
-                          isToday 
-                            ? 'text-[#1F6BFF]' 
-                            : 'text-gray-600 dark:text-gray-400'
-                        }`}>
-                          {data.grade.toFixed(1)}
-                        </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                          {isToday ? 'Today' : `Session ${data.session}`}
-                        </div>
-                      </div>
+                      <span className={`text-xs font-medium ${
+                        isToday 
+                          ? 'text-blue-600 dark:text-blue-400' 
+                          : 'text-muted-foreground'
+                      }`}>
+                        {data.grade.toFixed(1)}
+                      </span>
                     </div>
                   );
                 })}
               </div>
-            </div>
-            
-            <p className="text-center text-gray-600 dark:text-gray-400 mt-8">
-              Consistent upward trend — keep building on this momentum
-            </p>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-            <Button 
-              onClick={() => navigate('/dashboard', { 
-                state: { 
-                  openSubjectDrawer: true, 
-                  subjectId: subjectId,
-                  drawerTab: 'overview'
-                } 
-              })}
-              className="flex-1 bg-[#1F6BFF] hover:bg-[#0D47A1] text-white rounded-xl h-14 text-base font-medium"
-            >
-              View detailed insights
-            </Button>
-            <Button 
-              onClick={() => window.location.reload()}
-              variant="outline"
-              className="flex-1 border-2 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-xl h-14 text-base font-medium"
-            >
-              Practice again
-            </Button>
-          </div>
-        </main>
+          {/* Next Steps */}
+          <Card className="border-0 shadow-lg rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-lg font-bold text-foreground">What's Next?</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <Button 
+                  variant="outline"
+                  className="h-auto py-4 px-4 rounded-xl border-0 bg-white dark:bg-gray-900 hover:bg-blue-50 dark:hover:bg-blue-950/30 shadow-md hover:shadow-lg transition-all duration-300"
+                  onClick={() => navigate('/notebook')}
+                >
+                  <div className="flex flex-col items-start text-left gap-1 w-full">
+                    <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold">
+                      <NotebookPen className="h-4 w-4" />
+                      <span>Review Notes</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Check your weak areas</p>
+                  </div>
+                </Button>
+
+                <Button 
+                  variant="outline"
+                  className="h-auto py-4 px-4 rounded-xl border-0 bg-white dark:bg-gray-900 hover:bg-purple-50 dark:hover:bg-purple-950/30 shadow-md hover:shadow-lg transition-all duration-300"
+                  onClick={() => navigate('/practice')}
+                >
+                  <div className="flex flex-col items-start text-left gap-1 w-full">
+                    <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold">
+                      <Brain className="h-4 w-4" />
+                      <span>Practice More</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Choose another topic</p>
+                  </div>
+                </Button>
+
+                <Button 
+                  variant="outline"
+                  className="h-auto py-4 px-4 rounded-xl border-0 bg-white dark:bg-gray-900 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 shadow-md hover:shadow-lg transition-all duration-300"
+                  onClick={() => navigate('/dashboard')}
+                >
+                  <div className="flex flex-col items-start text-left gap-1 w-full">
+                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <BarChart3 className="h-4 w-4" />
+                      <span>View Progress</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">See full dashboard</p>
+                  </div>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Motivational Footer */}
+          <Card className="border-0 shadow-lg rounded-3xl bg-gradient-to-r from-emerald-400 to-cyan-500 text-white overflow-hidden">
+            <CardContent className="py-8 text-center space-y-4">
+              <div className="space-y-2">
+                <p className="text-lg font-semibold">
+                  Consistency pays off — keep going, you're building mastery
+                </p>
+                <p className="text-sm text-white/80">
+                  +30 MP earned for completing this section
+                </p>
+              </div>
+              <Button 
+                size="lg"
+                className="bg-white text-emerald-600 hover:bg-white/90 font-bold px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                onClick={() => navigate('/dashboard', { 
+                  state: { 
+                    openSubjectDrawer: true, 
+                    subjectId: subjectId,
+                    drawerTab: 'overview'
+                  } 
+                })}
+              >
+                Continue to Dashboard
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </CardContent>
+          </Card>
+
+        </div>
       </div>
     );
   }
