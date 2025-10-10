@@ -31748,6 +31748,164 @@ export const curriculum: Subject[] = [
         ]
       },
       {
+        id: '3.1.3-bonding',
+        name: '3.1.3 Bonding',
+        questions: [
+          {
+            id: 'chem-3.1.3-q1',
+            question: 'Describe the structure of an ionic compound such as sodium chloride.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Giant ionic lattice structure. Electrostatic attraction between oppositely charged ions. Regular arrangement of Na⁺ and Cl⁻ ions.',
+            markingCriteria: {
+              breakdown: [
+                'Giant lattice structure (1 mark)',
+                'Electrostatic attraction between ions (1 mark)',
+                'Regular arrangement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q2',
+            question: 'Explain what is meant by a covalent bond.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A shared pair of electrons between two atoms. The electrostatic attraction between the shared pair and the nuclei of both atoms.',
+            markingCriteria: {
+              breakdown: [
+                'Shared pair of electrons (1 mark)',
+                'Electrostatic attraction to nuclei (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q3',
+            question: 'Explain what is meant by a dative covalent bond. Give an example.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A dative (coordinate) covalent bond is where both electrons in the shared pair come from the same atom. Example: NH₄⁺ - the nitrogen lone pair is donated to H⁺. Can be shown with an arrow from the donor atom.',
+            markingCriteria: {
+              breakdown: [
+                'Both electrons from same atom (1 mark)',
+                'Suitable example given (1 mark)',
+                'Arrow notation or clear explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q4',
+            question: 'Describe metallic bonding.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A lattice of positive metal ions. Surrounded by a sea of delocalised electrons. Electrostatic attraction between the positive ions and delocalised electrons.',
+            markingCriteria: {
+              breakdown: [
+                'Positive ions in lattice (1 mark)',
+                'Delocalised electrons (1 mark)',
+                'Electrostatic attraction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q5',
+            question: 'Diamond and graphite are both forms of carbon. Explain why diamond has a higher melting point than graphite.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Both have giant covalent structures with strong covalent bonds. In diamond, each carbon forms four covalent bonds in a tetrahedral structure. In graphite, each carbon forms three bonds in layers. Diamond has more bonds per atom and no weak intermolecular forces between layers. Therefore more energy is needed to break the structure in diamond.',
+            markingCriteria: {
+              breakdown: [
+                'Both giant covalent with strong bonds (1 mark)',
+                'Diamond has 4 bonds per carbon, graphite 3 (1 mark)',
+                'Graphite has weak forces between layers (1 mark)',
+                'More energy needed to break diamond structure (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q6',
+            question: 'Predict the shape and bond angle of a molecule of ammonia (NH₃). Explain your answer.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Shape: trigonal pyramidal. Bond angle: 107°. NH₃ has 4 electron pairs (3 bonding, 1 lone pair). Electron pairs repel to be as far apart as possible. Lone pair repels more than bonding pairs, reducing bond angle from 109.5° to 107°.',
+            markingCriteria: {
+              breakdown: [
+                'Trigonal pyramidal shape (1 mark)',
+                'Bond angle 107° (1 mark)',
+                '4 electron pairs - 3 bonding, 1 lone (1 mark)',
+                'Lone pair repels more, reducing angle (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q7',
+            question: 'Explain what is meant by electronegativity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The ability of an atom to attract the bonding pair of electrons in a covalent bond towards itself.',
+            markingCriteria: {
+              breakdown: [
+                'Ability to attract bonding electrons (1 mark)',
+                'In a covalent bond (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q8',
+            question: 'Explain why HCl is a polar molecule but Cl₂ is non-polar.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'In HCl, chlorine is more electronegative than hydrogen, so the bonding electrons are pulled towards Cl, creating a dipole (δ+H-Clδ-). In Cl₂, both atoms have the same electronegativity, so electrons are shared equally and there is no dipole.',
+            markingCriteria: {
+              breakdown: [
+                'Cl more electronegative than H in HCl (1 mark)',
+                'Creates permanent dipole/unequal sharing (1 mark)',
+                'Cl₂ has equal sharing/no electronegativity difference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q9',
+            question: 'Describe hydrogen bonding in water and explain why it occurs.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen is much more electronegative than hydrogen, so O-H bonds are polar with δ+ on H and δ- on O. The δ+ hydrogen is attracted to the lone pair on δ- oxygen of another water molecule. This is hydrogen bonding - a strong permanent dipole-dipole attraction. Shown as H···O dotted line.',
+            markingCriteria: {
+              breakdown: [
+                'O-H bonds polar due to electronegativity difference (1 mark)',
+                'δ+ H attracted to lone pair on δ- O (1 mark)',
+                'Named as hydrogen bond (1 mark)',
+                'Strong permanent dipole-dipole attraction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          },
+          {
+            id: 'chem-3.1.3-q10',
+            question: 'Explain why the boiling point of NH₃ is higher than the boiling point of PH₃.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'NH₃ has hydrogen bonding between molecules because N is very electronegative. N-H bonds are polar and H attracted to lone pair on N of adjacent molecule. PH₃ only has weak London forces because P is not electronegative enough for hydrogen bonding. Hydrogen bonds are stronger than London forces, so more energy is needed to overcome them in NH₃, giving it a higher boiling point.',
+            markingCriteria: {
+              breakdown: [
+                'NH₃ has hydrogen bonding (1 mark)',
+                'PH₃ only has London forces (1 mark)',
+                'N electronegative enough for H-bonding, P is not (1 mark)',
+                'H-bonds stronger/more energy to overcome (1 mark)'
+              ]
+            },
+            specReference: 'AQA Chemistry A-level (3.1.3)'
+          }
+        ]
+      },
+      {
         id: '3.1.4-energetics',
         name: '3.1.4 Energetics',
         questions: [
