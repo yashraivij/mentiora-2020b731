@@ -1321,13 +1321,13 @@ const Dashboard = () => {
   // Calculate study time for selected subject
   useEffect(() => {
     const calculateSubjectStudyTime = async () => {
-      if (!user?.id || !selectedDrawerSubject?.name) {
+      if (!user?.id || !selectedDrawerSubject?.id) {
         setSubjectStudyTime({hours: 0, minutes: 0});
         return;
       }
       
-      // Convert subject name to the format used in database (e.g., "Chemistry" -> "chemistry-edexcel")
-      const subjectId = `${selectedDrawerSubject.name.toLowerCase()}-${selectedDrawerSubject.examBoard.toLowerCase()}`;
+      // Use the subject id directly from curriculum (e.g., "chemistry-edexcel")
+      const subjectId = selectedDrawerSubject.id;
       
       console.log('Fetching study time for subject_id:', subjectId);
       
@@ -1356,7 +1356,7 @@ const Dashboard = () => {
     };
     
     calculateSubjectStudyTime();
-  }, [user?.id, selectedDrawerSubject?.name, selectedDrawerSubject?.examBoard]);
+  }, [user?.id, selectedDrawerSubject?.id]);
 
   // Clear quest notification when viewing quests tab
   useEffect(() => {
