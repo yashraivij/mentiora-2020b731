@@ -34,7 +34,12 @@ const SubjectTopics = () => {
       const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
       if (savedProgress) {
         const allProgress = JSON.parse(savedProgress);
-        const subjectProgress = allProgress.filter((p: any) => p.subjectId === subjectId);
+        // Convert string dates back to Date objects
+        const progressWithDates = allProgress.map((p: any) => ({
+          ...p,
+          lastAttempt: new Date(p.lastAttempt)
+        }));
+        const subjectProgress = progressWithDates.filter((p: any) => p.subjectId === subjectId);
         setTopicProgress(subjectProgress);
       }
       

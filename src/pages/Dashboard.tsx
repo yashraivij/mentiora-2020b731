@@ -741,7 +741,13 @@ const Dashboard = () => {
 
     const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
     if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
+      const parsedProgress = JSON.parse(savedProgress);
+      // Convert string dates back to Date objects
+      const progressWithDates = parsedProgress.map((p: any) => ({
+        ...p,
+        lastAttempt: new Date(p.lastAttempt)
+      }));
+      setUserProgress(progressWithDates);
     }
   };
 
@@ -2457,29 +2463,15 @@ const Dashboard = () => {
                                       // Only include topics with scores > 0
                                       const subjectExams = userProgress.filter(p => p.subjectId === subjectId && p.averageScore > 0);
                                       
-                                      console.log('🔍 Accuracy Debug:', { 
-                                        subjectId, 
-                                        subjectExams,
-                                        allProgress: userProgress 
-                                      });
-                                      
                                       if (subjectExams.length === 0) return '0';
                                       
                                       // Calculate overall accuracy from all attempts (excluding 0% scores)
                                       const totalScore = subjectExams.reduce((sum, p) => {
                                         const contribution = p.averageScore * p.attempts;
-                                        console.log(`  Topic ${p.topicId}: score=${p.averageScore}, attempts=${p.attempts}, contribution=${contribution}`);
                                         return sum + contribution;
                                       }, 0);
                                       const totalAttempts = subjectExams.reduce((sum, p) => sum + p.attempts, 0);
                                       const accuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
-                                      
-                                      console.log('📊 Accuracy Calculation:', { 
-                                        totalScore, 
-                                        totalAttempts, 
-                                        accuracy,
-                                        rounded: Math.round(accuracy) 
-                                      });
                                       
                                       return Math.round(accuracy);
                                     })()}%

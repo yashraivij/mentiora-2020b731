@@ -29,7 +29,13 @@ const Analytics = () => {
       const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user.id}`);
       
       if (savedProgress) {
-        setAnalyticsData(JSON.parse(savedProgress));
+        const parsedProgress = JSON.parse(savedProgress);
+        // Convert string dates back to Date objects
+        const progressWithDates = parsedProgress.map((p: any) => ({
+          ...p,
+          lastAttempt: new Date(p.lastAttempt)
+        }));
+        setAnalyticsData(progressWithDates);
       }
       if (savedWeakTopics) {
         setWeakTopics(JSON.parse(savedWeakTopics));
