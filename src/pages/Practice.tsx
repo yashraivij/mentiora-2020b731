@@ -829,96 +829,28 @@ const Practice = () => {
             </p>
           </div>
 
-          {/* Performance Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Overall Score */}
-            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
+          {/* Performance Summary Card - Overall Score Only */}
+          <div className="flex justify-center">
+            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-6 relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <Target className="h-6 w-6 text-white" />
+              <CardContent className="p-8 relative">
+                <div className="text-center space-y-4">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
+                      <Target className="h-8 w-8 text-white" />
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Overall Score
-                  </p>
-                  <p className="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                    {Math.round(averagePercentage)}%
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {correctAnswers}/{attempts.length} correct
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Accuracy */}
-            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-6 relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <CheckCircle2 className="h-6 w-6 text-white" />
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      Overall Score
+                    </p>
+                    <p className="text-6xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                      {Math.round(averagePercentage)}%
+                    </p>
+                    <p className="text-base text-muted-foreground">
+                      {correctAnswers} out of {attempts.length} questions correct
+                    </p>
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Accuracy
-                  </p>
-                  <p className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                    {Math.round((correctAnswers / attempts.length) * 100)}%
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Last 7 days
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Study Time */}
-            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-6 relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <Clock className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Study Time
-                  </p>
-                  <p className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-                    {sessionDuration}m
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    This session
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Questions */}
-            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-6 relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <BookOpen className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    This Week
-                  </p>
-                  <p className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    {attempts.length}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Questions
-                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -984,8 +916,16 @@ const Practice = () => {
                     <span>Grade 9.0</span>
                   </div>
                   <div className="relative h-4 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+                    {/* Old grade position - light fill */}
                     <div 
-                      className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-2000 ease-out"
+                      className="absolute top-0 bottom-0 bg-gradient-to-r from-blue-300 to-cyan-300 dark:from-blue-700 dark:to-cyan-700 rounded-full transition-all duration-1000 ease-out"
+                      style={{ 
+                        width: `${((oldPredictedGrade - 4) / 5) * 100}%`,
+                      }}
+                    />
+                    {/* New grade position - animated bright fill */}
+                    <div 
+                      className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-2000 ease-out delay-500"
                       style={{ 
                         width: `${((newPredictedGrade - 4) / 5) * 100}%`,
                         backgroundSize: '200% 100%',
