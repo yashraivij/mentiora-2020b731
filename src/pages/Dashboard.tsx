@@ -1326,24 +1326,48 @@ const Dashboard = () => {
         return;
       }
       
-      const { data: exams } = await supabase
+      console.log('Calculating study time for subject:', selectedDrawerSubject.name);
+      
+      // Query exams table - the subject_id in exams matches the subject_name in user_subjects
+      // which is the full name like "Chemistry (AQA)" or "Biology (A-Level)"
+      const { data: exams, error } = await supabase
         .from("exams")
-        .select("started_at, completed_at")
+        .select("started_at, completed_at, subject_id")
         .eq("user_id", user.id)
-        .eq("subject_id", selectedDrawerSubject.name)
         .not("completed_at", "is", null);
       
+      console.log('All exams for user:', exams);
+      
+      if (error) {
+        console.error('Error fetching exams:', error);
+        setSubjectStudyTime({hours: 0, minutes: 0});
+        return;
+      }
+      
       if (exams && exams.length > 0) {
-        const totalMinutes = exams.reduce((sum, exam) => {
-          const start = new Date(exam.started_at);
-          const end = new Date(exam.completed_at!);
-          const durationMs = end.getTime() - start.getTime();
-          return sum + (durationMs / (1000 * 60)); // Convert to minutes
-        }, 0);
+        // Filter exams that match the current subject name
+        const subjectExams = exams.filter(exam => 
+          exam.subject_id === selectedDrawerSubject.name || 
+          exam.subject_id.includes(selectedDrawerSubject.name)
+        );
         
-        const hours = Math.floor(totalMinutes / 60);
-        const minutes = Math.round(totalMinutes % 60);
-        setSubjectStudyTime({hours, minutes});
+        console.log('Filtered exams for this subject:', subjectExams);
+        
+        if (subjectExams.length > 0) {
+          const totalMinutes = subjectExams.reduce((sum, exam) => {
+            const start = new Date(exam.started_at);
+            const end = new Date(exam.completed_at!);
+            const durationMs = end.getTime() - start.getTime();
+            return sum + (durationMs / (1000 * 60)); // Convert to minutes
+          }, 0);
+          
+          const hours = Math.floor(totalMinutes / 60);
+          const minutes = Math.round(totalMinutes % 60);
+          console.log('Calculated study time:', hours, 'hours', minutes, 'minutes');
+          setSubjectStudyTime({hours, minutes});
+        } else {
+          setSubjectStudyTime({hours: 0, minutes: 0});
+        }
       } else {
         setSubjectStudyTime({hours: 0, minutes: 0});
       }
