@@ -1432,20 +1432,20 @@ const Dashboard = () => {
         : subject.target_grade || 7;
       
       // Get actual predicted grade from performance data (predictedGrades array)
-      console.log('🔍 Looking for predicted grade:', { 
-        subjectName: subject.subject_name, 
-        subjectId, 
-        availablePredictedGrades: predictedGrades.map(pg => ({ id: pg.subject_id, grade: pg.grade }))
-      });
+      // Match using curriculum subject ID
+      const curriculumSubject = curriculum.find(c => 
+        c.name === subject.subject_name || 
+        (c.name.includes(subject.subject_name.split(' (')[0]) && c.id === subjectId)
+      );
       
       const actualPredictedGrade = predictedGrades.find(pg => {
-        const nameMatch = pg.subject_id === subject.subject_name;
-        const idMatch = pg.subject_id === subjectId;
-        console.log(`  Checking ${pg.subject_id} (grade: ${pg.grade}):`, { nameMatch, idMatch });
-        return nameMatch || idMatch;
+        // Try matching with curriculum subject ID
+        if (curriculumSubject && pg.subject_id === curriculumSubject.id) {
+          return true;
+        }
+        // Fallback to direct ID match
+        return pg.subject_id === subjectId;
       });
-      
-      console.log('✅ Found predicted grade:', actualPredictedGrade);
       
       // Use actual predicted grade if available, otherwise check if any practice done
       let predicted: number | string = target;
