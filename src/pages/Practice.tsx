@@ -742,311 +742,297 @@ const Practice = () => {
     const incorrectAnswers = attempts.length - correctAnswers - partialAnswers;
     
     // Calculate predicted grade impact
-    const gradeMap = ['U', 'D', 'C', 'B', 'A', 'A*'];
-    const currentGradeIndex = 2;
-    const gradeImprovement = averagePercentage >= 85 ? 0.8 : averagePercentage >= 70 ? 0.6 : averagePercentage >= 50 ? 0.4 : 0.2;
     const oldPredictedGrade = 7.0;
+    const gradeImprovement = averagePercentage >= 85 ? 0.8 : averagePercentage >= 70 ? 0.6 : averagePercentage >= 50 ? 0.4 : 0.2;
     const newPredictedGrade = Math.min(oldPredictedGrade + gradeImprovement, 9.0);
     
-    // Calculate additional metrics
+    // Calculate time metrics
+    const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
-    const retentionEstimate = Math.min(averagePercentage + 5, 95);
-    const betterThanPercentage = Math.floor(averagePercentage * 0.85);
-    
-    // Identify strong and weak topics (simplified)
-    const strongTopics = correctAnswers >= 3 ? ["Bonding and Structure", "Ionic Compounds"] : ["Core Concepts"];
-    const weakTopics = incorrectAnswers >= 2 ? ["Electrolysis", "Energy Changes"] : partialAnswers >= 2 ? ["Complex Reactions"] : [];
     
     return (
       <div className="min-h-screen bg-white dark:bg-gray-950">
-        {/* Confetti Effect (CSS-based) */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-2 h-2 bg-[#1F6BFF] rounded-full animate-[fall_3s_ease-in-out]" style={{ animationDelay: '0s' }} />
-          <div className="absolute top-0 left-1/3 w-2 h-2 bg-[#16A34A] rounded-full animate-[fall_3s_ease-in-out]" style={{ animationDelay: '0.2s' }} />
-          <div className="absolute top-0 left-1/2 w-2 h-2 bg-[#F59E0B] rounded-full animate-[fall_3s_ease-in-out]" style={{ animationDelay: '0.4s' }} />
-          <div className="absolute top-0 left-2/3 w-2 h-2 bg-[#EC4899] rounded-full animate-[fall_3s_ease-in-out]" style={{ animationDelay: '0.6s' }} />
-          <div className="absolute top-0 left-3/4 w-2 h-2 bg-[#8B5CF6] rounded-full animate-[fall_3s_ease-in-out]" style={{ animationDelay: '0.8s' }} />
-        </div>
+        {/* Clean Header */}
+        <header className="border-b border-gray-100 dark:border-gray-900">
+          <div className="max-w-6xl mx-auto px-8 lg:px-12 py-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2">
+                  Section complete
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">{topic?.name}</p>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Overall score</div>
+                <div className="text-4xl font-semibold text-gray-900 dark:text-white">
+                  {Math.round(averagePercentage)}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
 
-        <main className="max-w-5xl mx-auto px-6 py-12">
-          {/* HERO HEADER */}
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-3">
-              🎉 Section Complete!
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              You've finished <span className="font-semibold text-gray-900 dark:text-white">{topic?.name}</span> — here's how you did.
+        <main className="max-w-6xl mx-auto px-8 lg:px-12 py-16">
+          {/* Predicted Grade Card - Featured */}
+          <div className="bg-gradient-to-br from-[#1F6BFF] to-[#0D47A1] rounded-3xl p-12 mb-12 text-white">
+            <div className="max-w-3xl mx-auto">
+              <p className="text-white/80 text-lg mb-8">Your predicted grade</p>
+              
+              <div className="flex items-center justify-center gap-12 mb-8">
+                <div className="text-center">
+                  <div className="text-white/60 text-sm mb-3 uppercase tracking-wider">Before</div>
+                  <div className="text-6xl font-bold">{oldPredictedGrade.toFixed(1)}</div>
+                </div>
+                
+                <div className="flex flex-col items-center">
+                  <TrendingUp className="h-12 w-12 mb-2" />
+                  <div className="text-lg font-semibold">+{(newPredictedGrade - oldPredictedGrade).toFixed(1)}</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-white/60 text-sm mb-3 uppercase tracking-wider">After</div>
+                  <div className="text-6xl font-bold">{newPredictedGrade.toFixed(1)}</div>
+                </div>
+              </div>
+              
+              <p className="text-center text-white/90 text-lg">
+                Keep this momentum to achieve a higher grade
+              </p>
+            </div>
+          </div>
+
+          {/* Performance Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* Accuracy */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Accuracy</p>
+                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
+                    {Math.round(averagePercentage)}%
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
+                  <Target className="h-6 w-6 text-green-600 dark:text-green-400" />
+                </div>
+              </div>
+              <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-green-500 rounded-full transition-all duration-1000"
+                  style={{ width: `${averagePercentage}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Questions Answered */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Questions answered</p>
+                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
+                    {attempts.length}
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+                  <BookOpen className="h-6 w-6 text-[#1F6BFF]" />
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div>
+                  <div className="text-lg font-semibold text-green-600 dark:text-green-400">{correctAnswers}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Correct</div>
+                </div>
+                <div>
+                  <div className="text-lg font-semibold text-amber-600 dark:text-amber-400">{partialAnswers}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Partial</div>
+                </div>
+                <div>
+                  <div className="text-lg font-semibold text-red-600 dark:text-red-400">{incorrectAnswers}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Incorrect</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Time Spent */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Time spent</p>
+                  <p className="text-4xl font-semibold text-gray-900 dark:text-white">
+                    {sessionDuration}m
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                </div>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Avg {avgTimePerQuestion}s per question
+              </p>
+            </div>
+          </div>
+
+          {/* Detailed Breakdown */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            {/* Strong Areas */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                Strong areas
+              </h3>
+              
+              {correctAnswers >= 2 ? (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 p-4 bg-green-50 dark:bg-green-900/10 rounded-xl">
+                    <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">Core concepts</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Strong understanding</p>
+                    </div>
+                  </div>
+                  
+                  {correctAnswers >= 4 && (
+                    <div className="flex items-center gap-4 p-4 bg-green-50 dark:bg-green-900/10 rounded-xl">
+                      <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle2 className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Application skills</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Excellent progress</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-600 dark:text-gray-400">
+                  Complete more questions to identify your strong areas
+                </p>
+              )}
+            </div>
+
+            {/* Areas to Review */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                Areas to review
+              </h3>
+              
+              {incorrectAnswers > 0 || partialAnswers > 0 ? (
+                <div className="space-y-4">
+                  {incorrectAnswers > 0 && (
+                    <div className="flex items-center gap-4 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl">
+                      <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
+                        <Target className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Complex problems</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Needs more practice</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {partialAnswers > 1 && (
+                    <div className="flex items-center gap-4 p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl">
+                      <div className="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
+                        <Target className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Detail accuracy</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Almost there</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="p-6 bg-green-50 dark:bg-green-900/10 rounded-xl text-center">
+                  <p className="font-medium text-gray-900 dark:text-white mb-1">Excellent work</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">No areas need review</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Progress Trend */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-12 border border-gray-100 dark:border-gray-800 mb-16">
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+              Your progress trend
+            </h3>
+            
+            <div className="relative h-64">
+              <div className="absolute inset-0 flex items-end justify-around gap-4">
+                {[
+                  { session: 1, grade: 6.2 },
+                  { session: 2, grade: 6.5 },
+                  { session: 3, grade: 6.8 },
+                  { session: 4, grade: 7.0 },
+                  { session: 5, grade: newPredictedGrade }
+                ].map((data, idx) => {
+                  const isToday = idx === 4;
+                  const height = (data.grade / 9) * 100;
+                  
+                  return (
+                    <div key={idx} className="flex-1 flex flex-col items-center gap-3">
+                      <div 
+                        className={`w-full rounded-t-lg transition-all duration-700 ${
+                          isToday 
+                            ? 'bg-[#1F6BFF]' 
+                            : 'bg-gray-200 dark:bg-gray-800'
+                        }`}
+                        style={{ 
+                          height: `${height}%`,
+                          transitionDelay: `${idx * 100}ms`
+                        }}
+                      >
+                        {isToday && (
+                          <div className="flex items-center justify-center h-full">
+                            <TrendingUp className="h-5 w-5 text-white" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <div className={`text-sm font-medium ${
+                          isToday 
+                            ? 'text-[#1F6BFF]' 
+                            : 'text-gray-600 dark:text-gray-400'
+                        }`}>
+                          {data.grade.toFixed(1)}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {isToday ? 'Today' : `Session ${data.session}`}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <p className="text-center text-gray-600 dark:text-gray-400 mt-8">
+              Consistent upward trend — keep building on this momentum
             </p>
           </div>
 
-          {/* SCORE DISPLAY CARD */}
-          <div className="bg-gradient-to-b from-[#F5F9FF] to-white dark:from-gray-900 dark:to-gray-950 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-8 mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#1F6BFF] mb-6">
-                <Trophy className="h-10 w-10 text-white" />
-              </div>
-              
-              <div className="mb-6">
-                <div className="text-6xl font-bold text-gray-900 dark:text-white mb-2">
-                  {Math.round(averagePercentage)}%
-                </div>
-                <p className="text-gray-600 dark:text-gray-400">Your Score</p>
-              </div>
-
-              {/* Predicted Grade Animation */}
-              <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 mb-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Your new predicted grade</p>
-                <div className="flex items-center justify-center gap-4">
-                  <span className="text-3xl font-bold text-gray-400 dark:text-gray-600 line-through">
-                    {oldPredictedGrade.toFixed(1)}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="h-6 w-6 text-[#16A34A]" />
-                    <span className="text-sm font-semibold text-[#16A34A]">
-                      +{(newPredictedGrade - oldPredictedGrade).toFixed(1)}
-                    </span>
-                  </div>
-                  <span className="text-5xl font-bold text-[#1F6BFF] animate-scale-in">
-                    {newPredictedGrade.toFixed(1)}
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                👏 That's better than <span className="font-semibold text-[#1F6BFF]">{betterThanPercentage}%</span> of students this week
-              </p>
-            </div>
-          </div>
-
-          {/* PERFORMANCE OVERVIEW */}
-          <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">📊 Performance Overview</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Accuracy Card */}
-              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-6 border border-gray-100 dark:border-gray-800">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Accuracy</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{Math.round(averagePercentage)}%</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-[#1F6BFF]/10 flex items-center justify-center">
-                    <Target className="h-6 w-6 text-[#1F6BFF]" />
-                  </div>
-                </div>
-                <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-[#1F6BFF] rounded-full transition-all duration-1000"
-                    style={{ width: `${averagePercentage}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Speed Card */}
-              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-6 border border-gray-100 dark:border-gray-800">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Speed</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{avgTimePerQuestion}s</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-[#F59E0B]/10 flex items-center justify-center">
-                    <Zap className="h-6 w-6 text-[#F59E0B]" />
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">avg per question</p>
-              </div>
-
-              {/* Retention Card */}
-              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-6 border border-gray-100 dark:border-gray-800">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Retention Estimate</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{Math.round(retentionEstimate)}%</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-[#8B5CF6]/10 flex items-center justify-center">
-                    <BookOpen className="h-6 w-6 text-[#8B5CF6]" />
-                  </div>
-                </div>
-                <div className="relative w-16 h-16 mx-auto">
-                  <svg className="transform -rotate-90 w-16 h-16">
-                    <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="none" className="text-gray-200 dark:text-gray-800" />
-                    <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="none" 
-                      className="text-[#8B5CF6]" 
-                      strokeDasharray={`${(retentionEstimate / 100) * 176} 176`}
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Improvement Card */}
-              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-6 border border-gray-100 dark:border-gray-800">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Improvement</p>
-                    <p className="text-3xl font-bold text-[#16A34A]">+{gradeImprovement.toFixed(1)}</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center">
-                    <TrendingUp className="h-6 w-6 text-[#16A34A]" />
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">grade change since last attempt</p>
-              </div>
-            </div>
-          </div>
-
-          {/* STRENGTHS & WEAKNESSES */}
-          <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">🔍 Strengths & Weaknesses</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Strong Topics */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Strong Topics</h3>
-                <div className="space-y-3">
-                  {strongTopics.map((topic, idx) => (
-                    <div key={idx} className="bg-[#16A34A]/5 dark:bg-[#16A34A]/10 rounded-xl p-4 border border-[#16A34A]/20">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-[#16A34A] flex-shrink-0" />
-                        <span className="font-medium text-gray-900 dark:text-white">{topic}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Weak Topics */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Weak Topics</h3>
-                {weakTopics.length > 0 ? (
-                  <>
-                    <div className="space-y-3 mb-4">
-                      {weakTopics.map((topic, idx) => (
-                        <div key={idx} className="bg-[#F59E0B]/5 dark:bg-[#F59E0B]/10 rounded-xl p-4 border border-[#F59E0B]/20">
-                          <div className="flex items-center gap-3">
-                            <AlertCircle className="h-5 w-5 text-[#F59E0B] flex-shrink-0" />
-                            <span className="font-medium text-gray-900 dark:text-white">{topic}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <Button 
-                      className="w-full bg-[#1F6BFF] hover:bg-[#1557D0] text-white rounded-xl h-12 font-semibold"
-                      onClick={() => navigate('/dashboard')}
-                    >
-                      Revise these next →
-                    </Button>
-                  </>
-                ) : (
-                  <div className="bg-[#16A34A]/5 dark:bg-[#16A34A]/10 rounded-xl p-6 border border-[#16A34A]/20 text-center">
-                    <p className="text-gray-700 dark:text-gray-300">🌟 No weak areas detected!</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">You're doing great</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* GRADE PROGRESSION VISUAL */}
-          <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">📈 Grade Progression</h2>
-            
-            <div className="bg-gradient-to-b from-[#F5F9FF] to-white dark:from-gray-900 dark:to-gray-950 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-8 border border-gray-100 dark:border-gray-800">
-              <div className="relative h-48">
-                {/* Simple progression visualization */}
-                <div className="absolute inset-0 flex items-end justify-around">
-                  {[6.2, 6.5, 6.8, 7.0, newPredictedGrade].map((grade, idx) => (
-                    <div key={idx} className="flex flex-col items-center gap-2">
-                      <div 
-                        className={`w-12 rounded-t-lg transition-all duration-500 ${
-                          idx === 4 
-                            ? 'bg-[#1F6BFF] shadow-lg shadow-[#1F6BFF]/50' 
-                            : 'bg-gray-300 dark:bg-gray-700'
-                        }`}
-                        style={{ 
-                          height: `${(grade / 9) * 100}%`,
-                          animationDelay: `${idx * 0.1}s`
-                        }}
-                      />
-                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
-                        {idx === 4 ? 'Today' : `S${idx + 1}`}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <p className="text-center text-gray-600 dark:text-gray-400 mt-6">
-                You're trending upward — keep the momentum 🚀
-              </p>
-            </div>
-          </div>
-
-          {/* NEXT STEPS */}
-          <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">🗓️ Next Steps</h2>
-            
-            <div className="bg-gradient-to-b from-[#F5F9FF] to-white dark:from-gray-900 dark:to-gray-950 rounded-2xl shadow-md shadow-slate-100 dark:shadow-none p-6 border border-gray-100 dark:border-gray-800">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Review Weak Areas */}
-                <button 
-                  onClick={() => navigate('/dashboard')}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-[#1F6BFF] hover:shadow-md transition-all text-left group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#F59E0B]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <BookOpen className="h-6 w-6 text-[#F59E0B]" />
-                  </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">📚 Review your weak areas</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Focus on topics that need improvement</p>
-                  <span className="text-sm font-medium text-[#1F6BFF] group-hover:underline">Open Revision Plan →</span>
-                </button>
-
-                {/* Practice Another Topic */}
-                <button 
-                  onClick={() => navigate('/dashboard')}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-[#1F6BFF] hover:shadow-md transition-all text-left group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#8B5CF6]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Zap className="h-6 w-6 text-[#8B5CF6]" />
-                  </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">🧠 Practice another topic</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Continue building your knowledge</p>
-                  <span className="text-sm font-medium text-[#1F6BFF] group-hover:underline">Choose Next Topic →</span>
-                </button>
-
-                {/* View Progress Dashboard */}
-                <button 
-                  onClick={() => navigate('/dashboard')}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-[#1F6BFF] hover:shadow-md transition-all text-left group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <TrendingUp className="h-6 w-6 text-[#16A34A]" />
-                  </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">📈 See your full progress</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Track your learning journey</p>
-                  <span className="text-sm font-medium text-[#1F6BFF] group-hover:underline">View Progress →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* MOTIVATIONAL FOOTER */}
-          <div className="text-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="bg-gradient-to-r from-[#1F6BFF] to-[#1557D0] rounded-2xl p-8 shadow-lg shadow-[#1F6BFF]/20">
-              <p className="text-xl font-semibold text-white mb-6">
-                Consistency pays off — keep going, you're building mastery ✨
-              </p>
-              
-              <Button 
-                onClick={() => navigate('/dashboard')}
-                className="bg-white hover:bg-gray-100 text-[#1F6BFF] rounded-xl h-14 px-8 text-lg font-semibold shadow-md"
-              >
-                Continue → Dashboard
-              </Button>
-              
-              <p className="text-sm text-white/80 mt-4">
-                Earn +30 MP for completing this section 🎁
-              </p>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+            <Button 
+              onClick={() => navigate('/dashboard', { 
+                state: { 
+                  openSubjectDrawer: true, 
+                  subjectId: subjectId,
+                  drawerTab: 'overview'
+                } 
+              })}
+              className="flex-1 bg-[#1F6BFF] hover:bg-[#0D47A1] text-white rounded-xl h-14 text-base font-medium"
+            >
+              View detailed insights
+            </Button>
+            <Button 
+              onClick={() => window.location.reload()}
+              variant="outline"
+              className="flex-1 border-2 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-xl h-14 text-base font-medium"
+            >
+              Practice again
+            </Button>
           </div>
         </main>
       </div>
