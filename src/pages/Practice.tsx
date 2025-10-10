@@ -741,118 +741,243 @@ const Practice = () => {
     }).length;
     const incorrectAnswers = attempts.length - correctAnswers - partialAnswers;
     
+    // Calculate predicted grade impact (simulated based on performance)
+    const gradeMap = ['U', 'D', 'C', 'B', 'A', 'A*'];
+    const currentGradeIndex = 2; // Starting at C
+    const gradeImprovement = averagePercentage >= 85 ? 2 : averagePercentage >= 70 ? 1 : averagePercentage >= 50 ? 0.5 : 0;
+    const newGradeIndex = Math.min(Math.floor(currentGradeIndex + gradeImprovement), gradeMap.length - 1);
+    const oldGrade = gradeMap[currentGradeIndex];
+    const newGrade = gradeMap[newGradeIndex];
+    const gradeChanged = newGradeIndex > currentGradeIndex;
+    
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-950">
+      <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-white to-[#EFF6FF] dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+        {/* Animated Background Elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 -left-10 w-72 h-72 bg-[#0EA5E9]/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 -right-10 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#0EA5E9]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+
         {/* Header */}
-        <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-          <div className="max-w-4xl mx-auto px-6 md:px-8 py-5">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center">
-                <CheckCircle2 className="h-6 w-6 text-[#0EA5E9]" />
+        <header className="relative border-b border-[#E2E8F0]/50 dark:border-gray-800/50 bg-white/50 dark:bg-gray-950/50 backdrop-blur-xl">
+          <div className="max-w-6xl mx-auto px-6 md:px-8 py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg animate-scale-in">
+                  <Trophy className="h-7 w-7 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] bg-clip-text text-transparent">
+                    Session Complete!
+                  </h1>
+                  <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1">{topic?.name}</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-[#0F172A] dark:text-white">Session Complete!</h1>
-                <p className="text-sm text-[#64748B] dark:text-gray-400">{topic?.name}</p>
-              </div>
+              <img src={mentioraLogo} alt="Mentiora" className="h-8 opacity-80" />
             </div>
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-6 md:px-8 py-8">
-          {/* Performance Overview Card */}
-          <div className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 p-8 mb-6 shadow-lg">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] mb-4">
-                <Trophy className="h-10 w-10 text-white" />
-              </div>
-              <div className="text-6xl font-bold text-[#0F172A] dark:text-white mb-2">
-                {Math.round(averagePercentage)}%
-              </div>
-              <p className="text-lg text-[#64748B] dark:text-gray-400">Overall Score</p>
-            </div>
-
-            {/* Score Breakdown */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-4 rounded-2xl bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800">
-                <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
-                  {marksEarned}
+        <main className="relative max-w-6xl mx-auto px-6 md:px-8 py-10 space-y-8">
+          {/* Hero Score Card with Animation */}
+          <div className="relative animate-fade-in">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-3xl blur-xl opacity-20 animate-pulse" />
+            <div className="relative bg-gradient-to-br from-white via-white to-[#F8FAFC] dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 rounded-3xl border-2 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-10 shadow-2xl">
+              <div className="text-center mb-8">
+                {/* Animated Trophy Icon */}
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] mb-6 shadow-xl animate-scale-in">
+                  <Trophy className="h-12 w-12 text-white animate-pulse" />
                 </div>
-                <p className="text-xs text-[#64748B] dark:text-gray-400">Marks Earned</p>
-              </div>
-              <div className="text-center p-4 rounded-2xl bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800">
-                <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
-                  {totalMarks}
+                
+                {/* Score with Animation */}
+                <div className="relative inline-block">
+                  <div className="text-8xl font-black bg-gradient-to-br from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] bg-clip-text text-transparent mb-3 animate-scale-in">
+                    {Math.round(averagePercentage)}%
+                  </div>
+                  <div className="absolute -top-6 -right-16">
+                    <Award className="h-12 w-12 text-[#38BDF8] animate-pulse" />
+                  </div>
                 </div>
-                <p className="text-xs text-[#64748B] dark:text-gray-400">Total Marks</p>
-              </div>
-              <div className="text-center p-4 rounded-2xl bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800">
-                <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
-                  {attempts.length}
+                
+                <p className="text-xl text-[#64748B] dark:text-gray-400 font-medium mb-6">Overall Performance</p>
+                
+                {/* Animated Performance Badge */}
+                <div className="inline-flex animate-fade-in">
+                  <Badge className={`text-base px-6 py-3 rounded-2xl font-bold shadow-lg animate-scale-in ${
+                    averagePercentage >= 85 
+                      ? 'bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 text-white border-0' 
+                      : averagePercentage >= 60 
+                      ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white border-0' 
+                      : 'bg-gradient-to-r from-red-500 via-rose-500 to-red-600 text-white border-0'
+                  }`}>
+                    {averagePercentage >= 85 ? "🎉 Outstanding!" : averagePercentage >= 60 ? "⭐ Well Done!" : "💪 Keep Going!"}
+                  </Badge>
                 </div>
-                <p className="text-xs text-[#64748B] dark:text-gray-400">Questions</p>
               </div>
-            </div>
 
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <Progress value={averagePercentage} className="h-3 bg-gray-200 dark:bg-gray-800" />
-            </div>
+              {/* Animated Progress Bar */}
+              <div className="mb-8">
+                <div className="h-4 bg-[#E2E8F0] dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full transition-all duration-1000 ease-out shadow-lg"
+                    style={{ width: `${averagePercentage}%` }}
+                  />
+                </div>
+              </div>
 
-            {/* Performance Badge */}
-            <div className="flex justify-center">
-              <Badge className={`text-sm px-4 py-2 rounded-xl font-semibold ${
-                averagePercentage >= 85 
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0' 
-                  : averagePercentage >= 60 
-                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0' 
-                  : 'bg-gradient-to-r from-red-500 to-rose-500 text-white border-0'
-              }`}>
-                {averagePercentage >= 85 ? "🎉 Excellent Performance!" : averagePercentage >= 60 ? "⭐ Good Work!" : "💪 Keep Practicing!"}
-              </Badge>
+              {/* Score Breakdown with Hover Effects */}
+              <div className="grid grid-cols-3 gap-6">
+                <div className="group text-center p-6 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                  <div className="text-4xl font-black text-[#0EA5E9] mb-2 group-hover:scale-110 transition-transform">
+                    {marksEarned}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Marks Earned</p>
+                </div>
+                <div className="group text-center p-6 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#38BDF8] transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                  <div className="text-4xl font-black text-[#38BDF8] mb-2 group-hover:scale-110 transition-transform">
+                    {totalMarks}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Total Marks</p>
+                </div>
+                <div className="group text-center p-6 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                  <div className="text-4xl font-black text-[#0EA5E9] mb-2 group-hover:scale-110 transition-transform">
+                    {attempts.length}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Questions</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Detailed Analytics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {/* Correct Answers */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border border-green-200 dark:border-green-800/50 p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-green-500 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
+          {/* Predicted Grade Change - Dynamic Graphic */}
+          <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] to-[#0EA5E9] rounded-3xl blur-xl opacity-20" />
+            <div className="relative bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 rounded-3xl border-2 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-8 shadow-xl overflow-hidden">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg">
+                  <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-green-700 dark:text-green-400">{correctAnswers}</div>
+                <div>
+                  <h3 className="text-xl font-bold text-[#0F172A] dark:text-white">Predicted Grade Impact</h3>
+                  <p className="text-sm text-[#64748B] dark:text-gray-400">Based on your performance</p>
+                </div>
               </div>
-              <p className="text-sm text-green-700 dark:text-green-400 font-medium">Fully Correct</p>
-              <p className="text-xs text-green-600 dark:text-green-500 mt-1">Perfect answers</p>
+
+              {/* Grade Transition Visual */}
+              <div className="relative flex items-center justify-center gap-8 py-8">
+                {/* Old Grade */}
+                <div className="text-center">
+                  <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 mb-3 uppercase tracking-wider">Current</div>
+                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#E2E8F0] to-[#CBD5E1] dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-lg">
+                    <span className="text-4xl font-black text-[#64748B] dark:text-gray-400">{oldGrade}</span>
+                  </div>
+                </div>
+
+                {/* Arrow with Animation */}
+                <div className="relative">
+                  {gradeChanged ? (
+                    <>
+                      <div className="animate-pulse">
+                        <TrendingUp className="h-12 w-12 text-[#0EA5E9]" strokeWidth={3} />
+                      </div>
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 px-3 py-1 text-xs font-bold animate-scale-in">
+                          +{gradeImprovement} Grade{gradeImprovement > 1 ? 's' : ''}
+                        </Badge>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-[#CBD5E1] dark:text-gray-700">
+                      <div className="h-12 w-12 flex items-center justify-center">
+                        <div className="h-1 w-8 bg-current rounded-full" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* New Grade with Highlight */}
+                <div className="text-center">
+                  <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 mb-3 uppercase tracking-wider">Projected</div>
+                  <div className={`w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-500 ${
+                    gradeChanged 
+                      ? 'bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] animate-scale-in ring-4 ring-[#0EA5E9]/30' 
+                      : 'bg-gradient-to-br from-[#E2E8F0] to-[#CBD5E1] dark:from-gray-800 dark:to-gray-700'
+                  }`}>
+                    <span className={`text-4xl font-black ${gradeChanged ? 'text-white' : 'text-[#64748B] dark:text-gray-400'}`}>
+                      {newGrade}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Grade Context */}
+              <div className="text-center mt-6">
+                <p className="text-sm text-[#64748B] dark:text-gray-400">
+                  {gradeChanged ? (
+                    <span className="font-medium">
+                      🎯 Keep this momentum to improve your grade from <span className="font-bold text-[#0F172A] dark:text-white">{oldGrade}</span> to <span className="font-bold bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] bg-clip-text text-transparent">{newGrade}</span>!
+                    </span>
+                  ) : (
+                    <span className="font-medium">
+                      Continue practicing to see grade improvements
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Detailed Analytics with Enhanced Design */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {/* Correct Answers */}
+            <div className="group relative overflow-hidden bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border-2 border-green-200 dark:border-green-800/50 p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl cursor-pointer">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-green-400/10 rounded-full blur-3xl" />
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <CheckCircle2 className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-green-700 dark:text-green-400 group-hover:scale-110 transition-transform">{correctAnswers}</div>
+                </div>
+                <p className="text-base text-green-700 dark:text-green-400 font-bold mb-1">Fully Correct</p>
+                <p className="text-sm text-green-600 dark:text-green-500">Perfect understanding</p>
+              </div>
             </div>
 
             {/* Partial Answers */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800/50 p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-white" />
+            <div className="group relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border-2 border-amber-200 dark:border-amber-800/50 p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl cursor-pointer">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-full blur-3xl" />
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <TrendingUp className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-amber-700 dark:text-amber-400 group-hover:scale-110 transition-transform">{partialAnswers}</div>
                 </div>
-                <div className="text-2xl font-bold text-amber-700 dark:text-amber-400">{partialAnswers}</div>
+                <p className="text-base text-amber-700 dark:text-amber-400 font-bold mb-1">Partial Credit</p>
+                <p className="text-sm text-amber-600 dark:text-amber-500">Almost there</p>
               </div>
-              <p className="text-sm text-amber-700 dark:text-amber-400 font-medium">Partially Correct</p>
-              <p className="text-xs text-amber-600 dark:text-amber-500 mt-1">Some marks earned</p>
             </div>
 
             {/* Incorrect Answers */}
-            <div className="bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-2xl border border-red-200 dark:border-red-800/50 p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-red-500 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-white" />
+            <div className="group relative overflow-hidden bg-gradient-to-br from-red-50 via-rose-50 to-red-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-2xl border-2 border-red-200 dark:border-red-800/50 p-6 hover:scale-105 transition-all duration-300 hover:shadow-2xl cursor-pointer">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-400/10 rounded-full blur-3xl" />
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <Target className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-4xl font-black text-red-700 dark:text-red-400 group-hover:scale-110 transition-transform">{incorrectAnswers}</div>
                 </div>
-                <div className="text-2xl font-bold text-red-700 dark:text-red-400">{incorrectAnswers}</div>
+                <p className="text-base text-red-700 dark:text-red-400 font-bold mb-1">To Review</p>
+                <p className="text-sm text-red-600 dark:text-red-500">Growth opportunity</p>
               </div>
-              <p className="text-sm text-red-700 dark:text-red-400 font-medium">Needs Review</p>
-              <p className="text-xs text-red-600 dark:text-red-500 mt-1">Focus areas</p>
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          {/* Action Buttons with Enhanced Style */}
+          <div className="flex flex-col sm:flex-row gap-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <Button 
               onClick={() => navigate('/dashboard', { 
                 state: { 
@@ -861,16 +986,17 @@ const Practice = () => {
                   drawerTab: 'overview'
                 } 
               })}
-              className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-2xl py-6 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+              className="group flex-1 relative overflow-hidden bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white rounded-2xl py-7 text-lg font-bold shadow-2xl hover:shadow-[#0EA5E9]/50 transition-all duration-300 hover:scale-105"
             >
-              <Zap className="h-5 w-5 mr-2" />
-              View Insights
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+              <Zap className="h-6 w-6 mr-2 group-hover:rotate-12 transition-transform" />
+              View Detailed Insights
             </Button>
             <Button 
               onClick={() => window.location.reload()}
-              variant="outline"
-              className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 rounded-2xl py-6 text-base font-semibold"
+              className="group flex-1 relative overflow-hidden bg-white dark:bg-gray-900 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9] hover:text-white dark:hover:bg-[#0EA5E9] rounded-2xl py-7 text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
+              <BookOpenCheck className="h-6 w-6 mr-2 group-hover:rotate-12 transition-transform" />
               Practice Again
             </Button>
           </div>
