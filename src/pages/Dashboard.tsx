@@ -1396,12 +1396,13 @@ const Dashboard = () => {
       const subjectId = userSubjects[index] || `subject-${index}`;
       
       // Parse grades (they might be strings like "5" or numbers)
-      const predicted = typeof subject.predicted_grade === 'string' 
-        ? parseFloat(subject.predicted_grade) || 5 
-        : subject.predicted_grade || 5;
+      // Use target grade as fallback for predicted grade if not yet calculated
       const target = typeof subject.target_grade === 'string'
         ? parseFloat(subject.target_grade) || 7
         : subject.target_grade || 7;
+      const predicted = typeof subject.predicted_grade === 'string' 
+        ? parseFloat(subject.predicted_grade) || target 
+        : subject.predicted_grade || target;
       
       // Generate trend based on predicted grade
       const baseTrend = Math.floor((predicted / 9) * 100);

@@ -21,8 +21,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
   // Prepare radar chart data
   const radarData = predictedGrades.map((prediction) => {
     const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
-    const targetGrade = parseInt(userSubject?.target_grade || "5");
-    const currentGrade = parseInt(prediction.grade || "0");
+    const targetGrade = parseInt(userSubject?.target_grade || "7");
+    // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
+    const currentGrade = parseInt(prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0");
 
     return {
       subject: prediction.subject_id.slice(0, 12),
@@ -110,8 +111,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {predictedGrades.map((prediction) => {
           const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
-          const targetGrade = parseInt(userSubject?.target_grade || "5");
-          const currentGrade = parseInt(prediction.grade || "0");
+          const targetGrade = parseInt(userSubject?.target_grade || "7");
+          // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
+          const currentGrade = parseInt(prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0");
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
 
           return (
