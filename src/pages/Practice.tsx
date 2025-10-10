@@ -816,30 +816,40 @@ const Practice = () => {
             </Card>
 
             {/* Predicted Grade Animation */}
-            <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200 dark:border-blue-800 rounded-2xl">
-              <CardContent className="py-6">
-                <div className="space-y-3">
-                  <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
-                    Predicted Grade Improvement
+            <Card className="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 dark:from-blue-950/30 dark:via-cyan-950/30 dark:to-blue-950/30 border-blue-200/50 dark:border-blue-800/50 rounded-3xl shadow-xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+              <CardContent className="py-10 relative">
+                <div className="space-y-6">
+                  <p className="text-base font-semibold text-blue-900 dark:text-blue-100 tracking-tight">
+                    Your predicted grade improved from
                   </p>
-                  <div className="flex items-center justify-center gap-4">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      {oldPredictedGrade.toFixed(1)}
+                  <div className="flex items-center justify-center gap-6">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-blue-600/20 dark:bg-blue-400/20 blur-xl rounded-full" />
+                      <div className="relative text-5xl font-bold bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-400 dark:to-blue-500 bg-clip-text text-transparent">
+                        {oldPredictedGrade.toFixed(1)}
+                      </div>
                     </div>
-                    <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-pulse" />
+                    <div className="flex flex-col items-center gap-2">
+                      <ArrowRight className="h-8 w-8 text-blue-600 dark:text-blue-400 animate-pulse" />
+                      <div className="px-3 py-1 rounded-full bg-emerald-500/20 dark:bg-emerald-400/20 border border-emerald-500/30 dark:border-emerald-400/30">
+                        <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                          +{gradeImprovement.toFixed(1)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">
-                      {newPredictedGrade.toFixed(1)}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-cyan-600/20 dark:bg-cyan-400/20 blur-xl rounded-full animate-pulse" />
+                      <div className="relative text-5xl font-bold bg-gradient-to-br from-cyan-600 to-cyan-700 dark:from-cyan-400 dark:to-cyan-500 bg-clip-text text-transparent">
+                        {newPredictedGrade.toFixed(1)}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-400">
-                    <TrendingUp className="h-4 w-4" />
-                    <span className="text-sm font-semibold">+{gradeImprovement.toFixed(1)} improvement</span>
+                  <div className="pt-4 border-t border-blue-200/50 dark:border-blue-800/50">
+                    <p className="text-sm text-blue-800 dark:text-blue-200 text-center font-medium">
+                      👏 You scored better than <span className="font-bold text-blue-900 dark:text-blue-100">{percentileRank}%</span> of students this week
+                    </p>
                   </div>
-                  <p className="text-xs text-blue-700 dark:text-blue-300 mt-2">
-                    👏 You scored better than {percentileRank}% of students this week
-                  </p>
                 </div>
               </CardContent>
             </Card>
