@@ -832,14 +832,14 @@ const Practice = () => {
           {/* Performance Summary Card - Overall Score Only */}
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
                 <div className="text-center space-y-3">
                   <div className="space-y-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       Overall Score
                     </p>
-                    <p className="text-5xl font-bold text-primary">
+                    <p className="text-5xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
                       {Math.round(averagePercentage)}%
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -853,10 +853,10 @@ const Practice = () => {
 
           {/* Predicted Grade Improvement - Premium Card */}
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <Card className="bg-gradient-to-br from-card via-primary/5 to-primary/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-card via-primary/10 to-accent/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
@@ -893,12 +893,12 @@ const Practice = () => {
                     </div>
 
                     <div className="text-center space-y-2 group">
-                      <Badge className="mb-1 bg-primary text-primary-foreground border-0 text-xs">
+                      <Badge className="mb-1 bg-gradient-to-r from-primary to-accent text-primary-foreground border-0 text-xs">
                         Now
                       </Badge>
                       <div className="relative">
-                        <div className="absolute inset-0 bg-primary/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                        <div className="relative text-5xl font-bold text-primary">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                        <div className="relative text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                           {newPredictedGrade.toFixed(1)}
                         </div>
                       </div>
@@ -923,7 +923,7 @@ const Practice = () => {
                       />
                       {/* New grade position - animated bright fill - animates after */}
                       <div 
-                        className="absolute top-0 bottom-0 bg-primary rounded-full transition-all duration-1500 ease-out"
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-1500 ease-out shadow-lg shadow-primary/50"
                         style={{ 
                           width: '0%',
                           backgroundSize: '200% 100%',
