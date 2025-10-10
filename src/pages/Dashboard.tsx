@@ -1326,55 +1326,37 @@ const Dashboard = () => {
         return;
       }
       
-      console.log('Calculating study time for subject:', selectedDrawerSubject.name);
+      // Convert subject name to the format used in database (e.g., "Chemistry" -> "chemistry-edexcel")
+      const subjectId = `${selectedDrawerSubject.name.toLowerCase()}-${selectedDrawerSubject.examBoard.toLowerCase()}`;
       
-      // Query exams table - the subject_id in exams matches the subject_name in user_subjects
-      // which is the full name like "Chemistry (AQA)" or "Biology (A-Level)"
-      const { data: exams, error } = await supabase
-        .from("exams")
-        .select("started_at, completed_at, subject_id")
+      console.log('Fetching study time for subject_id:', subjectId);
+      
+      // Query subject_performance table for practice question time
+      const { data: subjectPerf, error } = await supabase
+        .from("subject_performance")
+        .select("study_hours")
         .eq("user_id", user.id)
-        .not("completed_at", "is", null);
+        .eq("subject_id", subjectId)
+        .maybeSingle();
       
-      console.log('All exams for user:', exams);
+      console.log('Subject performance data:', subjectPerf);
       
       if (error) {
-        console.error('Error fetching exams:', error);
+        console.error('Error fetching subject performance:', error);
         setSubjectStudyTime({hours: 0, minutes: 0});
         return;
       }
       
-      if (exams && exams.length > 0) {
-        // Filter exams that match the current subject name
-        const subjectExams = exams.filter(exam => 
-          exam.subject_id === selectedDrawerSubject.name || 
-          exam.subject_id.includes(selectedDrawerSubject.name)
-        );
-        
-        console.log('Filtered exams for this subject:', subjectExams);
-        
-        if (subjectExams.length > 0) {
-          const totalMinutes = subjectExams.reduce((sum, exam) => {
-            const start = new Date(exam.started_at);
-            const end = new Date(exam.completed_at!);
-            const durationMs = end.getTime() - start.getTime();
-            return sum + (durationMs / (1000 * 60)); // Convert to minutes
-          }, 0);
-          
-          const hours = Math.floor(totalMinutes / 60);
-          const minutes = Math.round(totalMinutes % 60);
-          console.log('Calculated study time:', hours, 'hours', minutes, 'minutes');
-          setSubjectStudyTime({hours, minutes});
-        } else {
-          setSubjectStudyTime({hours: 0, minutes: 0});
-        }
-      } else {
-        setSubjectStudyTime({hours: 0, minutes: 0});
-      }
+      const totalHours = subjectPerf?.study_hours || 0;
+      const hours = Math.floor(totalHours);
+      const minutes = Math.round((totalHours - hours) * 60);
+      
+      console.log('Calculated study time:', hours, 'hours', minutes, 'minutes');
+      setSubjectStudyTime({hours, minutes});
     };
     
     calculateSubjectStudyTime();
-  }, [user?.id, selectedDrawerSubject?.name]);
+  }, [user?.id, selectedDrawerSubject?.name, selectedDrawerSubject?.examBoard]);
 
   // Clear quest notification when viewing quests tab
   useEffect(() => {
