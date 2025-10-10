@@ -282,44 +282,41 @@ const Dashboard = () => {
 
   // Map database subject_id to curriculum subject_id for consistent icons
   const mapDatabaseSubjectToCurriculum = (dbSubjectId: string) => {
-    const normalized = dbSubjectId.toLowerCase().trim();
-    
     const subjectMapping: { [key: string]: string } = {
       // A-level subjects
-      "mathematics (a-level)": "maths-aqa-alevel",
-      "biology (a-level)": "biology-aqa-alevel",
+      "Mathematics (A-Level)": "maths-aqa-alevel",
+      "Biology (A-Level)": "biology-aqa-alevel",
       
       // GCSE/standard subjects with exam board in name
-      "physics (edexcel)": "physics-edexcel",
-      "chemistry (edexcel)": "chemistry-edexcel",
-      "biology (edexcel)": "biology-edexcel",
+      "Physics (Edexcel)": "physics-edexcel",
+      "Chemistry (Edexcel)": "chemistry-edexcel",
+      "Biology (Edexcel)": "biology-edexcel",
       
       // GCSE/standard subjects
-      "mathematics": "maths-edexcel",
+      "Mathematics": "maths-edexcel",
       "maths": "maths-edexcel", 
+      "mathematics": "maths-edexcel",
+      "Physics": "physics-edexcel",
       "physics": "physics-edexcel",
+      "Chemistry": "chemistry-edexcel",
       "chemistry": "chemistry-edexcel",
+      "Biology": "biology-edexcel", 
       "biology": "biology-edexcel",
-      
-      // English subjects - map all variations to the AQA version
-      "english language": "english-language-aqa",
-      "english-language": "english-language-aqa",
-      "english language (aqa)": "english-language-aqa",
-      "edexcel-english-language": "edexcel-english-language",
-      
-      "english literature": "english-literature", 
+      "English Language": "english-language",
+      "english-language": "english-language",
+      "English Literature": "english-literature", 
       "english-literature": "english-literature",
-      "english-literature-edexcel": "english-literature-edexcel",
-      
+      "Geography": "geography",
       "geography": "geography",
+      "History": "history",
       "history": "history",
-      "religious studies": "religious-studies",
+      "Religious Studies": "religious-studies",
       "religious-studies": "religious-studies",
-      "business studies": "business-edexcel-igcse",
+      "Business Studies": "business-edexcel-igcse",
       "business": "business-edexcel-igcse",
     };
     
-    return subjectMapping[normalized] || dbSubjectId;
+    return subjectMapping[dbSubjectId] || dbSubjectId;
   };
 
   // Load flashcard sets
@@ -666,9 +663,18 @@ const Dashboard = () => {
 
       console.log('Raw predicted exam completions data:', data);
 
-      // Don't group - keep ALL records so we can filter and sort later
-      // This ensures we get the most recent grade even if subject_id format changed
-      setPredictedGrades(data || []);
+      // Group by subject_id and get the latest prediction for each subject
+      const latestGrades = data?.reduce((acc: any, grade: any) => {
+        if (!acc[grade.subject_id] || new Date(grade.created_at) > new Date(acc[grade.subject_id].created_at)) {
+          acc[grade.subject_id] = grade;
+        }
+        return acc;
+      }, {});
+
+      console.log('Predicted grades from DB:', Object.values(latestGrades || {}));
+      console.log('User subjects from curriculum:', userSubjects);
+      
+      setPredictedGrades(Object.values(latestGrades || {}));
     } catch (error) {
       console.error('Error loading predicted grades:', error);
     }
@@ -1555,21 +1561,21 @@ const Dashboard = () => {
       const practicePercentage = Math.round(totalScore / totalTopics);
       
       // Get most recent predicted exam completion for this subject
-      const matchingGrades = predictedGrades.filter(pg => {
-        const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
-        return mappedSubjectId === subjectId;
-      });
-      
-      const recentExamCompletion = matchingGrades
+      const recentExamCompletion = predictedGrades
+        .filter(pg => pg.subject_id === subjectId)
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
       const hasPracticeData = subjectProgress.length > 0;
       
-      // Use the latest predicted grade directly from database (preserving decimals)
-      if (recentExamCompletion) {
-        // Use the grade from predicted_exam_completions as the source of truth
-        const gradeValue = recentExamCompletion.grade;
-        predicted = gradeValue === 'U' || gradeValue === '0' || gradeValue === 0 ? 'U' : parseFloat(gradeValue) || 0;
+      // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
+      if (recentExamCompletion && hasPracticeData) {
+        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseInt(recentExamCompletion.grade) || 0;
+        const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
+        predicted = combinedGrade === 0 ? 'U' : combinedGrade;
+      } else if (recentExamCompletion) {
+        // Only exam completion exists
+        predicted = recentExamCompletion.grade === 'U' ? 'U' : parseInt(recentExamCompletion.grade) || 0;
       } else if (hasPracticeData) {
         // Only practice data exists
         const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
@@ -2495,7 +2501,7 @@ const Dashboard = () => {
                                        <div className={`text-3xl font-bold flex items-center gap-2 ${
                                         isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
                                       }`}>
-                                        {sign}{change.toFixed(1)}
+                                        {sign}{change.toFixed(1)} grades
                                       </div>
                                     </CardContent>
                                   </Card>
@@ -2570,14 +2576,8 @@ const Dashboard = () => {
                                 const subjectIdToMatch = selectedDrawerSubject?.id || '';
                                 const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
-                                // Get user's predicted grade for this subject using the mapped subject ID
-                                const matchingGrades = predictedGrades.filter(pg => {
-                                  const mappedPgSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
-                                  return mappedPgSubjectId === subjectIdToMatch;
-                                });
-                                
-                                const userPredictedGrade = matchingGrades
-                                  .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+                                // Get user's predicted grade for this subject using the direct subject ID
+                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 if (userPredictedGrade) {

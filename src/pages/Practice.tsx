@@ -674,7 +674,7 @@ const Practice = () => {
           .from('predicted_exam_completions')
           .select('grade, percentage')
           .eq('user_id', user.id)
-          .eq('subject_id', subjectId) // Match using subjectId for consistency
+          .eq('subject_id', subjectName)
           .order('completed_at', { ascending: false })
           .limit(1)
           .maybeSingle();
@@ -703,7 +703,7 @@ const Practice = () => {
           .from('predicted_exam_completions')
           .insert({
             user_id: user.id,
-            subject_id: subjectId, // Use subjectId (e.g., "english-language-aqa") not subjectName
+            subject_id: subjectName,
             grade: newPredictedGrade.toString(),
             percentage: newPercentage,
             total_marks: 100,
@@ -891,28 +891,12 @@ const Practice = () => {
   };
 
   if (sessionComplete) {
-    console.log('📊 Rendering section complete page');
-    
-    // Safety check - if no topic, questions or attempts, redirect to dashboard
-    if (!topic || shuffledQuestions.length === 0 || attempts.length === 0) {
-      console.error('Session complete but missing data:', {
-        hasTopic: !!topic,
-        questionsCount: shuffledQuestions.length,
-        attemptsCount: attempts.length
-      });
-      navigate('/dashboard');
-      return null;
-    }
-    
-    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + (q.marks || 0), 0);
-    const marksEarned = attempts.reduce((sum, a) => sum + (a.score || 0), 0);
+    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
+    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
     // Calculate performance metrics
-    const correctAnswers = attempts.filter(a => {
-      const question = shuffledQuestions.find(q => q.id === a.questionId);
-      return question && a.score === question.marks;
-    }).length;
+    const correctAnswers = attempts.filter(a => a.score === shuffledQuestions.find(q => q.id === a.questionId)?.marks).length;
     const partialAnswers = attempts.filter(a => {
       const questionMarks = shuffledQuestions.find(q => q.id === a.questionId)?.marks || 0;
       return a.score > 0 && a.score < questionMarks;

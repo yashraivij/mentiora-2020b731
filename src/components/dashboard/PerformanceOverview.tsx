@@ -18,33 +18,15 @@ interface PerformanceOverviewProps {
 }
 
 export const PerformanceOverview = ({ predictedGrades, userSubjects }: PerformanceOverviewProps) => {
-  // Helper to match predicted grade subject_id with user subject
-  const findMatchingUserSubject = (predictionSubjectId: string) => {
-    // Convert database subject_id to parts (e.g., "english-language-aqa" -> ["english", "language", "aqa"])
-    const parts = predictionSubjectId.toLowerCase().split('-');
-    
-    return userSubjects.find((userSubject) => {
-      const subjectName = userSubject.subject_name.toLowerCase();
-      const examBoard = userSubject.exam_board.toLowerCase();
-      
-      // Check if the prediction subject_id contains both the subject name parts and exam board
-      const subjectNameParts = subjectName.split(' ').map(part => part.toLowerCase());
-      const matchesSubject = subjectNameParts.every(part => parts.includes(part));
-      const matchesBoard = parts.includes(examBoard);
-      
-      return matchesSubject && matchesBoard;
-    });
-  };
-
   // Prepare radar chart data
   const radarData = predictedGrades.map((prediction) => {
-    const userSubject = findMatchingUserSubject(prediction.subject_id);
+    const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
     const targetGrade = parseInt(userSubject?.target_grade || "7");
-    // Use the latest predicted grade from database
-    const gradeValue = prediction.grade || "0";
-    // Treat "0", "0.0" or "U" as ungraded
-    const isUngraded = gradeValue === 'U' || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue) === 0;
-    const currentGrade = isUngraded ? 0 : parseFloat(gradeValue);
+    // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
+    const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
+    // Treat "0", 0, "0.0" or "U" as ungraded
+    const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
+    const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
 
     return {
       subject: prediction.subject_id.slice(0, 12),
@@ -131,13 +113,13 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
       {/* Subject Progress Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {predictedGrades.map((prediction) => {
-          const userSubject = findMatchingUserSubject(prediction.subject_id);
+          const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
           const targetGrade = parseInt(userSubject?.target_grade || "7");
-          // Use the latest predicted grade from database
-          const gradeValue = prediction.grade || "0";
-          // Treat "0", "0.0" or "U" as ungraded
-          const isUngraded = gradeValue === 'U' || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue) === 0;
-          const currentGrade = isUngraded ? 0 : parseFloat(gradeValue);
+          // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
+          const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
+          // Treat "0", 0, "0.0" or "U" as ungraded
+          const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
+          const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
 
           return (
