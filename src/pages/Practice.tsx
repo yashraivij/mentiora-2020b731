@@ -817,14 +817,14 @@ const Practice = () => {
     
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-        <div className="max-w-6xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
+        <div className="max-w-6xl mx-auto px-6 py-8 space-y-6 animate-fade-in">
           
           {/* Hero Header */}
-          <div className="text-center space-y-3">
-            <h1 className="text-4xl font-bold text-foreground">
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold text-foreground">
               Section Complete!
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
             </p>
           </div>
@@ -833,21 +833,21 @@ const Practice = () => {
           <div className="flex justify-center">
             <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-8 relative">
-                <div className="text-center space-y-4">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
-                      <Target className="h-8 w-8 text-white" />
+              <CardContent className="p-6 relative">
+                <div className="text-center space-y-3">
+                  <div className="flex justify-center mb-2">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
+                      <Target className="h-7 w-7 text-white" />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                  <div className="space-y-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       Overall Score
                     </p>
-                    <p className="text-6xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                    <p className="text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
                       {Math.round(averagePercentage)}%
                     </p>
-                    <p className="text-base text-muted-foreground">
+                    <p className="text-sm text-muted-foreground">
                       {correctAnswers} out of {attempts.length} questions correct
                     </p>
                   </div>
@@ -862,47 +862,47 @@ const Practice = () => {
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-400/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
-            <CardHeader className="border-b border-border/50 relative">
-              <div className="space-y-2">
+            <CardHeader className="border-b border-border/50 relative pb-4">
+              <div className="space-y-1">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-                  <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+                  <TrendingUp className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
                   <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">Grade Improvement</span>
                 </div>
-                <CardTitle className="text-3xl font-bold">Predicted Grade</CardTitle>
-                <p className="text-base text-muted-foreground">Based on your recent performance</p>
+                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
+                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
               </div>
             </CardHeader>
-            <CardContent className="p-10 relative">
-              <div className="space-y-10">
+            <CardContent className="p-6 relative">
+              <div className="space-y-6">
                 {/* Grade Comparison */}
-                <div className="flex items-center justify-center gap-16">
-                  <div className="text-center space-y-3 group">
-                    <Badge variant="outline" className="mb-2 border-cyan-200 dark:border-cyan-800">
+                <div className="flex items-center justify-center gap-12">
+                  <div className="text-center space-y-2 group">
+                    <Badge variant="outline" className="mb-1 border-cyan-200 dark:border-cyan-800 text-xs">
                       Before
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-6xl font-bold text-cyan-600 dark:text-cyan-400">
+                      <div className="relative text-5xl font-bold text-cyan-600 dark:text-cyan-400">
                         {oldPredictedGrade.toFixed(1)}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-base flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
-                      <TrendingUp className="h-5 w-5" />
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
+                      <TrendingUp className="h-4 w-4" />
                       <span>+{gradeImprovement.toFixed(1)}</span>
                     </div>
-                    <ArrowRight className="h-8 w-8 text-cyan-600 dark:text-cyan-400 animate-pulse" />
+                    <ArrowRight className="h-6 w-6 text-cyan-600 dark:text-cyan-400 animate-pulse" />
                   </div>
 
-                  <div className="text-center space-y-3 group">
-                    <Badge className="mb-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0">
+                  <div className="text-center space-y-2 group">
+                    <Badge className="mb-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0 text-xs">
                       Now
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-6xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+                      <div className="relative text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
                         {newPredictedGrade.toFixed(1)}
                       </div>
                     </div>
@@ -910,8 +910,8 @@ const Practice = () => {
                 </div>
 
                 {/* Animated Progress Bar */}
-                <div className="space-y-4">
-                  <div className="flex justify-between text-sm font-semibold text-muted-foreground">
+                <div className="space-y-3">
+                  <div className="flex justify-between text-xs font-semibold text-muted-foreground">
                     <span>Grade 4.0</span>
                     <span>Grade 9.0</span>
                   </div>
@@ -935,18 +935,18 @@ const Practice = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'slide 2s infinite' }} />
                     </div>
                   </div>
-                  <div className="text-center pt-2">
-                    <p className="text-base text-muted-foreground">
-                      Progress: <span className="font-bold text-cyan-600 dark:text-cyan-400 text-lg">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
+                  <div className="text-center pt-1">
+                    <p className="text-sm text-muted-foreground">
+                      Progress: <span className="font-bold text-cyan-600 dark:text-cyan-400">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
                     </p>
                   </div>
                 </div>
 
                 {/* Percentile Badge */}
-                <div className="flex justify-center">
-                  <div className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
-                    <p className="text-base text-center">
-                      <span className="text-2xl">👏</span> You scored better than <span className="font-bold text-cyan-600 dark:text-cyan-400 text-lg">{percentileRank}%</span> of students this week
+                <div className="flex justify-center pt-2">
+                  <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+                    <p className="text-sm text-center">
+                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-cyan-600 dark:text-cyan-400">{percentileRank}%</span> of students this week
                     </p>
                   </div>
                 </div>
