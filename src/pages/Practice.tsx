@@ -776,37 +776,41 @@ const Practice = () => {
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
     
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-gray-950 p-6">
-        <div className="max-w-6xl mx-auto space-y-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+        <div className="max-w-6xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
           
-          {/* Header */}
-          <div className="space-y-2">
+          {/* Hero Header */}
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-2xl mb-4 shadow-lg shadow-cyan-500/30 animate-scale-in">
+              🎉
+            </div>
             <h1 className="text-4xl font-bold text-foreground">
-              Section Complete
+              Section Complete!
             </h1>
-            <p className="text-lg text-muted-foreground">
-              You've just finished {topic?.name} — here's how you did.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
             </p>
           </div>
 
           {/* Performance Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Overall Score */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardContent className="p-6">
+            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-6 relative">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
+                    <Target className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase">
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Overall Score
                   </p>
-                  <p className="text-3xl font-bold text-foreground">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
                     {Math.round(averagePercentage)}%
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     {correctAnswers}/{attempts.length} correct
                   </p>
                 </div>
@@ -814,21 +818,22 @@ const Practice = () => {
             </Card>
 
             {/* Accuracy */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardContent className="p-6">
+            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-6 relative">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center">
-                    <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
+                    <CheckCircle2 className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase">
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Accuracy
                   </p>
-                  <p className="text-3xl font-bold text-foreground">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                     {Math.round((correctAnswers / attempts.length) * 100)}%
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     Last 7 days
                   </p>
                 </div>
@@ -836,21 +841,22 @@ const Practice = () => {
             </Card>
 
             {/* Study Time */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardContent className="p-6">
+            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-6 relative">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                    <Clock className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform duration-500">
+                    <Clock className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase">
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Study Time
                   </p>
-                  <p className="text-3xl font-bold text-foreground">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
                     {sessionDuration}m
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     This session
                   </p>
                 </div>
@@ -858,21 +864,22 @@ const Practice = () => {
             </Card>
 
             {/* Questions */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardContent className="p-6">
+            <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-6 relative">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center">
-                    <BookOpen className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-500">
+                    <BookOpen className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase">
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     This Week
                   </p>
-                  <p className="text-3xl font-bold text-foreground">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                     {attempts.length}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     Questions
                   </p>
                 </div>
@@ -880,107 +887,143 @@ const Practice = () => {
             </Card>
           </div>
 
-          {/* Predicted Grade Improvement */}
-          <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-            <CardHeader className="border-b border-border">
-              <div className="space-y-1">
-                <CardTitle className="text-2xl font-bold">Predicted Grade Improvement</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
+          {/* Predicted Grade Improvement - Premium Card */}
+          <Card className="bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 dark:from-gray-900 dark:via-cyan-950/10 dark:to-blue-950/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            {/* Animated background elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-400/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            
+            <CardHeader className="border-b border-border/50 relative">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+                  <TrendingUp className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+                  <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">Grade Improvement</span>
+                </div>
+                <CardTitle className="text-3xl font-bold">Predicted Grade</CardTitle>
+                <p className="text-base text-muted-foreground">Based on your recent performance</p>
               </div>
             </CardHeader>
-            <CardContent className="p-8">
-              <div className="space-y-8">
-                <div className="flex items-center justify-center gap-12">
-                  <div className="text-center space-y-2">
-                    <Badge variant="outline" className="mb-2">
+            <CardContent className="p-10 relative">
+              <div className="space-y-10">
+                {/* Grade Comparison */}
+                <div className="flex items-center justify-center gap-16">
+                  <div className="text-center space-y-3 group">
+                    <Badge variant="outline" className="mb-2 border-cyan-200 dark:border-cyan-800">
                       Before
                     </Badge>
-                    <div className="text-5xl font-bold text-cyan-600 dark:text-cyan-400">
-                      {oldPredictedGrade.toFixed(1)}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                      <div className="relative text-6xl font-bold text-cyan-600 dark:text-cyan-400">
+                        {oldPredictedGrade.toFixed(1)}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="px-4 py-2 rounded-full bg-emerald-500 text-white font-bold text-sm flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4" />
-                      +{gradeImprovement.toFixed(1)}
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-base flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
+                      <TrendingUp className="h-5 w-5" />
+                      <span>+{gradeImprovement.toFixed(1)}</span>
                     </div>
-                    <ArrowRight className="h-6 w-6 text-muted-foreground" />
+                    <ArrowRight className="h-8 w-8 text-cyan-600 dark:text-cyan-400 animate-pulse" />
                   </div>
 
-                  <div className="text-center space-y-2">
-                    <Badge variant="default" className="mb-2 bg-cyan-500">
+                  <div className="text-center space-y-3 group">
+                    <Badge className="mb-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0">
                       Now
                     </Badge>
-                    <div className="text-5xl font-bold text-cyan-600 dark:text-cyan-400">
-                      {newPredictedGrade.toFixed(1)}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                      <div className="relative text-6xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+                        {newPredictedGrade.toFixed(1)}
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Progress Bar */}
-                <div className="space-y-3">
-                  <div className="flex justify-between text-xs font-medium text-muted-foreground">
-                    <span>Grade 4</span>
-                    <span>Grade 9</span>
+                {/* Animated Progress Bar */}
+                <div className="space-y-4">
+                  <div className="flex justify-between text-sm font-semibold text-muted-foreground">
+                    <span>Grade 4.0</span>
+                    <span>Grade 9.0</span>
                   </div>
-                  <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="relative h-4 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
                     <div 
-                      className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1000"
+                      className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-2000 ease-out"
                       style={{ 
                         width: `${((newPredictedGrade - 4) / 5) * 100}%`,
+                        backgroundSize: '200% 100%',
+                        animation: 'shimmer 3s infinite'
                       }}
-                    />
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'slide 2s infinite' }} />
+                    </div>
                   </div>
-                  <p className="text-sm text-center text-muted-foreground">
-                    You scored better than <span className="font-semibold text-cyan-600 dark:text-cyan-400">{percentileRank}%</span> of students this week
-                  </p>
+                  <div className="text-center pt-2">
+                    <p className="text-base text-muted-foreground">
+                      Progress: <span className="font-bold text-cyan-600 dark:text-cyan-400 text-lg">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
+                    </p>
+                  </div>
+                </div>
+
+                {/* Percentile Badge */}
+                <div className="flex justify-center">
+                  <div className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+                    <p className="text-base text-center">
+                      <span className="text-2xl">👏</span> You scored better than <span className="font-bold text-cyan-600 dark:text-cyan-400 text-lg">{percentileRank}%</span> of students this week
+                    </p>
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Performance Comparison */}
-          <div className="space-y-4">
+          <div className="space-y-5">
             <h2 className="text-2xl font-bold text-foreground">Performance Comparison</h2>
             
-            <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
               {/* Predicted Grade */}
-              <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="space-y-3">
+              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <CardContent className="p-8 relative">
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-muted-foreground uppercase">
+                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Predicted Grade
                       </p>
-                      <span className="text-2xl font-bold text-foreground">
+                      <span className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
                         {newPredictedGrade.toFixed(1)}
                       </span>
                     </div>
-                    <Progress 
-                      value={(newPredictedGrade / 9) * 100} 
-                      className="h-2 bg-slate-100 dark:bg-gray-800 [&>div]:bg-cyan-500"
-                    />
+                    <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1500"
+                        style={{ width: `${(newPredictedGrade / 9) * 100}%` }}
+                      />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Target Grade */}
-              <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="space-y-3">
+              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <CardContent className="p-8 relative">
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-muted-foreground uppercase">
+                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Target Grade
                       </p>
-                      <span className="text-2xl font-bold text-foreground">
+                      <span className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                         9
                       </span>
                     </div>
-                    <Progress 
-                      value={100} 
-                      className="h-2 bg-slate-100 dark:bg-gray-800 [&>div]:bg-emerald-500"
-                    />
+                    <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-1500"
+                        style={{ width: '100%' }}
+                      />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -988,38 +1031,40 @@ const Practice = () => {
           </div>
 
           {/* Performance Breakdown */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Strong Areas */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardHeader className="border-b border-border">
-                <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+            <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+              <CardHeader className="border-b border-emerald-200/50 dark:border-emerald-800/50">
+                <CardTitle className="text-xl font-bold flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
+                    <CheckCircle2 className="h-5 w-5 text-white" />
+                  </div>
                   Strong Performance
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {correctAnswers >= 2 ? (
                     <>
-                      <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-full bg-emerald-500 rounded-full" />
-                        <span className="text-sm text-foreground">Core concept understanding</span>
+                      <div className="flex items-center gap-4 group">
+                        <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                        <span className="text-base text-foreground font-medium">Core concept understanding</span>
                       </div>
                       {averagePercentage >= 80 && (
-                        <div className="flex items-center gap-3">
-                          <div className="w-1.5 h-full bg-emerald-500 rounded-full" />
-                          <span className="text-sm text-foreground">Excellent accuracy rate</span>
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Excellent accuracy rate</span>
                         </div>
                       )}
                       {avgTimePerQuestion < 40 && (
-                        <div className="flex items-center gap-3">
-                          <div className="w-1.5 h-full bg-emerald-500 rounded-full" />
-                          <span className="text-sm text-foreground">Efficient time management</span>
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Efficient time management</span>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-base text-muted-foreground">
                       Complete more questions to identify strengths
                     </p>
                   )}
@@ -1028,32 +1073,34 @@ const Practice = () => {
             </Card>
 
             {/* Focus Areas */}
-            <Card className="bg-white dark:bg-gray-900 rounded-xl border-0 shadow-sm">
-              <CardHeader className="border-b border-border">
-                <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-red-600" />
+            <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+              <CardHeader className="border-b border-amber-200/50 dark:border-amber-800/50">
+                <CardTitle className="text-xl font-bold flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
+                    <AlertCircle className="h-5 w-5 text-white" />
+                  </div>
                   Focus Areas
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {(attempts.length - correctAnswers) > 0 ? (
                     <>
                       {(attempts.length - correctAnswers - partialAnswers) > 0 && (
-                        <div className="flex items-center gap-3">
-                          <div className="w-1.5 h-full bg-red-500 rounded-full" />
-                          <span className="text-sm text-foreground">Complex problem solving</span>
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Complex problem solving</span>
                         </div>
                       )}
                       {partialAnswers > 0 && (
-                        <div className="flex items-center gap-3">
-                          <div className="w-1.5 h-full bg-red-500 rounded-full" />
-                          <span className="text-sm text-foreground">Detail accuracy refinement</span>
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-base text-foreground font-medium">Detail accuracy refinement</span>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-sm text-emerald-600 font-medium">
+                    <p className="text-base text-emerald-600 dark:text-emerald-400 font-semibold">
                       Perfect performance! No areas need review
                     </p>
                   )}
@@ -1063,7 +1110,7 @@ const Practice = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-center gap-4 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
             <Button
               onClick={() => {
                 setSessionComplete(false);
@@ -1073,23 +1120,30 @@ const Practice = () => {
                 localStorage.removeItem(`practice-session-${subjectId}-${topicId}`);
               }}
               variant="outline"
-              className="px-8 rounded-lg"
+              size="lg"
+              className="px-10 py-6 rounded-xl text-base font-semibold border-2 hover:scale-105 transition-all duration-300"
             >
+              <RotateCcw className="h-5 w-5 mr-2" />
               Practice Again
             </Button>
             <Button
               onClick={() => navigate('/dashboard')}
-              className="px-8 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white"
+              size="lg"
+              className="px-10 py-6 rounded-xl text-base font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Continue to Dashboard
+              <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </div>
 
           {/* Footer Message */}
-          <div className="text-center py-4">
-            <p className="text-sm text-muted-foreground">
-              +30 MP added for completing this section
-            </p>
+          <div className="text-center py-6">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+              <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+              <p className="text-base font-medium text-foreground">
+                +30 MP added for completing this section
+              </p>
+            </div>
           </div>
 
         </div>
