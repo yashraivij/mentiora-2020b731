@@ -1422,8 +1422,41 @@ const Dashboard = () => {
   // Convert userSubjectsWithGrades to mockSubjects format - only show subjects user has added
   const mockSubjects = userSubjectsWithGrades.length > 0 ? userSubjectsWithGrades
     .map((subject, index) => {
-      // Find corresponding subject ID from userSubjects
-      const subjectId = userSubjects[index] || `subject-${index}`;
+      // Derive subject ID from name and exam board (same logic as loadUserSubjects)
+      const getSubjectId = (subjectName: string, examBoard: string): string => {
+        const board = examBoard.toLowerCase();
+        
+        // Handle A-level subjects
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        
+        // Handle subjects with exam board in name
+        if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
+        if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
+        if (subjectName === "English Language (Edexcel)") return "edexcel-english-language";
+        
+        // Handle standard subjects
+        if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
+        if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
+        if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
+        if (subjectName === "Biology") return "biology";
+        if (subjectName === "IGCSE Business") return "business-edexcel-igcse";
+        if (subjectName === "Business") return "business";
+        if (subjectName === "English Language") return "english-language";
+        if (subjectName === "English Literature") return "english-literature";
+        if (subjectName === "Geography") return "geography";
+        if (subjectName === "History") return "history";
+        if (subjectName === "Religious Studies") return "religious-studies";
+        if (subjectName === "Computer Science") return "computer-science";
+        if (subjectName === "Spanish") return "spanish-aqa";
+        
+        // Fallback: try to find by name in curriculum
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
+      };
+      
+      const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       
       // Parse grades (they might be strings like "5" or numbers)
       // Use target grade as fallback for predicted grade if not yet calculated
@@ -1432,14 +1465,7 @@ const Dashboard = () => {
         : subject.target_grade || 7;
       
       // Get actual predicted grade from performance data (predictedGrades array)
-      // Match directly using curriculum subject ID (subjectId is already mapped from database to curriculum)
-      console.log('📊 mockSubjects - Looking for grade:', {
-        subjectName: subject.subject_name,
-        subjectId,
-        predictedGradesAvailable: predictedGrades.map(pg => ({ id: pg.subject_id, grade: pg.grade }))
-      });
       const actualPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectId);
-      console.log('📊 mockSubjects - Found:', actualPredictedGrade);
       
       // Use actual predicted grade if available, otherwise check if any practice done
       let predicted: number | string = target;
