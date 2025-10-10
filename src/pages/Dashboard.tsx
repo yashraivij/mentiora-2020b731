@@ -183,6 +183,7 @@ const Dashboard = () => {
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
   const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
   const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
+  const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -1317,6 +1318,40 @@ const Dashboard = () => {
     return () => window.removeEventListener('mpEarned', handleMPEarned);
   }, [activeTab]);
 
+  // Calculate study time for selected subject
+  useEffect(() => {
+    const calculateSubjectStudyTime = async () => {
+      if (!user?.id || !selectedDrawerSubject?.name) {
+        setSubjectStudyTime({hours: 0, minutes: 0});
+        return;
+      }
+      
+      const { data: exams } = await supabase
+        .from("exams")
+        .select("started_at, completed_at")
+        .eq("user_id", user.id)
+        .eq("subject_id", selectedDrawerSubject.name)
+        .not("completed_at", "is", null);
+      
+      if (exams && exams.length > 0) {
+        const totalMinutes = exams.reduce((sum, exam) => {
+          const start = new Date(exam.started_at);
+          const end = new Date(exam.completed_at!);
+          const durationMs = end.getTime() - start.getTime();
+          return sum + (durationMs / (1000 * 60)); // Convert to minutes
+        }, 0);
+        
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = Math.round(totalMinutes % 60);
+        setSubjectStudyTime({hours, minutes});
+      } else {
+        setSubjectStudyTime({hours: 0, minutes: 0});
+      }
+    };
+    
+    calculateSubjectStudyTime();
+  }, [user?.id, selectedDrawerSubject?.name]);
+
   // Clear quest notification when viewing quests tab
   useEffect(() => {
     if (activeTab === 'quests') {
@@ -2416,11 +2451,16 @@ const Dashboard = () => {
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
                                     {(() => {
                                       const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                      const subjectPerf = userSubjectsWithGrades.find(s => {
-                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
-                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
-                                      });
-                                      return Math.round(subjectPerf?.accuracy_rate || 0);
+                                      const subjectExams = userProgress.filter(p => p.subjectId === mappedSubjectId);
+                                      
+                                      if (subjectExams.length === 0) return '0';
+                                      
+                                      // Calculate overall accuracy from all attempts
+                                      const totalScore = subjectExams.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
+                                      const totalAttempts = subjectExams.reduce((sum, p) => sum + p.attempts, 0);
+                                      const accuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
+                                      
+                                      return Math.round(accuracy);
                                     })()}%
                                   </div>
                                 </CardContent>
@@ -2440,16 +2480,7 @@ const Dashboard = () => {
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Study Time</div>
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                                    {(() => {
-                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                      const subjectPerf = userSubjectsWithGrades.find(s => {
-                                        const curriculumSubject = curriculum.find(c => c.id === mappedSubjectId);
-                                        return curriculumSubject && s.subject_name === curriculumSubject.name;
-                                      });
-                                      const hours = Math.floor(subjectPerf?.study_hours || 0);
-                                      const minutes = Math.round(((subjectPerf?.study_hours || 0) % 1) * 60);
-                                      return `${hours}h ${minutes}m`;
-                                    })()}
+                                    {subjectStudyTime.hours}h {subjectStudyTime.minutes}m
                                   </div>
                                 </CardContent>
                               </Card>
