@@ -492,13 +492,42 @@ const Dashboard = () => {
         .select("subject_name, exam_board, predicted_grade, target_grade")
         .eq("user_id", user.id)
         .order('created_at', { ascending: true });
+      
+      // For each subject, get last 6 exam scores for the trend graph
+      const subjectsWithTrends = await Promise.all((data || []).map(async (subj) => {
+        const { data: exams } = await supabase
+          .from("exams")
+          .select("score, total_marks, completed_at")
+          .eq("user_id", user.id)
+          .eq("subject_id", subj.subject_name)
+          .not("completed_at", "is", null)
+          .order("completed_at", { ascending: false })
+          .limit(6);
+        
+        // Convert scores to percentages (0-100 scale for the graph)
+        const last_6_scores = exams && exams.length > 0
+          ? exams.reverse().map(exam => 
+              exam.total_marks > 0 ? Math.round((exam.score / exam.total_marks) * 100) : 0
+            )
+          : [0, 0, 0, 0, 0, 0]; // Default to zeros if no exams
+        
+        // Pad with zeros if less than 6 attempts
+        while (last_6_scores.length < 6) {
+          last_6_scores.unshift(0);
+        }
+        
+        return {
+          ...subj,
+          last_6_scores: last_6_scores.slice(-6) // Take only last 6
+        };
+      }));
 
       if (error) {
         console.error("Error loading user subjects:", error);
         return;
       }
 
-      if (data) {
+      if (subjectsWithTrends && subjectsWithTrends.length > 0) {
         // Load subject_performance data to get study_hours and accuracy_rate
         const { data: perfData } = await supabase
           .from("subject_performance")
@@ -539,8 +568,8 @@ const Dashboard = () => {
           return subject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
         };
         
-        // Merge performance data with subject data
-        const enrichedData = data.map(subject => {
+        // Merge performance data with subject data (including last_6_scores)
+        const enrichedData = subjectsWithTrends.map(subject => {
           const expectedSubjectId = getSubjectId(subject.subject_name, subject.exam_board);
           const perf = perfData?.find(p => 
             p.subject_id === expectedSubjectId && 
@@ -549,7 +578,8 @@ const Dashboard = () => {
           return {
             ...subject,
             study_hours: perf?.study_hours || 0,
-            accuracy_rate: perf?.accuracy_rate || 0
+            accuracy_rate: perf?.accuracy_rate || 0,
+            last_6_scores: subject.last_6_scores // Keep the last_6_scores from earlier query
           };
         });
         
@@ -559,7 +589,7 @@ const Dashboard = () => {
         // Load predicted grades
         loadPredictedGrades();
         
-        const subjectIds = data
+        const subjectIds = subjectsWithTrends
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
             const subjectName = record.subject_name;
@@ -1438,10 +1468,8 @@ const Dashboard = () => {
         }
       }
       
-      // Generate trend based on predicted grade (only if numeric)
-      const numericPredicted = typeof predicted === 'number' ? predicted : 0;
-      const baseTrend = Math.floor((numericPredicted / 9) * 100);
-      const trend = Array.from({ length: 6 }, (_, i) => baseTrend - 20 + (i * 4));
+      // Get actual trend from last 6 exam attempts for this subject
+      const trend = subject.last_6_scores || [0, 0, 0, 0, 0, 0];
       
       // Determine status
       const diff = typeof predicted === 'number' ? predicted - target : -999;
