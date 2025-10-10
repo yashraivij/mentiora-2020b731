@@ -2465,12 +2465,29 @@ const Dashboard = () => {
                                       const subjectId = selectedDrawerSubject?.id || '';
                                       const subjectExams = userProgress.filter(p => p.subjectId === subjectId);
                                       
+                                      console.log('🔍 Accuracy Debug:', { 
+                                        subjectId, 
+                                        subjectExams,
+                                        allProgress: userProgress 
+                                      });
+                                      
                                       if (subjectExams.length === 0) return '0';
                                       
                                       // Calculate overall accuracy from all attempts
-                                      const totalScore = subjectExams.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
+                                      const totalScore = subjectExams.reduce((sum, p) => {
+                                        const contribution = p.averageScore * p.attempts;
+                                        console.log(`  Topic ${p.topicId}: score=${p.averageScore}, attempts=${p.attempts}, contribution=${contribution}`);
+                                        return sum + contribution;
+                                      }, 0);
                                       const totalAttempts = subjectExams.reduce((sum, p) => sum + p.attempts, 0);
                                       const accuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
+                                      
+                                      console.log('📊 Accuracy Calculation:', { 
+                                        totalScore, 
+                                        totalAttempts, 
+                                        accuracy,
+                                        rounded: Math.round(accuracy) 
+                                      });
                                       
                                       return Math.round(accuracy);
                                     })()}%
