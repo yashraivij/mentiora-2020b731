@@ -112,6 +112,7 @@ const Practice = () => {
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
+  const [showConfetti, setShowConfetti] = useState(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -133,6 +134,45 @@ const Practice = () => {
     console.log('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
     console.log('Topic lookup:', { found: !!topic, topicId, topicName: topic?.name });
   }
+
+  // Confetti effect when session completes
+  useEffect(() => {
+    if (sessionComplete && !showConfetti) {
+      setShowConfetti(true);
+      
+      const createConfetti = () => {
+        const colors = ['#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        const confettiCount = 50;
+        const confettiElements: HTMLDivElement[] = [];
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '-10px';
+          confetti.style.opacity = '1';
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          confetti.style.zIndex = '9999';
+          confetti.style.pointerEvents = 'none';
+          confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+          confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+          
+          document.body.appendChild(confetti);
+          confettiElements.push(confetti);
+        }
+
+        // Clean up confetti after animation
+        setTimeout(() => {
+          confettiElements.forEach(el => el.remove());
+        }, 6000);
+      };
+
+      createConfetti();
+    }
+  }, [sessionComplete, showConfetti]);
 
   // Save session state to localStorage
   const saveSessionState = () => {
@@ -774,41 +814,6 @@ const Practice = () => {
     
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
-    
-    // Trigger confetti on load
-    useEffect(() => {
-      const createConfetti = () => {
-        const colors = ['#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
-        const confettiCount = 50;
-        const confettiElements: HTMLDivElement[] = [];
-
-        for (let i = 0; i < confettiCount; i++) {
-          const confetti = document.createElement('div');
-          confetti.style.position = 'fixed';
-          confetti.style.width = '10px';
-          confetti.style.height = '10px';
-          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.left = Math.random() * 100 + '%';
-          confetti.style.top = '-10px';
-          confetti.style.opacity = '1';
-          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-          confetti.style.zIndex = '9999';
-          confetti.style.pointerEvents = 'none';
-          confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
-          confetti.style.animationDelay = `${Math.random() * 0.5}s`;
-          
-          document.body.appendChild(confetti);
-          confettiElements.push(confetti);
-        }
-
-        // Clean up confetti after animation
-        setTimeout(() => {
-          confettiElements.forEach(el => el.remove());
-        }, 6000);
-      };
-
-      createConfetti();
-    }, []);
     
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
