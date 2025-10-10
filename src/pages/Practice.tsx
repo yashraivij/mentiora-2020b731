@@ -628,62 +628,56 @@ const Practice = () => {
     
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
-    // Fetch actual predicted grade from user_subjects FIRST before completing session
+    // Fetch actual predicted grade from predicted_exam_completions (same as Dashboard)
     let fetchedPredictedGrade: number | null = null;
     if (user?.id && subjectId) {
       try {
         const subject = curriculum.find(s => s.id === subjectId);
-        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
-                         subjectId.includes('edexcel') ? 'Edexcel' : 
-                         subjectId.includes('ocr') ? 'OCR' : 'AQA';
+        const subjectName = subject?.name || '';
         
-        // Map subject ID to database subject name format
-        let subjectName = subject?.name || '';
+        console.log('🔍 Fetching predicted grade for:', { subjectId, subjectName, userId: user.id });
         
-        // Handle A-Level subjects - they are stored with "(A-Level)" suffix in database
-        if (subjectId.includes('alevel')) {
-          subjectName = `${subjectName} (A-Level)`;
-        }
-        // Handle subjects with exam board in name like "Chemistry (Edexcel)"
-        else if (subjectId.includes('edexcel') && !subjectName.includes('Edexcel')) {
-          // Only add if it's a subject that uses this naming convention in DB
-          if (subjectName === 'Chemistry' || subjectName === 'Physics') {
-            subjectName = `${subjectName} (Edexcel)`;
-          }
-        }
-        
-        console.log('🎯 Fetching predicted grade for:', { subjectName, examBoard, userId: user.id });
-        
-        const { data: userSubjectData, error: gradeError } = await supabase
-          .from('user_subjects')
-          .select('predicted_grade')
+        // Query predicted_exam_completions to get calculated predicted grade (same as Dashboard)
+        const { data: predictedGradeData, error: gradeError } = await supabase
+          .from('predicted_exam_completions')
+          .select('grade, subject_id')
           .eq('user_id', user.id)
-          .eq('subject_name', subjectName)
-          .eq('exam_board', examBoard)
-          .maybeSingle();
-        
-        console.log('📊 Predicted grade data:', userSubjectData);
+          .order('completed_at', { ascending: false });
         
         if (gradeError) {
-          console.error('Error fetching predicted grade:', gradeError);
-        } else if (userSubjectData?.predicted_grade) {
-          const grade = typeof userSubjectData.predicted_grade === 'string' 
-            ? parseFloat(userSubjectData.predicted_grade) 
-            : userSubjectData.predicted_grade;
-          if (!isNaN(grade)) {
-            console.log('✅ Fetched actual predicted grade:', grade);
-            fetchedPredictedGrade = grade;
-            setActualPredictedGrade(grade);
+          console.error('❌ Error fetching predicted grades:', gradeError);
+        } else if (predictedGradeData && predictedGradeData.length > 0) {
+          console.log('📊 All predicted grades:', predictedGradeData);
+          
+          // Find the matching subject - try matching by subject_id or subject name
+          const matchingGrade = predictedGradeData.find(pg => 
+            pg.subject_id === subjectName || 
+            pg.subject_id?.toLowerCase() === subjectName.toLowerCase() ||
+            pg.subject_id === subjectId
+          );
+          
+          if (matchingGrade?.grade) {
+            const grade = typeof matchingGrade.grade === 'string' 
+              ? parseFloat(matchingGrade.grade) 
+              : matchingGrade.grade;
+            if (!isNaN(grade) && grade > 0) {
+              console.log('✅ Found predicted grade:', grade, 'for subject:', matchingGrade.subject_id);
+              fetchedPredictedGrade = grade;
+              setActualPredictedGrade(grade);
+            }
+          } else {
+            console.warn('⚠️ No matching predicted grade found for:', subjectName, 'or', subjectId);
           }
         } else {
-          console.warn('⚠️ No predicted grade found for this subject');
+          console.warn('⚠️ No predicted exam data found');
         }
       } catch (error) {
-        console.error('Error fetching predicted grade:', error);
+        console.error('❌ Error in fetch logic:', error);
       }
     }
     
     // Store the fetched grade for use in the completion screen
+    console.log('💾 Storing fetched grade:', fetchedPredictedGrade);
     (window as any).__lastFetchedPredictedGrade = fetchedPredictedGrade;
     
     // Update subject_performance table in Supabase
