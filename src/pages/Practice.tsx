@@ -997,7 +997,7 @@ const Practice = () => {
                         style={{ 
                           width: '0%',
                           animation: 'fillProgress 1s ease-out 600ms forwards',
-                          '--target-width': `${((oldPredictedGrade - 4) / 5) * 100}%`
+                          '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       />
                       {/* New grade position - animated bright fill - animates after */}
@@ -1007,7 +1007,7 @@ const Practice = () => {
                           width: '0%',
                           backgroundSize: '200% 100%',
                           animation: 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
-                          '--target-width': `${((newPredictedGrade - 4) / 5) * 100}%`
+                          '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: 'slideAndFade 2s infinite 2700ms' }} />
@@ -1015,7 +1015,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        Progress: <span className="font-bold text-[hsl(195,69%,54%)]">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
+                        Progress: <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> towards grade 9
                       </p>
                     </div>
                   </div>
