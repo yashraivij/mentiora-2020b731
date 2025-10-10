@@ -629,6 +629,7 @@ const Practice = () => {
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
     // Fetch actual predicted grade from user_subjects FIRST before completing session
+    let fetchedPredictedGrade: number | null = null;
     if (user?.id && subjectId) {
       try {
         const subject = curriculum.find(s => s.id === subjectId);
@@ -670,10 +671,9 @@ const Practice = () => {
             ? parseFloat(userSubjectData.predicted_grade) 
             : userSubjectData.predicted_grade;
           if (!isNaN(grade)) {
-            console.log('✅ Setting actual predicted grade:', grade);
+            console.log('✅ Fetched actual predicted grade:', grade);
+            fetchedPredictedGrade = grade;
             setActualPredictedGrade(grade);
-            // Wait a moment for state to update
-            await new Promise(resolve => setTimeout(resolve, 100));
           }
         } else {
           console.warn('⚠️ No predicted grade found for this subject');
@@ -682,6 +682,9 @@ const Practice = () => {
         console.error('Error fetching predicted grade:', error);
       }
     }
+    
+    // Store the fetched grade for use in the completion screen
+    (window as any).__lastFetchedPredictedGrade = fetchedPredictedGrade;
     
     // Update subject_performance table in Supabase
     if (user?.id && subjectId) {
@@ -864,9 +867,31 @@ const Practice = () => {
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
     // Grade improvement calculation - use actual predicted grade from database
-    const oldPredictedGrade = actualPredictedGrade || 7.0; // Default to 7.0 if not found
-    const gradeImprovement = averagePercentage >= 85 ? 0.6 : averagePercentage >= 70 ? 0.4 : averagePercentage >= 50 ? 0.3 : 0.1;
-    const newPredictedGrade = Math.min(oldPredictedGrade + gradeImprovement, 9.0);
+    const storedGrade = (window as any).__lastFetchedPredictedGrade;
+    const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
+    
+    // Calculate grade change based on performance - decrease for poor scores
+    let gradeImprovement: number;
+    if (averagePercentage >= 85) {
+      gradeImprovement = 0.6;  // Excellent performance
+    } else if (averagePercentage >= 70) {
+      gradeImprovement = 0.4;  // Good performance
+    } else if (averagePercentage >= 50) {
+      gradeImprovement = 0.2;  // Average performance
+    } else if (averagePercentage >= 30) {
+      gradeImprovement = -0.1; // Below average - decrease
+    } else {
+      gradeImprovement = -0.3; // Poor performance - larger decrease
+    }
+    
+    const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
+    
+    console.log('📈 Grade calculation:', { 
+      oldPredictedGrade, 
+      averagePercentage, 
+      gradeImprovement, 
+      newPredictedGrade 
+    });
     
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
