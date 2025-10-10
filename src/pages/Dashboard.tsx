@@ -2376,38 +2376,37 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectId = selectedDrawerSubject?.id || '';
                                 
-                                // Get predicted grades from last 7 days and 7-14 days ago
+                                // Get practice data from last 7 days
                                 const now = new Date();
                                 const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                                const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
                                 
-                                // Get predicted exam completions for this subject
-                                const subjectPredictions = predictedGrades.filter(g => g.subject_id === subjectId);
-                                
-                                const last7DaysGrades = subjectPredictions.filter(g => 
-                                  new Date(g.created_at) >= sevenDaysAgo
+                                // Get all progress for this subject with scores > 0
+                                const subjectProgress = userProgress.filter(p => 
+                                  p.subjectId === subjectId && p.averageScore > 0
                                 );
-                                const prev7DaysGrades = subjectPredictions.filter(g => {
-                                  const date = new Date(g.created_at);
-                                  return date >= fourteenDaysAgo && date < sevenDaysAgo;
-                                });
                                 
-                                // Calculate average predicted grade for each period
-                                const parseGrade = (grade: any) => {
-                                  if (typeof grade === 'number') return grade;
-                                  const parsed = parseFloat(grade);
-                                  return isNaN(parsed) ? 0 : parsed;
-                                };
+                                // Separate recent practice (last 7 days) from older practice
+                                const recentPractice = subjectProgress.filter(p => 
+                                  new Date(p.lastAttempt) >= sevenDaysAgo
+                                );
+                                const olderPractice = subjectProgress.filter(p => 
+                                  new Date(p.lastAttempt) < sevenDaysAgo
+                                );
                                 
-                                const currentGrade = last7DaysGrades.length > 0
-                                  ? last7DaysGrades.reduce((sum, g) => sum + parseGrade(g.grade), 0) / last7DaysGrades.length
+                                // Calculate weighted average for recent practice
+                                const recentAvg = recentPractice.length > 0
+                                  ? recentPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
+                                    recentPractice.reduce((sum, p) => sum + p.attempts, 0)
                                   : 0;
-                                  
-                                const previousGrade = prev7DaysGrades.length > 0
-                                  ? prev7DaysGrades.reduce((sum, g) => sum + parseGrade(g.grade), 0) / prev7DaysGrades.length
-                                  : currentGrade;
                                 
-                                const change = currentGrade - previousGrade;
+                                // Calculate weighted average for older practice (baseline)
+                                const olderAvg = olderPractice.length > 0
+                                  ? olderPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
+                                    olderPractice.reduce((sum, p) => sum + p.attempts, 0)
+                                  : recentAvg; // If no older data, use recent as baseline
+                                
+                                // Calculate percentage point change
+                                const change = recentPractice.length > 0 ? recentAvg - olderAvg : 0;
                                 const isPositive = change >= 0;
                                 const sign = isPositive ? '+' : '';
                                 
