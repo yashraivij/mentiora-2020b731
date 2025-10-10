@@ -848,7 +848,7 @@ const Practice = () => {
                       {Math.round(averagePercentage)}%
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {correctAnswers} out of {attempts.length} questions correct
+                      {correctAnswers} out of {shuffledQuestions.length} questions correct
                     </p>
                   </div>
                 </div>
