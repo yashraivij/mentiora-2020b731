@@ -1445,7 +1445,7 @@ const Dashboard = () => {
         const gradeValue = typeof actualPredictedGrade.grade === 'string'
           ? parseFloat(actualPredictedGrade.grade)
           : actualPredictedGrade.grade;
-        if (!isNaN(gradeValue) && gradeValue > 0) {
+        if (!isNaN(gradeValue) && gradeValue >= 0) {
           predicted = gradeValue;
           hasCompletedQuestions = true;
         }
