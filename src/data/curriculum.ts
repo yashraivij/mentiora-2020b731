@@ -12680,12 +12680,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'm1-q5',
-            question: 'Calculate 2⁴ × 2⁻⁷ × 2³, giving your answer as a fraction.',
+            question: 'Calculate 2⁵ × 2⁻² ÷ 2⁴, giving your answer as a fraction.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: '2⁴ × 2⁻⁷ × 2³ = 2⁴⁻⁷⁺³ = 2⁰ = 1',
+            modelAnswer: '2⁵ × 2⁻² ÷ 2⁴ = 2⁵⁻²⁻⁴ = 2⁻¹ = 1/2',
             markingCriteria: {
-              breakdown: ['Add indices: 4 + (-7) + 3 = 0 (1 mark)', 'Recognize 2⁰ = 1 (1 mark)', 'Final answer 1 (1 mark)']
+              breakdown: ['Add/subtract indices: 5 + (-2) + (-4) = -1 (1 mark)', 'Recognize 2⁻¹ = 1/2 (1 mark)', 'Final answer as fraction: 1/2 (1 mark)']
             },
             specReference: '1.1.2c - Index laws',
             calculatorGuidance: 'non-calc-friendly'
@@ -12716,12 +12716,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'm1-q8',
-            question: 'Calculate (3⁻² × 3⁴) ÷ (3⁻¹ × 3³). Give your answer as a fraction.',
+            question: 'Calculate (3² × 3⁻¹) ÷ (3⁴ × 3⁻²). Give your answer as a fraction.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: '(3⁻² × 3⁴) ÷ (3⁻¹ × 3³) = 3⁻²⁺⁴ ÷ 3⁻¹⁺³ = 3² ÷ 3² = 3⁰ = 1',
+            modelAnswer: '(3² × 3⁻¹) ÷ (3⁴ × 3⁻²) = 3²⁻¹ ÷ 3⁴⁻² = 3¹ ÷ 3² = 3¹⁻² = 3⁻¹ = 1/3',
             markingCriteria: {
-              breakdown: ['Simplify numerator: 3² (1 mark)', 'Simplify denominator: 3² (1 mark)', 'Final answer: 1 (1 mark)']
+              breakdown: ['Simplify numerator: 3¹ (1 mark)', 'Simplify denominator: 3² (1 mark)', 'Final answer as fraction: 1/3 (1 mark)']
             },
             specReference: '1.1.2c - Index laws',
             calculatorGuidance: 'non-calc-friendly'
