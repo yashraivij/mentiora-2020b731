@@ -775,15 +775,47 @@ const Practice = () => {
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
     
+    // Trigger confetti on load
+    useEffect(() => {
+      const createConfetti = () => {
+        const colors = ['#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        const confettiCount = 50;
+        const confettiElements: HTMLDivElement[] = [];
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '-10px';
+          confetti.style.opacity = '1';
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          confetti.style.zIndex = '9999';
+          confetti.style.pointerEvents = 'none';
+          confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+          confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+          
+          document.body.appendChild(confetti);
+          confettiElements.push(confetti);
+        }
+
+        // Clean up confetti after animation
+        setTimeout(() => {
+          confettiElements.forEach(el => el.remove());
+        }, 6000);
+      };
+
+      createConfetti();
+    }, []);
+    
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
         <div className="max-w-6xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
           
           {/* Hero Header */}
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-2xl mb-4 shadow-lg shadow-cyan-500/30 animate-scale-in">
-              🎉
-            </div>
             <h1 className="text-4xl font-bold text-foreground">
               Section Complete!
             </h1>
