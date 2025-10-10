@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, BarChart, Bar, LineChart, Line } from "recharts";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 
 interface TopicProgress {
   topicId: string;
@@ -30,26 +31,65 @@ const SubjectTopics = () => {
   const subject = curriculum.find(s => s.id === subjectId);
 
   useEffect(() => {
-    if (user?.id) {
-      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
-      if (savedProgress) {
-        const allProgress = JSON.parse(savedProgress);
-        // Convert string dates back to Date objects
-        const progressWithDates = allProgress.map((p: any) => ({
-          ...p,
-          lastAttempt: new Date(p.lastAttempt)
-        }));
-        const subjectProgress = progressWithDates.filter((p: any) => p.subjectId === subjectId);
-        setTopicProgress(subjectProgress);
+    const loadProgress = async () => {
+      if (user?.id) {
+        try {
+          // Try loading from database first
+          const { data, error } = await supabase
+            .from('user_progress')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('subject_id', subjectId);
+
+          if (error) throw error;
+
+          if (data && data.length > 0) {
+            const progressData = data.map((p: any) => ({
+              subjectId: p.subject_id,
+              topicId: p.topic_id,
+              attempts: p.attempts,
+              averageScore: p.average_score,
+              lastAttempt: new Date(p.last_attempt)
+            }));
+            setTopicProgress(progressData);
+          } else {
+            // Fallback to localStorage
+            const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+            if (savedProgress) {
+              const allProgress = JSON.parse(savedProgress);
+              const progressWithDates = allProgress.map((p: any) => ({
+                ...p,
+                lastAttempt: new Date(p.lastAttempt)
+              }));
+              const subjectProgress = progressWithDates.filter((p: any) => p.subjectId === subjectId);
+              setTopicProgress(subjectProgress);
+            }
+          }
+        } catch (error) {
+          console.error('Error loading progress:', error);
+          // Fallback to localStorage on error
+          const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+          if (savedProgress) {
+            const allProgress = JSON.parse(savedProgress);
+            const progressWithDates = allProgress.map((p: any) => ({
+              ...p,
+              lastAttempt: new Date(p.lastAttempt)
+            }));
+            const subjectProgress = progressWithDates.filter((p: any) => p.subjectId === subjectId);
+            setTopicProgress(subjectProgress);
+          }
+        }
+        
+        // Check if target grade is already set
+        const savedGrade = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
+        if (savedGrade) {
+          setTargetGrade(parseInt(savedGrade));
+          setShowGradeSetup(false);
+        }
       }
-      
-      // Check if target grade is already set
-      const savedGrade = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
-      if (savedGrade) {
-        setTargetGrade(parseInt(savedGrade));
-        setShowGradeSetup(false);
-      }
-    }
+    };
+
+    loadProgress();
   }, [user?.id, subjectId]);
 
   const handleGradeSelect = (grade: number) => {

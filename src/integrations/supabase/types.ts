@@ -1200,6 +1200,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_progress: {
+        Row: {
+          attempts: number
+          average_score: number
+          created_at: string
+          id: string
+          last_attempt: string
+          subject_id: string
+          topic_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          average_score?: number
+          created_at?: string
+          id?: string
+          last_attempt?: string
+          subject_id: string
+          topic_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          average_score?: number
+          created_at?: string
+          id?: string
+          last_attempt?: string
+          subject_id?: string
+          topic_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_subjects: {
         Row: {
           created_at: string

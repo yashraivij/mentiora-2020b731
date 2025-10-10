@@ -8,6 +8,7 @@ import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, TrendingUp, AlertTriangle, Target, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AnalyticsData {
   subjectId: string;
@@ -24,23 +25,60 @@ const Analytics = () => {
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
 
   useEffect(() => {
-    if (user?.id) {
-      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
-      const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user.id}`);
-      
-      if (savedProgress) {
-        const parsedProgress = JSON.parse(savedProgress);
-        // Convert string dates back to Date objects
-        const progressWithDates = parsedProgress.map((p: any) => ({
-          ...p,
-          lastAttempt: new Date(p.lastAttempt)
-        }));
-        setAnalyticsData(progressWithDates);
+    const loadAnalytics = async () => {
+      if (user?.id) {
+        try {
+          // Try loading from database first
+          const { data, error } = await supabase
+            .from('user_progress')
+            .select('*')
+            .eq('user_id', user.id);
+
+          if (error) throw error;
+
+          if (data && data.length > 0) {
+            const progressData = data.map((p: any) => ({
+              subjectId: p.subject_id,
+              topicId: p.topic_id,
+              attempts: p.attempts,
+              averageScore: p.average_score,
+              lastAttempt: new Date(p.last_attempt)
+            }));
+            setAnalyticsData(progressData);
+          } else {
+            // Fallback to localStorage
+            const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+            if (savedProgress) {
+              const parsedProgress = JSON.parse(savedProgress);
+              const progressWithDates = parsedProgress.map((p: any) => ({
+                ...p,
+                lastAttempt: new Date(p.lastAttempt)
+              }));
+              setAnalyticsData(progressWithDates);
+            }
+          }
+        } catch (error) {
+          console.error('Error loading analytics:', error);
+          // Fallback to localStorage on error
+          const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+          if (savedProgress) {
+            const parsedProgress = JSON.parse(savedProgress);
+            const progressWithDates = parsedProgress.map((p: any) => ({
+              ...p,
+              lastAttempt: new Date(p.lastAttempt)
+            }));
+            setAnalyticsData(progressWithDates);
+          }
+        }
+        
+        const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user.id}`);
+        if (savedWeakTopics) {
+          setWeakTopics(JSON.parse(savedWeakTopics));
+        }
       }
-      if (savedWeakTopics) {
-        setWeakTopics(JSON.parse(savedWeakTopics));
-      }
-    }
+    };
+
+    loadAnalytics();
   }, [user?.id]);
 
   const getTopicName = (topicId: string) => {

@@ -576,7 +576,7 @@ const Practice = () => {
       }
     }
     
-    // Save progress
+    // Save progress to both database and localStorage
     const progressKey = `mentiora_progress_${user?.id}`;
     const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');
     
@@ -591,42 +591,75 @@ const Practice = () => {
       (p: any) => p.subjectId === subjectId && p.topicId === topicId
     );
     
+    let finalScore = Math.round(averagePercentage);
+    let finalAttempts = 1;
+    
     if (topicProgressIndex >= 0) {
       const oldScore = existingProgress[topicProgressIndex].averageScore;
       const newScore = Math.round(averagePercentage);
       
+      finalAttempts = existingProgress[topicProgressIndex].attempts + 1;
+      
       // Only update if new score is better OR if it's a significant attempt (not 0%)
       if (newScore > oldScore) {
+        finalScore = newScore;
         existingProgress[topicProgressIndex].averageScore = newScore;
         console.log('✅ Score IMPROVED - updating from', oldScore, 'to', newScore);
       } else if (newScore > 0) {
         // Average with existing score only if new score is not 0
-        existingProgress[topicProgressIndex].averageScore = Math.round(
-          (oldScore + newScore) / 2
-        );
-        console.log('📊 Score AVERAGED - from', oldScore, 'and', newScore, 'to', existingProgress[topicProgressIndex].averageScore);
+        finalScore = Math.round((oldScore + newScore) / 2);
+        existingProgress[topicProgressIndex].averageScore = finalScore;
+        console.log('📊 Score AVERAGED - from', oldScore, 'and', newScore, 'to', finalScore);
       } else {
+        finalScore = oldScore;
         console.log('⚠️ Score NOT UPDATED - new score is 0%, keeping', oldScore);
       }
       
-      existingProgress[topicProgressIndex].attempts += 1;
+      existingProgress[topicProgressIndex].attempts = finalAttempts;
       existingProgress[topicProgressIndex].lastAttempt = new Date();
     } else {
       existingProgress.push({
         subjectId,
         topicId,
-        attempts: 1,
-        averageScore: Math.round(averagePercentage),
+        attempts: finalAttempts,
+        averageScore: finalScore,
         lastAttempt: new Date()
       });
-      console.log('🆕 NEW SCORE - created entry with', Math.round(averagePercentage) + '%');
+      console.log('🆕 NEW SCORE - created entry with', finalScore + '%');
     }
     
     console.log('💾 SAVING SCORE - After:', {
       saved: existingProgress.find((p: any) => p.subjectId === subjectId && p.topicId === topicId)
     });
     
+    // Save to localStorage
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
+    
+    // Save to database
+    if (user?.id) {
+      try {
+        const { error } = await supabase
+          .from('user_progress')
+          .upsert({
+            user_id: user.id,
+            subject_id: subjectId,
+            topic_id: topicId,
+            attempts: finalAttempts,
+            average_score: finalScore,
+            last_attempt: new Date().toISOString()
+          }, {
+            onConflict: 'user_id,subject_id,topic_id'
+          });
+        
+        if (error) {
+          console.error('Error saving progress to database:', error);
+        } else {
+          console.log('✅ Progress saved to database');
+        }
+      } catch (error) {
+        console.error('Error upserting progress:', error);
+      }
+    }
     
     // Fetch actual predicted grade from predicted_exam_completions (same as Dashboard)
     let fetchedPredictedGrade: number | null = null;

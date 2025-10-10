@@ -735,19 +735,54 @@ const Dashboard = () => {
     }
   };
 
-  // Load user progress
-  const loadUserProgress = () => {
+  // Load user progress from database
+  const loadUserProgress = async () => {
     if (!user?.id) return;
 
-    const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
-    if (savedProgress) {
-      const parsedProgress = JSON.parse(savedProgress);
-      // Convert string dates back to Date objects
-      const progressWithDates = parsedProgress.map((p: any) => ({
-        ...p,
-        lastAttempt: new Date(p.lastAttempt)
-      }));
-      setUserProgress(progressWithDates);
+    try {
+      // Fetch from database
+      const { data, error } = await supabase
+        .from('user_progress')
+        .select('*')
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        const progressData = data.map((p: any) => ({
+          subjectId: p.subject_id,
+          topicId: p.topic_id,
+          attempts: p.attempts,
+          averageScore: p.average_score,
+          lastAttempt: new Date(p.last_attempt)
+        }));
+        setUserProgress(progressData);
+        // Also save to localStorage as backup
+        localStorage.setItem(`mentiora_progress_${user.id}`, JSON.stringify(progressData));
+      } else {
+        // Fallback to localStorage if no database data
+        const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+        if (savedProgress) {
+          const parsedProgress = JSON.parse(savedProgress);
+          const progressWithDates = parsedProgress.map((p: any) => ({
+            ...p,
+            lastAttempt: new Date(p.lastAttempt)
+          }));
+          setUserProgress(progressWithDates);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading progress:', error);
+      // Fallback to localStorage on error
+      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+      if (savedProgress) {
+        const parsedProgress = JSON.parse(savedProgress);
+        const progressWithDates = parsedProgress.map((p: any) => ({
+          ...p,
+          lastAttempt: new Date(p.lastAttempt)
+        }));
+        setUserProgress(progressWithDates);
+      }
     }
   };
 
