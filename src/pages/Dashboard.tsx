@@ -668,9 +668,6 @@ const Dashboard = () => {
 
       // Don't group - keep ALL records so we can filter and sort later
       // This ensures we get the most recent grade even if subject_id format changed
-      console.log('All predicted grades from DB:', data);
-      console.log('User subjects from curriculum:', userSubjects);
-      
       setPredictedGrades(data || []);
     } catch (error) {
       console.error('Error loading predicted grades:', error);
@@ -1559,26 +1556,12 @@ const Dashboard = () => {
       
       // Get most recent predicted exam completion for this subject
       const matchingGrades = predictedGrades.filter(pg => {
-        // Map database subject_id to curriculum subject_id for consistent matching
         const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
-        const matches = mappedSubjectId === subjectId;
-        if (matches) {
-          console.log(`✅ Match found for ${subjectId}:`, {
-            dbSubjectId: pg.subject_id,
-            mappedSubjectId,
-            grade: pg.grade,
-            created_at: pg.created_at
-          });
-        }
-        return matches;
+        return mappedSubjectId === subjectId;
       });
       
       const recentExamCompletion = matchingGrades
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-      
-      if (recentExamCompletion) {
-        console.log(`🎯 Using grade for ${subjectId}:`, recentExamCompletion.grade);
-      }
       
       const hasPracticeData = subjectProgress.length > 0;
       
@@ -2595,12 +2578,6 @@ const Dashboard = () => {
                                 
                                 const userPredictedGrade = matchingGrades
                                   .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-                                  
-                                console.log(`🎯 Performance Comparison for ${subjectIdToMatch}:`, {
-                                  matchingGrades: matchingGrades.length,
-                                  selectedGrade: userPredictedGrade?.grade,
-                                  allGrades: matchingGrades.map(g => ({ subject_id: g.subject_id, grade: g.grade, created_at: g.created_at }))
-                                });
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 if (userPredictedGrade) {
