@@ -54,8 +54,28 @@ serve(async (req) => {
     
     const { question, userAnswer, modelAnswer, markingCriteria, totalMarks, subject } = requestBody;
 
+    // Normalize mathematical answers for better comparison
+    const normalizeMathAnswer = (answer: string): string => {
+      if (!answer) return answer;
+      const trimmed = answer.trim();
+      
+      // Check if it's a simple fraction like "1/1", "2/2", "4/4"
+      const fractionMatch = trimmed.match(/^(\d+)\/(\d+)$/);
+      if (fractionMatch) {
+        const numerator = parseInt(fractionMatch[1]);
+        const denominator = parseInt(fractionMatch[2]);
+        if (denominator !== 0 && numerator === denominator) {
+          return '1'; // Simplify fractions like 1/1, 2/2, etc. to just 1
+        }
+      }
+      
+      return answer;
+    };
+
+    const normalizedUserAnswer = normalizeMathAnswer(userAnswer);
+
     // Validate required fields
-    if (!question || !userAnswer || !totalMarks) {
+    if (!question || !normalizedUserAnswer || !totalMarks) {
       return new Response(JSON.stringify({ error: 'Missing required fields: question, userAnswer, totalMarks' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -63,7 +83,7 @@ serve(async (req) => {
     }
 
     // Check if answer is substantial enough to be marked
-    const trimmedAnswer = userAnswer.trim();
+    const trimmedAnswer = normalizedUserAnswer.trim();
     
     // Check if this is a multiple choice question (has options like a), b), c), d))
     const isMultipleChoice = /[a-d]\)\s/.test(question);
@@ -114,7 +134,7 @@ serve(async (req) => {
     }
 
     // Validate input lengths to prevent abuse
-    if (question.length > 5000 || userAnswer.length > 5000 || (modelAnswer && modelAnswer.length > 5000)) {
+    if (question.length > 5000 || normalizedUserAnswer.length > 5000 || (modelAnswer && modelAnswer.length > 5000)) {
       return new Response(JSON.stringify({ error: 'Input too long' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -145,7 +165,7 @@ SUBJECT: ${subject || 'GCSE Subject'} - Apply GCSE-specific marking criteria
 
 QUESTION: ${question}
 
-STUDENT'S ANSWER: ${userAnswer}
+STUDENT'S ANSWER: ${normalizedUserAnswer}
 
 MODEL ANSWER: ${modelAnswer}
 
@@ -157,8 +177,8 @@ TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 CRITICAL MARKING REQUIREMENT - BASE FEEDBACK ONLY ON WHAT WAS ACTUALLY WRITTEN:
 🚨 ABSOLUTELY CRITICAL: Your feedback must ONLY refer to what the student actually wrote. DO NOT make assumptions about working, steps, or methods they didn't show. DO NOT suggest they showed working when they only provided a final answer. Be completely accurate about what was actually submitted.
 
-EQUIVALENT TERMINOLOGY ACCEPTANCE:
-🎯 IMPORTANT: Accept scientifically accurate alternative terminology and phrasings that mean the same thing:
+EQUIVALENT TERMINOLOGY AND MATHEMATICAL FORMS ACCEPTANCE:
+🎯 IMPORTANT: Accept scientifically accurate alternative terminology and mathematically equivalent answers:
 - "Shells" = "Energy levels" = "Electron shells" (Chemistry/Physics)
 - "Orbits" = "Orbitals" when used in basic GCSE context
 - "Speed" = "Velocity" in basic motion contexts  
@@ -168,7 +188,10 @@ EQUIVALENT TERMINOLOGY ACCEPTANCE:
 - "Increases" = "Goes up" = "Rises" = "Gets bigger/larger"
 - Accept equivalent mathematical expressions (e.g., "3x + 2x = 5x" vs "2x + 3x = 5x")
 - Accept equivalent units (e.g., "m/s" = "metres per second" = "meters per second")
-Do NOT penalize students for using correct alternative scientific terminology that demonstrates the same understanding.
+- CRITICAL: Accept equivalent fraction forms (e.g., "1/1" = "1", "2/2" = "1", "4/4" = "1", "6/3" = "2")
+- Accept simplified vs unsimplified fractions if mathematically equivalent (e.g., "2/4" = "1/2")
+- Accept decimal equivalents of fractions (e.g., "0.5" = "1/2")
+Do NOT penalize students for using correct alternative scientific terminology or mathematically equivalent forms that demonstrate the same understanding.
 
 GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
 1. ACCURACY OF FEEDBACK: Base all feedback strictly on the actual student submission. If they only wrote a final answer, acknowledge that. If they showed working, comment on the working shown.
@@ -282,9 +305,9 @@ Respond in this exact JSON format:
     } catch (parseError) {
       console.error('Failed to parse AI response:', aiResponse);
       // Fallback response if JSON parsing fails - only give marks for substantial answers
-      const isSubstantialAnswer = userAnswer.trim().length >= 3 && 
-        userAnswer.trim().split(/\s+/).length >= 1 && 
-        /[a-zA-Z]/.test(userAnswer.trim());
+      const isSubstantialAnswer = normalizedUserAnswer.trim().length >= 3 && 
+        normalizedUserAnswer.trim().split(/\s+/).length >= 1 && 
+        /[a-zA-Z]/.test(normalizedUserAnswer.trim());
       
       markingResult = {
         marksAwarded: isSubstantialAnswer ? Math.round(totalMarks * 0.3) : 0,
