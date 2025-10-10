@@ -1566,8 +1566,9 @@ const Dashboard = () => {
       // Get most recent predicted exam completion for this subject
       const recentExamCompletion = predictedGrades
         .filter(pg => {
-          // Directly match using subject_id since Practice.tsx now saves with subjectId
-          return pg.subject_id === subjectId;
+          // Map database subject_id to curriculum subject_id for consistent matching
+          const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
+          return mappedSubjectId === subjectId;
         })
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
@@ -2578,8 +2579,11 @@ const Dashboard = () => {
                                 const subjectIdToMatch = selectedDrawerSubject?.id || '';
                                 const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
-                                // Get user's predicted grade for this subject using the direct subject ID
-                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
+                                // Get user's predicted grade for this subject using the mapped subject ID
+                                const userPredictedGrade = predictedGrades.find(pg => {
+                                  const mappedPgSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
+                                  return mappedPgSubjectId === subjectIdToMatch;
+                                });
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 if (userPredictedGrade) {
