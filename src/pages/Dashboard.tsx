@@ -2463,7 +2463,8 @@ const Dashboard = () => {
                                     {(() => {
                                       // Use the subject ID directly from selectedDrawerSubject
                                       const subjectId = selectedDrawerSubject?.id || '';
-                                      const subjectExams = userProgress.filter(p => p.subjectId === subjectId);
+                                      // Only include topics with scores > 0
+                                      const subjectExams = userProgress.filter(p => p.subjectId === subjectId && p.averageScore > 0);
                                       
                                       console.log('🔍 Accuracy Debug:', { 
                                         subjectId, 
@@ -2473,7 +2474,7 @@ const Dashboard = () => {
                                       
                                       if (subjectExams.length === 0) return '0';
                                       
-                                      // Calculate overall accuracy from all attempts
+                                      // Calculate overall accuracy from all attempts (excluding 0% scores)
                                       const totalScore = subjectExams.reduce((sum, p) => {
                                         const contribution = p.averageScore * p.attempts;
                                         console.log(`  Topic ${p.topicId}: score=${p.averageScore}, attempts=${p.attempts}, contribution=${contribution}`);
