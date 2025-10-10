@@ -648,7 +648,7 @@ const Dashboard = () => {
     if (!user?.id) return;
 
     try {
-      console.log('Loading predicted grades for user:', user.id);
+      console.log('📊 Loading predicted grades for user:', user.id);
       
       const { data, error } = await supabase
         .from('predicted_exam_completions')
@@ -661,7 +661,7 @@ const Dashboard = () => {
         return;
       }
 
-      console.log('Raw predicted exam completions data:', data);
+      console.log('📊 Raw predicted exam completions:', data);
 
       // Group by subject_id and get the latest prediction for each subject
       const latestGrades = data?.reduce((acc: any, grade: any) => {
@@ -671,8 +671,8 @@ const Dashboard = () => {
         return acc;
       }, {});
 
-      console.log('Predicted grades from DB:', Object.values(latestGrades || {}));
-      console.log('User subjects from curriculum:', userSubjects);
+      console.log('📊 Latest grades by subject:', latestGrades);
+      console.log('📊 User subjects from curriculum:', userSubjects);
       
       setPredictedGrades(Object.values(latestGrades || {}));
     } catch (error) {

@@ -836,6 +836,14 @@ const Practice = () => {
         const storedGrade = (window as any).__lastFetchedPredictedGrade;
         const oldPredictedGrade = storedGrade !== null ? storedGrade : (actualPredictedGrade || 5.0);
         
+        console.log('🔢 Grade Save - Input values:', {
+          subjectId,
+          storedGrade,
+          actualPredictedGrade,
+          oldPredictedGrade,
+          averagePercentage
+        });
+        
         let gradeImprovement: number;
         if (averagePercentage >= 100) {
           gradeImprovement = 1.0;
@@ -859,30 +867,40 @@ const Practice = () => {
         
         const newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
         
+        console.log('🔢 Grade calculation:', {
+          gradeImprovement: gradeImprovement.toFixed(2),
+          newPredictedGrade: newPredictedGrade.toFixed(1)
+        });
+        
         // Insert new predicted grade record
-        const { error: gradeError } = await supabase
+        const insertData = {
+          user_id: user.id,
+          subject_id: subjectId,
+          grade: newPredictedGrade.toFixed(1),
+          percentage: averagePercentage,
+          total_marks: shuffledQuestions.reduce((sum, q) => sum + q.marks, 0),
+          achieved_marks: attempts.reduce((sum, a) => sum + a.score, 0),
+          questions: [],
+          answers: [],
+          results: {},
+          exam_date: new Date().toISOString().split('T')[0],
+          time_taken_seconds: Math.floor((Date.now() - sessionStartTime) / 1000)
+        };
+        
+        console.log('💾 Inserting grade data:', insertData);
+        
+        const { error: gradeError, data: insertedData } = await supabase
           .from('predicted_exam_completions')
-          .insert({
-            user_id: user.id,
-            subject_id: subjectId,
-            grade: newPredictedGrade.toFixed(1),
-            percentage: averagePercentage,
-            total_marks: shuffledQuestions.reduce((sum, q) => sum + q.marks, 0),
-            achieved_marks: attempts.reduce((sum, a) => sum + a.score, 0),
-            questions: [],
-            answers: [],
-            results: {},
-            exam_date: new Date().toISOString().split('T')[0],
-            time_taken_seconds: Math.floor((Date.now() - sessionStartTime) / 1000)
-          });
+          .insert(insertData)
+          .select();
         
         if (gradeError) {
           console.error('❌ Error saving predicted grade:', gradeError);
         } else {
-          console.log('✅ Predicted grade saved:', newPredictedGrade.toFixed(1));
+          console.log('✅ Predicted grade saved successfully:', insertedData);
         }
       } catch (error) {
-        console.error('Error saving predicted grade:', error);
+        console.error('❌ Error saving predicted grade (catch):', error);
       }
     }
 
