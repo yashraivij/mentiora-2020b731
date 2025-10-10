@@ -666,18 +666,12 @@ const Dashboard = () => {
 
       console.log('Raw predicted exam completions data:', data);
 
-      // Group by subject_id and get the latest prediction for each subject
-      const latestGrades = data?.reduce((acc: any, grade: any) => {
-        if (!acc[grade.subject_id] || new Date(grade.created_at) > new Date(acc[grade.subject_id].created_at)) {
-          acc[grade.subject_id] = grade;
-        }
-        return acc;
-      }, {});
-
-      console.log('Predicted grades from DB:', Object.values(latestGrades || {}));
+      // Don't group - keep ALL records so we can filter and sort later
+      // This ensures we get the most recent grade even if subject_id format changed
+      console.log('All predicted grades from DB:', data);
       console.log('User subjects from curriculum:', userSubjects);
       
-      setPredictedGrades(Object.values(latestGrades || {}));
+      setPredictedGrades(data || []);
     } catch (error) {
       console.error('Error loading predicted grades:', error);
     }
@@ -1564,13 +1558,27 @@ const Dashboard = () => {
       const practicePercentage = Math.round(totalScore / totalTopics);
       
       // Get most recent predicted exam completion for this subject
-      const recentExamCompletion = predictedGrades
-        .filter(pg => {
-          // Map database subject_id to curriculum subject_id for consistent matching
-          const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
-          return mappedSubjectId === subjectId;
-        })
+      const matchingGrades = predictedGrades.filter(pg => {
+        // Map database subject_id to curriculum subject_id for consistent matching
+        const mappedSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
+        const matches = mappedSubjectId === subjectId;
+        if (matches) {
+          console.log(`✅ Match found for ${subjectId}:`, {
+            dbSubjectId: pg.subject_id,
+            mappedSubjectId,
+            grade: pg.grade,
+            created_at: pg.created_at
+          });
+        }
+        return matches;
+      });
+      
+      const recentExamCompletion = matchingGrades
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+      
+      if (recentExamCompletion) {
+        console.log(`🎯 Using grade for ${subjectId}:`, recentExamCompletion.grade);
+      }
       
       const hasPracticeData = subjectProgress.length > 0;
       
@@ -2580,9 +2588,18 @@ const Dashboard = () => {
                                 const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
                                 // Get user's predicted grade for this subject using the mapped subject ID
-                                const userPredictedGrade = predictedGrades.find(pg => {
+                                const matchingGrades = predictedGrades.filter(pg => {
                                   const mappedPgSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
                                   return mappedPgSubjectId === subjectIdToMatch;
+                                });
+                                
+                                const userPredictedGrade = matchingGrades
+                                  .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+                                  
+                                console.log(`🎯 Performance Comparison for ${subjectIdToMatch}:`, {
+                                  matchingGrades: matchingGrades.length,
+                                  selectedGrade: userPredictedGrade?.grade,
+                                  allGrades: matchingGrades.map(g => ({ subject_id: g.subject_id, grade: g.grade, created_at: g.created_at }))
                                 });
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
