@@ -1433,7 +1433,13 @@ const Dashboard = () => {
       
       // Get actual predicted grade from performance data (predictedGrades array)
       // Match directly using curriculum subject ID (subjectId is already mapped from database to curriculum)
+      console.log('📊 mockSubjects - Looking for grade:', {
+        subjectName: subject.subject_name,
+        subjectId,
+        predictedGradesAvailable: predictedGrades.map(pg => ({ id: pg.subject_id, grade: pg.grade }))
+      });
       const actualPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectId);
+      console.log('📊 mockSubjects - Found:', actualPredictedGrade);
       
       // Use actual predicted grade if available, otherwise check if any practice done
       let predicted: number | string = target;
