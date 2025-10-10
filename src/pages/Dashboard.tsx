@@ -1400,9 +1400,33 @@ const Dashboard = () => {
       const target = typeof subject.target_grade === 'string'
         ? parseFloat(subject.target_grade) || 7
         : subject.target_grade || 7;
-      const predicted = typeof subject.predicted_grade === 'string' 
-        ? parseFloat(subject.predicted_grade) || target 
-        : subject.predicted_grade || target;
+      
+      // Get actual predicted grade from performance data (predictedGrades array)
+      const actualPredictedGrade = predictedGrades.find(pg => 
+        pg.subject_id === subject.subject_name || 
+        pg.subject_id === subjectId
+      );
+      
+      // Use actual predicted grade if available, otherwise fall back to target
+      let predicted = target;
+      if (actualPredictedGrade) {
+        const gradeValue = typeof actualPredictedGrade.grade === 'string'
+          ? parseFloat(actualPredictedGrade.grade)
+          : actualPredictedGrade.grade;
+        if (!isNaN(gradeValue) && gradeValue > 0) {
+          predicted = gradeValue;
+        }
+      }
+      // If no actual predicted grade, check if subject has a non-default predicted_grade
+      if (predicted === target && subject.predicted_grade) {
+        const subjectPredicted = typeof subject.predicted_grade === 'string' 
+          ? parseFloat(subject.predicted_grade) 
+          : subject.predicted_grade;
+        // Only use it if it's not the default "5" value
+        if (!isNaN(subjectPredicted) && subjectPredicted !== 5) {
+          predicted = subjectPredicted;
+        }
+      }
       
       // Generate trend based on predicted grade
       const baseTrend = Math.floor((predicted / 9) * 100);
@@ -1495,15 +1519,15 @@ const Dashboard = () => {
         return;
       }
 
-      const { error } = await supabase
-        .from("user_subjects")
-        .insert({
-          user_id: user.id,
-          subject_name: subjectName,
-          exam_board: examBoard,
-          predicted_grade: "5",
-          target_grade: targetGrade
-        });
+        const { error } = await supabase
+          .from("user_subjects")
+          .insert({
+            user_id: user.id,
+            subject_name: subjectName,
+            exam_board: examBoard,
+            predicted_grade: targetGrade, // Use target grade as initial predicted grade
+            target_grade: targetGrade
+          });
 
       if (error) {
         console.error("Error adding subject:", error);
