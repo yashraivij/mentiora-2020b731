@@ -817,10 +817,10 @@ const Practice = () => {
     
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-        <div className="max-w-6xl mx-auto px-6 py-8 space-y-6 animate-fade-in">
+        <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
           
           {/* Hero Header */}
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '0ms', animationFillMode: 'forwards' }}>
             <h1 className="text-3xl font-bold text-foreground">
               Section Complete!
             </h1>
@@ -830,7 +830,7 @@ const Practice = () => {
           </div>
 
           {/* Performance Summary Card - Overall Score Only */}
-          <div className="flex justify-center">
+          <div className="flex justify-center opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
             <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
@@ -857,105 +857,110 @@ const Practice = () => {
           </div>
 
           {/* Predicted Grade Improvement - Premium Card */}
-          <Card className="bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 dark:from-gray-900 dark:via-cyan-950/10 dark:to-blue-950/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
-            {/* Animated background elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-400/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-            
-            <CardHeader className="border-b border-border/50 relative pb-4">
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-                  <TrendingUp className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
-                  <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">Grade Improvement</span>
+          <div className="opacity-0 animate-fade-in" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+            <Card className="bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 dark:from-gray-900 dark:via-cyan-950/10 dark:to-blue-950/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+              {/* Animated background elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-400/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              
+              <CardHeader className="border-b border-border/50 relative pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+                    <TrendingUp className="h-3 w-3 text-cyan-600 dark:text-cyan-400" />
+                    <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">Grade Improvement</span>
+                  </div>
+                  <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
+                  <p className="text-sm text-muted-foreground">Based on your recent performance</p>
                 </div>
-                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6 relative">
-              <div className="space-y-6">
-                {/* Grade Comparison */}
-                <div className="flex items-center justify-center gap-12">
-                  <div className="text-center space-y-2 group">
-                    <Badge variant="outline" className="mb-1 border-cyan-200 dark:border-cyan-800 text-xs">
-                      Before
-                    </Badge>
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-5xl font-bold text-cyan-600 dark:text-cyan-400">
-                        {oldPredictedGrade.toFixed(1)}
+              </CardHeader>
+              <CardContent className="p-6 relative">
+                <div className="space-y-6">
+                  {/* Grade Comparison */}
+                  <div className="flex items-center justify-center gap-12">
+                    <div className="text-center space-y-2 group">
+                      <Badge variant="outline" className="mb-1 border-cyan-200 dark:border-cyan-800 text-xs">
+                        Before
+                      </Badge>
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                        <div className="relative text-5xl font-bold text-cyan-600 dark:text-cyan-400">
+                          {oldPredictedGrade.toFixed(1)}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
+                        <TrendingUp className="h-4 w-4" />
+                        <span>+{gradeImprovement.toFixed(1)}</span>
+                      </div>
+                      <ArrowRight className="h-6 w-6 text-cyan-600 dark:text-cyan-400 animate-pulse" />
+                    </div>
+
+                    <div className="text-center space-y-2 group">
+                      <Badge className="mb-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0 text-xs">
+                        Now
+                      </Badge>
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                        <div className="relative text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+                          {newPredictedGrade.toFixed(1)}
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/30 hover:scale-105 transition-transform duration-300">
-                      <TrendingUp className="h-4 w-4" />
-                      <span>+{gradeImprovement.toFixed(1)}</span>
+                  {/* Animated Progress Bar */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between text-xs font-semibold text-muted-foreground">
+                      <span>Grade 4.0</span>
+                      <span>Grade 9.0</span>
                     </div>
-                    <ArrowRight className="h-6 w-6 text-cyan-600 dark:text-cyan-400 animate-pulse" />
-                  </div>
-
-                  <div className="text-center space-y-2 group">
-                    <Badge className="mb-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0 text-xs">
-                      Now
-                    </Badge>
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
-                        {newPredictedGrade.toFixed(1)}
+                    <div className="relative h-4 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+                      {/* Old grade position - light fill - animates first */}
+                      <div 
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-blue-300 to-cyan-300 dark:from-blue-700 dark:to-cyan-700 rounded-full transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: '0%',
+                          animation: 'fillProgress 1s ease-out 600ms forwards',
+                          '--target-width': `${((oldPredictedGrade - 4) / 5) * 100}%`
+                        } as React.CSSProperties}
+                      />
+                      {/* New grade position - animated bright fill - animates after */}
+                      <div 
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-1500 ease-out"
+                        style={{ 
+                          width: '0%',
+                          backgroundSize: '200% 100%',
+                          animation: 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
+                          '--target-width': `${((newPredictedGrade - 4) / 5) * 100}%`
+                        } as React.CSSProperties}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: 'slideAndFade 2s infinite 2700ms' }} />
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Animated Progress Bar */}
-                <div className="space-y-3">
-                  <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                    <span>Grade 4.0</span>
-                    <span>Grade 9.0</span>
-                  </div>
-                  <div className="relative h-4 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
-                    {/* Old grade position - light fill */}
-                    <div 
-                      className="absolute top-0 bottom-0 bg-gradient-to-r from-blue-300 to-cyan-300 dark:from-blue-700 dark:to-cyan-700 rounded-full transition-all duration-1000 ease-out"
-                      style={{ 
-                        width: `${((oldPredictedGrade - 4) / 5) * 100}%`,
-                      }}
-                    />
-                    {/* New grade position - animated bright fill */}
-                    <div 
-                      className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-2000 ease-out delay-500"
-                      style={{ 
-                        width: `${((newPredictedGrade - 4) / 5) * 100}%`,
-                        backgroundSize: '200% 100%',
-                        animation: 'shimmer 3s infinite'
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'slide 2s infinite' }} />
+                    <div className="text-center pt-1">
+                      <p className="text-sm text-muted-foreground">
+                        Progress: <span className="font-bold text-cyan-600 dark:text-cyan-400">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
+                      </p>
                     </div>
                   </div>
-                  <div className="text-center pt-1">
-                    <p className="text-sm text-muted-foreground">
-                      Progress: <span className="font-bold text-cyan-600 dark:text-cyan-400">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
-                    </p>
-                  </div>
-                </div>
 
-                {/* Percentile Badge */}
-                <div className="flex justify-center pt-2">
-                  <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
-                    <p className="text-sm text-center">
-                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-cyan-600 dark:text-cyan-400">{percentileRank}%</span> of students this week
-                    </p>
+                  {/* Percentile Badge */}
+                  <div className="flex justify-center pt-2">
+                    <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+                      <p className="text-sm text-center">
+                        <span className="text-xl">👏</span> You scored better than <span className="font-bold text-cyan-600 dark:text-cyan-400">{percentileRank}%</span> of students this week
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Performance Comparison */}
-          <div className="space-y-5">
+          <div className="space-y-5 opacity-0 animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
             <h2 className="text-2xl font-bold text-foreground">Performance Comparison</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
