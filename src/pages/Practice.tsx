@@ -835,11 +835,6 @@ const Practice = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
                 <div className="text-center space-y-3">
-                  <div className="flex justify-center mb-2">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-500">
-                      <Target className="h-7 w-7 text-white" />
-                    </div>
-                  </div>
                   <div className="space-y-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       Overall Score
