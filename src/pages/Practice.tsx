@@ -661,57 +661,70 @@ const Practice = () => {
       }
     }
     
-    // Fetch actual predicted grade from predicted_exam_completions (same as Dashboard)
-    let fetchedPredictedGrade: number | null = null;
+    // Calculate and update predicted grade based on practice performance
     if (user?.id && subjectId) {
       try {
         const subject = curriculum.find(s => s.id === subjectId);
         const subjectName = subject?.name || '';
         
-        console.log('🔍 Fetching predicted grade for:', { subjectId, subjectName, userId: user.id });
+        console.log('🔍 Updating predicted grade for:', { subjectId, subjectName, userId: user.id });
         
-        // Query predicted_exam_completions to get calculated predicted grade (same as Dashboard)
-        const { data: predictedGradeData, error: gradeError } = await supabase
+        // Get current predicted grade from database
+        const { data: currentGradeData } = await supabase
           .from('predicted_exam_completions')
-          .select('grade, subject_id')
+          .select('grade, percentage')
           .eq('user_id', user.id)
-          .order('completed_at', { ascending: false });
+          .eq('subject_id', subjectName)
+          .order('completed_at', { ascending: false })
+          .limit(1)
+          .maybeSingle();
         
-        if (gradeError) {
-          console.error('❌ Error fetching predicted grades:', gradeError);
-        } else if (predictedGradeData && predictedGradeData.length > 0) {
-          console.log('📊 All predicted grades:', predictedGradeData);
+        // Calculate new predicted grade based on practice score
+        // Convert percentage to grade (0-9 scale)
+        const practiceGrade = Math.floor(finalScore / 11.11); // 0-100% -> 0-9 grades
+        
+        let newPredictedGrade = practiceGrade;
+        let newPercentage = finalScore;
+        
+        if (currentGradeData) {
+          // If there's existing data, blend old and new (weighted towards new performance)
+          const currentGrade = typeof currentGradeData.grade === 'string' 
+            ? parseFloat(currentGradeData.grade) 
+            : currentGradeData.grade;
+          const currentPercentage = currentGradeData.percentage || 0;
           
-          // Find the matching subject - try matching by subject_id or subject name
-          const matchingGrade = predictedGradeData.find(pg => 
-            pg.subject_id === subjectName || 
-            pg.subject_id?.toLowerCase() === subjectName.toLowerCase() ||
-            pg.subject_id === subjectId
-          );
-          
-          if (matchingGrade?.grade) {
-            const grade = typeof matchingGrade.grade === 'string' 
-              ? parseFloat(matchingGrade.grade) 
-              : matchingGrade.grade;
-            if (!isNaN(grade) && grade > 0) {
-              console.log('✅ Found predicted grade:', grade, 'for subject:', matchingGrade.subject_id);
-              fetchedPredictedGrade = grade;
-              setActualPredictedGrade(grade);
-            }
-          } else {
-            console.warn('⚠️ No matching predicted grade found for:', subjectName, 'or', subjectId);
-          }
+          // 70% weight on new performance, 30% on historical
+          newPredictedGrade = Math.round((practiceGrade * 0.7 + currentGrade * 0.3) * 10) / 10;
+          newPercentage = Math.round(finalScore * 0.7 + currentPercentage * 0.3);
+        }
+        
+        // Insert new predicted grade record
+        const { error: insertError } = await supabase
+          .from('predicted_exam_completions')
+          .insert({
+            user_id: user.id,
+            subject_id: subjectName,
+            grade: newPredictedGrade.toString(),
+            percentage: newPercentage,
+            total_marks: 100,
+            achieved_marks: newPercentage,
+            time_taken_seconds: 0,
+            exam_date: new Date().toISOString().split('T')[0],
+            questions: [],
+            answers: [],
+            results: {}
+          });
+        
+        if (insertError) {
+          console.error('❌ Error inserting predicted grade:', insertError);
         } else {
-          console.warn('⚠️ No predicted exam data found');
+          console.log('✅ Updated predicted grade:', newPredictedGrade, 'for subject:', subjectName);
+          setActualPredictedGrade(newPredictedGrade);
         }
       } catch (error) {
-        console.error('❌ Error in fetch logic:', error);
+        console.error('❌ Error updating predicted grade:', error);
       }
     }
-    
-    // Store the fetched grade for use in the completion screen
-    console.log('💾 Storing fetched grade:', fetchedPredictedGrade);
-    (window as any).__lastFetchedPredictedGrade = fetchedPredictedGrade;
     
     // Update subject_performance table in Supabase
     if (user?.id && subjectId) {

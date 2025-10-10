@@ -2417,37 +2417,67 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectId = selectedDrawerSubject?.id || '';
                                 
-                                // Get practice data from last 7 days
+                                // Get predicted grades from last 7 days vs before for this subject
                                 const now = new Date();
                                 const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
                                 
-                                // Get all progress for this subject with scores > 0
-                                const subjectProgress = userProgress.filter(p => 
-                                  p.subjectId === subjectId && p.averageScore > 0
+                                // Filter predicted grades for this subject only
+                                const subjectPredictedGrades = (predictedGrades as any[]).filter(
+                                  (pg: any) => {
+                                    const pgSubjectId = mapDatabaseSubjectToCurriculum(pg.subject_id);
+                                    return pgSubjectId === subjectId;
+                                  }
                                 );
                                 
-                                // Separate recent practice (last 7 days) from older practice
-                                const recentPractice = subjectProgress.filter(p => 
-                                  new Date(p.lastAttempt) >= sevenDaysAgo
+                                if (subjectPredictedGrades.length === 0) {
+                                  // No predicted grade data yet
+                                  return (
+                                    <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm">
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
+                                            <TrendingUp className="h-4 w-4 text-[#94A3B8]" />
+                                          </div>
+                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
+                                        </div>
+                                        <div className="text-3xl font-bold text-[#94A3B8]">
+                                          0.0%
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  );
+                                }
+                                
+                                // Get most recent grade
+                                const latestGrade = subjectPredictedGrades.sort((a: any, b: any) => 
+                                  new Date(b.completed_at || b.created_at).getTime() - 
+                                  new Date(a.completed_at || a.created_at).getTime()
+                                )[0];
+                                
+                                const latestGradeNum = typeof latestGrade.grade === 'string' 
+                                  ? parseFloat(latestGrade.grade) 
+                                  : latestGrade.grade;
+                                
+                                // Get grade from 7 days ago (or earliest if less than 7 days)
+                                const gradesOlderThan7Days = subjectPredictedGrades.filter((pg: any) => 
+                                  new Date(pg.completed_at || pg.created_at) < sevenDaysAgo
                                 );
-                                const olderPractice = subjectProgress.filter(p => 
-                                  new Date(p.lastAttempt) < sevenDaysAgo
-                                );
                                 
-                                // Calculate weighted average for recent practice
-                                const recentAvg = recentPractice.length > 0
-                                  ? recentPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
-                                    recentPractice.reduce((sum, p) => sum + p.attempts, 0)
-                                  : 0;
+                                let baselineGrade = latestGradeNum;
+                                if (gradesOlderThan7Days.length > 0) {
+                                  // Get the most recent grade from before 7 days ago
+                                  const oldestRecentGrade = gradesOlderThan7Days.sort((a: any, b: any) => 
+                                    new Date(b.completed_at || b.created_at).getTime() - 
+                                    new Date(a.completed_at || a.created_at).getTime()
+                                  )[0];
+                                  
+                                  baselineGrade = typeof oldestRecentGrade.grade === 'string'
+                                    ? parseFloat(oldestRecentGrade.grade)
+                                    : oldestRecentGrade.grade;
+                                }
                                 
-                                // Calculate weighted average for older practice (baseline)
-                                const olderAvg = olderPractice.length > 0
-                                  ? olderPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
-                                    olderPractice.reduce((sum, p) => sum + p.attempts, 0)
-                                  : recentAvg; // If no older data, use recent as baseline
-                                
-                                // Calculate percentage point change
-                                const change = recentPractice.length > 0 ? recentAvg - olderAvg : 0;
+                                // Calculate grade change (in grade points)
+                                const change = latestGradeNum - baselineGrade;
                                 const isPositive = change >= 0;
                                 const sign = isPositive ? '+' : '';
                                 
@@ -2468,10 +2498,10 @@ const Dashboard = () => {
                                         </div>
                                         <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
                                       </div>
-                                      <div className={`text-3xl font-bold flex items-center gap-2 ${
+                                       <div className={`text-3xl font-bold flex items-center gap-2 ${
                                         isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
                                       }`}>
-                                        {sign}{change.toFixed(1)}%
+                                        {sign}{change.toFixed(1)} grades
                                       </div>
                                     </CardContent>
                                   </Card>
