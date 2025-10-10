@@ -628,7 +628,7 @@ const Practice = () => {
     
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
-    // Update subject_performance table in Supabase
+    // Fetch actual predicted grade from user_subjects FIRST before completing session
     if (user?.id && subjectId) {
       try {
         const subject = curriculum.find(s => s.id === subjectId);
@@ -636,7 +636,6 @@ const Practice = () => {
                          subjectId.includes('edexcel') ? 'Edexcel' : 
                          subjectId.includes('ocr') ? 'OCR' : 'AQA';
         
-        // Fetch actual predicted grade from user_subjects
         // Map subject ID to database subject name format
         let subjectName = subject?.name || '';
         
@@ -652,7 +651,9 @@ const Practice = () => {
           }
         }
         
-        const { data: userSubjectData } = await supabase
+        console.log('🎯 Fetching predicted grade for:', { subjectName, examBoard, userId: user.id });
+        
+        const { data: userSubjectData, error: gradeError } = await supabase
           .from('user_subjects')
           .select('predicted_grade')
           .eq('user_id', user.id)
@@ -660,14 +661,35 @@ const Practice = () => {
           .eq('exam_board', examBoard)
           .maybeSingle();
         
-        if (userSubjectData?.predicted_grade) {
+        console.log('📊 Predicted grade data:', userSubjectData);
+        
+        if (gradeError) {
+          console.error('Error fetching predicted grade:', gradeError);
+        } else if (userSubjectData?.predicted_grade) {
           const grade = typeof userSubjectData.predicted_grade === 'string' 
             ? parseFloat(userSubjectData.predicted_grade) 
             : userSubjectData.predicted_grade;
           if (!isNaN(grade)) {
+            console.log('✅ Setting actual predicted grade:', grade);
             setActualPredictedGrade(grade);
+            // Wait a moment for state to update
+            await new Promise(resolve => setTimeout(resolve, 100));
           }
+        } else {
+          console.warn('⚠️ No predicted grade found for this subject');
         }
+      } catch (error) {
+        console.error('Error fetching predicted grade:', error);
+      }
+    }
+    
+    // Update subject_performance table in Supabase
+    if (user?.id && subjectId) {
+      try {
+        const subject = curriculum.find(s => s.id === subjectId);
+        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
+                         subjectId.includes('edexcel') ? 'Edexcel' : 
+                         subjectId.includes('ocr') ? 'OCR' : 'AQA';
         
         // Calculate actual time spent in minutes
         const timeSpentMs = Date.now() - sessionStartTime;
