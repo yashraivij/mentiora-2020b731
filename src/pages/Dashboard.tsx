@@ -2501,7 +2501,7 @@ const Dashboard = () => {
                                        <div className={`text-3xl font-bold flex items-center gap-2 ${
                                         isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
                                       }`}>
-                                        {sign}{change.toFixed(1)} grades
+                                        {sign}{change.toFixed(1)}
                                       </div>
                                     </CardContent>
                                   </Card>
