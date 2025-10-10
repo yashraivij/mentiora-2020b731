@@ -961,20 +961,20 @@ const Practice = () => {
             <div className="grid md:grid-cols-2 gap-4">
               {/* Predicted Grade */}
               <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/5 to-[hsl(195,60%,60%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <CardContent className="p-8 relative">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Predicted Grade
                       </p>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                      <span className="text-3xl font-bold text-[hsl(195,69%,54%)]">
                         {newPredictedGrade.toFixed(1)}
                       </span>
                     </div>
-                    <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
                       <div 
-                        className="absolute top-0 bottom-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1500"
+                        className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)] rounded-full transition-all duration-1500"
                         style={{ width: `${(newPredictedGrade / 9) * 100}%` }}
                       />
                     </div>
@@ -1106,7 +1106,7 @@ const Practice = () => {
             <Button
               onClick={() => navigate('/dashboard')}
               size="lg"
-              className="px-10 py-6 rounded-xl text-base font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="px-10 py-6 rounded-xl text-base font-semibold bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,48%)] text-white shadow-lg shadow-[hsl(195,69%,54%)]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Continue to Dashboard
               <ArrowRight className="h-5 w-5 ml-2" />
