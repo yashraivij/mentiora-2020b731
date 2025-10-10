@@ -2461,8 +2461,9 @@ const Dashboard = () => {
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
                                     {(() => {
-                                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(selectedDrawerSubject?.name || '');
-                                      const subjectExams = userProgress.filter(p => p.subjectId === mappedSubjectId);
+                                      // Use the subject ID directly from selectedDrawerSubject
+                                      const subjectId = selectedDrawerSubject?.id || '';
+                                      const subjectExams = userProgress.filter(p => p.subjectId === subjectId);
                                       
                                       if (subjectExams.length === 0) return '0';
                                       
