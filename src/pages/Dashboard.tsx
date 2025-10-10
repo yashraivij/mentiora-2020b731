@@ -287,12 +287,17 @@ const Dashboard = () => {
       "Mathematics (A-Level)": "maths-aqa-alevel",
       "Biology (A-Level)": "biology-aqa-alevel",
       
+      // GCSE/standard subjects with exam board in name
+      "Physics (Edexcel)": "physics-edexcel",
+      "Chemistry (Edexcel)": "chemistry-edexcel",
+      "Biology (Edexcel)": "biology-edexcel",
+      
       // GCSE/standard subjects
       "Mathematics": "maths-edexcel",
       "maths": "maths-edexcel", 
       "mathematics": "maths-edexcel",
-      "Physics": "physics",
-      "physics": "physics",
+      "Physics": "physics-edexcel",
+      "physics": "physics-edexcel",
       "Chemistry": "chemistry-edexcel",
       "chemistry": "chemistry-edexcel",
       "Biology": "biology-edexcel", 
