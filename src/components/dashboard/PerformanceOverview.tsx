@@ -24,7 +24,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
     const targetGrade = parseInt(userSubject?.target_grade || "7");
     // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
     const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
-    const currentGrade = gradeValue === 'U' ? 0 : parseInt(gradeValue);
+    // Treat "0", 0, "0.0" or "U" as ungraded
+    const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
+    const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
 
     return {
       subject: prediction.subject_id.slice(0, 12),
@@ -115,8 +117,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
           const targetGrade = parseInt(userSubject?.target_grade || "7");
           // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
           const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
-          const isUngraded = gradeValue === 'U';
-          const currentGrade = isUngraded ? 0 : parseInt(gradeValue);
+          // Treat "0", 0, "0.0" or "U" as ungraded
+          const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
+          const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
 
           return (
