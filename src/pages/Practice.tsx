@@ -832,14 +832,14 @@ const Practice = () => {
           {/* Performance Summary Card - Overall Score Only */}
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
                 <div className="text-center space-y-3">
                   <div className="space-y-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       Overall Score
                     </p>
-                    <p className="text-5xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+                    <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
                       {Math.round(averagePercentage)}%
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -853,16 +853,16 @@ const Practice = () => {
 
           {/* Predicted Grade Improvement - Premium Card */}
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <Card className="bg-gradient-to-br from-card via-primary/10 to-accent/10 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                    <TrendingUp className="h-3 w-3 text-primary" />
-                    <span className="text-xs font-semibold text-primary">Grade Improvement</span>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
+                    <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
+                    <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
                   </div>
                   <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
                   <p className="text-sm text-muted-foreground">Based on your recent performance</p>
@@ -873,12 +873,12 @@ const Practice = () => {
                   {/* Grade Comparison */}
                   <div className="flex items-center justify-center gap-12">
                     <div className="text-center space-y-2 group">
-                      <Badge variant="outline" className="mb-1 border-primary/30 text-xs">
+                      <Badge variant="outline" className="mb-1 border-[hsl(195,69%,54%)]/30 text-xs">
                         Before
                       </Badge>
                       <div className="relative">
-                        <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                        <div className="relative text-5xl font-bold text-primary">
+                        <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                        <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
                           {oldPredictedGrade.toFixed(1)}
                         </div>
                       </div>
@@ -889,16 +889,16 @@ const Practice = () => {
                         <TrendingUp className="h-4 w-4" />
                         <span>+{gradeImprovement.toFixed(1)}</span>
                       </div>
-                      <ArrowRight className="h-6 w-6 text-primary animate-pulse" />
+                      <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                     </div>
 
                     <div className="text-center space-y-2 group">
-                      <Badge className="mb-1 bg-gradient-to-r from-primary to-accent text-primary-foreground border-0 text-xs">
+                      <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
                         Now
                       </Badge>
                       <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                        <div className="relative text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                        <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
                           {newPredictedGrade.toFixed(1)}
                         </div>
                       </div>
@@ -914,7 +914,7 @@ const Practice = () => {
                     <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
                       {/* Old grade position - light fill - animates first */}
                       <div 
-                        className="absolute top-0 bottom-0 bg-primary/30 rounded-full transition-all duration-1000 ease-out"
+                        className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)]/30 rounded-full transition-all duration-1000 ease-out"
                         style={{ 
                           width: '0%',
                           animation: 'fillProgress 1s ease-out 600ms forwards',
@@ -923,7 +923,7 @@ const Practice = () => {
                       />
                       {/* New grade position - animated bright fill - animates after */}
                       <div 
-                        className="absolute top-0 bottom-0 bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-1500 ease-out shadow-lg shadow-primary/50"
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,60%,60%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[hsl(195,69%,54%)]/50"
                         style={{ 
                           width: '0%',
                           backgroundSize: '200% 100%',
@@ -936,16 +936,16 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        Progress: <span className="font-bold text-primary">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
+                        Progress: <span className="font-bold text-[hsl(195,69%,54%)]">{Math.round(((newPredictedGrade - 4) / 5) * 100)}%</span> towards grade 9
                       </p>
                     </div>
                   </div>
 
                   {/* Percentile Badge */}
                   <div className="flex justify-center pt-2">
-                    <div className="px-5 py-2 rounded-2xl bg-primary/5 border border-primary/20">
+                    <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
                       <p className="text-sm text-center">
-                        <span className="text-xl">👏</span> You scored better than <span className="font-bold text-primary">{percentileRank}%</span> of students this week
+                        <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
                       </p>
                     </div>
                   </div>
