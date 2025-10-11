@@ -76,14 +76,13 @@ export const MPRewardsProvider = ({ children }: MPRewardsProviderProps) => {
   }, [currentToast, toastQueue, playMPRewardChime, triggerMPCounterBounce]);
 
   const showMPReward = useCallback((amount: number, message: string) => {
-    // MP reward notifications disabled per user request
-    // const reward: MPReward = {
-    //   id: Date.now().toString(),
-    //   amount,
-    //   message
-    // };
+    const reward: MPReward = {
+      id: Date.now().toString(),
+      amount,
+      message
+    };
 
-    // setToastQueue(prev => [...prev, reward]);
+    setToastQueue(prev => [...prev, reward]);
     
     // Trigger quest notification badge
     window.dispatchEvent(new CustomEvent('mpEarned'));
