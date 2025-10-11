@@ -1389,77 +1389,93 @@ const Practice = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 relative">
-                <div className="space-y-3">
-                  {(attempts.length - correctAnswers) > 0 ? (
-                    <>
-                      {attempts
-                        .filter(attempt => {
-                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
-                          return question && (attempt.score / question.marks) < 0.7;
-                        })
-                        .slice(0, 3)
-                        .map((attempt, index) => {
-                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
-                          if (!question) return null;
-                          const percentage = (attempt.score / question.marks) * 100;
-                          const marksLost = question.marks - attempt.score;
-                          
-                          return (
-                            <div key={attempt.questionId} className="group/item">
-                              <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-amber-200/30 dark:border-amber-800/30 hover:border-amber-400/50 dark:hover:border-amber-600/50 hover:bg-amber-50/80 dark:hover:bg-amber-950/40 transition-all duration-300 hover:shadow-md">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
-                                  <span className="text-white font-bold text-sm">{index + 1}</span>
-                                </div>
-                                <div className="flex-1 min-w-0 space-y-1.5">
-                                  <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
-                                    {question.question.length > 80 
-                                      ? question.question.substring(0, 80) + '...' 
-                                      : question.question}
-                                  </p>
-                                  <div className="flex items-center gap-2 flex-wrap">
-                                    <Badge className="bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-0 text-xs px-2 py-0.5">
-                                      {attempt.score}/{question.marks} marks
-                                    </Badge>
-                                    <Badge className="bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-0 text-xs px-2 py-0.5">
-                                      -{marksLost} {marksLost === 1 ? 'mark' : 'marks'} lost
-                                    </Badge>
-                                    {percentage > 0 && percentage < 70 && (
-                                      <Badge className="bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-0 text-xs px-2 py-0.5">
-                                        {Math.round(percentage)}% partial
+                <div className="space-y-4">
+                  <div className="space-y-3">
+                    {(attempts.length - correctAnswers) > 0 ? (
+                      <>
+                        {attempts
+                          .filter(attempt => {
+                            const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                            return question && (attempt.score / question.marks) < 0.7;
+                          })
+                          .slice(0, 3)
+                          .map((attempt, index) => {
+                            const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                            if (!question) return null;
+                            const percentage = (attempt.score / question.marks) * 100;
+                            const marksLost = question.marks - attempt.score;
+                            
+                            return (
+                              <div key={attempt.questionId} className="group/item">
+                                <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-amber-200/30 dark:border-amber-800/30 hover:border-amber-400/50 dark:hover:border-amber-600/50 hover:bg-amber-50/80 dark:hover:bg-amber-950/40 transition-all duration-300 hover:shadow-md">
+                                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
+                                    <span className="text-white font-bold text-sm">{index + 1}</span>
+                                  </div>
+                                  <div className="flex-1 min-w-0 space-y-1.5">
+                                    <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
+                                      {question.question.length > 80 
+                                        ? question.question.substring(0, 80) + '...' 
+                                        : question.question}
+                                    </p>
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                      <Badge className="bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-0 text-xs px-2 py-0.5">
+                                        {attempt.score}/{question.marks} marks
                                       </Badge>
+                                      <Badge className="bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-0 text-xs px-2 py-0.5">
+                                        -{marksLost} {marksLost === 1 ? 'mark' : 'marks'} lost
+                                      </Badge>
+                                      {percentage > 0 && percentage < 70 && (
+                                        <Badge className="bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-0 text-xs px-2 py-0.5">
+                                          {Math.round(percentage)}% partial
+                                        </Badge>
+                                      )}
+                                    </div>
+                                    {attempt.feedback.whyYoursDidnt && (
+                                      <p className="text-xs text-muted-foreground line-clamp-2 pt-1 italic">
+                                        "{attempt.feedback.whyYoursDidnt.length > 100 
+                                          ? attempt.feedback.whyYoursDidnt.substring(0, 100) + '...' 
+                                          : attempt.feedback.whyYoursDidnt}"
+                                      </p>
                                     )}
                                   </div>
-                                  {attempt.feedback.whyYoursDidnt && (
-                                    <p className="text-xs text-muted-foreground line-clamp-2 pt-1 italic">
-                                      "{attempt.feedback.whyYoursDidnt.length > 100 
-                                        ? attempt.feedback.whyYoursDidnt.substring(0, 100) + '...' 
-                                        : attempt.feedback.whyYoursDidnt}"
-                                    </p>
-                                  )}
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
-                      {(attempts.length - correctAnswers) > 3 && (
-                        <div className="text-center pt-2">
-                          <Badge variant="outline" className="text-xs text-muted-foreground border-amber-300/50 dark:border-amber-700/50">
-                            +{(attempts.length - correctAnswers) - 3} more to review
-                          </Badge>
+                            );
+                          })}
+                        {(attempts.length - correctAnswers) > 3 && (
+                          <div className="text-center pt-2">
+                            <Badge variant="outline" className="text-xs text-muted-foreground border-amber-300/50 dark:border-amber-700/50">
+                              +{(attempts.length - correctAnswers) - 3} more to review
+                            </Badge>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="text-center py-6">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100/50 dark:bg-emerald-900/20 mb-3">
+                          <Trophy className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
                         </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100/50 dark:bg-emerald-900/20 mb-3">
-                        <Trophy className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+                        <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                          Perfect performance! 🎉
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          No areas need review
+                        </p>
                       </div>
-                      <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                        Perfect performance! 🎉
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        No areas need review
-                      </p>
+                    )}
+                  </div>
+
+                  {/* CTA to Smart Revision Notebook */}
+                  {(attempts.length - correctAnswers) > 0 && (
+                    <div className="pt-3 border-t border-amber-200/30 dark:border-amber-800/30">
+                      <Button
+                        onClick={() => navigate('/notebook')}
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl group/btn"
+                      >
+                        <NotebookPen className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                        Review in Smart Notebook
+                        <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
                     </div>
                   )}
                 </div>
