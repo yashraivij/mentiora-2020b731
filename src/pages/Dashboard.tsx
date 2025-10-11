@@ -1604,12 +1604,11 @@ const Dashboard = () => {
           const windowAvg = windowTotal / windowCount;
           if (windowAvg > bestAverage) {
             bestAverage = windowAvg;
-            const formatHour = (h: number) => {
-              const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
-              const period = h >= 12 ? 'pm' : 'am';
-              return `${hour12}${period}`;
-            };
-            bestWindow = `${formatHour(startHour)}–${formatHour((startHour + 2) % 24)}`;
+            const endHour = (startHour + 2) % 24;
+            const startHour12 = startHour === 0 ? 12 : startHour > 12 ? startHour - 12 : startHour;
+            const endHour12 = endHour === 0 ? 12 : endHour > 12 ? endHour - 12 : endHour;
+            const period = endHour >= 12 ? 'pm' : 'am';
+            bestWindow = `${startHour12}–${endHour12}${period}`;
           }
         }
       }
