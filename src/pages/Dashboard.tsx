@@ -187,13 +187,13 @@ const Dashboard = () => {
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
-    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
-    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
-    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-700 dark:text-orange-300", activeColor: "bg-orange-400 dark:bg-orange-600" },
-    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-700 dark:text-blue-300", activeColor: "bg-blue-400 dark:bg-blue-600" },
-    { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary dark:bg-primary/70" },
+    { id: "learn", label: "LEARN", icon: Home, color: "text-[#0EA5E9]", activeColor: "bg-[#0EA5E9]" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, color: "text-[#F59E0B]", activeColor: "bg-[#F59E0B]" },
+    { id: "progress", label: "PROGRESS", icon: TrendingUp, color: "text-[#10B981]", activeColor: "bg-[#10B981]" },
+    { id: "quests", label: "QUESTS", icon: Star, color: "text-[#EF4444]", activeColor: "bg-[#EF4444]" },
+    { id: "notes", label: "NOTES", icon: NotebookPen, color: "text-[#3B82F6]", activeColor: "bg-[#3B82F6]" },
+    { id: "flashcards", label: "FLASHCARDS", icon: Brain, color: "text-[#8B5CF6]", activeColor: "bg-[#8B5CF6]" },
+    { id: "profile", label: "PROFILE", icon: User, color: "text-muted-foreground", activeColor: "bg-muted" },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
@@ -2337,11 +2337,11 @@ const Dashboard = () => {
                         if (item.id === 'quests') setQuestNotificationCount(0);
                       }}
                       className={isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
+                        ? `${item.activeColor} text-white shadow-md` 
+                        : `hover:bg-muted/50 ${item.color}`
                       }
                     >
-                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
+                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : ''}`} />
                       <span className="font-bold text-sm tracking-wide">{item.label}</span>
                     </MobileNavItem>
                     {showBadge && (
@@ -2416,7 +2416,7 @@ const Dashboard = () => {
 
         {/* Navigation */}
         <nav className="flex-1 px-4">
-          <div className="space-y-2">
+          <div className="space-y-1">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -2429,15 +2429,14 @@ const Dashboard = () => {
                       if (item.id === 'quests') setQuestNotificationCount(0);
                     }}
                     whileHover={{ scale: 1.02 }}
-                    className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
                       isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:scale-105`
+                        ? `${item.activeColor} text-white shadow-md` 
+                        : `hover:bg-muted/50 ${item.color}`
                     }`}
                   >
-                    <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
-                      <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
-                    </div>
+                    <Icon className={`h-5 w-5 ${isActive ? 'text-white' : ''}`} />
                     <span className="font-bold text-sm tracking-wide">{item.label}</span>
                   </motion.button>
                   {showBadge && (
@@ -2452,29 +2451,29 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="px-4 pt-4 border-t border-border space-y-2">
+        <div className="px-4 pt-4 border-t border-border space-y-1">
           <button
             data-feedback-fish
             data-feedback-fish-userid={user?.email || ""}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
+            className="w-full flex items-center justify-start gap-3 px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-all duration-200"
           >
-            <span className="text-lg mr-3">💬</span>
-            <span className="font-medium">Feedback</span>
+            <span className="text-lg">💬</span>
+            <span className="font-medium text-sm">Feedback</span>
           </button>
           <button
             onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
+            className="w-full flex items-center justify-start gap-3 px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-all duration-200"
           >
-            <span className="text-lg mr-3">🎮</span>
-            <span className="font-medium">Join Discord</span>
+            <span className="text-lg">🎮</span>
+            <span className="font-medium text-sm">Join Discord</span>
           </button>
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
+            className="w-full justify-start gap-3 px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl"
           >
-            <User className="h-4 w-4 mr-3" />
-            Sign Out
+            <User className="h-4 w-4" />
+            <span className="font-medium text-sm">Sign Out</span>
           </Button>
         </div>
       </div>
