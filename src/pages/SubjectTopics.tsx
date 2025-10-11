@@ -163,12 +163,12 @@ const SubjectTopics = () => {
   if (showGradeSetup) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-8">
-        <Card className="max-w-2xl w-full rounded-3xl border-[#E7ECF5] shadow-[0_8px_48px_rgba(15,23,42,0.08)]">
+        <Card className="max-w-2xl w-full rounded-3xl border-border shadow-lg dark:shadow-xl">
           <CardHeader className="text-center space-y-4 pt-12 pb-8">
-            <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-[#2E5BFF] to-[#60A5FA] flex items-center justify-center mb-4">
-              <Target className="h-8 w-8 text-white" />
+            <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center mb-4">
+              <Target className="h-8 w-8 text-primary-foreground" />
             </div>
-            <CardTitle className="text-3xl font-semibold text-[#0F172A]">
+            <CardTitle className="text-3xl font-semibold text-foreground">
               Set your target grade for {subject?.name}
             </CardTitle>
             <p className="text-muted-foreground text-base">
@@ -182,7 +182,7 @@ const SubjectTopics = () => {
                   key={grade}
                   onClick={() => handleGradeSelect(grade)}
                   variant="outline"
-                  className="h-20 text-2xl font-semibold rounded-2xl border-[#E7ECF5] hover:border-[#2E5BFF] hover:bg-[#F7F9FC] hover:text-[#2E5BFF] transition-all duration-200 hover:shadow-[0_0_20px_rgba(46,91,255,0.15)]"
+                  className="h-20 text-2xl font-semibold rounded-2xl border-border hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200 hover:shadow-lg dark:hover:bg-primary/20"
                 >
                   {grade}
                 </Button>
@@ -200,9 +200,9 @@ const SubjectTopics = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Minimal Header */}
-      <header className="border-b border-[#E7ECF5] bg-background">
+      <header className="border-b border-border bg-card dark:bg-card/50">
         <div className="max-w-6xl mx-auto px-8 py-6">
-          <Button variant="ghost" onClick={() => navigate(-1)} className="hover:bg-[#F7F9FC]">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="hover:bg-muted">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
@@ -214,11 +214,11 @@ const SubjectTopics = () => {
           {/* Main Content Column */}
           <div className="space-y-8">
             {/* Hero Card */}
-            <Card className="rounded-2xl border-[#E7ECF5] shadow-[0_6px_30px_rgba(15,23,42,0.06)] overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-[#2E5BFF]/5 to-transparent" />
+            <Card className="rounded-2xl border-border shadow-lg dark:shadow-xl overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-primary/5 to-transparent dark:from-primary/10" />
               <CardHeader className="relative space-y-6 pb-8">
                 <div>
-                  <h1 className="text-4xl font-semibold text-[#0F172A] mb-2">
+                  <h1 className="text-4xl font-semibold text-foreground mb-2">
                     Your journey in {subject?.name}
                   </h1>
                   <p className="text-muted-foreground text-lg">
@@ -227,13 +227,13 @@ const SubjectTopics = () => {
                 </div>
                 
                 <div className="flex flex-wrap gap-3">
-                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                  <div className="px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/20 border border-border text-sm font-medium text-foreground">
                     🎯 Target: {targetGrade}
                   </div>
-                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                  <div className="px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/20 border border-border text-sm font-medium text-foreground">
                     🌿 {confidenceLevel}
                   </div>
-                  <div className="px-4 py-2 rounded-full bg-[#F7F9FC] border border-[#E7ECF5] text-sm font-medium">
+                  <div className="px-4 py-2 rounded-full bg-muted/50 dark:bg-muted/20 border border-border text-sm font-medium text-foreground">
                     ⏰ Focus: {focusTopic}
                   </div>
                 </div>

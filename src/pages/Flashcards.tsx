@@ -220,7 +220,7 @@ const Flashcards = () => {
   if (isMobile) {
     return (
       <div className="min-h-screen bg-background">
-        <header className="bg-card border-b border-border p-4 flex justify-between items-center">
+        <header className="bg-card border-b border-border p-4 flex justify-between items-center shadow-sm">
           <img src={mentioraLogo} alt="Mentiora" className="h-8" />
           <ThemeToggle />
         </header>
@@ -316,7 +316,7 @@ const Flashcards = () => {
                 <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
               </div>
             ) : flashcardSets.length === 0 ? (
-              <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
+              <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-800/50 shadow-sm">
                 <CardContent className="text-center py-12">
                   <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
                     <Brain className="h-16 w-16 text-white" />
