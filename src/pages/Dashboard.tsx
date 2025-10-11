@@ -3442,6 +3442,9 @@ const Dashboard = () => {
                                 examBoard = 'CCEA';
                               } else if (subject.id.includes('aqa')) {
                                 examBoard = 'AQA';
+                              } else if (subject.id === 'geography') {
+                                // Explicitly label base Geography as AQA
+                                examBoard = 'AQA';
                               }
                               
                               return (
