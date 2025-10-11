@@ -1027,6 +1027,14 @@ const Practice = () => {
     const newPredictedGrade = parseFloat(existingGradeData.currentGrade || '0');
     const gradeImprovement = isFirstPractice ? newPredictedGrade : newPredictedGrade - oldPredictedGrade;
     
+    console.log('📊 Session Complete Display Values:', {
+      isFirstPractice,
+      oldPredictedGrade: oldPredictedGrade.toFixed(1),
+      newPredictedGrade: newPredictedGrade.toFixed(1),
+      gradeImprovement: gradeImprovement.toFixed(1),
+      rawData: existingGradeData
+    });
+    
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
     
