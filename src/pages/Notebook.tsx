@@ -158,30 +158,26 @@ const Notebook = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-4xl">
-        {/* Centered Header with Icon */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-4">
-            <BookOpen className="h-8 w-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            Smart Revision Notebook
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Instant notes for every lost mark
-          </p>
-        </div>
+      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-6xl">
+        {/* Header Section */}
+        <div className="mb-8">
+          <div className="flex flex-col gap-6">
+            {/* Title and Description */}
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground mb-1">
+                Revision Notes
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Personalized notes from your practice sessions
+              </p>
+            </div>
 
-        {/* Filter Card */}
-        <Card className="mb-8 shadow-sm">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Subject
-                </label>
+            {/* Filters and Stats Row */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              {/* Filters */}
+              <div className="flex items-center gap-2">
                 <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                  <SelectTrigger className="w-full bg-background">
+                  <SelectTrigger className="w-[160px] h-9 text-sm">
                     <SelectValue placeholder="All Subjects" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover">
@@ -191,14 +187,9 @@ const Notebook = () => {
                     ))}
                   </SelectContent>
                 </Select>
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Confidence
-                </label>
+                
                 <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                  <SelectTrigger className="w-full bg-background">
+                  <SelectTrigger className="w-[160px] h-9 text-sm">
                     <SelectValue placeholder="All Confidence" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover">
@@ -209,9 +200,28 @@ const Notebook = () => {
                   </SelectContent>
                 </Select>
               </div>
+
+              {/* Stats - Compact inline display */}
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <BookOpen className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-foreground"><BlurSpan>{stats.totalEntries}</BlurSpan></span>
+                  <span className="text-muted-foreground">notes</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-foreground"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></span>
+                  <span className="text-muted-foreground">saved</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Brain className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-foreground"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></span>
+                  <span className="text-muted-foreground">subjects</span>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Notebook Entries */}
         {sortedEntries.length === 0 ? (
