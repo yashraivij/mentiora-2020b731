@@ -190,14 +190,6 @@ export function MedlySubjectsView({
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
               </Button>
-              <Button variant="ghost" className="rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200 font-medium">
-                <Target className="h-4 w-4 mr-2" />
-                Update Targets
-              </Button>
-              <Button variant="ghost" className="rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200 font-medium">
-                <Download className="h-4 w-4 mr-2" />
-                Export PDF
-              </Button>
             </motion.div>
           </div>
 
