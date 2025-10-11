@@ -187,13 +187,13 @@ const Dashboard = () => {
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
-    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
-    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
-    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-700 dark:text-orange-300", activeColor: "bg-orange-400 dark:bg-orange-600" },
-    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-700 dark:text-blue-300", activeColor: "bg-blue-400 dark:bg-blue-600" },
-    { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary dark:bg-primary/70" },
+    { id: "learn", label: "Learn", icon: Home, color: "text-primary" },
+    { id: "leaderboards", label: "Leaderboards", icon: Trophy, color: "text-amber-500 dark:text-amber-400" },
+    { id: "progress", label: "Progress", icon: TrendingUp, color: "text-emerald-500 dark:text-emerald-400" },
+    { id: "quests", label: "Quests", icon: Star, color: "text-violet-500 dark:text-violet-400" },
+    { id: "notes", label: "Notes", icon: NotebookPen, color: "text-blue-500 dark:text-blue-400" },
+    { id: "flashcards", label: "Flashcards", icon: Brain, color: "text-pink-500 dark:text-pink-400" },
+    { id: "profile", label: "Profile", icon: User, color: "text-muted-foreground" },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
@@ -2337,15 +2337,15 @@ const Dashboard = () => {
                         if (item.id === 'quests') setQuestNotificationCount(0);
                       }}
                       className={isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
+                        ? 'bg-primary/10 dark:bg-primary/20 text-foreground' 
+                        : 'hover:bg-muted/60 dark:hover:bg-muted/40 text-muted-foreground'
                       }
                     >
-                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
-                      <span className="font-bold text-sm tracking-wide">{item.label}</span>
+                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? item.color : 'text-muted-foreground'}`} />
+                      <span className="font-semibold text-sm">{item.label}</span>
                     </MobileNavItem>
                     {showBadge && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md">
                         {questNotificationCount}
                       </div>
                     )}
@@ -2415,8 +2415,8 @@ const Dashboard = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4">
-          <div className="space-y-2">
+        <nav className="flex-1 px-3">
+          <div className="space-y-1">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -2428,20 +2428,37 @@ const Dashboard = () => {
                       setActiveTab(item.id);
                       if (item.id === 'quests') setQuestNotificationCount(0);
                     }}
-                    whileHover={{ scale: 1.02 }}
-                    className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group ${
                       isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:scale-105`
+                        ? 'bg-primary/10 dark:bg-primary/20' 
+                        : 'hover:bg-muted/60 dark:hover:bg-muted/40'
                     }`}
                   >
-                    <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
-                      <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
+                    <div className={`flex items-center justify-center w-9 h-9 rounded-lg transition-all ${
+                      isActive 
+                        ? 'bg-primary/15 dark:bg-primary/25' 
+                        : 'bg-muted/50 dark:bg-muted/30 group-hover:bg-muted dark:group-hover:bg-muted/50'
+                    }`}>
+                      <Icon className={`h-5 w-5 ${isActive ? item.color : 'text-muted-foreground group-hover:text-foreground'}`} />
                     </div>
-                    <span className="font-bold text-sm tracking-wide">{item.label}</span>
+                    <span className={`font-semibold text-sm transition-colors ${
+                      isActive 
+                        ? 'text-foreground' 
+                        : 'text-muted-foreground group-hover:text-foreground'
+                    }`}>
+                      {item.label}
+                    </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute left-0 w-1 h-8 bg-primary rounded-r-full"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </motion.button>
                   {showBadge && (
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
+                    <div className="absolute top-2 right-2 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md">
                       {questNotificationCount}
                     </div>
                   )}
@@ -2452,29 +2469,35 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="px-4 pt-4 border-t border-border space-y-2">
+        <div className="px-3 pt-4 border-t border-border space-y-1">
           <button
             data-feedback-fish
             data-feedback-fish-userid={user?.email || ""}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl transition-all duration-200"
           >
-            <span className="text-lg mr-3">💬</span>
-            <span className="font-medium">Feedback</span>
+            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
+              <span className="text-lg">💬</span>
+            </div>
+            <span className="font-medium text-sm">Feedback</span>
           </button>
           <button
             onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl transition-all duration-200"
           >
-            <span className="text-lg mr-3">🎮</span>
-            <span className="font-medium">Join Discord</span>
+            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
+              <span className="text-lg">🎮</span>
+            </div>
+            <span className="font-medium text-sm">Join Discord</span>
           </button>
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
+            className="w-full justify-start gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl h-auto"
           >
-            <User className="h-4 w-4 mr-3" />
-            Sign Out
+            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
+              <User className="h-5 w-5" />
+            </div>
+            <span className="font-medium text-sm">Sign Out</span>
           </Button>
         </div>
       </div>
