@@ -96,6 +96,15 @@ export function MedlySubjectsView({
   removeSubject,
 }: MedlySubjectsViewProps) {
   
+  // Safe defaults for first-time users with no data
+  const safeProfile = {
+    overallPred: profile.overallPred || 0,
+    overallTarget: profile.overallTarget || 0,
+    retention: profile.retention || 0,
+    bestWindow: profile.bestWindow || "No data yet",
+    weekMinutes: profile.weekMinutes || 0,
+  };
+  
   const filteredMockSubjects = insightFilter
     ? mockSubjects.filter(s => {
         if (insightFilter === "weak") return s.status === "Off target";
@@ -218,16 +227,16 @@ export function MedlySubjectsView({
                         transition={{ delay: 0.3, type: "spring" }}
                         className="text-3xl font-bold text-[#0F172A]"
                       >
-                        {profile.overallPred}
+                        {safeProfile.overallPred}
                       </motion.span>
                       <span className="text-sm text-[#64748B] font-medium">→</span>
-                      <span className="text-xl font-bold text-[#0EA5E9]">{profile.overallTarget}</span>
+                      <span className="text-xl font-bold text-[#0EA5E9]">{safeProfile.overallTarget}</span>
                     </div>
                     <div className="mt-3 flex gap-2">
                       <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: `${(profile.overallPred / 10) * 100}%` }}
+                          animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
                           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                         />
@@ -262,7 +271,7 @@ export function MedlySubjectsView({
                       transition={{ delay: 0.35, type: "spring" }}
                       className="text-3xl font-bold text-[#0F172A]"
                     >
-                      {Math.round(profile.retention * 100)}%
+                      {Math.round(safeProfile.retention * 100)}%
                     </motion.div>
                     <div className="text-xs text-[#64748B] mt-1 font-medium">Last 7 days</div>
                   </motion.div>
@@ -294,7 +303,7 @@ export function MedlySubjectsView({
                       transition={{ delay: 0.4, type: "spring" }}
                       className="text-3xl font-bold text-[#0F172A]"
                     >
-                      {profile.bestWindow}
+                      {safeProfile.bestWindow}
                     </motion.div>
                     <div className="text-xs text-[#64748B] mt-1 font-medium">Your peak focus hours</div>
                   </motion.div>
@@ -326,7 +335,7 @@ export function MedlySubjectsView({
                       transition={{ delay: 0.45, type: "spring" }}
                       className="text-3xl font-bold text-[#0F172A]"
                     >
-                      {Math.floor(profile.weekMinutes / 60)}h {profile.weekMinutes % 60}m
+                      {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
                     </motion.div>
                     <div className="text-xs text-[#64748B] mt-1 font-medium">Study time</div>
                   </motion.div>
