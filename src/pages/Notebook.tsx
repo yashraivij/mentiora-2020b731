@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar, Unlock } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
@@ -141,167 +142,224 @@ const Notebook = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Header with Gradient */}
-      <header className="bg-gradient-to-r from-[#3DB4E8]/10 via-[#3DB4E8]/5 to-transparent border-b border-border/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 py-5">
+    <div className="min-h-screen bg-background">
+      {/* Clean Simple Header */}
+      <header className="bg-card/50 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <Button 
               variant="ghost" 
               onClick={() => navigate('/dashboard')}
-              className="text-muted-foreground hover:text-foreground hover:bg-[#3DB4E8]/10 transition-all duration-200 rounded-xl"
+              className="text-muted-foreground hover:text-foreground rounded-xl"
             >
-              <ArrowLeft className="h-5 w-5 sm:mr-2" />
-              <span className="hidden sm:inline font-medium">Back to Dashboard</span>
+              <ArrowLeft className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Back</span>
             </Button>
-            <div className="flex items-center gap-3">
-              <div className="hidden sm:flex h-10 w-10 rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#3DB4E8]/70 items-center justify-center">
-                <BookOpen className="h-5 w-5 text-white" />
-              </div>
-              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                Smart Revision Notebook
-              </h1>
-            </div>
-            <div className="w-20 sm:w-32"></div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-10 max-w-6xl">
-        {/* Welcome Section with Medly Gradient */}
-        <div className="mb-10">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Your Smart Revision Notes
-            </h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 py-10 max-w-7xl">
+        {/* Hero Section - Medly Style */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 mb-10"
+        >
+          {/* Animated background elements */}
+          <motion.div 
+            className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <div className="relative z-10">
+            <motion.h1 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight"
+            >
+              Smart Revision Notebook
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-[#64748B] dark:text-gray-400 font-light"
+            >
               Ultra-clear, Grade 9-level notes for every mark you've lost
-            </p>
-          </div>
+            </motion.p>
 
-          {/* Stats Cards - Medly Style */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-            <Card className="rounded-2xl bg-card border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3DB4E8]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <CardContent className="p-7 text-center relative">
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#3DB4E8]/20 to-[#3DB4E8]/10 flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="h-7 w-7 text-[#3DB4E8]" />
+            {/* KPI Belt */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                    <BookOpen className="h-5 w-5 text-[#0EA5E9]" />
+                  </div>
+                  <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Total Notes</span>
                 </div>
-                <div className="text-4xl font-bold text-foreground mb-2"><BlurSpan>{stats.totalEntries}</BlurSpan></div>
-                <div className="text-sm font-medium text-muted-foreground">Total Notes Created</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="rounded-2xl bg-card border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <CardContent className="p-7 text-center relative">
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-7 w-7 text-emerald-600 dark:text-emerald-400" />
-                </div>
-                <div className="text-4xl font-bold text-foreground mb-2"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></div>
-                <div className="text-sm font-medium text-muted-foreground">Study Time Saved</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="rounded-2xl bg-card border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <CardContent className="p-7 text-center relative">
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center mx-auto mb-4">
-                  <Brain className="h-7 w-7 text-purple-600 dark:text-purple-400" />
-                </div>
-                <div className="text-4xl font-bold text-foreground mb-2"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></div>
-                <div className="text-sm font-medium text-muted-foreground">Subjects Covered</div>
-              </CardContent>
-            </Card>
-          </div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                >
+                  <BlurSpan>{stats.totalEntries}</BlurSpan>
+                </motion.div>
+                <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Notes created</div>
+              </motion.div>
 
-          {/* Filters - Medly Style */}
-          <Card className="rounded-2xl bg-gradient-to-br from-card to-card/50 border border-border/50 shadow-sm">
-            <CardContent className="p-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <Filter className="h-5 w-5 text-[#3DB4E8]" />
-                  <h3 className="text-base font-semibold text-foreground">Filter Your Notes</h3>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.15 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                    <TrendingUp className="h-5 w-5 text-[#16A34A]" />
+                  </div>
+                  <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Time Saved</span>
                 </div>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                    <SelectTrigger className="w-full sm:w-48 bg-background border-border/50 rounded-xl hover:border-[#3DB4E8]/50 transition-colors">
-                      <SelectValue placeholder="All Subjects" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover border-border/50 rounded-xl">
-                      <SelectItem value="all">All Subjects</SelectItem>
-                      {getSubjects().map(subject => (
-                        <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  
-                  <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                    <SelectTrigger className="w-full sm:w-48 bg-background border-border/50 rounded-xl hover:border-[#3DB4E8]/50 transition-colors">
-                      <SelectValue placeholder="All Confidence" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover border-border/50 rounded-xl">
-                      <SelectItem value="all">All Confidence</SelectItem>
-                      <SelectItem value="low">Low Confidence</SelectItem>
-                      <SelectItem value="medium">Medium Confidence</SelectItem>
-                      <SelectItem value="high">High Confidence</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.35, type: "spring" }}
+                  className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                >
+                  <BlurSpan>{stats.timeSavedHours}h</BlurSpan>
+                </motion.div>
+                <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Study time saved</div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#A855F7]/20 dark:border-[#A855F7]/30 shadow-sm hover:shadow-md hover:shadow-[#A855F7]/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#A855F7]/20 to-[#A855F7]/5">
+                    <Brain className="h-5 w-5 text-[#A855F7]" />
+                  </div>
+                  <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Subjects</span>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, type: "spring" }}
+                  className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                >
+                  <BlurSpan>{stats.subjectsWithNotes}</BlurSpan>
+                </motion.div>
+                <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Subjects covered</div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white tracking-tight">Your Notes</h2>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+              <SelectTrigger className="w-full sm:w-48 bg-card border-border/50 rounded-xl hover:border-[#0EA5E9]/50 transition-colors">
+                <SelectValue placeholder="All Subjects" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover border-border/50 rounded-xl">
+                <SelectItem value="all">All Subjects</SelectItem>
+                {getSubjects().map(subject => (
+                  <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            
+            <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+              <SelectTrigger className="w-full sm:w-48 bg-card border-border/50 rounded-xl hover:border-[#0EA5E9]/50 transition-colors">
+                <SelectValue placeholder="All Confidence" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover border-border/50 rounded-xl">
+                <SelectItem value="all">All Confidence</SelectItem>
+                <SelectItem value="low">Low Confidence</SelectItem>
+                <SelectItem value="medium">Medium Confidence</SelectItem>
+                <SelectItem value="high">High Confidence</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* Notebook Entries */}
         {sortedEntries.length === 0 ? (
-          <Card className="rounded-2xl text-center py-20 bg-gradient-to-br from-card to-card/50 border border-border/50 shadow-sm">
-            <CardContent>
-              <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-[#3DB4E8]/20 to-[#3DB4E8]/10 flex items-center justify-center mx-auto mb-6">
-                <BookOpen className="h-10 w-10 text-[#3DB4E8]" />
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
-              <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
-                Start practicing questions to generate your personalized Smart revision notes!
-              </p>
-              <Button 
-                onClick={() => navigate('/dashboard')} 
-                className="bg-gradient-to-r from-[#3DB4E8] to-[#3DB4E8]/80 hover:from-[#3DB4E8]/90 hover:to-[#3DB4E8]/70 text-white px-8 py-6 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <BookOpen className="h-5 w-5 mr-2" />
-                Start Practicing
-              </Button>
-            </CardContent>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <Card className="rounded-3xl text-center py-16 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm">
+              <CardContent>
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 inline-flex items-center justify-center mx-auto mb-6">
+                  <BookOpen className="h-12 w-12 text-[#0EA5E9]" />
+                </div>
+                <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white mb-3">No Revision Notes Yet</h3>
+                <p className="text-[#64748B] dark:text-gray-400 mb-8 max-w-md mx-auto">
+                  Start practicing questions to generate your personalized revision notes!
+                </p>
+                <Button 
+                  onClick={() => navigate('/dashboard')} 
+                  className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium px-6"
+                >
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Start Practicing
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
         ) : (
-          <div className="space-y-6">
-            {sortedEntries.map((entry) => (
-              <NotebookEntry key={entry.id} entry={entry} />
+          <div className="space-y-4">
+            {sortedEntries.map((entry, index) => (
+              <motion.div
+                key={entry.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * index }}
+              >
+                <NotebookEntry entry={entry} />
+              </motion.div>
             ))}
           </div>
         )}
 
-        {/* Action Buttons - Medly Style */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-16">
-          <Button 
-            onClick={() => navigate(-1)} 
-            variant="outline"
-            className="w-full sm:w-auto px-8 py-6 rounded-xl border-border/50 hover:border-[#3DB4E8]/50 hover:bg-[#3DB4E8]/5 transition-all duration-200 font-medium"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" />
-            Go Back
-          </Button>
-          <Button 
-            onClick={() => {
-              navigate('/dashboard');
-              window.scrollTo(0, 0);
-            }}
-            className="w-full sm:w-auto px-8 py-6 rounded-xl bg-gradient-to-r from-[#3DB4E8] to-[#3DB4E8]/80 hover:from-[#3DB4E8]/90 hover:to-[#3DB4E8]/70 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <BookOpen className="h-5 w-5 mr-2" />
-            Practice More Questions
-          </Button>
-        </div>
+        {/* Action Button */}
+        {sortedEntries.length > 0 && (
+          <div className="flex justify-center mt-12">
+            <Button 
+              onClick={() => {
+                navigate('/dashboard');
+                window.scrollTo(0, 0);
+              }}
+              className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium px-6"
+            >
+              <BookOpen className="h-4 w-4 mr-2" />
+              Practice More Questions
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

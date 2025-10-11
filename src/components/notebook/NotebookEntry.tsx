@@ -1,21 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Unlock, Crown } from "lucide-react";
-import { format } from "date-fns";
+import { BookOpen, Lightbulb, Target, Clock, AlertCircle, Crown, CheckCircle, FileText, Tag, TrendingUp } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-// Safe text formatting function to prevent XSS
-const formatBoldText = (text: string): React.ReactNode => {
-  const parts = text.split(/(\*\*.*?\*\*)/g);
-  return parts.map((part, index) => {
-    if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>;
-    }
-    return part.replace(/\*/g, '');
-  });
-};
 
 interface NotebookEntryProps {
   entry: {
@@ -40,176 +29,213 @@ interface NotebookEntryProps {
   };
 }
 
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
-  const navigate = useNavigate();
   
-  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+  const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
+    <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
   );
-  
-  const getConfidenceColor = (level: string) => {
-    switch (level.toLowerCase()) {
-      case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300';
-      case 'high': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300';
-    }
-  };
-
-  const getSkillIcon = (skillType: string) => {
-    switch (skillType.toLowerCase()) {
-      case 'calc': return <Target className="h-4 w-4" />;
-      case 'graph': return <Brain className="h-4 w-4" />;
-      case 'define': return <BookOpen className="h-4 w-4" />;
-      default: return <Lightbulb className="h-4 w-4" />;
-    }
-  };
 
   return (
-    <Card className="rounded-2xl bg-card border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
-      {/* Gradient Header Background */}
-      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#3DB4E8] via-[#3DB4E8]/60 to-[#3DB4E8]/30" />
-      
-      <CardHeader className="pb-5 px-7 pt-8">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <CardTitle className="text-xl font-bold text-foreground mb-3 break-words">
-              {entry.subject} → {entry.topic}
-            </CardTitle>
-            <CardDescription className="text-sm text-muted-foreground mb-4 break-words leading-relaxed">
-              {entry.question_label}
-            </CardDescription>
+    <Card className="rounded-3xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500">
+      <CardContent className="p-6 sm:p-8 space-y-6">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-6 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
+          <div className="space-y-3 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
+              <Badge className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white px-3 py-1 font-semibold shadow-sm">
+                {entry.subject}
+              </Badge>
+              <Badge variant="outline" className="rounded-xl border-[#E2E8F0]/50 dark:border-gray-700 px-3 py-1 font-medium text-[#64748B] dark:text-gray-400">
+                {entry.paper}
+              </Badge>
               <Badge 
-                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium text-xs px-3 py-1 rounded-full`}
+                className={cn(
+                  "rounded-xl px-3 py-1 font-medium shadow-sm",
+                  entry.confidence_level.toLowerCase() === 'high' && "bg-[#16A34A] text-white",
+                  entry.confidence_level.toLowerCase() === 'medium' && "bg-[#F59E0B] text-white",
+                  entry.confidence_level.toLowerCase() === 'low' && "bg-[#EF4444] text-white"
+                )}
               >
                 {entry.confidence_level} Confidence
               </Badge>
-              <Badge className="bg-muted/80 dark:bg-muted text-foreground border-0 text-xs px-3 py-1 rounded-full">
-                {getSkillIcon(entry.skill_type)}
-                <span className="ml-1">{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
-              </Badge>
-              <Badge className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-0 text-xs px-3 py-1 rounded-full font-semibold">
-                -{entry.mark_loss} marks
-              </Badge>
-              <Badge className="bg-muted/60 dark:bg-muted/40 text-muted-foreground border-0 text-xs px-3 py-1 rounded-full flex items-center gap-1.5">
-                <Clock className="h-3 w-3" />
-                {format(new Date(entry.created_at), 'MMM d, yyyy')}
-              </Badge>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-white leading-tight">
+              {entry.question_label}
+            </h3>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-[#64748B] dark:text-gray-400">
+              <span className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-[#0EA5E9]" />
+                {entry.topic} → {entry.subtopic}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5" />
+                {formatDate(entry.created_at)}
+              </span>
+              <span className="flex items-center gap-1.5 font-semibold text-[#EF4444]">
+                -{entry.mark_loss} mark{entry.mark_loss !== 1 ? 's' : ''} lost
+              </span>
             </div>
           </div>
         </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-5 px-7 pb-7">
-        {/* What Tripped Me Up - Medly Style */}
-        <div className="rounded-xl bg-gradient-to-br from-red-50 to-red-50/50 dark:from-red-950/20 dark:to-red-900/10 p-5 border border-red-200/50 dark:border-red-800/30">
-          <h4 className="font-semibold text-red-800 dark:text-red-300 mb-3 flex items-center gap-2.5 text-sm">
-            <div className="h-8 w-8 rounded-lg bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
-              <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400 flex-shrink-0" />
-            </div>
-            What Tripped Me Up
-          </h4>
-          <p className="text-red-900 dark:text-red-200 text-sm break-words leading-relaxed ml-10"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
-        </div>
 
-        {/* Fix Sentence - Medly Style */}
-        <div className="rounded-xl bg-gradient-to-br from-green-50 to-green-50/50 dark:from-green-950/20 dark:to-green-900/10 p-5 border border-green-200/50 dark:border-green-800/30">
-          <h4 className="font-semibold text-green-800 dark:text-green-300 mb-3 flex items-center gap-2.5 text-sm">
-            <div className="h-8 w-8 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
-              <Lightbulb className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
+        {/* What Tripped Me Up */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
+              <AlertCircle className="h-4 w-4 text-[#EF4444]" />
             </div>
-            Fix in One Sentence
-          </h4>
-          <p className="text-green-900 dark:text-green-200 text-sm font-medium break-words leading-relaxed ml-10"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
-        </div>
-
-        {/* Bulletproof Notes - Medly Style */}
-        <div className="rounded-xl bg-gradient-to-br from-[#3DB4E8]/10 to-[#3DB4E8]/5 dark:from-[#3DB4E8]/20 dark:to-[#3DB4E8]/10 p-5 border border-[#3DB4E8]/20 dark:border-[#3DB4E8]/30">
-          <h4 className="font-semibold text-[#3DB4E8] dark:text-[#3DB4E8]/90 mb-4 flex items-center gap-2.5 text-sm">
-            <div className="h-8 w-8 rounded-lg bg-[#3DB4E8]/20 dark:bg-[#3DB4E8]/30 flex items-center justify-center">
-              <BookOpen className="h-4 w-4 text-[#3DB4E8] flex-shrink-0" />
-            </div>
-            Bulletproof Notes
-          </h4>
-          <ul className="space-y-3 ml-10">
-            {entry.bulletproof_notes.map((note, index) => (
-              <li key={index} className="flex items-start gap-3 text-foreground text-sm">
-                <span className="text-[#3DB4E8] mt-1 flex-shrink-0 font-bold">•</span>
-                <span className="break-words leading-relaxed"><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Premium CTA - Medly Style */}
-        {!isPremium && (
-          <div className="rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#3DB4E8]/80 text-white p-6 text-center shadow-lg">
-            <div className="flex items-center justify-center gap-2.5 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-white/20 flex items-center justify-center">
-                <Unlock className="h-5 w-5 flex-shrink-0" />
-              </div>
-              <h4 className="font-bold text-base">
-                Unlock Full Notes
-              </h4>
-            </div>
-            <p className="text-white/95 text-sm mb-4 max-w-md mx-auto">
-              Start your free trial to access complete revision notes and boost your grades
-            </p>
-            <Button 
-              onClick={() => navigate("/pricing")}
-              className="w-full bg-white text-[#3DB4E8] hover:bg-white/90 font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
-            >
-              <Crown className="h-4 w-4 mr-2" />
-              Start Free Trial
-            </Button>
+            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">What Tripped Me Up</h4>
           </div>
-        )}
+          <BlurWrapper>
+            <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed pl-10">{entry.what_tripped_up}</p>
+          </BlurWrapper>
+        </div>
 
-        {/* Mini Example - Medly Style */}
+        {/* Fix Sentence */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+              <CheckCircle className="h-4 w-4 text-[#16A34A]" />
+            </div>
+            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">The Fix</h4>
+          </div>
+          <BlurWrapper>
+            <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed font-medium pl-10">{entry.fix_sentence}</p>
+          </BlurWrapper>
+        </div>
+
+        {/* Bulletproof Notes */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+              <Lightbulb className="h-4 w-4 text-[#0EA5E9]" />
+            </div>
+            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Bulletproof Notes</h4>
+          </div>
+          <BlurWrapper>
+            <div className="space-y-2 pl-10">
+              {entry.bulletproof_notes.map((note, idx) => (
+                <div key={idx} className="flex gap-2.5">
+                  <div className="flex-shrink-0 h-5 w-5 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                    {idx + 1}
+                  </div>
+                  <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed flex-1">{note}</p>
+                </div>
+              ))}
+            </div>
+          </BlurWrapper>
+        </div>
+
+        {/* Mini Example (if exists) */}
         {entry.mini_example && (
-          <div className="rounded-xl bg-gradient-to-br from-purple-50 to-purple-50/50 dark:from-purple-950/20 dark:to-purple-900/10 p-5 border border-purple-200/50 dark:border-purple-800/30">
-            <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-3 flex items-center gap-2.5 text-sm">
-              <div className="h-8 w-8 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center">
-                <Target className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
+                <FileText className="h-4 w-4 text-[#F59E0B]" />
               </div>
-              Mini Worked Example
-            </h4>
-            <p className="text-purple-900 dark:text-purple-200 text-sm whitespace-pre-wrap break-words leading-relaxed ml-10">
-              <BlurSpan>{entry.mini_example?.replace(/\*/g, '')}</BlurSpan>
-            </p>
+              <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Mini Example</h4>
+            </div>
+            <BlurWrapper>
+              <div className="pl-10 p-4 bg-[#F8FAFC] dark:bg-gray-800/50 rounded-xl border border-[#E2E8F0]/50 dark:border-gray-700">
+                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed font-mono">{entry.mini_example}</p>
+              </div>
+            </BlurWrapper>
           </div>
         )}
 
-        {/* Keywords - Medly Style */}
-        <div className="rounded-xl bg-gradient-to-br from-muted/50 to-muted/30 p-5 border border-border/50">
-          <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2.5 text-sm">
-            <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
-              <Brain className="h-4 w-4 text-foreground/70 flex-shrink-0" />
+        {/* Keywords */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-[#A855F7]/20 to-[#A855F7]/5">
+              <Tag className="h-4 w-4 text-[#A855F7]" />
             </div>
-            Key Terms
-          </h4>
-          <div className="flex flex-wrap gap-2 ml-10">
-            {entry.keywords.map((keyword, index) => (
-              <Badge key={index} className="bg-background border border-border/50 text-foreground text-xs px-3 py-1.5 rounded-lg font-medium hover:border-[#3DB4E8]/50 transition-colors">
-                <BlurSpan>{keyword}</BlurSpan>
-              </Badge>
-            ))}
+            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Key Terms</h4>
           </div>
-        </div>
-
-        {/* Next Step - Medly Style */}
-        <div className="rounded-xl bg-gradient-to-br from-amber-50 to-amber-50/50 dark:from-amber-950/20 dark:to-amber-900/10 p-5 border border-amber-200/50 dark:border-amber-800/30">
-          <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2.5 text-sm">
-            <div className="h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
-              <Target className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+          <BlurWrapper>
+            <div className="flex flex-wrap gap-2 pl-10">
+              {entry.keywords.map((keyword, idx) => (
+                <Badge 
+                  key={idx} 
+                  className="rounded-xl bg-[#A855F7] text-white px-3 py-1 text-xs font-medium shadow-sm"
+                >
+                  {keyword}
+                </Badge>
+              ))}
             </div>
-            Next Step
-          </h4>
-          <p className="text-amber-900 dark:text-amber-200 text-sm break-words leading-relaxed ml-10"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
+          </BlurWrapper>
         </div>
 
+        {/* Metadata Footer */}
+        <div className="pt-6 border-t border-[#E2E8F0]/30 dark:border-gray-700/30 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <BlurWrapper>
+            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#F8FAFC] dark:bg-gray-800/50 border border-[#E2E8F0]/50 dark:border-gray-700">
+              <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                <BookOpen className="h-4 w-4 text-[#0EA5E9]" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Skill Type</p>
+                <p className="text-sm font-bold text-[#0F172A] dark:text-white">{entry.skill_type}</p>
+              </div>
+            </div>
+          </BlurWrapper>
+          <BlurWrapper>
+            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#F8FAFC] dark:bg-gray-800/50 border border-[#E2E8F0]/50 dark:border-gray-700">
+              <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                <TrendingUp className="h-4 w-4 text-[#16A34A]" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Bloom Level</p>
+                <p className="text-sm font-bold text-[#0F172A] dark:text-white">{entry.bloom_level}</p>
+              </div>
+            </div>
+          </BlurWrapper>
+        </div>
+
+        {/* Next Steps */}
+        <BlurWrapper>
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30">
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center flex-shrink-0 shadow-md">
+                <Target className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h4 className="text-base font-bold text-[#0F172A] dark:text-white mb-1.5">Next Step</h4>
+                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{entry.next_step_suggestion}</p>
+              </div>
+            </div>
+          </div>
+        </BlurWrapper>
+
+        {/* Premium CTA for non-premium users */}
+        {!isPremium && (
+          <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#F59E0B]/10 to-[#F59E0B]/5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#F59E0B]/20 to-transparent rounded-full blur-3xl"></div>
+            <div className="relative flex flex-col sm:flex-row items-center gap-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#F59E0B]/80 flex items-center justify-center shadow-lg flex-shrink-0">
+                <Crown className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-1">Unlock Full Access</h4>
+                <p className="text-sm text-[#64748B] dark:text-gray-400 mb-3">
+                  Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
+                </p>
+                <Button 
+                  className="rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80 hover:from-[#F59E0B]/90 hover:to-[#F59E0B]/70 text-white shadow-lg shadow-[#F59E0B]/25 hover:shadow-xl hover:shadow-[#F59E0B]/30 transition-all duration-300 font-medium text-sm px-5"
+                  onClick={() => {/* Add premium upgrade logic */}}
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
