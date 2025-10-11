@@ -114,6 +114,7 @@ const Practice = () => {
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
+  const [existingGradeData, setExistingGradeData] = useState<{ grade: string; isFirst: boolean } | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -135,6 +136,28 @@ const Practice = () => {
     console.log('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
     console.log('Topic lookup:', { found: !!topic, topicId, topicName: topic?.name });
   }
+
+  // Fetch existing grade when session completes
+  useEffect(() => {
+    const fetchExistingGrade = async () => {
+      if (sessionComplete && user?.id && subjectId) {
+        const { data } = await supabase
+          .from('predicted_exam_completions')
+          .select('grade, created_at')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        
+        if (data && data.length > 0) {
+          setExistingGradeData({ grade: data[0].grade, isFirst: false });
+        } else {
+          setExistingGradeData({ grade: '0', isFirst: true });
+        }
+      }
+    };
+    fetchExistingGrade();
+  }, [sessionComplete, user?.id, subjectId]);
 
   // Confetti effect when session completes
   useEffect(() => {
@@ -1002,30 +1025,6 @@ const Practice = () => {
     // Calculate time metrics
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
-    
-    // Fetch existing grade from database to determine if this is first practice
-    const [existingGradeData, setExistingGradeData] = React.useState<{ grade: string; isFirst: boolean } | null>(null);
-    
-    React.useEffect(() => {
-      const fetchExistingGrade = async () => {
-        if (user?.id && subjectId) {
-          const { data } = await supabase
-            .from('predicted_exam_completions')
-            .select('grade, created_at')
-            .eq('user_id', user.id)
-            .eq('subject_id', subjectId)
-            .order('created_at', { ascending: false })
-            .limit(1);
-          
-          if (data && data.length > 0) {
-            setExistingGradeData({ grade: data[0].grade, isFirst: false });
-          } else {
-            setExistingGradeData({ grade: '0', isFirst: true });
-          }
-        }
-      };
-      fetchExistingGrade();
-    }, []);
     
     if (!existingGradeData) {
       return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
