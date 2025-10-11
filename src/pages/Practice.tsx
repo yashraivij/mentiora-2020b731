@@ -868,10 +868,10 @@ const Practice = () => {
         // Fetch the MOST RECENT predicted grade for this subject (before this practice)
         const { data: existingGrades } = await supabase
           .from('predicted_exam_completions')
-          .select('grade, percentage, completed_at')
+          .select('grade, percentage, created_at')
           .eq('user_id', user.id)
           .eq('subject_id', subjectId)
-          .order('completed_at', { ascending: false })
+          .order('created_at', { ascending: false })
           .limit(1);
         
         const hasExistingGrades = existingGrades && existingGrades.length > 0;
