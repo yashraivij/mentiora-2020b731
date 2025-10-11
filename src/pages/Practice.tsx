@@ -1556,9 +1556,9 @@ const Practice = () => {
   const currentAttempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : undefined;
 
   return (
-    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'}`} style={{ backgroundColor: '#ffffff' }}>
+    <div className={`min-h-screen ${isPremium ? '' : 'pt-12'} bg-background`}>
       {/* Medly-style Top Navigation */}
-      <header className="border-b border-gray-200 bg-white">
+      <header className="border-b border-border bg-card dark:bg-card/95">
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             {/* Left: Topic name with navigation */}
@@ -1580,8 +1580,8 @@ const Practice = () => {
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <BookOpen className="h-4 w-4 text-gray-600 flex-shrink-0" />
-                <h1 className="text-lg font-semibold text-slate-900 truncate">{topic?.name}</h1>
+                <BookOpen className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                <h1 className="text-lg font-semibold text-foreground truncate">{topic?.name}</h1>
               </div>
             </div>
 
@@ -1593,17 +1593,17 @@ const Practice = () => {
                   const questionAttempts = attempts.filter(a => a.questionId === question.id);
                   const attempt = questionAttempts.length > 0 ? questionAttempts[questionAttempts.length - 1] : null;
                   
-                  // Determine color based on marks
-                  let circleColor = 'bg-gray-200 border-gray-300'; // Not attempted yet
+                   // Determine color based on marks
+                  let circleColor = 'bg-muted border-border dark:bg-muted/50'; // Not attempted yet
                   const isAttempted = attempt !== null;
                   
                   if (isAttempted) {
                     if (attempt.score === question.marks) {
-                      circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50'; // Full marks
+                      circleColor = 'bg-emerald-500 border-emerald-600 shadow-sm shadow-emerald-500/50 dark:bg-emerald-600 dark:border-emerald-700'; // Full marks
                     } else if (attempt.score <= question.marks / 2) {
-                      circleColor = 'bg-red-500 border-red-600 shadow-sm shadow-red-500/50'; // Half or less
+                      circleColor = 'bg-red-500 border-red-600 shadow-sm shadow-red-500/50 dark:bg-red-600 dark:border-red-700'; // Half or less
                     } else {
-                      circleColor = 'bg-amber-500 border-amber-600 shadow-sm shadow-amber-500/50'; // In between
+                      circleColor = 'bg-amber-500 border-amber-600 shadow-sm shadow-amber-500/50 dark:bg-amber-600 dark:border-amber-700'; // In between
                     }
                   }
                   
@@ -1616,8 +1616,8 @@ const Practice = () => {
                       {index > 0 && (
                         <div className={`absolute right-full w-2 h-0.5 ${
                           attempts.filter(a => a.questionId === shuffledQuestions[index - 1].id).length > 0
-                            ? 'bg-gray-400'
-                            : 'bg-gray-200'
+                            ? 'bg-muted-foreground/40 dark:bg-muted-foreground/30'
+                            : 'bg-border dark:bg-border/50'
                         }`} />
                       )}
                       
@@ -1663,7 +1663,7 @@ const Practice = () => {
       <main className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
           {/* Left Pane: Question Sheet */}
-          <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
+          <div className="rounded-lg bg-card dark:bg-card/95 shadow-sm border border-border p-8">
             {/* Question Header */}
             <div className="mb-6">
               <div className="flex items-start justify-between gap-4 mb-4">
@@ -1672,19 +1672,19 @@ const Practice = () => {
                 <div className="flex items-center gap-2 mb-4">
                   <div className="inline-flex items-center gap-1">
                     {(currentQuestionIndex + 1).toString().padStart(2, '0').split('').map((digit, idx) => (
-                      <span key={idx} className="inline-block border-2 border-slate-900 px-3 py-1 text-base font-mono font-semibold">{digit}</span>
+                      <span key={idx} className="inline-block border-2 border-foreground px-3 py-1 text-base font-mono font-semibold text-foreground dark:border-foreground/80">{digit}</span>
                     ))}
                   </div>
                 </div>
                   
                   {/* Question text */}
-                  <p className="text-base text-slate-900 leading-relaxed mb-2">
+                  <p className="text-base text-foreground leading-relaxed mb-2">
                     {currentQuestion.question}
                   </p>
                 </div>
                 
                 {/* Marks pill */}
-                <div className="text-sm font-semibold text-slate-900 whitespace-nowrap">
+                <div className="text-sm font-semibold text-foreground whitespace-nowrap">
                   [{currentQuestion.marks} marks]
                 </div>
               </div>
@@ -1698,26 +1698,26 @@ const Practice = () => {
                   onChange={(e) => setUserAnswer(e.target.value)}
                   placeholder=""
                   disabled={showFeedback}
-                  className="w-full h-full min-h-[400px] border border-gray-300 focus:ring-0 text-base resize-none p-4 bg-transparent rounded-md"
+                  className="w-full h-full min-h-[400px] border border-border focus:ring-0 text-base resize-none p-4 bg-background/50 dark:bg-background/30 rounded-md text-foreground"
                 />
               ) : (
                 <div className="space-y-4">
                   {/* User's answer - color based on performance */}
                   <div className={`p-5 rounded-[20px] shadow-sm border ${
                     currentAttempt.score === currentQuestion.marks
-                      ? 'bg-[#E8F8F0] border-[#10B981]/20'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200/50 dark:border-emerald-800/50'
                       : currentAttempt.score <= currentQuestion.marks / 2
-                      ? 'bg-[#FEF2F2] border-[#EF4444]/20'
-                      : 'bg-[#FEF9C3] border-[#EAB308]/20'
+                      ? 'bg-red-50 dark:bg-red-950/30 border-red-200/50 dark:border-red-800/50'
+                      : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200/50 dark:border-amber-800/50'
                   }`}>
                     <h4 className={`font-bold mb-3 text-sm uppercase tracking-wide ${
                       currentAttempt.score === currentQuestion.marks
-                        ? 'text-[#059669]'
+                        ? 'text-emerald-700 dark:text-emerald-400'
                         : currentAttempt.score <= currentQuestion.marks / 2
-                        ? 'text-[#DC2626]'
-                        : 'text-[#CA8A04]'
+                        ? 'text-red-700 dark:text-red-400'
+                        : 'text-amber-700 dark:text-amber-400'
                     }`}>Your Answer</h4>
-                    <p className="text-gray-800 font-medium leading-relaxed">{userAnswer}</p>
+                    <p className="text-foreground font-medium leading-relaxed">{userAnswer}</p>
                   </div>
                   
                   {/* Marks display inline */}
@@ -1767,17 +1767,17 @@ const Practice = () => {
                       
                       {/* Model answer */}
                       {currentAttempt.feedback?.modelAnswer && (
-                        <div className="mt-6 p-5 bg-[#E8F8F0] rounded-[20px] shadow-sm border border-[#10B981]/20">
-                          <h4 className="font-bold text-[#059669] mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
-                          <p className="text-gray-800 font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
+                        <div className="mt-6 p-5 bg-emerald-50 dark:bg-emerald-950/30 rounded-[20px] shadow-sm border border-emerald-200/50 dark:border-emerald-800/50">
+                          <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
+                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                         </div>
                       )}
                       
                       {/* Teacher feedback */}
                       {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="mt-6 p-5 bg-[#E8F6FB] rounded-[20px] shadow-sm border border-[#3BAFDA]/20">
-                          <h4 className="font-bold text-[#2A9BC7] mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
-                          <p className="text-gray-800 font-medium leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
+                        <div className="mt-6 p-5 bg-blue-50 dark:bg-blue-950/30 rounded-[20px] shadow-sm border border-blue-200/50 dark:border-blue-800/50">
+                          <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
+                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
                         </div>
                       )}
                     </>
@@ -1792,7 +1792,7 @@ const Practice = () => {
                 <Button
                   onClick={handleSubmitAnswer}
                   disabled={isSubmitting || !userAnswer.trim()}
-                  className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base disabled:opacity-50 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 font-semibold text-base disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   {isSubmitting ? "Marking..." : "Check answer"}
                 </Button>
@@ -1804,7 +1804,7 @@ const Practice = () => {
           <aside className="flex flex-col h-[600px]">
             {/* Header */}
             <div className="mb-4">
-              <h2 className="text-base font-semibold text-slate-700">Ask mentiora</h2>
+              <h2 className="text-base font-semibold text-foreground">Ask mentiora</h2>
             </div>
 
             {/* Feedback content or chat messages */}
@@ -1815,8 +1815,8 @@ const Practice = () => {
                     <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`rounded-[20px] p-4 text-sm font-medium max-w-[80%] ${
                         msg.role === 'user' 
-                          ? 'bg-[#3BAFDA] text-white' 
-                          : 'bg-gray-100 text-gray-800'
+                          ? 'bg-primary text-primary-foreground' 
+                          : 'bg-muted text-foreground'
                       }`}>
                         {msg.content}
                       </div>
@@ -1824,11 +1824,11 @@ const Practice = () => {
                   ))}
                   {isChatLoading && (
                     <div className="flex justify-start">
-                      <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
+                      <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
-                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"></div>
+                          <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         </div>
                       </div>
                     </div>
@@ -1836,15 +1836,15 @@ const Practice = () => {
                 </>
               ) : showFeedback && currentAttempt ? (
                 <div className="space-y-3">
-                  <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
+                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                     You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
                   </div>
                   {currentAttempt.score === 0 && (
-                    <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
+                    <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                       It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
                     </div>
                   )}
-                  <div className="bg-gray-100 rounded-[20px] p-4 text-sm text-gray-800 font-medium">
+                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                     Let&apos;s go through it together.
                   </div>
                 </div>
@@ -1854,13 +1854,13 @@ const Practice = () => {
                   <div className="space-y-3">
                     <button
                       onClick={() => sendChatMessage("I don't understand this problem")}
-                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
                     >
                       I don&apos;t understand this problem
                     </button>
                     <button
                       onClick={() => sendChatMessage("Can you walk me through this step by step")}
-                      className="w-full text-left text-sm text-slate-700 hover:text-slate-900 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
                     >
                       Can you walk me through this step by step
                     </button>
@@ -1882,7 +1882,7 @@ const Practice = () => {
                 }}
                 placeholder="Reply"
                 disabled={isChatLoading}
-                className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#3BAFDA] rounded-lg text-sm"
+                className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
               />
               <Button 
                 onClick={() => {
@@ -1891,7 +1891,7 @@ const Practice = () => {
                   }
                 }}
                 disabled={!chatMessage.trim() || isChatLoading}
-                className="h-11 w-11 p-0 rounded-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white flex items-center justify-center disabled:opacity-50"
+                className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
               >
                 <Send className="h-4 w-4 rotate-45" />
               </Button>
@@ -1904,10 +1904,10 @@ const Practice = () => {
       {showFeedback && currentAttempt && (
         <div className={`fixed bottom-0 left-0 right-0 border-t shadow-lg z-50 ${
           currentAttempt.score === currentQuestion.marks
-            ? 'bg-emerald-50 border-emerald-200'
+            ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800'
             : currentAttempt.score <= currentQuestion.marks / 2
-            ? 'bg-red-50 border-red-200'
-            : 'bg-amber-50 border-amber-200'
+            ? 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
+            : 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
         }`}>
           <div className="max-w-6xl mx-auto px-6 md:px-8 py-4">
             <div className="flex items-center justify-between">
@@ -1953,7 +1953,7 @@ const Practice = () => {
               </div>
               <Button
                 onClick={handleNextQuestion}
-                className="bg-[#3BAFDA] hover:bg-[#2A9BC7] text-white rounded-full px-10 py-6 text-base font-medium shadow-md"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 text-base font-medium shadow-md"
               >
                 {currentQuestionIndex === shuffledQuestions.length - 1 ? 'Submit' : 'Next question'}
               </Button>
