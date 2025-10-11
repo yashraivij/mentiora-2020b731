@@ -1602,6 +1602,11 @@ const Dashboard = () => {
       return {
         id: subjectId,
         name: (() => {
+          // Check if exam board is already in the subject name
+          const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
+          if (hasExamBoard) {
+            return subject.subject_name;
+          }
           // Override exam board display for specific subjects
           if (subjectId === 'music-eduqas-gcse') {
             return `${subject.subject_name} (Eduqas)`;
