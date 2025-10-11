@@ -865,20 +865,21 @@ const Practice = () => {
       // Save predicted grade to database
     if (user?.id && subjectId) {
       try {
-        // Fetch ALL existing predicted grades for this subject to calculate average
+        // Fetch the MOST RECENT predicted grade for this subject (before this practice)
         const { data: existingGrades } = await supabase
           .from('predicted_exam_completions')
           .select('grade, percentage')
           .eq('user_id', user.id)
           .eq('subject_id', subjectId)
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: false })
+          .limit(1);
         
         const hasExistingGrades = existingGrades && existingGrades.length > 0;
         
         console.log('🔢 Grade Save - Input values:', {
           subjectId,
           hasExistingGrades,
-          existingGradesCount: existingGrades?.length || 0,
+          mostRecentGrade: hasExistingGrades ? existingGrades[0].grade : 'none',
           averagePercentage
         });
         
@@ -893,18 +894,15 @@ const Practice = () => {
           newPredictedGrade = currentTopicGrade;
           console.log('🆕 First predicted grade:', newPredictedGrade.toFixed(1));
         } else {
-          // Average all grades from all completed topics
-          const allGrades = existingGrades.map(g => parseFloat(g.grade));
-          allGrades.push(currentTopicGrade);
+          // Update predicted grade based on most recent grade and current performance
+          // Weight: 70% recent grade + 30% current performance for smooth updates
+          const oldGradeValue = parseFloat(existingGrades[0].grade);
+          newPredictedGrade = (oldGradeValue * 0.7) + (currentTopicGrade * 0.3);
           
-          const sumOfGrades = allGrades.reduce((sum, grade) => sum + grade, 0);
-          newPredictedGrade = sumOfGrades / allGrades.length;
-          
-          console.log('📊 Averaging grades:', {
-            previousGrades: existingGrades.map(g => g.grade),
+          console.log('📊 Updating predicted grade:', {
+            previousGrade: oldGradeValue.toFixed(1),
             currentTopicGrade: currentTopicGrade.toFixed(1),
-            allGrades: allGrades.map(g => g.toFixed(1)),
-            average: newPredictedGrade.toFixed(1)
+            newPredictedGrade: newPredictedGrade.toFixed(1)
           });
         }
         
