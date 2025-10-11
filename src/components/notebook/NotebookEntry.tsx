@@ -67,30 +67,33 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   };
 
   return (
-    <Card className="bg-white border border-gray-200 hover:shadow-md transition-shadow duration-200">
-      <CardHeader className="pb-4 px-6 pt-6">
+    <Card className="rounded-2xl bg-card border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+      {/* Gradient Header Background */}
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#3DB4E8] via-[#3DB4E8]/60 to-[#3DB4E8]/30" />
+      
+      <CardHeader className="pb-5 px-7 pt-8">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <CardTitle className="text-lg font-bold text-gray-900 mb-2 break-words">
+            <CardTitle className="text-xl font-bold text-foreground mb-3 break-words">
               {entry.subject} → {entry.topic}
             </CardTitle>
-            <CardDescription className="text-sm text-gray-600 mb-3 break-words">
+            <CardDescription className="text-sm text-muted-foreground mb-4 break-words leading-relaxed">
               {entry.question_label}
             </CardDescription>
             <div className="flex items-center gap-2 flex-wrap">
               <Badge 
-                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium text-xs`}
+                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium text-xs px-3 py-1 rounded-full`}
               >
                 {entry.confidence_level} Confidence
               </Badge>
-              <Badge className="bg-gray-100 text-gray-700 border-0 text-xs">
+              <Badge className="bg-muted/80 dark:bg-muted text-foreground border-0 text-xs px-3 py-1 rounded-full">
                 {getSkillIcon(entry.skill_type)}
                 <span className="ml-1">{entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}</span>
               </Badge>
-              <Badge className="bg-red-50 text-red-700 border-0 text-xs">
+              <Badge className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-0 text-xs px-3 py-1 rounded-full font-semibold">
                 -{entry.mark_loss} marks
               </Badge>
-              <Badge className="bg-gray-50 text-gray-600 border-0 text-xs flex items-center gap-1">
+              <Badge className="bg-muted/60 dark:bg-muted/40 text-muted-foreground border-0 text-xs px-3 py-1 rounded-full flex items-center gap-1.5">
                 <Clock className="h-3 w-3" />
                 {format(new Date(entry.created_at), 'MMM d, yyyy')}
               </Badge>
@@ -99,97 +102,112 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-5 px-6 pb-6">
-        {/* What Tripped Me Up */}
-        <div className="bg-red-50 p-4 rounded-lg border border-red-100">
-          <h4 className="font-semibold text-red-800 mb-2 flex items-center gap-2 text-sm">
-            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+      <CardContent className="space-y-5 px-7 pb-7">
+        {/* What Tripped Me Up - Medly Style */}
+        <div className="rounded-xl bg-gradient-to-br from-red-50 to-red-50/50 dark:from-red-950/20 dark:to-red-900/10 p-5 border border-red-200/50 dark:border-red-800/30">
+          <h4 className="font-semibold text-red-800 dark:text-red-300 mb-3 flex items-center gap-2.5 text-sm">
+            <div className="h-8 w-8 rounded-lg bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
+              <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400 flex-shrink-0" />
+            </div>
             What Tripped Me Up
           </h4>
-          <p className="text-red-700 text-sm break-words"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
+          <p className="text-red-900 dark:text-red-200 text-sm break-words leading-relaxed ml-10"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
         </div>
 
-        {/* Fix Sentence */}
-        <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-          <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2 text-sm">
-            <Lightbulb className="h-4 w-4 flex-shrink-0" />
+        {/* Fix Sentence - Medly Style */}
+        <div className="rounded-xl bg-gradient-to-br from-green-50 to-green-50/50 dark:from-green-950/20 dark:to-green-900/10 p-5 border border-green-200/50 dark:border-green-800/30">
+          <h4 className="font-semibold text-green-800 dark:text-green-300 mb-3 flex items-center gap-2.5 text-sm">
+            <div className="h-8 w-8 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
+              <Lightbulb className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
+            </div>
             Fix in One Sentence
           </h4>
-          <p className="text-green-700 text-sm font-medium break-words"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
+          <p className="text-green-900 dark:text-green-200 text-sm font-medium break-words leading-relaxed ml-10"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
         </div>
 
-        {/* Bulletproof Notes */}
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-          <h4 className="font-semibold text-blue-800 mb-3 flex items-center gap-2 text-sm">
-            <BookOpen className="h-4 w-4 flex-shrink-0" />
+        {/* Bulletproof Notes - Medly Style */}
+        <div className="rounded-xl bg-gradient-to-br from-[#3DB4E8]/10 to-[#3DB4E8]/5 dark:from-[#3DB4E8]/20 dark:to-[#3DB4E8]/10 p-5 border border-[#3DB4E8]/20 dark:border-[#3DB4E8]/30">
+          <h4 className="font-semibold text-[#3DB4E8] dark:text-[#3DB4E8]/90 mb-4 flex items-center gap-2.5 text-sm">
+            <div className="h-8 w-8 rounded-lg bg-[#3DB4E8]/20 dark:bg-[#3DB4E8]/30 flex items-center justify-center">
+              <BookOpen className="h-4 w-4 text-[#3DB4E8] flex-shrink-0" />
+            </div>
             Bulletproof Notes
           </h4>
-          <ul className="space-y-2">
+          <ul className="space-y-3 ml-10">
             {entry.bulletproof_notes.map((note, index) => (
-              <li key={index} className="flex items-start gap-2 text-blue-700 text-sm">
-                <span className="text-blue-500 mt-1 flex-shrink-0">•</span>
-                <span className="break-words"><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
+              <li key={index} className="flex items-start gap-3 text-foreground text-sm">
+                <span className="text-[#3DB4E8] mt-1 flex-shrink-0 font-bold">•</span>
+                <span className="break-words leading-relaxed"><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Premium CTA for non-premium users */}
+        {/* Premium CTA - Medly Style */}
         {!isPremium && (
-          <div className="bg-[#3DB4E8] text-white p-4 rounded-lg text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Unlock className="h-4 w-4 flex-shrink-0" />
-              <h4 className="font-semibold text-sm">
+          <div className="rounded-xl bg-gradient-to-br from-[#3DB4E8] to-[#3DB4E8]/80 text-white p-6 text-center shadow-lg">
+            <div className="flex items-center justify-center gap-2.5 mb-3">
+              <div className="h-10 w-10 rounded-xl bg-white/20 flex items-center justify-center">
+                <Unlock className="h-5 w-5 flex-shrink-0" />
+              </div>
+              <h4 className="font-bold text-base">
                 Unlock Full Notes
               </h4>
             </div>
-            <p className="text-white/90 text-sm mb-3">
-              Start your free trial to access complete revision notes
+            <p className="text-white/95 text-sm mb-4 max-w-md mx-auto">
+              Start your free trial to access complete revision notes and boost your grades
             </p>
             <Button 
               onClick={() => navigate("/pricing")}
-              className="w-full bg-white text-[#3DB4E8] hover:bg-gray-100 font-semibold py-2 rounded-lg"
+              className="w-full bg-white text-[#3DB4E8] hover:bg-white/90 font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
             >
+              <Crown className="h-4 w-4 mr-2" />
               Start Free Trial
             </Button>
           </div>
         )}
 
-        {/* Mini Example */}
+        {/* Mini Example - Medly Style */}
         {entry.mini_example && (
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
-            <h4 className="font-semibold text-purple-800 mb-2 flex items-center gap-2 text-sm">
-              <Target className="h-4 w-4" />
+          <div className="rounded-xl bg-gradient-to-br from-purple-50 to-purple-50/50 dark:from-purple-950/20 dark:to-purple-900/10 p-5 border border-purple-200/50 dark:border-purple-800/30">
+            <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-3 flex items-center gap-2.5 text-sm">
+              <div className="h-8 w-8 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center">
+                <Target className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              </div>
               Mini Worked Example
             </h4>
-            <p className="text-purple-700 text-sm whitespace-pre-wrap">
+            <p className="text-purple-900 dark:text-purple-200 text-sm whitespace-pre-wrap break-words leading-relaxed ml-10">
               <BlurSpan>{entry.mini_example?.replace(/\*/g, '')}</BlurSpan>
             </p>
           </div>
         )}
 
-        {/* Keywords */}
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-          <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm">
-            <Brain className="h-4 w-4 flex-shrink-0" />
-            Keywords
+        {/* Keywords - Medly Style */}
+        <div className="rounded-xl bg-gradient-to-br from-muted/50 to-muted/30 p-5 border border-border/50">
+          <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2.5 text-sm">
+            <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
+              <Brain className="h-4 w-4 text-foreground/70 flex-shrink-0" />
+            </div>
+            Key Terms
           </h4>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 ml-10">
             {entry.keywords.map((keyword, index) => (
-              <Badge key={index} className="bg-white border border-gray-300 text-gray-700 text-xs">
+              <Badge key={index} className="bg-background border border-border/50 text-foreground text-xs px-3 py-1.5 rounded-lg font-medium hover:border-[#3DB4E8]/50 transition-colors">
                 <BlurSpan>{keyword}</BlurSpan>
               </Badge>
             ))}
           </div>
         </div>
 
-        {/* Next Step */}
-        <div className="bg-amber-50 p-4 rounded-lg border border-amber-100">
-          <h4 className="font-semibold text-amber-800 mb-2 flex items-center gap-2 text-sm">
-            <Target className="h-4 w-4 flex-shrink-0" />
+        {/* Next Step - Medly Style */}
+        <div className="rounded-xl bg-gradient-to-br from-amber-50 to-amber-50/50 dark:from-amber-950/20 dark:to-amber-900/10 p-5 border border-amber-200/50 dark:border-amber-800/30">
+          <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2.5 text-sm">
+            <div className="h-8 w-8 rounded-lg bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
+              <Target className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+            </div>
             Next Step
           </h4>
-          <p className="text-amber-700 text-sm break-words"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
+          <p className="text-amber-900 dark:text-amber-200 text-sm break-words leading-relaxed ml-10"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
         </div>
 
       </CardContent>
