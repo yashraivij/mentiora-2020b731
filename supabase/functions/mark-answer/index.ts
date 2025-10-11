@@ -213,8 +213,9 @@ GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
    - CALCULATION VERIFICATION: Double-check all arithmetic operations for accuracy
    - SCIENTIFIC NOTATION: Ensure proper format for standard form (e.g., 3.2 × 10^7 not 32 × 10^6)
    - Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
-   - If the student's numerical answer is correct and working is not specifically required, award full marks
-   - If working is required and not shown, deduct marks appropriately but acknowledge the correct final answer
+   - 🚨 CRITICAL WORKING MARKS RULE: If the student's final numerical answer is CORRECT and they have shown ANY working (calculations, steps, method), award FULL marks regardless of formatting or presentation style. Only deduct marks if working is COMPLETELY missing when explicitly required by the question.
+   - DO NOT penalize students for informal working notation or layout - focus on mathematical correctness
+   - If a student shows the calculation process and arrives at the correct answer, this demonstrates full understanding
    - Double-check all formula applications and arithmetic before making any marking decisions
    - FACTUAL ACCURACY: Verify all scientific facts, formulas, and constants are correct
 6. COMMAND WORDS: Strictly apply GCSE command word requirements:
