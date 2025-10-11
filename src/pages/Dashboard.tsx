@@ -3314,10 +3314,10 @@ const Dashboard = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 max-w-4xl w-full max-h-[85vh] overflow-hidden"
+                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-4xl w-full max-h-[85vh] overflow-hidden"
                   >
                     {/* Header */}
-                    <div className="relative p-6 border-b border-[#E2E8F0]/50">
+                    <div className="relative p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                       <div className="flex items-center justify-between">
                         <div>
                           {selectedSubjectGroup && (
@@ -3325,16 +3325,16 @@ const Dashboard = () => {
                               onClick={() => setSelectedSubjectGroup(null)}
                               variant="ghost"
                               size="sm"
-                              className="mb-2 text-[#64748B] hover:text-[#0F172A]"
+                              className="mb-2 text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white"
                             >
                               <ChevronRight className="h-4 w-4 rotate-180 mr-1" />
                               Back to subjects
                             </Button>
                           )}
-                          <h2 className="text-3xl font-bold text-[#0F172A] tracking-tight">
+                          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
                             {selectedSubjectGroup ? `Choose Exam Board` : 'Add Subjects'}
                           </h2>
-                          <p className="text-sm text-[#64748B] mt-1 font-light">
+                          <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
                             {selectedSubjectGroup ? 'Select your exam board for ' + selectedSubjectGroup : 'Choose subjects to add to your dashboard'}
                           </p>
                         </div>
@@ -3345,7 +3345,7 @@ const Dashboard = () => {
                           }}
                           variant="ghost"
                           size="icon"
-                          className="w-10 h-10 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-all duration-200"
+                          className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
                         >
                           <X className="h-5 w-5" />
                         </Button>
@@ -3356,16 +3356,16 @@ const Dashboard = () => {
                     <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
                       {!selectedSubjectGroup ? (
                         <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel')} className="w-full">
-                          <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] p-1 h-12 rounded-xl">
+                          <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] dark:bg-gray-800 p-1 h-12 rounded-xl">
                             <TabsTrigger 
                               value="gcse"
-                              className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
+                              className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
                             >
                               GCSE Subjects
                             </TabsTrigger>
                             <TabsTrigger 
                               value="alevel"
-                              className="data-[state=active]:bg-white data-[state=active]:text-[#0F172A] data-[state=active]:shadow-sm text-[#64748B] font-semibold rounded-lg transition-all duration-200"
+                              className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
                             >
                               A-Level Subjects
                             </TabsTrigger>
@@ -3391,11 +3391,11 @@ const Dashboard = () => {
                               if (groupedSubjects.size === 0) {
                                 return (
                                   <div className="text-center py-12 px-4">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 flex items-center justify-center">
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 dark:from-[#16A34A]/30 dark:to-[#16A34A]/10 flex items-center justify-center">
                                       <Check className="h-8 w-8 text-[#16A34A]" />
                                     </div>
-                                    <p className="text-lg font-bold text-[#0F172A]">All GCSE subjects added!</p>
-                                    <p className="text-sm text-[#64748B] mt-2">You&apos;ve already added all available GCSE subjects to your dashboard.</p>
+                                    <p className="text-lg font-bold text-[#0F172A] dark:text-white">All GCSE subjects added!</p>
+                                    <p className="text-sm text-[#64748B] dark:text-gray-400 mt-2">You&apos;ve already added all available GCSE subjects to your dashboard.</p>
                                   </div>
                                 );
                               }
@@ -3433,7 +3433,7 @@ const Dashboard = () => {
                                         transition={{ duration: 0.2 }}
                                       >
                                         <Card 
-                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
                                           onClick={() => {
                                             setSelectedSubjectGroup(baseName);
                                           }}
@@ -3442,10 +3442,10 @@ const Dashboard = () => {
                                             <div className="flex items-center space-x-4">
                                               <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
                                               <div className="flex-1 min-w-0">
-                                                <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
+                                                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
                                                   {baseName}
                                                 </h3>
-                                                <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                                <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                                   <BookOpen className="h-3.5 w-3.5" />
                                                   {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
                                                 </p>
@@ -3526,7 +3526,7 @@ const Dashboard = () => {
                                         transition={{ duration: 0.2 }}
                                       >
                                         <Card 
-                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                          className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
                                           onClick={() => {
                                             setSelectedSubjectGroup(baseName);
                                           }}
@@ -3535,10 +3535,10 @@ const Dashboard = () => {
                                             <div className="flex items-center space-x-4">
                                               <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{emoji}</div>
                                               <div className="flex-1 min-w-0">
-                                                <h3 className="text-lg font-bold text-[#0F172A] mobile-text-wrap tracking-tight">
+                                                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
                                                   {baseName}
                                                 </h3>
-                                                <p className="text-sm text-[#64748B] mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                                <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
                                                   <BookOpen className="h-3.5 w-3.5" />
                                                   {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
                                                 </p>
@@ -3625,7 +3625,7 @@ const Dashboard = () => {
                                   whileTap={{ scale: 0.98 }}
                                 >
                                   <Card 
-                                    className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] group"
+                                    className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
                                     onClick={() => {
                                       setSelectedSubjectForGrade({
                                         id: subject.id,
@@ -3639,7 +3639,7 @@ const Dashboard = () => {
                                         <div className="inline-block px-6 py-2 mb-4 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] group-hover:scale-105 transition-transform duration-300">
                                           <span className="text-2xl font-bold text-white">{examBoard}</span>
                                         </div>
-                                        <p className="text-sm text-[#64748B] flex items-center justify-center gap-1.5">
+                                        <p className="text-sm text-[#64748B] dark:text-gray-400 flex items-center justify-center gap-1.5">
                                           <BookOpen className="h-3.5 w-3.5" />
                                           {subject.topics.length} topics available
                                         </p>
@@ -3663,13 +3663,13 @@ const Dashboard = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 max-w-2xl w-full"
+                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-2xl w-full"
                   >
-                    <div className="p-6 border-b border-[#E2E8F0]/50">
+                    <div className="p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h2 className="text-3xl font-bold text-[#0F172A] tracking-tight">Set Target Grade</h2>
-                          <p className="text-sm text-[#64748B] mt-1 font-light">
+                          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Set Target Grade</h2>
+                          <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
                             What grade are you aiming for in {selectedSubjectForGrade.name}?
                           </p>
                         </div>
@@ -3677,7 +3677,7 @@ const Dashboard = () => {
                           onClick={() => setSelectedSubjectForGrade(null)}
                           variant="ghost"
                           size="icon"
-                          className="w-10 h-10 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-all duration-200"
+                          className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
                         >
                           <X className="h-5 w-5" />
                         </Button>
@@ -3696,9 +3696,9 @@ const Dashboard = () => {
                               setShowAddSubjects(false);
                               setSelectedSubjectGroup(null);
                             }}
-                            className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] border-2 border-[#E2E8F0] hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+                            className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
                           >
-                            <div className="text-4xl font-bold text-[#0F172A] group-hover:text-[#0EA5E9] transition-colors">
+                            <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
                               {grade}
                             </div>
                           </motion.button>

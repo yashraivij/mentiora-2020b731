@@ -533,8 +533,8 @@ export function MedlySubjectsView({
         transition={{ delay: 0.6 }}
         className="text-center py-12 px-6"
       >
-        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#0EA5E9]/5 via-white to-[#38BDF8]/5 border border-[#0EA5E9]/10">
-          <p className="text-lg text-[#475569] font-medium leading-relaxed">
+        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#0EA5E9]/5 via-white to-[#38BDF8]/5 dark:from-[#0EA5E9]/10 dark:via-gray-800 dark:to-[#38BDF8]/10 border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
+          <p className="text-lg text-[#475569] dark:text-gray-300 font-medium leading-relaxed">
             Small, consistent study sessions beat cramming. <span className="text-[#0EA5E9] font-bold">You've got this.</span>
           </p>
         </div>
