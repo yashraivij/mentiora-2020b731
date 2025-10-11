@@ -134,7 +134,7 @@ const Notebook = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
-          <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
+          <p className="text-foreground font-medium text-lg">Loading notes...</p>
         </div>
       </div>
     );
@@ -142,114 +142,109 @@ const Notebook = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b sticky top-0 z-50 bg-background">
-        <div className="container mx-auto px-6 py-3 max-w-6xl">
+      {/* Top Navigation */}
+      <header className="border-b bg-background sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4 max-w-6xl">
           <Button 
             variant="ghost" 
-            size="sm"
             onClick={() => navigate('/dashboard')}
-            className="text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
+            Dashboard
           </Button>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-6xl">
-        {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-foreground mb-2">
-            Revision Notebook
+      <main className="container mx-auto px-6 py-10 max-w-6xl">
+        {/* Page Header */}
+        <header className="mb-10">
+          <h1 className="text-3xl font-bold text-foreground mb-3">
+            Study Notes
           </h1>
-          <p className="text-muted-foreground">
-            Review your personalized study notes
+          <p className="text-muted-foreground text-base">
+            Your personalized notes from practice sessions
           </p>
-        </div>
+        </header>
 
-        {/* Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Filter by subject" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Subjects</SelectItem>
-                {getSubjects().map(subject => (
-                  <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            
-            <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Filter by confidence" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Confidence Levels</SelectItem>
-                <SelectItem value="low">Low Confidence</SelectItem>
-                <SelectItem value="medium">Medium Confidence</SelectItem>
-                <SelectItem value="high">High Confidence</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium"><BlurSpan>{stats.totalEntries}</BlurSpan></span>
-              <span className="text-muted-foreground">notes</span>
+        {/* Filter Controls */}
+        <div className="bg-card border rounded-lg p-6 mb-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
+            <div className="flex-1 flex items-center gap-3">
+              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                <SelectTrigger className="w-full md:w-[200px]">
+                  <SelectValue placeholder="Select subject" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Subjects</SelectItem>
+                  {getSubjects().map(subject => (
+                    <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                <SelectTrigger className="w-full md:w-[200px]">
+                  <SelectValue placeholder="Select confidence" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Levels</SelectItem>
+                  <SelectItem value="low">Low</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium"><BlurSpan>{stats.timeSavedHours}</BlurSpan></span>
-              <span className="text-muted-foreground">hours saved</span>
-            </div>
-          </div>
-        </div>
 
-        {/* Content */}
-        {sortedEntries.length === 0 ? (
-          <Card className="p-12 text-center">
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-                <BookOpen className="h-8 w-8 text-muted-foreground" />
+            <div className="flex items-center gap-6 text-sm border-l pl-6">
+              <div>
+                <span className="font-semibold text-foreground"><BlurSpan>{stats.totalEntries}</BlurSpan></span>
+                <span className="text-muted-foreground ml-1">total</span>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">No notes yet</h3>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Complete practice questions to create personalized revision notes
-                </p>
-                <Button onClick={() => navigate('/dashboard')}>
-                  Start Practicing
-                </Button>
+                <span className="font-semibold text-foreground"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></span>
+                <span className="text-muted-foreground ml-1">saved</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Notes List */}
+        {sortedEntries.length === 0 ? (
+          <Card className="p-16">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
+                <BookOpen className="h-10 w-10 text-muted-foreground" />
+              </div>
+              <h2 className="text-xl font-semibold mb-3">No notes available</h2>
+              <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
+                Practice questions to generate your first revision note
+              </p>
+              <Button onClick={() => navigate('/dashboard')} size="lg">
+                Go to Practice
+              </Button>
             </div>
           </Card>
         ) : (
-          <>
-            <div className="space-y-4 mb-8">
-              {sortedEntries.map((entry) => (
-                <NotebookEntry key={entry.id} entry={entry} />
-              ))}
-            </div>
-
-            <div className="text-center">
+          <div className="space-y-5">
+            {sortedEntries.map((entry) => (
+              <NotebookEntry key={entry.id} entry={entry} />
+            ))}
+            
+            <div className="pt-6 text-center">
               <Button 
                 variant="outline"
+                size="lg"
                 onClick={() => {
                   navigate('/dashboard');
                   window.scrollTo(0, 0);
                 }}
               >
-                Continue Practicing
+                Practice More
               </Button>
             </div>
-          </>
+          </div>
         )}
-      </div>
+      </main>
     </div>
   );
 };
