@@ -5008,16 +5008,6 @@ const Dashboard = () => {
 
       </div>
       </div>
-      
-      {/* Floating Feedback Button - Repositioned for mobile */}
-      <button
-        data-feedback-fish
-        data-feedback-fish-userid={user?.email || ""}
-        className={`fixed ${isMobile ? 'bottom-20 right-4' : 'bottom-6 right-6'} bg-blue-600 hover:bg-blue-700 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center mobile-touch-target`}
-        title="Send Feedback"
-      >
-        <span className="text-lg sm:text-xl">💬</span>
-      </button>
     </div>
   );
 };
