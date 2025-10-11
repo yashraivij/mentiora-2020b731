@@ -158,68 +158,43 @@ const Notebook = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-6xl">
-        {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex flex-col gap-6">
-            {/* Title and Description */}
-            <div>
-              <h1 className="text-2xl font-semibold text-foreground mb-1">
-                Revision Notes
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Personalized notes from your practice sessions
-              </p>
-            </div>
+      <div className="container mx-auto px-4 sm:px-6 py-6 max-w-5xl">
+        {/* Simple Header */}
+        <div className="mb-6">
+          <h1 className="text-xl font-medium text-foreground">
+            Notes
+          </h1>
+        </div>
 
-            {/* Filters and Stats Row */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              {/* Filters */}
-              <div className="flex items-center gap-2">
-                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                  <SelectTrigger className="w-[160px] h-9 text-sm">
-                    <SelectValue placeholder="All Subjects" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover">
-                    <SelectItem value="all">All Subjects</SelectItem>
-                    {getSubjects().map(subject => (
-                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                  <SelectTrigger className="w-[160px] h-9 text-sm">
-                    <SelectValue placeholder="All Confidence" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover">
-                    <SelectItem value="all">All Confidence</SelectItem>
-                    <SelectItem value="low">Low Confidence</SelectItem>
-                    <SelectItem value="medium">Medium Confidence</SelectItem>
-                    <SelectItem value="high">High Confidence</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+        {/* Filters Bar */}
+        <div className="flex items-center gap-3 mb-6 pb-4 border-b">
+          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+            <SelectTrigger className="w-[150px] h-8 text-xs">
+              <SelectValue placeholder="Subject" />
+            </SelectTrigger>
+            <SelectContent className="bg-popover">
+              <SelectItem value="all" className="text-xs">All Subjects</SelectItem>
+              {getSubjects().map(subject => (
+                <SelectItem key={subject} value={subject} className="text-xs">{subject}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
+          <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+            <SelectTrigger className="w-[150px] h-8 text-xs">
+              <SelectValue placeholder="Confidence" />
+            </SelectTrigger>
+            <SelectContent className="bg-popover">
+              <SelectItem value="all" className="text-xs">All</SelectItem>
+              <SelectItem value="low" className="text-xs">Low</SelectItem>
+              <SelectItem value="medium" className="text-xs">Medium</SelectItem>
+              <SelectItem value="high" className="text-xs">High</SelectItem>
+            </SelectContent>
+          </Select>
 
-              {/* Stats - Compact inline display */}
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1.5">
-                  <BookOpen className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium text-foreground"><BlurSpan>{stats.totalEntries}</BlurSpan></span>
-                  <span className="text-muted-foreground">notes</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium text-foreground"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></span>
-                  <span className="text-muted-foreground">saved</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Brain className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium text-foreground"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></span>
-                  <span className="text-muted-foreground">subjects</span>
-                </div>
-              </div>
-            </div>
+          <div className="ml-auto flex items-center gap-4 text-xs text-muted-foreground">
+            <span><BlurSpan>{stats.totalEntries}</BlurSpan> entries</span>
+            <span><BlurSpan>{stats.timeSavedHours}h</BlurSpan> saved</span>
           </div>
         </div>
 
