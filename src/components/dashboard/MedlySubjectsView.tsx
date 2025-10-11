@@ -294,7 +294,7 @@ export function MedlySubjectsView({
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
                         <Clock className="h-5 w-5 text-[#F59E0B]" />
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Best Study Time</span>
+                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">You perform best at</span>
                     </div>
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.5 }}
@@ -304,12 +304,12 @@ export function MedlySubjectsView({
                     >
                       {profile.bestWindow}
                     </motion.div>
-                    <div className="text-xs text-[#64748B] mt-1 font-medium">Most productive</div>
+                    <div className="text-xs text-[#64748B] mt-1 font-medium">Your peak focus hours</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">When you perform best</p>
-                  <p className="text-xs text-muted-foreground">The 2-hour window where you achieve the highest average scores based on your practice history</p>
+                  <p className="font-medium mb-1">We think you perform best at this time</p>
+                  <p className="text-xs text-muted-foreground">Based on your practice history, this 2-hour window is when you achieve your highest scores. Try scheduling important study sessions during these peak hours!</p>
                 </TooltipContent>
               </Tooltip>
 
