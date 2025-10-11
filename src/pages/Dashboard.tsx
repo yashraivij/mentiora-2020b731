@@ -2527,7 +2527,7 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer */}
               <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-950 dark:to-gray-900">
+                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950">
                   {selectedDrawerSubject && (
                     <>
                       <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">

@@ -134,7 +134,7 @@ export function MedlySubjectsView({
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
       >
         {/* Premium gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0EA5E9]/5 pointer-events-none" />
@@ -212,7 +212,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
@@ -257,7 +257,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.15 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
@@ -289,7 +289,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
@@ -321,7 +321,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.25 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
@@ -375,7 +375,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className="group relative rounded-3xl border border-[#E2E8F0]/50 hover:border-[#0EA5E9]/30 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC]"
+                className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -388,7 +388,7 @@ export function MedlySubjectsView({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-lg text-[#64748B] hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all duration-200 opacity-0 group-hover:opacity-100"
+                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-lg text-[#64748B] dark:text-gray-400 hover:text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-red-900/20 transition-all duration-200 opacity-0 group-hover:opacity-100"
                   onClick={(e) => {
                     e.stopPropagation();
                     removeSubject(subject.id);
