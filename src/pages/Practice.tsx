@@ -1153,26 +1153,30 @@ const Practice = () => {
                       <span>Grade 9.0</span>
                     </div>
                     <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
-                      {/* Old grade position - light fill - animates first */}
-                      <div 
-                        className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)]/30 rounded-full transition-all duration-1000 ease-out"
-                        style={{ 
-                          width: '0%',
-                          animation: 'fillProgress 1s ease-out 600ms forwards',
-                          '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
-                        } as React.CSSProperties}
-                      />
-                      {/* New grade position - animated bright fill - animates after */}
+                      {/* Old grade position - only show if not first practice */}
+                      {!isFirstPractice && (
+                        <div 
+                          className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)]/30 rounded-full transition-all duration-1000 ease-out"
+                          style={{ 
+                            width: '0%',
+                            animation: 'fillProgress 1s ease-out 600ms forwards',
+                            '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
+                          } as React.CSSProperties}
+                        />
+                      )}
+                      {/* New grade position - animated bright fill */}
                       <div 
                         className="absolute top-0 bottom-0 bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,60%,60%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[hsl(195,69%,54%)]/50"
                         style={{ 
                           width: '0%',
                           backgroundSize: '200% 100%',
-                          animation: 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
+                          animation: isFirstPractice 
+                            ? 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms'
+                            : 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
                           '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: 'slideAndFade 2s infinite 2700ms' }} />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: isFirstPractice ? 'slideAndFade 2s infinite 2100ms' : 'slideAndFade 2s infinite 2700ms' }} />
                       </div>
                     </div>
                     <div className="text-center pt-1">
@@ -1195,9 +1199,9 @@ const Practice = () => {
             </Card>
           </div>
 
-          {/* Performance Comparison */}
+          {/* Performance Summary */}
           <div className="space-y-5 animate-fade-in" style={{ animationDelay: '600ms' }}>
-            <h2 className="text-2xl font-bold text-foreground">Performance Comparison</h2>
+            <h2 className="text-2xl font-bold text-foreground">{isFirstPractice ? 'Your Performance' : 'Performance Comparison'}</h2>
             
             <div className="grid md:grid-cols-2 gap-4">
               {/* Predicted Grade */}
