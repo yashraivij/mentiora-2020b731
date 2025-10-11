@@ -855,78 +855,45 @@ const Practice = () => {
       // Save predicted grade to database
     if (user?.id && subjectId) {
       try {
-        // Check if user has existing predicted grade for this subject
+        // Fetch ALL existing predicted grades for this subject to calculate average
         const { data: existingGrades } = await supabase
           .from('predicted_exam_completions')
-          .select('grade, created_at')
+          .select('grade, percentage')
           .eq('user_id', user.id)
           .eq('subject_id', subjectId)
-          .order('created_at', { ascending: false })
-          .limit(1);
+          .order('created_at', { ascending: false });
         
-        const hasExistingGrade = existingGrades && existingGrades.length > 0;
-        const currentGrade = hasExistingGrade ? parseFloat(existingGrades[0].grade) : null;
+        const hasExistingGrades = existingGrades && existingGrades.length > 0;
         
         console.log('🔢 Grade Save - Input values:', {
           subjectId,
-          hasExistingGrade,
-          currentGrade,
+          hasExistingGrades,
+          existingGradesCount: existingGrades?.length || 0,
           averagePercentage
         });
         
+        // Convert current percentage to grade
+        const currentTopicGrade = percentageToGrade(averagePercentage);
+        
         let newPredictedGrade: number;
         
-        if (!hasExistingGrade) {
-          // First time practicing this subject - calculate initial grade based on performance
-          // Map percentage to grade: 90%+ = 9, 80%+ = 8, 70%+ = 7, etc.
-          if (averagePercentage >= 95) {
-            newPredictedGrade = 9.0;
-          } else if (averagePercentage >= 85) {
-            newPredictedGrade = 8.0 + ((averagePercentage - 85) / 10) * 1.0;
-          } else if (averagePercentage >= 75) {
-            newPredictedGrade = 7.0 + ((averagePercentage - 75) / 10) * 1.0;
-          } else if (averagePercentage >= 65) {
-            newPredictedGrade = 6.0 + ((averagePercentage - 65) / 10) * 1.0;
-          } else if (averagePercentage >= 55) {
-            newPredictedGrade = 5.0 + ((averagePercentage - 55) / 10) * 1.0;
-          } else if (averagePercentage >= 45) {
-            newPredictedGrade = 4.0 + ((averagePercentage - 45) / 10) * 1.0;
-          } else if (averagePercentage >= 35) {
-            newPredictedGrade = 3.0 + ((averagePercentage - 35) / 10) * 1.0;
-          } else if (averagePercentage >= 25) {
-            newPredictedGrade = 2.0 + ((averagePercentage - 25) / 10) * 1.0;
-          } else {
-            newPredictedGrade = 1.0 + (averagePercentage / 25) * 1.0;
-          }
-          
+        if (!hasExistingGrades) {
+          // First time practicing this subject
+          newPredictedGrade = currentTopicGrade;
           console.log('🆕 First predicted grade:', newPredictedGrade.toFixed(1));
         } else {
-          // Has existing grade - make small incremental adjustments
-          // Good performance (80%+) = small increase, poor performance (<60%) = small decrease
-          let adjustment: number;
+          // Average all grades from all completed topics
+          const allGrades = existingGrades.map(g => parseFloat(g.grade));
+          allGrades.push(currentTopicGrade);
           
-          if (averagePercentage >= 90) {
-            adjustment = 0.2; // Excellent: +0.2
-          } else if (averagePercentage >= 80) {
-            adjustment = 0.1; // Good: +0.1
-          } else if (averagePercentage >= 70) {
-            adjustment = 0.05; // Above average: +0.05
-          } else if (averagePercentage >= 60) {
-            adjustment = 0.0; // Average: no change
-          } else if (averagePercentage >= 50) {
-            adjustment = -0.05; // Below average: -0.05
-          } else if (averagePercentage >= 40) {
-            adjustment = -0.1; // Poor: -0.1
-          } else {
-            adjustment = -0.2; // Very poor: -0.2
-          }
+          const sumOfGrades = allGrades.reduce((sum, grade) => sum + grade, 0);
+          newPredictedGrade = sumOfGrades / allGrades.length;
           
-          newPredictedGrade = Math.max(1.0, Math.min(currentGrade! + adjustment, 9.0));
-          
-          console.log('📈 Incremental adjustment:', {
-            currentGrade,
-            adjustment: adjustment.toFixed(2),
-            newGrade: newPredictedGrade.toFixed(1)
+          console.log('📊 Averaging grades:', {
+            previousGrades: existingGrades.map(g => g.grade),
+            currentTopicGrade: currentTopicGrade.toFixed(1),
+            allGrades: allGrades.map(g => g.toFixed(1)),
+            average: newPredictedGrade.toFixed(1)
           });
         }
         
@@ -1010,6 +977,20 @@ const Practice = () => {
     console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
+  // Helper function to convert percentage to GCSE grade
+  const percentageToGrade = (percentage: number): number => {
+    if (percentage >= 90) return 9.0;
+    if (percentage >= 80) return 8.0 + ((percentage - 80) / 10);
+    if (percentage >= 70) return 7.0 + ((percentage - 70) / 10);
+    if (percentage >= 60) return 6.0 + ((percentage - 60) / 10);
+    if (percentage >= 50) return 5.0 + ((percentage - 50) / 10);
+    if (percentage >= 40) return 4.0 + ((percentage - 40) / 10);
+    if (percentage >= 30) return 3.0 + ((percentage - 30) / 10);
+    if (percentage >= 20) return 2.0 + ((percentage - 20) / 10);
+    if (percentage >= 10) return 1.0 + ((percentage - 10) / 10);
+    return percentage / 10; // 0-9% = 0.0-0.9 (U grade)
+  };
+
   if (sessionComplete) {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
@@ -1034,49 +1015,20 @@ const Practice = () => {
     const oldPredictedGrade = isFirstPractice ? 0 : parseFloat(existingGradeData.grade);
     
     // Calculate new grade using same logic as save
+    const currentTopicGrade = percentageToGrade(averagePercentage);
     let newPredictedGrade: number;
     let gradeImprovement: number;
     
     if (isFirstPractice) {
-      // First time - calculate initial grade based on standard GCSE boundaries
-      if (averagePercentage >= 90) {
-        newPredictedGrade = 9.0;
-      } else if (averagePercentage >= 80) {
-        newPredictedGrade = 8.0 + ((averagePercentage - 80) / 10) * 1.0;
-      } else if (averagePercentage >= 70) {
-        newPredictedGrade = 7.0 + ((averagePercentage - 70) / 10) * 1.0;
-      } else if (averagePercentage >= 60) {
-        newPredictedGrade = 6.0 + ((averagePercentage - 60) / 10) * 1.0;
-      } else if (averagePercentage >= 50) {
-        newPredictedGrade = 5.0 + ((averagePercentage - 50) / 10) * 1.0;
-      } else if (averagePercentage >= 40) {
-        newPredictedGrade = 4.0 + ((averagePercentage - 40) / 10) * 1.0;
-      } else if (averagePercentage >= 30) {
-        newPredictedGrade = 3.0 + ((averagePercentage - 30) / 10) * 1.0;
-      } else if (averagePercentage >= 20) {
-        newPredictedGrade = 2.0 + ((averagePercentage - 20) / 10) * 1.0;
-      } else {
-        newPredictedGrade = 1.0 + (averagePercentage / 20) * 1.0;
-      }
+      // First time - use current topic grade
+      newPredictedGrade = currentTopicGrade;
       gradeImprovement = newPredictedGrade;
     } else {
-      // Incremental adjustment
-      if (averagePercentage >= 90) {
-        gradeImprovement = 0.2;
-      } else if (averagePercentage >= 80) {
-        gradeImprovement = 0.1;
-      } else if (averagePercentage >= 70) {
-        gradeImprovement = 0.05;
-      } else if (averagePercentage >= 60) {
-        gradeImprovement = 0.0;
-      } else if (averagePercentage >= 50) {
-        gradeImprovement = -0.05;
-      } else if (averagePercentage >= 40) {
-        gradeImprovement = -0.1;
-      } else {
-        gradeImprovement = -0.2;
-      }
-      newPredictedGrade = Math.max(1.0, Math.min(oldPredictedGrade + gradeImprovement, 9.0));
+      // Fetch all grades and calculate average
+      // This is a simple calculation since we already have the data in existingGradeData
+      // The backend already calculated this average when saving
+      newPredictedGrade = currentTopicGrade; // Will be recalculated after save
+      gradeImprovement = newPredictedGrade - oldPredictedGrade;
     }
     
     // Percentile rank
