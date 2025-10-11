@@ -116,6 +116,8 @@ const Practice = () => {
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
   const [existingGradeData, setExistingGradeData] = useState<{ grade: string; currentGrade?: string; isFirst: boolean } | null>(null);
   const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
+  const [beforeSessionGrade, setBeforeSessionGrade] = useState<number | null>(null);
+  const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -336,6 +338,43 @@ const Practice = () => {
       saveSessionState();
     }
   }, [currentQuestionIndex, userAnswer, attempts, showFeedback, shuffledQuestions]);
+
+  // Fetch and store the current predicted grade when practice session starts
+  useEffect(() => {
+    const fetchCurrentPredictedGrade = async () => {
+      if (!user?.id || !subjectId || shuffledQuestions.length === 0 || beforeSessionGrade !== null) {
+        return;
+      }
+
+      try {
+        console.log('🔍 Fetching current predicted grade before practice session starts...');
+        
+        const { data: existingGrades } = await supabase
+          .from('predicted_exam_completions')
+          .select('grade')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        
+        if (existingGrades && existingGrades.length > 0) {
+          const currentGrade = parseFloat(existingGrades[0].grade);
+          setBeforeSessionGrade(currentGrade);
+          setIsFirstPracticeSession(false);
+          console.log('✅ Before session grade captured:', currentGrade.toFixed(1));
+        } else {
+          // First time practicing this subject
+          setBeforeSessionGrade(null);
+          setIsFirstPracticeSession(true);
+          console.log('🆕 First practice session - no previous grade');
+        }
+      } catch (error) {
+        console.error('Error fetching current predicted grade:', error);
+      }
+    };
+
+    fetchCurrentPredictedGrade();
+  }, [user?.id, subjectId, shuffledQuestions.length, beforeSessionGrade]);
 
   // Auto-scroll chat messages
   useEffect(() => {
@@ -865,42 +904,25 @@ const Practice = () => {
       // Save predicted grade to database
     if (user?.id && subjectId) {
       try {
-        // Fetch the MOST RECENT predicted grade for this subject (before this practice)
-        const { data: existingGrades } = await supabase
-          .from('predicted_exam_completions')
-          .select('grade, percentage, created_at')
-          .eq('user_id', user.id)
-          .eq('subject_id', subjectId)
-          .order('created_at', { ascending: false })
-          .limit(1);
-        
-        const hasExistingGrades = existingGrades && existingGrades.length > 0;
-        
-        console.log('🔢 BEFORE this session - Previous predicted grade:', {
-          subjectId,
-          hasExistingGrades,
-          previousGrade: hasExistingGrades ? existingGrades[0].grade : 'none (first session)',
-          currentSessionScore: averagePercentage + '%'
-        });
-        
         // Convert current percentage to grade
         const currentTopicGrade = percentageToGrade(averagePercentage);
         
-        let newPredictedGrade: number;
-        const oldGrade = hasExistingGrades ? parseFloat(existingGrades[0].grade) : 0;
+        // Use the before session grade that was captured when questions were generated
+        const oldGrade = beforeSessionGrade !== null ? beforeSessionGrade : 0;
+        const isFirstSession = beforeSessionGrade === null || beforeSessionGrade === 0;
         
-        if (!hasExistingGrades) {
+        let newPredictedGrade: number;
+        
+        if (isFirstSession) {
           // First time practicing this subject
           newPredictedGrade = currentTopicGrade;
           console.log('🆕 First predicted grade:', newPredictedGrade.toFixed(1));
         } else {
           // Update predicted grade: 50% previous grade + 50% current performance
-          // This creates clear, responsive updates while maintaining stability
-          const oldGradeValue = parseFloat(existingGrades[0].grade);
-          newPredictedGrade = (oldGradeValue * 0.5) + (currentTopicGrade * 0.5);
+          newPredictedGrade = (oldGrade * 0.5) + (currentTopicGrade * 0.5);
           
           console.log('📊 Updating predicted grade:', {
-            beforeGrade: oldGradeValue.toFixed(1),
+            beforeGrade: oldGrade.toFixed(1),
             currentSessionGrade: currentTopicGrade.toFixed(1),
             nowGrade: newPredictedGrade.toFixed(1)
           });
@@ -910,14 +932,14 @@ const Practice = () => {
         setSavedGradeData({
           oldGrade: oldGrade,
           newGrade: newPredictedGrade,
-          isFirst: !hasExistingGrades
+          isFirst: isFirstSession
         });
         
-        console.log('💾 NOW after this session - Grade data saved for display:', {
-          beforeGrade: oldGrade === 0 ? 'N/A (first session)' : oldGrade.toFixed(1),
+        console.log('💾 Session Complete - Grade progression:', {
+          beforeGrade: isFirstSession ? 'N/A (first session)' : oldGrade.toFixed(1),
           nowGrade: newPredictedGrade.toFixed(1),
-          improvement: !hasExistingGrades ? `+${newPredictedGrade.toFixed(1)} (baseline)` : `${(newPredictedGrade - oldGrade) >= 0 ? '+' : ''}${(newPredictedGrade - oldGrade).toFixed(1)}`,
-          thisGradeWillBeUsedEverywhere: 'Yes - until next practice session'
+          improvement: isFirstSession ? `+${newPredictedGrade.toFixed(1)} (baseline)` : `${(newPredictedGrade - oldGrade) >= 0 ? '+' : ''}${(newPredictedGrade - oldGrade).toFixed(1)}`,
+          willBeUsedAcrossApp: 'Yes - until next practice session'
         });
         
         // Insert new predicted grade record with explicit completed_at timestamp
