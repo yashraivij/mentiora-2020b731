@@ -1582,7 +1582,7 @@ const Dashboard = () => {
     });
     
     // Find the 2-hour window with best average performance
-    let bestWindow = "No data yet";
+    let bestWindow = "--";
     let bestAverage = 0;
     
     if (Object.keys(hourlyPerformance).length > 0) {
