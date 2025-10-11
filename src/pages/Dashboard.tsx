@@ -187,13 +187,13 @@ const Dashboard = () => {
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
 
   const sidebarItems = [
-    { id: "learn", label: "Learn", icon: Home, color: "text-primary" },
-    { id: "leaderboards", label: "Leaderboards", icon: Trophy, color: "text-amber-500 dark:text-amber-400" },
-    { id: "progress", label: "Progress", icon: TrendingUp, color: "text-emerald-500 dark:text-emerald-400" },
-    { id: "quests", label: "Quests", icon: Star, color: "text-violet-500 dark:text-violet-400" },
-    { id: "notes", label: "Notes", icon: NotebookPen, color: "text-blue-500 dark:text-blue-400" },
-    { id: "flashcards", label: "Flashcards", icon: Brain, color: "text-pink-500 dark:text-pink-400" },
-    { id: "profile", label: "Profile", icon: User, color: "text-muted-foreground" },
+    { id: "learn", label: "Learn", icon: Home },
+    { id: "leaderboards", label: "Leaderboards", icon: Trophy },
+    { id: "progress", label: "Progress", icon: TrendingUp },
+    { id: "quests", label: "Quests", icon: Star },
+    { id: "notes", label: "Notes", icon: NotebookPen },
+    { id: "flashcards", label: "Flashcards", icon: Brain },
+    { id: "profile", label: "Profile", icon: User },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
@@ -2337,15 +2337,15 @@ const Dashboard = () => {
                         if (item.id === 'quests') setQuestNotificationCount(0);
                       }}
                       className={isActive 
-                        ? 'bg-primary/10 dark:bg-primary/20 text-foreground' 
-                        : 'hover:bg-muted/60 dark:hover:bg-muted/40 text-muted-foreground'
+                        ? 'bg-primary/10 dark:bg-primary/15 text-foreground' 
+                        : 'hover:bg-muted/50 dark:hover:bg-muted/30 text-muted-foreground'
                       }
                     >
-                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? item.color : 'text-muted-foreground'}`} />
-                      <span className="font-semibold text-sm">{item.label}</span>
+                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                      <span className={`font-medium text-[15px] ${isActive ? 'font-semibold' : ''}`}>{item.label}</span>
                     </MobileNavItem>
                     {showBadge && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md">
+                      <div className="absolute -top-1 -right-1 min-w-5 h-5 px-1.5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
                         {questNotificationCount}
                       </div>
                     )}
@@ -2415,8 +2415,8 @@ const Dashboard = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3">
-          <div className="space-y-1">
+        <nav className="flex-1 px-2">
+          <div className="space-y-0.5">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -2429,38 +2429,33 @@ const Dashboard = () => {
                       if (item.id === 'quests') setQuestNotificationCount(0);
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150 group ${
                       isActive 
-                        ? 'bg-primary/10 dark:bg-primary/20' 
-                        : 'hover:bg-muted/60 dark:hover:bg-muted/40'
+                        ? 'bg-primary/10 dark:bg-primary/15' 
+                        : 'hover:bg-muted/50 dark:hover:bg-muted/30'
                     }`}
                   >
-                    <div className={`flex items-center justify-center w-9 h-9 rounded-lg transition-all ${
+                    <Icon className={`h-5 w-5 transition-colors ${
                       isActive 
-                        ? 'bg-primary/15 dark:bg-primary/25' 
-                        : 'bg-muted/50 dark:bg-muted/30 group-hover:bg-muted dark:group-hover:bg-muted/50'
-                    }`}>
-                      <Icon className={`h-5 w-5 ${isActive ? item.color : 'text-muted-foreground group-hover:text-foreground'}`} />
-                    </div>
-                    <span className={`font-semibold text-sm transition-colors ${
+                        ? 'text-primary dark:text-primary' 
+                        : 'text-muted-foreground group-hover:text-foreground'
+                    }`} />
+                    <span className={`font-medium text-[15px] transition-colors ${
                       isActive 
-                        ? 'text-foreground' 
+                        ? 'text-foreground font-semibold' 
                         : 'text-muted-foreground group-hover:text-foreground'
                     }`}>
                       {item.label}
                     </span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute left-0 w-1 h-8 bg-primary rounded-r-full"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </motion.button>
                   {showBadge && (
-                    <div className="absolute top-2 right-2 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md">
+                    <motion.div 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute top-1.5 right-1.5 min-w-5 h-5 px-1.5 bg-destructive text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm"
+                    >
                       {questNotificationCount}
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               );
@@ -2469,35 +2464,29 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="px-3 pt-4 border-t border-border space-y-1">
+        <div className="px-2 pt-4 border-t border-border space-y-0.5">
           <button
             data-feedback-fish
             data-feedback-fish-userid={user?.email || ""}
-            className="w-full flex items-center gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-muted/30 rounded-lg transition-all duration-150"
           >
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
-              <span className="text-lg">💬</span>
-            </div>
-            <span className="font-medium text-sm">Feedback</span>
+            <span className="text-base">💬</span>
+            <span className="font-medium text-[15px]">Feedback</span>
           </button>
           <button
             onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-            className="w-full flex items-center gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-muted/30 rounded-lg transition-all duration-150"
           >
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
-              <span className="text-lg">🎮</span>
-            </div>
-            <span className="font-medium text-sm">Join Discord</span>
+            <span className="text-base">🎮</span>
+            <span className="font-medium text-[15px]">Join Discord</span>
           </button>
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start gap-3 px-3 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-muted/40 rounded-xl h-auto"
+            className="w-full justify-start gap-3 px-3 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-muted/30 rounded-lg h-auto font-medium text-[15px]"
           >
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted/50 dark:bg-muted/30">
-              <User className="h-5 w-5" />
-            </div>
-            <span className="font-medium text-sm">Sign Out</span>
+            <User className="h-5 w-5" />
+            Sign Out
           </Button>
         </div>
       </div>
