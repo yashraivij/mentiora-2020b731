@@ -163,53 +163,53 @@ const Notebook = () => {
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-3xl font-semibold text-foreground mb-2">
-                Revision Notebook
+              <h1 className="text-2xl font-medium text-foreground mb-1">
+                Notebook
               </h1>
               <p className="text-sm text-muted-foreground">
-                Your personalized study notes from practice questions
+                Your personalized notes from practice
               </p>
             </div>
             
             {/* Filters */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div className="flex items-center gap-2">
               <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-full sm:w-[160px] h-9 text-sm">
-                  <SelectValue placeholder="All Subjects" />
+                <SelectTrigger className="w-[140px] h-9 text-xs border-border/40 bg-background">
+                  <SelectValue placeholder="Subject" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Subjects</SelectItem>
+                <SelectContent className="bg-popover">
+                  <SelectItem value="all" className="text-xs">All Subjects</SelectItem>
                   {getSubjects().map(subject => (
-                    <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    <SelectItem key={subject} value={subject} className="text-xs">{subject}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
               
               <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                <SelectTrigger className="w-full sm:w-[160px] h-9 text-sm">
-                  <SelectValue placeholder="All Confidence" />
+                <SelectTrigger className="w-[140px] h-9 text-xs border-border/40 bg-background">
+                  <SelectValue placeholder="Confidence" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Confidence</SelectItem>
-                  <SelectItem value="low">Low Confidence</SelectItem>
-                  <SelectItem value="medium">Medium Confidence</SelectItem>
-                  <SelectItem value="high">High Confidence</SelectItem>
+                <SelectContent className="bg-popover">
+                  <SelectItem value="all" className="text-xs">All Levels</SelectItem>
+                  <SelectItem value="low" className="text-xs">Low</SelectItem>
+                  <SelectItem value="medium" className="text-xs">Medium</SelectItem>
+                  <SelectItem value="high" className="text-xs">High</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Card className="border-border/50">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Card className="border-border/40">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <BookOpen className="h-4 w-4 text-primary" />
+                  <div className="p-2 rounded-md bg-muted">
+                    <BookOpen className="h-4 w-4 text-muted-foreground" />
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Total Notes</p>
-                    <p className="text-2xl font-semibold text-foreground">
+                    <p className="text-xl font-medium text-foreground">
                       <BlurSpan>{stats.totalEntries}</BlurSpan>
                     </p>
                   </div>
@@ -217,15 +217,15 @@ const Notebook = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border/50">
+            <Card className="border-border/40">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <TrendingUp className="h-4 w-4 text-primary" />
+                  <div className="p-2 rounded-md bg-muted">
+                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Time Saved</p>
-                    <p className="text-2xl font-semibold text-foreground">
+                    <p className="text-xl font-medium text-foreground">
                       <BlurSpan>{stats.timeSavedHours}h</BlurSpan>
                     </p>
                   </div>
@@ -233,15 +233,15 @@ const Notebook = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border/50">
+            <Card className="border-border/40">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <Brain className="h-4 w-4 text-primary" />
+                  <div className="p-2 rounded-md bg-muted">
+                    <Brain className="h-4 w-4 text-muted-foreground" />
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Subjects</p>
-                    <p className="text-2xl font-semibold text-foreground">
+                    <p className="text-xl font-medium text-foreground">
                       <BlurSpan>{stats.subjectsWithNotes}</BlurSpan>
                     </p>
                   </div>
