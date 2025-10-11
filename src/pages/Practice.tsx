@@ -868,21 +868,19 @@ const Practice = () => {
         // Fetch the MOST RECENT predicted grade for this subject (before this practice)
         const { data: existingGrades } = await supabase
           .from('predicted_exam_completions')
-          .select('grade, percentage, created_at')
+          .select('grade, percentage, completed_at')
           .eq('user_id', user.id)
           .eq('subject_id', subjectId)
-          .order('created_at', { ascending: false })
+          .order('completed_at', { ascending: false })
           .limit(1);
         
         const hasExistingGrades = existingGrades && existingGrades.length > 0;
         
-        console.log('🔢 Grade Save - Fetched existing grades:', {
+        console.log('🔢 BEFORE this session - Previous predicted grade:', {
           subjectId,
           hasExistingGrades,
-          existingGradesData: existingGrades,
-          mostRecentGrade: hasExistingGrades ? existingGrades[0].grade : 'none',
-          mostRecentCreatedAt: hasExistingGrades ? existingGrades[0].created_at : 'none',
-          currentSessionScore: averagePercentage
+          previousGrade: hasExistingGrades ? existingGrades[0].grade : 'none (first session)',
+          currentSessionScore: averagePercentage + '%'
         });
         
         // Convert current percentage to grade
@@ -915,11 +913,11 @@ const Practice = () => {
           isFirst: !hasExistingGrades
         });
         
-        console.log('💾 Saved grade data for display:', {
-          oldGrade: oldGrade.toFixed(1),
-          newGrade: newPredictedGrade.toFixed(1),
-          improvement: (newPredictedGrade - oldGrade).toFixed(1),
-          isFirst: !hasExistingGrades
+        console.log('💾 NOW after this session - Grade data saved for display:', {
+          beforeGrade: oldGrade === 0 ? 'N/A (first session)' : oldGrade.toFixed(1),
+          nowGrade: newPredictedGrade.toFixed(1),
+          improvement: !hasExistingGrades ? `+${newPredictedGrade.toFixed(1)} (baseline)` : `${(newPredictedGrade - oldGrade) >= 0 ? '+' : ''}${(newPredictedGrade - oldGrade).toFixed(1)}`,
+          thisGradeWillBeUsedEverywhere: 'Yes - until next practice session'
         });
         
         // Insert new predicted grade record
@@ -1042,15 +1040,15 @@ const Practice = () => {
     const newPredictedGrade = savedGradeData.newGrade;
     const gradeImprovement = isFirstPractice ? newPredictedGrade : newPredictedGrade - oldPredictedGrade;
     
-    console.log('📊 SESSION COMPLETE - Display Values:', {
+    console.log('📊 SESSION COMPLETE - Displaying to user:', {
       isFirstPractice,
-      beforeGrade: oldPredictedGrade.toFixed(1),
-      nowGrade: newPredictedGrade.toFixed(1),
-      improvement: gradeImprovement.toFixed(1),
+      beforeGradeShown: isFirstPractice ? 'N/A (first session)' : oldPredictedGrade.toFixed(1),
+      nowGradeShown: newPredictedGrade.toFixed(1),
+      improvementShown: gradeImprovement.toFixed(1),
       currentSessionScore: averagePercentage.toFixed(1) + '%',
       explanation: isFirstPractice 
-        ? 'First practice - showing initial predicted grade only'
-        : `Before grade (${oldPredictedGrade.toFixed(1)}) was the predicted grade before this session. Now grade (${newPredictedGrade.toFixed(1)}) is updated after this session.`
+        ? 'First practice - establishing baseline predicted grade'
+        : `Before grade (${oldPredictedGrade.toFixed(1)}) was the predicted grade before this session. Now grade (${newPredictedGrade.toFixed(1)}) is the updated predicted grade after this session. This Now grade will be used everywhere in the app until the next session.`
     });
     
     // Percentile rank
