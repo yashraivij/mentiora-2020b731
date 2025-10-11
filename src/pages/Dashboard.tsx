@@ -1614,13 +1614,16 @@ const Dashboard = () => {
       }
     }
     
+    // For new users with no real data, set weekMinutes to 0
+    const actualWeekMinutes = validSubjectsCount === 0 && userProgress.length === 0 ? 0 : weeklyStudyMinutes;
+    
     return {
       name: getFirstName(),
       overallPred: avgPred,
       overallTarget: avgTarget,
       retention,
       bestWindow,
-      weekMinutes: weeklyStudyMinutes
+      weekMinutes: actualWeekMinutes
     };
   }, [userSubjectsWithGrades, userProgress, predictedGrades, weeklyStudyMinutes, user]);
   
