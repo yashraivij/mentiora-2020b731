@@ -2466,57 +2466,30 @@ const Dashboard = () => {
                                 const now = new Date();
                                 const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
                                 
-                                // Get all progress for this subject with scores > 0
+                                // Get all progress for this subject
                                 const subjectProgress = userProgress.filter(p => 
-                                  p.subjectId === subjectId && p.averageScore > 0
+                                  p.subjectId === subjectId
                                 );
                                 
-                                // Separate recent practice (last 7 days) from older practice
+                                // Get recent practice (last 7 days)
                                 const recentPractice = subjectProgress.filter(p => 
                                   new Date(p.lastAttempt) >= sevenDaysAgo
                                 );
-                                const olderPractice = subjectProgress.filter(p => 
-                                  new Date(p.lastAttempt) < sevenDaysAgo
-                                );
                                 
-                                // Calculate weighted average for recent practice
-                                const recentAvg = recentPractice.length > 0
-                                  ? recentPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
-                                    recentPractice.reduce((sum, p) => sum + p.attempts, 0)
-                                  : 0;
-                                
-                                // Calculate weighted average for older practice (baseline)
-                                const olderAvg = olderPractice.length > 0
-                                  ? olderPractice.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0) / 
-                                    olderPractice.reduce((sum, p) => sum + p.attempts, 0)
-                                  : recentAvg; // If no older data, use recent as baseline
-                                
-                                // Calculate percentage point change
-                                const change = recentPractice.length > 0 ? recentAvg - olderAvg : 0;
-                                const isPositive = change >= 0;
-                                const sign = isPositive ? '+' : '';
+                                // Count total attempts in last 7 days
+                                const questionsAnswered = recentPractice.reduce((sum, p) => sum + p.attempts, 0);
                                 
                                 return (
-                                  <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
-                                    isPositive 
-                                      ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
-                                      : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
-                                  }`}>
+                                  <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
                                     <CardContent className="p-5">
                                       <div className="flex items-center gap-2 mb-2">
-                                        <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
-                                          {isPositive ? (
-                                            <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
-                                          ) : (
-                                            <TrendingDown className="h-4 w-4 text-[#EF4444]" />
-                                          )}
+                                        <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
+                                          <TrendingUp className="h-4 w-4 text-[#16A34A]" />
                                         </div>
-                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Last 7 days</div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Questions (7d)</div>
                                       </div>
-                                      <div className={`text-3xl font-bold flex items-center gap-2 ${
-                                        isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
-                                      }`}>
-                                        {sign}{change.toFixed(1)}%
+                                      <div className="text-3xl font-bold text-[#16A34A]">
+                                        {questionsAnswered}
                                       </div>
                                     </CardContent>
                                   </Card>
