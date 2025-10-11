@@ -114,7 +114,7 @@ const Practice = () => {
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
-  const [existingGradeData, setExistingGradeData] = useState<{ grade: string; isFirst: boolean } | null>(null);
+  const [existingGradeData, setExistingGradeData] = useState<{ grade: string; currentGrade?: string; isFirst: boolean } | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -151,9 +151,17 @@ const Practice = () => {
         // If there's only 1 record, this IS the first practice (the one just saved)
         // If there are 2+ records, use the second most recent as the "before" grade
         if (data && data.length > 1) {
-          setExistingGradeData({ grade: data[1].grade, isFirst: false });
+          setExistingGradeData({ 
+            grade: data[1].grade, // Before grade (second most recent)
+            currentGrade: data[0].grade, // Current grade (most recent/just saved)
+            isFirst: false 
+          });
         } else {
-          setExistingGradeData({ grade: '0', isFirst: true });
+          setExistingGradeData({ 
+            grade: '0', 
+            currentGrade: data && data[0] ? data[0].grade : '0', // First grade saved
+            isFirst: true 
+          });
         }
       }
     };
@@ -1015,22 +1023,9 @@ const Practice = () => {
     const isFirstPractice = existingGradeData.isFirst;
     const oldPredictedGrade = isFirstPractice ? 0 : parseFloat(existingGradeData.grade);
     
-    // Calculate new grade using same logic as save
-    const currentTopicGrade = percentageToGrade(averagePercentage);
-    let newPredictedGrade: number;
-    let gradeImprovement: number;
-    
-    if (isFirstPractice) {
-      // First time - use current topic grade
-      newPredictedGrade = currentTopicGrade;
-      gradeImprovement = newPredictedGrade;
-    } else {
-      // Fetch all grades and calculate average
-      // This is a simple calculation since we already have the data in existingGradeData
-      // The backend already calculated this average when saving
-      newPredictedGrade = currentTopicGrade; // Will be recalculated after save
-      gradeImprovement = newPredictedGrade - oldPredictedGrade;
-    }
+    // Use the actual saved grade from database (which includes averaging logic)
+    const newPredictedGrade = parseFloat(existingGradeData.currentGrade || '0');
+    const gradeImprovement = isFirstPractice ? newPredictedGrade : newPredictedGrade - oldPredictedGrade;
     
     // Percentile rank
     const percentileRank = Math.min(Math.round(averagePercentage * 0.9), 95);
