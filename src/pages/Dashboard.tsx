@@ -1567,8 +1567,53 @@ const Dashboard = () => {
       ? recentProgress.reduce((sum, p) => sum + p.averageScore, 0) / (recentProgress.length * 100)
       : 0;
     
-    // Best study time - would need analytics data, keeping placeholder for now
-    const bestWindow = "7–9pm";
+    // Calculate best study time based on performance by hour
+    const hourlyPerformance: { [hour: number]: { total: number; count: number } } = {};
+    
+    userProgress.forEach(p => {
+      if (p.averageScore > 0) {
+        const hour = new Date(p.lastAttempt).getHours();
+        if (!hourlyPerformance[hour]) {
+          hourlyPerformance[hour] = { total: 0, count: 0 };
+        }
+        hourlyPerformance[hour].total += p.averageScore;
+        hourlyPerformance[hour].count += 1;
+      }
+    });
+    
+    // Find the 2-hour window with best average performance
+    let bestWindow = "7–9pm";
+    let bestAverage = 0;
+    
+    if (Object.keys(hourlyPerformance).length > 0) {
+      // Try all 2-hour windows
+      for (let startHour = 0; startHour < 24; startHour++) {
+        const endHour = (startHour + 2) % 24;
+        let windowTotal = 0;
+        let windowCount = 0;
+        
+        for (let h = startHour; h < startHour + 2; h++) {
+          const hour = h % 24;
+          if (hourlyPerformance[hour]) {
+            windowTotal += hourlyPerformance[hour].total;
+            windowCount += hourlyPerformance[hour].count;
+          }
+        }
+        
+        if (windowCount > 0) {
+          const windowAvg = windowTotal / windowCount;
+          if (windowAvg > bestAverage) {
+            bestAverage = windowAvg;
+            const formatHour = (h: number) => {
+              const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+              const period = h >= 12 ? 'pm' : 'am';
+              return `${hour12}${period}`;
+            };
+            bestWindow = `${formatHour(startHour)}–${formatHour((startHour + 2) % 24)}`;
+          }
+        }
+      }
+    }
     
     return {
       name: getFirstName(),
