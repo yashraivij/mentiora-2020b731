@@ -1299,186 +1299,163 @@ const Practice = () => {
           {/* Performance Breakdown */}
           <div className="grid md:grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '800ms' }}>
             {/* Strong Areas */}
-            <Card className="bg-gradient-to-br from-emerald-50 via-teal-50/50 to-emerald-50 dark:from-emerald-950/30 dark:via-teal-950/20 dark:to-emerald-950/30 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardHeader className="border-b border-emerald-200/50 dark:border-emerald-800/50 pb-4 relative">
-                <CardTitle className="text-xl font-bold flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-300">
-                    <CheckCircle2 className="h-6 w-6 text-white" />
+            <Card className="bg-card rounded-3xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold">Strong Performance</div>
-                    <div className="text-xs font-normal text-muted-foreground mt-0.5">Questions you answered well</div>
+                    <CardTitle className="text-lg font-semibold">Strong Performance</CardTitle>
+                    <p className="text-xs text-muted-foreground mt-0.5">Questions answered well</p>
                   </div>
-                </CardTitle>
+                </div>
               </CardHeader>
-              <CardContent className="p-6 relative">
-                <div className="space-y-3">
-                  {correctAnswers > 0 ? (
-                    <>
+              <CardContent className="px-6 pb-6">
+                {correctAnswers > 0 ? (
+                  <div className="space-y-3">
+                    {attempts
+                      .filter(attempt => {
+                        const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                        return question && (attempt.score / question.marks) >= 0.7;
+                      })
+                      .slice(0, 3)
+                      .map((attempt, index) => {
+                        const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                        if (!question) return null;
+                        const percentage = (attempt.score / question.marks) * 100;
+                        
+                        return (
+                          <div key={attempt.questionId} className="group/item p-4 rounded-2xl bg-muted/40 hover:bg-muted/60 border border-transparent hover:border-emerald-200/50 dark:hover:border-emerald-800/50 transition-all duration-200">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center">
+                                <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-xs">{index + 1}</span>
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-foreground/90 line-clamp-2 mb-2 leading-relaxed">
+                                  {question.question.length > 90 
+                                    ? question.question.substring(0, 90) + '...' 
+                                    : question.question}
+                                </p>
+                                <div className="flex items-center gap-2">
+                                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20">
+                                    <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">{attempt.score}/{question.marks}</span>
+                                  </div>
+                                  <div className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                                    <span>•</span>
+                                    <span>{Math.round(percentage)}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    {correctAnswers > 3 && (
+                      <div className="text-center pt-1">
+                        <span className="text-xs text-muted-foreground">+{correctAnswers - 3} more</span>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-muted/50 mb-3">
+                      <Target className="h-6 w-6 text-muted-foreground/40" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Complete more questions
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Focus Areas */}
+            <Card className="bg-card rounded-3xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="w-10 h-10 rounded-2xl bg-[hsl(195,69%,54%)]/10 flex items-center justify-center">
+                    <Brain className="h-5 w-5 text-[hsl(195,69%,54%)]" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg font-semibold">Focus Areas</CardTitle>
+                    <p className="text-xs text-muted-foreground mt-0.5">Questions to review</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="px-6 pb-6">
+                {(attempts.length - correctAnswers) > 0 ? (
+                  <div className="space-y-4">
+                    <div className="space-y-3">
                       {attempts
                         .filter(attempt => {
                           const question = shuffledQuestions.find(q => q.id === attempt.questionId);
-                          return question && (attempt.score / question.marks) >= 0.7;
+                          return question && (attempt.score / question.marks) < 0.7;
                         })
                         .slice(0, 3)
                         .map((attempt, index) => {
                           const question = shuffledQuestions.find(q => q.id === attempt.questionId);
                           if (!question) return null;
-                          const percentage = (attempt.score / question.marks) * 100;
+                          const marksLost = question.marks - attempt.score;
                           
                           return (
-                            <div key={attempt.questionId} className="group/item">
-                              <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-emerald-200/30 dark:border-emerald-800/30 hover:border-emerald-400/50 dark:hover:border-emerald-600/50 hover:bg-emerald-50/80 dark:hover:bg-emerald-950/40 transition-all duration-300 hover:shadow-md">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
-                                  <span className="text-white font-bold text-sm">{index + 1}</span>
+                            <div key={attempt.questionId} className="group/item p-4 rounded-2xl bg-muted/40 hover:bg-muted/60 border border-transparent hover:border-[hsl(195,69%,54%)]/20 transition-all duration-200">
+                              <div className="flex items-start gap-3">
+                                <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-[hsl(195,69%,54%)]/10 flex items-center justify-center">
+                                  <span className="text-[hsl(195,69%,54%)] font-semibold text-xs">{index + 1}</span>
                                 </div>
-                                <div className="flex-1 min-w-0 space-y-1.5">
-                                  <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
-                                    {question.question.length > 80 
-                                      ? question.question.substring(0, 80) + '...' 
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm text-foreground/90 line-clamp-2 mb-2 leading-relaxed">
+                                    {question.question.length > 90 
+                                      ? question.question.substring(0, 90) + '...' 
                                       : question.question}
                                   </p>
                                   <div className="flex items-center gap-2 flex-wrap">
-                                    <Badge className="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border-0 text-xs px-2 py-0.5">
-                                      {attempt.score}/{question.marks} marks
-                                    </Badge>
-                                    <Badge className="bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-0 text-xs px-2 py-0.5">
-                                      {Math.round(percentage)}% correct
-                                    </Badge>
+                                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-500/10 dark:bg-red-500/20">
+                                      <span className="text-xs font-semibold text-red-700 dark:text-red-300">-{marksLost} {marksLost === 1 ? 'mark' : 'marks'}</span>
+                                    </div>
+                                    <div className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                                      <span>•</span>
+                                      <span>{attempt.score}/{question.marks}</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           );
                         })}
-                      {correctAnswers > 3 && (
-                        <div className="text-center pt-2">
-                          <Badge variant="outline" className="text-xs text-muted-foreground border-emerald-300/50 dark:border-emerald-700/50">
-                            +{correctAnswers - 3} more correct {correctAnswers - 3 === 1 ? 'answer' : 'answers'}
-                          </Badge>
+                      {(attempts.length - correctAnswers) > 3 && (
+                        <div className="text-center pt-1">
+                          <span className="text-xs text-muted-foreground">+{(attempts.length - correctAnswers) - 3} more</span>
                         </div>
                       )}
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted/50 mb-3">
-                        <Target className="h-8 w-8 text-muted-foreground/50" />
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Complete more questions to identify strengths
-                      </p>
                     </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
 
-            {/* Focus Areas */}
-            <Card className="bg-gradient-to-br from-amber-50 via-orange-50/50 to-amber-50 dark:from-amber-950/30 dark:via-orange-950/20 dark:to-amber-950/30 rounded-2xl border border-amber-200/50 dark:border-amber-800/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardHeader className="border-b border-amber-200/50 dark:border-amber-800/50 pb-4 relative">
-                <CardTitle className="text-xl font-bold flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
-                    <AlertCircle className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold">Focus Areas</div>
-                    <div className="text-xs font-normal text-muted-foreground mt-0.5">Questions that need review</div>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6 relative">
-                <div className="space-y-4">
-                  <div className="space-y-3">
-                    {(attempts.length - correctAnswers) > 0 ? (
-                      <>
-                        {attempts
-                          .filter(attempt => {
-                            const question = shuffledQuestions.find(q => q.id === attempt.questionId);
-                            return question && (attempt.score / question.marks) < 0.7;
-                          })
-                          .slice(0, 3)
-                          .map((attempt, index) => {
-                            const question = shuffledQuestions.find(q => q.id === attempt.questionId);
-                            if (!question) return null;
-                            const percentage = (attempt.score / question.marks) * 100;
-                            const marksLost = question.marks - attempt.score;
-                            
-                            return (
-                              <div key={attempt.questionId} className="group/item">
-                                <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-amber-200/30 dark:border-amber-800/30 hover:border-amber-400/50 dark:hover:border-amber-600/50 hover:bg-amber-50/80 dark:hover:bg-amber-950/40 transition-all duration-300 hover:shadow-md">
-                                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
-                                    <span className="text-white font-bold text-sm">{index + 1}</span>
-                                  </div>
-                                  <div className="flex-1 min-w-0 space-y-1.5">
-                                    <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
-                                      {question.question.length > 80 
-                                        ? question.question.substring(0, 80) + '...' 
-                                        : question.question}
-                                    </p>
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                      <Badge className="bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-0 text-xs px-2 py-0.5">
-                                        {attempt.score}/{question.marks} marks
-                                      </Badge>
-                                      <Badge className="bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-0 text-xs px-2 py-0.5">
-                                        -{marksLost} {marksLost === 1 ? 'mark' : 'marks'} lost
-                                      </Badge>
-                                      {percentage > 0 && percentage < 70 && (
-                                        <Badge className="bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-0 text-xs px-2 py-0.5">
-                                          {Math.round(percentage)}% partial
-                                        </Badge>
-                                      )}
-                                    </div>
-                                    {attempt.feedback.whyYoursDidnt && (
-                                      <p className="text-xs text-muted-foreground line-clamp-2 pt-1 italic">
-                                        "{attempt.feedback.whyYoursDidnt.length > 100 
-                                          ? attempt.feedback.whyYoursDidnt.substring(0, 100) + '...' 
-                                          : attempt.feedback.whyYoursDidnt}"
-                                      </p>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        {(attempts.length - correctAnswers) > 3 && (
-                          <div className="text-center pt-2">
-                            <Badge variant="outline" className="text-xs text-muted-foreground border-amber-300/50 dark:border-amber-700/50">
-                              +{(attempts.length - correctAnswers) - 3} more to review
-                            </Badge>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="text-center py-6">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100/50 dark:bg-emerald-900/20 mb-3">
-                          <Trophy className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
-                        </div>
-                        <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                          Perfect performance! 🎉
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          No areas need review
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* CTA to Smart Revision Notebook */}
-                  {(attempts.length - correctAnswers) > 0 && (
-                    <div className="pt-3 border-t border-amber-200/30 dark:border-amber-800/30">
+                    {/* CTA to Smart Revision Notebook */}
+                    <div className="pt-2">
                       <Button
                         onClick={() => navigate('/notebook')}
-                        className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl group/btn"
+                        className="w-full bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,48%)] text-white shadow-sm hover:shadow-md transition-all duration-200 rounded-xl h-11 font-medium"
                       >
-                        <NotebookPen className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                        Review in Smart Notebook
-                        <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                        <NotebookPen className="h-4 w-4 mr-2" />
+                        Review in Notebook
+                        <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 mb-3">
+                      <Trophy className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                    </div>
+                    <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                      Perfect performance! 🎉
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      No areas need review
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
