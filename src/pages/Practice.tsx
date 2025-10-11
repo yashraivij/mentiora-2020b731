@@ -1038,25 +1038,25 @@ const Practice = () => {
     let gradeImprovement: number;
     
     if (isFirstPractice) {
-      // First time - calculate initial grade
-      if (averagePercentage >= 95) {
+      // First time - calculate initial grade based on standard GCSE boundaries
+      if (averagePercentage >= 90) {
         newPredictedGrade = 9.0;
-      } else if (averagePercentage >= 85) {
-        newPredictedGrade = 8.0 + ((averagePercentage - 85) / 10) * 1.0;
-      } else if (averagePercentage >= 75) {
-        newPredictedGrade = 7.0 + ((averagePercentage - 75) / 10) * 1.0;
-      } else if (averagePercentage >= 65) {
-        newPredictedGrade = 6.0 + ((averagePercentage - 65) / 10) * 1.0;
-      } else if (averagePercentage >= 55) {
-        newPredictedGrade = 5.0 + ((averagePercentage - 55) / 10) * 1.0;
-      } else if (averagePercentage >= 45) {
-        newPredictedGrade = 4.0 + ((averagePercentage - 45) / 10) * 1.0;
-      } else if (averagePercentage >= 35) {
-        newPredictedGrade = 3.0 + ((averagePercentage - 35) / 10) * 1.0;
-      } else if (averagePercentage >= 25) {
-        newPredictedGrade = 2.0 + ((averagePercentage - 25) / 10) * 1.0;
+      } else if (averagePercentage >= 80) {
+        newPredictedGrade = 8.0 + ((averagePercentage - 80) / 10) * 1.0;
+      } else if (averagePercentage >= 70) {
+        newPredictedGrade = 7.0 + ((averagePercentage - 70) / 10) * 1.0;
+      } else if (averagePercentage >= 60) {
+        newPredictedGrade = 6.0 + ((averagePercentage - 60) / 10) * 1.0;
+      } else if (averagePercentage >= 50) {
+        newPredictedGrade = 5.0 + ((averagePercentage - 50) / 10) * 1.0;
+      } else if (averagePercentage >= 40) {
+        newPredictedGrade = 4.0 + ((averagePercentage - 40) / 10) * 1.0;
+      } else if (averagePercentage >= 30) {
+        newPredictedGrade = 3.0 + ((averagePercentage - 30) / 10) * 1.0;
+      } else if (averagePercentage >= 20) {
+        newPredictedGrade = 2.0 + ((averagePercentage - 20) / 10) * 1.0;
       } else {
-        newPredictedGrade = 1.0 + (averagePercentage / 25) * 1.0;
+        newPredictedGrade = 1.0 + (averagePercentage / 20) * 1.0;
       }
       gradeImprovement = newPredictedGrade;
     } else {
@@ -1138,43 +1138,61 @@ const Practice = () => {
               <CardContent className="p-6 relative">
                 <div className="space-y-6">
                   {/* Grade Comparison */}
-                  <div className="flex items-center justify-center gap-12">
-                    <div className="text-center space-y-2 group">
-                      <Badge variant="outline" className="mb-1 border-[hsl(195,69%,54%)]/30 text-xs">
-                        Before
-                      </Badge>
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                        <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                          {oldPredictedGrade.toFixed(1)}
+                  {isFirstPractice ? (
+                    /* First Practice - Show only current grade */
+                    <div className="flex items-center justify-center">
+                      <div className="text-center space-y-2 group">
+                        <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
+                          Your Predicted Grade
+                        </Badge>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                          <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
+                            {newPredictedGrade.toFixed(1)}
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                    <div className="flex flex-col items-center gap-2">
-                      <div className={`px-5 py-2 rounded-2xl ${gradeImprovement >= 0 ? 'bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30' : 'bg-gradient-to-r from-red-500 to-rose-500 shadow-red-500/30'} text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300`}>
-                        {gradeImprovement >= 0 ? (
-                          <TrendingUp className="h-4 w-4" />
-                        ) : (
-                          <TrendingDown className="h-4 w-4" />
-                        )}
-                        <span>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
+                  ) : (
+                    /* Subsequent Practices - Show before/after comparison */
+                    <div className="flex items-center justify-center gap-12">
+                      <div className="text-center space-y-2 group">
+                        <Badge variant="outline" className="mb-1 border-[hsl(195,69%,54%)]/30 text-xs">
+                          Before
+                        </Badge>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
+                            {oldPredictedGrade.toFixed(1)}
+                          </div>
+                        </div>
                       </div>
-                      <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
-                    </div>
 
-                    <div className="text-center space-y-2 group">
-                      <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                        Now
-                      </Badge>
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                        <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                          {newPredictedGrade.toFixed(1)}
+                      <div className="flex flex-col items-center gap-2">
+                        <div className={`px-5 py-2 rounded-2xl ${gradeImprovement >= 0 ? 'bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30' : 'bg-gradient-to-r from-red-500 to-rose-500 shadow-red-500/30'} text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300`}>
+                          {gradeImprovement >= 0 ? (
+                            <TrendingUp className="h-4 w-4" />
+                          ) : (
+                            <TrendingDown className="h-4 w-4" />
+                          )}
+                          <span>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
+                        </div>
+                        <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
+                      </div>
+
+                      <div className="text-center space-y-2 group">
+                        <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
+                          Now
+                        </Badge>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
+                            {newPredictedGrade.toFixed(1)}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Animated Progress Bar */}
                   <div className="space-y-3">
