@@ -185,11 +185,17 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           let subjectName = curriculumSubject?.name || 
             subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
           
-          // Add exam board to subject names
-          if (subjectId === 'music-eduqas-gcse') {
-            subjectName = `${subjectName} (Eduqas)`;
-          } else if (subjectId !== 'maths-edexcel' && !subjectName.includes('Edexcel')) {
-            subjectName = `${subjectName} (AQA)`;
+          // Only add exam board if not already in the name
+          if (!subjectName.includes('(') && !subjectName.includes(')')) {
+            if (subjectId === 'music-eduqas-gcse' || subjectId.includes('eduqas')) {
+              subjectName = `${subjectName} (Eduqas)`;
+            } else if (subjectId.includes('edexcel')) {
+              subjectName = `${subjectName} (Edexcel)`;
+            } else if (subjectId.includes('aqa')) {
+              subjectName = `${subjectName} (AQA)`;
+            } else if (subjectId.includes('ocr')) {
+              subjectName = `${subjectName} (OCR)`;
+            }
           }
 
           // Calculate confidence based on practice attempts
