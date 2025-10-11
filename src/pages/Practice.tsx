@@ -146,11 +146,12 @@ const Practice = () => {
           .select('grade, created_at')
           .eq('user_id', user.id)
           .eq('subject_id', subjectId)
-          .order('created_at', { ascending: false })
-          .limit(1);
+          .order('created_at', { ascending: false });
         
-        if (data && data.length > 0) {
-          setExistingGradeData({ grade: data[0].grade, isFirst: false });
+        // If there's only 1 record, this IS the first practice (the one just saved)
+        // If there are 2+ records, use the second most recent as the "before" grade
+        if (data && data.length > 1) {
+          setExistingGradeData({ grade: data[1].grade, isFirst: false });
         } else {
           setExistingGradeData({ grade: '0', isFirst: true });
         }
