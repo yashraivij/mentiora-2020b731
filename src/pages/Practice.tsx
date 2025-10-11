@@ -1297,103 +1297,170 @@ const Practice = () => {
           </div>
 
           {/* Performance Breakdown */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '800ms' }}>
             {/* Strong Areas */}
-            <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="border-b border-emerald-200/50 dark:border-emerald-800/50">
+            <Card className="bg-gradient-to-br from-emerald-50 via-teal-50/50 to-emerald-50 dark:from-emerald-950/30 dark:via-teal-950/20 dark:to-emerald-950/30 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardHeader className="border-b border-emerald-200/50 dark:border-emerald-800/50 pb-4 relative">
                 <CardTitle className="text-xl font-bold flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
-                    <CheckCircle2 className="h-5 w-5 text-white" />
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <CheckCircle2 className="h-6 w-6 text-white" />
                   </div>
-                  Strong Performance
+                  <div>
+                    <div className="text-xl font-bold">Strong Performance</div>
+                    <div className="text-xs font-normal text-muted-foreground mt-0.5">Questions you answered well</div>
+                  </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  {correctAnswers >= 2 ? (
+              <CardContent className="p-6 relative">
+                <div className="space-y-3">
+                  {correctAnswers > 0 ? (
                     <>
-                      <div className="flex items-center gap-4 group">
-                        <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                        <span className="text-base text-foreground font-medium">Core concept understanding</span>
-                      </div>
-                      {averagePercentage >= 80 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Excellent accuracy rate</span>
-                        </div>
-                      )}
-                      {avgTimePerQuestion < 40 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Efficient time management</span>
+                      {attempts
+                        .filter(attempt => {
+                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                          return question && (attempt.score / question.marks) >= 0.7;
+                        })
+                        .slice(0, 3)
+                        .map((attempt, index) => {
+                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                          if (!question) return null;
+                          const percentage = (attempt.score / question.marks) * 100;
+                          
+                          return (
+                            <div key={attempt.questionId} className="group/item">
+                              <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-emerald-200/30 dark:border-emerald-800/30 hover:border-emerald-400/50 dark:hover:border-emerald-600/50 hover:bg-emerald-50/80 dark:hover:bg-emerald-950/40 transition-all duration-300 hover:shadow-md">
+                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
+                                  <span className="text-white font-bold text-sm">{index + 1}</span>
+                                </div>
+                                <div className="flex-1 min-w-0 space-y-1.5">
+                                  <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
+                                    {question.question.length > 80 
+                                      ? question.question.substring(0, 80) + '...' 
+                                      : question.question}
+                                  </p>
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <Badge className="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border-0 text-xs px-2 py-0.5">
+                                      {attempt.score}/{question.marks} marks
+                                    </Badge>
+                                    <Badge className="bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-0 text-xs px-2 py-0.5">
+                                      {Math.round(percentage)}% correct
+                                    </Badge>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      {correctAnswers > 3 && (
+                        <div className="text-center pt-2">
+                          <Badge variant="outline" className="text-xs text-muted-foreground border-emerald-300/50 dark:border-emerald-700/50">
+                            +{correctAnswers - 3} more correct {correctAnswers - 3 === 1 ? 'answer' : 'answers'}
+                          </Badge>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-base text-muted-foreground">
-                      Complete more questions to identify strengths
-                    </p>
+                    <div className="text-center py-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted/50 mb-3">
+                        <Target className="h-8 w-8 text-muted-foreground/50" />
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Complete more questions to identify strengths
+                      </p>
+                    </div>
                   )}
                 </div>
               </CardContent>
             </Card>
 
             {/* Focus Areas */}
-            <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader className="border-b border-amber-200/50 dark:border-amber-800/50">
+            <Card className="bg-gradient-to-br from-amber-50 via-orange-50/50 to-amber-50 dark:from-amber-950/30 dark:via-orange-950/20 dark:to-amber-950/30 rounded-2xl border border-amber-200/50 dark:border-amber-800/30 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardHeader className="border-b border-amber-200/50 dark:border-amber-800/50 pb-4 relative">
                 <CardTitle className="text-xl font-bold flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
-                    <AlertCircle className="h-5 w-5 text-white" />
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <AlertCircle className="h-6 w-6 text-white" />
                   </div>
-                  Focus Areas
+                  <div>
+                    <div className="text-xl font-bold">Focus Areas</div>
+                    <div className="text-xs font-normal text-muted-foreground mt-0.5">Questions that need review</div>
+                  </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-4">
+              <CardContent className="p-6 relative">
+                <div className="space-y-3">
                   {(attempts.length - correctAnswers) > 0 ? (
                     <>
-                      {/* Show multiple focus areas based on wrong answers */}
-                      {(attempts.length - correctAnswers - partialAnswers) > 0 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Key concept understanding</span>
-                        </div>
-                      )}
-                      {partialAnswers > 0 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Detail accuracy refinement</span>
-                        </div>
-                      )}
-                      {averagePercentage < 50 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Question comprehension skills</span>
-                        </div>
-                      )}
-                      {avgTimePerQuestion > 60 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Time management under exam conditions</span>
-                        </div>
-                      )}
-                      {attempts.length > 2 && (attempts.length - correctAnswers) >= attempts.length * 0.5 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Exam technique and structure</span>
-                        </div>
-                      )}
-                      {partialAnswers > 0 && averagePercentage >= 50 && (
-                        <div className="flex items-center gap-4 group">
-                          <div className="w-2 h-12 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                          <span className="text-base text-foreground font-medium">Marking criteria precision</span>
+                      {attempts
+                        .filter(attempt => {
+                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                          return question && (attempt.score / question.marks) < 0.7;
+                        })
+                        .slice(0, 3)
+                        .map((attempt, index) => {
+                          const question = shuffledQuestions.find(q => q.id === attempt.questionId);
+                          if (!question) return null;
+                          const percentage = (attempt.score / question.marks) * 100;
+                          const marksLost = question.marks - attempt.score;
+                          
+                          return (
+                            <div key={attempt.questionId} className="group/item">
+                              <div className="flex items-start gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 border border-amber-200/30 dark:border-amber-800/30 hover:border-amber-400/50 dark:hover:border-amber-600/50 hover:bg-amber-50/80 dark:hover:bg-amber-950/40 transition-all duration-300 hover:shadow-md">
+                                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm group-hover/item:scale-110 transition-transform duration-300">
+                                  <span className="text-white font-bold text-sm">{index + 1}</span>
+                                </div>
+                                <div className="flex-1 min-w-0 space-y-1.5">
+                                  <p className="text-sm font-medium text-foreground line-clamp-2 leading-snug">
+                                    {question.question.length > 80 
+                                      ? question.question.substring(0, 80) + '...' 
+                                      : question.question}
+                                  </p>
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <Badge className="bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-0 text-xs px-2 py-0.5">
+                                      {attempt.score}/{question.marks} marks
+                                    </Badge>
+                                    <Badge className="bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-0 text-xs px-2 py-0.5">
+                                      -{marksLost} {marksLost === 1 ? 'mark' : 'marks'} lost
+                                    </Badge>
+                                    {percentage > 0 && percentage < 70 && (
+                                      <Badge className="bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-0 text-xs px-2 py-0.5">
+                                        {Math.round(percentage)}% partial
+                                      </Badge>
+                                    )}
+                                  </div>
+                                  {attempt.feedback.whyYoursDidnt && (
+                                    <p className="text-xs text-muted-foreground line-clamp-2 pt-1 italic">
+                                      "{attempt.feedback.whyYoursDidnt.length > 100 
+                                        ? attempt.feedback.whyYoursDidnt.substring(0, 100) + '...' 
+                                        : attempt.feedback.whyYoursDidnt}"
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      {(attempts.length - correctAnswers) > 3 && (
+                        <div className="text-center pt-2">
+                          <Badge variant="outline" className="text-xs text-muted-foreground border-amber-300/50 dark:border-amber-700/50">
+                            +{(attempts.length - correctAnswers) - 3} more to review
+                          </Badge>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-base text-emerald-600 dark:text-emerald-400 font-semibold">
-                      Perfect performance! No areas need review
-                    </p>
+                    <div className="text-center py-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100/50 dark:bg-emerald-900/20 mb-3">
+                        <Trophy className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+                      </div>
+                      <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                        Perfect performance! 🎉
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        No areas need review
+                      </p>
+                    </div>
                   )}
                 </div>
               </CardContent>
