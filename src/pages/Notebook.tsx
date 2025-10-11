@@ -142,103 +142,112 @@ const Notebook = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Clean Simple Header */}
-      <header className="bg-card/50 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Button 
-              variant="ghost" 
-              onClick={() => navigate('/dashboard')}
-              className="text-muted-foreground hover:text-foreground rounded-xl"
-            >
-              <ArrowLeft className="h-4 w-4 sm:mr-2" />
-              <span className="hidden sm:inline">Back</span>
-            </Button>
-          </div>
+      {/* Header */}
+      <header className="border-b sticky top-0 z-50 bg-background">
+        <div className="container mx-auto px-6 py-3 max-w-6xl">
+          <Button 
+            variant="ghost" 
+            size="sm"
+            onClick={() => navigate('/dashboard')}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Dashboard
+          </Button>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-6 max-w-5xl">
-        {/* Simple Header */}
-        <div className="mb-6">
-          <h1 className="text-xl font-medium text-foreground">
-            Notes
+      <div className="container mx-auto px-6 py-8 max-w-6xl">
+        {/* Page Title */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-semibold text-foreground mb-2">
+            Revision Notebook
           </h1>
+          <p className="text-muted-foreground">
+            Review your personalized study notes
+          </p>
         </div>
 
-        {/* Filters Bar */}
-        <div className="flex items-center gap-3 mb-6 pb-4 border-b">
-          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-            <SelectTrigger className="w-[150px] h-8 text-xs">
-              <SelectValue placeholder="Subject" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover">
-              <SelectItem value="all" className="text-xs">All Subjects</SelectItem>
-              {getSubjects().map(subject => (
-                <SelectItem key={subject} value={subject} className="text-xs">{subject}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-            <SelectTrigger className="w-[150px] h-8 text-xs">
-              <SelectValue placeholder="Confidence" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover">
-              <SelectItem value="all" className="text-xs">All</SelectItem>
-              <SelectItem value="low" className="text-xs">Low</SelectItem>
-              <SelectItem value="medium" className="text-xs">Medium</SelectItem>
-              <SelectItem value="high" className="text-xs">High</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <div className="ml-auto flex items-center gap-4 text-xs text-muted-foreground">
-            <span><BlurSpan>{stats.totalEntries}</BlurSpan> entries</span>
-            <span><BlurSpan>{stats.timeSavedHours}h</BlurSpan> saved</span>
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-3">
+            <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Filter by subject" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Subjects</SelectItem>
+                {getSubjects().map(subject => (
+                  <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            
+            <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Filter by confidence" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Confidence Levels</SelectItem>
+                <SelectItem value="low">Low Confidence</SelectItem>
+                <SelectItem value="medium">Medium Confidence</SelectItem>
+                <SelectItem value="high">High Confidence</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-        </div>
 
-        {/* Notebook Entries */}
-        {sortedEntries.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-              <BookOpen className="h-8 w-8 text-muted-foreground" />
+          <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium"><BlurSpan>{stats.totalEntries}</BlurSpan></span>
+              <span className="text-muted-foreground">notes</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">No Notes Yet</h3>
-            <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              Start practicing questions to generate your personalized revision notes
-            </p>
-            <Button 
-              onClick={() => navigate('/dashboard')} 
-              size="sm"
-            >
-              <BookOpen className="h-4 w-4 mr-2" />
-              Start Practicing
-            </Button>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium"><BlurSpan>{stats.timeSavedHours}</BlurSpan></span>
+              <span className="text-muted-foreground">hours saved</span>
+            </div>
           </div>
-        ) : (
-          <div className="space-y-4">
-            {sortedEntries.map((entry) => (
-              <NotebookEntry key={entry.id} entry={entry} />
-            ))}
-          </div>
-        )}
+        </div>
 
-        {/* Action Button */}
-        {sortedEntries.length > 0 && (
-          <div className="flex justify-center mt-8">
-            <Button 
-              onClick={() => {
-                navigate('/dashboard');
-                window.scrollTo(0, 0);
-              }}
-              variant="outline"
-              size="sm"
-            >
-              <BookOpen className="h-4 w-4 mr-2" />
-              Practice More Questions
-            </Button>
-          </div>
+        {/* Content */}
+        {sortedEntries.length === 0 ? (
+          <Card className="p-12 text-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+                <BookOpen className="h-8 w-8 text-muted-foreground" />
+              </div>
+              <div>
+                <h3 className="text-lg font-medium mb-2">No notes yet</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Complete practice questions to create personalized revision notes
+                </p>
+                <Button onClick={() => navigate('/dashboard')}>
+                  Start Practicing
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ) : (
+          <>
+            <div className="space-y-4 mb-8">
+              {sortedEntries.map((entry) => (
+                <NotebookEntry key={entry.id} entry={entry} />
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Button 
+                variant="outline"
+                onClick={() => {
+                  navigate('/dashboard');
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Continue Practicing
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </div>
