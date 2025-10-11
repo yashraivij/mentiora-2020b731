@@ -115,6 +115,7 @@ const Practice = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
   const [existingGradeData, setExistingGradeData] = useState<{ grade: string; currentGrade?: string; isFirst: boolean } | null>(null);
+  const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -885,6 +886,7 @@ const Practice = () => {
         const currentTopicGrade = percentageToGrade(averagePercentage);
         
         let newPredictedGrade: number;
+        const oldGrade = hasExistingGrades ? parseFloat(existingGrades[0].grade) : 0;
         
         if (!hasExistingGrades) {
           // First time practicing this subject
@@ -905,6 +907,13 @@ const Practice = () => {
             average: newPredictedGrade.toFixed(1)
           });
         }
+        
+        // Store grade data for display (before database insert)
+        setSavedGradeData({
+          oldGrade: oldGrade,
+          newGrade: newPredictedGrade,
+          isFirst: !hasExistingGrades
+        });
         
         // Insert new predicted grade record
         const insertData = {
@@ -1016,15 +1025,14 @@ const Practice = () => {
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 60000);
     const avgTimePerQuestion = Math.floor((Date.now() - sessionStartTime) / attempts.length / 1000);
     
-    if (!existingGradeData) {
+    // Use the saved grade data calculated during the save operation (not from database fetch)
+    if (!savedGradeData) {
       return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
     }
     
-    const isFirstPractice = existingGradeData.isFirst;
-    const oldPredictedGrade = isFirstPractice ? 0 : parseFloat(existingGradeData.grade);
-    
-    // Use the actual saved grade from database (which includes averaging logic)
-    const newPredictedGrade = parseFloat(existingGradeData.currentGrade || '0');
+    const isFirstPractice = savedGradeData.isFirst;
+    const oldPredictedGrade = savedGradeData.oldGrade;
+    const newPredictedGrade = savedGradeData.newGrade;
     const gradeImprovement = isFirstPractice ? newPredictedGrade : newPredictedGrade - oldPredictedGrade;
     
     console.log('📊 Session Complete Display Values:', {
@@ -1032,7 +1040,7 @@ const Practice = () => {
       oldPredictedGrade: oldPredictedGrade.toFixed(1),
       newPredictedGrade: newPredictedGrade.toFixed(1),
       gradeImprovement: gradeImprovement.toFixed(1),
-      rawData: existingGradeData
+      currentScore: averagePercentage.toFixed(1) + '%'
     });
     
     // Percentile rank
