@@ -3,6 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Plus,
   Target,
   Download,
@@ -196,116 +202,150 @@ export function MedlySubjectsView({
           </div>
 
           {/* KPI Belt */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1 }}
-              whileHover={{ scale: 1.02, y: -2 }}
-              className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                  <Target className="h-5 w-5 text-[#0EA5E9]" />
-                </div>
-                <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Overall Progress</span>
-              </div>
-              <div className="flex items-baseline gap-3">
-                <motion.span 
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3, type: "spring" }}
-                  className="text-3xl font-bold text-[#0F172A]"
-                >
-                  {profile.overallPred}
-                </motion.span>
-                <span className="text-sm text-[#64748B] font-medium">→</span>
-                <span className="text-xl font-bold text-[#0EA5E9]">{profile.overallTarget}</span>
-              </div>
-              <div className="mt-3 flex gap-2">
-                <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] rounded-full overflow-hidden">
+          <TooltipProvider>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
                   <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(profile.overallPred / 10) * 100}%` }}
-                    transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
-                  />
-                </div>
-              </div>
-            </motion.div>
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                        <Target className="h-5 w-5 text-[#0EA5E9]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Overall Progress</span>
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                      <motion.span 
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, type: "spring" }}
+                        className="text-3xl font-bold text-[#0F172A]"
+                      >
+                        {profile.overallPred}
+                      </motion.span>
+                      <span className="text-sm text-[#64748B] font-medium">→</span>
+                      <span className="text-xl font-bold text-[#0EA5E9]">{profile.overallTarget}</span>
+                    </div>
+                    <div className="mt-3 flex gap-2">
+                      <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${(profile.overallPred / 10) * 100}%` }}
+                          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Average predicted grade across all subjects</p>
+                  <p className="text-xs text-muted-foreground">Calculated from your exam completions and practice performance compared to your target grades</p>
+                </TooltipContent>
+              </Tooltip>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15 }}
-              whileHover={{ scale: 1.02, y: -2 }}
-              className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-                  <Brain className="h-5 w-5 text-[#16A34A]" />
-                </div>
-                <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Retention</span>
-              </div>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.35, type: "spring" }}
-                className="text-3xl font-bold text-[#0F172A]"
-              >
-                {Math.round(profile.retention * 100)}%
-              </motion.div>
-              <div className="text-xs text-[#64748B] mt-1 font-medium">Last 7 days</div>
-            </motion.div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                        <Brain className="h-5 w-5 text-[#16A34A]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Retention</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A]"
+                    >
+                      {Math.round(profile.retention * 100)}%
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] mt-1 font-medium">Last 7 days</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Your knowledge retention rate</p>
+                  <p className="text-xs text-muted-foreground">Average accuracy from all practice attempts in the last 7 days</p>
+                </TooltipContent>
+              </Tooltip>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              whileHover={{ scale: 1.02, y: -2 }}
-              className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
-                  <Clock className="h-5 w-5 text-[#F59E0B]" />
-                </div>
-                <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Best Study Time</span>
-              </div>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, type: "spring" }}
-                className="text-3xl font-bold text-[#0F172A]"
-              >
-                {profile.bestWindow}
-              </motion.div>
-              <div className="text-xs text-[#64748B] mt-1 font-medium">Most productive</div>
-            </motion.div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
+                        <Clock className="h-5 w-5 text-[#F59E0B]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Best Study Time</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A]"
+                    >
+                      {profile.bestWindow}
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] mt-1 font-medium">Most productive</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">When you perform best</p>
+                  <p className="text-xs text-muted-foreground">The 2-hour window where you achieve the highest average scores based on your practice history</p>
+                </TooltipContent>
+              </Tooltip>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.25 }}
-              whileHover={{ scale: 1.02, y: -2 }}
-              className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                  <Calendar className="h-5 w-5 text-[#0EA5E9]" />
-                </div>
-                <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">This Week</span>
-              </div>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.45, type: "spring" }}
-                className="text-3xl font-bold text-[#0F172A]"
-              >
-                {Math.floor(profile.weekMinutes / 60)}h {profile.weekMinutes % 60}m
-              </motion.div>
-              <div className="text-xs text-[#64748B] mt-1 font-medium">Study time</div>
-            </motion.div>
-          </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.25 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                        <Calendar className="h-5 w-5 text-[#0EA5E9]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">This Week</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.45, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A]"
+                    >
+                      {Math.floor(profile.weekMinutes / 60)}h {profile.weekMinutes % 60}m
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] mt-1 font-medium">Study time</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Total study time this week</p>
+                  <p className="text-xs text-muted-foreground">Combined minutes from all your practice sessions and activities in the last 7 days</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </TooltipProvider>
         </div>
       </motion.div>
 
