@@ -894,15 +894,15 @@ const Practice = () => {
           newPredictedGrade = currentTopicGrade;
           console.log('🆕 First predicted grade:', newPredictedGrade.toFixed(1));
         } else {
-          // Update predicted grade based on most recent grade and current performance
-          // Weight: 70% recent grade + 30% current performance for smooth updates
+          // Update predicted grade: 50% previous grade + 50% current performance
+          // This creates clear, responsive updates while maintaining stability
           const oldGradeValue = parseFloat(existingGrades[0].grade);
-          newPredictedGrade = (oldGradeValue * 0.7) + (currentTopicGrade * 0.3);
+          newPredictedGrade = (oldGradeValue * 0.5) + (currentTopicGrade * 0.5);
           
           console.log('📊 Updating predicted grade:', {
-            previousGrade: oldGradeValue.toFixed(1),
-            currentTopicGrade: currentTopicGrade.toFixed(1),
-            newPredictedGrade: newPredictedGrade.toFixed(1)
+            beforeGrade: oldGradeValue.toFixed(1),
+            currentSessionGrade: currentTopicGrade.toFixed(1),
+            nowGrade: newPredictedGrade.toFixed(1)
           });
         }
         
