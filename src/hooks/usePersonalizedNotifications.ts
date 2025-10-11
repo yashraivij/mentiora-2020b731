@@ -151,15 +151,16 @@ export const usePersonalizedNotifications = () => {
     const isFullyCorrect = marksAwarded === totalMarks;
     const newStreak = await updateConsecutiveCorrect(user.id, subjectId, isFullyCorrect);
 
+    // Disabled: Practice streak and exam recommendation notifications removed per user request
     // Show streak notification if they got 4+ correct in a row
-    if (isFullyCorrect && newStreak >= 4) {
-      await showPracticeStreakNotification(subjectName, subjectId, newStreak);
-    }
+    // if (isFullyCorrect && newStreak >= 4) {
+    //   await showPracticeStreakNotification(subjectName, subjectId, newStreak);
+    // }
 
     // Also check for exam recommendation after a good streak
-    if (isFullyCorrect && newStreak >= 4) {
-      await checkForExamRecommendation(subjectId, subjectName);
-    }
+    // if (isFullyCorrect && newStreak >= 4) {
+    //   await checkForExamRecommendation(subjectId, subjectName);
+    // }
   }, [user?.id, updateConsecutiveCorrect, showPracticeStreakNotification, checkForExamRecommendation]);
 
   // Handle predicted exam wrong answer
