@@ -1759,13 +1759,53 @@ const Dashboard = () => {
   const removeSubject = async (subjectId: string) => {
     if (!user?.id) return;
     
-    // Find the index of this subject in userSubjects
-    const subjectIndex = userSubjects.findIndex(id => id === subjectId);
-    if (subjectIndex === -1) return;
+    // Find the database subject by matching subject ID generation logic
+    const dbSubject = userSubjectsWithGrades.find((subject) => {
+      const getSubjectId = (subjectName: string, examBoard: string): string => {
+        const board = examBoard.toLowerCase();
+        
+        // Handle A-level subjects
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        
+        // Handle subjects with exam board in name
+        if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
+        if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
+        if (subjectName === "English Language (Edexcel)") return "edexcel-english-language";
+        
+        // Handle standard subjects
+        if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
+        if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
+        if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
+        if (subjectName === "Biology") return "biology";
+        if (subjectName === "IGCSE Business") return "business-edexcel-igcse";
+        if (subjectName === "Business") return "business";
+        if (subjectName === "English Language") return "english-language";
+        if (subjectName === "English Literature") return "english-literature";
+        if (subjectName === "Geography") return "geography";
+        if (subjectName === "History") return "history";
+        if (subjectName === "Religious Studies") return "religious-studies";
+        if (subjectName === "Computer Science") return "computer-science";
+        if (subjectName === "Spanish") return "spanish-aqa";
+        
+        // Fallback: try to find by name in curriculum
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
+      };
+      
+      return getSubjectId(subject.subject_name, subject.exam_board) === subjectId;
+    });
     
-    // Get the corresponding database record from userSubjectsWithGrades
-    const dbSubject = userSubjectsWithGrades[subjectIndex];
-    if (!dbSubject) return;
+    if (!dbSubject) {
+      console.error("Could not find subject to remove:", subjectId);
+      toast({
+        title: "Error",
+        description: "Could not find subject to remove",
+        variant: "destructive"
+      });
+      return;
+    }
 
     try {
       const { error } = await supabase
