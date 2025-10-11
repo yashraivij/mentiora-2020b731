@@ -174,7 +174,7 @@ export function MedlySubjectsView({
                 transition={{ delay: 0.2 }}
                 className="text-lg text-[#64748B] font-light"
               >
-                Predicted grades, weak topics & weekly plan—updated just for you.
+                Predicted grades, weak topics & weekly plan at a glance.
               </motion.p>
             </div>
             <motion.div 
