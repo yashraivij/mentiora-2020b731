@@ -2462,40 +2462,43 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectId = selectedDrawerSubject?.id || '';
                                 
-                                const now = new Date();
-                                const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                                const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
-                                
-                                // Get all progress for this subject
+                                // Get all progress for this subject with scores > 0
                                 const subjectProgress = userProgress.filter(p => 
                                   p.subjectId === subjectId && p.averageScore > 0
                                 );
                                 
-                                // Recent week (last 7 days)
-                                const recentWeek = subjectProgress.filter(p => 
-                                  new Date(p.lastAttempt) >= sevenDaysAgo
+                                if (subjectProgress.length === 0) {
+                                  return (
+                                    <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm hover:shadow-lg transition-all duration-300">
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
+                                            <TrendingUp className="h-4 w-4 text-[#94A3B8]" />
+                                          </div>
+                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
+                                        </div>
+                                        <div className="text-3xl font-bold text-[#94A3B8]">
+                                          --
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  );
+                                }
+                                
+                                // Sort by last attempt date
+                                const sorted = [...subjectProgress].sort((a, b) => 
+                                  new Date(b.lastAttempt).getTime() - new Date(a.lastAttempt).getTime()
                                 );
                                 
-                                // Previous week (7-14 days ago)
-                                const previousWeek = subjectProgress.filter(p => {
-                                  const date = new Date(p.lastAttempt);
-                                  return date >= fourteenDaysAgo && date < sevenDaysAgo;
-                                });
+                                // Get last 3 attempts average
+                                const recentAttempts = sorted.slice(0, 3);
+                                const recentAvg = recentAttempts.reduce((sum, p) => sum + p.averageScore, 0) / recentAttempts.length;
                                 
-                                // Calculate average scores
-                                const recentAvg = recentWeek.length > 0
-                                  ? recentWeek.reduce((sum, p) => sum + p.averageScore, 0) / recentWeek.length
-                                  : 0;
+                                // Get overall average
+                                const overallAvg = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length;
                                 
-                                const previousAvg = previousWeek.length > 0
-                                  ? previousWeek.reduce((sum, p) => sum + p.averageScore, 0) / previousWeek.length
-                                  : recentAvg;
-                                
-                                // Calculate percentage point change
-                                const change = recentWeek.length > 0 && previousWeek.length > 0 
-                                  ? recentAvg - previousAvg 
-                                  : 0;
-                                
+                                // Calculate difference
+                                const change = recentAvg - overallAvg;
                                 const isPositive = change >= 0;
                                 const sign = isPositive ? '+' : '';
                                 
@@ -2514,7 +2517,7 @@ const Dashboard = () => {
                                             <TrendingDown className="h-4 w-4 text-[#EF4444]" />
                                           )}
                                         </div>
-                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">7-Day Change</div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
                                       </div>
                                       <div className={`text-3xl font-bold flex items-center gap-2 ${
                                         isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
