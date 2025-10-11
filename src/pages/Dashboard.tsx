@@ -1555,7 +1555,7 @@ const Dashboard = () => {
     
     // Calculate averages
     const avgPred = validSubjectsCount > 0 ? parseFloat((overallPred / validSubjectsCount).toFixed(1)) : 0;
-    const avgTarget = validSubjectsCount > 0 ? parseFloat((overallTarget / validSubjectsCount).toFixed(1)) : 8.0;
+    const avgTarget = validSubjectsCount > 0 ? parseFloat((overallTarget / validSubjectsCount).toFixed(1)) : 0;
     
     // Calculate retention (average score from last 7 days)
     const now = new Date();
@@ -1582,7 +1582,7 @@ const Dashboard = () => {
     });
     
     // Find the 2-hour window with best average performance
-    let bestWindow = "7–9pm";
+    let bestWindow = "No data yet";
     let bestAverage = 0;
     
     if (Object.keys(hourlyPerformance).length > 0) {
