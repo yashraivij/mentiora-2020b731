@@ -64,7 +64,7 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
@@ -144,6 +144,7 @@ const Dashboard = () => {
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
   const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
   const [userStats, setUserStats] = useState<any>(null);
+  const [weeklyStudyMinutes, setWeeklyStudyMinutes] = useState(0);
   const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
@@ -640,6 +641,32 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error("Error loading user subjects:", error);
+    }
+  };
+
+  // Load weekly study minutes from daily_usage
+  const loadWeeklyStudyMinutes = async () => {
+    if (!user?.id) return;
+
+    try {
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      
+      const { data, error } = await supabase
+        .from("daily_usage")
+        .select("total_minutes")
+        .eq("user_id", user.id)
+        .gte("date", sevenDaysAgo.toISOString().split('T')[0]);
+
+      if (error) {
+        console.error("Error loading weekly study minutes:", error);
+        return;
+      }
+
+      const totalMinutes = data?.reduce((sum, day) => sum + (day.total_minutes || 0), 0) || 0;
+      setWeeklyStudyMinutes(totalMinutes);
+    } catch (error) {
+      console.error("Error loading weekly study minutes:", error);
     }
   };
 
@@ -1262,6 +1289,7 @@ const Dashboard = () => {
     if (user?.id) {
       loadUserStats();
       loadUserSubjects();
+      loadWeeklyStudyMinutes();
       loadUserProgress();
       loadLeaderboardData();
       loadPredictedGrades(); // Load predicted grades on user load
@@ -1286,6 +1314,7 @@ const Dashboard = () => {
         loadUserStats();
         loadPredictedGrades();
         loadUserSubjects(); // Reload subject performance data
+        loadWeeklyStudyMinutes(); // Reload weekly study minutes
         loadUserProgress(); // Reload progress data
       }
     };
@@ -1335,6 +1364,7 @@ const Dashboard = () => {
         loadLeaderboardData(); // Refresh leaderboard every 30 seconds for live updates
         loadPredictedGrades(); // Refresh predicted grades to catch new completions
         loadUserSubjects(); // Refresh subject performance data
+        loadWeeklyStudyMinutes(); // Refresh weekly study minutes
       }
     }, 30000);
 
@@ -1463,15 +1493,92 @@ const Dashboard = () => {
     return user.email?.split("@")[0] || "there";
   };
   
-  // Mock data for Medly dashboard
-  const profile = { 
-    name: getFirstName(), 
-    overallPred: 6.8, 
-    overallTarget: 8.0, 
-    retention: 0.74, 
-    bestWindow: "7–9pm", 
-    weekMinutes: 320 
-  };
+  // Calculate actual metrics from user data
+  const profile = useMemo(() => {
+    // Calculate overall predicted grade (average of all subject predictions)
+    let overallPred = 0;
+    let overallTarget = 0;
+    let validSubjectsCount = 0;
+    
+    userSubjectsWithGrades.forEach(subject => {
+      const target = typeof subject.target_grade === 'string'
+        ? parseFloat(subject.target_grade) || 7
+        : subject.target_grade || 7;
+      
+      // Get subject ID to find progress
+      const getSubjectId = (subjectName: string, examBoard: string): string => {
+        const board = examBoard.toLowerCase();
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
+        if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
+        if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
+        if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
+        if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
+        if (subjectName === "Biology") return "biology";
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
+      };
+      
+      const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
+      const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+      const currSubject = curriculum.find(s => s.id === subjectId);
+      const totalTopics = currSubject?.topics.length || 1;
+      const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+      const practicePercentage = Math.round(totalScore / totalTopics);
+      
+      const recentExamCompletion = predictedGrades
+        .filter(pg => pg.subject_id === subjectId)
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+      
+      const hasPracticeData = subjectProgress.length > 0;
+      let predicted = 0;
+      
+      if (recentExamCompletion && hasPracticeData) {
+        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseInt(recentExamCompletion.grade) || 0;
+        const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        predicted = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
+      } else if (recentExamCompletion) {
+        predicted = recentExamCompletion.grade === 'U' ? 0 : parseInt(recentExamCompletion.grade) || 0;
+      } else if (hasPracticeData) {
+        const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        predicted = practiceGrade;
+      }
+      
+      if (predicted > 0) {
+        overallPred += predicted;
+        overallTarget += target;
+        validSubjectsCount++;
+      }
+    });
+    
+    // Calculate averages
+    const avgPred = validSubjectsCount > 0 ? parseFloat((overallPred / validSubjectsCount).toFixed(1)) : 0;
+    const avgTarget = validSubjectsCount > 0 ? parseFloat((overallTarget / validSubjectsCount).toFixed(1)) : 8.0;
+    
+    // Calculate retention (average score from last 7 days)
+    const now = new Date();
+    const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const recentProgress = userProgress.filter(p => 
+      new Date(p.lastAttempt) >= sevenDaysAgo && p.averageScore > 0
+    );
+    const retention = recentProgress.length > 0
+      ? recentProgress.reduce((sum, p) => sum + p.averageScore, 0) / (recentProgress.length * 100)
+      : 0;
+    
+    // Best study time - would need analytics data, keeping placeholder for now
+    const bestWindow = "7–9pm";
+    
+    return {
+      name: getFirstName(),
+      overallPred: avgPred,
+      overallTarget: avgTarget,
+      retention,
+      bestWindow,
+      weekMinutes: weeklyStudyMinutes
+    };
+  }, [userSubjectsWithGrades, userProgress, predictedGrades, weeklyStudyMinutes, user]);
   
   // Get subject icon emoji
   const getSubjectIconEmoji = (subjectId: string): string => {
@@ -1708,6 +1815,7 @@ const Dashboard = () => {
 
       // Reload subjects to update both userSubjects and userSubjectsWithGrades
       await loadUserSubjects();
+      await loadWeeklyStudyMinutes();
       toast({
         title: "Success",
         description: `${subjectName} added to your subjects`,
@@ -1745,6 +1853,7 @@ const Dashboard = () => {
       }
 
       await loadUserSubjects();
+      await loadWeeklyStudyMinutes();
       toast({
         title: "Success",
         description: "Target grade updated",
@@ -1832,6 +1941,7 @@ const Dashboard = () => {
 
       // Reload subjects to update both userSubjects and userSubjectsWithGrades
       await loadUserSubjects();
+      await loadWeeklyStudyMinutes();
       toast({
         title: "Success",
         description: `${dbSubject.subject_name} removed from your subjects`,
