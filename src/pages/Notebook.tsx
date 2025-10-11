@@ -158,121 +158,81 @@ const Notebook = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
-        {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-            <div>
-              <h1 className="text-2xl font-medium text-foreground mb-1">
-                Notebook
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Your personalized notes from practice
-              </p>
-            </div>
-            
-            {/* Filters */}
-            <div className="flex items-center gap-2">
-              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-[140px] h-9 text-xs border-border/40 bg-background">
-                  <SelectValue placeholder="Subject" />
-                </SelectTrigger>
-                <SelectContent className="bg-popover">
-                  <SelectItem value="all" className="text-xs">All Subjects</SelectItem>
-                  {getSubjects().map(subject => (
-                    <SelectItem key={subject} value={subject} className="text-xs">{subject}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                <SelectTrigger className="w-[140px] h-9 text-xs border-border/40 bg-background">
-                  <SelectValue placeholder="Confidence" />
-                </SelectTrigger>
-                <SelectContent className="bg-popover">
-                  <SelectItem value="all" className="text-xs">All Levels</SelectItem>
-                  <SelectItem value="low" className="text-xs">Low</SelectItem>
-                  <SelectItem value="medium" className="text-xs">Medium</SelectItem>
-                  <SelectItem value="high" className="text-xs">High</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+      <div className="container mx-auto px-4 sm:px-6 py-8 max-w-4xl">
+        {/* Centered Header with Icon */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-4">
+            <BookOpen className="h-8 w-8 text-primary-foreground" />
           </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <Card className="border-border/40">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-muted">
-                    <BookOpen className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Total Notes</p>
-                    <p className="text-xl font-medium text-foreground">
-                      <BlurSpan>{stats.totalEntries}</BlurSpan>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/40">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-muted">
-                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Time Saved</p>
-                    <p className="text-xl font-medium text-foreground">
-                      <BlurSpan>{stats.timeSavedHours}h</BlurSpan>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/40">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-muted">
-                    <Brain className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Subjects</p>
-                    <p className="text-xl font-medium text-foreground">
-                      <BlurSpan>{stats.subjectsWithNotes}</BlurSpan>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Smart Revision Notebook
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Instant notes for every lost mark
+          </p>
         </div>
+
+        {/* Filter Card */}
+        <Card className="mb-8 shadow-sm">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">
+                  Subject
+                </label>
+                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                  <SelectTrigger className="w-full bg-background">
+                    <SelectValue placeholder="All Subjects" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover">
+                    <SelectItem value="all">All Subjects</SelectItem>
+                    {getSubjects().map(subject => (
+                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">
+                  Confidence
+                </label>
+                <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                  <SelectTrigger className="w-full bg-background">
+                    <SelectValue placeholder="All Confidence" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover">
+                    <SelectItem value="all">All Confidence</SelectItem>
+                    <SelectItem value="low">Low Confidence</SelectItem>
+                    <SelectItem value="medium">Medium Confidence</SelectItem>
+                    <SelectItem value="high">High Confidence</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Notebook Entries */}
         {sortedEntries.length === 0 ? (
-          <Card className="text-center py-12 border-border/50">
-            <CardContent>
-              <div className="p-3 rounded-lg bg-muted inline-flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">No Notes Yet</h3>
-              <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-                Start practicing questions to generate your personalized revision notes
-              </p>
-              <Button 
-                onClick={() => navigate('/dashboard')} 
-                size="sm"
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                Start Practicing
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+              <BookOpen className="h-8 w-8 text-muted-foreground" />
+            </div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">No Notes Yet</h3>
+            <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
+              Start practicing questions to generate your personalized revision notes
+            </p>
+            <Button 
+              onClick={() => navigate('/dashboard')} 
+              size="sm"
+            >
+              <BookOpen className="h-4 w-4 mr-2" />
+              Start Practicing
+            </Button>
+          </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {sortedEntries.map((entry) => (
               <NotebookEntry key={entry.id} entry={entry} />
             ))}
