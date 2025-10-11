@@ -920,7 +920,8 @@ const Practice = () => {
           thisGradeWillBeUsedEverywhere: 'Yes - until next practice session'
         });
         
-        // Insert new predicted grade record
+        // Insert new predicted grade record with explicit completed_at timestamp
+        const completionTimestamp = new Date().toISOString();
         const insertData = {
           user_id: user.id,
           subject_id: subjectId,
@@ -932,6 +933,7 @@ const Practice = () => {
           answers: [],
           results: {},
           exam_date: new Date().toISOString().split('T')[0],
+          completed_at: completionTimestamp,
           time_taken_seconds: Math.floor((Date.now() - sessionStartTime) / 1000)
         };
         
