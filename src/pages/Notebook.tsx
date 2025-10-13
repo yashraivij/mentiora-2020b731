@@ -157,12 +157,12 @@ const Notebook = () => {
 
       <main className="container mx-auto px-6 py-10 max-w-6xl">
         {/* Page Header */}
-        <header className="mb-10">
-          <h1 className="text-3xl font-bold text-foreground mb-3">
-            Study Notes
+        <header className="mb-8">
+          <h1 className="text-4xl font-bold text-foreground mb-2">
+            Notes
           </h1>
-          <p className="text-muted-foreground text-base">
-            Your personalized notes from practice sessions
+          <p className="text-muted-foreground">
+            Your study notes
           </p>
         </header>
 
