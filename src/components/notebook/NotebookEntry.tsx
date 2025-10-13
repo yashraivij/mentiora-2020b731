@@ -70,8 +70,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
     return genericPhrases.some(phrase => cleaned.includes(phrase)) && cleaned.length < 60;
   };
 
-  // Get unique keywords and filter out empty ones
-  const uniqueKeywords = [...new Set(entry.keywords)].filter(k => k && k.trim().length > 0);
+  // Get unique keywords and filter out empty ones, topic names, and subtopic names
+  const uniqueKeywords = [...new Set(entry.keywords)]
+    .filter(k => {
+      if (!k || k.trim().length === 0) return false;
+      const cleaned = k.toLowerCase().trim();
+      const topic = entry.topic.toLowerCase().trim();
+      const subtopic = entry.subtopic.toLowerCase().trim();
+      // Filter out if keyword matches topic or subtopic
+      return cleaned !== topic && cleaned !== subtopic;
+    });
   
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
@@ -107,7 +115,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <div className="flex flex-wrap items-center gap-4 text-sm text-[#64748B] dark:text-gray-400">
               <span className="flex items-center gap-2">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#0EA5E9]" />
-                {entry.topic} → {entry.subtopic}
+                {entry.topic === entry.subtopic ? entry.topic : `${entry.topic} → ${entry.subtopic}`}
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" />
