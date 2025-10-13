@@ -342,7 +342,7 @@ export function MedlySubjectsView({
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
                   <p className="font-medium mb-1">Total time saved this week</p>
-                  <p className="text-xs text-muted-foreground">Time saved through smart practice and focused learning in the last 7 days</p>
+                  <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
                 </TooltipContent>
               </Tooltip>
             </div>
