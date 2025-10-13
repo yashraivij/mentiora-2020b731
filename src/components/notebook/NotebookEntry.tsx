@@ -190,7 +190,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Keywords */}
-        {uniqueKeywords.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#A855F7]/20 to-[#A855F7]/5">
@@ -211,24 +210,21 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             </div>
           </BlurWrapper>
         </div>
-        )}
 
-        {/* Next Steps - only show if not generic */}
-        {!isGenericNextStep(entry.next_step_suggestion) && (
-          <BlurWrapper>
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30">
-              <div className="flex items-start gap-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Target className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-base font-bold text-[#0F172A] dark:text-white mb-1.5">Next Step</h4>
-                  <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{cleanMarkdown(entry.next_step_suggestion)}</p>
-                </div>
+        {/* Next Steps */}
+        <BlurWrapper>
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30">
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center flex-shrink-0 shadow-md">
+                <Target className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h4 className="text-base font-bold text-[#0F172A] dark:text-white mb-1.5">Next Step</h4>
+                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{cleanMarkdown(entry.next_step_suggestion)}</p>
               </div>
             </div>
-          </BlurWrapper>
-        )}
+          </div>
+        </BlurWrapper>
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
