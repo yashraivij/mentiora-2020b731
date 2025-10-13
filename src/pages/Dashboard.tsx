@@ -2736,7 +2736,7 @@ const Dashboard = () => {
                                     <div className="p-1.5 rounded-lg bg-[#F59E0B]/10">
                                       <Clock className="h-4 w-4 text-[#F59E0B]" />
                                     </div>
-                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Study Time</div>
+                                    <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Time Saved</div>
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
                                     {subjectStudyTime.hours}h {subjectStudyTime.minutes}m
