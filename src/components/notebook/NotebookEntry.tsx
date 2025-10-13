@@ -37,6 +37,16 @@ const formatDate = (dateString: string) => {
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
   
+  // Clean markdown formatting from text
+  const cleanMarkdown = (text: string): string => {
+    return text
+      .replace(/\*\*/g, '') // Remove bold markers
+      .replace(/\*/g, '')   // Remove italic markers
+      .replace(/#{1,6}\s/g, '') // Remove heading markers
+      .replace(/`/g, '')    // Remove code markers
+      .trim();
+  };
+  
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
   );
@@ -95,7 +105,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <BlurWrapper>
             <div className="p-5 rounded-xl bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
               <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
-                {entry.what_tripped_up}
+                {cleanMarkdown(entry.what_tripped_up)}
               </p>
             </div>
           </BlurWrapper>
@@ -112,7 +122,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <BlurWrapper>
             <div className="p-5 rounded-xl bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
               <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
-                {entry.fix_sentence}
+                {cleanMarkdown(entry.fix_sentence)}
               </p>
             </div>
           </BlurWrapper>
@@ -128,21 +138,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           </div>
           <BlurWrapper>
             <div className="space-y-4 pl-2">
-              {entry.bulletproof_notes.map((note, idx) => {
-                // Clean up the note text - remove asterisks and trim
-                const cleanNote = note.replace(/^\*+|\*+$/g, '').trim();
-                
-                return (
-                  <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
-                    <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
-                      {idx + 1}
-                    </div>
-                    <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
-                      {cleanNote}
-                    </p>
+              {entry.bulletproof_notes.map((note, idx) => (
+                <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
+                  <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
+                    {idx + 1}
                   </div>
-                );
-              })}
+                  <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                    {cleanMarkdown(note)}
+                  </p>
+                </div>
+              ))}
             </div>
           </BlurWrapper>
         </div>
@@ -159,7 +164,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <BlurWrapper>
               <div className="p-5 bg-gradient-to-br from-[#FFFBEB] to-[#FEF3C7] dark:from-yellow-950/20 dark:to-yellow-900/10 rounded-xl border border-[#F59E0B]/30 shadow-sm">
                 <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-mono whitespace-pre-wrap">
-                  {entry.mini_example}
+                  {cleanMarkdown(entry.mini_example)}
                 </p>
               </div>
             </BlurWrapper>
@@ -223,7 +228,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               </div>
               <div>
                 <h4 className="text-base font-bold text-[#0F172A] dark:text-white mb-1.5">Next Step</h4>
-                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{entry.next_step_suggestion}</p>
+                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{cleanMarkdown(entry.next_step_suggestion)}</p>
               </div>
             </div>
           </div>
