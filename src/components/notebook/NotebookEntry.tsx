@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, AlertCircle, Crown, CheckCircle, FileText, Tag, TrendingUp } from "lucide-react";
+import { BookOpen, Lightbulb, Clock, AlertCircle, Crown, CheckCircle, FileText, TrendingUp } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
@@ -56,25 +56,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
     return true;
   };
 
-  // Check if next step is generic/repetitive
-  const isGenericNextStep = (suggestion: string): boolean => {
-    const cleaned = cleanMarkdown(suggestion.toLowerCase());
-    const genericPhrases = [
-      'practice more questions',
-      'practice questions',
-      'do more practice',
-      'keep practicing',
-      'revise this topic',
-      'review this',
-      'go over',
-    ];
-    return genericPhrases.some(phrase => cleaned.includes(phrase)) && cleaned.length < 60;
-  };
-
-  // Get unique keywords and filter out empty ones
-  const uniqueKeywords = [...new Set(entry.keywords)]
-    .filter(k => k && k.trim().length > 0);
-  
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
   );
@@ -181,49 +162,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             </div>
           </BlurWrapper>
         </div>
-
-        {/* Keywords */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-[#A855F7]/20 to-[#A855F7]/5">
-              <Tag className="h-5 w-5 text-[#A855F7]" />
-            </div>
-            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Key Terms to Know</h4>
-          </div>
-           <BlurWrapper>
-             {uniqueKeywords.length > 0 ? (
-               <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
-                 {uniqueKeywords.map((keyword, idx) => (
-                   <Badge 
-                     key={idx} 
-                     className="rounded-lg bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white px-4 py-2 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
-                   >
-                     {keyword}
-                   </Badge>
-                 ))}
-               </div>
-             ) : (
-               <div className="p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
-                 <p className="text-sm text-[#64748B] dark:text-gray-400 italic">Key terms will be generated for new notes</p>
-               </div>
-             )}
-           </BlurWrapper>
-        </div>
-
-        {/* Next Steps */}
-        <BlurWrapper>
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30">
-            <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center flex-shrink-0 shadow-md">
-                <Target className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-[#0F172A] dark:text-white mb-1.5">Next Step</h4>
-                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed">{cleanMarkdown(entry.next_step_suggestion)}</p>
-              </div>
-            </div>
-          </div>
-        </BlurWrapper>
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
