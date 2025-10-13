@@ -337,12 +337,12 @@ export function MedlySubjectsView({
                     >
                       {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
                     </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Study time</div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Time saved</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Total study time this week</p>
-                  <p className="text-xs text-muted-foreground">Combined minutes from all your practice sessions and activities in the last 7 days</p>
+                  <p className="font-medium mb-1">Total time saved this week</p>
+                  <p className="text-xs text-muted-foreground">Time saved through smart practice and focused learning in the last 7 days</p>
                 </TooltipContent>
               </Tooltip>
             </div>

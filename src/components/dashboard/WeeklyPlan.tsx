@@ -401,7 +401,7 @@ export const WeeklyPlan = ({ weakTopics, targetGrades }: WeeklyPlanProps) => {
             <div className="text-2xl font-bold text-foreground">
               {totalStudyTime} mins
             </div>
-            <div className="text-sm text-muted-foreground">Total Study Time</div>
+            <div className="text-sm text-muted-foreground">Time Saved</div>
           </CardContent>
         </Card>
         <Card className="border-0 shadow-lg">
