@@ -109,7 +109,7 @@ Create comprehensive, Grade 9-level revision notes in this EXACT format. Start A
 [Show calculations with units, clearly label steps, highlight the key technique]
 [Use realistic GCSE-level numbers and include final answer with correct units]
 
-5. KEYWORDS: [8-12 essential exam keywords and technical terms that appear in mark schemes, separated by commas]
+5. KEYWORDS: [8-12 SPECIFIC technical terms, concepts, formulas, or principles directly related to THIS question and mistake - NOT generic topic names. Examples: "Newton's Second Law", "Ionic bonding", "Photosynthesis equation", "Quadratic formula", "Mitosis phases". Make each keyword meaningful and exam-relevant.]
 
 6. NEXT STEP: [Specific actionable advice - which exact type of questions to practice next, which topic to revise, or which skill to develop]
 
