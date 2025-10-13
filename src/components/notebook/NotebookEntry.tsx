@@ -71,16 +71,9 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
     return genericPhrases.some(phrase => cleaned.includes(phrase)) && cleaned.length < 60;
   };
 
-  // Get unique keywords and filter out empty ones, topic names, and subtopic names
+  // Get unique keywords and filter out only empty ones
   const uniqueKeywords = [...new Set(entry.keywords)]
-    .filter(k => {
-      if (!k || k.trim().length === 0) return false;
-      const cleaned = k.toLowerCase().trim();
-      const topic = entry.topic.toLowerCase().trim();
-      const subtopic = entry.subtopic.toLowerCase().trim();
-      // Filter out if keyword matches topic or subtopic
-      return cleaned !== topic && cleaned !== subtopic;
-    });
+    .filter(k => k && k.trim().length > 0);
   
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
@@ -197,18 +190,24 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             </div>
             <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Key Terms to Know</h4>
           </div>
-          <BlurWrapper>
-            <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
-              {uniqueKeywords.map((keyword, idx) => (
-                <Badge 
-                  key={idx} 
-                  className="rounded-lg bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white px-4 py-2 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
-                >
-                  {keyword}
-                </Badge>
-              ))}
-            </div>
-          </BlurWrapper>
+           <BlurWrapper>
+             {uniqueKeywords.length > 0 ? (
+               <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
+                 {uniqueKeywords.map((keyword, idx) => (
+                   <Badge 
+                     key={idx} 
+                     className="rounded-lg bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white px-4 py-2 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
+                   >
+                     {keyword}
+                   </Badge>
+                 ))}
+               </div>
+             ) : (
+               <div className="p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
+                 <p className="text-sm text-[#64748B] dark:text-gray-400 italic">Key terms will be generated for new notes</p>
+               </div>
+             )}
+           </BlurWrapper>
         </div>
 
         {/* Next Steps */}
