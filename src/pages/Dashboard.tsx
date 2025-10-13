@@ -180,7 +180,7 @@ const Dashboard = () => {
   // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
-  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan'>('overview');
+  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes'>('overview');
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
   const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
@@ -2593,7 +2593,7 @@ const Dashboard = () => {
                       </SheetHeader>
 
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
-                        <TabsList className="grid w-full grid-cols-4 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
+                        <TabsList className="grid w-full grid-cols-5 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Overview
                           </TabsTrigger>
@@ -2605,6 +2605,9 @@ const Dashboard = () => {
                           </TabsTrigger>
                           <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Plan
+                          </TabsTrigger>
+                          <TabsTrigger value="notes" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                            Notes
                           </TabsTrigger>
                         </TabsList>
 
@@ -3297,6 +3300,56 @@ const Dashboard = () => {
                                     </motion.div>
                                   );
                                 });
+                              })()}
+                            </CardContent>
+                          </Card>
+                        </TabsContent>
+
+                        <TabsContent value="notes" className="space-y-4 mt-8">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                            <CardHeader>
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Your Notes</CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">
+                                Review notes from your mistakes and learning progress
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              {(() => {
+                                const subjectNotes = entries.filter(entry => {
+                                  const subjectDisplayName = getSubjectDisplayName(selectedDrawerSubject);
+                                  // Match either just the subject name or with exam board
+                                  return entry.subject === subjectDisplayName.split(' (')[0] || 
+                                         entry.subject === subjectDisplayName;
+                                });
+
+                                if (subjectNotes.length === 0) {
+                                  return (
+                                    <div className="text-center py-16">
+                                      <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
+                                        <NotebookPen className="h-8 w-8 text-muted-foreground" />
+                                      </div>
+                                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                                        No notes yet for this subject
+                                      </h3>
+                                      <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                                        Start practicing questions to generate personalized revision notes
+                                      </p>
+                                      <Button 
+                                        onClick={() => {
+                                          setSubjectDrawerOpen(false);
+                                          setActiveTab("learn");
+                                        }}
+                                        className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm"
+                                      >
+                                        Start Practicing
+                                      </Button>
+                                    </div>
+                                  );
+                                }
+
+                                return subjectNotes.map((entry) => (
+                                  <NotebookEntry key={entry.id} entry={entry} />
+                                ));
                               })()}
                             </CardContent>
                           </Card>
