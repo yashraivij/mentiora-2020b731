@@ -46,6 +46,26 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
       .replace(/`/g, '')    // Remove code markers
       .trim();
   };
+
+  // Filter out incomplete or textbook-related content
+  const isValidNote = (note: string): boolean => {
+    const cleaned = cleanMarkdown(note);
+    // Filter out empty notes or notes that end with a colon (incomplete)
+    if (!cleaned || cleaned.endsWith(':')) return false;
+    return true;
+  };
+
+  const shouldShowExample = (example: string): boolean => {
+    const cleaned = cleanMarkdown(example.toLowerCase());
+    // Hide if it references textbook or is too short
+    if (cleaned.includes('textbook') || cleaned.includes('text book') || cleaned.length < 20) {
+      return false;
+    }
+    return true;
+  };
+
+  // Get unique keywords
+  const uniqueKeywords = [...new Set(entry.keywords)];
   
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
@@ -138,22 +158,24 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           </div>
           <BlurWrapper>
             <div className="space-y-4 pl-2">
-              {entry.bulletproof_notes.map((note, idx) => (
-                <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
-                  <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
-                    {idx + 1}
+              {entry.bulletproof_notes
+                .filter(isValidNote)
+                .map((note, idx) => (
+                  <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
+                      {idx + 1}
+                    </div>
+                    <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                      {cleanMarkdown(note)}
+                    </p>
                   </div>
-                  <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
-                    {cleanMarkdown(note)}
-                  </p>
-                </div>
-              ))}
+                ))}
             </div>
           </BlurWrapper>
         </div>
 
-        {/* Mini Example (if exists) */}
-        {entry.mini_example && (
+        {/* Mini Example (if exists and valid) */}
+        {entry.mini_example && shouldShowExample(entry.mini_example) && (
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
@@ -181,7 +203,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           </div>
           <BlurWrapper>
             <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
-              {entry.keywords.map((keyword, idx) => (
+              {uniqueKeywords.map((keyword, idx) => (
                 <Badge 
                   key={idx} 
                   className="rounded-lg bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white px-4 py-2 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
@@ -193,31 +215,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           </BlurWrapper>
         </div>
 
-        {/* Metadata Footer */}
-        <div className="pt-6 border-t border-[#E2E8F0]/30 dark:border-gray-700/30 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <BlurWrapper>
-            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#F8FAFC] dark:bg-gray-800/50 border border-[#E2E8F0]/50 dark:border-gray-700">
-              <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                <BookOpen className="h-4 w-4 text-[#0EA5E9]" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Skill Type</p>
-                <p className="text-sm font-bold text-[#0F172A] dark:text-white">{entry.skill_type}</p>
-              </div>
-            </div>
-          </BlurWrapper>
-          <BlurWrapper>
-            <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[#F8FAFC] dark:bg-gray-800/50 border border-[#E2E8F0]/50 dark:border-gray-700">
-              <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-                <TrendingUp className="h-4 w-4 text-[#16A34A]" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Bloom Level</p>
-                <p className="text-sm font-bold text-[#0F172A] dark:text-white">{entry.bloom_level}</p>
-              </div>
-            </div>
-          </BlurWrapper>
-        </div>
 
         {/* Next Steps */}
         <BlurWrapper>
