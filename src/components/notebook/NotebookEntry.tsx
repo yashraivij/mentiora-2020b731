@@ -65,7 +65,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
                 {entry.confidence_level} Confidence
               </Badge>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-white leading-tight">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-white leading-tight mt-1">
               {entry.question_label}
             </h3>
             <div className="flex flex-wrap items-center gap-4 text-sm text-[#64748B] dark:text-gray-400">
@@ -88,12 +88,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
-              <AlertCircle className="h-4 w-4 text-[#EF4444]" />
+              <AlertCircle className="h-5 w-5 text-[#EF4444]" />
             </div>
-            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">What Tripped Me Up</h4>
+            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">What Went Wrong</h4>
           </div>
           <BlurWrapper>
-            <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed pl-10">{entry.what_tripped_up}</p>
+            <div className="p-5 rounded-xl bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
+              <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
+                {entry.what_tripped_up}
+              </p>
+            </div>
           </BlurWrapper>
         </div>
 
@@ -101,33 +105,44 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-              <CheckCircle className="h-4 w-4 text-[#16A34A]" />
+              <CheckCircle className="h-5 w-5 text-[#16A34A]" />
             </div>
-            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">The Fix</h4>
+            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">The Solution</h4>
           </div>
           <BlurWrapper>
-            <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed font-medium pl-10">{entry.fix_sentence}</p>
+            <div className="p-5 rounded-xl bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
+              <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
+                {entry.fix_sentence}
+              </p>
+            </div>
           </BlurWrapper>
         </div>
 
         {/* Bulletproof Notes */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
               <Lightbulb className="h-4 w-4 text-[#0EA5E9]" />
             </div>
-            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Bulletproof Notes</h4>
+            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Key Points to Remember</h4>
           </div>
           <BlurWrapper>
-            <div className="space-y-2 pl-10">
-              {entry.bulletproof_notes.map((note, idx) => (
-                <div key={idx} className="flex gap-2.5">
-                  <div className="flex-shrink-0 h-5 w-5 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
-                    {idx + 1}
+            <div className="space-y-4 pl-2">
+              {entry.bulletproof_notes.map((note, idx) => {
+                // Clean up the note text - remove asterisks and trim
+                const cleanNote = note.replace(/^\*+|\*+$/g, '').trim();
+                
+                return (
+                  <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
+                    <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
+                      {idx + 1}
+                    </div>
+                    <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                      {cleanNote}
+                    </p>
                   </div>
-                  <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed flex-1">{note}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </BlurWrapper>
         </div>
@@ -137,13 +152,15 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
-                <FileText className="h-4 w-4 text-[#F59E0B]" />
+                <FileText className="h-5 w-5 text-[#F59E0B]" />
               </div>
-              <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Mini Example</h4>
+              <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Example</h4>
             </div>
             <BlurWrapper>
-              <div className="pl-10 p-4 bg-[#F8FAFC] dark:bg-gray-800/50 rounded-xl border border-[#E2E8F0]/50 dark:border-gray-700">
-                <p className="text-sm text-[#475569] dark:text-gray-300 leading-relaxed font-mono">{entry.mini_example}</p>
+              <div className="p-5 bg-gradient-to-br from-[#FFFBEB] to-[#FEF3C7] dark:from-yellow-950/20 dark:to-yellow-900/10 rounded-xl border border-[#F59E0B]/30 shadow-sm">
+                <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-mono whitespace-pre-wrap">
+                  {entry.mini_example}
+                </p>
               </div>
             </BlurWrapper>
           </div>
@@ -153,16 +170,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#A855F7]/20 to-[#A855F7]/5">
-              <Tag className="h-4 w-4 text-[#A855F7]" />
+              <Tag className="h-5 w-5 text-[#A855F7]" />
             </div>
-            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Key Terms</h4>
+            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Key Terms to Know</h4>
           </div>
           <BlurWrapper>
-            <div className="flex flex-wrap gap-2 pl-10">
+            <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] dark:from-purple-950/20 dark:to-purple-900/10 border border-[#A855F7]/20">
               {entry.keywords.map((keyword, idx) => (
                 <Badge 
                   key={idx} 
-                  className="rounded-xl bg-[#A855F7] text-white px-3 py-1 text-xs font-medium shadow-sm"
+                  className="rounded-lg bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white px-4 py-2 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200"
                 >
                   {keyword}
                 </Badge>
