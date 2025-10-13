@@ -71,16 +71,9 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
     return genericPhrases.some(phrase => cleaned.includes(phrase)) && cleaned.length < 60;
   };
 
-  // Get unique keywords and filter out empty ones, topic names, and subtopic names
+  // Get unique keywords and filter out empty ones
   const uniqueKeywords = [...new Set(entry.keywords)]
-    .filter(k => {
-      if (!k || k.trim().length === 0) return false;
-      const cleaned = k.toLowerCase().trim();
-      const topic = entry.topic.toLowerCase().trim();
-      const subtopic = entry.subtopic.toLowerCase().trim();
-      // Filter out if keyword exactly matches topic or subtopic
-      return cleaned !== topic && cleaned !== subtopic;
-    });
+    .filter(k => k && k.trim().length > 0);
   
   const BlurWrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={!isPremium ? "blur-sm select-none" : ""}>{children}</div>
