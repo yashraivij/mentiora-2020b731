@@ -58,6 +58,7 @@ import {
   TrendingDown,
   BarChart3,
   Download,
+  AlertCircle,
   FileText,
   ChevronDown,
   ChevronUp,
@@ -3712,94 +3713,165 @@ const Dashboard = () => {
 
           {/* Notes tab with full notebook functionality */}
           {activeTab === "notes" && (
-            <div className="bg-gradient-to-br from-background via-background to-muted/20 min-h-screen -m-8 p-8">
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 mb-6 shadow-lg">
-                  <NotebookPen className="h-8 w-8 text-white" />
-                </div>
-                 <h1 className="text-4xl font-bold text-foreground mb-4">
-                  Notes
+            <div className="min-h-screen">
+              {/* Header */}
+              <div className="mb-8">
+                <h1 className="text-4xl font-bold text-foreground mb-2">
+                  Your Notes
                 </h1>
-                 <p className="text-muted-foreground text-lg max-w-md mx-auto">
-                  Your study notes
+                <p className="text-muted-foreground text-base">
+                  Review notes from mistakes & track learning progress
                 </p>
               </div>
 
-              {/* Filters */}
-              <div className="max-w-2xl mx-auto bg-card/90 backdrop-blur-sm rounded-2xl shadow-xl border border-border p-6 mb-8">
-                <div className="flex items-center justify-center space-x-8">
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground block">Subject</label>
-                    <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
-                      <SelectTrigger className="w-44 bg-background border-border hover:border-primary focus:border-primary transition-all duration-200">
-                        <SelectValue placeholder="All Subjects" />
-                      </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="all">All Subjects</SelectItem>
-                    {getNotebookSubjects().map(subject => (
-                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                    ))}
-                  </SelectContent>
-                  </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground block">Confidence</label>
-                    <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                      <SelectTrigger className="w-44 bg-background border-border hover:border-primary focus:border-primary transition-all duration-200">
-                        <SelectValue placeholder="All Confidence" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50">
-                        <SelectItem value="all">All Confidence</SelectItem>
-                        <SelectItem value="low">Low Confidence</SelectItem>
-                        <SelectItem value="medium">Medium Confidence</SelectItem>
-                        <SelectItem value="high">High Confidence</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+              {/* Stats Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <Card className="bg-card border">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                        <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Total Notes
+                      </p>
+                      <p className="text-3xl font-bold text-foreground">
+                        {entries.length}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                        <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Low Confidence
+                      </p>
+                      <p className="text-3xl font-bold text-foreground">
+                        {entries.filter(e => e.confidence_level.toLowerCase() === 'low').length}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Topics to focus on</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                        <TrendingDown className="h-5 w-5 text-red-600 dark:text-red-400" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Marks Lost
+                      </p>
+                      <p className="text-3xl font-bold text-foreground">
+                        {entries.reduce((sum, entry) => sum + entry.mark_loss, 0)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Total across notes</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                        <Clock className="h-5 w-5 text-green-600 dark:text-green-400" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        Time Saved
+                      </p>
+                      <p className="text-3xl font-bold text-foreground">
+                        {Math.round((entries.length * 15) / 60 * 10) / 10}h
+                      </p>
+                      <p className="text-xs text-muted-foreground">Revision time</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
+
+              {/* Filters */}
+              <Card className="mb-6 bg-card border">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 flex-1">
+                      <Filter className="h-4 w-4 text-muted-foreground" />
+                      <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
+                        <SelectTrigger className="w-[180px] h-9 bg-background">
+                          <SelectValue placeholder="All Subjects" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-popover z-50">
+                          <SelectItem value="all">All Subjects</SelectItem>
+                          {getNotebookSubjects().map(subject => (
+                            <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      
+                      <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                        <SelectTrigger className="w-[180px] h-9 bg-background">
+                          <SelectValue placeholder="All Confidence" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-popover z-50">
+                          <SelectItem value="all">All Confidence</SelectItem>
+                          <SelectItem value="low">Low Confidence</SelectItem>
+                          <SelectItem value="medium">Medium Confidence</SelectItem>
+                          <SelectItem value="high">High Confidence</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="text-sm text-muted-foreground">
+                      Showing {sortedEntries.length} of {entries.length} notes
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Notebook Entries */}
               {notebookLoading ? (
                 <div className="text-center py-16">
-                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent mx-auto mb-6"></div>
-                  <p className="text-foreground font-medium text-lg">Loading your notes...</p>
+                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
+                  <p className="text-foreground font-medium">Loading your notes...</p>
                 </div>
               ) : sortedEntries.length === 0 ? (
-                <div className="max-w-2xl mx-auto">
-                  <Card className="text-center py-16 px-8 border border-border shadow-xl bg-card/90 backdrop-blur-sm">
-                    <CardContent className="space-y-8">
-                      <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center shadow-lg">
-                        <NotebookPen className="h-12 w-12 text-violet-600" />
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <h3 className="text-2xl font-semibold text-gray-900">
-                          No revision notes yet
-                        </h3>
-                        <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">
-                          Start practicing questions to generate your personalized Smart revision notes!
-                        </p>
-                      </div>
-
-                      <div className="pt-4">
-                        <Button 
-                          onClick={() => setActiveTab("learn")} 
-                          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-                        >
-                          Start Practicing
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ) : (
-                <div className="space-y-8">
-                  {sortedEntries.map((entry, index) => (
-                    <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                      <NotebookEntry entry={entry} />
+                <Card className="bg-card border">
+                  <CardContent className="text-center py-16 px-8">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
+                      <NotebookPen className="h-8 w-8 text-muted-foreground" />
                     </div>
+                    
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      No notes yet
+                    </h3>
+                    <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                      Start practicing questions to generate personalized revision notes
+                    </p>
+
+                    <Button 
+                      onClick={() => setActiveTab("learn")}
+                      className="bg-primary hover:bg-primary/90"
+                    >
+                      Start Practicing
+                    </Button>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {sortedEntries.map((entry) => (
+                    <NotebookEntry key={entry.id} entry={entry} />
                   ))}
                 </div>
               )}
