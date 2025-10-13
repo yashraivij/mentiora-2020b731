@@ -3718,10 +3718,10 @@ const Dashboard = () => {
                   <NotebookPen className="h-8 w-8 text-white" />
                 </div>
                  <h1 className="text-4xl font-bold text-foreground mb-4">
-                  Smart Revision Notebook
+                  Notes
                 </h1>
                  <p className="text-muted-foreground text-lg max-w-md mx-auto">
-                  Instant notes for every lost mark
+                  Your study notes
                 </p>
               </div>
 
