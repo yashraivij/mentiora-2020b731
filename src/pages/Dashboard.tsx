@@ -644,7 +644,7 @@ const Dashboard = () => {
     }
   };
 
-  // Load weekly study minutes from daily_usage
+  // Load weekly time saved from notebook entries (15 min per entry)
   const loadWeeklyStudyMinutes = async () => {
     if (!user?.id) return;
 
@@ -653,20 +653,21 @@ const Dashboard = () => {
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
       
       const { data, error } = await supabase
-        .from("daily_usage")
-        .select("total_minutes")
+        .from("notebook_entries")
+        .select("id")
         .eq("user_id", user.id)
-        .gte("date", sevenDaysAgo.toISOString().split('T')[0]);
+        .gte("created_at", sevenDaysAgo.toISOString());
 
       if (error) {
-        console.error("Error loading weekly study minutes:", error);
+        console.error("Error loading weekly notebook entries:", error);
         return;
       }
 
-      const totalMinutes = data?.reduce((sum, day) => sum + (day.total_minutes || 0), 0) || 0;
+      // Each notebook entry saves ~15 minutes of manual note-taking time
+      const totalMinutes = (data?.length || 0) * 15;
       setWeeklyStudyMinutes(totalMinutes);
     } catch (error) {
-      console.error("Error loading weekly study minutes:", error);
+      console.error("Error loading weekly time saved:", error);
     }
   };
 
@@ -1394,7 +1395,7 @@ const Dashboard = () => {
     return () => window.removeEventListener('mpEarned', handleMPEarned);
   }, [activeTab]);
 
-  // Calculate study time for selected subject
+  // Calculate time saved for selected subject based on notebook entries
   useEffect(() => {
     const calculateSubjectStudyTime = async () => {
       if (!user?.id || !selectedDrawerSubject?.id) {
@@ -1402,32 +1403,33 @@ const Dashboard = () => {
         return;
       }
       
-      // Use the subject id directly from curriculum (e.g., "chemistry-edexcel")
+      // Extract base subject name (e.g., "chemistry" from "chemistry-edexcel")
       const subjectId = selectedDrawerSubject.id;
+      const baseSubjectName = subjectId.split('-')[0];
       
-      console.log('Fetching study time for subject_id:', subjectId);
+      console.log('Fetching time saved for subject:', baseSubjectName);
       
-      // Query subject_performance table for practice question time
-      const { data: subjectPerf, error } = await supabase
-        .from("subject_performance")
-        .select("study_hours")
+      // Count notebook entries for this subject (each entry = 15 min saved)
+      const { data: notebookEntries, error } = await supabase
+        .from("notebook_entries")
+        .select("id")
         .eq("user_id", user.id)
-        .eq("subject_id", subjectId)
-        .maybeSingle();
+        .ilike("subject", baseSubjectName);
       
-      console.log('Subject performance data:', subjectPerf);
+      console.log('Notebook entries found:', notebookEntries?.length || 0);
       
       if (error) {
-        console.error('Error fetching subject performance:', error);
+        console.error('Error fetching notebook entries:', error);
         setSubjectStudyTime({hours: 0, minutes: 0});
         return;
       }
       
-      const totalHours = subjectPerf?.study_hours || 0;
-      const hours = Math.floor(totalHours);
-      const minutes = Math.round((totalHours - hours) * 60);
+      // Each notebook entry saves ~15 minutes
+      const totalMinutes = (notebookEntries?.length || 0) * 15;
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
       
-      console.log('Calculated study time:', hours, 'hours', minutes, 'minutes');
+      console.log('Calculated time saved:', hours, 'hours', minutes, 'minutes');
       setSubjectStudyTime({hours, minutes});
     };
     
