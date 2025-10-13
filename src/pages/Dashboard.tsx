@@ -1410,11 +1410,12 @@ const Dashboard = () => {
       console.log('Fetching time saved for subject:', baseSubjectName);
       
       // Count notebook entries for this subject (each entry = 15 min saved)
+      // Use pattern matching to handle subjects like "Computer Science"
       const { data: notebookEntries, error } = await supabase
         .from("notebook_entries")
         .select("id")
         .eq("user_id", user.id)
-        .ilike("subject", baseSubjectName);
+        .ilike("subject", `%${baseSubjectName}%`);
       
       console.log('Notebook entries found:', notebookEntries?.length || 0);
       
