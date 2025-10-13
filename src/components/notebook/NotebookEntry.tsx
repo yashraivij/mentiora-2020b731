@@ -44,6 +44,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
       .replace(/\*/g, '')   // Remove italic markers
       .replace(/#{1,6}\s/g, '') // Remove heading markers
       .replace(/`/g, '')    // Remove code markers
+      .replace(/^-\s+/, '') // Remove leading dash
       .trim();
   };
 
