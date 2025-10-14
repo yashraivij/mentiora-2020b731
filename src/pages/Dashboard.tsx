@@ -2390,7 +2390,7 @@ const Dashboard = () => {
               size="sm"
               data-feedback-fish
               data-feedback-fish-userid={user?.email || ""}
-              className="text-muted-foreground hover:text-foreground"
+              className="hover:bg-muted"
             >
               Feedback
             </Button>
@@ -2398,7 +2398,7 @@ const Dashboard = () => {
               variant="ghost"
               size="sm"
               onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-              className="text-muted-foreground hover:text-foreground"
+              className="hover:bg-muted"
             >
               Discord
             </Button>
@@ -2407,7 +2407,7 @@ const Dashboard = () => {
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="text-muted-foreground hover:text-foreground"
+              className="hover:bg-muted"
             >
               Sign Out
             </Button>
