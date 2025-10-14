@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -99,10 +99,21 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedFlashcards, setGeneratedFlashcards] = useState<GeneratedFlashcard[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+  
+  const previewRef = useRef<HTMLDivElement>(null);
 
   // Auto-detect subject and exam board from user's first subject
   const subject = userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "";
   const examBoard = userSubjects.length > 0 ? userSubjects[0].exam_board : "";
+
+  // Auto-scroll to preview when flashcards are generated
+  useEffect(() => {
+    if (generatedFlashcards.length > 0 && previewRef.current) {
+      setTimeout(() => {
+        previewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [generatedFlashcards.length]);
 
   const handleEnhanceToggle = (checked: boolean) => {
     if (!isPremium) {
@@ -155,12 +166,6 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
       }
 
       setGeneratedFlashcards(data.flashcards);
-      
-      // Auto-generate a title if not provided
-      if (!setTitle.trim()) {
-        const subjectName = subjects.find(s => s.id === subject)?.name || subject;
-        setSetTitle(`${subjectName} (${examBoard}) - ${new Date().toLocaleDateString()}`);
-      }
 
       toast({
         title: "Success!",
@@ -333,7 +338,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <Card ref={previewRef} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
           <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-4">
             <div className="flex items-center justify-between">
               <div>
