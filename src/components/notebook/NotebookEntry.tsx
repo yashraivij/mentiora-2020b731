@@ -125,21 +125,21 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   );
 
   return (
-    <Card className="rounded-3xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500">
-      <CardContent className="p-6 sm:p-8 space-y-6">
+    <Card className="rounded-2xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+      <CardContent className="p-4 space-y-4">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-6 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
-          <div className="space-y-3 flex-1">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 pb-4 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
+          <div className="space-y-2 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <Badge className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white px-3 py-1 font-semibold shadow-sm">
+              <Badge className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white px-2 py-0.5 font-semibold shadow-sm text-xs">
                 {entry.subject}
               </Badge>
-              <Badge variant="outline" className="rounded-xl border-[#E2E8F0]/50 dark:border-gray-700 px-3 py-1 font-medium text-[#64748B] dark:text-gray-400">
+              <Badge variant="outline" className="rounded-lg border-[#E2E8F0]/50 dark:border-gray-700 px-2 py-0.5 font-medium text-[#64748B] dark:text-gray-400 text-xs">
                 {entry.paper}
               </Badge>
               <Badge 
                 className={cn(
-                  "rounded-xl px-3 py-1 font-medium shadow-sm",
+                  "rounded-lg px-2 py-0.5 font-medium shadow-sm text-xs",
                   entry.confidence_level.toLowerCase() === 'high' && "bg-[#16A34A] text-white",
                   entry.confidence_level.toLowerCase() === 'medium' && "bg-[#F59E0B] text-white",
                   entry.confidence_level.toLowerCase() === 'low' && "bg-[#EF4444] text-white"
@@ -148,19 +148,19 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
                 {entry.confidence_level} Confidence
               </Badge>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-white leading-tight mt-1">
+            <h3 className="text-base font-bold text-[#0F172A] dark:text-white leading-tight mt-1">
               {entry.question_label}
             </h3>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-[#64748B] dark:text-gray-400">
-              <span className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#0EA5E9]" />
+            <div className="flex flex-wrap items-center gap-3 text-xs text-[#64748B] dark:text-gray-400">
+              <span className="flex items-center gap-1.5">
+                <div className="h-1 w-1 rounded-full bg-[#0EA5E9]" />
                 {entry.topic === entry.subtopic ? entry.topic : `${entry.topic} → ${entry.subtopic}`}
               </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" />
+              <span className="flex items-center gap-1">
+                <Clock className="h-3 w-3" />
                 {formatDate(entry.created_at)}
               </span>
-              <span className="flex items-center gap-1.5 font-semibold text-[#EF4444]">
+              <span className="flex items-center gap-1 font-semibold text-[#EF4444]">
                 -{entry.mark_loss} mark{entry.mark_loss !== 1 ? 's' : ''} lost
               </span>
             </div>
@@ -168,16 +168,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* What Tripped Me Up */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
-              <AlertCircle className="h-5 w-5 text-[#EF4444]" />
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
+              <AlertCircle className="h-4 w-4 text-[#EF4444]" />
             </div>
-            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">What Went Wrong</h4>
+            <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">What Went Wrong</h4>
           </div>
           <BlurWrapper>
-            <div className="p-5 rounded-xl bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
-              <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
+            <div className="p-3 rounded-lg bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
+              <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
                 {renderTextWithLatex(cleanMarkdown(entry.what_tripped_up))}
               </p>
             </div>
@@ -185,16 +185,16 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Fix Sentence */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-              <CheckCircle className="h-5 w-5 text-[#16A34A]" />
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+              <CheckCircle className="h-4 w-4 text-[#16A34A]" />
             </div>
-            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">The Solution</h4>
+            <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">The Solution</h4>
           </div>
           <BlurWrapper>
-            <div className="p-5 rounded-xl bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
-              <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
+            <div className="p-3 rounded-lg bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
+              <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
                 {renderTextWithLatex(cleanMarkdown(entry.fix_sentence))}
               </p>
             </div>
@@ -202,23 +202,23 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Bulletproof Notes */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-              <Lightbulb className="h-4 w-4 text-[#0EA5E9]" />
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+              <Lightbulb className="h-3.5 w-3.5 text-[#0EA5E9]" />
             </div>
-            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white">Key Points to Remember</h4>
+            <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">Key Points to Remember</h4>
           </div>
           <BlurWrapper>
-            <div className="space-y-4 pl-2">
+            <div className="space-y-2.5 pl-1">
               {entry.bulletproof_notes
                 .filter(isValidNote)
                 .map((note, idx) => (
-                  <div key={idx} className="flex gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm hover:shadow-md">
-                    <div className="flex-shrink-0 h-7 w-7 rounded-lg bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
+                  <div key={idx} className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/40 transition-all duration-200 shadow-sm">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
                       {idx + 1}
                     </div>
-                    <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                    <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
                       {renderTextWithLatex(cleanMarkdown(note))}
                     </p>
                   </div>
@@ -229,22 +229,22 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
-          <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#F59E0B]/10 to-[#F59E0B]/5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#F59E0B]/20 to-transparent rounded-full blur-3xl"></div>
-            <div className="relative flex flex-col sm:flex-row items-center gap-4">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#F59E0B]/80 flex items-center justify-center shadow-lg flex-shrink-0">
-                <Crown className="h-6 w-6 text-white" />
+          <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-[#F59E0B]/10 to-[#F59E0B]/5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#F59E0B]/20 to-transparent rounded-full blur-2xl"></div>
+            <div className="relative flex flex-col sm:flex-row items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#F59E0B] to-[#F59E0B]/80 flex items-center justify-center shadow-lg flex-shrink-0">
+                <Crown className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1 text-center sm:text-left">
-                <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-1">Unlock Full Access</h4>
-                <p className="text-sm text-[#64748B] dark:text-gray-400 mb-3">
+                <h4 className="text-sm font-bold text-[#0F172A] dark:text-white mb-0.5">Unlock Full Access</h4>
+                <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2">
                   Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
                 </p>
                 <Button 
-                  className="rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80 hover:from-[#F59E0B]/90 hover:to-[#F59E0B]/70 text-white shadow-lg shadow-[#F59E0B]/25 hover:shadow-xl hover:shadow-[#F59E0B]/30 transition-all duration-300 font-medium text-sm px-5"
+                  className="rounded-lg bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80 hover:from-[#F59E0B]/90 hover:to-[#F59E0B]/70 text-white shadow-lg shadow-[#F59E0B]/25 hover:shadow-xl hover:shadow-[#F59E0B]/30 transition-all duration-300 font-medium text-xs px-4 h-8"
                   onClick={() => {/* Add premium upgrade logic */}}
                 >
-                  <Crown className="h-4 w-4 mr-2" />
+                  <Crown className="h-3.5 w-3.5 mr-1.5" />
                   Upgrade Now
                 </Button>
               </div>
