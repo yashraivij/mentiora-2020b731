@@ -228,8 +228,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
       {/* Main Card Container */}
       <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
         <CardHeader>
-          <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-            <Brain className="h-5 w-5 text-[#0EA5E9]" />
+          <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
             Create Flashcards
           </CardTitle>
           <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
@@ -264,25 +263,20 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
           {/* Enhanced Mode Toggle */}
           <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/5 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/10 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm">
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/20 dark:bg-[#0EA5E9]/30 shadow-sm">
-                  <Sparkles className="h-4 w-4 text-[#0EA5E9]" />
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Label htmlFor="enhance" className="text-sm font-bold text-[#0F172A] dark:text-white tracking-tight cursor-pointer">
+                    Enhanced Generation
+                  </Label>
+                  {!isPremium && (
+                    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold text-xs shadow-sm">
+                      Premium
+                    </Badge>
+                  )}
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Label htmlFor="enhance" className="text-sm font-bold text-[#0F172A] dark:text-white tracking-tight cursor-pointer">
-                      Enhanced Generation
-                    </Label>
-                    {!isPremium && (
-                      <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold text-xs shadow-sm">
-                        Premium
-                      </Badge>
-                    )}
-                  </div>
-                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                    {isPremium ? "Exam-style questions with marks" : "Unlock exam-style flashcards"}
-                  </p>
-                </div>
+                <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                  {isPremium ? "Exam-style questions with marks" : "Unlock exam-style flashcards"}
+                </p>
               </div>
               <Switch
                 id="enhance"
