@@ -22,7 +22,7 @@ export const PromotionalStrip = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg">
+    <div className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg">
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1">
