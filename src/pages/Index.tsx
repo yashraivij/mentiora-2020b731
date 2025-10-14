@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award, Calendar, TrendingUp, Clock, Crown, GraduationCap, TimerIcon, TrendingUpIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -446,7 +448,7 @@ const Index = () => {
 
 
 
-        {/* Feature Showcase - Duolingo/Quizlet Style */}
+        {/* Feature Showcase - Clean Professional Style */}
         <div className="mb-16 sm:mb-24 lg:mb-32">
           {/* First Feature - Smart Practice */}
           <motion.div 
@@ -456,25 +458,23 @@ const Index = () => {
             viewport={{ once: true }}
             className="mb-12 sm:mb-16 lg:mb-24"
           >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-                <div className="space-y-6 sm:space-y-8 px-2 sm:px-0">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
                   <motion.h3 
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight"
-                    whileHover={{ scale: 1.02 }}
+                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight"
                   >
                     Every question, every answer,{" "}
-                    <span className="text-primary">
-                      one ultimate study experience
-                    </span>
+                    <span className="text-primary">one ultimate study experience</span>
                   </motion.h3>
-                  <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     Practice with real exam questions from past papers, get instant feedback, and watch your understanding grow with every answer.
                   </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button 
                       onClick={() => navigate('/register')} 
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mobile-touch-target w-full sm:w-auto"
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl"
                     >
                       Start Practicing Free
                     </Button>
@@ -482,40 +482,35 @@ const Index = () => {
                 </div>
                 <motion.div 
                   className="relative"
-                  whileHover={{ scale: 1.02, y: -10 }}
+                  whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="bg-primary rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-card rounded-2xl p-6 shadow-lg">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                        <div className="flex-1 bg-muted rounded-full h-6 flex items-center px-4">
-                          <span className="text-sm text-muted-foreground">Chemistry Practice</span>
+                  <Card className="border-2 shadow-xl">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">Chemistry Practice</CardTitle>
+                        <Badge variant="secondary" className="font-normal">Question 1 of 12</Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="bg-muted/50 rounded-lg p-4">
+                        <p className="text-sm font-medium text-foreground">What is the formula for calculating the rate of reaction?</p>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="bg-primary/10 border-2 border-primary rounded-lg p-3 flex items-start gap-2">
+                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-sm font-medium text-primary">Rate = Change in concentration / Time</span>
+                        </div>
+                        <div className="bg-background border rounded-lg p-3">
+                          <span className="text-sm text-muted-foreground">Rate = Time / Change in concentration</span>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div className="text-lg font-semibold text-foreground">Question 1 of 12</div>
-                        <div className="bg-muted rounded-xl p-4">
-                          <p className="text-foreground">What is the formula for calculating the rate of reaction?</p>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="bg-primary/10 border-2 border-primary/20 rounded-lg p-3 text-primary">
-                            ✓ Rate = Change in concentration / Time
-                          </div>
-                          <div className="bg-muted border rounded-lg p-3 text-muted-foreground">Rate = Time / Change in concentration</div>
-                        </div>
-                        <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
-                          <div className="flex items-center gap-2 text-primary font-semibold mb-2">
-                            <CheckCircle className="h-5 w-5" />
-                            Correct! Well done.
-                          </div>
-                          <p className="text-sm text-primary/80">You're mastering rate calculations. This type of question appears frequently in Paper 2.</p>
-                        </div>
+                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
+                        <p className="text-sm font-medium text-primary mb-1">Correct! Well done.</p>
+                        <p className="text-xs text-muted-foreground">You&apos;re mastering rate calculations. This appears frequently in Paper 2.</p>
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               </div>
             </div>
@@ -529,81 +524,77 @@ const Index = () => {
             viewport={{ once: true }}
             className="mb-24"
           >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <motion.div 
-                  className="relative lg:order-1"
-                  whileHover={{ scale: 1.02, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="bg-primary rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-card rounded-2xl p-6 shadow-lg">
-                      <div className="flex items-center justify-between mb-6">
-                        <h4 className="text-xl font-bold text-foreground">Smart Revision Notebook</h4>
-                        <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Auto-Generated</div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="bg-muted rounded-xl p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <BookOpen className="h-4 w-4 text-primary" />
-                            <div className="font-semibold text-foreground">Chemical Bonding</div>
-                          </div>
-                          <div className="text-sm text-muted-foreground leading-relaxed">
-                            <strong>Key Points:</strong> Ionic bonds form between metals and non-metals through electron transfer. The electrostatic attraction between oppositely charged ions creates the bond.
-                          </div>
-                        </div>
-                        <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Brain className="h-4 w-4 text-primary" />
-                            <div className="font-semibold text-primary">Your Learning Style</div>
-                          </div>
-                          <div className="text-sm text-primary/80">
-                            Visual diagrams and step-by-step examples work best for you
-                          </div>
-                        </div>
-                        <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Target className="h-4 w-4 text-primary" />
-                            <div className="font-semibold text-primary">Exam Focus</div>
-                          </div>
-                          <div className="text-sm text-primary/80">
-                            Practice drawing dot-and-cross diagrams for ionic compounds
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
-                        <div className="flex items-center gap-2 text-primary font-semibold mb-2">
-                          <Sparkles className="h-5 w-5" />
-                          Updated for Your Progress
-                        </div>
-                        <p className="text-sm text-primary/80">Notes automatically updated based on your latest practice sessions and weak areas.</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-                <div className="space-y-8 lg:order-2">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6 lg:order-2">
                   <motion.h3 
-                    className="text-5xl lg:text-6xl font-bold text-foreground leading-tight"
-                    whileHover={{ scale: 1.02 }}
+                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight"
                   >
-                    Your{" "}
-                    <span className="text-primary">
-                      smart revision
-                    </span>{" "}
-                    notebook
+                    Your <span className="text-primary">smart revision</span> notebook
                   </motion.h3>
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     Get automatically generated, personalized revision notes tailored to your learning style and exam board. Save hours of note-taking and focus on what matters most for your exams.
                   </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button 
                       onClick={() => navigate('/register')}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl"
                     >
                       Generate My Notes
                     </Button>
                   </motion.div>
                 </div>
+                <motion.div 
+                  className="relative lg:order-1"
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Card className="border-2 shadow-xl">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">Smart Revision Notebook</CardTitle>
+                        <Badge className="bg-primary/10 text-primary hover:bg-primary/20 font-normal">Auto-Generated</Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="bg-muted/50 rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <BookOpen className="h-4 w-4 text-primary" />
+                          <div className="font-semibold text-sm">Chemical Bonding</div>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          <strong>Key Points:</strong> Ionic bonds form between metals and non-metals through electron transfer. The electrostatic attraction between oppositely charged ions creates the bond.
+                        </p>
+                      </div>
+                      <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Brain className="h-4 w-4 text-primary" />
+                          <div className="font-semibold text-xs text-primary">Your Learning Style</div>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Visual diagrams and step-by-step examples work best for you
+                        </p>
+                      </div>
+                      <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Target className="h-4 w-4 text-primary" />
+                          <div className="font-semibold text-xs text-primary">Exam Focus</div>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Practice drawing dot-and-cross diagrams for ionic compounds
+                        </p>
+                      </div>
+                      <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Sparkles className="h-4 w-4 text-primary" />
+                          <div className="font-semibold text-xs text-primary">Updated for Your Progress</div>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Notes automatically updated based on your latest practice sessions.</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -615,25 +606,22 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
                   <motion.h3 
-                    className="text-5xl lg:text-6xl font-bold leading-tight"
-                    whileHover={{ scale: 1.02 }}
+                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight"
                   >
-                    <span className="text-primary">
-                      Stay motivated
-                    </span>{" "}
-                    with every question
+                    <span className="text-primary">Stay motivated</span> with every question
                   </motion.h3>
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     Track your progress, celebrate wins, and watch your grades improve with detailed analytics that show exactly how close you are to your target grades.
                   </p>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button 
                       onClick={() => navigate('/register')} 
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl"
                     >
                       Start Your Journey
                     </Button>
@@ -641,30 +629,30 @@ const Index = () => {
                 </div>
                 <motion.div 
                   className="relative"
-                  whileHover={{ scale: 1.02, y: -10 }}
+                  whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="bg-primary rounded-3xl p-8 shadow-2xl">
-                    <div className="bg-card rounded-2xl p-6 shadow-lg">
-                      <div className="text-center mb-6">
-                        <div className="w-24 h-24 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center">
-                          <Trophy className="h-12 w-12 text-primary-foreground" />
-                        </div>
-                        <h4 className="text-2xl font-bold text-foreground mb-2">Streak Master!</h4>
-                        <p className="text-muted-foreground">7 days in a row 🔥</p>
+                  <Card className="border-2 shadow-xl">
+                    <CardHeader className="text-center pb-3">
+                      <div className="w-20 h-20 bg-primary rounded-full mx-auto mb-3 flex items-center justify-center">
+                        <Trophy className="h-10 w-10 text-primary-foreground" />
                       </div>
-                      <div className="grid grid-cols-3 gap-4 mb-6">
-                        <div className="text-center p-3 bg-primary/10 rounded-xl">
-                          <div className="text-2xl font-bold text-primary">124</div>
-                          <div className="text-xs text-primary/80">Questions</div>
+                      <CardTitle className="text-xl">Streak Master!</CardTitle>
+                      <CardDescription>7 days in a row 🔥</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="text-center p-3 bg-primary/10 rounded-lg">
+                          <div className="text-xl font-bold text-primary">124</div>
+                          <div className="text-xs text-muted-foreground">Questions</div>
                         </div>
-                        <div className="text-center p-3 bg-primary/10 rounded-xl">
-                          <div className="text-2xl font-bold text-primary">89%</div>
-                          <div className="text-xs text-primary/80">Accuracy</div>
+                        <div className="text-center p-3 bg-primary/10 rounded-lg">
+                          <div className="text-xl font-bold text-primary">89%</div>
+                          <div className="text-xs text-muted-foreground">Accuracy</div>
                         </div>
-                        <div className="text-center p-3 bg-primary/10 rounded-xl">
-                          <div className="text-2xl font-bold text-primary">Grade 8</div>
-                          <div className="text-xs text-primary/80">Predicted</div>
+                        <div className="text-center p-3 bg-primary/10 rounded-lg">
+                          <div className="text-xl font-bold text-primary">Grade 8</div>
+                          <div className="text-xs text-muted-foreground">Predicted</div>
                         </div>
                       </div>
                       <div className="space-y-2">
@@ -672,12 +660,10 @@ const Index = () => {
                           <span className="text-muted-foreground">Progress to Grade 9</span>
                           <span className="text-primary font-semibold">87%</span>
                         </div>
-                        <div className="w-full bg-muted rounded-full h-3">
-                          <div className="bg-primary h-3 rounded-full" style={{width: '87%'}}></div>
-                        </div>
+                        <Progress value={87} className="h-2" />
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               </div>
             </div>
