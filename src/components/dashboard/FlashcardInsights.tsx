@@ -190,7 +190,7 @@ export const FlashcardInsights = ({
                             setRenamingSetId(set.id);
                             setNewSetName(set.title);
                           }}
-                          className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
                         >
                           <Pencil className="h-3.5 w-3.5" />
                         </Button>
