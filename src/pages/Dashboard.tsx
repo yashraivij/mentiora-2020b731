@@ -2392,7 +2392,7 @@ const Dashboard = () => {
               data-feedback-fish-userid={user?.email || ""}
               className="text-muted-foreground hover:text-foreground"
             >
-              💬 Feedback
+              Feedback
             </Button>
             <Button
               variant="ghost"
@@ -2400,7 +2400,7 @@ const Dashboard = () => {
               onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
               className="text-muted-foreground hover:text-foreground"
             >
-              🎮 Discord
+              Discord
             </Button>
             <ThemeToggle />
             <Button
@@ -2409,7 +2409,6 @@ const Dashboard = () => {
               onClick={handleLogout}
               className="text-muted-foreground hover:text-foreground"
             >
-              <User className="h-4 w-4 mr-2" />
               Sign Out
             </Button>
           </div>
