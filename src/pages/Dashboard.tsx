@@ -1406,17 +1406,21 @@ const Dashboard = () => {
   // Handle navigation state from practice page
   useEffect(() => {
     if (location.state?.openSubjectDrawer && location.state?.subjectId) {
+      console.log('Opening subject drawer from navigation state:', location.state);
       const subject = curriculum.find(s => s.id === location.state.subjectId);
+      console.log('Found subject:', subject);
       if (subject) {
         setSelectedDrawerSubject(subject);
         setSubjectDrawerOpen(true);
         setDrawerTab(location.state.drawerTab || 'overview');
         setActiveTab('learn');
         // Clear the state to prevent reopening on subsequent renders
-        navigate(location.pathname, { replace: true, state: {} });
+        setTimeout(() => {
+          navigate(location.pathname, { replace: true, state: {} });
+        }, 100);
       }
     }
-  }, [location.state]);
+  }, [location.state, navigate, setActiveTab]);
 
   useEffect(() => {
     const interval = setInterval(() => {
