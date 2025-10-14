@@ -63,6 +63,8 @@ import {
   FileText,
   ChevronDown,
   ChevronUp,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -192,6 +194,7 @@ const Dashboard = () => {
   const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
   const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
+  const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -2580,7 +2583,7 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer */}
               <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950">
+                <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 transition-all duration-300`}>
                   {selectedDrawerSubject && (
                     <>
                       <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
@@ -2601,6 +2604,18 @@ const Dashboard = () => {
                               Detailed performance insights
                             </SheetDescription>
                           </div>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => setIsDrawerMaximized(!isDrawerMaximized)}
+                            className="h-10 w-10 rounded-xl border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:text-[#0EA5E9] transition-colors"
+                          >
+                            {isDrawerMaximized ? (
+                              <Minimize2 className="h-5 w-5" />
+                            ) : (
+                              <Maximize2 className="h-5 w-5" />
+                            )}
+                          </Button>
                         </div>
                         <div className="flex gap-3">
                           <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
