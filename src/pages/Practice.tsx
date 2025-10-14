@@ -1469,7 +1469,7 @@ const Practice = () => {
                   {(attempts.length - correctAnswers) > 0 && (
                     <div className="pt-3 border-t border-amber-200/30 dark:border-amber-800/30">
                       <Button
-                        onClick={() => navigate('/', { state: { subjectId, drawerTab: 'notes' } })}
+                        onClick={() => navigate('/', { state: { openSubjectDrawer: true, subjectId, drawerTab: 'notes' } })}
                         className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl group/btn"
                       >
                         <NotebookPen className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
