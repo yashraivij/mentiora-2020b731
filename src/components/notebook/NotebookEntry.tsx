@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import katex from "katex";
 import "katex/dist/katex.min.css";
+import { useNavigate } from "react-router-dom";
 
 
 interface NotebookEntryProps {
@@ -100,6 +101,7 @@ const renderTextWithLatex = (text: string): React.ReactNode => {
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
+  const navigate = useNavigate();
   
   // Clean markdown formatting from text
   const cleanMarkdown = (text: string): string => {
@@ -231,7 +233,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               </p>
               <Button 
                 className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
-                onClick={() => {/* Add premium upgrade logic */}}
+                onClick={() => navigate('/pricing')}
               >
                 Upgrade Now
               </Button>
