@@ -2529,21 +2529,26 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer - Resizable */}
               {subjectDrawerOpen && selectedDrawerSubject && (
-                <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-                  <ResizablePanelGroup direction="horizontal" className="h-full">
-                    <ResizablePanel 
-                      defaultSize={60} 
-                      minSize={0}
-                      maxSize={80}
-                      className="pointer-events-none"
-                      onClick={() => setSubjectDrawerOpen(false)}
-                    />
-                    <ResizableHandle withHandle className="bg-border/50" />
-                    <ResizablePanel 
-                      defaultSize={40} 
-                      minSize={20}
-                      className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 overflow-hidden"
-                    >
+                <>
+                  {/* Backdrop */}
+                  <div 
+                    className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+                    onClick={() => setSubjectDrawerOpen(false)}
+                  />
+                  {/* Resizable Drawer */}
+                  <div className="fixed inset-0 z-50 pointer-events-none">
+                    <ResizablePanelGroup direction="horizontal" className="h-full">
+                      <ResizablePanel 
+                        defaultSize={60} 
+                        minSize={0}
+                        maxSize={80}
+                      />
+                      <ResizableHandle withHandle className="bg-border/50 pointer-events-auto" />
+                      <ResizablePanel 
+                        defaultSize={40} 
+                        minSize={20}
+                        className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 overflow-hidden pointer-events-auto"
+                      >
                       <div className="h-full overflow-y-auto">
                         <div className="p-6">
                           {/* Header */}
@@ -3464,7 +3469,8 @@ const Dashboard = () => {
                       </div>
                     </ResizablePanel>
                   </ResizablePanelGroup>
-                </div>
+                  </div>
+                </>
               )}
 
               {/* Add Subjects Modal */}
