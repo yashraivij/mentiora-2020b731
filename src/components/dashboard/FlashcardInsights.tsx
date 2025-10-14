@@ -482,7 +482,9 @@ export const FlashcardInsights = ({
       <TabsContent value="create" className="mt-0">
         <FlashcardCreator 
           onSetCreated={() => {
-            onFlashcardCreated?.();
+            if (onFlashcardCreated) {
+              onFlashcardCreated();
+            }
           }}
           userSubjects={userSubjects}
         />
