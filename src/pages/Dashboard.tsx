@@ -3394,6 +3394,19 @@ const Dashboard = () => {
                                       set.subject_id === selectedDrawerSubject?.id
                                     );
 
+                                    if (viewMode && selectedSet) {
+                                      return (
+                                        <FlashcardViewer 
+                                          flashcardSet={selectedSet}
+                                          mode={viewMode}
+                                          onBack={() => {
+                                            setSelectedSet(null);
+                                            setViewMode(null);
+                                          }}
+                                        />
+                                      );
+                                    }
+
                                     if (subjectSets.length === 0) {
                                       return (
                                         <div className="text-center py-16">
@@ -3411,64 +3424,48 @@ const Dashboard = () => {
                                     }
 
                                     return (
-                                      <div className="space-y-6">
+                                      <div className="space-y-4">
                                         {subjectSets.map((set: any) => (
-                                          <div key={set.id} className="space-y-3">
-                                            <div className="flex items-center justify-between mb-3">
-                                              <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
-                                                {set.flashcards?.length || 0} cards
-                                              </Badge>
-                                            </div>
-                                            {set.flashcards?.map((card: any) => {
-                                              const isFlipped = flippedCards.has(card.id);
-                                              return (
-                                                <div
-                                                  key={card.id}
-                                                  className="perspective-1000"
-                                                  onClick={() => toggleCardFlip(card.id)}
-                                                >
-                                                  <motion.div
-                                                    className="relative cursor-pointer"
-                                                    initial={false}
-                                                    animate={{ rotateY: isFlipped ? 180 : 0 }}
-                                                    transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-                                                    style={{ transformStyle: "preserve-3d" }}
-                                                  >
-                                                    <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
-                                                      <CardContent className="p-4">
-                                                        <AnimatePresence mode="wait">
-                                                          {!isFlipped ? (
-                                                            <motion.div
-                                                              key="front"
-                                                              initial={{ opacity: 0 }}
-                                                              animate={{ opacity: 1 }}
-                                                              exit={{ opacity: 0 }}
-                                                              transition={{ duration: 0.2 }}
-                                                            >
-                                                              <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wide">Question</div>
-                                                              <div className="text-sm font-bold text-[#0F172A] dark:text-white leading-relaxed">{card.front}</div>
-                                                            </motion.div>
-                                                          ) : (
-                                                            <motion.div
-                                                              key="back"
-                                                              initial={{ opacity: 0 }}
-                                                              animate={{ opacity: 1 }}
-                                                              exit={{ opacity: 0 }}
-                                                              transition={{ duration: 0.2 }}
-                                                              style={{ transform: "rotateY(180deg)" }}
-                                                            >
-                                                              <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wide">Answer</div>
-                                                              <div className="text-sm text-[#0F172A] dark:text-white font-medium leading-relaxed">{card.back}</div>
-                                                            </motion.div>
-                                                          )}
-                                                        </AnimatePresence>
-                                                      </CardContent>
-                                                    </Card>
-                                                  </motion.div>
+                                          <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                                            <CardContent className="p-5">
+                                              <div className="mb-4">
+                                                <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">
+                                                  {set.title}
+                                                </h3>
+                                                <div className="flex items-center gap-3">
+                                                  <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                                                    {set.flashcards?.length || 0} cards
+                                                  </Badge>
+                                                  <span className="text-xs text-[#64748B] dark:text-gray-400">
+                                                    {new Date(set.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                                  </span>
                                                 </div>
-                                              );
-                                            })}
-                                          </div>
+                                              </div>
+                                              <div className="flex gap-3">
+                                                <Button
+                                                  onClick={() => {
+                                                    setSelectedSet(set);
+                                                    setViewMode("flashcards");
+                                                  }}
+                                                  className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                                                >
+                                                  <Eye className="h-4 w-4 mr-2" />
+                                                  Review
+                                                </Button>
+                                                <Button
+                                                  onClick={() => {
+                                                    setSelectedSet(set);
+                                                    setViewMode("learn");
+                                                  }}
+                                                  variant="outline"
+                                                  className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 font-bold rounded-xl"
+                                                >
+                                                  <Play className="h-4 w-4 mr-2" />
+                                                  Study
+                                                </Button>
+                                              </div>
+                                            </CardContent>
+                                          </Card>
                                         ))}
                                         <Button 
                                           onClick={() => {

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft } from "lucide-react";
+import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft, Eye, Play } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
@@ -28,6 +28,7 @@ export const FlashcardInsights = ({
   const [selectedSet, setSelectedSet] = useState<any>(null);
   const [showLibrary, setShowLibrary] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
   
   const totalCards = individualFlashcards.length;
   const totalSets = flashcardSets.length;
@@ -61,6 +62,22 @@ export const FlashcardInsights = ({
     });
   };
 
+  // If viewing a set, show the flashcard viewer
+  if (viewMode && selectedSet) {
+    return (
+      <div className="h-full">
+        <FlashcardViewer 
+          flashcardSet={selectedSet}
+          mode={viewMode}
+          onBack={() => {
+            setViewMode(null);
+            setSelectedSet(null);
+          }}
+        />
+      </div>
+    );
+  }
+
   // If in learning mode, show the flashcard viewer
   if (learningMode && selectedSet) {
     return (
@@ -83,8 +100,8 @@ export const FlashcardInsights = ({
       <div className="space-y-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight">Your Flashcard Library</h3>
-            <p className="text-sm text-[#64748B] dark:text-gray-400">Click any card to flip between question and answer</p>
+            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight">Your Flashcard Collection</h3>
+            <p className="text-sm text-[#64748B] dark:text-gray-400">Review and study your flashcard sets for effective revision</p>
           </div>
           <Button
             onClick={() => setShowLibrary(false)}
@@ -105,90 +122,45 @@ export const FlashcardInsights = ({
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {flashcardSets.map((set: any) => (
               <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight">{set.title}</CardTitle>
-                      <CardDescription className="text-xs font-medium text-[#64748B] dark:text-gray-400 mt-1">
-                        Study with flashcards for this subject
-                      </CardDescription>
+                <CardContent className="p-5">
+                  <div className="mb-4">
+                    <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">
+                      {set.title}
+                    </h3>
+                    <div className="flex items-center gap-3">
+                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                        {set.flashcards?.length || 0} cards
+                      </Badge>
+                      <span className="text-xs text-[#64748B] dark:text-gray-400">
+                        {new Date(set.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 mt-3">
-                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
-                      {set.flashcards?.length || 0} cards
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-4">
-                  {/* Individual Flashcards with Flip */}
-                  <div className="space-y-3">
-                    {set.flashcards?.map((card: any) => {
-                      const isFlipped = flippedCards.has(card.id);
-                      return (
-                        <div
-                          key={card.id}
-                          className="perspective-1000"
-                          onClick={() => toggleCardFlip(card.id)}
-                        >
-                          <motion.div
-                            className="relative cursor-pointer"
-                            initial={false}
-                            animate={{ rotateY: isFlipped ? 180 : 0 }}
-                            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-                            style={{ transformStyle: "preserve-3d" }}
-                          >
-                            <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
-                              <CardContent className="p-4">
-                                <AnimatePresence mode="wait">
-                                  {!isFlipped ? (
-                                    <motion.div
-                                      key="front"
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      exit={{ opacity: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                    >
-                                      <Badge variant="outline" className="mb-2 font-bold text-[#0EA5E9] border-[#0EA5E9] text-xs">
-                                        Question
-                                      </Badge>
-                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed">
-                                        {card.front}
-                                      </p>
-                                      <p className="text-xs text-muted-foreground mt-3 italic">
-                                        Click to reveal answer
-                                      </p>
-                                    </motion.div>
-                                  ) : (
-                                    <motion.div
-                                      key="back"
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      exit={{ opacity: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      style={{ transform: "rotateY(180deg)" }}
-                                    >
-                                      <Badge variant="outline" className="mb-2 font-bold text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400 text-xs">
-                                        Answer
-                                      </Badge>
-                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed whitespace-pre-wrap">
-                                        {card.back}
-                                      </p>
-                                      <p className="text-xs text-muted-foreground mt-3 italic">
-                                        Click to show question
-                                      </p>
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
-                              </CardContent>
-                            </Card>
-                          </motion.div>
-                        </div>
-                      );
-                    })}
+                  <div className="flex gap-3">
+                    <Button
+                      onClick={() => {
+                        setSelectedSet(set);
+                        setViewMode("flashcards");
+                      }}
+                      className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                    >
+                      <Eye className="h-4 w-4 mr-2" />
+                      Review
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setSelectedSet(set);
+                        setViewMode("learn");
+                      }}
+                      variant="outline"
+                      className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 font-bold rounded-xl"
+                    >
+                      <Play className="h-4 w-4 mr-2" />
+                      Study
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
