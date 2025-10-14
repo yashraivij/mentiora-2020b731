@@ -81,6 +81,7 @@ import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
 import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 
 interface UserProgress {
   subjectId: string;
@@ -3938,12 +3939,18 @@ const Dashboard = () => {
                     ]}
                   />
 
-                  {/* 4. Flashcard Insights */}
-                  <FlashcardInsights
-                    flashcardSets={flashcardSets}
-                    individualFlashcards={individualFlashcards}
-                    onViewFlashcards={() => setActiveTab("flashcards")}
-                  />
+                  {/* 4. Flashcard Insights - Resizable */}
+                  <ResizablePanelGroup direction="horizontal" className="min-h-[400px] rounded-lg border">
+                    <ResizablePanel defaultSize={100} minSize={30}>
+                      <div className="h-full overflow-auto p-6">
+                        <FlashcardInsights
+                          flashcardSets={flashcardSets}
+                          individualFlashcards={individualFlashcards}
+                          onViewFlashcards={() => setActiveTab("flashcards")}
+                        />
+                      </div>
+                    </ResizablePanel>
+                  </ResizablePanelGroup>
 
                   {/* 5. Personalized Summary */}
                   <PersonalizedSummary
