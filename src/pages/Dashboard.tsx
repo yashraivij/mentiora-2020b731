@@ -2900,14 +2900,6 @@ const Dashboard = () => {
                         <TabsContent value="papers" className="space-y-4 mt-8">
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              {!isPremium && (
-                                <div className="flex items-center justify-between mb-2">
-                                  <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-xs flex items-center gap-1">
-                                    <Crown className="h-3 w-3" />
-                                    Premium Required
-                                  </Badge>
-                                </div>
-                              )}
                               <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
                                 Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
                               </CardTitle>
@@ -2927,14 +2919,8 @@ const Dashboard = () => {
                                       <motion.div 
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        onClick={() => {
-                                          if (isPremium) {
-                                            navigate('/predicted-exam/geography');
-                                          } else {
-                                            navigate('/pricing');
-                                          }
-                                        }}
-                                        className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 pointer-events-none' : ''}`}
+                                        onClick={() => navigate('/predicted-exam/geography')}
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
                                           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
@@ -2955,14 +2941,8 @@ const Dashboard = () => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.1 }}
-                                        onClick={() => {
-                                          if (isPremium) {
-                                            navigate('/predicted-exam/geography-paper-2');
-                                          } else {
-                                            navigate('/pricing');
-                                          }
-                                        }}
-                                        className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 pointer-events-none' : ''}`}
+                                        onClick={() => navigate('/predicted-exam/geography-paper-2')}
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
                                           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
@@ -2991,14 +2971,8 @@ const Dashboard = () => {
                                   <motion.div 
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    onClick={() => {
-                                      if (isPremium) {
-                                        navigate(`/predicted-exam/${selectedDrawerSubject.id}`);
-                                      } else {
-                                        navigate('/pricing');
-                                      }
-                                    }}
-                                    className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 pointer-events-none' : ''}`}
+                                    onClick={() => navigate(`/predicted-exam/${selectedDrawerSubject.id}`)}
+                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                   >
                                     <div className="flex items-center gap-4">
                                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
