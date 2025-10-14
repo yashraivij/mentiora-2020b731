@@ -233,7 +233,7 @@ export const FlashcardInsights = ({
           value="library"
           className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
-          Library
+          Sets
         </TabsTrigger>
         <TabsTrigger 
           value="create"
@@ -374,7 +374,7 @@ export const FlashcardInsights = ({
                   </Button>
                 )}
                 <Button 
-                  onClick={onViewFlashcards}
+                  onClick={() => setShowLibrary(true)}
                   variant="outline"
                   className="w-full border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl font-bold h-10 group text-sm"
                 >
