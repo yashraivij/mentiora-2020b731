@@ -229,10 +229,19 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
-          <div className="mt-4 text-center">
-            <p className="text-xs text-[#64748B] dark:text-gray-400">
-              Upgrade to Premium for detailed insights and recommendations
-            </p>
+          <div className="mt-4 p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm">
+            <div className="text-center space-y-3">
+              <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Full Access</h4>
+              <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
+                Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
+              </p>
+              <Button 
+                className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                onClick={() => {/* Add premium upgrade logic */}}
+              >
+                Upgrade Now
+              </Button>
+            </div>
           </div>
         )}
       </CardContent>
