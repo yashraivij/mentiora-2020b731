@@ -3465,11 +3465,61 @@ const Dashboard = () => {
                                       <div className="space-y-4">
                                         {subjectSets.map((set: any) => (
                                           <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                                            <CardContent className="p-5">
+                                             <CardContent className="p-5">
                                               <div className="mb-4">
-                                                <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">
-                                                  {set.title}
-                                                </h3>
+                                                {renamingSetId === set.id ? (
+                                                  <div className="flex items-center gap-2 mb-2">
+                                                    <Input
+                                                      value={newSetName}
+                                                      onChange={(e) => setNewSetName(e.target.value)}
+                                                      onKeyDown={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                          handleRenameSet(set.id);
+                                                        } else if (e.key === 'Escape') {
+                                                          setRenamingSetId(null);
+                                                          setNewSetName("");
+                                                        }
+                                                      }}
+                                                      className="flex-1 h-8 text-sm"
+                                                      autoFocus
+                                                    />
+                                                    <Button
+                                                      size="sm"
+                                                      onClick={() => handleRenameSet(set.id)}
+                                                      className="h-8 w-8 p-0 bg-emerald-500 hover:bg-emerald-600"
+                                                    >
+                                                      <Check className="h-4 w-4" />
+                                                    </Button>
+                                                    <Button
+                                                      size="sm"
+                                                      variant="outline"
+                                                      onClick={() => {
+                                                        setRenamingSetId(null);
+                                                        setNewSetName("");
+                                                      }}
+                                                      className="h-8 w-8 p-0"
+                                                    >
+                                                      <X className="h-4 w-4" />
+                                                    </Button>
+                                                  </div>
+                                                ) : (
+                                                  <div className="flex items-center gap-2 mb-2">
+                                                    <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex-1">
+                                                      {set.title}
+                                                    </h3>
+                                                    <Button
+                                                      size="sm"
+                                                      variant="ghost"
+                                                      onClick={() => {
+                                                        setRenamingSetId(set.id);
+                                                        setNewSetName(set.title);
+                                                      }}
+                                                      className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
+                                                    >
+                                                      <Pencil className="h-3.5 w-3.5" />
+                                                    </Button>
+                                                  </div>
+                                                )}
                                                 <div className="flex items-center gap-3">
                                                   <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
                                                     {set.flashcards?.length || 0} cards
