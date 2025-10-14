@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Check, Minus, Brain, Target, TrendingUp, Zap, Heart, Shield, Star, Sparkles, Trophy, BookOpen, Clock, BarChart3, Flame } from "lucide-react";
+import { Check, Brain, Target, TrendingUp, Zap, BookOpen, BarChart3, Star, Sparkles, Clock, Trophy, Shield, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 
 const Pricing = () => {
   const navigate = useNavigate();
@@ -15,47 +17,47 @@ const Pricing = () => {
 
   const premiumFeatures = [
     {
-      icon: Heart,
-      title: "Unlimited Practice Sessions",
-      description: "Study without limits - no hearts to worry about!",
-      color: "from-pink-400 to-rose-400"
-    },
-    {
       icon: Brain,
       title: "Advanced Grade Predictions",
-      description: "Know exactly where you stand with advanced analytics",
-      color: "from-purple-400 to-indigo-400"
+      description: "AI-powered predictions across all subjects",
+      color: "text-primary"
     },
     {
       icon: Target,
       title: "Personalized Weak Spot Analysis",
-      description: "Target your revision with precision-guided learning",
-      color: "from-blue-400 to-cyan-400"
+      description: "Target your weakest topics with precision",
+      color: "text-primary"
     },
     {
-      icon: TrendingUp,
-      title: "Advanced Progress Tracking",
-      description: "Detailed insights into your academic journey",
-      color: "from-green-400 to-emerald-400"
+      icon: BookOpen,
+      title: "2026 Predicted Exam Papers",
+      description: "Practice with predicted questions for upcoming exams",
+      color: "text-primary"
+    },
+    {
+      icon: Trophy,
+      title: "Smart Revision Notebook",
+      description: "Auto-generated notes from your practice",
+      color: "text-primary"
     },
     {
       icon: Zap,
-      title: "Priority Question Generation",
-      description: "Get the most relevant questions for your exams",
-      color: "from-yellow-400 to-orange-400"
+      title: "Unlimited Practice",
+      description: "No hearts, no limits on your learning",
+      color: "text-primary"
     },
     {
       icon: Shield,
-      title: "Ad-Free Learning Experience",
-      description: "Focus on what matters - zero distractions",
-      color: "from-teal-400 to-cyan-400"
+      title: "Ad-Free Experience",
+      description: "Focus on what matters most",
+      color: "text-primary"
     }
   ];
 
   const statsData = [
-    { number: "3.7x", label: "more likely to achieve target grades" },
-    { number: "89%", label: "of premium users see grade improvements" },
-    { number: "2.5x", label: "faster exam preparation" }
+    { number: "3.7x", label: "More likely to achieve target grades" },
+    { number: "89%", label: "Of premium users see grade improvements" },
+    { number: "15hrs", label: "Average time saved per month" }
   ];
 
   useEffect(() => {
@@ -101,170 +103,195 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 lg:px-8 py-4 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate("/dashboard")}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-8 w-8" />
-              <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
-            </button>
-          </div>
+      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50">
+        <div className="flex items-center justify-between px-6 lg:px-8 py-4 max-w-7xl mx-auto">
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
+          >
+            <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-7 w-7" />
+            <h1 className="text-lg font-semibold text-foreground">Mentiora</h1>
+          </button>
           <Button
             variant="ghost"
             onClick={() => navigate("/dashboard")}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-sm text-muted-foreground hover:text-foreground"
           >
             Back to Dashboard
           </Button>
         </div>
       </div>
 
-      <div className="px-4 py-8 max-w-7xl mx-auto">
+      <div className="px-6 py-16 max-w-6xl mx-auto">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-4">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-primary font-semibold text-sm">Premium Features</span>
-          </div>
+          <Badge variant="outline" className="mb-6 px-4 py-1.5 text-xs font-medium border-primary/20 text-primary">
+            <Sparkles className="h-3 w-3 mr-1.5" />
+            Premium Features
+          </Badge>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Unlock Your Full Potential
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            Achieve Your Target Grades
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of students achieving their target grades with Mentiora Premium
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Join thousands of students using Mentiora Premium to excel in their GCSEs
           </p>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-20"
+        >
+          {statsData.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl font-bold text-primary mb-1">{stat.number}</div>
+              <p className="text-xs text-muted-foreground leading-relaxed">{stat.label}</p>
+            </div>
+          ))}
         </motion.div>
 
         {/* Pricing Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-md mx-auto mb-16"
+          className="max-w-md mx-auto mb-24"
         >
-          <Card className="border-2 border-primary/20 shadow-lg">
+          <Card className="border border-border/50 shadow-sm">
             <CardContent className="p-8">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1 mb-4">
-                  <Star className="h-3 w-3 text-primary" />
-                  <span className="text-primary font-medium text-xs">Limited Time Offer</span>
+              <div className="text-center mb-8">
+                <Badge variant="secondary" className="mb-4 px-3 py-1 text-xs font-medium">
+                  <Star className="h-3 w-3 mr-1" />
+                  Limited Time Offer
+                </Badge>
+                <h3 className="text-xl font-semibold mb-3">Start Your Free Trial</h3>
+                <p className="text-sm text-muted-foreground mb-6">Try Premium free for 7 days</p>
+                <div className="mb-6">
+                  <div className="flex items-baseline justify-center gap-1 mb-2">
+                    <span className="text-5xl font-bold">£9.99</span>
+                    <span className="text-lg text-muted-foreground">/month</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Cancel anytime</p>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Start Your Free Trial</h3>
-                <p className="text-muted-foreground text-sm mb-4">First 7 days absolutely free</p>
-                <div className="text-5xl font-bold mb-2">
-                  £9.99<span className="text-xl font-medium text-muted-foreground">/month</span>
-                </div>
-                <p className="text-sm text-muted-foreground">Cancel anytime, no commitment</p>
               </div>
               
-              <Button
-                onClick={handleStartTrial}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base mb-3"
-                size="lg"
-              >
-                Get Free Trial
-              </Button>
-              
-              <Button
-                variant="ghost"
-                onClick={handleNoThanks}
-                className="w-full text-muted-foreground hover:text-foreground"
-              >
-                Maybe Later
-              </Button>
+              <div className="space-y-2 mb-8">
+                <Button
+                  onClick={handleStartTrial}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-5 text-sm"
+                  size="lg"
+                >
+                  Start Free Trial
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  onClick={handleNoThanks}
+                  className="w-full text-sm text-muted-foreground hover:text-foreground"
+                >
+                  Maybe Later
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Feature Showcase Sections */}
-        <div className="space-y-24 mb-16">
+        {/* Feature Sections */}
+        <div className="space-y-32 mb-24">
           {/* Grade Predictions Feature */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            className="grid lg:grid-cols-2 gap-16 items-center"
           >
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <BarChart3 className="h-5 w-5 text-primary" />
-                </div>
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 mb-5">
+                <BarChart3 className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-2xl font-semibold mb-3 tracking-tight">
                 Advanced Grade Predictions
               </h3>
-              <p className="text-lg text-muted-foreground mb-6">
-                Know exactly where you stand with AI-powered predictions that track your progress across all subjects in real-time.
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Know exactly where you stand with AI-powered predictions that analyze your performance across all subjects and topics in real-time.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {[
-                  "Real-time grade predictions for all subjects",
-                  "Personalized improvement recommendations", 
-                  "Track progress towards target grades",
-                  "Identify weak areas before exams"
+                  "Real-time grade predictions",
+                  "Personalized improvement paths", 
+                  "Track progress to target grades",
+                  "Identify weak areas early"
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <Check className="h-3 w-3 text-primary-foreground" />
+                  <div key={index} className="flex items-center gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-2.5 w-2.5 text-primary" />
                     </div>
-                    <span className="text-foreground">{item}</span>
+                    <span className="text-sm text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
             <div>
-              <Card className="border border-border shadow-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-primary" />
-                    Grade Predictions
-                  </CardTitle>
+              <Card className="border border-border/50 shadow-sm">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-base font-semibold">Grade Predictions</CardTitle>
+                    <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                  </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {[
-                      { 
-                        subject: "Mathematics", 
-                        current: "B", 
-                        predicted: "A",
-                        color: "bg-blue-500"
-                      },
-                      { 
-                        subject: "Physics", 
-                        current: "C", 
-                        predicted: "B",
-                        color: "bg-purple-500"
-                      },
-                      { 
-                        subject: "Chemistry", 
-                        current: "B", 
-                        predicted: "A*",
-                        color: "bg-green-500"
-                      }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${item.color}`}></div>
-                          <span className="font-medium">{item.subject}</span>
+                <CardContent className="space-y-4">
+                  {[
+                    { 
+                      subject: "Mathematics", 
+                      current: 5, 
+                      predicted: 8,
+                      target: 9,
+                      color: "bg-blue-500"
+                    },
+                    { 
+                      subject: "Physics", 
+                      current: 4, 
+                      predicted: 6,
+                      target: 7,
+                      color: "bg-purple-500"
+                    },
+                    { 
+                      subject: "Chemistry", 
+                      current: 6, 
+                      predicted: 8,
+                      target: 9,
+                      color: "bg-green-500"
+                    }
+                  ].map((item, index) => (
+                    <div key={index} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-1.5 h-1.5 rounded-full ${item.color}`}></div>
+                          <span className="text-sm font-medium">{item.subject}</span>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-muted-foreground text-sm">Current: {item.current}</span>
-                          <TrendingUp className="h-4 w-4 text-primary" />
-                          <span className="text-primary font-bold text-sm">Pred: {item.predicted}</span>
+                        <div className="flex items-center gap-3 text-xs">
+                          <span className="text-muted-foreground">Current: {item.current}</span>
+                          <TrendingUp className="h-3 w-3 text-primary" />
+                          <span className="text-primary font-semibold">Pred: {item.predicted}</span>
+                          <span className="text-muted-foreground">→</span>
+                          <span className="text-foreground font-semibold">Target: {item.target}</span>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                      <Progress 
+                        value={(item.predicted / item.target) * 100} 
+                        className="h-1.5"
+                      />
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             </div>
@@ -274,72 +301,65 @@ const Pricing = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="grid lg:grid-cols-2 gap-16 items-center"
           >
             <div className="lg:order-2">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <BookOpen className="h-5 w-5 text-primary" />
-                </div>
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 mb-5">
+                <BookOpen className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-2xl font-semibold mb-3 tracking-tight">
                 2026 Predicted Exam Papers
               </h3>
-              <p className="text-lg text-muted-foreground mb-6">
-                Practice with exam-style questions predicted for 2026, designed to match the latest curriculum and exam board requirements.
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Practice with AI-predicted exam questions designed to match the 2026 curriculum and exam board specifications.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {[
-                  "AI-predicted questions for 2026 exams",
-                  "Aligned with latest curriculum changes",
-                  "Full exam paper simulations",
-                  "Detailed marking and feedback"
+                  "AI-predicted exam questions",
+                  "Aligned with 2026 curriculum",
+                  "Full exam simulations",
+                  "Detailed marking feedback"
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <Check className="h-3 w-3 text-primary-foreground" />
+                  <div key={index} className="flex items-center gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-2.5 w-2.5 text-primary" />
                     </div>
-                    <span className="text-foreground">{item}</span>
+                    <span className="text-sm text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
             <div className="lg:order-1">
-              <Card className="border border-border shadow-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <BookOpen className="h-5 w-5 text-primary" />
-                    2026 Predicted Exam Paper
-                  </CardTitle>
-                  <CardDescription className="text-xs">Mathematics Paper 1 - Sample</CardDescription>
+              <Card className="border border-border/50 shadow-sm">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="text-base font-semibold mb-1">2026 Predicted Exam</CardTitle>
+                      <CardDescription className="text-xs">Mathematics Paper 1</CardDescription>
+                    </div>
+                    <Badge variant="outline" className="text-xs">
+                      <Clock className="h-3 w-3 mr-1" />
+                      90 mins
+                    </Badge>
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-muted/30 rounded-lg p-4">
-                    <div className="text-center mb-4 pb-3 border-b border-border">
-                      <p className="text-xs text-muted-foreground">Time: 1 hour 30 minutes</p>
-                    </div>
-                    
-                    <div className="space-y-4 text-sm">
-                      <div className="border-l-2 border-primary pl-3">
-                        <p className="font-medium mb-1">Question 1.</p>
-                        <p className="text-muted-foreground mb-1">Solve the equation 3x + 7 = 22</p>
-                        <span className="text-primary text-xs font-medium">[2 marks]</span>
+                  <div className="bg-muted/30 rounded-lg p-4 space-y-4">
+                    {[
+                      { q: "Question 1", text: "Solve the equation 3x + 7 = 22", marks: 2 },
+                      { q: "Question 2", text: "Find the area of a circle with radius 5cm", marks: 3 },
+                      { q: "Question 3", text: "Expand and simplify (x + 3)(x - 2)", marks: 3 }
+                    ].map((item, index) => (
+                      <div key={index} className="border-l-2 border-primary pl-3 py-1">
+                        <p className="text-xs font-semibold mb-1">{item.q}</p>
+                        <p className="text-xs text-muted-foreground mb-1.5">{item.text}</p>
+                        <Badge variant="secondary" className="text-xs px-2 py-0">
+                          {item.marks} marks
+                        </Badge>
                       </div>
-                      
-                      <div className="border-l-2 border-primary pl-3">
-                        <p className="font-medium mb-1">Question 2.</p>
-                        <p className="text-muted-foreground mb-1">Find the area of a circle with radius 5cm.</p>
-                        <span className="text-primary text-xs font-medium">[3 marks]</span>
-                      </div>
-                      
-                      <div className="border-l-2 border-primary pl-3">
-                        <p className="font-medium mb-1">Question 3.</p>
-                        <p className="text-muted-foreground mb-1">Expand and simplify (x + 3)(x - 2)</p>
-                        <span className="text-primary text-xs font-medium">[3 marks]</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -350,146 +370,123 @@ const Pricing = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="grid lg:grid-cols-2 gap-16 items-center"
           >
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Brain className="h-5 w-5 text-primary" />
-                </div>
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 mb-5">
+                <Brain className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-2xl font-semibold mb-3 tracking-tight">
                 Smart Revision Notebook
               </h3>
-              <p className="text-lg text-muted-foreground mb-6">
-                Automatically generate personalized revision notes from your practice sessions, highlighting key concepts and areas for improvement.
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Automatically generate personalized revision notes from your practice sessions, organized by subject and topic.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {[
-                  "Auto-generated notes from practice",
-                  "Organized by subject and topic",
-                  "Highlights weak areas and key concepts",
-                  "Export and share your notes"
+                  "Auto-generated from practice",
+                  "Organized by subject & topic",
+                  "Highlights weak areas",
+                  "Export and share notes"
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <Check className="h-3 w-3 text-primary-foreground" />
+                  <div key={index} className="flex items-center gap-2.5">
+                    <div className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-2.5 w-2.5 text-primary" />
                     </div>
-                    <span className="text-foreground">{item}</span>
+                    <span className="text-sm text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
             <div>
-              <Card className="border border-border shadow-sm">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <BookOpen className="h-8 w-8 text-primary" />
+              <Card className="border border-border/50 shadow-sm">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-base font-semibold">Revision Notes</CardTitle>
+                    <BookOpen className="h-4 w-4 text-muted-foreground" />
                   </div>
-                  <h4 className="text-lg font-bold text-center mb-4">Revision Notebook</h4>
-                  
-                  <div className="space-y-3">
-                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-blue-500">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                        <span className="font-medium text-sm">Mathematics</span>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {[
+                    { subject: "Mathematics", topic: "Quadratic Equations", color: "border-blue-500", dot: "bg-blue-500", text: "Use the formula ax² + bx + c = 0 where a ≠ 0" },
+                    { subject: "Physics", topic: "Newton's Laws", color: "border-purple-500", dot: "bg-purple-500", text: "Force = mass × acceleration (F = ma)" },
+                    { subject: "Chemistry", topic: "Periodic Table", color: "border-green-500", dot: "bg-green-500", text: "Elements grouped by similar properties" }
+                  ].map((item, index) => (
+                    <div key={index} className={`bg-muted/30 rounded-lg p-3 border-l-2 ${item.color}`}>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className={`w-1.5 h-1.5 rounded-full ${item.dot}`}></div>
+                        <span className="text-xs font-semibold">{item.subject}</span>
+                        <span className="text-xs text-muted-foreground">• {item.topic}</span>
                       </div>
-                      <p className="text-muted-foreground text-xs">Quadratic equations: Use the formula ax² + bx + c = 0 where a ≠ 0</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.text}</p>
                     </div>
-                    
-                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-purple-500">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                        <span className="font-medium text-sm">Physics</span>
-                      </div>
-                      <p className="text-muted-foreground text-xs">Newton's Second Law: Force = mass × acceleration (F = ma)</p>
-                    </div>
-
-                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-green-500">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                        <span className="font-medium text-sm">Chemistry</span>
-                      </div>
-                      <p className="text-muted-foreground text-xs">Periodic Table: Elements grouped by similar properties</p>
-                    </div>
-                  </div>
+                  ))}
                 </CardContent>
               </Card>
             </div>
           </motion.div>
         </div>
 
-        {/* Final CTA Section */}
+        {/* All Features Grid */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="mb-24"
         >
-          <h3 className="text-3xl font-bold mb-6">
-            Everything You Need to Excel
-          </h3>
-          <div className="max-w-2xl mx-auto space-y-3 mb-8">
-            {[
-              "Unlimited practice sessions - no hearts system",
-              "Advanced grade predictions and analytics", 
-              "2026 predicted exam papers and questions",
-              "Smart revision notebook with AI-generated notes",
-              "Personalized weak spot analysis",
-              "Ad-free learning experience"
-            ].map((item, index) => (
-              <div key={index} className="flex items-center gap-3 justify-center">
-                <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                  <Check className="h-3 w-3 text-primary-foreground" />
-                </div>
-                <span className="text-foreground">{item}</span>
-              </div>
-            ))}
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-semibold mb-3 tracking-tight">
+              Everything You Need to Excel
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              All premium features included in your subscription
+            </p>
           </div>
           
-          <Card className="max-w-md mx-auto border-2 border-primary/20 shadow-lg">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+            {premiumFeatures.map((feature, index) => (
+              <Card key={index} className="border border-border/50 hover:border-border transition-colors">
+                <CardContent className="p-6">
+                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 mb-4`}>
+                    <feature.icon className={`h-5 w-5 ${feature.color}`} />
+                  </div>
+                  <h4 className="text-sm font-semibold mb-2">{feature.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Final CTA */}
+          <Card className="max-w-md mx-auto border border-border/50 shadow-sm">
             <CardContent className="p-8">
-              <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1 mb-4">
-                  <Star className="h-3 w-3 text-primary" />
-                  <span className="text-primary font-medium text-xs">Best Value</span>
+              <div className="text-center mb-8">
+                <Badge variant="secondary" className="mb-4 px-3 py-1 text-xs font-medium">
+                  <Star className="h-3 w-3 mr-1" />
+                  Best Value
+                </Badge>
+                <h3 className="text-xl font-semibold mb-3">Start Your Free Trial</h3>
+                <p className="text-sm text-muted-foreground mb-6">Try Premium free for 7 days</p>
+                <div className="mb-6">
+                  <div className="flex items-baseline justify-center gap-1 mb-2">
+                    <span className="text-5xl font-bold">£9.99</span>
+                    <span className="text-lg text-muted-foreground">/month</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Cancel anytime</p>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Start Your Free Trial</h3>
-                <p className="text-sm text-muted-foreground mb-3">First 7 days absolutely free</p>
-                <div className="text-5xl font-bold mb-2">
-                  £9.99<span className="text-xl font-medium text-muted-foreground">/month</span>
-                </div>
-                <p className="text-sm text-muted-foreground">Cancel anytime, no commitment</p>
               </div>
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-5 text-sm"
                 size="lg"
               >
-                Get Free Trial
+                Start Free Trial
               </Button>
             </CardContent>
           </Card>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8"
-        >
-          {statsData.map((stat, index) => (
-            <Card key={index} className="text-center border border-border">
-              <CardContent className="p-6">
-                <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </CardContent>
-            </Card>
-          ))}
         </motion.div>
       </div>
     </div>
