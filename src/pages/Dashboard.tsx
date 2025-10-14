@@ -53,6 +53,7 @@ import {
   X,
   Eye,
   Play,
+  Pencil,
   ChevronRight,
   Target,
   TrendingDown,
@@ -179,6 +180,8 @@ const Dashboard = () => {
   const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
   const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
   const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
+  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
+  const [newSetName, setNewSetName] = useState("");
   
   // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
@@ -440,6 +443,42 @@ const Dashboard = () => {
       toast({
         title: "Error",
         description: "Failed to delete flashcard set",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleRenameSet = async (setId: string) => {
+    if (!newSetName.trim()) {
+      toast({
+        title: "Error",
+        description: "Set name cannot be empty",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('flashcards')
+        .update({ title: newSetName.trim() })
+        .eq('set_id', setId);
+
+      if (error) throw error;
+
+      setRenamingSetId(null);
+      setNewSetName("");
+      loadFlashcardSets();
+      
+      toast({
+        title: "Success",
+        description: "Flashcard set renamed successfully",
+      });
+    } catch (error) {
+      console.error('Error renaming flashcard set:', error);
+      toast({
+        title: "Error",
+        description: "Failed to rename flashcard set",
         variant: "destructive"
       });
     }
@@ -4465,10 +4504,61 @@ const Dashboard = () => {
                                              <div className="p-2 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg shadow-lg">
                                                <Brain className="h-4 w-4 text-white" />
                                              </div>
-                                           <div>
-                                             <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                                               {set.title}
-                                             </CardTitle>
+                                           <div className="flex-1">
+                                             {renamingSetId === set.id ? (
+                                               <div className="flex items-center gap-2">
+                                                 <Input
+                                                   value={newSetName}
+                                                   onChange={(e) => setNewSetName(e.target.value)}
+                                                   onKeyDown={(e) => {
+                                                     if (e.key === 'Enter') {
+                                                       handleRenameSet(set.id);
+                                                     } else if (e.key === 'Escape') {
+                                                       setRenamingSetId(null);
+                                                       setNewSetName("");
+                                                     }
+                                                   }}
+                                                   className="h-9 text-sm font-bold"
+                                                   autoFocus
+                                                 />
+                                                 <Button
+                                                   size="sm"
+                                                   onClick={() => handleRenameSet(set.id)}
+                                                   className="h-9 w-9 p-0 bg-emerald-500 hover:bg-emerald-600"
+                                                 >
+                                                   <Check className="h-4 w-4" />
+                                                 </Button>
+                                                 <Button
+                                                   size="sm"
+                                                   variant="outline"
+                                                   onClick={() => {
+                                                     setRenamingSetId(null);
+                                                     setNewSetName("");
+                                                   }}
+                                                   className="h-9 w-9 p-0"
+                                                 >
+                                                   <X className="h-4 w-4" />
+                                                 </Button>
+                                               </div>
+                                             ) : (
+                                               <div className="flex items-center gap-2">
+                                                 <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors flex-1">
+                                                   {set.title}
+                                                 </CardTitle>
+                                                 <Button
+                                                   size="sm"
+                                                   variant="ghost"
+                                                   onClick={(e) => {
+                                                     e.stopPropagation();
+                                                     setRenamingSetId(set.id);
+                                                     setNewSetName(set.title);
+                                                   }}
+                                                   className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                 >
+                                                   <Pencil className="h-3.5 w-3.5" />
+                                                 </Button>
+                                               </div>
+                                             )}
                                              <CardDescription className="text-muted-foreground text-sm">
                                                {set.card_count} cards • {formatDate(set.created_at)}
                                              </CardDescription>
