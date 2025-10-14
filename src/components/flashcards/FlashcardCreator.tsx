@@ -226,29 +226,44 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
   return (
     <div className="space-y-6">
       {/* Main Card Container */}
-      <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-2xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-            Create Flashcards
-          </CardTitle>
-          <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium text-base">
-            Transform your study notes into AI-powered flashcards
-          </CardDescription>
+      <Card className="rounded-3xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white via-[#FAFBFC] to-[#F8FAFC] dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 shadow-2xl">
+        <CardHeader className="pb-6 border-b border-[#E2E8F0]/30 dark:border-gray-800/50">
+          <div className="space-y-2">
+            <CardTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+              Create Flashcards
+            </CardTitle>
+            <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium text-lg">
+              Transform your study notes into AI-powered flashcards
+            </CardDescription>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-8 pt-8">
           {/* Study Notes Input */}
-          <div className="space-y-3">
-            <Label htmlFor="notes" className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight">
-              Study Notes
-            </Label>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="notes" className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight">
+                Study Notes
+              </Label>
+              <div className="text-sm font-medium text-[#64748B] dark:text-gray-400">
+                {notes.length < 50 ? (
+                  <span>
+                    Minimum <span className="text-[#0EA5E9] font-bold">{50}</span> characters
+                  </span>
+                ) : (
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+                    ✓ Ready
+                  </span>
+                )}
+              </div>
+            </div>
             <Textarea
               id="notes"
               placeholder="Paste your study notes here... The more detailed your notes, the better the flashcards will be."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="min-h-[200px] rounded-2xl border-2 border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-900 text-[#0F172A] dark:text-white shadow-sm focus:ring-2 focus:ring-[#0EA5E9]/50 focus:border-[#0EA5E9] font-medium resize-none text-base leading-relaxed p-4"
+              className="min-h-[220px] rounded-2xl border-2 border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-950 text-[#0F172A] dark:text-white shadow-sm hover:border-[#0EA5E9]/50 focus:ring-2 focus:ring-[#0EA5E9]/30 focus:border-[#0EA5E9] font-medium resize-none text-base leading-relaxed p-5 transition-all duration-200"
             />
-            <div className="flex justify-between items-center pt-1">
+            <div className="flex justify-between items-center">
               <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
                 {notes.length < 50 ? (
                   <>
@@ -256,57 +271,63 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
                   </>
                 ) : (
                   <>
-                    <span className="text-[#0EA5E9] font-bold">{notes.length}</span> characters
+                    <span className="text-[#0EA5E9] font-bold">{notes.length}</span> characters • Ready to generate
                   </>
                 )}
               </p>
               {notes.length >= 50 && (
-                <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0 font-bold shadow-md px-3 py-1">
-                  ✓ Ready to Generate
+                <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0 font-bold shadow-lg px-4 py-1.5 text-sm animate-in fade-in slide-in-from-right-2 duration-300">
+                  ✓ Ready
                 </Badge>
               )}
             </div>
           </div>
 
           {/* Enhanced Mode Toggle */}
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/20 dark:via-[#0EA5E9]/10 dark:to-transparent border-2 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm">
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Label htmlFor="enhance" className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight cursor-pointer">
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/8 via-[#0EA5E9]/4 to-transparent dark:from-[#0EA5E9]/15 dark:via-[#0EA5E9]/8 dark:to-transparent border-2 border-[#0EA5E9]/25 dark:border-[#0EA5E9]/30 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-[#0EA5E9]/40">
+            <div className="flex items-start justify-between gap-6 mb-5">
+              <div className="flex-1 space-y-2">
+                <div className="flex items-center gap-3">
+                  <Label htmlFor="enhance" className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight cursor-pointer">
                     Enhanced Generation
                   </Label>
                   {!isPremium && (
-                    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold text-xs shadow-md px-2 py-0.5">
+                    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold text-xs shadow-md px-2.5 py-1">
                       Premium
                     </Badge>
                   )}
                 </div>
                 <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium leading-relaxed">
                   {isPremium 
-                    ? "Generate exam-style flashcards with mark schemes and detailed answers" 
-                    : "Unlock exam-style flashcards with marks and examiner guidance"}
+                    ? "Generate exam-style flashcards with mark schemes and detailed guidance" 
+                    : "Unlock exam-style flashcards with marks, examiner tips, and structured answers"}
                 </p>
               </div>
               <Switch
                 id="enhance"
                 checked={enhance}
                 onCheckedChange={handleEnhanceToggle}
-                className="data-[state=checked]:bg-[#0EA5E9] mt-1"
+                className="data-[state=checked]:bg-[#0EA5E9] mt-1.5 scale-110"
               />
             </div>
 
             {/* Example Preview */}
             {(enhance || !isPremium) && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-[#E2E8F0]/50 dark:border-gray-700">
-                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-[#E2E8F0] dark:border-gray-700 shadow-sm">
-                  <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 mb-2 tracking-wide uppercase">Standard</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 border-t border-[#E2E8F0]/40 dark:border-gray-700/50 animate-in fade-in slide-in-from-top-2 duration-500">
+                <div className="group p-5 bg-white dark:bg-gray-900 rounded-2xl border-2 border-[#E2E8F0] dark:border-gray-700 shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-[#64748B]"></div>
+                    <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wide uppercase">Standard</p>
+                  </div>
                   <p className="text-sm text-[#0F172A] dark:text-white font-medium leading-relaxed">
                     {subject && subjectExamples[subject]?.normal ? subjectExamples[subject].normal : "What is Newton's first law?"}
                   </p>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 rounded-xl border-2 border-[#0EA5E9]/40 shadow-md">
-                  <p className="text-xs font-bold text-[#0EA5E9] mb-2 tracking-wide uppercase">Enhanced</p>
+                <div className="group p-5 bg-gradient-to-br from-[#0EA5E9]/8 to-[#38BDF8]/8 dark:from-[#0EA5E9]/15 dark:to-[#38BDF8]/15 rounded-2xl border-2 border-[#0EA5E9]/50 shadow-lg hover:shadow-xl hover:border-[#0EA5E9]/70 transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-[#0EA5E9] animate-pulse"></div>
+                    <p className="text-xs font-bold text-[#0EA5E9] tracking-wide uppercase">Enhanced</p>
+                  </div>
                   <p className="text-sm text-[#0F172A] dark:text-white font-medium leading-relaxed">
                     {subject && subjectExamples[subject]?.enhanced ? subjectExamples[subject].enhanced : "State and explain Newton's first law of motion. (3 marks)"}
                   </p>
@@ -319,16 +340,16 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || notes.length < 50}
-            className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl font-bold text-lg h-14 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-xl hover:shadow-2xl transition-all duration-300 rounded-2xl font-bold text-lg h-16 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98]"
           >
             {isGenerating ? (
               <>
-                <Loader2 className="h-6 w-6 mr-2 animate-spin" />
+                <Loader2 className="h-6 w-6 mr-3 animate-spin" />
                 Generating Flashcards...
               </>
             ) : (
               <>
-                <Sparkles className="h-6 w-6 mr-2" />
+                <Sparkles className="h-6 w-6 mr-3" />
                 Generate Flashcards
               </>
             )}
@@ -338,60 +359,66 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
-          <CardHeader className="border-b border-[#E2E8F0]/50 dark:border-gray-800 pb-6">
+        <Card className="rounded-3xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white via-[#FAFBFC] to-[#F8FAFC] dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <CardHeader className="border-b-2 border-[#E2E8F0]/30 dark:border-gray-800/50 pb-6">
             <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-2xl font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">
-                  Preview Your Flashcards
+              <div className="space-y-2">
+                <CardTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                  Your Flashcards
                 </CardTitle>
-                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium text-base">
-                  Review and customize before saving
+                <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium text-lg">
+                  Review and customize before saving to your library
                 </CardDescription>
               </div>
-              <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-4 py-2 text-base">
+              <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-lg px-5 py-2.5 text-lg rounded-xl">
                 {generatedFlashcards.length} cards
               </Badge>
             </div>
           </CardHeader>
-          <CardContent className="space-y-6 pt-6">
+          <CardContent className="space-y-8 pt-8">
             {/* Optional Set Title */}
-            <div>
-              <Label htmlFor="setTitle" className="text-base font-bold text-[#0F172A] dark:text-white mb-3 block tracking-tight">
-                Flashcard Set Title (Optional)
-              </Label>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="setTitle" className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight">
+                  Flashcard Set Name
+                </Label>
+                <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">Optional</span>
+              </div>
               <Input
                 id="setTitle"
                 placeholder="e.g., Physics Revision - Forces and Motion"
                 value={setTitle}
                 onChange={(e) => setSetTitle(e.target.value)}
-                className="rounded-xl border-2 border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm focus:ring-2 focus:ring-[#0EA5E9]/50 focus:border-[#0EA5E9] font-medium h-12 text-base"
+                className="rounded-2xl border-2 border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-950 shadow-sm hover:border-[#0EA5E9]/50 focus:ring-2 focus:ring-[#0EA5E9]/30 focus:border-[#0EA5E9] font-medium h-14 text-base px-5 transition-all duration-200"
               />
             </div>
 
-            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+            <div className="space-y-5 max-h-[550px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#0EA5E9]/20 scrollbar-track-transparent">
               {generatedFlashcards.map((flashcard, index) => (
-                <Card key={index} className="rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-md hover:shadow-lg hover:border-[#0EA5E9]/50 transition-all duration-200">
-                  <CardContent className="p-6 space-y-4">
+                <Card key={index} className="group rounded-2xl border-2 border-[#E2E8F0]/60 dark:border-gray-700 bg-white dark:bg-gray-950 shadow-md hover:shadow-xl hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 hover:-translate-y-0.5">
+                  <CardContent className="p-6 space-y-5">
                     <div>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-md">
-                          <span className="text-sm font-bold text-white">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                          <span className="text-base font-bold text-white">
                             {index + 1}
                           </span>
                         </div>
-                        <span className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wide uppercase">
+                        <span className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wider uppercase">
                           Question
                         </span>
                       </div>
-                      <p className="text-base font-bold text-[#0F172A] dark:text-white leading-relaxed tracking-tight pl-11">
+                      <p className="text-base font-bold text-[#0F172A] dark:text-white leading-relaxed tracking-tight pl-13">
                         {flashcard.front}
                       </p>
                     </div>
-                    <div className="pt-4 border-t-2 border-[#E2E8F0]/50 dark:border-gray-800">
-                      <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 mb-3 tracking-wide uppercase">
-                        Answer
-                      </p>
+                    <div className="pt-5 border-t-2 border-[#E2E8F0]/60 dark:border-gray-800">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#0EA5E9]"></div>
+                        <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wider uppercase">
+                          Answer
+                        </p>
+                      </div>
                       <p className="text-base text-[#64748B] dark:text-gray-300 leading-relaxed font-medium">
                         {flashcard.back}
                       </p>
@@ -404,16 +431,16 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
             <Button
               onClick={handleSave}
               disabled={isSaving}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl font-bold h-14 text-lg"
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 rounded-2xl font-bold h-16 text-lg hover:scale-[1.02] active:scale-[0.98]"
             >
               {isSaving ? (
                 <>
-                  <Loader2 className="h-6 w-6 mr-2 animate-spin" />
+                  <Loader2 className="h-6 w-6 mr-3 animate-spin" />
                   Saving to Library...
                 </>
               ) : (
                 <>
-                  <Plus className="h-6 w-6 mr-2" />
+                  <Plus className="h-6 w-6 mr-3" />
                   Save to Library
                 </>
               )}
