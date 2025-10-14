@@ -80,7 +80,6 @@ import { StudyInsights } from "@/components/dashboard/StudyInsights";
 import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
 import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
-import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 
 interface UserProgress {
   subjectId: string;
@@ -181,7 +180,7 @@ const Dashboard = () => {
   // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
-  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
+  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes'>('overview');
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
   const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
@@ -2594,7 +2593,7 @@ const Dashboard = () => {
                       </SheetHeader>
 
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
-                        <TabsList className="grid w-full grid-cols-6 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
+                        <TabsList className="grid w-full grid-cols-5 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Overview
                           </TabsTrigger>
@@ -2609,9 +2608,6 @@ const Dashboard = () => {
                           </TabsTrigger>
                           <TabsTrigger value="notes" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Notes
-                          </TabsTrigger>
-                          <TabsTrigger value="flashcards" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
-                            Flashcards
                           </TabsTrigger>
                         </TabsList>
 
@@ -3358,81 +3354,6 @@ const Dashboard = () => {
                             </CardContent>
                           </Card>
                         </TabsContent>
-
-                        <TabsContent value="flashcards" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                            <CardHeader>
-                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Your Flashcards</CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">
-                                Study with flashcards for this subject
-                              </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                              {(() => {
-                                const subjectFlashcards = individualFlashcards.filter(card => 
-                                  card.subject_id === selectedDrawerSubject?.id
-                                );
-
-                                if (subjectFlashcards.length === 0) {
-                                  return (
-                                    <div className="text-center py-16">
-                                      <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
-                                        <Brain className="h-8 w-8 text-muted-foreground" />
-                                      </div>
-                                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                                        No flashcards yet for this subject
-                                      </h3>
-                                      <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-                                        Create flashcards to help you study and retain information
-                                      </p>
-                                      <Button 
-                                        onClick={() => {
-                                          setSubjectDrawerOpen(false);
-                                          setActiveTab("flashcards");
-                                        }}
-                                        className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-semibold shadow-sm"
-                                      >
-                                        <Brain className="h-4 w-4 mr-2" />
-                                        Create Flashcards
-                                      </Button>
-                                    </div>
-                                  );
-                                }
-
-                                return (
-                                  <div className="space-y-3">
-                                    {subjectFlashcards.map((card) => (
-                                      <Card key={card.id} className="bg-white dark:bg-gray-800 border border-[#E2E8F0] dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200">
-                                        <CardContent className="p-4">
-                                          <div className="space-y-3">
-                                            <div>
-                                              <div className="text-xs text-muted-foreground mb-1 font-medium">Question</div>
-                                              <div className="text-sm font-semibold text-foreground">{card.front}</div>
-                                            </div>
-                                            <div className="pt-2 border-t border-border">
-                                              <div className="text-xs text-muted-foreground mb-1 font-medium">Answer</div>
-                                              <div className="text-sm text-muted-foreground">{card.back}</div>
-                                            </div>
-                                          </div>
-                                        </CardContent>
-                                      </Card>
-                                    ))}
-                                    <Button 
-                                      onClick={() => {
-                                        setSubjectDrawerOpen(false);
-                                        setActiveTab("flashcards");
-                                      }}
-                                      variant="outline"
-                                      className="w-full mt-4"
-                                    >
-                                      View All Flashcards
-                                    </Button>
-                                  </div>
-                                );
-                              })()}
-                            </CardContent>
-                          </Card>
-                        </TabsContent>
                       </Tabs>
                     </>
                   )}
@@ -3938,14 +3859,7 @@ const Dashboard = () => {
                     ]}
                   />
 
-                  {/* 4. Flashcard Insights */}
-                  <FlashcardInsights
-                    flashcardSets={flashcardSets}
-                    individualFlashcards={individualFlashcards}
-                    onViewFlashcards={() => setActiveTab("flashcards")}
-                  />
-
-                  {/* 5. Personalized Summary */}
+                  {/* 4. Personalized Summary */}
                   <PersonalizedSummary
                     predictedGrades={predictedGrades}
                     userProgress={userProgress}
