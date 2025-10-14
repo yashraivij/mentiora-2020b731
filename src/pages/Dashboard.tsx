@@ -3960,6 +3960,7 @@ const Dashboard = () => {
                           flashcardSets={flashcardSets}
                           individualFlashcards={individualFlashcards}
                           onViewFlashcards={() => setActiveTab("flashcards")}
+                          onLearnFlashcards={() => setActiveTab("flashcards")}
                           onFlashcardCreated={() => {
                             loadFlashcardSets();
                             loadIndividualFlashcards();
@@ -4382,37 +4383,37 @@ const Dashboard = () => {
 
                          {/* Flashcard Sets Grid */}
                          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                           {flashcardSets.map((set, index) => {
-                             // Color gradients for different cards - unified cyan theme
-                             const gradients = [
-                               "bg-gradient-to-br from-cyan-50 via-cyan-100 to-teal-50 dark:from-cyan-900/30 dark:via-cyan-800/20 dark:to-teal-900/30 border-cyan-300/60 dark:border-cyan-600/30 shadow-cyan-200/50 dark:shadow-cyan-900/20",
-                               "bg-gradient-to-br from-teal-50 via-cyan-100 to-sky-50 dark:from-teal-900/30 dark:via-cyan-800/20 dark:to-sky-900/30 border-teal-300/60 dark:border-teal-600/30 shadow-teal-200/50 dark:shadow-teal-900/20",
-                               "bg-gradient-to-br from-sky-50 via-cyan-100 to-blue-50 dark:from-sky-900/30 dark:via-cyan-800/20 dark:to-blue-900/30 border-sky-300/60 dark:border-sky-600/30 shadow-sky-200/50 dark:shadow-sky-900/20",
-                               "bg-gradient-to-br from-cyan-50 via-sky-100 to-cyan-50 dark:from-cyan-900/30 dark:via-sky-800/20 dark:to-cyan-900/30 border-cyan-300/60 dark:border-cyan-600/30 shadow-cyan-200/50 dark:shadow-cyan-900/20",
-                               "bg-gradient-to-br from-blue-50 via-cyan-100 to-teal-50 dark:from-blue-900/30 dark:via-cyan-800/20 dark:to-teal-900/30 border-blue-300/60 dark:border-blue-600/30 shadow-blue-200/50 dark:shadow-blue-900/20",
-                               "bg-gradient-to-br from-teal-50 via-sky-100 to-cyan-50 dark:from-teal-900/30 dark:via-sky-800/20 dark:to-cyan-900/30 border-teal-300/60 dark:border-teal-600/30 shadow-teal-200/50 dark:shadow-teal-900/20"
-                             ];
-                             const cardGradient = gradients[index % gradients.length];
-                             
-                             return (
-                               <motion.div
-                                 key={set.id}
-                                 initial={{ opacity: 0, y: 20 }}
-                                 animate={{ opacity: 1, y: 0 }}
-                                 transition={{ delay: 0.05 * index }}
-                                 className="group"
-                               >
-                                 <Card className={`${cardGradient} backdrop-blur-xl border-2 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] overflow-hidden relative`}>
-                                   {/* Decorative elements */}
-                                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/20 to-transparent dark:from-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500"></div>
-                                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/10 to-transparent dark:from-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500"></div>
-                                   <CardHeader className="relative pb-3">
-                                     <div className="flex justify-between items-start mb-3">
-                                       <div className="flex-1">
-                                         <div className="flex items-center gap-3 mb-2">
-                                            <div className="p-2 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-lg shadow-lg">
-                                              <Brain className="h-4 w-4 text-white" />
-                                            </div>
+                            {flashcardSets.map((set, index) => {
+                              // Color gradients for different cards - medly blue and emerald theme
+                              const gradients = [
+                                "bg-gradient-to-br from-[#0EA5E9]/10 via-[#38BDF8]/10 to-emerald-50 dark:from-[#0EA5E9]/20 dark:via-[#38BDF8]/15 dark:to-emerald-900/30 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 shadow-[#0EA5E9]/20 dark:shadow-[#0EA5E9]/10",
+                                "bg-gradient-to-br from-emerald-50 via-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-emerald-900/30 dark:via-[#0EA5E9]/15 dark:to-[#38BDF8]/20 border-emerald-300/60 dark:border-emerald-600/30 shadow-emerald-200/50 dark:shadow-emerald-900/20",
+                                "bg-gradient-to-br from-[#38BDF8]/10 via-[#0EA5E9]/10 to-emerald-50 dark:from-[#38BDF8]/20 dark:via-[#0EA5E9]/15 dark:to-emerald-900/30 border-[#38BDF8]/30 dark:border-[#38BDF8]/40 shadow-[#38BDF8]/20 dark:shadow-[#38BDF8]/10",
+                                "bg-gradient-to-br from-[#0EA5E9]/10 via-emerald-50 to-[#0EA5E9]/10 dark:from-[#0EA5E9]/20 dark:via-emerald-900/20 dark:to-[#0EA5E9]/20 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 shadow-[#0EA5E9]/20 dark:shadow-[#0EA5E9]/10",
+                                "bg-gradient-to-br from-emerald-50 via-[#38BDF8]/10 to-[#0EA5E9]/10 dark:from-emerald-900/30 dark:via-[#38BDF8]/15 dark:to-[#0EA5E9]/20 border-emerald-300/60 dark:border-emerald-600/30 shadow-emerald-200/50 dark:shadow-emerald-900/20",
+                                "bg-gradient-to-br from-[#0EA5E9]/10 via-[#0EA5E9]/15 to-emerald-50 dark:from-[#0EA5E9]/20 dark:via-[#0EA5E9]/25 dark:to-emerald-900/30 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 shadow-[#0EA5E9]/20 dark:shadow-[#0EA5E9]/10"
+                              ];
+                              const cardGradient = gradients[index % gradients.length];
+                              
+                              return (
+                                <motion.div
+                                  key={set.id}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.05 * index }}
+                                  className="group"
+                                >
+                                  <Card className={`${cardGradient} backdrop-blur-xl border-2 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] overflow-hidden relative`}>
+                                    {/* Decorative elements */}
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/20 to-transparent dark:from-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500"></div>
+                                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/10 to-transparent dark:from-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500"></div>
+                                    <CardHeader className="relative pb-3">
+                                      <div className="flex justify-between items-start mb-3">
+                                        <div className="flex-1">
+                                          <div className="flex items-center gap-3 mb-2">
+                                             <div className="p-2 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg shadow-lg">
+                                               <Brain className="h-4 w-4 text-white" />
+                                             </div>
                                            <div>
                                              <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                                                {set.title}
@@ -4451,17 +4452,17 @@ const Dashboard = () => {
                                          <Eye className="h-3 w-3 mr-1" />
                                          Review
                                        </Button>
-                                        <Button
-                                          size="sm"
-                                          onClick={() => {
-                                            setSelectedSet(set);
-                                            setViewMode("learn");
-                                          }}
-                                          className="w-full bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
-                                        >
-                                          <Play className="h-3 w-3 mr-1" />
-                                          Study
-                                        </Button>
+                                         <Button
+                                           size="sm"
+                                           onClick={() => {
+                                             setSelectedSet(set);
+                                             setViewMode("learn");
+                                           }}
+                                           className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
+                                         >
+                                           <Play className="h-3 w-3 mr-1" />
+                                           Study
+                                         </Button>
                                      </div>
                                    </CardContent>
                                  </Card>

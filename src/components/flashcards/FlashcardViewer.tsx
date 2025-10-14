@@ -440,7 +440,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                         <Button 
                           onClick={handleAnswerSubmit}
                           disabled={!userAnswer.trim()}
-                          className="w-full bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white font-semibold py-6 disabled:opacity-50 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
+                          className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold py-6 disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
                         >
                           <Check className="h-4 w-4 mr-2" />
                           Check Answer
@@ -452,14 +452,14 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                           <p className="text-sm text-muted-foreground mb-2">Your answer:</p>
                           <p className="font-medium">{userAnswer}</p>
                         </div>
-                        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg">
                           <p className="text-sm text-muted-foreground mb-2">Correct answer:</p>
-                          <div className="font-medium text-green-800 dark:text-green-200">{formatFlashcardText(currentCard.back)}</div>
+                          <div className="font-medium text-emerald-800 dark:text-emerald-200">{formatFlashcardText(currentCard.back)}</div>
                         </div>
                         <div className="flex gap-3">
                           <Button 
                             onClick={() => handleAnswerFeedback(true)}
-                            className="flex-1 bg-green-600 hover:bg-green-700"
+                            className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white"
                           >
                             <Check className="h-4 w-4 mr-2" />
                             I got it right
@@ -489,7 +489,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                         if (showFeedback) {
                           if (isCorrect) {
                             buttonVariant = "default";
-                            buttonClass = "bg-green-600 hover:bg-green-700 border-green-600";
+                            buttonClass = "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 border-emerald-600 text-white";
                           } else if (isSelected && !isCorrect) {
                             buttonVariant = "destructive";
                           }

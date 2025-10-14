@@ -10,6 +10,7 @@ interface FlashcardInsightsProps {
   flashcardSets: any[];
   individualFlashcards: any[];
   onViewFlashcards: () => void;
+  onLearnFlashcards?: () => void;
   onFlashcardCreated?: () => void;
   userSubjects?: Array<{ subject_name: string; exam_board: string }>;
 }
@@ -18,6 +19,7 @@ export const FlashcardInsights = ({
   flashcardSets, 
   individualFlashcards,
   onViewFlashcards,
+  onLearnFlashcards,
   onFlashcardCreated,
   userSubjects = []
 }: FlashcardInsightsProps) => {
@@ -167,23 +169,34 @@ export const FlashcardInsights = ({
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                  <div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-950/30">
-                    <Zap className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20 border border-emerald-200/50 dark:border-emerald-800/30">
+                  <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 shadow-sm">
+                    <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium">Study Sessions</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm font-medium text-[#0F172A] dark:text-white">Study Sessions</p>
+                    <p className="text-xs text-[#64748B] dark:text-gray-400">
                       Regular review boosts retention by 80%
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#E2E8F0]/50 dark:border-gray-800">
+              <div className="pt-4 border-t border-[#E2E8F0]/50 dark:border-gray-800 space-y-3">
+                {totalCards > 0 && onLearnFlashcards && (
+                  <Button 
+                    onClick={onLearnFlashcards}
+                    className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-12 group"
+                  >
+                    <Zap className="h-5 w-5 mr-2" />
+                    Start Learning
+                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                )}
                 <Button 
                   onClick={onViewFlashcards}
-                  className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-12 group"
+                  variant="outline"
+                  className="w-full border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl font-bold h-12 group"
                 >
                   <Brain className="h-5 w-5 mr-2" />
                   View All Flashcards
