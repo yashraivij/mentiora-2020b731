@@ -3369,68 +3369,80 @@ const Dashboard = () => {
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                              {(() => {
-                                const subjectFlashcards = individualFlashcards.filter(card => 
-                                  card.subject_id === selectedDrawerSubject?.id
-                                );
+                              <Tabs defaultValue="view" className="w-full">
+                                <TabsList className="grid w-full grid-cols-2 mb-6">
+                                  <TabsTrigger value="view">View Cards</TabsTrigger>
+                                  <TabsTrigger value="create">Create New</TabsTrigger>
+                                </TabsList>
 
-                                if (subjectFlashcards.length === 0) {
-                                  return (
-                                    <div className="text-center py-16">
-                                      <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
-                                        <Brain className="h-8 w-8 text-muted-foreground" />
-                                      </div>
-                                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                                        No flashcards yet for this subject
-                                      </h3>
-                                      <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-                                        Create flashcards to help you study and retain information
-                                      </p>
-                                      <Button 
-                                        onClick={() => {
-                                          setSubjectDrawerOpen(false);
-                                          setActiveTab("flashcards");
-                                        }}
-                                        className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-semibold shadow-sm"
-                                      >
-                                        <Brain className="h-4 w-4 mr-2" />
-                                        Create Flashcards
-                                      </Button>
-                                    </div>
-                                  );
-                                }
+                                <TabsContent value="view">
+                                  {(() => {
+                                    const subjectFlashcards = individualFlashcards.filter(card => 
+                                      card.subject_id === selectedDrawerSubject?.id
+                                    );
 
-                                return (
-                                  <div className="space-y-3">
-                                    {subjectFlashcards.map((card) => (
-                                      <Card key={card.id} className="bg-white dark:bg-gray-800 border border-[#E2E8F0] dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200">
-                                        <CardContent className="p-4">
-                                          <div className="space-y-3">
-                                            <div>
-                                              <div className="text-xs text-muted-foreground mb-1 font-medium">Question</div>
-                                              <div className="text-sm font-semibold text-foreground">{card.front}</div>
-                                            </div>
-                                            <div className="pt-2 border-t border-border">
-                                              <div className="text-xs text-muted-foreground mb-1 font-medium">Answer</div>
-                                              <div className="text-sm text-muted-foreground">{card.back}</div>
-                                            </div>
+                                    if (subjectFlashcards.length === 0) {
+                                      return (
+                                        <div className="text-center py-16">
+                                          <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
+                                            <Brain className="h-8 w-8 text-muted-foreground" />
                                           </div>
-                                        </CardContent>
-                                      </Card>
-                                    ))}
-                                    <Button 
-                                      onClick={() => {
-                                        setSubjectDrawerOpen(false);
-                                        setActiveTab("flashcards");
-                                      }}
-                                      variant="outline"
-                                      className="w-full mt-4"
-                                    >
-                                      View All Flashcards
-                                    </Button>
-                                  </div>
-                                );
-                              })()}
+                                          <h3 className="text-lg font-semibold text-foreground mb-2">
+                                            No flashcards yet for this subject
+                                          </h3>
+                                          <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                                            Create flashcards to help you study and retain information
+                                          </p>
+                                        </div>
+                                      );
+                                    }
+
+                                    return (
+                                      <div className="space-y-3">
+                                        {subjectFlashcards.map((card) => (
+                                          <Card key={card.id} className="bg-white dark:bg-gray-800 border border-[#E2E8F0] dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200">
+                                            <CardContent className="p-4">
+                                              <div className="space-y-3">
+                                                <div>
+                                                  <div className="text-xs text-muted-foreground mb-1 font-medium">Question</div>
+                                                  <div className="text-sm font-semibold text-foreground">{card.front}</div>
+                                                </div>
+                                                <div className="pt-2 border-t border-border">
+                                                  <div className="text-xs text-muted-foreground mb-1 font-medium">Answer</div>
+                                                  <div className="text-sm text-muted-foreground">{card.back}</div>
+                                                </div>
+                                              </div>
+                                            </CardContent>
+                                          </Card>
+                                        ))}
+                                        <Button 
+                                          onClick={() => {
+                                            setSubjectDrawerOpen(false);
+                                            setActiveTab("flashcards");
+                                          }}
+                                          variant="outline"
+                                          className="w-full mt-4"
+                                        >
+                                          View All Flashcards
+                                        </Button>
+                                      </div>
+                                    );
+                                  })()}
+                                </TabsContent>
+
+                                <TabsContent value="create">
+                                  <FlashcardCreator 
+                                    onSetCreated={() => {
+                                      loadFlashcardSets();
+                                      loadIndividualFlashcards();
+                                      toast({
+                                        title: "Success",
+                                        description: "Flashcards created successfully!",
+                                      });
+                                    }}
+                                  />
+                                </TabsContent>
+                              </Tabs>
                             </CardContent>
                           </Card>
                         </TabsContent>
