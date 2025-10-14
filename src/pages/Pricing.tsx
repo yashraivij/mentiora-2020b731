@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Check, Minus, Brain, Target, TrendingUp, Zap, Heart, Shield, Star, Sparkles, Trophy, BookOpen, Clock, BarChart3, Flame } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
@@ -99,23 +99,30 @@ const Pricing = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden pt-12">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="flex items-center justify-between px-4 lg:px-8 py-4 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-8 w-8" />
+              <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
+            </button>
+          </div>
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/dashboard")}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Back to Dashboard
+          </Button>
+        </div>
       </div>
-      
-      {/* Header with Logo */}
-      <div className="absolute top-16 left-4 z-20">
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="text-white/90 hover:text-white transition-colors duration-200"
-        >
-          <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-12 w-auto" />
-        </button>
-      </div>
-      
-      <div className="relative z-10 px-4 py-4 max-w-6xl mx-auto">
+
+      <div className="px-4 py-8 max-w-7xl mx-auto">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -123,138 +130,137 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="mb-6">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-              <Sparkles className="h-5 w-5 text-yellow-400" />
-              <span className="text-white/90 font-semibold">Mentiora Premium</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-              <span className="text-green-400">3.7x</span> more likely to achieve{" "}
-              <span 
-                className={`bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform inline-block ${
-                  isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-                }`}
-              >
-                {currentGrade}
-              </span>{" "}
-              grades!
-            </h1>
+          <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2 mb-4">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span className="text-primary font-semibold text-sm">Premium Features</span>
           </div>
+          
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Unlock Your Full Potential
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Join thousands of students achieving their target grades with Mentiora Premium
+          </p>
         </motion.div>
 
-        {/* CTA Section */}
+        {/* Pricing Card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-12"
+          className="max-w-md mx-auto mb-16"
         >
-          <Card className="max-w-sm mx-auto bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
+          <Card className="border-2 border-primary/20 shadow-lg">
             <CardContent className="p-8">
-              <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
-                  <Star className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-400 font-medium text-xs">Limited Time</span>
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1 mb-4">
+                  <Star className="h-3 w-3 text-primary" />
+                  <span className="text-primary font-medium text-xs">Limited Time Offer</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4 font-sans">
-                  Start Free Trial
-                </h3>
-                <div className="space-y-2 mb-4">
-                  <div className="text-base text-white/70 font-sans">
-                    First 7 days free
-                  </div>
-                  <div className="text-4xl font-bold text-white font-sans">
-                    £9.99<span className="text-lg font-medium text-white/80">/month</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1 bg-green-400/20 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-green-400 font-medium text-xs">After trial ends</span>
-                  </div>
+                <h3 className="text-2xl font-bold mb-2">Start Your Free Trial</h3>
+                <p className="text-muted-foreground text-sm mb-4">First 7 days absolutely free</p>
+                <div className="text-5xl font-bold mb-2">
+                  £9.99<span className="text-xl font-medium text-muted-foreground">/month</span>
                 </div>
-                <p className="text-white/70 text-sm font-sans mt-2">
-                  Cancel any time.
-                </p>
+                <p className="text-sm text-muted-foreground">Cancel anytime, no commitment</p>
               </div>
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base mb-3"
+                size="lg"
               >
                 Get Free Trial
+              </Button>
+              
+              <Button
+                variant="ghost"
+                onClick={handleNoThanks}
+                className="w-full text-muted-foreground hover:text-foreground"
+              >
+                Maybe Later
               </Button>
             </CardContent>
           </Card>
         </motion.div>
 
         {/* Feature Showcase Sections */}
-        <div className="space-y-20 mb-16">
+        <div className="space-y-24 mb-16">
           {/* Grade Predictions Feature */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
             <div>
-              <h3 className="text-3xl font-bold text-white mb-6">
-                Accurate grade predictions
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-3xl font-bold mb-4">
+                Advanced Grade Predictions
               </h3>
-              <p className="text-xl text-white/80 mb-6">
-                Know exactly where you stand and what you need to improve with our advanced analytics that track your progress across all subjects.
+              <p className="text-lg text-muted-foreground mb-6">
+                Know exactly where you stand with AI-powered predictions that track your progress across all subjects in real-time.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
                   "Real-time grade predictions for all subjects",
                   "Personalized improvement recommendations", 
-                  "Track progress towards your target grades",
-                  "Identify weak areas before it's too late"
+                  "Track progress towards target grades",
+                  "Identify weak areas before exams"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="h-3 w-3 text-primary-foreground" />
                     </div>
-                    <span className="text-white/90">{item}</span>
+                    <span className="text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="relative">
-              <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+            <div>
+              <Card className="border border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-blue-400" />
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5 text-primary" />
                     Grade Predictions
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {[
                       { 
                         subject: "Mathematics", 
                         current: "B", 
-                        predicted: "A", 
-                        iconColor: "text-green-400" 
+                        predicted: "A",
+                        color: "bg-blue-500"
                       },
                       { 
                         subject: "Physics", 
                         current: "C", 
-                        predicted: "B", 
-                        iconColor: "text-blue-400" 
+                        predicted: "B",
+                        color: "bg-purple-500"
                       },
                       { 
                         subject: "Chemistry", 
                         current: "B", 
-                        predicted: "A*", 
-                        iconColor: "text-purple-400" 
+                        predicted: "A*",
+                        color: "bg-green-500"
                       }
                     ].map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                        <span className="text-white font-medium">{item.subject}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-white/70">Current: {item.current}</span>
-                          <TrendingUp className={`h-4 w-4 ${item.iconColor}`} />
-                          <span className="text-green-400 font-bold">Pred: {item.predicted}</span>
+                      <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-2 h-2 rounded-full ${item.color}`}></div>
+                          <span className="font-medium">{item.subject}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-muted-foreground text-sm">Current: {item.current}</span>
+                          <TrendingUp className="h-4 w-4 text-primary" />
+                          <span className="text-primary font-bold text-sm">Pred: {item.predicted}</span>
                         </div>
                       </div>
                     ))}
@@ -268,69 +274,73 @@ const Pricing = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
             <div className="lg:order-2">
-              <h3 className="text-3xl font-bold text-white mb-6">
-                Predicted 2026 exam questions
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-3xl font-bold mb-4">
+                2026 Predicted Exam Papers
               </h3>
-              <p className="text-xl text-white/80 mb-6">
-                Stay ahead of the curve with predicted questions that mirror the style and content of upcoming 2026 exams across all subjects.
+              <p className="text-lg text-muted-foreground mb-6">
+                Practice with exam-style questions predicted for 2026, designed to match the latest curriculum and exam board requirements.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
-                  "Question predictions for 2026 exams",
-                  "Subject-specific content aligned with new curriculum",
-                  "Practice with the latest question formats",
-                  "Stay prepared for exam board changes"
+                  "AI-predicted questions for 2026 exams",
+                  "Aligned with latest curriculum changes",
+                  "Full exam paper simulations",
+                  "Detailed marking and feedback"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-purple-400 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="h-3 w-3 text-primary-foreground" />
                     </div>
-                    <span className="text-white/90">{item}</span>
+                    <span className="text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="lg:order-1 relative">
-              <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+            <div className="lg:order-1">
+              <Card className="border border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-purple-400" />
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <BookOpen className="h-5 w-5 text-primary" />
                     2026 Predicted Exam Paper
                   </CardTitle>
+                  <CardDescription className="text-xs">Mathematics Paper 1 - Sample</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-white/5 rounded-lg p-4 mb-4">
-                    <div className="text-center mb-3">
-                      <h4 className="text-white font-bold text-sm">Mathematics Paper 1 - Sample</h4>
-                      <p className="text-white/60 text-xs">Time: 1 hour 30 minutes</p>
+                  <div className="bg-muted/30 rounded-lg p-4">
+                    <div className="text-center mb-4 pb-3 border-b border-border">
+                      <p className="text-xs text-muted-foreground">Time: 1 hour 30 minutes</p>
                     </div>
                     
-                    <div className="space-y-3 text-xs">
-                      <div className="border-l-2 border-purple-400 pl-2">
-                        <p className="text-white/90 font-medium">Question 1.</p>
-                        <p className="text-white/70">Solve the equation 3x + 7 = 22</p>
-                        <span className="text-purple-400">[2 marks]</span>
+                    <div className="space-y-4 text-sm">
+                      <div className="border-l-2 border-primary pl-3">
+                        <p className="font-medium mb-1">Question 1.</p>
+                        <p className="text-muted-foreground mb-1">Solve the equation 3x + 7 = 22</p>
+                        <span className="text-primary text-xs font-medium">[2 marks]</span>
                       </div>
                       
-                      <div className="border-l-2 border-purple-400 pl-2">
-                        <p className="text-white/90 font-medium">Question 2.</p>
-                        <p className="text-white/70">Find the area of a circle with radius 5cm.</p>
-                        <span className="text-purple-400">[3 marks]</span>
+                      <div className="border-l-2 border-primary pl-3">
+                        <p className="font-medium mb-1">Question 2.</p>
+                        <p className="text-muted-foreground mb-1">Find the area of a circle with radius 5cm.</p>
+                        <span className="text-primary text-xs font-medium">[3 marks]</span>
                       </div>
                       
-                      <div className="border-l-2 border-purple-400 pl-2">
-                        <p className="text-white/90 font-medium">Question 3.</p>
-                        <p className="text-white/70">Expand and simplify (x + 3)(x - 2)</p>
-                        <span className="text-purple-400">[3 marks]</span>
+                      <div className="border-l-2 border-primary pl-3">
+                        <p className="font-medium mb-1">Question 3.</p>
+                        <p className="text-muted-foreground mb-1">Expand and simplify (x + 3)(x - 2)</p>
+                        <span className="text-primary text-xs font-medium">[3 marks]</span>
                       </div>
                     </div>
                   </div>
-                  
                 </CardContent>
               </Card>
             </div>
@@ -338,126 +348,149 @@ const Pricing = () => {
 
           {/* Smart Revision Notebook Feature */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
             <div>
-              <h3 className="text-3xl font-bold text-white mb-6">
-                <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  ✨ Smart revision notebook
-                </span>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Brain className="h-5 w-5 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-3xl font-bold mb-4">
+                Smart Revision Notebook
               </h3>
-              <p className="text-xl text-white/80 mb-6">
-                Never lose track of important topics again. Get personalized revision notes that adapt to your learning style and exam requirements.
+              <p className="text-lg text-muted-foreground mb-6">
+                Automatically generate personalized revision notes from your practice sessions, highlighting key concepts and areas for improvement.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
-                  "Auto-generated notes from your practice sessions",
-                  "Key concepts organized by subject and topic",
-                  "Personalized weak areas highlighted"
+                  "Auto-generated notes from practice",
+                  "Organized by subject and topic",
+                  "Highlights weak areas and key concepts",
+                  "Export and share your notes"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="h-3 w-3 text-primary-foreground" />
                     </div>
-                    <span className="text-white/90">{item}</span>
+                    <span className="text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="relative">
-              <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+            <div>
+              <Card className="border border-border shadow-sm">
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center justify-center">
-                    <BookOpen className="h-8 w-8 text-white" />
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-primary" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-4 text-center">Revision Notebook</h4>
+                  <h4 className="text-lg font-bold text-center mb-4">Revision Notebook</h4>
                   
-                  <div className="space-y-3 mb-4">
-                    <div className="bg-white/5 rounded-lg p-3">
+                  <div className="space-y-3">
+                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-blue-500">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <span className="text-white font-medium text-sm">Mathematics</span>
+                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                        <span className="font-medium text-sm">Mathematics</span>
                       </div>
-                      <p className="text-white/70 text-xs">Quadratic equations: Use the formula ax² + bx + c = 0</p>
+                      <p className="text-muted-foreground text-xs">Quadratic equations: Use the formula ax² + bx + c = 0 where a ≠ 0</p>
                     </div>
                     
-                    <div className="bg-white/5 rounded-lg p-3">
+                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-purple-500">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-                        <span className="text-white font-medium text-sm">Physics</span>
+                        <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                        <span className="font-medium text-sm">Physics</span>
                       </div>
-                      <p className="text-white/70 text-xs">Newton's laws: Force = mass × acceleration...</p>
+                      <p className="text-muted-foreground text-xs">Newton's Second Law: Force = mass × acceleration (F = ma)</p>
                     </div>
-                  </div>
-                  
-                </CardContent>
-              </Card>
-            </div>
-          </motion.div>
 
-          {/* Recap and Final CTA Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-            className="text-center mb-12"
-          >
-            <h3 className="text-3xl font-bold text-white mb-8">
-              Everything you need to excel
-            </h3>
-            <div className="max-w-2xl mx-auto space-y-4 mb-12">
-              {[
-                "Accurate grade predictions with advanced analytics", 
-                "Predicted 2026 exam questions and papers",
-                "Smart revision notebook with personalized notes",
-                "Personalized weak spot analysis and targeting",
-                "Advanced progress tracking across all subjects"
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3 justify-center">
-                  <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center flex-shrink-0">
-                    <Check className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-white/90">{item}</span>
-                </div>
-              ))}
-            </div>
-            
-            <div className="flex justify-center">
-              <Card className="max-w-sm bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
-                <CardContent className="p-8">
-                  <div className="mb-6">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
-                      <Star className="h-3 w-3 text-yellow-400" />
-                      <span className="text-yellow-400 font-medium text-xs">Best Deal</span>
+                    <div className="bg-muted/50 rounded-lg p-3 border-l-2 border-green-500">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                        <span className="font-medium text-sm">Chemistry</span>
+                      </div>
+                      <p className="text-muted-foreground text-xs">Periodic Table: Elements grouped by similar properties</p>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 font-sans">
-                      Start Free Trial
-                    </h3>
-                    <p className="text-sm text-white/70 mb-2 font-sans">First 7 days free</p>
-                    <div className="text-4xl font-bold text-white mb-4 font-sans">
-                      £9.99<span className="text-lg font-medium text-white/80">/month</span>
-                    </div>
-                    <p className="text-white/70 text-sm font-sans">
-                      After trial ends. Cancel any time.
-                    </p>
                   </div>
-                  
-                  <Button
-                    onClick={handleStartTrial}
-                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
-                  >
-                    Get Free Trial
-                  </Button>
                 </CardContent>
               </Card>
             </div>
           </motion.div>
         </div>
 
+        {/* Final CTA Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="text-center mb-12"
+        >
+          <h3 className="text-3xl font-bold mb-6">
+            Everything You Need to Excel
+          </h3>
+          <div className="max-w-2xl mx-auto space-y-3 mb-8">
+            {[
+              "Unlimited practice sessions - no hearts system",
+              "Advanced grade predictions and analytics", 
+              "2026 predicted exam papers and questions",
+              "Smart revision notebook with AI-generated notes",
+              "Personalized weak spot analysis",
+              "Ad-free learning experience"
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-3 justify-center">
+                <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                  <Check className="h-3 w-3 text-primary-foreground" />
+                </div>
+                <span className="text-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+          
+          <Card className="max-w-md mx-auto border-2 border-primary/20 shadow-lg">
+            <CardContent className="p-8">
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1 mb-4">
+                  <Star className="h-3 w-3 text-primary" />
+                  <span className="text-primary font-medium text-xs">Best Value</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Start Your Free Trial</h3>
+                <p className="text-sm text-muted-foreground mb-3">First 7 days absolutely free</p>
+                <div className="text-5xl font-bold mb-2">
+                  £9.99<span className="text-xl font-medium text-muted-foreground">/month</span>
+                </div>
+                <p className="text-sm text-muted-foreground">Cancel anytime, no commitment</p>
+              </div>
+              
+              <Button
+                onClick={handleStartTrial}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
+                size="lg"
+              >
+                Get Free Trial
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+          className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8"
+        >
+          {statsData.map((stat, index) => (
+            <Card key={index} className="text-center border border-border">
+              <CardContent className="p-6">
+                <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
