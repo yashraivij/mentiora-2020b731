@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FlashcardInsightsProps {
   flashcardSets: any[];
@@ -25,6 +26,8 @@ export const FlashcardInsights = ({
 }: FlashcardInsightsProps) => {
   const [learningMode, setLearningMode] = useState(false);
   const [selectedSet, setSelectedSet] = useState<any>(null);
+  const [showLibrary, setShowLibrary] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
   
   const totalCards = individualFlashcards.length;
   const totalSets = flashcardSets.length;
@@ -46,6 +49,18 @@ export const FlashcardInsights = ({
   // Estimate review progress (mock data - can be enhanced with actual review tracking)
   const reviewProgress = Math.min((Number(totalCards) / 100) * 100, 100);
 
+  const toggleCardFlip = (cardId: string) => {
+    setFlippedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
+  };
+
   // If in learning mode, show the flashcard viewer
   if (learningMode && selectedSet) {
     return (
@@ -58,6 +73,128 @@ export const FlashcardInsights = ({
             setSelectedSet(null);
           }}
         />
+      </div>
+    );
+  }
+
+  // If in library mode, show the library view
+  if (showLibrary) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white tracking-tight">Your Flashcard Library</h3>
+            <p className="text-sm text-[#64748B] dark:text-gray-400">Click any card to flip between question and answer</p>
+          </div>
+          <Button
+            onClick={() => setShowLibrary(false)}
+            variant="outline"
+            size="sm"
+            className="border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 font-bold rounded-xl"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Insights
+          </Button>
+        </div>
+
+        {flashcardSets.length === 0 ? (
+          <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+            <CardContent className="text-center py-12">
+              <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
+              <p className="text-sm text-muted-foreground">No flashcards yet. Create some to get started!</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-6">
+            {flashcardSets.map((set: any) => (
+              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-4">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight">{set.title}</CardTitle>
+                      <CardDescription className="text-xs font-medium text-[#64748B] dark:text-gray-400 mt-1">
+                        Study with flashcards for this subject
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 mt-3">
+                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                      {set.flashcards?.length || 0} cards
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  {/* Individual Flashcards with Flip */}
+                  <div className="space-y-3">
+                    {set.flashcards?.map((card: any) => {
+                      const isFlipped = flippedCards.has(card.id);
+                      return (
+                        <div
+                          key={card.id}
+                          className="perspective-1000"
+                          onClick={() => toggleCardFlip(card.id)}
+                        >
+                          <motion.div
+                            className="relative cursor-pointer"
+                            initial={false}
+                            animate={{ rotateY: isFlipped ? 180 : 0 }}
+                            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                            style={{ transformStyle: "preserve-3d" }}
+                          >
+                            <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
+                              <CardContent className="p-4">
+                                <AnimatePresence mode="wait">
+                                  {!isFlipped ? (
+                                    <motion.div
+                                      key="front"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <Badge variant="outline" className="mb-2 font-bold text-[#0EA5E9] border-[#0EA5E9] text-xs">
+                                        Question
+                                      </Badge>
+                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed">
+                                        {card.front}
+                                      </p>
+                                      <p className="text-xs text-muted-foreground mt-3 italic">
+                                        Click to reveal answer
+                                      </p>
+                                    </motion.div>
+                                  ) : (
+                                    <motion.div
+                                      key="back"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      style={{ transform: "rotateY(180deg)" }}
+                                    >
+                                      <Badge variant="outline" className="mb-2 font-bold text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400 text-xs">
+                                        Answer
+                                      </Badge>
+                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed whitespace-pre-wrap">
+                                        {card.back}
+                                      </p>
+                                      <p className="text-xs text-muted-foreground mt-3 italic">
+                                        Click to show question
+                                      </p>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     );
   }
@@ -85,16 +222,22 @@ export const FlashcardInsights = ({
 
   return (
     <Tabs defaultValue="insights" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 mb-4 bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800 rounded-xl shadow-sm p-1">
+      <TabsList className="grid w-full grid-cols-3 mb-4 bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800 rounded-xl shadow-sm p-1">
         <TabsTrigger 
           value="insights"
-          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-sm"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
           Insights
         </TabsTrigger>
         <TabsTrigger 
+          value="library"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
+        >
+          Library
+        </TabsTrigger>
+        <TabsTrigger 
           value="create"
-          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-sm"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
           Create New
         </TabsTrigger>
@@ -261,6 +404,107 @@ export const FlashcardInsights = ({
             </div>
           </CardContent>
         </Card>
+      </TabsContent>
+
+      <TabsContent value="library" className="mt-0 space-y-6">
+        {flashcardSets.length === 0 ? (
+          <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+            <CardContent className="text-center py-12">
+              <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
+              <p className="text-sm text-muted-foreground">No flashcards yet. Create some to get started!</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-6">
+            {flashcardSets.map((set: any) => (
+              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-3">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight">{set.title}</CardTitle>
+                      <CardDescription className="text-xs font-medium text-[#64748B] dark:text-gray-400 mt-1">
+                        Click any card to flip between question and answer
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 mt-3">
+                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                      {set.flashcards?.length || 0} cards
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  {/* Individual Flashcards with Flip */}
+                  <div className="space-y-3">
+                    {set.flashcards?.map((card: any) => {
+                      const isFlipped = flippedCards.has(card.id);
+                      return (
+                        <div
+                          key={card.id}
+                          className="perspective-1000"
+                          onClick={() => toggleCardFlip(card.id)}
+                        >
+                          <motion.div
+                            className="relative cursor-pointer"
+                            initial={false}
+                            animate={{ rotateY: isFlipped ? 180 : 0 }}
+                            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                            style={{ transformStyle: "preserve-3d" }}
+                          >
+                            <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
+                              <CardContent className="p-4">
+                                <AnimatePresence mode="wait">
+                                  {!isFlipped ? (
+                                    <motion.div
+                                      key="front"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <Badge variant="outline" className="mb-2 font-bold text-[#0EA5E9] border-[#0EA5E9] text-xs">
+                                        Question
+                                      </Badge>
+                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed">
+                                        {card.front}
+                                      </p>
+                                      <p className="text-xs text-muted-foreground mt-3 italic">
+                                        Click to reveal answer
+                                      </p>
+                                    </motion.div>
+                                  ) : (
+                                    <motion.div
+                                      key="back"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.2 }}
+                                      style={{ transform: "rotateY(180deg)" }}
+                                    >
+                                      <Badge variant="outline" className="mb-2 font-bold text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-400 text-xs">
+                                        Answer
+                                      </Badge>
+                                      <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed whitespace-pre-wrap">
+                                        {card.back}
+                                      </p>
+                                      <p className="text-xs text-muted-foreground mt-3 italic">
+                                        Click to show question
+                                      </p>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </TabsContent>
 
       <TabsContent value="create" className="mt-0">
