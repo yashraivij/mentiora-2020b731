@@ -226,9 +226,9 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
   return (
     <div className="space-y-6">
       {/* Study Notes Input */}
-      <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6">
-        <Label htmlFor="notes" className="text-base font-bold text-foreground flex items-center gap-2 mb-3">
-          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+      <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-[#E2E8F0]/50 dark:border-gray-800 p-6">
+        <Label htmlFor="notes" className="text-base font-bold text-[#0F172A] dark:text-white flex items-center gap-2 mb-3">
+          <div className="w-2 h-2 bg-[#0EA5E9] rounded-full"></div>
           Your Study Notes *
         </Label>
         <Textarea
@@ -236,26 +236,26 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
           placeholder="Paste your study notes here... (minimum 50 characters)"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          className="min-h-[200px] bg-background/80 border border-border focus:border-purple-400 transition-all duration-300 rounded-lg shadow-sm resize-none font-medium"
+          className="min-h-[200px] bg-background/80 border border-border focus:border-[#0EA5E9] transition-all duration-300 rounded-lg shadow-sm resize-none font-medium"
         />
         <div className="flex justify-between items-center mt-2">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-[#64748B] dark:text-gray-400">
             {notes.length < 50 ? `${50 - notes.length} more characters needed` : `${notes.length} characters`}
           </p>
         </div>
       </div>
 
       {/* Enhanced Mode Toggle */}
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-xl shadow-md border border-purple-200/50 dark:border-purple-800/30 p-6">
+      <div className="bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 rounded-xl shadow-md border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30 p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-              <Label htmlFor="enhance" className="text-base font-bold text-foreground cursor-pointer">
+              <Sparkles className="h-5 w-5 text-[#0EA5E9]" />
+              <Label htmlFor="enhance" className="text-base font-bold text-[#0F172A] dark:text-white cursor-pointer">
                 Enhance for Marks {!isPremium && <Badge variant="secondary" className="ml-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">Premium</Badge>}
               </Label>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm text-[#64748B] dark:text-gray-400 leading-relaxed">
               {isPremium 
                 ? "Generate exam-style flashcards with mark allocations and detailed model answers"
                 : "Unlock exam-style flashcards with mark schemes to maximize your grades"}
@@ -273,26 +273,26 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
             id="enhance"
             checked={enhance}
             onCheckedChange={handleEnhanceToggle}
-            className="data-[state=checked]:bg-purple-600"
+            className="data-[state=checked]:bg-[#0EA5E9]"
           />
         </div>
 
         {/* Preview of what enhancement looks like */}
         {(enhance || !isPremium) && (
-          <div className="mt-4 pt-4 border-t border-purple-200 dark:border-purple-800/30">
+          <div className="mt-4 pt-4 border-t border-[#0EA5E9]/30">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-3 bg-white/50 dark:bg-gray-900/50 rounded-lg border border-border">
-                <div className="text-xs font-semibold text-muted-foreground mb-1">Normal</div>
-                <div className="text-sm font-medium text-foreground">
+                <div className="text-xs font-semibold text-[#64748B] dark:text-gray-400 mb-1">Normal</div>
+                <div className="text-sm font-medium text-[#0F172A] dark:text-white">
                   {subject && subjectExamples[subject]?.normal ? subjectExamples[subject].normal : "What is Newton's first law?"}
                 </div>
               </div>
-              <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-950/50 dark:to-pink-950/50 rounded-lg border border-purple-300 dark:border-purple-700">
-                <div className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-1 flex items-center gap-1">
+              <div className="p-3 bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/20 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/30 rounded-lg border border-[#0EA5E9]/50">
+                <div className="text-xs font-semibold text-[#0EA5E9] mb-1 flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
                   Enhanced
                 </div>
-                <div className="text-sm font-medium text-foreground">
+                <div className="text-sm font-medium text-[#0F172A] dark:text-white">
                   {subject && subjectExamples[subject]?.enhanced ? subjectExamples[subject].enhanced : "State and explain Newton's first law of motion. (3 marks)"}
                 </div>
               </div>
@@ -305,7 +305,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
       <Button
         onClick={handleGenerate}
         disabled={isGenerating || notes.length < 50}
-        className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isGenerating ? (
           <>
@@ -323,20 +323,20 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
         <div className="space-y-6 animate-fade-in">
-          <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl shadow-md border border-emerald-200/50 dark:border-emerald-800/30 p-6">
+          <div className="bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 rounded-xl shadow-md border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30 p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
-                <Zap className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+              <div className="p-2 bg-[#0EA5E9]/20 rounded-lg">
+                <Zap className="h-5 w-5 text-[#0EA5E9]" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-foreground">Generated {generatedFlashcards.length} Flashcards</h3>
-                <p className="text-sm text-muted-foreground">Review and save to your library</p>
+                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white">Generated {generatedFlashcards.length} Flashcards</h3>
+                <p className="text-sm text-[#64748B] dark:text-gray-400">Review and save to your library</p>
               </div>
             </div>
 
             {/* Optional Set Title */}
             <div className="mb-4">
-              <Label htmlFor="setTitle" className="text-sm font-medium text-foreground mb-2 block">
+              <Label htmlFor="setTitle" className="text-sm font-medium text-[#0F172A] dark:text-white mb-2 block">
                 Set Title (Optional)
               </Label>
               <Input
@@ -344,27 +344,27 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
                 placeholder="e.g., Physics Revision - Forces and Motion"
                 value={setTitle}
                 onChange={(e) => setSetTitle(e.target.value)}
-                className="bg-background/80 border border-border focus:border-emerald-400 transition-all"
+                className="bg-background/80 border border-border focus:border-[#0EA5E9] transition-all"
               />
             </div>
 
             <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
               {generatedFlashcards.map((flashcard, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-900 border border-border hover:border-emerald-400 transition-all">
+                <Card key={index} className="bg-white dark:bg-gray-900 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] dark:hover:border-[#0EA5E9] transition-all">
                   <CardContent className="p-4">
                     <div className="space-y-3">
                       <div>
-                        <Badge variant="secondary" className="mb-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-0">
+                        <Badge variant="secondary" className="mb-2 bg-[#0EA5E9]/20 text-[#0EA5E9] border-0">
                           Card {index + 1}
                         </Badge>
-                        <div className="text-xs text-muted-foreground mb-1 font-medium">Front</div>
-                        <div className="text-sm font-semibold text-foreground bg-muted/50 p-3 rounded-lg">
+                        <div className="text-xs text-[#64748B] dark:text-gray-400 mb-1 font-medium">Front</div>
+                        <div className="text-sm font-semibold text-[#0F172A] dark:text-white bg-muted/50 p-3 rounded-lg">
                           {flashcard.front}
                         </div>
                       </div>
                       <div className="pt-2 border-t border-border">
-                        <div className="text-xs text-muted-foreground mb-1 font-medium">Back</div>
-                        <div className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg">
+                        <div className="text-xs text-[#64748B] dark:text-gray-400 mb-1 font-medium">Back</div>
+                        <div className="text-sm text-[#64748B] dark:text-gray-400 bg-muted/30 p-3 rounded-lg">
                           {flashcard.back}
                         </div>
                       </div>
@@ -377,7 +377,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
             <Button
               onClick={handleSave}
               disabled={isSaving}
-              className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full mt-6 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               {isSaving ? (
                 <>

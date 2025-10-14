@@ -43,16 +43,16 @@ export const FlashcardInsights = ({
 
   return (
     <Tabs defaultValue="insights" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-purple-100 to-purple-50 dark:from-purple-950/50 dark:to-purple-900/30 border border-purple-200/50 dark:border-purple-800/30">
+      <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30">
         <TabsTrigger 
           value="insights"
-          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-lg"
         >
           Insights
         </TabsTrigger>
         <TabsTrigger 
           value="create"
-          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-lg"
         >
           Create New
         </TabsTrigger>
@@ -60,48 +60,48 @@ export const FlashcardInsights = ({
 
       <TabsContent value="insights" className="space-y-6 mt-0">
         {/* Flashcard Overview */}
-        <Card className="border-0 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-background shadow-2xl">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Brain className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-              Flashcard Statistics
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Your flashcard learning progress and insights
-            </p>
-          </CardHeader>
+        <Card className="border-0 bg-gradient-to-br from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-background shadow-2xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Brain className="h-5 w-5 text-[#0EA5E9]" />
+            Flashcard Statistics
+          </CardTitle>
+          <p className="text-sm text-[#64748B] dark:text-gray-400">
+            Your flashcard learning progress and insights
+          </p>
+        </CardHeader>
           <CardContent>
-            <div className="grid gap-6 md:grid-cols-3">
-              {/* Total Sets */}
-              <div className="text-center p-6 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-950/30 dark:to-purple-900/20 border border-purple-200/50 dark:border-purple-800/30">
-                <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  {totalSets}
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Flashcard Sets
-                </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Total Sets */}
+            <div className="text-center p-6 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30">
+              <div className="text-4xl font-bold text-[#0EA5E9] mb-2">
+                {totalSets}
               </div>
-
-              {/* Total Cards */}
-              <div className="text-center p-6 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-950/30 dark:to-blue-900/20 border border-blue-200/50 dark:border-blue-800/30">
-                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                  {totalCards}
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Total Cards
-                </div>
-              </div>
-
-              {/* Avg Per Set */}
-              <div className="text-center p-6 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-950/30 dark:to-emerald-900/20 border border-emerald-200/50 dark:border-emerald-800/30">
-                <div className="text-4xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">
-                  {avgCardsPerSet}
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Cards per Set
-                </div>
+              <div className="text-sm font-medium text-[#64748B] dark:text-gray-400">
+                Flashcard Sets
               </div>
             </div>
+
+            {/* Total Cards */}
+            <div className="text-center p-6 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30">
+              <div className="text-4xl font-bold text-[#0EA5E9] mb-2">
+                {totalCards}
+              </div>
+              <div className="text-sm font-medium text-[#64748B] dark:text-gray-400">
+                Total Cards
+              </div>
+            </div>
+
+            {/* Avg Per Set */}
+            <div className="text-center p-6 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30">
+              <div className="text-4xl font-bold text-[#0EA5E9] mb-2">
+                {avgCardsPerSet}
+              </div>
+              <div className="text-sm font-medium text-[#64748B] dark:text-gray-400">
+                Cards per Set
+              </div>
+            </div>
+          </div>
           </CardContent>
         </Card>
 
@@ -180,14 +180,14 @@ export const FlashcardInsights = ({
                 </div>
               </div>
 
-              <Button 
-                onClick={onViewFlashcards}
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white shadow-lg"
-              >
-                <Brain className="h-4 w-4 mr-2" />
-                View All Flashcards
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+            <Button 
+              onClick={onViewFlashcards}
+              className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg"
+            >
+              <Brain className="h-4 w-4 mr-2" />
+              View All Flashcards
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
             </CardContent>
           </Card>
         </div>
