@@ -74,7 +74,7 @@ interface FlashcardViewerProps {
   onBack: () => void;
 }
 
-export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerProps) => {
+export const FlashcardViewer = ({ flashcardSet, mode: initialMode, onBack }: FlashcardViewerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [shuffledCards, setShuffledCards] = useState<Flashcard[]>([]);
@@ -87,9 +87,15 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
   const [learnMode, setLearnMode] = useState<"type" | "multiple-choice">("type");
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [multipleChoiceOptions, setMultipleChoiceOptions] = useState<string[]>([]);
+  const [viewMode, setViewMode] = useState<"flashcards" | "learn">(initialMode);
   
   const isMobile = useIsMobile();
   const { toast } = useToast();
+
+  // Update viewMode when initialMode changes
+  useEffect(() => {
+    setViewMode(initialMode);
+  }, [initialMode]);
 
   useEffect(() => {
     // Initialize with original order
@@ -98,10 +104,10 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
 
   // Generate multiple choice options when card changes or mode switches
   useEffect(() => {
-    if (mode === "learn" && learnMode === "multiple-choice" && currentCard) {
+    if (viewMode === "learn" && learnMode === "multiple-choice" && currentCard) {
       generateMultipleChoiceOptions();
     }
-  }, [currentIndex, learnMode, mode]);
+  }, [currentIndex, learnMode, viewMode]);
 
   const generateMultipleChoiceOptions = () => {
     if (!currentCard) return;
@@ -134,7 +140,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       setUserAnswer("");
       setShowAnswer(false);
       setSelectedChoice(null);
-    } else if (mode === "learn" && !isSessionComplete) {
+    } else if (viewMode === "learn" && !isSessionComplete) {
       // Complete the session
       setIsSessionComplete(true);
       toast({
@@ -238,7 +244,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (mode === "flashcards") {
+    if (viewMode === "flashcards") {
       if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
         handleFlip();
@@ -247,7 +253,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       } else if (e.key === "ArrowLeft") {
         handlePrevious();
       }
-    } else if (mode === "learn" && e.key === "Enter" && userAnswer.trim() && !showAnswer) {
+    } else if (viewMode === "learn" && e.key === "Enter" && userAnswer.trim() && !showAnswer) {
       handleAnswerSubmit();
     }
   };
@@ -311,16 +317,16 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
             <div>
               <h1 className="font-semibold">{flashcardSet.title}</h1>
               <p className="text-sm text-muted-foreground">
-                {mode === "flashcards" ? "Flashcard Review" : "Learn Mode"}
+                {viewMode === "flashcards" ? "Flashcard Review" : "Learn Mode"}
               </p>
             </div>
           </div>
           
           <div className="flex items-center gap-2">
-            <Badge variant={mode === "learn" ? "default" : "secondary"}>
+            <Badge variant={viewMode === "learn" ? "default" : "secondary"}>
               {currentIndex + 1} / {shuffledCards.length}
             </Badge>
-            {mode === "learn" && (
+            {viewMode === "learn" && (
               <Badge variant="outline">
                 {correctAnswers} correct
               </Badge>
@@ -329,12 +335,48 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
         </div>
       </div>
 
-      {/* Learn Mode Toggle */}
-      {mode === "learn" && (
-        <div className="bg-card border-b border-border p-4">
+      {/* Mode Toggle */}
+      <div className="bg-card border-b border-border p-4">
+        <div className="max-w-4xl mx-auto flex justify-center gap-2">
+          <Button
+            variant={viewMode === "flashcards" ? "default" : "outline"}
+            size="sm"
+            onClick={() => {
+              setViewMode("flashcards");
+              setIsFlipped(false);
+              setUserAnswer("");
+              setShowAnswer(false);
+              setSelectedChoice(null);
+            }}
+            className={viewMode === "flashcards" ? "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white border-0" : ""}
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            Flip Cards
+          </Button>
+          <Button
+            variant={viewMode === "learn" ? "default" : "outline"}
+            size="sm"
+            onClick={() => {
+              setViewMode("learn");
+              setIsFlipped(false);
+              setUserAnswer("");
+              setShowAnswer(false);
+              setSelectedChoice(null);
+            }}
+            className={viewMode === "learn" ? "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white border-0" : ""}
+          >
+            <Edit3 className="h-4 w-4 mr-2" />
+            Learn Mode
+          </Button>
+        </div>
+      </div>
+
+      {/* Learn Sub-Mode Toggle */}
+      {viewMode === "learn" && (
+        <div className="bg-card border-b border-border p-3">
           <div className="max-w-4xl mx-auto flex justify-center gap-2">
             <Button
-              variant={learnMode === "type" ? "default" : "outline"}
+              variant={learnMode === "type" ? "secondary" : "ghost"}
               size="sm"
               onClick={() => {
                 setLearnMode("type");
@@ -343,11 +385,11 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                 setSelectedChoice(null);
               }}
             >
-              <Edit3 className="h-4 w-4 mr-2" />
+              <Edit3 className="h-3 w-3 mr-2" />
               Type Answer
             </Button>
             <Button
-              variant={learnMode === "multiple-choice" ? "default" : "outline"}
+              variant={learnMode === "multiple-choice" ? "secondary" : "ghost"}
               size="sm"
               onClick={() => {
                 setLearnMode("multiple-choice");
@@ -356,7 +398,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                 setSelectedChoice(null);
               }}
             >
-              <List className="h-4 w-4 mr-2" />
+              <List className="h-3 w-3 mr-2" />
               Multiple Choice
             </Button>
           </div>
@@ -367,11 +409,11 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       <div className="bg-card border-b border-border p-4">
         <div className="max-w-4xl mx-auto">
           <Progress 
-            value={mode === "learn" ? learnProgress : progress} 
+            value={viewMode === "learn" ? learnProgress : progress} 
             className="w-full h-2" 
           />
           <p className="text-xs text-muted-foreground mt-2 text-center">
-            {mode === "learn" ? 
+            {viewMode === "learn" ? 
               `${completedCards.size} of ${shuffledCards.length} cards completed` :
               `Card ${currentIndex + 1} of ${shuffledCards.length}`
             }
@@ -382,7 +424,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
       {/* Main Content */}
       <div className="flex-1 p-4 max-w-4xl mx-auto">
         <div className="min-h-96 flex items-center justify-center">
-          {mode === "flashcards" ? (
+          {viewMode === "flashcards" ? (
             // Flashcard Mode - Flip Card
             <div className="w-full max-w-2xl">
               <AnimatePresence mode="wait">
@@ -547,14 +589,14 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
           <Button
             variant="outline"
             onClick={handleNext}
-            disabled={mode === "learn" && !completedCards.has(currentIndex) && !showAnswer}
+            disabled={viewMode === "learn" && !completedCards.has(currentIndex) && !showAnswer}
           >
             {!isMobile && "Next"}
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
 
-        {mode === "flashcards" && (
+        {viewMode === "flashcards" && (
           <p className="text-center text-sm text-muted-foreground mt-4">
             Use arrow keys to navigate • Space to flip • Mobile: tap to flip
           </p>

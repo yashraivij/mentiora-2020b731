@@ -399,7 +399,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
             <Button
               onClick={handleSave}
               disabled={isSaving}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-11 text-sm hover:scale-[1.01] active:scale-[0.99]"
+              className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-11 text-sm hover:scale-[1.01] active:scale-[0.99]"
             >
               {isSaving ? (
                 <>
