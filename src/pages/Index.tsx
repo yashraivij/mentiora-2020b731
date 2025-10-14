@@ -239,7 +239,7 @@ const Index = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-between items-center mb-12 sm:mb-16 lg:mb-24 pt-4"
+          className="flex flex-col sm:flex-row justify-between items-center mb-8 pt-4"
         >
           <motion.div 
             className="flex items-center space-x-4"
