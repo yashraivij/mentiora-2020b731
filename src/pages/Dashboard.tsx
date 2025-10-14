@@ -824,7 +824,8 @@ const Dashboard = () => {
         .from('notebook_entries')
         .select('*')
         .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false })
+        .limit(100); // Load first 100 for faster initial load
 
       if (error) {
         console.error('Error loading notebook entries:', error);
@@ -1295,9 +1296,7 @@ const Dashboard = () => {
       loadLeaderboardData();
       loadPredictedGrades(); // Load predicted grades on user load
       loadClassMedianGrades(); // Load class median grades on user load
-      if (activeTab === "notes") {
-        loadNotebookEntries();
-      }
+      loadNotebookEntries(); // Pre-load notebook entries for faster access
       if (activeTab === "progress") {
         loadPredictedGrades(); // Refresh predicted grades when viewing progress tab
       }
