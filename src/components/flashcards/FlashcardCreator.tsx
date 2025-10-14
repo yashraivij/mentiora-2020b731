@@ -12,7 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useNavigate } from "react-router-dom";
-import { Brain, Sparkles, BookOpen, Zap } from "lucide-react";
+import { Brain, Sparkles, Plus, Loader2 } from "lucide-react";
 
 interface FlashcardCreatorProps {
   onSetCreated: () => void;
@@ -225,195 +225,193 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
 
   return (
     <div className="space-y-6">
-      {/* Study Notes Input */}
-      <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg hover:shadow-xl transition-all duration-300">
+      {/* Main Card Container */}
+      <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-            <div className="w-2 h-2 bg-[#0EA5E9] rounded-full"></div>
-            Your Study Notes
+            <Brain className="h-5 w-5 text-[#0EA5E9]" />
+            Create Flashcards
           </CardTitle>
           <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
-            Paste your notes here to generate smart flashcards
+            Transform your study notes into AI-powered flashcards
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <Textarea
-            id="notes"
-            placeholder="Paste your study notes here... (minimum 50 characters)"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="min-h-[200px] bg-background/80 border border-[#E2E8F0] dark:border-gray-700 focus:border-[#0EA5E9] focus:ring-2 focus:ring-[#0EA5E9]/20 transition-all duration-300 rounded-xl shadow-sm resize-none font-medium"
-          />
-          <div className="flex justify-between items-center mt-3">
-            <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-              {notes.length < 50 ? `${50 - notes.length} more characters needed` : `${notes.length} characters`}
-            </p>
-            {notes.length >= 50 && (
-              <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0 shadow-sm">
-                ✓ Ready
-              </Badge>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Enhanced Mode Toggle */}
-      <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg hover:shadow-xl transition-all duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-[#0EA5E9]" />
-            Enhance for Marks
-            {!isPremium && <Badge variant="secondary" className="ml-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold shadow-sm">Premium</Badge>}
-          </CardTitle>
-          <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
-            {isPremium 
-              ? "Generate exam-style flashcards with mark allocations"
-              : "Unlock exam-style flashcards with mark schemes"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              {!isPremium && (
-                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-xl border border-amber-200 dark:border-amber-800/30">
-                  <p className="text-sm font-medium text-amber-900 dark:text-amber-100">
-                    ✨ Premium flashcards include mark schemes and examiner tips
-                  </p>
-                </div>
-              )}
-              
-              {/* Preview of what enhancement looks like */}
-              {(enhance || !isPremium) && (
-                <div className="mt-4 space-y-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-[#E2E8F0] dark:border-gray-700 shadow-sm">
-                      <div className="text-xs font-semibold text-[#64748B] dark:text-gray-400 mb-2 tracking-wide uppercase">Normal</div>
-                      <div className="text-sm font-medium text-[#0F172A] dark:text-white">
-                        {subject && subjectExamples[subject]?.normal ? subjectExamples[subject].normal : "What is Newton's first law?"}
-                      </div>
-                    </div>
-                    <div className="p-4 bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 rounded-xl border border-[#0EA5E9]/50 shadow-sm">
-                      <div className="text-xs font-semibold text-[#0EA5E9] mb-2 flex items-center gap-1 tracking-wide uppercase">
-                        <Sparkles className="h-3 w-3" />
-                        Enhanced
-                      </div>
-                      <div className="text-sm font-medium text-[#0F172A] dark:text-white">
-                        {subject && subjectExamples[subject]?.enhanced ? subjectExamples[subject].enhanced : "State and explain Newton's first law of motion. (3 marks)"}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <CardContent className="space-y-6">
+          {/* Study Notes Input */}
+          <div className="space-y-3">
+            <Label htmlFor="notes" className="text-sm font-bold text-[#0F172A] dark:text-white tracking-tight">
+              Study Notes
+            </Label>
+            <Textarea
+              id="notes"
+              placeholder="Paste your study notes here... (minimum 50 characters)"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="min-h-[180px] rounded-2xl border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-900 text-[#0F172A] dark:text-white shadow-sm focus:ring-2 focus:ring-[#0EA5E9] focus:border-[#0EA5E9] font-medium resize-none"
+            />
+            <div className="flex justify-between items-center">
+              <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                {notes.length < 50 ? `${50 - notes.length} more characters needed` : `${notes.length} characters`}
+              </p>
+              {notes.length >= 50 && (
+                <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0 font-bold shadow-sm">
+                  Ready
+                </Badge>
               )}
             </div>
-            <Switch
-              id="enhance"
-              checked={enhance}
-              onCheckedChange={handleEnhanceToggle}
-              className="data-[state=checked]:bg-[#0EA5E9]"
-            />
           </div>
+
+          {/* Enhanced Mode Toggle */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/5 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/10 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/20 dark:bg-[#0EA5E9]/30 shadow-sm">
+                  <Sparkles className="h-4 w-4 text-[#0EA5E9]" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="enhance" className="text-sm font-bold text-[#0F172A] dark:text-white tracking-tight cursor-pointer">
+                      Enhanced Generation
+                    </Label>
+                    {!isPremium && (
+                      <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 font-bold text-xs shadow-sm">
+                        Premium
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                    {isPremium ? "Exam-style questions with marks" : "Unlock exam-style flashcards"}
+                  </p>
+                </div>
+              </div>
+              <Switch
+                id="enhance"
+                checked={enhance}
+                onCheckedChange={handleEnhanceToggle}
+                className="data-[state=checked]:bg-[#0EA5E9]"
+              />
+            </div>
+
+            {/* Example Preview */}
+            {(enhance || !isPremium) && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                <div className="p-3 bg-white dark:bg-gray-800 rounded-xl border border-[#E2E8F0] dark:border-gray-700 shadow-sm">
+                  <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 mb-1.5 tracking-wide uppercase">Standard</p>
+                  <p className="text-sm text-[#0F172A] dark:text-white font-medium">
+                    {subject && subjectExamples[subject]?.normal ? subjectExamples[subject].normal : "What is Newton's first law?"}
+                  </p>
+                </div>
+                <div className="p-3 bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 rounded-xl border border-[#0EA5E9]/30 shadow-sm">
+                  <p className="text-xs font-bold text-[#0EA5E9] mb-1.5 tracking-wide uppercase">Enhanced</p>
+                  <p className="text-sm text-[#0F172A] dark:text-white font-medium">
+                    {subject && subjectExamples[subject]?.enhanced ? subjectExamples[subject].enhanced : "State and explain Newton's first law of motion. (3 marks)"}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Generate Button */}
+          <Button
+            onClick={handleGenerate}
+            disabled={isGenerating || notes.length < 50}
+            className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold text-base h-12"
+          >
+            {isGenerating ? (
+              <>
+                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Sparkles className="h-5 w-5 mr-2" />
+                Generate Flashcards
+              </>
+            )}
+          </Button>
         </CardContent>
       </Card>
-
-      {/* Generate Button */}
-      <Button
-        onClick={handleGenerate}
-        disabled={isGenerating || notes.length < 50}
-        className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isGenerating ? (
-          <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-            Generating Flashcards...
-          </>
-        ) : (
-          <>
-            <Brain className="h-5 w-5 mr-3" />
-            Generate Smart Flashcards
-          </>
-        )}
-      </Button>
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <div className="space-y-6 animate-fade-in">
-          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
-            <CardHeader className="bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 dark:from-[#0EA5E9]/20 dark:to-[#38BDF8]/20 border-b border-[#E2E8F0]/50 dark:border-gray-800">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#0EA5E9]/20 rounded-xl">
-                  <Zap className="h-5 w-5 text-[#0EA5E9]" />
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                    Generated {generatedFlashcards.length} Flashcards
-                  </CardTitle>
-                  <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium mt-1">
-                    Review and save to your library
-                  </CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              {/* Optional Set Title */}
-              <div>
-                <Label htmlFor="setTitle" className="text-sm font-bold text-[#0F172A] dark:text-white mb-2 block">
-                  Set Title (Optional)
-                </Label>
-                <Input
-                  id="setTitle"
-                  placeholder="e.g., Physics Revision - Forces and Motion"
-                  value={setTitle}
-                  onChange={(e) => setSetTitle(e.target.value)}
-                  className="bg-background/80 border border-[#E2E8F0] dark:border-gray-700 focus:border-[#0EA5E9] focus:ring-2 focus:ring-[#0EA5E9]/20 transition-all rounded-xl shadow-sm font-medium"
-                />
-              </div>
+        <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-xl">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
+                <Brain className="h-5 w-5 text-[#0EA5E9]" />
+                Preview Flashcards
+              </CardTitle>
+              <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-sm">
+                {generatedFlashcards.length} cards
+              </Badge>
+            </div>
+            <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
+              Review and save your generated flashcards
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Optional Set Title */}
+            <div>
+              <Label htmlFor="setTitle" className="text-sm font-bold text-[#0F172A] dark:text-white mb-2 block tracking-tight">
+                Set Title (Optional)
+              </Label>
+              <Input
+                id="setTitle"
+                placeholder="e.g., Physics Revision - Forces and Motion"
+                value={setTitle}
+                onChange={(e) => setSetTitle(e.target.value)}
+                className="rounded-xl border-[#E2E8F0] dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm focus:ring-2 focus:ring-[#0EA5E9] focus:border-[#0EA5E9] font-medium"
+              />
+            </div>
 
-              <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
-                {generatedFlashcards.map((flashcard, index) => (
-                  <Card key={index} className="bg-white dark:bg-gray-800 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] dark:hover:border-[#0EA5E9] rounded-2xl transition-all shadow-sm hover:shadow-md">
-                    <CardContent className="p-4">
-                      <div className="space-y-3">
-                        <div>
-                          <Badge variant="secondary" className="mb-2 bg-[#0EA5E9]/10 text-[#0EA5E9] border-0 font-semibold">
-                            Card {index + 1}
-                          </Badge>
-                          <div className="text-xs font-semibold text-[#64748B] dark:text-gray-400 mb-1 tracking-wide uppercase">Question</div>
-                          <div className="text-sm font-semibold text-[#0F172A] dark:text-white bg-muted/50 p-3 rounded-xl">
-                            {flashcard.front}
-                          </div>
-                        </div>
-                        <div className="pt-2 border-t border-[#E2E8F0] dark:border-gray-700">
-                          <div className="text-xs font-semibold text-[#64748B] dark:text-gray-400 mb-1 tracking-wide uppercase">Answer</div>
-                          <div className="text-sm text-[#64748B] dark:text-gray-400 bg-muted/30 p-3 rounded-xl font-medium">
-                            {flashcard.back}
-                          </div>
+            <div className="space-y-3 max-h-[450px] overflow-y-auto pr-2">
+              {generatedFlashcards.map((flashcard, index) => (
+                <Card key={index} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-md hover:shadow-lg transition-all duration-200">
+                  <CardContent className="p-5 space-y-3">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 flex items-center justify-center">
+                          <span className="text-xs font-bold text-[#0EA5E9]">
+                            {index + 1}
+                          </span>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      <p className="text-sm font-bold text-[#0F172A] dark:text-white leading-relaxed tracking-tight">
+                        {flashcard.front}
+                      </p>
+                    </div>
+                    <div className="pt-3 border-t border-[#E2E8F0]/50 dark:border-gray-800">
+                      <p className="text-xs font-bold text-[#64748B] dark:text-gray-400 mb-2 tracking-wide uppercase">
+                        Answer
+                      </p>
+                      <p className="text-sm text-[#64748B] dark:text-gray-300 leading-relaxed font-medium">
+                        {flashcard.back}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
 
-              <Button
-                onClick={handleSave}
-                disabled={isSaving}
-                className="w-full mt-6 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                {isSaving ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                    Saving to Library...
-                  </>
-                ) : (
-                  <>
-                    <BookOpen className="h-5 w-5 mr-3" />
-                    Save to Library
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+            <Button
+              onClick={handleSave}
+              disabled={isSaving}
+              className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-12"
+            >
+              {isSaving ? (
+                <>
+                  <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Plus className="h-5 w-5 mr-2" />
+                  Save Flashcard Set
+                </>
+              )}
+            </Button>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

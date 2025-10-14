@@ -43,7 +43,7 @@ export const FlashcardInsights = ({
 
   return (
     <Tabs defaultValue="insights" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 border border-[#E2E8F0]/50 dark:border-gray-800 rounded-2xl shadow-md p-1">
+      <TabsList className="grid w-full grid-cols-2 mb-6 bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800 rounded-2xl shadow-md p-1">
         <TabsTrigger 
           value="insights"
           className="rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-lg font-bold tracking-tight transition-all duration-300"
