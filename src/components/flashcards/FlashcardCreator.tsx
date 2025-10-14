@@ -224,249 +224,222 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
   return (
     <div className="space-y-8">
-      {/* Hero Section */}
-      <div className="space-y-2">
-        <h3 className="text-2xl font-bold">Smart Flashcards</h3>
-        <p className="text-muted-foreground">
-          Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
-        </p>
-      </div>
+      <div className="space-y-6 max-w-4xl mx-auto">
+        {/* Subject and Exam Board Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <Label htmlFor="subject" className="text-sm font-semibold text-foreground">
+              Subject <span className="text-destructive">*</span>
+            </Label>
+            <Select value={subject} onValueChange={setSubject}>
+              <SelectTrigger 
+                id="subject" 
+                className="w-full h-14 text-base bg-background border-2 hover:border-purple-500/50 focus:border-purple-500 transition-colors shadow-sm"
+              >
+                <SelectValue placeholder="Select your subject" />
+              </SelectTrigger>
+              <SelectContent className="max-h-[300px] bg-background border-2">
+                {subjects.map((subj) => (
+                  <SelectItem 
+                    key={subj.id} 
+                    value={subj.id}
+                    className="text-base py-3 hover:bg-muted cursor-pointer"
+                  >
+                    {subj.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      {/* Subject and Exam Board Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-3">
-          <Label htmlFor="subject" className="text-sm font-semibold">
-            Subject <span className="text-destructive">*</span>
-          </Label>
-          <Select value={subject} onValueChange={setSubject}>
-            <SelectTrigger className="h-11 bg-background border-input hover:border-primary/50 focus:border-primary transition-colors">
-              <SelectValue placeholder="Select subject" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover border-border">
-              {subjects.map((subj) => (
-                <SelectItem key={subj.id} value={subj.id} className="cursor-pointer">
-                  {subj.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="space-y-3">
+            <Label htmlFor="examBoard" className="text-sm font-semibold text-foreground">
+              Exam Board <span className="text-destructive">*</span>
+            </Label>
+            <Select value={examBoard} onValueChange={setExamBoard}>
+              <SelectTrigger 
+                id="examBoard" 
+                className="w-full h-14 text-base bg-background border-2 hover:border-purple-500/50 focus:border-purple-500 transition-colors shadow-sm"
+              >
+                <SelectValue placeholder="Select your exam board" />
+              </SelectTrigger>
+              <SelectContent className="bg-background border-2">
+                {examBoards.map((board) => (
+                  <SelectItem 
+                    key={board.id} 
+                    value={board.id}
+                    className="text-base py-3 hover:bg-muted cursor-pointer"
+                  >
+                    {board.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
+        {/* Study Notes Input */}
         <div className="space-y-3">
-          <Label htmlFor="examBoard" className="text-sm font-semibold">
-            Exam Board <span className="text-destructive">*</span>
+          <Label htmlFor="notes" className="text-sm font-semibold text-foreground">
+            Your Study Notes <span className="text-destructive">*</span>
           </Label>
-          <Select value={examBoard} onValueChange={setExamBoard}>
-            <SelectTrigger className="h-11 bg-background border-input hover:border-primary/50 focus:border-primary transition-colors">
-              <SelectValue placeholder="Select exam board" />
-            </SelectTrigger>
-            <SelectContent className="bg-popover border-border">
-              {examBoards.map((board) => (
-                <SelectItem key={board.id} value={board.id} className="cursor-pointer">
-                  {board.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* Notes Input */}
-      <div className="space-y-3">
-        <Label htmlFor="notes" className="text-sm font-semibold">
-          Your Study Notes <span className="text-destructive">*</span>
-        </Label>
-        <div className="relative">
           <Textarea
             id="notes"
             placeholder="Paste your study notes here... (minimum 50 characters)"
+            className="min-h-[240px] text-base bg-background border-2 focus:border-purple-500 hover:border-purple-500/50 transition-colors resize-none shadow-sm rounded-xl"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="min-h-[200px] resize-none bg-background border-input hover:border-primary/50 focus:border-primary transition-colors"
             maxLength={5000}
           />
-          {notes.length >= 50 && (
-            <div className="absolute top-3 right-3 text-primary">
-              <Sparkles className="h-5 w-5" />
-            </div>
-          )}
+          <div className="flex items-center justify-between">
+            {notes.length < 50 ? (
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-orange-500" />
+                <span>Need <strong>{50 - notes.length}</strong> more characters</span>
+              </p>
+            ) : (
+              <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-2 font-medium">
+                <Sparkles className="h-4 w-4" />
+                Ready to generate flashcards
+              </p>
+            )}
+            <p className="text-sm font-medium text-muted-foreground">{notes.length}/5000</p>
+          </div>
         </div>
-        <div className="flex justify-between items-center text-xs">
-          <span className={`font-medium transition-colors ${
-            notes.length < 50 
-              ? 'text-destructive' 
-              : 'text-primary'
-          }`}>
-            {notes.length < 50 ? `Need ${50 - notes.length} more characters` : "Ready to generate"}
-          </span>
-          <span className="text-muted-foreground">
-            {notes.length}/5000
-          </span>
-        </div>
-      </div>
 
-      {/* Enhance Toggle */}
-      <Card className={`transition-all ${enhance ? 'ring-2 ring-primary' : ''}`}>
-        <CardContent className="p-6">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-4 flex-1">
-              <div className="p-2 rounded-lg bg-primary/10 mt-1">
-                <Sparkles className="h-5 w-5 text-primary" />
-              </div>
-              <div className="space-y-2 flex-1">
+        {/* Enhance for Marks Toggle */}
+        <Card className="border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 shadow-md">
+          <CardContent className="p-6">
+            <div className="flex items-start justify-between gap-6">
+              <div className="flex-1 space-y-2">
                 <div className="flex items-center gap-3">
-                  <Label htmlFor="enhance" className="text-base font-semibold cursor-pointer">
-                    Enhance for Marks
-                  </Label>
-                  {enhance && (
-                    <Badge className="bg-primary text-primary-foreground">
-                      PREMIUM
-                    </Badge>
-                  )}
+                  <div className="p-2 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl">
+                    <Sparkles className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-lg text-foreground">Enhance for Marks</h3>
+                    {enhance && isPremium && (
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0 shadow-sm">
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        Premium
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Flashcards will use premium exam-board specific language and mark scheme terminology
+                <p className="text-sm text-muted-foreground leading-relaxed pl-12">
+                  Use exam-board specific language and mark scheme terminology to maximize your marks
                 </p>
               </div>
+              <Switch
+                id="enhance"
+                checked={enhance && isPremium}
+                onCheckedChange={handleEnhanceToggle}
+                className="mt-2 data-[state=checked]:bg-purple-600"
+              />
             </div>
-            <Switch
-              id="enhance"
-              checked={enhance && isPremium}
-              onCheckedChange={handleEnhanceToggle}
-            />
-          </div>
-          
-          {enhance && isPremium && subject && examBoard && (
-            <div className="mt-6 pt-6 border-t space-y-4">
-              <h4 className="text-sm font-semibold text-muted-foreground">
-                Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
-              </h4>
-              <div className="space-y-3">
-                <div className="p-4 bg-muted/50 rounded-lg">
-                  <div className="text-xs font-semibold text-muted-foreground mb-2">Normal:</div>
-                  <div className="text-sm">"{subjectExamples[subject]?.normal || "What is...?"}"</div>
-                </div>
-                <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
-                  <div className="text-xs font-semibold text-primary mb-2">Enhanced:</div>
-                  <div className="text-sm font-medium">"{subjectExamples[subject]?.enhanced.replace('(', `(${examBoard} ${subjects.find(s => s.id === subject)?.name}) (`).replace(' marks)', ' marks)') || `Explain... (4 marks, ${examBoard} ${subjects.find(s => s.id === subject)?.name})`}"</div>
+            
+            {enhance && isPremium && subject && examBoard && (
+              <div className="mt-6 pt-6 border-t-2 space-y-4">
+                <h4 className="text-sm font-bold text-muted-foreground">
+                  Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
+                </h4>
+                <div className="space-y-3">
+                  <div className="p-4 bg-muted/50 rounded-xl">
+                    <div className="text-xs font-semibold text-muted-foreground mb-2">Normal:</div>
+                    <div className="text-sm">"{subjectExamples[subject]?.normal || "What is...?"}"</div>
+                  </div>
+                  <div className="p-4 bg-purple-100 dark:bg-purple-900/50 rounded-xl border-2 border-purple-300 dark:border-purple-700">
+                    <div className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-2">Enhanced:</div>
+                    <div className="text-sm font-medium text-foreground">"{subjectExamples[subject]?.enhanced.replace('(', `(${examBoard} ${subjects.find(s => s.id === subject)?.name}) (`).replace(' marks)', ' marks)') || `Explain... (4 marks, ${examBoard} ${subjects.find(s => s.id === subject)?.name})`}"</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+            )}
+          </CardContent>
+        </Card>
 
-      {/* Generate Button */}
-      <Button
-        onClick={handleGenerate}
-        disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-        className="w-full h-12"
-        size="lg"
-      >
-        {isGenerating ? (
-          <>
-            <div className="animate-spin rounded-full h-4 w-4 border-2 border-current border-t-transparent mr-2" />
-            Generating Smart Flashcards...
-          </>
-        ) : (
-          <>
-            <Brain className="h-4 w-4 mr-2" />
-            Generate Smart Flashcards
-          </>
-        )}
-      </Button>
+        {/* Generate Button */}
+        <Button
+          onClick={handleGenerate}
+          disabled={!subject || !examBoard || notes.length < 50 || isGenerating}
+          size="lg"
+          className="w-full h-16 text-lg font-bold shadow-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white border-0"
+        >
+          {isGenerating ? (
+            <>
+              <div className="animate-spin rounded-full h-6 w-6 border-3 border-white border-t-transparent mr-3"></div>
+              Generating Your Flashcards...
+            </>
+          ) : (
+            <>
+              <Sparkles className="h-6 w-6 mr-3" />
+              Generate Smart Flashcards
+            </>
+          )}
+        </Button>
+      </div>
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card>
-          <CardHeader className="border-b bg-muted/30">
+        <div className="space-y-8 max-w-4xl mx-auto mt-12">
+          <div className="flex items-center justify-between p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-2xl border-2 border-green-200 dark:border-green-800">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-lg bg-primary/10">
-                <BookOpen className="h-6 w-6 text-primary" />
+              <div className="p-3 bg-green-500 rounded-2xl">
+                <Sparkles className="h-6 w-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl">
-                  Generated Flashcards ({generatedFlashcards.length})
-                </CardTitle>
-                <CardDescription className="mt-1">
-                  {enhance 
-                    ? `Enhanced with ${examBoard} ${subjects.find(s => s.id === subject)?.name} mark scheme language`
-                    : "Review your flashcards before saving"
-                  }
-                </CardDescription>
-              </div>
-              {enhance && (
-                <Badge className="ml-auto bg-primary text-primary-foreground">
-                  Enhanced
-                </Badge>
-              )}
-            </div>
-          </CardHeader>
-          
-          <CardContent className="p-6 space-y-6">
-            {/* Set Title Input */}
-            <div className="space-y-3">
-              <Label htmlFor="setTitle" className="text-sm font-semibold">
-                Set Title <span className="text-muted-foreground font-normal">(Optional)</span>
-              </Label>
-              <Input
-                id="setTitle"
-                placeholder="Auto-generated title will be used if empty"
-                value={setTitle}
-                onChange={(e) => setSetTitle(e.target.value)}
-                className="h-11 bg-background border-input"
-              />
-            </div>
-
-            {/* Flashcard Preview Grid */}
-            <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground">Preview Flashcards</h3>
-              <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
-                {generatedFlashcards.map((card, index) => (
-                  <Card key={index} className="border-border">
-                    <CardContent className="p-4 space-y-3">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge variant="secondary" className="text-xs">
-                            Front
-                          </Badge>
-                          <span className="text-xs text-muted-foreground">Card {index + 1}</span>
-                        </div>
-                        <p className="font-medium text-sm leading-relaxed">{card.front}</p>
-                      </div>
-                      <div className="pt-3 border-t">
-                        <Badge variant="secondary" className="mb-2 text-xs">
-                          Back
-                        </Badge>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{card.back}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                <h3 className="text-2xl font-bold text-foreground">Flashcards Generated!</h3>
+                <p className="text-muted-foreground">Review your flashcards below and save them to your library</p>
               </div>
             </div>
+            <Badge variant="secondary" className="text-lg px-5 py-2 font-bold">
+              {generatedFlashcards.length} {generatedFlashcards.length === 1 ? 'Card' : 'Cards'}
+            </Badge>
+          </div>
 
-            {/* Save Button */}
-            <Button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="w-full h-12"
-              size="lg"
-            >
-              {isSaving ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-current border-t-transparent mr-2" />
-                  Saving to Library...
-                </>
-              ) : (
-                <>
-                  <BookOpen className="h-4 w-4 mr-2" />
-                  Save to Library ({generatedFlashcards.length} cards)
-                </>
-              )}
-            </Button>
-          </CardContent>
-        </Card>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {generatedFlashcards.map((card, index) => (
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 border-none shadow-md">
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                      <span className="text-xs font-bold text-purple-700 dark:text-purple-300">Card {index + 1}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground mb-2">QUESTION</p>
+                      <p className="font-bold text-base leading-tight text-foreground">{card.front}</p>
+                    </div>
+                    <div className="pt-4 border-t-2">
+                      <p className="text-xs font-semibold text-muted-foreground mb-2">ANSWER</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{card.back}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Button
+            onClick={handleSave}
+            disabled={isSaving}
+            size="lg"
+            className="w-full h-16 text-lg font-bold shadow-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0"
+          >
+            {isSaving ? (
+              <>
+                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white border-t-transparent mr-3"></div>
+                Saving to Your Library...
+              </>
+            ) : (
+              <>
+                <BookOpen className="h-6 w-6 mr-3" />
+                Save to My Library
+              </>
+            )}
+          </Button>
+        </div>
       )}
     </div>
   );
