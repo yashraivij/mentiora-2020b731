@@ -16,6 +16,7 @@ import { Brain, Sparkles, BookOpen, Zap } from "lucide-react";
 
 interface FlashcardCreatorProps {
   onSetCreated: () => void;
+  userSubjects?: Array<{ subject_name: string; exam_board: string }>;
 }
 
 interface GeneratedFlashcard {
@@ -86,20 +87,22 @@ const subjectExamples = {
   }
 };
 
-export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
+export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardCreatorProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { isPremium } = useSubscription();
   const navigate = useNavigate();
   
   const [notes, setNotes] = useState("");
-  const [subject, setSubject] = useState("");
-  const [examBoard, setExamBoard] = useState("");
   const [enhance, setEnhance] = useState(false);
   const [setTitle, setSetTitle] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedFlashcards, setGeneratedFlashcards] = useState<GeneratedFlashcard[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Auto-detect subject and exam board from user's first subject
+  const subject = userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "";
+  const examBoard = userSubjects.length > 0 ? userSubjects[0].exam_board : "";
 
   const handleEnhanceToggle = (checked: boolean) => {
     if (!isPremium) {
@@ -202,8 +205,6 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
       // Reset form
       setNotes("");
-      setSubject("");
-      setExamBoard("");
       setSetTitle("");
       setEnhance(false);
       setGeneratedFlashcards([]);
@@ -224,130 +225,76 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
   return (
     <div className="space-y-6">
-      {/* Subject and Exam Board Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6">
-          <Label htmlFor="subject" className="text-base font-bold text-foreground flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 bg-sky-400 rounded-full"></div>
-            Subject *
-          </Label>
-          <Select value={subject} onValueChange={setSubject}>
-            <SelectTrigger className="bg-background/80 border border-border hover:border-sky-400 focus:border-sky-400 transition-all duration-300 shadow-sm rounded-lg">
-              <SelectValue placeholder="Select subject" />
-            </SelectTrigger>
-            <SelectContent className="bg-background/95 backdrop-blur-xl border border-border rounded-lg shadow-xl">
-              {subjects.map((subj) => (
-                <SelectItem key={subj.id} value={subj.id} className="hover:bg-muted rounded-md font-medium">
-                  {subj.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6">
-          <Label htmlFor="examBoard" className="text-base font-bold text-foreground flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-            Exam Board *
-          </Label>
-          <Select value={examBoard} onValueChange={setExamBoard}>
-            <SelectTrigger className="bg-background/80 border border-border hover:border-blue-400 focus:border-blue-400 transition-all duration-300 shadow-sm rounded-lg">
-              <SelectValue placeholder="Select exam board" />
-            </SelectTrigger>
-            <SelectContent className="bg-background/95 backdrop-blur-xl border border-border rounded-lg shadow-xl">
-              {examBoards.map((board) => (
-                <SelectItem key={board.id} value={board.id} className="hover:bg-muted rounded-md font-medium">
-                  {board.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* Notes Input */}
+      {/* Study Notes Input */}
       <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6">
         <Label htmlFor="notes" className="text-base font-bold text-foreground flex items-center gap-2 mb-3">
-          <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
           Your Study Notes *
         </Label>
-        <div className="relative group">
-          <Textarea
-            id="notes"
-            placeholder="Paste your study notes here... (minimum 50 characters)"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="min-h-36 bg-background/80 border border-border hover:border-slate-400 focus:border-slate-400 transition-all duration-300 shadow-sm rounded-lg font-medium"
-            maxLength={5000}
-          />
-          {notes.length >= 50 && (
-            <div className="absolute top-3 right-3 text-slate-500">
-              <Sparkles className="h-5 w-5" />
-            </div>
-          )}
-        </div>
-        <div className="flex justify-between items-center text-sm mt-3">
-          <span className={`px-4 py-2 rounded-full font-medium shadow-sm transition-all duration-300 ${
-            notes.length < 50 
-              ? 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800' 
-              : 'bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800'
-          }`}>
-            {notes.length < 50 ? `Need ${50 - notes.length} more characters` : "✨ Ready to generate!"}
-          </span>
-          <span className="text-muted-foreground font-medium bg-muted px-3 py-1 rounded-full border border-border">
-            {notes.length}/5000
-          </span>
+        <Textarea
+          id="notes"
+          placeholder="Paste your study notes here... (minimum 50 characters)"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="min-h-[200px] bg-background/80 border border-border focus:border-purple-400 transition-all duration-300 rounded-lg shadow-sm resize-none font-medium"
+        />
+        <div className="flex justify-between items-center mt-2">
+          <p className="text-xs text-muted-foreground">
+            {notes.length < 50 ? `${50 - notes.length} more characters needed` : `${notes.length} characters`}
+          </p>
         </div>
       </div>
 
-      {/* Enhance Toggle */}
-      <div className={`bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6 transition-all duration-300 ${
-        enhance ? 'border-purple-300 dark:border-purple-700/50' : ''
-      }`}>
-        <div className="flex items-center space-x-6">
-          <div className={`p-3 rounded-xl transition-all duration-300 ${enhance ? 'bg-purple-400 shadow-lg' : 'bg-muted'}`}>
-            <Switch
-              id="enhance"
-              checked={enhance && isPremium}
-              onCheckedChange={handleEnhanceToggle}
-              className="data-[state=checked]:bg-purple-500"
-            />
-          </div>
+      {/* Enhanced Mode Toggle */}
+      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-xl shadow-md border border-purple-200/50 dark:border-purple-800/30 p-6">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <Label htmlFor="enhance" className="flex items-center gap-3 font-bold cursor-pointer text-lg">
-              <Sparkles className={`h-6 w-6 transition-all duration-300 ${enhance ? 'text-purple-500' : 'text-muted-foreground'}`} />
-              <span className={enhance ? 'text-purple-600 dark:text-purple-400' : 'text-foreground'}>
-                Enhance for Marks
-              </span>
-              {enhance && (
-                <Badge className="bg-purple-500 text-white text-sm font-bold px-3 py-1 shadow-md">
-                  ACTIVE
-                </Badge>
-              )}
-            </Label>
-            <p className={`text-base mt-2 font-medium ${enhance ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
-              {enhance 
-                ? "Flashcards will use premium exam-board specific language and mark scheme terminology"
-                : "Flashcards will use premium exam-board specific language and mark scheme terminology"
-              }
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              <Label htmlFor="enhance" className="text-base font-bold text-foreground cursor-pointer">
+                Enhance for Marks {!isPremium && <Badge variant="secondary" className="ml-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">Premium</Badge>}
+              </Label>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {isPremium 
+                ? "Generate exam-style flashcards with mark allocations and detailed model answers"
+                : "Unlock exam-style flashcards with mark schemes to maximize your grades"}
             </p>
-          </div>
-        </div>
-        
-        {enhance && isPremium && subject && examBoard && (
-          <div className="mt-6 p-5 bg-purple-50/80 dark:bg-purple-950/30 backdrop-blur-sm rounded-xl border border-purple-200 dark:border-purple-800 shadow-sm">
-            <h4 className="text-base font-bold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
-              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-              Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
-            </h4>
-            <div className="space-y-3">
-              <div className="p-4 bg-background/80 rounded-lg border border-border shadow-sm">
-                <span className="font-bold text-muted-foreground">Normal:</span> 
-                <span className="ml-3 font-medium">"{subjectExamples[subject]?.normal || "What is...?"}"</span>
+            
+            {!isPremium && (
+              <div className="mt-3 p-3 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-950/30 dark:to-orange-950/30 rounded-lg border border-amber-200 dark:border-amber-800/30">
+                <p className="text-xs font-medium text-amber-900 dark:text-amber-100">
+                  ✨ Premium flashcards include mark schemes and examiner tips
+                </p>
               </div>
-              <div className="p-4 bg-purple-100/80 dark:bg-purple-900/40 rounded-lg border border-purple-300 dark:border-purple-700 shadow-sm">
-                <span className="font-bold text-purple-700 dark:text-purple-300">Enhanced:</span> 
-                <span className="ml-3 font-bold">"{subjectExamples[subject]?.enhanced.replace('(', `(${examBoard} ${subjects.find(s => s.id === subject)?.name}) (`).replace(' marks)', ' marks)') || `Explain... (4 marks, ${examBoard} ${subjects.find(s => s.id === subject)?.name})`}"</span>
+            )}
+          </div>
+          <Switch
+            id="enhance"
+            checked={enhance}
+            onCheckedChange={handleEnhanceToggle}
+            className="data-[state=checked]:bg-purple-600"
+          />
+        </div>
+
+        {/* Preview of what enhancement looks like */}
+        {(enhance || !isPremium) && (
+          <div className="mt-4 pt-4 border-t border-purple-200 dark:border-purple-800/30">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-3 bg-white/50 dark:bg-gray-900/50 rounded-lg border border-border">
+                <div className="text-xs font-semibold text-muted-foreground mb-1">Normal</div>
+                <div className="text-sm font-medium text-foreground">
+                  {subject && subjectExamples[subject]?.normal ? subjectExamples[subject].normal : "What is Newton's first law?"}
+                </div>
+              </div>
+              <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-950/50 dark:to-pink-950/50 rounded-lg border border-purple-300 dark:border-purple-700">
+                <div className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-1 flex items-center gap-1">
+                  <Sparkles className="h-3 w-3" />
+                  Enhanced
+                </div>
+                <div className="text-sm font-medium text-foreground">
+                  {subject && subjectExamples[subject]?.enhanced ? subjectExamples[subject].enhanced : "State and explain Newton's first law of motion. (3 marks)"}
+                </div>
               </div>
             </div>
           </div>
@@ -357,120 +304,96 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
       {/* Generate Button */}
       <Button
         onClick={handleGenerate}
-        disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-        className="w-full bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-400 hover:to-blue-400 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100 rounded-xl"
-        size="lg"
+        disabled={isGenerating || notes.length < 50}
+        className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isGenerating ? (
-          <div className="flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-3 border-white border-t-transparent" />
-            <span className="text-lg font-bold">Generating Smart Flashcards...</span>
-          </div>
+          <>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+            Generating Flashcards...
+          </>
         ) : (
-          <div className="flex items-center gap-3">
-            <Zap className="h-5 w-5" />
-            <span className="text-lg font-bold">Generate Smart Flashcards</span>
-            <Brain className="h-5 w-5" />
-          </div>
+          <>
+            <Brain className="h-5 w-5 mr-3" />
+            Generate Smart Flashcards
+          </>
         )}
       </Button>
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-xl border border-border overflow-hidden">
-          <div className="bg-gradient-to-r from-sky-100/80 to-blue-100/80 dark:from-sky-800/40 dark:to-blue-800/40 backdrop-blur-sm border-b border-border p-8">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-sky-400 to-blue-400 rounded-2xl flex items-center justify-center shadow-lg">
-                <BookOpen className="h-6 w-6 text-white" />
+        <div className="space-y-6 animate-fade-in">
+          <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl shadow-md border border-emerald-200/50 dark:border-emerald-800/30 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+                <Zap className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">
-                  Generated Flashcards ({generatedFlashcards.length})
-                </h2>
-                <div className="flex items-center gap-3 mt-2">
-                  {enhance && (
-                    <Badge className="bg-gradient-to-r from-purple-400 to-violet-400 text-white text-sm font-bold px-4 py-2 shadow-md">
-                      Enhanced
-                    </Badge>
-                  )}
-                </div>
+                <h3 className="text-lg font-bold text-foreground">Generated {generatedFlashcards.length} Flashcards</h3>
+                <p className="text-sm text-muted-foreground">Review and save to your library</p>
               </div>
             </div>
-            <p className="text-muted-foreground font-medium text-lg mt-4">
-              {enhance 
-                ? `These flashcards have been enhanced with ${examBoard} ${subjects.find(s => s.id === subject)?.name} mark scheme language and command words`
-                : "Review your flashcards before saving them to your library"
-              }
-            </p>
-          </div>
-          
-          <div className="p-8 space-y-6">
-            {/* Set Title Input */}
-            <div className="bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6">
-              <Label htmlFor="setTitle" className="text-base font-bold text-foreground flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+
+            {/* Optional Set Title */}
+            <div className="mb-4">
+              <Label htmlFor="setTitle" className="text-sm font-medium text-foreground mb-2 block">
                 Set Title (Optional)
               </Label>
               <Input
                 id="setTitle"
-                placeholder="Auto-generated title will be used if empty"
+                placeholder="e.g., Physics Revision - Forces and Motion"
                 value={setTitle}
                 onChange={(e) => setSetTitle(e.target.value)}
-                className="bg-background/80 border border-border hover:border-slate-400 focus:border-slate-400 transition-all duration-300 shadow-sm rounded-lg font-medium py-3"
+                className="bg-background/80 border border-border focus:border-emerald-400 transition-all"
               />
             </div>
 
-            {/* Flashcard Preview Grid */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-cyan-600 dark:text-cyan-400 flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-cyan-500" />
-                Preview Your Flashcards
-              </h3>
-              <div className="grid gap-4 max-h-96 overflow-y-auto rounded-lg border border-cyan-300 dark:border-cyan-600/50 p-4 bg-gradient-to-br from-cyan-50/80 to-cyan-100/60 dark:from-cyan-900/30 dark:to-cyan-800/20 backdrop-blur-sm">
-                {generatedFlashcards.map((flashcard, index) => (
-                  <div key={index} className="border rounded-xl p-4 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] bg-gradient-to-br from-cyan-50 to-cyan-100/80 dark:from-cyan-900/25 dark:to-cyan-800/20 border-cyan-300 dark:border-cyan-600/50 shadow-sm hover:shadow-cyan-200/50 dark:hover:shadow-cyan-800/30">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <h4 className="font-semibold text-sm flex items-center gap-2 text-cyan-600 dark:text-cyan-400">
-                          Question
-                        </h4>
-                        <p className="text-sm bg-cyan-100/80 dark:bg-cyan-800/30 p-3 rounded border border-cyan-300 dark:border-cyan-600/50 font-medium">{flashcard.front}</p>
+            <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+              {generatedFlashcards.map((flashcard, index) => (
+                <Card key={index} className="bg-white dark:bg-gray-900 border border-border hover:border-emerald-400 transition-all">
+                  <CardContent className="p-4">
+                    <div className="space-y-3">
+                      <div>
+                        <Badge variant="secondary" className="mb-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-0">
+                          Card {index + 1}
+                        </Badge>
+                        <div className="text-xs text-muted-foreground mb-1 font-medium">Front</div>
+                        <div className="text-sm font-semibold text-foreground bg-muted/50 p-3 rounded-lg">
+                          {flashcard.front}
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <h4 className="font-semibold text-sm flex items-center gap-2 text-cyan-600 dark:text-cyan-400">
-                          Answer
-                        </h4>
-                        <p className="text-sm bg-cyan-100/80 dark:bg-cyan-800/30 p-3 rounded border border-cyan-300 dark:border-cyan-600/50 font-medium">{flashcard.back}</p>
+                      <div className="pt-2 border-t border-border">
+                        <div className="text-xs text-muted-foreground mb-1 font-medium">Back</div>
+                        <div className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg">
+                          {flashcard.back}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
 
-            {/* Save Button */}
-            <div className="pt-4 border-t border-cyan-300 dark:border-cyan-600/50">
-              <Button
-                onClick={handleSave}
-                disabled={isSaving}
-                className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 shadow-lg hover:shadow-xl hover:shadow-cyan-200/30 dark:hover:shadow-cyan-800/20 transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100"
-                size="lg"
-              >
-                {isSaving ? (
-                  <div className="flex items-center gap-2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                    <span>Saving to Library...</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <span>Save to Library</span>
-                  </div>
-                 )}
-               </Button>
-             </div>
-           </div>
-         </div>
-       )}
-     </div>
-   );
- };
+            <Button
+              onClick={handleSave}
+              disabled={isSaving}
+              className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {isSaving ? (
+                <>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                  Saving to Library...
+                </>
+              ) : (
+                <>
+                  <BookOpen className="h-5 w-5 mr-3" />
+                  Save to Library
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

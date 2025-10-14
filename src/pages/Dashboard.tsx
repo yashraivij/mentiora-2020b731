@@ -3440,6 +3440,7 @@ const Dashboard = () => {
                                         description: "Flashcards created successfully!",
                                       });
                                     }}
+                                    userSubjects={userSubjectsWithGrades}
                                   />
                                 </TabsContent>
                               </Tabs>
@@ -3967,6 +3968,7 @@ const Dashboard = () => {
                               description: "Flashcards created successfully!",
                             });
                           }}
+                          userSubjects={userSubjectsWithGrades}
                         />
                       </div>
                     </ResizablePanel>

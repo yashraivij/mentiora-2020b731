@@ -11,13 +11,15 @@ interface FlashcardInsightsProps {
   individualFlashcards: any[];
   onViewFlashcards: () => void;
   onFlashcardCreated?: () => void;
+  userSubjects?: Array<{ subject_name: string; exam_board: string }>;
 }
 
 export const FlashcardInsights = ({ 
   flashcardSets, 
   individualFlashcards,
   onViewFlashcards,
-  onFlashcardCreated
+  onFlashcardCreated,
+  userSubjects = []
 }: FlashcardInsightsProps) => {
   const totalCards = individualFlashcards.length;
   const totalSets = flashcardSets.length;
@@ -41,12 +43,22 @@ export const FlashcardInsights = ({
 
   return (
     <Tabs defaultValue="insights" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 mb-6">
-        <TabsTrigger value="insights">Insights</TabsTrigger>
-        <TabsTrigger value="create">Create New</TabsTrigger>
+      <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-purple-100 to-purple-50 dark:from-purple-950/50 dark:to-purple-900/30 border border-purple-200/50 dark:border-purple-800/30">
+        <TabsTrigger 
+          value="insights"
+          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+        >
+          Insights
+        </TabsTrigger>
+        <TabsTrigger 
+          value="create"
+          className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+        >
+          Create New
+        </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="insights" className="space-y-6">
+      <TabsContent value="insights" className="space-y-6 mt-0">
         {/* Flashcard Overview */}
         <Card className="border-0 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-background shadow-2xl">
           <CardHeader>
@@ -199,11 +211,12 @@ export const FlashcardInsights = ({
         </Card>
       </TabsContent>
 
-      <TabsContent value="create">
+      <TabsContent value="create" className="mt-0">
         <FlashcardCreator 
           onSetCreated={() => {
             onFlashcardCreated?.();
           }}
+          userSubjects={userSubjects}
         />
       </TabsContent>
     </Tabs>
