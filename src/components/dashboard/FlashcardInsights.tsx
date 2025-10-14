@@ -473,11 +473,61 @@ export const FlashcardInsights = ({
         ) : (
           <div className="space-y-6">
             {flashcardSets.map((set: any) => (
-              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg group">
                 <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-3">
                   <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight">{set.title}</CardTitle>
+                    <div className="flex-1">
+                      {renamingSetId === set.id ? (
+                        <div className="flex items-center gap-2 mb-2">
+                          <Input
+                            value={newSetName}
+                            onChange={(e) => setNewSetName(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                handleRenameSet(set.id);
+                              } else if (e.key === 'Escape') {
+                                setRenamingSetId(null);
+                                setNewSetName("");
+                              }
+                            }}
+                            className="flex-1 h-9 text-sm"
+                            autoFocus
+                          />
+                          <Button
+                            size="sm"
+                            onClick={() => handleRenameSet(set.id)}
+                            className="h-9 w-9 p-0 bg-emerald-500 hover:bg-emerald-600"
+                          >
+                            <Check className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setRenamingSetId(null);
+                              setNewSetName("");
+                            }}
+                            className="h-9 w-9 p-0"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex-1">{set.title}</CardTitle>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => {
+                              setRenamingSetId(set.id);
+                              setNewSetName(set.title);
+                            }}
+                            className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
+                      )}
                       <CardDescription className="text-xs font-medium text-[#64748B] dark:text-gray-400 mt-1">
                         Click any card to flip between question and answer
                       </CardDescription>
