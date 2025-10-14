@@ -190,6 +190,9 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
     try {
       setIsSaving(true);
 
+      // Generate a unique set_id for this batch of flashcards
+      const setId = crypto.randomUUID();
+
       // Prepare flashcards for database insertion
       const flashcardsToSave = generatedFlashcards.map(flashcard => ({
         user_id: user.id,
@@ -197,6 +200,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
         exam_board: examBoard,
         front: flashcard.front,
         back: flashcard.back,
+        set_id: setId,
       }));
 
       const { error } = await supabase

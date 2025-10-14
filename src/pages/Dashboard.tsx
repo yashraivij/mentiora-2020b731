@@ -339,14 +339,14 @@ const Dashboard = () => {
         return;
       }
 
-      // Group flashcards by subject and exam board to create sets
+      // Group flashcards by set_id to create distinct sets
       const setsMap = new Map<string, FlashcardSet>();
       
       data?.forEach(flashcard => {
-        const setKey = `${flashcard.subject_id}-${flashcard.exam_board}`;
-        const setTitle = `${flashcard.subject_id} (${flashcard.exam_board})`;
+        const setKey = flashcard.set_id || `${flashcard.subject_id}-${flashcard.exam_board}`;
         
         if (!setsMap.has(setKey)) {
+          const setTitle = `${flashcard.subject_id} (${flashcard.exam_board})`;
           setsMap.set(setKey, {
             id: setKey,
             title: setTitle,
@@ -426,8 +426,7 @@ const Dashboard = () => {
         .from('flashcards')
         .delete()
         .eq('user_id', user?.id)
-        .eq('subject_id', set.subject_id)
-        .eq('exam_board', set.exam_board);
+        .eq('set_id', setId);
 
       if (error) throw error;
 

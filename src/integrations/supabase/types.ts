@@ -442,6 +442,7 @@ export type Database = {
           last_reviewed: string | null
           next_review: string | null
           review_count: number | null
+          set_id: string | null
           subject_id: string
           user_id: string
         }
@@ -455,6 +456,7 @@ export type Database = {
           last_reviewed?: string | null
           next_review?: string | null
           review_count?: number | null
+          set_id?: string | null
           subject_id: string
           user_id: string
         }
@@ -468,6 +470,7 @@ export type Database = {
           last_reviewed?: string | null
           next_review?: string | null
           review_count?: number | null
+          set_id?: string | null
           subject_id?: string
           user_id?: string
         }
