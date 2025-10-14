@@ -2384,7 +2384,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="flex items-center justify-between px-4 lg:px-8 py-4">
