@@ -1,13 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft, Eye, Play } from "lucide-react";
+import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft, Eye, Play, Pencil, Check, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface FlashcardInsightsProps {
   flashcardSets: any[];
@@ -31,6 +34,8 @@ export const FlashcardInsights = ({
   const [showLibrary, setShowLibrary] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
+  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
+  const [newSetName, setNewSetName] = useState("");
   
   const totalCards = individualFlashcards.length;
   const totalSets = flashcardSets.length;
@@ -126,12 +131,62 @@ export const FlashcardInsights = ({
         ) : (
           <div className="space-y-4">
             {flashcardSets.map((set: any) => (
-              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+              <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg group">
                 <CardContent className="p-5">
                   <div className="mb-4">
-                    <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">
-                      {set.title}
-                    </h3>
+                    {renamingSetId === set.id ? (
+                      <div className="flex items-center gap-2 mb-2">
+                        <Input
+                          value={newSetName}
+                          onChange={(e) => setNewSetName(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              handleRenameSet(set.id);
+                            } else if (e.key === 'Escape') {
+                              setRenamingSetId(null);
+                              setNewSetName("");
+                            }
+                          }}
+                          className="flex-1 h-8 text-sm"
+                          autoFocus
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => handleRenameSet(set.id)}
+                          className="h-8 w-8 p-0 bg-emerald-500 hover:bg-emerald-600"
+                        >
+                          <Check className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            setRenamingSetId(null);
+                            setNewSetName("");
+                          }}
+                          className="h-8 w-8 p-0"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex-1">
+                          {set.title}
+                        </h3>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => {
+                            setRenamingSetId(set.id);
+                            setNewSetName(set.title);
+                          }}
+                          className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                    )}
                     <div className="flex items-center gap-3">
                       <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
                         {set.flashcards?.length || 0} cards
@@ -191,6 +246,33 @@ export const FlashcardInsights = ({
       };
       setSelectedSet(combinedSet);
       setLearningMode(true);
+    }
+  };
+
+  const handleRenameSet = async (setId: string) => {
+    if (!newSetName.trim()) {
+      toast.error("Set name cannot be empty");
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('flashcards')
+        .update({ title: newSetName.trim() })
+        .eq('set_id', setId);
+
+      if (error) throw error;
+
+      toast.success("Flashcard set renamed successfully");
+      setRenamingSetId(null);
+      setNewSetName("");
+      
+      if (onFlashcardCreated) {
+        onFlashcardCreated();
+      }
+    } catch (error) {
+      console.error('Error renaming flashcard set:', error);
+      toast.error("Failed to rename flashcard set");
     }
   };
 
