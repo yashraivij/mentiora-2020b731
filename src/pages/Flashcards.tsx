@@ -59,11 +59,7 @@ const Flashcards = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   
-  const [activeTab, setActiveTab] = useState(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get('tab');
-    return tab === 'library' ? 'library' : 'create';
-  });
+  const [activeTab, setActiveTab] = useState<"create" | "sets" | "all-cards" | "smart">("smart");
   const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
@@ -160,7 +156,7 @@ const Flashcards = () => {
 
   const handleSetCreated = () => {
     loadFlashcardSets();
-    setActiveTab("library");
+    setActiveTab("sets");
     toast({
       title: "Success",
       description: "Flashcards created and saved!",
@@ -248,17 +244,14 @@ const Flashcards = () => {
     );
   }
 
-  // Calculate stats
-  const totalSets = flashcardSets.length;
-  const totalCards = flashcardSets.reduce((sum, set) => sum + set.card_count, 0);
-  const avgCardsPerSet = totalSets > 0 ? Math.round(totalCards / totalSets) : 0;
-  
-  // Get most studied subject
-  const subjectCounts = flashcardSets.reduce((acc, set) => {
-    acc[set.subject_id] = (acc[set.subject_id] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-  const topSubject = Object.entries(subjectCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "None";
+  // Get all individual flashcards
+  const allFlashcards = flashcardSets.flatMap(set => 
+    set.flashcards.map(card => ({
+      ...card,
+      subject: set.subject_id,
+      examBoard: set.exam_board
+    }))
+  );
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -319,220 +312,194 @@ const Flashcards = () => {
         <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto space-y-8">
             {/* Hero Section */}
-            <div className="flex justify-between items-center">
-              <div>
-                <h1 className="text-4xl font-bold tracking-tight mb-2">Your Flashcards</h1>
-                <p className="text-muted-foreground text-lg">
-                  Master your subjects with spaced repetition learning.
-                </p>
-              </div>
-              <Button 
-                onClick={() => setActiveTab("create")}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
-              >
-                <Plus className="h-5 w-5 mr-2" />
-                Create Set
-              </Button>
-            </div>
-
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                        Total Sets
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-3xl font-bold">{totalSets}</p>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Flashcard collections
-                      </p>
-                    </div>
-                    <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                      <Brain className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                        Total Cards
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-3xl font-bold">{totalCards}</p>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Items to study
-                      </p>
-                    </div>
-                    <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                      <BookOpen className="h-5 w-5 text-green-600 dark:text-green-400" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                        Avg Cards/Set
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-3xl font-bold">{avgCardsPerSet}</p>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Cards per collection
-                      </p>
-                    </div>
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                        Top Subject
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-bold truncate">{topSubject}</p>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Most flashcard sets
-                      </p>
-                    </div>
-                    <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
-                      <Trophy className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Flashcard Sets Section */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Your Sets</h2>
-              
-              {loading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-                  <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
-                </div>
-              ) : flashcardSets.length === 0 ? (
-                <Card className="border-2 border-dashed">
-                  <CardContent className="text-center py-16">
-                    <div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-full w-fit mx-auto mb-6">
-                      <Brain className="h-12 w-12 text-purple-600 dark:text-purple-400" />
+              <h1 className="text-4xl font-bold tracking-tight mb-2">Smart Flashcards</h1>
+              <p className="text-muted-foreground text-lg">
+                Transform your study notes into powerful flashcards with analysis and exam-board optimization
+              </p>
+            </div>
+
+            {/* Tabs */}
+            <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as any)} className="space-y-6">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="smart">Smart Flashcards</TabsTrigger>
+                <TabsTrigger value="create">Create</TabsTrigger>
+                <TabsTrigger value="sets">Sets</TabsTrigger>
+                <TabsTrigger value="all-cards">All Cards</TabsTrigger>
+              </TabsList>
+
+              {/* Smart Flashcards Tab */}
+              <TabsContent value="smart" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>AI-Powered Flashcard Generation</CardTitle>
+                    <CardDescription>
+                      Let AI analyze your study materials and create optimized flashcards tailored to your exam board
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center py-12">
+                      <div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-full w-fit mx-auto mb-6">
+                        <Brain className="h-12 w-12 text-purple-600 dark:text-purple-400" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3">Smart Learning Coming Soon</h3>
+                      <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                        Our AI will soon analyze your weak areas and automatically generate targeted flashcards to improve your understanding
+                      </p>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">No flashcard sets yet</h3>
-                    <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                      Create your first set of flashcards to start studying more effectively with spaced repetition!
-                    </p>
-                    <Button 
-                      onClick={() => setActiveTab("create")} 
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90"
-                    >
-                      <Plus className="h-5 w-5 mr-2" />
-                      Create Your First Set
-                    </Button>
                   </CardContent>
                 </Card>
-              ) : (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {flashcardSets.map((set) => (
-                    <Card key={set.id} className="hover-lift group">
-                      <CardHeader className="pb-3">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <CardTitle className="text-lg font-semibold mb-1">{set.title}</CardTitle>
-                            <CardDescription>
-                              {set.card_count} cards • Created {formatDate(set.created_at)}
-                            </CardDescription>
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDeleteSet(set.id)}
-                            className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <Badge variant="secondary" className="font-medium">
-                          {set.subject_id}
-                        </Badge>
-                        <div className="grid grid-cols-2 gap-3 pt-2">
-                          <Button
-                            variant="outline"
-                            onClick={() => {
-                              setSelectedSet(set);
-                              setViewMode("flashcards");
-                            }}
-                            className="w-full"
-                          >
-                            <Eye className="h-4 w-4 mr-2" />
-                            Review
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              setSelectedSet(set);
-                              setViewMode("learn");
-                            }}
-                            className="w-full bg-primary hover:bg-primary/90"
-                          >
-                            <Play className="h-4 w-4 mr-2" />
-                            Learn
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </div>
+              </TabsContent>
 
-            {/* Creator Section - Expandable */}
-            {activeTab === "create" && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-8"
-              >
-                <Card className="border-primary">
+              {/* Create Tab */}
+              <TabsContent value="create" className="space-y-6">
+                <Card>
                   <CardHeader>
-                    <div className="flex justify-between items-center">
-                      <CardTitle>Create New Flashcard Set</CardTitle>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setActiveTab("library")}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
+                    <CardTitle>Create New Flashcard Set</CardTitle>
+                    <CardDescription>
+                      Generate flashcards using AI or create them manually
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <FlashcardCreator onSetCreated={handleSetCreated} />
                   </CardContent>
                 </Card>
-              </motion.div>
-            )}
+              </TabsContent>
+
+              {/* Sets Tab */}
+              <TabsContent value="sets" className="space-y-6">
+                {loading ? (
+                  <div className="text-center py-12">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                    <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
+                  </div>
+                ) : flashcardSets.length === 0 ? (
+                  <Card className="border-2 border-dashed">
+                    <CardContent className="text-center py-16">
+                      <div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-full w-fit mx-auto mb-6">
+                        <Brain className="h-12 w-12 text-purple-600 dark:text-purple-400" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3">No flashcard sets yet</h3>
+                      <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                        Create your first set of flashcards to start studying more effectively with spaced repetition!
+                      </p>
+                      <Button 
+                        onClick={() => setActiveTab("create")} 
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90"
+                      >
+                        <Plus className="h-5 w-5 mr-2" />
+                        Create Your First Set
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {flashcardSets.map((set) => (
+                      <Card key={set.id} className="hover-lift group">
+                        <CardHeader className="pb-3">
+                          <div className="flex justify-between items-start">
+                            <div className="flex-1">
+                              <CardTitle className="text-lg font-semibold mb-1">{set.title}</CardTitle>
+                              <CardDescription>
+                                {set.card_count} cards • Created {formatDate(set.created_at)}
+                              </CardDescription>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleDeleteSet(set.id)}
+                              className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <Badge variant="secondary" className="font-medium">
+                            {set.subject_id}
+                          </Badge>
+                          <div className="grid grid-cols-2 gap-3 pt-2">
+                            <Button
+                              variant="outline"
+                              onClick={() => {
+                                setSelectedSet(set);
+                                setViewMode("flashcards");
+                              }}
+                              className="w-full"
+                            >
+                              <Eye className="h-4 w-4 mr-2" />
+                              Review
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                setSelectedSet(set);
+                                setViewMode("learn");
+                              }}
+                              className="w-full bg-primary hover:bg-primary/90"
+                            >
+                              <Play className="h-4 w-4 mr-2" />
+                              Learn
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </TabsContent>
+
+              {/* All Cards Tab */}
+              <TabsContent value="all-cards" className="space-y-6">
+                {allFlashcards.length === 0 ? (
+                  <Card className="border-2 border-dashed">
+                    <CardContent className="text-center py-16">
+                      <div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-full w-fit mx-auto mb-6">
+                        <BookOpen className="h-12 w-12 text-purple-600 dark:text-purple-400" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3">No flashcards yet</h3>
+                      <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                        Create flashcards to see them all in one place
+                      </p>
+                      <Button 
+                        onClick={() => setActiveTab("create")} 
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90"
+                      >
+                        <Plus className="h-5 w-5 mr-2" />
+                        Create Flashcards
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-2xl font-bold">All Flashcards ({allFlashcards.length})</h2>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {allFlashcards.map((card) => (
+                        <Card key={card.id} className="hover-lift">
+                          <CardHeader>
+                            <div className="flex justify-between items-start gap-2 mb-2">
+                              <Badge variant="secondary" className="text-xs">
+                                {card.subject}
+                              </Badge>
+                              <Badge variant="outline" className="text-xs">
+                                {card.examBoard}
+                              </Badge>
+                            </div>
+                            <CardTitle className="text-base font-medium">{card.front}</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm text-muted-foreground line-clamp-3">{card.back}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
           </div>
         </main>
       </div>
