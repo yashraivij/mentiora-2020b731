@@ -2532,16 +2532,16 @@ const Dashboard = () => {
                 <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
                   <ResizablePanelGroup direction="horizontal" className="h-full">
                     <ResizablePanel 
-                      defaultSize={0} 
+                      defaultSize={60} 
                       minSize={0}
-                      maxSize={70}
+                      maxSize={80}
                       className="pointer-events-none"
                       onClick={() => setSubjectDrawerOpen(false)}
                     />
                     <ResizableHandle withHandle className="bg-border/50" />
                     <ResizablePanel 
-                      defaultSize={100} 
-                      minSize={30}
+                      defaultSize={40} 
+                      minSize={20}
                       className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 overflow-hidden"
                     >
                       <div className="h-full overflow-y-auto">
