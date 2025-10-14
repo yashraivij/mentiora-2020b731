@@ -2528,28 +2528,8 @@ const Dashboard = () => {
               )}
 
               {/* Subject Detail Drawer */}
-              {subjectDrawerOpen && (
-                <div className="fixed inset-0 z-50">
-                  <ResizablePanelGroup direction="horizontal">
-                    <ResizablePanel 
-                      defaultSize={60} 
-                      minSize={10}
-                      maxSize={60}
-                      className="relative"
-                    >
-                      <div 
-                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-                        onClick={() => setSubjectDrawerOpen(false)}
-                      />
-                    </ResizablePanel>
-                    <ResizableHandle withHandle className="bg-border/50 hover:bg-border transition-colors" />
-                    <ResizablePanel 
-                      defaultSize={40} 
-                      minSize={30}
-                      maxSize={90}
-                      className="relative"
-                    >
-                      <div className="h-full overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-2xl">
+              <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950">
                   {selectedDrawerSubject && (
                     <>
                       <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
@@ -3457,11 +3437,8 @@ const Dashboard = () => {
                       </Tabs>
                     </>
                   )}
-                      </div>
-                    </ResizablePanel>
-                  </ResizablePanelGroup>
-                </div>
-              )}
+                </SheetContent>
+              </Sheet>
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
