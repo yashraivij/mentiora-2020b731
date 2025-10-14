@@ -3384,14 +3384,14 @@ const Dashboard = () => {
                                     if (subjectFlashcards.length === 0) {
                                       return (
                                         <div className="text-center py-16">
-                                          <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-6">
-                                            <Brain className="h-8 w-8 text-muted-foreground" />
+                                          <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 flex items-center justify-center mb-6 shadow-lg">
+                                            <Brain className="h-10 w-10 text-[#0EA5E9]" />
                                           </div>
-                                          <h3 className="text-lg font-semibold text-foreground mb-2">
-                                            No flashcards yet for this subject
+                                          <h3 className="text-xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight">
+                                            No flashcards yet
                                           </h3>
-                                          <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-                                            Create flashcards to help you study and retain information
+                                          <p className="text-[#64748B] dark:text-gray-400 mb-6 max-w-sm mx-auto font-medium leading-relaxed">
+                                            Create flashcards to help you study and retain information more effectively
                                           </p>
                                         </div>
                                       );
