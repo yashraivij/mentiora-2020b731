@@ -20,6 +20,7 @@ import {
   TrendingDown,
   Play,
   X,
+  Crown,
 } from "lucide-react";
 
 // Sparkline component
@@ -78,6 +79,8 @@ interface MedlySubjectsViewProps {
   insightFilter: string | null;
   setInsightFilter: (filter: string | null) => void;
   removeSubject: (subjectId: string) => void;
+  isPremium?: boolean;
+  onUpgradeToPremium?: () => void;
 }
 
 export function MedlySubjectsView({
@@ -94,6 +97,8 @@ export function MedlySubjectsView({
   insightFilter,
   setInsightFilter,
   removeSubject,
+  isPremium = false,
+  onUpgradeToPremium,
 }: MedlySubjectsViewProps) {
   
   // Safe defaults for first-time users with no data
@@ -199,6 +204,15 @@ export function MedlySubjectsView({
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
               </Button>
+              {!isPremium && onUpgradeToPremium && (
+                <Button 
+                  onClick={onUpgradeToPremium}
+                  className="rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 font-medium"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade to Premium
+                </Button>
+              )}
             </motion.div>
           </div>
 
