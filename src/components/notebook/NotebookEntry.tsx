@@ -131,12 +131,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 pb-4 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
           <div className="space-y-2 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <Badge className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white px-2 py-0.5 font-semibold shadow-sm text-xs">
-                {entry.subject}
-              </Badge>
-              <Badge variant="outline" className="rounded-lg border-[#E2E8F0]/50 dark:border-gray-700 px-2 py-0.5 font-medium text-[#64748B] dark:text-gray-400 text-xs">
-                {entry.paper}
-              </Badge>
               <Badge 
                 className={cn(
                   "rounded-lg px-2 py-0.5 font-medium shadow-sm text-xs",
