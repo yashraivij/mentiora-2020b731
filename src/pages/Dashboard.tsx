@@ -68,7 +68,7 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
@@ -3311,9 +3311,46 @@ const Dashboard = () => {
                                   );
                                 }
 
-                                return subjectNotes.map((entry) => (
-                                  <NotebookEntry key={entry.id} entry={entry} />
-                                ));
+                                return subjectNotes.map((entry, index) => {
+                                  // Insert premium CTA in the middle of notes
+                                  const middleIndex = Math.floor(subjectNotes.length / 2);
+                                  const shouldShowCTA = !isPremium && index === middleIndex && subjectNotes.length > 2;
+                                  
+                                  return (
+                                    <React.Fragment key={entry.id}>
+                                      <NotebookEntry entry={entry} />
+                                      {shouldShowCTA && (
+                                        <div className="my-8 p-8 rounded-3xl border-2 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 bg-gradient-to-br from-[#0EA5E9]/5 via-[#38BDF8]/5 to-[#0EA5E9]/5 dark:from-[#0EA5E9]/10 dark:via-[#38BDF8]/10 dark:to-[#0EA5E9]/10 backdrop-blur-sm relative overflow-hidden shadow-xl">
+                                          {/* Premium glow effects */}
+                                          <div className="absolute top-0 left-1/4 w-32 h-32 bg-[#0EA5E9]/20 rounded-full blur-3xl animate-pulse"></div>
+                                          <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-[#38BDF8]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                                          
+                                          <div className="relative text-center space-y-6">
+                                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] shadow-lg shadow-[#0EA5E9]/50 mb-2">
+                                              <Crown className="h-8 w-8 text-white" />
+                                            </div>
+                                            
+                                            <div className="space-y-3 max-w-md mx-auto">
+                                              <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                                                Unlock Full Access
+                                              </h3>
+                                              <p className="text-base text-[#64748B] dark:text-gray-400 leading-relaxed">
+                                                Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
+                                              </p>
+                                            </div>
+                                            
+                                            <Button 
+                                              onClick={() => navigate('/pricing')}
+                                              className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/30 hover:shadow-xl hover:shadow-[#0EA5E9]/40 transition-all duration-300 font-semibold text-base px-8 py-6 h-auto"
+                                            >
+                                              Upgrade Now
+                                            </Button>
+                                          </div>
+                                        </div>
+                                      )}
+                                    </React.Fragment>
+                                  );
+                                });
                               })()}
                             </CardContent>
                           </Card>
