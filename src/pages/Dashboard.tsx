@@ -80,6 +80,7 @@ import { StudyInsights } from "@/components/dashboard/StudyInsights";
 import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
 import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
+import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 
 interface UserProgress {
   subjectId: string;
@@ -3859,7 +3860,14 @@ const Dashboard = () => {
                     ]}
                   />
 
-                  {/* 4. Personalized Summary */}
+                  {/* 4. Flashcard Insights */}
+                  <FlashcardInsights
+                    flashcardSets={flashcardSets}
+                    individualFlashcards={individualFlashcards}
+                    onViewFlashcards={() => setActiveTab("flashcards")}
+                  />
+
+                  {/* 5. Personalized Summary */}
                   <PersonalizedSummary
                     predictedGrades={predictedGrades}
                     userProgress={userProgress}
