@@ -2900,12 +2900,22 @@ const Dashboard = () => {
                         <TabsContent value="papers" className="space-y-4 mt-8">
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                                Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
-                              </CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
-                                Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
-                              </CardDescription>
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                                    Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
+                                  </CardTitle>
+                                  <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
+                                    Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
+                                  </CardDescription>
+                                </div>
+                                {!isPremium && (
+                                  <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-xs flex items-center gap-1">
+                                    <Crown className="h-3 w-3" />
+                                    Premium
+                                  </Badge>
+                                )}
+                              </div>
                             </CardHeader>
                             <CardContent className="space-y-3 p-6">
                               {(() => {
@@ -2919,12 +2929,18 @@ const Dashboard = () => {
                                       <motion.div 
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        onClick={() => navigate('/predicted-exam/geography')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        onClick={() => {
+                                          if (isPremium) {
+                                            navigate('/predicted-exam/geography');
+                                          } else {
+                                            navigate('/pricing');
+                                          }
+                                        }}
+                                        className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 hover:border-amber-500/30' : 'hover:border-[#0EA5E9]/30'}`}
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
-                                            {subjectEmoji}
+                                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl relative ${isPremium ? 'bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5' : 'bg-gradient-to-br from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800'}`}>
+                                            {isPremium ? subjectEmoji : <Lock className="h-6 w-6 text-gray-400 dark:text-gray-500" />}
                                           </div>
                                           <div>
                                             <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
@@ -2932,21 +2948,34 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
-                                            Start
-                                          </Badge>
+                                          {isPremium ? (
+                                            <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                              Start
+                                            </Badge>
+                                          ) : (
+                                            <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white font-semibold text-xs flex items-center gap-1">
+                                              <Lock className="h-3 w-3" />
+                                              Locked
+                                            </Badge>
+                                          )}
                                         </div>
                                       </motion.div>
                                       <motion.div 
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.1 }}
-                                        onClick={() => navigate('/predicted-exam/geography-paper-2')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        onClick={() => {
+                                          if (isPremium) {
+                                            navigate('/predicted-exam/geography-paper-2');
+                                          } else {
+                                            navigate('/pricing');
+                                          }
+                                        }}
+                                        className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 hover:border-amber-500/30' : 'hover:border-[#0EA5E9]/30'}`}
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
-                                            {subjectEmoji}
+                                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl relative ${isPremium ? 'bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5' : 'bg-gradient-to-br from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800'}`}>
+                                            {isPremium ? subjectEmoji : <Lock className="h-6 w-6 text-gray-400 dark:text-gray-500" />}
                                           </div>
                                           <div>
                                             <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
@@ -2954,9 +2983,16 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
-                                            Start
-                                          </Badge>
+                                          {isPremium ? (
+                                            <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                              Start
+                                            </Badge>
+                                          ) : (
+                                            <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white font-semibold text-xs flex items-center gap-1">
+                                              <Lock className="h-3 w-3" />
+                                              Locked
+                                            </Badge>
+                                          )}
                                         </div>
                                       </motion.div>
                                     </>
@@ -2971,12 +3007,18 @@ const Dashboard = () => {
                                   <motion.div 
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    onClick={() => navigate(`/predicted-exam/${selectedDrawerSubject.id}`)}
-                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                    onClick={() => {
+                                      if (isPremium) {
+                                        navigate(`/predicted-exam/${selectedDrawerSubject.id}`);
+                                      } else {
+                                        navigate('/pricing');
+                                      }
+                                    }}
+                                    className={`flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-md transition-all duration-300 cursor-pointer group ${!isPremium ? 'opacity-60 hover:border-amber-500/30' : 'hover:border-[#0EA5E9]/30'}`}
                                   >
                                     <div className="flex items-center gap-4">
-                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
-                                        {subjectEmoji}
+                                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl relative ${isPremium ? 'bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5' : 'bg-gradient-to-br from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800'}`}>
+                                        {isPremium ? subjectEmoji : <Lock className="h-6 w-6 text-gray-400 dark:text-gray-500" />}
                                       </div>
                                       <div>
                                         <div className="font-bold text-base text-[#0F172A] dark:text-white mb-1">{subjectName}</div>
@@ -2984,9 +3026,16 @@ const Dashboard = () => {
                                       </div>
                                     </div>
                                     <div className="text-right">
-                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
-                                        Start
-                                      </Badge>
+                                      {isPremium ? (
+                                        <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                          Start
+                                        </Badge>
+                                      ) : (
+                                        <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white font-semibold text-xs flex items-center gap-1">
+                                          <Lock className="h-3 w-3" />
+                                          Locked
+                                        </Badge>
+                                      )}
                                     </div>
                                   </motion.div>
                                 );
