@@ -62,7 +62,6 @@ import {
   FileText,
   ChevronDown,
   ChevronUp,
-  Pencil,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -73,7 +72,7 @@ import { openManageBilling } from "@/lib/manageBilling";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
-import { toast as sonnerToast } from "sonner";
+import { toast } from "sonner";
 import { useMPRewards } from "@/hooks/useMPRewards";
 import { PerformanceOverview } from "@/components/dashboard/PerformanceOverview";
 import { StrengthsWeaknesses } from "@/components/dashboard/StrengthsWeaknesses";
@@ -176,8 +175,6 @@ const Dashboard = () => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
-  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
-  const [newSetName, setNewSetName] = useState<string>("");
   const [questNotificationCount, setQuestNotificationCount] = useState(0);
   const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
   const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
@@ -418,29 +415,6 @@ const Dashboard = () => {
       }
       return newSet;
     });
-  };
-
-  const handleRenameSet = async (setId: string) => {
-    if (!newSetName.trim()) {
-      sonnerToast.error("Set name cannot be empty");
-      return;
-    }
-
-    try {
-      const { error } = await supabase
-        .from('flashcards')
-        .update({ title: newSetName.trim() })
-        .eq('set_id', setId);
-
-      if (error) throw error;
-
-      sonnerToast.success("Flashcard set renamed!");
-      setRenamingSetId(null);
-      loadFlashcardSets();
-    } catch (error) {
-      console.error('Error renaming set:', error);
-      sonnerToast.error("Failed to rename set");
-    }
   };
 
   const handleDeleteSet = async (setId: string) => {
@@ -4484,69 +4458,20 @@ const Dashboard = () => {
                                     {/* Decorative elements */}
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/20 to-transparent dark:from-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500"></div>
                                     <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/10 to-transparent dark:from-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500"></div>
-                                     <CardHeader className="relative pb-3">
+                                    <CardHeader className="relative pb-3">
                                       <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
                                           <div className="flex items-center gap-3 mb-2">
                                              <div className="p-2 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg shadow-lg">
                                                <Brain className="h-4 w-4 text-white" />
                                              </div>
-                                           <div className="flex-1">
-                                             {renamingSetId === set.id ? (
-                                               <div className="flex items-center gap-2">
-                                                 <Input
-                                                   value={newSetName}
-                                                   onChange={(e) => setNewSetName(e.target.value)}
-                                                   onKeyDown={(e) => {
-                                                     if (e.key === 'Enter') {
-                                                       handleRenameSet(set.id);
-                                                     } else if (e.key === 'Escape') {
-                                                       setRenamingSetId(null);
-                                                     }
-                                                   }}
-                                                   className="text-sm font-bold"
-                                                   autoFocus
-                                                 />
-                                                 <Button
-                                                   size="sm"
-                                                   onClick={() => handleRenameSet(set.id)}
-                                                   className="bg-[#0EA5E9] hover:bg-[#0284C7] h-8 text-xs px-2"
-                                                 >
-                                                   Save
-                                                 </Button>
-                                                 <Button
-                                                   variant="ghost"
-                                                   size="sm"
-                                                   onClick={() => setRenamingSetId(null)}
-                                                   className="h-8 text-xs px-2"
-                                                 >
-                                                   Cancel
-                                                 </Button>
-                                               </div>
-                                             ) : (
-                                               <>
-                                                 <div className="flex items-center gap-2">
-                                                   <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                                                     {set.title}
-                                                   </CardTitle>
-                                                   <Button
-                                                     variant="ghost"
-                                                     size="sm"
-                                                     onClick={(e) => {
-                                                       e.stopPropagation();
-                                                       setRenamingSetId(set.id);
-                                                       setNewSetName(set.title);
-                                                     }}
-                                                     className="text-muted-foreground hover:text-[#0EA5E9] p-1 h-auto opacity-0 group-hover:opacity-100 transition-opacity"
-                                                   >
-                                                     <Pencil className="h-3 w-3" />
-                                                   </Button>
-                                                 </div>
-                                                 <CardDescription className="text-muted-foreground text-sm">
-                                                   {set.card_count} cards • {formatDate(set.created_at)}
-                                                 </CardDescription>
-                                               </>
-                                             )}
+                                           <div>
+                                             <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                                               {set.title}
+                                             </CardTitle>
+                                             <CardDescription className="text-muted-foreground text-sm">
+                                               {set.card_count} cards • {formatDate(set.created_at)}
+                                             </CardDescription>
                                            </div>
                                          </div>
                                        </div>
