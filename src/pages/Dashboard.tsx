@@ -64,7 +64,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -174,6 +174,7 @@ const Dashboard = () => {
   const [cardsLoading, setCardsLoading] = useState(false);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
   const [questNotificationCount, setQuestNotificationCount] = useState(0);
   const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
   const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
@@ -402,6 +403,18 @@ const Dashboard = () => {
     } finally {
       setCardsLoading(false);
     }
+  };
+
+  const toggleCardFlip = (cardId: string) => {
+    setFlippedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
   };
 
   const handleDeleteSet = async (setId: string) => {
@@ -3371,17 +3384,17 @@ const Dashboard = () => {
                             <CardContent className="space-y-4">
                               <Tabs defaultValue="view" className="w-full">
                                 <TabsList className="grid w-full grid-cols-2 mb-6">
-                                  <TabsTrigger value="view">View Cards</TabsTrigger>
+                                  <TabsTrigger value="view">Sets</TabsTrigger>
                                   <TabsTrigger value="create">Create New</TabsTrigger>
                                 </TabsList>
 
                                 <TabsContent value="view">
                                   {(() => {
-                                    const subjectFlashcards = individualFlashcards.filter(card => 
-                                      card.subject_id === selectedDrawerSubject?.id
+                                    const subjectSets = flashcardSets.filter(set => 
+                                      set.subject_id === selectedDrawerSubject?.id
                                     );
 
-                                    if (subjectFlashcards.length === 0) {
+                                    if (subjectSets.length === 0) {
                                       return (
                                         <div className="text-center py-16">
                                           <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 flex items-center justify-center mb-6 shadow-lg">
@@ -3398,22 +3411,64 @@ const Dashboard = () => {
                                     }
 
                                     return (
-                                      <div className="space-y-3">
-                                        {subjectFlashcards.map((card) => (
-                                          <Card key={card.id} className="bg-white dark:bg-gray-800 border border-[#E2E8F0] dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200">
-                                            <CardContent className="p-4">
-                                              <div className="space-y-3">
-                                                <div>
-                                                  <div className="text-xs text-muted-foreground mb-1 font-medium">Question</div>
-                                                  <div className="text-sm font-semibold text-foreground">{card.front}</div>
+                                      <div className="space-y-6">
+                                        {subjectSets.map((set: any) => (
+                                          <div key={set.id} className="space-y-3">
+                                            <div className="flex items-center justify-between mb-3">
+                                              <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                                                {set.flashcards?.length || 0} cards
+                                              </Badge>
+                                            </div>
+                                            {set.flashcards?.map((card: any) => {
+                                              const isFlipped = flippedCards.has(card.id);
+                                              return (
+                                                <div
+                                                  key={card.id}
+                                                  className="perspective-1000"
+                                                  onClick={() => toggleCardFlip(card.id)}
+                                                >
+                                                  <motion.div
+                                                    className="relative cursor-pointer"
+                                                    initial={false}
+                                                    animate={{ rotateY: isFlipped ? 180 : 0 }}
+                                                    transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                                                    style={{ transformStyle: "preserve-3d" }}
+                                                  >
+                                                    <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
+                                                      <CardContent className="p-4">
+                                                        <AnimatePresence mode="wait">
+                                                          {!isFlipped ? (
+                                                            <motion.div
+                                                              key="front"
+                                                              initial={{ opacity: 0 }}
+                                                              animate={{ opacity: 1 }}
+                                                              exit={{ opacity: 0 }}
+                                                              transition={{ duration: 0.2 }}
+                                                            >
+                                                              <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wide">Question</div>
+                                                              <div className="text-sm font-bold text-[#0F172A] dark:text-white leading-relaxed">{card.front}</div>
+                                                            </motion.div>
+                                                          ) : (
+                                                            <motion.div
+                                                              key="back"
+                                                              initial={{ opacity: 0 }}
+                                                              animate={{ opacity: 1 }}
+                                                              exit={{ opacity: 0 }}
+                                                              transition={{ duration: 0.2 }}
+                                                              style={{ transform: "rotateY(180deg)" }}
+                                                            >
+                                                              <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wide">Answer</div>
+                                                              <div className="text-sm text-[#0F172A] dark:text-white font-medium leading-relaxed">{card.back}</div>
+                                                            </motion.div>
+                                                          )}
+                                                        </AnimatePresence>
+                                                      </CardContent>
+                                                    </Card>
+                                                  </motion.div>
                                                 </div>
-                                                <div className="pt-2 border-t border-border">
-                                                  <div className="text-xs text-muted-foreground mb-1 font-medium">Answer</div>
-                                                  <div className="text-sm text-muted-foreground">{card.back}</div>
-                                                </div>
-                                              </div>
-                                            </CardContent>
-                                          </Card>
+                                              );
+                                            })}
+                                          </div>
                                         ))}
                                         <Button 
                                           onClick={() => {
@@ -3421,7 +3476,7 @@ const Dashboard = () => {
                                             setActiveTab("flashcards");
                                           }}
                                           variant="outline"
-                                          className="w-full mt-4"
+                                          className="w-full mt-4 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl font-bold"
                                         >
                                           View All Flashcards
                                         </Button>
