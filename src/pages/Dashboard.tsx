@@ -3947,6 +3947,14 @@ const Dashboard = () => {
                           flashcardSets={flashcardSets}
                           individualFlashcards={individualFlashcards}
                           onViewFlashcards={() => setActiveTab("flashcards")}
+                          onFlashcardCreated={() => {
+                            loadFlashcardSets();
+                            loadIndividualFlashcards();
+                            toast({
+                              title: "Success",
+                              description: "Flashcards created successfully!",
+                            });
+                          }}
                         />
                       </div>
                     </ResizablePanel>
