@@ -104,8 +104,28 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [], selectedSubj
   const previewRef = useRef<HTMLDivElement>(null);
 
   // Use selectedSubjectId if provided, otherwise auto-detect from user's first subject
-  const subject = selectedSubjectId || (userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "");
-  const examBoard = userSubjects.length > 0 ? userSubjects[0].exam_board : "";
+  const getSubjectInfo = () => {
+    if (selectedSubjectId && userSubjects.length > 0) {
+      // Find the matching subject in userSubjects
+      const matchingSubject = userSubjects.find(s => 
+        s.subject_name.toLowerCase().replace(/\s+/g, '-') === selectedSubjectId ||
+        s.subject_name.toLowerCase() === selectedSubjectId.toLowerCase()
+      );
+      if (matchingSubject) {
+        return {
+          subject: selectedSubjectId,
+          examBoard: matchingSubject.exam_board
+        };
+      }
+    }
+    // Fallback to first subject if no match or no selectedSubjectId
+    return {
+      subject: userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "",
+      examBoard: userSubjects.length > 0 ? userSubjects[0].exam_board : ""
+    };
+  };
+
+  const { subject, examBoard } = getSubjectInfo();
 
   // Auto-scroll to preview when flashcards are generated
   useEffect(() => {

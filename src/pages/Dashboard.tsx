@@ -3606,6 +3606,7 @@ const Dashboard = () => {
                                       });
                                     }}
                                     userSubjects={userSubjectsWithGrades}
+                                    selectedSubjectId={selectedDrawerSubject?.id}
                                   />
                                 </TabsContent>
                               </Tabs>
