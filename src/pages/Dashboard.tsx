@@ -1361,6 +1361,14 @@ const Dashboard = () => {
     }
   }, [user?.id, activeTab]);
 
+  // Load flashcards when drawer flashcards tab opens
+  useEffect(() => {
+    if (subjectDrawerOpen && drawerTab === 'flashcards') {
+      loadFlashcardSets();
+      loadIndividualFlashcards();
+    }
+  }, [subjectDrawerOpen, drawerTab]);
+
   // Force refresh when dashboard becomes visible to catch completed practice
   useEffect(() => {
     const handleFocus = () => {
