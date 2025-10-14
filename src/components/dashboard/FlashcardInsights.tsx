@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft, Eye, Play, Pencil, Check, X } from "lucide-react";
+import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft, Eye, Play, Pencil, Check, X, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -183,17 +183,44 @@ export const FlashcardInsights = ({
                         <h3 className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex-1">
                           {set.title}
                         </h3>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => {
-                            setRenamingSetId(set.id);
-                            setNewSetName(set.title);
-                          }}
-                          className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
-                        >
-                          <Pencil className="h-3.5 w-3.5" />
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => {
+                              setRenamingSetId(set.id);
+                              setNewSetName(set.title);
+                            }}
+                            className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={async () => {
+                              try {
+                                const { error } = await supabase
+                                  .from('flashcards')
+                                  .delete()
+                                  .eq('set_id', set.id);
+
+                                if (error) throw error;
+
+                                toast.success("Flashcard set deleted successfully");
+                                if (onFlashcardCreated) {
+                                  onFlashcardCreated();
+                                }
+                              } catch (error) {
+                                console.error('Error deleting flashcard set:', error);
+                                toast.error("Failed to delete flashcard set");
+                              }
+                            }}
+                            className="h-7 w-7 p-0 text-[#64748B] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
                       </div>
                     )}
                     <div className="flex items-center gap-3">
@@ -524,17 +551,44 @@ export const FlashcardInsights = ({
                       ) : (
                         <div className="flex items-center gap-2">
                           <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex-1">{set.title}</CardTitle>
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => {
-                              setRenamingSetId(set.id);
-                              setNewSetName(set.title);
-                            }}
-                            className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
-                          >
-                            <Pencil className="h-3.5 w-3.5" />
-                          </Button>
+                          <div className="flex items-center gap-1">
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => {
+                                setRenamingSetId(set.id);
+                                setNewSetName(set.title);
+                              }}
+                              className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
+                            >
+                              <Pencil className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={async () => {
+                                try {
+                                  const { error } = await supabase
+                                    .from('flashcards')
+                                    .delete()
+                                    .eq('set_id', set.id);
+
+                                  if (error) throw error;
+
+                                  toast.success("Flashcard set deleted successfully");
+                                  if (onFlashcardCreated) {
+                                    onFlashcardCreated();
+                                  }
+                                } catch (error) {
+                                  console.error('Error deleting flashcard set:', error);
+                                  toast.error("Failed to delete flashcard set");
+                                }
+                              }}
+                              className="h-7 w-7 p-0 text-[#64748B] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
                         </div>
                       )}
                       <CardDescription className="text-xs font-medium text-[#64748B] dark:text-gray-400 mt-1">
