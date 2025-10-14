@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Check, Brain, Target, TrendingUp, Zap, BookOpen, BarChart3, Star, Sparkles, Clock, Trophy, Shield, Award } from "lucide-react";
+import { Check, X, Brain, Target, TrendingUp, Zap, BookOpen, BarChart3, Star, Sparkles, Clock, Trophy, Shield, Award, Lock, ChevronDown, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Pricing = () => {
   const navigate = useNavigate();
