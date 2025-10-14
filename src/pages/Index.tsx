@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, Brain, TrendingUp, Calendar, Target, Sparkles, ChevronDown, ChevronUp, ArrowRight, BarChart3, Clock, BookOpen } from "lucide-react";
+import { CheckCircle, Brain, TrendingUp, Calendar, Target, Sparkles, ChevronDown, ChevronUp, ArrowRight, BarChart3, Clock, BookOpen, Zap, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -161,74 +162,107 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section - Premium gradient background */}
+      {/* Hero Section - Premium with deeper gradients and energy */}
       <motion.section 
         ref={heroRef}
-        className="relative overflow-hidden pt-20 pb-32 lg:pt-32 lg:pb-40"
+        className="relative overflow-hidden pt-24 pb-40 lg:pt-40 lg:pb-56"
       >
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-primary/5 pointer-events-none" />
-        <div className="absolute top-1/4 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Multi-layer animated gradient background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-primary/15 via-background to-background pointer-events-none" />
+        <div className="absolute top-1/3 -right-64 w-[600px] h-[600px] bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-1/3 -left-64 w-[600px] h-[600px] bg-gradient-radial from-blue-500/15 via-primary/10 to-transparent rounded-full blur-3xl pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
         
-        <div className="container mx-auto px-6 lg:px-8 relative">
+        {/* Floating gradient orb */}
+        <motion.div 
+          className="absolute top-1/2 left-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"
+          animate={{
+            x: [-50, 50, -50],
+            y: [-30, 30, -30],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <div className="container mx-auto px-6 lg:px-12 relative max-w-7xl">
           <motion.div
             initial="hidden"
             animate={heroInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-5xl mx-auto text-center"
           >
+            {/* Glowing backdrop for headline */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-64 bg-primary/5 blur-3xl rounded-full pointer-events-none" />
+            
             <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 leading-[1.1] tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-10 leading-[1.05] tracking-tight relative"
+              initial={{ opacity: 0, y: 40 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
             >
-              The GCSE and A-Level<br />tutor built for{" "}
-              <span className="text-primary relative inline-block">
+              The GCSE & A-Level<br />tutor built around{" "}
+              <span className="text-primary relative inline-block font-extrabold">
                 you
                 <motion.span
-                  className="absolute -bottom-2 left-0 right-0 h-3 bg-primary/20 -z-10 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={heroInView ? { width: "100%" } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="absolute -bottom-3 left-0 right-0 h-4 bg-gradient-to-r from-primary/30 via-primary/40 to-primary/30 -z-10 rounded-full blur-sm"
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={heroInView ? { width: "110%", opacity: 1 } : { width: 0, opacity: 0 }}
+                  transition={{ duration: 1, delay: 0.9 }}
                 />
               </span>
               .
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-light"
+              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground/90 mb-6 max-w-4xl mx-auto leading-relaxed font-light"
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
             >
-              Mentiora personalises your revision — tracking progress, predicting grades, and guiding you with data-driven precision.
+              Your personalised revision coach — built to understand how you learn.
+            </motion.p>
+            
+            <motion.p 
+              className="text-lg md:text-xl text-muted-foreground/70 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.5 }}
+            >
+              Mentiora tracks your progress, predicts your grades, and creates a plan that evolves with every answer.
             </motion.p>
             
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10"
+              className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12"
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.9, delay: 0.7 }}
             >
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ scale: 1.08, y: -3 }} 
+                whileTap={{ scale: 0.97 }}
+                className="relative group"
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
                 <Button 
                   onClick={() => navigate('/register')}
                   size="lg"
-                  className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-2xl hover:shadow-primary/40 px-10 py-7 text-lg font-semibold rounded-2xl transition-all duration-300"
+                  className="relative bg-gradient-to-r from-primary via-primary to-blue-500 text-primary-foreground hover:shadow-2xl hover:shadow-primary/50 px-12 py-8 text-lg font-bold rounded-2xl transition-all duration-300 bg-[length:200%_100%] hover:bg-[position:100%_0] animate-shimmer"
                 >
                   Start Free Trial
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.06, y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Button 
                   variant="outline"
                   size="lg"
                   onClick={() => navigate('/dashboard')}
-                  className="px-10 py-7 text-lg font-semibold rounded-2xl border-2 hover:bg-muted/50 hover:shadow-lg transition-all duration-300"
+                  className="px-12 py-8 text-lg font-semibold rounded-2xl border-2 border-border/50 hover:border-primary/50 hover:bg-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
                 >
                   Explore Dashboard
                 </Button>
@@ -236,32 +270,39 @@ const Index = () => {
             </motion.div>
             
             <motion.p 
-              className="text-sm text-muted-foreground/80 font-light"
+              className="text-sm text-muted-foreground/70 font-light"
               initial={{ opacity: 0 }}
               animate={heroInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.9, delay: 0.9 }}
             >
-              Trusted by students across the UK preparing for 2026 exams.
+              Trusted by GCSE & A-Level students across the UK preparing for 2026 exams.
             </motion.p>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* Three Feature Cards Section */}
-      <section ref={featuresRef} className="py-24 lg:py-32 relative">
-        <div className="container mx-auto px-6 lg:px-8">
+      {/* Three Feature Cards Section - Enhanced with deeper gradients */}
+      <section ref={featuresRef} className="py-32 lg:py-40 relative">
+        {/* Thin divider with blur */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
           <motion.div
             initial="hidden"
             animate={featuresInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-24"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Your personal tutor —<br />reimagined for modern learning.
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 tracking-tight leading-[1.1]">
+              Your personal tutor —<br />
+              <span className="bg-gradient-to-r from-primary via-blue-500 to-primary bg-clip-text text-transparent">
+                reimagined for modern learning
+              </span>
+              .
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
-              Everything you'd expect from a private tutor, made smarter and more affordable.
+            <p className="text-xl md:text-2xl text-muted-foreground/80 max-w-3xl mx-auto font-light leading-relaxed">
+              Everything you'd expect from a private tutor, redesigned to be smarter, simpler, and made for you.
             </p>
           </motion.div>
 
@@ -269,45 +310,52 @@ const Index = () => {
             initial="hidden"
             animate={featuresInView ? "visible" : "hidden"}
             variants={staggerChildren}
-            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto"
           >
             {[
               {
                 icon: Brain,
                 title: "Smart Revision Notebook",
-                description: "Mentiora builds your study plan around weak topics, updating after every quiz or session.",
-                gradient: "from-blue-500/10 to-cyan-500/10"
+                description: "Turn weak topics into strengths with a personalised study plan that updates after every quiz or practice session.",
+                gradient: "from-blue-500/20 via-cyan-500/15 to-blue-500/10",
+                iconBg: "from-blue-500/20 to-cyan-500/20"
               },
               {
                 icon: TrendingUp,
                 title: "Predicted Grades",
-                description: "See real-time grade predictions that evolve as your performance improves.",
-                gradient: "from-primary/10 to-blue-500/10"
+                description: "Watch your grade rise in real time. Every session updates your predicted grade — motivating you to reach your goals faster.",
+                gradient: "from-primary/20 via-blue-500/15 to-primary/10",
+                iconBg: "from-primary/20 to-blue-500/20"
               },
               {
                 icon: Calendar,
                 title: "Weekly Insights",
-                description: "Understand your retention, study patterns, and best times to learn.",
-                gradient: "from-cyan-500/10 to-primary/10"
+                description: "Understand your learning habits at a glance. Track your retention, study focus, and best hours to revise for maximum results.",
+                gradient: "from-cyan-500/20 via-primary/15 to-cyan-500/10",
+                iconBg: "from-cyan-500/20 to-primary/20"
               }
             ].map((feature, index) => (
               <motion.div 
                 key={index}
                 variants={fadeInUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                whileHover={{ y: -12, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="group"
               >
-                <Card className={`border-border/50 bg-gradient-to-br ${feature.gradient} hover:shadow-2xl transition-all duration-500 h-full rounded-3xl overflow-hidden group`}>
-                  <CardHeader className="pb-4">
+                <Card className={`relative border-border/40 bg-gradient-to-br ${feature.gradient} backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 h-full rounded-3xl overflow-hidden`}>
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-transparent group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none" />
+                  
+                  <CardHeader className="pb-6 relative">
                     <motion.div 
-                      className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300"
-                      whileHover={{ rotate: [0, -10, 10, -10, 0], transition: { duration: 0.5 } }}
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.iconBg} flex items-center justify-center mb-8 shadow-lg group-hover:shadow-xl group-hover:shadow-primary/20 transition-all duration-300`}
+                      whileHover={{ rotate: [0, -8, 8, -8, 0], scale: 1.1, transition: { duration: 0.6 } }}
                     >
-                      <feature.icon className="w-7 h-7 text-primary" />
+                      <feature.icon className="w-8 h-8 text-primary drop-shadow-sm" />
                     </motion.div>
-                    <CardTitle className="text-2xl font-bold">{feature.title}</CardTitle>
+                    <CardTitle className="text-2xl md:text-3xl font-bold mb-4">{feature.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-muted-foreground leading-relaxed text-base">
+                  <CardContent className="relative">
+                    <CardDescription className="text-muted-foreground/90 leading-relaxed text-base md:text-lg">
                       {feature.description}
                     </CardDescription>
                   </CardContent>
@@ -318,11 +366,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Dashboard Visual Section */}
-      <section ref={dashboardRef} className="py-24 lg:py-32 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-            {/* Left: Mockup */}
+      {/* Dashboard Visual Section - Product showcase with motion */}
+      <section ref={dashboardRef} className="py-32 lg:py-40 relative overflow-hidden">
+        {/* Background with floating blur circles */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-blue-500/5 to-background" />
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl relative">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Left: Enhanced Mockup */}
             <motion.div
               initial="hidden"
               animate={dashboardInView ? "visible" : "hidden"}
@@ -332,92 +410,126 @@ const Index = () => {
             >
               <motion.div 
                 className="relative"
-                whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.4 } }}
               >
-                {/* Glow effect */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-3xl blur-2xl opacity-50" />
+                {/* Enhanced multi-layer glow */}
+                <div className="absolute -inset-6 bg-gradient-to-r from-primary/30 via-blue-500/25 to-primary/30 rounded-3xl blur-3xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="absolute -inset-3 bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-3xl blur-xl" />
                 
-                <div className="relative bg-card border border-border/50 rounded-3xl p-8 shadow-2xl">
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className="text-xl font-bold text-foreground">Your Dashboard</h3>
-                      <Badge className="bg-primary/10 text-primary border-primary/20 px-3 py-1">
-                        <span className="w-2 h-2 bg-primary rounded-full inline-block mr-2 animate-pulse" />
+                <div className="relative bg-card/95 backdrop-blur-sm border-2 border-primary/20 rounded-3xl p-10 shadow-2xl">
+                  <div className="space-y-7">
+                    <div className="flex items-center justify-between mb-8">
+                      <h3 className="text-2xl font-bold text-foreground">Your Dashboard</h3>
+                      <Badge className="bg-gradient-to-r from-primary/20 to-blue-500/20 text-primary border-primary/30 px-4 py-1.5 shadow-lg">
+                        <motion.span 
+                          className="w-2.5 h-2.5 bg-primary rounded-full inline-block mr-2"
+                          animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
                         Live
                       </Badge>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-5">
                       <motion.div 
-                        className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-5 border border-primary/10"
-                        whileHover={{ scale: 1.05 }}
+                        className="bg-gradient-to-br from-primary/15 to-blue-500/10 rounded-2xl p-6 border border-primary/20 shadow-lg"
+                        whileHover={{ scale: 1.05, y: -4 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <p className="text-xs text-muted-foreground mb-2 font-medium">Predicted Grade</p>
-                        <p className="text-3xl font-bold text-primary">Grade 8</p>
-                        <p className="text-xs text-primary/70 mt-1">↑ from Grade 7</p>
+                        <p className="text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wide">Predicted Grade</p>
+                        <p className="text-4xl font-bold text-primary mb-1">Grade 8</p>
+                        <motion.p 
+                          className="text-xs text-primary/80 mt-2 flex items-center gap-1"
+                          initial={{ x: -5, opacity: 0 }}
+                          animate={dashboardInView ? { x: 0, opacity: 1 } : { x: -5, opacity: 0 }}
+                          transition={{ delay: 1 }}
+                        >
+                          <TrendingUp className="w-3 h-3" />
+                          ↑ from Grade 7
+                        </motion.p>
                       </motion.div>
                       <motion.div 
-                        className="bg-muted/50 rounded-2xl p-5 border border-border/50"
-                        whileHover={{ scale: 1.05 }}
+                        className="bg-muted/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg"
+                        whileHover={{ scale: 1.05, y: -4 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <p className="text-xs text-muted-foreground mb-2 font-medium">This Week</p>
-                        <p className="text-3xl font-bold text-foreground">5h 20m</p>
-                        <p className="text-xs text-muted-foreground mt-1">+2h from last week</p>
+                        <p className="text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wide">This Week</p>
+                        <p className="text-4xl font-bold text-foreground mb-1">5h 20m</p>
+                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+                          <Sparkles className="w-3 h-3" />
+                          +2h from last week
+                        </p>
                       </motion.div>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground font-medium">Retention Rate</span>
-                        <span className="font-bold text-foreground">74%</span>
+                        <span className="text-muted-foreground font-medium">Retention Rate ↑</span>
+                        <span className="font-bold text-foreground text-lg">74%</span>
                       </div>
-                      <div className="w-full bg-muted/50 rounded-full h-3 overflow-hidden">
+                      <div className="relative w-full bg-muted/50 rounded-full h-4 overflow-hidden shadow-inner">
                         <motion.div 
-                          className="bg-gradient-to-r from-primary to-blue-500 h-3 rounded-full"
+                          className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary h-4 rounded-full shadow-lg"
                           initial={{ width: 0 }}
                           animate={dashboardInView ? { width: '74%' } : { width: 0 }}
-                          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                          transition={{ duration: 2, delay: 0.8, ease: "easeOut" }}
+                        />
+                        {/* Animated shimmer */}
+                        <motion.div 
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                          animate={{ x: ['-100%', '200%'] }}
+                          transition={{ duration: 2, delay: 2.5, ease: "easeInOut" }}
                         />
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-primary/5 to-blue-500/5 rounded-2xl p-5 border border-primary/10">
+                    <div className="bg-gradient-to-br from-primary/10 via-blue-500/5 to-primary/10 rounded-2xl p-6 border border-primary/15 shadow-lg">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Clock className="w-4 h-4 text-primary" />
+                        <div className="w-9 h-9 rounded-lg bg-primary/15 flex items-center justify-center shadow-sm">
+                          <Clock className="w-5 h-5 text-primary" />
                         </div>
-                        <p className="text-sm font-semibold text-foreground">Study Peak</p>
+                        <p className="text-sm font-bold text-foreground">Study Peak</p>
                       </div>
-                      <p className="text-sm text-muted-foreground">Your best learning time is 7–9 pm</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Your best learning time is <span className="text-primary font-semibold">7–9 pm</span></p>
                     </div>
                   </div>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Right: Text */}
+            {/* Right: Enhanced Text */}
             <motion.div
               initial="hidden"
               animate={dashboardInView ? "visible" : "hidden"}
               variants={fadeInUp}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="order-1 lg:order-2"
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="order-1 lg:order-2 space-y-8"
             >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 tracking-tight leading-[1.1]">
-                Built around<br />how you learn.
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-[1.05]">
+                Built around<br />
+                <span className="bg-gradient-to-r from-primary via-blue-500 to-primary bg-clip-text text-transparent">
+                  how you learn
+                </span>
+                .
               </h2>
-              <p className="text-xl text-muted-foreground mb-10 leading-relaxed font-light">
-                Your dashboard tracks subjects, predicted grades, and weak areas — dynamically adapting to your performance. It's your own intelligent revision coach.
+              <p className="text-xl md:text-2xl text-muted-foreground/90 leading-relaxed font-light">
+                Your Mentiora dashboard is your personal command centre — tracking every subject, predicted grade, and weekly goal in one place.
               </p>
-              <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.3 }}>
+              <p className="text-lg md:text-xl text-muted-foreground/80 leading-relaxed font-light">
+                It adapts automatically to your performance, helping you revise smarter, not longer.
+              </p>
+              <motion.div 
+                whileHover={{ x: 8 }} 
+                transition={{ duration: 0.3 }}
+                className="pt-4"
+              >
                 <Button 
-                  variant="outline"
                   size="lg"
                   onClick={() => document.getElementById('comparison')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-2xl px-8 py-6 text-base font-semibold border-2 hover:bg-muted/50 hover:shadow-lg transition-all"
+                  className="bg-gradient-to-r from-primary to-blue-500 text-primary-foreground rounded-2xl px-10 py-7 text-lg font-bold hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 group"
                 >
                   See How It Works
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </motion.div>
             </motion.div>
@@ -425,167 +537,239 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Graph Comparison Section */}
-      <section id="comparison" ref={comparisonRef} className="py-24 lg:py-32">
-        <div className="container mx-auto px-6 lg:px-8">
+      {/* Graph Comparison Section - Enhanced with depth */}
+      <section id="comparison" ref={comparisonRef} className="py-32 lg:py-40 relative">
+        {/* Thin divider with blur */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
           <motion.div
             initial="hidden"
             animate={comparisonInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-24"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Personalised tutoring — at a<br />fraction of the cost.
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 tracking-tight leading-[1.05]">
+              Personalised tutoring —<br />
+              <span className="text-primary">at a fraction of the cost</span>
+              .
             </h2>
-            <p className="text-xl text-muted-foreground font-light">
+            <p className="text-xl md:text-2xl text-muted-foreground/80 font-light">
               Smarter, faster, and 95% cheaper than private tutoring.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-            {/* Graph Card */}
+          <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            {/* Graph Card - Enhanced with glow */}
             <motion.div
               initial="hidden"
               animate={comparisonInView ? "visible" : "hidden"}
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.2 }}
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -6, transition: { duration: 0.4 } }}
+              className="group"
             >
-              <Card className="border-border/50 bg-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 h-full">
-                <h3 className="text-2xl font-bold text-foreground mb-8">Grade Improvement</h3>
-                <div className="relative h-80 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl p-6">
-                  <svg className="w-full h-full" viewBox="0 0 400 250" preserveAspectRatio="none">
-                    {/* Grid lines */}
-                    <line x1="0" y1="200" x2="400" y2="200" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
-                    <line x1="0" y1="150" x2="400" y2="150" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
-                    <line x1="0" y1="100" x2="400" y2="100" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
-                    <line x1="0" y1="50" x2="400" y2="50" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
+              <Card className="relative border-2 border-border/40 bg-gradient-to-br from-card via-card to-primary/5 rounded-3xl p-10 shadow-xl hover:shadow-2xl hover:border-primary/30 transition-all duration-500 h-full overflow-hidden">
+                {/* Subtle glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-transparent group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none" />
+                
+                <div className="relative">
+                  <h3 className="text-3xl font-bold text-foreground mb-10 flex items-center gap-3">
+                    <Zap className="w-8 h-8 text-primary" />
+                    Grade Improvement
+                  </h3>
+                  <div className="relative h-80 bg-gradient-to-br from-muted/40 to-muted/20 rounded-2xl p-8 backdrop-blur-sm shadow-inner">
+                    <svg className="w-full h-full" viewBox="0 0 400 250" preserveAspectRatio="none">
+                      {/* Grid lines */}
+                      <line x1="0" y1="200" x2="400" y2="200" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
+                      <line x1="0" y1="150" x2="400" y2="150" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
+                      <line x1="0" y1="100" x2="400" y2="100" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
+                      <line x1="0" y1="50" x2="400" y2="50" stroke="hsl(var(--border))" strokeWidth="1" opacity="0.3" />
+                      
+                      {/* Grey dashed line - Traditional tutoring */}
+                      <motion.path
+                        d="M 0 200 Q 100 180, 200 140 T 400 100"
+                        fill="none"
+                        stroke="hsl(0 0% 60%)"
+                        strokeWidth="3"
+                        strokeDasharray="8,8"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={comparisonInView ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
+                        transition={{ duration: 2, delay: 0.5 }}
+                      />
+                      
+                      {/* Blue gradient line - Mentiora with glow */}
+                      <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="hsl(195 69% 54%)" />
+                          <stop offset="50%" stopColor="hsl(200 100% 60%)" />
+                          <stop offset="100%" stopColor="hsl(195 69% 54%)" />
+                        </linearGradient>
+                        <filter id="glow">
+                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                          <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                          </feMerge>
+                        </filter>
+                      </defs>
+                      <motion.path
+                        d="M 0 200 Q 100 120, 200 60 T 400 20"
+                        fill="none"
+                        stroke="url(#lineGradient)"
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                        filter="url(#glow)"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={comparisonInView ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
+                        transition={{ duration: 2.5, delay: 0.8 }}
+                      />
+                    </svg>
                     
-                    {/* Grey dashed line - Traditional tutoring */}
-                    <motion.path
-                      d="M 0 200 Q 100 180, 200 140 T 400 100"
-                      fill="none"
-                      stroke="hsl(0 0% 60%)"
-                      strokeWidth="3"
-                      strokeDasharray="8,8"
-                      initial={{ pathLength: 0 }}
-                      animate={comparisonInView ? { pathLength: 1 } : { pathLength: 0 }}
-                      transition={{ duration: 2, delay: 0.5 }}
-                    />
-                    
-                    {/* Blue gradient line - Mentiora */}
-                    <defs>
-                      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="hsl(195 69% 54%)" />
-                        <stop offset="100%" stopColor="hsl(200 100% 60%)" />
-                      </linearGradient>
-                    </defs>
-                    <motion.path
-                      d="M 0 200 Q 100 120, 200 60 T 400 20"
-                      fill="none"
-                      stroke="url(#lineGradient)"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      initial={{ pathLength: 0 }}
-                      animate={comparisonInView ? { pathLength: 1 } : { pathLength: 0 }}
-                      transition={{ duration: 2, delay: 0.8 }}
-                    />
-                  </svg>
-                  
-                  {/* Legend */}
-                  <div className="absolute top-4 right-4 space-y-3 bg-card/80 backdrop-blur-sm rounded-xl p-4 border border-border/50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-1 bg-gradient-to-r from-primary to-blue-500 rounded-full"></div>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Mentiora</p>
-                        <p className="text-xs text-muted-foreground">£14.99/mo</p>
+                    {/* Legend with enhanced styling */}
+                    <div className="absolute top-6 right-6 space-y-4 bg-card/95 backdrop-blur-md rounded-2xl p-5 border-2 border-border/50 shadow-xl">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-1.5 bg-gradient-to-r from-primary to-blue-500 rounded-full shadow-sm shadow-primary/50"></div>
+                        <div>
+                          <p className="text-sm font-bold text-foreground">Mentiora</p>
+                          <p className="text-xs text-primary font-medium">£14.99/mo</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-1 border-t-2 border-dashed border-muted-foreground rounded-full"></div>
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground">Traditional</p>
-                        <p className="text-xs text-muted-foreground">£500/mo</p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-1.5 border-t-2 border-dashed border-muted-foreground/60 rounded-full"></div>
+                        <div>
+                          <p className="text-sm font-semibold text-muted-foreground/80">Traditional</p>
+                          <p className="text-xs text-muted-foreground/70">£500/mo</p>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <motion.div
+                    className="text-center mt-8 px-6 py-4 bg-gradient-to-r from-primary/10 via-blue-500/10 to-primary/10 rounded-2xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={comparisonInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ delay: 3 }}
+                  >
+                    <p className="text-muted-foreground font-medium">
+                      <span className="text-primary font-bold text-2xl">68%</span> average grade improvement with Mentiora
+                    </p>
+                    <p className="text-sm text-muted-foreground/70 mt-1">Students achieve measurable progress in under four weeks.</p>
+                  </motion.div>
                 </div>
-                <p className="text-center text-muted-foreground mt-6 font-medium">
-                  <span className="text-primary font-bold text-lg">68%</span> grade improvement with Mentiora.
-                </p>
               </Card>
             </motion.div>
 
-            {/* Cost Comparison Card */}
+            {/* Cost Comparison Card - Enhanced */}
             <motion.div
               initial="hidden"
               animate={comparisonInView ? "visible" : "hidden"}
               variants={fadeInUp}
               transition={{ duration: 0.8, delay: 0.4 }}
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -6, transition: { duration: 0.4 } }}
+              className="group"
             >
-              <Card className="border-border/50 bg-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 h-full">
-                <h3 className="text-2xl font-bold text-foreground mb-8">Cost Comparison</h3>
-                <div className="flex items-end justify-center gap-12 h-80 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl p-8">
-                  {/* Grey bar - Traditional */}
-                  <div className="flex flex-col items-center flex-1">
-                    <motion.div 
-                      className="w-full bg-gradient-to-t from-muted to-muted/60 rounded-t-2xl relative shadow-lg"
-                      style={{ height: '100%' }}
-                      initial={{ height: 0 }}
-                      animate={comparisonInView ? { height: '100%' } : { height: 0 }}
-                      transition={{ duration: 1.5, delay: 0.8 }}
-                    >
-                      <div className="absolute -top-16 left-1/2 -translate-x-1/2 text-center">
-                        <p className="text-3xl font-bold text-muted-foreground">£500</p>
-                        <p className="text-xs text-muted-foreground font-medium">per month</p>
-                      </div>
-                    </motion.div>
-                    <p className="text-sm text-muted-foreground mt-6 text-center font-medium">Private tutoring</p>
+              <Card className="relative border-2 border-border/40 bg-gradient-to-br from-card via-card to-blue-500/5 rounded-3xl p-10 shadow-xl hover:shadow-2xl hover:border-blue-500/30 transition-all duration-500 h-full overflow-hidden">
+                {/* Subtle glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-primary/0 to-primary/0 group-hover:from-blue-500/5 group-hover:via-transparent group-hover:to-primary/5 transition-all duration-500 pointer-events-none" />
+                
+                <div className="relative">
+                  <h3 className="text-3xl font-bold text-foreground mb-10 flex items-center gap-3">
+                    <BarChart3 className="w-8 h-8 text-primary" />
+                    Cost Comparison
+                  </h3>
+                  <div className="flex items-end justify-center gap-16 h-80 bg-gradient-to-br from-muted/40 to-muted/20 rounded-2xl p-10 backdrop-blur-sm shadow-inner">
+                    {/* Grey bar - Traditional */}
+                    <div className="flex flex-col items-center flex-1">
+                      <motion.div 
+                        className="w-full bg-gradient-to-t from-muted via-muted/80 to-muted/60 rounded-t-2xl relative shadow-xl"
+                        style={{ height: '100%' }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={comparisonInView ? { height: '100%', opacity: 1 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 1.8, delay: 0.8, ease: "easeOut" }}
+                      >
+                        <div className="absolute -top-20 left-1/2 -translate-x-1/2 text-center">
+                          <p className="text-4xl font-bold text-muted-foreground">£500</p>
+                          <p className="text-xs text-muted-foreground/70 font-medium mt-1">per month</p>
+                        </div>
+                      </motion.div>
+                      <p className="text-sm text-muted-foreground/80 mt-7 text-center font-semibold">Private tutoring</p>
+                    </div>
+                    
+                    {/* Blue bar - Mentiora with glow */}
+                    <div className="flex flex-col items-center flex-1">
+                      <motion.div 
+                        className="w-full bg-gradient-to-t from-primary via-primary/90 to-blue-500 rounded-t-2xl relative shadow-2xl shadow-primary/40"
+                        style={{ height: '15%' }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={comparisonInView ? { height: '15%', opacity: 1 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 1.8, delay: 1.3, ease: "easeOut" }}
+                      >
+                        <motion.div 
+                          className="absolute inset-0 bg-primary/30 rounded-t-2xl blur-md"
+                          animate={{ opacity: [0.5, 0.8, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        <div className="absolute -top-20 left-1/2 -translate-x-1/2 text-center">
+                          <p className="text-4xl font-bold text-primary">£14.99</p>
+                          <p className="text-xs text-primary/80 font-medium mt-1">per month</p>
+                        </div>
+                      </motion.div>
+                      <p className="text-sm text-foreground font-bold mt-7 text-center">Mentiora</p>
+                    </div>
                   </div>
-                  
-                  {/* Blue bar - Mentiora */}
-                  <div className="flex flex-col items-center flex-1">
-                    <motion.div 
-                      className="w-full bg-gradient-to-t from-primary to-primary/80 rounded-t-2xl relative shadow-lg shadow-primary/30"
-                      style={{ height: '15%' }}
-                      initial={{ height: 0 }}
-                      animate={comparisonInView ? { height: '15%' } : { height: 0 }}
-                      transition={{ duration: 1.5, delay: 1.2 }}
-                    >
-                      <div className="absolute -top-16 left-1/2 -translate-x-1/2 text-center">
-                        <p className="text-3xl font-bold text-primary">£14.99</p>
-                        <p className="text-xs text-primary font-medium">per month</p>
-                      </div>
-                    </motion.div>
-                    <p className="text-sm text-foreground font-semibold mt-6 text-center">Mentiora</p>
-                  </div>
+                  <motion.div
+                    className="text-center mt-8 px-6 py-4 bg-gradient-to-r from-blue-500/10 via-primary/10 to-blue-500/10 rounded-2xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={comparisonInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ delay: 3.5 }}
+                  >
+                    <p className="text-muted-foreground leading-relaxed font-medium">
+                      One plan. All subjects. <span className="text-primary font-bold">Unlimited progress.</span>
+                    </p>
+                    <p className="text-sm text-muted-foreground/70 mt-1">For under <span className="text-primary font-bold">5%</span> of the cost.</p>
+                  </motion.div>
                 </div>
-                <p className="text-center text-muted-foreground mt-6 leading-relaxed">
-                  Students achieve measurable progress in less than 4 weeks — for under <span className="text-primary font-bold">5%</span> of the cost.
-                </p>
               </Card>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="py-24 lg:py-32 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-6 lg:px-8">
+      {/* Testimonials Section - Enhanced with avatars */}
+      <section ref={testimonialsRef} className="py-32 lg:py-40 relative overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-blue-500/5 to-background" />
+        <motion.div 
+          className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl relative">
           <motion.div
             initial="hidden"
             animate={testimonialsInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-24"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Loved by students and<br />parents across the UK.
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 tracking-tight leading-[1.05]">
+              Loved by students and<br />
+              <span className="bg-gradient-to-r from-primary via-blue-500 to-primary bg-clip-text text-transparent">
+                parents across the UK
+              </span>
+              .
             </h2>
-            <p className="text-xl text-muted-foreground font-light">
-              Real stories from learners using Mentiora to boost their grades.
+            <p className="text-xl md:text-2xl text-muted-foreground/80 font-light">
+              Real stories from learners who turned revision into results.
             </p>
           </motion.div>
 
@@ -593,34 +777,62 @@ const Index = () => {
             initial="hidden"
             animate={testimonialsInView ? "visible" : "hidden"}
             variants={staggerChildren}
-            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12"
+            className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto mb-16"
           >
             {[
-              { quote: "It feels like a tutor that actually knows how I learn.", author: "Emma, Year 11", highlight: "knows how I learn" },
-              { quote: "My predicted grade went up two levels.", author: "Daniel, Year 10", highlight: "two levels" },
-              { quote: "Mentiora made revision feel easy and personal.", author: "Sophie, Year 12", highlight: "easy and personal" }
+              { quote: "It feels like a tutor that actually understands me.", author: "Maya", role: "Year 11", highlight: "actually understands me", avatar: "M" },
+              { quote: "My grades jumped from 6 to 8 in three weeks.", author: "Ethan", role: "GCSE Student", highlight: "6 to 8 in three weeks", avatar: "E" },
+              { quote: "Finally, a study app that feels personal.", author: "Sophie", role: "Year 10 Parent", highlight: "feels personal", avatar: "S" }
             ].map((testimonial, index) => (
               <motion.div 
                 key={index} 
                 variants={fadeInUp}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -10, transition: { duration: 0.4 } }}
+                className="group"
               >
-                <Card className="border-border/50 bg-card hover:shadow-2xl transition-all duration-500 rounded-3xl p-8 h-full">
-                  <CardContent className="p-0">
+                <Card className="relative border-2 border-border/40 bg-card/80 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-500 rounded-3xl p-10 h-full overflow-hidden">
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none" />
+                  
+                  <CardContent className="p-0 relative">
                     <motion.div
-                      whileHover={{ rotate: [0, 10, -10, 0] }}
+                      className="mb-8"
+                      whileHover={{ rotate: [0, 5, -5, 0] }}
                       transition={{ duration: 0.5 }}
                     >
-                      <Sparkles className="w-10 h-10 text-primary mb-6" />
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center border-2 border-primary/30 shadow-lg">
+                        <Avatar className="w-full h-full">
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-blue-500 text-primary-foreground font-bold text-lg">
+                            {testimonial.avatar}
+                          </AvatarFallback>
+                        </Avatar>
+                      </div>
                     </motion.div>
-                    <p className="text-lg text-foreground mb-6 leading-relaxed">
+                    
+                    <motion.div 
+                      className="mb-6"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={testimonialsInView ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
+                      transition={{ delay: index * 0.2 + 0.5 }}
+                    >
+                      <Star className="w-8 h-8 text-primary fill-primary opacity-80" />
+                    </motion.div>
+                    
+                    <p className="text-lg md:text-xl text-foreground/90 mb-8 leading-relaxed font-light">
                       "{testimonial.quote.split(testimonial.highlight)[0]}
                       <span className="text-primary font-semibold">{testimonial.highlight}</span>
                       {testimonial.quote.split(testimonial.highlight)[1]}"
                     </p>
-                    <p className="text-sm text-muted-foreground font-medium">
-                      — {testimonial.author}
-                    </p>
+                    <div className="flex items-center gap-4 pt-4 border-t border-border/30">
+                      <div>
+                        <p className="text-base font-bold text-foreground">
+                          {testimonial.author}
+                        </p>
+                        <p className="text-sm text-muted-foreground/80">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -631,36 +843,55 @@ const Index = () => {
             initial="hidden"
             animate={testimonialsInView ? "visible" : "hidden"}
             variants={fadeInUp}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="text-center"
           >
-            <p className="text-sm text-muted-foreground mb-4 font-medium">Used by 30,000+ students in top UK schools</p>
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground/60">
-              <span className="font-medium">Harris Academy</span>
-              <span>•</span>
-              <span className="font-medium">Wren Academy</span>
-              <span>•</span>
-              <span className="font-medium">Forest School</span>
+            <p className="text-base text-muted-foreground/80 mb-6 font-medium">Used by 30,000+ students in top UK schools</p>
+            <div className="flex flex-wrap justify-center gap-10 text-base text-muted-foreground/60">
+              <span className="font-semibold">Harris Academy</span>
+              <span className="opacity-50">•</span>
+              <span className="font-semibold">Wren Academy</span>
+              <span className="opacity-50">•</span>
+              <span className="font-semibold">Forest School</span>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Pricing Section with Tabs */}
-      <section id="pricing" ref={pricingRef} className="py-24 lg:py-32">
-        <div className="container mx-auto px-6 lg:px-8">
+      {/* Pricing Section with Tabs - Enhanced with gradient background */}
+      <section id="pricing" ref={pricingRef} className="py-32 lg:py-40 relative overflow-hidden">
+        {/* Horizontal gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-background to-blue-500/5" />
+        <motion.div 
+          className="absolute top-1/2 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl relative">
           <motion.div
             initial="hidden"
             animate={pricingInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              All-in-one personalised revision<br />— for one simple plan.
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 tracking-tight leading-[1.05]">
+              All-in-one personalised revision<br />
+              <span className="bg-gradient-to-r from-primary via-blue-500 to-primary bg-clip-text text-transparent">
+                — for one simple plan
+              </span>
+              .
             </h2>
-            <p className="text-xl text-muted-foreground font-light">
-              Unlimited access to all GCSE & A-Level subjects.
+            <p className="text-xl md:text-2xl text-muted-foreground/80 font-light">
+              Unlimited access to GCSE & A-Level subjects, all in one plan.
             </p>
           </motion.div>
 
@@ -669,36 +900,39 @@ const Index = () => {
             animate={pricingInView ? "visible" : "hidden"}
             variants={fadeInUp}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-6xl mx-auto"
           >
             <Tabs defaultValue="2026" className="w-full">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12 h-14 bg-muted/50 p-1 rounded-2xl">
-                <TabsTrigger value="2026" className="rounded-xl text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-16 h-16 bg-muted/60 backdrop-blur-sm p-1.5 rounded-2xl shadow-lg border border-border/30">
+                <TabsTrigger value="2026" className="rounded-xl text-base font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-blue-500 data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg transition-all">
                   2026 Exams
                 </TabsTrigger>
-                <TabsTrigger value="2027" className="rounded-xl text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
+                <TabsTrigger value="2027" className="rounded-xl text-base font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-blue-500 data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg transition-all">
                   2027 Exams
                 </TabsTrigger>
               </TabsList>
               
               <TabsContent value="2026" className="mt-0">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Monthly Plan */}
+                <div className="grid md:grid-cols-2 gap-10">
+                  {/* Monthly Plan - Enhanced */}
                   <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ y: -10, scale: 1.01 }}
+                    transition={{ duration: 0.4 }}
+                    className="group"
                   >
-                    <Card className="border-border/50 bg-card hover:shadow-2xl transition-all duration-500 rounded-3xl p-10 h-full">
-                      <CardHeader className="p-0 mb-8">
-                        <CardTitle className="text-3xl font-bold text-foreground mb-6">Monthly</CardTitle>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-bold text-foreground">£14.99</span>
-                          <span className="text-xl text-muted-foreground font-light">/ month</span>
+                    <Card className="relative border-2 border-border/40 bg-card/80 backdrop-blur-sm hover:shadow-2xl hover:border-border/60 transition-all duration-500 rounded-3xl p-12 h-full overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-transparent group-hover:from-muted/20 group-hover:via-transparent group-hover:to-muted/20 transition-all duration-500 pointer-events-none" />
+                      
+                      <CardHeader className="p-0 mb-10 relative">
+                        <CardTitle className="text-3xl md:text-4xl font-bold text-foreground mb-8">Monthly</CardTitle>
+                        <div className="flex items-baseline gap-3 mb-4">
+                          <span className="text-6xl font-bold text-foreground">£14.99</span>
+                          <span className="text-2xl text-muted-foreground/70 font-light">/ month</span>
                         </div>
-                        <p className="text-muted-foreground mt-3 font-light">Full access, cancel anytime.</p>
+                        <p className="text-muted-foreground/90 text-base font-light">Cancel anytime.</p>
                       </CardHeader>
-                      <CardContent className="p-0 space-y-6">
-                        <ul className="space-y-4">
+                      <CardContent className="p-0 space-y-8 relative">
+                        <ul className="space-y-5">
                           {[
                             "All GCSE & A-Level subjects",
                             "Unlimited practice questions",
@@ -708,49 +942,61 @@ const Index = () => {
                           ].map((feature, i) => (
                             <motion.li 
                               key={i} 
-                              className="flex items-start gap-3"
+                              className="flex items-start gap-4"
                               initial={{ opacity: 0, x: -20 }}
                               animate={pricingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                              transition={{ delay: i * 0.1 }}
+                              transition={{ delay: i * 0.1 + 0.3 }}
                             >
-                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground">{feature}</span>
+                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                              <span className="text-foreground/90 text-base">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
-                        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                        <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                           <Button 
                             onClick={() => navigate('/register')}
                             variant="outline"
-                            className="w-full mt-8 rounded-2xl py-7 text-base font-semibold border-2 hover:bg-muted/50 hover:shadow-lg transition-all"
+                            className="w-full mt-10 rounded-2xl py-8 text-lg font-bold border-2 border-border/50 hover:border-primary/50 hover:bg-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all group"
                           >
                             Start Free Trial
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </Button>
                         </motion.div>
                       </CardContent>
                     </Card>
                   </motion.div>
 
-                  {/* Annual Plan - Highlighted */}
+                  {/* Annual Plan - Highlighted with enhanced spark */}
                   <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ y: -10, scale: 1.01 }}
+                    transition={{ duration: 0.4 }}
+                    className="group"
                   >
-                    <Card className="border-primary/50 bg-gradient-to-br from-primary/10 via-primary/5 to-background hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 rounded-3xl p-10 h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-6 py-2 rounded-bl-3xl font-semibold text-sm">
+                    <Card className="relative border-2 border-primary/40 bg-gradient-to-br from-primary/15 via-primary/5 to-background backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/60 transition-all duration-500 rounded-3xl p-12 h-full overflow-hidden">
+                      {/* Animated glow */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue-500/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                      
+                      {/* Enhanced Save badge with sparkle */}
+                      <motion.div 
+                        className="absolute top-0 right-0 bg-gradient-to-r from-primary to-blue-500 text-primary-foreground px-8 py-3 rounded-bl-3xl font-bold text-base shadow-xl flex items-center gap-2"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <Sparkles className="w-4 h-4" />
                         Save 33%
-                      </div>
-                      <CardHeader className="p-0 mb-8">
-                        <CardTitle className="text-3xl font-bold text-foreground mb-6">Annual</CardTitle>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-bold text-foreground">£120</span>
-                          <span className="text-xl text-muted-foreground font-light">/ year</span>
+                      </motion.div>
+                      
+                      <CardHeader className="p-0 mb-10 relative">
+                        <CardTitle className="text-3xl md:text-4xl font-bold text-foreground mb-8">Annual</CardTitle>
+                        <div className="flex items-baseline gap-3 mb-2">
+                          <span className="text-6xl font-bold text-foreground">£120</span>
+                          <span className="text-2xl text-muted-foreground/70 font-light">/ year</span>
                         </div>
-                        <p className="text-primary font-semibold mt-2">That's just £10/month</p>
-                        <p className="text-muted-foreground mt-2 font-light">Get unlimited access until July 2026.</p>
+                        <p className="text-primary font-bold text-lg mb-3">That's just £10/month</p>
+                        <p className="text-muted-foreground/90 text-base font-light">Get unlimited access until July 2026.</p>
                       </CardHeader>
-                      <CardContent className="p-0 space-y-6">
-                        <ul className="space-y-4">
+                      <CardContent className="p-0 space-y-8 relative">
+                        <ul className="space-y-5">
                           {[
                             "All GCSE & A-Level subjects",
                             "Unlimited practice questions",
@@ -761,22 +1007,29 @@ const Index = () => {
                           ].map((feature, i) => (
                             <motion.li 
                               key={i} 
-                              className="flex items-start gap-3"
+                              className="flex items-start gap-4"
                               initial={{ opacity: 0, x: -20 }}
                               animate={pricingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                              transition={{ delay: i * 0.1 }}
+                              transition={{ delay: i * 0.1 + 0.3 }}
                             >
-                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground">{feature}</span>
+                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                              <span className="text-foreground/90 text-base">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
-                        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                        <motion.div 
+                          whileHover={{ scale: 1.04 }} 
+                          whileTap={{ scale: 0.97 }}
+                          className="relative"
+                        >
+                          {/* Button glow effect */}
+                          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
                           <Button 
                             onClick={() => navigate('/register')}
-                            className="w-full mt-8 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-2xl hover:shadow-primary/40 rounded-2xl py-7 text-base font-semibold transition-all"
+                            className="relative w-full mt-10 bg-gradient-to-r from-primary via-primary to-blue-500 text-primary-foreground hover:shadow-2xl hover:shadow-primary/50 rounded-2xl py-8 text-lg font-bold transition-all group bg-[length:200%_100%] hover:bg-[position:100%_0]"
                           >
                             Start Free Trial
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </Button>
                         </motion.div>
                       </CardContent>
@@ -786,23 +1039,26 @@ const Index = () => {
               </TabsContent>
               
               <TabsContent value="2027" className="mt-0">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Same structure for 2027 */}
+                <div className="grid md:grid-cols-2 gap-10">
+                  {/* Monthly Plan - 2027 */}
                   <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ y: -10, scale: 1.01 }}
+                    transition={{ duration: 0.4 }}
+                    className="group"
                   >
-                    <Card className="border-border/50 bg-card hover:shadow-2xl transition-all duration-500 rounded-3xl p-10 h-full">
-                      <CardHeader className="p-0 mb-8">
-                        <CardTitle className="text-3xl font-bold text-foreground mb-6">Monthly</CardTitle>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-bold text-foreground">£14.99</span>
-                          <span className="text-xl text-muted-foreground font-light">/ month</span>
+                    <Card className="relative border-2 border-border/40 bg-card/80 backdrop-blur-sm hover:shadow-2xl hover:border-border/60 transition-all duration-500 rounded-3xl p-12 h-full overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-transparent group-hover:from-muted/20 group-hover:via-transparent group-hover:to-muted/20 transition-all duration-500 pointer-events-none" />
+                      
+                      <CardHeader className="p-0 mb-10 relative">
+                        <CardTitle className="text-3xl md:text-4xl font-bold text-foreground mb-8">Monthly</CardTitle>
+                        <div className="flex items-baseline gap-3 mb-4">
+                          <span className="text-6xl font-bold text-foreground">£14.99</span>
+                          <span className="text-2xl text-muted-foreground/70 font-light">/ month</span>
                         </div>
-                        <p className="text-muted-foreground mt-3 font-light">Full access, cancel anytime.</p>
+                        <p className="text-muted-foreground/90 text-base font-light">Cancel anytime.</p>
                       </CardHeader>
-                      <CardContent className="p-0 space-y-6">
-                        <ul className="space-y-4">
+                      <CardContent className="p-0 space-y-8 relative">
+                        <ul className="space-y-5">
                           {[
                             "All GCSE & A-Level subjects",
                             "Unlimited practice questions",
@@ -812,23 +1068,24 @@ const Index = () => {
                           ].map((feature, i) => (
                             <motion.li 
                               key={i} 
-                              className="flex items-start gap-3"
+                              className="flex items-start gap-4"
                               initial={{ opacity: 0, x: -20 }}
                               animate={pricingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                              transition={{ delay: i * 0.1 }}
+                              transition={{ delay: i * 0.1 + 0.3 }}
                             >
-                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground">{feature}</span>
+                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                              <span className="text-foreground/90 text-base">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
-                        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                        <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                           <Button 
                             onClick={() => navigate('/register')}
                             variant="outline"
-                            className="w-full mt-8 rounded-2xl py-7 text-base font-semibold border-2 hover:bg-muted/50 hover:shadow-lg transition-all"
+                            className="w-full mt-10 rounded-2xl py-8 text-lg font-bold border-2 border-border/50 hover:border-primary/50 hover:bg-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all group"
                           >
                             Start Free Trial
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </Button>
                         </motion.div>
                       </CardContent>
@@ -836,24 +1093,33 @@ const Index = () => {
                   </motion.div>
 
                   <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ y: -10, scale: 1.01 }}
+                    transition={{ duration: 0.4 }}
+                    className="group"
                   >
-                    <Card className="border-primary/50 bg-gradient-to-br from-primary/10 via-primary/5 to-background hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 rounded-3xl p-10 h-full relative overflow-hidden">
-                      <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-6 py-2 rounded-bl-3xl font-semibold text-sm">
+                    <Card className="relative border-2 border-primary/40 bg-gradient-to-br from-primary/15 via-primary/5 to-background backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/60 transition-all duration-500 rounded-3xl p-12 h-full overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue-500/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                      
+                      <motion.div 
+                        className="absolute top-0 right-0 bg-gradient-to-r from-primary to-blue-500 text-primary-foreground px-8 py-3 rounded-bl-3xl font-bold text-base shadow-xl flex items-center gap-2"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <Sparkles className="w-4 h-4" />
                         Save 33%
-                      </div>
-                      <CardHeader className="p-0 mb-8">
-                        <CardTitle className="text-3xl font-bold text-foreground mb-6">Annual</CardTitle>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-bold text-foreground">£120</span>
-                          <span className="text-xl text-muted-foreground font-light">/ year</span>
+                      </motion.div>
+                      
+                      <CardHeader className="p-0 mb-10 relative">
+                        <CardTitle className="text-3xl md:text-4xl font-bold text-foreground mb-8">Annual</CardTitle>
+                        <div className="flex items-baseline gap-3 mb-2">
+                          <span className="text-6xl font-bold text-foreground">£120</span>
+                          <span className="text-2xl text-muted-foreground/70 font-light">/ year</span>
                         </div>
-                        <p className="text-primary font-semibold mt-2">That's just £10/month</p>
-                        <p className="text-muted-foreground mt-2 font-light">Get unlimited access until July 2027.</p>
+                        <p className="text-primary font-bold text-lg mb-3">That's just £10/month</p>
+                        <p className="text-muted-foreground/90 text-base font-light">Get unlimited access until July 2027.</p>
                       </CardHeader>
-                      <CardContent className="p-0 space-y-6">
-                        <ul className="space-y-4">
+                      <CardContent className="p-0 space-y-8 relative">
+                        <ul className="space-y-5">
                           {[
                             "All GCSE & A-Level subjects",
                             "Unlimited practice questions",
@@ -864,22 +1130,28 @@ const Index = () => {
                           ].map((feature, i) => (
                             <motion.li 
                               key={i} 
-                              className="flex items-start gap-3"
+                              className="flex items-start gap-4"
                               initial={{ opacity: 0, x: -20 }}
                               animate={pricingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                              transition={{ delay: i * 0.1 }}
+                              transition={{ delay: i * 0.1 + 0.3 }}
                             >
-                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground">{feature}</span>
+                              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                              <span className="text-foreground/90 text-base">{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
-                        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                        <motion.div 
+                          whileHover={{ scale: 1.04 }} 
+                          whileTap={{ scale: 0.97 }}
+                          className="relative"
+                        >
+                          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
                           <Button 
                             onClick={() => navigate('/register')}
-                            className="w-full mt-8 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-2xl hover:shadow-primary/40 rounded-2xl py-7 text-base font-semibold transition-all"
+                            className="relative w-full mt-10 bg-gradient-to-r from-primary via-primary to-blue-500 text-primary-foreground hover:shadow-2xl hover:shadow-primary/50 rounded-2xl py-8 text-lg font-bold transition-all group bg-[length:200%_100%] hover:bg-[position:100%_0]"
                           >
                             Start Free Trial
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </Button>
                         </motion.div>
                       </CardContent>
@@ -893,10 +1165,10 @@ const Index = () => {
               initial="hidden"
               animate={pricingInView ? "visible" : "hidden"}
               variants={fadeInUp}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center mt-10"
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="text-center mt-12"
             >
-              <p className="text-sm text-muted-foreground font-light">
+              <p className="text-base text-muted-foreground/80 font-light">
                 No credit card required. Cancel anytime.
               </p>
             </motion.div>
@@ -1013,26 +1285,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border/50 py-12 bg-muted/20">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
+      {/* Footer - Enhanced */}
+      <footer className="border-t-2 border-border/30 py-16 bg-gradient-to-b from-muted/30 to-muted/20">
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <motion.div 
+              className="flex items-center gap-4"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
-                className="w-8 h-8 object-contain"
+                className="w-10 h-10 object-contain"
               />
-              <span className="text-lg font-semibold text-foreground">Mentiora</span>
+              <span className="text-xl font-bold text-foreground tracking-tight">Mentiora</span>
+            </motion.div>
+            
+            <div className="flex flex-wrap justify-center gap-8 text-base text-muted-foreground/80 font-medium">
+              <a href="#pricing" className="hover:text-primary transition-colors hover:underline underline-offset-4">Pricing</a>
+              <a href="#faq" className="hover:text-primary transition-colors hover:underline underline-offset-4">FAQ</a>
+              <a href="/login" className="hover:text-primary transition-colors hover:underline underline-offset-4">Login</a>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground font-medium">
-              <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
-              <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
-              <a href="/login" className="hover:text-primary transition-colors">Login</a>
-            </div>
-            
-            <p className="text-sm text-muted-foreground font-light">
+            <p className="text-sm text-muted-foreground/70 font-light">
               © 2025 Mentiora. Built for students, by educators.
             </p>
           </div>
