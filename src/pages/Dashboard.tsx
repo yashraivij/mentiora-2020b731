@@ -2373,172 +2373,52 @@ const Dashboard = () => {
 
   return (
     <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
-      {/* Mobile Header */}
-      {isMobile && (
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border p-4">
-          <div className="flex items-center justify-between">
-            <MobileNav>
-              {sidebarItems.map((item) => {
-                const isActive = activeTab === item.id;
-                const showBadge = item.id === 'quests' && questNotificationCount > 0;
-                return (
-                  <div key={item.id} className="relative">
-                    <MobileNavItem
-                      onClick={() => {
-                        if (item.id === "flashcards") {
-                          setActiveTab("flashcards");
-                        } else {
-                          setActiveTab(item.id);
-                        }
-                        if (item.id === 'quests') setQuestNotificationCount(0);
-                      }}
-                      className={isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
-                      }
-                    >
-                      <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
-                      <span className="font-bold text-sm tracking-wide">{item.label}</span>
-                    </MobileNavItem>
-                    {showBadge && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
-                        {questNotificationCount}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-              
-              {/* Additional Navigation Items */}
-              <div className="border-t border-border mt-2 pt-2">
-                <MobileNavItem
-                  onClick={() => {
-                    const feedbackButton = document.querySelector('[data-feedback-fish]') as HTMLElement;
-                    if (feedbackButton) feedbackButton.click();
-                  }}
-                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
-                >
-                  <span className="text-lg mr-3">💬</span>
-                  <span className="font-medium">Feedback</span>
-                </MobileNavItem>
-                
-                <MobileNavItem
-                  onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
-                >
-                  <span className="text-lg mr-3">🎮</span>
-                  <span className="font-medium">Join Discord</span>
-                </MobileNavItem>
-                
-                <MobileNavItem
-                  onClick={handleLogout}
-                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
-                >
-                  <User className="h-4 w-4 mr-3" />
-                  <span className="font-medium">Sign Out</span>
-                </MobileNavItem>
-              </div>
-            </MobileNav>
-            
-            <div className="flex items-center gap-2">
-              <img
-                src={mentioraLogo}
-                alt="Mentiora"
-                className="h-8 w-8"
-              />
-              <span className="font-bold text-lg text-foreground">Mentiora</span>
-              {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Desktop Layout */}
-      <div className={`flex ${isMobile ? 'min-h-screen flex-col pt-0' : 'h-screen'}`}>
-        
-        {/* Desktop Sidebar - Hidden on mobile */}
-        <div className={`w-64 bg-background border-r-2 border-border flex flex-col py-6 ${isMobile ? 'hidden' : 'block'}`}>
-        {/* Logo */}
-        <div className="px-6 mb-8 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+      {/* Header */}
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
             <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
             <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
-            {isPremium && (
-              <Crown className="w-5 h-5 text-yellow-500" />
-            )}
+            {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
           </div>
-          <ThemeToggle />
-        </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 px-4">
-          <div className="space-y-2">
-            {sidebarItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              const showBadge = item.id === 'quests' && questNotificationCount > 0;
-              return (
-                <div key={item.id} className="relative">
-                  <motion.button
-                    onClick={() => {
-                      setActiveTab(item.id);
-                      if (item.id === 'quests') setQuestNotificationCount(0);
-                    }}
-                    whileHover={{ scale: 1.02 }}
-                    className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
-                      isActive 
-                        ? `${item.activeColor} text-white shadow-lg` 
-                        : `${item.bgColor} ${item.textColor} hover:scale-105`
-                    }`}
-                  >
-                    <div className={`relative p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
-                      <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
-                    </div>
-                    <span className="font-bold text-sm tracking-wide">{item.label}</span>
-                  </motion.button>
-                  {showBadge && (
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-background shadow-lg">
-                      {questNotificationCount}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          {/* Right side actions */}
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              data-feedback-fish
+              data-feedback-fish-userid={user?.email || ""}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              💬 Feedback
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              🎮 Discord
+            </Button>
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <User className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
-        </nav>
-
-        {/* Bottom Section */}
-        <div className="px-4 pt-4 border-t border-border space-y-2">
-          <button
-            data-feedback-fish
-            data-feedback-fish-userid={user?.email || ""}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
-          >
-            <span className="text-lg mr-3">💬</span>
-            <span className="font-medium">Feedback</span>
-          </button>
-          <button
-            onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
-          >
-            <span className="text-lg mr-3">🎮</span>
-            <span className="font-medium">Join Discord</span>
-          </button>
-          <Button
-            variant="ghost"
-            onClick={handleLogout}
-            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
-          >
-            <User className="h-4 w-4 mr-3" />
-            Sign Out
-          </Button>
         </div>
       </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col lg:flex-row">
-          {/* Main Learning Area */}
-          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
+      {/* Main Content */}
+      <div className="w-full">
+        <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
             <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
@@ -5458,8 +5338,6 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-
-      </div>
       </div>
     </div>
   );
