@@ -22,16 +22,18 @@ interface TimeSlotAnalysis {
 }
 
 export const OptimalStudyTimeCard = () => {
-  const { user } = useAuth();
+  const { user, isPremium } = useAuth();
   const [analysis, setAnalysis] = useState<TimeSlotAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasEnoughData, setHasEnoughData] = useState(false);
 
   useEffect(() => {
-    if (user?.id) {
+    if (user?.id && isPremium) {
       analyzeStudyTimes();
+    } else {
+      setLoading(false);
     }
-  }, [user?.id]);
+  }, [user?.id, isPremium]);
 
   const analyzeStudyTimes = async () => {
     try {
@@ -142,6 +144,48 @@ export const OptimalStudyTimeCard = () => {
     if (timeRange.includes("6-9pm")) return "🌆";
     return "🌙";
   };
+
+  if (!isPremium) {
+    return (
+      <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-gray-600/20 via-slate-600/20 to-gray-600/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 via-slate-500/10 to-gray-500/10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+        <CardHeader className="relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-gray-500 to-slate-600 shadow-lg">
+                <Brain className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <CardTitle className="text-lg font-bold text-gray-700 dark:text-gray-300">
+                  Study Optimizer
+                </CardTitle>
+                <p className="text-xs text-muted-foreground">Premium Intelligence</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <Crown className="h-4 w-4 text-amber-500" />
+              <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-md">
+                Pro
+              </Badge>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="relative">
+          <div className="text-center py-4">
+            <div className="p-3 rounded-lg bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/20 shadow-lg">
+              <p className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
+                🔒 Premium Feature
+              </p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                Upgrade to Premium to unlock personalized study time optimization
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (loading) {
     return (

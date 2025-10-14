@@ -19,17 +19,19 @@ interface OptimalTimeAnalysis {
 }
 
 export const OptimalLearningTimeCard = () => {
-  const { user } = useAuth();
+  const { user, isPremium } = useAuth();
   const [analysis, setAnalysis] = useState<OptimalTimeAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasEnoughData, setHasEnoughData] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
-    if (user?.id) {
+    if (user?.id && isPremium) {
       analyzeOptimalTimes();
+    } else {
+      setLoading(false);
     }
-  }, [user?.id]);
+  }, [user?.id, isPremium]);
 
   const analyzeOptimalTimes = async () => {
     try {
@@ -152,6 +154,35 @@ export const OptimalLearningTimeCard = () => {
     const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
     return `Try reviewing ${randomSubject} during this window for maximum impact.`;
   };
+
+  if (!isPremium) {
+    return (
+      <Card className="relative overflow-hidden bg-gradient-to-br from-gray-100 via-slate-100 to-gray-100 dark:from-gray-800 dark:via-slate-800 dark:to-gray-800 border-0 shadow-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 via-slate-500/10 to-gray-500/10" />
+        <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-2 left-2 p-2 rounded-xl bg-gradient-to-br from-gray-500 to-slate-600 shadow-lg">
+          <Clock className="h-5 w-5 text-white" />
+        </div>
+        <CardContent className="pt-12 pb-6 px-6">
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-amber-200 to-orange-200 dark:from-amber-800/50 dark:to-orange-800/50 mx-auto mb-3">
+              <Brain className="h-6 w-6 text-amber-700 dark:text-amber-300" />
+            </div>
+            <div className="space-y-3">
+              <div className="p-4 rounded-xl bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/30 shadow-lg">
+                <p className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                  🔒 Premium Feature
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Upgrade to Premium to discover your optimal learning times with AI-powered analysis
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (loading) {
     return (
