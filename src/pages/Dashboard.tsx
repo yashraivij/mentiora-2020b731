@@ -2527,61 +2527,31 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {/* Subject Detail Drawer - Resizable */}
-              {subjectDrawerOpen && selectedDrawerSubject && (
-                <>
-                  {/* Backdrop */}
-                  <div 
-                    className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
-                    onClick={() => setSubjectDrawerOpen(false)}
-                  />
-                  {/* Resizable Drawer */}
-                  <div className="fixed inset-0 z-50 pointer-events-none">
-                    <ResizablePanelGroup direction="horizontal" className="h-full">
-                      <ResizablePanel 
-                        defaultSize={60} 
-                        minSize={0}
-                        maxSize={80}
-                      />
-                      <ResizableHandle withHandle className="bg-border/50 pointer-events-auto" />
-                      <ResizablePanel 
-                        defaultSize={40} 
-                        minSize={20}
-                        className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 overflow-hidden pointer-events-auto"
-                      >
-                      <div className="h-full overflow-y-auto">
-                        <div className="p-6">
-                          {/* Header */}
-                          <div className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-5">
-                                <motion.div 
-                                  initial={{ scale: 0 }}
-                                  animate={{ scale: 1 }}
-                                  transition={{ type: "spring", stiffness: 200 }}
-                                  className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10 text-4xl"
-                                >
-                                  {getSubjectIconEmoji(selectedDrawerSubject.id)}
-                                </motion.div>
-                                <div className="flex-1">
-                                  <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                                    {getSubjectDisplayName(selectedDrawerSubject)}
-                                  </h2>
-                                  <p className="text-base text-[#64748B] dark:text-gray-400 mt-1 font-medium">
-                                    Detailed performance insights
-                                  </p>
-                                </div>
-                              </div>
-                              <Button
-                                onClick={() => setSubjectDrawerOpen(false)}
-                                variant="ghost"
-                                size="icon"
-                                className="w-10 h-10 rounded-xl"
-                              >
-                                <X className="h-5 w-5" />
-                              </Button>
-                            </div>
-                            <div className="flex gap-3">
+              {/* Subject Detail Drawer */}
+              <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+                <SheetContent side="right" className="w-full sm:max-w-3xl overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950">
+                  {selectedDrawerSubject && (
+                    <>
+                      <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
+                        <div className="flex items-center gap-5">
+                          <motion.div 
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: "spring", stiffness: 200 }}
+                            className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10 text-4xl"
+                          >
+                            {getSubjectIconEmoji(selectedDrawerSubject.id)}
+                          </motion.div>
+                          <div className="flex-1">
+                            <SheetTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                              {getSubjectDisplayName(selectedDrawerSubject)}
+                            </SheetTitle>
+                            <SheetDescription className="text-base text-[#64748B] dark:text-gray-400 mt-1 font-medium">
+                              Detailed performance insights
+                            </SheetDescription>
+                          </div>
+                        </div>
+                        <div className="flex gap-3">
                           <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
                             Predicted {selectedDrawerSubject.predicted}
                           </Badge>
@@ -2621,10 +2591,10 @@ const Dashboard = () => {
                               ))}
                             </select>
                           )}
-                            </div>
-                          </div>
+                        </div>
+                      </SheetHeader>
 
-                          <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
+                      <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
                         <TabsList className="grid w-full grid-cols-6 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
                             Overview
@@ -3464,14 +3434,11 @@ const Dashboard = () => {
                             </CardContent>
                           </Card>
                         </TabsContent>
-                        </Tabs>
-                        </div>
-                      </div>
-                    </ResizablePanel>
-                  </ResizablePanelGroup>
-                  </div>
-                </>
-              )}
+                      </Tabs>
+                    </>
+                  )}
+                </SheetContent>
+              </Sheet>
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
