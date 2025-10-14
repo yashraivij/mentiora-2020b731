@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MobileNav, MobileNavItem } from "@/components/ui/mobile-nav";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -32,6 +34,7 @@ import {
   Play,
   Edit,
   Eye,
+  Pencil,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
@@ -55,7 +58,6 @@ interface FlashcardSet {
 
 const Flashcards = () => {
   const { user, logout } = useAuth();
-  const { toast } = useToast();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   
@@ -69,6 +71,8 @@ const Flashcards = () => {
   const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
   const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
+  const [newSetName, setNewSetName] = useState<string>("");
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -105,11 +109,7 @@ const Flashcards = () => {
 
       if (error) {
         console.error('Error loading flashcard sets:', error);
-        toast({
-          title: "Error",
-          description: "Failed to load flashcard sets",
-          variant: "destructive"
-        });
+        toast.error("Failed to load flashcard sets");
         return;
       }
 
@@ -149,11 +149,7 @@ const Flashcards = () => {
       setFlashcardSets(Array.from(setsMap.values()));
     } catch (error) {
       console.error('Error loading flashcard sets:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load flashcard sets",
-        variant: "destructive"
-      });
+      toast.error("Failed to load flashcard sets");
     } finally {
       setLoading(false);
     }
@@ -162,10 +158,30 @@ const Flashcards = () => {
   const handleSetCreated = () => {
     loadFlashcardSets();
     setActiveTab("library");
-    toast({
-      title: "Success",
-      description: "Flashcards created and saved!",
-    });
+    toast.success("Flashcards created and saved!");
+  };
+
+  const handleRenameSet = async (setId: string) => {
+    if (!newSetName.trim()) {
+      toast.error("Set name cannot be empty");
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('flashcards')
+        .update({ title: newSetName.trim() })
+        .eq('set_id', setId);
+
+      if (error) throw error;
+
+      toast.success("Flashcard set renamed!");
+      setRenamingSetId(null);
+      loadFlashcardSets();
+    } catch (error) {
+      console.error('Error renaming set:', error);
+      toast.error("Failed to rename set");
+    }
   };
 
   const handleDeleteSet = async (setId: string) => {
@@ -182,17 +198,10 @@ const Flashcards = () => {
       if (error) throw error;
 
       setFlashcardSets(sets => sets.filter(s => s.id !== setId));
-      toast({
-        title: "Success",
-        description: "Flashcard set deleted",
-      });
+      toast.success("Flashcard set deleted");
     } catch (error) {
       console.error('Error deleting flashcard set:', error);
-      toast({
-        title: "Error",
-        description: "Failed to delete flashcard set",
-        variant: "destructive"
-      });
+      toast.error("Failed to delete flashcard set");
     }
   };
 
@@ -347,11 +356,56 @@ const Flashcards = () => {
               <div className="space-y-8">
                 {flashcardSets.map((set) => (
                   <div key={set.id}>
-                    <Card className="mb-6 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                     <Card className="mb-6 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                       <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-4">
                         <div className="flex justify-between items-start">
-                          <div>
-                            <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight mb-2">{set.title}</CardTitle>
+                          <div className="flex-1">
+                            {renamingSetId === set.id ? (
+                              <div className="flex items-center gap-2 mb-2">
+                                <Input
+                                  value={newSetName}
+                                  onChange={(e) => setNewSetName(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                      handleRenameSet(set.id);
+                                    } else if (e.key === 'Escape') {
+                                      setRenamingSetId(null);
+                                    }
+                                  }}
+                                  className="text-xl font-bold"
+                                  autoFocus
+                                />
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleRenameSet(set.id)}
+                                  className="bg-[#0EA5E9] hover:bg-[#0284C7]"
+                                >
+                                  Save
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => setRenamingSetId(null)}
+                                >
+                                  Cancel
+                                </Button>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-2 mb-2">
+                                <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">{set.title}</CardTitle>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => {
+                                    setRenamingSetId(set.id);
+                                    setNewSetName(set.title);
+                                  }}
+                                  className="text-muted-foreground hover:text-[#0EA5E9] p-1 h-auto"
+                                >
+                                  <Pencil className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            )}
                             <CardDescription className="text-sm font-medium text-[#64748B] dark:text-gray-400">
                               Study with flashcards for this subject
                             </CardDescription>
