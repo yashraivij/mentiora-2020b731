@@ -37,11 +37,20 @@ export const FlashcardInsights = ({
   const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
   const [newSetName, setNewSetName] = useState("");
   
-  const totalCards = individualFlashcards.length;
-  const totalSets = flashcardSets.length;
+  // Filter flashcards by selected subject if provided
+  const filteredFlashcardSets = selectedSubjectId 
+    ? flashcardSets.filter(set => set.subject_id === selectedSubjectId)
+    : flashcardSets;
+  
+  const filteredIndividualFlashcards = selectedSubjectId
+    ? individualFlashcards.filter(card => card.subject_id === selectedSubjectId)
+    : individualFlashcards;
+  
+  const totalCards = filteredIndividualFlashcards.length;
+  const totalSets = filteredFlashcardSets.length;
   
   // Group cards by subject
-  const cardsBySubject = individualFlashcards.reduce((acc, card) => {
+  const cardsBySubject = filteredIndividualFlashcards.reduce((acc, card) => {
     const subject = card.subject_id || 'Unknown';
     acc[subject] = (acc[subject] || 0) + 1;
     return acc;
@@ -121,7 +130,7 @@ export const FlashcardInsights = ({
           </Button>
         </div>
 
-        {flashcardSets.length === 0 ? (
+        {filteredFlashcardSets.length === 0 ? (
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardContent className="text-center py-12">
               <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
@@ -130,7 +139,7 @@ export const FlashcardInsights = ({
           </Card>
         ) : (
           <div className="space-y-4">
-            {flashcardSets.map((set: any) => (
+            {filteredFlashcardSets.map((set: any) => (
               <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg group">
                 <CardContent className="p-5">
                   <div className="mb-4">
@@ -229,20 +238,20 @@ export const FlashcardInsights = ({
   }
 
   const handleStartLearning = () => {
-    if (flashcardSets.length > 0) {
-      // Create a combined set with all flashcards
+    if (filteredFlashcardSets.length > 0) {
+      // Create a combined set with all filtered flashcards
       const combinedSet = {
         id: 'all-flashcards',
-        title: 'All Flashcards',
-        subject_id: 'mixed',
+        title: selectedSubjectId ? `All ${selectedSubjectId} Flashcards` : 'All Flashcards',
+        subject_id: selectedSubjectId || 'mixed',
         exam_board: 'mixed',
-        flashcards: individualFlashcards.map(card => ({
+        flashcards: filteredIndividualFlashcards.map(card => ({
           id: card.id,
           front: card.front,
           back: card.back
         })),
         created_at: new Date().toISOString(),
-        card_count: individualFlashcards.length
+        card_count: filteredIndividualFlashcards.length
       };
       setSelectedSet(combinedSet);
       setLearningMode(true);
@@ -463,7 +472,7 @@ export const FlashcardInsights = ({
       </TabsContent>
 
       <TabsContent value="library" className="mt-0 space-y-6">
-        {flashcardSets.length === 0 ? (
+        {filteredFlashcardSets.length === 0 ? (
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardContent className="text-center py-12">
               <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
@@ -472,7 +481,7 @@ export const FlashcardInsights = ({
           </Card>
         ) : (
           <div className="space-y-6">
-            {flashcardSets.map((set: any) => (
+            {filteredFlashcardSets.map((set: any) => (
               <Card key={set.id} className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg group">
                 <CardHeader className="border-b border-[#E2E8F0]/30 dark:border-gray-800/50 pb-3">
                   <div className="flex justify-between items-start">
