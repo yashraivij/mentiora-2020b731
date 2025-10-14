@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Clock, AlertCircle, Crown, CheckCircle, FileText, TrendingUp } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 
 
 interface NotebookEntryProps {
@@ -32,6 +34,68 @@ interface NotebookEntryProps {
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
+// Render text with LaTeX support
+const renderTextWithLatex = (text: string): React.ReactNode => {
+  // Pattern to match inline LaTeX: \(...\) or $...$
+  // Pattern to match display LaTeX: \[...\] or $$...$$
+  const latexPattern = /(\\\(.*?\\\)|\\\[.*?\\\]|\$\$.*?\$\$|\$.*?\$)/g;
+  
+  const parts = text.split(latexPattern);
+  
+  return (
+    <>
+      {parts.map((part, index) => {
+        // Check if this part is LaTeX
+        if (!part) return null;
+        
+        // Inline LaTeX: \(...\) or $...$
+        if ((part.startsWith('\\(') && part.endsWith('\\)')) || 
+            (part.startsWith('$') && part.endsWith('$') && !part.startsWith('$$'))) {
+          const latex = part.startsWith('\\(') 
+            ? part.slice(2, -2) 
+            : part.slice(1, -1);
+          try {
+            return (
+              <span
+                key={index}
+                dangerouslySetInnerHTML={{
+                  __html: katex.renderToString(latex, { throwOnError: false, displayMode: false })
+                }}
+              />
+            );
+          } catch (e) {
+            return <span key={index}>{part}</span>;
+          }
+        }
+        
+        // Display LaTeX: \[...\] or $$...$$
+        if ((part.startsWith('\\[') && part.endsWith('\\]')) || 
+            (part.startsWith('$$') && part.endsWith('$$'))) {
+          const latex = part.startsWith('\\[') 
+            ? part.slice(2, -2) 
+            : part.slice(2, -2);
+          try {
+            return (
+              <div
+                key={index}
+                className="my-2"
+                dangerouslySetInnerHTML={{
+                  __html: katex.renderToString(latex, { throwOnError: false, displayMode: true })
+                }}
+              />
+            );
+          } catch (e) {
+            return <span key={index}>{part}</span>;
+          }
+        }
+        
+        // Regular text
+        return <span key={index}>{part}</span>;
+      })}
+    </>
+  );
 };
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
@@ -114,7 +178,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <BlurWrapper>
             <div className="p-5 rounded-xl bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
               <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
-                {cleanMarkdown(entry.what_tripped_up)}
+                {renderTextWithLatex(cleanMarkdown(entry.what_tripped_up))}
               </p>
             </div>
           </BlurWrapper>
@@ -131,7 +195,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <BlurWrapper>
             <div className="p-5 rounded-xl bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
               <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
-                {cleanMarkdown(entry.fix_sentence)}
+                {renderTextWithLatex(cleanMarkdown(entry.fix_sentence))}
               </p>
             </div>
           </BlurWrapper>
@@ -155,7 +219,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
                       {idx + 1}
                     </div>
                     <p className="text-base text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
-                      {cleanMarkdown(note)}
+                      {renderTextWithLatex(cleanMarkdown(note))}
                     </p>
                   </div>
                 ))}
