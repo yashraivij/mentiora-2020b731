@@ -229,25 +229,18 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA for non-premium users */}
         {!isPremium && (
-          <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-[#F59E0B]/10 to-[#F59E0B]/5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#F59E0B]/20 to-transparent rounded-full blur-2xl"></div>
-            <div className="relative flex flex-col sm:flex-row items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#F59E0B] to-[#F59E0B]/80 flex items-center justify-center shadow-lg flex-shrink-0">
-                <Crown className="h-5 w-5 text-white" />
-              </div>
-              <div className="flex-1 text-center sm:text-left">
-                <h4 className="text-sm font-bold text-[#0F172A] dark:text-white mb-0.5">Unlock Full Access</h4>
-                <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2">
-                  Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
-                </p>
-                <Button 
-                  className="rounded-lg bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80 hover:from-[#F59E0B]/90 hover:to-[#F59E0B]/70 text-white shadow-lg shadow-[#F59E0B]/25 hover:shadow-xl hover:shadow-[#F59E0B]/30 transition-all duration-300 font-medium text-xs px-4 h-8"
-                  onClick={() => {/* Add premium upgrade logic */}}
-                >
-                  <Crown className="h-3.5 w-3.5 mr-1.5" />
-                  Upgrade Now
-                </Button>
-              </div>
+          <div className="mt-4 p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm">
+            <div className="text-center space-y-3">
+              <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Full Access</h4>
+              <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
+                Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
+              </p>
+              <Button 
+                className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                onClick={() => {/* Add premium upgrade logic */}}
+              >
+                Upgrade Now
+              </Button>
             </div>
           </div>
         )}
