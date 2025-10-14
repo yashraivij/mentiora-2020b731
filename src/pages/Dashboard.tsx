@@ -346,7 +346,7 @@ const Dashboard = () => {
         const setKey = flashcard.set_id || `${flashcard.subject_id}-${flashcard.exam_board}`;
         
         if (!setsMap.has(setKey)) {
-          const setTitle = `${flashcard.subject_id} (${flashcard.exam_board})`;
+          const setTitle = flashcard.title || `${flashcard.subject_id} (${flashcard.exam_board})`;
           setsMap.set(setKey, {
             id: setKey,
             title: setTitle,

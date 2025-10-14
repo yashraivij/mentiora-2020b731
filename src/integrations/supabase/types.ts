@@ -444,6 +444,7 @@ export type Database = {
           review_count: number | null
           set_id: string | null
           subject_id: string
+          title: string | null
           user_id: string
         }
         Insert: {
@@ -458,6 +459,7 @@ export type Database = {
           review_count?: number | null
           set_id?: string | null
           subject_id: string
+          title?: string | null
           user_id: string
         }
         Update: {
@@ -472,6 +474,7 @@ export type Database = {
           review_count?: number | null
           set_id?: string | null
           subject_id?: string
+          title?: string | null
           user_id?: string
         }
         Relationships: []

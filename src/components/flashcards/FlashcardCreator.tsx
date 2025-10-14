@@ -202,6 +202,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [], selectedSubj
         front: flashcard.front,
         back: flashcard.back,
         set_id: setId,
+        title: setTitle.trim() || null,
       }));
 
       const { error } = await supabase
