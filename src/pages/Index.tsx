@@ -307,7 +307,7 @@ const Index = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight"
           >
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              The GCSE Tutor Built For You.
+              Your personal GCSE and A-Level tutor.
             </span>
           </motion.h2>
           
@@ -317,7 +317,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0"
           >
-            Every <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent font-bold">top grades</span>.
+            Mentiora adapts to how you learn — identifying what to revise next and helping you make every study session count.
           </motion.p>
           
           <motion.div
