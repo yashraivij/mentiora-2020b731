@@ -180,14 +180,16 @@ export const FlashcardInsights = ({
                 </div>
               </div>
 
-              <Button 
-                onClick={onViewFlashcards}
-                className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold"
-              >
-                <Brain className="h-4 w-4 mr-2" />
-                View All Flashcards
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+              <div className="pt-4 border-t border-[#E2E8F0]/50 dark:border-gray-800">
+                <Button 
+                  onClick={onViewFlashcards}
+                  className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-12 group"
+                >
+                  <Brain className="h-5 w-5 mr-2" />
+                  View All Flashcards
+                  <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
