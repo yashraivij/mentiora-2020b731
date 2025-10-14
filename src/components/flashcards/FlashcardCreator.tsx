@@ -348,10 +348,7 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
                 Generating Flashcards...
               </>
             ) : (
-              <>
-                <Sparkles className="h-6 w-6 mr-3" />
-                Generate Flashcards
-              </>
+              "Generate Flashcards"
             )}
           </Button>
         </CardContent>
