@@ -3956,11 +3956,10 @@ const Dashboard = () => {
                   <ResizablePanelGroup direction="horizontal" className="min-h-[400px] rounded-lg border">
                     <ResizablePanel defaultSize={100} minSize={30}>
                       <div className="h-full overflow-auto p-6">
-                        <FlashcardInsights
+                         <FlashcardInsights
                           flashcardSets={flashcardSets}
                           individualFlashcards={individualFlashcards}
                           onViewFlashcards={() => setActiveTab("flashcards")}
-                          onLearnFlashcards={() => setActiveTab("flashcards")}
                           onFlashcardCreated={() => {
                             loadFlashcardSets();
                             loadIndividualFlashcards();

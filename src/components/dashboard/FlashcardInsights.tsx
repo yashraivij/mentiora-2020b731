@@ -1,16 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Brain, BookOpen, TrendingUp, Zap, ArrowRight } from "lucide-react";
+import { Brain, BookOpen, TrendingUp, Zap, ArrowRight, ArrowLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
+import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
+import { useState } from "react";
 
 interface FlashcardInsightsProps {
   flashcardSets: any[];
   individualFlashcards: any[];
   onViewFlashcards: () => void;
-  onLearnFlashcards?: () => void;
   onFlashcardCreated?: () => void;
   userSubjects?: Array<{ subject_name: string; exam_board: string }>;
 }
@@ -19,10 +20,12 @@ export const FlashcardInsights = ({
   flashcardSets, 
   individualFlashcards,
   onViewFlashcards,
-  onLearnFlashcards,
   onFlashcardCreated,
   userSubjects = []
 }: FlashcardInsightsProps) => {
+  const [learningMode, setLearningMode] = useState(false);
+  const [selectedSet, setSelectedSet] = useState<any>(null);
+  
   const totalCards = individualFlashcards.length;
   const totalSets = flashcardSets.length;
   
@@ -42,6 +45,43 @@ export const FlashcardInsights = ({
 
   // Estimate review progress (mock data - can be enhanced with actual review tracking)
   const reviewProgress = Math.min((Number(totalCards) / 100) * 100, 100);
+
+  // If in learning mode, show the flashcard viewer
+  if (learningMode && selectedSet) {
+    return (
+      <div className="h-full">
+        <FlashcardViewer 
+          flashcardSet={selectedSet}
+          mode="learn"
+          onBack={() => {
+            setLearningMode(false);
+            setSelectedSet(null);
+          }}
+        />
+      </div>
+    );
+  }
+
+  const handleStartLearning = () => {
+    if (flashcardSets.length > 0) {
+      // Create a combined set with all flashcards
+      const combinedSet = {
+        id: 'all-flashcards',
+        title: 'All Flashcards',
+        subject_id: 'mixed',
+        exam_board: 'mixed',
+        flashcards: individualFlashcards.map(card => ({
+          id: card.id,
+          front: card.front,
+          back: card.back
+        })),
+        created_at: new Date().toISOString(),
+        card_count: individualFlashcards.length
+      };
+      setSelectedSet(combinedSet);
+      setLearningMode(true);
+    }
+  };
 
   return (
     <Tabs defaultValue="insights" className="w-full">
@@ -183,9 +223,9 @@ export const FlashcardInsights = ({
               </div>
 
               <div className="pt-4 border-t border-[#E2E8F0]/50 dark:border-gray-800 space-y-3">
-                {totalCards > 0 && onLearnFlashcards && (
+                {totalCards > 0 && (
                   <Button 
-                    onClick={onLearnFlashcards}
+                    onClick={handleStartLearning}
                     className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl font-bold h-12 group"
                   >
                     <Zap className="h-5 w-5 mr-2" />
