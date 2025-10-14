@@ -15,6 +15,7 @@ interface FlashcardInsightsProps {
   onViewFlashcards: () => void;
   onFlashcardCreated?: () => void;
   userSubjects?: Array<{ subject_name: string; exam_board: string }>;
+  selectedSubjectId?: string;
 }
 
 export const FlashcardInsights = ({ 
@@ -22,7 +23,8 @@ export const FlashcardInsights = ({
   individualFlashcards,
   onViewFlashcards,
   onFlashcardCreated,
-  userSubjects = []
+  userSubjects = [],
+  selectedSubjectId
 }: FlashcardInsightsProps) => {
   const [learningMode, setLearningMode] = useState(false);
   const [selectedSet, setSelectedSet] = useState<any>(null);
@@ -487,6 +489,7 @@ export const FlashcardInsights = ({
             }
           }}
           userSubjects={userSubjects}
+          selectedSubjectId={selectedSubjectId}
         />
       </TabsContent>
     </Tabs>

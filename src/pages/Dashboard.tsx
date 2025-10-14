@@ -4006,22 +4006,23 @@ const Dashboard = () => {
                   {/* 4. Flashcard Insights - Resizable */}
                   <ResizablePanelGroup direction="horizontal" className="min-h-[400px] rounded-lg border">
                     <ResizablePanel defaultSize={100} minSize={30}>
-                      <div className="h-full overflow-auto p-6">
-                         <FlashcardInsights
-                          flashcardSets={flashcardSets}
-                          individualFlashcards={individualFlashcards}
-                          onViewFlashcards={() => setActiveTab("flashcards")}
-                          onFlashcardCreated={() => {
-                            loadFlashcardSets();
-                            loadIndividualFlashcards();
-                            toast({
-                              title: "Success",
-                              description: "Flashcards created successfully!",
-                            });
-                          }}
-                          userSubjects={userSubjectsWithGrades}
-                        />
-                      </div>
+                       <div className="h-full overflow-auto p-6">
+                          <FlashcardInsights
+                           flashcardSets={flashcardSets}
+                           individualFlashcards={individualFlashcards}
+                           onViewFlashcards={() => setActiveTab("flashcards")}
+                           onFlashcardCreated={() => {
+                             loadFlashcardSets();
+                             loadIndividualFlashcards();
+                             toast({
+                               title: "Success",
+                               description: "Flashcards created successfully!",
+                             });
+                           }}
+                           userSubjects={userSubjectsWithGrades}
+                           selectedSubjectId={selectedDrawerSubject?.id}
+                         />
+                       </div>
                     </ResizablePanel>
                   </ResizablePanelGroup>
 

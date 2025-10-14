@@ -17,6 +17,7 @@ import { Brain, Sparkles, Plus, Loader2 } from "lucide-react";
 interface FlashcardCreatorProps {
   onSetCreated: () => void;
   userSubjects?: Array<{ subject_name: string; exam_board: string }>;
+  selectedSubjectId?: string;
 }
 
 interface GeneratedFlashcard {
@@ -87,7 +88,7 @@ const subjectExamples = {
   }
 };
 
-export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardCreatorProps) => {
+export const FlashcardCreator = ({ onSetCreated, userSubjects = [], selectedSubjectId }: FlashcardCreatorProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { isPremium } = useSubscription();
@@ -102,8 +103,8 @@ export const FlashcardCreator = ({ onSetCreated, userSubjects = [] }: FlashcardC
   
   const previewRef = useRef<HTMLDivElement>(null);
 
-  // Auto-detect subject and exam board from user's first subject
-  const subject = userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "";
+  // Use selectedSubjectId if provided, otherwise auto-detect from user's first subject
+  const subject = selectedSubjectId || (userSubjects.length > 0 ? userSubjects[0].subject_name.toLowerCase().replace(/\s+/g, '-') : "");
   const examBoard = userSubjects.length > 0 ? userSubjects[0].exam_board : "";
 
   // Auto-scroll to preview when flashcards are generated
