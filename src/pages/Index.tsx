@@ -603,10 +603,88 @@ const Index = () => {
               <h3 className="text-3xl font-bold mb-6" style={{ color: '#0BA5E9' }}>
                 68% grade improvement
               </h3>
-              <Card className="bg-white rounded-2xl shadow-lg">
-                <CardContent className="p-10">
-                  <div className="h-64 flex items-center justify-center text-gray-400">
-                    [Grade Improvement Graph]
+              <Card className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="relative h-80">
+                    {/* Graph SVG */}
+                    <svg
+                      viewBox="0 0 500 300"
+                      className="w-full h-full"
+                      preserveAspectRatio="xMidYMid meet"
+                    >
+                      {/* Y-axis label */}
+                      <text
+                        x="20"
+                        y="150"
+                        transform="rotate(-90 20 150)"
+                        className="text-xs fill-gray-400"
+                        textAnchor="middle"
+                      >
+                        Average grades
+                      </text>
+
+                      {/* X-axis label */}
+                      <text
+                        x="250"
+                        y="290"
+                        className="text-xs fill-gray-400"
+                        textAnchor="middle"
+                      >
+                        Hours spent learning
+                      </text>
+
+                      {/* Non-personal education curve (gray) */}
+                      <motion.path
+                        d="M 50,250 Q 150,180 250,150 T 450,120"
+                        fill="none"
+                        stroke="#D1D5DB"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                      />
+
+                      {/* Personalised education curve (blue) */}
+                      <motion.path
+                        d="M 50,250 Q 120,120 200,80 T 450,60"
+                        fill="none"
+                        stroke="#0BA5E9"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
+                      />
+
+                      {/* Personalised education label */}
+                      <motion.g
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 1.5 }}
+                      >
+                        <circle cx="200" cy="80" r="4" fill="#0BA5E9" />
+                        <line x1="200" y1="80" x2="200" y2="50" stroke="#0BA5E9" strokeWidth="1.5" strokeDasharray="3,3" />
+                        <text x="205" y="45" className="text-xs font-semibold" fill="#000">
+                          Personalised education
+                        </text>
+                      </motion.g>
+
+                      {/* Non-personal education label */}
+                      <motion.g
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 1.8 }}
+                      >
+                        <text x="255" y="145" className="text-xs" fill="#6B7280">
+                          Non-personal education
+                        </text>
+                      </motion.g>
+                    </svg>
                   </div>
                 </CardContent>
               </Card>
