@@ -916,71 +916,67 @@ const Index = () => {
 
 
       {/* PRICING SECTION */}
-      <section className="py-24 px-6" style={{ backgroundColor: '#F8FAFC' }}>
-        <div className="max-w-7xl mx-auto">
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              Personalised tutoring at a<br />
-              <span style={{ color: '#0BA5E9' }}>fraction of the cost</span>
+            <h2 className="text-5xl lg:text-6xl font-bold leading-tight mb-5">
+              <span className="text-black">Personalised tutoring</span>
+              <br />
+              <span style={{ color: '#0BA5E9' }}>at a fraction of the cost</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              More effective than personal tutoring, at just 5% of the cost.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Trained to be more effective than personal tutoring,
+              <br />
+              at just 5% of the cost of private tuition.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            {/* Left side - Graph */}
+          {/* Main Comparison - Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start max-w-6xl mx-auto">
+            
+            {/* LEFT COLUMN: Effectiveness Graph */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeInUp}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <div className="bg-white rounded-3xl p-8 shadow-md border border-gray-100">
-                <h3 className="text-3xl font-bold mb-6 text-black">
-                  <span style={{ color: '#0BA5E9' }}>68%</span> grade improvement
-                </h3>
-                
+              {/* Graph Title */}
+              <h3 className="text-4xl font-bold mb-8" style={{ color: '#0BA5E9' }}>
+                68% grade improvement
+              </h3>
+
+              {/* Graph Container */}
+              <div className="bg-white border border-gray-200 p-10 min-h-[500px]">
                 <svg
-                  viewBox="0 0 500 300"
-                  className="w-full"
-                  style={{ maxHeight: '300px' }}
+                  viewBox="0 0 600 400"
+                  className="w-full h-full"
+                  preserveAspectRatio="xMidYMid meet"
                 >
-                  {/* Grid lines */}
-                  <line x1="60" y1="50" x2="460" y2="50" stroke="#F1F5F9" strokeWidth="1" />
-                  <line x1="60" y1="100" x2="460" y2="100" stroke="#F1F5F9" strokeWidth="1" />
-                  <line x1="60" y1="150" x2="460" y2="150" stroke="#F1F5F9" strokeWidth="1" />
-                  <line x1="60" y1="200" x2="460" y2="200" stroke="#F1F5F9" strokeWidth="1" />
-                  
-                  {/* Y-axis */}
-                  <line x1="60" y1="30" x2="60" y2="250" stroke="#CBD5E1" strokeWidth="2" />
-                  
-                  {/* X-axis */}
-                  <line x1="60" y1="250" x2="460" y2="250" stroke="#CBD5E1" strokeWidth="2" />
-                  
-                  {/* Y-axis label */}
+                  {/* Y-axis label (rotated) */}
                   <text
-                    x="25"
-                    y="140"
-                    transform="rotate(-90 25 140)"
-                    className="text-xs fill-gray-500 font-medium"
+                    x="-200"
+                    y="20"
+                    transform="rotate(-90)"
+                    className="text-sm fill-gray-500"
                     textAnchor="middle"
                   >
-                    Average grades
+                    Average grade
                   </text>
 
                   {/* X-axis label */}
                   <text
-                    x="260"
-                    y="280"
-                    className="text-xs fill-gray-500 font-medium"
+                    x="350"
+                    y="385"
+                    className="text-sm fill-gray-500"
                     textAnchor="middle"
                   >
                     Hours spent learning
@@ -988,196 +984,200 @@ const Index = () => {
 
                   {/* Gray curve - Non-personal education */}
                   <motion.path
-                    d="M 60,240 Q 150,200 250,170 Q 350,150 450,140"
+                    d="M 80,320 Q 200,250 350,210 Q 450,190 580,180"
                     fill="none"
-                    stroke="#94A3B8"
+                    stroke="#9CA3AF"
                     strokeWidth="3"
                     strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2, ease: "easeOut" }}
                   />
 
                   {/* Blue curve - Personalised education */}
                   <motion.path
-                    d="M 60,240 Q 130,120 200,70 Q 270,40 340,35"
+                    d="M 80,320 Q 180,140 300,80 Q 400,40 520,30"
                     fill="none"
                     stroke="#0BA5E9"
-                    strokeWidth="4"
+                    strokeWidth="3"
                     strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1.8, ease: "easeOut", delay: 0.3 }}
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
                   />
 
-                  {/* Point on blue curve */}
-                  <motion.circle
-                    cx="340"
-                    cy="35"
-                    r="6"
-                    fill="#0BA5E9"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.4, delay: 2.2 }}
-                  />
-
-                  {/* Personalised education label with icon */}
+                  {/* Personalised education label with dashed line */}
                   <motion.g
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.4, delay: 2.4 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 2.3, duration: 0.5 }}
                   >
-                    <rect x="345" y="20" width="140" height="28" rx="14" fill="#0BA5E9" />
+                    {/* Dashed line from curve to label */}
+                    <line
+                      x1="520"
+                      y1="30"
+                      x2="420"
+                      y2="70"
+                      stroke="#0BA5E9"
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                    />
+                    {/* Circle on curve */}
+                    <circle cx="520" cy="30" r="4" fill="#0BA5E9" />
+                    {/* Infinity symbol (Medly logo) */}
+                    <path
+                      d="M 375,65 Q 372,60 370,65 Q 368,70 370,75 Q 372,70 375,65 M 375,65 Q 378,60 380,65 Q 382,70 380,75 Q 378,70 375,65"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="1.5"
+                    />
+                    {/* Label text */}
                     <text
-                      x="415"
-                      y="38"
-                      className="text-xs font-semibold"
-                      fill="#FFFFFF"
-                      textAnchor="middle"
+                      x="390"
+                      y="72"
+                      className="text-sm font-medium fill-black"
                     >
-                      Personalised
+                      Personalised education
                     </text>
                   </motion.g>
 
-                  {/* Non-personal education label */}
+                  {/* Non-personal education label with dashed line */}
                   <motion.g
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.4, delay: 2.6 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 2.5, duration: 0.5 }}
                   >
-                    <rect x="250" y="180" width="140" height="28" rx="14" fill="#E2E8F0" />
+                    {/* Dashed line from curve to label */}
+                    <line
+                      x1="450"
+                      y1="190"
+                      x2="400"
+                      y2="240"
+                      stroke="#9CA3AF"
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                    />
+                    {/* Circle on curve */}
+                    <circle cx="450" cy="190" r="4" fill="#9CA3AF" />
+                    {/* Label text */}
                     <text
                       x="320"
-                      y="198"
-                      className="text-xs font-semibold"
-                      fill="#475569"
-                      textAnchor="middle"
+                      y="247"
+                      className="text-sm font-medium fill-black"
                     >
-                      Non-personal
+                      Non-personal education
                     </text>
                   </motion.g>
                 </svg>
               </div>
             </motion.div>
 
-            {/* Right side - Pricing comparison */}
+            {/* RIGHT COLUMN: Cost Comparison */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeInUp}
-              transition={{ delay: 0.2 }}
-              className="space-y-8"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col justify-between min-h-[500px] relative"
             >
-              {/* Personal tutoring card */}
-              <div className="bg-white rounded-2xl p-8 border-2 border-gray-200 relative">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <div className="text-gray-500 text-sm font-semibold mb-2 uppercase tracking-wide">Personal tutoring</div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-6xl font-extrabold text-gray-800">£500</span>
-                      <span className="text-xl text-gray-500 font-medium">/month</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-3 pt-4 border-t border-gray-200">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
-                    <span>Limited availability</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
-                    <span>1-2 sessions per week</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
-                    <span>Generic lesson plans</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Comparison arrow/indicator */}
-              <div className="relative">
-                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
-                  <motion.div
-                    className="px-6 py-2 rounded-full text-sm font-bold text-white shadow-xl z-10"
-                    style={{ backgroundColor: '#0BA5E9' }}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.4 }}
-                  >
-                    95% cheaper ↓
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Mentiora pricing card */}
-              <motion.div 
-                className="relative"
-                initial={{ scale: 0.95, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <div 
-                  className="rounded-2xl p-8 shadow-2xl border-2 relative overflow-hidden" 
-                  style={{ 
-                    background: 'linear-gradient(135deg, #0BA5E9 0%, #0284C7 100%)',
-                    borderColor: '#0EA5E9'
-                  }}
+              {/* Top Section - Personal Tutoring Price */}
+              <div className="text-right">
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="mb-4"
                 >
-                  {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                      <img 
-                        src={mentioraLogo} 
-                        alt="Mentiora" 
-                        className="h-8 w-8"
-                      />
-                      <span className="text-2xl font-bold text-white">Mentiora</span>
-                    </div>
-                    
-                    <div className="mb-6">
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <span className="text-6xl font-extrabold text-white">£24.99</span>
-                        <span className="text-xl text-white/90 font-medium">/month</span>
-                      </div>
-                      <div className="text-white/80 text-sm">First 7 days free</div>
-                    </div>
+                  <div className="text-5xl font-bold text-black">
+                    £500<span className="text-2xl text-gray-600">/month</span>
+                  </div>
+                </motion.div>
 
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2 text-sm text-white">
-                        <CheckCircle2 className="w-5 h-5" />
-                        <span>24/7 AI tutor access</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-white">
-                        <CheckCircle2 className="w-5 h-5" />
-                        <span>Unlimited practice questions</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-white">
-                        <CheckCircle2 className="w-5 h-5" />
-                        <span>Personalized study plans</span>
-                      </div>
-                    </div>
+                {/* Tall Gray Bar (Pill-shaped) */}
+                <motion.div
+                  className="bg-gray-200 rounded-full mx-auto mb-6"
+                  style={{ width: '200px', height: '280px', marginLeft: 'auto' }}
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                />
 
-                    <Button
-                      onClick={() => navigate(user ? '/dashboard' : '/register')}
-                      className="w-full bg-white hover:bg-gray-50 font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-base"
-                      style={{ color: '#0BA5E9' }}
-                    >
-                      Start free trial →
-                    </Button>
+                <div className="text-base text-gray-600">Personal tutoring</div>
+              </div>
+
+              {/* Middle Section - Cost Comparison Text */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+                className="text-right my-8"
+              >
+                <h3 className="text-3xl font-bold leading-tight">
+                  <span className="text-black">95% cheaper than</span>
+                  <br />
+                  <span style={{ color: '#0BA5E9' }}>private tutoring</span>
+                </h3>
+              </motion.div>
+
+              {/* Bottom Section - Mentiora Pricing */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1 }}
+                className="text-right relative"
+              >
+                <div className="mb-4">
+                  <div className="text-5xl font-bold text-black">
+                    £24.99<span className="text-xl text-gray-600">/month</span>
                   </div>
                 </div>
+
+                <Button
+                  onClick={() => navigate(user ? '/dashboard' : '/register')}
+                  className="mb-6 px-8 py-5 rounded-full font-semibold text-base hover:opacity-90 transition-opacity"
+                  style={{ backgroundColor: '#0BA5E9', color: 'white' }}
+                >
+                  Get started
+                </Button>
+
+                <div className="flex items-center justify-end gap-2 mb-4">
+                  <img 
+                    src={mentioraLogo} 
+                    alt="Mentiora" 
+                    className="h-8 w-8"
+                  />
+                  <span className="text-2xl font-bold" style={{ color: '#0BA5E9' }}>mentiora</span>
+                </div>
+
+                {/* Small Dashboard Preview (bottom right corner) */}
+                <motion.div
+                  className="absolute bottom-0 right-0 w-48 rounded-lg overflow-hidden shadow-2xl border border-gray-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1.2 }}
+                  style={{ transform: 'translateY(60px)' }}
+                >
+                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-3">
+                    <div className="bg-white rounded-md p-2 mb-2">
+                      <div className="h-2 bg-cyan-500 rounded w-3/4 mb-1"></div>
+                      <div className="h-1 bg-gray-200 rounded w-full mb-1"></div>
+                      <div className="h-1 bg-gray-200 rounded w-5/6"></div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="bg-red-100 rounded h-12"></div>
+                      <div className="bg-blue-100 rounded h-12"></div>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
