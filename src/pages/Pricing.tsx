@@ -80,7 +80,7 @@ const Pricing = () => {
               <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
             ))}
           </div>
-          <span className="text-base">Trusted by 30K+ students</span>
+          <span className="text-base">1K+ reviews on 🍎</span>
         </div>
 
         {/* Main Headline */}
