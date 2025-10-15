@@ -259,69 +259,66 @@ const Pricing = () => {
               </Button>
             </div>
 
-            {/* Right Column - Email Preview in Envelope */}
+            {/* Right Column - Email Preview */}
             <div className="relative flex items-center justify-center">
-              {/* Envelope Container */}
-              <div className="relative w-full max-w-md">
-                {/* Email Letter - appears to come out of envelope */}
-                <div className="relative bg-white rounded-lg shadow-xl p-8 z-20 border border-gray-200 mb-[-40px]">
-                  <div className="mb-4">
-                    <div className="text-sm font-bold text-gray-900 mb-2">
-                      Help Your Child Get Through GCSEs
+              <div className="w-full max-w-md bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden">
+                {/* Email Header */}
+                <div className="bg-gradient-to-r from-[#00A8FF] to-[#0096E6] px-6 py-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      M
                     </div>
-                    <div className="text-xs text-gray-500 mb-3">
-                      Dear parent or guardian,
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2.5 text-xs text-gray-700 leading-relaxed">
-                    <p>Your child has expressed interest in using Mently AI to prepare for their GCSE studies. Mently AI provides AI-personalized learning through individualisation.</p>
-                    
-                    <div className="space-y-1.5 pl-2">
-                      <div className="flex items-start gap-2">
-                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>Unlimited access to over 10 exam-style questions for every topic and mastery of their exam towards ...</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>Instead of marking and listening textbook, learn with AI by asking questions, practising exam board</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>24/7 step by step tutoring that builds your child&apos;s subject understanding and exam confidence</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>20+ timed mock predicted papers per subject</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>Comprehensive and concise notes from each topic on their curriculum</span>
-                      </div>
-                    </div>
-                    
-                    <p className="pt-1">Exam-focused preparation aligned with upcoming exams</p>
-                  </div>
-                  
-                  <div className="mt-5 text-center">
-                    <div className="text-xs text-gray-400">
-                      mently.app/get-parent
+                    <div>
+                      <div className="text-white font-semibold text-sm">Mentiora</div>
+                      <div className="text-white/80 text-xs">hello@mentiora.com</div>
                     </div>
                   </div>
                 </div>
-                
-                {/* Envelope */}
-                <div className="relative bg-gradient-to-b from-gray-200 to-gray-300 rounded-lg shadow-2xl overflow-hidden z-10" style={{ paddingTop: '50px', paddingBottom: '80px' }}>
-                  {/* Envelope flap - open triangles */}
-                  <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
-                    {/* Left flap */}
-                    <div 
-                      className="absolute left-0 top-0 w-0 h-0 border-l-[250px] border-l-transparent border-t-[80px] border-t-gray-300"
-                    />
-                    {/* Right flap */}
-                    <div 
-                      className="absolute right-0 top-0 w-0 h-0 border-r-[250px] border-r-transparent border-t-[80px] border-t-gray-300"
-                    />
+
+                {/* Email Body */}
+                <div className="p-6">
+                  <div className="mb-4 pb-3 border-b border-gray-100">
+                    <div className="text-xs text-gray-500 mb-1">To: Parent/Guardian</div>
+                    <div className="text-base font-bold text-gray-900">
+                      Help Your Child Get Through GCSEs
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
+                    <p className="text-gray-600">Dear parent or guardian,</p>
+                    
+                    <p>Your child has expressed interest in using Mently AI to prepare for their GCSE studies. Mently AI provides AI-personalized learning through individualisation.</p>
+                    
+                    <div className="space-y-2 pl-1">
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span className="text-xs">Unlimited access to over 10 exam-style questions for every topic and mastery of their exam towards ...</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span className="text-xs">Instead of marking and listening textbook, learn with AI by asking questions, practising exam board</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span className="text-xs">24/7 step by step tutoring that builds your child&apos;s subject understanding and exam confidence</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span className="text-xs">20+ timed mock predicted papers per subject</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span className="text-xs">Comprehensive and concise notes from each topic on their curriculum</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-xs">Exam-focused preparation aligned with upcoming exams</p>
+                    
+                    <div className="mt-4 pt-4 border-t border-gray-100 text-center">
+                      <a href="#" className="text-[#00A8FF] text-xs font-medium hover:underline">
+                        mently.app/get-parent
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
