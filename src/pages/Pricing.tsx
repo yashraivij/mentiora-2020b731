@@ -40,7 +40,6 @@ const Pricing = () => {
     "Practice with 2,500+ exam-style questions per subject with instant marking and feedback.",
     "Track your performance with real-time analytics showing strengths, weaknesses and predicted grades.",
     "Access 24/7 tutoring with step-by-step explanations for every concept and question.",
-    "Prepare with 10+ timed mock papers per subject, designed for your specific exam board.",
     "Get exclusive access to Mentiora's 2026 Predicted Papers.",
     "Create and review custom flashcards powered by spaced repetition for better retention.",
     "Study efficiently with exam-focused notes for every topic in your curriculum.",
@@ -322,7 +321,7 @@ const Pricing = () => {
                               </div>
                               <div className="flex items-start gap-1.5">
                                 <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">10+ timed mock papers per subject</span>
+                                <span className="text-[9px]">Predicted Papers & performance analytics</span>
                               </div>
                             </div>
                           </div>
