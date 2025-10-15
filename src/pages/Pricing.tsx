@@ -41,11 +41,11 @@ const Pricing = () => {
     "Track your performance with real-time analytics showing strengths, weaknesses and predicted grades.",
     "Access 24/7 AI tutoring with step-by-step explanations for every concept and question.",
     "Prepare with 10+ timed mock papers per subject, designed for your specific exam board.",
-    "Get exclusive access to Mentiora's 2026 Predicted Papers (releasing this April).",
+    "Get exclusive access to Mentiora's 2026 Predicted Papers.",
     "Create and review custom flashcards powered by spaced repetition for better retention.",
     "Study efficiently with AI-generated, exam-focused notes for every topic in your curriculum.",
     "Monitor stress levels with adaptive learning recommendations to maintain optimal study performance.",
-    "Access 40+ subjects from GCSEs, IGCSEs, A Levels and IB across multiple examination boards including AQA, Edexcel, CIE and OCR.",
+    "Access 40+ subjects from GCSEs, IGCSEs, and A Levels across multiple examination boards including AQA, Edexcel, and OCR.",
     "Start immediately - change or cancel your plan anytime."
   ];
 
