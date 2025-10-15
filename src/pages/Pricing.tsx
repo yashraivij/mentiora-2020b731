@@ -416,46 +416,6 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Awards and Support Section */}
-        <div className="mb-16 py-16">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
-            Award-winning and supported<br />by leading institutions
-          </h2>
-
-          {/* Institution Logos */}
-          <div className="flex items-center justify-center gap-16 flex-wrap opacity-70">
-            <div className="h-20 flex items-center">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gray-800">UCL</div>
-                <div className="text-xs text-gray-600">INNOVATION<br />& ENTERPRISE</div>
-              </div>
-            </div>
-            <div className="h-20 flex items-center">
-              <div className="text-center">
-                <div className="text-4xl text-gray-800 mb-1">🚀</div>
-                <div className="text-sm font-medium text-gray-700">Microsoft<br />for Startups</div>
-              </div>
-            </div>
-            <div className="h-20 flex items-center">
-              <div className="text-center">
-                <div className="text-xl font-bold text-white bg-purple-600 px-3 py-1 mb-1">UKRI</div>
-                <div className="text-sm font-medium text-gray-700">Innovate<br />UK</div>
-              </div>
-            </div>
-            <div className="h-20 flex items-center">
-              <div className="text-2xl font-bold">
-                <span className="text-blue-500">G</span>
-                <span className="text-red-500">o</span>
-                <span className="text-yellow-500">o</span>
-                <span className="text-blue-500">g</span>
-                <span className="text-green-500">l</span>
-                <span className="text-red-500">e</span>
-                <span className="text-gray-600 ml-1 text-base">for Startups</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* FAQs Section */}
         <div className="mb-16 py-12 max-w-[800px] mx-auto">
           <h2 className="text-5xl font-bold text-center mb-12 text-gray-900">
