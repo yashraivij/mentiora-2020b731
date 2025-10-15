@@ -491,7 +491,7 @@ const Index = () => {
       </section>
 
       {/* HOW MENTIORA PERSONALIZES YOUR LEARNING SECTION */}
-      <section className="py-32 px-6 bg-white">
+      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -499,23 +499,23 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <div className="text-xs font-bold tracking-[1.5px] mb-4" style={{ color: '#0BA5E9' }}>
               INTELLIGENT PERSONALIZATION
             </div>
-            <h2 className="text-5xl md:text-6xl font-extrabold leading-tight mb-5">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-5 text-black">
               Your learning experience,<br />
               <span style={{ color: '#0BA5E9' }}>powered by AI</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-4xl mx-auto leading-relaxed">
-              Mentiora doesn't just teach—it learns about you. Our AI continuously analyzes
-              your performance to predict your grades, save you time, and adapt your study plan in real-time.
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Mentiora continuously analyzes your performance to predict your grades, 
+              save you time, and adapt your study plan in real-time.
             </p>
           </motion.div>
 
           {/* Feature Cards Row 1: Predicted Grades & Auto-Notes */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
             {/* FEATURE 1: PREDICTED GRADES ENGINE */}
             <motion.div
               initial="hidden"
@@ -523,36 +523,37 @@ const Index = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-2" style={{ borderColor: 'rgba(11, 165, 233, 0.2)' }}>
-                <CardContent className="p-10">
+              <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 bg-white">
+                <CardContent className="p-8">
                   {/* Feature Badge */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold mb-6"
-                    style={{ background: 'linear-gradient(135deg, #0BA5E9, #0284C7)' }}>
-                    🎯 Predicted Grades
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
+                    style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}>
+                    Predicted Grades
                   </div>
 
-                  <h3 className="text-3xl font-bold text-black mb-4">
+                  <h3 className="text-2xl font-bold text-black mb-3">
                     Know exactly where you stand
                   </h3>
-                  <p className="text-base text-gray-600 leading-relaxed mb-8">
-                    Our AI analyzes every question you answer, tracking accuracy, speed, and consistency across topics. Using machine learning trained on thousands of past exam results, Mentiora predicts your current grade with remarkable precision.
+                  <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                    Our AI analyzes every question you answer, tracking accuracy, speed, and consistency. 
+                    Using machine learning trained on thousands of past exam results, Mentiora predicts your current grade with precision.
                   </p>
 
                   {/* Visual Component */}
                   <div className="grid grid-cols-[1fr_auto_1fr] gap-4 items-center">
                     {/* Left: Input Metrics */}
                     <div className="space-y-2">
-                      <div className="bg-gray-50 rounded-lg p-3 text-xs">
-                        <div className="font-semibold text-black mb-1">📊 Topic Accuracy</div>
-                        <div className="text-lg font-bold" style={{ color: '#0BA5E9' }}>78%</div>
+                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="text-xs font-semibold text-gray-700 mb-1">Topic Accuracy</div>
+                        <div className="text-xl font-bold text-black">78%</div>
                       </div>
-                      <div className="bg-gray-50 rounded-lg p-3 text-xs">
-                        <div className="font-semibold text-black mb-1">⏱️ Answer Speed</div>
-                        <div className="text-lg font-bold" style={{ color: '#0BA5E9' }}>2.3 min</div>
+                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="text-xs font-semibold text-gray-700 mb-1">Answer Speed</div>
+                        <div className="text-xl font-bold text-black">2.3 min</div>
                       </div>
-                      <div className="bg-gray-50 rounded-lg p-3 text-xs">
-                        <div className="font-semibold text-black mb-1">📈 Consistency</div>
-                        <div className="text-lg font-bold text-green-600">High</div>
+                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="text-xs font-semibold text-gray-700 mb-1">Consistency</div>
+                        <div className="text-xl font-bold text-green-600">High</div>
                       </div>
                     </div>
 
@@ -561,48 +562,48 @@ const Index = () => {
                       <motion.div
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="text-3xl"
+                        className="text-2xl font-bold"
                         style={{ color: '#0BA5E9' }}
                       >
                         →
                       </motion.div>
-                      <div className="text-xs text-gray-400 mt-1">AI</div>
                     </div>
 
                     {/* Right: Output */}
-                    <div className="rounded-2xl p-6 text-center" 
-                      style={{ background: 'linear-gradient(135deg, #0BA5E9, #06B6D4)' }}>
-                      <div className="text-xs text-white/80 uppercase font-semibold mb-2">Your Predicted Grade</div>
-                      <div className="text-7xl font-black text-white mb-3">7</div>
-                      <div className="bg-white/20 rounded-full h-2 mb-2 overflow-hidden">
+                    <div className="rounded-xl p-5 text-center border-2" 
+                      style={{ borderColor: '#0BA5E9', background: 'linear-gradient(135deg, #F0F9FF, #E0F2FE)' }}>
+                      <div className="text-xs text-gray-700 uppercase font-semibold mb-2">Predicted Grade</div>
+                      <div className="text-6xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>7</div>
+                      <div className="bg-gray-200 rounded-full h-1.5 mb-2 overflow-hidden">
                         <motion.div 
-                          className="bg-white h-full rounded-full"
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: '#0BA5E9' }}
                           initial={{ width: 0 }}
                           whileInView={{ width: '92%' }}
                           viewport={{ once: true }}
                           transition={{ duration: 1, delay: 0.3 }}
                         />
                       </div>
-                      <div className="text-xs text-white/90 mb-3">92% confidence</div>
-                      <div className="text-xs text-white/80 space-y-1">
-                        <div>↗️ +1.2 grades in 3 weeks</div>
-                        <div>🎯 On track for target</div>
+                      <div className="text-xs text-gray-600 mb-2">92% confidence</div>
+                      <div className="text-xs text-gray-600 space-y-0.5">
+                        <div>+1.2 grades improvement</div>
+                        <div>On track for target</div>
                       </div>
                     </div>
                   </div>
 
                   {/* How It Works */}
                   <details className="mt-6 group">
-                    <summary className="cursor-pointer text-sm font-semibold text-gray-700 hover:text-black flex items-center gap-2">
-                      🔍 How we calculate this
+                    <summary className="cursor-pointer text-sm font-semibold text-gray-700 hover:text-black flex items-center gap-2 list-none">
+                      How we calculate this
                       <span className="text-xs text-gray-400 group-open:rotate-180 transition-transform">▼</span>
                     </summary>
-                    <div className="mt-3 bg-gray-50 rounded-xl p-4 text-xs text-gray-700 leading-relaxed space-y-1">
+                    <div className="mt-3 bg-gray-50 rounded-lg p-4 text-xs text-gray-700 leading-relaxed space-y-1 border border-gray-200">
                       <div>• Analyzes 50+ data points per topic</div>
-                      <div>• Compares your performance to 100,000+ historical exam results</div>
-                      <div>• Weights recent performance higher than old attempts</div>
-                      <div>• Adjusts for question difficulty and exam board patterns</div>
-                      <div>• Updates in real-time after every practice session</div>
+                      <div>• Compares performance to 100,000+ historical results</div>
+                      <div>• Weights recent performance higher</div>
+                      <div>• Adjusts for question difficulty and exam patterns</div>
+                      <div>• Updates in real-time after every session</div>
                     </div>
                   </details>
                 </CardContent>
@@ -617,77 +618,76 @@ const Index = () => {
               variants={fadeInUp}
               transition={{ delay: 0.1 }}
             >
-              <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-2" style={{ borderColor: 'rgba(168, 85, 247, 0.2)' }}>
-                <CardContent className="p-10">
+              <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 bg-white">
+                <CardContent className="p-8">
                   {/* Feature Badge */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold mb-6"
-                    style={{ background: 'linear-gradient(135deg, #A855F7, #EC4899)' }}>
-                    ⚡ Auto-Notes
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
+                    style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}>
+                    Auto-Notes
                   </div>
 
-                  <h3 className="text-3xl font-bold text-black mb-4">
+                  <h3 className="text-2xl font-bold text-black mb-3">
                     Stop writing, start learning
                   </h3>
-                  <p className="text-base text-gray-600 leading-relaxed mb-8">
-                    As you study, Mentiora automatically generates personalized notes based on what you're learning. No more spending hours writing summaries—our AI captures key points, explanations, and examples tailored to your understanding level.
+                  <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                    Mentiora automatically generates personalized notes as you study. 
+                    No more spending hours writing summaries—our AI captures key points and examples tailored to your level.
                   </p>
 
                   {/* Time Comparison Visual */}
-                  <div className="grid grid-cols-2 gap-0 mb-6 rounded-xl overflow-hidden border-2 border-gray-200">
+                  <div className="grid grid-cols-2 gap-0 mb-6 rounded-lg overflow-hidden border border-gray-200">
                     {/* Without Mentiora */}
-                    <div className="bg-gray-100 p-6 text-center">
-                      <div className="text-xs text-gray-500 uppercase font-semibold mb-4">Without Mentiora</div>
-                      <div className="text-5xl mb-2">⏰</div>
+                    <div className="bg-gray-50 p-5 text-center border-r border-gray-200">
+                      <div className="text-xs text-gray-500 uppercase font-semibold mb-3">Without Mentiora</div>
                       <div className="text-3xl font-bold text-gray-700 mb-2">3h 45m</div>
                       <div className="text-xs text-gray-600 space-y-1">
-                        <div>✍️ Writing by hand</div>
-                        <div>📚 Summarizing textbook</div>
-                        <div>⏰ Time consuming</div>
+                        <div>Manual note-taking</div>
+                        <div>Summarizing textbook</div>
+                        <div>Time consuming</div>
                       </div>
                     </div>
 
                     {/* With Mentiora */}
-                    <div className="p-6 text-center" style={{ background: 'linear-gradient(135deg, #F0F9FF, #E0F2FE)' }}>
-                      <div className="text-xs uppercase font-semibold mb-4" style={{ color: '#0BA5E9' }}>With Auto-Notes</div>
-                      <div className="text-5xl mb-2">✨</div>
+                    <div className="bg-white p-5 text-center">
+                      <div className="text-xs uppercase font-semibold mb-3" style={{ color: '#0BA5E9' }}>With Auto-Notes</div>
                       <div className="text-3xl font-bold mb-2" style={{ color: '#0BA5E9' }}>12m</div>
                       <div className="text-xs text-gray-700 space-y-1">
-                        <div>⚡ Instant generation</div>
-                        <div>🎯 Personalized to you</div>
-                        <div>🔄 Continuously updated</div>
+                        <div>Instant generation</div>
+                        <div>Personalized content</div>
+                        <div>Continuously updated</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Time Saved Banner */}
-                  <div className="rounded-xl p-5 text-center text-white mb-6"
-                    style={{ background: 'linear-gradient(135deg, #10B981, #0BA5E9)' }}>
-                    <div className="text-3xl font-extrabold mb-1">3h 33m saved per session</div>
-                    <div className="text-sm opacity-90">That's 14+ hours per month 🎉</div>
+                  <div className="rounded-lg p-4 text-center border-2 mb-6"
+                    style={{ borderColor: '#0BA5E9', backgroundColor: '#F0F9FF' }}>
+                    <div className="text-2xl font-bold mb-1" style={{ color: '#0BA5E9' }}>3h 33m saved per session</div>
+                    <div className="text-sm text-gray-600">That's 14+ hours per month</div>
                   </div>
 
                   {/* Auto-Notes Preview */}
                   <details className="group">
-                    <summary className="cursor-pointer text-sm font-semibold text-gray-700 hover:text-black flex items-center gap-2">
-                      📝 See example auto-notes
+                    <summary className="cursor-pointer text-sm font-semibold text-gray-700 hover:text-black flex items-center gap-2 list-none">
+                      See example auto-notes
                       <span className="text-xs text-gray-400 group-open:rotate-180 transition-transform">▼</span>
                     </summary>
-                    <div className="mt-3 bg-gray-50 rounded-xl p-4 text-xs leading-relaxed">
+                    <div className="mt-3 bg-gray-50 rounded-lg p-4 text-xs leading-relaxed border border-gray-200">
                       <div className="font-bold text-black mb-2">Chemical Bonding - Your Notes</div>
                       <div className="space-y-2 text-gray-700">
                         <div className="flex items-start gap-2">
-                          <span className="text-green-600">✓</span>
-                          <span><strong>You're strong with:</strong> Ionic bonding basics</span>
+                          <CheckCircle2 className="w-3 h-3 text-green-600 mt-0.5 flex-shrink-0" />
+                          <span><strong>Strong:</strong> Ionic bonding basics</span>
                         </div>
                         <div className="flex items-start gap-2">
-                          <span className="text-orange-500">⚠️</span>
+                          <AlertTriangle className="w-3 h-3 text-orange-500 mt-0.5 flex-shrink-0" />
                           <span><strong>Review:</strong> Covalent bond polarity</span>
                         </div>
                         <div className="mt-3 pt-3 border-t border-gray-200">
-                          <div className="font-semibold mb-1">Key Points (for you):</div>
+                          <div className="font-semibold mb-1">Key Points:</div>
                           <div>• Ionic bonds form between metals and non-metals</div>
-                          <div>• You struggled with electronegativity—remember it's about how strongly atoms attract electrons</div>
-                          <div>• Practice: Draw dot-cross diagrams (weak area)</div>
+                          <div>• Focus on electronegativity concepts</div>
+                          <div>• Practice dot-cross diagrams</div>
                         </div>
                       </div>
                     </div>
@@ -702,12 +702,12 @@ const Index = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center my-8"
+            className="text-center my-6"
           >
             <div className="inline-flex items-center gap-3 text-xs text-gray-400 font-medium">
-              <div className="h-px w-20 bg-gray-300"></div>
-              <span style={{ color: '#0BA5E9' }}>Real-time data processing</span>
-              <div className="h-px w-20 bg-gray-300"></div>
+              <div className="h-px w-16 bg-gray-300"></div>
+              <span>Real-time processing</span>
+              <div className="h-px w-16 bg-gray-300"></div>
             </div>
           </motion.div>
 
@@ -718,117 +718,109 @@ const Index = () => {
             viewport={{ once: true }}
             variants={fadeInUp}
             transition={{ delay: 0.2 }}
-            className="mt-16"
+            className="mt-6"
           >
-            <Card className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300" 
-              style={{ 
-                borderColor: '#0BA5E9',
-                background: 'linear-gradient(135deg, rgba(11, 165, 233, 0.02), rgba(255, 255, 255, 1))'
-              }}>
-              <CardContent className="p-10 lg:p-14">
-                <div className="grid lg:grid-cols-[2fr_3fr] gap-12">
+            <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 bg-white">
+              <CardContent className="p-8 lg:p-10">
+                <div className="grid lg:grid-cols-[2fr_3fr] gap-10">
                   {/* Left: Explanation */}
                   <div>
                     {/* Feature Badge */}
-                    <motion.div 
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold mb-6"
-                      style={{ background: 'linear-gradient(135deg, #F97316, #DC2626)' }}
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                    <div 
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
+                      style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}
                     >
-                      📅 Adaptive Planner - Core Feature
-                    </motion.div>
+                      Adaptive Planner
+                    </div>
 
-                    <h3 className="text-4xl font-extrabold text-black mb-4">
+                    <h3 className="text-3xl font-bold text-black mb-3">
                       Your week, intelligently planned
                     </h3>
-                    <p className="text-base text-gray-600 leading-relaxed mb-8">
-                      Mentiora creates a personalized weekly study schedule that adapts to your performance in real-time. If you're excelling at a topic, we'll move you forward faster. Struggling? We'll allocate extra time and provide targeted support.
+                    <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                      Mentiora creates a personalized weekly study schedule that adapts to your performance in real-time. 
+                      Excelling at a topic? We move you forward faster. Struggling? We allocate extra time and support.
                     </p>
 
                     {/* Key Features */}
-                    <div className="space-y-5 mb-8">
+                    <div className="space-y-4 mb-6">
                       <div className="flex items-start gap-3">
-                        <div className="text-2xl">🎯</div>
+                        <Target className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#0BA5E9' }} />
                         <div>
-                          <div className="text-base font-bold text-black">Priority-based scheduling</div>
-                          <div className="text-sm text-gray-600">Weak topics get more study time automatically</div>
+                          <div className="text-sm font-bold text-black">Priority-based scheduling</div>
+                          <div className="text-xs text-gray-600">Weak topics automatically get more study time</div>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="text-2xl">🔄</div>
+                        <TrendingUp className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#0BA5E9' }} />
                         <div>
-                          <div className="text-base font-bold text-black">Real-time adaptation</div>
-                          <div className="text-sm text-gray-600">Plan updates after every practice session</div>
+                          <div className="text-sm font-bold text-black">Real-time adaptation</div>
+                          <div className="text-xs text-gray-600">Plan updates after every practice session</div>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="text-2xl">🧠</div>
+                        <Brain className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#0BA5E9' }} />
                         <div>
-                          <div className="text-base font-bold text-black">Spaced repetition built-in</div>
-                          <div className="text-sm text-gray-600">Reviews scheduled at optimal intervals</div>
+                          <div className="text-sm font-bold text-black">Spaced repetition built-in</div>
+                          <div className="text-xs text-gray-600">Reviews scheduled at optimal intervals</div>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <div className="text-2xl">⏰</div>
+                        <Clock className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#0BA5E9' }} />
                         <div>
-                          <div className="text-base font-bold text-black">Peak performance timing</div>
-                          <div className="text-sm text-gray-600">Suggests study times based on when you focus best</div>
+                          <div className="text-sm font-bold text-black">Peak performance timing</div>
+                          <div className="text-xs text-gray-600">Study times based on when you focus best</div>
                         </div>
                       </div>
                     </div>
 
                     <Button 
                       style={{ backgroundColor: '#0BA5E9' }}
-                      className="text-white font-semibold px-8 py-5 rounded-lg hover:opacity-90"
+                      className="text-white font-semibold px-6 py-5 rounded-lg hover:opacity-90"
                     >
-                      See your personalized plan →
+                      See your plan
                     </Button>
                   </div>
 
                   {/* Right: Interactive Planner Visual */}
                   <div>
-                    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                    <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
                       {/* Planner Header */}
                       <div className="bg-gray-50 border-b border-gray-200 p-4">
                         <div className="flex items-center justify-between mb-3">
-                          <div className="font-bold text-black">Your Adaptive Weekly Plan</div>
-                          <div className="text-xs text-gray-500">Week of Oct 14-20</div>
+                          <div className="font-bold text-sm text-black">Your Weekly Plan</div>
+                          <div className="text-xs text-gray-500">Oct 14-20</div>
                         </div>
                         <div className="flex gap-2">
                           <button className="px-3 py-1 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: '#0BA5E9' }}>All</button>
-                          <button className="px-3 py-1 rounded-full text-xs text-gray-600 bg-gray-200">Chemistry</button>
-                          <button className="px-3 py-1 rounded-full text-xs text-gray-600 bg-gray-200">Biology</button>
+                          <button className="px-3 py-1 rounded-full text-xs text-gray-600 bg-white border border-gray-200">Chemistry</button>
+                          <button className="px-3 py-1 rounded-full text-xs text-gray-600 bg-white border border-gray-200">Biology</button>
                         </div>
                       </div>
 
                       {/* Daily Tasks */}
-                      <div className="p-4 space-y-3 max-h-96 overflow-y-auto">
+                      <div className="p-4 space-y-3 max-h-80 overflow-y-auto">
                         {/* Monday */}
                         <div>
                           <div className="bg-gray-100 rounded-t-lg px-3 py-2 flex items-center justify-between">
                             <span className="text-xs font-bold text-black">Monday, Oct 14</span>
-                            <span className="text-xs text-gray-600">1h 45m planned</span>
+                            <span className="text-xs text-gray-600">1h 45m</span>
                           </div>
                           <div className="space-y-2 p-2">
                             <div className="bg-white rounded-lg p-3 border-l-4 border-red-500 shadow-sm">
-                              <div className="text-xs font-semibold text-black mb-1">9:00 AM - 9:35 AM (35 min)</div>
-                              <div className="text-sm font-bold text-black">Chemical Bonding - Focus Session</div>
+                              <div className="text-xs font-semibold text-gray-600 mb-1">9:00 AM - 9:35 AM</div>
+                              <div className="text-sm font-bold text-black">Chemical Bonding Focus</div>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs text-gray-500">●●○ Medium</span>
-                                <span className="px-2 py-0.5 rounded text-xs font-semibold text-white" style={{ backgroundColor: '#0BA5E9' }}>Ready to start</span>
+                                <span className="px-2 py-0.5 rounded text-xs font-semibold text-white" style={{ backgroundColor: '#0BA5E9' }}>Ready</span>
+                                <span className="text-xs text-gray-500">Medium difficulty</span>
                               </div>
-                              <div className="text-xs text-red-600 mt-1">📊 This is a weak topic for you</div>
                             </div>
 
-                            <div className="bg-white rounded-lg p-3 border-l-4 border-green-500 shadow-sm opacity-75">
-                              <div className="text-xs font-semibold text-black mb-1">2:00 PM - 2:25 PM (25 min)</div>
+                            <div className="bg-white rounded-lg p-3 border-l-4 border-green-500 shadow-sm opacity-60">
+                              <div className="text-xs font-semibold text-gray-600 mb-1">2:00 PM - 2:25 PM</div>
                               <div className="text-sm font-bold text-black">Cell Structure Review</div>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs text-gray-500">●○○ Easy</span>
-                                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-green-600 text-white">Completed ✓</span>
+                                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-green-600 text-white">Completed</span>
                               </div>
-                              <div className="text-xs text-green-600 mt-1">✓ You're strong here - quick review only</div>
                             </div>
                           </div>
                         </div>
@@ -837,43 +829,40 @@ const Index = () => {
                         <div>
                           <div className="bg-gray-100 rounded-t-lg px-3 py-2 flex items-center justify-between">
                             <span className="text-xs font-bold text-black">Tuesday, Oct 15</span>
-                            <span className="text-xs text-gray-600">2h 00m planned</span>
+                            <span className="text-xs text-gray-600">2h 00m</span>
                           </div>
                           <div className="space-y-2 p-2">
                             <motion.div 
-                              className="bg-yellow-50 rounded-lg p-3 border-l-4 border-yellow-500 shadow-sm"
+                              className="bg-blue-50 rounded-lg p-3 border-l-4 shadow-sm"
+                              style={{ borderLeftColor: '#0BA5E9' }}
                               initial={{ scale: 0.95 }}
                               whileInView={{ scale: 1 }}
                               viewport={{ once: true }}
                             >
-                              <div className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold mb-2" style={{ backgroundColor: '#FEF08A', color: '#854D0E' }}>
-                                ⚡ Auto-adjusted based on Monday's performance
+                              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold mb-2" style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}>
+                                Auto-adjusted
                               </div>
-                              <div className="text-xs font-semibold text-black mb-1">6:30 PM - 7:15 PM (45 min)</div>
+                              <div className="text-xs font-semibold text-gray-600 mb-1">6:30 PM - 7:15 PM</div>
                               <div className="text-sm font-bold text-black">Ionic Compounds Practice</div>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs text-gray-500">●●● Hard</span>
-                                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-orange-600 text-white">Recommended time</span>
-                              </div>
-                              <div className="text-xs text-orange-600 mt-1">🎯 Scheduled during your peak focus hours</div>
+                              <div className="text-xs text-gray-600 mt-1">Peak focus time</div>
                             </motion.div>
                           </div>
                         </div>
 
-                        {/* Wednesday - Accelerated learning */}
+                        {/* Wednesday */}
                         <div>
                           <div className="bg-gray-100 rounded-t-lg px-3 py-2 flex items-center justify-between">
                             <span className="text-xs font-bold text-black">Wednesday, Oct 16</span>
-                            <span className="text-xs text-gray-600">1h 30m planned</span>
+                            <span className="text-xs text-gray-600">1h 30m</span>
                           </div>
                           <div className="space-y-2 p-2">
                             <div className="bg-green-50 rounded-lg p-3 border-l-4 border-green-500 shadow-sm">
-                              <div className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-bold mb-2" style={{ backgroundColor: '#BBF7D0', color: '#166534' }}>
-                                🚀 Advanced faster - you mastered this!
+                              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold mb-2 bg-green-100 text-green-700">
+                                Advanced
                               </div>
-                              <div className="text-xs font-semibold text-black mb-1">4:00 PM - 4:40 PM (40 min)</div>
-                              <div className="text-sm font-bold text-black">Advanced Organic Chemistry</div>
-                              <div className="text-xs text-green-600 mt-1">Moving to next level based on your progress</div>
+                              <div className="text-xs font-semibold text-gray-600 mb-1">4:00 PM - 4:40 PM</div>
+                              <div className="text-sm font-bold text-black">Organic Chemistry</div>
+                              <div className="text-xs text-gray-600 mt-1">You mastered the basics</div>
                             </div>
                           </div>
                         </div>
@@ -882,43 +871,24 @@ const Index = () => {
                       {/* Stats Footer */}
                       <div className="bg-gray-50 border-t border-gray-200 p-3 grid grid-cols-3 gap-2 text-center">
                         <div>
-                          <div className="text-lg font-bold" style={{ color: '#0BA5E9' }}>87%</div>
-                          <div className="text-xs text-gray-600">Plan completion</div>
+                          <div className="text-base font-bold" style={{ color: '#0BA5E9' }}>87%</div>
+                          <div className="text-xs text-gray-600">Completion</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bold text-green-600">2.3x</div>
-                          <div className="text-xs text-gray-600">Faster progress</div>
+                          <div className="text-base font-bold text-green-600">2.3x</div>
+                          <div className="text-xs text-gray-600">Faster</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bold text-orange-600">4→1</div>
+                          <div className="text-base font-bold text-orange-600">4→1</div>
                           <div className="text-xs text-gray-600">Weak topics</div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Live Adaptation Callout */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 }}
-                      className="mt-4 bg-white border-2 rounded-xl p-4 shadow-lg"
-                      style={{ borderColor: '#0BA5E9' }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <motion.div
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-2xl"
-                        >
-                          ⚡
-                        </motion.div>
-                        <div>
-                          <div className="font-bold text-sm" style={{ color: '#0BA5E9' }}>Live Adaptation</div>
-                          <div className="text-xs text-gray-600">Plan updated 43 mins ago based on your last session</div>
-                        </div>
-                      </div>
-                    </motion.div>
+                    {/* Live Adaptation Note */}
+                    <div className="mt-3 bg-blue-50 border rounded-lg p-3 text-xs text-gray-700" style={{ borderColor: '#0BA5E9' }}>
+                      <strong style={{ color: '#0BA5E9' }}>Live Adaptation:</strong> Plan updated 43 mins ago based on your last session
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -931,50 +901,41 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="mt-20"
+            className="mt-16"
           >
-            <div className="bg-gray-50 rounded-2xl p-12 max-w-5xl mx-auto">
-              <h3 className="text-3xl font-bold text-black text-center mb-12">
+            <div className="bg-white rounded-xl p-10 border border-gray-200 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-black text-center mb-10">
                 Three features, one intelligent system
               </h3>
 
               {/* Flow Diagram */}
-              <div className="flex items-center justify-center gap-6 mb-8 flex-wrap">
-                <div className="bg-cyan-100 rounded-xl p-6 text-center flex-1 min-w-[180px]" style={{ borderLeft: '4px solid #0BA5E9' }}>
-                  <div className="text-3xl mb-2">🎯</div>
+              <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
+                <div className="bg-gray-50 rounded-lg p-5 text-center flex-1 min-w-[160px] border border-gray-200">
+                  <Target className="w-8 h-8 mx-auto mb-2" style={{ color: '#0BA5E9' }} />
                   <div className="font-bold text-sm text-black">Predicted Grades</div>
-                  <div className="text-xs text-gray-600 mt-1">Your performance data</div>
+                  <div className="text-xs text-gray-600 mt-1">Performance data</div>
                 </div>
 
-                <div className="text-2xl font-bold" style={{ color: '#0BA5E9' }}>→</div>
+                <div className="text-xl font-bold" style={{ color: '#0BA5E9' }}>→</div>
 
-                <div className="bg-purple-100 rounded-xl p-6 text-center flex-1 min-w-[180px]" style={{ borderLeft: '4px solid #A855F7' }}>
-                  <div className="text-3xl mb-2">⚡</div>
+                <div className="bg-gray-50 rounded-lg p-5 text-center flex-1 min-w-[160px] border border-gray-200">
+                  <BookOpen className="w-8 h-8 mx-auto mb-2" style={{ color: '#0BA5E9' }} />
                   <div className="font-bold text-sm text-black">Auto-Notes</div>
-                  <div className="text-xs text-gray-600 mt-1">Personalized materials</div>
+                  <div className="text-xs text-gray-600 mt-1">Learning materials</div>
                 </div>
 
-                <div className="text-2xl font-bold" style={{ color: '#0BA5E9' }}>→</div>
+                <div className="text-xl font-bold" style={{ color: '#0BA5E9' }}>→</div>
 
-                <div className="bg-orange-100 rounded-xl p-6 text-center flex-1 min-w-[180px]" style={{ borderLeft: '4px solid #F97316' }}>
-                  <div className="text-3xl mb-2">📅</div>
+                <div className="bg-gray-50 rounded-lg p-5 text-center flex-1 min-w-[160px] border border-gray-200">
+                  <Calendar className="w-8 h-8 mx-auto mb-2" style={{ color: '#0BA5E9' }} />
                   <div className="font-bold text-sm text-black">Weekly Planner</div>
                   <div className="text-xs text-gray-600 mt-1">Adaptive schedule</div>
                 </div>
-
-                <motion.div 
-                  className="text-2xl font-bold hidden lg:block"
-                  style={{ color: '#0BA5E9' }}
-                  animate={{ x: [-100, 0] }}
-                  transition={{ duration: 1.5 }}
-                >
-                  ↩
-                </motion.div>
               </div>
 
-              <p className="text-center text-base text-gray-600 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-center text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
                 Your predicted grades identify weak areas → Auto-notes focus on those topics → 
-                Your planner schedules extra practice → Improved performance → Better predictions → The cycle continues
+                Your planner schedules extra practice → Improved performance → Better predictions
               </p>
             </div>
           </motion.div>
@@ -985,30 +946,30 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-8 mt-20"
+            className="grid md:grid-cols-3 gap-6 mt-16"
           >
             <motion.div variants={fadeInUp}>
-              <Card className="text-center hover:shadow-xl transition-all">
-                <CardContent className="p-8">
-                  <div className="text-5xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>14.7 hours</div>
+              <Card className="text-center hover:shadow-lg transition-all bg-white">
+                <CardContent className="p-6">
+                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>14.7 hours</div>
                   <p className="text-sm text-gray-600 leading-relaxed">Average time saved per month with auto-notes</p>
                 </CardContent>
               </Card>
             </motion.div>
 
             <motion.div variants={fadeInUp}>
-              <Card className="text-center hover:shadow-xl transition-all">
-                <CardContent className="p-8">
-                  <div className="text-5xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>94%</div>
+              <Card className="text-center hover:shadow-lg transition-all bg-white">
+                <CardContent className="p-6">
+                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>94%</div>
                   <p className="text-sm text-gray-600 leading-relaxed">Students report better time management with adaptive planner</p>
                 </CardContent>
               </Card>
             </motion.div>
 
             <motion.div variants={fadeInUp}>
-              <Card className="text-center hover:shadow-xl transition-all">
-                <CardContent className="p-8">
-                  <div className="text-5xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>1.8 grades</div>
+              <Card className="text-center hover:shadow-lg transition-all bg-white">
+                <CardContent className="p-6">
+                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>1.8 grades</div>
                   <p className="text-sm text-gray-600 leading-relaxed">Average improvement with personalized learning in 8 weeks</p>
                 </CardContent>
               </Card>
@@ -1021,39 +982,41 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="mt-20"
+            className="mt-16"
           >
-            <div className="rounded-3xl p-16 text-center"
-              style={{ background: 'linear-gradient(135deg, #0BA5E9, #06B6D4)' }}>
-              <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            <div className="rounded-2xl p-12 text-center bg-white border-2 shadow-lg" style={{ borderColor: '#0BA5E9' }}>
+              <h3 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#0BA5E9' }}>
                 Ready for learning that adapts to you?
               </h3>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              <p className="text-base text-gray-600 mb-6 max-w-xl mx-auto">
                 Join 50,000+ students learning smarter with personalized AI
               </p>
               
-              <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
                 <Button 
                   size="lg"
                   onClick={() => navigate(user ? '/dashboard' : '/register')}
-                  className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-6 rounded-full shadow-2xl hover:scale-105 transition-all"
-                  style={{ color: '#0BA5E9' }}
+                  style={{ backgroundColor: '#0BA5E9' }}
+                  className="text-white text-base font-semibold px-10 py-6 rounded-full shadow-lg hover:opacity-90 transition-all"
                 >
                   Start your free trial
                 </Button>
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="bg-transparent border-2 border-white text-white text-lg font-semibold px-12 py-6 rounded-full hover:bg-white hover:text-[#0BA5E9] transition-all"
+                  className="border-2 text-base font-semibold px-10 py-6 rounded-full hover:bg-gray-50 transition-all"
+                  style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
                 >
-                  Watch 2-min demo
+                  Watch demo
                 </Button>
               </div>
 
-              <p className="text-sm text-white/80 space-x-4">
-                <span>✓ No credit card required</span>
-                <span>✓ Set up in 60 seconds</span>
-                <span>✓ Cancel anytime</span>
+              <p className="text-xs text-gray-500 space-x-3">
+                <span>No credit card required</span>
+                <span>•</span>
+                <span>Set up in 60 seconds</span>
+                <span>•</span>
+                <span>Cancel anytime</span>
               </p>
             </div>
           </motion.div>
