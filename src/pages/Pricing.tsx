@@ -390,28 +390,28 @@ const Pricing = () => {
           </div>
 
           {/* Teacher Section */}
-          <div className="text-center max-w-[600px] mx-auto">
-            <h3 className="text-xl font-bold mb-4 text-gray-900">
-              Ask your teacher for your school's 20% discount code.
-            </h3>
-            
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              School teachers in every country are eligible to receive a free, personalised discount code offering students 20% off any Mently subscription.
-            </p>
-            
-            <p className="text-gray-600">
-              No school code yet? Ask them to email{" "}
-              <a href="mailto:contact@medlyai.com" className="text-[#00A8FF] font-medium hover:underline">
-                contact@medlyai.com
-              </a>{" "}
-              for one.
-            </p>
+          <div className="flex items-center justify-center gap-8 max-w-[700px] mx-auto">
+            <div className="flex-1">
+              <h3 className="text-xl font-bold mb-4 text-gray-900">
+                Ask your teacher for your school's 20% discount code.
+              </h3>
+              
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                School teachers in every country are eligible to receive a free, personalised discount code offering students 20% off any Mently subscription.
+              </p>
+              
+              <p className="text-gray-600">
+                No school code yet? Ask them to email{" "}
+                <a href="mailto:contact@medlyai.com" className="text-[#00A8FF] font-medium hover:underline">
+                  contact@medlyai.com
+                </a>{" "}
+                for one.
+              </p>
+            </div>
             
             {/* Teacher Emoji */}
-            <div className="mt-8 flex justify-center">
-              <div className="w-24 h-24 flex items-center justify-center">
-                <div className="text-6xl">👩‍🏫</div>
-              </div>
+            <div className="flex-shrink-0">
+              <div className="text-8xl">👩‍🏫</div>
             </div>
           </div>
         </div>
