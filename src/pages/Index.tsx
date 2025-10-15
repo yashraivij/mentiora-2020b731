@@ -32,6 +32,8 @@ const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
+  const [expandedSection, setExpandedSection] = useState(false);
+  const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -490,522 +492,339 @@ const Index = () => {
         </div>
       </section>
 
-      {/* INTERACTIVE PERSONALIZATION SECTION */}
+      {/* CIRCULAR FEEDBACK LOOP PERSONALIZATION SECTION */}
       <section className="py-32 px-6 bg-white">
         <div className="max-w-[1400px] mx-auto">
-          {/* Two-Column Header */}
-          <div className="grid lg:grid-cols-[60%_40%] gap-12 mb-16">
-            {/* Left Column */}
-            <div>
-              <div className="inline-block px-3 py-1.5 rounded-full text-xs font-bold mb-4" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
-                HOW IT WORKS
-              </div>
-              <h2 className="text-5xl font-extrabold text-black leading-tight mb-5">
-                Three features.<br />
-                <span style={{ color: '#00B4D8' }}>One adaptive brain.</span>
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                Mentiora analyzes how you learn and automatically personalizes your entire study experience. No setup required.
-              </p>
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: '#00B4D8' }}>
+              HOW PERSONALIZATION WORKS
             </div>
-
-            {/* Right Column - Animated Illustration */}
-            <div className="flex items-center justify-center">
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative"
-              >
-                <div className="w-72 h-72 rounded-full bg-gradient-to-br from-cyan-100 to-purple-100 flex items-center justify-center">
-                  <Brain className="w-32 h-32" style={{ color: '#00B4D8' }} />
-                  {/* Animated nodes */}
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute top-12 right-12 w-4 h-4 rounded-full"
-                    style={{ backgroundColor: '#00B4D8' }}
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    className="absolute bottom-16 left-8 w-4 h-4 rounded-full"
-                    style={{ backgroundColor: '#9333EA' }}
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                    className="absolute top-20 left-16 w-4 h-4 rounded-full"
-                    style={{ backgroundColor: '#00B4D8' }}
-                  />
-                </div>
-              </motion.div>
-            </div>
+            <h2 className="text-5xl font-extrabold leading-tight mb-5">
+              <span className="text-black">A learning system that</span>
+              <br />
+              <span style={{ color: '#00B4D8' }}>never stops improving</span>
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+              Every question you answer makes Mentiora smarter about how you learn.
+              <br />Watch how the cycle works.
+            </p>
           </div>
 
-          {/* Tabbed Interface */}
-          <div className="mt-16">
-            {/* Tab Navigation */}
-            <div className="flex justify-center mb-10">
-              <div className="inline-flex bg-gray-100 rounded-2xl p-2 gap-2">
+          {/* Main Circular Graphic */}
+          <div 
+            className="rounded-3xl p-20 relative min-h-[700px] mb-16"
+            style={{ 
+              background: 'radial-gradient(circle at center, #E6F7FF 0%, #FFFFFF 100%)'
+            }}
+          >
+            {/* Central Hub */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full flex flex-col items-center justify-center border-4 border-white shadow-2xl z-10"
+              style={{ 
+                background: 'linear-gradient(135deg, #00B4D8, #0284C7)'
+              }}
+              animate={{ 
+                scale: [1, 1.05, 1]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Brain className="w-12 h-12 text-white mb-2" />
+              <div className="text-lg font-bold text-white">AI Engine</div>
+              <div className="text-xs text-white/80">Learning about you</div>
+            </motion.div>
+
+            {/* SVG Connection Lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+              <defs>
+                <linearGradient id="lineGradient">
+                  <stop offset="0%" stopColor="#00B4D8" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#00B4D8" stopOpacity="0.6" />
+                </linearGradient>
+              </defs>
+              {/* Lines connecting nodes to center */}
+              <line x1="50%" y1="15%" x2="50%" y2="50%" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8 4" />
+              <line x1="85%" y1="50%" x2="50%" y2="50%" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8 4" />
+              <line x1="50%" y1="85%" x2="50%" y2="50%" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8 4" />
+              <line x1="15%" y1="50%" x2="50%" y2="50%" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8 4" />
+            </svg>
+
+            {/* Node 1: You Study (Top) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 w-60 bg-white rounded-2xl p-7 shadow-xl border-2"
+              style={{ borderColor: '#E0F2FE' }}
+              whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+            >
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <span className="text-2xl">📚</span>
+              </div>
+              <div className="text-xs font-bold tracking-wider text-gray-500 mb-2">STEP 1</div>
+              <h3 className="text-xl font-bold text-black mb-2">You Study</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Answer questions across your syllabus topics
+              </p>
+              <div className="bg-cyan-50 rounded-lg px-3 py-2 text-xs text-gray-700">
+                ✓ 12 questions answered today
+              </div>
+            </motion.div>
+
+            {/* Node 2: Data Collected (Right) */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="absolute top-1/2 right-0 transform -translate-y-1/2 w-60 bg-white rounded-2xl p-7 shadow-xl border-2"
+              style={{ borderColor: '#E0F2FE' }}
+              whileHover={{ x: 4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+            >
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <span className="text-2xl">📊</span>
+              </div>
+              <div className="text-xs font-bold tracking-wider text-gray-500 mb-2">STEP 2</div>
+              <h3 className="text-xl font-bold text-black mb-2">Data Collected</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                We track accuracy, speed, patterns, and weak areas
+              </p>
+              <div className="flex gap-2">
+                <div className="bg-cyan-50 rounded-lg px-2 py-1 text-xs">78%</div>
+                <div className="bg-cyan-50 rounded-lg px-2 py-1 text-xs">2.3m</div>
+                <div className="bg-cyan-50 rounded-lg px-2 py-1 text-xs">12 topics</div>
+              </div>
+            </motion.div>
+
+            {/* Node 3: AI Analyzes (Bottom) */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-60 bg-white rounded-2xl p-7 shadow-xl border-2"
+              style={{ borderColor: '#E0F2FE' }}
+              whileHover={{ y: 4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+            >
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <span className="text-2xl">🔍</span>
+              </div>
+              <div className="text-xs font-bold tracking-wider text-gray-500 mb-2">STEP 3</div>
+              <h3 className="text-xl font-bold text-black mb-2">AI Analyzes</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Machine learning identifies your learning patterns
+              </p>
+              <motion.div 
+                className="text-xs font-semibold"
+                style={{ color: '#00B4D8' }}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Processing 50+ data points...
+              </motion.div>
+            </motion.div>
+
+            {/* Node 4: Personalized Output (Left) */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+              className="absolute top-1/2 left-0 transform -translate-y-1/2 w-60 bg-white rounded-2xl p-7 shadow-xl border-2"
+              style={{ borderColor: '#E0F2FE' }}
+              whileHover={{ x: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+            >
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <span className="text-2xl">✨</span>
+              </div>
+              <div className="text-xs font-bold tracking-wider text-gray-500 mb-2">STEP 4</div>
+              <h3 className="text-xl font-bold text-black mb-2">You Get Results</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Predicted grades, auto-notes, adapted study plan
+              </p>
+              <div className="space-y-2">
+                <div className="bg-cyan-100 rounded-md px-3 py-1 text-xs font-semibold" style={{ color: '#00B4D8' }}>
+                  Grade 7
+                </div>
+                <div className="bg-purple-100 rounded-md px-3 py-1 text-xs font-semibold text-purple-700">
+                  14h saved
+                </div>
+                <div className="bg-orange-100 rounded-md px-3 py-1 text-xs font-semibold text-orange-700">
+                  7 days planned
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Cycle Completion Arrow */}
+            <div className="absolute top-8 left-12">
+              <div className="bg-white rounded-full px-4 py-2 shadow-lg border border-gray-200">
+                <div className="text-xs text-gray-600 flex items-center gap-2">
+                  🔄 <span>Cycle repeats continuously</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Info Badges */}
+            <motion.div
+              className="absolute top-16 right-12 bg-white rounded-xl px-4 py-3 shadow-lg border border-gray-200 flex items-center gap-2"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span>⚡</span>
+              <span className="text-sm text-gray-700">Updates after every session</span>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-24 right-8 bg-white rounded-xl px-4 py-3 shadow-lg border border-gray-200 flex items-center gap-2"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <span>🎯</span>
+              <span className="text-sm text-gray-700">92% prediction accuracy</span>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-32 left-8 bg-white rounded-xl px-4 py-3 shadow-lg border border-gray-200 flex items-center gap-2"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              <span>🔄</span>
+              <span className="text-sm text-gray-700">Real-time adaptation</span>
+            </motion.div>
+          </div>
+
+          {/* Expandable "How It Works" Section */}
+          <div className="bg-gray-50 rounded-2xl p-10 max-w-4xl mx-auto mb-20">
+            <button
+              onClick={() => setExpandedSection(!expandedSection)}
+              className="w-full flex items-center justify-between text-left hover:opacity-80 transition-opacity"
+            >
+              <span className="text-base font-semibold text-black flex items-center gap-2">
+                🔍 See detailed breakdown of each step
+              </span>
+              <motion.span
+                animate={{ rotate: expandedSection ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-2xl"
+              >
+                →
+              </motion.span>
+            </button>
+
+            {expandedSection && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-8 space-y-4"
+              >
                 {[
-                  { id: 'grades', label: 'Grade Predictions', icon: '🎯' },
-                  { id: 'notes', label: 'Auto-Notes', icon: '📝' },
-                  { id: 'planner', label: 'Smart Planner', icon: '📅' }
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => {
-                      const section = document.getElementById(`tab-${tab.id}`);
-                      section?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className={`px-8 py-3.5 rounded-xl font-semibold text-base transition-all duration-200 ${
-                      true ? 'bg-white text-black shadow-md' : 'bg-transparent text-gray-600 hover:bg-white/50'
-                    }`}
-                  >
-                    <span className="mr-2">{tab.icon}</span>
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Tab 1: Grade Predictions */}
-            <div id="tab-grades" className="mb-20">
-              <div 
-                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
-                style={{ background: 'linear-gradient(135deg, #E6F7FF 0%, #FFFFFF 100%)' }}
-              >
-                <div className="grid lg:grid-cols-[40%_60%] gap-16 items-center">
-                  {/* Left - Explanation */}
-                  <div>
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mb-5" style={{ backgroundColor: '#E6F7FF' }}>
-                      🎯
-                    </div>
-                    <h3 className="text-4xl font-bold text-black mb-4">
-                      Always know where you stand
-                    </h3>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                      Our AI constantly analyzes your performance—accuracy, speed, consistency—to predict your exam grade with 92% accuracy. No guessing, just data.
-                    </p>
-                    
-                    <div className="space-y-3">
-                      {[
-                        'Updates after every question',
-                        'Tracks 50+ performance metrics',
-                        'Compares to 100K+ student data',
-                        'Predicts grade boundaries'
-                      ].map((point, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                          <span className="text-base text-gray-700">{point}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Right - Interactive Visual */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-white rounded-2xl p-10 shadow-2xl"
-                  >
-                    <div className="flex items-center gap-2 mb-8">
-                      <FlaskConical className="w-5 h-5" style={{ color: '#00B4D8' }} />
-                      <span className="font-bold text-lg">Chemistry (AQA)</span>
-                    </div>
-
-                    {/* Circular Progress */}
-                    <div className="flex justify-center mb-8">
-                      <div className="relative w-56 h-56">
-                        <svg className="transform -rotate-90 w-56 h-56">
-                          <circle
-                            cx="112"
-                            cy="112"
-                            r="100"
-                            stroke="#E5E7EB"
-                            strokeWidth="12"
-                            fill="none"
-                          />
-                          <motion.circle
-                            cx="112"
-                            cy="112"
-                            r="100"
-                            stroke="url(#gradient)"
-                            strokeWidth="12"
-                            fill="none"
-                            strokeLinecap="round"
-                            initial={{ strokeDasharray: "0 628" }}
-                            whileInView={{ strokeDasharray: "439 628" }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: 0.3 }}
-                          />
-                          <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stopColor="#00B4D8" />
-                              <stop offset="100%" stopColor="#0284C7" />
-                            </linearGradient>
-                          </defs>
-                        </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <div className="text-sm text-gray-500 mb-1">Your Grade</div>
-                          <motion.div 
-                            className="text-7xl font-extrabold text-black"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                          >
-                            7
-                          </motion.div>
-                          <div className="text-sm text-gray-500 mt-1">Target: Grade 9</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Confidence Meter */}
-                    <div className="mb-6">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-gray-600">Prediction Confidence</span>
-                        <span className="text-sm font-bold text-black">92%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full"
-                          style={{ background: 'linear-gradient(90deg, #10B981, #00B4D8)' }}
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '92%' }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.5 }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Mini Stats */}
-                    <div className="grid grid-cols-3 gap-3">
-                      {[
-                        { label: '↗ +1.2', sub: 'Last 7 days' },
-                        { label: '⚡ 89%', sub: 'Accuracy' },
-                        { label: '📊 12/15', sub: 'Topics strong' }
-                      ].map((stat, i) => (
-                        <div key={i} className="bg-gray-50 rounded-lg p-3 text-center">
-                          <div className="font-bold text-sm text-black">{stat.label}</div>
-                          <div className="text-xs text-gray-600">{stat.sub}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-
-            {/* Tab 2: Auto-Notes */}
-            <div id="tab-notes" className="mb-20">
-              <div 
-                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
-                style={{ background: 'linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%)' }}
-              >
-                <div className="grid lg:grid-cols-[40%_60%] gap-16 items-start">
-                  {/* Left - Explanation */}
-                  <div>
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mb-5" style={{ backgroundColor: '#FAE8FF' }}>
-                      📝
-                    </div>
-                    <h3 className="text-4xl font-bold text-black mb-4">
-                      Notes that write themselves
-                    </h3>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                      As you study, Mentiora generates personalized notes automatically. Focused on what you need to know, written in a way you understand. Stop wasting time on summaries.
-                    </p>
-                    
-                    <div 
-                      className="rounded-xl p-6 text-white"
-                      style={{ background: 'linear-gradient(135deg, #9333EA, #EC4899)' }}
+                  {
+                    title: '1. You Study',
+                    content: `As you practice with Mentiora, you answer questions across all your syllabus topics. We don't just check if you're right or wrong—we measure:\n\n• How long you take to answer\n• Which topics you attempt first\n• Your consistency across similar questions\n• Patterns in your mistakes`
+                  },
+                  {
+                    title: '2. Data Collected',
+                    content: `Every interaction generates data. We collect over 50 data points per session:\n\n• Topic-specific accuracy rates\n• Answer speed and hesitation patterns\n• Common error types\n• Time of day performance\n• Retention rates over time\n\nAll data is encrypted and used solely to personalize your learning.`
+                  },
+                  {
+                    title: '3. AI Analyzes',
+                    content: `Our machine learning models process your data in real-time:\n\n• Compare your performance to 100,000+ historical student patterns\n• Identify which topics you struggle with and why\n• Predict your current grade with 92% accuracy\n• Calculate optimal study schedules based on your focus patterns\n• Determine which explanations work best for your learning style`
+                  },
+                  {
+                    title: '4. You Get Results',
+                    content: `Personalization happens automatically across three key areas:\n\n• Grade Predictions: Know exactly where you stand (updated after each session)\n• Auto-Notes: Get personalized notes focused on YOUR weak areas\n• Smart Planner: Your weekly schedule adapts based on what you need most practice with\n\nThe best part? This cycle runs continuously. Every question you answer makes your experience more personalized.`
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="bg-white rounded-xl overflow-hidden">
+                    <button
+                      onClick={() => setExpandedAccordion(expandedAccordion === index ? null : index)}
+                      className="w-full px-6 py-4 text-left font-bold text-black hover:bg-gray-50 transition-colors flex items-center justify-between"
                     >
-                      <div className="text-2xl font-bold">⚡ 14 hours saved this month</div>
-                    </div>
-                  </div>
-
-                  {/* Right - Visual Comparison */}
-                  <div>
-                    {/* Split Comparison */}
-                    <div className="grid grid-cols-2 rounded-2xl overflow-hidden shadow-xl mb-6">
-                      {/* Traditional */}
-                      <div className="bg-gray-100 p-8">
-                        <div className="text-sm font-semibold text-gray-500 mb-4">Manual Notes</div>
-                        <div className="text-4xl font-bold text-gray-400 mb-4">3h 45m</div>
-                        <div className="text-2xl mb-4">😰</div>
-                        <ul className="space-y-2 text-sm text-gray-600">
-                          <li>• Time-consuming</li>
-                          <li>• Often incomplete</li>
-                          <li>• Hard to review</li>
-                        </ul>
-                      </div>
-
-                      {/* With Mentiora */}
-                      <div className="p-8" style={{ background: 'linear-gradient(135deg, #E6F7FF, #FFFFFF)' }}>
-                        <div className="text-sm font-semibold mb-4" style={{ color: '#00B4D8' }}>Auto-Notes</div>
-                        <div className="text-4xl font-bold mb-4" style={{ color: '#00B4D8' }}>12m</div>
-                        <div className="text-2xl mb-4">✨</div>
-                        <ul className="space-y-2 text-sm text-gray-700">
-                          <li>• Instant generation</li>
-                          <li>• Personalized to you</li>
-                          <li>• AI-organized</li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Sample Note Preview */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="bg-white border-2 rounded-xl p-6 shadow-lg"
-                      style={{ borderColor: '#00B4D8' }}
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="font-bold text-lg text-black">Chemical Bonding - Your Notes</div>
-                        <div className="text-xs text-gray-500">Generated 2 mins ago</div>
-                      </div>
-
-                      <div className="space-y-4 text-sm">
-                        <div>
-                          <div className="font-semibold text-green-700 mb-2 flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4" />
-                            Strong Areas
-                          </div>
-                          <ul className="text-gray-700 space-y-1 ml-6">
-                            <li>• Ionic bonding formation</li>
-                            <li>• Simple molecular structures</li>
-                          </ul>
-                        </div>
-
-                        <div>
-                          <div className="font-semibold text-orange-600 mb-2 flex items-center gap-2">
-                            <AlertTriangle className="w-4 h-4" />
-                            Review This
-                          </div>
-                          <ul className="text-gray-700 space-y-1 ml-6">
-                            <li>• Metallic bonding (you got 2/5 questions wrong)</li>
-                            <li>• Intermolecular forces</li>
-                          </ul>
-                        </div>
-
-                        <div className="bg-gray-50 rounded-lg p-3">
-                          <div className="font-semibold text-black mb-2">Key Takeaways:</div>
-                          <p className="text-gray-700 leading-relaxed">
-                            Ionic bonds form between metals and non-metals through electron transfer. 
-                            You're struggling with metallic bonding - focus on the "sea of electrons" concept.
-                          </p>
-                        </div>
-
-                        <div className="text-xs" style={{ color: '#00B4D8' }}>
-                          📚 Suggested Practice: Questions 12-15, Topic 3.2
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Tab 3: Smart Planner */}
-            <div id="tab-planner" className="mb-20">
-              <div 
-                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
-                style={{ background: 'linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%)' }}
-              >
-                {/* Centered Intro */}
-                <div className="text-center mb-12">
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mx-auto mb-5" style={{ backgroundColor: '#FFEDD5' }}>
-                    📅
-                  </div>
-                  <h3 className="text-4xl font-bold text-black mb-4">
-                    Your week, perfectly planned
-                  </h3>
-                  <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                    Mentiora builds your study schedule automatically and adapts it in real-time. 
-                    If you're acing a topic, we move you forward. Struggling? We add targeted practice.
-                  </p>
-                </div>
-
-                {/* Weekly Planner Interface */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl p-8 shadow-2xl max-w-5xl mx-auto"
-                >
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-8 pb-4 border-b">
-                    <div className="font-bold text-lg">Your Adaptive Plan</div>
-                    <div className="flex items-center gap-4">
-                      <button className="text-gray-400 hover:text-black">←</button>
-                      <span className="font-semibold">Oct 14-20</span>
-                      <button className="text-gray-400 hover:text-black">→</button>
-                    </div>
-                    <div className="px-4 py-1.5 rounded-full text-sm font-bold text-white" style={{ backgroundColor: '#00B4D8' }}>
-                      2.5h total
-                    </div>
-                  </div>
-
-                  {/* Day Cards */}
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {/* Monday */}
-                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-green-500">
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="font-bold text-sm">Monday, Oct 14</div>
-                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
-                          45 min
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <div className="bg-white rounded-lg p-3 border border-gray-200">
-                          <div className="text-xs text-gray-500 mb-1">9:00 AM - Chemistry</div>
-                          <div className="font-semibold text-sm text-black mb-2">Ionic Bonding Practice</div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex gap-0.5">
-                              {[1, 2, 0].map((filled, i) => (
-                                <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
-                              ))}
-                            </div>
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-semibold">
-                              Completed ✓
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Tuesday - With Adaptation Badge */}
-                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 relative" style={{ borderLeftColor: '#00B4D8' }}>
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                      {item.title}
+                      <motion.span
+                        animate={{ rotate: expandedAccordion === index ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        ⚡ Plan adjusted!
+                        ▼
+                      </motion.span>
+                    </button>
+                    {expandedAccordion === index && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="px-6 pb-5"
+                      >
+                        <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                          {item.content}
+                        </p>
                       </motion.div>
-
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="font-bold text-sm">Tuesday, Oct 15</div>
-                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
-                          50 min
-                        </div>
-                      </div>
-                      
-                      <div className="bg-blue-50 rounded-lg p-3 border-2" style={{ borderColor: '#00B4D8' }}>
-                        <div className="text-xs text-gray-600 mb-1">6:30 PM - Biology</div>
-                        <div className="font-semibold text-sm text-black mb-2">Cell Structure Deep Dive</div>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex gap-0.5">
-                            {[1, 1, 1].map((filled, i) => (
-                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
-                            ))}
-                          </div>
-                          <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
-                            Up next
-                          </span>
-                        </div>
-                        <div className="text-xs text-gray-600 mt-2">🎯 Peak focus time</div>
-                      </div>
-                    </div>
-
-                    {/* Wednesday */}
-                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-orange-500">
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="font-bold text-sm">Wednesday, Oct 16</div>
-                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
-                          55 min
-                        </div>
-                      </div>
-                      
-                      <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
-                        <div className="text-xs text-gray-600 mb-1">4:00 PM - Computer Science</div>
-                        <div className="font-semibold text-sm text-black mb-2">Algorithms Deep Dive</div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex gap-0.5">
-                            {[1, 1, 1].map((filled, i) => (
-                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
-                            ))}
-                          </div>
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 font-semibold">
-                            Advanced
-                          </span>
-                        </div>
-                        <div className="text-xs text-gray-600 mt-2">You mastered basics faster</div>
-                      </div>
-                    </div>
+                    )}
                   </div>
-
-                  {/* Bottom Info */}
-                  <div className="mt-6 pt-6 border-t text-center">
-                    <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
-                      <span>🔄</span>
-                      <span>Plans adapt after every study session</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+                ))}
+              </motion.div>
+            )}
           </div>
 
           {/* Stats Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gray-50 rounded-3xl p-12 mt-20"
-          >
-            <h3 className="text-3xl font-bold text-black text-center mb-12">
-              Powered by real results
+          <div className="text-center mb-20">
+            <h3 className="text-3xl font-bold text-black mb-12">
+              The results speak for themselves
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { number: '92%', label: 'Prediction accuracy' },
-                { number: '14.7h', label: 'Avg time saved/month' },
-                { number: '+1.8', label: 'Grade improvement' },
-                { number: '50K+', label: 'Active students' }
+                { icon: '🎯', number: '92%', label: 'Prediction accuracy' },
+                { icon: '⚡', number: '14.7h', label: 'Avg time saved monthly' },
+                { icon: '📈', number: '+1.8', label: 'Grade improvement' },
+                { icon: '🔄', number: '1000+', label: 'Adaptations per student' }
               ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-5xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl mb-3">{stat.icon}</div>
+                  <div className="text-5xl font-black mb-2" style={{ color: '#00B4D8' }}>
                     {stat.number}
                   </div>
                   <div className="text-base text-gray-600">{stat.label}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Final CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-16 rounded-3xl p-12 text-center shadow-xl"
+            className="rounded-3xl p-12 text-center shadow-xl max-w-3xl mx-auto"
             style={{ background: 'linear-gradient(90deg, #00B4D8, #0284C7)' }}
           >
-            <h3 className="text-4xl font-bold text-white mb-4">
-              Experience intelligent learning
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Ready for learning that adapts to you?
             </h3>
-            <p className="text-xl text-white/90 mb-8">
-              Try all three features free for 14 days
+            <p className="text-lg text-white/90 mb-8">
+              Join 50,000+ students experiencing personalized AI learning
             </p>
             <Button
               size="lg"
               onClick={() => navigate(user ? '/dashboard' : '/register')}
-              className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-7 rounded-full hover:scale-105 transition-all"
+              className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-6 rounded-full hover:scale-105 transition-all"
               style={{ color: '#00B4D8' }}
             >
-              Start free trial
+              Start your free trial
             </Button>
             <p className="text-sm text-white/80 mt-4">
-              No credit card • Cancel anytime
+              No credit card • Setup in 60 seconds
             </p>
           </motion.div>
         </div>
