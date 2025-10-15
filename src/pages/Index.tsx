@@ -778,7 +778,7 @@ const Index = () => {
       </section>
 
       {/* DASHBOARD PREVIEW SECTION */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6" style={{ backgroundColor: '#F8FAFC' }}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
@@ -788,146 +788,332 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              Intelligence that adapts to <span style={{ color: '#0BA5E9' }}>you</span>
+              Everything you need, <span style={{ color: '#0BA5E9' }}>personalised</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mentiora analyzes your learning in real-time to predict grades, save time, and create personalized notes
+              Mentiora learns from every question you answer to create your unique learning experience
             </p>
           </motion.div>
 
-          {/* Unified Dashboard Preview */}
+          {/* Dashboard Preview */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Card className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl shadow-xl border-0 overflow-hidden">
-              <CardContent className="p-0">
-                <div className="grid lg:grid-cols-[1.2fr_1fr] gap-0">
-                  {/* Left Side - Main Analytics */}
-                  <div className="p-8 lg:p-12">
-                    <div className="mb-8">
-                      <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm mb-6">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                        <span className="text-sm font-semibold text-gray-700">Live Analysis</span>
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+              {/* Dashboard Header */}
+              <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-8 py-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-1">Your Dashboard</h3>
+                    <p className="text-gray-300 text-sm">Personalised insights updated in real-time</p>
+                  </div>
+                  <div className="flex items-center gap-2 bg-green-500/20 rounded-full px-4 py-2">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                    <span className="text-sm font-semibold text-green-300">Live</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Dashboard Content */}
+              <div className="p-8">
+                {/* Top Metrics Row */}
+                <div className="grid md:grid-cols-4 gap-4 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#0BA5E9' }}>
+                        <TrendingUp className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-3xl font-bold text-black mb-2">Your Performance Dashboard</h3>
-                      <p className="text-gray-600">Updated in real-time as you study</p>
+                      <span className="text-xs font-bold text-gray-600">PREDICTED GRADE</span>
                     </div>
-
-                    {/* Key Metrics Grid */}
-                    <div className="grid grid-cols-2 gap-4 mb-8">
-                      <div className="bg-white rounded-2xl p-6 shadow-sm">
-                        <div className="flex items-center gap-2 mb-3">
-                          <TrendingUp className="w-5 h-5" style={{ color: '#0BA5E9' }} />
-                          <span className="text-xs font-semibold text-gray-500">PREDICTED GRADE</span>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-4xl font-bold text-black">7</span>
-                          <span className="text-lg text-green-600 font-semibold">↑ from 5</span>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-2">Based on 50+ data points</p>
-                      </div>
-
-                      <div className="bg-white rounded-2xl p-6 shadow-sm">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Clock className="w-5 h-5 text-green-600" />
-                          <span className="text-xs font-semibold text-gray-500">TIME SAVED</span>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-4xl font-bold text-black">12.5</span>
-                          <span className="text-lg text-gray-600">hrs</span>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-2">This month vs manual study</p>
-                      </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-4xl font-bold" style={{ color: '#0BA5E9' }}>7</span>
+                      <span className="text-lg text-green-600 font-bold">↑2</span>
                     </div>
+                    <p className="text-xs text-gray-600">Biology GCSE</p>
+                  </motion.div>
 
-                    {/* How it works breakdown */}
-                    <div className="bg-white rounded-2xl p-6 shadow-sm">
-                      <h4 className="text-sm font-bold text-gray-700 mb-4">HOW WE PREDICT YOUR GRADES</h4>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-xs font-bold text-gray-600">TIME SAVED</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-4xl font-bold text-green-600">12.5</span>
+                      <span className="text-lg text-gray-600">hrs</span>
+                    </div>
+                    <p className="text-xs text-gray-600">This month</p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center">
+                        <Brain className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-xs font-bold text-gray-600">RETENTION</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-4xl font-bold text-purple-600">87</span>
+                      <span className="text-lg text-gray-600">%</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Accuracy rate</p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
+                        <BookOpen className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-xs font-bold text-gray-600">AUTO NOTES</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-4xl font-bold text-orange-500">64</span>
+                      <span className="text-lg text-gray-600">/78</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Topics covered</p>
+                  </motion.div>
+                </div>
+
+                {/* Main Content Grid */}
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {/* Left Column - Predicted Performance */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="lg:col-span-2 space-y-6"
+                  >
+                    {/* Grade Prediction Algorithm */}
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
+                      <h4 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                        <Target className="w-5 h-5" style={{ color: '#0BA5E9' }} />
+                        How we predict your grades
+                      </h4>
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>1</div>
                           <div className="flex-1">
-                            <div className="text-sm font-medium text-black">Practice accuracy tracking</div>
-                            <div className="text-xs text-gray-500">87% across 234 questions</div>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-semibold text-black">Practice accuracy</span>
+                              <span className="text-sm font-bold" style={{ color: '#0BA5E9' }}>87%</span>
+                            </div>
+                            <div className="w-full bg-white rounded-full h-2">
+                              <motion.div
+                                className="h-full rounded-full"
+                                style={{ backgroundColor: '#0BA5E9' }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: '87%' }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, delay: 0.5 }}
+                              />
+                            </div>
                           </div>
                         </div>
+
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>2</div>
                           <div className="flex-1">
-                            <div className="text-sm font-medium text-black">Topic coverage analysis</div>
-                            <div className="text-xs text-gray-500">64/78 syllabus topics completed</div>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-semibold text-black">Topic coverage</span>
+                              <span className="text-sm font-bold" style={{ color: '#0BA5E9' }}>82%</span>
+                            </div>
+                            <div className="w-full bg-white rounded-full h-2">
+                              <motion.div
+                                className="h-full rounded-full"
+                                style={{ backgroundColor: '#0BA5E9' }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: '82%' }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, delay: 0.7 }}
+                              />
+                            </div>
                           </div>
                         </div>
+
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>3</div>
                           <div className="flex-1">
-                            <div className="text-sm font-medium text-black">Weak area improvement rate</div>
-                            <div className="text-xs text-gray-500">+23% in last 2 weeks</div>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-semibold text-black">Weak areas improving</span>
+                              <span className="text-sm font-bold text-green-600">+23%</span>
+                            </div>
+                            <div className="w-full bg-white rounded-full h-2">
+                              <motion.div
+                                className="h-full rounded-full bg-green-500"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: '78%' }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, delay: 0.9 }}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Right Side - Auto Notes & Features */}
-                  <div className="bg-white lg:border-l border-gray-200 p-8 lg:p-12">
-                    <div className="mb-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <BookOpen className="w-5 h-5 text-orange-500" />
-                        <h4 className="text-lg font-bold text-black">Auto-Generated Notes</h4>
-                      </div>
-                      <p className="text-sm text-gray-600">Curriculum-aligned, exam-focused</p>
-                    </div>
-
-                    {/* Sample notes */}
-                    <div className="space-y-3 mb-8">
-                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-100">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">1</div>
-                          <span className="text-xs font-semibold text-gray-600">PHOTOSYNTHESIS</span>
+                    {/* Personalized Learning Path */}
+                    <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                      <h4 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                        <Target className="w-5 h-5 text-purple-600" />
+                        Your personalized learning path
+                      </h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-200">
+                          <div className="flex items-center gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-green-600" />
+                            <div>
+                              <div className="text-sm font-bold text-black">Photosynthesis</div>
+                              <div className="text-xs text-gray-600">Mastered • 94% accuracy</div>
+                            </div>
+                          </div>
+                          <div className="text-xs font-bold text-green-600">Strong</div>
                         </div>
-                        <p className="text-xs text-gray-700 leading-relaxed">
-                          Light energy is <span className="font-bold text-black">absorbed</span> by chlorophyll...
-                        </p>
-                      </div>
 
-                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-100">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">2</div>
-                          <span className="text-xs font-semibold text-gray-600">LIMITING FACTORS</span>
+                        <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl border border-blue-200">
+                          <div className="flex items-center gap-3">
+                            <Target className="w-5 h-5" style={{ color: '#0BA5E9' }} />
+                            <div>
+                              <div className="text-sm font-bold text-black">Cell division</div>
+                              <div className="text-xs text-gray-600">In progress • 67% accuracy</div>
+                            </div>
+                          </div>
+                          <div className="text-xs font-bold" style={{ color: '#0BA5E9' }}>Focus</div>
                         </div>
-                        <p className="text-xs text-gray-700 leading-relaxed">
-                          Rate determined by <span className="font-bold text-black">lowest</span> available resource...
-                        </p>
-                      </div>
 
-                      <div className="text-center py-2">
-                        <span className="text-xs font-semibold text-orange-600">+ 12 more topics generated</span>
+                        <div className="flex items-center justify-between p-4 bg-orange-50 rounded-xl border border-orange-200">
+                          <div className="flex items-center gap-3">
+                            <AlertTriangle className="w-5 h-5 text-orange-500" />
+                            <div>
+                              <div className="text-sm font-bold text-black">Genetics</div>
+                              <div className="text-xs text-gray-600">Needs work • 45% accuracy</div>
+                            </div>
+                          </div>
+                          <div className="text-xs font-bold text-orange-600">Weak</div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Right Column - Auto Notes & Features */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-6"
+                  >
+                    {/* Auto Generated Notes */}
+                    <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100">
+                      <h4 className="text-sm font-bold text-gray-700 mb-4 flex items-center gap-2">
+                        <BookOpen className="w-4 h-4 text-orange-500" />
+                        AUTO NOTES
+                      </h4>
+                      <div className="space-y-2">
+                        <div className="bg-white rounded-lg p-3 shadow-sm">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-4 h-4 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">1</div>
+                            <span className="text-xs font-bold text-gray-700">Photosynthesis</span>
+                          </div>
+                          <p className="text-xs text-gray-600 leading-relaxed">
+                            Light energy <span className="font-bold text-black">absorbed</span> by chlorophyll...
+                          </p>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-3 shadow-sm">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-4 h-4 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">2</div>
+                            <span className="text-xs font-bold text-gray-700">Limiting factors</span>
+                          </div>
+                          <p className="text-xs text-gray-600 leading-relaxed">
+                            Rate determined by <span className="font-bold text-black">lowest</span> resource...
+                          </p>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-3 shadow-sm opacity-50">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-4 h-4 rounded bg-gray-300 flex items-center justify-center text-white text-xs font-bold">3</div>
+                            <span className="text-xs font-bold text-gray-500">Glucose uses</span>
+                          </div>
+                        </div>
+
+                        <div className="text-center pt-2">
+                          <span className="text-xs font-bold text-orange-600">+ 61 more topics</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Additional features */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 text-sm">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-700">Instant feedback on every answer</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-sm">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-700">Smart question targeting</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-sm">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-700">Adaptive learning path</span>
+                    {/* Time Saved Breakdown */}
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                      <h4 className="text-sm font-bold text-gray-700 mb-4 flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-green-600" />
+                        TIME BREAKDOWN
+                      </h4>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-700">Auto notes</span>
+                          <span className="text-sm font-bold text-green-600">4.2 hrs</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-700">Smart targeting</span>
+                          <span className="text-sm font-bold text-green-600">5.8 hrs</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-700">Instant feedback</span>
+                          <span className="text-sm font-bold text-green-600">2.5 hrs</span>
+                        </div>
+                        <div className="pt-3 border-t border-green-200">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-gray-700">Total saved</span>
+                            <span className="text-lg font-bold text-green-600">12.5 hrs</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+
+                    {/* Best Study Time */}
+                    <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                      <h4 className="text-sm font-bold text-gray-700 mb-4 flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-purple-600" />
+                        OPTIMAL TIME
+                      </h4>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-purple-600 mb-1">6-8pm</div>
+                        <p className="text-xs text-gray-600">You perform best in the evening</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
