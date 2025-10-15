@@ -260,75 +260,68 @@ const Pricing = () => {
             </div>
 
             {/* Right Column - Email Coming Out of Envelope */}
-            <div className="relative flex items-center justify-center pt-8">
-              <div className="relative w-full max-w-sm">
-                {/* Email Card - appears to slide out */}
-                <div className="relative z-20 bg-white rounded-lg shadow-2xl border-2 border-gray-300 overflow-hidden transform -mb-12">
-                  {/* Email Header Bar */}
-                  <div className="bg-gradient-to-r from-[#00A8FF] to-[#0096E6] px-4 py-2 flex items-center gap-2">
-                    <div className="w-6 h-6 bg-white/30 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                      M
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-white font-semibold text-xs">Mentiora</div>
-                      <div className="text-white/70 text-[10px]">hello@mentiora.com</div>
-                    </div>
-                  </div>
-
-                  {/* Email Content */}
-                  <div className="p-4 bg-white">
-                    <div className="text-[10px] text-gray-500 mb-1">To: Parent/Guardian</div>
-                    <div className="text-xs font-bold text-gray-900 mb-3">
+            <div className="relative flex items-center justify-center">
+              <div className="relative w-full max-w-md">
+                {/* Email Letter - slides out from top */}
+                <div className="relative z-20 bg-white rounded-t-xl shadow-2xl border border-gray-200 p-6 mb-[-30px]">
+                  <div className="mb-3">
+                    <div className="text-sm font-bold text-gray-900 mb-1">
                       Help Your Child Get Through GCSEs
                     </div>
+                    <div className="text-[10px] text-gray-500 mb-3">
+                      Dear parent or guardian,
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 text-[10px] text-gray-700 leading-relaxed">
+                    <p>Your child has expressed interest in using Medly AI to prepare for their GCSE studies. Medly AI provides 1:1 personalised learning through individualisation.</p>
                     
-                    <div className="space-y-2 text-[10px] text-gray-700 leading-relaxed">
-                      <p className="text-gray-600">Dear parent or guardian,</p>
-                      <p>Your child has expressed interest in using Mently AI to prepare for their GCSE studies...</p>
-                      
-                      <div className="space-y-1">
-                        <div className="flex items-start gap-1.5">
-                          <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                          <span>2,500+ exam-style questions</span>
-                        </div>
-                        <div className="flex items-start gap-1.5">
-                          <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                          <span>AI marking and tutoring</span>
-                        </div>
-                        <div className="flex items-start gap-1.5">
-                          <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                          <span>Mock predicted papers</span>
-                        </div>
+                    <div className="space-y-1 pl-1">
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span>Unlimited access to over 10 exam-style questions for every nook and cranny of their exam towards ...</span>
                       </div>
-                      
-                      <div className="pt-2 mt-2 border-t border-gray-100 text-center">
-                        <span className="text-[#00A8FF] font-medium">mently.app/get-parent</span>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span>Instead of copying and listening to dry voiceovers, learn with AI by asking questions, practising exam-board</span>
                       </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span>24/7 step by step tutoring that builds your child&apos;s subject understanding and exam confidence</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span>20+ timed mock predicted papers per subject</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                        <span>Comprehensive and concise notes from each topic on their curriculum</span>
+                      </div>
+                    </div>
+                    
+                    <p className="pt-1">Exam-focused preparation aligned with upcoming exams</p>
+                    
+                    <div className="mt-3 pt-2 border-t border-gray-100 text-center">
+                      <span className="text-[10px] text-gray-400">mently.app/get-parent</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Envelope */}
-                <div className="relative z-10 bg-gradient-to-b from-blue-100 to-blue-200 rounded-lg shadow-xl p-8 pt-16">
-                  {/* Envelope flap */}
-                  <div className="absolute top-0 left-0 right-0 h-16 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 flex">
-                      {/* Left flap triangle */}
-                      <div 
-                        className="w-0 h-0 border-l-[200px] border-l-transparent border-t-[64px] border-t-blue-300"
-                      />
-                      {/* Right flap triangle */}
-                      <div 
-                        className="w-0 h-0 border-r-[200px] border-r-transparent border-t-[64px] border-t-blue-300"
-                      />
-                    </div>
+                <div className="relative z-10 bg-gradient-to-b from-gray-100 via-gray-50 to-white rounded-b-xl shadow-xl overflow-hidden">
+                  {/* Envelope flap - open V shape */}
+                  <div className="relative h-24">
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+                      {/* Left flap */}
+                      <path d="M 0,0 L 200,80 L 200,0 Z" fill="#e8e8e8" stroke="#d4d4d4" strokeWidth="1"/>
+                      {/* Right flap */}
+                      <path d="M 400,0 L 200,80 L 200,0 Z" fill="#f0f0f0" stroke="#d4d4d4" strokeWidth="1"/>
+                    </svg>
                   </div>
                   
-                  {/* Envelope address lines decoration */}
-                  <div className="space-y-2 opacity-30">
-                    <div className="h-2 bg-blue-400 rounded w-3/4"></div>
-                    <div className="h-2 bg-blue-400 rounded w-1/2"></div>
-                    <div className="h-2 bg-blue-400 rounded w-2/3"></div>
+                  {/* Envelope body */}
+                  <div className="bg-gradient-to-b from-gray-50 to-gray-100 px-8 py-12 rounded-b-xl">
+                    <div className="opacity-0">Placeholder</div>
                   </div>
                 </div>
               </div>
