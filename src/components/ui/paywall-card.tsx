@@ -2,7 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Lock, Crown, Sparkles, Star, Zap, Trophy, TrendingUp, Brain, Target, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { PricingModal } from "./pricing-modal";
 
 interface PaywallCardProps {
   title: string;
@@ -75,14 +76,16 @@ const getThemeConfig = (theme: 'grades' | 'questions' | 'notebook' = 'grades') =
 
 export const PaywallCard = ({ title, description, onUpgrade, children, theme = 'grades', benefits = [] }: PaywallCardProps) => {
   const config = getThemeConfig(theme);
-  const navigate = useNavigate();
+  const [showPricing, setShowPricing] = useState(false);
   
   const handleUpgrade = () => {
-    navigate('/pricing');
+    setShowPricing(true);
   };
 
   return (
-    <Card className={`relative overflow-hidden border-0 bg-gradient-to-br ${config.gradients.main} shadow-2xl`}>
+    <>
+      <PricingModal open={showPricing} onOpenChange={setShowPricing} />
+      <Card className={`relative overflow-hidden border-0 bg-gradient-to-br ${config.gradients.main} shadow-2xl`}>
       {/* Animated background gradient */}
       <div className={`absolute inset-0 bg-gradient-to-br ${config.gradients.bg} animate-pulse`} />
       
@@ -263,5 +266,6 @@ export const PaywallCard = ({ title, description, onUpgrade, children, theme = '
         </div>
       </CardContent>
     </Card>
+    </>
   );
 };
