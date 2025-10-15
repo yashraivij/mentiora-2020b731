@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { 
   ArrowRight, 
@@ -9,439 +9,696 @@ import {
   TrendingUp,
   Calendar,
   Brain,
-  Home,
-  Trophy,
-  Flame
+  Clock,
+  CheckCircle2,
+  AlertTriangle,
+  Laptop,
+  FlaskConical,
+  Dna,
+  Crown,
+  Menu,
+  X
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { useState } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation - matches dashboard nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b">
-        <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+    <div className="min-h-screen bg-white">
+      {/* NAVIGATION */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <img 
               src={mentioraLogo} 
               alt="Mentiora" 
               className="h-8 w-8"
             />
-            <span className="text-lg font-semibold text-foreground">
-              Mentiora
+            <span className="text-xl font-bold text-black flex items-center">
+              Ment<Crown className="w-4 h-4 text-yellow-500 -mt-2" />ora
             </span>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => navigate("/pricing")} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={() => navigate("/pricing")} className="text-base text-gray-600 hover:text-black transition-colors">
               Pricing
             </button>
+            <button className="text-base text-gray-600 hover:text-black transition-colors">
+              About us
+            </button>
+            <button className="text-base text-gray-600 hover:text-black transition-colors">
+              GCSE Results Day 2025
+            </button>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <Button onClick={() => navigate("/dashboard")} className="premium-button shadow-lg">
+              <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#0BA5E9' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
               </Button>
             ) : (
               <>
-                <Button onClick={() => navigate("/login")} variant="ghost" size="sm">
+                <Button onClick={() => navigate("/login")} variant="ghost" className="text-gray-600 hover:text-black">
                   Login
                 </Button>
                 <Button 
                   onClick={() => navigate("/register")} 
-                  size="sm" 
-                  className="premium-button shadow-lg"
+                  style={{ backgroundColor: '#0BA5E9' }}
+                  className="text-white px-6 rounded-lg font-semibold hover:opacity-90"
                 >
-                  Start Free Trial
+                  Try Mentiora
                 </Button>
               </>
             )}
           </div>
+
+          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
         </div>
       </nav>
 
-      {/* Hero Section - Dashboard Style */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-8"
-            >
-              <div className="space-y-6">
-                <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-foreground leading-tight">
-                  Your revision, finally made{" "}
-                  <span className="text-gradient-primary">
-                    personal
-                  </span>
-                </h1>
-                
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  The GCSE & A-Level tutor built around you — Mentiora adapts to your goals, strengths, and progress.
-                </p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate(user ? '/dashboard' : '/register')}
-                  className="premium-button shadow-lg hover:shadow-xl transition-all"
-                >
-                  Start Free Trial <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={() => navigate('/dashboard')}
-                  className="hover:bg-muted/50"
-                >
-                  Explore Dashboard
-                </Button>
-              </div>
+      {/* HERO SECTION */}
+      <section className="relative pt-20 pb-24 px-6 bg-white">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUp}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Partner Logos */}
+            <div className="flex items-center justify-center gap-12 mb-16 opacity-60">
+              <div className="text-sm font-medium text-gray-500">Microsoft for Startups</div>
+              <div className="text-sm font-medium text-gray-500 bg-purple-600 text-white px-3 py-1">UKRI Innovate UK</div>
+              <div className="text-sm font-medium text-gray-500">Google for Startups</div>
+            </div>
 
-              <p className="text-sm text-muted-foreground">
-                No credit card required
-              </p>
+            {/* Headline */}
+            <h1 className="text-6xl md:text-7xl font-extrabold text-black leading-tight mb-6 tracking-tight">
+              Your revision, finally<br />
+              <span style={{ color: '#0BA5E9' }}>made personal</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+              Mentiora AI teaches you how to answer every question
+              in your exams to get full marks.
+            </p>
+
+            {/* CTA Button */}
+            <Button 
+              size="lg"
+              onClick={() => navigate(user ? '/dashboard' : '/register')}
+              style={{ 
+                backgroundColor: '#0BA5E9',
+                boxShadow: '0px 4px 12px rgba(11, 165, 233, 0.3)'
+              }}
+              className="text-white text-lg font-semibold px-12 py-6 rounded-full hover:scale-105 transition-all mb-3"
+            >
+              Try now for free
+            </Button>
+
+            <p className="text-sm text-gray-400">No credit card required</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SUBJECT CARDS SECTION */}
+      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {[
+              {
+                icon: "📐",
+                title: "GCSE Maths",
+                description: "Get step-by-step guidance to solve maths problems.",
+              },
+              {
+                icon: "✏️",
+                title: "GCSE English",
+                description: "Learn how to structure your answers for each question.",
+              },
+              {
+                icon: "🔬",
+                title: "GCSE Science",
+                description: "Apply your knowledge in 'Explain', and 'Suggest' questions.",
+              }
+            ].map((subject, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+              >
+                <Card className="bg-white rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full">
+                  <CardContent className="p-10">
+                    <div className="text-5xl mb-6">{subject.icon}</div>
+                    <h3 className="text-2xl font-bold text-black mb-4">{subject.title}</h3>
+                    <p className="text-base text-gray-600 leading-relaxed mb-6">{subject.description}</p>
+                    <button 
+                      style={{ color: '#0BA5E9' }}
+                      className="font-semibold text-base hover:underline inline-flex items-center group"
+                    >
+                      Try it now 
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* EXAMPLE QUESTION SECTION */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left - Example Question */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+            >
+              <Card className="border border-gray-200 rounded-2xl shadow-md">
+                <CardContent className="p-8">
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="text-sm font-bold text-black">Example English Question</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm text-gray-500">4 marks</span>
+                      <button className="text-xs border border-gray-300 px-3 py-1 rounded-md">
+                        Medly solve together
+                      </button>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-black mb-5">
+                    The Hidden Underground - London's Lost River Fleet
+                  </h3>
+
+                  <div className="text-sm text-gray-700 leading-loose space-y-4 mb-6">
+                    <p>
+                      Sarah Chen adjusted her headlamp as she descended into the darkness, 
+                      the beam cutting through the damp air like a searchlight. The forgotten 
+                      tunnel beneath London stretched ahead, its Victorian brickwork still 
+                      remarkably intact after 150 years.
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-900 h-40 rounded-lg mb-6 flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Tunnel Image</span>
+                  </div>
+
+                  <div className="text-sm text-gray-700 leading-relaxed mb-6">
+                    <p className="mb-3">
+                      <strong>Read again the first part of the source, from lines 1 to 4.</strong>
+                    </p>
+                    <p>
+                      List four things about Sarah Chen from this part of the source.
+                    </p>
+                  </div>
+
+                  <textarea 
+                    placeholder="Your answer"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm resize-none"
+                    rows={5}
+                  />
+                </CardContent>
+              </Card>
             </motion.div>
 
-            {/* Right: Dashboard Preview - Real Card Style */}
+            {/* Right - Try Medly Card */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              transition={{ delay: 0.2 }}
             >
-              <div className="premium-card rounded-2xl p-8 shadow-lg space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b">
-                  <h3 className="text-lg font-semibold text-foreground">Your Subjects</h3>
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-muted"></div>
-                    <div className="w-3 h-3 rounded-full bg-muted"></div>
-                    <div className="w-3 h-3 rounded-full bg-primary"></div>
-                  </div>
-                </div>
-                
-                {/* Subject Cards - Exactly like dashboard */}
-                <div className="space-y-4">
-                  {[
-                    { subject: "Mathematics", grade: "8", retention: "85%", hours: "12.5h" },
-                    { subject: "Biology", grade: "7", retention: "78%", hours: "9.2h" },
-                    { subject: "Chemistry", grade: "7", retention: "72%", hours: "8.8h" }
-                  ].map((item, i) => (
-                    <div key={i} className="premium-card p-4 rounded-xl hover-lift cursor-pointer">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-medium text-foreground">{item.subject}</span>
-                        <span className="text-sm font-semibold text-primary">Grade {item.grade}</span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <TrendingUp className="w-3 h-3" />
-                          <span>Retention {item.retention}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          <span>{item.hours}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <Card className="bg-black rounded-2xl">
+                <CardContent className="p-10">
+                  <h3 className="text-3xl font-bold text-white mb-3">Try Medly now</h3>
+                  <p className="text-base text-gray-300 mb-8">
+                    Let's try answering a question together!
+                  </p>
+                  <Button 
+                    style={{ backgroundColor: '#0BA5E9' }}
+                    className="w-full text-white text-base font-semibold py-3 rounded-lg hover:opacity-90"
+                  >
+                    Okay
+                  </Button>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Features Grid - Dashboard Card Style */}
-      <section className="py-20 px-6 bg-muted/30">
+      {/* UNLIKE ANY OTHER APP SECTION */}
+      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
         <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            variants={fadeInUp}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-6">
-              Everything you need to excel
+            <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
+              Unlike any other app<br />
+              A <span style={{ color: '#0BA5E9' }}>personalised AI tutor</span>.
             </h2>
-            <p className="text-xl text-muted-foreground">
-              From personalized plans to real-time tracking — all in one place
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Mentiora AI teaches you how to answer every question
+              in your exams to get full marks.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-10"
+          >
             {[
               {
-                icon: Target,
-                title: "Predicted Grades",
-                description: "See your predicted grade for every subject in real-time",
-                stats: "Grade 8 →",
+                icon: "📕",
+                title: "Your Personal Tutor",
+                description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div style={{ backgroundColor: '#0BA5E9' }} className="rounded-lg p-3 mb-4 text-white text-sm">
+                      Hi Medly, What did this question mean by potential energy?
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="font-bold text-sm mb-2">Potential energy</p>
+                      <p className="text-xs text-gray-700 leading-relaxed">
+                        When a liquid turns into a solid, the particles lose energy and move closer together...
+                      </p>
+                    </div>
+                  </div>
+                )
               },
               {
-                icon: TrendingUp,
-                title: "Retention Tracking",
-                description: "Monitor how much you're retaining from each topic",
-                stats: "85% avg",
+                icon: "📝",
+                title: "Your Exam Guide",
+                description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="border-b border-gray-200 pb-2 mb-3">
+                      <div className="font-semibold text-sm">Unit 1: Cell Biology</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div style={{ color: '#0BA5E9', backgroundColor: '#E0F2FE' }} className="text-sm px-3 py-2 rounded">
+                        Eukaryotes and prokaryoti...
+                      </div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Animal and plant cells</div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Cell specialisation</div>
+                    </div>
+                  </div>
+                )
               },
               {
-                icon: Calendar,
-                title: "Study Time",
-                description: "Track your focus hours and optimize your schedule",
-                stats: "12.5h this week",
-              },
-              {
-                icon: BookOpen,
-                title: "Smart Notebook",
-                description: "AI-generated notes that adapt to your learning style",
-                stats: "24 entries",
+                icon: "🏃",
+                title: "Your Examiner",
+                description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="font-semibold text-sm mb-4">Your marks awarded</div>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Leaves become damaged</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Less chloroplasts</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4" />
+                        <span className="text-sm text-gray-400">Less photosynthesis</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700">
+                      You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
+                    </div>
+                  </div>
+                )
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                variants={fadeInUp}
               >
-                <Card className="premium-card hover-lift h-full">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <feature.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-                    </div>
-                    <div className="pt-2 border-t">
-                      <span className="text-xs font-medium text-primary">{feature.stats}</span>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="text-5xl mb-6">{feature.icon}</div>
+                <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
+                <p className="text-base text-gray-600 leading-relaxed">{feature.description}</p>
+                {feature.visual}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Dashboard Preview Section */}
-      <section className="py-20 px-6 bg-background">
+      {/* CURRICULUM COVERAGE SECTION */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
+              The only AI tutor that's<br />
+              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
+            </h2>
+            <p className="text-lg text-gray-600">
+              Other AI tutoring platforms are not based on Exam Board Curriculums.<br />
+              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline">Request it here</button>.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-4 gap-8"
+          >
+            {[
+              {
+                title: "GCSE",
+                board: "AQA",
+                subjects: ["Biology", "Chemistry", "Physics", "Computer Science", "English", "Maths", "Geography"]
+              },
+              {
+                title: "IGCSE",
+                board: "CIE",
+                subjects: ["Biology", "Chemistry", "Physics", "Computer Science", "Economics", "Geography", "History"]
+              },
+              {
+                title: "A-Level",
+                board: "AQA",
+                subjects: ["Biology", "Chemistry", "Physics", "Maths", "Computer Science", "Economics", "Psychology"]
+              },
+              {
+                title: "IB",
+                board: "International Baccalaureate",
+                subjects: ["Biology", "Chemistry", "Physics", "Economics", "Maths AA", "Maths AI", "Psychology"]
+              }
+            ].map((column, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <h3 className="text-3xl font-bold text-black mb-2">{column.title}</h3>
+                <p className="text-base text-gray-500 mb-6">{column.board}</p>
+                <div className="flex flex-wrap gap-2">
+                  {column.subjects.map((subject, i) => (
+                    <span 
+                      key={i}
+                      className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
+                    >
+                      {subject}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* PRICING SECTION */}
+      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
+              Personalised tutoring<br />
+              <span style={{ color: '#0BA5E9' }}>at a fraction of the cost</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Trained to be more effective than personal tutoring,
+              at just 5% of the cost of private tuition.
+            </p>
+          </motion.div>
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
+              variants={fadeInUp}
             >
-              <h2 className="text-4xl md:text-5xl font-semibold text-foreground">
-                Your progress, visualized
-              </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Track your performance across all subjects with real-time insights and personalized recommendations.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <TrendingUp className="w-4 h-4 text-primary" />
+              <h3 className="text-3xl font-bold mb-6" style={{ color: '#0BA5E9' }}>
+                68% grade improvement
+              </h3>
+              <Card className="bg-white rounded-2xl shadow-lg">
+                <CardContent className="p-10">
+                  <div className="h-64 flex items-center justify-center text-gray-400">
+                    [Grade Improvement Graph]
                   </div>
-                  <p className="text-muted-foreground">See predicted grades update as you study</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Target className="w-4 h-4 text-primary" />
-                  </div>
-                  <p className="text-muted-foreground">Identify weak topics automatically</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Calendar className="w-4 h-4 text-primary" />
-                  </div>
-                  <p className="text-muted-foreground">Get personalized weekly study plans</p>
-                </div>
-              </div>
-              <Button 
-                size="lg"
-                onClick={() => navigate(user ? '/dashboard' : '/register')}
-                className="premium-button shadow-lg"
-              >
-                See Your Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                </CardContent>
+              </Card>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              variants={fadeInUp}
+              transition={{ delay: 0.2 }}
+              className="space-y-5"
             >
-              <div className="premium-card rounded-2xl p-8 shadow-lg">
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-6">Performance Overview</h3>
-                  
-                  {/* Progress bars like dashboard */}
-                  <div className="space-y-4">
-                    {[
-                      { subject: "Mathematics", score: 85, color: "bg-primary" },
-                      { subject: "English", score: 78, color: "bg-primary" },
-                      { subject: "Science", score: 72, color: "bg-primary" }
-                    ].map((item, i) => (
-                      <div key={i} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-foreground font-medium">{item.subject}</span>
-                          <span className="text-muted-foreground">{item.score}%</span>
-                        </div>
-                        <div className="relative h-2 bg-muted rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${item.score}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: i * 0.2 }}
-                            className={`h-full ${item.color} rounded-full`}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+              <div className="bg-gray-100 rounded-xl p-8">
+                <div className="text-4xl font-bold text-black">£500/month</div>
+                <div className="text-sm text-gray-500 mt-1">Personal tutoring</div>
+              </div>
+
+              <div className="bg-white rounded-xl p-8 shadow-lg border-2 relative" style={{ borderColor: '#0BA5E9' }}>
+                <div className="absolute -top-3 right-6 px-4 py-1 rounded-md text-xs font-semibold text-white" style={{ backgroundColor: '#0BA5E9' }}>
+                  95% cheaper than private tutoring
                 </div>
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-5xl font-extrabold text-black">£24.99</span>
+                  <span className="text-2xl font-semibold text-gray-500">/month</span>
+                </div>
+                <img src={mentioraLogo} alt="Mentiora" className="h-8" />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section - Dashboard Card Style */}
-      <section className="py-20 px-6 bg-muted/30">
+      {/* DASHBOARD PREVIEW SECTION */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            variants={fadeInUp}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-6">
-              Trusted by students nationwide
+            <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
+              Track your progress with<br />
+              <span style={{ color: '#0BA5E9' }}>real-time insights</span>
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Join thousands of GCSE & A-Level students improving their grades
-            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { value: "30,000+", label: "Active Students", icon: Trophy },
-              { value: "85%", label: "Improved Grades", icon: TrendingUp },
-              { value: "500k+", label: "Questions Completed", icon: Brain }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Card className="premium-card text-center">
-                  <CardContent className="p-8 space-y-4">
-                    <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center">
-                      <stat.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-4xl font-bold text-foreground">{stat.value}</p>
-                      <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section - Dashboard Style */}
-      <section className="py-24 px-6 bg-background">
-        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="premium-card rounded-3xl p-12 text-center shadow-xl"
+            variants={staggerContainer}
           >
-            <div className="space-y-6">
-              <div className="w-16 h-16 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center">
-                <Flame className="w-8 h-8 text-primary" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-semibold text-foreground">
-                Start your revision journey today
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Join thousands of students using Mentiora to achieve their target grades
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button 
-                  size="lg"
-                  onClick={() => navigate(user ? '/dashboard' : '/register')}
-                  className="premium-button shadow-lg text-lg px-8 py-6"
-                >
-                  Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
-              <p className="text-sm text-muted-foreground">No credit card required</p>
+            {/* Metrics Cards */}
+            <div className="grid md:grid-cols-4 gap-4 mb-8">
+              {[
+                { icon: Target, label: "OVERALL PROGRESS", value: "0 → 0", color: '#0BA5E9' },
+                { icon: Brain, label: "RETENTION", value: "14%", color: '#10B981' },
+                { icon: Clock, label: "YOU PERFORM BEST AT", value: "6–8pm", color: '#F59E0B' },
+                { icon: Calendar, label: "THIS WEEK", value: "5h 45m", color: '#0BA5E9' }
+              ].map((metric, i) => (
+                <motion.div key={i} variants={fadeInUp}>
+                  <Card className="bg-white rounded-xl shadow-sm">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: `${metric.color}20` }}>
+                          <metric.icon className="w-5 h-5" style={{ color: metric.color }} />
+                        </div>
+                      </div>
+                      <div className="text-xs font-semibold text-gray-500 mb-2">{metric.label}</div>
+                      <div className="text-2xl font-bold text-black">{metric.value}</div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Subject Cards */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: Laptop, subject: "Computer Science (AQA)", target: "3", color: '#3B82F6' },
+                { icon: FlaskConical, subject: "Chemistry (AQA)", target: "7", color: '#F97316' },
+                { icon: Dna, subject: "Biology (AQA)", target: "9", color: '#10B981' }
+              ].map((subject, i) => (
+                <motion.div key={i} variants={fadeInUp}>
+                  <Card className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow">
+                    <CardContent className="p-8">
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${subject.color}20` }}>
+                          <subject.icon className="w-6 h-6" style={{ color: subject.color }} />
+                        </div>
+                        <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Not started</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-black mb-6">{subject.subject}</h3>
+                      
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <div className="text-xs text-gray-500 mb-1">PREDICTED</div>
+                          <div className="text-2xl font-bold text-gray-400">U</div>
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500 mb-1">TARGET</div>
+                          <div className="text-2xl font-bold text-black">{subject.target}</div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 mb-6">
+                        <div className="flex items-center gap-2 text-sm">
+                          <CheckCircle2 className="w-4 h-4 text-green-500" />
+                          <span className="text-gray-600">Strong: Various topics</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <AlertTriangle className="w-4 h-4 text-red-500" />
+                          <span className="text-gray-600">Focus: Core concepts</span>
+                        </div>
+                      </div>
+
+                      <Button 
+                        style={{ backgroundColor: '#0BA5E9' }}
+                        className="w-full text-white font-semibold rounded-lg"
+                      >
+                        Topics
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer - Dashboard Style */}
-      <footer className="border-t py-12 px-6">
+      {/* FINAL CTA SECTION */}
+      <section 
+        className="py-20 px-6"
+        style={{ 
+          background: 'linear-gradient(120deg, #0BA5E9, #06B6D4)',
+        }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-5xl font-bold text-white mb-4">
+              Start your journey to better grades
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Join thousands of students already improving with Mentiora AI
+            </p>
+            <Button 
+              size="lg"
+              onClick={() => navigate(user ? '/dashboard' : '/register')}
+              className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-6 rounded-full shadow-lg hover:scale-105 transition-all"
+              style={{ color: '#0BA5E9' }}
+            >
+              Try now for free
+            </Button>
+            <p className="text-sm text-white/80 mt-4">
+              No credit card required • Get started in 60 seconds
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-gray-900 text-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6" />
-                <span className="text-lg font-semibold text-foreground">Mentiora</span>
+                <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6 brightness-0 invert" />
+                <span className="text-lg font-bold">Mentiora</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Your personalized GCSE & A-Level revision platform
-              </p>
+              <p className="text-sm text-gray-400">AI-powered personalised learning</p>
             </div>
-            
+
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Product</h4>
+              <h4 className="font-bold text-white mb-4">Product</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => navigate('/practice')} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Practice</button></li>
-                <li><button onClick={() => navigate('/flashcards')} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Flashcards</button></li>
-                <li><button onClick={() => navigate('/notebook')} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Notebook</button></li>
+                <li><button onClick={() => navigate('/pricing')} className="text-sm text-gray-400 hover:text-white transition-colors">Pricing</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Features</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Subjects</button></li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Company</h4>
+              <h4 className="font-bold text-white mb-4">Company</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => navigate('/pricing')} className="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">About us</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Careers</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Blog</button></li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+              <h4 className="font-bold text-white mb-4">Legal</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</button></li>
+                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</button></li>
               </ul>
             </div>
           </div>
-          
-          <div className="mt-12 pt-8 border-t text-center">
-            <p className="text-sm text-muted-foreground">
-              © 2025 Mentiora. All rights reserved.
-            </p>
+
+          <div className="border-t border-gray-800 pt-8 text-center">
+            <p className="text-sm text-gray-400">© 2025 Mentiora. All rights reserved.</p>
           </div>
         </div>
       </footer>
