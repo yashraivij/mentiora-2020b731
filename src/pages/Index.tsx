@@ -523,9 +523,8 @@ const Index = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 {[
                   { name: "AQA", level: "GCSE & A-Level" },
-                  { name: "CIE", level: "IGCSE" },
                   { name: "Edexcel", level: "GCSE & IGCSE" },
-                  { name: "IB", level: "International Baccalaureate" }
+                  { name: "OCR", level: "GCSE" }
                 ].map((board, i) => (
                   <motion.div
                     key={i}
@@ -548,12 +547,16 @@ const Index = () => {
                   { name: "Chemistry", emoji: "🧪" },
                   { name: "Physics", emoji: "🧲" },
                   { name: "Maths", emoji: "📐" },
-                  { name: "English", emoji: "✍️" },
+                  { name: "English Language", emoji: "✍️" },
+                  { name: "English Literature", emoji: "📖" },
                   { name: "Computer Science", emoji: "💻" },
                   { name: "Geography", emoji: "🌍" },
                   { name: "History", emoji: "⏳" },
-                  { name: "Economics", emoji: "💰" },
-                  { name: "Psychology", emoji: "🧠" }
+                  { name: "Psychology", emoji: "🧠" },
+                  { name: "Business", emoji: "💼" },
+                  { name: "Religious Studies", emoji: "⛪" },
+                  { name: "Combined Science", emoji: "🔬" },
+                  { name: "Spanish", emoji: "🇪🇸" }
                 ].map((subject, i) => (
                   <motion.div
                     key={i}
