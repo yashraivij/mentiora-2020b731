@@ -106,48 +106,260 @@ const Index = () => {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative pt-20 pb-24 px-6 bg-white">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Partner Logos */}
-            <div className="flex items-center justify-center gap-12 mb-16 opacity-60">
-              <div className="text-sm font-medium text-gray-500">Microsoft for Startups</div>
-              <div className="text-sm font-medium text-gray-500 bg-purple-600 text-white px-3 py-1">UKRI Innovate UK</div>
-              <div className="text-sm font-medium text-gray-500">Google for Startups</div>
+      <section className="pt-32 pb-20 px-4 bg-gradient-to-b from-[#F0F9FF] to-white min-h-[85vh] flex items-center">
+        <div className="max-w-[1400px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* LEFT COLUMN: HEADLINE & CTA */}
+            <div className="lg:col-span-7 space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="inline-block"
+              >
+                <span className="inline-block px-4 py-2 bg-[#E0F2FE] text-[#0BA5E9] text-xs font-bold tracking-wide rounded-full uppercase">
+                  GCSE & A-LEVEL AI TUTOR
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight"
+              >
+                Your revision,{" "}
+                <br className="hidden sm:block" />
+                <span className="text-black">finally made </span>
+                <span className="text-[#0BA5E9]">personal</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+                className="text-xl text-[#6B7280] leading-relaxed max-w-[520px]"
+              >
+                Mentiora predicts your grades, creates personalized notes, and plans your week automatically. Get the 1-on-1 tutor experience at 5% of the cost.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4 pt-4"
+              >
+                <Button
+                  size="lg"
+                  className="text-lg px-12 py-6 rounded-full bg-[#0BA5E9] hover:bg-[#0BA5E9]/90 shadow-[0px_4px_16px_rgba(11,165,233,0.3)] hover:scale-105 transition-all"
+                  onClick={() => navigate(user ? '/dashboard' : '/register')}
+                >
+                  Start free trial
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-10 py-6 rounded-full border-2 hover:border-[#0BA5E9] hover:text-[#0BA5E9] transition-all"
+                  onClick={() => {
+                    const pricingSection = document.getElementById('pricing-section');
+                    pricingSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Watch demo
+                </Button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.8 }}
+                className="flex flex-wrap items-center gap-6 text-sm text-[#9CA3AF] pt-4"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-[#0BA5E9]">✓</span>
+                  <span>No credit card required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#0BA5E9]">✓</span>
+                  <span>50,000+ students</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#0BA5E9]">✓</span>
+                  <span>Setup in 60 seconds</span>
+                </div>
+              </motion.div>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-6xl md:text-7xl font-extrabold text-black leading-tight mb-6 tracking-tight">
-              Your revision, finally<br />
-              <span style={{ color: '#0BA5E9' }}>made personal</span>
-            </h1>
+            {/* RIGHT COLUMN: INTERACTIVE CHAT DEMO */}
+            <div className="lg:col-span-5 relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-white rounded-3xl p-8 shadow-[0px_12px_48px_rgba(0,0,0,0.12)] border border-[#E5E7EB] relative min-h-[500px]"
+              >
+                {/* Chat Header */}
+                <div className="flex items-center gap-3 pb-5 border-b border-[#F3F4F6] mb-6">
+                  <div className="w-8 h-8 bg-[#0BA5E9] rounded-full flex items-center justify-center text-white font-bold">
+                    M
+                  </div>
+                  <span className="text-sm text-[#6B7280] font-medium">Mentiora AI Assistant</span>
+                </div>
 
-            {/* Subheading */}
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Mentiora teaches you how to answer every question
-              in your exams to get full marks.
-            </p>
+                {/* Chat Messages */}
+                <div className="space-y-4">
+                  {/* User Message 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 1.2 }}
+                    className="flex justify-end"
+                  >
+                    <div className="bg-[#0BA5E9] text-white px-5 py-4 rounded-[20px_20px_4px_20px] max-w-[75%] shadow-[0px_2px_8px_rgba(11,165,233,0.2)]">
+                      <p className="text-base leading-relaxed">How do I improve my Chemistry grade?</p>
+                    </div>
+                  </motion.div>
 
-            {/* CTA Button */}
-            <Button 
-              size="lg"
-              onClick={() => navigate(user ? '/dashboard' : '/register')}
-              style={{ 
-                backgroundColor: '#0BA5E9',
-                boxShadow: '0px 4px 12px rgba(11, 165, 233, 0.3)'
-              }}
-              className="text-white text-lg font-semibold px-12 py-6 rounded-full hover:scale-105 transition-all mb-3"
-            >
-              Try now for free
-            </Button>
+                  {/* Typing Indicator */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 1.8 }}
+                    className="flex"
+                  >
+                    <motion.div
+                      animate={{ opacity: [1, 1, 0] }}
+                      transition={{ duration: 1, delay: 1.8, times: [0, 0.8, 1] }}
+                      className="bg-[#F3F4F6] px-4 py-3 rounded-[20px] flex gap-1"
+                    >
+                      <motion.span
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                        className="w-2 h-2 bg-[#9CA3AF] rounded-full"
+                      />
+                      <motion.span
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        className="w-2 h-2 bg-[#9CA3AF] rounded-full"
+                      />
+                      <motion.span
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                        className="w-2 h-2 bg-[#9CA3AF] rounded-full"
+                      />
+                    </motion.div>
+                  </motion.div>
 
-            <p className="text-sm text-gray-400">No credit card required</p>
-          </motion.div>
+                  {/* AI Response 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 2.8 }}
+                    className="flex"
+                  >
+                    <div className="bg-[#F3F4F6] text-black px-6 py-5 rounded-[20px_20px_20px_4px] max-w-[85%] shadow-[0px_2px_8px_rgba(0,0,0,0.06)]">
+                      <p className="text-[15px] leading-relaxed">
+                        Based on your last 3 practice sessions, you're struggling with <strong>Chemical Bonding</strong> (42% accuracy).
+                        <br /><br />
+                        I've created a personalized study plan:
+                        <br />
+                        • 30 min focused practice today at <span className="text-[#0BA5E9] font-semibold">6pm</span> (your peak time)
+                        <br />
+                        • Auto-generated notes on ionic bonding
+                        <br />
+                        • Updated prediction: You're currently at <span className="text-[#0BA5E9] font-bold">Grade 5</span>, targeting <span className="text-[#0BA5E9] font-bold">Grade 7</span>
+                        <br /><br />
+                        Ready to start?
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* User Message 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 4.5 }}
+                    className="flex justify-end"
+                  >
+                    <div className="bg-[#0BA5E9] text-white px-5 py-4 rounded-[20px_20px_4px_20px] shadow-[0px_2px_8px_rgba(11,165,233,0.2)]">
+                      <p className="text-base leading-relaxed">Yes! Let's start</p>
+                    </div>
+                  </motion.div>
+
+                  {/* AI Response 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 5.5 }}
+                    className="flex"
+                  >
+                    <div className="bg-[#F3F4F6] text-black px-6 py-4 rounded-[20px_20px_20px_4px] shadow-[0px_2px_8px_rgba(0,0,0,0.06)]">
+                      <p className="text-[15px] leading-relaxed">
+                        Perfect! Opening your personalized Chemistry lesson now... 🎯
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Try it yourself prompt */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 6.5 }}
+                  className="mt-6 bg-gradient-to-r from-[#0BA5E9] to-[#0284C7] rounded-xl p-4 text-center cursor-pointer hover:scale-[1.02] transition-all"
+                  onClick={() => navigate(user ? '/dashboard' : '/register')}
+                >
+                  <span className="text-white font-semibold">Try Mentiora free →</span>
+                </motion.div>
+              </motion.div>
+
+              {/* Floating Badges */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: [0, -8, 0] }}
+                transition={{ 
+                  opacity: { duration: 0.4, delay: 1.5 },
+                  y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute -top-4 -right-4 bg-white px-4 py-3 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hidden lg:block"
+              >
+                <p className="text-sm font-medium flex items-center gap-2">
+                  <span>🎯</span>
+                  <span>92% prediction accuracy</span>
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: [-10, -2, -10] }}
+                transition={{ 
+                  opacity: { duration: 0.4, delay: 2 },
+                  x: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+                }}
+                className="absolute top-1/3 -left-6 bg-white px-4 py-3 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hidden lg:block"
+              >
+                <p className="text-sm font-medium flex items-center gap-2">
+                  <span>⚡</span>
+                  <span>14h saved this month</span>
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: [0, 8, 0] }}
+                transition={{ 
+                  opacity: { duration: 0.4, delay: 2.5 },
+                  y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }
+                }}
+                className="absolute -bottom-4 -right-6 bg-white px-4 py-3 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hidden lg:block"
+              >
+                <p className="text-sm font-medium flex items-center gap-2">
+                  <span>📊</span>
+                  <span>+1.8 grade improvement</span>
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
