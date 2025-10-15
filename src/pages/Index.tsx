@@ -504,149 +504,69 @@ const Index = () => {
               The only AI tutor that's<br />
               <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
             </h2>
-            <p className="text-base text-gray-600">
+            <p className="text-base text-gray-600 mb-8">
               Other AI tutoring platforms are not based on Exam Board Curriculums.<br />
               Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
             </p>
           </motion.div>
 
-          <div className="space-y-8">
-            {/* GCSE Section */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <div className="flex items-baseline gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-black">GCSE</h3>
-                <span className="text-sm text-gray-500">AQA</span>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-5xl mx-auto"
+          >
+            {/* Exam Boards */}
+            <div className="mb-10">
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { name: "AQA", level: "GCSE & A-Level" },
+                  { name: "CIE", level: "IGCSE" },
+                  { name: "Edexcel", level: "GCSE & IGCSE" },
+                  { name: "IB", level: "International Baccalaureate" }
+                ].map((board, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="text-xl font-bold text-black mb-1">{board.name}</div>
+                    <div className="text-xs text-gray-500">{board.level}</div>
+                  </motion.div>
+                ))}
               </div>
-              <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
+            </div>
+
+            {/* Subjects */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {[
                   { name: "Biology", emoji: "🧬" },
                   { name: "Chemistry", emoji: "🧪" },
                   { name: "Physics", emoji: "🧲" },
-                  { name: "Computer Science", emoji: "💻" },
+                  { name: "Maths", emoji: "📐" },
                   { name: "English", emoji: "✍️" },
-                  { name: "Maths", emoji: "📐" },
-                  { name: "Geography", emoji: "🌍" }
-                ].map((subject, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-3 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                  >
-                    <div className="text-2xl mb-1">{subject.emoji}</div>
-                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* IGCSE Section */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <div className="flex items-baseline gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-black">IGCSE</h3>
-                <span className="text-sm text-gray-500">CIE</span>
-              </div>
-              <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
-                {[
-                  { name: "Biology", emoji: "🧬" },
-                  { name: "Chemistry", emoji: "🧪" },
-                  { name: "Physics", emoji: "🧲" },
                   { name: "Computer Science", emoji: "💻" },
-                  { name: "Economics", emoji: "💰" },
                   { name: "Geography", emoji: "🌍" },
-                  { name: "History", emoji: "⏳" }
-                ].map((subject, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-3 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                  >
-                    <div className="text-2xl mb-1">{subject.emoji}</div>
-                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* A-Level Section */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <div className="flex items-baseline gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-black">A-Level</h3>
-                <span className="text-sm text-gray-500">AQA</span>
-              </div>
-              <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
-                {[
-                  { name: "Biology", emoji: "🧬" },
-                  { name: "Chemistry", emoji: "🧪" },
-                  { name: "Physics", emoji: "🧲" },
-                  { name: "Maths", emoji: "📐" },
-                  { name: "Computer Science", emoji: "💻" },
+                  { name: "History", emoji: "⏳" },
                   { name: "Economics", emoji: "💰" },
                   { name: "Psychology", emoji: "🧠" }
                 ].map((subject, i) => (
                   <motion.div
                     key={i}
-                    variants={fadeInUp}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-3 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
                   >
-                    <div className="text-2xl mb-1">{subject.emoji}</div>
+                    <div className="text-3xl mb-2">{subject.emoji}</div>
                     <div className="text-xs font-medium text-gray-900">{subject.name}</div>
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-
-            {/* IB Section */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <div className="flex items-baseline gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-black">IB</h3>
-                <span className="text-sm text-gray-500">International Baccalaureate</span>
-              </div>
-              <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
-                {[
-                  { name: "Biology", emoji: "🧬" },
-                  { name: "Chemistry", emoji: "🧪" },
-                  { name: "Physics", emoji: "🧲" },
-                  { name: "Economics", emoji: "💰" },
-                  { name: "Maths AA", emoji: "📐" },
-                  { name: "Maths AI", emoji: "📊" },
-                  { name: "Psychology", emoji: "🧠" }
-                ].map((subject, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-3 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                  >
-                    <div className="text-2xl mb-1">{subject.emoji}</div>
-                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
