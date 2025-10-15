@@ -127,7 +127,7 @@ const Index = () => {
 
             {/* Subheading */}
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Mentiora AI teaches you how to answer every question
+              Mentiora teaches you how to answer every question
               in your exams to get full marks.
             </p>
 
@@ -395,10 +395,10 @@ const Index = () => {
           >
             <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
               Unlike any other app<br />
-              A <span style={{ color: '#0BA5E9' }}>personalised AI tutor</span>.
+              A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Mentiora AI teaches you how to answer every question
+              Mentiora teaches you how to answer every question
               in your exams to get full marks.
             </p>
           </motion.div>
@@ -501,11 +501,11 @@ const Index = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              The only AI tutor that's<br />
+              The only tutor that's<br />
               <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
             </h2>
             <p className="text-base text-gray-600 mb-8">
-              Other AI tutoring platforms are not based on Exam Board Curriculums.<br />
+              Other tutoring platforms are not based on Exam Board Curriculums.<br />
               Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
             </p>
           </motion.div>
@@ -759,7 +759,7 @@ const Index = () => {
               Start your journey to better grades
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Join thousands of students already improving with Mentiora AI
+              Join thousands of students already improving with Mentiora
             </p>
             <Button 
               size="lg"
@@ -785,7 +785,7 @@ const Index = () => {
                 <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6 brightness-0 invert" />
                 <span className="text-lg font-bold">Mentiora</span>
               </div>
-              <p className="text-sm text-gray-400">AI-powered personalised learning</p>
+              <p className="text-sm text-gray-400">Personalised learning for GCSE & A-Levels</p>
             </div>
 
             <div>
