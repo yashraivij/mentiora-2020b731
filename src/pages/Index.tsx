@@ -904,9 +904,9 @@ const Index = () => {
             className="mt-16"
           >
             <div className="bg-white rounded-xl p-10 border border-gray-200 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-black text-center mb-10">
-                Three features, one intelligent system
-              </h3>
+            <h3 className="text-2xl font-bold text-black text-center mb-8">
+              One intelligent system
+            </h3>
 
               {/* Flow Diagram */}
               <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
@@ -933,9 +933,8 @@ const Index = () => {
                 </div>
               </div>
 
-              <p className="text-center text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Your predicted grades identify weak areas → Auto-notes focus on those topics → 
-                Your planner schedules extra practice → Improved performance → Better predictions
+              <p className="text-center text-xs text-gray-600 max-w-xl mx-auto">
+                Performance data feeds personalized materials, which inform your adaptive schedule
               </p>
             </div>
           </motion.div>
@@ -951,8 +950,8 @@ const Index = () => {
             <motion.div variants={fadeInUp}>
               <Card className="text-center hover:shadow-lg transition-all bg-white">
                 <CardContent className="p-6">
-                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>14.7 hours</div>
-                  <p className="text-sm text-gray-600 leading-relaxed">Average time saved per month with auto-notes</p>
+                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>14.7 hrs</div>
+                  <p className="text-xs text-gray-600">Saved per month</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -961,7 +960,7 @@ const Index = () => {
               <Card className="text-center hover:shadow-lg transition-all bg-white">
                 <CardContent className="p-6">
                   <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>94%</div>
-                  <p className="text-sm text-gray-600 leading-relaxed">Students report better time management with adaptive planner</p>
+                  <p className="text-xs text-gray-600">Better time management</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -969,8 +968,8 @@ const Index = () => {
             <motion.div variants={fadeInUp}>
               <Card className="text-center hover:shadow-lg transition-all bg-white">
                 <CardContent className="p-6">
-                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>1.8 grades</div>
-                  <p className="text-sm text-gray-600 leading-relaxed">Average improvement with personalized learning in 8 weeks</p>
+                  <div className="text-4xl font-extrabold mb-2" style={{ color: '#0BA5E9' }}>+1.8</div>
+                  <p className="text-xs text-gray-600">Grade improvement avg</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -984,39 +983,35 @@ const Index = () => {
             variants={fadeInUp}
             className="mt-16"
           >
-            <div className="rounded-2xl p-12 text-center bg-white border-2 shadow-lg" style={{ borderColor: '#0BA5E9' }}>
-              <h3 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#0BA5E9' }}>
-                Ready for learning that adapts to you?
+            <div className="rounded-2xl p-10 text-center bg-white border-2 shadow-lg" style={{ borderColor: '#0BA5E9' }}>
+              <h3 className="text-3xl font-bold mb-2" style={{ color: '#0BA5E9' }}>
+                Learning that adapts to you
               </h3>
-              <p className="text-base text-gray-600 mb-6 max-w-xl mx-auto">
-                Join 50,000+ students learning smarter with personalized AI
+              <p className="text-sm text-gray-600 mb-6">
+                Join 50,000+ students using AI-powered learning
               </p>
               
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
                 <Button 
                   size="lg"
                   onClick={() => navigate(user ? '/dashboard' : '/register')}
                   style={{ backgroundColor: '#0BA5E9' }}
-                  className="text-white text-base font-semibold px-10 py-6 rounded-full shadow-lg hover:opacity-90 transition-all"
+                  className="text-white text-base font-semibold px-10 py-5 rounded-full shadow-lg hover:opacity-90 transition-all"
                 >
-                  Start your free trial
+                  Start free trial
                 </Button>
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 text-base font-semibold px-10 py-6 rounded-full hover:bg-gray-50 transition-all"
+                  className="border-2 text-base font-semibold px-10 py-5 rounded-full hover:bg-gray-50 transition-all"
                   style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
                 >
                   Watch demo
                 </Button>
               </div>
 
-              <p className="text-xs text-gray-500 space-x-3">
-                <span>No credit card required</span>
-                <span>•</span>
-                <span>Set up in 60 seconds</span>
-                <span>•</span>
-                <span>Cancel anytime</span>
+              <p className="text-xs text-gray-500">
+                No credit card • 60 second setup
               </p>
             </div>
           </motion.div>
