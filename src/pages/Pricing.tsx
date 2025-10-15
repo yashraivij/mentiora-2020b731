@@ -371,7 +371,7 @@ const Pricing = () => {
         </div>
 
         {/* Loved by Students Section */}
-        <div className="mb-16 py-12">
+        <div className="mb-16">
           <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
             Loved by 30,000+ GCSE students<br />from the UK's top schools
           </h2>
@@ -420,7 +420,7 @@ const Pricing = () => {
         </div>
 
         {/* FAQs Section */}
-        <div className="mb-16 py-12 max-w-[800px] mx-auto">
+        <div className="mb-16 max-w-[800px] mx-auto">
           <h2 className="text-5xl font-bold text-center mb-12 text-gray-900">
             FAQs
           </h2>
