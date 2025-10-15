@@ -260,63 +260,63 @@ const Pricing = () => {
             </div>
 
             {/* Right Column - Email on Laptop */}
-            <div className="relative flex items-center justify-center scale-75">
+            <div className="relative flex items-center justify-center">
               <div className="relative w-full max-w-2xl">
                 {/* Laptop Screen */}
-                <div className="relative bg-gray-800 rounded-t-xl p-2 shadow-2xl">
+                <div className="relative bg-gray-800 rounded-t-xl p-3 shadow-2xl">
                   {/* Screen bezel */}
-                  <div className="bg-gray-900 rounded-t-lg p-0.5">
+                  <div className="bg-gray-900 rounded-t-lg p-1">
                     {/* Browser Chrome */}
                     <div className="bg-white rounded-t-md">
                       {/* Browser toolbar */}
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-t-md border-b border-gray-200">
-                        <div className="flex gap-1">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                          <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                      <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-t-md border-b border-gray-200">
+                        <div className="flex gap-1.5">
+                          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                          <div className="w-3 h-3 rounded-full bg-green-400"></div>
                         </div>
-                        <div className="flex-1 bg-white rounded px-2 py-0.5 text-[10px] text-gray-600">
+                        <div className="flex-1 bg-white rounded px-3 py-1 text-xs text-gray-600">
                           mently.app/get-parent
                         </div>
                       </div>
                       
                       {/* Email Content */}
-                      <div className="p-5 bg-white h-[280px] overflow-hidden">
+                      <div className="p-6 bg-white h-[320px] overflow-hidden">
                         {/* Email Header */}
                         <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                          <div className="w-10 h-10 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-full flex items-center justify-center text-white font-bold">
                             M
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-900 text-sm">Mentiora</div>
-                            <div className="text-[10px] text-gray-500">hello@mentiora.com</div>
+                            <div className="font-semibold text-gray-900">Mentiora</div>
+                            <div className="text-xs text-gray-500">hello@mentiora.com</div>
                           </div>
                         </div>
                         
-                        <div className="space-y-2.5">
+                        <div className="space-y-3">
                           <div>
-                            <div className="text-[9px] text-gray-500 mb-1">To: Parent/Guardian</div>
-                            <h3 className="text-sm font-bold text-gray-900">
+                            <div className="text-[10px] text-gray-500 mb-1">To: Parent/Guardian</div>
+                            <h3 className="text-base font-bold text-gray-900">
                               Help Your Child Get Through GCSEs
                             </h3>
                           </div>
                           
-                          <div className="space-y-2 text-[10px] text-gray-700 leading-relaxed">
+                          <div className="space-y-2.5 text-xs text-gray-700 leading-relaxed">
                             <p className="text-gray-600">Dear parent or guardian,</p>
                             
                             <p>Your child has expressed interest in using Medly AI to prepare for their GCSE studies...</p>
                             
-                            <div className="space-y-1 pl-0.5">
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                            <div className="space-y-1.5 pl-0.5">
+                              <div className="flex items-start gap-2">
+                                <Check className="w-3.5 h-3.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
                                 <span>Unlimited access to exam-style questions</span>
                               </div>
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                              <div className="flex items-start gap-2">
+                                <Check className="w-3.5 h-3.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
                                 <span>24/7 AI tutoring and guidance</span>
                               </div>
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                              <div className="flex items-start gap-2">
+                                <Check className="w-3.5 h-3.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
                                 <span>Mock papers and practice tests</span>
                               </div>
                             </div>
@@ -327,12 +327,38 @@ const Pricing = () => {
                   </div>
                 </div>
                 
-                {/* Laptop Base */}
+                {/* Laptop Base with Keyboard */}
                 <div className="relative">
                   {/* Keyboard section */}
-                  <div className="bg-gradient-to-b from-gray-700 to-gray-800 h-4 rounded-b-md shadow-lg"></div>
+                  <div className="bg-gradient-to-b from-gray-700 to-gray-800 px-6 py-4 rounded-b-lg shadow-lg">
+                    {/* Keyboard keys representation */}
+                    <div className="space-y-1 opacity-40">
+                      <div className="flex gap-1 justify-center">
+                        {[...Array(14)].map((_, i) => (
+                          <div key={i} className="w-8 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-1 justify-center px-4">
+                        {[...Array(13)].map((_, i) => (
+                          <div key={i} className="w-8 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-1 justify-center">
+                        <div className="w-12 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                        {[...Array(11)].map((_, i) => (
+                          <div key={i} className="w-8 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                        ))}
+                        <div className="w-12 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                      </div>
+                      <div className="flex gap-1 justify-center px-16">
+                        <div className="flex-1 h-6 bg-gray-600 rounded-sm border border-gray-500"></div>
+                      </div>
+                    </div>
+                    {/* Trackpad */}
+                    <div className="mt-2 mx-auto w-32 h-16 bg-gray-600 rounded border border-gray-500 opacity-30"></div>
+                  </div>
                   {/* Bottom base */}
-                  <div className="mx-auto w-3/4 h-1.5 bg-gray-600 rounded-b-lg shadow-xl"></div>
+                  <div className="mx-auto w-3/4 h-2 bg-gray-600 rounded-b-xl shadow-xl"></div>
                 </div>
               </div>
             </div>
