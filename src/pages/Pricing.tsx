@@ -264,8 +264,8 @@ const Pricing = () => {
               {/* Envelope Container */}
               <div className="relative w-full max-w-md">
                 {/* Email Letter - appears to come out of envelope */}
-                <div className="relative bg-white rounded-t-lg shadow-2xl p-6 z-10 border border-gray-200">
-                  <div className="mb-3">
+                <div className="relative bg-white rounded-lg shadow-xl p-8 z-20 border border-gray-200 mb-[-40px]">
+                  <div className="mb-4">
                     <div className="text-sm font-bold text-gray-900 mb-2">
                       Help Your Child Get Through GCSEs
                     </div>
@@ -274,7 +274,7 @@ const Pricing = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-2 text-xs text-gray-700 leading-relaxed">
+                  <div className="space-y-2.5 text-xs text-gray-700 leading-relaxed">
                     <p>Your child has expressed interest in using Mently AI to prepare for their GCSE studies. Mently AI provides AI-personalized learning through individualisation.</p>
                     
                     <div className="space-y-1.5 pl-2">
@@ -284,7 +284,7 @@ const Pricing = () => {
                       </div>
                       <div className="flex items-start gap-2">
                         <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                        <span>Instead of copying and listening to dry voice overs, learn with AI by asking questions, practising exam board</span>
+                        <span>Instead of marking and listening textbook, learn with AI by asking questions, practising exam board</span>
                       </div>
                       <div className="flex items-start gap-2">
                         <Check className="w-3 h-3 text-[#00A8FF] flex-shrink-0 mt-0.5" />
@@ -300,39 +300,28 @@ const Pricing = () => {
                       </div>
                     </div>
                     
-                    <p className="pt-1">Exam-focused preparation aligned wit upcoming exams</p>
+                    <p className="pt-1">Exam-focused preparation aligned with upcoming exams</p>
                   </div>
                   
-                  <div className="mt-4 text-center">
+                  <div className="mt-5 text-center">
                     <div className="text-xs text-gray-400">
                       mently.app/get-parent
                     </div>
                   </div>
                 </div>
                 
-                {/* Envelope Bottom */}
-                <div className="relative -mt-2">
-                  {/* Envelope body */}
-                  <div className="bg-gradient-to-b from-gray-100 to-gray-200 rounded-b-lg p-8 pt-12 shadow-lg">
-                    {/* Envelope flap triangles */}
-                    <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ transform: 'translateY(-1px)' }}>
-                      {/* Left triangle */}
-                      <div 
-                        className="absolute left-0 w-0 h-0"
-                        style={{
-                          borderLeft: '240px solid transparent',
-                          borderBottom: '60px solid rgb(229, 231, 235)',
-                        }}
-                      />
-                      {/* Right triangle */}
-                      <div 
-                        className="absolute right-0 w-0 h-0"
-                        style={{
-                          borderRight: '240px solid transparent',
-                          borderBottom: '60px solid rgb(229, 231, 235)',
-                        }}
-                      />
-                    </div>
+                {/* Envelope */}
+                <div className="relative bg-gradient-to-b from-gray-200 to-gray-300 rounded-lg shadow-2xl overflow-hidden z-10" style={{ paddingTop: '50px', paddingBottom: '80px' }}>
+                  {/* Envelope flap - open triangles */}
+                  <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
+                    {/* Left flap */}
+                    <div 
+                      className="absolute left-0 top-0 w-0 h-0 border-l-[250px] border-l-transparent border-t-[80px] border-t-gray-300"
+                    />
+                    {/* Right flap */}
+                    <div 
+                      className="absolute right-0 top-0 w-0 h-0 border-r-[250px] border-r-transparent border-t-[80px] border-t-gray-300"
+                    />
                   </div>
                 </div>
               </div>
