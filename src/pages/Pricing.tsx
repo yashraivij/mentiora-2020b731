@@ -261,10 +261,10 @@ const Pricing = () => {
 
             {/* Right Column - Email on Laptop */}
             <div className="relative flex items-center justify-center pt-8">
-              <div className="relative w-full max-w-xl" style={{ perspective: '1000px' }}>
-                {/* Laptop Screen with 3D transform */}
-                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-lg p-2 shadow-2xl" style={{ transform: 'rotateX(5deg)' }}>
-                  {/* Screen bezel with depth */}
+              <div className="relative w-full max-w-xl">
+                {/* Laptop Screen */}
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-lg p-2 shadow-2xl">
+                  {/* Screen bezel */}
                   <div className="bg-black rounded-lg p-1 shadow-inner">
                     {/* Browser Chrome */}
                     <div className="bg-white rounded-md overflow-hidden">
@@ -327,10 +327,10 @@ const Pricing = () => {
                   </div>
                 </div>
                 
-                {/* Laptop Base with 3D effect */}
-                <div className="relative -mt-1">
-                  {/* Keyboard section with 3D perspective */}
-                  <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 px-4 py-3 rounded-b-md shadow-2xl" style={{ transform: 'rotateX(-2deg) translateZ(-10px)', transformStyle: 'preserve-3d' }}>
+                {/* Laptop Base */}
+                <div className="relative">
+                  {/* Keyboard section */}
+                  <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 px-4 py-3 rounded-b-md shadow-2xl">
                     {/* Keyboard keys */}
                     <div className="space-y-0.5 opacity-30">
                       <div className="flex gap-0.5 justify-center">
@@ -357,7 +357,7 @@ const Pricing = () => {
                     {/* Trackpad */}
                     <div className="mt-1.5 mx-auto w-24 h-12 bg-gray-700 rounded border border-gray-600 opacity-20 shadow-inner"></div>
                   </div>
-                  {/* Bottom edge with shadow */}
+                  {/* Bottom edge */}
                   <div className="mx-auto w-2/3 h-1.5 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg shadow-2xl opacity-80"></div>
                 </div>
               </div>
