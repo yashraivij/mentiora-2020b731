@@ -42,7 +42,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Subtle floating orb */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -63,7 +63,7 @@ const Index = () => {
       <motion.nav 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200/60"
+        className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b"
       >
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -72,37 +72,35 @@ const Index = () => {
               alt="Mentiora" 
               className="h-8 w-8"
             />
-            <span className="text-xl font-bold text-gray-900">
+            <span className="text-lg font-semibold text-foreground">
               Mentiora
             </span>
           </div>
           
-          <div className="hidden md:flex items-center gap-10">
-            <button onClick={() => navigate("/pricing")} className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+          <div className="hidden md:flex items-center gap-8">
+            <button onClick={() => navigate("/pricing")} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Pricing
             </button>
-            <button onClick={() => navigate("/dashboard")} className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+            <button onClick={() => navigate("/dashboard")} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Dashboard
             </button>
-            <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+            <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               FAQ
             </button>
-            <Button onClick={() => navigate("/login")} variant="ghost" size="sm" className="text-gray-600">
+            <Button onClick={() => navigate("/login")} variant="ghost" size="sm">
               Login
             </Button>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                onClick={() => navigate("/register")} 
-                size="sm" 
-                className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
-              >
-                Start Free Trial
-              </Button>
-            </motion.div>
+            <Button 
+              onClick={() => navigate("/register")} 
+              size="sm" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            >
+              Start Free Trial
+            </Button>
           </div>
 
           <button className="md:hidden">
-            <Menu className="h-6 w-6 text-gray-600" />
+            <Menu className="h-6 w-6 text-muted-foreground" />
           </button>
         </div>
       </motion.nav>
@@ -147,28 +145,17 @@ const Index = () => {
             variants={fadeInUp}
           >
             <motion.h1 
-              className="text-6xl md:text-8xl font-extrabold mb-8 leading-[1.05] tracking-tight text-gray-900"
+              className="text-4xl md:text-5xl font-semibold mb-6 leading-tight tracking-tight text-foreground"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              The GCSE & A-Level<br />tutor built around{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                  you
-                </span>
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  className="absolute bottom-2 left-0 right-0 h-4 bg-gradient-to-r from-blue-400/20 to-purple-400/20"
-                />
-              </span>
-              .
+              The GCSE & A-Level tutor built around{" "}
+              <span className="text-primary">you</span>.
             </motion.h1>
             
             <motion.p 
-              className="text-2xl md:text-3xl text-gray-600 mb-5 max-w-4xl mx-auto leading-relaxed font-light tracking-wide"
+              className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
@@ -177,7 +164,7 @@ const Index = () => {
             </motion.p>
             
             <motion.p 
-              className="text-lg text-gray-500 mb-16 max-w-3xl mx-auto leading-relaxed"
+              className="text-base text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
@@ -186,36 +173,32 @@ const Index = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-10"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
             >
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Button 
-                  onClick={() => navigate("/register")}
-                  size="lg"
-                  className="relative bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] hover:shadow-xl hover:shadow-blue-500/30 text-white px-10 py-7 text-lg font-semibold group transition-all duration-300"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </motion.div>
+              <Button 
+                onClick={() => navigate("/register")}
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
+              >
+                Start Free Trial
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
               
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Button 
-                  onClick={() => navigate("/dashboard")}
-                  size="lg"
-                  variant="outline"
-                  className="px-10 py-7 text-lg font-medium border-2 border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300"
-                >
-                  Explore Dashboard
-                </Button>
-              </motion.div>
+              <Button 
+                onClick={() => navigate("/dashboard")}
+                size="lg"
+                variant="outline"
+                className="px-8"
+              >
+                Explore Dashboard
+              </Button>
             </motion.div>
 
             <motion.p 
-              className="text-sm text-gray-400 font-light"
+              className="text-sm text-muted-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.5 }}
@@ -232,17 +215,14 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-[#F8FAFC]"
+        className="py-24 px-8 bg-muted/30"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
-              Designed to make revision{" "}
-              <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                personal
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              Designed to make revision <span className="text-primary">personal</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Every student learns differently — Mentiora adapts to you.
             </p>
           </div>
@@ -354,19 +334,15 @@ const Index = () => {
                 transition={{ delay: index * 0.15, duration: 0.6 }}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
               >
-                <Card className="relative overflow-hidden border border-gray-200/60 bg-white hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 h-full rounded-3xl">
-                  <CardContent className="p-10">
-                    <motion.div
-                      whileHover={{ rotate: [0, -5, 5, 0] }}
-                      transition={{ duration: 0.5 }}
-                      className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-[#3B82F6]/10 to-[#A78BFA]/10 mb-8"
-                    >
-                      <feature.icon className="h-7 w-7 text-[#3B82F6]" strokeWidth={1.5} />
-                    </motion.div>
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="inline-flex p-3 rounded-xl bg-primary/10 mb-6">
+                      <feature.icon className="h-5 w-5 text-primary" strokeWidth={2} />
+                    </div>
                     
-                    <div className="mb-6 pb-6 border-b border-gray-100">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                    <div className="mb-6">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
                     </div>
                     
                     <div className="mt-6">
@@ -386,7 +362,7 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-white"
+        className="py-24 px-8 bg-background"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-20 items-center">
@@ -396,16 +372,13 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-5xl md:text-6xl font-extrabold mb-8 leading-tight text-gray-900 tracking-tight">
-                Built around{" "}
-                <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                  how you learn
-                </span>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-6 leading-tight text-foreground tracking-tight">
+                Built around <span className="text-primary">how you learn</span>
               </h2>
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed font-light tracking-wide">
+              <p className="text-base text-muted-foreground mb-4 leading-relaxed">
                 Your Mentiora dashboard tracks every subject, grade, and goal — adapting automatically to your performance.
               </p>
-              <p className="text-lg text-gray-500 mb-10 leading-relaxed">
+              <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
                 See your predicted grades rise, your study patterns evolve, and your retention grow.
               </p>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.98 }}>
@@ -506,17 +479,14 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-gradient-to-b from-[#F3F0FF] to-[#F8FAFC]"
+        className="py-24 px-8 bg-gradient-to-b from-accent/5 to-muted/30"
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
-              Learning that gets{" "}
-              <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                smarter every week
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              Learning that gets <span className="text-primary">smarter every week</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Mentiora uses your performance to refine what you learn next — building a personalised path to your target grade.
             </p>
           </div>
@@ -554,24 +524,14 @@ const Index = () => {
                   transition={{ delay: index * 0.2, duration: 0.6 }}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
-                  <Card className="border border-gray-200/60 bg-white hover:shadow-xl transition-all duration-300 rounded-3xl h-full">
-                    <CardContent className="p-10 text-center">
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.1, 1],
-                        }}
-                        transition={{ 
-                          duration: 3, 
-                          repeat: Infinity,
-                          delay: index * 0.3
-                        }}
-                        className={`inline-flex p-6 rounded-full bg-gradient-to-br ${step.color} text-white mb-8 shadow-lg`}
-                      >
-                        <step.icon className="h-8 w-8" strokeWidth={2} />
-                      </motion.div>
+                  <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                    <CardContent className="p-8 text-center">
+                      <div className={`inline-flex p-4 rounded-full bg-gradient-to-br ${step.color} text-white mb-6`}>
+                        <step.icon className="h-6 w-6" strokeWidth={2} />
+                      </div>
                       
-                      <h3 className="text-2xl font-bold mb-4 text-gray-900">{step.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                      <h3 className="text-xl font-semibold mb-3 text-foreground">{step.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -587,17 +547,14 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-white"
+        className="py-24 px-8 bg-background"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
-              Smarter than tutoring —{" "}
-              <span className="bg-gradient-to-r from-green-600 to-[#3B82F6] bg-clip-text text-transparent">
-                95% cheaper
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              Smarter than tutoring — <span className="text-primary">95% cheaper</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Personalised, data-driven learning designed to outperform private tuition.
             </p>
           </div>
@@ -610,10 +567,10 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <Card className="border border-gray-200/60 shadow-xl bg-white rounded-3xl overflow-hidden h-full">
-                <CardContent className="p-10">
-                  <h3 className="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-900">
-                    <TrendingUp className="h-6 w-6 text-[#3B82F6]" strokeWidth={2} />
+              <Card className="h-full">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-foreground">
+                    <TrendingUp className="h-5 w-5 text-primary" strokeWidth={2} />
                     Grade Improvement
                   </h3>
                   
@@ -678,10 +635,10 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <Card className="border border-gray-200/60 shadow-xl bg-white rounded-3xl overflow-hidden h-full">
-                <CardContent className="p-10">
-                  <h3 className="text-2xl font-bold mb-8 flex items-center gap-3 text-gray-900">
-                    <Sparkles className="h-6 w-6 text-green-600" strokeWidth={2} />
+              <Card className="h-full">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-foreground">
+                    <Sparkles className="h-5 w-5 text-primary" strokeWidth={2} />
                     Cost Comparison
                   </h3>
                   
@@ -705,10 +662,8 @@ const Index = () => {
 
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-semibold text-gray-700">Mentiora</span>
-                        <span className="text-2xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                          £14.99
-                        </span>
+                        <span className="text-sm font-medium text-foreground">Mentiora</span>
+                        <span className="text-xl font-semibold text-primary">£14.99</span>
                       </div>
                       <div className="h-16 bg-blue-50 rounded-xl relative overflow-hidden border border-blue-100">
                         <motion.div
@@ -741,17 +696,14 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-[#F9FBFF]"
+        className="py-24 px-8 bg-muted/20"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
-              Loved by students{" "}
-              <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                across the UK
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              Loved by students <span className="text-primary">across the UK</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Real stories from learners who turned revision into results.
             </p>
           </div>
@@ -788,20 +740,20 @@ const Index = () => {
                 transition={{ delay: index * 0.15, duration: 0.6 }}
                 whileHover={{ y: -8 }}
               >
-                <Card className="relative overflow-hidden border border-gray-200/60 bg-white hover:shadow-xl transition-all duration-300 h-full rounded-3xl">
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
                   {/* Gradient accent line on top */}
                   <div className={`h-1 bg-gradient-to-r ${testimonial.accentColor}`} />
                   
-                  <CardContent className="p-8">
-                    <div className="mb-6 flex">
+                  <CardContent className="p-6">
+                    <div className="mb-4 flex">
                       {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <svg key={i} className="h-4 w-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
                           <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                         </svg>
                       ))}
                     </div>
                     
-                    <blockquote className="text-lg font-medium mb-8 leading-relaxed text-gray-700">
+                    <blockquote className="text-base mb-6 leading-relaxed text-foreground">
                       "{testimonial.quote}"
                     </blockquote>
                     
@@ -833,14 +785,11 @@ const Index = () => {
         className="py-32 px-8 bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-white"
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
-              All-in-one{" "}
-              <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                personalised revision
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              All-in-one <span className="text-primary">personalised revision</span>
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Unlimited access to GCSE & A-Level subjects — one simple plan.
             </p>
           </div>
@@ -854,17 +803,15 @@ const Index = () => {
               transition={{ duration: 0.6 }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <Card className="relative overflow-hidden border-2 border-gray-200 hover:border-[#3B82F6]/50 transition-all duration-300 bg-white/90 backdrop-blur-sm rounded-3xl h-full">
-                <CardContent className="p-10">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Monthly</h3>
-                  <div className="mb-8">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                      £14.99
-                    </span>
-                    <span className="text-gray-500 ml-2">/ month</span>
+              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">Monthly</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-semibold text-primary">£14.99</span>
+                    <span className="text-muted-foreground ml-2">/ month</span>
                   </div>
                   
-                  <ul className="space-y-4 mb-10">
+                  <ul className="space-y-3 mb-8">
                     {[
                       "Smart Revision Notebook",
                       "Personalised Grade Tracking",
@@ -872,22 +819,21 @@ const Index = () => {
                       "Unlimited Practice Sessions",
                       "All GCSE & A-Level Subjects"
                     ].map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-[#3B82F6] shrink-0 mt-0.5" strokeWidth={2} />
-                        <span className="text-sm text-gray-700">{feature}</span>
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" strokeWidth={2} />
+                        <span className="text-sm text-muted-foreground">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Button 
                     onClick={() => navigate("/register")}
-                    className="w-full bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] hover:shadow-lg transition-all"
-                    size="lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   >
                     Start Free Trial
                   </Button>
                   
-                  <p className="text-xs text-center text-gray-400 mt-4">
+                  <p className="text-xs text-center text-muted-foreground mt-3">
                     Cancel anytime
                   </p>
                 </CardContent>
@@ -902,24 +848,22 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <Card className="relative overflow-hidden border-2 border-[#3B82F6] shadow-2xl shadow-blue-500/20 bg-white rounded-3xl h-full">
+              <Card className="h-full border-primary shadow-lg">
                 <div className="absolute top-4 right-4">
-                  <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 text-xs font-bold text-white flex items-center gap-1.5">
+                  <div className="px-3 py-1 rounded-full bg-primary/10 text-xs font-medium text-primary flex items-center gap-1">
                     <Sparkles className="h-3 w-3" />
                     Save 33%
                   </div>
                 </div>
                 
-                <CardContent className="p-10">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Annual</h3>
-                  <div className="mb-8">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">
-                      £120
-                    </span>
-                    <span className="text-gray-500 ml-2">/ year</span>
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">Annual</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-semibold text-primary">£120</span>
+                    <span className="text-muted-foreground ml-2">/ year</span>
                   </div>
                   
-                  <ul className="space-y-4 mb-10">
+                  <ul className="space-y-3 mb-8">
                     {[
                       "Everything in Monthly",
                       "Priority Support",
@@ -927,22 +871,21 @@ const Index = () => {
                       "Downloadable Progress Reports",
                       "7-Day Money-Back Guarantee"
                     ].map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-[#3B82F6] shrink-0 mt-0.5" strokeWidth={2} />
-                        <span className="text-sm font-medium text-gray-700">{feature}</span>
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" strokeWidth={2} />
+                        <span className="text-sm text-muted-foreground">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
                   <Button 
                     onClick={() => navigate("/register")}
-                    className="w-full bg-gradient-to-r from-[#3B82F6] via-[#A78BFA] to-[#3B82F6] hover:shadow-xl hover:shadow-blue-500/30 bg-[length:200%_100%] hover:bg-[position:100%_0] transition-all"
-                    size="lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   >
                     Start Free Trial
                   </Button>
                   
-                  <p className="text-xs text-center text-gray-400 mt-4">
+                  <p className="text-xs text-center text-muted-foreground mt-3">
                     No card required • 7-day guarantee
                   </p>
                 </CardContent>
@@ -950,7 +893,7 @@ const Index = () => {
             </motion.div>
           </div>
 
-          <p className="text-center text-gray-500 mt-12 text-sm">
+          <p className="text-center text-muted-foreground mt-10 text-sm">
             No card required • Cancel anytime • 7-day money-back guarantee
           </p>
         </div>
@@ -962,11 +905,11 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 bg-white"
+        className="py-24 px-8 bg-background"
       >
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 tracking-tight">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
               Frequently Asked Questions
             </h2>
           </div>
@@ -1021,7 +964,7 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-40 px-8 relative overflow-hidden bg-gradient-to-br from-[#A78BFA]/10 via-[#3B82F6]/10 to-white"
+        className="py-32 px-8 relative overflow-hidden bg-gradient-to-br from-accent/10 to-background"
       >
         {/* Gentle floating particles */}
         {[...Array(10)].map((_, i) => (
@@ -1047,59 +990,51 @@ const Index = () => {
         ))}
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-6xl md:text-7xl font-extrabold mb-8 leading-tight text-gray-900 tracking-tight">
-            Ready to see your{" "}
-            <span className="bg-gradient-to-r from-[#3B82F6] via-[#A78BFA] to-[#3B82F6] bg-clip-text text-transparent">
-              grades grow?
-            </span>
+          <h2 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight text-foreground tracking-tight">
+            Ready to see your <span className="text-primary">grades grow?</span>
           </h2>
           
-          <p className="text-2xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
             Join thousands of GCSE & A-Level students learning smarter with Mentiora.
           </p>
 
-          <motion.div
-            whileHover={{ scale: 1.08, y: -4 }}
-            whileTap={{ scale: 0.98 }}
+          <Button 
+            onClick={() => navigate("/register")}
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-12"
           >
-            <Button 
-              onClick={() => navigate("/register")}
-              size="lg"
-              className="bg-gradient-to-r from-[#3B82F6] via-[#A78BFA] to-[#3B82F6] hover:shadow-2xl hover:shadow-blue-500/40 text-white px-14 py-8 text-xl font-semibold group bg-[length:200%_100%] hover:bg-[position:100%_0] transition-all duration-500"
-            >
-              Start Free Trial
-              <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
-            </Button>
-          </motion.div>
+            Start Free Trial
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
 
-          <div className="mt-12 p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200/60 max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="mt-10 p-6 rounded-2xl bg-card/80 backdrop-blur-sm border max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-2">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <svg key={i} className="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
                   <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                 </svg>
               ))}
             </div>
-            <p className="text-lg font-semibold mb-2 text-gray-900">
+            <p className="text-base font-semibold mb-1 text-foreground">
               9 out of 10 students improved by 1 or more grades
             </p>
-            <p className="text-sm text-gray-500">within 4 weeks</p>
+            <p className="text-sm text-muted-foreground">within 4 weeks</p>
           </div>
         </div>
       </motion.section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200/60 py-12 px-8 bg-white">
+      <footer className="border-t py-10 px-8 bg-background">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center justify-center gap-3 mb-3">
             <img 
               src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
               alt="Mentiora" 
-              className="h-7 w-7"
+              className="h-6 w-6"
             />
-            <span className="font-bold text-lg text-gray-900">Mentiora</span>
+            <span className="font-semibold text-base text-foreground">Mentiora</span>
           </div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             © 2025 Mentiora. All rights reserved.
           </p>
         </div>
