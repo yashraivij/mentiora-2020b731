@@ -737,7 +737,8 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              Personalised tutoring at a fraction of the cost
+              Personalised tutoring at a<br />
+              <span style={{ color: '#0BA5E9' }}>fraction of the cost</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               More effective than personal tutoring, at just 5% of the cost.
@@ -882,49 +883,113 @@ const Index = () => {
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
-              className="flex flex-col gap-6"
+              className="space-y-8"
             >
               {/* Personal tutoring card */}
-              <div className="bg-white rounded-2xl p-8 border border-gray-200">
-                <div className="text-gray-500 text-sm font-medium mb-2">Personal tutoring</div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-bold text-gray-700">£500</span>
-                  <span className="text-xl text-gray-400">/month</span>
+              <div className="bg-white rounded-2xl p-8 border-2 border-gray-200 relative">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <div className="text-gray-500 text-sm font-semibold mb-2 uppercase tracking-wide">Personal tutoring</div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-6xl font-extrabold text-gray-800">£500</span>
+                      <span className="text-xl text-gray-500 font-medium">/month</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-3 pt-4 border-t border-gray-200">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                    <span>Limited availability</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                    <span>1-2 sessions per week</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                    <span>Generic lesson plans</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Comparison arrow/indicator */}
+              <div className="relative">
+                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
+                  <motion.div
+                    className="px-6 py-2 rounded-full text-sm font-bold text-white shadow-xl z-10"
+                    style={{ backgroundColor: '#0BA5E9' }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                  >
+                    95% cheaper ↓
+                  </motion.div>
                 </div>
               </div>
 
               {/* Mentiora pricing card */}
-              <div className="relative">
-                {/* Badge */}
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                  <div className="px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-lg" style={{ backgroundColor: '#0BA5E9' }}>
-                    95% cheaper
-                  </div>
-                </div>
-                
-                <div className="rounded-2xl p-8 shadow-xl" style={{ background: 'linear-gradient(135deg, #0BA5E9 0%, #0284C7 100%)' }}>
-                  <div className="flex items-center gap-2 mb-4">
-                    <img 
-                      src={mentioraLogo} 
-                      alt="Mentiora" 
-                      className="h-6 w-6"
-                    />
-                    <span className="text-lg font-bold text-white">Mentiora</span>
-                  </div>
+              <motion.div 
+                className="relative"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <div 
+                  className="rounded-2xl p-8 shadow-2xl border-2 relative overflow-hidden" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, #0BA5E9 0%, #0284C7 100%)',
+                    borderColor: '#0EA5E9'
+                  }}
+                >
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                   
-                  <div className="flex items-baseline gap-2 mb-6">
-                    <span className="text-5xl font-bold text-white">£24.99</span>
-                    <span className="text-xl text-white/80">/month</span>
-                  </div>
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-6">
+                      <img 
+                        src={mentioraLogo} 
+                        alt="Mentiora" 
+                        className="h-8 w-8"
+                      />
+                      <span className="text-2xl font-bold text-white">Mentiora</span>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <div className="flex items-baseline gap-2 mb-2">
+                        <span className="text-6xl font-extrabold text-white">£24.99</span>
+                        <span className="text-xl text-white/90 font-medium">/month</span>
+                      </div>
+                      <div className="text-white/80 text-sm">First 7 days free</div>
+                    </div>
 
-                  <Button
-                    onClick={() => navigate(user ? '/dashboard' : '/register')}
-                    className="w-full bg-white text-[#0BA5E9] hover:bg-gray-50 font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-                  >
-                    Start free trial
-                  </Button>
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-2 text-sm text-white">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>24/7 AI tutor access</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-white">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Unlimited practice questions</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-white">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Personalized study plans</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      onClick={() => navigate(user ? '/dashboard' : '/register')}
+                      className="w-full bg-white hover:bg-gray-50 font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-base"
+                      style={{ color: '#0BA5E9' }}
+                    >
+                      Start free trial →
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
