@@ -22,11 +22,14 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -245,19 +248,25 @@ const Index = () => {
                     Explain why increasing light intensity increases the rate of photosynthesis.
                   </h3>
 
-                  <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 min-h-[180px]">
-                    <p className="text-sm text-gray-800 leading-relaxed">
-                      More light means more energy is available for photosynthesis to occur. 
-                      Light is needed for the plant to make glucose. When there is more light, 
-                      the reaction happens faster so more oxygen is produced.
-                    </p>
-                  </div>
+                  <Textarea 
+                    placeholder="Type your answer here..."
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    className="min-h-[180px] mb-4 text-sm border-2 border-gray-200 rounded-lg p-4 resize-none focus:border-[#0BA5E9]"
+                    disabled={isAnswerSubmitted}
+                  />
 
                   <Button 
                     style={{ backgroundColor: '#0BA5E9' }}
                     className="w-full text-white text-base font-semibold py-3 rounded-lg hover:opacity-90"
+                    onClick={() => {
+                      if (!isAnswerSubmitted && userAnswer.trim()) {
+                        setIsAnswerSubmitted(true);
+                      }
+                    }}
+                    disabled={!userAnswer.trim() || isAnswerSubmitted}
                   >
-                    Submit Answer
+                    {isAnswerSubmitted ? "Answer Submitted ✓" : "Submit Answer"}
                   </Button>
                 </CardContent>
               </Card>
@@ -271,68 +280,88 @@ const Index = () => {
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
             >
-              <Card className="border-2 rounded-2xl shadow-lg" style={{ borderColor: '#0BA5E9' }}>
-                <CardContent className="p-8">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                        <span className="text-lg">🌿</span>
+              {!isAnswerSubmitted ? (
+                <Card className="border border-gray-200 rounded-2xl shadow-md h-full">
+                  <CardContent className="p-8 flex flex-col items-center justify-center min-h-[500px]">
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                        <span className="text-3xl">📝</span>
                       </div>
-                      <span className="text-sm font-bold text-black">Your Result</span>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Submit your answer</h3>
+                      <p className="text-sm text-gray-600">
+                        Type your answer in the box and click submit to see how Mentiora marks your work
+                      </p>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-black">2/3</div>
-                      <div className="text-xs text-gray-500">marks awarded</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-semibold text-green-900">Light provides energy</p>
-                        <p className="text-xs text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card className="border-2 rounded-2xl shadow-lg" style={{ borderColor: '#0BA5E9' }}>
+                  <CardContent className="p-8">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+                          <span className="text-lg">🌿</span>
+                        </div>
+                        <span className="text-sm font-bold text-black">Your Result</span>
                       </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-semibold text-green-900">Rate of reaction increases</p>
-                        <p className="text-xs text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-black">2/3</div>
+                        <div className="text-xs text-gray-500">marks awarded</div>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
-                      <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-semibold text-red-900">Missing: Chlorophyll absorption</p>
-                        <p className="text-xs text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-semibold text-green-900">Light provides energy</p>
+                          <p className="text-xs text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-semibold text-green-900">Rate of reaction increases</p>
+                          <p className="text-xs text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                        <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-semibold text-red-900">Missing: Chlorophyll absorption</p>
+                          <p className="text-xs text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
-                    <div className="flex items-start gap-2">
-                      <div className="text-lg flex-shrink-0">💡</div>
-                      <div>
-                        <p className="text-sm font-semibold text-gray-900 mb-1">Feedback</p>
-                        <p className="text-xs text-gray-700 leading-relaxed">
-                          Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy during photosynthesis.
-                        </p>
+                    <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
+                      <div className="flex items-start gap-2">
+                        <div className="text-lg flex-shrink-0">💡</div>
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900 mb-1">Feedback</p>
+                          <p className="text-xs text-gray-700 leading-relaxed">
+                            Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy during photosynthesis.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <Button 
-                    variant="outline"
-                    className="w-full text-base font-semibold py-3 rounded-lg"
-                    style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
-                  >
-                    Try Another Question
-                  </Button>
-                </CardContent>
-              </Card>
+                    <Button 
+                      variant="outline"
+                      className="w-full text-base font-semibold py-3 rounded-lg"
+                      style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
+                      onClick={() => {
+                        setIsAnswerSubmitted(false);
+                        setUserAnswer("");
+                      }}
+                    >
+                      Try Again
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
             </motion.div>
           </div>
         </div>
