@@ -404,8 +404,8 @@ const Pricing = () => {
               
               <p className="text-gray-600">
                 No school code yet? Ask them to email{" "}
-                <a href="mailto:contact@medlyai.com" className="text-[#00A8FF] font-medium hover:underline">
-                  contact@medlyai.com
+                <a href="mailto:yash@mentiora.com" className="text-[#00A8FF] font-medium hover:underline">
+                  yash@mentiora.com
                 </a>{" "}
                 for one.
               </p>
