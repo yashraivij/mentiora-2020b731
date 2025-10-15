@@ -151,6 +151,196 @@ const Index = () => {
         </div>
       </section>
 
+      {/* UNLIKE ANY OTHER APP SECTION */}
+      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">
+              Unlike any other app<br />
+              A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Mentiora teaches you how to answer every question
+              in your exams to get full marks.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-10"
+          >
+            {[
+              {
+                icon: "📕",
+                title: "Your Personal Tutor",
+                description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div style={{ backgroundColor: '#0BA5E9' }} className="rounded-lg p-3 mb-4 text-white text-sm">
+                      Hi Mentiora, What did this question mean by potential energy?
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="font-bold text-sm mb-2">Potential energy</p>
+                      <p className="text-xs text-gray-700 leading-relaxed">
+                        When a liquid turns into a solid, the particles lose energy and move closer together...
+                      </p>
+                    </div>
+                  </div>
+                )
+              },
+              {
+                icon: "📝",
+                title: "Your Exam Guide",
+                description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="border-b border-gray-200 pb-2 mb-3">
+                      <div className="font-semibold text-sm">Unit 1: Cell Biology</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div style={{ color: '#0BA5E9', backgroundColor: '#E0F2FE' }} className="text-sm px-3 py-2 rounded">
+                        Eukaryotes and prokaryoti...
+                      </div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Animal and plant cells</div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Cell specialisation</div>
+                    </div>
+                  </div>
+                )
+              },
+              {
+                icon: "✍️",
+                title: "Your Examiner",
+                description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="font-semibold text-sm mb-4">Your marks awarded</div>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Leaves become damaged</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Less chloroplasts</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4" />
+                        <span className="text-sm text-gray-400">Less photosynthesis</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700">
+                      You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
+                    </div>
+                  </div>
+                )
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+              >
+                <div className="text-5xl mb-6">{feature.icon}</div>
+                <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
+                <p className="text-base text-gray-600 leading-relaxed">{feature.description}</p>
+                {feature.visual}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CURRICULUM COVERAGE SECTION */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
+              The only tutor that's<br />
+              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
+            </h2>
+            <p className="text-base text-gray-600 mb-8">
+              Other tutoring platforms are not based on Exam Board Curriculums.<br />
+              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-5xl mx-auto"
+          >
+            {/* Exam Boards */}
+            <div className="mb-10">
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { name: "AQA", level: "GCSE & A-Level" },
+                  { name: "Edexcel", level: "GCSE & IGCSE" },
+                  { name: "OCR", level: "GCSE" }
+                ].map((board, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="text-xl font-bold text-black mb-1">{board.name}</div>
+                    <div className="text-xs text-gray-500">{board.level}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Subjects */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {[
+                  { name: "Biology", emoji: "🧬" },
+                  { name: "Chemistry", emoji: "🧪" },
+                  { name: "Physics", emoji: "🧲" },
+                  { name: "Maths", emoji: "📐" },
+                  { name: "English Language", emoji: "✍️" },
+                  { name: "English Literature", emoji: "📖" },
+                  { name: "Computer Science", emoji: "💻" },
+                  { name: "Geography", emoji: "🌍" },
+                  { name: "History", emoji: "⏳" },
+                  { name: "Psychology", emoji: "🧠" },
+                  { name: "Business", emoji: "💼" },
+                  { name: "Religious Studies", emoji: "⛪" },
+                  { name: "Combined Science", emoji: "🔬" },
+                  { name: "Spanish", emoji: "🇪🇸" }
+                ].map((subject, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
+                  >
+                    <div className="text-3xl mb-2">{subject.emoji}</div>
+                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* SUBJECT CARDS SECTION */}
       <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
         <div className="max-w-7xl mx-auto">
@@ -385,112 +575,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* UNLIKE ANY OTHER APP SECTION */}
-      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">
-              Unlike any other app<br />
-              A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Mentiora teaches you how to answer every question
-              in your exams to get full marks.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-10"
-          >
-            {[
-              {
-                icon: "📕",
-                title: "Your Personal Tutor",
-                description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div style={{ backgroundColor: '#0BA5E9' }} className="rounded-lg p-3 mb-4 text-white text-sm">
-                      Hi Mentiora, What did this question mean by potential energy?
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="font-bold text-sm mb-2">Potential energy</p>
-                      <p className="text-xs text-gray-700 leading-relaxed">
-                        When a liquid turns into a solid, the particles lose energy and move closer together...
-                      </p>
-                    </div>
-                  </div>
-                )
-              },
-              {
-                icon: "📝",
-                title: "Your Exam Guide",
-                description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div className="border-b border-gray-200 pb-2 mb-3">
-                      <div className="font-semibold text-sm">Unit 1: Cell Biology</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div style={{ color: '#0BA5E9', backgroundColor: '#E0F2FE' }} className="text-sm px-3 py-2 rounded">
-                        Eukaryotes and prokaryoti...
-                      </div>
-                      <div className="text-sm px-3 py-2 text-gray-700">Animal and plant cells</div>
-                      <div className="text-sm px-3 py-2 text-gray-700">Cell specialisation</div>
-                    </div>
-                  </div>
-                )
-              },
-              {
-                icon: "✍️",
-                title: "Your Examiner",
-                description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div className="font-semibold text-sm mb-4">Your marks awarded</div>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Leaves become damaged</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Less chloroplasts</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4" />
-                        <span className="text-sm text-gray-400">Less photosynthesis</span>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700">
-                      You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
-                    </div>
-                  </div>
-                )
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-              >
-                <div className="text-5xl mb-6">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
-                <p className="text-base text-gray-600 leading-relaxed">{feature.description}</p>
-                {feature.visual}
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* CIRCULAR FEEDBACK LOOP PERSONALIZATION SECTION */}
       <section className="py-32 px-6 bg-white">
@@ -830,88 +914,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CURRICULUM COVERAGE SECTION */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              The only tutor that's<br />
-              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
-            </h2>
-            <p className="text-base text-gray-600 mb-8">
-              Other tutoring platforms are not based on Exam Board Curriculums.<br />
-              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="max-w-5xl mx-auto"
-          >
-            {/* Exam Boards */}
-            <div className="mb-10">
-              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
-              <div className="flex flex-wrap justify-center gap-4">
-                {[
-                  { name: "AQA", level: "GCSE & A-Level" },
-                  { name: "Edexcel", level: "GCSE & IGCSE" },
-                  { name: "OCR", level: "GCSE" }
-                ].map((board, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="text-xl font-bold text-black mb-1">{board.name}</div>
-                    <div className="text-xs text-gray-500">{board.level}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Subjects */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {[
-                  { name: "Biology", emoji: "🧬" },
-                  { name: "Chemistry", emoji: "🧪" },
-                  { name: "Physics", emoji: "🧲" },
-                  { name: "Maths", emoji: "📐" },
-                  { name: "English Language", emoji: "✍️" },
-                  { name: "English Literature", emoji: "📖" },
-                  { name: "Computer Science", emoji: "💻" },
-                  { name: "Geography", emoji: "🌍" },
-                  { name: "History", emoji: "⏳" },
-                  { name: "Psychology", emoji: "🧠" },
-                  { name: "Business", emoji: "💼" },
-                  { name: "Religious Studies", emoji: "⛪" },
-                  { name: "Combined Science", emoji: "🔬" },
-                  { name: "Spanish", emoji: "🇪🇸" }
-                ].map((subject, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                  >
-                    <div className="text-3xl mb-2">{subject.emoji}</div>
-                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* PRICING SECTION */}
       <section className="py-24 px-6" style={{ backgroundColor: '#F8FAFC' }}>
