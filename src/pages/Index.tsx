@@ -490,250 +490,523 @@ const Index = () => {
         </div>
       </section>
 
-      {/* AI THAT LEARNS HOW YOU LEARN SECTION */}
-      <section className="py-24 px-6" style={{ backgroundColor: '#F0F4F8' }}>
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-5">
-              <span className="text-black">AI that learns </span>
-              <span style={{ color: '#00B4D8' }}>how you learn</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              One intelligent system that predicts grades, creates notes, and plans your week
-            </p>
-          </motion.div>
-
-          {/* STAGE 1: YOUR PERFORMANCE */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-5xl mx-auto mb-10"
-          >
-            <div className="bg-white rounded-3xl p-10 shadow-lg">
-              <div className="text-center mb-8">
-                <h3 className="text-sm font-bold tracking-wider text-gray-500 uppercase">
-                  Your Performance
-                </h3>
+      {/* INTERACTIVE PERSONALIZATION SECTION */}
+      <section className="py-32 px-6 bg-white">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Two-Column Header */}
+          <div className="grid lg:grid-cols-[60%_40%] gap-12 mb-16">
+            {/* Left Column */}
+            <div>
+              <div className="inline-block px-3 py-1.5 rounded-full text-xs font-bold mb-4" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
+                HOW IT WORKS
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Metric Card 1 */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-md transition-all hover:-translate-y-1"
-                >
-                  <div className="text-5xl font-extrabold text-black mb-2">78%</div>
-                  <div className="text-base text-gray-600 font-medium">Accuracy</div>
-                </motion.div>
-
-                {/* Metric Card 2 */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-md transition-all hover:-translate-y-1"
-                >
-                  <div className="text-5xl font-extrabold text-black mb-2">2.3m</div>
-                  <div className="text-base text-gray-600 font-medium">Avg Speed</div>
-                </motion.div>
-
-                {/* Metric Card 3 */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-md transition-all hover:-translate-y-1"
-                >
-                  <div className="text-5xl font-extrabold text-black mb-2">12</div>
-                  <div className="text-base text-gray-600 font-medium">Topics</div>
-                </motion.div>
-              </div>
+              <h2 className="text-5xl font-extrabold text-black leading-tight mb-5">
+                Three features.<br />
+                <span style={{ color: '#00B4D8' }}>One adaptive brain.</span>
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                Mentiora analyzes how you learn and automatically personalizes your entire study experience. No setup required.
+              </p>
             </div>
-          </motion.div>
 
-          {/* CONNECTOR ARROW */}
-          <div className="flex justify-center my-8">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-5xl font-bold"
-              style={{ color: '#00B4D8' }}
-            >
-              ↓
-            </motion.div>
+            {/* Right Column - Animated Illustration */}
+            <div className="flex items-center justify-center">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="relative"
+              >
+                <div className="w-72 h-72 rounded-full bg-gradient-to-br from-cyan-100 to-purple-100 flex items-center justify-center">
+                  <Brain className="w-32 h-32" style={{ color: '#00B4D8' }} />
+                  {/* Animated nodes */}
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute top-12 right-12 w-4 h-4 rounded-full"
+                    style={{ backgroundColor: '#00B4D8' }}
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    className="absolute bottom-16 left-8 w-4 h-4 rounded-full"
+                    style={{ backgroundColor: '#9333EA' }}
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    className="absolute top-20 left-16 w-4 h-4 rounded-full"
+                    style={{ backgroundColor: '#00B4D8' }}
+                  />
+                </div>
+              </motion.div>
+            </div>
           </div>
 
-          {/* STAGE 2: AI ANALYSIS ENGINE */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-5xl mx-auto mb-10"
-          >
-            <div 
-              className="rounded-3xl p-12 border-4 shadow-xl"
-              style={{ 
-                background: 'linear-gradient(135deg, #E6F7FF 0%, #F0F9FF 100%)',
-                borderColor: '#00B4D8'
-              }}
-            >
-              <div className="text-center">
-                <Brain className="w-16 h-16 mx-auto mb-5" style={{ color: '#00B4D8' }} />
-                <h3 className="text-3xl font-bold text-black mb-3">AI Analysis Engine</h3>
-                <p className="text-lg text-gray-700 font-medium">
-                  Real-time personalization across all features
-                </p>
+          {/* Tabbed Interface */}
+          <div className="mt-16">
+            {/* Tab Navigation */}
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex bg-gray-100 rounded-2xl p-2 gap-2">
+                {[
+                  { id: 'grades', label: 'Grade Predictions', icon: '🎯' },
+                  { id: 'notes', label: 'Auto-Notes', icon: '📝' },
+                  { id: 'planner', label: 'Smart Planner', icon: '📅' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      const section = document.getElementById(`tab-${tab.id}`);
+                      section?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className={`px-8 py-3.5 rounded-xl font-semibold text-base transition-all duration-200 ${
+                      true ? 'bg-white text-black shadow-md' : 'bg-transparent text-gray-600 hover:bg-white/50'
+                    }`}
+                  >
+                    <span className="mr-2">{tab.icon}</span>
+                    {tab.label}
+                  </button>
+                ))}
               </div>
             </div>
-          </motion.div>
 
-          {/* CONNECTOR ARROW */}
-          <div className="flex justify-center my-8">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="text-5xl font-bold"
-              style={{ color: '#00B4D8' }}
-            >
-              ↓
-            </motion.div>
-          </div>
+            {/* Tab 1: Grade Predictions */}
+            <div id="tab-grades" className="mb-20">
+              <div 
+                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
+                style={{ background: 'linear-gradient(135deg, #E6F7FF 0%, #FFFFFF 100%)' }}
+              >
+                <div className="grid lg:grid-cols-[40%_60%] gap-16 items-center">
+                  {/* Left - Explanation */}
+                  <div>
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mb-5" style={{ backgroundColor: '#E6F7FF' }}>
+                      🎯
+                    </div>
+                    <h3 className="text-4xl font-bold text-black mb-4">
+                      Always know where you stand
+                    </h3>
+                    <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                      Our AI constantly analyzes your performance—accuracy, speed, consistency—to predict your exam grade with 92% accuracy. No guessing, just data.
+                    </p>
+                    
+                    <div className="space-y-3">
+                      {[
+                        'Updates after every question',
+                        'Tracks 50+ performance metrics',
+                        'Compares to 100K+ student data',
+                        'Predicts grade boundaries'
+                      ].map((point, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                          <span className="text-base text-gray-700">{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-          {/* STAGE 3: PERSONALIZED FOR YOU */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-5xl mx-auto"
-          >
-            <div className="bg-white rounded-3xl p-10 shadow-lg">
-              <div className="text-center mb-8">
-                <h3 className="text-sm font-bold tracking-wider text-gray-500 uppercase">
-                  Personalized For You
-                </h3>
-              </div>
-              
-              {/* Feature Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                {/* Feature Card 1 - Predicted Grade */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-white border-2 rounded-2xl p-8 text-center hover:shadow-xl transition-all hover:-translate-y-1"
-                  style={{ borderColor: '#00B4D8' }}
-                >
-                  <Target className="w-8 h-8 mx-auto mb-4" style={{ color: '#00B4D8' }} />
-                  <div className="text-6xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>7</div>
-                  <div className="text-base font-bold text-black mb-1">Predicted Grade</div>
-                  <div className="text-sm text-gray-600">92% accuracy</div>
-                </motion.div>
-
-                {/* Feature Card 2 - Time Saved */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-white border-2 rounded-2xl p-8 text-center hover:shadow-xl transition-all hover:-translate-y-1"
-                  style={{ borderColor: '#00B4D8' }}
-                >
-                  <BookOpen className="w-8 h-8 mx-auto mb-4" style={{ color: '#00B4D8' }} />
-                  <div className="text-6xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>14h</div>
-                  <div className="text-base font-bold text-black mb-1">Time Saved</div>
-                  <div className="text-sm text-gray-600">Auto-notes created</div>
-                </motion.div>
-
-                {/* Feature Card 3 - Days Planned */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-white border-2 rounded-2xl p-8 text-center hover:shadow-xl transition-all hover:-translate-y-1"
-                  style={{ borderColor: '#00B4D8' }}
-                >
-                  <Calendar className="w-8 h-8 mx-auto mb-4" style={{ color: '#00B4D8' }} />
-                  <div className="text-6xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>7</div>
-                  <div className="text-base font-bold text-black mb-1">Days Planned</div>
-                  <div className="text-sm text-gray-600">Adapts in real-time</div>
-                </motion.div>
-              </div>
-
-              {/* Stats Banner */}
-              <div className="border-t border-gray-200 pt-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                  {/* Right - Interactive Visual */}
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-white rounded-2xl p-10 shadow-2xl"
                   >
-                    <div className="text-5xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>+1.8</div>
-                    <div className="text-base text-gray-600 font-medium">Grade improvement</div>
-                  </motion.div>
+                    <div className="flex items-center gap-2 mb-8">
+                      <FlaskConical className="w-5 h-5" style={{ color: '#00B4D8' }} />
+                      <span className="font-bold text-lg">Chemistry (AQA)</span>
+                    </div>
 
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <div className="text-5xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>94%</div>
-                    <div className="text-base text-gray-600 font-medium">Better planning</div>
-                  </motion.div>
+                    {/* Circular Progress */}
+                    <div className="flex justify-center mb-8">
+                      <div className="relative w-56 h-56">
+                        <svg className="transform -rotate-90 w-56 h-56">
+                          <circle
+                            cx="112"
+                            cy="112"
+                            r="100"
+                            stroke="#E5E7EB"
+                            strokeWidth="12"
+                            fill="none"
+                          />
+                          <motion.circle
+                            cx="112"
+                            cy="112"
+                            r="100"
+                            stroke="url(#gradient)"
+                            strokeWidth="12"
+                            fill="none"
+                            strokeLinecap="round"
+                            initial={{ strokeDasharray: "0 628" }}
+                            whileInView={{ strokeDasharray: "439 628" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.5, delay: 0.3 }}
+                          />
+                          <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#00B4D8" />
+                              <stop offset="100%" stopColor="#0284C7" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <div className="text-sm text-gray-500 mb-1">Your Grade</div>
+                          <motion.div 
+                            className="text-7xl font-extrabold text-black"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                          >
+                            7
+                          </motion.div>
+                          <div className="text-sm text-gray-500 mt-1">Target: Grade 9</div>
+                        </div>
+                      </div>
+                    </div>
 
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <div className="text-5xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>50K+</div>
-                    <div className="text-base text-gray-600 font-medium">Students</div>
+                    {/* Confidence Meter */}
+                    <div className="mb-6">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-gray-600">Prediction Confidence</span>
+                        <span className="text-sm font-bold text-black">92%</span>
+                      </div>
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full"
+                          style={{ background: 'linear-gradient(90deg, #10B981, #00B4D8)' }}
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '92%' }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Mini Stats */}
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        { label: '↗ +1.2', sub: 'Last 7 days' },
+                        { label: '⚡ 89%', sub: 'Accuracy' },
+                        { label: '📊 12/15', sub: 'Topics strong' }
+                      ].map((stat, i) => (
+                        <div key={i} className="bg-gray-50 rounded-lg p-3 text-center">
+                          <div className="font-bold text-sm text-black">{stat.label}</div>
+                          <div className="text-xs text-gray-600">{stat.sub}</div>
+                        </div>
+                      ))}
+                    </div>
                   </motion.div>
                 </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* CTA SECTION */}
+            {/* Tab 2: Auto-Notes */}
+            <div id="tab-notes" className="mb-20">
+              <div 
+                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
+                style={{ background: 'linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%)' }}
+              >
+                <div className="grid lg:grid-cols-[40%_60%] gap-16 items-start">
+                  {/* Left - Explanation */}
+                  <div>
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mb-5" style={{ backgroundColor: '#FAE8FF' }}>
+                      📝
+                    </div>
+                    <h3 className="text-4xl font-bold text-black mb-4">
+                      Notes that write themselves
+                    </h3>
+                    <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                      As you study, Mentiora generates personalized notes automatically. Focused on what you need to know, written in a way you understand. Stop wasting time on summaries.
+                    </p>
+                    
+                    <div 
+                      className="rounded-xl p-6 text-white"
+                      style={{ background: 'linear-gradient(135deg, #9333EA, #EC4899)' }}
+                    >
+                      <div className="text-2xl font-bold">⚡ 14 hours saved this month</div>
+                    </div>
+                  </div>
+
+                  {/* Right - Visual Comparison */}
+                  <div>
+                    {/* Split Comparison */}
+                    <div className="grid grid-cols-2 rounded-2xl overflow-hidden shadow-xl mb-6">
+                      {/* Traditional */}
+                      <div className="bg-gray-100 p-8">
+                        <div className="text-sm font-semibold text-gray-500 mb-4">Manual Notes</div>
+                        <div className="text-4xl font-bold text-gray-400 mb-4">3h 45m</div>
+                        <div className="text-2xl mb-4">😰</div>
+                        <ul className="space-y-2 text-sm text-gray-600">
+                          <li>• Time-consuming</li>
+                          <li>• Often incomplete</li>
+                          <li>• Hard to review</li>
+                        </ul>
+                      </div>
+
+                      {/* With Mentiora */}
+                      <div className="p-8" style={{ background: 'linear-gradient(135deg, #E6F7FF, #FFFFFF)' }}>
+                        <div className="text-sm font-semibold mb-4" style={{ color: '#00B4D8' }}>Auto-Notes</div>
+                        <div className="text-4xl font-bold mb-4" style={{ color: '#00B4D8' }}>12m</div>
+                        <div className="text-2xl mb-4">✨</div>
+                        <ul className="space-y-2 text-sm text-gray-700">
+                          <li>• Instant generation</li>
+                          <li>• Personalized to you</li>
+                          <li>• AI-organized</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Sample Note Preview */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="bg-white border-2 rounded-xl p-6 shadow-lg"
+                      style={{ borderColor: '#00B4D8' }}
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="font-bold text-lg text-black">Chemical Bonding - Your Notes</div>
+                        <div className="text-xs text-gray-500">Generated 2 mins ago</div>
+                      </div>
+
+                      <div className="space-y-4 text-sm">
+                        <div>
+                          <div className="font-semibold text-green-700 mb-2 flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4" />
+                            Strong Areas
+                          </div>
+                          <ul className="text-gray-700 space-y-1 ml-6">
+                            <li>• Ionic bonding formation</li>
+                            <li>• Simple molecular structures</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <div className="font-semibold text-orange-600 mb-2 flex items-center gap-2">
+                            <AlertTriangle className="w-4 h-4" />
+                            Review This
+                          </div>
+                          <ul className="text-gray-700 space-y-1 ml-6">
+                            <li>• Metallic bonding (you got 2/5 questions wrong)</li>
+                            <li>• Intermolecular forces</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-gray-50 rounded-lg p-3">
+                          <div className="font-semibold text-black mb-2">Key Takeaways:</div>
+                          <p className="text-gray-700 leading-relaxed">
+                            Ionic bonds form between metals and non-metals through electron transfer. 
+                            You're struggling with metallic bonding - focus on the "sea of electrons" concept.
+                          </p>
+                        </div>
+
+                        <div className="text-xs" style={{ color: '#00B4D8' }}>
+                          📚 Suggested Practice: Questions 12-15, Topic 3.2
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tab 3: Smart Planner */}
+            <div id="tab-planner" className="mb-20">
+              <div 
+                className="rounded-3xl p-16 min-h-[600px] border border-gray-200 shadow-xl"
+                style={{ background: 'linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%)' }}
+              >
+                {/* Centered Intro */}
+                <div className="text-center mb-12">
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl mx-auto mb-5" style={{ backgroundColor: '#FFEDD5' }}>
+                    📅
+                  </div>
+                  <h3 className="text-4xl font-bold text-black mb-4">
+                    Your week, perfectly planned
+                  </h3>
+                  <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                    Mentiora builds your study schedule automatically and adapts it in real-time. 
+                    If you're acing a topic, we move you forward. Struggling? We add targeted practice.
+                  </p>
+                </div>
+
+                {/* Weekly Planner Interface */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl p-8 shadow-2xl max-w-5xl mx-auto"
+                >
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-8 pb-4 border-b">
+                    <div className="font-bold text-lg">Your Adaptive Plan</div>
+                    <div className="flex items-center gap-4">
+                      <button className="text-gray-400 hover:text-black">←</button>
+                      <span className="font-semibold">Oct 14-20</span>
+                      <button className="text-gray-400 hover:text-black">→</button>
+                    </div>
+                    <div className="px-4 py-1.5 rounded-full text-sm font-bold text-white" style={{ backgroundColor: '#00B4D8' }}>
+                      2.5h total
+                    </div>
+                  </div>
+
+                  {/* Day Cards */}
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {/* Monday */}
+                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-green-500">
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="font-bold text-sm">Monday, Oct 14</div>
+                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
+                          45 min
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div className="bg-white rounded-lg p-3 border border-gray-200">
+                          <div className="text-xs text-gray-500 mb-1">9:00 AM - Chemistry</div>
+                          <div className="font-semibold text-sm text-black mb-2">Ionic Bonding Practice</div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex gap-0.5">
+                              {[1, 2, 0].map((filled, i) => (
+                                <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
+                              ))}
+                            </div>
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-semibold">
+                              Completed ✓
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Tuesday - With Adaptation Badge */}
+                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 relative" style={{ borderLeftColor: '#00B4D8' }}>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                      >
+                        ⚡ Plan adjusted!
+                      </motion.div>
+
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="font-bold text-sm">Tuesday, Oct 15</div>
+                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
+                          50 min
+                        </div>
+                      </div>
+                      
+                      <div className="bg-blue-50 rounded-lg p-3 border-2" style={{ borderColor: '#00B4D8' }}>
+                        <div className="text-xs text-gray-600 mb-1">6:30 PM - Biology</div>
+                        <div className="font-semibold text-sm text-black mb-2">Cell Structure Deep Dive</div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex gap-0.5">
+                            {[1, 1, 1].map((filled, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
+                            ))}
+                          </div>
+                          <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
+                            Up next
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-600 mt-2">🎯 Peak focus time</div>
+                      </div>
+                    </div>
+
+                    {/* Wednesday */}
+                    <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-orange-500">
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="font-bold text-sm">Wednesday, Oct 16</div>
+                        <div className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: '#E6F7FF', color: '#00B4D8' }}>
+                          55 min
+                        </div>
+                      </div>
+                      
+                      <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
+                        <div className="text-xs text-gray-600 mb-1">4:00 PM - Computer Science</div>
+                        <div className="font-semibold text-sm text-black mb-2">Algorithms Deep Dive</div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex gap-0.5">
+                            {[1, 1, 1].map((filled, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${filled ? 'bg-black' : 'bg-gray-300'}`} />
+                            ))}
+                          </div>
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 font-semibold">
+                            Advanced
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-600 mt-2">You mastered basics faster</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Info */}
+                  <div className="mt-6 pt-6 border-t text-center">
+                    <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+                      <span>🔄</span>
+                      <span>Plans adapt after every study session</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mt-16"
+            className="bg-gray-50 rounded-3xl p-12 mt-20"
           >
-            <Button 
+            <h3 className="text-3xl font-bold text-black text-center mb-12">
+              Powered by real results
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { number: '92%', label: 'Prediction accuracy' },
+                { number: '14.7h', label: 'Avg time saved/month' },
+                { number: '+1.8', label: 'Grade improvement' },
+                { number: '50K+', label: 'Active students' }
+              ].map((stat, i) => (
+                <div key={i}>
+                  <div className="text-5xl font-extrabold mb-2" style={{ color: '#00B4D8' }}>
+                    {stat.number}
+                  </div>
+                  <div className="text-base text-gray-600">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Final CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 rounded-3xl p-12 text-center shadow-xl"
+            style={{ background: 'linear-gradient(90deg, #00B4D8, #0284C7)' }}
+          >
+            <h3 className="text-4xl font-bold text-white mb-4">
+              Experience intelligent learning
+            </h3>
+            <p className="text-xl text-white/90 mb-8">
+              Try all three features free for 14 days
+            </p>
+            <Button
               size="lg"
               onClick={() => navigate(user ? '/dashboard' : '/register')}
-              className="text-white text-lg font-semibold px-12 py-7 rounded-full hover:scale-105 transition-all"
-              style={{ 
-                backgroundColor: '#00B4D8',
-                boxShadow: '0px 4px 16px rgba(0, 180, 216, 0.3)'
-              }}
+              className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-7 rounded-full hover:scale-105 transition-all"
+              style={{ color: '#00B4D8' }}
             >
-              Start learning smarter
+              Start free trial
             </Button>
-            <p className="text-sm text-gray-600 mt-3">No credit card required</p>
+            <p className="text-sm text-white/80 mt-4">
+              No credit card • Cancel anytime
+            </p>
           </motion.div>
         </div>
       </section>
