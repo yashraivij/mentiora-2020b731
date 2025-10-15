@@ -195,11 +195,26 @@ const Index = () => {
         </div>
       </section>
 
-      {/* EXAMPLE QUESTION SECTION */}
+      {/* TOPIC PRACTICE QUESTION SECTION */}
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left - Example Question */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+              See how <span style={{ color: '#0BA5E9' }}>questions are marked</span>
+            </h2>
+            <p className="text-lg text-gray-600">
+              Answer topic-based questions and get instant, detailed feedback
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Left - Question Interface */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -209,51 +224,46 @@ const Index = () => {
               <Card className="border border-gray-200 rounded-2xl shadow-md">
                 <CardContent className="p-8">
                   <div className="flex justify-between items-center mb-6">
-                    <span className="text-sm font-bold text-black">Example English Question</span>
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-500">4 marks</span>
-                      <button className="text-xs border border-gray-300 px-3 py-1 rounded-md">
-                        Medly solve together
-                      </button>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+                        <span className="text-lg">🌿</span>
+                      </div>
+                      <span className="text-sm font-bold text-black">Biology - Photosynthesis</span>
                     </div>
+                    <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}>
+                      3 marks
+                    </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-black mb-5">
-                    The Hidden Underground - London's Lost River Fleet
+                  <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      A student investigated the effect of light intensity on the rate of photosynthesis in pondweed.
+                    </p>
+                  </div>
+
+                  <h3 className="text-base font-bold text-black mb-4">
+                    Explain why increasing light intensity increases the rate of photosynthesis.
                   </h3>
 
-                  <div className="text-sm text-gray-700 leading-loose space-y-4 mb-6">
-                    <p>
-                      Sarah Chen adjusted her headlamp as she descended into the darkness, 
-                      the beam cutting through the damp air like a searchlight. The forgotten 
-                      tunnel beneath London stretched ahead, its Victorian brickwork still 
-                      remarkably intact after 150 years.
+                  <div className="bg-white border-2 border-gray-200 rounded-lg p-4 mb-4 min-h-[180px]">
+                    <p className="text-sm text-gray-800 leading-relaxed">
+                      More light means more energy is available for photosynthesis to occur. 
+                      Light is needed for the plant to make glucose. When there is more light, 
+                      the reaction happens faster so more oxygen is produced.
                     </p>
                   </div>
 
-                  <div className="bg-gray-900 h-40 rounded-lg mb-6 flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Tunnel Image</span>
-                  </div>
-
-                  <div className="text-sm text-gray-700 leading-relaxed mb-6">
-                    <p className="mb-3">
-                      <strong>Read again the first part of the source, from lines 1 to 4.</strong>
-                    </p>
-                    <p>
-                      List four things about Sarah Chen from this part of the source.
-                    </p>
-                  </div>
-
-                  <textarea 
-                    placeholder="Your answer"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm resize-none"
-                    rows={5}
-                  />
+                  <Button 
+                    style={{ backgroundColor: '#0BA5E9' }}
+                    className="w-full text-white text-base font-semibold py-3 rounded-lg hover:opacity-90"
+                  >
+                    Submit Answer
+                  </Button>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Right - Try Medly Card */}
+            {/* Right - Marked Result */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -261,17 +271,65 @@ const Index = () => {
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
             >
-              <Card className="bg-black rounded-2xl">
-                <CardContent className="p-10">
-                  <h3 className="text-3xl font-bold text-white mb-3">Try Medly now</h3>
-                  <p className="text-base text-gray-300 mb-8">
-                    Let's try answering a question together!
-                  </p>
+              <Card className="border-2 rounded-2xl shadow-lg" style={{ borderColor: '#0BA5E9' }}>
+                <CardContent className="p-8">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+                        <span className="text-lg">🌿</span>
+                      </div>
+                      <span className="text-sm font-bold text-black">Your Result</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-black">2/3</div>
+                      <div className="text-xs text-gray-500">marks awarded</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-semibold text-green-900">Light provides energy</p>
+                        <p className="text-xs text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-semibold text-green-900">Rate of reaction increases</p>
+                        <p className="text-xs text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                      <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-semibold text-red-900">Missing: Chlorophyll absorption</p>
+                        <p className="text-xs text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
+                    <div className="flex items-start gap-2">
+                      <div className="text-lg flex-shrink-0">💡</div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900 mb-1">Feedback</p>
+                        <p className="text-xs text-gray-700 leading-relaxed">
+                          Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy during photosynthesis.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   <Button 
-                    style={{ backgroundColor: '#0BA5E9' }}
-                    className="w-full text-white text-base font-semibold py-3 rounded-lg hover:opacity-90"
+                    variant="outline"
+                    className="w-full text-base font-semibold py-3 rounded-lg"
+                    style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
                   >
-                    Okay
+                    Try Another Question
                   </Button>
                 </CardContent>
               </Card>
