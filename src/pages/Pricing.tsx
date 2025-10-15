@@ -390,7 +390,7 @@ const Pricing = () => {
           </div>
 
           {/* Teacher Section */}
-          <div className="flex items-center justify-center gap-8 max-w-[700px] mx-auto">
+          <div className="flex items-center justify-center gap-8 max-w-[700px] mx-auto bg-gray-50 rounded-2xl p-8">
             <div className="flex-1">
               <h3 className="text-xl font-bold mb-4 text-gray-900">
                 Ask your teacher for your school's 20% discount code.
