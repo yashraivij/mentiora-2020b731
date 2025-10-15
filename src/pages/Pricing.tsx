@@ -36,13 +36,15 @@ const Pricing = () => {
   };
 
   const features = [
-    "Boost your grades in just 5 minutes with Mentiora, your personal AI exam tutor.",
-    "Practice with 2,500+ exam-style questions per subject with instant AI marking.",
-    "Create custom practice sessions focused on your specific weak areas.",
-    "Understand tough concepts with 24/7 step-by-step tutoring and exam strategy guidance.",
+    "Get an adaptive personalised weekly study plan tailored to your learning pace and exam goals.",
+    "Practice with 2,500+ exam-style questions per subject with instant AI marking and feedback.",
+    "Track your performance with real-time analytics showing strengths, weaknesses and predicted grades.",
+    "Access 24/7 AI tutoring with step-by-step explanations for every concept and question.",
     "Prepare with 10+ timed mock papers per subject, designed for your specific exam board.",
     "Get exclusive access to Mentiora's 2026 Predicted Papers (releasing this April).",
-    "Study efficiently with concise, exam-focused notes for every point in your curriculum.",
+    "Create and review custom flashcards powered by spaced repetition for better retention.",
+    "Study efficiently with AI-generated, exam-focused notes for every topic in your curriculum.",
+    "Monitor stress levels with adaptive learning recommendations to maintain optimal study performance.",
     "Access 40+ subjects from GCSEs, IGCSEs, A Levels and IB across multiple examination boards including AQA, Edexcel, CIE and OCR.",
     "Start immediately - change or cancel your plan anytime."
   ];
