@@ -309,20 +309,20 @@ const Pricing = () => {
                           <div className="space-y-1.5 text-[10px] text-gray-700 leading-relaxed">
                             <p className="text-gray-600">Dear parent or guardian,</p>
                             
-                            <p>Your child has expressed interest in using Medly AI for GCSE prep...</p>
+                            <p>Your child has expressed interest in using Mentiora for GCSE prep...</p>
                             
                             <div className="space-y-1">
                               <div className="flex items-start gap-1.5">
                                 <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">Unlimited exam-style questions</span>
+                                <span className="text-[9px]">2,500+ exam-style questions with instant marking</span>
                               </div>
                               <div className="flex items-start gap-1.5">
                                 <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">24/7 AI tutoring</span>
+                                <span className="text-[9px]">24/7 tutoring with step-by-step explanations</span>
                               </div>
                               <div className="flex items-start gap-1.5">
                                 <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">Mock papers & tests</span>
+                                <span className="text-[9px]">10+ timed mock papers per subject</span>
                               </div>
                             </div>
                           </div>
