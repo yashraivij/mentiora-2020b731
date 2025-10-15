@@ -393,7 +393,7 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-5 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">
               Unlike any other app<br />
               A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
             </h2>
@@ -418,7 +418,7 @@ const Index = () => {
                 visual: (
                   <div className="bg-white rounded-xl p-6 mt-6">
                     <div style={{ backgroundColor: '#0BA5E9' }} className="rounded-lg p-3 mb-4 text-white text-sm">
-                      Hi Medly, What did this question mean by potential energy?
+                      Hi Mentiora, What did this question mean by potential energy?
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4">
                       <p className="font-bold text-sm mb-2">Potential energy</p>
@@ -449,7 +449,7 @@ const Index = () => {
                 )
               },
               {
-                icon: "🏃",
+                icon: "✍️",
                 title: "Your Examiner",
                 description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
                 visual: (
