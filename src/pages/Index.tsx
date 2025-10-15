@@ -17,12 +17,14 @@ import {
   Dna,
   Crown,
   Menu,
-  X
+  X,
+  Send
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -216,152 +218,166 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Left - Question Interface */}
+          <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start max-w-6xl mx-auto">
+            {/* Left Pane: Question Sheet */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <Card className="border border-gray-200 rounded-2xl shadow-md">
-                <CardContent className="p-8">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                        <span className="text-lg">🌿</span>
+              <div className="rounded-lg bg-white shadow-sm border border-gray-200 p-8">
+                {/* Question Header */}
+                <div className="mb-6">
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex-1">
+                      {/* Question reference numbers */}
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="inline-flex items-center gap-1">
+                          <span className="inline-block border-2 border-black px-3 py-1 text-base font-mono font-semibold text-black">0</span>
+                          <span className="inline-block border-2 border-black px-3 py-1 text-base font-mono font-semibold text-black">1</span>
+                        </div>
                       </div>
-                      <span className="text-sm font-bold text-black">Biology - Photosynthesis</span>
+                      
+                      {/* Question text */}
+                      <p className="text-base text-black leading-relaxed mb-2">
+                        Explain why increasing light intensity increases the rate of photosynthesis.
+                      </p>
                     </div>
-                    <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: '#E0F2FE', color: '#0BA5E9' }}>
-                      3 marks
-                    </span>
+                    
+                    {/* Marks pill */}
+                    <div className="text-sm font-semibold text-black whitespace-nowrap">
+                      [3 marks]
+                    </div>
                   </div>
+                </div>
 
-                  <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                    <p className="text-sm text-gray-700 leading-relaxed">
-                      A student investigated the effect of light intensity on the rate of photosynthesis in pondweed.
-                    </p>
-                  </div>
-
-                  <h3 className="text-base font-bold text-black mb-4">
-                    Explain why increasing light intensity increases the rate of photosynthesis.
-                  </h3>
-
+                {/* Answer area */}
+                <div className="min-h-[400px] mb-6">
                   <Textarea 
-                    placeholder="Type your answer here..."
+                    placeholder=""
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
-                    className="min-h-[180px] mb-4 text-sm border-2 border-gray-200 rounded-lg p-4 resize-none focus:border-[#0BA5E9]"
+                    className="w-full h-[400px] border-2 border-gray-200 rounded-lg p-4 resize-none focus:border-[#0BA5E9] focus:ring-1 focus:ring-[#0BA5E9] text-base text-black font-medium leading-relaxed"
                     disabled={isAnswerSubmitted}
                   />
+                </div>
 
-                  <Button 
-                    style={{ backgroundColor: '#0BA5E9' }}
-                    className="w-full text-white text-base font-semibold py-3 rounded-lg hover:opacity-90"
-                    onClick={() => {
-                      if (!isAnswerSubmitted && userAnswer.trim()) {
-                        setIsAnswerSubmitted(true);
-                      }
-                    }}
-                    disabled={!userAnswer.trim() || isAnswerSubmitted}
-                  >
-                    {isAnswerSubmitted ? "Answer Submitted ✓" : "Submit Answer"}
-                  </Button>
-                </CardContent>
-              </Card>
+                {/* Bottom action area */}
+                {!isAnswerSubmitted && (
+                  <div className="flex justify-end">
+                    <Button
+                      onClick={() => {
+                        if (userAnswer.trim()) {
+                          setIsAnswerSubmitted(true);
+                        }
+                      }}
+                      disabled={!userAnswer.trim()}
+                      style={{ backgroundColor: '#0BA5E9' }}
+                      className="text-white rounded-full px-10 py-6 font-semibold text-base disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Check answer
+                    </Button>
+                  </div>
+                )}
+              </div>
             </motion.div>
 
-            {/* Right - Marked Result */}
+            {/* Right Pane: Ask mentiora */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
+              className="flex flex-col h-[600px]"
             >
-              {!isAnswerSubmitted ? (
-                <Card className="border border-gray-200 rounded-2xl shadow-md h-full">
-                  <CardContent className="p-8 flex flex-col items-center justify-center min-h-[500px]">
-                    <div className="text-center">
-                      <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                        <span className="text-3xl">📝</span>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">Submit your answer</h3>
-                      <p className="text-sm text-gray-600">
-                        Type your answer in the box and click submit to see how Mentiora marks your work
-                      </p>
+              {/* Header */}
+              <div className="mb-4">
+                <h2 className="text-base font-semibold text-black">Ask mentiora</h2>
+              </div>
+
+              {/* Chat messages or feedback */}
+              <div className="flex-1 overflow-auto mb-4 space-y-3 rounded-lg bg-gray-50 p-4">
+                {!isAnswerSubmitted ? (
+                  <div className="flex flex-col h-full">
+                    <div className="flex-1" />
+                    <div className="space-y-3">
+                      <button
+                        className="w-full text-left text-sm text-black hover:text-black/90 p-3 rounded-lg hover:bg-white transition-colors"
+                      >
+                        I don&apos;t understand this problem
+                      </button>
+                      <button
+                        className="w-full text-left text-sm text-black hover:text-black/90 p-3 rounded-lg hover:bg-white transition-colors"
+                      >
+                        Can you walk me through this step by step
+                      </button>
                     </div>
-                  </CardContent>
-                </Card>
-              ) : (
-                <Card className="border-2 rounded-2xl shadow-lg" style={{ borderColor: '#0BA5E9' }}>
-                  <CardContent className="p-8">
-                    <div className="flex justify-between items-center mb-6">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                          <span className="text-lg">🌿</span>
-                        </div>
-                        <span className="text-sm font-bold text-black">Your Result</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-black">2/3</div>
-                        <div className="text-xs text-gray-500">marks awarded</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-sm font-semibold text-green-900">Light provides energy</p>
-                          <p className="text-xs text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-sm font-semibold text-green-900">Rate of reaction increases</p>
-                          <p className="text-xs text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
-                        <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-sm font-semibold text-red-900">Missing: Chlorophyll absorption</p>
-                          <p className="text-xs text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
-                        </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex justify-start">
+                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
+                        You got 2 out of 3 marks for this question.
                       </div>
                     </div>
-
-                    <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
-                      <div className="flex items-start gap-2">
-                        <div className="text-lg flex-shrink-0">💡</div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-900 mb-1">Feedback</p>
-                          <p className="text-xs text-gray-700 leading-relaxed">
-                            Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy during photosynthesis.
-                          </p>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
+                        Let&apos;s go through it together.
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                            <div className="text-xs">
+                              <p className="font-semibold text-green-900">Light provides energy</p>
+                              <p className="text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                            <div className="text-xs">
+                              <p className="font-semibold text-green-900">Rate increases</p>
+                              <p className="text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <X className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                            <div className="text-xs">
+                              <p className="font-semibold text-red-900">Missing point</p>
+                              <p className="text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <div className="flex justify-start">
+                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
+                        Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy.
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
-                    <Button 
-                      variant="outline"
-                      className="w-full text-base font-semibold py-3 rounded-lg"
-                      style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
-                      onClick={() => {
-                        setIsAnswerSubmitted(false);
-                        setUserAnswer("");
-                      }}
-                    >
-                      Try Again
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
+              {/* Reply input at bottom */}
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Reply"
+                  className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#0BA5E9] focus:border-[#0BA5E9] rounded-lg text-sm"
+                  disabled={!isAnswerSubmitted}
+                />
+                <Button 
+                  disabled={!isAnswerSubmitted}
+                  style={{ backgroundColor: '#0BA5E9' }}
+                  className="h-11 w-11 p-0 rounded-full text-white flex items-center justify-center disabled:opacity-50 hover:opacity-90"
+                >
+                  <Send className="h-4 w-4 rotate-45" />
+                </Button>
+              </div>
             </motion.div>
           </div>
         </div>
