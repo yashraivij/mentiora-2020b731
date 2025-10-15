@@ -791,294 +791,140 @@ const Index = () => {
               Intelligence that adapts to <span style={{ color: '#0BA5E9' }}>you</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mentiora continuously analyzes your learning to deliver personalized predictions and save you hours of work
+              Mentiora analyzes your learning in real-time to predict grades, save time, and create personalized notes
             </p>
           </motion.div>
 
-          {/* Main Feature Showcase Grid */}
+          {/* Unified Dashboard Preview */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid lg:grid-cols-2 gap-8 mb-12"
+            variants={fadeInUp}
           >
-            {/* Predicted Grades - How it works */}
-            <motion.div variants={fadeInUp}>
-              <Card className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#0BA5E920' }}>
-                      <TrendingUp className="w-6 h-6" style={{ color: '#0BA5E9' }} />
+            <Card className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl shadow-xl border-0 overflow-hidden">
+              <CardContent className="p-0">
+                <div className="grid lg:grid-cols-[1.2fr_1fr] gap-0">
+                  {/* Left Side - Main Analytics */}
+                  <div className="p-8 lg:p-12">
+                    <div className="mb-8">
+                      <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm mb-6">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span className="text-sm font-semibold text-gray-700">Live Analysis</span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-black mb-2">Your Performance Dashboard</h3>
+                      <p className="text-gray-600">Updated in real-time as you study</p>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-black">Predicted Grades</h3>
-                      <p className="text-sm text-gray-500">Real-time performance modeling</p>
-                    </div>
-                  </div>
 
-                  {/* Algorithm visualization */}
-                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 mb-4">
-                    <div className="space-y-3 text-sm">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#0BA5E9' }}></div>
-                        <span className="text-gray-700 font-medium">Practice accuracy</span>
-                        <span className="ml-auto text-black font-bold">87%</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#0BA5E9' }}></div>
-                        <span className="text-gray-700 font-medium">Topic coverage</span>
-                        <span className="ml-auto text-black font-bold">64/78 topics</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#0BA5E9' }}></div>
-                        <span className="text-gray-700 font-medium">Weak areas improving</span>
-                        <span className="ml-auto text-black font-bold">+23%</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#0BA5E9' }}></div>
-                        <span className="text-gray-700 font-medium">Time investment</span>
-                        <span className="ml-auto text-black font-bold">18.5 hrs</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-6 pt-4 border-t border-gray-200">
-                      <div className="flex items-center justify-between">
-                        <span className="text-base font-semibold text-gray-700">Your predicted grade:</span>
+                    {/* Key Metrics Grid */}
+                    <div className="grid grid-cols-2 gap-4 mb-8">
+                      <div className="bg-white rounded-2xl p-6 shadow-sm">
+                        <div className="flex items-center gap-2 mb-3">
+                          <TrendingUp className="w-5 h-5" style={{ color: '#0BA5E9' }} />
+                          <span className="text-xs font-semibold text-gray-500">PREDICTED GRADE</span>
+                        </div>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-bold" style={{ color: '#0BA5E9' }}>7</span>
-                          <span className="text-sm text-green-600 font-semibold">↑ from 5</span>
+                          <span className="text-4xl font-bold text-black">7</span>
+                          <span className="text-lg text-green-600 font-semibold">↑ from 5</span>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2">Based on 50+ data points</p>
+                      </div>
+
+                      <div className="bg-white rounded-2xl p-6 shadow-sm">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Clock className="w-5 h-5 text-green-600" />
+                          <span className="text-xs font-semibold text-gray-500">TIME SAVED</span>
+                        </div>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-bold text-black">12.5</span>
+                          <span className="text-lg text-gray-600">hrs</span>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2">This month vs manual study</p>
+                      </div>
+                    </div>
+
+                    {/* How it works breakdown */}
+                    <div className="bg-white rounded-2xl p-6 shadow-sm">
+                      <h4 className="text-sm font-bold text-gray-700 mb-4">HOW WE PREDICT YOUR GRADES</h4>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>1</div>
+                          <div className="flex-1">
+                            <div className="text-sm font-medium text-black">Practice accuracy tracking</div>
+                            <div className="text-xs text-gray-500">87% across 234 questions</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>2</div>
+                          <div className="flex-1">
+                            <div className="text-sm font-medium text-black">Topic coverage analysis</div>
+                            <div className="text-xs text-gray-500">64/78 syllabus topics completed</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: '#0BA5E9' }}>3</div>
+                          <div className="flex-1">
+                            <div className="text-sm font-medium text-black">Weak area improvement rate</div>
+                            <div className="text-xs text-gray-500">+23% in last 2 weeks</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-500 leading-relaxed">
-                    Our algorithm analyzes 50+ data points from your practice sessions to predict your exam performance with 94% accuracy
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Time Saved Tracker */}
-            <motion.div variants={fadeInUp}>
-              <Card className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#10B98120' }}>
-                      <Clock className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-black">Time Saved</h3>
-                      <p className="text-sm text-gray-500">Efficiency tracking</p>
-                    </div>
-                  </div>
-
-                  {/* Time saved breakdown */}
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 mb-4">
-                    <div className="text-center mb-6">
-                      <div className="text-5xl font-bold text-green-600 mb-2">12.5</div>
-                      <div className="text-sm text-gray-600 font-medium">hours saved this month</div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Auto-generated notes</span>
-                        <span className="text-black font-bold">4.2 hrs</span>
+                  {/* Right Side - Auto Notes & Features */}
+                  <div className="bg-white lg:border-l border-gray-200 p-8 lg:p-12">
+                    <div className="mb-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <BookOpen className="w-5 h-5 text-orange-500" />
+                        <h4 className="text-lg font-bold text-black">Auto-Generated Notes</h4>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
+                      <p className="text-sm text-gray-600">Curriculum-aligned, exam-focused</p>
+                    </div>
+
+                    {/* Sample notes */}
+                    <div className="space-y-3 mb-8">
+                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-100">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">1</div>
+                          <span className="text-xs font-semibold text-gray-600">PHOTOSYNTHESIS</span>
+                        </div>
+                        <p className="text-xs text-gray-700 leading-relaxed">
+                          Light energy is <span className="font-bold text-black">absorbed</span> by chlorophyll...
+                        </p>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-100">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">2</div>
+                          <span className="text-xs font-semibold text-gray-600">LIMITING FACTORS</span>
+                        </div>
+                        <p className="text-xs text-gray-700 leading-relaxed">
+                          Rate determined by <span className="font-bold text-black">lowest</span> available resource...
+                        </p>
+                      </div>
+
+                      <div className="text-center py-2">
+                        <span className="text-xs font-semibold text-orange-600">+ 12 more topics generated</span>
+                      </div>
+                    </div>
+
+                    {/* Additional features */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-sm">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                        <span className="text-gray-700">Instant feedback on every answer</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
                         <span className="text-gray-700">Smart question targeting</span>
-                        <span className="text-black font-bold">5.8 hrs</span>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-700">Instant feedback</span>
-                        <span className="text-black font-bold">2.5 hrs</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-green-200">
-                      <div className="text-xs text-green-700 font-medium text-center">
-                        ≈ 3 full tutoring sessions
+                      <div className="flex items-center gap-3 text-sm">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                        <span className="text-gray-700">Adaptive learning path</span>
                       </div>
                     </div>
                   </div>
-
-                  <p className="text-xs text-gray-500 leading-relaxed">
-                    Mentiora eliminates busywork by automating note-taking and focusing your practice on what matters most
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-
-          {/* Auto Notes Feature */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mb-12"
-          >
-            <Card className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-              <CardContent className="p-8">
-                <div className="grid lg:grid-cols-[1fr_1.5fr] gap-8 items-center">
-                  {/* Left: Feature description */}
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F59E0B20' }}>
-                        <BookOpen className="w-6 h-6 text-orange-500" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-black">Auto-Generated Notes</h3>
-                        <p className="text-sm text-gray-500">Curriculum-aligned summaries</p>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      Every topic you study is automatically converted into concise, exam-focused notes. No more hours spent copying from textbooks.
-                    </p>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
-                        <span className="text-sm text-gray-700">Covers all spec points</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
-                        <span className="text-sm text-gray-700">Updated based on your mistakes</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
-                        <span className="text-sm text-gray-700">Exam command words highlighted</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right: Visual example */}
-                  <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 space-y-3">
-                    <div className="bg-white rounded-xl p-4 shadow-sm">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">1</div>
-                        <span className="text-xs font-semibold text-gray-600">PHOTOSYNTHESIS</span>
-                      </div>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        Light energy is <span className="font-bold text-black">absorbed</span> by chlorophyll in chloroplasts...
-                      </p>
-                    </div>
-
-                    <div className="bg-white rounded-xl p-4 shadow-sm">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 rounded bg-orange-500 flex items-center justify-center text-white text-xs font-bold">2</div>
-                        <span className="text-xs font-semibold text-gray-600">LIMITING FACTORS</span>
-                      </div>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        Rate determined by <span className="font-bold text-black">lowest</span> available resource (light, CO₂, temp)...
-                      </p>
-                    </div>
-
-                    <div className="bg-white rounded-xl p-4 shadow-sm opacity-60">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 rounded bg-gray-300 flex items-center justify-center text-white text-xs font-bold">3</div>
-                        <span className="text-xs font-semibold text-gray-400">USES OF GLUCOSE</span>
-                      </div>
-                      <p className="text-sm text-gray-400 leading-relaxed">
-                        Glucose converted to starch for storage...
-                      </p>
-                    </div>
-
-                    <div className="text-center pt-2">
-                      <span className="text-xs text-orange-600 font-semibold">+ 12 more topics automatically generated</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Personalized Learning Path */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl shadow-2xl border-0 overflow-hidden">
-              <CardContent className="p-8">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">Your Personalized Learning Path</h3>
-                  <p className="text-gray-300">Dynamically adapted to your strengths and weaknesses</p>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                  {[
-                    { 
-                      subject: "Biology", 
-                      icon: Dna,
-                      current: "Grade 7",
-                      target: "Grade 9",
-                      progress: 78,
-                      color: '#10B981',
-                      nextFocus: "Cell division & Genetics"
-                    },
-                    { 
-                      subject: "Chemistry", 
-                      icon: FlaskConical,
-                      current: "Grade 5",
-                      target: "Grade 7",
-                      progress: 52,
-                      color: '#F97316',
-                      nextFocus: "Atomic structure"
-                    },
-                    { 
-                      subject: "Physics", 
-                      icon: Target,
-                      current: "Grade 4",
-                      target: "Grade 6",
-                      progress: 34,
-                      color: '#3B82F6',
-                      nextFocus: "Energy transfers"
-                    }
-                  ].map((subject, i) => (
-                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${subject.color}30` }}>
-                          <subject.icon className="w-5 h-5" style={{ color: subject.color }} />
-                        </div>
-                        <h4 className="text-lg font-bold text-white">{subject.subject}</h4>
-                      </div>
-
-                      <div className="space-y-3 mb-4">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-300">Current</span>
-                          <span className="text-white font-bold">{subject.current}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-gray-300">Target</span>
-                          <span className="text-white font-bold">{subject.target}</span>
-                        </div>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="mb-4">
-                        <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden">
-                          <motion.div
-                            className="h-full rounded-full"
-                            style={{ backgroundColor: subject.color }}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${subject.progress}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: i * 0.2 }}
-                          />
-                        </div>
-                        <div className="text-xs text-gray-400 mt-1 text-right">{subject.progress}% complete</div>
-                      </div>
-
-                      <div className="bg-white/5 rounded-lg p-3 border border-white/10">
-                        <div className="text-xs text-gray-400 mb-1">Next focus area:</div>
-                        <div className="text-sm text-white font-medium">{subject.nextFocus}</div>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </CardContent>
             </Card>
