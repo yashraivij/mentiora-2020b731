@@ -185,15 +185,134 @@ const Pricing = () => {
           </Card>
         </div>
 
-        {/* Features List */}
-        <div className="mb-16 max-w-[700px] mx-auto">
-          <div className="space-y-4">
-            {features.map((feature, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-[#00A8FF] flex-shrink-0 mt-0.5" />
-                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
+        {/* Comparison Table */}
+        <div className="mb-16 max-w-[1000px] mx-auto">
+          <div className="overflow-hidden rounded-3xl border-2 border-gray-200">
+            {/* Table Header */}
+            <div className="grid grid-cols-3 gap-px bg-gray-200">
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm font-medium text-gray-900">Features</span>
               </div>
-            ))}
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm font-bold text-gray-900">Free</span>
+              </div>
+              <div className="bg-[#00A8FF] px-6 py-4 text-center">
+                <span className="text-sm font-bold text-white">Premium</span>
+              </div>
+            </div>
+
+            {/* Table Body */}
+            <div className="grid grid-cols-3 gap-px bg-gray-200">
+              {/* Row 1 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Exam-style questions per subject</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-600">Limited</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm font-medium text-gray-900">2,500+</span>
+              </div>
+
+              {/* Row 2 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">AI instant marking</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 3 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Custom practice sessions (weak areas)</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-400">—</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 4 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">24/7 step-by-step AI tutoring</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-600">Basic</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 5 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Timed mock papers per subject</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-600">1</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm font-medium text-gray-900">10+</span>
+              </div>
+
+              {/* Row 6 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">2026 Predicted Papers</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-400">—</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 7 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Exam-focused notes (full curriculum)</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-600">Limited</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 8 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Subjects available</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-600">1</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm font-medium text-gray-900">40+</span>
+              </div>
+
+              {/* Row 9 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Multiple exam boards (AQA, Edexcel, CIE, OCR)</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <span className="text-sm text-gray-400">—</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+
+              {/* Row 10 */}
+              <div className="bg-white px-6 py-4">
+                <span className="text-sm text-gray-700">Cancel anytime</span>
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+              <div className="bg-white px-6 py-4 text-center">
+                <Check className="w-5 h-5 text-[#00A8FF] mx-auto" />
+              </div>
+            </div>
           </div>
 
           <p className="text-center mt-12 text-gray-600">
