@@ -150,38 +150,29 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              The GCSE & A-Level tutor built around{" "}
-              <span className="text-primary">you</span>.
+              Your revision, finally made{" "}
+              <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">personal</span>.
             </motion.h1>
             
             <motion.p 
-              className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              Your personalised revision coach — built to understand how you learn.
+              Learn smarter, improve faster, and see your grades grow — with a study coach that understands how you learn.
             </motion.p>
-            
-            <motion.p 
-              className="text-base text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
+
+            <motion.div
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
             >
-              Mentiora tracks your progress, predicts your grades, and creates a plan that evolves with every answer.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-            >
               <Button 
                 onClick={() => navigate("/register")}
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
+                className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] hover:shadow-xl hover:shadow-blue-500/30 text-white px-8 transition-all duration-300"
               >
                 Start Free Trial
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -191,21 +182,143 @@ const Index = () => {
                 onClick={() => navigate("/dashboard")}
                 size="lg"
                 variant="outline"
-                className="px-8"
+                className="px-8 hover:bg-muted/50"
               >
-                Explore Dashboard
+                Watch Demo
               </Button>
             </motion.div>
 
             <motion.p 
-              className="text-sm text-muted-foreground"
+              className="text-sm text-muted-foreground mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
             >
-              Trusted by GCSE & A-Level students preparing for 2026 exams
+              Trusted by thousands of GCSE & A-Level students preparing for 2026 exams
             </motion.p>
+
+            {/* Trust bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground"
+            >
+              <span className="font-medium">Students from:</span>
+              <span className="px-3 py-1 rounded-full bg-muted/50 font-medium">Oxford</span>
+              <span className="px-3 py-1 rounded-full bg-muted/50 font-medium">Cambridge</span>
+              <span className="px-3 py-1 rounded-full bg-muted/50 font-medium">UCL</span>
+              <span className="px-3 py-1 rounded-full bg-muted/50 font-medium">Imperial</span>
+            </motion.div>
           </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Real Results Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-150px" }}
+        variants={fadeInUp}
+        className="py-24 px-8 bg-background"
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
+              See what real improvement looks like
+            </h2>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Over 82% of students improve by at least one grade within 4 weeks
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <Card className="p-8 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-0">
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">Average Grade Improvement</h3>
+                  <p className="text-sm text-muted-foreground">First 4 weeks with Mentiora</p>
+                </div>
+                <div className="h-64 flex items-end gap-3">
+                  {[
+                    { label: "Week 1", grade: 6, color: "from-red-400 to-orange-400" },
+                    { label: "Week 2", grade: 6.5, color: "from-orange-400 to-yellow-400" },
+                    { label: "Week 3", grade: 7.2, color: "from-yellow-400 to-blue-400" },
+                    { label: "Week 4", grade: 8, color: "from-blue-400 to-[#3B82F6]" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                      <motion.div
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${(item.grade / 9) * 100}%` }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.2, duration: 0.8 }}
+                        className={`w-full bg-gradient-to-t ${item.color} rounded-t-xl relative group cursor-pointer`}
+                      >
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                          Grade {item.grade}
+                        </div>
+                      </motion.div>
+                      <span className="text-xs text-muted-foreground font-medium">{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 flex items-center justify-center gap-2 text-green-600">
+                  <TrendingUp className="h-4 w-4" />
+                  <span className="text-sm font-semibold">+2 grade improvement in 4 weeks</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="space-y-6">
+              <Card className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 border-blue-100">
+                <CardContent className="p-0">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="h-6 w-6 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 mb-2">
+                        "I felt stuck at Grade 6. Now I'm on track for an 8."
+                      </p>
+                      <p className="text-xs text-muted-foreground">— Ethan, GCSE Maths Student</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-purple-100">
+                <CardContent className="p-0">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="h-6 w-6 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 mb-2">
+                        "It's like having a tutor who actually knows me."
+                      </p>
+                      <p className="text-xs text-muted-foreground">— Sophie, A-Level Biology Student</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-green-50 to-teal-50 border-green-100">
+                <CardContent className="p-0">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="h-6 w-6 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 mb-2">
+                        "My weak topics became my strongest in 3 weeks."
+                      </p>
+                      <p className="text-xs text-muted-foreground">— James, GCSE Chemistry Student</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -220,7 +333,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
-              Designed to make revision <span className="text-primary">personal</span>
+              Revise smarter with <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">personalised insights</span>
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Every student learns differently — Mentiora adapts to you.
@@ -696,39 +809,42 @@ const Index = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-24 px-8 bg-muted/20"
+        className="py-24 px-8 bg-gradient-to-b from-blue-50/30 to-purple-50/20"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground tracking-tight">
-              Loved by students <span className="text-primary">across the UK</span>
+              Loved by students and parents <span className="bg-gradient-to-r from-[#3B82F6] to-[#A78BFA] bg-clip-text text-transparent">across the UK</span>
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Real stories from learners who turned revision into results.
+              Real stories from learners who turned revision into results
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "It feels like a tutor that actually understands me.",
-                author: "Maya",
-                role: "Year 11",
-                avatar: "M",
+                quote: "I felt stuck at Grade 6. Now I'm on track for an 8.",
+                description: "Mentiora showed me exactly where I was going wrong and helped me fix it week by week.",
+                author: "Ethan R.",
+                role: "Year 11, GCSE Maths",
+                avatar: "/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png",
                 accentColor: "from-[#3B82F6] to-cyan-500"
               },
               {
-                quote: "My grades jumped from 6 to 8 in three weeks.",
-                author: "Ethan",
-                role: "GCSE Student",
-                avatar: "E",
+                quote: "It's like having a tutor who actually knows me.",
+                description: "The Smart Notebook tracks my weak topics and adjusts my study plan automatically.",
+                author: "Sophie L.",
+                role: "Year 12, A-Level Biology",
+                avatar: "/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png",
                 accentColor: "from-[#A78BFA] to-pink-500"
               },
               {
-                quote: "Finally, a study app that feels personal.",
-                author: "Sophie",
-                role: "Year 10 Parent",
-                avatar: "S",
+                quote: "My weak topics became my strongest in 3 weeks.",
+                description: "The predicted grades motivated me to keep going. Watching them rise was incredible.",
+                author: "James M.",
+                role: "Year 10, GCSE Chemistry",
+                avatar: "/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png",
                 accentColor: "from-pink-500 to-orange-500"
               }
             ].map((testimonial, index) => (
@@ -740,29 +856,39 @@ const Index = () => {
                 transition={{ delay: index * 0.15, duration: 0.6 }}
                 whileHover={{ y: -8 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                <Card className="h-full hover:shadow-xl transition-all duration-300 bg-white">
                   {/* Gradient accent line on top */}
-                  <div className={`h-1 bg-gradient-to-r ${testimonial.accentColor}`} />
+                  <div className={`h-1.5 bg-gradient-to-r ${testimonial.accentColor} rounded-t-xl`} />
                   
-                  <CardContent className="p-6">
+                  <CardContent className="p-8">
+                    {/* Star rating */}
                     <div className="mb-4 flex">
                       {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="h-4 w-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <svg key={i} className="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
                           <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                         </svg>
                       ))}
                     </div>
                     
-                    <blockquote className="text-base mb-6 leading-relaxed text-foreground">
+                    {/* Main quote - larger and bolder */}
+                    <blockquote className="text-lg font-semibold mb-3 leading-snug text-foreground">
                       "{testimonial.quote}"
                     </blockquote>
                     
-                    <div className="flex items-center gap-4">
-                      <Avatar className={`h-12 w-12 border-2 bg-gradient-to-br ${testimonial.accentColor}`}>
-                        <AvatarFallback className="text-white font-bold bg-transparent">
-                          {testimonial.avatar}
-                        </AvatarFallback>
-                      </Avatar>
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                      {testimonial.description}
+                    </p>
+                    
+                    {/* Author info with image */}
+                    <div className="flex items-center gap-4 pt-4 border-t">
+                      <div className={`h-14 w-14 rounded-full bg-gradient-to-br ${testimonial.accentColor} p-0.5`}>
+                        <div className="h-full w-full rounded-full bg-white flex items-center justify-center">
+                          <span className={`text-lg font-bold bg-gradient-to-br ${testimonial.accentColor} bg-clip-text text-transparent`}>
+                            {testimonial.author[0]}
+                          </span>
+                        </div>
+                      </div>
                       <div>
                         <div className="font-semibold text-gray-900">{testimonial.author}</div>
                         <div className="text-sm text-gray-500">{testimonial.role}</div>
@@ -773,6 +899,31 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Social proof bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-6 px-8 py-4 rounded-full bg-white border shadow-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                <span className="text-sm font-medium">1,247+ students</span>
+              </div>
+              <div className="h-6 w-px bg-gray-200" />
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 border-2 border-white" />
+                  ))}
+                </div>
+                <span className="text-sm text-muted-foreground">joined this week</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -958,68 +1109,101 @@ const Index = () => {
         </div>
       </motion.section>
 
-      {/* Final CTA - Lavender to blue gradient */}
+      {/* Final CTA - Warm gradient with energy */}
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-150px" }}
         variants={fadeInUp}
-        className="py-32 px-8 relative overflow-hidden bg-gradient-to-br from-accent/10 to-background"
+        className="py-32 px-8 relative overflow-hidden bg-gradient-to-br from-[#3B82F6] via-[#6366F1] to-[#A78BFA]"
       >
-        {/* Gentle floating particles */}
-        {[...Array(10)].map((_, i) => (
+        {/* Upward floating particles for energy */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ 
-              opacity: [0, 0.4, 0],
-              scale: [0, 1, 0],
-              y: [0, -80]
+              opacity: [0, 0.6, 0],
+              scale: [0, 1.5, 0],
+              y: [0, -120]
             }}
             transition={{
-              duration: 4,
+              duration: 5,
               repeat: Infinity,
-              delay: i * 0.4
+              delay: i * 0.3,
+              ease: "easeOut"
             }}
-            className="absolute w-2 h-2 bg-blue-400/40 rounded-full"
+            className="absolute w-3 h-3 bg-white/40 rounded-full blur-sm"
             style={{
-              left: `${20 + Math.random() * 60}%`,
-              bottom: `${Math.random() * 50}%`
+              left: `${10 + Math.random() * 80}%`,
+              bottom: `${Math.random() * 30}%`
             }}
           />
         ))}
 
+        {/* Glowing edges */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent pointer-events-none" />
+
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight text-foreground tracking-tight">
-            Ready to see your <span className="text-primary">grades grow?</span>
-          </h2>
-          
-          <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Join thousands of GCSE & A-Level students learning smarter with Mentiora.
-          </p>
-
-          <Button 
-            onClick={() => navigate("/register")}
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-12"
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-semibold mb-6 leading-tight tracking-tight text-white"
           >
-            Start Free Trial
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+            Start improving your grades today
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed"
+          >
+            Join the students learning smarter, not harder — and see real results in weeks, not months.
+          </motion.p>
 
-          <div className="mt-10 p-6 rounded-2xl bg-card/80 backdrop-blur-sm border max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-2 mb-2">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Button 
+              onClick={() => navigate("/register")}
+              size="lg"
+              className="bg-white hover:bg-white/95 text-[#3B82F6] px-12 shadow-2xl shadow-black/20 font-semibold text-base"
+            >
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </motion.div>
+
+          {/* Social proof badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 inline-flex flex-col items-center gap-3 px-8 py-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+          >
+            <div className="flex items-center gap-2">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <svg key={i} className="h-6 w-6 text-yellow-300 fill-current" viewBox="0 0 20 20">
                   <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                 </svg>
               ))}
             </div>
-            <p className="text-base font-semibold mb-1 text-foreground">
-              9 out of 10 students improved by 1 or more grades
+            <p className="text-lg font-semibold text-white">
+              9/10 students improved within 4 weeks
             </p>
-            <p className="text-sm text-muted-foreground">within 4 weeks</p>
-          </div>
+            <p className="text-sm text-white/80">
+              with an average grade increase of +2
+            </p>
+          </motion.div>
         </div>
       </motion.section>
 
