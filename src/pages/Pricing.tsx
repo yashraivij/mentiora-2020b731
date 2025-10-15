@@ -73,22 +73,25 @@ const Pricing = () => {
       </div>
 
       <div className="max-w-[900px] mx-auto px-6 py-12">
-        {/* Rating Badge */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <span className="text-base font-medium">Excellent</span>
-          <span className="text-3xl font-bold">4.8</span>
-          <div className="flex gap-0.5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
-            ))}
-          </div>
-          <span className="text-base">1K+ reviews on 🍎</span>
-        </div>
-
         {/* Main Headline */}
-        <h1 className="text-5xl font-bold text-center mb-4 text-gray-900">
-          Get unlimited access to Mentiora
-        </h1>
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <h1 className="text-5xl font-bold text-gray-900">
+            Start
+          </h1>
+          {/* Mentiora Logo Graphic */}
+          <div className="relative">
+            <div className="w-20 h-20 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
+              <img 
+                src="/src/assets/mentiora-logo.png" 
+                alt="Mentiora" 
+                className="w-12 h-12 brightness-0 invert"
+              />
+            </div>
+          </div>
+          <h1 className="text-5xl font-bold text-gray-900">
+            for free.
+          </h1>
+        </div>
 
         <p className="text-center text-gray-600 text-lg mb-6 max-w-[700px] mx-auto">
           Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
