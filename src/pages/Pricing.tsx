@@ -84,7 +84,7 @@ const Pricing = () => {
               <img 
                 src="/src/assets/mentiora-logo.png" 
                 alt="Mentiora" 
-                className="w-12 h-12 brightness-0 invert"
+                className="w-12 h-12"
               />
             </div>
           </div>
