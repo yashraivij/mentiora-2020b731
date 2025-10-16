@@ -20,6 +20,26 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
   const [parentEmail, setParentEmail] = useState("");
   const [showParentForm, setShowParentForm] = useState(false);
 
+  // Dynamic pricing based on exam year
+  const pricingData = {
+    "2026": {
+      oneTimePrice: "200.00",
+      originalPrice: "300.00",
+      savingsPercent: "33%",
+      endDate: "31st July 2026",
+      offerEnds: "15/10/25"
+    },
+    "2027": {
+      oneTimePrice: "225.00",
+      originalPrice: "350.00",
+      savingsPercent: "36%",
+      endDate: "31st July 2027",
+      offerEnds: "31/12/25"
+    }
+  };
+
+  const currentPricing = pricingData[examYear];
+
   const handleUpgrade = () => {
     openPaymentLink();
     onOpenChange(false);
@@ -140,23 +160,23 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   </p>
                 </Card>
 
-                {/* 2026 Exams */}
+                {/* Exam Access Card */}
                 <Card className="border-2 border-gray-200 rounded-3xl p-6 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
                   <div className="absolute top-4 right-4 bg-white text-[#00A8FF] px-3 py-1 rounded-full text-xs font-bold">
-                    Save 33%
+                    Save {currentPricing.savingsPercent}
                   </div>
                   
                   <h3 className="text-xl font-bold mb-2">{examYear} Exams</h3>
                   <p className="mb-4 text-white/90 text-sm">
-                    One-time payment. Get unlimited access until {examYear === "2026" ? "31st July 2026" : "31st July 2027"}.
+                    One-time payment. Get unlimited access until {currentPricing.endDate}.
                   </p>
                   
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-4xl font-bold">£200.00</span>
+                      <span className="text-4xl font-bold">£{currentPricing.oneTimePrice}</span>
                       <span className="text-white/90 text-sm">once</span>
                     </div>
-                    <span className="text-white/70 line-through">300.00</span>
+                    <span className="text-white/70 line-through">{currentPricing.originalPrice}</span>
                   </div>
 
                   <Button
@@ -167,7 +187,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   </Button>
 
                   <p className="text-xs text-white/80 mt-3 text-center">
-                    £200 billed once. Offer ends 15/10/25.
+                    £{currentPricing.oneTimePrice} billed once. Offer ends {currentPricing.offerEnds}.
                   </p>
                 </Card>
               </div>
