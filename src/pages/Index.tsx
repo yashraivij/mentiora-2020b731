@@ -206,19 +206,19 @@ const Index = () => {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              {/* Mini Study Insights Card - Real Dashboard Design */}
+              {/* Mini "You Perform Best At" Card - Dashboard Design */}
               <div 
                 className="w-[240px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5 border border-gray-100"
                 style={{ transform: 'rotate(3deg)' }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 rounded-lg" style={{ backgroundColor: '#f3f4f6' }}>
-                    <Clock className="h-4 w-4" style={{ color: '#3b82f6' }} />
+                  <div className="p-1.5 rounded-lg bg-orange-50">
+                    <Clock className="h-4 w-4 text-orange-500" />
                   </div>
-                  <h3 className="font-semibold text-sm text-black">Peak Study Time</h3>
+                  <h3 className="font-semibold text-xs text-gray-500 uppercase tracking-wide">You Perform Best At</h3>
                 </div>
-                <div className="text-2xl font-bold mb-2" style={{ color: '#3b82f6' }}>7-9 PM</div>
-                <p className="text-xs text-gray-500 leading-relaxed">You study best in the evening based on focus patterns</p>
+                <div className="text-3xl font-bold mb-1 text-black">6–8pm</div>
+                <p className="text-xs text-gray-500">Your peak focus hours</p>
               </div>
             </motion.div>
           </motion.div>
