@@ -115,7 +115,7 @@ const Index = () => {
         }}
       >
         <div className="max-w-[1100px] mx-auto w-full relative">
-          {/* Floating Element 1 - Top Left: Subject Progress Card */}
+          {/* Floating Element 1 - Top Left: Sticky Note with Checkmark */}
           <motion.div
             initial={{ opacity: 0, x: -50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -126,38 +126,36 @@ const Index = () => {
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
+              {/* Yellow Sticky Note */}
               <div 
-                className="w-[280px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
-                style={{ transform: 'rotate(-8deg)' }}
+                className="relative w-[180px] h-[180px] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                style={{
+                  backgroundColor: '#fef08a',
+                  transform: 'rotate(-8deg)'
+                }}
               >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                  <span className="font-bold text-black">Chemistry</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Progress</span>
-                    <span className="text-lg font-bold text-emerald-600">85%</span>
-                  </div>
-                  <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div className="h-full w-[85%] bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"></div>
-                  </div>
-                  <div className="flex justify-between text-xs pt-2">
-                    <div className="flex items-center space-x-1">
-                      <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                      <span className="text-gray-600">12 Mastered</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span className="text-gray-600">3 Weak</span>
-                    </div>
+                {/* Pin */}
+                <div className="absolute top-[-8px] left-1/2 -translate-x-1/2 text-2xl">📌</div>
+                
+                {/* Handwritten text */}
+                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Study your weakest topics to master every concept on your syllabus.
+                </p>
+                
+                {/* White card with checkmark overlay */}
+                <div 
+                  className="absolute bottom-[-20px] left-[-20px] w-[80px] h-[80px] bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20"
+                  style={{ transform: 'rotate(5deg)' }}
+                >
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2563eb' }}>
+                    <CheckCircle2 className="w-8 h-8 text-white" />
                   </div>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 2 - Center Top: Predicted Grade Badge (visible on all screens) */}
+          {/* Floating Element 2 - Center Top: App Icons Grid (visible on all screens) */}
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -165,20 +163,19 @@ const Index = () => {
             className="absolute top-[-30px] md:top-[-60px] left-1/2 -translate-x-1/2 z-10"
           >
             <motion.div
-              animate={{ y: [0, -5, 0], scale: [1, 1.05, 1] }}
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             >
-              <div className="w-[90px] h-[90px] md:w-[140px] md:h-[140px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-4 md:p-6 flex flex-col items-center justify-center">
-                <div className="text-[8px] md:text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Predicted</div>
-                <div className="text-4xl md:text-5xl font-extrabold bg-gradient-to-br from-purple-600 via-purple-500 to-blue-600 bg-clip-text text-transparent">
-                  8
-                </div>
-                <div className="text-[8px] md:text-xs text-gray-500 mt-1">Grade</div>
+              <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-3 md:p-5 grid grid-cols-2 gap-2 md:gap-3">
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full" style={{ backgroundColor: '#0ba5e9' }}></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element - Mobile: Mini Predicted Grade (visible on mobile/tablet only) */}
+          {/* Floating Element - Mobile Sticky Note (visible on mobile/tablet only) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -186,26 +183,25 @@ const Index = () => {
             className="absolute bottom-[-60px] left-[10px] md:bottom-[-80px] md:left-[20px] block lg:hidden z-10"
           >
             <motion.div
-              animate={{ y: [0, -5, 0], scale: [1, 1.05, 1] }}
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
             >
               <div 
-                className="relative w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-xl shadow-[0_6px_20px_rgba(0,0,0,0.1)] p-3 flex flex-col items-center justify-center"
+                className="relative w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.1)] p-3"
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#fef08a',
                   transform: 'rotate(-5deg)'
                 }}
               >
-                <div className="text-[8px] font-semibold text-gray-500 uppercase tracking-wide">Predicted</div>
-                <div className="text-3xl md:text-4xl font-extrabold bg-gradient-to-br from-purple-600 via-purple-500 to-blue-600 bg-clip-text text-transparent">
-                  8
-                </div>
-                <div className="text-[8px] text-gray-500">Grade</div>
+                <div className="absolute top-[-6px] left-1/2 -translate-x-1/2 text-lg">📌</div>
+                <p className="text-xs leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Master every concept on your syllabus.
+                </p>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 3 - Top Right: Streak & MP Card */}
+          {/* Floating Element 3 - Top Right: Clock & Reminder Card */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -216,30 +212,29 @@ const Index = () => {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
+              {/* Clock Card */}
               <div 
-                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5 space-y-4"
+                className="relative w-[90px] h-[90px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] flex items-center justify-center"
                 style={{ transform: 'rotate(8deg)' }}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl">🔥</span>
-                    <span className="font-bold text-black">7 Day</span>
-                  </div>
-                  <span className="text-sm text-gray-500">Streak</span>
-                </div>
-                <div className="h-px bg-gray-200"></div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">⚡</span>
-                    <span className="text-lg font-bold text-amber-600">450</span>
-                  </div>
-                  <span className="text-xs text-gray-500">MP Points</span>
+                <Clock className="w-14 h-14 text-black" />
+              </div>
+              
+              {/* Reminder Card */}
+              <div 
+                className="absolute bottom-[-30px] right-[-40px] w-[160px] bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.15)] p-4 z-20"
+                style={{ transform: 'rotate(-5deg)' }}
+              >
+                <div className="text-sm font-bold text-black mb-3">Reminders</div>
+                <div className="text-xs text-gray-600 mb-2">Study session<br/>Your next topic</div>
+                <div className="inline-block px-3 py-1.5 rounded-md text-xs" style={{ backgroundColor: '#e0f2fe', color: '#0ba5e9' }}>
+                  ⏰ 16:00-16:45
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 4 - Bottom Left: Today's Study Plan Card */}
+          {/* Floating Element 4 - Bottom Left: Today's Lessons Card */}
           <motion.div
             initial={{ opacity: 0, x: -50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -254,45 +249,44 @@ const Index = () => {
                 className="w-[280px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
                 style={{ transform: 'rotate(-3deg)' }}
               >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-black">Today's Study Plan</span>
-                    <span className="text-xs text-gray-500">3 tasks</span>
+                <div className="text-base font-bold text-black mb-4">Today's lessons</div>
+                
+                {/* Lesson Item 1 */}
+                <div className="mb-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#f97316' }}></div>
+                    <span className="text-sm text-black flex-1">Chemistry revision</span>
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
                   </div>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <div className="flex-1">
-                        <div className="text-sm text-black">Physics - Forces</div>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div className="h-full w-[60%] bg-blue-500 rounded-full"></div>
-                          </div>
-                          <span className="text-xs text-gray-500">60%</span>
-                        </div>
-                      </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ backgroundColor: '#2563eb', width: '60%' }}></div>
                     </div>
-                    
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                      <div className="flex-1">
-                        <div className="text-sm text-black">Maths - Algebra</div>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div className="h-full w-[20%] bg-orange-500 rounded-full"></div>
-                          </div>
-                          <span className="text-xs text-gray-500">20%</span>
-                        </div>
-                      </div>
-                    </div>
+                    <span className="text-xs text-gray-600">60%</span>
                   </div>
+                  <div className="text-xs text-gray-400">Oct 16</div>
+                </div>
+                
+                {/* Lesson Item 2 */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                    <span className="text-sm text-black flex-1">Maths practice</span>
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ backgroundColor: '#f97316', width: '12%' }}></div>
+                    </div>
+                    <span className="text-xs text-gray-600">12%</span>
+                  </div>
+                  <div className="text-xs text-gray-400">Oct 18</div>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 5 - Bottom Right: Study Insights Card */}
+          {/* Floating Element 5 - Bottom Right: Integrations Card */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -304,54 +298,49 @@ const Index = () => {
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
               <div 
-                className="w-[240px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
                 style={{ transform: 'rotate(4deg)' }}
               >
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">📊</span>
-                    <span className="font-bold text-black">Study Insights</span>
+                <div className="text-sm font-bold text-black mb-4">100+ Integrations</div>
+                
+                {/* App Logos - Overlapping cards */}
+                <div className="relative h-20">
+                  <div 
+                    className="absolute left-0 top-0 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl"
+                    style={{ transform: 'rotate(-5deg)' }}
+                  >
+                    📧
                   </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                      <span className="text-xs text-gray-600">This week</span>
-                      <span className="text-sm font-bold text-black">3.5 hrs</span>
-                    </div>
-                    
-                    <div className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                      <span className="text-xs text-gray-600">Best time</span>
-                      <span className="text-sm font-bold text-black">6-8 PM</span>
-                    </div>
-                    
-                    <div className="flex items-center space-x-1 pt-1">
-                      <span className="text-xs text-emerald-600 font-semibold">+12%</span>
-                      <span className="text-xs text-gray-600">vs last week</span>
-                    </div>
+                  <div 
+                    className="absolute left-8 top-2 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-10"
+                    style={{ transform: 'rotate(3deg)' }}
+                  >
+                    📚
+                  </div>
+                  <div 
+                    className="absolute left-16 top-4 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-20"
+                    style={{ transform: 'rotate(-3deg)' }}
+                  >
+                    📅
                   </div>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 6 - Bottom Center: Flashcard Preview */}
+          {/* Floating Element 6 - Bottom Center: Rocket */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
-            className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 hidden lg:block z-10"
+            className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 hidden lg:block z-10"
           >
             <motion.div
-              animate={{ y: [0, -8, 0], rotateY: [0, 5, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="text-5xl"
             >
-              <div className="w-[180px] h-[120px] bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-4 flex items-center justify-center">
-                <div className="text-center space-y-2">
-                  <div className="text-2xl">🧠</div>
-                  <div className="text-sm font-bold text-white">Flashcards</div>
-                  <div className="text-xs text-white/80">24 cards</div>
-                </div>
-              </div>
+              🚀
             </motion.div>
           </motion.div>
 
