@@ -111,9 +111,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
         <div className="px-2">
           <motion.p 
             className="text-center text-gray-600 mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
           >
             Pay just once to get all-in-one access until {currentPricing.endDate}, or subscribe to on-the-go learning.
           </motion.p>
@@ -123,9 +124,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               {/* Ask My Parents Link */}
               <motion.div 
                 className="text-center mb-8"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4 }}
               >
                 <button
                   onClick={() => setShowParentForm(true)}
@@ -138,9 +140,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               {/* Exam Year Toggle */}
               <motion.div 
                 className="flex justify-center gap-2 mb-8"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4 }}
               >
                 <button
                   onClick={() => setExamYear("2026")}
@@ -176,9 +179,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                 >
                   {/* Monthly */}
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
                   >
                     <Card className="border-2 border-gray-200 rounded-3xl p-6 hover:shadow-lg transition-shadow">
                       <h3 className="text-xl font-bold mb-2">Monthly</h3>
@@ -210,9 +214,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
 
                   {/* Exam Access Card */}
                   <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
                   >
                     <Card className="border-2 border-gray-200 rounded-3xl p-6 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
                       <div className="absolute top-4 right-4 bg-white text-[#00A8FF] px-3 py-1 rounded-full text-xs font-bold">
@@ -250,9 +255,10 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               {/* Features List */}
               <motion.div 
                 className="mb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5 }}
               >
                 <div className="space-y-2">
                   {features.map((feature, i) => (
@@ -260,8 +266,9 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                       key={i} 
                       className="flex items-start gap-2"
                       initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.9 + i * 0.05 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.4, delay: i * 0.05 }}
                     >
                       <Check className="w-5 h-5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
                       <p className="text-gray-700 text-sm leading-relaxed">{feature}</p>
