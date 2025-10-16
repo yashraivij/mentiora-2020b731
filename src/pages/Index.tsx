@@ -293,84 +293,52 @@ const Index = () => {
             >
               {/* Mini Subject Card - Real Dashboard Design */}
               <div 
-                className="w-[300px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                className="w-[240px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 style={{ transform: 'rotate(5deg)' }}
               >
                 {/* Content */}
-                <div className="relative p-5">
+                <div className="relative p-4">
                   {/* Header */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl">🧪</span>
-                    <div className="flex-1">
-                      <h3 className="text-base font-bold text-black">Chemistry (AQA)</h3>
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-slate-500 text-white text-xs font-medium">
-                      Not started
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xl">🧪</span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-bold text-black truncate">Chemistry</h3>
                     </div>
                   </div>
                   
-                  {/* Predicted Grade */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Predicted</span>
-                    <span className="text-xl font-bold text-black">U</span>
-                  </div>
-                  
-                  {/* Target Grade with Progress */}
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Target</span>
-                      <span className="text-xl font-bold text-black">7</span>
+                  {/* Predicted & Target Grade */}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-medium text-gray-500 uppercase">Predicted</span>
+                      <span className="text-lg font-bold text-black">U</span>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-green-500 to-green-600 rounded-full"
-                        style={{ width: '70%' }}
-                      />
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-medium text-gray-500 uppercase">Target</span>
+                      <span className="text-lg font-bold text-black">7</span>
                     </div>
                   </div>
                   
                   {/* Last 6 Attempts - Medly Blue Graph */}
-                  <div className="mb-4">
-                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-3">Last 6 Attempts</span>
-                    <div className="h-16 relative">
-                      <svg width="100%" height="100%" viewBox="0 0 250 60" preserveAspectRatio="none">
+                  <div className="mb-3">
+                    <span className="text-[10px] font-medium text-gray-500 uppercase block mb-2">Last 6 Attempts</span>
+                    <div className="h-12 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 220 48" preserveAspectRatio="none">
                         <polyline
                           fill="none"
                           stroke="#0BA5E9"
-                          strokeWidth="2.5"
-                          points="0,45 50,35 100,40 150,25 200,30 250,20"
+                          strokeWidth="2"
+                          points="0,36 44,28 88,32 132,20 176,24 220,16"
                         />
                       </svg>
                     </div>
                   </div>
                   
-                  {/* Strong/Focus Topics */}
-                  <div className="space-y-1.5 mb-4">
-                    <div className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                      <span className="font-medium text-green-600">Strong:</span>
-                      <span className="text-gray-600">Various topics</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs">
-                      <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
-                      <span className="font-medium text-red-600">Focus:</span>
-                      <span className="text-gray-600">Core concepts</span>
-                    </div>
-                  </div>
-                  
-                  {/* View Insights Link */}
-                  <div className="text-center mb-3">
-                    <button className="text-xs font-semibold text-cyan-500 hover:text-cyan-600">
-                      View insights
-                    </button>
-                  </div>
-                  
                   {/* Topics Button */}
                   <button 
-                    className="w-full py-2.5 rounded-xl font-semibold text-sm text-white"
+                    className="w-full py-2 rounded-lg font-semibold text-xs text-white"
                     style={{ backgroundColor: '#0BA5E9' }}
                   >
-                    Topics
+                    View Topics
                   </button>
                 </div>
               </div>
