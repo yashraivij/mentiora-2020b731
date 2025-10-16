@@ -123,7 +123,7 @@ const Index = () => {
             initial={{ opacity: 0, x: -50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute top-[-40px] left-[-100px] hidden lg:block z-10"
+            className="absolute top-[-40px] left-[-180px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -8, 0] }}
@@ -200,7 +200,7 @@ const Index = () => {
             initial={{ opacity: 0, x: 50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="absolute top-[-20px] right-[-140px] hidden lg:block z-10"
+            className="absolute top-[-20px] right-[-220px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
@@ -228,7 +228,7 @@ const Index = () => {
             initial={{ opacity: 0, x: -50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="absolute bottom-[-80px] left-[-100px] hidden lg:block z-10"
+            className="absolute bottom-[-80px] left-[-200px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -6, 0] }}
@@ -306,7 +306,7 @@ const Index = () => {
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="absolute bottom-[-100px] right-[-120px] hidden lg:block z-10"
+            className="absolute bottom-[-100px] right-[-200px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -7, 0] }}
