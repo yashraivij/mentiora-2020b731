@@ -106,136 +106,127 @@ const Index = () => {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative pt-20 pb-32 px-4 bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#020617] min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 right-20 w-96 h-96 bg-[#0BA5E9]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-5xl mx-auto w-full relative z-10">
-          {/* Main Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center space-y-8"
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-              <span className="bg-gradient-to-r from-[#a78bfa] via-[#60a5fa] to-[#34d399] bg-clip-text text-transparent">
-                Your AI tutor from
+      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className="text-center space-y-8">
+            {/* Main Headline with Gradient */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight"
+            >
+              <span className="bg-gradient-to-r from-[#a78bfa] via-[#7dd3fc] to-[#f0abfc] bg-clip-text text-transparent">
+                Your AI tutor from GCSE to A-Level
               </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#ec4899] via-[#8b5cf6] to-[#6366f1] bg-clip-text text-transparent">
-                GCSE to A-Level
-              </span>
-            </h1>
+            </motion.h1>
 
+            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
             >
-              The evidence-based study platform for GCSE and A-Level exams.
+              The AI-powered study platform for UK secondary students. Predicted grades, personalized notes, and adaptive planning.
             </motion.p>
 
+            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-4"
+              className="flex justify-center pt-4"
             >
               <Button
                 size="lg"
-                className="text-lg px-12 py-7 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] hover:from-[#7c3aed] hover:to-[#db2777] text-white shadow-[0px_8px_24px_rgba(139,92,246,0.4)] hover:scale-105 transition-all font-semibold"
+                className="text-lg px-12 py-7 rounded-full font-semibold shadow-[0px_8px_32px_rgba(167,139,250,0.4)] hover:scale-105 transition-all"
+                style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #f0abfc 100%)' }}
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
-                Join 50,000+ students—for free <ArrowRight className="ml-2 w-5 h-5" />
+                Join 50,000+ students—for free →
               </Button>
             </motion.div>
-          </motion.div>
 
-          {/* Divider with text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex items-center gap-4 my-16"
-          >
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-            <span className="text-sm text-white/60 font-medium tracking-wide">
-              Designed by top educators & students
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-          </motion.div>
+            {/* University Badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="pt-16 space-y-6"
+            >
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div className="w-full border-t border-white/10"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-transparent px-4 text-sm text-white/60">
+                    Helping students get into
+                  </span>
+                </div>
+              </div>
 
-          {/* University Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-wrap items-center justify-center gap-12 md:gap-16"
-          >
-            <div className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
-              <div className="text-4xl">🎓</div>
-              <span className="text-xs text-white/80 font-semibold">OXFORD</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
-              <div className="text-4xl">🎓</div>
-              <span className="text-xs text-white/80 font-semibold">CAMBRIDGE</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
-              <div className="text-4xl">🎓</div>
-              <span className="text-xs text-white/80 font-semibold">IMPERIAL</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
-              <div className="text-4xl">🎓</div>
-              <span className="text-xs text-white/80 font-semibold">UCL</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
-              <div className="text-4xl">🎓</div>
-              <span className="text-xs text-white/80 font-semibold">LSE</span>
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70">
+                <div className="flex flex-col items-center">
+                  <div className="text-white/90 font-semibold text-lg">Oxford</div>
+                  <div className="text-white/60 text-sm">University</div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-white/90 font-semibold text-lg">Cambridge</div>
+                  <div className="text-white/60 text-sm">University</div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-white/90 font-semibold text-lg">Imperial</div>
+                  <div className="text-white/60 text-sm">College London</div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-white/90 font-semibold text-lg">UCL</div>
+                  <div className="text-white/60 text-sm">University</div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-white/90 font-semibold text-lg">LSE</div>
+                  <div className="text-white/60 text-sm">London School of Economics</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         </div>
       </section>
 
       {/* DEMO VIDEO SECTION */}
-      <section className="py-24 px-4 bg-gradient-to-b from-white to-[#F0F9FF] relative overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[#0BA5E9]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center space-y-6 mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              See Mentiora in <span className="text-[#0BA5E9]">action</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-black">
+              See Mentiora in action
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Watch how our AI personalizes your learning journey from day one
+              Watch how Mentiora adapts to your learning style and helps you achieve your target grades
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            className="relative max-w-5xl mx-auto"
           >
-            {/* Video Container */}
-            <div className="relative rounded-3xl overflow-hidden shadow-[0px_20px_60px_rgba(0,0,0,0.15)] border-8 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-[0px_20px_60px_rgba(0,0,0,0.15)] bg-black">
               <video
-                className="w-full h-auto"
+                className="w-full aspect-video"
                 controls
                 poster="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png"
               >
@@ -244,69 +235,30 @@ const Index = () => {
               </video>
             </div>
 
-            {/* Decorative floating elements around video */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-8 -left-8 bg-white rounded-2xl p-4 shadow-xl hidden lg:block"
-            >
-              <div className="flex items-center gap-3">
-                <div className="text-3xl">🎯</div>
-                <div>
-                  <div className="text-2xl font-bold text-[#0BA5E9]">92%</div>
-                  <div className="text-xs text-gray-600">Prediction accuracy</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-8 -right-8 bg-white rounded-2xl p-4 shadow-xl hidden lg:block"
-            >
-              <div className="flex items-center gap-3">
-                <div className="text-3xl">⚡</div>
-                <div>
-                  <div className="text-2xl font-bold text-[#0BA5E9]">14.7h</div>
-                  <div className="text-xs text-gray-600">Saved per month</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ x: [-10, 0, -10] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute top-1/2 -left-12 bg-white rounded-2xl p-4 shadow-xl hidden lg:block"
-            >
-              <div className="flex items-center gap-3">
-                <div className="text-3xl">📈</div>
-                <div>
-                  <div className="text-2xl font-bold text-[#0BA5E9]">+1.8</div>
-                  <div className="text-xs text-gray-600">Grade improvement</div>
-                </div>
-              </div>
-            </motion.div>
+            {/* Decorative elements around video */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
           </motion.div>
 
           {/* Quick Stats Below Video */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto"
           >
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#0BA5E9] mb-2">50,000+</div>
-              <div className="text-gray-600">Students trust Mentiora</div>
+              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">92%</div>
+              <div className="text-gray-600">Grade prediction accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#0BA5E9] mb-2">40+</div>
-              <div className="text-gray-600">Subjects covered</div>
+              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">14.7h</div>
+              <div className="text-gray-600">Average time saved per month</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#0BA5E9] mb-2">2,500+</div>
-              <div className="text-gray-600">Practice questions</div>
+              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">+1.8</div>
+              <div className="text-gray-600">Average grade improvement</div>
             </div>
           </motion.div>
         </div>
