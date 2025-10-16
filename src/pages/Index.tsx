@@ -105,121 +105,309 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
-        <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="text-center space-y-8">
+      {/* HERO SECTION - ChronoTask Style */}
+      <section 
+        className="relative py-24 px-4 min-h-[600px] flex items-center overflow-hidden"
+        style={{
+          backgroundColor: '#f8f9fa',
+          backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)',
+          backgroundSize: '20px 20px'
+        }}
+      >
+        <div className="max-w-[1100px] mx-auto w-full relative">
+          {/* Floating Element 1 - Top Left: Sticky Note with Checkmark */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, y: -50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="absolute top-[-40px] left-[-100px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {/* Yellow Sticky Note */}
+              <div 
+                className="relative w-[180px] h-[180px] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                style={{
+                  backgroundColor: '#fef08a',
+                  transform: 'rotate(-8deg)'
+                }}
+              >
+                {/* Pin */}
+                <div className="absolute top-[-8px] left-1/2 -translate-x-1/2 text-2xl">📌</div>
+                
+                {/* Handwritten text */}
+                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Study your weakest topics to master every concept on your syllabus.
+                </p>
+                
+                {/* White card with checkmark overlay */}
+                <div 
+                  className="absolute bottom-[-20px] left-[-20px] w-[80px] h-[80px] bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20"
+                  style={{ transform: 'rotate(5deg)' }}
+                >
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2563eb' }}>
+                    <CheckCircle2 className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 2 - Center Top: App Icons Grid (visible on all screens) */}
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="absolute top-[-30px] md:top-[-60px] left-1/2 -translate-x-1/2 z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+              <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-3 md:p-5 grid grid-cols-2 gap-2 md:gap-3">
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full" style={{ backgroundColor: '#0ba5e9' }}></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element - Mobile Sticky Note (visible on mobile/tablet only) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className="absolute bottom-[-60px] left-[10px] md:bottom-[-80px] md:left-[20px] block lg:hidden z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+            >
+              <div 
+                className="relative w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.1)] p-3"
+                style={{
+                  backgroundColor: '#fef08a',
+                  transform: 'rotate(-5deg)'
+                }}
+              >
+                <div className="absolute top-[-6px] left-1/2 -translate-x-1/2 text-lg">📌</div>
+                <p className="text-xs leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Master every concept on your syllabus.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 3 - Top Right: Clock & Reminder Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 50, y: -50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className="absolute top-[-20px] right-[-120px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              {/* Clock Card */}
+              <div 
+                className="relative w-[90px] h-[90px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] flex items-center justify-center"
+                style={{ transform: 'rotate(8deg)' }}
+              >
+                <Clock className="w-14 h-14 text-black" />
+              </div>
+              
+              {/* Reminder Card */}
+              <div 
+                className="absolute bottom-[-30px] right-[-40px] w-[160px] bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.15)] p-4 z-20"
+                style={{ transform: 'rotate(-5deg)' }}
+              >
+                <div className="text-sm font-bold text-black mb-3">Reminders</div>
+                <div className="text-xs text-gray-600 mb-2">Study session<br/>Your next topic</div>
+                <div className="inline-block px-3 py-1.5 rounded-md text-xs" style={{ backgroundColor: '#e0f2fe', color: '#0ba5e9' }}>
+                  ⏰ 16:00-16:45
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 4 - Bottom Left: Today's Lessons Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, y: 50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="absolute bottom-[-80px] left-[-80px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              <div 
+                className="w-[280px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                style={{ transform: 'rotate(-3deg)' }}
+              >
+                <div className="text-base font-bold text-black mb-4">Today's lessons</div>
+                
+                {/* Lesson Item 1 */}
+                <div className="mb-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#f97316' }}></div>
+                    <span className="text-sm text-black flex-1">Chemistry revision</span>
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ backgroundColor: '#2563eb', width: '60%' }}></div>
+                    </div>
+                    <span className="text-xs text-gray-600">60%</span>
+                  </div>
+                  <div className="text-xs text-gray-400">Oct 16</div>
+                </div>
+                
+                {/* Lesson Item 2 */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                    <span className="text-sm text-black flex-1">Maths practice</span>
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ backgroundColor: '#f97316', width: '12%' }}></div>
+                    </div>
+                    <span className="text-xs text-gray-600">12%</span>
+                  </div>
+                  <div className="text-xs text-gray-400">Oct 18</div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 5 - Bottom Right: Integrations Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 50, y: 50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="absolute bottom-[-100px] right-[-100px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -7, 0] }}
+              transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              <div 
+                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                style={{ transform: 'rotate(4deg)' }}
+              >
+                <div className="text-sm font-bold text-black mb-4">100+ Integrations</div>
+                
+                {/* App Logos - Overlapping cards */}
+                <div className="relative h-20">
+                  <div 
+                    className="absolute left-0 top-0 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl"
+                    style={{ transform: 'rotate(-5deg)' }}
+                  >
+                    📧
+                  </div>
+                  <div 
+                    className="absolute left-8 top-2 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-10"
+                    style={{ transform: 'rotate(3deg)' }}
+                  >
+                    📚
+                  </div>
+                  <div 
+                    className="absolute left-16 top-4 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-20"
+                    style={{ transform: 'rotate(-3deg)' }}
+                  >
+                    📅
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 6 - Bottom Center: Rocket */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="text-5xl"
+            >
+              🚀
+            </motion.div>
+          </motion.div>
+
+          {/* Main Content - Centered */}
+          <div className="text-center relative z-20 py-16 md:py-12 px-4">
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight"
+              transition={{ duration: 0.5 }}
+              className="mb-6 text-4xl md:text-5xl lg:text-6xl"
+              style={{
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em'
+              }}
             >
-              <span className="bg-gradient-to-r from-foreground via-foreground to-foreground bg-clip-text text-transparent">
-                Your AI tutor from{" "}
+              <span className="block" style={{ color: '#000000' }}>
+                Learn, practice, and improve
               </span>
-              <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent font-bold">
-                GCSE to A-Level
+              <span className="block" style={{ color: '#b0b0b0' }}>
+                all in one place
               </span>
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Subheading */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-normal"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mx-auto mb-10 text-base md:text-lg px-4"
+              style={{
+                fontWeight: 400,
+                color: '#4a4a4a',
+                maxWidth: '600px'
+              }}
             >
-              The AI-powered study platform for UK secondary students. Predicted grades, personalized notes, and adaptive planning.
+              AI-powered tutoring that predicts your grades and personalizes your learning.
             </motion.p>
 
             {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center pt-6"
+              transition={{ duration: 0.5, delay: 0.4 }}
             >
               <Button
                 size="lg"
-                className="text-base px-10 py-6 rounded-full font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+                className="px-8 py-3.5 text-base font-semibold transition-all duration-200 w-full md:w-auto"
+                style={{
+                  backgroundColor: '#2563eb',
+                  color: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '0px 2px 8px rgba(37, 99, 235, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#1d4ed8';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#2563eb';
+                }}
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
-                Join 50,000+ students—for free 
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Get free demo
               </Button>
             </motion.div>
-
-            {/* University Badges */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="pt-20 space-y-8"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                  <div className="w-full border-t border-border/50"></div>
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="bg-background px-6 text-sm font-medium text-muted-foreground">
-                    Helping students get into
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
-                {[
-                  { name: "Oxford", sub: "University" },
-                  { name: "Cambridge", sub: "University" },
-                  { name: "Imperial", sub: "College London" },
-                  { name: "UCL", sub: "University" },
-                  { name: "LSE", sub: "London School of Economics" }
-                ].map((uni, idx) => (
-                  <motion.div
-                    key={uni.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.7 + idx * 0.1 }}
-                    className="flex flex-col items-center group cursor-default"
-                  >
-                    <div className="text-foreground font-semibold text-base group-hover:text-primary transition-colors">{uni.name}</div>
-                    <div className="text-muted-foreground text-xs font-normal">{uni.sub}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
-        </div>
-
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.03, 0.05, 0.03],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.03, 0.06, 0.03],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
-          />
         </div>
       </section>
 
