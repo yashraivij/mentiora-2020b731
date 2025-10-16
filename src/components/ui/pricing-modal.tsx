@@ -157,8 +157,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
 
                   <Button
                     onClick={handleUpgrade}
-                    variant="outline"
-                    className="w-full h-12 rounded-full text-sm font-semibold border-2 border-gray-900 !text-gray-900 hover:bg-gray-50 hover:!text-gray-900"
+                    className="w-full h-12 rounded-full text-sm font-semibold border-2 border-gray-900 bg-background text-gray-900 hover:bg-gray-50 hover:text-gray-900 transition-colors"
                   >
                     Subscribe Monthly
                   </Button>
