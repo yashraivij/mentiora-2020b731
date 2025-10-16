@@ -206,18 +206,18 @@ const Index = () => {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              {/* Mini "You Perform Best At" Card - Exact Dashboard Design */}
+              {/* Mini "You Perform Best At" Card - Dashboard Design */}
               <div 
-                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5 border border-gray-100"
+                className="w-[240px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5 border border-gray-100"
                 style={{ transform: 'rotate(3deg)' }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="p-2 rounded-lg bg-orange-100">
+                  <div className="p-1.5 rounded-lg bg-orange-50">
                     <Clock className="h-4 w-4 text-orange-500" />
                   </div>
-                  <h3 className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">You Perform Best At</h3>
+                  <h3 className="font-semibold text-xs text-gray-500 uppercase tracking-wide">You Perform Best At</h3>
                 </div>
-                <div className="text-2xl font-bold mb-1 text-black">6–8pm</div>
+                <div className="text-3xl font-bold mb-1 text-black">6–8pm</div>
                 <p className="text-xs text-gray-500">Your peak focus hours</p>
               </div>
             </motion.div>
