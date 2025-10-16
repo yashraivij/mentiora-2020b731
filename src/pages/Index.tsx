@@ -280,7 +280,7 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 5 - Bottom Right: Predictive Performance Card (Real Dashboard Component) */}
+          {/* Floating Element 5 - Bottom Right: Subject Card with Predicted/Target Grades (Real Dashboard Component) */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -291,85 +291,87 @@ const Index = () => {
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              {/* Mini Predictive Performance Card - Real Dashboard Design */}
+              {/* Mini Subject Card - Real Dashboard Design */}
               <div 
-                className="w-[280px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                className="w-[300px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 style={{ transform: 'rotate(5deg)' }}
               >
-                {/* Medly Blue Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-600/10" />
-                
                 {/* Content */}
                 <div className="relative p-5">
-                  {/* Header with Icon */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md">
-                      <TrendingUp className="h-5 w-5 text-white" />
+                  {/* Header */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">🧪</span>
+                    <div className="flex-1">
+                      <h3 className="text-base font-bold text-black">Chemistry (AQA)</h3>
+                    </div>
+                    <div className="px-3 py-1 rounded-full bg-slate-500 text-white text-xs font-medium">
+                      Not started
                     </div>
                   </div>
                   
-                  <h3 className="text-base font-bold text-black mb-1">Predictive Performance</h3>
-                  <p className="text-xs text-gray-500 mb-6 leading-relaxed">Grade forecast based on learning patterns</p>
-                  
-                  {/* Average Grade */}
-                  <div className="flex justify-between text-xs text-gray-500 mb-3">
-                    <span>Average Grade</span>
-                    <span className="font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
-                      7.2
-                    </span>
+                  {/* Predicted Grade */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Predicted</span>
+                    <span className="text-xl font-bold text-black">U</span>
                   </div>
                   
-                  {/* Mini Bar Chart */}
-                  <div className="space-y-2.5">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-12 text-xs text-gray-500 font-medium">Chem</div>
-                      <div className="flex-1 relative">
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500"
-                            style={{ width: '88%' }}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-black">8</span>
-                      </div>
+                  {/* Target Grade with Progress */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Target</span>
+                      <span className="text-xl font-bold text-black">7</span>
                     </div>
-                    
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-12 text-xs text-gray-500 font-medium">Math</div>
-                      <div className="flex-1 relative">
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-500"
-                            style={{ width: '77%' }}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-black">7</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-12 text-xs text-gray-500 font-medium">Bio</div>
-                      <div className="flex-1 relative">
-                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full rounded-full bg-gradient-to-r from-yellow-500 to-orange-500"
-                            style={{ width: '66%' }}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-xs font-bold text-black">6</span>
-                      </div>
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-green-500 to-green-600 rounded-full"
+                        style={{ width: '70%' }}
+                      />
                     </div>
                   </div>
                   
-                  <div className="text-xs text-gray-400 text-center pt-4 border-t border-gray-100 mt-4">
-                    +2 more subjects
+                  {/* Last 6 Attempts - Medly Blue Graph */}
+                  <div className="mb-4">
+                    <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-3">Last 6 Attempts</span>
+                    <div className="h-16 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 250 60" preserveAspectRatio="none">
+                        <polyline
+                          fill="none"
+                          stroke="#0BA5E9"
+                          strokeWidth="2.5"
+                          points="0,45 50,35 100,40 150,25 200,30 250,20"
+                        />
+                      </svg>
+                    </div>
                   </div>
+                  
+                  {/* Strong/Focus Topics */}
+                  <div className="space-y-1.5 mb-4">
+                    <div className="flex items-center gap-2 text-xs">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                      <span className="font-medium text-green-600">Strong:</span>
+                      <span className="text-gray-600">Various topics</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                      <span className="font-medium text-red-600">Focus:</span>
+                      <span className="text-gray-600">Core concepts</span>
+                    </div>
+                  </div>
+                  
+                  {/* View Insights Link */}
+                  <div className="text-center mb-3">
+                    <button className="text-xs font-semibold text-cyan-500 hover:text-cyan-600">
+                      View insights
+                    </button>
+                  </div>
+                  
+                  {/* Topics Button */}
+                  <button 
+                    className="w-full py-2.5 rounded-xl font-semibold text-sm text-white"
+                    style={{ backgroundColor: '#0BA5E9' }}
+                  >
+                    Topics
+                  </button>
                 </div>
               </div>
             </motion.div>
