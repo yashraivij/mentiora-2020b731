@@ -583,31 +583,6 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16"
-          >
-            {[
-              { name: "🔬", label: "Combined Science" },
-              { name: "🇪🇸", label: "Spanish" },
-              { name: "📐", label: "GCSE Maths" },
-              { name: "✏️", label: "GCSE English" },
-              { name: "🔬", label: "GCSE Science" }
-            ].map((subject, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl mb-2">{subject.name}</div>
-                <div className="text-sm font-medium text-gray-700">{subject.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
             className="grid md:grid-cols-3 gap-6 mb-20"
           >
             {[
