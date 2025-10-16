@@ -118,7 +118,7 @@ const Index = () => {
         }}
       >
         <div className="max-w-[900px] mx-auto w-full relative">
-          {/* Floating Element 1 - Top Left: Sticky Note with Checkmark */}
+          {/* Floating Element 1 - Top Left: Chat Conversation */}
           <motion.div
             initial={{ opacity: 0, x: -50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -129,21 +129,41 @@ const Index = () => {
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Yellow Sticky Note */}
-              <div 
-                className="relative w-[180px] h-[180px] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
-                style={{
-                  backgroundColor: '#fef08a',
-                  transform: 'rotate(-8deg)'
-                }}
-              >
-                {/* Pin */}
-                <div className="absolute top-[-8px] left-1/2 -translate-x-1/2 text-2xl">📌</div>
+              {/* Chat Conversation */}
+              <div className="space-y-3" style={{ width: '240px' }}>
+                {/* User Message */}
+                <div className="flex justify-end">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-md max-w-[180px]"
+                    style={{
+                      backgroundColor: '#0BA5E9',
+                      color: 'white'
+                    }}
+                  >
+                    <p className="text-sm font-medium">
+                      How can I improve my Chemistry grade?
+                    </p>
+                  </div>
+                </div>
                 
-                {/* Handwritten text */}
-                <p className="text-base leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
-                  Get AI-predicted grades, personalized study plans, and master every topic! 🎯
-                </p>
+                {/* Mentiora Response */}
+                <div className="flex justify-start">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-md max-w-[200px]"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      color: '#000000',
+                      border: '1px solid #e5e7eb'
+                    }}
+                  >
+                    <p className="text-sm font-medium mb-1">
+                      Focus on Bonding Structure! 📚
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      You're at 56% - let's get you to your target grade with personalized practice.
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -413,7 +433,7 @@ const Index = () => {
                 maxWidth: '600px'
               }}
             >
-              Designed to help GCSE & A-Level students achieve their best results through personalised plans, grade tracking, and step-by-step guidance.
+              Personalised GCSE & A-Level revision built to help you reach your best results.
             </motion.p>
 
             {/* CTA Button */}
@@ -440,7 +460,7 @@ const Index = () => {
                 }}
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
-                Get free demo
+                Try now for free
               </Button>
             </motion.div>
           </div>
