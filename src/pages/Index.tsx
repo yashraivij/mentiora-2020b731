@@ -295,35 +295,35 @@ const Index = () => {
             >
               {/* Mini Subject Card - Exact Dashboard Design */}
               <div 
-                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                className="w-[170px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
                 style={{ transform: 'rotate(5deg)' }}
               >
                 {/* Content */}
-                <div className="p-4 space-y-3">
+                <div className="p-3 space-y-2.5">
                   {/* Header */}
                   <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">🧪</span>
-                      <h3 className="text-sm font-bold text-black">Chemistry</h3>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-base">🧪</span>
+                      <h3 className="text-xs font-bold text-black">Chemistry</h3>
                     </div>
-                    <div className="px-2 py-0.5 rounded-md bg-slate-500 text-white text-[10px] font-medium">
+                    <div className="px-1.5 py-0.5 rounded-md bg-slate-500 text-white text-[9px] font-medium">
                       Not started
                     </div>
                   </div>
                   
                   {/* Predicted Section */}
-                  <div className="bg-gray-100 rounded-lg px-3 py-2">
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                      <span className="text-xl font-bold text-black">U</span>
+                      <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                      <span className="text-lg font-bold text-black">U</span>
                     </div>
                   </div>
                   
                   {/* Target Section */}
-                  <div className="bg-gray-100 rounded-lg px-3 py-2 space-y-2">
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5 space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                      <span className="text-xl font-bold text-black">7</span>
+                      <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                      <span className="text-lg font-bold text-black">7</span>
                     </div>
                     <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
                       <div 
@@ -334,44 +334,23 @@ const Index = () => {
                   </div>
                   
                   {/* Last 6 Attempts Section */}
-                  <div className="bg-gray-100 rounded-lg px-3 py-2">
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
-                    <div className="h-10 relative">
-                      <svg width="100%" height="100%" viewBox="0 0 170 40" preserveAspectRatio="none">
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5">
+                    <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block mb-1.5">Last 6 Attempts</span>
+                    <div className="h-8 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 140 32" preserveAspectRatio="none">
                         <polyline
                           fill="none"
                           stroke="#0BA5E9"
                           strokeWidth="2"
-                          points="0,30 34,23 68,27 102,17 136,20 170,13"
+                          points="0,24 28,19 56,22 84,14 112,16 140,10"
                         />
                       </svg>
                     </div>
                   </div>
                   
-                  {/* Strong/Focus Topics */}
-                  <div className="space-y-0.5 pt-0.5">
-                    <div className="flex items-center gap-1.5 text-[11px]">
-                      <CheckCircle2 className="h-3 w-3 text-green-600" />
-                      <span className="font-bold text-green-600">Strong:</span>
-                      <span className="text-gray-700">Various topics</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[11px]">
-                      <AlertTriangle className="h-3 w-3 text-red-600" />
-                      <span className="font-bold text-red-600">Focus:</span>
-                      <span className="text-gray-700">Core concepts</span>
-                    </div>
-                  </div>
-                  
-                  {/* View Insights Link */}
-                  <div className="text-center pt-0.5">
-                    <button className="text-xs font-bold text-cyan-500 hover:text-cyan-600">
-                      View insights
-                    </button>
-                  </div>
-                  
                   {/* Topics Button */}
                   <button 
-                    className="w-full py-2 rounded-lg font-bold text-xs text-white"
+                    className="w-full py-1.5 rounded-lg font-bold text-[10px] text-white"
                     style={{ backgroundColor: '#0BA5E9' }}
                   >
                     Topics
