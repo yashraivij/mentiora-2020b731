@@ -106,7 +106,7 @@ const Index = () => {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden bg-background">
+      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center space-y-8">
             {/* Main Headline */}
@@ -114,10 +114,14 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-foreground"
+              className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] tracking-tight"
             >
-              Your AI tutor from{" "}
-              <span className="text-primary">GCSE to A-Level</span>
+              <span className="bg-gradient-to-r from-foreground via-foreground to-foreground bg-clip-text text-transparent">
+                Your AI tutor from{" "}
+              </span>
+              <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent font-bold">
+                GCSE to A-Level
+              </span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -125,24 +129,25 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-normal"
             >
               The AI-powered study platform for UK secondary students. Predicted grades, personalized notes, and adaptive planning.
             </motion.p>
 
             {/* CTA Button */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex justify-center pt-4"
+              className="flex justify-center pt-6"
             >
               <Button
                 size="lg"
-                className="text-lg px-12 py-7 rounded-full font-semibold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
+                className="text-base px-10 py-6 rounded-full font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
-                Join 50,000+ students—for free →
+                Join 50,000+ students—for free 
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
 
@@ -151,40 +156,38 @@ const Index = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="pt-16 space-y-6"
+              className="pt-20 space-y-8"
             >
               <div className="relative">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                  <div className="w-full border-t border-border"></div>
+                  <div className="w-full border-t border-border/50"></div>
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="bg-background px-4 text-sm text-muted-foreground">
+                  <span className="bg-background px-6 text-sm font-medium text-muted-foreground">
                     Helping students get into
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-                <div className="flex flex-col items-center">
-                  <div className="text-foreground font-semibold text-lg">Oxford</div>
-                  <div className="text-muted-foreground text-sm">University</div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-foreground font-semibold text-lg">Cambridge</div>
-                  <div className="text-muted-foreground text-sm">University</div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-foreground font-semibold text-lg">Imperial</div>
-                  <div className="text-muted-foreground text-sm">College London</div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-foreground font-semibold text-lg">UCL</div>
-                  <div className="text-muted-foreground text-sm">University</div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-foreground font-semibold text-lg">LSE</div>
-                  <div className="text-muted-foreground text-sm">London School of Economics</div>
-                </div>
+              <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+                {[
+                  { name: "Oxford", sub: "University" },
+                  { name: "Cambridge", sub: "University" },
+                  { name: "Imperial", sub: "College London" },
+                  { name: "UCL", sub: "University" },
+                  { name: "LSE", sub: "London School of Economics" }
+                ].map((uni, idx) => (
+                  <motion.div
+                    key={uni.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.7 + idx * 0.1 }}
+                    className="flex flex-col items-center group cursor-default"
+                  >
+                    <div className="text-foreground font-semibold text-base group-hover:text-primary transition-colors">{uni.name}</div>
+                    <div className="text-muted-foreground text-xs font-normal">{uni.sub}</div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -192,8 +195,31 @@ const Index = () => {
 
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.03, 0.05, 0.03],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.03, 0.06, 0.03],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
+          />
         </div>
       </section>
 
