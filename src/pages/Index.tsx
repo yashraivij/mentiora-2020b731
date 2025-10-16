@@ -335,8 +335,8 @@ const Index = () => {
                     </div>
                     <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-blue-500 rounded-full"
-                        style={{ width: '78%' }}
+                        className="h-full rounded-full"
+                        style={{ width: '78%', backgroundColor: '#0BA5E9' }}
                       />
                     </div>
                   </div>
@@ -429,16 +429,16 @@ const Index = () => {
                 size="lg"
                 className="px-8 py-3.5 text-base font-semibold transition-all duration-200 w-full md:w-auto"
                 style={{
-                  backgroundColor: '#2563eb',
+                  backgroundColor: '#0BA5E9',
                   color: 'white',
                   borderRadius: '8px',
-                  boxShadow: '0px 2px 8px rgba(37, 99, 235, 0.3)'
+                  boxShadow: '0px 2px 8px rgba(11, 165, 233, 0.3)'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#1d4ed8';
+                  e.currentTarget.style.backgroundColor = '#0891C7';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#2563eb';
+                  e.currentTarget.style.backgroundColor = '#0BA5E9';
                 }}
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
