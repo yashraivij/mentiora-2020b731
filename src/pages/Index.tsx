@@ -295,37 +295,37 @@ const Index = () => {
             >
               {/* Mini Subject Card - Exact Dashboard Design */}
               <div 
-                className="w-[240px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
                 style={{ transform: 'rotate(5deg)' }}
               >
                 {/* Content */}
-                <div className="p-5 space-y-4">
+                <div className="p-4 space-y-3">
                   {/* Header */}
                   <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-2xl">🧪</span>
-                      <h3 className="text-base font-bold text-black">Chemistry (AQA)</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">🧪</span>
+                      <h3 className="text-sm font-bold text-black">Chemistry</h3>
                     </div>
-                    <div className="px-2.5 py-1 rounded-md bg-slate-500 text-white text-xs font-medium">
+                    <div className="px-2 py-0.5 rounded-md bg-slate-500 text-white text-[10px] font-medium">
                       Not started
                     </div>
                   </div>
                   
                   {/* Predicted Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3">
+                  <div className="bg-gray-100 rounded-lg px-3 py-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                      <span className="text-2xl font-bold text-black">U</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                      <span className="text-xl font-bold text-black">U</span>
                     </div>
                   </div>
                   
                   {/* Target Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2.5">
+                  <div className="bg-gray-100 rounded-lg px-3 py-2 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                      <span className="text-2xl font-bold text-black">7</span>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                      <span className="text-xl font-bold text-black">7</span>
                     </div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-green-500 rounded-full"
                         style={{ width: '70%' }}
@@ -334,44 +334,44 @@ const Index = () => {
                   </div>
                   
                   {/* Last 6 Attempts Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3">
-                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-3">Last 6 Attempts</span>
-                    <div className="h-12 relative">
-                      <svg width="100%" height="100%" viewBox="0 0 208 48" preserveAspectRatio="none">
+                  <div className="bg-gray-100 rounded-lg px-3 py-2">
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
+                    <div className="h-10 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 170 40" preserveAspectRatio="none">
                         <polyline
                           fill="none"
                           stroke="#0BA5E9"
                           strokeWidth="2"
-                          points="0,36 41.6,28 83.2,32 124.8,20 166.4,24 208,16"
+                          points="0,30 34,23 68,27 102,17 136,20 170,13"
                         />
                       </svg>
                     </div>
                   </div>
                   
                   {/* Strong/Focus Topics */}
-                  <div className="space-y-1 pt-1">
-                    <div className="flex items-center gap-1.5 text-xs">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                  <div className="space-y-0.5 pt-0.5">
+                    <div className="flex items-center gap-1.5 text-[11px]">
+                      <CheckCircle2 className="h-3 w-3 text-green-600" />
                       <span className="font-bold text-green-600">Strong:</span>
                       <span className="text-gray-700">Various topics</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs">
-                      <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                    <div className="flex items-center gap-1.5 text-[11px]">
+                      <AlertTriangle className="h-3 w-3 text-red-600" />
                       <span className="font-bold text-red-600">Focus:</span>
                       <span className="text-gray-700">Core concepts</span>
                     </div>
                   </div>
                   
                   {/* View Insights Link */}
-                  <div className="text-center pt-1">
-                    <button className="text-sm font-bold text-cyan-500 hover:text-cyan-600">
+                  <div className="text-center pt-0.5">
+                    <button className="text-xs font-bold text-cyan-500 hover:text-cyan-600">
                       View insights
                     </button>
                   </div>
                   
                   {/* Topics Button */}
                   <button 
-                    className="w-full py-2.5 rounded-lg font-bold text-sm text-white"
+                    className="w-full py-2 rounded-lg font-bold text-xs text-white"
                     style={{ backgroundColor: '#0BA5E9' }}
                   >
                     Topics
