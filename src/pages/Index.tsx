@@ -234,49 +234,68 @@ const Index = () => {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
-              {/* Mini Weekly Plan Card - Real Dashboard Design */}
+              {/* Mini Weekly Plan Card - Drawer Style */}
               <div 
-                className="w-[300px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                className="w-[300px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100"
                 style={{ transform: 'rotate(-4deg)' }}
               >
-                {/* Header */}
-                <div className="px-5 py-4" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05))' }}>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <Zap className="h-4 w-4" style={{ color: '#3b82f6' }} />
-                      <h3 className="font-semibold text-sm text-black">Monday</h3>
+                <div className="p-4 space-y-4">
+                  {/* Day Header */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-black text-base">Mon</span>
+                      <span className="text-gray-500 text-sm ml-2">— Kickstart Week</span>
                     </div>
-                    <CheckCircle2 className="h-4 w-4" style={{ color: '#10b981' }} />
+                    <span className="px-2.5 py-1 rounded-lg text-xs font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
+                      30 mins
+                    </span>
                   </div>
-                  <p className="text-xs font-medium text-gray-600">Kickstart Week</p>
-                </div>
-                
-                {/* Tasks */}
-                <div className="px-5 py-4 space-y-3">
-                  <div className="flex items-start gap-2">
-                    <span className="text-base">⚗️</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="text-xs font-medium text-red-600">Organic Chemistry</p>
-                        <span className="text-xs px-1.5 py-0 rounded text-red-600 bg-red-50 font-medium">weak</span>
+                  
+                  {/* Task 1 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-medium text-black">Create 10 flashcards on Bonding Structure</span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                            Priority
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-500">15 mins • Current: 8%</p>
                       </div>
-                      <p className="text-xs text-gray-500 leading-tight">Create 10 flashcards + do short 5-Q quiz</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
+                        <span>▶</span> Start
+                      </button>
+                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        Done
+                      </button>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-2">
-                    <span className="text-base">📐</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-orange-600 mb-1">Trigonometry</p>
-                      <p className="text-xs text-gray-500 leading-tight">Watch AI explanation → practice questions</p>
+                  {/* Task 2 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-medium text-black">Practice questions on Bonding Structure</span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                            Priority
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-500">15 mins • Current: 8%</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
+                        <span>▶</span> Start
+                      </button>
+                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        Done
+                      </button>
                     </div>
                   </div>
-                </div>
-                
-                {/* Footer */}
-                <div className="px-5 py-3 border-t border-gray-100 flex items-center gap-2 text-xs text-gray-500">
-                  <Clock className="h-3 w-3" />
-                  <span>50 mins total</span>
                 </div>
               </div>
             </motion.div>
