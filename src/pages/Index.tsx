@@ -261,7 +261,7 @@ const Index = () => {
                             Priority
                           </span>
                         </div>
-                        <p className="text-[10px] text-gray-500">15 mins • Current: 8%</p>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
                       </div>
                     </div>
                     <div className="flex gap-1.5">
@@ -284,7 +284,7 @@ const Index = () => {
                             Priority
                           </span>
                         </div>
-                        <p className="text-[10px] text-gray-500">15 mins • Current: 8%</p>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
                       </div>
                     </div>
                     <div className="flex gap-1.5">
