@@ -141,8 +141,8 @@ const Index = () => {
                 <div className="absolute top-[-8px] left-1/2 -translate-x-1/2 text-2xl">📌</div>
                 
                 {/* Handwritten text */}
-                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
-                  Your AI tutor adapts to you, predicting grades and personalizing every lesson.
+                <p className="text-base leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Get AI-predicted grades, personalized study plans, and master every topic! 🎯
                 </p>
               </div>
             </motion.div>
@@ -188,8 +188,8 @@ const Index = () => {
                 }}
               >
                 <div className="absolute top-[-6px] left-1/2 -translate-x-1/2 text-lg">📌</div>
-                <p className="text-xs leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
-                  AI-powered tutoring tailored just for you.
+                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
+                  Smart AI tutoring that knows exactly what you need! 📚✨
                 </p>
               </div>
             </motion.div>
