@@ -173,7 +173,7 @@ const Index = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="absolute top-[-30px] md:top-[-60px] left-1/2 -translate-x-1/2 z-10"
+            className="absolute top-[-30px] md:top-[-60px] left-[calc(50%-10px)] md:left-1/2 -translate-x-1/2 z-10"
           >
             <motion.div
               animate={{ y: [0, -5, 0] }}
