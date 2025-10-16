@@ -106,19 +106,18 @@ const Index = () => {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
+      <section className="relative pt-32 pb-24 px-4 min-h-[90vh] flex items-center overflow-hidden bg-background">
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center space-y-8">
-            {/* Main Headline with Gradient */}
+            {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-foreground"
             >
-              <span className="bg-gradient-to-r from-[#a78bfa] via-[#7dd3fc] to-[#f0abfc] bg-clip-text text-transparent">
-                Your AI tutor from GCSE to A-Level
-              </span>
+              Your AI tutor from{" "}
+              <span className="text-primary">GCSE to A-Level</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -126,7 +125,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             >
               The AI-powered study platform for UK secondary students. Predicted grades, personalized notes, and adaptive planning.
             </motion.p>
@@ -140,8 +139,7 @@ const Index = () => {
             >
               <Button
                 size="lg"
-                className="text-lg px-12 py-7 rounded-full font-semibold shadow-[0px_8px_32px_rgba(167,139,250,0.4)] hover:scale-105 transition-all"
-                style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #f0abfc 100%)' }}
+                className="text-lg px-12 py-7 rounded-full font-semibold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
                 Join 50,000+ students—for free →
@@ -157,35 +155,35 @@ const Index = () => {
             >
               <div className="relative">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                  <div className="w-full border-t border-white/10"></div>
+                  <div className="w-full border-t border-border"></div>
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="bg-transparent px-4 text-sm text-white/60">
+                  <span className="bg-background px-4 text-sm text-muted-foreground">
                     Helping students get into
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70">
+              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
                 <div className="flex flex-col items-center">
-                  <div className="text-white/90 font-semibold text-lg">Oxford</div>
-                  <div className="text-white/60 text-sm">University</div>
+                  <div className="text-foreground font-semibold text-lg">Oxford</div>
+                  <div className="text-muted-foreground text-sm">University</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-white/90 font-semibold text-lg">Cambridge</div>
-                  <div className="text-white/60 text-sm">University</div>
+                  <div className="text-foreground font-semibold text-lg">Cambridge</div>
+                  <div className="text-muted-foreground text-sm">University</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-white/90 font-semibold text-lg">Imperial</div>
-                  <div className="text-white/60 text-sm">College London</div>
+                  <div className="text-foreground font-semibold text-lg">Imperial</div>
+                  <div className="text-muted-foreground text-sm">College London</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-white/90 font-semibold text-lg">UCL</div>
-                  <div className="text-white/60 text-sm">University</div>
+                  <div className="text-foreground font-semibold text-lg">UCL</div>
+                  <div className="text-muted-foreground text-sm">University</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-white/90 font-semibold text-lg">LSE</div>
-                  <div className="text-white/60 text-sm">London School of Economics</div>
+                  <div className="text-foreground font-semibold text-lg">LSE</div>
+                  <div className="text-muted-foreground text-sm">London School of Economics</div>
                 </div>
               </div>
             </motion.div>
@@ -194,13 +192,13 @@ const Index = () => {
 
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         </div>
       </section>
 
       {/* DEMO VIDEO SECTION */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -209,10 +207,10 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="text-center space-y-6 mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
               See Mentiora in action
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Watch how Mentiora adapts to your learning style and helps you achieve your target grades
             </p>
           </motion.div>
@@ -224,7 +222,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative max-w-5xl mx-auto"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-[0px_20px_60px_rgba(0,0,0,0.15)] bg-black">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
               <video
                 className="w-full aspect-video"
                 controls
@@ -236,8 +234,8 @@ const Index = () => {
             </div>
 
             {/* Decorative elements around video */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
           </motion.div>
 
           {/* Quick Stats Below Video */}
@@ -249,16 +247,16 @@ const Index = () => {
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto"
           >
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">92%</div>
-              <div className="text-gray-600">Grade prediction accuracy</div>
+              <div className="text-4xl font-bold text-primary mb-2">92%</div>
+              <div className="text-muted-foreground">Grade prediction accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">14.7h</div>
-              <div className="text-gray-600">Average time saved per month</div>
+              <div className="text-4xl font-bold text-primary mb-2">14.7h</div>
+              <div className="text-muted-foreground">Average time saved per month</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-[#0BA5E9] mb-2">+1.8</div>
-              <div className="text-gray-600">Average grade improvement</div>
+              <div className="text-4xl font-bold text-primary mb-2">+1.8</div>
+              <div className="text-muted-foreground">Average grade improvement</div>
             </div>
           </motion.div>
         </div>
