@@ -280,7 +280,7 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 5 - Bottom Right: Subject Progress Card (Real Dashboard Component) */}
+          {/* Floating Element 5 - Bottom Right: Predictive Performance Card (Real Dashboard Component) */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -291,59 +291,84 @@ const Index = () => {
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              {/* Mini Subject Card - Real Dashboard Design */}
+              {/* Mini Predictive Performance Card - Real Dashboard Design */}
               <div 
                 className="w-[280px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 style={{ transform: 'rotate(5deg)' }}
               >
-                {/* Colored background accent */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5" />
+                {/* Medly Blue Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-600/10" />
                 
                 {/* Content */}
                 <div className="relative p-5">
+                  {/* Header with Icon */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full" style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}></div>
-                      <div>
-                        <h3 className="text-base font-bold text-black">Chemistry</h3>
-                        <p className="text-xs font-semibold text-gray-600">85% accuracy</p>
-                      </div>
-                    </div>
-                    <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-50 to-emerald-100 border border-emerald-200">
-                      <span className="text-sm font-bold" style={{ color: '#059669' }}>85%</span>
+                    <div className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md">
+                      <TrendingUp className="h-5 w-5 text-white" />
                     </div>
                   </div>
                   
-                  {/* Progress Bar */}
-                  <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden mb-4 shadow-inner">
-                    <div className="h-full rounded-full" style={{ background: 'linear-gradient(90deg, #10b981, #059669)', width: '85%' }}></div>
+                  <h3 className="text-base font-bold text-black mb-1">Predictive Performance</h3>
+                  <p className="text-xs text-gray-500 mb-6 leading-relaxed">Grade forecast based on learning patterns</p>
+                  
+                  {/* Average Grade */}
+                  <div className="flex justify-between text-xs text-gray-500 mb-3">
+                    <span>Average Grade</span>
+                    <span className="font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
+                      7.2
+                    </span>
                   </div>
                   
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center p-2 rounded-xl bg-emerald-50/80 border border-emerald-100">
-                      <div className="flex items-center justify-center mb-1">
-                        <CheckCircle2 className="h-3 w-3 mr-1" style={{ color: '#10b981' }} />
-                        <span className="text-base font-bold" style={{ color: '#059669' }}>12</span>
+                  {/* Mini Bar Chart */}
+                  <div className="space-y-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-12 text-xs text-gray-500 font-medium">Chem</div>
+                      <div className="flex-1 relative">
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500"
+                            style={{ width: '88%' }}
+                          />
+                        </div>
                       </div>
-                      <p className="text-xs font-medium" style={{ color: '#059669' }}>Mastered</p>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-black">8</span>
+                      </div>
                     </div>
                     
-                    <div className="text-center p-2 rounded-xl bg-red-50/80 border border-red-100">
-                      <div className="flex items-center justify-center mb-1">
-                        <AlertTriangle className="h-3 w-3 mr-1" style={{ color: '#ef4444' }} />
-                        <span className="text-base font-bold" style={{ color: '#dc2626' }}>3</span>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-12 text-xs text-gray-500 font-medium">Math</div>
+                      <div className="flex-1 relative">
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-500"
+                            style={{ width: '77%' }}
+                          />
+                        </div>
                       </div>
-                      <p className="text-xs font-medium" style={{ color: '#dc2626' }}>Weak</p>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-black">7</span>
+                      </div>
                     </div>
                     
-                    <div className="text-center p-2 rounded-xl bg-gray-50 border border-gray-200">
-                      <div className="flex items-center justify-center mb-1">
-                        <Target className="h-3 w-3 mr-1 text-gray-400" />
-                        <span className="text-base font-bold text-gray-600">8</span>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-12 text-xs text-gray-500 font-medium">Bio</div>
+                      <div className="flex-1 relative">
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full rounded-full bg-gradient-to-r from-yellow-500 to-orange-500"
+                            style={{ width: '66%' }}
+                          />
+                        </div>
                       </div>
-                      <p className="text-xs font-medium text-gray-600">Untested</p>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-black">6</span>
+                      </div>
                     </div>
+                  </div>
+                  
+                  <div className="text-xs text-gray-400 text-center pt-4 border-t border-gray-100 mt-4">
+                    +2 more subjects
                   </div>
                 </div>
               </div>
