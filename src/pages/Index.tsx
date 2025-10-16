@@ -145,7 +145,7 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 2 - Center Top: App Icons Grid (visible on all screens) */}
+          {/* Floating Element 2 - Center Top: Mentiora Logo (visible on all screens) */}
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -156,11 +156,12 @@ const Index = () => {
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             >
-              <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-3 md:p-5 grid grid-cols-2 gap-2 md:gap-3">
-                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full" style={{ backgroundColor: '#0ba5e9' }}></div>
-                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
-                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
-                <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-black"></div>
+              <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-3 md:p-5 flex items-center justify-center">
+                <img 
+                  src={mentioraLogo} 
+                  alt="Mentiora" 
+                  className="w-full h-full object-contain"
+                />
               </div>
             </motion.div>
           </motion.div>
