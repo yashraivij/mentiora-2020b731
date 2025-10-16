@@ -397,10 +397,7 @@ const Index = () => {
               }}
             >
               <span className="block" style={{ color: '#000000' }}>
-                Learn, practice, and improve
-              </span>
-              <span className="block" style={{ color: '#b0b0b0' }}>
-                all in one place
+                Your revision, finally made personal
               </span>
             </motion.h1>
 
@@ -416,7 +413,7 @@ const Index = () => {
                 maxWidth: '600px'
               }}
             >
-              AI-powered tutoring that predicts your grades and personalizes your learning.
+              Designed to help GCSE & A-Level students achieve their best results through personalised plans, grade tracking, and step-by-step guidance.
             </motion.p>
 
             {/* CTA Button */}
