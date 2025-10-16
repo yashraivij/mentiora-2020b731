@@ -383,13 +383,13 @@ const Index = () => {
           </motion.div>
 
           {/* Main Content - Centered */}
-          <div className="text-center relative z-20 py-16 md:py-12 px-4">
+          <div className="text-center relative z-20 py-16 md:py-12 px-4 mx-auto">
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 text-4xl md:text-5xl lg:text-6xl"
+              className="mb-6 text-4xl md:text-5xl lg:text-6xl mx-auto"
               style={{
                 fontWeight: 700,
                 lineHeight: 1.1,
@@ -424,6 +424,7 @@ const Index = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex justify-center"
             >
               <Button
                 size="lg"
