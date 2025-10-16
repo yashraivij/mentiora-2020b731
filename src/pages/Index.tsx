@@ -141,7 +141,7 @@ const Index = () => {
                     }}
                   >
                     <p className="text-sm font-medium">
-                      How can I improve my Chemistry grade?
+                      I'm stuck on this bonding question 😅
                     </p>
                   </div>
                 </div>
@@ -157,10 +157,10 @@ const Index = () => {
                     }}
                   >
                     <p className="text-sm font-medium mb-1">
-                      Focus on Bonding Structure! 📚
+                      Let's break it down! 💡
                     </p>
                     <p className="text-xs text-gray-600">
-                      You're at 56% - let's get you to your target grade with personalized practice.
+                      First, identify the type of bond. What elements are involved?
                     </p>
                   </div>
                 </div>
