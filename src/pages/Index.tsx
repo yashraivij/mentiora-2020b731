@@ -397,7 +397,7 @@ const Index = () => {
               }}
             >
               <span className="block" style={{ color: '#000000' }}>
-                Your revision, finally made personal
+                Your revision, finally made <span style={{ color: '#0BA5E9' }}>personal</span>
               </span>
             </motion.h1>
 
