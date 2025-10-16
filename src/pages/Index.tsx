@@ -239,59 +239,59 @@ const Index = () => {
                 className="w-[300px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100"
                 style={{ transform: 'rotate(-4deg)' }}
               >
-                <div className="p-4 space-y-4">
+                <div className="p-3 space-y-2.5">
                   {/* Day Header */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-bold text-black text-base">Mon</span>
-                      <span className="text-gray-500 text-sm ml-2">— Kickstart Week</span>
+                      <span className="font-bold text-black text-sm">Mon</span>
+                      <span className="text-gray-500 text-xs ml-1.5">— Kickstart Week</span>
                     </div>
-                    <span className="px-2.5 py-1 rounded-lg text-xs font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
+                    <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
                       30 mins
                     </span>
                   </div>
                   
                   {/* Task 1 */}
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-medium text-black">Create 10 flashcards on Bonding Structure</span>
-                          <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-xs font-medium text-black">Create 10 flashcards on Bonding Structure</span>
+                          <span className="px-1 py-0 rounded text-[9px] font-semibold bg-red-100 text-red-600">
                             Priority
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">15 mins • Current: 8%</p>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 8%</p>
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
+                    <div className="flex gap-1.5">
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
                         <span>▶</span> Start
                       </button>
-                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
                         Done
                       </button>
                     </div>
                   </div>
                   
                   {/* Task 2 */}
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-medium text-black">Practice questions on Bonding Structure</span>
-                          <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-xs font-medium text-black">Practice questions on Bonding Structure</span>
+                          <span className="px-1 py-0 rounded text-[9px] font-semibold bg-red-100 text-red-600">
                             Priority
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">15 mins • Current: 8%</p>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 8%</p>
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
+                    <div className="flex gap-1.5">
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
                         <span>▶</span> Start
                       </button>
-                      <button className="px-3 py-1.5 rounded-lg text-xs font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
                         Done
                       </button>
                     </div>
