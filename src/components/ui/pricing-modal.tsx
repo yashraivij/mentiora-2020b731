@@ -23,22 +23,27 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
   // Dynamic pricing based on exam year
   const pricingData = {
     "2026": {
+      monthlyPrice: "24.99",
       oneTimePrice: "200.00",
       originalPrice: "300.00",
       savingsPercent: "33%",
       endDate: "31st July 2026",
-      offerEnds: "15/10/25"
+      offerEnds: "15/10/25",
+      monthsUntilExam: "16"
     },
     "2027": {
+      monthlyPrice: "24.99",
       oneTimePrice: "225.00",
       originalPrice: "350.00",
       savingsPercent: "36%",
       endDate: "31st July 2027",
-      offerEnds: "31/12/25"
+      offerEnds: "31/12/25",
+      monthsUntilExam: "28"
     }
   };
 
   const currentPricing = pricingData[examYear];
+  const monthlySavings = ((parseFloat(currentPricing.oneTimePrice) / parseFloat(currentPricing.monthlyPrice) / parseFloat(currentPricing.monthsUntilExam)) * 100).toFixed(0);
 
   const handleUpgrade = () => {
     openPaymentLink();
@@ -94,7 +99,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
 
         <div className="px-2">
           <p className="text-center text-gray-600 mb-6">
-            Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
+            Pay just once to get all-in-one access until {currentPricing.endDate}, or subscribe to on-the-go learning.
           </p>
 
           {!showParentForm ? (
@@ -142,9 +147,12 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   
                   <div className="mb-6">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-gray-900">£24.99</span>
+                      <span className="text-4xl font-bold text-gray-900">£{currentPricing.monthlyPrice}</span>
                       <span className="text-gray-600 text-sm">/month</span>
                     </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      ~£{(parseFloat(currentPricing.monthlyPrice) * parseFloat(currentPricing.monthsUntilExam)).toFixed(0)} total until {examYear} exams
+                    </p>
                   </div>
 
                   <Button
@@ -156,7 +164,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   </Button>
 
                   <p className="text-xs text-gray-500 mt-3 text-center">
-                    £24.99 billed monthly. Cancel anytime.
+                    £{currentPricing.monthlyPrice} billed monthly. Cancel anytime.
                   </p>
                 </Card>
 
