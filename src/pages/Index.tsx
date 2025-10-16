@@ -117,7 +117,7 @@ const Index = () => {
           backgroundSize: '20px 20px'
         }}
       >
-        <div className="max-w-[1100px] mx-auto w-full relative">
+        <div className="max-w-[900px] mx-auto w-full relative">
           {/* Floating Element 1 - Top Left: Sticky Note with Checkmark */}
           <motion.div
             initial={{ opacity: 0, x: -50, y: -50 }}
