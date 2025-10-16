@@ -6,6 +6,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import mentioraLogo from "@/assets/mentiora-logo.png";
 
 interface PricingModalProps {
   open: boolean;
@@ -61,7 +62,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
             <div className="relative">
               <div className="w-16 h-16 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
                 <img 
-                  src="/src/assets/mentiora-logo.png" 
+                  src={mentioraLogo} 
                   alt="Mentiora" 
                   className="w-10 h-10"
                 />
