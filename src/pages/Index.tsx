@@ -141,16 +141,6 @@ const Index = () => {
                 <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
                   Study your weakest topics to master every concept on your syllabus.
                 </p>
-                
-                {/* White card with checkmark overlay */}
-                <div 
-                  className="absolute bottom-[-20px] left-[-20px] w-[80px] h-[80px] bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20"
-                  style={{ transform: 'rotate(5deg)' }}
-                >
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#2563eb' }}>
-                    <CheckCircle2 className="w-8 h-8 text-white" />
-                  </div>
-                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -286,7 +276,7 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 5 - Bottom Right: Integrations Card */}
+          {/* Floating Element 5 - Bottom Right: Study Insights Card */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: 50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -298,49 +288,36 @@ const Index = () => {
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
               <div 
-                className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
+                className="w-[220px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5"
                 style={{ transform: 'rotate(4deg)' }}
               >
-                <div className="text-sm font-bold text-black mb-4">100+ Integrations</div>
+                <div className="text-sm font-bold text-black mb-4">Study Insights</div>
                 
-                {/* App Logos - Overlapping cards */}
-                <div className="relative h-20">
-                  <div 
-                    className="absolute left-0 top-0 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl"
-                    style={{ transform: 'rotate(-5deg)' }}
-                  >
-                    📧
+                {/* Weekly Study Time */}
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-gray-600">This week</span>
+                    <span className="text-lg font-bold text-black">12.5h</span>
                   </div>
-                  <div 
-                    className="absolute left-8 top-2 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-10"
-                    style={{ transform: 'rotate(3deg)' }}
-                  >
-                    📚
-                  </div>
-                  <div 
-                    className="absolute left-16 top-4 w-16 h-16 bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl z-20"
-                    style={{ transform: 'rotate(-3deg)' }}
-                  >
-                    📅
+                  <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ backgroundColor: '#10b981', width: '75%' }}></div>
                   </div>
                 </div>
+                
+                {/* Best Study Time */}
+                <div className="mb-3">
+                  <div className="text-xs text-gray-600 mb-1">Best study time</div>
+                  <div className="inline-block px-3 py-1.5 rounded-md text-xs font-semibold" style={{ backgroundColor: '#e0f2fe', color: '#0ba5e9' }}>
+                    🕐 16:00-18:00
+                  </div>
+                </div>
+                
+                {/* Progress indicator */}
+                <div className="flex items-center gap-2 text-xs">
+                  <TrendingUp className="w-4 h-4" style={{ color: '#10b981' }} />
+                  <span className="text-gray-600">+15% this month</span>
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Floating Element 6 - Bottom Center: Rocket */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
-            className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 hidden lg:block z-10"
-          >
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="text-5xl"
-            >
-              🚀
             </motion.div>
           </motion.div>
 
