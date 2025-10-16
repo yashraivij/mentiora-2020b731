@@ -173,7 +173,7 @@ const Index = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="absolute top-[-30px] md:top-[-60px] left-[calc(50%-15px)] md:left-[calc(50%-20px)] -translate-x-1/2 z-10"
+            className="absolute top-[-30px] md:top-[-60px] left-1/2 -translate-x-1/2 z-10"
           >
             <motion.div
               animate={{ y: [0, -5, 0] }}
@@ -467,70 +467,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* DEMO VIDEO SECTION */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="text-center space-y-6 mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              See Mentiora in action
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Watch how Mentiora adapts to your learning style and helps you achieve your target grades
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative max-w-5xl mx-auto"
-          >
-            <div className="relative rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
-              <video
-                className="w-full aspect-video"
-                controls
-                poster="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png"
-              >
-                <source src="/demo-video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-
-            {/* Decorative elements around video */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
-          </motion.div>
-
-          {/* Quick Stats Below Video */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto"
-          >
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">92%</div>
-              <div className="text-muted-foreground">Grade prediction accuracy</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">14.7h</div>
-              <div className="text-muted-foreground">Average time saved per month</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">+1.8</div>
-              <div className="text-muted-foreground">Average grade improvement</div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* UNLIKE ANY OTHER APP SECTION */}
       <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
@@ -639,98 +575,40 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CURRICULUM COVERAGE SECTION */}
+      {/* SUBJECTS OVERVIEW SECTION */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-12"
+            variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
-              The only tutor that's<br />
-              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
-            </h2>
-            <p className="text-base text-gray-600 mb-8">
-              Other tutoring platforms are not based on Exam Board Curriculums.<br />
-              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
-            </p>
+            {[
+              { name: "🔬", label: "Combined Science" },
+              { name: "🇪🇸", label: "Spanish" },
+              { name: "📐", label: "GCSE Maths" },
+              { name: "✏️", label: "GCSE English" },
+              { name: "🔬", label: "GCSE Science" }
+            ].map((subject, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl mb-2">{subject.name}</div>
+                <div className="text-sm font-medium text-gray-700">{subject.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="max-w-5xl mx-auto"
-          >
-            {/* Exam Boards */}
-            <div className="mb-10">
-              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
-              <div className="flex flex-wrap justify-center gap-4">
-                {[
-                  { name: "AQA", level: "GCSE & A-Level" },
-                  { name: "Edexcel", level: "GCSE & IGCSE" },
-                  { name: "OCR", level: "GCSE" }
-                ].map((board, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
-                  >
-                    <div className="text-xl font-bold text-black mb-1">{board.name}</div>
-                    <div className="text-xs text-gray-500">{board.level}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Subjects */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {[
-                  { name: "Biology", emoji: "🧬" },
-                  { name: "Chemistry", emoji: "🧪" },
-                  { name: "Physics", emoji: "🧲" },
-                  { name: "Maths", emoji: "📐" },
-                  { name: "English Language", emoji: "✍️" },
-                  { name: "English Literature", emoji: "📖" },
-                  { name: "Computer Science", emoji: "💻" },
-                  { name: "Geography", emoji: "🌍" },
-                  { name: "History", emoji: "⏳" },
-                  { name: "Psychology", emoji: "🧠" },
-                  { name: "Business", emoji: "💼" },
-                  { name: "Religious Studies", emoji: "⛪" },
-                  { name: "Combined Science", emoji: "🔬" },
-                  { name: "Spanish", emoji: "🇪🇸" }
-                ].map((subject, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                  >
-                    <div className="text-3xl mb-2">{subject.emoji}</div>
-                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SUBJECT CARDS SECTION */}
-      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
-        <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-6 mb-20"
           >
             {[
               {
@@ -770,12 +648,8 @@ const Index = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
 
-      {/* TOPIC PRACTICE QUESTION SECTION */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
+          {/* QUESTION MARKING DEMONSTRATION */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -890,69 +764,98 @@ const Index = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="flex justify-start">
-                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
-                        You got 2 out of 3 marks for this question.
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
-                        Let&apos;s go through it together.
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
-                        <div className="space-y-3">
-                          <div className="flex items-start gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            <div className="text-xs">
-                              <p className="font-semibold text-green-900">Light provides energy</p>
-                              <p className="text-green-700 mt-1">✓ Correct - Light energy is needed for photosynthesis</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            <div className="text-xs">
-                              <p className="font-semibold text-green-900">Rate increases</p>
-                              <p className="text-green-700 mt-1">✓ Correct - More light increases reaction rate</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <X className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                            <div className="text-xs">
-                              <p className="font-semibold text-red-900">Missing point</p>
-                              <p className="text-red-700 mt-1">✗ You needed to mention that chlorophyll absorbs light energy</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="bg-gray-200 rounded-[20px] p-4 text-sm text-black font-medium max-w-[80%]">
-                        Good explanation! To get full marks, remember to mention that <strong>chlorophyll in the chloroplasts absorbs light energy</strong> and converts it into chemical energy.
-                      </div>
+                    <div className="bg-white rounded-lg p-3 shadow-sm">
+                      <p className="text-sm text-black font-medium mb-2">Your answer has been marked!</p>
+                      <p className="text-xs text-gray-600">Check the feedback below to improve your response.</p>
                     </div>
                   </div>
                 )}
               </div>
-
-              {/* Reply input at bottom */}
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Reply"
-                  className="h-11 px-4 flex-1 border border-gray-300 focus:ring-1 focus:ring-[#0BA5E9] focus:border-[#0BA5E9] rounded-lg text-sm"
-                  disabled={!isAnswerSubmitted}
-                />
-                <Button 
-                  disabled={!isAnswerSubmitted}
-                  style={{ backgroundColor: '#0BA5E9' }}
-                  className="h-11 w-11 p-0 rounded-full text-white flex items-center justify-center disabled:opacity-50 hover:opacity-90"
-                >
-                  <Send className="h-4 w-4 rotate-45" />
-                </Button>
-              </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* CURRICULUM COVERAGE SECTION */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
+              The only tutor that's<br />
+              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
+            </h2>
+            <p className="text-base text-gray-600 mb-8">
+              Other tutoring platforms are not based on Exam Board Curriculums.<br />
+              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-5xl mx-auto"
+          >
+            {/* Exam Boards */}
+            <div className="mb-10">
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { name: "AQA", level: "GCSE & A-Level" },
+                  { name: "Edexcel", level: "GCSE & IGCSE" },
+                  { name: "OCR", level: "GCSE" }
+                ].map((board, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="text-xl font-bold text-black mb-1">{board.name}</div>
+                    <div className="text-xs text-gray-500">{board.level}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Subjects */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {[
+                  { name: "Biology", emoji: "🧬" },
+                  { name: "Chemistry", emoji: "🧪" },
+                  { name: "Physics", emoji: "🧲" },
+                  { name: "Maths", emoji: "📐" },
+                  { name: "English Language", emoji: "✍️" },
+                  { name: "English Literature", emoji: "📖" },
+                  { name: "Computer Science", emoji: "💻" },
+                  { name: "Geography", emoji: "🌍" },
+                  { name: "History", emoji: "⏳" },
+                  { name: "Psychology", emoji: "🧠" },
+                  { name: "Business", emoji: "💼" },
+                  { name: "Religious Studies", emoji: "⛪" },
+                  { name: "Combined Science", emoji: "🔬" },
+                  { name: "Spanish", emoji: "🇪🇸" }
+                ].map((subject, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
+                  >
+                    <div className="text-3xl mb-2">{subject.emoji}</div>
+                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
