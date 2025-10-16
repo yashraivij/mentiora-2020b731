@@ -315,7 +315,7 @@ const Index = () => {
                   <div className="bg-gray-100 rounded-lg px-2.5 py-1.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                      <span className="text-lg font-bold text-black">U</span>
+                      <span className="text-lg font-bold text-black">7</span>
                     </div>
                   </div>
                   
@@ -323,7 +323,7 @@ const Index = () => {
                   <div className="bg-gray-100 rounded-lg px-2.5 py-1.5 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                      <span className="text-lg font-bold text-black">7</span>
+                      <span className="text-lg font-bold text-black">9</span>
                     </div>
                     <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
                       <div 
@@ -342,7 +342,7 @@ const Index = () => {
                           fill="none"
                           stroke="#0BA5E9"
                           strokeWidth="2"
-                          points="0,24 28,19 56,22 84,14 112,16 140,10"
+                          points="0,24 28,20 56,16 84,12 112,8 140,4"
                         />
                       </svg>
                     </div>
