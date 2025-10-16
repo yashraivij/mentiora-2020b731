@@ -293,85 +293,89 @@ const Index = () => {
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              {/* Mini Subject Card - Real Dashboard Design */}
+              {/* Mini Subject Card - Dashboard Style */}
               <div 
-                className="w-[260px] bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border-0"
+                className="w-[280px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
                 style={{ transform: 'rotate(5deg)' }}
               >
-                {/* Background Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5" />
-                
                 {/* Content */}
-                <div className="relative p-5 space-y-4">
+                <div className="p-5 space-y-4">
                   {/* Header */}
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 shadow-lg"></div>
-                      <div>
-                        <h3 className="text-base font-bold text-black leading-tight">Chemistry</h3>
-                        <span className="text-xs font-semibold text-gray-600">72% accuracy</span>
-                      </div>
+                      <span className="text-2xl">🧪</span>
+                      <h3 className="text-lg font-bold text-black">Chemistry (AQA)</h3>
                     </div>
-                    <div className="px-3 py-1.5 rounded-2xl border bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200">
-                      <span className="text-xs font-bold text-yellow-600">72%</span>
+                    <div className="px-3 py-1 rounded-md bg-slate-500 text-white text-xs font-medium">
+                      Not started
                     </div>
                   </div>
                   
-                  {/* Progress Bar */}
-                  <div className="space-y-2">
-                    <div className="h-2.5 rounded-full bg-gray-200 overflow-hidden shadow-inner">
+                  {/* Predicted Grade Section */}
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">Predicted</span>
+                      <span className="text-2xl font-bold text-black">U</span>
+                    </div>
+                  </div>
+                  
+                  {/* Target Grade Section */}
+                  <div className="bg-gray-50 rounded-lg p-3 space-y-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">Target</span>
+                      <span className="text-2xl font-bold text-black">7</span>
+                    </div>
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-emerald-400 to-cyan-500 rounded-full"
-                        style={{ width: '72%' }}
+                        className="h-full bg-green-500 rounded-full"
+                        style={{ width: '70%' }}
                       />
                     </div>
                   </div>
                   
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center space-y-1.5 p-2.5 rounded-2xl bg-emerald-50/50 border border-emerald-100">
-                      <div className="flex items-center justify-center">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 mr-1" />
-                        <span className="text-base font-bold text-emerald-600">8</span>
-                      </div>
-                      <p className="text-[10px] font-medium text-emerald-600">Mastered</p>
-                    </div>
-                    
-                    <div className="text-center space-y-1.5 p-2.5 rounded-2xl bg-red-50/50 border border-red-100">
-                      <div className="flex items-center justify-center">
-                        <AlertTriangle className="h-3.5 w-3.5 text-red-500 mr-1" />
-                        <span className="text-base font-bold text-red-600">3</span>
-                      </div>
-                      <p className="text-[10px] font-medium text-red-600">Weak</p>
-                    </div>
-                    
-                    <div className="text-center space-y-1.5 p-2.5 rounded-2xl bg-gray-50 border border-gray-200">
-                      <div className="flex items-center justify-center">
-                        <Circle className="h-3.5 w-3.5 text-gray-400 mr-1" />
-                        <span className="text-base font-bold text-gray-600">12</span>
-                      </div>
-                      <p className="text-[10px] font-medium text-gray-600">Untested</p>
+                  {/* Last 6 Attempts Section */}
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide block mb-3">Last 6 Attempts</span>
+                    <div className="h-12 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 240 48" preserveAspectRatio="none">
+                        <polyline
+                          fill="none"
+                          stroke="#0BA5E9"
+                          strokeWidth="2"
+                          points="0,36 48,28 96,32 144,20 192,24 240,16"
+                        />
+                      </svg>
                     </div>
                   </div>
                   
-                  {/* Footer with Topics and Button */}
-                  <div className="flex items-center justify-between pt-2">
-                    <div className="flex items-center gap-1.5">
-                      <Sparkles className="h-3 w-3 text-gray-400" />
-                      <span className="text-[10px] text-gray-600 font-medium">23 topics</span>
+                  {/* Strong/Focus Topics */}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-xs">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                      <span className="font-semibold text-green-600">Strong:</span>
+                      <span className="text-gray-600">Various topics</span>
                     </div>
-                    <button 
-                      className="bg-gradient-to-r from-emerald-400 to-cyan-500 text-white font-semibold px-4 py-1.5 rounded-xl shadow-lg text-xs flex items-center gap-1.5"
-                    >
-                      Start
-                      <ArrowRight className="h-3 w-3" />
+                    <div className="flex items-center gap-2 text-xs">
+                      <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                      <span className="font-semibold text-red-600">Focus:</span>
+                      <span className="text-gray-600">Core concepts</span>
+                    </div>
+                  </div>
+                  
+                  {/* View Insights Link */}
+                  <div className="text-center">
+                    <button className="text-sm font-semibold text-cyan-500 hover:text-cyan-600">
+                      View insights
                     </button>
                   </div>
-                </div>
-                
-                {/* Premium Border Glow */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-[1px] opacity-20 pointer-events-none">
-                  <div className="w-full h-full bg-white rounded-3xl" />
+                  
+                  {/* Topics Button */}
+                  <button 
+                    className="w-full py-2.5 rounded-lg font-semibold text-sm text-white"
+                    style={{ backgroundColor: '#0BA5E9' }}
+                  >
+                    Topics
+                  </button>
                 </div>
               </div>
             </motion.div>
