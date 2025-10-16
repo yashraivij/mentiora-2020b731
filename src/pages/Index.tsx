@@ -306,16 +306,19 @@ const Index = () => {
                       <span className="text-base">🧪</span>
                       <h3 className="text-xs font-bold text-black">Chemistry</h3>
                     </div>
-                    <div className="px-1.5 py-0.5 rounded-md bg-slate-500 text-white text-[9px] font-medium">
-                      Not started
-                    </div>
                   </div>
                   
                   {/* Predicted Section */}
-                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5">
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
                       <span className="text-lg font-bold text-black">7</span>
+                    </div>
+                    <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-blue-500 rounded-full"
+                        style={{ width: '78%' }}
+                      />
                     </div>
                   </div>
                   
@@ -342,7 +345,7 @@ const Index = () => {
                           fill="none"
                           stroke="#0BA5E9"
                           strokeWidth="2"
-                          points="0,24 28,20 56,16 84,12 112,8 140,4"
+                          points="0,26 28,23 56,19 84,14 112,9 140,5"
                         />
                       </svg>
                     </div>
