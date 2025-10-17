@@ -2433,7 +2433,8 @@ const Dashboard = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden relative">
+          <div className="md:hidden flex items-center gap-2 relative">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -2472,10 +2473,6 @@ const Dashboard = () => {
                     >
                       Discord
                     </button>
-                    <div className="px-4 py-2.5 flex items-center justify-between">
-                      <span className="text-sm text-gray-700 dark:text-gray-200">Theme</span>
-                      <ThemeToggle />
-                    </div>
                     <button
                       onClick={() => {
                         handleLogout();
