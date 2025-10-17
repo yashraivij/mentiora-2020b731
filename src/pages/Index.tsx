@@ -783,7 +783,7 @@ const Index = () => {
                 </div>
               </div>
                   
-              {/* Question Card - Real Dashboard Style with Ask Medly */}
+              {/* Question Card - Real Dashboard Style */}
               <motion.div
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
                 className="max-w-[700px] mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition-all duration-200"
@@ -809,17 +809,7 @@ const Index = () => {
                   <p className="text-sm text-gray-600 italic">Your answer appears here...</p>
                 </div>
                 
-                <div className="flex justify-between items-center gap-3">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="text-sm font-medium"
-                  >
-                    Ask Medly
-                  </Button>
-                  <div className="text-xs text-gray-500 flex-1 text-center">
-                    Chemistry • Photosynthesis
-                  </div>
+                <div className="flex justify-end items-center">
                   <Button
                     size="sm"
                     className="text-white font-semibold rounded-full px-6"
@@ -868,64 +858,92 @@ const Index = () => {
                 </div>
               </div>
                   
-              {/* Analysis Dashboard - Real Dashboard Style */}
-              <motion.div 
-                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition-all duration-200"
-              >
-                <div className="grid md:grid-cols-3 gap-6">
-                  {/* Time Saved Stat */}
-                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
-                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Time Saved</div>
-                    <div className="text-4xl font-bold text-foreground mb-2">14.7h</div>
-                    <div className="text-xs text-muted-foreground">This month</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#0BA5E9' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '85%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                      />
+              {/* Analysis Dashboard - Exact Match to Dashboard */}
+              <div className="max-w-[1000px] mx-auto grid md:grid-cols-4 gap-6">
+                {/* Overall Progress */}
+                <motion.div
+                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-card rounded-2xl shadow-lg p-6 border-0 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" strokeWidth="2"/>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
+                      </svg>
                     </div>
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Overall Progress</div>
                   </div>
-                  
-                  {/* Accuracy Stat */}
-                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
-                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Accuracy</div>
-                    <div className="text-4xl font-bold text-foreground mb-2">78%</div>
-                    <div className="text-xs text-muted-foreground">Current performance</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#10B981' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '78%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.7 }}
-                      />
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <span className="text-4xl font-bold text-foreground">6.8</span>
+                    <span className="text-lg text-muted-foreground">→</span>
+                    <span className="text-2xl font-bold text-primary">8</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-primary rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: '76%' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Retention */}
+                <motion.div
+                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-card rounded-2xl shadow-lg p-6 border-0 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="p-2 rounded-lg bg-green-500/10">
+                      <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
                     </div>
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Retention</div>
                   </div>
-                  
-                  {/* Best Performance Time */}
-                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
-                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">You Perform Best At</div>
-                    <div className="text-4xl font-bold text-foreground mb-2">7-9 PM</div>
-                    <div className="text-xs text-muted-foreground">Peak focus time</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#A855F7' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '95%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.9 }}
-                      />
+                  <div className="text-4xl font-bold text-foreground mb-2">74%</div>
+                  <div className="text-xs text-muted-foreground">Last 7 days</div>
+                </motion.div>
+
+                {/* Best Study Time */}
+                <motion.div
+                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-card rounded-2xl shadow-lg p-6 border-0 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="p-2 rounded-lg bg-orange-500/10">
+                      <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
                     </div>
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Best Study Time</div>
                   </div>
-                </div>
-              </motion.div>
+                  <div className="text-4xl font-bold text-foreground mb-2">7-9pm</div>
+                  <div className="text-xs text-muted-foreground">Most productive</div>
+                </motion.div>
+
+                {/* This Week */}
+                <motion.div
+                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-card rounded-2xl shadow-lg p-6 border-0 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2" strokeLinecap="round"/>
+                        <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2" strokeLinecap="round"/>
+                        <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">This Week</div>
+                  </div>
+                  <div className="text-4xl font-bold text-foreground mb-2">5h 20m</div>
+                  <div className="text-xs text-muted-foreground">Study time</div>
+                </motion.div>
+              </div>
             </motion.div>
 
             {/* Connector Arrow */}
