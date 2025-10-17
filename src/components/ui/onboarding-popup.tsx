@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { curriculum } from "@/data/curriculum";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -22,32 +23,58 @@ interface OnboardingData {
   parentEmail: string | null;
 }
 
-// Subjects organized by level
-const GCSE_SUBJECTS = [
-  { id: 'biology-gcse', name: 'Biology', emoji: '🧬' },
-  { id: 'chemistry-gcse', name: 'Chemistry', emoji: '⚗️' },
-  { id: 'physics-gcse', name: 'Physics', emoji: '⚛️' },
-  { id: 'mathematics-gcse', name: 'Mathematics', emoji: '🔢' },
-  { id: 'english-gcse', name: 'English Literature', emoji: '📖' },
-  { id: 'computer-science-gcse', name: 'Computer Science', emoji: '💻' },
-  { id: 'history-gcse', name: 'History', emoji: '📜' },
-  { id: 'geography-gcse', name: 'Geography', emoji: '🌍' },
-  { id: 'business-gcse', name: 'Business', emoji: '💼' },
-  { id: 'statistics-gcse', name: 'Statistics', emoji: '📊' },
-];
+// Extract unique subjects from curriculum by level
+const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
+  const subjectMap: { [key: string]: { id: string; name: string; examBoard: string; emoji: string } } = {};
+  
+  curriculum.forEach((subject) => {
+    const subjectId = subject.id.toLowerCase();
+    const subjectName = subject.name;
+    
+    // Extract exam board and level from ID (e.g., "biology-aqa-alevel" or "combined-science-aqa")
+    const parts = subjectId.split('-');
+    const examBoard = parts.find(p => ['aqa', 'edexcel', 'ocr', 'eduqas'].includes(p))?.toUpperCase() || 'AQA';
+    const isAlevel = subjectId.includes('alevel');
+    const isIgcse = subjectId.includes('igcse');
+    const isGcse = !isAlevel && !isIgcse;
+    
+    // Assign emojis based on subject name
+    const getEmoji = (name: string) => {
+      const nameLower = name.toLowerCase();
+      if (nameLower.includes('biology')) return '🧬';
+      if (nameLower.includes('chemistry')) return '⚗️';
+      if (nameLower.includes('physics')) return '⚛️';
+      if (nameLower.includes('math') || nameLower.includes('statistic')) return '🔢';
+      if (nameLower.includes('english')) return '📖';
+      if (nameLower.includes('psychology')) return '🧠';
+      if (nameLower.includes('history')) return '📜';
+      if (nameLower.includes('geography')) return '🌍';
+      if (nameLower.includes('business')) return '💼';
+      if (nameLower.includes('computer')) return '💻';
+      if (nameLower.includes('science')) return '🔬';
+      if (nameLower.includes('music')) return '🎵';
+      return '📚';
+    };
+    
+    if ((level === 'gcse' && isGcse) || (level === 'alevel' && isAlevel) || (level === 'igcse' && isIgcse)) {
+      const key = `${subjectName}-${examBoard}`;
+      if (!subjectMap[key]) {
+        subjectMap[key] = {
+          id: subject.id,
+          name: subjectName,
+          examBoard: examBoard,
+          emoji: getEmoji(subjectName)
+        };
+      }
+    }
+  });
+  
+  return Object.values(subjectMap).sort((a, b) => a.name.localeCompare(b.name));
+};
 
-const ALEVEL_SUBJECTS = [
-  { id: 'biology-alevel', name: 'Biology', emoji: '🧬' },
-  { id: 'chemistry-alevel', name: 'Chemistry', emoji: '⚗️' },
-  { id: 'physics-alevel', name: 'Physics', emoji: '⚛️' },
-  { id: 'mathematics-alevel', name: 'Mathematics', emoji: '🔢' },
-  { id: 'english-alevel', name: 'English Literature', emoji: '📖' },
-  { id: 'psychology-alevel', name: 'Psychology', emoji: '🧠' },
-  { id: 'history-alevel', name: 'History', emoji: '📜' },
-  { id: 'geography-alevel', name: 'Geography', emoji: '🌍' },
-  { id: 'business-alevel', name: 'Business', emoji: '💼' },
-  { id: 'statistics-alevel', name: 'Statistics', emoji: '📊' },
-];
+const GCSE_SUBJECTS = getSubjectsByLevel('gcse');
+const ALEVEL_SUBJECTS = getSubjectsByLevel('alevel');
+const IGCSE_SUBJECTS = getSubjectsByLevel('igcse');
 
 const ACQUISITION_SOURCES = [
   { id: 'google', label: 'Google search', emoji: '🔍' },
@@ -105,7 +132,7 @@ const STUDY_PREFERENCES = [
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
+  const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse'>('gcse');
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     acquisitionSource: '',
     acquisitionSourceOther: null,
@@ -192,13 +219,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           .eq('id', user.id);
 
         if (onboardingData.subjects.length > 0) {
-          const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS];
+          const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectId => {
             const subject = allSubjects.find(s => s.id === subjectId);
             return {
               user_id: user.id,
               subject_name: subject?.name || subjectId,
-              exam_board: 'AQA',
+              exam_board: subject?.examBoard || 'AQA',
               predicted_grade: 'Not Set',
               target_grade: null,
               priority_level: 3
@@ -226,7 +253,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     return (currentStep / 5) * 100;
   };
 
-  const currentSubjects = subjectLevel === 'gcse' ? GCSE_SUBJECTS : ALEVEL_SUBJECTS;
+  const getCurrentSubjects = () => {
+    if (subjectLevel === 'gcse') return GCSE_SUBJECTS;
+    if (subjectLevel === 'alevel') return ALEVEL_SUBJECTS;
+    return IGCSE_SUBJECTS;
+  };
+
+  const currentSubjects = getCurrentSubjects();
   const filteredSubjects = currentSubjects.filter(subject =>
     subject.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -385,6 +418,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                     A-Level
                   </button>
+                  <button
+                    onClick={() => setSubjectLevel('igcse')}
+                    className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
+                      subjectLevel === 'igcse'
+                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
+                    }`}
+                  >
+                    IGCSE
+                  </button>
                 </div>
 
                 {/* Search + grid */}
@@ -400,7 +443,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 <div className="max-h-[240px] overflow-y-auto mb-3">
-                  <div className="grid grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-1 gap-2.5">
                     {filteredSubjects.map((subject) => (
                       <button
                         key={subject.id}
@@ -416,12 +459,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                         }`}
                       >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           <span className="text-[18px]">{subject.emoji}</span>
-                          <span className="text-[14px] font-medium">{subject.name}</span>
+                          <div className="text-left">
+                            <div className="text-[14px] font-medium">{subject.name}</div>
+                            <div className="text-[11px] text-[#6B7280] font-medium">{subject.examBoard}</div>
+                          </div>
                         </div>
                         {onboardingData.subjects.includes(subject.id) && (
-                          <Check className="w-[16px] h-[16px] text-[#00B4D8]" />
+                          <Check className="w-[16px] h-[16px] text-[#00B4D8] flex-shrink-0" />
                         )}
                       </button>
                     ))}
