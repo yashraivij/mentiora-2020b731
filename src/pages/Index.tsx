@@ -997,7 +997,7 @@ const Index = () => {
               </div>
               
               {/* Three Dashboard Cards - Exact Platform Style */}
-              <div className="grid md:grid-cols-3 gap-5 max-w-[1000px] mx-auto">
+              <div className="grid md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
                 {/* Card 1: Predicted Grades - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
@@ -1007,7 +1007,7 @@ const Index = () => {
                   whileHover={{ y: -4, boxShadow: '0 15px 30px rgba(0,0,0,0.12)' }}
                   className="bg-white rounded-lg shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-4 space-y-2.5 flex-1 flex flex-col">
+                  <div className="p-6 space-y-3 flex-1 flex flex-col">
                     {/* Title */}
                     <div className="mb-1">
                       <h3 className="text-sm font-bold text-[#0F172A]">Predicted Grades</h3>
@@ -1086,7 +1086,7 @@ const Index = () => {
                   whileHover={{ y: -4, boxShadow: '0 15px 30px rgba(0,0,0,0.12)' }}
                   className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-lg border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-4 flex-1 flex flex-col">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="mb-2.5">
                       <h3 className="text-sm font-bold text-[#0F172A] dark:text-white">Your Notes</h3>
                       <p className="text-xs text-[#64748B] dark:text-gray-400">Review notes from mistakes</p>
@@ -1178,7 +1178,7 @@ const Index = () => {
                   whileHover={{ y: -4, boxShadow: '0 15px 30px rgba(0,0,0,0.12)' }}
                   className="bg-white rounded-lg shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-4 space-y-2.5 flex-1 flex flex-col">
+                  <div className="p-6 space-y-3 flex-1 flex flex-col">
                     {/* Title */}
                     <div className="mb-1">
                       <h3 className="text-sm font-bold text-[#0F172A]">Weekly Plan</h3>
