@@ -3259,111 +3259,128 @@ const Dashboard = () => {
                                     }
                                   };
                                   
+                                  // Determine if this item should be blurred (all except first Monday item)
+                                  const shouldBlur = !isPremium && i > 0;
+                                  
                                   return (
-                                    <motion.div 
-                                      key={day}
-                                      initial={{ opacity: 0, x: -20 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: i * 0.05 }}
-                                      className="p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300"
-                                    >
-                                      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
-                                        <div>
-                                          <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
-                                          <span className="text-xs text-[#64748B] dark:text-gray-400 ml-2">— {dayThemes[i]}</span>
+                                    <div key={day} className="relative">
+                                      <motion.div 
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                        className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm pointer-events-none' : ''}`}
+                                      >
+                                        <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
+                                          <div>
+                                            <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
+                                            <span className="text-xs text-[#64748B] dark:text-gray-400 ml-2">— {dayThemes[i]}</span>
+                                          </div>
+                                          <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
                                         </div>
-                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
-                                      </div>
-                                      
-                                      <div className="space-y-3">
-                                        {activities.map((activity, actIdx) => {
-                                          const activityId = `${day}-${actIdx}`;
-                                          const isCompleted = completedActivities.has(activityId);
-                                          
-                                          return (
-                                            <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
-                                              <div className="flex-1 min-w-0">
-                                                <div className="flex items-center gap-2">
-                                                  <p className={`text-sm text-[#0F172A] dark:text-white font-medium truncate ${isCompleted ? 'line-through opacity-50' : ''}`}>
-                                                    {activity.text}
+                                        
+                                        <div className="space-y-3">
+                                          {activities.map((activity, actIdx) => {
+                                            const activityId = `${day}-${actIdx}`;
+                                            const isCompleted = completedActivities.has(activityId);
+                                            
+                                            return (
+                                              <div key={actIdx} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white dark:bg-gray-950 border border-[#E2E8F0]/30 dark:border-gray-800">
+                                                <div className="flex-1 min-w-0">
+                                                  <div className="flex items-center gap-2">
+                                                    <p className={`text-sm text-[#0F172A] dark:text-white font-medium truncate ${isCompleted ? 'line-through opacity-50' : ''}`}>
+                                                      {activity.text}
+                                                    </p>
+                                                    {topic && topic.averageScore < 50 && topic.attempts > 0 && !isCompleted && (
+                                                      <Badge className="text-[10px] px-1.5 py-0.5 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-0">
+                                                        Priority
+                                                      </Badge>
+                                                    )}
+                                                    {topic && topic.attempts === 0 && !isCompleted && (
+                                                      <Badge className="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-0">
+                                                        New
+                                                      </Badge>
+                                                    )}
+                                                  </div>
+                                                  <p className={`text-xs text-[#64748B] dark:text-gray-400 mt-0.5 ${isCompleted ? 'line-through opacity-50' : ''}`}>
+                                                    {activity.mins} mins
+                                                    {topic && topic.averageScore > 0 && !isCompleted && (
+                                                      <span className="ml-2">• Current: {Math.round(topic.averageScore)}%</span>
+                                                    )}
                                                   </p>
-                                                  {topic && topic.averageScore < 50 && topic.attempts > 0 && !isCompleted && (
-                                                    <Badge className="text-[10px] px-1.5 py-0.5 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-0">
-                                                      Priority
-                                                    </Badge>
-                                                  )}
-                                                  {topic && topic.attempts === 0 && !isCompleted && (
-                                                    <Badge className="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-0">
-                                                      New
-                                                    </Badge>
-                                                  )}
                                                 </div>
-                                                <p className={`text-xs text-[#64748B] dark:text-gray-400 mt-0.5 ${isCompleted ? 'line-through opacity-50' : ''}`}>
-                                                  {activity.mins} mins
-                                                  {topic && topic.averageScore > 0 && !isCompleted && (
-                                                    <span className="ml-2">• Current: {Math.round(topic.averageScore)}%</span>
-                                                  )}
-                                                </p>
-                                              </div>
-                                              <div className="flex gap-2 flex-shrink-0">
-                                                <Button 
-                                                  size="sm" 
-                                                  className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
-                                                  onClick={() => handleStartActivity(activity)}
-                                                >
-                                                  <Play className="h-3 w-3 mr-1" />
-                                                  Start
-                                                </Button>
-                                                <Button 
-                                                  size="sm" 
-                                                  variant="outline" 
-                                                  className={`rounded-lg border-2 font-semibold text-xs px-3 h-8 ${
-                                                    isCompleted 
-                                                      ? 'border-[#16A34A] bg-[#16A34A] text-white hover:bg-[#16A34A]/90' 
-                                                      : 'border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10'
-                                                  }`}
-                                                  onClick={() => {
-                                                    setCompletedActivities(prev => {
-                                                      const newSet = new Set(prev);
-                                                      if (isCompleted) {
-                                                        newSet.delete(activityId);
-                                                      } else {
-                                                        newSet.add(activityId);
-                                                        
-                                                        // Update last attempt date for this topic to reflect completion
-                                                        if (topic && activity.topicId) {
-                                                          const updatedProgress = userProgress.map(p => 
-                                                            p.subjectId === topic.subjectId && p.topicId === activity.topicId
-                                                              ? { ...p, lastAttempt: new Date() }
-                                                              : p
-                                                          );
-                                                          setUserProgress(updatedProgress);
-                                                          if (user?.id) {
-                                                            localStorage.setItem(`mentiora_progress_${user.id}`, JSON.stringify(updatedProgress));
+                                                <div className="flex gap-2 flex-shrink-0">
+                                                  <Button 
+                                                    size="sm" 
+                                                    className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
+                                                    onClick={() => handleStartActivity(activity)}
+                                                  >
+                                                    <Play className="h-3 w-3 mr-1" />
+                                                    Start
+                                                  </Button>
+                                                  <Button 
+                                                    size="sm" 
+                                                    variant="outline" 
+                                                    className={`rounded-lg border-2 font-semibold text-xs px-3 h-8 ${
+                                                      isCompleted 
+                                                        ? 'border-[#16A34A] bg-[#16A34A] text-white hover:bg-[#16A34A]/90' 
+                                                        : 'border-[#16A34A] text-[#16A34A] hover:bg-[#16A34A]/10'
+                                                    }`}
+                                                    onClick={() => {
+                                                      setCompletedActivities(prev => {
+                                                        const newSet = new Set(prev);
+                                                        if (isCompleted) {
+                                                          newSet.delete(activityId);
+                                                        } else {
+                                                          newSet.add(activityId);
+                                                          
+                                                          // Update last attempt date for this topic to reflect completion
+                                                          if (topic && activity.topicId) {
+                                                            const updatedProgress = userProgress.map(p => 
+                                                              p.subjectId === topic.subjectId && p.topicId === activity.topicId
+                                                                ? { ...p, lastAttempt: new Date() }
+                                                                : p
+                                                            );
+                                                            setUserProgress(updatedProgress);
+                                                            if (user?.id) {
+                                                              localStorage.setItem(`mentiora_progress_${user.id}`, JSON.stringify(updatedProgress));
+                                                            }
                                                           }
                                                         }
-                                                      }
-                                                      return newSet;
-                                                    });
-                                                    
-                                                    // Show encouraging toast
-                                                    if (!isCompleted) {
-                                                      toast({
-                                                        title: "Great work! 🎉",
-                                                        description: "Activity completed. Your study plan is adapting to your progress.",
+                                                        return newSet;
                                                       });
-                                                    }
-                                                  }}
-                                                >
-                                                  {isCompleted ? <Check className="h-3 w-3 mr-1" /> : null}
-                                                  Done
-                                                </Button>
+                                                      
+                                                      // Show encouraging toast
+                                                      if (!isCompleted) {
+                                                        toast({
+                                                          title: "Great work! 🎉",
+                                                          description: "Activity completed. Your study plan is adapting to your progress.",
+                                                        });
+                                                      }
+                                                    }}
+                                                  >
+                                                    {isCompleted ? <Check className="h-3 w-3 mr-1" /> : null}
+                                                    Done
+                                                  </Button>
+                                                </div>
                                               </div>
-                                            </div>
-                                          );
-                                        })}
-                                      </div>
-                                    </motion.div>
+                                            );
+                                          })}
+                                        </div>
+                                      </motion.div>
+                                      
+                                      {/* Premium Overlay for Blurred Items */}
+                                      {shouldBlur && (
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                          <Button
+                                            onClick={() => navigate('/pricing')}
+                                            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-lg"
+                                          >
+                                            <Crown className="w-4 h-4 mr-2" />
+                                            Upgrade to Premium
+                                          </Button>
+                                        </div>
+                                      )}
+                                    </div>
                                   );
                                 });
                               })()}
