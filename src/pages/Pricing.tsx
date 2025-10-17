@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
 import birminghamLogo from "@/assets/birmingham-logo.png";
@@ -74,7 +75,7 @@ const Pricing = () => {
             onClick={() => navigate("/dashboard")}
             className="flex items-center gap-2 hover:opacity-70 transition-opacity"
           >
-            <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-7 w-7" />
+            <img src={mentioraLogo} alt="Mentiora" className="h-7 w-7" />
             <span className="text-base font-semibold">Mentiora</span>
           </button>
           <Button
@@ -105,7 +106,7 @@ const Pricing = () => {
           <div className="relative">
             <div className="w-20 h-20 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
               <img 
-                src="/src/assets/mentiora-logo.png" 
+                src={mentioraLogo} 
                 alt="Mentiora" 
                 className="w-12 h-12"
               />
