@@ -139,7 +139,7 @@ const Pricing = () => {
             
             <div className="mb-8">
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-bold text-gray-900">£24.99</span>
+                <span className="text-5xl font-bold text-gray-900">£9.99</span>
                 <span className="text-gray-600">/month</span>
               </div>
             </div>
@@ -153,7 +153,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              £24.99 billed monthly. Cancel anytime.
+              £9.99 billed monthly. Cancel anytime.
             </p>
           </Card>
 
@@ -170,10 +170,10 @@ const Pricing = () => {
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-5xl font-bold">£200.00</span>
+                <span className="text-5xl font-bold">£{examYear === "2026" ? "74.99" : "174.99"}</span>
                 <span className="text-white/90">once</span>
               </div>
-              <span className="text-white/70 line-through text-lg">300.00</span>
+              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "99.99" : "249.99"}</span>
             </div>
 
             <Button
@@ -184,7 +184,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-white/80 mt-4 text-center">
-              £200 billed once. Offer ends 15/10/25.
+              £{examYear === "2026" ? "74.99" : "174.99"} billed once. Offer ends 15/10/25.
             </p>
           </Card>
         </div>
