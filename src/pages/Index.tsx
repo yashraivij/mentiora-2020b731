@@ -59,6 +59,13 @@ const Index = () => {
     }
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* NAVIGATION */}
@@ -76,13 +83,13 @@ const Index = () => {
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <button className="text-base text-gray-600 hover:text-black transition-colors">
+            <button onClick={() => scrollToSection('about')} className="text-base text-gray-600 hover:text-black transition-colors">
               About Us
             </button>
-            <button className="text-base text-gray-600 hover:text-black transition-colors">
+            <button onClick={() => scrollToSection('subjects')} className="text-base text-gray-600 hover:text-black transition-colors">
               Subjects
             </button>
-            <button className="text-base text-gray-600 hover:text-black transition-colors">
+            <button onClick={() => scrollToSection('features')} className="text-base text-gray-600 hover:text-black transition-colors">
               Features
             </button>
             <button onClick={() => navigate("/pricing")} className="text-base text-gray-600 hover:text-black transition-colors">
@@ -504,8 +511,8 @@ const Index = () => {
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '140px' }}
+                  className="h-8 w-auto object-contain"
+                  style={{ maxWidth: '100px' }}
                 />
               </div>
               {/* Second set - duplicate for seamless loop */}
@@ -553,8 +560,8 @@ const Index = () => {
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '140px' }}
+                  className="h-8 w-auto object-contain"
+                  style={{ maxWidth: '100px' }}
                 />
               </div>
             </motion.div>
@@ -564,7 +571,7 @@ const Index = () => {
 
 
       {/* UNLIKE ANY OTHER APP SECTION */}
-      <section className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
+      <section id="about" className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
@@ -672,7 +679,7 @@ const Index = () => {
 
 
       {/* CURRICULUM COVERAGE SECTION */}
-      <section className="py-20 px-6 bg-white">
+      <section id="subjects" className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
@@ -756,7 +763,7 @@ const Index = () => {
 
 
       {/* HOW PERSONALIZATION WORKS - DASHBOARD SHOWCASE */}
-      <section className="relative py-20 px-6 overflow-hidden bg-white">
+      <section id="features" className="relative py-20 px-6 overflow-hidden bg-white">
         <div className="max-w-[1400px] mx-auto">
           {/* Section Header */}
           <motion.div
