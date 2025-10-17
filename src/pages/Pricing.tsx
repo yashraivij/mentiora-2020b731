@@ -55,6 +55,11 @@ const Pricing = () => {
     "Start immediately - change or cancel your plan anytime."
   ];
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
     <motion.div 
       className="min-h-screen bg-white"
@@ -85,7 +90,14 @@ const Pricing = () => {
 
       <div className="max-w-[900px] mx-auto px-6 py-12">
         {/* Main Headline */}
-        <div className="flex items-center justify-center gap-4 mb-4">
+        <motion.div 
+          className="flex items-center justify-center gap-4 mb-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+        >
           <h1 className="text-5xl font-bold text-gray-900">
             Start
           </h1>
@@ -102,24 +114,45 @@ const Pricing = () => {
           <h1 className="text-5xl font-bold text-gray-900">
             for free.
           </h1>
-        </div>
+        </motion.div>
 
-        <p className="text-center text-gray-600 text-lg mb-6 max-w-[700px] mx-auto">
+        <motion.p 
+          className="text-center text-gray-600 text-lg mb-6 max-w-[700px] mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
-        </p>
+        </motion.p>
 
         {/* Ask My Parents Link */}
-        <div className="text-center mb-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <button
             onClick={() => document.getElementById('parents-section')?.scrollIntoView({ behavior: 'smooth' })}
             className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
           >
             Ask my parents <ChevronRight className="w-4 h-4" />
           </button>
-        </div>
+        </motion.div>
 
         {/* Exam Year Toggle */}
-        <div className="flex justify-center gap-2 mb-12">
+        <motion.div 
+          className="flex justify-center gap-2 mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <button
             onClick={() => setExamYear("2026")}
             className={`px-8 py-3 rounded-full text-base font-medium transition-all ${
@@ -140,10 +173,17 @@ const Pricing = () => {
           >
             2027 Exams
           </button>
-        </div>
+        </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
+        <motion.div 
+          className="grid md:grid-cols-2 gap-6 mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           {/* Monthly */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
@@ -200,10 +240,17 @@ const Pricing = () => {
               £{examYear === "2026" ? "74.99" : "174.99"} billed once.
             </p>
           </Card>
-        </div>
+        </motion.div>
 
         {/* Features List */}
-        <div className="mb-24 max-w-[700px] mx-auto">
+        <motion.div 
+          className="mb-24 max-w-[700px] mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+        >
           <div className="space-y-4">
             {features.map((feature, i) => (
               <div key={i} className="flex items-start gap-3">
@@ -218,15 +265,29 @@ const Pricing = () => {
               Interested for a school or classroom? Contact us here.
             </a>
           </p>
-        </div>
+        </motion.div>
 
         {/* Want Help Asking Your Parents Section */}
         <div id="parents-section" className="mb-32 scroll-mt-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Want help asking your parents?
-          </h2>
+          </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-12 items-start"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {/* Left Column - Form */}
             <div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">
@@ -379,17 +440,31 @@ const Pricing = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Russell Group Section */}
         <div className="mb-32">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Helping GCSE & A-Level students<br />get into Russell Group universities
-          </h2>
+          </motion.h2>
 
           {/* University Logos Strip */}
-          <div className="py-8 px-6 overflow-hidden bg-white">
+          <motion.div 
+            className="py-8 px-6 overflow-hidden bg-white"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             <div className="relative">
               <motion.div
                 className="flex items-center gap-12"
@@ -487,10 +562,17 @@ const Pricing = () => {
                 </div>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Teacher Section */}
-          <div className="flex items-center justify-center gap-8 max-w-[700px] mx-auto bg-gray-50 rounded-2xl p-8">
+          <motion.div 
+            className="flex items-center justify-center gap-8 max-w-[700px] mx-auto bg-gray-50 rounded-2xl p-8 mt-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <div className="flex-1">
               <h3 className="text-xl font-bold mb-4 text-gray-900">
                 Ask your teacher for your school's 20% discount code.
@@ -513,16 +595,30 @@ const Pricing = () => {
             <div className="flex-shrink-0">
               <div className="text-8xl">👩‍🏫</div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* FAQs Section */}
         <div className="mb-24 max-w-[800px] mx-auto">
-          <h2 className="text-5xl font-bold text-center mb-12 text-gray-900">
+          <motion.h2 
+            className="text-5xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             FAQs
-          </h2>
+          </motion.h2>
 
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             {/* FAQ Item 1 */}
             <div className="border-b border-gray-200">
               <button 
@@ -654,7 +750,7 @@ const Pricing = () => {
                 )}
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
