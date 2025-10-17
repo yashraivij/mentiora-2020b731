@@ -28,10 +28,7 @@ import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
 import birminghamLogo from "@/assets/birmingham-logo.png";
-import exeterLogo from "@/assets/exeter-logo.webp";
 import oxfordLogo from "@/assets/oxford-logo.png";
-import cambridgeLogo from "@/assets/cambridge-logo.png";
-import lseLogo from "@/assets/lse-logo.png";
 import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
@@ -495,32 +492,8 @@ const Index = () => {
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
-                  src={exeterLogo} 
-                  alt="University of Exeter" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
-                  src={cambridgeLogo} 
-                  alt="University of Cambridge" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
-                  src={lseLogo} 
-                  alt="London School of Economics" 
                   className="w-auto object-contain"
                   style={{ height: '40px', maxWidth: '160px' }}
                 />
@@ -560,32 +533,8 @@ const Index = () => {
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
-                  src={exeterLogo} 
-                  alt="University of Exeter" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
-                  src={cambridgeLogo} 
-                  alt="University of Cambridge" 
-                  className="w-auto object-contain"
-                  style={{ height: '40px', maxWidth: '160px' }}
-                />
-              </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
-                <img 
-                  src={lseLogo} 
-                  alt="London School of Economics" 
                   className="w-auto object-contain"
                   style={{ height: '40px', maxWidth: '160px' }}
                 />
