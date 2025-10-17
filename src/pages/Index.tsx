@@ -699,7 +699,7 @@ const Index = () => {
             </h2>
             <p className="text-lg text-gray-600 mb-8">
               Other tutoring platforms are not based on Exam Board Curriculums.<br />
-              Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
+              Don't see your subject? <a href="mailto:yash@mentiora.com?subject=Subject Request" style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</a>.
             </p>
           </motion.div>
 
