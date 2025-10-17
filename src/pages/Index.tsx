@@ -1038,90 +1038,71 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 2: Your Notes - Exact Dashboard Match */}
+                {/* Card 2: Auto-Notes - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold text-black dark:text-white mb-1">Your Notes</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Review notes from your mistakes and learning progress</p>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-bold text-foreground">Your Notes</h3>
+                      <p className="text-sm text-muted-foreground">Review notes from your mistakes and learning progress</p>
                     </div>
                     
-                    <div>
-                      <span className="inline-block px-2.5 py-1 text-xs font-bold rounded bg-red-500 text-white mb-3">
-                        Low Confidence
-                      </span>
-                      <h4 className="font-bold text-base text-black dark:text-white mb-3 leading-snug">
-                        Explain how clock speed, cache size, and number of cores affect CPU performance.
-                      </h4>
-                      <div className="flex items-center gap-3 text-xs mb-6">
-                        <span className="text-primary font-medium">• Systems Architecture</span>
-                        <span className="text-gray-600 dark:text-gray-400">📅 13 Oct 2025</span>
-                        <span className="text-red-500 font-medium">-6 marks lost</span>
+                    <div className="space-y-4">
+                      <div>
+                        <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-red-500 text-white mb-3">
+                          Low Confidence
+                        </span>
+                        <h4 className="font-bold text-base text-foreground mb-2">
+                          Explain how clock speed, cache size, and number of cores affect CPU performance.
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                          <span className="text-primary">• Systems Architecture</span>
+                          <span>📅 13 Oct 2025</span>
+                          <span className="text-red-500">-6 marks lost</span>
+                        </div>
                       </div>
                       
-                      <div className="bg-red-50 dark:bg-red-950/20 rounded-lg p-4 mb-3">
+                      <div className="bg-red-50 dark:bg-red-950/20 rounded-lg p-3">
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
-                            <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                              <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
-                            </svg>
+                          <div className="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                            <span className="text-red-500 text-xs">⚠</span>
                           </div>
-                          <h5 className="text-sm font-bold text-black dark:text-white">What Went Wrong</h5>
+                          <h5 className="text-sm font-bold text-foreground">What Went Wrong</h5>
                         </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">
+                        <p className="text-xs text-muted-foreground ml-7">
                           Insufficient understanding of key concepts
                         </p>
                       </div>
                       
-                      <div className="bg-green-50 dark:bg-green-950/20 rounded-lg p-4 mb-3">
+                      <div className="bg-green-50 dark:bg-green-950/20 rounded-lg p-3">
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
-                            <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                            </svg>
+                          <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                            <span className="text-green-500 text-xs">✓</span>
                           </div>
-                          <h5 className="text-sm font-bold text-black dark:text-white">The Solution</h5>
+                          <h5 className="text-sm font-bold text-foreground">The Solution</h5>
                         </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">
+                        <p className="text-xs text-muted-foreground ml-7">
                           Review the fundamental principles and practice similar questions
                         </p>
                       </div>
                       
-                      <div className="bg-blue-50 dark:bg-blue-950/20 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-                            <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                            </svg>
+                      <div className="bg-primary/5 rounded-lg p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-primary text-xs">💡</span>
                           </div>
-                          <h5 className="text-sm font-bold text-black dark:text-white">Key Points to Remember</h5>
+                          <h5 className="text-sm font-bold text-foreground">Key Points to Remember</h5>
                         </div>
-                        <div className="space-y-3">
-                          <div className="flex gap-3">
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-bold text-xs flex-shrink-0">1</span>
-                            <p className="text-sm text-gray-700 dark:text-gray-300">
-                              <strong>Clock Speed:</strong> Clock Speed Refers To The Number Of Cycles A CPU Can Execute Per Second, Measured In Gigahertz (GHz). Higher Clock Speeds Allow The CPU To Process More Instructions Per Second, Leading To Faster Performance.
-                            </p>
-                          </div>
-                          <div className="flex gap-3">
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-bold text-xs flex-shrink-0">2</span>
-                            <p className="text-sm text-gray-700 dark:text-gray-300">
-                              <strong>Cache Size:</strong> Cache Size Is The Amount Of High-Speed Memory Located Inside The CPU. Larger Cache Sizes Allow More Frequently Used Data To Be Stored Close To The CPU.
-                            </p>
-                          </div>
-                          <div className="flex gap-3">
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-bold text-xs flex-shrink-0">3</span>
-                            <p className="text-sm text-gray-700 dark:text-gray-300">
-                              <strong>Number Of Cores:</strong> The Number Of Cores Refers To The Individual Processing Units Within The CPU.
-                            </p>
+                        <div className="ml-7 space-y-2 text-xs text-muted-foreground">
+                          <div className="flex gap-2">
+                            <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-white font-bold text-xs flex-shrink-0">1</span>
+                            <p>Clock Speed refers to the number of cycles a CPU can execute per second</p>
                           </div>
                         </div>
                       </div>
@@ -1129,40 +1110,47 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 3: Adaptive Weekly Plan - Exact Dashboard Match */}
+                {/* Card 3: Smart Planner - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
-                    <div className="mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-bold text-black dark:text-white">Mon</h3>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-bold text-foreground">Adaptive Weekly Plan</h3>
+                      <p className="text-sm text-muted-foreground">Personalized study schedule that updates daily</p>
+                    </div>
+                    
+                    <div className="mb-4 pb-4 border-b border-border">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-base font-bold text-foreground">Mon</h4>
+                          <p className="text-xs text-muted-foreground">— Kickstart Week</p>
+                        </div>
                         <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#0BA5E9', color: 'white' }}>
                           30 mins
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">— Kickstart Week</p>
                     </div>
                     
-                    <div className="space-y-4">
-                      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div className="space-y-3">
+                      <div className="bg-background border border-border rounded-lg p-3">
                         <div className="flex items-start justify-between mb-2">
-                          <h5 className="text-sm font-medium text-black dark:text-white flex-1 leading-snug">
+                          <h5 className="text-sm font-medium text-foreground flex-1">
                             Create 10 flashcards on Systems Architecture
                           </h5>
                           <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
                             Priority
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">15 mins</p>
-                        <div className="flex gap-3">
+                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
+                        <div className="flex gap-2">
                           <button 
-                            className="flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
                             style={{ backgroundColor: '#0BA5E9' }}
                           >
                             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
@@ -1176,19 +1164,19 @@ const Index = () => {
                         </div>
                       </div>
                       
-                      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                      <div className="bg-background border border-border rounded-lg p-3">
                         <div className="flex items-start justify-between mb-2">
-                          <h5 className="text-sm font-medium text-black dark:text-white flex-1 leading-snug">
+                          <h5 className="text-sm font-medium text-foreground flex-1">
                             Practice questions on Systems Architecture
                           </h5>
                           <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
                             Priority
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">15 mins</p>
-                        <div className="flex gap-3">
+                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
+                        <div className="flex gap-2">
                           <button 
-                            className="flex-1 flex items-center justify-center gap-2 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
                             style={{ backgroundColor: '#0BA5E9' }}
                           >
                             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
