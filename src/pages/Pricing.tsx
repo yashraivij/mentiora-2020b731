@@ -135,14 +135,14 @@ const Pricing = () => {
           {/* Monthly */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
-            <p className="text-gray-600 mb-6">Start learning today with full access to all features.</p>
+            <p className="text-gray-600 mb-6">Try free for 7 days, then £9.99/month. Cancel anytime.</p>
             
             <div className="mb-8">
-              <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-5xl font-bold text-[#00A8FF]">FREE</span>
-                <span className="text-gray-600">for 7 days</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-5xl font-bold text-gray-900">£0</span>
+                <span className="text-gray-600">/week</span>
               </div>
-              <p className="text-base text-gray-700 font-medium">Then only £9.99/month</p>
+              <p className="text-sm text-gray-600 mt-2">Then £9.99/month after trial</p>
             </div>
 
             <Button
@@ -154,7 +154,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              No payment required now. Cancel anytime.
+              Free for 7 days, then £9.99/month. Cancel anytime.
             </p>
           </Card>
 
