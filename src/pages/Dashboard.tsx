@@ -2617,24 +2617,42 @@ const Dashboard = () => {
                       </SheetHeader>
 
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-4 sm:mt-8">
-                        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 bg-muted border border-border gap-1">
-                          <TabsTrigger value="overview" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                        {/* Mobile Dropdown */}
+                        <div className="sm:hidden">
+                          <Select value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)}>
+                            <SelectTrigger className="w-full rounded-xl bg-background border-border">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent className="bg-background border-border">
+                              <SelectItem value="overview">Overview</SelectItem>
+                              <SelectItem value="topics">Topics</SelectItem>
+                              <SelectItem value="papers">Papers</SelectItem>
+                              <SelectItem value="plan">Plan</SelectItem>
+                              <SelectItem value="notes">Notes</SelectItem>
+                              <SelectItem value="flashcards">Flashcards</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        {/* Desktop Tabs */}
+                        <TabsList className="hidden sm:grid w-full grid-cols-6 rounded-2xl p-1.5 bg-muted border border-border">
+                          <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Overview
                           </TabsTrigger>
-                          <TabsTrigger value="topics" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                          <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Topics
                           </TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Papers
                           </TabsTrigger>
-                          <TabsTrigger value="plan" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                          <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Plan
                           </TabsTrigger>
-                          <TabsTrigger value="notes" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                          <TabsTrigger value="notes" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Notes
                           </TabsTrigger>
-                          <TabsTrigger value="flashcards" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
-                            Cards
+                          <TabsTrigger value="flashcards" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
+                            Flashcards
                           </TabsTrigger>
                         </TabsList>
 
