@@ -65,6 +65,7 @@ import {
   ChevronUp,
   Maximize2,
   Minimize2,
+  Menu,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -195,6 +196,7 @@ const Dashboard = () => {
   const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
   const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -2391,7 +2393,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="z-50 bg-background/95 backdrop-blur-sm">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="flex items-center justify-between px-4 lg:px-8 py-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -2400,8 +2402,8 @@ const Dashboard = () => {
             {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
           </div>
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-2">
             <Button
               variant="ghost"
               size="sm"
@@ -2428,6 +2430,65 @@ const Dashboard = () => {
             >
               Sign Out
             </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="hover:bg-transparent hover:text-[#0EA5E9]"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+
+            {/* Mobile Dropdown Menu */}
+            {mobileMenuOpen && (
+              <>
+                {/* Backdrop */}
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setMobileMenuOpen(false)}
+                />
+                
+                {/* Dropdown */}
+                <div className="absolute right-0 top-12 z-50 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                  <div className="py-2">
+                    <button
+                      data-feedback-fish
+                      data-feedback-fish-userid={user?.email || ""}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Feedback
+                    </button>
+                    <button
+                      onClick={() => {
+                        window.open('https://discord.gg/NUy3u3A65B', '_blank');
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      Discord
+                    </button>
+                    <div className="px-4 py-2.5 flex items-center justify-between">
+                      <span className="text-sm text-gray-700 dark:text-gray-200">Theme</span>
+                      <ThemeToggle />
+                    </div>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-t border-gray-200 dark:border-gray-700"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
