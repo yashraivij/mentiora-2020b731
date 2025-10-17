@@ -986,21 +986,27 @@ const Index = () => {
               
               {/* Three Dashboard Cards - Exact Platform Style */}
               <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
-                {/* Card 1: Predicted Grades - Exact Floating Card Style */}
+                {/* Card 1: Predicted Grades - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200"
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                    {/* Title */}
+                    <div className="mb-2">
+                      <h3 className="text-lg font-bold text-[#0F172A]">Predicted Grades</h3>
+                      <p className="text-sm text-[#64748B]">Track your progress towards your target grades</p>
+                    </div>
+                    
                     {/* Header */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">🧪</span>
-                        <h3 className="text-base font-bold text-black">Chemistry</h3>
+                        <h4 className="text-base font-bold text-black">Chemistry</h4>
                       </div>
                     </div>
                     
@@ -1037,7 +1043,7 @@ const Index = () => {
                     </div>
                     
                     {/* Last 6 Attempts Section */}
-                    <div className="bg-gray-100 rounded-lg px-4 py-3">
+                    <div className="bg-gray-100 rounded-lg px-4 py-3 flex-1">
                       <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
                       <div className="h-12 relative">
                         <svg width="100%" height="100%" viewBox="0 0 140 48" preserveAspectRatio="none">
@@ -1053,7 +1059,7 @@ const Index = () => {
                     
                     {/* Topics Button */}
                     <button 
-                      className="w-full py-2.5 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      className="w-full py-2.5 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity mt-auto"
                       style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Topics
@@ -1068,15 +1074,15 @@ const Index = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200"
+                  className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="mb-4">
                       <h3 className="text-lg font-bold text-[#0F172A] dark:text-white">Your Notes</h3>
                       <p className="text-sm text-[#64748B] dark:text-gray-400">Review notes from your mistakes and learning progress</p>
                     </div>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-4 flex-1 flex flex-col">
                       {/* Header Section */}
                       <div className="pb-4 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
                         <div className="space-y-2">
@@ -1134,8 +1140,8 @@ const Index = () => {
                         </div>
                       </div>
                       
-                      {/* Key Points to Remember */}
-                      <div className="space-y-3">
+                      {/* Key Points to Remember - Scrollable if needed */}
+                      <div className="space-y-3 flex-1 overflow-auto">
                         <div className="flex items-center gap-2">
                           <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
                             <Sparkles className="h-3.5 w-3.5 text-[#0EA5E9]" />
@@ -1173,16 +1179,22 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 3: Smart Planner - Exact Floating Card Style */}
+                {/* Card 3: Weekly Plan - Exact Floating Card Style */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200"
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                    {/* Title */}
+                    <div className="mb-2">
+                      <h3 className="text-lg font-bold text-[#0F172A]">Weekly Plan</h3>
+                      <p className="text-sm text-[#64748B]">Personalized study schedule that adapts to you</p>
+                    </div>
+                    
                     {/* Day Header */}
                     <div className="flex items-center justify-between">
                       <div>
@@ -1218,7 +1230,7 @@ const Index = () => {
                     </div>
                     
                     {/* Task 2 */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
