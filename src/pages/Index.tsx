@@ -92,7 +92,7 @@ const Index = () => {
             <button onClick={() => scrollToSection('features')} className="text-base text-gray-600 hover:text-black transition-colors">
               Features
             </button>
-            <button onClick={() => navigate("/pricing")} className="text-base text-gray-600 hover:text-black transition-colors">
+            <button onClick={() => scrollToSection('pricing')} className="text-base text-gray-600 hover:text-black transition-colors">
               Pricing
             </button>
           </div>
@@ -852,11 +852,11 @@ const Index = () => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-1"
+                className="flex flex-col items-center gap-0"
               >
                 <div className="w-[2px] h-16 bg-primary rounded-full" />
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary">
-                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary -mt-1">
+                  <path d="M12 4L12 20M12 20L6 14M12 20L18 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
             </div>
@@ -977,11 +977,11 @@ const Index = () => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="flex flex-col items-center gap-1"
+                className="flex flex-col items-center gap-0"
               >
                 <div className="w-[2px] h-16 bg-primary rounded-full" />
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary">
-                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary -mt-1">
+                  <path d="M12 4L12 20M12 20L6 14M12 20L18 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
             </div>
@@ -1277,7 +1277,7 @@ const Index = () => {
 
 
       {/* PRICING SECTION */}
-      <section className="py-24 px-6 bg-white">
+      <section id="pricing" className="py-24 px-6 bg-white">
         <div className="max-w-[1400px] mx-auto">
           {/* Section Header */}
           <motion.div
@@ -1547,10 +1547,7 @@ const Index = () => {
 
       {/* FINAL CTA SECTION */}
       <section 
-        className="py-20 px-6"
-        style={{ 
-          background: 'linear-gradient(120deg, #0BA5E9, #06B6D4)',
-        }}
+        className="py-20 px-6 bg-gradient-to-br from-white to-gray-50"
       >
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -1559,21 +1556,21 @@ const Index = () => {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl font-bold text-white mb-4">
+            <h2 className="text-5xl font-bold text-black mb-4">
               Start your journey to better grades
             </h2>
-            <p className="text-xl text-white/90 mb-8">
+            <p className="text-xl text-gray-600 mb-8">
               Join thousands of students already improving with Mentiora
             </p>
             <Button 
               size="lg"
               onClick={() => navigate(user ? '/dashboard' : '/register')}
-              className="bg-white hover:bg-gray-50 text-lg font-semibold px-12 py-6 rounded-full shadow-lg hover:scale-105 transition-all"
-              style={{ color: '#0BA5E9' }}
+              className="text-white text-lg font-semibold px-12 py-6 rounded-lg shadow-lg hover:scale-105 transition-all"
+              style={{ backgroundColor: '#0BA5E9' }}
             >
               Try now for free
             </Button>
-            <p className="text-sm text-white/80 mt-4">
+            <p className="text-sm text-gray-500 mt-4">
               No credit card required • Get started in 60 seconds
             </p>
           </motion.div>
@@ -1581,46 +1578,46 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-gray-900 text-white py-16 px-6">
+      <footer className="bg-white border-t border-gray-200 py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6 brightness-0 invert" />
-                <span className="text-lg font-bold">Mentiora</span>
+              <div className="flex items-center gap-2 mb-3">
+                <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6" />
+                <span className="text-lg font-bold text-black">Mentiora</span>
               </div>
-              <p className="text-sm text-gray-400">Personalised learning for GCSE & A-Levels</p>
+              <p className="text-sm text-gray-600">Personalised learning for GCSE & A-Levels</p>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-4">Product</h4>
+              <h4 className="font-semibold text-black mb-3">Product</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => navigate('/pricing')} className="text-sm text-gray-400 hover:text-white transition-colors">Pricing</button></li>
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Features</button></li>
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Subjects</button></li>
+                <li><button onClick={() => scrollToSection('pricing')} className="text-sm text-gray-600 hover:text-black transition-colors">Pricing</button></li>
+                <li><button onClick={() => scrollToSection('features')} className="text-sm text-gray-600 hover:text-black transition-colors">Features</button></li>
+                <li><button onClick={() => scrollToSection('subjects')} className="text-sm text-gray-600 hover:text-black transition-colors">Subjects</button></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-4">Company</h4>
+              <h4 className="font-semibold text-black mb-3">Company</h4>
               <ul className="space-y-2">
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">About us</button></li>
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Careers</button></li>
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Blog</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="text-sm text-gray-600 hover:text-black transition-colors">About us</button></li>
+                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Careers</button></li>
+                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Blog</button></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-4">Legal</h4>
+              <h4 className="font-semibold text-black mb-3">Legal</h4>
               <ul className="space-y-2">
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</button></li>
-                <li><button className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</button></li>
+                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Privacy Policy</button></li>
+                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Terms of Service</button></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-sm text-gray-400">© 2025 Mentiora. All rights reserved.</p>
+          <div className="border-t border-gray-200 pt-6 text-center">
+            <p className="text-sm text-gray-600">© 2025 Mentiora. All rights reserved.</p>
           </div>
         </div>
       </footer>
