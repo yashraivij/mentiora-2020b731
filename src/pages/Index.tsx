@@ -1371,37 +1371,42 @@ const Index = () => {
                     transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                   />
 
-                  {/* Personalised education label with dashed line */}
+                  {/* Personalised education label */}
                   <motion.g
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 1.7, duration: 0.4 }}
                   >
-                    {/* Dashed line */}
-                    <line
-                      x1="520"
-                      y1="20"
-                      x2="450"
-                      y2="70"
-                      stroke="#9CA3AF"
-                      strokeWidth="1.5"
-                      strokeDasharray="4 4"
-                    />
-                    {/* Circle on curve */}
-                    <circle cx="520" cy="20" r="4" fill="#0BA5E9" />
-                    {/* Infinity symbol */}
-                    <g transform="translate(390, 60)">
-                      <path
-                        d="M 0,5 C -2,0 -5,0 -7,5 C -5,10 -2,10 0,5 M 0,5 C 2,0 5,0 7,5 C 5,10 2,10 0,5"
-                        fill="black"
-                      />
-                    </g>
+                    {/* Mentiora logo as circle */}
+                    <circle cx="520" cy="20" r="8" fill="#0BA5E9" />
                     <text
-                      x="405"
-                      y="70"
-                      className="text-sm fill-black font-medium"
-                      fontSize="15"
+                      x="510"
+                      y="26"
+                      className="fill-white font-bold"
+                      fontSize="12"
+                      textAnchor="middle"
+                    >
+                      m
+                    </text>
+                    
+                    {/* Label with background */}
+                    <rect
+                      x="380"
+                      y="50"
+                      width="165"
+                      height="32"
+                      rx="6"
+                      fill="white"
+                      stroke="#0BA5E9"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x="462"
+                      y="71"
+                      className="text-base fill-black font-semibold"
+                      fontSize="16"
+                      textAnchor="middle"
                     >
                       Personalised education
                     </text>
@@ -1414,21 +1419,26 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 1.9, duration: 0.4 }}
                   >
-                    <line
-                      x1="480"
-                      y1="190"
-                      x2="410"
-                      y2="245"
-                      stroke="#9CA3AF"
-                      strokeWidth="1.5"
-                      strokeDasharray="4 4"
+                    {/* Circle on curve */}
+                    <circle cx="480" cy="190" r="8" fill="#D1D5DB" />
+                    
+                    {/* Label with background */}
+                    <rect
+                      x="295"
+                      y="225"
+                      width="190"
+                      height="32"
+                      rx="6"
+                      fill="white"
+                      stroke="#D1D5DB"
+                      strokeWidth="2"
                     />
-                    <circle cx="480" cy="190" r="4" fill="#D1D5DB" />
                     <text
-                      x="315"
-                      y="250"
-                      className="text-sm fill-black font-medium"
-                      fontSize="15"
+                      x="390"
+                      y="246"
+                      className="text-base fill-black font-semibold"
+                      fontSize="16"
+                      textAnchor="middle"
                     >
                       Non-personal education
                     </text>
