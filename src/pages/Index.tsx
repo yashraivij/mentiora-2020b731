@@ -763,143 +763,200 @@ const Index = () => {
 
           {/* Main Visual Flow */}
           <div className="relative max-w-[1200px] mx-auto">
+            {/* Connecting Line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-blue-200 to-transparent -translate-x-1/2 hidden md:block" />
+
             {/* Stage 1: YOU STUDY */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mb-10"
+              transition={{ duration: 0.7, type: "spring" }}
+              className="relative mb-16"
             >
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
-                  <span className="text-2xl">1</span>
-                  <span>You Study</span>
+              <div className="flex items-start gap-8 md:gap-12">
+                {/* Step Indicator - Left Side */}
+                <div className="flex-shrink-0">
+                  <motion.div
+                    whileHover={{ scale: 1.05, rotate: 5 }}
+                    className="relative"
+                  >
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-2xl relative overflow-hidden"
+                      style={{ 
+                        background: 'linear-gradient(135deg, #0BA5E9 0%, #0284C7 100%)',
+                        boxShadow: '0 10px 40px rgba(11, 165, 233, 0.4), inset 0 -2px 10px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      <span className="relative z-10">1</span>
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                    </div>
+                    {/* Pulse Ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2"
+                      style={{ borderColor: '#0BA5E9' }}
+                      animate={{ scale: [1, 1.3, 1.3], opacity: [0.5, 0, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                    />
+                  </motion.div>
                 </div>
-                <p className="text-lg text-gray-600">Answer questions and get instant feedback</p>
-              </div>
-              
-              {/* Question Card - Real Dashboard Style */}
-              <motion.div
-                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
-                className="max-w-[700px] mx-auto bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100"
-              >
-                <div className="flex items-start justify-between gap-4 mb-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="inline-flex items-center gap-1">
-                        <span className="inline-block border-2 border-black px-3 py-1 text-sm font-mono font-semibold text-black">0</span>
-                        <span className="inline-block border-2 border-black px-3 py-1 text-sm font-mono font-semibold text-black">4</span>
+
+                {/* Content - Right Side */}
+                <div className="flex-1 pt-2">
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-bold text-black mb-2">You Study</h3>
+                    <p className="text-base text-gray-600">Answer questions and get instant feedback</p>
+                  </div>
+                  
+                  {/* Question Card - Real Dashboard Style */}
+                  <motion.div
+                    whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
+                    className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100"
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="inline-flex items-center gap-1">
+                            <span className="inline-block border-2 border-black px-3 py-1 text-sm font-mono font-semibold text-black">0</span>
+                            <span className="inline-block border-2 border-black px-3 py-1 text-sm font-mono font-semibold text-black">4</span>
+                          </div>
+                        </div>
+                        <p className="text-base text-black leading-relaxed">
+                          Explain why increasing light intensity increases the rate of photosynthesis.
+                        </p>
+                      </div>
+                      <div className="text-sm font-semibold text-black whitespace-nowrap">
+                        [3 marks]
                       </div>
                     </div>
-                    <p className="text-base text-black leading-relaxed">
-                      Explain why increasing light intensity increases the rate of photosynthesis.
-                    </p>
-                  </div>
-                  <div className="text-sm font-semibold text-black whitespace-nowrap">
-                    [3 marks]
-                  </div>
+                    
+                    <div className="bg-gray-50 rounded-lg p-4 mb-4 min-h-[100px] border-2 border-gray-200">
+                      <p className="text-sm text-gray-600 italic">Your answer appears here...</p>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="text-xs text-gray-500">
+                        Chemistry • Photosynthesis
+                      </div>
+                      <Button
+                        size="sm"
+                        className="text-white font-semibold rounded-full px-6"
+                        style={{ backgroundColor: '#0BA5E9' }}
+                      >
+                        Submit Answer
+                      </Button>
+                    </div>
+                  </motion.div>
                 </div>
-                
-                <div className="bg-gray-50 rounded-lg p-4 mb-4 min-h-[100px] border-2 border-gray-200">
-                  <p className="text-sm text-gray-600 italic">Your answer appears here...</p>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <div className="text-xs text-gray-500">
-                    Chemistry • Photosynthesis
-                  </div>
-                  <Button
-                    size="sm"
-                    className="text-white font-semibold rounded-full px-6"
-                    style={{ backgroundColor: '#0BA5E9' }}
-                  >
-                    Submit Answer
-                  </Button>
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center my-8">
               <motion.div
-                animate={{ y: [0, 8, 0] }}
+                animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="flex flex-col items-center">
-                  <div className="w-1 h-8 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
-                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px]" style={{ borderTopColor: '#0BA5E9' }} />
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-1 h-12 rounded-full bg-gradient-to-b from-blue-500 to-blue-400" />
+                  <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[16px] border-t-blue-400" />
                 </div>
               </motion.div>
             </div>
 
             {/* Stage 2: AI ANALYZES */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-10"
+              transition={{ duration: 0.7, type: "spring", delay: 0.2 }}
+              className="relative mb-16"
             >
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
-                  <span className="text-2xl">2</span>
-                  <span>AI Analyzes</span>
+              <div className="flex items-start gap-8 md:gap-12 flex-row-reverse">
+                {/* Step Indicator - Right Side */}
+                <div className="flex-shrink-0">
+                  <motion.div
+                    whileHover={{ scale: 1.05, rotate: -5 }}
+                    className="relative"
+                  >
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-2xl relative overflow-hidden"
+                      style={{ 
+                        background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+                        boxShadow: '0 10px 40px rgba(139, 92, 246, 0.4), inset 0 -2px 10px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      <span className="relative z-10">2</span>
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                    </div>
+                    {/* Pulse Ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2"
+                      style={{ borderColor: '#8B5CF6' }}
+                      animate={{ scale: [1, 1.3, 1.3], opacity: [0.5, 0, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                    />
+                  </motion.div>
                 </div>
-                <p className="text-lg text-gray-600">We track 50+ data points from every answer</p>
-              </div>
-              
-              {/* Analysis Dashboard - Real Dashboard Style */}
-              <div className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100">
-                <div className="grid md:grid-cols-3 gap-6">
-                  {/* Time Saved Stat */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Time Saved</div>
-                    <div className="text-4xl font-bold text-black mb-2">14.7h</div>
-                    <div className="text-xs text-gray-600">This month</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#0BA5E9' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '85%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                      />
-                    </div>
+
+                {/* Content - Left Side */}
+                <div className="flex-1 pt-2 text-right md:text-left">
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-bold text-black mb-2">AI Analyzes</h3>
+                    <p className="text-base text-gray-600">We track 50+ data points from every answer</p>
                   </div>
                   
-                  {/* Accuracy Stat */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accuracy</div>
-                    <div className="text-4xl font-bold text-black mb-2">78%</div>
-                    <div className="text-xs text-gray-600">Current performance</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#10B981' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '78%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.7 }}
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Questions Answered */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Progress</div>
-                    <div className="text-4xl font-bold text-black mb-2">147</div>
-                    <div className="text-xs text-gray-600">Questions answered</div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#A855F7' }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '92%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.9 }}
-                      />
+                  {/* Analysis Dashboard - Real Dashboard Style */}
+                  <div className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100">
+                    <div className="grid md:grid-cols-3 gap-6">
+                      {/* Time Saved Stat */}
+                      <div className="bg-gray-100 rounded-xl p-5">
+                        <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Time Saved</div>
+                        <div className="text-4xl font-bold text-black mb-2">14.7h</div>
+                        <div className="text-xs text-gray-600">This month</div>
+                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                          <motion.div 
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: '#0BA5E9' }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '85%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Accuracy Stat */}
+                      <div className="bg-gray-100 rounded-xl p-5">
+                        <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accuracy</div>
+                        <div className="text-4xl font-bold text-black mb-2">78%</div>
+                        <div className="text-xs text-gray-600">Current performance</div>
+                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                          <motion.div 
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: '#10B981' }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '78%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.7 }}
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Questions Answered */}
+                      <div className="bg-gray-100 rounded-xl p-5">
+                        <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Progress</div>
+                        <div className="text-4xl font-bold text-black mb-2">147</div>
+                        <div className="text-xs text-gray-600">Questions answered</div>
+                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                          <motion.div 
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: '#A855F7' }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '92%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.9 }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -907,32 +964,56 @@ const Index = () => {
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center my-8">
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
               >
-                <div className="flex flex-col items-center">
-                  <div className="w-1 h-8 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
-                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px]" style={{ borderTopColor: '#0BA5E9' }} />
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-500 to-purple-400" />
+                  <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[16px] border-t-purple-400" />
                 </div>
               </motion.div>
             </div>
 
             {/* Stage 3: YOU GET PERSONALIZED RESULTS */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.7, type: "spring", delay: 0.4 }}
+              className="relative"
             >
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
-                  <span className="text-2xl">3</span>
-                  <span>You Get Personalized Results</span>
-                </div>
-                <p className="text-lg text-gray-600">Three features that adapt to you in real-time</p>
-              </div>
+              <div className="flex flex-col items-center">
+                {/* Step Indicator - Center */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative mb-8"
+                >
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-2xl relative overflow-hidden"
+                    style={{ 
+                      background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                      boxShadow: '0 10px 40px rgba(16, 185, 129, 0.4), inset 0 -2px 10px rgba(0,0,0,0.2)'
+                    }}
+                  >
+                    <span className="relative z-10">3</span>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                  </div>
+                  {/* Pulse Ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2"
+                    style={{ borderColor: '#10B981' }}
+                    animate={{ scale: [1, 1.3, 1.3], opacity: [0.5, 0, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 1 }}
+                  />
+                </motion.div>
+
+                {/* Content - Center */}
+                <div className="w-full">
+                  <div className="text-center mb-10">
+                    <h3 className="text-3xl font-bold text-black mb-2">You Get Personalized Results</h3>
+                    <p className="text-base text-gray-600">Three features that adapt to you in real-time</p>
+                  </div>
               
               {/* Three Dashboard Cards - Exact Platform Style */}
               <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
@@ -1057,9 +1138,11 @@ const Index = () => {
                     </div>
                   </div>
                 </motion.div>
+                </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+        </div>
 
           {/* Section Ending */}
           <motion.div
