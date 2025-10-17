@@ -32,6 +32,11 @@ const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
     // Remove exam board from subject name if it exists (e.g., "Biology (Edexcel)" -> "Biology")
     const subjectName = subject.name.replace(/\s*\([^)]*\)\s*/g, '').trim();
     
+    // Skip Geography Paper 2 for GCSE
+    if (subjectName.toLowerCase().includes('geography paper 2') || subjectName.toLowerCase().includes('geography - paper 2')) {
+      return;
+    }
+    
     // Extract exam board and level from ID (e.g., "biology-aqa-alevel" or "combined-science-aqa")
     const parts = subjectId.split('-');
     const examBoardRaw = parts.find(p => ['aqa', 'edexcel', 'ocr', 'eduqas'].includes(p)) || 'aqa';

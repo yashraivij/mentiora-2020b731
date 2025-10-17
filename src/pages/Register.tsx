@@ -39,7 +39,11 @@ const Register = () => {
     const success = await register(name, email, password);
     
     if (success) {
-      setShowOnboarding(true);
+      navigate("/dashboard");
+      // Small delay to ensure navigation completes before showing popup
+      setTimeout(() => {
+        setShowOnboarding(true);
+      }, 100);
     } else {
       toast.error("Registration failed. Please try again.");
     }
