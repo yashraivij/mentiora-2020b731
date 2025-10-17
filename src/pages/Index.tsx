@@ -27,6 +27,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import cambridgeLogo from "@/assets/cambridge-logo.png";
 import oxfordLogo from "@/assets/oxford-logo.webp";
+import lseLogo from "@/assets/lse-logo.png";
+import exeterLogo from "@/assets/exeter-logo.webp";
+import bathLogo from "@/assets/bath-logo.svg";
+import bristolLogo from "@/assets/bristol-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -433,12 +437,12 @@ const Index = () => {
           <div className="relative">
             <motion.div
               className="flex items-center gap-16"
-              animate={{ x: [0, -1000] }}
+              animate={{ x: [0, -2000] }}
               transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 20,
+                  duration: 30,
                   ease: "linear",
                 },
               }}
@@ -455,13 +459,23 @@ const Index = () => {
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
               <img 
-                src={cambridgeLogo} 
-                alt="University of Cambridge" 
+                src={lseLogo} 
+                alt="London School of Economics" 
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
               <img 
-                src={oxfordLogo} 
-                alt="University of Oxford" 
+                src={exeterLogo} 
+                alt="University of Exeter" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={bathLogo} 
+                alt="University of Bath" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={bristolLogo} 
+                alt="University of Bristol" 
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
               {/* Duplicate set for seamless loop */}
@@ -476,13 +490,23 @@ const Index = () => {
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
               <img 
-                src={cambridgeLogo} 
-                alt="University of Cambridge" 
+                src={lseLogo} 
+                alt="London School of Economics" 
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
               <img 
-                src={oxfordLogo} 
-                alt="University of Oxford" 
+                src={exeterLogo} 
+                alt="University of Exeter" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={bathLogo} 
+                alt="University of Bath" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={bristolLogo} 
+                alt="University of Bristol" 
                 className="h-16 w-auto object-contain flex-shrink-0"
               />
             </motion.div>
