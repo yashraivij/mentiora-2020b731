@@ -33,6 +33,7 @@ import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Index = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -97,6 +99,13 @@ const Index = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Button
+              onClick={() => setShowOnboarding(true)}
+              variant="outline"
+              className="text-sm border-2 border-[#0BA5E9] text-[#0BA5E9] hover:bg-[#0BA5E9] hover:text-white"
+            >
+              Test Onboarding
+            </Button>
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#0BA5E9' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
@@ -1594,6 +1603,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Onboarding Popup */}
+      <OnboardingPopup
+        isOpen={showOnboarding}
+        onClose={() => setShowOnboarding(false)}
+        onSubjectsAdded={() => setShowOnboarding(false)}
+      />
     </div>
   );
 };
