@@ -1220,7 +1220,7 @@ const Index = () => {
                     </div>
                     
                     {/* Task 2 */}
-                    <div className="space-y-1.5 flex-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
                           <div className="flex items-center gap-1.5 mb-1">
@@ -1230,6 +1230,40 @@ const Index = () => {
                             </span>
                           </div>
                           <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
+                          <span>▶</span> Start
+                        </button>
+                        <button className="px-2.5 py-1 rounded text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1px solid #10b981' }}>
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* Divider */}
+                    <div className="border-t border-gray-200 my-3"></div>
+                    
+                    {/* Tuesday Header */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-black text-sm">Tue</span>
+                        <span className="text-gray-500 text-xs ml-1.5">— Build Momentum</span>
+                      </div>
+                      <span className="px-2 py-0.5 rounded text-[10px]" style={{ color: '#0BA5E9', border: '1px solid #0BA5E9' }}>
+                        25 mins
+                      </span>
+                    </div>
+                    
+                    {/* Tuesday Task */}
+                    <div className="space-y-1.5 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-xs text-black">Review states of matter</span>
+                          </div>
+                          <p className="text-[10px] text-gray-500">25 mins • Current: 72%</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
