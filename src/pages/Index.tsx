@@ -985,7 +985,7 @@ const Index = () => {
               </div>
               
               {/* Three Dashboard Cards - Exact Platform Style */}
-              <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
+              <div className="grid md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
                 {/* Card 1: Predicted Grades - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
@@ -993,28 +993,28 @@ const Index = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
+                  className="bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                  <div className="p-4 space-y-3 flex-1 flex flex-col">
                     {/* Title */}
-                    <div className="mb-2">
-                      <h3 className="text-lg font-bold text-[#0F172A]">Predicted Grades</h3>
-                      <p className="text-sm text-[#64748B]">Track your progress towards your target grades</p>
+                    <div className="mb-1">
+                      <h3 className="text-base font-bold text-[#0F172A]">Predicted Grades</h3>
+                      <p className="text-xs text-[#64748B]">Track your progress towards your target grades</p>
                     </div>
                     
                     {/* Header */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl">🧪</span>
-                        <h4 className="text-base font-bold text-black">Chemistry</h4>
+                        <span className="text-xl">🧪</span>
+                        <h4 className="text-sm text-black">Chemistry</h4>
                       </div>
                     </div>
                     
                     {/* Predicted Section */}
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                    <div className="bg-gray-100 rounded-lg px-3 py-2 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                        <span className="text-3xl font-bold text-black">7</span>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-wider">Predicted</span>
+                        <span className="text-2xl font-bold text-black">7</span>
                       </div>
                       <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
                         <motion.div 
@@ -1029,10 +1029,10 @@ const Index = () => {
                     </div>
                     
                     {/* Target Section */}
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                    <div className="bg-gray-100 rounded-lg px-3 py-2 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                        <span className="text-3xl font-bold text-black">9</span>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-wider">Target</span>
+                        <span className="text-2xl font-bold text-black">9</span>
                       </div>
                       <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
                         <div 
@@ -1043,9 +1043,9 @@ const Index = () => {
                     </div>
                     
                     {/* Last 6 Attempts Section */}
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 flex-1">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
-                      <div className="h-12 relative">
+                    <div className="bg-gray-100 rounded-lg px-3 py-2 flex-1">
+                      <span className="text-[10px] text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
+                      <div className="h-10 relative">
                         <svg width="100%" height="100%" viewBox="0 0 140 48" preserveAspectRatio="none">
                           <polyline
                             fill="none"
@@ -1059,7 +1059,7 @@ const Index = () => {
                     
                     {/* Topics Button */}
                     <button 
-                      className="w-full py-2.5 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity mt-auto"
+                      className="w-full py-2 rounded-lg text-xs text-white hover:opacity-90 transition-opacity mt-auto"
                       style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Topics
@@ -1074,36 +1074,36 @@ const Index = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200 flex flex-col"
+                  className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-xl border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="mb-4">
-                      <h3 className="text-lg font-bold text-[#0F172A] dark:text-white">Your Notes</h3>
-                      <p className="text-sm text-[#64748B] dark:text-gray-400">Review notes from your mistakes and learning progress</p>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="mb-3">
+                      <h3 className="text-base font-bold text-[#0F172A] dark:text-white">Your Notes</h3>
+                      <p className="text-xs text-[#64748B] dark:text-gray-400">Review notes from your mistakes and learning progress</p>
                     </div>
                     
-                    <div className="space-y-4 flex-1 flex flex-col">
+                    <div className="space-y-3 flex-1 flex flex-col">
                       {/* Header Section */}
-                      <div className="pb-4 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
-                        <div className="space-y-2">
+                      <div className="pb-3 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
+                        <div className="space-y-1.5">
                           <div>
-                            <Badge className="rounded-lg px-2 py-0.5 font-medium shadow-sm text-xs bg-[#EF4444] text-white mb-2">
+                            <Badge className="rounded-lg px-2 py-0.5 font-medium shadow-sm text-[10px] bg-[#EF4444] text-white mb-1.5">
                               Low Confidence
                             </Badge>
                           </div>
-                          <h4 className="text-base font-bold text-[#0F172A] dark:text-white leading-tight">
+                          <h4 className="text-sm text-[#0F172A] dark:text-white leading-tight">
                             Explain how clock speed, cache size, and number of cores affect CPU performance.
                           </h4>
-                          <div className="flex flex-wrap items-center gap-3 text-xs text-[#64748B] dark:text-gray-400">
-                            <span className="flex items-center gap-1.5">
+                          <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#64748B] dark:text-gray-400">
+                            <span className="flex items-center gap-1">
                               <div className="h-1 w-1 rounded-full bg-[#0EA5E9]" />
                               Systems Architecture
                             </span>
                             <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
+                              <Clock className="h-2.5 w-2.5" />
                               13 Oct 2025
                             </span>
-                            <span className="flex items-center gap-1 font-semibold text-[#EF4444]">
+                            <span className="flex items-center gap-1 font-medium text-[#EF4444]">
                               -6 marks lost
                             </span>
                           </div>
@@ -1111,65 +1111,65 @@ const Index = () => {
                       </div>
                       
                       {/* What Went Wrong */}
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
-                            <AlertTriangle className="h-4 w-4 text-[#EF4444]" />
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="p-1 rounded-lg bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
+                            <AlertTriangle className="h-3 w-3 text-[#EF4444]" />
                           </div>
-                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">What Went Wrong</h5>
+                          <h5 className="text-xs text-[#0F172A] dark:text-white">What Went Wrong</h5>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
-                          <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
+                        <div className="p-2 rounded-lg bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
+                          <p className="text-xs text-[#1E293B] dark:text-gray-200 leading-relaxed">
                             Insufficient understanding of key concepts
                           </p>
                         </div>
                       </div>
                       
                       {/* The Solution */}
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-                            <CheckCircle2 className="h-4 w-4 text-[#16A34A]" />
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="p-1 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                            <CheckCircle2 className="h-3 w-3 text-[#16A34A]" />
                           </div>
-                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">The Solution</h5>
+                          <h5 className="text-xs text-[#0F172A] dark:text-white">The Solution</h5>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
-                          <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
+                        <div className="p-2 rounded-lg bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
+                          <p className="text-xs text-[#1E293B] dark:text-gray-200 leading-relaxed">
                             Review the fundamental principles and practice similar questions
                           </p>
                         </div>
                       </div>
                       
                       {/* Key Points to Remember - Scrollable if needed */}
-                      <div className="space-y-3 flex-1 overflow-auto">
-                        <div className="flex items-center gap-2">
-                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                            <Sparkles className="h-3.5 w-3.5 text-[#0EA5E9]" />
+                      <div className="space-y-2 flex-1 overflow-auto">
+                        <div className="flex items-center gap-1.5">
+                          <div className="p-1 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                            <Sparkles className="h-3 w-3 text-[#0EA5E9]" />
                           </div>
-                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">Key Points to Remember</h5>
+                          <h5 className="text-xs text-[#0F172A] dark:text-white">Key Points to Remember</h5>
                         </div>
-                        <div className="space-y-2.5 pl-1">
-                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
-                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                        <div className="space-y-1.5 pl-1">
+                          <div className="flex gap-2 p-2 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-5 w-5 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
                               1
                             </div>
-                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                            <p className="text-[11px] text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1">
                               Clock Speed: Clock Speed Refers To The Number Of Cycles A CPU Can Execute Per Second, Measured In Gigahertz (GHz). Higher Clock Speeds Allow The CPU To Process More Instructions Per Second, Leading To Faster Performance.
                             </p>
                           </div>
-                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
-                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                          <div className="flex gap-2 p-2 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-5 w-5 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
                               2
                             </div>
-                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                            <p className="text-[11px] text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1">
                               Cache Size: Cache Size Is The Amount Of High-Speed Memory Located Inside The CPU. Larger Cache Sizes Allow More Frequently Used Data To Be Stored Close To The CPU, Reducing The Time It Takes To Access Data From Main Memory (RAM).
                             </p>
                           </div>
-                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
-                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                          <div className="flex gap-2 p-2 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-5 w-5 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
                               3
                             </div>
-                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                            <p className="text-[11px] text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1">
                               Number Of Cores: The Number Of Cores Refers To The Individual Processing Units Within The CPU. More cores enable the CPU to handle multiple tasks simultaneously, improving multitasking and parallel processing performance.
                             </p>
                           </div>
@@ -1186,67 +1186,67 @@ const Index = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
+                  className="bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200 flex flex-col"
                 >
-                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                  <div className="p-4 space-y-3 flex-1 flex flex-col">
                     {/* Title */}
-                    <div className="mb-2">
-                      <h3 className="text-lg font-bold text-[#0F172A]">Weekly Plan</h3>
-                      <p className="text-sm text-[#64748B]">Personalized study schedule that adapts to you</p>
+                    <div className="mb-1">
+                      <h3 className="text-base font-bold text-[#0F172A]">Weekly Plan</h3>
+                      <p className="text-xs text-[#64748B]">Personalized study schedule that adapts to you</p>
                     </div>
                     
                     {/* Day Header */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="font-bold text-black text-base">Mon</span>
-                        <span className="text-gray-500 text-sm ml-2">— Kickstart Week</span>
+                        <span className="text-black text-sm">Mon</span>
+                        <span className="text-gray-500 text-xs ml-2">— Kickstart Week</span>
                       </div>
-                      <span className="px-3 py-1 rounded-lg text-xs font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
+                      <span className="px-2 py-0.5 rounded-lg text-[10px]" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
                         30 mins
                       </span>
                     </div>
                     
                     {/* Task 1 */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm font-medium text-black">Create 10 flashcards on Bonding Structure</span>
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                            <span className="text-xs text-black">Create 10 flashcards on Bonding Structure</span>
+                            <span className="px-1.5 py-0.5 rounded text-[9px] bg-red-100 text-red-600">
                               Priority
                             </span>
                           </div>
-                          <p className="text-xs text-gray-500">15 mins • Current: 56%</p>
+                          <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
+                        <button className="px-2.5 py-1 rounded-lg text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
                           <span>▶</span> Start
                         </button>
-                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        <button className="px-2.5 py-1 rounded-lg text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
                           Done
                         </button>
                       </div>
                     </div>
                     
                     {/* Task 2 */}
-                    <div className="space-y-2 flex-1">
+                    <div className="space-y-1.5 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm font-medium text-black">Practice questions on Bonding Structure</span>
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                            <span className="text-xs text-black">Practice questions on Bonding Structure</span>
+                            <span className="px-1.5 py-0.5 rounded text-[9px] bg-red-100 text-red-600">
                               Priority
                             </span>
                           </div>
-                          <p className="text-xs text-gray-500">15 mins • Current: 56%</p>
+                          <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
+                        <button className="px-2.5 py-1 rounded-lg text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
                           <span>▶</span> Start
                         </button>
-                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        <button className="px-2.5 py-1 rounded-lg text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
                           Done
                         </button>
                       </div>
