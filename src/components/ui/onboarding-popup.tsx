@@ -245,18 +245,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.95 }}
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-12 max-h-[85vh] overflow-y-auto"
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-10 max-h-[88vh] overflow-hidden flex flex-col"
       >
         {/* Progress Bar */}
         {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
-          <div className="mb-10">
-            <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-3">
+          <div className="mb-6 flex-shrink-0">
+            <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-2">
               <motion.div
                 className="h-full bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9]"
                 initial={{ width: 0 }}
                 animate={{ width: `${getProgressPercentage()}%` }}
-                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               />
             </div>
             <p className="text-[13px] text-[#6B7280] text-center font-medium">
@@ -268,10 +268,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep}
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            className="flex-1 overflow-y-auto"
           >
             {/* Step 0: Welcome */}
             {currentStep === 0 && (
@@ -292,9 +293,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 1: How did you hear about us */}
             {currentStep === 1 && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-3">How did you hear about us?</h2>
-                <p className="text-[16px] text-[#6B7280] mb-6">This helps us understand how students find Mentiora</p>
-                <div className="space-y-3 mb-5">
+                <h2 className="text-[26px] font-bold text-black mb-2">How did you hear about us?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">This helps us understand how students find Mentiora</p>
+                <div className="space-y-2.5 mb-4">
                   {ACQUISITION_SOURCES.map((source) => (
                     <button
                       key={source.id}
@@ -330,9 +331,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 2: Year group */}
             {currentStep === 2 && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-3">What year are you in?</h2>
-                <p className="text-[16px] text-[#6B7280] mb-6">This helps us show you the right content</p>
-                <div className="space-y-3">
+                <h2 className="text-[26px] font-bold text-black mb-2">What year are you in?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">This helps us show you the right content</p>
+                <div className="space-y-2.5">
                   {YEAR_GROUPS.map((year) => (
                     <button
                       key={year.id}
@@ -359,14 +360,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 3: Select subjects WITH TABS */}
             {currentStep === 3 && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-3">Which subjects are you studying?</h2>
-                <p className="text-[16px] text-[#6B7280] mb-6">Select all that apply. You can add more later.</p>
+                <h2 className="text-[26px] font-bold text-black mb-2">Which subjects are you studying?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-4">Select all that apply. You can add more later.</p>
 
                 {/* Level tabs */}
-                <div className="flex gap-2 mb-5">
+                <div className="flex gap-2 mb-4">
                   <button
                     onClick={() => setSubjectLevel('gcse')}
-                    className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                    className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
                       subjectLevel === 'gcse'
                         ? 'bg-[#00B4D8] text-white shadow-md'
                         : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
@@ -376,7 +377,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </button>
                   <button
                     onClick={() => setSubjectLevel('alevel')}
-                    className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                    className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
                       subjectLevel === 'alevel'
                         ? 'bg-[#00B4D8] text-white shadow-md'
                         : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
@@ -387,19 +388,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 {/* Search + grid */}
-                <div className="relative mb-5">
+                <div className="relative mb-3">
                   <input
                     type="text"
                     placeholder="Search subjects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                    className="w-full pl-11 pr-4 py-2.5 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8] text-[14px]"
                   />
-                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[20px]">🔍</span>
+                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[18px]">🔍</span>
                 </div>
 
-                <div className="max-h-[280px] overflow-y-auto mb-5">
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="max-h-[240px] overflow-y-auto mb-3">
+                  <div className="grid grid-cols-2 gap-2.5">
                     {filteredSubjects.map((subject) => (
                       <button
                         key={subject.id}
@@ -409,18 +410,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             : [...onboardingData.subjects, subject.id];
                           setOnboardingData({ ...onboardingData, subjects: newSubjects });
                         }}
-                        className={`flex items-center justify-between p-3 rounded-[10px] border-2 transition-all ${
+                        className={`flex items-center justify-between p-2.5 rounded-[10px] border-2 transition-all duration-200 ${
                           onboardingData.subjects.includes(subject.id)
                             ? 'border-[#00B4D8] bg-[#F0F9FF]'
                             : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                         }`}
                       >
                         <div className="flex items-center gap-2">
-                          <span className="text-[20px]">{subject.emoji}</span>
-                          <span className="text-[15px] font-medium">{subject.name}</span>
+                          <span className="text-[18px]">{subject.emoji}</span>
+                          <span className="text-[14px] font-medium">{subject.name}</span>
                         </div>
                         {onboardingData.subjects.includes(subject.id) && (
-                          <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                          <Check className="w-[16px] h-[16px] text-[#00B4D8]" />
                         )}
                       </button>
                     ))}
@@ -428,7 +429,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 {onboardingData.subjects.length > 0 && (
-                  <p className="text-[14px] text-[#00B4D8] font-semibold text-center mb-5">
+                  <p className="text-[13px] text-[#00B4D8] font-semibold text-center mb-2">
                     {onboardingData.subjects.length} subject{onboardingData.subjects.length !== 1 ? 's' : ''} selected
                   </p>
                 )}
@@ -438,9 +439,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 4: Study preferences */}
             {currentStep === 4 && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-3">How do you like to study?</h2>
-                <p className="text-[16px] text-[#6B7280] mb-6">Select all that apply. We'll personalize your experience.</p>
-                <div className="space-y-3">
+                <h2 className="text-[26px] font-bold text-black mb-2">How do you like to study?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">Select all that apply. We'll personalize your experience.</p>
+                <div className="space-y-2.5">
                   {STUDY_PREFERENCES.map((pref) => (
                     <button
                       key={pref.id}
@@ -450,21 +451,21 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           : [...onboardingData.studyPreferences, pref.id];
                         setOnboardingData({ ...onboardingData, studyPreferences: newPrefs });
                       }}
-                      className={`w-full flex items-start justify-between p-4 rounded-[12px] border-2 transition-all ${
+                      className={`w-full flex items-start justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                         onboardingData.studyPreferences.includes(pref.id)
                           ? 'border-[#00B4D8] bg-[#F0F9FF]'
                           : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                       }`}
                     >
-                      <div className="flex items-start gap-3 text-left">
-                        <span className="text-[24px] mt-0.5">{pref.emoji}</span>
+                      <div className="flex items-start gap-2.5 text-left">
+                        <span className="text-[22px] mt-0.5">{pref.emoji}</span>
                         <div>
-                          <div className="text-[15px] font-semibold mb-1">{pref.title}</div>
-                          <div className="text-[13px] text-[#6B7280]">{pref.description}</div>
+                          <div className="text-[14px] font-semibold mb-0.5">{pref.title}</div>
+                          <div className="text-[12px] text-[#6B7280]">{pref.description}</div>
                         </div>
                       </div>
                       {onboardingData.studyPreferences.includes(pref.id) && (
-                        <Check className="w-[20px] h-[20px] text-[#00B4D8] flex-shrink-0 mt-1" />
+                        <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0 mt-1" />
                       )}
                     </button>
                   ))}
@@ -475,48 +476,48 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 5: Parent updates */}
             {currentStep === 5 && !showCompletion && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-3">Keep your parents in the loop?</h2>
-                <p className="text-[16px] text-[#6B7280] mb-6">We can send them weekly progress updates (optional)</p>
+                <h2 className="text-[26px] font-bold text-black mb-2">Keep your parents in the loop?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">We can send them weekly progress updates (optional)</p>
                 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <button
                     onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: true })}
-                    className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                    className={`w-full flex items-center justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                       onboardingData.parentUpdates
                         ? 'border-[#00B4D8] bg-[#F0F9FF]'
                         : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-[24px]">📧</span>
-                      <span className="text-[15px] font-medium">Yes, send weekly updates</span>
+                      <span className="text-[22px]">📧</span>
+                      <span className="text-[14px] font-medium">Yes, send weekly updates</span>
                     </div>
                     {onboardingData.parentUpdates && (
-                      <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
                     )}
                   </button>
 
                   <button
                     onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: false, parentEmail: null })}
-                    className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                    className={`w-full flex items-center justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                       !onboardingData.parentUpdates
                         ? 'border-[#00B4D8] bg-[#F0F9FF]'
                         : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-[24px]">🚫</span>
-                      <span className="text-[15px] font-medium">No thanks, just me</span>
+                      <span className="text-[22px]">🚫</span>
+                      <span className="text-[14px] font-medium">No thanks, just me</span>
                     </div>
                     {!onboardingData.parentUpdates && (
-                      <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
                     )}
                   </button>
                 </div>
 
                 {onboardingData.parentUpdates && (
-                  <div className="mt-5">
-                    <label className="block text-[14px] font-medium text-[#374151] mb-2">
+                  <div className="mt-4">
+                    <label className="block text-[13px] font-medium text-[#374151] mb-2">
                       Parent's email address
                     </label>
                     <input
@@ -524,10 +525,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       placeholder="parent@example.com"
                       value={onboardingData.parentEmail || ''}
                       onChange={(e) => setOnboardingData({ ...onboardingData, parentEmail: e.target.value })}
-                      className="w-full px-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                      className="w-full px-4 py-2.5 text-[14px] border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
                     />
                     {onboardingData.parentEmail && !isValidEmail(onboardingData.parentEmail) && (
-                      <p className="text-[13px] text-red-500 mt-2">Please enter a valid email address</p>
+                      <p className="text-[12px] text-red-500 mt-1.5">Please enter a valid email address</p>
                     )}
                   </div>
                 )}
@@ -613,22 +614,22 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
         {/* Navigation buttons */}
         {currentStep > 0 && currentStep < 6 && !showCompletion && (
-          <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-200">
+          <div className="flex items-center justify-between mt-5 pt-5 border-t border-gray-200 flex-shrink-0">
             {currentStep > 1 && (
-              <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[15px] underline">
+              <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline transition-colors duration-200">
                 Back
               </button>
             )}
             <div className="flex-1" />
             {currentStep !== 1 && (
-              <button onClick={handleSkip} className="text-[#6B7280] hover:text-black font-medium text-[15px] underline mr-4">
+              <button onClick={handleSkip} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline mr-4 transition-colors duration-200">
                 Skip
               </button>
             )}
             <button
               onClick={handleNext}
               disabled={!canContinue()}
-              className={`px-8 py-3.5 rounded-[10px] font-semibold text-[15px] transition-all duration-300 ${
+              className={`px-8 py-3 rounded-[10px] font-semibold text-[14px] transition-all duration-200 ${
                 canContinue()
                   ? 'bg-[#00B4D8] text-white hover:bg-[#0099b8] hover:shadow-md hover:-translate-y-0.5'
                   : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
