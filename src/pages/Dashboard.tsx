@@ -2421,6 +2421,16 @@ const Dashboard = () => {
             >
               Discord
             </Button>
+            {isPremium && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={openManageBilling}
+                className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
+              >
+                Manage Billing
+              </Button>
+            )}
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -2473,6 +2483,17 @@ const Dashboard = () => {
                     >
                       Discord
                     </button>
+                    {isPremium && (
+                      <button
+                        onClick={() => {
+                          openManageBilling();
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-t border-gray-200 dark:border-gray-700"
+                      >
+                        Manage Billing
+                      </button>
+                    )}
                     <button
                       onClick={() => {
                         handleLogout();
