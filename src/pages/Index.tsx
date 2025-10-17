@@ -578,7 +578,7 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-10"
+            className="grid md:grid-cols-3 gap-8"
           >
             {[
               {
@@ -650,10 +650,14 @@ const Index = () => {
                 key={index}
                 variants={fadeInUp}
               >
-                <div className="text-5xl mb-6">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
-                <p className="text-lg text-gray-600 leading-relaxed">{feature.description}</p>
-                {feature.visual}
+                <Card className="bg-white border-0 shadow-lg rounded-2xl overflow-hidden h-full">
+                  <CardContent className="p-8">
+                    <div className="text-5xl mb-6">{feature.icon}</div>
+                    <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
+                    <p className="text-base text-gray-600 leading-relaxed mb-6">{feature.description}</p>
+                    {feature.visual}
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </motion.div>
