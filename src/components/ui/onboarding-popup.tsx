@@ -526,14 +526,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { text: 'Staying motivated', icon: Flame, color: 'from-pink-400 to-rose-400', bg: 'from-pink-50 to-rose-50' },
-                    { text: 'Knowing what to revise', icon: Brain, color: 'from-green-400 to-emerald-400', bg: 'from-green-50 to-emerald-50' },
-                    { text: 'Running out of time', icon: Clock, color: 'from-orange-400 to-red-400', bg: 'from-orange-50 to-red-50' },
-                    { text: 'Understanding content', icon: BookOpen, color: 'from-blue-400 to-indigo-400', bg: 'from-blue-50 to-indigo-50' }
+                    { text: 'Staying motivated', emoji: '🔥', subtitle: 'Build consistent study habits' },
+                    { text: 'Knowing what to revise', emoji: '🧠', subtitle: 'Get personalized study plans' },
+                    { text: 'Running out of time', emoji: '⏰', subtitle: 'Optimize your schedule' },
+                    { text: 'Understanding content', emoji: '📚', subtitle: 'AI-powered explanations' }
                   ].map((struggle, index) => {
-                    const StruggleIcon = struggle.icon;
+                    const isSelected = revisionStruggles.includes(struggle.text);
                     return (
                       <motion.div
                         key={struggle.text}
@@ -544,25 +544,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         transition={{ delay: index * 0.1, duration: 0.2 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 rounded-3xl h-40 ${
-                            revisionStruggles.includes(struggle.text)
+                          className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                            isSelected
                               ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
                               : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
                           }`}
                           onClick={() => handleStruggleToggle(struggle.text)}
                         >
-                          <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className={`p-3 rounded-2xl mb-3 bg-gradient-to-r ${struggle.color} shadow-lg`}>
-                              <StruggleIcon className="h-6 w-6 text-white" />
-                            </div>
-                            <p className="font-bold text-sm text-[#0F172A] dark:text-white">{struggle.text}</p>
-                            {revisionStruggles.includes(struggle.text) && (
-                              <div className="absolute top-4 right-4">
-                                <div className="bg-[#0EA5E9] rounded-full p-1 shadow-lg">
-                                  <Check className="h-3 w-3 text-white" />
-                                </div>
+                          <CardContent className="p-5">
+                            <div className="flex items-center space-x-4">
+                              <div className="text-4xl">{struggle.emoji}</div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                                  {struggle.text}
+                                </h3>
+                                <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap mt-0.5">
+                                  {struggle.subtitle}
+                                </p>
                               </div>
-                            )}
+                              <div className="flex-shrink-0">
+                                <ChevronRight className="h-5 w-5 text-[#0EA5E9] transition-transform duration-300" />
+                              </div>
+                            </div>
                           </CardContent>
                         </Card>
                       </motion.div>
@@ -612,14 +615,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { text: 'Flashcards', icon: Star, color: 'from-yellow-400 to-orange-400', bg: 'from-yellow-50 to-orange-50' },
-                    { text: 'Practice questions', icon: NotebookPen, color: 'from-purple-400 to-pink-400', bg: 'from-purple-50 to-pink-50' },
-                    { text: 'Reading notes', icon: BookOpen, color: 'from-green-400 to-teal-400', bg: 'from-green-50 to-teal-50' },
-                    { text: 'Watching videos', icon: TrendingUp, color: 'from-blue-400 to-cyan-400', bg: 'from-blue-50 to-cyan-50' }
+                    { text: 'Flashcards', emoji: '⭐', subtitle: 'Spaced repetition learning' },
+                    { text: 'Practice questions', emoji: '📝', subtitle: 'Exam-style questions' },
+                    { text: 'Reading notes', emoji: '📖', subtitle: 'Comprehensive summaries' },
+                    { text: 'Watching videos', emoji: '📊', subtitle: 'Visual learning aids' }
                   ].map((method, index) => {
-                    const MethodIcon = method.icon;
+                    const isSelected = revisionMethods.includes(method.text);
                     return (
                       <motion.div
                         key={method.text}
@@ -630,25 +633,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         transition={{ delay: index * 0.1, duration: 0.2 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 rounded-3xl h-40 ${
-                            revisionMethods.includes(method.text)
+                          className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                            isSelected
                               ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
                               : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
                           }`}
                           onClick={() => handleMethodToggle(method.text)}
                         >
-                          <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className={`p-3 rounded-2xl mb-3 bg-gradient-to-r ${method.color} shadow-lg`}>
-                              <MethodIcon className="h-6 w-6 text-white" />
-                            </div>
-                            <p className="font-bold text-sm text-[#0F172A] dark:text-white">{method.text}</p>
-                            {revisionMethods.includes(method.text) && (
-                              <div className="absolute top-4 right-4">
-                                <div className="bg-[#0EA5E9] rounded-full p-1 shadow-lg">
-                                  <Check className="h-3 w-3 text-white" />
-                                </div>
+                          <CardContent className="p-5">
+                            <div className="flex items-center space-x-4">
+                              <div className="text-4xl">{method.emoji}</div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                                  {method.text}
+                                </h3>
+                                <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap mt-0.5">
+                                  {method.subtitle}
+                                </p>
                               </div>
-                            )}
+                              <div className="flex-shrink-0">
+                                <ChevronRight className="h-5 w-5 text-[#0EA5E9] transition-transform duration-300" />
+                              </div>
+                            </div>
                           </CardContent>
                         </Card>
                       </motion.div>
@@ -698,39 +704,71 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </p>
                 </div>
 
-                <div className="max-w-2xl mx-auto space-y-6">
-                  <Card 
-                    className={`cursor-pointer transition-all duration-300 rounded-3xl ${
-                      showParentProgress 
-                        ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]' 
-                        : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
-                    }`}
-                    onClick={() => setShowParentProgress(!showParentProgress)}
+                <div className="space-y-4">
+                  <motion.div
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <CardContent className="p-8 text-center">
-                      <div className="flex items-center justify-center mb-4">
-                        <div className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] p-4 rounded-3xl shadow-lg mr-4">
-                          <User className="h-10 w-10 text-white" />
-                        </div>
-                        <div className="text-left">
-                          <h4 className="text-2xl font-bold text-[#0F172A] dark:text-white">Share with Parent/Guardian</h4>
-                          <p className="text-sm text-[#64748B] dark:text-gray-400">Keep them updated on your progress</p>
-                        </div>
-                        <div className="ml-auto">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'bg-[#0EA5E9] border-[#0EA5E9]' : 'border-[#64748B]'
-                          }`}>
-                            {showParentProgress && <Check className="h-4 w-4 text-white" />}
+                    <Card 
+                      className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                        showParentProgress
+                          ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
+                          : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
+                      }`}
+                      onClick={() => setShowParentProgress(true)}
+                    >
+                      <CardContent className="p-5">
+                        <div className="flex items-center space-x-4">
+                          <div className="text-4xl">👨‍👩‍👧‍👦</div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                              Yes, share my progress
+                            </h3>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap mt-0.5">
+                              Weekly reports with study stats
+                            </p>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <ChevronRight className="h-5 w-5 text-[#0EA5E9] transition-transform duration-300" />
                           </div>
                         </div>
-                      </div>
-                      <p className="text-sm text-[#64748B] dark:text-gray-400">
-                        We'll send them weekly progress reports including your study streaks, 
-                        grade predictions, and achievements. You can change this anytime in settings.
-                      </p>
-                    </CardContent>
-                  </Card>
-                  
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card 
+                      className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                        !showParentProgress
+                          ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
+                          : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
+                      }`}
+                      onClick={() => setShowParentProgress(false)}
+                    >
+                      <CardContent className="p-5">
+                        <div className="flex items-center space-x-4">
+                          <div className="text-4xl">🙅</div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                              No thanks, skip this
+                            </h3>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap mt-0.5">
+                              I'll manage my progress privately
+                            </p>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <ChevronRight className="h-5 w-5 text-[#0EA5E9] transition-transform duration-300" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
                   {/* Parent Email Input - Show when opted in */}
                   {showParentProgress && (
                     <motion.div
