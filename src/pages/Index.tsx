@@ -1522,57 +1522,10 @@ const Index = () => {
             >
               Try now for free
             </Button>
-            <p className="text-sm text-gray-500 mt-4">
-              No credit card required • Get started in 60 seconds
-            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-200 py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6" />
-                <span className="text-lg font-bold text-black">Mentiora</span>
-              </div>
-              <p className="text-sm text-gray-600">Personalised learning for GCSE & A-Levels</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-black mb-3">Product</h4>
-              <ul className="space-y-2">
-                <li><button onClick={() => scrollToSection('pricing')} className="text-sm text-gray-600 hover:text-black transition-colors">Pricing</button></li>
-                <li><button onClick={() => scrollToSection('features')} className="text-sm text-gray-600 hover:text-black transition-colors">Features</button></li>
-                <li><button onClick={() => scrollToSection('subjects')} className="text-sm text-gray-600 hover:text-black transition-colors">Subjects</button></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-black mb-3">Company</h4>
-              <ul className="space-y-2">
-                <li><button onClick={() => scrollToSection('about')} className="text-sm text-gray-600 hover:text-black transition-colors">About us</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Careers</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Blog</button></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-black mb-3">Legal</h4>
-              <ul className="space-y-2">
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Privacy Policy</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Terms of Service</button></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200 pt-6 text-center">
-            <p className="text-sm text-gray-600">© 2025 Mentiora. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
