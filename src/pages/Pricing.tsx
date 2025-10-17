@@ -55,7 +55,12 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <motion.div 
+      className="min-h-screen bg-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Header */}
       <div className="border-b">
         <div className="flex items-center justify-between px-8 py-5 max-w-[1200px] mx-auto">
@@ -377,18 +382,13 @@ const Pricing = () => {
         </div>
 
         {/* Russell Group Section */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
+        <div className="mb-24">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
             Helping GCSE & A-Level students<br />get into Russell Group universities
           </h2>
 
           {/* University Logos Strip */}
-          <div className="py-8 px-6 overflow-hidden bg-gray-50 rounded-2xl">
-            <div className="text-center mb-6">
-              <p className="text-sm font-medium text-gray-600">
-                Trusted by <span className="font-bold text-black">500+ students</span> at Russell Group universities
-              </p>
-            </div>
+          <div className="py-8 px-6 overflow-hidden bg-white">
             <div className="relative">
               <motion.div
                 className="flex items-center gap-12"
@@ -572,7 +572,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
