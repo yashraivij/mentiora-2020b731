@@ -1511,30 +1511,12 @@ const Index = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1.6 }}
-            className="text-center mt-12"
-          >
-            <Button
-              onClick={() => navigate(user ? '/dashboard' : '/register')}
-              size="lg"
-              className="px-10 py-6 text-lg font-semibold rounded-lg hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: '#0BA5E9', color: 'white' }}
-            >
-              Get started for free
-            </Button>
-          </motion.div>
         </div>
       </section>
 
       {/* FINAL CTA SECTION */}
       <section 
-        className="py-20 px-6 bg-gradient-to-br from-white to-gray-50"
+        className="py-24 px-6 bg-gradient-to-br from-white to-gray-50"
       >
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
