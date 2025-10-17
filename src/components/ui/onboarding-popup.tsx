@@ -13,11 +13,16 @@ interface OnboardingPopupProps {
   onSubjectsAdded: () => void;
 }
 
+interface SubjectWithGrade {
+  id: string;
+  targetGrade: string;
+}
+
 interface OnboardingData {
   acquisitionSource: string;
   acquisitionSourceOther: string | null;
   yearGroup: string;
-  subjects: string[];
+  subjects: SubjectWithGrade[];
   studyPreferences: string[];
   parentUpdates: boolean;
   parentEmail: string | null;
@@ -140,9 +145,13 @@ const STUDY_PREFERENCES = [
   },
 ];
 
+const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
+const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
+
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse'>('gcse');
+  const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<string | null>(null);
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     acquisitionSource: '',
     acquisitionSourceOther: null,
@@ -230,14 +239,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
         if (onboardingData.subjects.length > 0) {
           const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
-          const subjectEntries = onboardingData.subjects.map(subjectId => {
-            const subject = allSubjects.find(s => s.id === subjectId);
+          const subjectEntries = onboardingData.subjects.map(subjectWithGrade => {
+            const subject = allSubjects.find(s => s.id === subjectWithGrade.id);
             return {
               user_id: user.id,
-              subject_name: subject?.name || subjectId,
+              subject_name: subject?.name || subjectWithGrade.id,
               exam_board: subject?.examBoard || 'AQA',
               predicted_grade: 'Not Set',
-              target_grade: null,
+              target_grade: subjectWithGrade.targetGrade,
               priority_level: 3
             };
           });
@@ -454,33 +463,76 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="max-h-[240px] overflow-y-auto mb-3">
                   <div className="grid grid-cols-1 gap-2.5">
-                    {filteredSubjects.map((subject) => (
-                      <button
-                        key={subject.id}
-                        onClick={() => {
-                          const newSubjects = onboardingData.subjects.includes(subject.id)
-                            ? onboardingData.subjects.filter(s => s !== subject.id)
-                            : [...onboardingData.subjects, subject.id];
-                          setOnboardingData({ ...onboardingData, subjects: newSubjects });
-                        }}
-                        className={`flex items-center justify-between p-2.5 rounded-[10px] border-2 transition-all duration-200 ${
-                          onboardingData.subjects.includes(subject.id)
-                            ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                            : 'border-[#E5E7EB] hover:border-[#00B4D8]'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-[18px]">{subject.emoji}</span>
-                          <div className="text-left">
-                            <div className="text-[14px] font-medium">{subject.name}</div>
-                            <div className="text-[11px] text-[#6B7280] font-medium">{subject.examBoard}</div>
-                          </div>
+                    {filteredSubjects.map((subject) => {
+                      const isSelected = onboardingData.subjects.some(s => s.id === subject.id);
+                      const subjectData = onboardingData.subjects.find(s => s.id === subject.id);
+                      const isSelectingGrade = selectedSubjectForGrade === subject.id;
+                      
+                      return (
+                        <div key={subject.id} className="space-y-2">
+                          <button
+                            onClick={() => {
+                              if (isSelected) {
+                                // Remove subject
+                                const newSubjects = onboardingData.subjects.filter(s => s.id !== subject.id);
+                                setOnboardingData({ ...onboardingData, subjects: newSubjects });
+                                setSelectedSubjectForGrade(null);
+                              } else {
+                                // Show grade picker
+                                setSelectedSubjectForGrade(subject.id);
+                              }
+                            }}
+                            className={`w-full flex items-center justify-between p-2.5 rounded-[10px] border-2 transition-all duration-200 ${
+                              isSelected
+                                ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                                : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2.5">
+                              <span className="text-[18px]">{subject.emoji}</span>
+                              <div className="text-left">
+                                <div className="text-[14px] font-medium">{subject.name}</div>
+                                <div className="text-[11px] text-[#6B7280] font-medium">
+                                  {subject.examBoard}
+                                  {subjectData && ` • Target: ${subjectData.targetGrade}`}
+                                </div>
+                              </div>
+                            </div>
+                            {isSelected && (
+                              <Check className="w-[16px] h-[16px] text-[#00B4D8] flex-shrink-0" />
+                            )}
+                          </button>
+                          
+                          {/* Grade picker */}
+                          {isSelectingGrade && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="pl-4 pr-2"
+                            >
+                              <p className="text-[12px] text-[#6B7280] mb-2 font-medium">Select your target grade:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {(subjectLevel === 'alevel' ? ALEVEL_GRADES : GCSE_GRADES).map((grade) => (
+                                  <button
+                                    key={grade}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      const newSubjects = [...onboardingData.subjects, { id: subject.id, targetGrade: grade }];
+                                      setOnboardingData({ ...onboardingData, subjects: newSubjects });
+                                      setSelectedSubjectForGrade(null);
+                                    }}
+                                    className="px-3 py-1.5 text-[13px] font-semibold rounded-md border-2 border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF] transition-all"
+                                  >
+                                    {grade}
+                                  </button>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
                         </div>
-                        {onboardingData.subjects.includes(subject.id) && (
-                          <Check className="w-[16px] h-[16px] text-[#00B4D8] flex-shrink-0" />
-                        )}
-                      </button>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
 
