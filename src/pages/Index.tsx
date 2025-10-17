@@ -985,52 +985,74 @@ const Index = () => {
               
               {/* Three Dashboard Cards - Exact Platform Style */}
               <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
-                {/* Card 1: Predicted Grades - Matching Dashboard Style */}
+                {/* Card 1: Predicted Grades - Exact Floating Card Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xl">🧪</span>
-                      <h3 className="text-sm font-bold text-foreground">Chemistry</h3>
+                  <div className="p-6 space-y-4">
+                    {/* Header */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">🧪</span>
+                        <h3 className="text-base font-bold text-black">Chemistry</h3>
+                      </div>
                     </div>
                     
-                    <div className="bg-muted rounded-lg px-4 py-3 space-y-3 mb-3">
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Predicted</span>
-                          <span className="text-2xl font-bold text-foreground">7</span>
-                        </div>
-                        <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div 
-                            className="h-full rounded-full"
-                            style={{ backgroundColor: '#0BA5E9' }}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: '78%' }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.8 }}
+                    {/* Predicted Section */}
+                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                        <span className="text-3xl font-bold text-black">7</span>
+                      </div>
+                      <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                        <motion.div 
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: '#0BA5E9' }}
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '78%' }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.8 }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Target Section */}
+                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                        <span className="text-3xl font-bold text-black">9</span>
+                      </div>
+                      <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-green-500 rounded-full"
+                          style={{ width: '70%' }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Last 6 Attempts Section */}
+                    <div className="bg-gray-100 rounded-lg px-4 py-3">
+                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
+                      <div className="h-12 relative">
+                        <svg width="100%" height="100%" viewBox="0 0 140 48" preserveAspectRatio="none">
+                          <polyline
+                            fill="none"
+                            stroke="#0BA5E9"
+                            strokeWidth="2.5"
+                            points="0,39 28,35 56,29 84,21 112,14 140,8"
                           />
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Target</span>
-                          <span className="text-2xl font-bold text-foreground">9</span>
-                        </div>
-                        <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
-                          <div className="h-full bg-green-500 rounded-full" style={{ width: '100%' }} />
-                        </div>
+                        </svg>
                       </div>
                     </div>
                     
+                    {/* Topics Button */}
                     <button 
-                      className="w-full py-2 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      className="w-full py-2.5 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity"
                       style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Topics
@@ -1110,84 +1132,70 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 3: Smart Planner - Matching Dashboard Style */}
+                {/* Card 3: Smart Planner - Exact Floating Card Style */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100 transition-all duration-200"
                 >
-                  <div className="p-6">
-                    <div className="mb-4">
-                      <h3 className="text-lg font-bold text-foreground">Adaptive Weekly Plan</h3>
-                      <p className="text-sm text-muted-foreground">Personalized study schedule that updates daily</p>
+                  <div className="p-6 space-y-4">
+                    {/* Day Header */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="font-bold text-black text-base">Mon</span>
+                        <span className="text-gray-500 text-sm ml-2">— Kickstart Week</span>
+                      </div>
+                      <span className="px-3 py-1 rounded-lg text-xs font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
+                        30 mins
+                      </span>
                     </div>
                     
-                    <div className="mb-4 pb-4 border-b border-border">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="text-base font-bold text-foreground">Mon</h4>
-                          <p className="text-xs text-muted-foreground">— Kickstart Week</p>
+                    {/* Task 1 */}
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-medium text-black">Create 10 flashcards on Bonding Structure</span>
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                              Priority
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500">15 mins • Current: 56%</p>
                         </div>
-                        <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#0BA5E9', color: 'white' }}>
-                          30 mins
-                        </span>
+                      </div>
+                      <div className="flex gap-2">
+                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
+                          <span>▶</span> Start
+                        </button>
+                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                          Done
+                        </button>
                       </div>
                     </div>
                     
-                    <div className="space-y-3">
-                      <div className="bg-background border border-border rounded-lg p-3">
-                        <div className="flex items-start justify-between mb-2">
-                          <h5 className="text-sm font-medium text-foreground flex-1">
-                            Create 10 flashcards on Systems Architecture
-                          </h5>
-                          <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
-                            Priority
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
-                        <div className="flex gap-2">
-                          <button 
-                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
-                            style={{ backgroundColor: '#0BA5E9' }}
-                          >
-                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M3 2l10 6-10 6V2z"/>
-                            </svg>
-                            Start
-                          </button>
-                          <button className="flex-1 py-2 rounded font-bold text-sm border-2 border-green-500 text-green-600 dark:text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
-                            Done
-                          </button>
+                    {/* Task 2 */}
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-medium text-black">Practice questions on Bonding Structure</span>
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-600">
+                              Priority
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500">15 mins • Current: 56%</p>
                         </div>
                       </div>
-                      
-                      <div className="bg-background border border-border rounded-lg p-3">
-                        <div className="flex items-start justify-between mb-2">
-                          <h5 className="text-sm font-medium text-foreground flex-1">
-                            Practice questions on Systems Architecture
-                          </h5>
-                          <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
-                            Priority
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
-                        <div className="flex gap-2">
-                          <button 
-                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
-                            style={{ backgroundColor: '#0BA5E9' }}
-                          >
-                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M3 2l10 6-10 6V2z"/>
-                            </svg>
-                            Start
-                          </button>
-                          <button className="flex-1 py-2 rounded font-bold text-sm border-2 border-green-500 text-green-600 dark:text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
-                            Done
-                          </button>
-                        </div>
+                      <div className="flex gap-2">
+                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
+                          <span>▶</span> Start
+                        </button>
+                        <button className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                          Done
+                        </button>
                       </div>
                     </div>
                   </div>
