@@ -1327,8 +1327,9 @@ const Index = () => {
                     x="-190"
                     y="25"
                     transform="rotate(-90)"
-                    className="text-xs fill-gray-400"
+                    className="text-sm fill-gray-500"
                     textAnchor="middle"
+                    fontSize="14"
                   >
                     Average grades
                   </text>
@@ -1337,8 +1338,9 @@ const Index = () => {
                   <text
                     x="350"
                     y="365"
-                    className="text-xs fill-gray-400"
+                    className="text-sm fill-gray-500"
                     textAnchor="middle"
+                    fontSize="14"
                   >
                     Hours spent learning
                   </text>
@@ -1348,7 +1350,7 @@ const Index = () => {
                     d="M 80,300 Q 200,240 350,210 Q 480,190 560,185"
                     fill="none"
                     stroke="#D1D5DB"
-                    strokeWidth="3"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
@@ -1361,7 +1363,7 @@ const Index = () => {
                     d="M 80,300 Q 180,120 300,70 Q 420,30 520,20"
                     fill="none"
                     stroke="#0BA5E9"
-                    strokeWidth="3"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
@@ -1381,24 +1383,25 @@ const Index = () => {
                       x1="520"
                       y1="20"
                       x2="450"
-                      y2="55"
+                      y2="70"
                       stroke="#9CA3AF"
-                      strokeWidth="1"
-                      strokeDasharray="3 3"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 4"
                     />
                     {/* Circle on curve */}
-                    <circle cx="520" cy="20" r="3" fill="#0BA5E9" />
+                    <circle cx="520" cy="20" r="4" fill="#0BA5E9" />
                     {/* Infinity symbol */}
-                    <g transform="translate(395, 45)">
+                    <g transform="translate(390, 60)">
                       <path
                         d="M 0,5 C -2,0 -5,0 -7,5 C -5,10 -2,10 0,5 M 0,5 C 2,0 5,0 7,5 C 5,10 2,10 0,5"
                         fill="black"
                       />
                     </g>
                     <text
-                      x="410"
-                      y="55"
-                      className="text-xs fill-black"
+                      x="405"
+                      y="70"
+                      className="text-sm fill-black font-medium"
+                      fontSize="15"
                     >
                       Personalised education
                     </text>
@@ -1414,17 +1417,18 @@ const Index = () => {
                     <line
                       x1="480"
                       y1="190"
-                      x2="420"
-                      y2="225"
+                      x2="410"
+                      y2="245"
                       stroke="#9CA3AF"
-                      strokeWidth="1"
-                      strokeDasharray="3 3"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 4"
                     />
-                    <circle cx="480" cy="190" r="3" fill="#D1D5DB" />
+                    <circle cx="480" cy="190" r="4" fill="#D1D5DB" />
                     <text
-                      x="330"
-                      y="230"
-                      className="text-xs fill-black"
+                      x="315"
+                      y="250"
+                      className="text-sm fill-black font-medium"
+                      fontSize="15"
                     >
                       Non-personal education
                     </text>
@@ -1439,52 +1443,49 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex items-center justify-center h-[450px]"
+              className="flex flex-col items-center justify-center"
             >
-              <div className="flex items-end gap-8 h-full max-h-[400px]">
+              {/* Title above bar chart */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="mb-8"
+              >
+                <h3 className="text-3xl font-bold text-center leading-tight">
+                  <span className="text-black">95% cheaper than</span>
+                  <br />
+                  <span style={{ color: '#0BA5E9' }}>private tutoring</span>
+                </h3>
+              </motion.div>
+
+              {/* Bar Chart */}
+              <div className="flex items-end gap-12 h-[350px]">
                 {/* Personal Tutoring - Tall Gray Bar */}
                 <div className="flex flex-col items-center justify-end h-full">
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="mb-2"
+                    transition={{ delay: 0.6 }}
+                    className="mb-3"
                   >
-                    <div className="text-3xl font-bold text-gray-700">
-                      £500<span className="text-lg">/month</span>
+                    <div className="text-2xl font-bold text-gray-700">
+                      £500<span className="text-base">/month</span>
                     </div>
                   </motion.div>
                   
                   <motion.div
-                    className="bg-gray-200 rounded-full relative"
-                    style={{ width: '100px', height: '280px' }}
+                    className="bg-gray-300 rounded-t-md relative"
+                    style={{ width: '80px', height: '240px' }}
                     initial={{ scaleY: 0, originY: 1 }}
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
                   />
                   
-                  <div className="text-sm text-gray-600 mt-3">Personal tutoring</div>
-                </div>
-
-                {/* Center Text */}
-                <div className="flex flex-col justify-center mb-12">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 }}
-                    className="text-center"
-                  >
-                    <h3 className="text-2xl font-bold leading-tight">
-                      <span className="text-black">95% cheaper</span>
-                      <br />
-                      <span className="text-black">than</span>
-                      <br />
-                      <span style={{ color: '#0BA5E9' }}>private tutoring</span>
-                    </h3>
-                  </motion.div>
+                  <div className="text-sm text-gray-600 mt-3 font-medium">Personal tutoring</div>
                 </div>
 
                 {/* Mentiora - Small Blue Bar */}
@@ -1494,16 +1495,16 @@ const Index = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 1 }}
-                    className="mb-2"
+                    className="mb-3"
                   >
-                    <div className="text-3xl font-bold text-black">
-                      £24.99<span className="text-lg">/month</span>
+                    <div className="text-2xl font-bold text-black">
+                      £9.99<span className="text-base">/month</span>
                     </div>
                   </motion.div>
                   
                   <motion.div
-                    className="rounded-full relative"
-                    style={{ width: '100px', height: '60px', backgroundColor: '#0BA5E9' }}
+                    className="rounded-t-md relative"
+                    style={{ width: '80px', height: '48px', backgroundColor: '#0BA5E9' }}
                     initial={{ scaleY: 0, originY: 1 }}
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
