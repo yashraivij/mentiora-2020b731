@@ -427,11 +427,16 @@ const Index = () => {
       </section>
 
       {/* UNIVERSITY STRIP SECTION */}
-      <section className="py-6 px-6 bg-white border-y border-gray-200 overflow-hidden">
+      <section 
+        className="py-8 px-6 overflow-hidden"
+        style={{
+          backgroundColor: '#f8f9fa'
+        }}
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-4">
-            <p className="text-sm text-gray-600">
-              Trusted by <span className="font-bold text-black">500+ students</span> at Russell Group universities including Oxford and Cambridge
+          <div className="text-center mb-6">
+            <p className="text-sm font-medium text-gray-600">
+              Trusted by <span className="font-bold text-black">500+ students</span> at Russell Group universities
             </p>
           </div>
           <div className="relative">
@@ -448,42 +453,42 @@ const Index = () => {
               }}
             >
               {/* First set of logos */}
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={cambridgeLogo} 
                   alt="University of Cambridge" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={lseLogo} 
                   alt="London School of Economics" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={exeterLogo} 
                   alt="University of Exeter" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bathLogo} 
                   alt="University of Bath" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
@@ -491,42 +496,42 @@ const Index = () => {
                 />
               </div>
               {/* Second set - duplicate for seamless loop */}
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={cambridgeLogo} 
                   alt="University of Cambridge" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={lseLogo} 
                   alt="London School of Economics" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={exeterLogo} 
                   alt="University of Exeter" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bathLogo} 
                   alt="University of Bath" 
                   className="max-h-12 max-w-full object-contain"
                 />
               </div>
-              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+              <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
