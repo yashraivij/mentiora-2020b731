@@ -1278,14 +1278,14 @@ const Index = () => {
 
       {/* PRICING SECTION */}
       <section id="pricing" className="py-24 px-6 bg-white">
-        <div className="max-w-[1400px] mx-auto">
+        <div className="max-w-[1200px] mx-auto">
           {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <h2 className="text-5xl lg:text-6xl font-bold leading-tight mb-5">
               <span className="text-black">Personalised tutoring</span>
@@ -1300,7 +1300,7 @@ const Index = () => {
           </motion.div>
 
           {/* Main Comparison - Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             
             {/* LEFT COLUMN: Effectiveness Graph */}
             <motion.div
@@ -1316,28 +1316,28 @@ const Index = () => {
               </h3>
 
               {/* Graph Container */}
-              <div className="bg-white border border-gray-200 p-10 min-h-[500px]">
+              <div className="bg-white border border-gray-200 rounded-lg p-8 h-[450px]">
                 <svg
-                  viewBox="0 0 600 400"
+                  viewBox="0 0 600 380"
                   className="w-full h-full"
                   preserveAspectRatio="xMidYMid meet"
                 >
                   {/* Y-axis label (rotated) */}
                   <text
-                    x="-200"
-                    y="20"
+                    x="-190"
+                    y="25"
                     transform="rotate(-90)"
-                    className="text-sm fill-gray-500"
+                    className="text-xs fill-gray-400"
                     textAnchor="middle"
                   >
-                    Average grade
+                    Average grades
                   </text>
 
                   {/* X-axis label */}
                   <text
                     x="350"
-                    y="385"
-                    className="text-sm fill-gray-500"
+                    y="365"
+                    className="text-xs fill-gray-400"
                     textAnchor="middle"
                   >
                     Hours spent learning
@@ -1345,20 +1345,20 @@ const Index = () => {
 
                   {/* Gray curve - Non-personal education */}
                   <motion.path
-                    d="M 80,320 Q 200,250 350,210 Q 450,190 580,180"
+                    d="M 80,300 Q 200,240 350,210 Q 480,190 560,185"
                     fill="none"
-                    stroke="#9CA3AF"
+                    stroke="#D1D5DB"
                     strokeWidth="3"
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 2, ease: "easeOut" }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
                   />
 
                   {/* Blue curve - Personalised education */}
                   <motion.path
-                    d="M 80,320 Q 180,140 300,80 Q 400,40 520,30"
+                    d="M 80,300 Q 180,120 300,70 Q 420,30 520,20"
                     fill="none"
                     stroke="#0BA5E9"
                     strokeWidth="3"
@@ -1366,7 +1366,7 @@ const Index = () => {
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
+                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                   />
 
                   {/* Personalised education label with dashed line */}
@@ -1374,61 +1374,57 @@ const Index = () => {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 2.3, duration: 0.5 }}
+                    transition={{ delay: 1.7, duration: 0.4 }}
                   >
-                    {/* Dashed line from curve to label */}
+                    {/* Dashed line */}
                     <line
                       x1="520"
-                      y1="30"
-                      x2="420"
-                      y2="70"
-                      stroke="#0BA5E9"
+                      y1="20"
+                      x2="450"
+                      y2="55"
+                      stroke="#9CA3AF"
                       strokeWidth="1"
-                      strokeDasharray="4 4"
+                      strokeDasharray="3 3"
                     />
                     {/* Circle on curve */}
-                    <circle cx="520" cy="30" r="4" fill="#0BA5E9" />
-                    {/* Infinity symbol (Medly logo) */}
-                    <path
-                      d="M 375,65 Q 372,60 370,65 Q 368,70 370,75 Q 372,70 375,65 M 375,65 Q 378,60 380,65 Q 382,70 380,75 Q 378,70 375,65"
-                      fill="none"
-                      stroke="black"
-                      strokeWidth="1.5"
-                    />
-                    {/* Label text */}
+                    <circle cx="520" cy="20" r="3" fill="#0BA5E9" />
+                    {/* Infinity symbol */}
+                    <g transform="translate(395, 45)">
+                      <path
+                        d="M 0,5 C -2,0 -5,0 -7,5 C -5,10 -2,10 0,5 M 0,5 C 2,0 5,0 7,5 C 5,10 2,10 0,5"
+                        fill="black"
+                      />
+                    </g>
                     <text
-                      x="390"
-                      y="72"
-                      className="text-sm font-medium fill-black"
+                      x="410"
+                      y="55"
+                      className="text-xs fill-black"
                     >
                       Personalised education
                     </text>
                   </motion.g>
 
-                  {/* Non-personal education label with dashed line */}
+                  {/* Non-personal education label */}
                   <motion.g
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 2.5, duration: 0.5 }}
+                    transition={{ delay: 1.9, duration: 0.4 }}
                   >
-                    {/* Dashed line from curve to label */}
                     <line
-                      x1="450"
+                      x1="480"
                       y1="190"
-                      x2="400"
-                      y2="240"
+                      x2="420"
+                      y2="225"
                       stroke="#9CA3AF"
                       strokeWidth="1"
-                      strokeDasharray="4 4"
+                      strokeDasharray="3 3"
                     />
-                    {/* Circle on curve */}
-                    <circle cx="450" cy="190" r="4" fill="#9CA3AF" />
-                    {/* Label text */}
+                    <circle cx="480" cy="190" r="3" fill="#D1D5DB" />
                     <text
-                      x="320"
-                      y="247"
-                      className="text-sm font-medium fill-black"
+                      x="330"
+                      y="230"
+                      className="text-xs fill-black"
                     >
                       Non-personal education
                     </text>
@@ -1443,105 +1439,113 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col justify-between min-h-[500px] relative"
+              className="flex items-center justify-center h-[450px]"
             >
-              {/* Top Section - Personal Tutoring Price */}
-              <div className="text-right">
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                  className="mb-4"
-                >
-                  <div className="text-5xl font-bold text-black">
-                    £500<span className="text-2xl text-gray-600">/month</span>
-                  </div>
-                </motion.div>
-
-                {/* Tall Gray Bar (Pill-shaped) */}
-                <motion.div
-                  className="bg-gray-200 rounded-full mx-auto mb-6"
-                  style={{ width: '200px', height: '280px', marginLeft: 'auto' }}
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.6 }}
-                />
-
-                <div className="text-base text-gray-600">Personal tutoring</div>
-              </div>
-
-              {/* Middle Section - Cost Comparison Text */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8 }}
-                className="text-right my-8"
-              >
-                <h3 className="text-3xl font-bold leading-tight">
-                  <span className="text-black">95% cheaper than</span>
-                  <br />
-                  <span style={{ color: '#0BA5E9' }}>private tutoring</span>
-                </h3>
-              </motion.div>
-
-              {/* Bottom Section - Mentiora Pricing */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1 }}
-                className="text-right relative"
-              >
-                <div className="mb-4">
-                  <div className="text-5xl font-bold text-black">
-                    £24.99<span className="text-xl text-gray-600">/month</span>
-                  </div>
-                </div>
-
-                <Button
-                  onClick={() => navigate(user ? '/dashboard' : '/register')}
-                  className="mb-6 px-8 py-5 rounded-full font-semibold text-base hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: '#0BA5E9', color: 'white' }}
-                >
-                  Get started
-                </Button>
-
-                <div className="flex items-center justify-end gap-2 mb-4">
-                  <img 
-                    src={mentioraLogo} 
-                    alt="Mentiora" 
-                    className="h-8 w-8"
+              <div className="flex items-end gap-8 h-full max-h-[400px]">
+                {/* Personal Tutoring - Tall Gray Bar */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="mb-2"
+                  >
+                    <div className="text-3xl font-bold text-gray-700">
+                      £500<span className="text-lg">/month</span>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="bg-gray-200 rounded-full relative"
+                    style={{ width: '100px', height: '280px' }}
+                    initial={{ scaleY: 0, originY: 1 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                   />
-                  <span className="text-2xl font-bold" style={{ color: '#0BA5E9' }}>mentiora</span>
+                  
+                  <div className="text-sm text-gray-600 mt-3">Personal tutoring</div>
                 </div>
 
-                {/* Small Dashboard Preview (bottom right corner) */}
-                <motion.div
-                  className="absolute bottom-0 right-0 w-48 rounded-lg overflow-hidden shadow-2xl border border-gray-200"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 1.2 }}
-                  style={{ transform: 'translateY(60px)' }}
-                >
-                  <div className="bg-gradient-to-br from-cyan-50 to-blue-50 p-3">
-                    <div className="bg-white rounded-md p-2 mb-2">
-                      <div className="h-2 bg-cyan-500 rounded w-3/4 mb-1"></div>
-                      <div className="h-1 bg-gray-200 rounded w-full mb-1"></div>
-                      <div className="h-1 bg-gray-200 rounded w-5/6"></div>
+                {/* Center Text */}
+                <div className="flex flex-col justify-center mb-12">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                    className="text-center"
+                  >
+                    <h3 className="text-2xl font-bold leading-tight">
+                      <span className="text-black">95% cheaper</span>
+                      <br />
+                      <span className="text-black">than</span>
+                      <br />
+                      <span style={{ color: '#0BA5E9' }}>private tutoring</span>
+                    </h3>
+                  </motion.div>
+                </div>
+
+                {/* Mentiora - Small Blue Bar */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1 }}
+                    className="mb-2"
+                  >
+                    <div className="text-3xl font-bold text-black">
+                      £24.99<span className="text-lg">/month</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-red-100 rounded h-12"></div>
-                      <div className="bg-blue-100 rounded h-12"></div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="rounded-full relative"
+                    style={{ width: '100px', height: '60px', backgroundColor: '#0BA5E9' }}
+                    initial={{ scaleY: 0, originY: 1 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+                  />
+                  
+                  <motion.div 
+                    className="flex items-center gap-2 mt-3"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.4 }}
+                  >
+                    <img 
+                      src={mentioraLogo} 
+                      alt="Mentiora" 
+                      className="h-5 w-5"
+                    />
+                    <span className="text-base font-bold" style={{ color: '#0BA5E9' }}>mentiora</span>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
           </div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 1.6 }}
+            className="text-center mt-12"
+          >
+            <Button
+              onClick={() => navigate(user ? '/dashboard' : '/register')}
+              size="lg"
+              className="px-10 py-6 text-lg font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: '#0BA5E9', color: 'white' }}
+            >
+              Get started for free
+            </Button>
+          </motion.div>
         </div>
       </section>
 
