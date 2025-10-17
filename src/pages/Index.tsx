@@ -168,26 +168,6 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 2 - Center Top: Mentiora Logo (visible on all screens) */}
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="absolute top-[-30px] md:top-[-60px] left-1/2 -translate-x-1/2 z-10"
-          >
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-white rounded-[15px] md:rounded-[20px] shadow-[0_8px_24px_rgba(0,0,0,0.15)] p-3 md:p-5 flex items-center justify-center">
-                <img 
-                  src={mentioraLogo} 
-                  alt="Mentiora" 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </motion.div>
-          </motion.div>
 
           {/* Floating Element - Mobile Sticky Note (visible on mobile/tablet only) */}
           <motion.div
