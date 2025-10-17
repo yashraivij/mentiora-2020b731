@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import cambridgeLogo from "@/assets/cambridge-logo.png";
+import oxfordLogo from "@/assets/oxford-logo.webp";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -444,6 +446,50 @@ const Index = () => {
               </Button>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* UNIVERSITY STRIP SECTION */}
+      <section className="py-12 px-6 bg-gray-50 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <p className="text-sm font-semibold text-gray-600 mb-6 uppercase tracking-wider">
+              Trusted by students at Russell Group universities
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-6">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+                className="grayscale hover:grayscale-0 transition-all duration-300"
+              >
+                <img 
+                  src={cambridgeLogo} 
+                  alt="University of Cambridge" 
+                  className="h-20 md:h-24 w-auto object-contain"
+                />
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+                className="grayscale hover:grayscale-0 transition-all duration-300"
+              >
+                <img 
+                  src={oxfordLogo} 
+                  alt="University of Oxford" 
+                  className="h-20 md:h-24 w-auto object-contain"
+                />
+              </motion.div>
+            </div>
+            <p className="text-base text-gray-700 font-medium">
+              We've helped over <span className="font-bold text-black">500+ students</span> gain admission to top Russell Group universities
+            </p>
+          </motion.div>
         </div>
       </section>
 
