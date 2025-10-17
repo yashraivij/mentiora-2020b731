@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Star, ChevronRight } from "lucide-react";
+import { Check, Star, ChevronRight, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const Pricing = () => {
   const [examYear, setExamYear] = useState<"2026" | "2027">("2026");
   const [studentName, setStudentName] = useState("");
   const [parentEmail, setParentEmail] = useState("");
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   const handleUpgrade = () => {
     openPaymentLink();
@@ -202,7 +203,7 @@ const Pricing = () => {
         </div>
 
         {/* Features List */}
-        <div className="mb-16 max-w-[700px] mx-auto">
+        <div className="mb-24 max-w-[700px] mx-auto">
           <div className="space-y-4">
             {features.map((feature, i) => (
               <div key={i} className="flex items-start gap-3">
@@ -220,7 +221,7 @@ const Pricing = () => {
         </div>
 
         {/* Want Help Asking Your Parents Section */}
-        <div id="parents-section" className="mb-16 scroll-mt-8">
+        <div id="parents-section" className="mb-32 scroll-mt-8">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
             Want help asking your parents?
           </h2>
@@ -382,7 +383,7 @@ const Pricing = () => {
         </div>
 
         {/* Russell Group Section */}
-        <div className="mb-24">
+        <div className="mb-32">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
             Helping GCSE & A-Level students<br />get into Russell Group universities
           </h2>
@@ -516,7 +517,7 @@ const Pricing = () => {
         </div>
 
         {/* FAQs Section */}
-        <div className="mb-16 max-w-[800px] mx-auto">
+        <div className="mb-24 max-w-[800px] mx-auto">
           <h2 className="text-5xl font-bold text-center mb-12 text-gray-900">
             FAQs
           </h2>
@@ -524,50 +525,82 @@ const Pricing = () => {
           <div className="space-y-4">
             {/* FAQ Item 1 */}
             <div className="border-b border-gray-200">
-              <button className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 0 ? null : 0)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Is Mentiora specific to the GCSE and A-Level specification?
                 </span>
-                <svg className="w-6 h-6 text-gray-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown 
+                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 0 ? 'rotate-180' : ''}`} 
+                />
               </button>
+              {expandedFAQ === 0 && (
+                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
+                  Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
+                </div>
+              )}
             </div>
 
             {/* FAQ Item 2 */}
             <div className="border-b border-gray-200">
-              <button className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 1 ? null : 1)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   How are answers marked on Mentiora?
                 </span>
-                <svg className="w-6 h-6 text-gray-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown 
+                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 1 ? 'rotate-180' : ''}`} 
+                />
               </button>
+              {expandedFAQ === 1 && (
+                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
+                  Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
+                </div>
+              )}
             </div>
 
             {/* FAQ Item 3 */}
             <div className="border-b border-gray-200">
-              <button className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 2 ? null : 2)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Can I cancel my subscription at any time?
                 </span>
-                <svg className="w-6 h-6 text-gray-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown 
+                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 2 ? 'rotate-180' : ''}`} 
+                />
               </button>
+              {expandedFAQ === 2 && (
+                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
+                  Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
+                </div>
+              )}
             </div>
 
             {/* FAQ Item 4 */}
             <div className="border-b border-gray-200">
-              <button className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 3 ? null : 3)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Which exam boards does Mentiora support?
                 </span>
-                <svg className="w-6 h-6 text-gray-900 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown 
+                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 3 ? 'rotate-180' : ''}`} 
+                />
               </button>
+              {expandedFAQ === 3 && (
+                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
+                  Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
+                </div>
+              )}
             </div>
           </div>
         </div>
