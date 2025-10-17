@@ -23,20 +23,12 @@ const SubjectTopics = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
-  const [targetGrade, setTargetGrade] = useState<string | null>(null);
+  const [targetGrade, setTargetGrade] = useState<number | null>(null);
   const [showGradeSetup, setShowGradeSetup] = useState(true);
   const [completedTasks, setCompletedTasks] = useState<boolean[]>([false, false, false]);
   const [chatMessage, setChatMessage] = useState("");
 
   const subject = curriculum.find(s => s.id === subjectId);
-  
-  // Check if this is an A-Level subject
-  const isALevelSubject = subjectId?.includes('alevel') || subjectId?.includes('a-level');
-  
-  // Define grade options based on subject type
-  const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
-  const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
-  const availableGrades = isALevelSubject ? ALEVEL_GRADES : GCSE_GRADES;
 
   useEffect(() => {
     const loadProgress = async () => {
@@ -91,7 +83,7 @@ const SubjectTopics = () => {
         // Check if target grade is already set
         const savedGrade = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
         if (savedGrade) {
-          setTargetGrade(savedGrade);
+          setTargetGrade(parseInt(savedGrade));
           setShowGradeSetup(false);
         }
       }
@@ -100,10 +92,10 @@ const SubjectTopics = () => {
     loadProgress();
   }, [user?.id, subjectId]);
 
-  const handleGradeSelect = (grade: string) => {
+  const handleGradeSelect = (grade: number) => {
     setTargetGrade(grade);
     if (user?.id) {
-      localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade);
+      localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade.toString());
     }
     setShowGradeSetup(false);
   };
@@ -184,8 +176,8 @@ const SubjectTopics = () => {
             </p>
           </CardHeader>
           <CardContent className="pb-12">
-            <div className={`grid gap-4 mb-8 ${isALevelSubject ? 'grid-cols-3' : 'grid-cols-3'}`}>
-              {availableGrades.map((grade) => (
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((grade) => (
                 <Button
                   key={grade}
                   onClick={() => handleGradeSelect(grade)}
