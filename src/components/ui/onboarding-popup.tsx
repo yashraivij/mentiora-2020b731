@@ -1,45 +1,10 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  BookOpen, 
-  TrendingUp, 
-  Users, 
-  Crown, 
-  Star, 
-  Sparkles, 
-  Zap,
-  ChevronRight,
-  Check,
-  Lock,
-  Trophy,
-  Brain,
-  Target,
-  Timer,
-  Award,
-  Rocket,
-  Gem,
-  Shield,
-  Heart,
-  Globe,
-  X,
-  Flame,
-  Clock,
-  NotebookPen,
-  User
-} from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { curriculum } from "@/data/curriculum";
-import { useSubscription } from "@/hooks/useSubscription";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import mentioraLogo from "@/assets/mentiora-logo.png";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -47,645 +12,807 @@ interface OnboardingPopupProps {
   onSubjectsAdded: () => void;
 }
 
-interface Subject {
-  id: string;
-  name: string;
-  examBoard: string;
-  topicCount: number;
+interface OnboardingData {
+  acquisitionSource: string;
+  acquisitionSourceOther: string | null;
+  yearGroup: string;
+  subjects: string[];
+  studyPreferences: string[];
+  parentUpdates: boolean;
+  parentEmail: string | null;
 }
 
-// Get topic counts from curriculum data
-const getTopicCount = (subjectId: string): number => {
-  const subject = curriculum.find(s => s.id === subjectId);
-  return subject?.topics.length || 0;
-};
-
-const GCSE_SUBJECTS: Subject[] = [
-  { id: 'physics-edexcel', name: 'Physics', examBoard: 'Edexcel', topicCount: getTopicCount('physics-edexcel') },
-  { id: 'chemistry-edexcel', name: 'Chemistry', examBoard: 'Edexcel', topicCount: getTopicCount('chemistry-edexcel') },
-  { id: 'english-language', name: 'English Language', examBoard: 'AQA', topicCount: getTopicCount('english-language') },
-  { id: 'religious-studies', name: 'Religious Studies', examBoard: 'AQA', topicCount: getTopicCount('religious-studies') },
-  { id: 'history', name: 'History', examBoard: 'AQA', topicCount: getTopicCount('history') },
-  { id: 'english-literature', name: 'English Literature', examBoard: 'AQA', topicCount: getTopicCount('english-literature') },
-  { id: 'physics', name: 'Physics', examBoard: 'AQA', topicCount: getTopicCount('physics') },
-  { id: 'geography', name: 'Geography', examBoard: 'AQA', topicCount: getTopicCount('geography') },
-  { id: 'geography-edexcel', name: 'Geography', examBoard: 'Edexcel', topicCount: getTopicCount('geography-edexcel') },
-  { id: 'maths', name: 'Mathematics', examBoard: 'AQA', topicCount: getTopicCount('maths') },
-  { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel', topicCount: getTopicCount('maths-edexcel') },
-  { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE', topicCount: getTopicCount('business-edexcel-igcse') },
-  { id: 'biology', name: 'Biology', examBoard: 'AQA', topicCount: getTopicCount('biology') },
-  { id: 'chemistry', name: 'Chemistry', examBoard: 'AQA', topicCount: getTopicCount('chemistry') },
-  { id: 'business', name: 'Business', examBoard: 'AQA', topicCount: getTopicCount('business') },
-  { id: 'combined-science-aqa', name: 'Combined Science', examBoard: 'AQA', topicCount: getTopicCount('combined-science-aqa') },
-  { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel', topicCount: getTopicCount('edexcel-english-language') },
-  { id: 'music-eduqas-gcse', name: 'Music', examBoard: 'Eduqas', topicCount: getTopicCount('music-eduqas-gcse') },
+const SUBJECTS = [
+  { id: 'biology', name: 'Biology', emoji: '🧬' },
+  { id: 'chemistry', name: 'Chemistry', emoji: '⚗️' },
+  { id: 'physics', name: 'Physics', emoji: '⚛️' },
+  { id: 'maths', name: 'Mathematics', emoji: '🔢' },
+  { id: 'english-language', name: 'English Language', emoji: '📖' },
+  { id: 'english-literature', name: 'English Literature', emoji: '📚' },
+  { id: 'computer-science', name: 'Computer Science', emoji: '💻' },
+  { id: 'business', name: 'Business', emoji: '💼' },
+  { id: 'geography', name: 'Geography', emoji: '🌍' },
+  { id: 'history', name: 'History', emoji: '📜' },
+  { id: 'religious-studies', name: 'Religious Studies', emoji: '🕌' },
+  { id: 'psychology', name: 'Psychology', emoji: '🧠' },
+  { id: 'music', name: 'Music', emoji: '🎵' },
+  { id: 'art', name: 'Art & Design', emoji: '🎨' },
+  { id: 'drama', name: 'Drama', emoji: '🎭' },
+  { id: 'pe', name: 'Physical Education', emoji: '⚽' },
 ];
 
-const ALEVEL_SUBJECTS: Subject[] = [
-  { id: 'psychology-aqa-alevel', name: 'Psychology', examBoard: 'AQA', topicCount: getTopicCount('psychology-aqa-alevel') },
+const ACQUISITION_SOURCES = [
+  { id: 'google', label: 'Google search', emoji: '🔍' },
+  { id: 'social', label: 'TikTok / Instagram / Social media', emoji: '📱' },
+  { id: 'friend', label: 'Friend or classmate', emoji: '👥' },
+  { id: 'parent', label: 'My parent told me', emoji: '👨‍👩‍👧' },
+  { id: 'school', label: 'School or teacher', emoji: '🏫' },
+  { id: 'youtube', label: 'YouTube video', emoji: '🎬' },
+  { id: 'blog', label: 'Blog post or article', emoji: '📰' },
+  { id: 'reddit', label: 'Reddit or online forum', emoji: '💬' },
+  { id: 'ad', label: 'Online ad', emoji: '🌐' },
+  { id: 'other', label: 'Other', emoji: '✍️' },
+];
+
+const YEAR_GROUPS = [
+  { id: 'year10', label: 'Year 10 (GCSE)', emoji: '📚' },
+  { id: 'year11', label: 'Year 11 (GCSE)', emoji: '📚' },
+  { id: 'year12', label: 'Year 12 (A-Level/AS)', emoji: '🎓' },
+  { id: 'year13', label: 'Year 13 (A-Level)', emoji: '🎓' },
+  { id: 'other', label: 'Other (IGCSE, IB, etc.)', emoji: '🌍' },
+];
+
+const STUDY_PREFERENCES = [
+  { 
+    id: 'practice', 
+    title: 'Practice questions', 
+    description: 'Learn by doing lots of exam-style questions',
+    emoji: '📝'
+  },
+  { 
+    id: 'reading', 
+    title: 'Reading explanations', 
+    description: 'Learn by reading detailed notes and explanations',
+    emoji: '📖'
+  },
+  { 
+    id: 'visual', 
+    title: 'Visual learning', 
+    description: 'Learn best with diagrams, videos, and animations',
+    emoji: '🎥'
+  },
+  { 
+    id: 'flashcards', 
+    title: 'Flashcards', 
+    description: 'Learn by memorizing key facts with flashcards',
+    emoji: '🎯'
+  },
+  { 
+    id: 'past-papers', 
+    title: 'Past papers', 
+    description: 'Learn by practicing full past exam papers',
+    emoji: '📊'
+  },
 ];
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
-  const [revisionStruggles, setRevisionStruggles] = useState<string[]>([]);
-  const [revisionMethods, setRevisionMethods] = useState<string[]>([]);
-  const [showParentProgress, setShowParentProgress] = useState(false);
-  const [parentEmail, setParentEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState<'gcse' | 'alevel'>('gcse');
+  const [currentStep, setCurrentStep] = useState(0);
+  const [onboardingData, setOnboardingData] = useState<OnboardingData>({
+    acquisitionSource: '',
+    acquisitionSourceOther: null,
+    yearGroup: '',
+    subjects: [],
+    studyPreferences: [],
+    parentUpdates: false,
+    parentEmail: null,
+  });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showCompletion, setShowCompletion] = useState(false);
+  const [completionStage, setCompletionStage] = useState(0);
   
-  const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleSubjectToggle = (subjectId: string) => {
-    setSelectedSubjects(prev => 
-      prev.includes(subjectId) 
-        ? prev.filter(id => id !== subjectId)
-        : [...prev, subjectId]
-    );
-  };
-
-  const handleStruggleToggle = (struggle: string) => {
-    setRevisionStruggles(prev => 
-      prev.includes(struggle) 
-        ? prev.filter(s => s !== struggle)
-        : [...prev, struggle]
-    );
-  };
-
-  const handleMethodToggle = (method: string) => {
-    setRevisionMethods(prev => 
-      prev.includes(method) 
-        ? prev.filter(m => m !== method)
-        : [...prev, method]
-    );
-  };
-
-  const addSubjectsToDatabase = async () => {
-    if (selectedSubjects.length === 0) return;
-
-    setIsLoading(true);
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      // Convert subjects to the format expected by the database
-      const subjectEntries = selectedSubjects.flatMap(subjectId => {
-        const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS];
-        const subject = allSubjects.find(s => s.id === subjectId);
-        
-        // Special handling for Geography - create separate entries for Paper 1 and Paper 2
-        if (subjectId === 'geography') {
-          return [
-            {
-              user_id: user.id,
-              subject_name: 'Geography Paper 1',
-              exam_board: subject?.examBoard || 'AQA',
-              predicted_grade: 'Not Set',
-              target_grade: null,
-              priority_level: 3
-            },
-            {
-              user_id: user.id,
-              subject_name: 'Geography Paper 2',
-              exam_board: subject?.examBoard || 'AQA',
-              predicted_grade: 'Not Set',
-              target_grade: null,
-              priority_level: 3
-            }
-          ];
-        }
-        
-        return {
-          user_id: user.id,
-          subject_name: subject?.name || subjectId,
-          exam_board: subject?.examBoard || 'AQA',
-          predicted_grade: 'Not Set',
-          target_grade: null,
-          priority_level: 3
-        };
-      });
-
-      const { error } = await supabase
-        .from('user_subjects')
-        .insert(subjectEntries);
-
-      if (error) {
-        console.error('Error adding subjects:', error);
-        toast({
-          title: "Error",
-          description: "Failed to add subjects. Please try again.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Success! 🎉",
-          description: `Added ${selectedSubjects.length} subject${selectedSubjects.length > 1 ? 's' : ''} to your list`,
-        });
-        // Don't call onSubjectsAdded() here - it should only be called when onboarding is complete
+  // Load from localStorage on mount
+  useEffect(() => {
+    if (isOpen) {
+      const saved = localStorage.getItem('onboardingData');
+      if (saved) {
+        setOnboardingData(JSON.parse(saved));
       }
-    } catch (error) {
-      console.error('Error adding subjects:', error);
-      toast({
-        title: "Error",
-        description: "Failed to add subjects. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
     }
-  };
+  }, [isOpen]);
+
+  // Save to localStorage on data change
+  useEffect(() => {
+    if (currentStep > 0 && currentStep < 6) {
+      localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
+    }
+  }, [onboardingData, currentStep]);
 
   const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleNext = async () => {
-    if (currentStep === 1 && selectedSubjects.length > 0) {
-      await addSubjectsToDatabase();
+  const canContinue = () => {
+    switch (currentStep) {
+      case 1:
+        return onboardingData.acquisitionSource !== '';
+      case 2:
+        return onboardingData.yearGroup !== '';
+      case 3:
+        return onboardingData.subjects.length > 0;
+      case 4:
+        return onboardingData.studyPreferences.length > 0;
+      case 5:
+        if (!onboardingData.parentUpdates) return true;
+        return onboardingData.parentEmail && isValidEmail(onboardingData.parentEmail);
+      default:
+        return true;
     }
-    
-    setCurrentStep(prev => prev + 1);
   };
 
-  const saveParentEmail = async () => {
+  const handleNext = () => {
+    if (currentStep === 5) {
+      handleComplete();
+    } else {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleSkip = () => {
+    if (currentStep === 1) return; // Can't skip step 1
+    handleNext();
+  };
+
+  const handleComplete = async () => {
+    setShowCompletion(true);
+    
+    // Stage 1: Loading (2 seconds)
+    setTimeout(() => setCompletionStage(1), 100);
+    
+    // Stage 2: Checklist items (0.3s apart)
+    setTimeout(() => setCompletionStage(2), 2000);
+    
+    // Stage 3: Show finish button
+    setTimeout(() => setCompletionStage(3), 3500);
+
+    // Save to backend
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (user) {
+        // Save onboarding data to user profile or separate table
+        await supabase
+          .from('profiles')
+          .update({
+            parent_email: onboardingData.parentEmail,
+          })
+          .eq('id', user.id);
 
-      const { error } = await supabase
-        .from('profiles')
-        .update({ parent_email: parentEmail })
-        .eq('id', user.id);
+        // Add subjects to user_subjects table
+        if (onboardingData.subjects.length > 0) {
+          const subjectEntries = onboardingData.subjects.map(subjectId => {
+            const subject = SUBJECTS.find(s => s.id === subjectId);
+            return {
+              user_id: user.id,
+              subject_name: subject?.name || subjectId,
+              exam_board: 'AQA',
+              predicted_grade: 'Not Set',
+              target_grade: null,
+              priority_level: 3
+            };
+          });
 
-      if (error) {
-        console.error('Error saving parent email:', error);
-        toast({
-          title: "Error",
-          description: "Failed to save parent email. Please try again.",
-          variant: "destructive",
-        });
+          await supabase
+            .from('user_subjects')
+            .insert(subjectEntries);
+        }
       }
     } catch (error) {
-      console.error('Error saving parent email:', error);
+      console.error('Error saving onboarding data:', error);
     }
+
+    // Clear localStorage
+    localStorage.removeItem('onboardingData');
   };
 
-  const handleUpgrade = () => {
-    navigate('/pricing');
-    onSubjectsAdded(); // Call when user upgrades
+  const handleFinish = () => {
+    onSubjectsAdded();
     onClose();
+    navigate('/dashboard');
   };
 
-  const stepVariants = {
-    hidden: { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -100 }
+  const getProgressPercentage = () => {
+    if (currentStep === 0) return 0;
+    return (currentStep / 5) * 100;
   };
+
+  const filteredSubjects = SUBJECTS.filter(subject =>
+    subject.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (!isOpen) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl sm:max-w-[95vw] max-h-[98vh] overflow-y-auto bg-white border border-gray-100 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
-        <DialogHeader className="pb-6 border-b border-gray-100">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#0BA5E9' }}>
-                <BookOpen className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ 
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backdropFilter: 'blur(4px)'
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 40, scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+          className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] max-h-[90vh] overflow-y-auto"
+          style={{
+            width: '90%',
+            maxWidth: '560px',
+            padding: currentStep === 0 ? '48px 40px' : '48px 40px',
+          }}
+        >
+          {/* Progress Bar (Steps 1-5 only) */}
+          {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
+            <div className="mb-10">
+              <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-3">
+                <motion.div
+                  className="h-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #00B4D8 0%, #0BA5E9 100%)',
+                  }}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${getProgressPercentage()}%` }}
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                />
               </div>
-              <div>
-                <DialogTitle className="text-2xl sm:text-3xl font-bold text-black">
-                  Welcome to Mentiora
-                </DialogTitle>
-                <DialogDescription className="text-base sm:text-lg text-gray-600">
-                  Let's personalize your learning experience
-                </DialogDescription>
-              </div>
+              <p className="text-[13px] text-[#6B7280] text-center font-medium">
+                Step {currentStep} of 5
+              </p>
             </div>
-            
-            {/* Progress indicator */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-600">Step {currentStep} of 4</span>
-              <div className="flex items-center gap-2">
-                {[1, 2, 3, 4].map((step) => (
+          )}
+
+          {/* Step 0: Welcome */}
+          {currentStep === 0 && (
+            <motion.div
+              key="step0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+              className="text-center"
+            >
+              <img 
+                src={mentioraLogo} 
+                alt="Mentiora Logo" 
+                className="h-14 mx-auto mb-9"
+              />
+              <h1 className="text-[40px] font-[800] text-black mb-4">
+                Welcome to Mentiora! 👋
+              </h1>
+              <p className="text-[18px] text-[#6B7280] mb-10">
+                Let's personalize your learning in under a minute
+              </p>
+              <button
+                onClick={() => setCurrentStep(1)}
+                className="w-full bg-[#00B4D8] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+              >
+                Let's go →
+              </button>
+              <p className="text-[14px] text-[#6B7280] mt-6">
+                Takes about 60 seconds • Your info stays private 🔒
+              </p>
+            </motion.div>
+          )}
+
+          {/* Step 1: How did you find us? */}
+          {currentStep === 1 && (
+            <motion.div
+              key="step1"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[28px] font-[700] text-black mb-3">
+                How did you find Mentiora?
+              </h2>
+              <p className="text-[16px] text-[#6B7280] mb-8">
+                This helps us reach more students like you
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                {ACQUISITION_SOURCES.map((source) => (
                   <div
-                    key={step}
-                    className={`h-2 w-8 sm:w-12 rounded-full transition-all duration-300`}
-                    style={{ backgroundColor: step <= currentStep ? '#0BA5E9' : '#e5e7eb' }}
+                    key={source.id}
+                    onClick={() => setOnboardingData({ 
+                      ...onboardingData, 
+                      acquisitionSource: source.id,
+                      acquisitionSourceOther: null 
+                    })}
+                    className={`flex items-center gap-4 p-4 rounded-[12px] border-2 cursor-pointer transition-all ${
+                      onboardingData.acquisitionSource === source.id
+                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF]'
+                    }`}
+                  >
+                    <span className="text-2xl">{source.emoji}</span>
+                    <span className="text-[16px] font-medium text-black">{source.label}</span>
+                  </div>
+                ))}
+                
+                {onboardingData.acquisitionSource === 'other' && (
+                  <motion.input
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    type="text"
+                    placeholder="Please tell us where..."
+                    value={onboardingData.acquisitionSourceOther || ''}
+                    onChange={(e) => setOnboardingData({ 
+                      ...onboardingData, 
+                      acquisitionSourceOther: e.target.value 
+                    })}
+                    className="w-full p-3 border border-[#D1D5DB] rounded-[8px] focus:outline-none focus:border-[#00B4D8]"
                   />
+                )}
+              </div>
+
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={handleSkip}
+                  className="text-[#6B7280] hover:underline"
+                >
+                  Skip
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={!canContinue()}
+                  className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
+                    canContinue()
+                      ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
+                      : 'bg-[#D1D5DB] cursor-not-allowed'
+                  }`}
+                >
+                  Continue
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 2: What year are you in? */}
+          {currentStep === 2 && (
+            <motion.div
+              key="step2"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[28px] font-[700] text-black mb-3">
+                What year are you in?
+              </h2>
+              <p className="text-[16px] text-[#6B7280] mb-8">
+                We'll show you the right content for your level
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                {YEAR_GROUPS.map((year) => (
+                  <div
+                    key={year.id}
+                    onClick={() => setOnboardingData({ ...onboardingData, yearGroup: year.id })}
+                    className={`flex items-center gap-4 p-4 rounded-[12px] border-2 cursor-pointer transition-all ${
+                      onboardingData.yearGroup === year.id
+                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF]'
+                    }`}
+                  >
+                    <span className="text-2xl">{year.emoji}</span>
+                    <span className="text-[16px] font-medium text-black">{year.label}</span>
+                  </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto pt-6">
-          <AnimatePresence mode="wait">
-            {/* Step 1: Subject Selection */}
-            {currentStep === 1 && (
-              <motion.div
-                key="step1"
-                variants={stepVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                <div className="text-center space-y-3 mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-black">
-                    What exams are you taking?
-                  </h3>
-                  <p className="text-base sm:text-lg text-gray-600">
-                    Select all the subjects you're studying - we'll add them to your dashboard
-                  </p>
-                </div>
-
-                <Tabs value={selectedLevel} onValueChange={(v) => setSelectedLevel(v as 'gcse' | 'alevel')} className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="gcse">GCSE Subjects</TabsTrigger>
-                    <TabsTrigger value="alevel">A-Level Subjects</TabsTrigger>
-                  </TabsList>
-                  
-                  <TabsContent value="gcse">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2">
-                      {GCSE_SUBJECTS.map((subject, index) => (
-                        <motion.div
-                          key={subject.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.03 }}
-                        >
-                          <Card 
-                            className={`cursor-pointer transition-all duration-200 ${
-                              selectedSubjects.includes(subject.id)
-                                ? 'shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                                : 'hover:shadow-md'
-                            }`}
-                            style={{
-                              backgroundColor: 'white',
-                              border: selectedSubjects.includes(subject.id) ? '2px solid #0BA5E9' : '1px solid #e5e7eb'
-                            }}
-                            onClick={() => handleSubjectToggle(subject.id)}
-                          >
-                            <CardContent className="p-4">
-                              <div className="flex items-center space-x-3">
-                                <Checkbox 
-                                  checked={selectedSubjects.includes(subject.id)}
-                                  onChange={() => {}}
-                                  className="pointer-events-none"
-                                />
-                                <div className="flex-1 min-w-0">
-                                  <p className="font-semibold text-sm truncate text-black">{subject.name}</p>
-                                  <p className="text-xs text-gray-500 mt-0.5">
-                                    {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} • {subject.examBoard}
-                                  </p>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="alevel">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2">
-                      {ALEVEL_SUBJECTS.map((subject, index) => (
-                        <motion.div
-                          key={subject.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.03 }}
-                        >
-                          <Card 
-                            className={`cursor-pointer transition-all duration-200 ${
-                              selectedSubjects.includes(subject.id)
-                                ? 'shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                                : 'hover:shadow-md'
-                            }`}
-                            style={{
-                              backgroundColor: 'white',
-                              border: selectedSubjects.includes(subject.id) ? '2px solid #0BA5E9' : '1px solid #e5e7eb'
-                            }}
-                            onClick={() => handleSubjectToggle(subject.id)}
-                          >
-                            <CardContent className="p-4">
-                              <div className="flex items-center space-x-3">
-                                <Checkbox 
-                                  checked={selectedSubjects.includes(subject.id)}
-                                  onChange={() => {}}
-                                  className="pointer-events-none"
-                                />
-                                <div className="flex-1 min-w-0">
-                                  <p className="font-semibold text-sm truncate text-black">{subject.name}</p>
-                                  <p className="text-xs text-gray-500 mt-0.5">
-                                    {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} • {subject.examBoard}
-                                  </p>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </TabsContent>
-                </Tabs>
-
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <div>
-                    <p className="font-semibold text-base text-gray-600">
-                      {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
-                    </p>
-                  </div>
-                  <Button 
-                    onClick={handleNext} 
-                    disabled={selectedSubjects.length === 0 || isLoading}
-                    className="text-white font-semibold px-8 py-2 rounded-lg disabled:opacity-50"
-                    style={{ backgroundColor: '#0BA5E9' }}
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={handleBack}
+                  className="text-[#6B7280] hover:underline"
+                >
+                  Back
+                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleSkip}
+                    className="text-[#6B7280] hover:underline"
                   >
-                    {isLoading ? (
-                      'Adding subjects...'
-                    ) : (
-                      <>
-                        Continue
-                        <ChevronRight className="h-4 w-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Step 2: Revision Struggles */}
-            {currentStep === 2 && (
-              <motion.div
-                key="step2"
-                variants={stepVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                <div className="text-center space-y-3 mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-black">
-                    What's your biggest struggle with revision?
-                  </h3>
-                  <p className="text-base sm:text-lg text-gray-600">
-                    We'll personalize your experience based on your challenges
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { text: 'Staying motivated', icon: Flame },
-                    { text: 'Knowing what to revise', icon: Brain },
-                    { text: 'Running out of time', icon: Clock },
-                    { text: 'Understanding content', icon: BookOpen }
-                  ].map((struggle, index) => {
-                    const StruggleIcon = struggle.icon;
-                    return (
-                      <motion.div
-                        key={struggle.text}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                      >
-                        <Card 
-                          className={`cursor-pointer transition-all duration-200 h-32 ${
-                            revisionStruggles.includes(struggle.text)
-                              ? 'shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                              : 'hover:shadow-md'
-                          }`}
-                          style={{
-                            backgroundColor: 'white',
-                            border: revisionStruggles.includes(struggle.text) ? '2px solid #0BA5E9' : '1px solid #e5e7eb'
-                          }}
-                          onClick={() => handleStruggleToggle(struggle.text)}
-                        >
-                          <CardContent className="p-4 text-center h-full flex flex-col justify-center items-center">
-                            <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: '#0BA5E9' }}>
-                              <StruggleIcon className="h-5 w-5 text-white" />
-                            </div>
-                            <p className="font-semibold text-sm text-black">{struggle.text}</p>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <Button variant="outline" onClick={() => setCurrentStep(1)} className="px-6 py-2 border-gray-200">
-                    Back
-                  </Button>
-                  <Button 
-                    onClick={handleNext} 
-                    disabled={revisionStruggles.length === 0}
-                    className="text-white font-semibold px-8 py-2 rounded-lg"
-                    style={{ backgroundColor: '#0BA5E9' }}
+                    Skip
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={!canContinue()}
+                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
+                      canContinue()
+                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
+                        : 'bg-[#D1D5DB] cursor-not-allowed'
+                    }`}
                   >
                     Continue
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
+                  </button>
                 </div>
-              </motion.div>
-            )}
+              </div>
+            </motion.div>
+          )}
 
-            {/* Step 3: Revision Methods */}
-            {currentStep === 3 && (
-              <motion.div
-                key="step3"
-                variants={stepVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
+          {/* Step 3: Select subjects */}
+          {currentStep === 3 && (
+            <motion.div
+              key="step3"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[28px] font-[700] text-black mb-3">
+                Which subjects are you studying?
+              </h2>
+              <p className="text-[16px] text-[#6B7280] mb-7">
+                Select all that apply. You can add more later.
+              </p>
+              
+              {/* Search box */}
+              <div className="relative mb-5">
+                <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-xl">
+                  🔍
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search subjects..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 border border-[#E5E7EB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                />
+              </div>
+
+              {/* Subjects grid */}
+              <div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5 max-h-[400px] overflow-y-auto pr-2"
+                style={{
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: '#00B4D8 #E5E7EB',
+                }}
               >
-                <div className="text-center space-y-3 mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-black">
-                    How do you usually revise?
-                  </h3>
-                  <p className="text-base sm:text-lg text-gray-600">
-                    We'll optimize your learning experience for your preferred methods
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { text: 'Flashcards', icon: Star },
-                    { text: 'Practice questions', icon: NotebookPen },
-                    { text: 'Reading notes', icon: BookOpen },
-                    { text: 'Watching videos', icon: TrendingUp }
-                  ].map((method, index) => {
-                    const MethodIcon = method.icon;
-                    return (
-                      <motion.div
-                        key={method.text}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                      >
-                        <Card 
-                          className={`cursor-pointer transition-all duration-200 h-32 ${
-                            revisionMethods.includes(method.text)
-                              ? 'shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                              : 'hover:shadow-md'
-                          }`}
-                          style={{
-                            backgroundColor: 'white',
-                            border: revisionMethods.includes(method.text) ? '2px solid #0BA5E9' : '1px solid #e5e7eb'
-                          }}
-                          onClick={() => handleMethodToggle(method.text)}
-                        >
-                          <CardContent className="p-4 text-center h-full flex flex-col justify-center items-center">
-                            <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: '#0BA5E9' }}>
-                              <MethodIcon className="h-5 w-5 text-white" />
-                            </div>
-                            <p className="font-semibold text-sm text-black">{method.text}</p>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <Button variant="outline" onClick={() => setCurrentStep(2)} className="px-6 py-2 border-gray-200">
-                    Back
-                  </Button>
-                  <Button 
-                    onClick={handleNext} 
-                    disabled={revisionMethods.length === 0}
-                    className="text-white font-semibold px-8 py-2 rounded-lg"
-                    style={{ backgroundColor: '#0BA5E9' }}
-                  >
-                    Continue
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Step 4: Parent Progress Sharing */}
-            {currentStep === 4 && (
-              <motion.div
-                key="step4"
-                variants={stepVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ duration: 0.3 }}
-                className="space-y-8"
-              >
-                <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-gray-800">
-                    Would you like us to share your progress? 👨‍👩‍👧‍👦
-                  </h3>
-                  <p className="text-lg text-gray-600">
-                    Keep your parent/guardian informed about your academic journey
-                  </p>
-                </div>
-
-                <div className="max-w-2xl mx-auto space-y-6">
-                  <Card className={`cursor-pointer transition-all duration-300 rounded-3xl border-2 ${
-                    showParentProgress 
-                      ? 'ring-4 ring-indigo-400 bg-gradient-to-br from-indigo-50 to-purple-50 shadow-xl transform scale-105' 
-                      : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
-                  }`}
-                  onClick={() => setShowParentProgress(!showParentProgress)}
-                  >
-                    <CardContent className="p-8 text-center">
-                      <div className="flex items-center justify-center mb-4">
-                        <div className="bg-gradient-to-r from-indigo-400 to-purple-400 p-4 rounded-3xl shadow-lg mr-4">
-                          <User className="h-10 w-10 text-white" />
-                        </div>
-                        <div className="text-left">
-                          <h4 className="text-2xl font-bold text-gray-800">Share with Parent/Guardian</h4>
-                          <p className="text-gray-600">Keep them updated on your progress</p>
-                        </div>
-                        <div className="ml-auto">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'bg-indigo-400 border-indigo-400' : 'border-gray-400'
-                          }`}>
-                            {showParentProgress && <Check className="h-4 w-4 text-white" />}
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        We'll send them weekly progress reports including your study streaks, 
-                        grade predictions, and achievements. You can change this anytime in settings.
-                      </p>
-                    </CardContent>
-                  </Card>
-                  
-                  {/* Parent Email Input - Show when opted in */}
-                  {showParentProgress && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-4"
-                    >
-                      <Card className="border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-md">
-                        <CardContent className="p-4">
-                          <div className="space-y-3">
-                            <Label 
-                              htmlFor="parentEmail" 
-                              className="text-base font-bold text-gray-800 flex items-center gap-2"
-                            >
-                              <User className="h-4 w-4 text-indigo-500" />
-                              Parent/Guardian Email Address *
-                            </Label>
-                            <Input
-                              id="parentEmail"
-                              type="email"
-                              value={parentEmail}
-                              onChange={(e) => setParentEmail(e.target.value)}
-                              placeholder="parent@example.com"
-                              className="text-base p-3 rounded-lg border-2 border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-                              required
-                            />
-                            <p className="text-xs text-gray-600 italic">
-                              Weekly progress reports with study statistics and achievements.
-                            </p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  )}
-                </div>
-
-                <div className="flex justify-between items-center pt-6 border-t">
-                  <Button variant="outline" onClick={() => setCurrentStep(3)} className="px-6 py-2">
-                    Back
-                  </Button>
-                  <Button 
+                {filteredSubjects.map((subject) => (
+                  <div
+                    key={subject.id}
                     onClick={() => {
-                      if (showParentProgress && parentEmail) {
-                        saveParentEmail();
-                      }
-                      onSubjectsAdded(); // Complete onboarding
-                      onClose();
+                      const newSubjects = onboardingData.subjects.includes(subject.id)
+                        ? onboardingData.subjects.filter(id => id !== subject.id)
+                        : [...onboardingData.subjects, subject.id];
+                      setOnboardingData({ ...onboardingData, subjects: newSubjects });
                     }}
-                    disabled={showParentProgress && (!parentEmail.trim() || !isValidEmail(parentEmail))}
-                    className="text-white font-semibold px-8 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ backgroundColor: '#0BA5E9' }}
+                    className={`flex items-center justify-between p-[14px] rounded-[10px] border-2 cursor-pointer transition-all ${
+                      onboardingData.subjects.includes(subject.id)
+                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                    }`}
                   >
-                    Complete Setup
-                    <Check className="h-4 w-4 ml-2" />
-                  </Button>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">{subject.emoji}</span>
+                      <span className="text-[15px] font-medium text-black">{subject.name}</span>
+                    </div>
+                    {onboardingData.subjects.includes(subject.id) && (
+                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Selection counter */}
+              <p className="text-[14px] text-[#00B4D8] font-semibold text-center mb-5">
+                {onboardingData.subjects.length} subject{onboardingData.subjects.length !== 1 ? 's' : ''} selected
+              </p>
+
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={handleBack}
+                  className="text-[#6B7280] hover:underline"
+                >
+                  Back
+                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleSkip}
+                    className="text-[#6B7280] hover:underline"
+                  >
+                    Skip
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={!canContinue()}
+                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
+                      canContinue()
+                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
+                        : 'bg-[#D1D5DB] cursor-not-allowed'
+                    }`}
+                  >
+                    Continue
+                  </button>
                 </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 4: Study preferences */}
+          {currentStep === 4 && (
+            <motion.div
+              key="step4"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[28px] font-[700] text-black mb-3">
+                How do you prefer to learn?
+              </h2>
+              <p className="text-[16px] text-[#6B7280] mb-8">
+                Select all that work for you. We'll adapt our approach.
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                {STUDY_PREFERENCES.map((pref) => (
+                  <div
+                    key={pref.id}
+                    onClick={() => {
+                      const newPrefs = onboardingData.studyPreferences.includes(pref.id)
+                        ? onboardingData.studyPreferences.filter(id => id !== pref.id)
+                        : [...onboardingData.studyPreferences, pref.id];
+                      setOnboardingData({ ...onboardingData, studyPreferences: newPrefs });
+                    }}
+                    className={`flex items-center justify-between p-5 rounded-[12px] border-2 cursor-pointer transition-all ${
+                      onboardingData.studyPreferences.includes(pref.id)
+                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                    }`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="text-[32px]">{pref.emoji}</span>
+                      <div>
+                        <h3 className="text-[18px] font-semibold text-black mb-1">{pref.title}</h3>
+                        <p className="text-[14px] text-[#6B7280] leading-relaxed">{pref.description}</p>
+                      </div>
+                    </div>
+                    {onboardingData.studyPreferences.includes(pref.id) && (
+                      <Check className="w-[22px] h-[22px] text-[#00B4D8] flex-shrink-0" />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={handleBack}
+                  className="text-[#6B7280] hover:underline"
+                >
+                  Back
+                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleSkip}
+                    className="text-[#6B7280] hover:underline"
+                  >
+                    Skip
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={!canContinue()}
+                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
+                      canContinue()
+                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
+                        : 'bg-[#D1D5DB] cursor-not-allowed'
+                    }`}
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 5: Parent updates */}
+          {currentStep === 5 && (
+            <motion.div
+              key="step5"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[28px] font-[700] text-black mb-3">
+                Keep your parents in the loop?
+              </h2>
+              <p className="text-[16px] text-[#6B7280] mb-8">
+                We can send weekly progress reports to a parent or guardian
+              </p>
+              
+              <div className="space-y-4 mb-6">
+                <div
+                  onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: true })}
+                  className={`p-6 rounded-[12px] border-2 cursor-pointer transition-all ${
+                    onboardingData.parentUpdates
+                      ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                      : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="text-[32px]">✉️</span>
+                    <div>
+                      <h3 className="text-[18px] font-semibold text-black mb-1">Yes, send weekly updates</h3>
+                      <p className="text-[14px] text-[#6B7280]">Your parent gets a progress email every Sunday</p>
+                    </div>
+                  </div>
+                </div>
+
+                {onboardingData.parentUpdates && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] p-5"
+                  >
+                    <label className="block text-[14px] font-semibold text-black mb-2">
+                      Parent/Guardian Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="parent@example.com"
+                      value={onboardingData.parentEmail || ''}
+                      onChange={(e) => setOnboardingData({ ...onboardingData, parentEmail: e.target.value })}
+                      className="w-full p-3 border border-[#D1D5DB] rounded-[8px] focus:outline-none focus:border-[#00B4D8]"
+                    />
+                    <p className="text-[13px] text-[#6B7280] mt-2">
+                      They'll get their first update next Sunday
+                    </p>
+                  </motion.div>
+                )}
+
+                <div
+                  onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: false, parentEmail: null })}
+                  className={`p-6 rounded-[12px] border-2 cursor-pointer transition-all ${
+                    !onboardingData.parentUpdates
+                      ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                      : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="text-[32px]">🔒</span>
+                    <div>
+                      <h3 className="text-[18px] font-semibold text-black mb-1">No thanks</h3>
+                      <p className="text-[14px] text-[#6B7280]">Keep my progress private</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#F9FAFB] p-4 rounded-[10px] flex items-start gap-3 mb-8">
+                <span className="text-xl">🔒</span>
+                <p className="text-[13px] text-[#6B7280]">
+                  We never share your data. Parents only see overall progress, not individual answers.
+                </p>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={handleBack}
+                  className="text-[#6B7280] hover:underline"
+                >
+                  Back
+                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleSkip}
+                    className="text-[#6B7280] hover:underline"
+                  >
+                    Skip
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={!canContinue()}
+                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
+                      canContinue()
+                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
+                        : 'bg-[#D1D5DB] cursor-not-allowed'
+                    }`}
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 6: Completion */}
+          {showCompletion && (
+            <motion.div
+              key="completion"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="text-center"
+            >
+              {/* Success icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: 0 }}
+                animate={{ scale: 1, rotate: 360 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="w-[100px] h-[100px] mx-auto mb-8 rounded-full flex items-center justify-center shadow-lg"
+                style={{
+                  background: 'linear-gradient(135deg, #00B4D8 0%, #0BA5E9 100%)',
+                }}
+              >
+                <Check className="w-14 h-14 text-white" strokeWidth={3} />
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </DialogContent>
-    </Dialog>
+
+              <h1 className="text-[36px] font-[800] text-black mb-4">
+                You're all set! 🎉
+              </h1>
+              <p className="text-[18px] text-[#6B7280] mb-10">
+                Creating your personalized learning plan...
+              </p>
+
+              {/* Loading spinner */}
+              {completionStage === 1 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="w-10 h-10 mx-auto border-4 border-[#E5E7EB] border-t-[#00B4D8] rounded-full animate-spin"
+                />
+              )}
+
+              {/* Checklist */}
+              {completionStage >= 2 && (
+                <div className="space-y-4 mb-10">
+                  {[
+                    { text: 'Analyzed your subjects', delay: 0 },
+                    { text: 'Identified your weak topics', delay: 0.3 },
+                    { text: 'Created your first week\'s plan', delay: 0.6 },
+                    { text: 'Generated personalized notes', delay: 0.9 },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: item.delay, duration: 0.3 }}
+                      className="flex items-center gap-3 justify-center"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      </div>
+                      <span className="text-[16px] text-black">{item.text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              {/* Finish button */}
+              {completionStage >= 3 && (
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={handleFinish}
+                  className="w-full max-w-[400px] bg-[#00B4D8] text-white font-semibold text-[18px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+                >
+                  Start learning →
+                </motion.button>
+              )}
+            </motion.div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
