@@ -828,9 +828,9 @@ const Index = () => {
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 className="flex flex-col items-center"
               >
-                <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-primary/60">
-                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="w-[2px] h-16 bg-gradient-to-b from-primary via-primary/70 to-primary/40 rounded-full" />
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary -mt-1">
+                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
             </div>
@@ -953,9 +953,9 @@ const Index = () => {
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 className="flex flex-col items-center"
               >
-                <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-primary/60">
-                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="w-[2px] h-16 bg-gradient-to-b from-primary via-primary/70 to-primary/40 rounded-full" />
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary -mt-1">
+                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
             </div>
@@ -1049,20 +1049,63 @@ const Index = () => {
                 >
                   <div className="p-6">
                     <div className="mb-4">
-                      <h3 className="text-sm font-bold text-foreground">Your Notes</h3>
-                      <p className="text-xs text-muted-foreground">Auto-generated</p>
+                      <h3 className="text-lg font-bold text-foreground">Your Notes</h3>
+                      <p className="text-sm text-muted-foreground">Review notes from your mistakes and learning progress</p>
                     </div>
                     
-                    <div className="bg-muted rounded-lg p-4 mb-4 min-h-[140px]">
-                      <div className="text-xs font-bold text-foreground mb-2">Chemical Bonding</div>
-                      <div className="text-xs text-muted-foreground leading-relaxed mb-3">
-                        Focus on metallic bonding - you scored 2/5 on recent questions. Remember: electrons form a "sea" around metal ions...
+                    <div className="space-y-4">
+                      <div>
+                        <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-red-500 text-white mb-3">
+                          Low Confidence
+                        </span>
+                        <h4 className="font-bold text-base text-foreground mb-2">
+                          Explain how clock speed, cache size, and number of cores affect CPU performance.
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                          <span className="text-primary">• Systems Architecture</span>
+                          <span>📅 13 Oct 2025</span>
+                          <span className="text-red-500">-6 marks lost</span>
+                        </div>
                       </div>
-                      <div className="text-xs text-muted-foreground opacity-70">Generated 5 mins ago</div>
-                    </div>
-                    
-                    <div className="text-xs text-muted-foreground flex items-center gap-2">
-                      <span className="font-semibold text-primary">14h saved this month</span>
+                      
+                      <div className="bg-red-50 dark:bg-red-950/20 rounded-lg p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                            <span className="text-red-500 text-xs">⚠</span>
+                          </div>
+                          <h5 className="text-sm font-bold text-foreground">What Went Wrong</h5>
+                        </div>
+                        <p className="text-xs text-muted-foreground ml-7">
+                          Insufficient understanding of key concepts
+                        </p>
+                      </div>
+                      
+                      <div className="bg-green-50 dark:bg-green-950/20 rounded-lg p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                            <span className="text-green-500 text-xs">✓</span>
+                          </div>
+                          <h5 className="text-sm font-bold text-foreground">The Solution</h5>
+                        </div>
+                        <p className="text-xs text-muted-foreground ml-7">
+                          Review the fundamental principles and practice similar questions
+                        </p>
+                      </div>
+                      
+                      <div className="bg-primary/5 rounded-lg p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-primary text-xs">💡</span>
+                          </div>
+                          <h5 className="text-sm font-bold text-foreground">Key Points to Remember</h5>
+                        </div>
+                        <div className="ml-7 space-y-2 text-xs text-muted-foreground">
+                          <div className="flex gap-2">
+                            <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-white font-bold text-xs flex-shrink-0">1</span>
+                            <p>Clock Speed refers to the number of cycles a CPU can execute per second</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -1077,32 +1120,68 @@ const Index = () => {
                   className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
-                    <div className="mb-4">
-                      <h3 className="text-sm font-bold text-foreground">Today's Plan</h3>
-                      <p className="text-xs text-muted-foreground">Auto-adapted</p>
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="text-lg font-bold text-foreground">Mon</h3>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: '#0BA5E9', color: 'white' }}>
+                          30 mins
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">— Kickstart Week</p>
                     </div>
                     
-                    <div className="space-y-3 mb-4">
-                      <div className="bg-muted rounded-lg p-3 border-l-4 border-primary">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-foreground">6:00pm - 6:30pm</span>
-                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-orange-500/10 text-orange-600 dark:text-orange-400">Peak</span>
+                    <div className="space-y-3">
+                      <div className="bg-card border border-border rounded-lg p-3">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="text-sm font-semibold text-foreground flex-1">
+                            Create 10 flashcards on Systems Architecture
+                          </h4>
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-red-500 text-white ml-2 flex-shrink-0">
+                            Priority
+                          </span>
                         </div>
-                        <div className="text-xs text-muted-foreground">Chemistry revision</div>
-                        <div className="text-xs text-muted-foreground opacity-70 mt-1">30 mins</div>
+                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
+                        <div className="flex gap-2">
+                          <button 
+                            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                            style={{ backgroundColor: '#0BA5E9' }}
+                          >
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 16 16">
+                              <path d="M3 2l10 6-10 6V2z"/>
+                            </svg>
+                            Start
+                          </button>
+                          <button className="flex-1 py-1.5 rounded font-semibold text-sm border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
+                            Done
+                          </button>
+                        </div>
                       </div>
                       
-                      <div className="bg-muted rounded-lg p-3 border-l-4 border-border">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-foreground">7:00pm - 7:20pm</span>
+                      <div className="bg-card border border-border rounded-lg p-3">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="text-sm font-semibold text-foreground flex-1">
+                            Practice questions on Systems Architecture
+                          </h4>
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-red-500 text-white ml-2 flex-shrink-0">
+                            Priority
+                          </span>
                         </div>
-                        <div className="text-xs text-muted-foreground">Maths practice</div>
-                        <div className="text-xs text-muted-foreground opacity-70 mt-1">20 mins</div>
+                        <p className="text-xs text-muted-foreground mb-3">15 mins</p>
+                        <div className="flex gap-2">
+                          <button 
+                            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                            style={{ backgroundColor: '#0BA5E9' }}
+                          >
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 16 16">
+                              <path d="M3 2l10 6-10 6V2z"/>
+                            </svg>
+                            Start
+                          </button>
+                          <button className="flex-1 py-1.5 rounded font-semibold text-sm border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
+                            Done
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="text-xs text-muted-foreground">
-                      Updates after every session
                     </div>
                   </div>
                 </motion.div>
