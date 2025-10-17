@@ -448,67 +448,91 @@ const Index = () => {
               }}
             >
               {/* First set of logos */}
-              <img 
-                src={cambridgeLogo} 
-                alt="University of Cambridge" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={oxfordLogo} 
-                alt="University of Oxford" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={lseLogo} 
-                alt="London School of Economics" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={exeterLogo} 
-                alt="University of Exeter" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={bathLogo} 
-                alt="University of Bath" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={bristolLogo} 
-                alt="University of Bristol" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={cambridgeLogo} 
+                  alt="University of Cambridge" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={oxfordLogo} 
+                  alt="University of Oxford" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={lseLogo} 
+                  alt="London School of Economics" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={exeterLogo} 
+                  alt="University of Exeter" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={bathLogo} 
+                  alt="University of Bath" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={bristolLogo} 
+                  alt="University of Bristol" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
               {/* Second set - duplicate for seamless loop */}
-              <img 
-                src={cambridgeLogo} 
-                alt="University of Cambridge" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={oxfordLogo} 
-                alt="University of Oxford" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={lseLogo} 
-                alt="London School of Economics" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={exeterLogo} 
-                alt="University of Exeter" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={bathLogo} 
-                alt="University of Bath" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
-              <img 
-                src={bristolLogo} 
-                alt="University of Bristol" 
-                className="h-14 w-40 object-contain flex-shrink-0"
-              />
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={cambridgeLogo} 
+                  alt="University of Cambridge" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={oxfordLogo} 
+                  alt="University of Oxford" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={lseLogo} 
+                  alt="London School of Economics" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={exeterLogo} 
+                  alt="University of Exeter" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={bathLogo} 
+                  alt="University of Bath" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
+              <div className="h-12 flex items-center justify-center flex-shrink-0" style={{ width: '160px' }}>
+                <img 
+                  src={bristolLogo} 
+                  alt="University of Bristol" 
+                  className="max-h-12 max-w-full object-contain"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
