@@ -160,7 +160,7 @@ const Pricing = () => {
           {/* 2026 Exams */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
             <div className="absolute top-6 right-6 bg-white text-[#00A8FF] px-4 py-1 rounded-full text-sm font-bold">
-              Save 33%
+              Save {examYear === "2026" ? "64%" : "47%"}
             </div>
             
             <h3 className="text-2xl font-bold mb-2">{examYear} Exams</h3>
@@ -173,7 +173,7 @@ const Pricing = () => {
                 <span className="text-5xl font-bold">£{examYear === "2026" ? "74.99" : "174.99"}</span>
                 <span className="text-white/90">once</span>
               </div>
-              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "99.99" : "249.99"}</span>
+              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "94.99" : "199.99"}</span>
             </div>
 
             <Button
@@ -184,7 +184,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-white/80 mt-4 text-center">
-              £{examYear === "2026" ? "74.99" : "174.99"} billed once. Offer ends 15/10/25.
+              £{examYear === "2026" ? "74.99" : "174.99"} billed once.
             </p>
           </Card>
         </div>
