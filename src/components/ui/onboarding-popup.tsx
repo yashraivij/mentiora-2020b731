@@ -327,105 +327,155 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   
                   <TabsContent value="gcse" className="animate-fade-in">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {GCSE_SUBJECTS.map((subject) => (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <Card 
-                            className={`cursor-pointer rounded-3xl transition-all duration-300 ${
-                              selectedSubjects.includes(subject.id)
-                                ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
-                                : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
-                            }`}
-                            onClick={() => handleSubjectToggle(subject.id)}
-                          >
-                            <CardContent className="p-5">
-                              <div className="flex items-center space-x-3">
-                                <div className="relative">
-                                  <Checkbox 
-                                    checked={selectedSubjects.includes(subject.id)}
-                                    onChange={() => {}}
-                                    className="pointer-events-none h-5 w-5"
-                                  />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <h3 className="text-base font-bold text-[#0F172A] dark:text-white mb-1">
-                                    {subject.name}
-                                  </h3>
-                                  <p className="text-sm text-[#64748B] dark:text-gray-400 flex items-center gap-1.5">
-                                    <BookOpen className="h-3.5 w-3.5" />
-                                    {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''}
-                                  </p>
-                                  <Badge 
-                                    className={`text-xs mt-2 ${
-                                      selectedSubjects.includes(subject.id)
-                                        ? 'bg-[#0EA5E9] text-white'
-                                        : 'bg-[#F1F5F9] dark:bg-gray-700 text-[#64748B] dark:text-gray-400'
-                                    }`}
-                                  >
-                                    {subject.examBoard}
-                                  </Badge>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      ))}
+                      {(() => {
+                        const subjectEmojis: { [key: string]: string } = {
+                          "Physics": "⚛️",
+                          "Chemistry": "🧪",
+                          "Biology": "🔬",
+                          "Combined Science": "🔬",
+                          "Mathematics": "🔢",
+                          "Statistics": "📊",
+                          "English Language": "✍️",
+                          "English Literature": "📖",
+                          "Geography": "🌍",
+                          "History": "🕰️",
+                          "Religious Studies": "⛪",
+                          "Business": "💼",
+                          "Computer Science": "💻",
+                          "Psychology": "🧠",
+                          "Music": "🎵",
+                        };
+
+                        // Group subjects by base name
+                        const groupedSubjects = new Map<string, Subject[]>();
+                        GCSE_SUBJECTS.forEach(subject => {
+                          let baseName = subject.name;
+                          if (!groupedSubjects.has(baseName)) {
+                            groupedSubjects.set(baseName, []);
+                          }
+                          groupedSubjects.get(baseName)!.push(subject);
+                        });
+
+                        return Array.from(groupedSubjects.entries()).map(([baseName, subjects]) => {
+                          const emoji = subjectEmojis[baseName] || "📚";
+                          const isSelected = subjects.some(s => selectedSubjects.includes(s.id));
+                          
+                          return (
+                            <motion.div
+                              key={baseName}
+                              whileHover={{ scale: 1.02, y: -2 }}
+                              whileTap={{ scale: 0.98 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Card 
+                                className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                                  isSelected
+                                    ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
+                                    : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
+                                }`}
+                                onClick={() => {
+                                  // Toggle all subjects in this group
+                                  const allSelected = subjects.every(s => selectedSubjects.includes(s.id));
+                                  if (allSelected) {
+                                    setSelectedSubjects(prev => prev.filter(id => !subjects.some(s => s.id === id)));
+                                  } else {
+                                    // Add the first subject from the group (default)
+                                    setSelectedSubjects(prev => [...prev.filter(id => !subjects.some(s => s.id === id)), subjects[0].id]);
+                                  }
+                                }}
+                              >
+                                <CardContent className="p-5">
+                                  <div className="flex items-center space-x-4">
+                                    <div className="text-4xl">{emoji}</div>
+                                    <div className="flex-1 min-w-0">
+                                      <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                                        {baseName}
+                                      </h3>
+                                      <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                        <BookOpen className="h-3.5 w-3.5" />
+                                        {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
+                                      </p>
+                                    </div>
+                                    <div className="flex-shrink-0">
+                                      <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
+                                    </div>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          );
+                        });
+                      })()}
                     </div>
                   </TabsContent>
 
                   <TabsContent value="alevel" className="animate-fade-in">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {ALEVEL_SUBJECTS.map((subject) => (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <Card 
-                            className={`cursor-pointer rounded-3xl transition-all duration-300 ${
-                              selectedSubjects.includes(subject.id)
-                                ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
-                                : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
-                            }`}
-                            onClick={() => handleSubjectToggle(subject.id)}
-                          >
-                            <CardContent className="p-5">
-                              <div className="flex items-center space-x-3">
-                                <div className="relative">
-                                  <Checkbox 
-                                    checked={selectedSubjects.includes(subject.id)}
-                                    onChange={() => {}}
-                                    className="pointer-events-none h-5 w-5"
-                                  />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <h3 className="text-base font-bold text-[#0F172A] dark:text-white mb-1">
-                                    {subject.name}
-                                  </h3>
-                                  <p className="text-sm text-[#64748B] dark:text-gray-400 flex items-center gap-1.5">
-                                    <BookOpen className="h-3.5 w-3.5" />
-                                    {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''}
-                                  </p>
-                                  <Badge 
-                                    className={`text-xs mt-2 ${
-                                      selectedSubjects.includes(subject.id)
-                                        ? 'bg-[#0EA5E9] text-white'
-                                        : 'bg-[#F1F5F9] dark:bg-gray-700 text-[#64748B] dark:text-gray-400'
-                                    }`}
-                                  >
-                                    {subject.examBoard}
-                                  </Badge>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      ))}
+                      {(() => {
+                        const subjectEmojis: { [key: string]: string } = {
+                          "Psychology": "🧠",
+                        };
+
+                        // Group subjects by base name
+                        const groupedSubjects = new Map<string, Subject[]>();
+                        ALEVEL_SUBJECTS.forEach(subject => {
+                          let baseName = subject.name;
+                          if (!groupedSubjects.has(baseName)) {
+                            groupedSubjects.set(baseName, []);
+                          }
+                          groupedSubjects.get(baseName)!.push(subject);
+                        });
+
+                        return Array.from(groupedSubjects.entries()).map(([baseName, subjects]) => {
+                          const emoji = subjectEmojis[baseName] || "📚";
+                          const isSelected = subjects.some(s => selectedSubjects.includes(s.id));
+                          
+                          return (
+                            <motion.div
+                              key={baseName}
+                              whileHover={{ scale: 1.02, y: -2 }}
+                              whileTap={{ scale: 0.98 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Card 
+                                className={`cursor-pointer rounded-3xl transition-all duration-300 ${
+                                  isSelected
+                                    ? 'border-2 border-[#0EA5E9] bg-[#0EA5E9]/5 dark:bg-[#0EA5E9]/10 shadow-[0_8px_24px_rgba(14,165,233,0.15)]'
+                                    : 'border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900'
+                                }`}
+                                onClick={() => {
+                                  // Toggle all subjects in this group
+                                  const allSelected = subjects.every(s => selectedSubjects.includes(s.id));
+                                  if (allSelected) {
+                                    setSelectedSubjects(prev => prev.filter(id => !subjects.some(s => s.id === id)));
+                                  } else {
+                                    // Add the first subject from the group (default)
+                                    setSelectedSubjects(prev => [...prev.filter(id => !subjects.some(s => s.id === id)), subjects[0].id]);
+                                  }
+                                }}
+                              >
+                                <CardContent className="p-5">
+                                  <div className="flex items-center space-x-4">
+                                    <div className="text-4xl">{emoji}</div>
+                                    <div className="flex-1 min-w-0">
+                                      <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mobile-text-wrap tracking-tight">
+                                        {baseName}
+                                      </h3>
+                                      <p className="text-sm text-[#64748B] dark:text-gray-400 mobile-text-wrap flex items-center gap-1.5 mt-0.5">
+                                        <BookOpen className="h-3.5 w-3.5" />
+                                        {subjects.length > 1 ? `${subjects.length} exam boards available` : `1 exam board available`}
+                                      </p>
+                                    </div>
+                                    <div className="flex-shrink-0">
+                                      <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-300" />
+                                    </div>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          );
+                        });
+                      })()}
                     </div>
                   </TabsContent>
                 </Tabs>
