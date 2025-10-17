@@ -737,14 +737,7 @@ const Index = () => {
 
 
       {/* HOW PERSONALIZATION WORKS - DASHBOARD SHOWCASE */}
-      <section 
-        className="relative py-32 px-6 overflow-hidden"
-        style={{
-          backgroundColor: '#f8f9fa',
-          backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)',
-          backgroundSize: '20px 20px'
-        }}
-      >
+      <section className="relative py-32 px-6 overflow-hidden bg-white">
         <div className="max-w-[1400px] mx-auto">
           {/* Section Header */}
           <motion.div
@@ -752,7 +745,7 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: '#0BA5E9' }}>
               HOW PERSONALIZATION WORKS
@@ -776,11 +769,12 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-20"
+              className="mb-10"
             >
               <div className="text-center mb-8">
-                <div className="inline-block px-6 py-2 rounded-full text-white font-bold text-sm mb-4" style={{ backgroundColor: '#0BA5E9' }}>
-                  STEP 1: YOU STUDY
+                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
+                  <span className="text-2xl">1</span>
+                  <span>You Study</span>
                 </div>
                 <p className="text-lg text-gray-600">Answer questions and get instant feedback</p>
               </div>
@@ -827,14 +821,14 @@ const Index = () => {
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center mb-16">
+            <div className="flex justify-center mb-6">
               <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-1 h-12 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
-                  <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[16px]" style={{ borderTopColor: '#0BA5E9' }} />
+                  <div className="w-1 h-8 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
+                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px]" style={{ borderTopColor: '#0BA5E9' }} />
                 </div>
               </motion.div>
             </div>
@@ -845,80 +839,82 @@ const Index = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-20"
+              className="mb-10"
             >
               <div className="text-center mb-8">
-                <div className="inline-block px-6 py-2 rounded-full text-white font-bold text-sm mb-4" style={{ backgroundColor: '#0BA5E9' }}>
-                  STEP 2: AI ANALYZES
+                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
+                  <span className="text-2xl">2</span>
+                  <span>AI Analyzes</span>
                 </div>
                 <p className="text-lg text-gray-600">We track 50+ data points from every answer</p>
               </div>
               
-              {/* Analysis Dashboard */}
+              {/* Analysis Dashboard - Real Dashboard Style */}
               <div className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100">
                 <div className="grid md:grid-cols-3 gap-6">
-                  {/* Metric 1 */}
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-5 border border-cyan-100"
-                  >
-                    <div className="flex items-center gap-2 mb-3">
-                      <Clock className="w-5 h-5" style={{ color: '#0BA5E9' }} />
-                      <div className="text-xs font-bold text-gray-600 uppercase">Speed</div>
+                  {/* Time Saved Stat */}
+                  <div className="bg-gray-100 rounded-xl p-5">
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Time Saved</div>
+                    <div className="text-4xl font-bold text-black mb-2">14.7h</div>
+                    <div className="text-xs text-gray-600">This month</div>
+                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                      <motion.div 
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: '#0BA5E9' }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '85%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                      />
                     </div>
-                    <div className="text-3xl font-black text-black mb-1">2.3m</div>
-                    <div className="text-xs text-gray-600">Average time per question</div>
-                  </motion.div>
+                  </div>
                   
-                  {/* Metric 2 */}
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100"
-                  >
-                    <div className="flex items-center gap-2 mb-3">
-                      <Target className="w-5 h-5 text-green-600" />
-                      <div className="text-xs font-bold text-gray-600 uppercase">Accuracy</div>
+                  {/* Accuracy Stat */}
+                  <div className="bg-gray-100 rounded-xl p-5">
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accuracy</div>
+                    <div className="text-4xl font-bold text-black mb-2">78%</div>
+                    <div className="text-xs text-gray-600">Current performance</div>
+                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                      <motion.div 
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: '#10B981' }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '78%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.7 }}
+                      />
                     </div>
-                    <div className="text-3xl font-black text-black mb-1">78%</div>
-                    <div className="text-xs text-gray-600">Topic performance rate</div>
-                  </motion.div>
+                  </div>
                   
-                  {/* Metric 3 */}
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100"
-                  >
-                    <div className="flex items-center gap-2 mb-3">
-                      <Brain className="w-5 h-5 text-purple-600" />
-                      <div className="text-xs font-bold text-gray-600 uppercase">Patterns</div>
+                  {/* Questions Answered */}
+                  <div className="bg-gray-100 rounded-xl p-5">
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Progress</div>
+                    <div className="text-4xl font-bold text-black mb-2">147</div>
+                    <div className="text-xs text-gray-600">Questions answered</div>
+                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
+                      <motion.div 
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: '#A855F7' }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '92%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.9 }}
+                      />
                     </div>
-                    <div className="text-3xl font-black text-black mb-1">12</div>
-                    <div className="text-xs text-gray-600">Weak topics identified</div>
-                  </motion.div>
+                  </div>
                 </div>
-                
-                {/* Processing Indicator */}
-                <motion.div
-                  className="mt-6 flex items-center justify-center gap-3 text-sm font-semibold"
-                  style={{ color: '#0BA5E9' }}
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Sparkles className="w-5 h-5" />
-                  <span>AI processing your performance data...</span>
-                </motion.div>
               </div>
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center mb-16">
+            <div className="flex justify-center mb-6">
               <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-1 h-12 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
-                  <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[16px]" style={{ borderTopColor: '#0BA5E9' }} />
+                  <div className="w-1 h-8 rounded-full" style={{ backgroundColor: '#0BA5E9' }} />
+                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px]" style={{ borderTopColor: '#0BA5E9' }} />
                 </div>
               </motion.div>
             </div>
@@ -929,184 +925,153 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-16"
             >
               <div className="text-center mb-12">
-                <div className="inline-block px-6 py-2 rounded-full text-white font-bold text-sm mb-4" style={{ backgroundColor: '#0BA5E9' }}>
-                  STEP 3: YOU GET PERSONALIZED RESULTS
+                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-white font-bold text-lg mb-4" style={{ backgroundColor: '#0BA5E9', boxShadow: '0 4px 12px rgba(11, 165, 233, 0.3)' }}>
+                  <span className="text-2xl">3</span>
+                  <span>You Get Personalized Results</span>
                 </div>
                 <p className="text-lg text-gray-600">Three features that adapt to you in real-time</p>
               </div>
               
-              {/* Three Floating Dashboard Cards */}
+              {/* Three Dashboard Cards - Exact Platform Style */}
               <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
-                {/* Card 1: Predicted Grades */}
+                {/* Card 1: Predicted Grades - Exact Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 >
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="p-2 rounded-lg" style={{ backgroundColor: '#E0F2FE' }}>
-                        <Target className="h-5 w-5" style={{ color: '#0BA5E9' }} />
-                      </div>
-                      <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Predicted Grade</h3>
+                      <span className="text-xl">🧪</span>
+                      <h3 className="text-sm font-bold text-black">Chemistry</h3>
                     </div>
                     
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 mb-3">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-gray-500 uppercase">Chemistry</span>
-                        <span className="text-2xl font-bold text-black">7</span>
+                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-3 mb-3">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                          <span className="text-2xl font-bold text-black">7</span>
+                        </div>
+                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                          <motion.div 
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: '#0BA5E9' }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '78%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.8 }}
+                          />
+                        </div>
                       </div>
-                      <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
-                        <motion.div 
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: '#0BA5E9' }}
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '78%' }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.8 }}
-                        />
+                      
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                          <span className="text-2xl font-bold text-black">9</span>
+                        </div>
+                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                          <div className="h-full bg-green-500 rounded-full" style={{ width: '100%' }} />
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-green-600" />
-                      <span className="text-gray-600">92% confidence • Updates daily</span>
-                    </div>
+                    <button 
+                      className="w-full py-2 rounded-lg font-bold text-sm text-white"
+                      style={{ backgroundColor: '#0BA5E9' }}
+                    >
+                      Topics
+                    </button>
                   </div>
                 </motion.div>
 
-                {/* Card 2: Auto-Notes */}
+                {/* Card 2: Auto-Notes - Exact Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 >
                   <div className="p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="p-2 rounded-lg bg-purple-100">
-                        <BookOpen className="h-5 w-5 text-purple-600" />
-                      </div>
-                      <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Auto-Notes</h3>
+                    <div className="mb-4">
+                      <h3 className="text-sm font-bold text-black">Your Notes</h3>
+                      <p className="text-xs text-gray-500">Auto-generated</p>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 mb-3">
-                      <div className="text-xs font-bold text-black mb-2">Bonding Structure</div>
+                    <div className="bg-gray-50 rounded-lg p-4 mb-4 min-h-[140px]">
+                      <div className="text-xs font-bold text-black mb-2">Chemical Bonding</div>
                       <div className="text-xs text-gray-600 leading-relaxed mb-3">
-                        Focus on metallic bonding - you scored 2/5 on recent questions...
+                        Focus on metallic bonding - you scored 2/5 on recent questions. Remember: electrons form a "sea" around metal ions...
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-3 h-3 text-purple-600" />
-                        <span className="text-xs font-semibold text-purple-600">Generated 5 mins ago</span>
-                      </div>
+                      <div className="text-xs text-gray-400">Generated 5 mins ago</div>
                     </div>
                     
-                    <div className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-green-600" />
-                      <span className="text-gray-600">14h saved this month</span>
+                    <div className="text-xs text-gray-600 flex items-center gap-2">
+                      <span className="font-semibold" style={{ color: '#A855F7' }}>14h saved this month</span>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Card 3: Smart Planner */}
+                {/* Card 3: Smart Planner - Exact Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
                 >
                   <div className="p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="p-2 rounded-lg bg-orange-100">
-                        <Calendar className="h-5 w-5 text-orange-600" />
-                      </div>
-                      <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Smart Planner</h3>
+                    <div className="mb-4">
+                      <h3 className="text-sm font-bold text-black">Today's Plan</h3>
+                      <p className="text-xs text-gray-500">Auto-adapted</p>
                     </div>
                     
-                    <div className="space-y-2 mb-3">
-                      <div className="bg-gray-50 rounded-lg p-3" style={{ borderLeft: '3px solid #0BA5E9' }}>
+                    <div className="space-y-3 mb-4">
+                      <div className="bg-gray-50 rounded-lg p-3" style={{ borderLeft: '4px solid #0BA5E9' }}>
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-black">Today 6:00pm</span>
-                          <span className="px-2 py-0.5 rounded text-xs font-semibold" style={{ backgroundColor: '#FED7AA', color: '#EA580C' }}>Peak</span>
+                          <span className="text-xs font-bold text-black">6:00pm - 6:30pm</span>
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-orange-100 text-orange-600">Peak</span>
                         </div>
                         <div className="text-xs text-gray-600">Chemistry revision</div>
+                        <div className="text-xs text-gray-400 mt-1">30 mins</div>
                       </div>
                       
-                      <div className="bg-gray-50 rounded-lg p-3 border-l-3 border-gray-300">
+                      <div className="bg-gray-50 rounded-lg p-3 border-l-4 border-gray-300">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-black">Tomorrow 5:30pm</span>
+                          <span className="text-xs font-bold text-black">7:00pm - 7:20pm</span>
                         </div>
                         <div className="text-xs text-gray-600">Maths practice</div>
+                        <div className="text-xs text-gray-400 mt-1">20 mins</div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-green-600" />
-                      <span className="text-gray-600">Auto-adapts every session</span>
+                    <div className="text-xs text-gray-600">
+                      Updates after every session
                     </div>
                   </div>
                 </motion.div>
               </div>
             </motion.div>
-
-            {/* Cycle Loop Indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="flex justify-center"
-            >
-              <div className="bg-white rounded-2xl shadow-lg px-8 py-4 border-2" style={{ borderColor: '#0BA5E9' }}>
-                <div className="flex items-center gap-3">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  >
-                    <Circle className="w-6 h-6" style={{ color: '#0BA5E9' }} />
-                  </motion.div>
-                  <div>
-                    <div className="text-sm font-bold text-black">Continuous Improvement Cycle</div>
-                    <div className="text-xs text-gray-600">Every answer makes your experience more personalized</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
-          {/* Bottom Stats */}
+          {/* Section Ending */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 1 }}
-            className="mt-20 max-w-[900px] mx-auto"
+            transition={{ delay: 0.9 }}
+            className="mt-20 text-center max-w-[700px] mx-auto"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {[
-                { number: '92%', label: 'Prediction accuracy' },
-                { number: '14.7h', label: 'Time saved monthly' },
-                { number: '+1.8', label: 'Grade improvement' },
-                { number: '50K+', label: 'Active students' }
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-4xl font-black mb-2" style={{ color: '#0BA5E9' }}>
-                    {stat.number}
-                  </div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              This continuous cycle means <span className="font-bold text-black">Mentiora gets smarter about you with every answer</span>, creating a truly personalized learning experience that improves your grades.
+            </p>
           </motion.div>
         </div>
       </section>
