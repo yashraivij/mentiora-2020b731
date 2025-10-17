@@ -24,6 +24,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
@@ -42,6 +43,7 @@ const Index = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -97,6 +99,13 @@ const Index = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Button 
+              onClick={() => setShowOnboarding(true)} 
+              variant="outline" 
+              className="text-gray-600 border-gray-200 hover:bg-gray-50"
+            >
+              Test Onboarding
+            </Button>
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#0BA5E9' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
@@ -1594,6 +1603,14 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <OnboardingPopup 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
+        onSubjectsAdded={() => {
+          setShowOnboarding(false);
+        }} 
+      />
     </div>
   );
 };
