@@ -22,23 +22,31 @@ interface OnboardingData {
   parentEmail: string | null;
 }
 
-const SUBJECTS = [
-  { id: 'biology', name: 'Biology', emoji: '🧬' },
-  { id: 'chemistry', name: 'Chemistry', emoji: '⚗️' },
-  { id: 'physics', name: 'Physics', emoji: '⚛️' },
-  { id: 'maths', name: 'Mathematics', emoji: '🔢' },
-  { id: 'english-language', name: 'English Language', emoji: '📖' },
-  { id: 'english-literature', name: 'English Literature', emoji: '📚' },
-  { id: 'computer-science', name: 'Computer Science', emoji: '💻' },
-  { id: 'business', name: 'Business', emoji: '💼' },
-  { id: 'geography', name: 'Geography', emoji: '🌍' },
-  { id: 'history', name: 'History', emoji: '📜' },
-  { id: 'religious-studies', name: 'Religious Studies', emoji: '🕌' },
-  { id: 'psychology', name: 'Psychology', emoji: '🧠' },
-  { id: 'music', name: 'Music', emoji: '🎵' },
-  { id: 'art', name: 'Art & Design', emoji: '🎨' },
-  { id: 'drama', name: 'Drama', emoji: '🎭' },
-  { id: 'pe', name: 'Physical Education', emoji: '⚽' },
+// Subjects organized by level
+const GCSE_SUBJECTS = [
+  { id: 'biology-gcse', name: 'Biology', emoji: '🧬' },
+  { id: 'chemistry-gcse', name: 'Chemistry', emoji: '⚗️' },
+  { id: 'physics-gcse', name: 'Physics', emoji: '⚛️' },
+  { id: 'mathematics-gcse', name: 'Mathematics', emoji: '🔢' },
+  { id: 'english-gcse', name: 'English Literature', emoji: '📖' },
+  { id: 'computer-science-gcse', name: 'Computer Science', emoji: '💻' },
+  { id: 'history-gcse', name: 'History', emoji: '📜' },
+  { id: 'geography-gcse', name: 'Geography', emoji: '🌍' },
+  { id: 'business-gcse', name: 'Business', emoji: '💼' },
+  { id: 'statistics-gcse', name: 'Statistics', emoji: '📊' },
+];
+
+const ALEVEL_SUBJECTS = [
+  { id: 'biology-alevel', name: 'Biology', emoji: '🧬' },
+  { id: 'chemistry-alevel', name: 'Chemistry', emoji: '⚗️' },
+  { id: 'physics-alevel', name: 'Physics', emoji: '⚛️' },
+  { id: 'mathematics-alevel', name: 'Mathematics', emoji: '🔢' },
+  { id: 'english-alevel', name: 'English Literature', emoji: '📖' },
+  { id: 'psychology-alevel', name: 'Psychology', emoji: '🧠' },
+  { id: 'history-alevel', name: 'History', emoji: '📜' },
+  { id: 'geography-alevel', name: 'Geography', emoji: '🌍' },
+  { id: 'business-alevel', name: 'Business', emoji: '💼' },
+  { id: 'statistics-alevel', name: 'Statistics', emoji: '📊' },
 ];
 
 const ACQUISITION_SOURCES = [
@@ -97,6 +105,7 @@ const STUDY_PREFERENCES = [
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     acquisitionSource: '',
     acquisitionSourceOther: null,
@@ -113,7 +122,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Load from localStorage on mount
   useEffect(() => {
     if (isOpen) {
       const saved = localStorage.getItem('onboardingData');
@@ -123,7 +131,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, [isOpen]);
 
-  // Save to localStorage on data change
   useEffect(() => {
     if (currentStep > 0 && currentStep < 6) {
       localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
@@ -165,38 +172,29 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const handleSkip = () => {
-    if (currentStep === 1) return; // Can't skip step 1
+    if (currentStep === 1) return;
     handleNext();
   };
 
   const handleComplete = async () => {
     setShowCompletion(true);
     
-    // Stage 1: Loading (2 seconds)
     setTimeout(() => setCompletionStage(1), 100);
-    
-    // Stage 2: Checklist items (0.3s apart)
     setTimeout(() => setCompletionStage(2), 2000);
-    
-    // Stage 3: Show finish button
     setTimeout(() => setCompletionStage(3), 3500);
 
-    // Save to backend
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // Save onboarding data to user profile or separate table
         await supabase
           .from('profiles')
-          .update({
-            parent_email: onboardingData.parentEmail,
-          })
+          .update({ parent_email: onboardingData.parentEmail })
           .eq('id', user.id);
 
-        // Add subjects to user_subjects table
         if (onboardingData.subjects.length > 0) {
+          const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectId => {
-            const subject = SUBJECTS.find(s => s.id === subjectId);
+            const subject = allSubjects.find(s => s.id === subjectId);
             return {
               user_id: user.id,
               subject_name: subject?.name || subjectId,
@@ -207,16 +205,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             };
           });
 
-          await supabase
-            .from('user_subjects')
-            .insert(subjectEntries);
+          await supabase.from('user_subjects').insert(subjectEntries);
         }
       }
     } catch (error) {
       console.error('Error saving onboarding data:', error);
     }
 
-    // Clear localStorage
     localStorage.removeItem('onboardingData');
   };
 
@@ -231,7 +226,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     return (currentStep / 5) * 100;
   };
 
-  const filteredSubjects = SUBJECTS.filter(subject =>
+  const currentSubjects = subjectLevel === 'gcse' ? GCSE_SUBJECTS : ALEVEL_SUBJECTS;
+  const filteredSubjects = currentSubjects.filter(subject =>
     subject.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -245,574 +241,404 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         backdropFilter: 'blur(4px)'
       }}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 40, scale: 0.95 }}
-          transition={{ duration: 0.3 }}
-          className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] max-h-[90vh] overflow-y-auto"
-          style={{
-            width: '90%',
-            maxWidth: '560px',
-            padding: currentStep === 0 ? '48px 40px' : '48px 40px',
-          }}
-        >
-          {/* Progress Bar (Steps 1-5 only) */}
-          {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
-            <div className="mb-10">
-              <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-3">
-                <motion.div
-                  className="h-full"
-                  style={{
-                    background: 'linear-gradient(90deg, #00B4D8 0%, #0BA5E9 100%)',
-                  }}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${getProgressPercentage()}%` }}
-                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                />
-              </div>
-              <p className="text-[13px] text-[#6B7280] text-center font-medium">
-                Step {currentStep} of 5
-              </p>
-            </div>
-          )}
-
-          {/* Step 0: Welcome */}
-          {currentStep === 0 && (
-            <motion.div
-              key="step0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="text-center"
-            >
-              <img 
-                src={mentioraLogo} 
-                alt="Mentiora Logo" 
-                className="h-14 mx-auto mb-9"
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 40, scale: 0.95 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-12 max-h-[85vh] overflow-y-auto"
+      >
+        {/* Progress Bar */}
+        {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
+          <div className="mb-10">
+            <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-3">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9]"
+                initial={{ width: 0 }}
+                animate={{ width: `${getProgressPercentage()}%` }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               />
-              <h1 className="text-[40px] font-[800] text-black mb-4">
-                Welcome to Mentiora! 👋
-              </h1>
-              <p className="text-[18px] text-[#6B7280] mb-10">
-                Let's personalize your learning in under a minute
-              </p>
-              <button
-                onClick={() => setCurrentStep(1)}
-                className="w-full bg-[#00B4D8] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
-              >
-                Let's go →
-              </button>
-              <p className="text-[14px] text-[#6B7280] mt-6">
-                Takes about 60 seconds • Your info stays private 🔒
-              </p>
-            </motion.div>
-          )}
+            </div>
+            <p className="text-[13px] text-[#6B7280] text-center font-medium">
+              Step {currentStep} of 5
+            </p>
+          </div>
+        )}
 
-          {/* Step 1: How did you find us? */}
-          {currentStep === 1 && (
-            <motion.div
-              key="step1"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-[28px] font-[700] text-black mb-3">
-                How did you find Mentiora?
-              </h2>
-              <p className="text-[16px] text-[#6B7280] mb-8">
-                This helps us reach more students like you
-              </p>
-              
-              <div className="space-y-3 mb-8">
-                {ACQUISITION_SOURCES.map((source) => (
-                  <div
-                    key={source.id}
-                    onClick={() => setOnboardingData({ 
-                      ...onboardingData, 
-                      acquisitionSource: source.id,
-                      acquisitionSourceOther: null 
-                    })}
-                    className={`flex items-center gap-4 p-4 rounded-[12px] border-2 cursor-pointer transition-all ${
-                      onboardingData.acquisitionSource === source.id
-                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                        : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF]'
-                    }`}
-                  >
-                    <span className="text-2xl">{source.emoji}</span>
-                    <span className="text-[16px] font-medium text-black">{source.label}</span>
-                  </div>
-                ))}
-                
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {/* Step 0: Welcome */}
+            {currentStep === 0 && (
+              <div className="text-center">
+                <img src={mentioraLogo} alt="Mentiora Logo" className="h-14 mx-auto mb-9" />
+                <h1 className="text-[40px] font-[800] text-black mb-4">Welcome to Mentiora! 👋</h1>
+                <p className="text-[18px] text-[#6B7280] mb-10">Let's personalize your learning in under a minute</p>
+                <button
+                  onClick={() => setCurrentStep(1)}
+                  className="w-full bg-[#00B4D8] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+                >
+                  Let's go →
+                </button>
+                <p className="text-[14px] text-[#6B7280] mt-6">Takes about 60 seconds • Your info stays private 🔒</p>
+              </div>
+            )}
+
+            {/* Step 1: How did you hear about us */}
+            {currentStep === 1 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-black mb-3">How did you hear about us?</h2>
+                <p className="text-[16px] text-[#6B7280] mb-6">This helps us understand how students find Mentiora</p>
+                <div className="space-y-3 mb-5">
+                  {ACQUISITION_SOURCES.map((source) => (
+                    <button
+                      key={source.id}
+                      onClick={() => setOnboardingData({ ...onboardingData, acquisitionSource: source.id })}
+                      className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                        onboardingData.acquisitionSource === source.id
+                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-[24px]">{source.emoji}</span>
+                        <span className="text-[15px] font-medium">{source.label}</span>
+                      </div>
+                      {onboardingData.acquisitionSource === source.id && (
+                        <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                      )}
+                    </button>
+                  ))}
+                </div>
                 {onboardingData.acquisitionSource === 'other' && (
-                  <motion.input
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                  <input
                     type="text"
-                    placeholder="Please tell us where..."
+                    placeholder="Please specify..."
                     value={onboardingData.acquisitionSourceOther || ''}
-                    onChange={(e) => setOnboardingData({ 
-                      ...onboardingData, 
-                      acquisitionSourceOther: e.target.value 
-                    })}
-                    className="w-full p-3 border border-[#D1D5DB] rounded-[8px] focus:outline-none focus:border-[#00B4D8]"
+                    onChange={(e) => setOnboardingData({ ...onboardingData, acquisitionSourceOther: e.target.value })}
+                    className="w-full px-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
                   />
                 )}
               </div>
+            )}
 
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={handleSkip}
-                  className="text-[#6B7280] hover:underline"
-                >
-                  Skip
-                </button>
-                <button
-                  onClick={handleNext}
-                  disabled={!canContinue()}
-                  className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
-                    canContinue()
-                      ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
-                      : 'bg-[#D1D5DB] cursor-not-allowed'
-                  }`}
-                >
-                  Continue
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Step 2: What year are you in? */}
-          {currentStep === 2 && (
-            <motion.div
-              key="step2"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-[28px] font-[700] text-black mb-3">
-                What year are you in?
-              </h2>
-              <p className="text-[16px] text-[#6B7280] mb-8">
-                We'll show you the right content for your level
-              </p>
-              
-              <div className="space-y-3 mb-8">
-                {YEAR_GROUPS.map((year) => (
-                  <div
-                    key={year.id}
-                    onClick={() => setOnboardingData({ ...onboardingData, yearGroup: year.id })}
-                    className={`flex items-center gap-4 p-4 rounded-[12px] border-2 cursor-pointer transition-all ${
-                      onboardingData.yearGroup === year.id
-                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                        : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF]'
-                    }`}
-                  >
-                    <span className="text-2xl">{year.emoji}</span>
-                    <span className="text-[16px] font-medium text-black">{year.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={handleBack}
-                  className="text-[#6B7280] hover:underline"
-                >
-                  Back
-                </button>
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleSkip}
-                    className="text-[#6B7280] hover:underline"
-                  >
-                    Skip
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    disabled={!canContinue()}
-                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
-                      canContinue()
-                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
-                        : 'bg-[#D1D5DB] cursor-not-allowed'
-                    }`}
-                  >
-                    Continue
-                  </button>
+            {/* Step 2: Year group */}
+            {currentStep === 2 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-black mb-3">What year are you in?</h2>
+                <p className="text-[16px] text-[#6B7280] mb-6">This helps us show you the right content</p>
+                <div className="space-y-3">
+                  {YEAR_GROUPS.map((year) => (
+                    <button
+                      key={year.id}
+                      onClick={() => setOnboardingData({ ...onboardingData, yearGroup: year.id })}
+                      className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                        onboardingData.yearGroup === year.id
+                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-[24px]">{year.emoji}</span>
+                        <span className="text-[15px] font-medium">{year.label}</span>
+                      </div>
+                      {onboardingData.yearGroup === year.id && (
+                        <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          )}
+            )}
 
-          {/* Step 3: Select subjects */}
-          {currentStep === 3 && (
-            <motion.div
-              key="step3"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-[28px] font-[700] text-black mb-3">
-                Which subjects are you studying?
-              </h2>
-              <p className="text-[16px] text-[#6B7280] mb-7">
-                Select all that apply. You can add more later.
-              </p>
-              
-              {/* Search box */}
-              <div className="relative mb-5">
-                <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-xl">
-                  🔍
-                </span>
-                <input
-                  type="text"
-                  placeholder="Search subjects..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-[#E5E7EB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
-                />
+            {/* Step 3: Select subjects WITH TABS */}
+            {currentStep === 3 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-black mb-3">Which subjects are you studying?</h2>
+                <p className="text-[16px] text-[#6B7280] mb-6">Select all that apply. You can add more later.</p>
+
+                {/* Level tabs */}
+                <div className="flex gap-2 mb-5">
+                  <button
+                    onClick={() => setSubjectLevel('gcse')}
+                    className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                      subjectLevel === 'gcse'
+                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
+                    }`}
+                  >
+                    GCSE
+                  </button>
+                  <button
+                    onClick={() => setSubjectLevel('alevel')}
+                    className={`flex-1 py-2.5 px-4 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                      subjectLevel === 'alevel'
+                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
+                    }`}
+                  >
+                    A-Level
+                  </button>
+                </div>
+
+                {/* Search + grid */}
+                <div className="relative mb-5">
+                  <input
+                    type="text"
+                    placeholder="Search subjects..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                  />
+                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[20px]">🔍</span>
+                </div>
+
+                <div className="max-h-[280px] overflow-y-auto mb-5">
+                  <div className="grid grid-cols-2 gap-3">
+                    {filteredSubjects.map((subject) => (
+                      <button
+                        key={subject.id}
+                        onClick={() => {
+                          const newSubjects = onboardingData.subjects.includes(subject.id)
+                            ? onboardingData.subjects.filter(s => s !== subject.id)
+                            : [...onboardingData.subjects, subject.id];
+                          setOnboardingData({ ...onboardingData, subjects: newSubjects });
+                        }}
+                        className={`flex items-center justify-between p-3 rounded-[10px] border-2 transition-all ${
+                          onboardingData.subjects.includes(subject.id)
+                            ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                            : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-[20px]">{subject.emoji}</span>
+                          <span className="text-[15px] font-medium">{subject.name}</span>
+                        </div>
+                        {onboardingData.subjects.includes(subject.id) && (
+                          <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {onboardingData.subjects.length > 0 && (
+                  <p className="text-[14px] text-[#00B4D8] font-semibold text-center mb-5">
+                    {onboardingData.subjects.length} subject{onboardingData.subjects.length !== 1 ? 's' : ''} selected
+                  </p>
+                )}
               </div>
+            )}
 
-              {/* Subjects grid */}
-              <div 
-                className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5 max-h-[400px] overflow-y-auto pr-2"
-                style={{
-                  scrollbarWidth: 'thin',
-                  scrollbarColor: '#00B4D8 #E5E7EB',
-                }}
-              >
-                {filteredSubjects.map((subject) => (
-                  <div
-                    key={subject.id}
-                    onClick={() => {
-                      const newSubjects = onboardingData.subjects.includes(subject.id)
-                        ? onboardingData.subjects.filter(id => id !== subject.id)
-                        : [...onboardingData.subjects, subject.id];
-                      setOnboardingData({ ...onboardingData, subjects: newSubjects });
-                    }}
-                    className={`flex items-center justify-between p-[14px] rounded-[10px] border-2 cursor-pointer transition-all ${
-                      onboardingData.subjects.includes(subject.id)
+            {/* Step 4: Study preferences */}
+            {currentStep === 4 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-black mb-3">How do you like to study?</h2>
+                <p className="text-[16px] text-[#6B7280] mb-6">Select all that apply. We'll personalize your experience.</p>
+                <div className="space-y-3">
+                  {STUDY_PREFERENCES.map((pref) => (
+                    <button
+                      key={pref.id}
+                      onClick={() => {
+                        const newPrefs = onboardingData.studyPreferences.includes(pref.id)
+                          ? onboardingData.studyPreferences.filter(p => p !== pref.id)
+                          : [...onboardingData.studyPreferences, pref.id];
+                        setOnboardingData({ ...onboardingData, studyPreferences: newPrefs });
+                      }}
+                      className={`w-full flex items-start justify-between p-4 rounded-[12px] border-2 transition-all ${
+                        onboardingData.studyPreferences.includes(pref.id)
+                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3 text-left">
+                        <span className="text-[24px] mt-0.5">{pref.emoji}</span>
+                        <div>
+                          <div className="text-[15px] font-semibold mb-1">{pref.title}</div>
+                          <div className="text-[13px] text-[#6B7280]">{pref.description}</div>
+                        </div>
+                      </div>
+                      {onboardingData.studyPreferences.includes(pref.id) && (
+                        <Check className="w-[20px] h-[20px] text-[#00B4D8] flex-shrink-0 mt-1" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 5: Parent updates */}
+            {currentStep === 5 && !showCompletion && (
+              <div>
+                <h2 className="text-[28px] font-bold text-black mb-3">Keep your parents in the loop?</h2>
+                <p className="text-[16px] text-[#6B7280] mb-6">We can send them weekly progress updates (optional)</p>
+                
+                <div className="space-y-4">
+                  <button
+                    onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: true })}
+                    className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                      onboardingData.parentUpdates
                         ? 'border-[#00B4D8] bg-[#F0F9FF]'
                         : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">{subject.emoji}</span>
-                      <span className="text-[15px] font-medium text-black">{subject.name}</span>
+                      <span className="text-[24px]">📧</span>
+                      <span className="text-[15px] font-medium">Yes, send weekly updates</span>
                     </div>
-                    {onboardingData.subjects.includes(subject.id) && (
-                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                    {onboardingData.parentUpdates && (
+                      <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
                     )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Selection counter */}
-              <p className="text-[14px] text-[#00B4D8] font-semibold text-center mb-5">
-                {onboardingData.subjects.length} subject{onboardingData.subjects.length !== 1 ? 's' : ''} selected
-              </p>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={handleBack}
-                  className="text-[#6B7280] hover:underline"
-                >
-                  Back
-                </button>
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleSkip}
-                    className="text-[#6B7280] hover:underline"
-                  >
-                    Skip
                   </button>
-                  <button
-                    onClick={handleNext}
-                    disabled={!canContinue()}
-                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
-                      canContinue()
-                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
-                        : 'bg-[#D1D5DB] cursor-not-allowed'
-                    }`}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
 
-          {/* Step 4: Study preferences */}
-          {currentStep === 4 && (
-            <motion.div
-              key="step4"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-[28px] font-[700] text-black mb-3">
-                How do you prefer to learn?
-              </h2>
-              <p className="text-[16px] text-[#6B7280] mb-8">
-                Select all that work for you. We'll adapt our approach.
-              </p>
-              
-              <div className="space-y-3 mb-8">
-                {STUDY_PREFERENCES.map((pref) => (
-                  <div
-                    key={pref.id}
-                    onClick={() => {
-                      const newPrefs = onboardingData.studyPreferences.includes(pref.id)
-                        ? onboardingData.studyPreferences.filter(id => id !== pref.id)
-                        : [...onboardingData.studyPreferences, pref.id];
-                      setOnboardingData({ ...onboardingData, studyPreferences: newPrefs });
-                    }}
-                    className={`flex items-center justify-between p-5 rounded-[12px] border-2 cursor-pointer transition-all ${
-                      onboardingData.studyPreferences.includes(pref.id)
+                  <button
+                    onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: false, parentEmail: null })}
+                    className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                      !onboardingData.parentUpdates
                         ? 'border-[#00B4D8] bg-[#F0F9FF]'
                         : 'border-[#E5E7EB] hover:border-[#00B4D8]'
                     }`}
                   >
-                    <div className="flex items-start gap-4">
-                      <span className="text-[32px]">{pref.emoji}</span>
-                      <div>
-                        <h3 className="text-[18px] font-semibold text-black mb-1">{pref.title}</h3>
-                        <p className="text-[14px] text-[#6B7280] leading-relaxed">{pref.description}</p>
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[24px]">🚫</span>
+                      <span className="text-[15px] font-medium">No thanks, just me</span>
                     </div>
-                    {onboardingData.studyPreferences.includes(pref.id) && (
-                      <Check className="w-[22px] h-[22px] text-[#00B4D8] flex-shrink-0" />
+                    {!onboardingData.parentUpdates && (
+                      <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
                     )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={handleBack}
-                  className="text-[#6B7280] hover:underline"
-                >
-                  Back
-                </button>
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleSkip}
-                    className="text-[#6B7280] hover:underline"
-                  >
-                    Skip
                   </button>
-                  <button
-                    onClick={handleNext}
-                    disabled={!canContinue()}
-                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
-                      canContinue()
-                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
-                        : 'bg-[#D1D5DB] cursor-not-allowed'
-                    }`}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Step 5: Parent updates */}
-          {currentStep === 5 && (
-            <motion.div
-              key="step5"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-[28px] font-[700] text-black mb-3">
-                Keep your parents in the loop?
-              </h2>
-              <p className="text-[16px] text-[#6B7280] mb-8">
-                We can send weekly progress reports to a parent or guardian
-              </p>
-              
-              <div className="space-y-4 mb-6">
-                <div
-                  onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: true })}
-                  className={`p-6 rounded-[12px] border-2 cursor-pointer transition-all ${
-                    onboardingData.parentUpdates
-                      ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                      : 'border-[#E5E7EB] hover:border-[#00B4D8]'
-                  }`}
-                >
-                  <div className="flex items-start gap-4">
-                    <span className="text-[32px]">✉️</span>
-                    <div>
-                      <h3 className="text-[18px] font-semibold text-black mb-1">Yes, send weekly updates</h3>
-                      <p className="text-[14px] text-[#6B7280]">Your parent gets a progress email every Sunday</p>
-                    </div>
-                  </div>
                 </div>
 
                 {onboardingData.parentUpdates && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] p-5"
-                  >
-                    <label className="block text-[14px] font-semibold text-black mb-2">
-                      Parent/Guardian Email
+                  <div className="mt-5">
+                    <label className="block text-[14px] font-medium text-[#374151] mb-2">
+                      Parent's email address
                     </label>
                     <input
                       type="email"
                       placeholder="parent@example.com"
                       value={onboardingData.parentEmail || ''}
                       onChange={(e) => setOnboardingData({ ...onboardingData, parentEmail: e.target.value })}
-                      className="w-full p-3 border border-[#D1D5DB] rounded-[8px] focus:outline-none focus:border-[#00B4D8]"
+                      className="w-full px-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
                     />
-                    <p className="text-[13px] text-[#6B7280] mt-2">
-                      They'll get their first update next Sunday
-                    </p>
-                  </motion.div>
-                )}
-
-                <div
-                  onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: false, parentEmail: null })}
-                  className={`p-6 rounded-[12px] border-2 cursor-pointer transition-all ${
-                    !onboardingData.parentUpdates
-                      ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                      : 'border-[#E5E7EB] hover:border-[#00B4D8]'
-                  }`}
-                >
-                  <div className="flex items-start gap-4">
-                    <span className="text-[32px]">🔒</span>
-                    <div>
-                      <h3 className="text-[18px] font-semibold text-black mb-1">No thanks</h3>
-                      <p className="text-[14px] text-[#6B7280]">Keep my progress private</p>
-                    </div>
+                    {onboardingData.parentEmail && !isValidEmail(onboardingData.parentEmail) && (
+                      <p className="text-[13px] text-red-500 mt-2">Please enter a valid email address</p>
+                    )}
                   </div>
-                </div>
+                )}
               </div>
+            )}
 
-              <div className="bg-[#F9FAFB] p-4 rounded-[10px] flex items-start gap-3 mb-8">
-                <span className="text-xl">🔒</span>
-                <p className="text-[13px] text-[#6B7280]">
-                  We never share your data. Parents only see overall progress, not individual answers.
-                </p>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={handleBack}
-                  className="text-[#6B7280] hover:underline"
-                >
-                  Back
-                </button>
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleSkip}
-                    className="text-[#6B7280] hover:underline"
-                  >
-                    Skip
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    disabled={!canContinue()}
-                    className={`px-8 py-[14px] rounded-[10px] font-semibold text-white transition-all ${
-                      canContinue()
-                        ? 'bg-[#00B4D8] hover:bg-[#0099b8] hover:translate-y-[-1px]'
-                        : 'bg-[#D1D5DB] cursor-not-allowed'
-                    }`}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Step 6: Completion */}
-          {showCompletion && (
-            <motion.div
-              key="completion"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="text-center"
-            >
-              {/* Success icon */}
-              <motion.div
-                initial={{ scale: 0, rotate: 0 }}
-                animate={{ scale: 1, rotate: 360 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="w-[100px] h-[100px] mx-auto mb-8 rounded-full flex items-center justify-center shadow-lg"
-                style={{
-                  background: 'linear-gradient(135deg, #00B4D8 0%, #0BA5E9 100%)',
-                }}
-              >
-                <Check className="w-14 h-14 text-white" strokeWidth={3} />
-              </motion.div>
-
-              <h1 className="text-[36px] font-[800] text-black mb-4">
-                You're all set! 🎉
-              </h1>
-              <p className="text-[18px] text-[#6B7280] mb-10">
-                Creating your personalized learning plan...
-              </p>
-
-              {/* Loading spinner */}
-              {completionStage === 1 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="w-10 h-10 mx-auto border-4 border-[#E5E7EB] border-t-[#00B4D8] rounded-full animate-spin"
-                />
-              )}
-
-              {/* Checklist */}
-              {completionStage >= 2 && (
-                <div className="space-y-4 mb-10">
-                  {[
-                    { text: 'Analyzed your subjects', delay: 0 },
-                    { text: 'Identified your weak topics', delay: 0.3 },
-                    { text: 'Created your first week\'s plan', delay: 0.6 },
-                    { text: 'Generated personalized notes', delay: 0.9 },
-                  ].map((item, index) => (
+            {/* Step 6: Completion animation */}
+            {showCompletion && (
+              <div className="text-center py-8">
+                <AnimatePresence mode="wait">
+                  {completionStage === 1 && (
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: item.delay, duration: 0.3 }}
-                      className="flex items-center gap-3 justify-center"
+                      key="stage1"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <div className="w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center">
-                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="w-12 h-12 border-4 border-white border-t-transparent rounded-full"
+                        />
                       </div>
-                      <span className="text-[16px] text-black">{item.text}</span>
+                      <h2 className="text-[28px] font-bold text-black mb-3">Setting up your account...</h2>
+                      <p className="text-[16px] text-[#6B7280]">This will only take a moment</p>
                     </motion.div>
-                  ))}
-                </div>
-              )}
+                  )}
 
-              {/* Finish button */}
-              {completionStage >= 3 && (
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={handleFinish}
-                  className="w-full max-w-[400px] bg-[#00B4D8] text-white font-semibold text-[18px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
-                >
-                  Start learning →
-                </motion.button>
-              )}
-            </motion.div>
-          )}
-        </motion.div>
-      </AnimatePresence>
+                  {completionStage === 2 && (
+                    <motion.div
+                      key="stage2"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Check className="w-12 h-12 text-white" strokeWidth={3} />
+                        </motion.div>
+                      </div>
+                      <h2 className="text-[28px] font-bold text-black mb-3">Adding your subjects...</h2>
+                      <p className="text-[16px] text-[#6B7280]">Getting everything ready for you</p>
+                    </motion.div>
+                  )}
+
+                  {completionStage === 3 && (
+                    <motion.div
+                      key="stage3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        className="text-[64px] mb-6"
+                      >
+                        🎉
+                      </motion.div>
+                      <h2 className="text-[32px] font-bold text-black mb-3">You're all set!</h2>
+                      <p className="text-[16px] text-[#6B7280] mb-8">Let's start your learning journey</p>
+                      <button
+                        onClick={handleFinish}
+                        className="bg-[#00B4D8] text-white font-semibold text-[16px] py-[16px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+                      >
+                        Go to Dashboard →
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation buttons */}
+        {currentStep > 0 && currentStep < 6 && !showCompletion && (
+          <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-200">
+            {currentStep > 1 && (
+              <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[15px] underline">
+                Back
+              </button>
+            )}
+            <div className="flex-1" />
+            {currentStep !== 1 && (
+              <button onClick={handleSkip} className="text-[#6B7280] hover:text-black font-medium text-[15px] underline mr-4">
+                Skip
+              </button>
+            )}
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className={`px-8 py-3.5 rounded-[10px] font-semibold text-[15px] transition-all duration-300 ${
+                canContinue()
+                  ? 'bg-[#00B4D8] text-white hover:bg-[#0099b8] hover:shadow-md hover:-translate-y-0.5'
+                  : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
+              }`}
+            >
+              Continue
+            </button>
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 };
