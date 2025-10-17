@@ -1378,35 +1378,24 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 1.7, duration: 0.4 }}
                   >
-                    {/* Mentiora logo as circle */}
-                    <circle cx="520" cy="20" r="8" fill="#0BA5E9" />
+                    {/* Mentiora logo circle */}
+                    <circle cx="365" cy="66" r="10" fill="#0BA5E9" />
                     <text
-                      x="510"
-                      y="26"
+                      x="365"
+                      y="71"
                       className="fill-white font-bold"
-                      fontSize="12"
+                      fontSize="14"
                       textAnchor="middle"
                     >
                       m
                     </text>
                     
-                    {/* Label with background */}
-                    <rect
-                      x="380"
-                      y="50"
-                      width="165"
-                      height="32"
-                      rx="6"
-                      fill="white"
-                      stroke="#0BA5E9"
-                      strokeWidth="2"
-                    />
+                    {/* Label text */}
                     <text
-                      x="462"
+                      x="382"
                       y="71"
                       className="text-base fill-black font-semibold"
                       fontSize="16"
-                      textAnchor="middle"
                     >
                       Personalised education
                     </text>
@@ -1419,26 +1408,12 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 1.9, duration: 0.4 }}
                   >
-                    {/* Circle on curve */}
-                    <circle cx="480" cy="190" r="8" fill="#D1D5DB" />
-                    
-                    {/* Label with background */}
-                    <rect
-                      x="295"
-                      y="225"
-                      width="190"
-                      height="32"
-                      rx="6"
-                      fill="white"
-                      stroke="#D1D5DB"
-                      strokeWidth="2"
-                    />
+                    {/* Label text */}
                     <text
-                      x="390"
+                      x="295"
                       y="246"
                       className="text-base fill-black font-semibold"
                       fontSize="16"
-                      textAnchor="middle"
                     >
                       Non-personal education
                     </text>
