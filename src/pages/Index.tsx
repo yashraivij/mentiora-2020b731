@@ -16,8 +16,6 @@ import {
   Laptop,
   FlaskConical,
   Dna,
-  Menu,
-  X,
   Send,
   Zap,
   Circle,
@@ -38,7 +36,6 @@ import { Input } from "@/components/ui/input";
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
@@ -130,9 +127,28 @@ const Index = () => {
             )}
           </div>
 
-          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+          {/* Mobile Sign In Button */}
+          <div className="md:hidden">
+            {user ? (
+              <Button 
+                onClick={() => navigate("/dashboard")} 
+                size="sm"
+                style={{ backgroundColor: '#0BA5E9' }} 
+                className="text-white px-4 rounded-lg font-semibold hover:opacity-90"
+              >
+                Dashboard
+              </Button>
+            ) : (
+              <Button 
+                onClick={() => navigate("/login")} 
+                size="sm"
+                style={{ backgroundColor: '#0BA5E9' }} 
+                className="text-white px-4 rounded-lg font-semibold hover:opacity-90"
+              >
+                Sign In
+              </Button>
+            )}
+          </div>
         </div>
       </nav>
 
