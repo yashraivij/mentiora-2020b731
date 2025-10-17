@@ -450,46 +450,70 @@ const Index = () => {
       </section>
 
       {/* UNIVERSITY STRIP SECTION */}
-      <section className="py-12 px-6 bg-gray-50 border-y border-gray-200">
+      <section className="py-6 px-6 bg-white border-y border-gray-200 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <p className="text-sm font-semibold text-gray-600 mb-6 uppercase tracking-wider">
-              Trusted by students at Russell Group universities
+          <div className="text-center mb-4">
+            <p className="text-sm text-gray-600">
+              Trusted by <span className="font-bold text-black">500+ students</span> at Russell Group universities including Oxford and Cambridge
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-6">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-                className="grayscale hover:grayscale-0 transition-all duration-300"
-              >
-                <img 
-                  src={cambridgeLogo} 
-                  alt="University of Cambridge" 
-                  className="h-20 md:h-24 w-auto object-contain"
-                />
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-                className="grayscale hover:grayscale-0 transition-all duration-300"
-              >
-                <img 
-                  src={oxfordLogo} 
-                  alt="University of Oxford" 
-                  className="h-20 md:h-24 w-auto object-contain"
-                />
-              </motion.div>
-            </div>
-            <p className="text-base text-gray-700 font-medium">
-              We've helped over <span className="font-bold text-black">500+ students</span> gain admission to top Russell Group universities
-            </p>
-          </motion.div>
+          </div>
+          <div className="relative">
+            <motion.div
+              className="flex items-center gap-16"
+              animate={{ x: [0, -1000] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 20,
+                  ease: "linear",
+                },
+              }}
+            >
+              {/* First set of logos */}
+              <img 
+                src={cambridgeLogo} 
+                alt="University of Cambridge" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={oxfordLogo} 
+                alt="University of Oxford" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={cambridgeLogo} 
+                alt="University of Cambridge" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={oxfordLogo} 
+                alt="University of Oxford" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              {/* Duplicate set for seamless loop */}
+              <img 
+                src={cambridgeLogo} 
+                alt="University of Cambridge" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={oxfordLogo} 
+                alt="University of Oxford" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={cambridgeLogo} 
+                alt="University of Cambridge" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+              <img 
+                src={oxfordLogo} 
+                alt="University of Oxford" 
+                className="h-16 w-auto object-contain flex-shrink-0"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
