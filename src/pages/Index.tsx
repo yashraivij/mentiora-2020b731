@@ -469,32 +469,32 @@ const Index = () => {
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={newcastleLogo} 
                   alt="Newcastle University" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={portsmouthLogo} 
                   alt="University of Portsmouth" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={birminghamLogo} 
                   alt="University of Birmingham" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               {/* Second set - duplicate for seamless loop */}
@@ -502,32 +502,32 @@ const Index = () => {
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={newcastleLogo} 
                   alt="Newcastle University" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={portsmouthLogo} 
                   alt="University of Portsmouth" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
                 <img 
                   src={birminghamLogo} 
                   alt="University of Birmingham" 
-                  className="h-10 w-auto object-contain"
-                  style={{ maxWidth: '160px' }}
+                  className="w-auto object-contain"
+                  style={{ height: '40px', maxWidth: '160px' }}
                 />
               </div>
             </motion.div>
