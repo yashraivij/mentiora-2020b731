@@ -16,7 +16,6 @@ import {
   Laptop,
   FlaskConical,
   Dna,
-  Crown,
   Menu,
   X,
   Send,
@@ -71,20 +70,23 @@ const Index = () => {
               alt="Mentiora" 
               className="h-8 w-8"
             />
-            <span className="text-xl font-bold text-black flex items-center">
-              Ment<Crown className="w-4 h-4 text-yellow-500 -mt-2" />ora
+            <span className="text-xl font-bold text-black">
+              Mentiora
             </span>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
+            <button className="text-base text-gray-600 hover:text-black transition-colors">
+              About Us
+            </button>
+            <button className="text-base text-gray-600 hover:text-black transition-colors">
+              Subjects
+            </button>
+            <button className="text-base text-gray-600 hover:text-black transition-colors">
+              Features
+            </button>
             <button onClick={() => navigate("/pricing")} className="text-base text-gray-600 hover:text-black transition-colors">
               Pricing
-            </button>
-            <button className="text-base text-gray-600 hover:text-black transition-colors">
-              About us
-            </button>
-            <button className="text-base text-gray-600 hover:text-black transition-colors">
-              GCSE Results Day 2025
             </button>
           </div>
 
@@ -95,7 +97,11 @@ const Index = () => {
               </Button>
             ) : (
               <>
-                <Button onClick={() => navigate("/login")} variant="ghost" className="text-gray-600 hover:text-black">
+                <Button 
+                  onClick={() => navigate("/login")} 
+                  variant="ghost" 
+                  className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
+                >
                   Login
                 </Button>
                 <Button 
@@ -458,42 +464,48 @@ const Index = () => {
                 <img 
                   src={cambridgeLogo} 
                   alt="University of Cambridge" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={lseLogo} 
                   alt="London School of Economics" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={exeterLogo} 
                   alt="University of Exeter" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bathLogo} 
                   alt="University of Bath" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               {/* Second set - duplicate for seamless loop */}
@@ -501,42 +513,48 @@ const Index = () => {
                 <img 
                   src={cambridgeLogo} 
                   alt="University of Cambridge" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={oxfordLogo} 
                   alt="University of Oxford" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={lseLogo} 
                   alt="London School of Economics" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={exeterLogo} 
                   alt="University of Exeter" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bathLogo} 
                   alt="University of Bath" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
               <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '160px' }}>
                 <img 
                   src={bristolLogo} 
                   alt="University of Bristol" 
-                  className="max-h-12 max-w-full object-contain"
+                  className="h-10 w-auto object-contain"
+                  style={{ maxWidth: '140px' }}
                 />
               </div>
             </motion.div>
