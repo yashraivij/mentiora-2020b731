@@ -248,20 +248,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl sm:max-w-[95vw] max-h-[98vh] overflow-y-auto bg-white border border-gray-100">
-        <DialogHeader className="pb-6 border-b border-gray-100">
+      <DialogContent className="max-w-7xl sm:max-w-[95vw] max-h-[98vh] overflow-y-auto bg-background dark:bg-background border-0 shadow-2xl">
+        {/* Subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50 dark:from-sky-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
+        
+        {/* Subtle border effect */}
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 dark:from-sky-800 dark:via-purple-800 dark:to-pink-800 p-0.5">
+          <div className="h-full w-full rounded-lg bg-background dark:bg-background" />
+        </div>
+
+        <DialogHeader className="relative z-10 pb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.12)]" style={{ backgroundColor: '#0BA5E9' }}>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-sky-400 to-purple-400 rounded-3xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-2xl sm:text-4xl font-bold text-black">
+                <DialogTitle className="text-2xl sm:text-4xl font-bold text-foreground dark:text-foreground">
                   Welcome to Mentiora!
                 </DialogTitle>
-                <DialogDescription className="text-lg sm:text-xl text-gray-600 font-medium">
+                <DialogDescription className="text-lg sm:text-xl text-muted-foreground dark:text-muted-foreground font-medium">
                   Let's personalize your learning experience
                 </DialogDescription>
               </div>
@@ -269,15 +277,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             {/* Progress indicator */}
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-500">Step {currentStep} of 4</span>
+              <span className="text-sm font-medium text-muted-foreground dark:text-muted-foreground">Step {currentStep} of 4</span>
               <div className="flex items-center gap-2">
                 {[1, 2, 3, 4].map((step) => (
                   <div
                     key={step}
-                    className={`h-3 w-8 sm:w-12 rounded-full transition-all duration-300`}
-                    style={{
-                      backgroundColor: step <= currentStep ? '#0BA5E9' : '#e5e7eb'
-                    }}
+                    className={`h-3 w-8 sm:w-12 rounded-full transition-all duration-500 ${
+                      step <= currentStep 
+                        ? 'bg-gradient-to-r from-sky-400 to-purple-400 shadow-lg' 
+                        : 'bg-gray-200'
+                    }`}
                   />
                 ))}
               </div>
@@ -285,7 +294,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           </div>
         </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto pt-6">
+        <div className="relative z-10 flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
             {/* Step 1: Subject Selection */}
             {currentStep === 1 && (
@@ -299,10 +308,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-black">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground dark:text-foreground">
                     What exams are you taking? 📚
                   </h3>
-                  <p className="text-base sm:text-lg text-gray-600">
+                  <p className="text-base sm:text-lg text-muted-foreground dark:text-muted-foreground">
                     Select all the subjects you're studying - we'll add them to your dashboard
                   </p>
                 </div>
@@ -325,13 +334,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           transition={{ delay: index * 0.05 }}
                         >
                           <Card 
-                            className={`cursor-pointer transition-all duration-300 bg-white border ${
+                            className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                               selectedSubjects.includes(subject.id)
-                                ? 'border-[#0BA5E9] shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                                : 'border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]'
+                                ? 'ring-4 ring-sky-400 bg-sky-50 dark:bg-sky-950/30 shadow-xl transform scale-105'
+                                : 'hover:bg-muted/50 dark:hover:bg-muted/30 hover:shadow-lg hover:scale-102 border-2 border-border dark:border-border'
                             }`}
                             onClick={() => handleSubjectToggle(subject.id)}
                           >
+                            {selectedSubjects.includes(subject.id) && (
+                              <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-purple-100 opacity-50" />
+                            )}
+                            
                             <CardContent className="p-5">
                               <div className="flex items-center space-x-3">
                                 <div className="relative">
@@ -340,15 +353,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                     onChange={() => {}}
                                     className="pointer-events-none"
                                   />
+                                  {selectedSubjects.includes(subject.id) && (
+                                    <div className="absolute -top-1 -right-1">
+                                      <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                                    </div>
+                                  )}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-bold text-sm truncate text-black">{subject.name}</p>
-                                  <p className="text-xs text-gray-500 mt-1">
+                                  <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
+                                  <p className="text-xs text-gray-600 dark:text-white mt-1">
                                     {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} available
                                   </p>
                                    <Badge 
                                     variant="secondary" 
-                                    className="text-xs mt-1 bg-gray-100 text-gray-600"
+                                    className={`text-xs mt-1 ${
+                                      selectedSubjects.includes(subject.id)
+                                        ? 'bg-sky-400 text-white shadow-lg'
+                                        : 'bg-muted dark:bg-muted text-muted-foreground dark:text-muted-foreground'
+                                    }`}
                                   >
                                     {subject.examBoard}
                                   </Badge>
@@ -373,13 +395,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       transition={{ delay: index * 0.05 }}
                     >
                       <Card 
-                        className={`cursor-pointer transition-all duration-300 bg-white border ${
+                        className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                           selectedSubjects.includes(subject.id)
-                            ? 'border-[#0BA5E9] shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                            : 'border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]'
+                            ? 'ring-4 ring-sky-400 bg-sky-50 dark:bg-sky-950/30 shadow-xl transform scale-105'
+                            : 'hover:bg-muted/50 dark:hover:bg-muted/30 hover:shadow-lg hover:scale-102 border-2 border-border dark:border-border'
                         }`}
                         onClick={() => handleSubjectToggle(subject.id)}
                       >
+                        {selectedSubjects.includes(subject.id) && (
+                          <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-purple-100 opacity-50" />
+                        )}
+                        
                         <CardContent className="p-5">
                           <div className="flex items-center space-x-3">
                             <div className="relative">
@@ -388,15 +414,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 onChange={() => {}}
                                 className="pointer-events-none"
                               />
+                              {selectedSubjects.includes(subject.id) && (
+                                <div className="absolute -top-1 -right-1">
+                                  <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                                </div>
+                              )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="font-bold text-sm truncate text-black">{subject.name}</p>
-                              <p className="text-xs text-gray-500 mt-1">
+                              <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
+                              <p className="text-xs text-gray-600 dark:text-white mt-1">
                                 {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} available
                               </p>
-                              <Badge 
+                               <Badge 
                                 variant="secondary" 
-                                className="text-xs mt-1 bg-gray-100 text-gray-600"
+                                className={`text-xs mt-1 ${
+                                  selectedSubjects.includes(subject.id)
+                                    ? 'bg-sky-400 text-white shadow-lg'
+                                    : 'bg-muted dark:bg-muted text-muted-foreground dark:text-muted-foreground'
+                                }`}
                               >
                                 {subject.examBoard}
                               </Badge>
@@ -449,7 +484,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-black">
+                  <h3 className="text-3xl font-bold text-gray-800">
                     What's your biggest struggle with revision? 🤔
                   </h3>
                   <p className="text-lg text-gray-600">
@@ -459,38 +494,38 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Staying motivated', icon: Flame },
-                    { text: 'Knowing what to revise', icon: Brain },
-                    { text: 'Running out of time', icon: Clock },
-                    { text: 'Understanding content', icon: BookOpen }
+                    { text: 'Staying motivated', icon: Flame, color: 'from-pink-400 to-rose-400', bg: 'from-pink-50 to-rose-50' },
+                    { text: 'Knowing what to revise', icon: Brain, color: 'from-green-400 to-emerald-400', bg: 'from-green-50 to-emerald-50' },
+                    { text: 'Running out of time', icon: Clock, color: 'from-orange-400 to-red-400', bg: 'from-orange-50 to-red-50' },
+                    { text: 'Understanding content', icon: BookOpen, color: 'from-blue-400 to-indigo-400', bg: 'from-blue-50 to-indigo-50' }
                   ].map((struggle, index) => {
                     const StruggleIcon = struggle.icon;
                     return (
                       <motion.div
                         key={struggle.text}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 bg-white border h-40 ${
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 rounded-3xl border-2 ${
                             revisionStruggles.includes(struggle.text)
-                              ? 'border-[#0BA5E9] shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                              : 'border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]'
+                              ? `ring-4 ring-current shadow-xl transform scale-105 bg-gradient-to-br ${struggle.bg}`
+                              : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                           }`}
                           onClick={() => handleStruggleToggle(struggle.text)}
                         >
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-4 rounded-2xl mb-4" style={{ backgroundColor: '#0BA5E9' }}>
+                            <div className={`p-4 rounded-2xl mb-4 bg-gradient-to-r ${struggle.color} shadow-lg`}>
                               <StruggleIcon className="h-8 w-8 text-white" />
                             </div>
-                            <p className="font-bold text-lg text-black">{struggle.text}</p>
+                            <p className="font-bold text-lg text-gray-800">{struggle.text}</p>
                             {revisionStruggles.includes(struggle.text) && (
                               <div className="absolute top-4 right-4">
-                                <div className="rounded-full p-1" style={{ backgroundColor: '#0BA5E9' }}>
-                                  <Check className="h-4 w-4 text-white" />
+                                <div className="bg-white rounded-full p-1 shadow-lg">
+                                  <Check className="h-4 w-4 text-green-500" />
                                 </div>
                               </div>
                             )}
@@ -501,18 +536,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   })}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <Button variant="outline" onClick={() => setCurrentStep(1)} className="px-6 py-2 border-gray-200">
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(1)} className="px-6 py-2">
                     Back
                   </Button>
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionStruggles.length === 0}
-                    className="text-white font-bold px-8 py-3 text-lg rounded-lg"
-                    style={{ backgroundColor: '#0BA5E9' }}
+                    className="bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-500 hover:to-emerald-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Continue</span>
+                    <span>Continue Journey</span>
+                    <span>✨</span>
                     <ChevronRight className="h-4 w-4" />
                   </div>
                   </Button>
@@ -532,7 +567,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-black">
+                  <h3 className="text-3xl font-bold text-gray-800">
                     How do you usually revise? 📖
                   </h3>
                   <p className="text-lg text-gray-600">
@@ -542,38 +577,38 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Flashcards', icon: Star },
-                    { text: 'Practice questions', icon: NotebookPen },
-                    { text: 'Reading notes', icon: BookOpen },
-                    { text: 'Watching videos', icon: TrendingUp }
+                    { text: 'Flashcards', icon: Star, color: 'from-yellow-400 to-orange-400', bg: 'from-yellow-50 to-orange-50' },
+                    { text: 'Practice questions', icon: NotebookPen, color: 'from-purple-400 to-pink-400', bg: 'from-purple-50 to-pink-50' },
+                    { text: 'Reading notes', icon: BookOpen, color: 'from-green-400 to-teal-400', bg: 'from-green-50 to-teal-50' },
+                    { text: 'Watching videos', icon: TrendingUp, color: 'from-blue-400 to-cyan-400', bg: 'from-blue-50 to-cyan-50' }
                   ].map((method, index) => {
                     const MethodIcon = method.icon;
                     return (
                       <motion.div
                         key={method.text}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 bg-white border h-40 ${
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 rounded-3xl border-2 ${
                             revisionMethods.includes(method.text)
-                              ? 'border-[#0BA5E9] shadow-[0_8px_24px_rgba(11,165,233,0.2)]'
-                              : 'border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]'
+                              ? `ring-4 ring-current shadow-xl transform scale-105 bg-gradient-to-br ${method.bg}`
+                              : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                           }`}
                           onClick={() => handleMethodToggle(method.text)}
                         >
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-4 rounded-2xl mb-4" style={{ backgroundColor: '#0BA5E9' }}>
+                            <div className={`p-4 rounded-2xl mb-4 bg-gradient-to-r ${method.color} shadow-lg`}>
                               <MethodIcon className="h-8 w-8 text-white" />
                             </div>
-                            <p className="font-bold text-lg text-black">{method.text}</p>
+                            <p className="font-bold text-lg text-gray-800">{method.text}</p>
                             {revisionMethods.includes(method.text) && (
                               <div className="absolute top-4 right-4">
-                                <div className="rounded-full p-1" style={{ backgroundColor: '#0BA5E9' }}>
-                                  <Check className="h-4 w-4 text-white" />
+                                <div className="bg-white rounded-full p-1 shadow-lg">
+                                  <Check className="h-4 w-4 text-green-500" />
                                 </div>
                               </div>
                             )}
@@ -584,18 +619,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   })}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <Button variant="outline" onClick={() => setCurrentStep(2)} className="px-6 py-2 border-gray-200">
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(2)} className="px-6 py-2">
                     Back
                   </Button>
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionMethods.length === 0}
-                    className="text-white font-bold px-8 py-3 text-lg rounded-lg"
-                    style={{ backgroundColor: '#0BA5E9' }}
+                    className="bg-gradient-to-r from-blue-400 to-purple-400 hover:from-blue-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Almost Done</span>
+                    <span>Almost Done!</span>
+                    <span>🎯</span>
                     <ChevronRight className="h-4 w-4" />
                   </div>
                   </Button>
@@ -615,7 +650,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-8"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-black">
+                  <h3 className="text-3xl font-bold text-gray-800">
                     Would you like us to share your progress? 👨‍👩‍👧‍👦
                   </h3>
                   <p className="text-lg text-gray-600">
@@ -624,26 +659,26 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 <div className="max-w-2xl mx-auto space-y-6">
-                  <Card className={`cursor-pointer transition-all duration-300 bg-white border ${
+                  <Card className={`cursor-pointer transition-all duration-300 rounded-3xl border-2 ${
                     showParentProgress 
-                      ? 'border-[#0BA5E9] shadow-[0_8px_24px_rgba(11,165,233,0.2)]' 
-                      : 'border-gray-100 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]'
+                      ? 'ring-4 ring-indigo-400 bg-gradient-to-br from-indigo-50 to-purple-50 shadow-xl transform scale-105' 
+                      : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                   }`}
                   onClick={() => setShowParentProgress(!showParentProgress)}
                   >
                     <CardContent className="p-8 text-center">
                       <div className="flex items-center justify-center mb-4">
-                        <div className="p-4 rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] mr-4" style={{ backgroundColor: '#0BA5E9' }}>
+                        <div className="bg-gradient-to-r from-indigo-400 to-purple-400 p-4 rounded-3xl shadow-lg mr-4">
                           <User className="h-10 w-10 text-white" />
                         </div>
                         <div className="text-left">
-                          <h4 className="text-2xl font-bold text-black">Share with Parent/Guardian</h4>
+                          <h4 className="text-2xl font-bold text-gray-800">Share with Parent/Guardian</h4>
                           <p className="text-gray-600">Keep them updated on your progress</p>
                         </div>
                         <div className="ml-auto">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'border-[#0BA5E9]' : 'border-gray-400'
-                          }`} style={showParentProgress ? { backgroundColor: '#0BA5E9' } : {}}>
+                            showParentProgress ? 'bg-indigo-400 border-indigo-400' : 'border-gray-400'
+                          }`}>
                             {showParentProgress && <Check className="h-4 w-4 text-white" />}
                           </div>
                         </div>
@@ -664,14 +699,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       transition={{ duration: 0.3 }}
                       className="mt-4"
                     >
-                      <Card className="border border-gray-200 bg-gray-50 rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+                      <Card className="border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-md">
                         <CardContent className="p-4">
                           <div className="space-y-3">
                             <Label 
                               htmlFor="parentEmail" 
-                              className="text-base font-bold text-black flex items-center gap-2"
+                              className="text-base font-bold text-gray-800 flex items-center gap-2"
                             >
-                              <User className="h-4 w-4" style={{ color: '#0BA5E9' }} />
+                              <User className="h-4 w-4 text-indigo-500" />
                               Parent/Guardian Email Address *
                             </Label>
                             <Input
@@ -680,8 +715,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               value={parentEmail}
                               onChange={(e) => setParentEmail(e.target.value)}
                               placeholder="parent@example.com"
-                              className="text-base p-3 rounded-lg border-2 border-gray-200 focus:border-[#0BA5E9] focus:ring-2"
-                              style={{ '--tw-ring-color': 'rgba(11, 165, 233, 0.1)' } as any}
+                              className="text-base p-3 rounded-lg border-2 border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                               required
                             />
                             <p className="text-xs text-gray-600 italic">
@@ -694,8 +728,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   )}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-gray-100">
-                  <Button variant="outline" onClick={() => setCurrentStep(3)} className="px-6 py-2 border-gray-200">
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(3)} className="px-6 py-2">
                     Back
                   </Button>
                   <Button 
@@ -707,11 +741,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       onClose();
                     }}
                     disabled={showParentProgress && (!parentEmail.trim() || !isValidEmail(parentEmail))}
-                    className="text-white font-bold px-8 py-3 text-lg rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ backgroundColor: '#0BA5E9' }}
+                    className="bg-gradient-to-r from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Complete Setup</span>
+                    <span>Complete Setup!</span>
+                    <span>🎉</span>
                     <Check className="h-4 w-4" />
                   </div>
                   </Button>

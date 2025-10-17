@@ -33,7 +33,6 @@ import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -43,7 +42,6 @@ const Index = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
-  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -435,23 +433,6 @@ const Index = () => {
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
                 Try now for free
-              </Button>
-            </motion.div>
-            
-            {/* Test Onboarding Button */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex justify-center mt-4"
-            >
-              <Button
-                variant="outline"
-                size="sm"
-                className="px-4 py-2 text-sm border-gray-200"
-                onClick={() => setShowOnboarding(true)}
-              >
-                Test Onboarding Flow
               </Button>
             </motion.div>
           </div>
@@ -1613,13 +1594,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-      
-      {/* Onboarding Popup */}
-      <OnboardingPopup 
-        isOpen={showOnboarding} 
-        onClose={() => setShowOnboarding(false)}
-        onSubjectsAdded={() => {}}
-      />
     </div>
   );
 };
