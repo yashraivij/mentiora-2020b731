@@ -129,7 +129,7 @@ const Index = () => {
 
       {/* HERO SECTION - ChronoTask Style */}
       <section 
-        className="relative py-24 px-4 min-h-[600px] flex items-center overflow-hidden"
+        className="relative py-20 px-4 min-h-[600px] flex items-center overflow-hidden"
         style={{
           backgroundColor: '#f8f9fa',
           backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)',
@@ -381,7 +381,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 text-4xl md:text-5xl lg:text-6xl mx-auto"
+              className="mb-6 text-5xl mx-auto"
               style={{
                 fontWeight: 700,
                 lineHeight: 1.1,
@@ -398,7 +398,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mx-auto mb-10 text-base md:text-lg px-4"
+              className="mx-auto mb-10 text-lg px-4"
               style={{
                 fontWeight: 400,
                 color: '#4a4a4a',
@@ -563,11 +563,11 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">
+            <h2 className="text-5xl font-bold text-black mb-5 leading-tight">
               Unlike any other app<br />
               A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Mentiora teaches you how to answer every question
               in your exams to get full marks.
             </p>
@@ -652,7 +652,7 @@ const Index = () => {
               >
                 <div className="text-5xl mb-6">{feature.icon}</div>
                 <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
-                <p className="text-base text-gray-600 leading-relaxed">{feature.description}</p>
+                <p className="text-lg text-gray-600 leading-relaxed">{feature.description}</p>
                 {feature.visual}
               </motion.div>
             ))}
@@ -671,11 +671,11 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 leading-tight">
+            <h2 className="text-5xl font-bold text-black mb-4 leading-tight">
               The only tutor that's<br />
               <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
             </h2>
-            <p className="text-base text-gray-600 mb-8">
+            <p className="text-lg text-gray-600 mb-8">
               Other tutoring platforms are not based on Exam Board Curriculums.<br />
               Don't see your subject? <button style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</button>.
             </p>
@@ -756,12 +756,12 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-extrabold leading-tight mb-5">
+            <h2 className="text-5xl font-bold leading-tight mb-5">
               <span className="text-black">A learning system that</span>
               <br />
               <span className="text-black"><span style={{ color: '#0BA5E9' }}>never stops improving</span></span>
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-[800px] mx-auto">
+            <p className="text-lg text-gray-600 leading-relaxed max-w-[800px] mx-auto">
               Every question you answer makes Mentiora smarter about how you learn.
               <br />Watch how the cycle works.
             </p>
@@ -786,8 +786,8 @@ const Index = () => {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-foreground tracking-tight">You Study</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Answer questions and get instant feedback</p>
+                    <h3 className="text-2xl font-bold text-foreground tracking-tight">You Study</h3>
+                    <p className="text-lg text-muted-foreground mt-1">Answer questions and get instant feedback</p>
                   </div>
                 </div>
               </div>
@@ -861,8 +861,8 @@ const Index = () => {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-foreground tracking-tight">Mentiora Analyzes</h3>
-                    <p className="text-sm text-muted-foreground mt-1">We track 50+ data points from every answer</p>
+                    <h3 className="text-2xl font-bold text-foreground tracking-tight">Mentiora Analyzes</h3>
+                    <p className="text-lg text-muted-foreground mt-1">We track 50+ data points from every answer</p>
                   </div>
                 </div>
               </div>
@@ -986,10 +986,10 @@ const Index = () => {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-foreground tracking-tight">You Get Personalized Results</h3>
+                    <h3 className="text-2xl font-bold text-foreground tracking-tight">You Get Personalized Results</h3>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Three features that adapt to you in real-time</p>
+                <p className="text-lg text-muted-foreground">Three features that adapt to you in real-time</p>
               </div>
               
               {/* Three Dashboard Cards - Exact Platform Style */}
@@ -1260,7 +1260,7 @@ const Index = () => {
 
 
       {/* PRICING SECTION */}
-      <section id="pricing" className="py-24 px-6 bg-white">
+      <section id="pricing" className="py-20 px-6 bg-white">
         <div className="max-w-[1200px] mx-auto">
           {/* Section Header */}
           <motion.div
@@ -1270,7 +1270,7 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl lg:text-6xl font-bold leading-tight mb-5">
+            <h2 className="text-5xl font-bold leading-tight mb-5">
               <span className="text-black">Personalised tutoring</span>
               <br />
               <span style={{ color: '#0BA5E9' }}>at a fraction of the cost</span>
@@ -1294,7 +1294,7 @@ const Index = () => {
               className="w-full"
             >
               {/* Graph Title */}
-              <h3 className="text-4xl font-bold mb-8" style={{ color: '#0BA5E9' }}>
+              <h3 className="text-2xl font-bold mb-8" style={{ color: '#0BA5E9' }}>
                 68% grade improvement
               </h3>
 
@@ -1418,7 +1418,7 @@ const Index = () => {
                 transition={{ delay: 0.4 }}
                 className="mb-8"
               >
-                <h3 className="text-3xl font-bold text-center leading-tight">
+                <h3 className="text-2xl font-bold text-center leading-tight">
                   <span className="text-black">95% cheaper than</span>
                   <br />
                   <span style={{ color: '#0BA5E9' }}>private tutoring</span>
@@ -1499,7 +1499,7 @@ const Index = () => {
 
       {/* FINAL CTA SECTION */}
       <section 
-        className="py-24 px-6 bg-gradient-to-br from-white to-gray-50"
+        className="py-20 px-6 bg-gradient-to-br from-white to-gray-50"
       >
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -1511,7 +1511,7 @@ const Index = () => {
             <h2 className="text-5xl font-bold text-black mb-4">
               Start your journey to better grades
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-lg text-gray-600 mb-8">
               Join thousands of students already improving with Mentiora
             </p>
             <Button 
