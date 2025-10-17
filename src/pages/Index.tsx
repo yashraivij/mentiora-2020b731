@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -1060,71 +1061,111 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 2: Auto-Notes - Matching Dashboard Style */}
+                {/* Card 2: Your Notes - Exact Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
+                  className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 shadow-lg transition-all duration-200"
                 >
                   <div className="p-6">
                     <div className="mb-4">
-                      <h3 className="text-lg font-bold text-foreground">Your Notes</h3>
-                      <p className="text-sm text-muted-foreground">Review notes from your mistakes and learning progress</p>
+                      <h3 className="text-lg font-bold text-[#0F172A] dark:text-white">Your Notes</h3>
+                      <p className="text-sm text-[#64748B] dark:text-gray-400">Review notes from your mistakes and learning progress</p>
                     </div>
                     
                     <div className="space-y-4">
-                      <div>
-                        <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-red-500 text-white mb-3">
-                          Low Confidence
-                        </span>
-                        <h4 className="font-bold text-base text-foreground mb-2">
-                          Explain how clock speed, cache size, and number of cores affect CPU performance.
-                        </h4>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                          <span className="text-primary">• Systems Architecture</span>
-                          <span>📅 13 Oct 2025</span>
-                          <span className="text-red-500">-6 marks lost</span>
+                      {/* Header Section */}
+                      <div className="pb-4 border-b border-[#E2E8F0]/30 dark:border-gray-700/30">
+                        <div className="space-y-2">
+                          <div>
+                            <Badge className="rounded-lg px-2 py-0.5 font-medium shadow-sm text-xs bg-[#EF4444] text-white mb-2">
+                              Low Confidence
+                            </Badge>
+                          </div>
+                          <h4 className="text-base font-bold text-[#0F172A] dark:text-white leading-tight">
+                            Explain how clock speed, cache size, and number of cores affect CPU performance.
+                          </h4>
+                          <div className="flex flex-wrap items-center gap-3 text-xs text-[#64748B] dark:text-gray-400">
+                            <span className="flex items-center gap-1.5">
+                              <div className="h-1 w-1 rounded-full bg-[#0EA5E9]" />
+                              Systems Architecture
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              13 Oct 2025
+                            </span>
+                            <span className="flex items-center gap-1 font-semibold text-[#EF4444]">
+                              -6 marks lost
+                            </span>
+                          </div>
                         </div>
                       </div>
                       
-                      <div className="bg-red-50 dark:bg-red-950/20 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                            <span className="text-red-500 text-xs">⚠</span>
+                      {/* What Went Wrong */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/5">
+                            <AlertTriangle className="h-4 w-4 text-[#EF4444]" />
                           </div>
-                          <h5 className="text-sm font-bold text-foreground">What Went Wrong</h5>
+                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">What Went Wrong</h5>
                         </div>
-                        <p className="text-xs text-muted-foreground ml-7">
-                          Insufficient understanding of key concepts
-                        </p>
+                        <div className="p-3 rounded-lg bg-[#FEF2F2] dark:bg-red-950/20 border border-[#EF4444]/20">
+                          <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-medium">
+                            Insufficient understanding of key concepts
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="bg-green-50 dark:bg-green-950/20 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                            <span className="text-green-500 text-xs">✓</span>
+                      {/* The Solution */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                            <CheckCircle2 className="h-4 w-4 text-[#16A34A]" />
                           </div>
-                          <h5 className="text-sm font-bold text-foreground">The Solution</h5>
+                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">The Solution</h5>
                         </div>
-                        <p className="text-xs text-muted-foreground ml-7">
-                          Review the fundamental principles and practice similar questions
-                        </p>
+                        <div className="p-3 rounded-lg bg-[#F0FDF4] dark:bg-green-950/20 border border-[#16A34A]/20">
+                          <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed font-semibold">
+                            Review the fundamental principles and practice similar questions
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="bg-primary/5 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span className="text-primary text-xs">💡</span>
+                      {/* Key Points to Remember */}
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className="p-1.5 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                            <Sparkles className="h-3.5 w-3.5 text-[#0EA5E9]" />
                           </div>
-                          <h5 className="text-sm font-bold text-foreground">Key Points to Remember</h5>
+                          <h5 className="text-sm font-bold text-[#0F172A] dark:text-white">Key Points to Remember</h5>
                         </div>
-                        <div className="ml-7 space-y-2 text-xs text-muted-foreground">
-                          <div className="flex gap-2">
-                            <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-white font-bold text-xs flex-shrink-0">1</span>
-                            <p>Clock Speed refers to the number of cycles a CPU can execute per second</p>
+                        <div className="space-y-2.5 pl-1">
+                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                              1
+                            </div>
+                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                              Clock Speed: Clock Speed Refers To The Number Of Cycles A CPU Can Execute Per Second, Measured In Gigahertz (GHz). Higher Clock Speeds Allow The CPU To Process More Instructions Per Second, Leading To Faster Performance.
+                            </p>
+                          </div>
+                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                              2
+                            </div>
+                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                              Cache Size: Cache Size Is The Amount Of High-Speed Memory Located Inside The CPU. Larger Cache Sizes Allow More Frequently Used Data To Be Stored Close To The CPU, Reducing The Time It Takes To Access Data From Main Memory (RAM).
+                            </p>
+                          </div>
+                          <div className="flex gap-2.5 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                            <div className="flex-shrink-0 h-6 w-6 rounded-md bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                              3
+                            </div>
+                            <p className="text-sm text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1 font-medium">
+                              Number Of Cores: The Number Of Cores Refers To The Individual Processing Units Within The CPU. More cores enable the CPU to handle multiple tasks simultaneously, improving multitasking and parallel processing performance.
+                            </p>
                           </div>
                         </div>
                       </div>
