@@ -51,11 +51,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 light flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <Card className="w-full max-w-md shadow-lg border border-gray-100 bg-white rounded-2xl">
         <CardHeader className="text-center pb-2">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: '#0BA5E9' }}>
               <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
@@ -63,7 +63,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          <CardTitle className="text-3xl font-bold text-black mb-2">
             Welcome Back
           </CardTitle>
           <CardDescription className="text-gray-600 text-base">
@@ -81,7 +81,10 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-12 rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                className="h-12 rounded-lg border-gray-200"
+                style={{ 
+                  borderColor: email ? '#0BA5E9' : undefined,
+                }}
               />
             </div>
             <div className="space-y-2">
@@ -93,13 +96,17 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-12 rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                className="h-12 rounded-lg border-gray-200"
+                style={{ 
+                  borderColor: password ? '#0BA5E9' : undefined,
+                }}
               />
               <div className="text-right">
                 <button
                   type="button"
                   onClick={handleForgotPassword}
-                  className="text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:underline font-medium"
+                  className="text-sm hover:underline font-medium"
+                  style={{ color: '#0BA5E9' }}
                 >
                   Forgot password?
                 </button>
@@ -107,7 +114,8 @@ const Login = () => {
             </div>
             <Button 
               type="submit" 
-              className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" 
+              className="w-full h-12 text-white font-semibold rounded-lg shadow-lg hover:opacity-90 transition-all duration-300" 
+              style={{ backgroundColor: '#0BA5E9' }}
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
@@ -116,7 +124,7 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{" "}
-              <Link to="/register" className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:underline font-semibold">
+              <Link to="/register" className="hover:underline font-semibold" style={{ color: '#0BA5E9' }}>
                 Sign up here
               </Link>
             </p>
