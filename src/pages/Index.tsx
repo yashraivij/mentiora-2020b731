@@ -1522,9 +1522,6 @@ const Index = () => {
             >
               Try now for free
             </Button>
-            <p className="text-sm text-gray-500 mt-4">
-              No credit card required • Get started in 60 seconds
-            </p>
           </motion.div>
         </div>
       </section>
@@ -1554,23 +1551,10 @@ const Index = () => {
               <h4 className="font-semibold text-black mb-3">Company</h4>
               <ul className="space-y-2">
                 <li><button onClick={() => scrollToSection('about')} className="text-sm text-gray-600 hover:text-black transition-colors">About us</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Careers</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Blog</button></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-black mb-3">Legal</h4>
-              <ul className="space-y-2">
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Privacy Policy</button></li>
-                <li><button className="text-sm text-gray-600 hover:text-black transition-colors">Terms of Service</button></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-200 pt-6 text-center">
-            <p className="text-sm text-gray-600">© 2025 Mentiora. All rights reserved.</p>
-          </div>
         </div>
       </footer>
     </div>
