@@ -1527,11 +1527,11 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-200 py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
+      <footer className="bg-white border-t border-gray-200 py-8 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-16 text-center md:text-left">
+            <div className="flex-shrink-0">
+              <div className="flex items-center gap-2 mb-3 justify-center md:justify-start">
                 <img src={mentioraLogo} alt="Mentiora" className="h-6 w-6" />
                 <span className="text-lg font-bold text-black">Mentiora</span>
               </div>
@@ -1554,7 +1554,6 @@ const Index = () => {
               </ul>
             </div>
           </div>
-
         </div>
       </footer>
     </div>
