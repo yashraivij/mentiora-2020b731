@@ -1378,17 +1378,14 @@ const Index = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 1.7, duration: 0.4 }}
                   >
-                    {/* Mentiora logo circle */}
-                    <circle cx="365" cy="66" r="10" fill="#0BA5E9" />
-                    <text
-                      x="365"
-                      y="71"
-                      className="fill-white font-bold"
-                      fontSize="14"
-                      textAnchor="middle"
-                    >
-                      m
-                    </text>
+                    {/* Mentiora logo image */}
+                    <image
+                      href={mentioraLogo}
+                      x="355"
+                      y="56"
+                      width="20"
+                      height="20"
+                    />
                     
                     {/* Label text */}
                     <text
