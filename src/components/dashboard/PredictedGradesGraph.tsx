@@ -40,34 +40,62 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Grade to percentage mapping
-  const gradeToPercentage = (grade: string): number => {
-    switch (grade) {
-      case '9': return 95;
-      case '8': return 85;
-      case '7': return 75;
-      case '6': return 65;
-      case '5': return 55;
-      case '4': return 45;
-      case '3': return 35;
-      case '2': return 25;
-      case '1': return 15;
-      case 'U': return 5;
-      default: return 0;
+  // Helper to check if subject is A-Level
+  const isALevelSubject = (subjectId: string): boolean => {
+    return subjectId.includes('alevel') || subjectId.includes('a-level');
+  };
+
+  // Grade to percentage mapping (handles both GCSE and A-Level)
+  const gradeToPercentage = (grade: string, isALevel: boolean = false): number => {
+    if (isALevel) {
+      switch (grade) {
+        case 'A*': return 95;
+        case 'A': return 85;
+        case 'B': return 75;
+        case 'C': return 65;
+        case 'D': return 55;
+        case 'E': return 45;
+        case 'U': return 5;
+        default: return 0;
+      }
+    } else {
+      switch (grade) {
+        case '9': return 95;
+        case '8': return 85;
+        case '7': return 75;
+        case '6': return 65;
+        case '5': return 55;
+        case '4': return 45;
+        case '3': return 35;
+        case '2': return 25;
+        case '1': return 15;
+        case 'U': return 5;
+        default: return 0;
+      }
     }
   };
 
-  // Percentage to grade mapping
-  const percentageToGrade = (percentage: number): string => {
-    if (percentage >= 90) return '9';
-    if (percentage >= 80) return '8';
-    if (percentage >= 70) return '7';
-    if (percentage >= 60) return '6';
-    if (percentage >= 50) return '5';
-    if (percentage >= 40) return '4';
-    if (percentage >= 30) return '3';
-    if (percentage >= 20) return '2';
-    return 'U';
+  // Percentage to grade mapping (handles both GCSE and A-Level)
+  const percentageToGrade = (percentage: number, isALevel: boolean = false): string => {
+    if (isALevel) {
+      if (percentage >= 90) return 'A*';
+      if (percentage >= 80) return 'A';
+      if (percentage >= 70) return 'B';
+      if (percentage >= 60) return 'C';
+      if (percentage >= 50) return 'D';
+      if (percentage >= 40) return 'E';
+      return 'U';
+    } else {
+      if (percentage >= 90) return '9';
+      if (percentage >= 80) return '8';
+      if (percentage >= 70) return '7';
+      if (percentage >= 60) return '6';
+      if (percentage >= 50) return '5';
+      if (percentage >= 40) return '4';
+      if (percentage >= 30) return '3';
+      if (percentage >= 20) return '2';
+      return 'U';
+    }
   };
 
   useEffect(() => {
@@ -104,9 +132,12 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
         };
 
         const calculateCombinedGrade = (subjectId: string) => {
+          // Check if this is an A-Level subject
+          const isALevel = isALevelSubject(subjectId);
+          
           // Get practice progress
           const practicePercentage = getSubjectProgress(subjectId);
-          const practiceGrade = percentageToGrade(practicePercentage);
+          const practiceGrade = percentageToGrade(practicePercentage, isALevel);
           
           // Get most recent predicted exam completion for this subject
           const recentExamCompletion = (predictedExamData || [])
@@ -121,9 +152,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           
           // If only exam completion, use that grade
           if (!hasPracticeData && recentExamCompletion) {
-            const examGradeNumber = getPredictedGradeNumber(recentExamCompletion.grade);
+            const examGradeNumber = isALevel ? 0 : getPredictedGradeNumber(recentExamCompletion.grade);
             return {
-              grade: examGradeNumber === 0 ? 'U' : examGradeNumber.toString(),
+              grade: recentExamCompletion.grade,
               percentage: recentExamCompletion.percentage,
               examGrade: recentExamCompletion.grade,
               practiceScore: 0
@@ -142,21 +173,33 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           
           // If both exist, combine with weighted average (predicted exam has more weight - 70%)
           if (hasPracticeData && recentExamCompletion) {
-            const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
-            const practiceGradeNum = practiceGrade === 'U' ? 0 : parseInt(practiceGrade);
-            const validPracticeGrade = isNaN(practiceGradeNum) ? 0 : practiceGradeNum;
-            const examWeight = 0.7;
-            const practiceWeight = 0.3;
-            
-            const combinedGrade = Math.round((examGrade * examWeight) + (validPracticeGrade * practiceWeight));
-            const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
-            
-            return {
-              grade: combinedGrade === 0 ? 'U' : combinedGrade.toString(),
-              percentage: isNaN(combinedPercentage) ? 0 : combinedPercentage,
-              examGrade: recentExamCompletion.grade,
-              practiceScore: practicePercentage
-            };
+            // For A-Level, use letter grades directly
+            if (isALevel) {
+              // Use the predicted exam grade as primary indicator
+              return {
+                grade: recentExamCompletion.grade,
+                percentage: recentExamCompletion.percentage,
+                examGrade: recentExamCompletion.grade,
+                practiceScore: practicePercentage
+              };
+            } else {
+              // For GCSE, use numeric calculation
+              const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+              const practiceGradeNum = practiceGrade === 'U' ? 0 : parseInt(practiceGrade);
+              const validPracticeGrade = isNaN(practiceGradeNum) ? 0 : practiceGradeNum;
+              const examWeight = 0.7;
+              const practiceWeight = 0.3;
+              
+              const combinedGrade = Math.round((examGrade * examWeight) + (validPracticeGrade * practiceWeight));
+              const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
+              
+              return {
+                grade: combinedGrade === 0 ? 'U' : combinedGrade.toString(),
+                percentage: isNaN(combinedPercentage) ? 0 : combinedPercentage,
+                examGrade: recentExamCompletion.grade,
+                practiceScore: practicePercentage
+              };
+            }
           }
           
           return null;
@@ -206,17 +249,23 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
-          return {
-            subjectId: subjectId,
-            subjectName,
-            practiceScore: combinedResult.practiceScore,
-            examGrade: combinedResult.examGrade,
-            finalGrade: combinedResult.grade || 'U',
-            finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
-            confidence,
-            practiceCount,
-            isGrade7Plus: combinedResult.grade !== 'U' && !isNaN(parseInt(combinedResult.grade)) && parseInt(combinedResult.grade) >= 7
-          } as GradeData;
+            // Determine if grade is "good" (7+ for GCSE, B+ for A-Level)
+            const isALevel = isALevelSubject(subjectId);
+            const isGoodGrade = isALevel 
+              ? ['A*', 'A', 'B'].includes(combinedResult.grade)
+              : (combinedResult.grade !== 'U' && !isNaN(parseInt(combinedResult.grade)) && parseInt(combinedResult.grade) >= 7);
+            
+            return {
+              subjectId: subjectId,
+              subjectName,
+              practiceScore: combinedResult.practiceScore,
+              examGrade: combinedResult.examGrade,
+              finalGrade: combinedResult.grade || 'U',
+              finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
+              confidence,
+              practiceCount,
+              isGrade7Plus: isGoodGrade
+            } as GradeData;
         });
 
         const grades = await Promise.all(gradePromises);
@@ -295,6 +344,22 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
       <span className={!isPremium ? "blur-sm select-none" : ""}>{children}</span>
     );
     
+    const isALevel = isALevelSubject(grade.subjectId);
+    
+    // Get next grade for improvement suggestions
+    const getNextGrade = (currentGrade: string): string | null => {
+      if (isALevel) {
+        const gradeOrder = ['E', 'D', 'C', 'B', 'A', 'A*'];
+        const currentIndex = gradeOrder.indexOf(currentGrade);
+        return currentIndex >= 0 && currentIndex < gradeOrder.length - 1 ? gradeOrder[currentIndex + 1] : null;
+      } else {
+        const numGrade = parseInt(currentGrade);
+        return !isNaN(numGrade) && numGrade < 9 ? (numGrade + 1).toString() : null;
+      }
+    };
+    
+    const nextGrade = getNextGrade(grade.finalGrade);
+    
     // For premium users, always show detailed information if there's any data
     if (isPremium) {
       // If user has practice data (including 0% scores)
@@ -302,9 +367,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
         return (
           <>
             You scored an average of {grade.practiceScore}% across your {grade.subjectName} quizzes. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
-            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+            {nextGrade && (
               <>
-                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
+                {' '}To hit a Grade {nextGrade}, aim for {gradeToPercentage(nextGrade, isALevel)}%+ across all topics.
               </>
             )}
           </>
@@ -315,9 +380,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
         return (
           <>
             You scored a Grade {grade.examGrade} in your {grade.subjectName} predicted paper. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
-            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+            {nextGrade && (
               <>
-                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
+                {' '}To hit a Grade {nextGrade}, aim for {gradeToPercentage(nextGrade, isALevel)}%+ across all topics.
               </>
             )}
           </>
@@ -331,9 +396,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
         <>
           📊 Your Results<br />
           You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+          {nextGrade && (
             <>
-              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
+              {' '}To hit a Grade {nextGrade}, aim for <BlurSpan>{gradeToPercentage(nextGrade, isALevel)}%+</BlurSpan> across all topics.
             </>
           )}
         </>
@@ -343,9 +408,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
         <>
           📊 Your Results<br />
           You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+          {nextGrade && (
             <>
-              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
+              {' '}To hit a Grade {nextGrade}, aim for <BlurSpan>{gradeToPercentage(nextGrade, isALevel)}%+</BlurSpan> across all topics.
             </>
           )}
         </>
@@ -355,7 +420,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     return "📊 Your Results<br />Start revising to unlock your prediction";
   };
 
-  // Helper function to convert grade string to number for calculations
+  // Helper function to convert grade string to number for calculations (GCSE only)
   const gradeToNumber = (grade: string): number => {
     if (grade === 'U') return 0;
     if (grade === '–') return 0;
@@ -363,8 +428,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     return isNaN(num) ? 0 : num;
   };
 
-  // Calculate average grade (same logic as PredictivePerformanceCard)
-  const gradesWithData = gradesData.filter(g => g.finalGrade !== '–');
+  // Calculate average grade (only for GCSE subjects with numeric grades)
+  const gradesWithData = gradesData.filter(g => g.finalGrade !== '–' && !isALevelSubject(g.subjectId));
   const averageGrade = gradesWithData.length > 0 
     ? gradesWithData.reduce((sum, g) => sum + gradeToNumber(g.finalGrade), 0) / gradesWithData.length
     : 0;
@@ -414,7 +479,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
             </div>
             <div>
               <CardTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent flex items-center space-x-3">
-                <span>Predicted GCSE Grades</span>
+                <span>Predicted Grades</span>
                 <Crown className="h-6 w-6 text-amber-500 animate-pulse" />
                 <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs px-2 py-1 font-bold animate-bounce">
                   PREMIUM
@@ -424,18 +489,18 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            {averageGrade > 0 && (
+            {averageGrade > 0 && gradesData.some(g => !isALevelSubject(g.subjectId)) && (
               <div className={`text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20 ${!isPremium ? 'blur-sm' : ''}`}>
                 <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   {averageGrade.toFixed(1)}
                 </div>
-                <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
+                <div className="text-xs text-muted-foreground font-semibold">GCSE Avg</div>
               </div>
             )}
             {grade7PlusCount > 0 && (
               <Badge className={`bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse ${!isPremium ? 'blur-sm' : ''}`}>
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                {grade7PlusCount} Grade 7+ 🎉
+                {grade7PlusCount} Top Grades 🎉
               </Badge>
             )}
           </div>
