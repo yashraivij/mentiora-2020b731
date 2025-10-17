@@ -147,7 +147,7 @@ const Pricing = () => {
             <Button
               onClick={handleUpgrade}
               variant="outline"
-              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#00A8FF] transition-colors"
+              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#00A8FF] hover:bg-white transition-colors"
             >
               Subscribe Monthly
             </Button>
