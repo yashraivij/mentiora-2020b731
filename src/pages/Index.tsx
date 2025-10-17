@@ -170,33 +170,6 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-
-          {/* Floating Element - Mobile Sticky Note (visible on mobile/tablet only) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
-            className="absolute bottom-[-60px] left-[10px] md:bottom-[-80px] md:left-[20px] block lg:hidden z-10"
-          >
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-            >
-              <div 
-                className="relative w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.1)] p-3"
-                style={{
-                  backgroundColor: '#fef08a',
-                  transform: 'rotate(-5deg)'
-                }}
-              >
-                <div className="absolute top-[-6px] left-1/2 -translate-x-1/2 text-lg">📌</div>
-                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Caveat, cursive', color: '#000' }}>
-                  Smart AI tutoring that knows exactly what you need! 📚✨
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-
           {/* Floating Element 3 - Top Right: Study Insights (Real Dashboard Component) */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: -50 }}
