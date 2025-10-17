@@ -436,13 +436,13 @@ const Index = () => {
           </div>
           <div className="relative">
             <motion.div
-              className="flex items-center gap-16"
-              animate={{ x: [0, -2000] }}
+              className="flex items-center gap-12"
+              animate={{ x: ["0%", "-50%"] }}
               transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 30,
+                  duration: 25,
                   ease: "linear",
                 },
               }}
@@ -451,63 +451,63 @@ const Index = () => {
               <img 
                 src={cambridgeLogo} 
                 alt="University of Cambridge" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={oxfordLogo} 
                 alt="University of Oxford" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={lseLogo} 
                 alt="London School of Economics" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={exeterLogo} 
                 alt="University of Exeter" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={bathLogo} 
                 alt="University of Bath" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={bristolLogo} 
                 alt="University of Bristol" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
-              {/* Duplicate set for seamless loop */}
+              {/* Second set - duplicate for seamless loop */}
               <img 
                 src={cambridgeLogo} 
                 alt="University of Cambridge" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={oxfordLogo} 
                 alt="University of Oxford" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={lseLogo} 
                 alt="London School of Economics" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={exeterLogo} 
                 alt="University of Exeter" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={bathLogo} 
                 alt="University of Bath" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
               <img 
                 src={bristolLogo} 
                 alt="University of Bristol" 
-                className="h-16 w-auto object-contain flex-shrink-0"
+                className="h-14 w-40 object-contain flex-shrink-0"
               />
             </motion.div>
           </div>
