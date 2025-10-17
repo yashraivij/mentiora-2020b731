@@ -6,7 +6,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
 import birminghamLogo from "@/assets/birmingham-logo.png";
@@ -532,15 +532,28 @@ const Pricing = () => {
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Is Mentiora specific to the GCSE and A-Level specification?
                 </span>
-                <ChevronDown 
-                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 0 ? 'rotate-180' : ''}`} 
-                />
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 0 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
               </button>
-              {expandedFAQ === 0 && (
-                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
-                  Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
-                </div>
-              )}
+              <AnimatePresence>
+                {expandedFAQ === 0 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* FAQ Item 2 */}
@@ -552,15 +565,28 @@ const Pricing = () => {
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   How are answers marked on Mentiora?
                 </span>
-                <ChevronDown 
-                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 1 ? 'rotate-180' : ''}`} 
-                />
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 1 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
               </button>
-              {expandedFAQ === 1 && (
-                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
-                  Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
-                </div>
-              )}
+              <AnimatePresence>
+                {expandedFAQ === 1 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* FAQ Item 3 */}
@@ -572,15 +598,28 @@ const Pricing = () => {
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Can I cancel my subscription at any time?
                 </span>
-                <ChevronDown 
-                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 2 ? 'rotate-180' : ''}`} 
-                />
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 2 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
               </button>
-              {expandedFAQ === 2 && (
-                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
-                  Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
-                </div>
-              )}
+              <AnimatePresence>
+                {expandedFAQ === 2 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* FAQ Item 4 */}
@@ -592,15 +631,28 @@ const Pricing = () => {
                 <span className="text-lg font-medium text-gray-900 pr-8">
                   Which exam boards does Mentiora support?
                 </span>
-                <ChevronDown 
-                  className={`w-6 h-6 text-gray-900 flex-shrink-0 transition-transform ${expandedFAQ === 3 ? 'rotate-180' : ''}`} 
-                />
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 3 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
               </button>
-              {expandedFAQ === 3 && (
-                <div className="pb-6 px-2 text-gray-600 leading-relaxed animate-accordion-down">
-                  Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
-                </div>
-              )}
+              <AnimatePresence>
+                {expandedFAQ === 3 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
