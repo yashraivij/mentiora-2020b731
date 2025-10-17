@@ -737,7 +737,7 @@ const Index = () => {
 
 
       {/* HOW PERSONALIZATION WORKS - DASHBOARD SHOWCASE */}
-      <section className="relative py-32 px-6 overflow-hidden bg-white">
+      <section className="relative py-20 px-6 overflow-hidden bg-white">
         <div className="max-w-[1400px] mx-auto">
           {/* Section Header */}
           <motion.div
@@ -747,9 +747,6 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: '#0BA5E9' }}>
-              HOW PERSONALIZATION WORKS
-            </div>
             <h2 className="text-5xl font-extrabold leading-tight mb-5">
               <span className="text-black">A learning system that</span>
               <br />
@@ -786,10 +783,10 @@ const Index = () => {
                 </div>
               </div>
                   
-              {/* Question Card - Real Dashboard Style */}
+              {/* Question Card - Real Dashboard Style with Ask Medly */}
               <motion.div
-                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
-                className="max-w-[700px] mx-auto bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100"
+                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                className="max-w-[700px] mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition-all duration-200"
               >
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div className="flex-1">
@@ -812,8 +809,15 @@ const Index = () => {
                   <p className="text-sm text-gray-600 italic">Your answer appears here...</p>
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <div className="text-xs text-gray-500">
+                <div className="flex justify-between items-center gap-3">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-sm font-medium"
+                  >
+                    Ask Medly
+                  </Button>
+                  <div className="text-xs text-gray-500 flex-1 text-center">
                     Chemistry • Photosynthesis
                   </div>
                   <Button
@@ -828,19 +832,20 @@ const Index = () => {
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center my-8">
+            <div className="flex justify-center my-12">
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-2"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className="flex flex-col items-center"
               >
-                <div className="w-[2px] h-12 bg-gradient-to-b from-primary/60 to-primary/20 rounded-full" />
-                <div className="w-3 h-3 rounded-full bg-primary/40 animate-pulse" />
-                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-primary/60" />
+                <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-primary/60">
+                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </motion.div>
             </div>
 
-            {/* Stage 2: AI ANALYZES */}
+            {/* Stage 2: MENTIORA ANALYZES */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -857,20 +862,23 @@ const Index = () => {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-foreground tracking-tight">AI Analyzes</h3>
+                    <h3 className="text-3xl font-bold text-foreground tracking-tight">Mentiora Analyzes</h3>
                     <p className="text-sm text-muted-foreground mt-1">We track 50+ data points from every answer</p>
                   </div>
                 </div>
               </div>
                   
               {/* Analysis Dashboard - Real Dashboard Style */}
-              <div className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-8 border border-gray-100">
+              <motion.div 
+                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
+                className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition-all duration-200"
+              >
                 <div className="grid md:grid-cols-3 gap-6">
                   {/* Time Saved Stat */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Time Saved</div>
-                    <div className="text-4xl font-bold text-black mb-2">14.7h</div>
-                    <div className="text-xs text-gray-600">This month</div>
+                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Time Saved</div>
+                    <div className="text-4xl font-bold text-foreground mb-2">14.7h</div>
+                    <div className="text-xs text-muted-foreground">This month</div>
                     <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
                       <motion.div 
                         className="h-full rounded-full"
@@ -884,10 +892,10 @@ const Index = () => {
                   </div>
                   
                   {/* Accuracy Stat */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accuracy</div>
-                    <div className="text-4xl font-bold text-black mb-2">78%</div>
-                    <div className="text-xs text-gray-600">Current performance</div>
+                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Accuracy</div>
+                    <div className="text-4xl font-bold text-foreground mb-2">78%</div>
+                    <div className="text-xs text-muted-foreground">Current performance</div>
                     <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
                       <motion.div 
                         className="h-full rounded-full"
@@ -900,36 +908,37 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  {/* Questions Answered */}
-                  <div className="bg-gray-100 rounded-xl p-5">
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Progress</div>
-                    <div className="text-4xl font-bold text-black mb-2">147</div>
-                    <div className="text-xs text-gray-600">Questions answered</div>
+                  {/* Best Performance Time */}
+                  <div className="bg-muted rounded-xl p-5 transition-all duration-200 hover:shadow-md">
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">You Perform Best At</div>
+                    <div className="text-4xl font-bold text-foreground mb-2">7-9 PM</div>
+                    <div className="text-xs text-muted-foreground">Peak focus time</div>
                     <div className="h-2 bg-gray-300 rounded-full overflow-hidden mt-3">
                       <motion.div 
                         className="h-full rounded-full"
                         style={{ backgroundColor: '#A855F7' }}
                         initial={{ width: 0 }}
-                        whileInView={{ width: '92%' }}
+                        whileInView={{ width: '95%' }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.9 }}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center my-8">
+            <div className="flex justify-center my-12">
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="flex flex-col items-center gap-2"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="flex flex-col items-center"
               >
-                <div className="w-[2px] h-12 bg-gradient-to-b from-primary/60 to-primary/20 rounded-full" />
-                <div className="w-3 h-3 rounded-full bg-primary/40 animate-pulse" />
-                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-primary/60" />
+                <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-primary/60">
+                  <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </motion.div>
             </div>
 
@@ -958,28 +967,28 @@ const Index = () => {
               
               {/* Three Dashboard Cards - Exact Platform Style */}
               <div className="grid md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
-                {/* Card 1: Predicted Grades - Exact Dashboard Style */}
+                {/* Card 1: Predicted Grades - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <span className="text-xl">🧪</span>
-                      <h3 className="text-sm font-bold text-black">Chemistry</h3>
+                      <h3 className="text-sm font-bold text-foreground">Chemistry</h3>
                     </div>
                     
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-3 mb-3">
+                    <div className="bg-muted rounded-lg px-4 py-3 space-y-3 mb-3">
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                          <span className="text-2xl font-bold text-black">7</span>
+                          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Predicted</span>
+                          <span className="text-2xl font-bold text-foreground">7</span>
                         </div>
-                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                        <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
                           <motion.div 
                             className="h-full rounded-full"
                             style={{ backgroundColor: '#0BA5E9' }}
@@ -993,17 +1002,17 @@ const Index = () => {
                       
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                          <span className="text-2xl font-bold text-black">9</span>
+                          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Target</span>
+                          <span className="text-2xl font-bold text-foreground">9</span>
                         </div>
-                        <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                        <div className="h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
                           <div className="h-full bg-green-500 rounded-full" style={{ width: '100%' }} />
                         </div>
                       </div>
                     </div>
                     
                     <button 
-                      className="w-full py-2 rounded-lg font-bold text-sm text-white"
+                      className="w-full py-2 rounded-lg font-bold text-sm text-white hover:opacity-90 transition-opacity"
                       style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Topics
@@ -1011,70 +1020,70 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* Card 2: Auto-Notes - Exact Dashboard Style */}
+                {/* Card 2: Auto-Notes - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
                     <div className="mb-4">
-                      <h3 className="text-sm font-bold text-black">Your Notes</h3>
-                      <p className="text-xs text-gray-500">Auto-generated</p>
+                      <h3 className="text-sm font-bold text-foreground">Your Notes</h3>
+                      <p className="text-xs text-muted-foreground">Auto-generated</p>
                     </div>
                     
-                    <div className="bg-gray-50 rounded-lg p-4 mb-4 min-h-[140px]">
-                      <div className="text-xs font-bold text-black mb-2">Chemical Bonding</div>
-                      <div className="text-xs text-gray-600 leading-relaxed mb-3">
+                    <div className="bg-muted rounded-lg p-4 mb-4 min-h-[140px]">
+                      <div className="text-xs font-bold text-foreground mb-2">Chemical Bonding</div>
+                      <div className="text-xs text-muted-foreground leading-relaxed mb-3">
                         Focus on metallic bonding - you scored 2/5 on recent questions. Remember: electrons form a "sea" around metal ions...
                       </div>
-                      <div className="text-xs text-gray-400">Generated 5 mins ago</div>
+                      <div className="text-xs text-muted-foreground opacity-70">Generated 5 mins ago</div>
                     </div>
                     
-                    <div className="text-xs text-gray-600 flex items-center gap-2">
-                      <span className="font-semibold" style={{ color: '#A855F7' }}>14h saved this month</span>
+                    <div className="text-xs text-muted-foreground flex items-center gap-2">
+                      <span className="font-semibold text-primary">14h saved this month</span>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Card 3: Smart Planner - Exact Dashboard Style */}
+                {/* Card 3: Smart Planner - Matching Dashboard Style */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}
-                  className="bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
                     <div className="mb-4">
-                      <h3 className="text-sm font-bold text-black">Today's Plan</h3>
-                      <p className="text-xs text-gray-500">Auto-adapted</p>
+                      <h3 className="text-sm font-bold text-foreground">Today's Plan</h3>
+                      <p className="text-xs text-muted-foreground">Auto-adapted</p>
                     </div>
                     
                     <div className="space-y-3 mb-4">
-                      <div className="bg-gray-50 rounded-lg p-3" style={{ borderLeft: '4px solid #0BA5E9' }}>
+                      <div className="bg-muted rounded-lg p-3 border-l-4 border-primary">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-black">6:00pm - 6:30pm</span>
-                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-orange-100 text-orange-600">Peak</span>
+                          <span className="text-xs font-bold text-foreground">6:00pm - 6:30pm</span>
+                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-orange-500/10 text-orange-600 dark:text-orange-400">Peak</span>
                         </div>
-                        <div className="text-xs text-gray-600">Chemistry revision</div>
-                        <div className="text-xs text-gray-400 mt-1">30 mins</div>
+                        <div className="text-xs text-muted-foreground">Chemistry revision</div>
+                        <div className="text-xs text-muted-foreground opacity-70 mt-1">30 mins</div>
                       </div>
                       
-                      <div className="bg-gray-50 rounded-lg p-3 border-l-4 border-gray-300">
+                      <div className="bg-muted rounded-lg p-3 border-l-4 border-border">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold text-black">7:00pm - 7:20pm</span>
+                          <span className="text-xs font-bold text-foreground">7:00pm - 7:20pm</span>
                         </div>
-                        <div className="text-xs text-gray-600">Maths practice</div>
-                        <div className="text-xs text-gray-400 mt-1">20 mins</div>
+                        <div className="text-xs text-muted-foreground">Maths practice</div>
+                        <div className="text-xs text-muted-foreground opacity-70 mt-1">20 mins</div>
                       </div>
                     </div>
                     
-                    <div className="text-xs text-gray-600">
+                    <div className="text-xs text-muted-foreground">
                       Updates after every session
                     </div>
                   </div>
