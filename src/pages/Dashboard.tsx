@@ -3264,11 +3264,31 @@ const Dashboard = () => {
                                   
                                   return (
                                     <div key={day} className="relative">
+                                      {/* Blur effect for non-premium users */}
+                                      {shouldBlur && (
+                                        <div className="absolute inset-0 backdrop-blur-md bg-background/30 z-10 rounded-2xl flex items-center justify-center">
+                                          <div className="text-center space-y-4 p-6">
+                                            <Lock className="w-12 h-12 mx-auto text-primary/60" />
+                                            <div>
+                                              <h3 className="text-lg font-bold text-foreground mb-2">Premium Feature</h3>
+                                              <p className="text-sm text-muted-foreground mb-4">Unlock the complete 7-day adaptive study plan</p>
+                                            </div>
+                                            <Button
+                                              onClick={() => navigate('/pricing')}
+                                              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-lg"
+                                            >
+                                              <Crown className="w-4 h-4 mr-2" />
+                                              Upgrade to Premium
+                                            </Button>
+                                          </div>
+                                        </div>
+                                      )}
+                                      
                                       <motion.div 
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: i * 0.05 }}
-                                        className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm pointer-events-none' : ''}`}
+                                        className="p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300"
                                       >
                                         <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                                           <div>
@@ -3367,19 +3387,6 @@ const Dashboard = () => {
                                           })}
                                         </div>
                                       </motion.div>
-                                      
-                                      {/* Premium Overlay for Blurred Items */}
-                                      {shouldBlur && (
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                          <Button
-                                            onClick={() => navigate('/pricing')}
-                                            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-lg"
-                                          >
-                                            <Crown className="w-4 h-4 mr-2" />
-                                            Upgrade to Premium
-                                          </Button>
-                                        </div>
-                                      )}
                                     </div>
                                   );
                                 });
