@@ -1824,7 +1824,12 @@ const Dashboard = () => {
       return {
         id: subjectId,
         name: (() => {
-          // Check if exam board is already in the subject name
+          // For A-Level subjects, replace "(A-Level)" with the exam board
+          if (subject.subject_name.includes('(A-Level)')) {
+            const baseName = subject.subject_name.replace('(A-Level)', '').trim();
+            return `${baseName} (${subject.exam_board})`;
+          }
+          // Check if exam board is already in the subject name (for other subjects)
           const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
           if (hasExamBoard) {
             return subject.subject_name;
