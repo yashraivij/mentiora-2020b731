@@ -6,6 +6,12 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
+import bristolLogo from "@/assets/bristol-logo.png";
+import newcastleLogo from "@/assets/newcastle-logo.svg";
+import birminghamLogo from "@/assets/birmingham-logo.png";
+import oxfordLogo from "@/assets/oxford-logo.png";
+import bathLogo from "@/assets/bath-logo.png";
 
 const Pricing = () => {
   const navigate = useNavigate();
@@ -370,25 +376,115 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Loved by Students Section */}
+        {/* Russell Group Section */}
         <div className="mb-16">
           <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
-            Loved by 30,000+ GCSE students<br />from the UK's top schools
+            Helping GCSE & A-Level students<br />get into Russell Group universities
           </h2>
 
-          {/* School Logos */}
-          <div className="flex items-center justify-center gap-12 flex-wrap mb-12 opacity-40 grayscale">
-            <div className="h-16 flex items-center">
-              <div className="text-2xl font-light text-gray-400">FOREST<br /><span className="text-sm">SCHOOL</span></div>
+          {/* University Logos Strip */}
+          <div className="py-8 px-6 overflow-hidden bg-gray-50 rounded-2xl">
+            <div className="text-center mb-6">
+              <p className="text-sm font-medium text-gray-600">
+                Trusted by <span className="font-bold text-black">500+ students</span> at Russell Group universities
+              </p>
             </div>
-            <div className="h-16 flex items-center">
-              <div className="text-xl font-serif text-gray-400">Queen Elizabeth's School</div>
-            </div>
-            <div className="h-16 flex items-center">
-              <div className="text-xl font-bold text-gray-400">Chiswick School</div>
-            </div>
-            <div className="h-16 flex items-center">
-              <div className="text-xl font-bold text-gray-400">SARACENS<br /><span className="text-sm">HIGH SCHOOL</span></div>
+            <div className="relative">
+              <motion.div
+                className="flex items-center gap-12"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 25,
+                    ease: "linear",
+                  },
+                }}
+              >
+                {/* First set of logos */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                {/* Second set - duplicate for seamless loop */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+              </motion.div>
             </div>
           </div>
 
