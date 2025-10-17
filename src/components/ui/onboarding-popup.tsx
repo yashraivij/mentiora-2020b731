@@ -29,11 +29,14 @@ const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
   
   curriculum.forEach((subject) => {
     const subjectId = subject.id.toLowerCase();
-    const subjectName = subject.name;
+    // Remove exam board from subject name if it exists (e.g., "Biology (Edexcel)" -> "Biology")
+    const subjectName = subject.name.replace(/\s*\([^)]*\)\s*/g, '').trim();
     
     // Extract exam board and level from ID (e.g., "biology-aqa-alevel" or "combined-science-aqa")
     const parts = subjectId.split('-');
-    const examBoard = parts.find(p => ['aqa', 'edexcel', 'ocr', 'eduqas'].includes(p))?.toUpperCase() || 'AQA';
+    const examBoardRaw = parts.find(p => ['aqa', 'edexcel', 'ocr', 'eduqas'].includes(p)) || 'aqa';
+    // Properly capitalize: "Edexcel" not "EDEXCEL"
+    const examBoard = examBoardRaw.charAt(0).toUpperCase() + examBoardRaw.slice(1).toLowerCase();
     const isAlevel = subjectId.includes('alevel');
     const isIgcse = subjectId.includes('igcse');
     const isGcse = !isAlevel && !isIgcse;
