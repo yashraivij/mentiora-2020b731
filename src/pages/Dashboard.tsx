@@ -2539,24 +2539,24 @@ const Dashboard = () => {
 
               {/* Subject Detail Drawer */}
               <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-                <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 transition-all duration-300`}>
+                <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
                   {selectedDrawerSubject && (
                     <>
-                      <SheetHeader className="space-y-6 pb-8 border-b border-[#E2E8F0]/50 dark:border-gray-800">
-                        <div className="flex items-center gap-5">
+                      <SheetHeader className="space-y-3 sm:space-y-6 pb-4 sm:pb-8 border-b border-border">
+                        <div className="flex items-center gap-3 sm:gap-5">
                           <motion.div 
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ type: "spring", stiffness: 200 }}
-                            className="p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-lg shadow-[#0EA5E9]/10 text-4xl"
+                            className="p-2 sm:p-4 rounded-xl sm:rounded-2xl bg-primary/10 shadow-md text-2xl sm:text-4xl flex-shrink-0"
                           >
                             {getSubjectIconEmoji(selectedDrawerSubject.id)}
                           </motion.div>
-                          <div className="flex-1">
-                            <SheetTitle className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                          <div className="flex-1 min-w-0">
+                            <SheetTitle className="text-xl sm:text-3xl font-bold tracking-tight truncate">
                               {getSubjectDisplayName(selectedDrawerSubject)}
                             </SheetTitle>
-                            <SheetDescription className="text-base text-[#64748B] dark:text-gray-400 mt-1 font-medium">
+                            <SheetDescription className="text-sm sm:text-base mt-0.5 sm:mt-1 font-medium hidden sm:block">
                               Detailed performance insights
                             </SheetDescription>
                           </div>
@@ -2564,33 +2564,33 @@ const Dashboard = () => {
                             variant="outline"
                             size="icon"
                             onClick={() => setIsDrawerMaximized(!isDrawerMaximized)}
-                            className="h-10 w-10 rounded-xl border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:text-[#0EA5E9] transition-colors"
+                            className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl flex-shrink-0 hidden sm:flex"
                           >
                             {isDrawerMaximized ? (
-                              <Minimize2 className="h-5 w-5" />
+                              <Minimize2 className="h-4 w-4 sm:h-5 sm:w-5" />
                             ) : (
-                              <Maximize2 className="h-5 w-5" />
+                              <Maximize2 className="h-4 w-4 sm:h-5 sm:w-5" />
                             )}
                           </Button>
                         </div>
-                        <div className="flex gap-3">
-                          <Badge className="rounded-xl px-4 py-1.5 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold shadow-md shadow-[#0EA5E9]/25">
+                        <div className="flex gap-2 sm:gap-3 flex-wrap">
+                          <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
                             Predicted {selectedDrawerSubject.predicted}
                           </Badge>
                           {!editingTargetGrade ? (
                             <Badge 
-                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer hover:bg-[#16A34A] hover:text-white hover:shadow-lg transition-all duration-200 flex items-center gap-2"
+                              className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                               onClick={() => setEditingTargetGrade(true)}
                             >
                               <span>Target {selectedDrawerSubject.target}</span>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="sm:w-[14px] sm:h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
                                 <path d="m15 5 4 4"/>
                               </svg>
                             </Badge>
                           ) : (
                             <select
-                              className="rounded-xl px-4 py-1.5 border-2 border-[#16A34A] text-[#16A34A] bg-white dark:bg-gray-950 font-semibold cursor-pointer"
+                              className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
                               defaultValue={selectedDrawerSubject.target}
                               onChange={(e) => {
                                 const subjectData = userSubjectsWithGrades.find(
@@ -2616,31 +2616,31 @@ const Dashboard = () => {
                         </div>
                       </SheetHeader>
 
-                      <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-8">
-                        <TabsList className="grid w-full grid-cols-6 rounded-2xl p-1.5 bg-[#F1F5F9] dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700">
-                          <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                      <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-4 sm:mt-8">
+                        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 bg-muted border border-border gap-1">
+                          <TabsTrigger value="overview" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
                             Overview
                           </TabsTrigger>
-                          <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                          <TabsTrigger value="topics" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
                             Topics
                           </TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                          <TabsTrigger value="papers" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
                             Papers
                           </TabsTrigger>
-                          <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                          <TabsTrigger value="plan" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
                             Plan
                           </TabsTrigger>
-                          <TabsTrigger value="notes" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
+                          <TabsTrigger value="notes" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
                             Notes
                           </TabsTrigger>
-                          <TabsTrigger value="flashcards" className="rounded-xl data-[state=active]:bg-white dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-md data-[state=active]:text-[#0EA5E9] font-semibold">
-                            Flashcards
+                          <TabsTrigger value="flashcards" className="rounded-lg sm:rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold text-xs sm:text-sm px-2 py-1.5 sm:py-2">
+                            Cards
                           </TabsTrigger>
                         </TabsList>
 
-                        <TabsContent value="overview" className="space-y-6 mt-8">
+                        <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-4 sm:mt-8">
                           {/* Performance Stats */}
-                          <div className="grid grid-cols-3 gap-4">
+                          <div className="grid grid-cols-3 gap-2 sm:gap-4">
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
