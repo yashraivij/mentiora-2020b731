@@ -762,7 +762,7 @@ const Index = () => {
           </motion.div>
 
           {/* Main Visual Flow */}
-          <div className="relative max-w-[1200px] mx-auto space-y-12">
+          <div className="relative max-w-[1200px] mx-auto space-y-16">
             {/* Stage 1: YOU STUDY */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -771,14 +771,19 @@ const Index = () => {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white font-bold text-sm" style={{ backgroundColor: '#0BA5E9' }}>
-                    1
-                  </span>
-                  <h3 className="text-2xl font-bold text-black">You Study</h3>
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-xl" />
+                    <span className="relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-lg shadow-lg">
+                      1
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground tracking-tight">You Study</h3>
+                    <p className="text-sm text-muted-foreground mt-1">Answer questions and get instant feedback</p>
+                  </div>
                 </div>
-                <p className="text-base text-gray-600 ml-11">Answer questions and get instant feedback</p>
               </div>
                   
               {/* Question Card - Real Dashboard Style */}
@@ -823,15 +828,15 @@ const Index = () => {
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center">
+            <div className="flex justify-center my-8">
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex flex-col items-center gap-2"
               >
-                <div className="flex flex-col items-center">
-                  <div className="w-0.5 h-8 bg-gray-300" />
-                  <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-gray-300" />
-                </div>
+                <div className="w-[2px] h-12 bg-gradient-to-b from-primary/60 to-primary/20 rounded-full" />
+                <div className="w-3 h-3 rounded-full bg-primary/40 animate-pulse" />
+                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-primary/60" />
               </motion.div>
             </div>
 
@@ -843,14 +848,19 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white font-bold text-sm" style={{ backgroundColor: '#8B5CF6' }}>
-                    2
-                  </span>
-                  <h3 className="text-2xl font-bold text-black">AI Analyzes</h3>
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-xl" />
+                    <span className="relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-lg shadow-lg">
+                      2
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground tracking-tight">AI Analyzes</h3>
+                    <p className="text-sm text-muted-foreground mt-1">We track 50+ data points from every answer</p>
+                  </div>
                 </div>
-                <p className="text-base text-gray-600 ml-11">We track 50+ data points from every answer</p>
               </div>
                   
               {/* Analysis Dashboard - Real Dashboard Style */}
@@ -911,15 +921,15 @@ const Index = () => {
             </motion.div>
 
             {/* Connector Arrow */}
-            <div className="flex justify-center">
+            <div className="flex justify-center my-8">
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="flex flex-col items-center gap-2"
               >
-                <div className="flex flex-col items-center">
-                  <div className="w-0.5 h-8 bg-gray-300" />
-                  <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-gray-300" />
-                </div>
+                <div className="w-[2px] h-12 bg-gradient-to-b from-primary/60 to-primary/20 rounded-full" />
+                <div className="w-3 h-3 rounded-full bg-primary/40 animate-pulse" />
+                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-primary/60" />
               </motion.div>
             </div>
 
@@ -931,14 +941,19 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="relative"
             >
-              <div className="mb-10">
-                <div className="flex items-center gap-3 mb-3 justify-center">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white font-bold text-sm" style={{ backgroundColor: '#10B981' }}>
-                    3
-                  </span>
-                  <h3 className="text-2xl font-bold text-black">You Get Personalized Results</h3>
+              <div className="mb-12 text-center">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-xl" />
+                    <span className="relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white font-bold text-lg shadow-lg">
+                      3
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground tracking-tight">You Get Personalized Results</h3>
+                  </div>
                 </div>
-                <p className="text-base text-gray-600 text-center">Three features that adapt to you in real-time</p>
+                <p className="text-sm text-muted-foreground">Three features that adapt to you in real-time</p>
               </div>
               
               {/* Three Dashboard Cards - Exact Platform Style */}
