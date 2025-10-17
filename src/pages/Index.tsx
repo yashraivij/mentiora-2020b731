@@ -826,10 +826,10 @@ const Index = () => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center gap-1"
               >
-                <div className="w-[2px] h-16 bg-gradient-to-b from-primary via-primary/70 to-primary/40 rounded-full" />
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary -mt-1">
+                <div className="w-[2px] h-16 bg-primary rounded-full" />
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary">
                   <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
@@ -951,10 +951,10 @@ const Index = () => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center gap-1"
               >
-                <div className="w-[2px] h-16 bg-gradient-to-b from-primary via-primary/70 to-primary/40 rounded-full" />
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary -mt-1">
+                <div className="w-[2px] h-16 bg-primary rounded-full" />
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" className="text-primary">
                   <path d="M8 0L8 12M8 12L4 8M8 12L12 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.div>
@@ -1120,64 +1120,71 @@ const Index = () => {
                   className="bg-card rounded-2xl shadow-lg overflow-hidden border-0 transition-all duration-200"
                 >
                   <div className="p-6">
-                    <div className="mb-6">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="text-lg font-bold text-foreground">Mon</h3>
-                        <span className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: '#0BA5E9', color: 'white' }}>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-bold text-foreground">Adaptive Weekly Plan</h3>
+                      <p className="text-sm text-muted-foreground">Personalized study schedule that updates daily</p>
+                    </div>
+                    
+                    <div className="mb-4 pb-4 border-b border-border">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-base font-bold text-foreground">Mon</h4>
+                          <p className="text-xs text-muted-foreground">— Kickstart Week</p>
+                        </div>
+                        <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#0BA5E9', color: 'white' }}>
                           30 mins
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">— Kickstart Week</p>
                     </div>
                     
                     <div className="space-y-3">
-                      <div className="bg-card border border-border rounded-lg p-3">
+                      <div className="bg-background border border-border rounded-lg p-3">
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="text-sm font-semibold text-foreground flex-1">
+                          <h5 className="text-sm font-medium text-foreground flex-1">
                             Create 10 flashcards on Systems Architecture
-                          </h4>
-                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-red-500 text-white ml-2 flex-shrink-0">
+                          </h5>
+                          <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
                             Priority
                           </span>
                         </div>
                         <p className="text-xs text-muted-foreground mb-3">15 mins</p>
                         <div className="flex gap-2">
                           <button 
-                            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
                             style={{ backgroundColor: '#0BA5E9' }}
                           >
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 16 16">
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
                               <path d="M3 2l10 6-10 6V2z"/>
                             </svg>
                             Start
                           </button>
-                          <button className="flex-1 py-1.5 rounded font-semibold text-sm border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
+                          <button className="flex-1 py-2 rounded font-bold text-sm border-2 border-green-500 text-green-600 dark:text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
                             Done
                           </button>
                         </div>
                       </div>
                       
-                      <div className="bg-card border border-border rounded-lg p-3">
+                      <div className="bg-background border border-border rounded-lg p-3">
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="text-sm font-semibold text-foreground flex-1">
+                          <h5 className="text-sm font-medium text-foreground flex-1">
                             Practice questions on Systems Architecture
-                          </h4>
-                          <span className="px-2 py-0.5 rounded text-xs font-semibold bg-red-500 text-white ml-2 flex-shrink-0">
+                          </h5>
+                          <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-500 text-white ml-2 flex-shrink-0">
                             Priority
                           </span>
                         </div>
                         <p className="text-xs text-muted-foreground mb-3">15 mins</p>
                         <div className="flex gap-2">
                           <button 
-                            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
                             style={{ backgroundColor: '#0BA5E9' }}
                           >
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 16 16">
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16">
                               <path d="M3 2l10 6-10 6V2z"/>
                             </svg>
                             Start
                           </button>
-                          <button className="flex-1 py-1.5 rounded font-semibold text-sm border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
+                          <button className="flex-1 py-2 rounded font-bold text-sm border-2 border-green-500 text-green-600 dark:text-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors">
                             Done
                           </button>
                         </div>
