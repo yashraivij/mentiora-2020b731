@@ -35,8 +35,10 @@ const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
     // Extract exam board and level from ID (e.g., "biology-aqa-alevel" or "combined-science-aqa")
     const parts = subjectId.split('-');
     const examBoardRaw = parts.find(p => ['aqa', 'edexcel', 'ocr', 'eduqas'].includes(p)) || 'aqa';
-    // Properly capitalize: "Edexcel" not "EDEXCEL"
-    const examBoard = examBoardRaw.charAt(0).toUpperCase() + examBoardRaw.slice(1).toLowerCase();
+    // Keep AQA and OCR in all caps, capitalize others properly
+    const examBoard = (examBoardRaw === 'aqa' || examBoardRaw === 'ocr') 
+      ? examBoardRaw.toUpperCase() 
+      : examBoardRaw.charAt(0).toUpperCase() + examBoardRaw.slice(1).toLowerCase();
     const isAlevel = subjectId.includes('alevel');
     const isIgcse = subjectId.includes('igcse');
     const isGcse = !isAlevel && !isIgcse;
