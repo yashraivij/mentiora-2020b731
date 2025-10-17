@@ -3862,57 +3862,64 @@ const Dashboard = () => {
               )}
 
               {/* Target Grade Selection Modal */}
-              {selectedSubjectForGrade && (
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-2xl w-full"
-                  >
-                    <div className="p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Set Target Grade</h2>
-                          <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
-                            What grade are you aiming for in {selectedSubjectForGrade.name}?
-                          </p>
-                        </div>
-                        <Button
-                          onClick={() => setSelectedSubjectForGrade(null)}
-                          variant="ghost"
-                          size="icon"
-                          className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
-                        >
-                          <X className="h-5 w-5" />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="p-8">
-                      <div className="grid grid-cols-3 gap-3">
-                        {[9, 8, 7, 6, 5, 4, 3, 2, 1].map((grade) => (
-                          <motion.button
-                            key={grade}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => {
-                              addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
-                              setSelectedSubjectForGrade(null);
-                              setShowAddSubjects(false);
-                              setSelectedSubjectGroup(null);
-                            }}
-                            className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+              {selectedSubjectForGrade && (() => {
+                const isALevel = selectedSubjectForGrade.id.includes('alevel') || selectedSubjectForGrade.id.includes('a-level');
+                const availableGrades = isALevel 
+                  ? ['A*', 'A', 'B', 'C', 'D', 'E']
+                  : ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
+                
+                return (
+                  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-2xl w-full"
+                    >
+                      <div className="p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Set Target Grade</h2>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
+                              What grade are you aiming for in {selectedSubjectForGrade.name}?
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => setSelectedSubjectForGrade(null)}
+                            variant="ghost"
+                            size="icon"
+                            className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
                           >
-                            <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
-                              {grade}
-                            </div>
-                          </motion.button>
-                        ))}
+                            <X className="h-5 w-5" />
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                </div>
-              )}
+                      <div className="p-8">
+                        <div className="grid grid-cols-3 gap-3">
+                          {availableGrades.map((grade) => (
+                            <motion.button
+                              key={grade}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                addSubject(selectedSubjectForGrade.id, grade, selectedSubjectForGrade.examBoard);
+                                setSelectedSubjectForGrade(null);
+                                setShowAddSubjects(false);
+                                setSelectedSubjectGroup(null);
+                              }}
+                              className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+                            >
+                              <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
+                                {grade}
+                              </div>
+                            </motion.button>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                );
+              })()}
             </div>
           )}
 
