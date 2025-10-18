@@ -1805,8 +1805,11 @@ const Dashboard = () => {
         const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
       } else {
-        // No data at all
-        predicted = 'U';
+        // No exam or practice data - use predicted_grade from user_subjects
+        const userSubjectPredictedGrade = typeof subject.predicted_grade === 'string' 
+          ? parseInt(subject.predicted_grade) || 0 
+          : subject.predicted_grade || 0;
+        predicted = userSubjectPredictedGrade === 0 ? 'U' : userSubjectPredictedGrade;
       }
       
       // Get actual trend from last 6 exam attempts for this subject
