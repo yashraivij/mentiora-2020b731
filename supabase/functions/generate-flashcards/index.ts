@@ -44,6 +44,12 @@ ANSWER FORMATTING RULES:
 11. Break up longer explanations into short, digestible sentences with line breaks for readability
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
+MULTIPLE CHOICE OPTIONS (if applicable):
+13. When creating multiple choice questions, ALL incorrect options must be plausible alternatives related to the SAME topic/concept as the question
+14. Incorrect options should be common misconceptions, similar terms, or related concepts - NOT random unrelated content from the notes
+15. Each wrong answer should be believable enough that a student who partially understands the topic might choose it
+16. Options should test understanding of the specific concept, not just recall of random facts
+
 Response format must be valid JSON:
 {
   "flashcards": [
