@@ -232,10 +232,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        await supabase
-          .from('profiles')
-          .update({ parent_email: onboardingData.parentEmail })
-          .eq('id', user.id);
+        // Save parent email to onboarding_parent_emails table
+        if (onboardingData.parentEmail) {
+          await supabase
+            .from('onboarding_parent_emails')
+            .insert({
+              user_id: user.id,
+              parent_email: onboardingData.parentEmail
+            });
+        }
 
         if (onboardingData.subjects.length > 0) {
           const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];

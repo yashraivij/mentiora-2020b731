@@ -67,9 +67,12 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
       
       if (user) {
         await supabase
-          .from('profiles')
-          .update({ parent_email: parentEmail })
-          .eq('id', user.id);
+          .from('paywall_parent_emails')
+          .insert({
+            user_id: user.id,
+            parent_email: parentEmail,
+            student_name: studentName
+          });
       }
       
       toast({

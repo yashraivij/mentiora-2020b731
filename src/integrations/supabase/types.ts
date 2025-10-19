@@ -587,6 +587,57 @@ export type Database = {
         }
         Relationships: []
       }
+      onboarding_parent_emails: {
+        Row: {
+          created_at: string
+          id: string
+          parent_email: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          parent_email: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          parent_email?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      paywall_parent_emails: {
+        Row: {
+          created_at: string
+          id: string
+          parent_email: string
+          student_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          parent_email: string
+          student_name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          parent_email?: string
+          student_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       performance_summaries: {
         Row: {
           accuracy_rate: number | null
