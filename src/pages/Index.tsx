@@ -1345,17 +1345,17 @@ const Index = () => {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
               className="w-full"
             >
               {/* Graph Title */}
-              <h3 className="text-2xl font-bold mb-8" style={{ color: '#0BA5E9' }}>
+              <h3 className="text-2xl font-bold mb-6 md:mb-8" style={{ color: '#0BA5E9' }}>
                 68% grade improvement
               </h3>
 
               {/* Graph Container */}
-              <div className="bg-white border border-gray-200 rounded-lg p-8 h-[450px]">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-8 h-auto min-h-[300px] md:h-[450px]">
                 <svg
                   viewBox="0 0 600 380"
                   className="w-full h-full"
@@ -1393,7 +1393,7 @@ const Index = () => {
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                   />
 
@@ -1406,7 +1406,7 @@ const Index = () => {
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
                   />
 
@@ -1414,7 +1414,7 @@ const Index = () => {
                   <motion.g
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ delay: 1.7, duration: 0.4 }}
                   >
                     {/* Mentiora logo image */}
@@ -1441,7 +1441,7 @@ const Index = () => {
                   <motion.g
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ delay: 1.9, duration: 0.4 }}
                   >
                     {/* Label text */}
