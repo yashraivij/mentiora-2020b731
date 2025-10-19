@@ -1304,6 +1304,42 @@ export type Database = {
       }
     }
     Views: {
+      daily_user_activity_report: {
+        Row: {
+          active_hours_span: number | null
+          activity_date: string | null
+          email: string | null
+          first_activity_at: string | null
+          flashcard_reviews: number | null
+          full_name: string | null
+          last_activity_at: string | null
+          logins: number | null
+          minutes_spent: number | null
+          practices_completed: number | null
+          study_sessions: number | null
+          subscription_status: string | null
+          total_activities: number | null
+        }
+        Relationships: []
+      }
+      todays_user_activity: {
+        Row: {
+          active_hours_span: number | null
+          activity_date: string | null
+          email: string | null
+          first_activity_at: string | null
+          flashcard_reviews: number | null
+          full_name: string | null
+          last_activity_at: string | null
+          logins: number | null
+          minutes_spent: number | null
+          practices_completed: number | null
+          study_sessions: number | null
+          subscription_status: string | null
+          total_activities: number | null
+        }
+        Relationships: []
+      }
       user_activity_analytics: {
         Row: {
           activities_count: number | null
