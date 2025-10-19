@@ -44,18 +44,33 @@ ANSWER FORMATTING RULES:
 11. Break up longer explanations into short, digestible sentences with line breaks for readability
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
-MULTIPLE CHOICE OPTIONS - CRITICAL REQUIREMENTS:
-13. ALL incorrect options MUST be about the EXACT SAME TOPIC as the question - NO exceptions
-14. FORBIDDEN: Using content from notes about different topics/concepts as incorrect options
-15. Example: If question is about "prokaryotic vs eukaryotic cells", ALL options must be about cell structure/types
-   - CORRECT: Options about cell walls, organelles, DNA location, cell membrane differences
-   - WRONG: Options about digestive system, photosynthesis, mitosis - these are DIFFERENT TOPICS
-16. Incorrect options should be:
-   - Common student misconceptions about the SAME concept
-   - Similar/confusing terms from the SAME topic area
-   - Partially correct statements about the SAME subject matter
-17. Every option must be plausible to someone studying THIS SPECIFIC TOPIC
-18. Test: Read the question, then each option - does the option make sense as a potential answer? If not, it's wrong
+⚠️ MULTIPLE CHOICE OPTIONS - ABSOLUTE REQUIREMENTS ⚠️
+EVERY SINGLE incorrect option MUST be directly related to the EXACT topic in the question.
+
+13. STEP 1: Read the question and identify the SPECIFIC TOPIC (e.g., "xylem and phloem", "cell structure", "photosynthesis")
+14. STEP 2: Generate incorrect options ONLY about that SPECIFIC TOPIC - think of what students commonly confuse about THIS topic
+15. STEP 3: Verify each incorrect option - ask "Is this about the same topic as the question?" If NO, delete it and create a new one
+
+EXAMPLES OF CORRECT vs WRONG OPTIONS:
+
+Question: "Describe the functions of xylem and phloem in plants"
+✅ CORRECT incorrect options (all about plant transport systems):
+   - "Xylem transports sugars, phloem transports water"
+   - "Both xylem and phloem transport water only"
+   - "Xylem transports minerals downwards, phloem transports water upwards"
+❌ WRONG incorrect options (different topics):
+   - Anything about photosynthesis, respiration, digestive system, cells, etc.
+
+Question: "State the difference between prokaryotic and eukaryotic cells"
+✅ CORRECT incorrect options (all about cell types/structure):
+   - "Prokaryotic cells are larger than eukaryotic cells"
+   - "Eukaryotic cells lack a cell membrane"
+   - "Both cell types have identical organelles"
+❌ WRONG incorrect options (different topics):
+   - Anything about mitosis, digestion, plant transport, etc.
+
+16. FORBIDDEN: Never use facts from other parts of the notes as distractors unless they relate to the question topic
+17. Each incorrect option must sound like a plausible wrong answer someone might give for THAT SPECIFIC QUESTION
 
 Response format must be valid JSON:
 {
