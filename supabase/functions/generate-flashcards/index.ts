@@ -45,32 +45,36 @@ ANSWER FORMATTING RULES:
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
 ⚠️ MULTIPLE CHOICE OPTIONS - ABSOLUTE REQUIREMENTS ⚠️
-EVERY SINGLE incorrect option MUST be directly related to the EXACT topic in the question.
+CRITICAL: Incorrect options must be VARIATIONS of the correct answer with specific details changed.
 
-13. STEP 1: Read the question and identify the SPECIFIC TOPIC (e.g., "xylem and phloem", "cell structure", "photosynthesis")
-14. STEP 2: Generate incorrect options ONLY about that SPECIFIC TOPIC - think of what students commonly confuse about THIS topic
-15. STEP 3: Verify each incorrect option - ask "Is this about the same topic as the question?" If NO, delete it and create a new one
+13. STEP 1: Generate the CORRECT answer first
+14. STEP 2: Create incorrect options by MODIFYING specific details in the correct answer:
+    - Change numbers (e.g., "four chambers" → "two chambers", "three chambers")
+    - Swap directions/locations (e.g., "left side to body" → "right side to body")
+    - Switch types/states (e.g., "oxygenated" → "deoxygenated", "nucleus present" → "nucleus absent")
+    - Reverse processes (e.g., "transports water up" → "transports water down")
+15. STEP 3: Ensure each incorrect option sounds plausible but is factually wrong about THAT specific concept
 
-EXAMPLES OF CORRECT vs WRONG OPTIONS:
+CORRECT EXAMPLE:
 
-Question: "Describe the functions of xylem and phloem in plants"
-✅ CORRECT incorrect options (all about plant transport systems):
-   - "Xylem transports sugars, phloem transports water"
-   - "Both xylem and phloem transport water only"
-   - "Xylem transports minerals downwards, phloem transports water upwards"
-❌ WRONG incorrect options (different topics):
-   - Anything about photosynthesis, respiration, digestive system, cells, etc.
+Question: "Explain the role of the heart in the circulatory system. (2 marks)"
+✅ CORRECT answer:
+   "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs."
+✅ CORRECT incorrect options (variations with changed details):
+   A. "The heart consists of two chambers and pumps deoxygenated blood from the left side to the lungs."
+   B. "The heart consists of four chambers and pumps oxygenated blood from the right side to the body."
+   C. "The heart consists of three chambers and pumps mixed blood throughout the body."
 
-Question: "State the difference between prokaryotic and eukaryotic cells"
-✅ CORRECT incorrect options (all about cell types/structure):
-   - "Prokaryotic cells are larger than eukaryotic cells"
-   - "Eukaryotic cells lack a cell membrane"
-   - "Both cell types have identical organelles"
-❌ WRONG incorrect options (different topics):
-   - Anything about mitosis, digestion, plant transport, etc.
+Question: "Describe the functions of xylem and phloem in plants. (2 marks)"
+✅ CORRECT answer:
+   "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts."
+✅ CORRECT incorrect options (variations with changed details):
+   A. "Xylem transports sugars upwards, while phloem transports water downwards."
+   B. "Both xylem and phloem transport water and minerals in the same direction."
+   C. "Xylem transports minerals downwards, while phloem transports water upwards."
 
-16. FORBIDDEN: Never use facts from other parts of the notes as distractors unless they relate to the question topic
-17. Each incorrect option must sound like a plausible wrong answer someone might give for THAT SPECIFIC QUESTION
+16. FORBIDDEN: Never use random facts from different topics in your notes as incorrect options
+17. Each incorrect option must be a believable wrong variation of the correct answer
 
 Response format must be valid JSON:
 {
