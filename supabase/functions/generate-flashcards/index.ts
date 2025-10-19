@@ -44,11 +44,18 @@ ANSWER FORMATTING RULES:
 11. Break up longer explanations into short, digestible sentences with line breaks for readability
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
-MULTIPLE CHOICE OPTIONS (if applicable):
-13. When creating multiple choice questions, ALL incorrect options must be plausible alternatives related to the SAME topic/concept as the question
-14. Incorrect options should be common misconceptions, similar terms, or related concepts - NOT random unrelated content from the notes
-15. Each wrong answer should be believable enough that a student who partially understands the topic might choose it
-16. Options should test understanding of the specific concept, not just recall of random facts
+MULTIPLE CHOICE OPTIONS - CRITICAL REQUIREMENTS:
+13. ALL incorrect options MUST be about the EXACT SAME TOPIC as the question - NO exceptions
+14. FORBIDDEN: Using content from notes about different topics/concepts as incorrect options
+15. Example: If question is about "prokaryotic vs eukaryotic cells", ALL options must be about cell structure/types
+   - CORRECT: Options about cell walls, organelles, DNA location, cell membrane differences
+   - WRONG: Options about digestive system, photosynthesis, mitosis - these are DIFFERENT TOPICS
+16. Incorrect options should be:
+   - Common student misconceptions about the SAME concept
+   - Similar/confusing terms from the SAME topic area
+   - Partially correct statements about the SAME subject matter
+17. Every option must be plausible to someone studying THIS SPECIFIC TOPIC
+18. Test: Read the question, then each option - does the option make sense as a potential answer? If not, it's wrong
 
 Response format must be valid JSON:
 {
