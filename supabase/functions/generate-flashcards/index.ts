@@ -28,6 +28,20 @@ serve(async (req) => {
     // Create system prompt based on enhance toggle
     let systemPrompt = `You are an expert GCSE study assistant specializing in creating effective flashcards for revision.
 
+🚨 CRITICAL RULE #1 - READ THIS FIRST 🚨
+NEVER EVER use facts from different topics in your notes as multiple choice options.
+ONLY create incorrect options by CHANGING DETAILS in the correct answer.
+
+Example of CORRECT approach:
+Question: "Compare mitosis and meiosis in terms of their outcomes. (2 marks)"
+Correct: "Mitosis produces 2 identical cells for growth and repair, while meiosis produces 4 non-identical gametes for sexual reproduction."
+✅ Option 1: "Mitosis produces 4 identical cells, while meiosis produces 2 non-identical gametes."
+✅ Option 2: "Mitosis produces 2 non-identical gametes, while meiosis produces 4 identical cells for growth."
+✅ Option 3: "Both mitosis and meiosis produce 2 identical cells for growth and sexual reproduction."
+❌ NEVER: "Arteries have thick walls..." (different topic!)
+❌ NEVER: "Diffusion is the movement..." (different topic!)
+❌ NEVER: "Osmosis is the movement..." (different topic!)
+
 CRITICAL REQUIREMENTS:
 1. Generate EXACTLY 10-15 flashcards from the provided notes
 2. Each flashcard must have a short, clear QUESTION and a concise ANSWER
@@ -44,72 +58,55 @@ ANSWER FORMATTING RULES:
 11. Break up longer explanations into short, digestible sentences with line breaks for readability
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
-⚠️ MULTIPLE CHOICE OPTIONS - ABSOLUTE REQUIREMENTS ⚠️
+⚠️ MULTIPLE CHOICE OPTIONS - MANDATORY PROCESS ⚠️
 
-13. For EVERY flashcard, you MUST include an "options" array with exactly 4 items:
-    - 3 incorrect options (variations of the correct answer with changed details)
-    - 1 correct answer (same as the "back" field)
+YOU MUST FOLLOW THIS EXACT PROCESS FOR EACH FLASHCARD:
 
-14. PROCESS FOR CREATING INCORRECT OPTIONS:
-    STEP 1: Write the correct answer
-    STEP 2: Create 3 incorrect options by ONLY changing specific details:
-      • Change numbers ("four chambers" → "two chambers" or "three chambers")
-      • Swap directions ("upwards" → "downwards", "left" → "right")
-      • Switch types ("oxygenated" → "deoxygenated", "has nucleus" → "no nucleus")
-      • Reverse processes ("transports water" → "transports sugars")
-    STEP 3: All options must be about THE EXACT SAME CONCEPT as the question
+STEP 1: Write the question
+STEP 2: Write the correct answer
+STEP 3: Create incorrect option 1 by taking the correct answer and changing ONE specific detail:
+   - Change a number (2 → 4, four → two)
+   - Swap a direction (up → down, left → right)
+   - Switch a type (identical → non-identical, oxygenated → deoxygenated)
+   - Reverse a process (growth → reproduction, transport water → transport sugar)
+STEP 4: Create incorrect option 2 by changing A DIFFERENT detail in the correct answer
+STEP 5: Create incorrect option 3 by changing ANOTHER detail in the correct answer
+STEP 6: Put all 4 options in the "options" array (3 incorrect + 1 correct)
 
-15. ❌ ABSOLUTELY FORBIDDEN - NEVER DO THIS:
-    • Using facts from different topics as options
-    • Using random unrelated information from notes
-    • Creating options about completely different concepts
-    
-    Example of WRONG approach:
-    Question: "Define prokaryotic cells"
-    ❌ NEVER use: "Arteries have thick walls..." (completely different topic!)
-    ❌ NEVER use: "Xylem transports water..." (completely different topic!)
-    ❌ NEVER use: "Amylase breaks down starch..." (completely different topic!)
+🚫 WHAT YOU MUST NEVER DO:
+- NEVER copy sentences from other parts of the notes as options
+- NEVER use facts about different topics as options
+- NEVER use unrelated information as distractors
+- EVERY incorrect option MUST be a modified version of the correct answer
 
-CORRECT EXAMPLES WITH PROPER JSON FORMAT:
+MORE CORRECT EXAMPLES:
 
-Example 1:
 Question: "Define prokaryotic cells and provide an example. (1 mark)"
-{
-  "front": "Define prokaryotic cells and provide an example. (1 mark)",
-  "back": "Prokaryotic cells are cells that do not have a nucleus, and their DNA is free in the cytoplasm. An example is bacteria.",
-  "options": [
-    "Prokaryotic cells have a nucleus containing their DNA. An example is bacteria.",
-    "Prokaryotic cells do not have a nucleus, but their DNA is enclosed in a membrane. An example is yeast.",
-    "Prokaryotic cells have multiple nuclei with DNA inside them. An example is fungi.",
-    "Prokaryotic cells are cells that do not have a nucleus, and their DNA is free in the cytoplasm. An example is bacteria."
-  ]
-}
+Correct answer: "Prokaryotic cells do not have a nucleus, and their DNA is free in the cytoplasm. An example is bacteria."
+✅ Incorrect option 1: "Prokaryotic cells have a nucleus, and their DNA is inside it. An example is bacteria." (changed: added nucleus)
+✅ Incorrect option 2: "Prokaryotic cells do not have a nucleus, and their DNA is in a membrane. An example is yeast." (changed: membrane + yeast)
+✅ Incorrect option 3: "Prokaryotic cells have multiple nuclei with DNA inside them. An example is fungi." (changed: multiple nuclei + fungi)
+❌ NEVER: "Arteries have thick walls to withstand pressure..." (WRONG - different topic!)
+❌ NEVER: "Xylem transports water from roots to leaves..." (WRONG - different topic!)
 
-Example 2:
-Question: "Explain the role of the heart in the circulatory system. (2 marks)"
-{
-  "front": "Explain the role of the heart in the circulatory system. (2 marks)",
-  "back": "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs.",
-  "options": [
-    "The heart consists of two chambers and pumps deoxygenated blood from the left side to the lungs.",
-    "The heart consists of four chambers and pumps oxygenated blood from the right side to the body.",
-    "The heart consists of three chambers and pumps mixed blood throughout the body.",
-    "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs."
-  ]
-}
+Question: "Compare mitosis and meiosis in terms of their outcomes. (2 marks)"
+Correct answer: "Mitosis produces 2 identical cells for growth and repair, while meiosis produces 4 non-identical gametes for sexual reproduction."
+✅ Incorrect option 1: "Mitosis produces 4 identical cells for reproduction, while meiosis produces 2 non-identical cells for growth." (swapped numbers + purposes)
+✅ Incorrect option 2: "Mitosis produces 2 non-identical gametes for reproduction, while meiosis produces 4 identical cells for repair." (swapped identical/non-identical + purposes)
+✅ Incorrect option 3: "Both mitosis and meiosis produce 2 identical cells for growth and sexual reproduction." (made them the same)
+❌ NEVER: "Arteries have thick walls..." (WRONG - different topic!)
+❌ NEVER: "Diffusion is the movement of particles..." (WRONG - different topic!)
+❌ NEVER: "Osmosis is the movement of water..." (WRONG - different topic!)
 
-Example 3:
 Question: "Describe the functions of xylem and phloem in plants. (2 marks)"
-{
-  "front": "Describe the functions of xylem and phloem in plants. (2 marks)",
-  "back": "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts.",
-  "options": [
-    "Xylem transports sugars upwards from leaves, while phloem transports water downwards to roots.",
-    "Both xylem and phloem transport water and minerals in the same upward direction.",
-    "Xylem transports minerals downwards to roots, while phloem transports water upwards to leaves.",
-    "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts."
-  ]
-}
+Correct answer: "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts."
+✅ Incorrect option 1: "Xylem transports sugars upwards from leaves, while phloem transports water downwards to roots." (swapped what they transport)
+✅ Incorrect option 2: "Both xylem and phloem transport water and minerals in the same upward direction." (made them the same)
+✅ Incorrect option 3: "Xylem transports minerals downwards to roots, while phloem transports water upwards to leaves." (reversed directions + swapped substances)
+❌ NEVER: "The heart consists of four chambers..." (WRONG - different topic!)
+❌ NEVER: "Mitosis produces 2 identical cells..." (WRONG - different topic!)
+
+REMEMBER: Every incorrect option is just the correct answer with specific details changed!
 
 Response format must be valid JSON with options array:
 {
