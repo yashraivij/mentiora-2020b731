@@ -45,43 +45,84 @@ ANSWER FORMATTING RULES:
 12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
 ⚠️ MULTIPLE CHOICE OPTIONS - ABSOLUTE REQUIREMENTS ⚠️
-CRITICAL: Incorrect options must be VARIATIONS of the correct answer with specific details changed.
 
-13. STEP 1: Generate the CORRECT answer first
-14. STEP 2: Create incorrect options by MODIFYING specific details in the correct answer:
-    - Change numbers (e.g., "four chambers" → "two chambers", "three chambers")
-    - Swap directions/locations (e.g., "left side to body" → "right side to body")
-    - Switch types/states (e.g., "oxygenated" → "deoxygenated", "nucleus present" → "nucleus absent")
-    - Reverse processes (e.g., "transports water up" → "transports water down")
-15. STEP 3: Ensure each incorrect option sounds plausible but is factually wrong about THAT specific concept
+13. For EVERY flashcard, you MUST include an "options" array with exactly 4 items:
+    - 3 incorrect options (variations of the correct answer with changed details)
+    - 1 correct answer (same as the "back" field)
 
-CORRECT EXAMPLE:
+14. PROCESS FOR CREATING INCORRECT OPTIONS:
+    STEP 1: Write the correct answer
+    STEP 2: Create 3 incorrect options by ONLY changing specific details:
+      • Change numbers ("four chambers" → "two chambers" or "three chambers")
+      • Swap directions ("upwards" → "downwards", "left" → "right")
+      • Switch types ("oxygenated" → "deoxygenated", "has nucleus" → "no nucleus")
+      • Reverse processes ("transports water" → "transports sugars")
+    STEP 3: All options must be about THE EXACT SAME CONCEPT as the question
 
+15. ❌ ABSOLUTELY FORBIDDEN - NEVER DO THIS:
+    • Using facts from different topics as options
+    • Using random unrelated information from notes
+    • Creating options about completely different concepts
+    
+    Example of WRONG approach:
+    Question: "Define prokaryotic cells"
+    ❌ NEVER use: "Arteries have thick walls..." (completely different topic!)
+    ❌ NEVER use: "Xylem transports water..." (completely different topic!)
+    ❌ NEVER use: "Amylase breaks down starch..." (completely different topic!)
+
+CORRECT EXAMPLES WITH PROPER JSON FORMAT:
+
+Example 1:
+Question: "Define prokaryotic cells and provide an example. (1 mark)"
+{
+  "front": "Define prokaryotic cells and provide an example. (1 mark)",
+  "back": "Prokaryotic cells are cells that do not have a nucleus, and their DNA is free in the cytoplasm. An example is bacteria.",
+  "options": [
+    "Prokaryotic cells have a nucleus containing their DNA. An example is bacteria.",
+    "Prokaryotic cells do not have a nucleus, but their DNA is enclosed in a membrane. An example is yeast.",
+    "Prokaryotic cells have multiple nuclei with DNA inside them. An example is fungi.",
+    "Prokaryotic cells are cells that do not have a nucleus, and their DNA is free in the cytoplasm. An example is bacteria."
+  ]
+}
+
+Example 2:
 Question: "Explain the role of the heart in the circulatory system. (2 marks)"
-✅ CORRECT answer:
-   "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs."
-✅ CORRECT incorrect options (variations with changed details):
-   A. "The heart consists of two chambers and pumps deoxygenated blood from the left side to the lungs."
-   B. "The heart consists of four chambers and pumps oxygenated blood from the right side to the body."
-   C. "The heart consists of three chambers and pumps mixed blood throughout the body."
+{
+  "front": "Explain the role of the heart in the circulatory system. (2 marks)",
+  "back": "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs.",
+  "options": [
+    "The heart consists of two chambers and pumps deoxygenated blood from the left side to the lungs.",
+    "The heart consists of four chambers and pumps oxygenated blood from the right side to the body.",
+    "The heart consists of three chambers and pumps mixed blood throughout the body.",
+    "The heart consists of four chambers and pumps oxygenated blood from the left side to the body, while the right side pumps deoxygenated blood to the lungs."
+  ]
+}
 
+Example 3:
 Question: "Describe the functions of xylem and phloem in plants. (2 marks)"
-✅ CORRECT answer:
-   "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts."
-✅ CORRECT incorrect options (variations with changed details):
-   A. "Xylem transports sugars upwards, while phloem transports water downwards."
-   B. "Both xylem and phloem transport water and minerals in the same direction."
-   C. "Xylem transports minerals downwards, while phloem transports water upwards."
+{
+  "front": "Describe the functions of xylem and phloem in plants. (2 marks)",
+  "back": "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts.",
+  "options": [
+    "Xylem transports sugars upwards from leaves, while phloem transports water downwards to roots.",
+    "Both xylem and phloem transport water and minerals in the same upward direction.",
+    "Xylem transports minerals downwards to roots, while phloem transports water upwards to leaves.",
+    "Xylem transports water and minerals upwards from roots to leaves, while phloem transports sugars downwards from leaves to other parts."
+  ]
+}
 
-16. FORBIDDEN: Never use random facts from different topics in your notes as incorrect options
-17. Each incorrect option must be a believable wrong variation of the correct answer
-
-Response format must be valid JSON:
+Response format must be valid JSON with options array:
 {
   "flashcards": [
     {
       "front": "Clear, specific question",
-      "back": "Naturally formatted answer that's easy to read and understand"
+      "back": "The correct answer",
+      "options": [
+        "Incorrect variation 1 with changed details",
+        "Incorrect variation 2 with changed details",
+        "Incorrect variation 3 with changed details",
+        "The correct answer (must match 'back' field exactly)"
+      ]
     }
   ]
 }`;
