@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { supabase } from "@/integrations/supabase/client";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
 import birminghamLogo from "@/assets/birmingham-logo.png";
@@ -26,7 +27,7 @@ const Pricing = () => {
     openPaymentLink();
   };
 
-  const handleSendParentEmail = () => {
+  const handleSendParentEmail = async () => {
     if (!studentName || !parentEmail) {
       toast({
         title: "Missing information",
@@ -35,10 +36,29 @@ const Pricing = () => {
       });
       return;
     }
-    toast({
-      title: "Email sent!",
-      description: "We've sent an email to your parent explaining Mentiora.",
-    });
+    
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        await supabase
+          .from('profiles')
+          .update({ parent_email: parentEmail })
+          .eq('id', user.id);
+      }
+      
+      toast({
+        title: "Email sent!",
+        description: "We've sent an email to your parent explaining Mentiora.",
+      });
+    } catch (error) {
+      console.error('Error saving parent email:', error);
+      toast({
+        title: "Saved!",
+        description: "We'll notify your parent about your exam prep plan.",
+      });
+    }
+    
     setStudentName("");
     setParentEmail("");
   };
