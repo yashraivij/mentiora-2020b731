@@ -3,11 +3,9 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
 const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2024-06-20" });
 const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET") || "";
-const supabase = createClient(
-  Deno.env.get("SUPABASE_URL") || "",
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "",
-  { auth: { persistSession: false } }
-);
+const supabase = createClient(Deno.env.get("SUPABASE_URL") || "", Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "", {
+  auth: { persistSession: false },
+});
 
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("ok", { status: 200 });
@@ -46,48 +44,61 @@ Deno.serve(async (req) => {
         const customerId = typeof session.customer === "string" ? session.customer : session.customer?.id;
         const email = session.customer_details?.email ?? undefined;
         const userId = session.client_reference_id ?? undefined;
-        
+
         // Check if this is a one-time payment (not a subscription)
         const isOneTimePayment = session.mode === "payment";
 
         if (customerId) {
           // Prepare update object - for one-time payments, also set subscription_status to active
-          const updateData: any = { 
-            stripe_customer_id: customerId, 
-            updated_at: new Date().toISOString() 
+          const updateData: any = {
+            stripe_customer_id: customerId,
+            updated_at: new Date().toISOString(),
           };
-          
+
           if (isOneTimePayment) {
             updateData.subscription_status = "active";
-            // Set expiration to July 31, 2026 for one-time payments
-            updateData.current_period_end = new Date("2026-07-31T23:59:59Z").toISOString();
+
+            // Determine expiration date based on amount paid
+            const amountPaid = session.amount_total; // Amount in pence
+            let expirationDate: string;
+
+            if (amountPaid === 34999) {
+              // £349.99 - July 2027 package
+              expirationDate = new Date("2027-07-31T23:59:59Z").toISOString();
+              console.log("📦 July 2027 package purchased");
+            } else if (amountPaid === 16999) {
+              // £169.99 - July 2026 package
+              expirationDate = new Date("2026-07-31T23:59:59Z").toISOString();
+              console.log("📦 July 2026 package purchased");
+            } else {
+              // Default to 1 year from now for any other amount
+              const oneYearFromNow = new Date();
+              oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+              expirationDate = oneYearFromNow.toISOString();
+              console.log("⚠️ Unknown payment amount:", amountPaid, "- defaulting to 1 year");
+            }
+
+            updateData.current_period_end = expirationDate;
+            console.log("💰 Amount paid:", amountPaid, "Expires:", expirationDate);
           }
 
           if (userId) {
             // A) attach by user id
-            const { data, error } = await supabase
-              .from("profiles")
-              .update(updateData)
-              .eq("id", userId)
-              .select("*");
+            const { data, error } = await supabase.from("profiles").update(updateData).eq("id", userId).select("*");
             console.log("attach by userId", { count: data?.length ?? 0, error, isOneTimePayment });
             if ((data?.length ?? 0) > 0) break; // done
           }
 
           if (email) {
             // B) attach by email
-            const { data, error } = await supabase
-              .from("profiles")
-              .update(updateData)
-              .eq("email", email)
-              .select("*");
+            const { data, error } = await supabase.from("profiles").update(updateData).eq("email", email).select("*");
             console.log("attach by email (session)", { count: data?.length ?? 0, error, isOneTimePayment });
             if ((data?.length ?? 0) > 0) break; // done
           }
 
           // C) fetch customer for email and try again
           const cust = await stripe.customers.retrieve(customerId);
-          const custEmail = !cust.deleted ? (cust as Stripe.Customer).email ?? undefined : undefined;
+          const custEmail = !cust.deleted ? ((cust as Stripe.Customer).email ?? undefined) : undefined;
           if (custEmail) {
             const { data, error } = await supabase
               .from("profiles")
@@ -111,7 +122,9 @@ Deno.serve(async (req) => {
         const customerId = typeof sub.customer === "string" ? sub.customer : sub.customer?.id;
         const status = sub.status; // 'trialing' | 'active' | 'past_due' | 'canceled' | 'unpaid'
         const plan = sub.items?.data?.[0]?.price?.id ?? null;
-        const currentPeriodEndIso = sub.current_period_end ? new Date(sub.current_period_end * 1000).toISOString() : null;
+        const currentPeriodEndIso = sub.current_period_end
+          ? new Date(sub.current_period_end * 1000).toISOString()
+          : null;
 
         // First pass: by stripe_customer_id
         let { data, error } = await supabase
