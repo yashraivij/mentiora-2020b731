@@ -59,9 +59,28 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     return Math.round(totalScore / totalTopics);
   };
 
-  const getPredictedGradeNumber = (gradeString: string): number => {
+  const isALevel = (subjectId: string): boolean => {
+    return subjectId.includes('alevel');
+  };
+
+  const gradeToNumber = (gradeString: string, subjectId: string): number => {
     if (gradeString === 'U') return 0;
-    return parseInt(gradeString) || 0;
+    
+    if (isALevel(subjectId)) {
+      // Convert A-Level letter grades to numbers
+      switch (gradeString) {
+        case 'A*': return 9;
+        case 'A': return 8;
+        case 'B': return 7;
+        case 'C': return 6;
+        case 'D': return 5;
+        case 'E': return 4;
+        default: return 0;
+      }
+    } else {
+      // GCSE grades
+      return parseInt(gradeString) || 0;
+    }
   };
 
   const getConfidenceLevel = (percentage: number, attempts: number) => {
@@ -87,9 +106,9 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
       return null;
     }
     
-    // If only exam completion, use that grade
+    // If only exam completion, use that grade (convert to number for calculations)
     if (!hasPracticeData && recentExamCompletion) {
-      const gradeNumber = getPredictedGradeNumber(recentExamCompletion.grade);
+      const gradeNumber = gradeToNumber(recentExamCompletion.grade, subjectId);
       return {
         grade: gradeNumber,
         percentage: recentExamCompletion.percentage
@@ -106,7 +125,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     
     // If both exist, combine with weighted average (predicted exam has more weight - 70%)
     if (hasPracticeData && recentExamCompletion) {
-      const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+      const examGrade = gradeToNumber(recentExamCompletion.grade, subjectId);
       const examWeight = 0.7;
       const practiceWeight = 0.3;
       

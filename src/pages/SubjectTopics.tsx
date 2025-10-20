@@ -159,8 +159,16 @@ const SubjectTopics = () => {
   const confidenceLevel = "Building consistency";
   const focusTopic = subject?.topics[0]?.name || "Core concepts";
 
+  // Determine if subject is A-Level
+  const isALevel = subjectId?.includes('alevel') || false;
+
   // Target Grade Setup Screen
   if (showGradeSetup) {
+    // Define grade options based on level
+    const gradeOptions = isALevel 
+      ? ['A*', 'A', 'B', 'C', 'D', 'E']
+      : ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
+
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-8">
         <Card className="max-w-2xl w-full rounded-3xl border-border shadow-lg dark:shadow-xl">
@@ -177,10 +185,10 @@ const SubjectTopics = () => {
           </CardHeader>
           <CardContent className="pb-12">
             <div className="grid grid-cols-3 gap-4 mb-8">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((grade) => (
+              {gradeOptions.map((grade) => (
                 <Button
                   key={grade}
-                  onClick={() => handleGradeSelect(grade)}
+                  onClick={() => handleGradeSelect(isALevel ? grade.charCodeAt(0) : parseInt(grade))}
                   variant="outline"
                   className="h-20 text-2xl font-semibold rounded-2xl border-border hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200 hover:shadow-lg dark:hover:bg-primary/20"
                 >
