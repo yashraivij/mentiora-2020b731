@@ -23,7 +23,7 @@ const SubjectTopics = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
-  const [targetGrade, setTargetGrade] = useState<number | null>(null);
+  const [targetGrade, setTargetGrade] = useState<string | null>(null);
   const [showGradeSetup, setShowGradeSetup] = useState(true);
   const [completedTasks, setCompletedTasks] = useState<boolean[]>([false, false, false]);
   const [chatMessage, setChatMessage] = useState("");
@@ -83,7 +83,7 @@ const SubjectTopics = () => {
         // Check if target grade is already set
         const savedGrade = localStorage.getItem(`mentiora_target_grade_${user.id}_${subjectId}`);
         if (savedGrade) {
-          setTargetGrade(parseInt(savedGrade));
+          setTargetGrade(savedGrade);
           setShowGradeSetup(false);
         }
       }
@@ -92,10 +92,10 @@ const SubjectTopics = () => {
     loadProgress();
   }, [user?.id, subjectId]);
 
-  const handleGradeSelect = (grade: number) => {
+  const handleGradeSelect = (grade: string) => {
     setTargetGrade(grade);
     if (user?.id) {
-      localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade.toString());
+      localStorage.setItem(`mentiora_target_grade_${user.id}_${subjectId}`, grade);
     }
     setShowGradeSetup(false);
   };
@@ -188,7 +188,7 @@ const SubjectTopics = () => {
               {gradeOptions.map((grade) => (
                 <Button
                   key={grade}
-                  onClick={() => handleGradeSelect(isALevel ? grade.charCodeAt(0) : parseInt(grade))}
+                  onClick={() => handleGradeSelect(grade)}
                   variant="outline"
                   className="h-20 text-2xl font-semibold rounded-2xl border-border hover:border-primary hover:bg-primary/10 hover:text-primary transition-all duration-200 hover:shadow-lg dark:hover:bg-primary/20"
                 >
