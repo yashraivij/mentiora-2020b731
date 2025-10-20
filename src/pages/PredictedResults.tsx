@@ -270,9 +270,16 @@ const PredictedResults = () => {
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
   };
   
-  // Calculate grade based on percentage - supports both GCSE and A-Level
+  // Helper to check if subject is A-Level by looking at curriculum
   const isALevel = (subjectId?: string): boolean => {
-    return subjectId?.includes('alevel') || false;
+    if (!subjectId) return false;
+    
+    // Get all A-Level subject IDs from curriculum
+    const aLevelSubjectIds = curriculum
+      .filter(s => s.id.includes('alevel'))
+      .map(s => s.id);
+    
+    return aLevelSubjectIds.includes(subjectId);
   };
 
   const getGrade = (percentage: number, subjectId?: string): string => {

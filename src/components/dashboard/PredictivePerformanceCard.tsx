@@ -59,8 +59,14 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     return Math.round(totalScore / totalTopics);
   };
 
+  // Helper to check if subject is A-Level by looking at curriculum
   const isALevel = (subjectId: string): boolean => {
-    return subjectId.includes('alevel');
+    // Get all A-Level subject IDs from curriculum
+    const aLevelSubjectIds = curriculum
+      .filter(s => s.id.includes('alevel'))
+      .map(s => s.id);
+    
+    return aLevelSubjectIds.includes(subjectId);
   };
 
   const gradeToNumber = (gradeString: string, subjectId: string): number => {
