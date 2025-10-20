@@ -46,16 +46,31 @@ Deno.serve(async (req) => {
         const customerId = typeof session.customer === "string" ? session.customer : session.customer?.id;
         const email = session.customer_details?.email ?? undefined;
         const userId = session.client_reference_id ?? undefined;
+        
+        // Check if this is a one-time payment (not a subscription)
+        const isOneTimePayment = session.mode === "payment";
 
         if (customerId) {
+          // Prepare update object - for one-time payments, also set subscription_status to active
+          const updateData: any = { 
+            stripe_customer_id: customerId, 
+            updated_at: new Date().toISOString() 
+          };
+          
+          if (isOneTimePayment) {
+            updateData.subscription_status = "active";
+            // Set expiration to July 31, 2026 for one-time payments
+            updateData.current_period_end = new Date("2026-07-31T23:59:59Z").toISOString();
+          }
+
           if (userId) {
             // A) attach by user id
             const { data, error } = await supabase
               .from("profiles")
-              .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
+              .update(updateData)
               .eq("id", userId)
               .select("*");
-            console.log("attach by userId", { count: data?.length ?? 0, error });
+            console.log("attach by userId", { count: data?.length ?? 0, error, isOneTimePayment });
             if ((data?.length ?? 0) > 0) break; // done
           }
 
@@ -63,10 +78,10 @@ Deno.serve(async (req) => {
             // B) attach by email
             const { data, error } = await supabase
               .from("profiles")
-              .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
+              .update(updateData)
               .eq("email", email)
               .select("*");
-            console.log("attach by email (session)", { count: data?.length ?? 0, error });
+            console.log("attach by email (session)", { count: data?.length ?? 0, error, isOneTimePayment });
             if ((data?.length ?? 0) > 0) break; // done
           }
 
@@ -76,10 +91,10 @@ Deno.serve(async (req) => {
           if (custEmail) {
             const { data, error } = await supabase
               .from("profiles")
-              .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
+              .update(updateData)
               .eq("email", custEmail)
               .select("*");
-            console.log("attach by email (customer)", { count: data?.length ?? 0, error });
+            console.log("attach by email (customer)", { count: data?.length ?? 0, error, isOneTimePayment });
           }
         }
         break;
