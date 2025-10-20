@@ -52,6 +52,22 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
     onOpenChange(false);
   };
 
+  const handleOneTimePayment = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+    const join = "https://buy.stripe.com/7sY5kC33Wew2daw95e8N207".includes("?") ? "&" : "?";
+    const successUrl = `${window.location.origin}/payment-success`;
+    window.location.href =
+      "https://buy.stripe.com/7sY5kC33Wew2daw95e8N207" + join +
+      "client_reference_id=" + encodeURIComponent(user.id) +
+      "&prefilled_email=" + encodeURIComponent(user.email || "") +
+      "&success_url=" + encodeURIComponent(successUrl);
+    onOpenChange(false);
+  };
+
   const handleSendParentEmail = async () => {
     if (!studentName || !parentEmail) {
       toast({
@@ -261,7 +277,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                       </div>
 
                       <Button
-                        onClick={handleUpgrade}
+                        onClick={handleOneTimePayment}
                         className="w-full h-12 rounded-full text-sm font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
                       >
                         Get Exam Access
