@@ -211,14 +211,14 @@ const Pricing = () => {
           {/* Monthly */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
-            <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
+            <p className="text-gray-600 mb-6">Start free, then £19.99/month.</p>
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2">
                 <span className="text-5xl font-bold text-gray-900">£0</span>
                 <span className="text-gray-600">/week</span>
               </div>
-              <p className="text-sm text-gray-500 mt-2">Then £9.99/month</p>
+              <p className="text-sm text-gray-500 mt-2">Then £19.99/month</p>
             </div>
 
             <Button
@@ -237,7 +237,7 @@ const Pricing = () => {
           {/* 2026 Exams */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
             <div className="absolute top-6 right-6 bg-white text-[#00A8FF] px-4 py-1 rounded-full text-sm font-bold">
-              Save {examYear === "2026" ? "64%" : "47%"}
+              Save {examYear === "2026" ? "15%" : "20%"}
             </div>
             
             <h3 className="text-2xl font-bold mb-2">{examYear} Exams</h3>
@@ -247,10 +247,10 @@ const Pricing = () => {
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-5xl font-bold">£{examYear === "2026" ? "74.99" : "174.99"}</span>
+                <span className="text-5xl font-bold">£{examYear === "2026" ? "169.99" : "349.99"}</span>
                 <span className="text-white/90">once</span>
               </div>
-              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "94.99" : "199.99"}</span>
+              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "199.99" : "449.99"}</span>
             </div>
 
             <Button
@@ -261,7 +261,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-white/80 mt-4 text-center">
-              £{examYear === "2026" ? "74.99" : "174.99"} billed once.
+              £{examYear === "2026" ? "169.99" : "349.99"} billed once.
             </p>
           </Card>
         </motion.div>
