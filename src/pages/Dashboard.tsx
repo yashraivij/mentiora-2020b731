@@ -2436,15 +2436,6 @@ const Dashboard = () => {
                 Manage Billing
               </Button>
             )}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowPremiumWelcome(true)}
-              className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold"
-            >
-              <Crown className="w-4 h-4 mr-1" />
-              Test Premium
-            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -2458,14 +2449,6 @@ const Dashboard = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2 relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setShowPremiumWelcome(true)}
-              className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white"
-            >
-              <Crown className="w-4 h-4" />
-            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
