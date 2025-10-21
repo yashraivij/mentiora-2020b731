@@ -436,12 +436,26 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className="text-base font-bold text-[#0F172A] dark:text-white">{subject.predicted}</span>
+                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
+                          {(() => {
+                            const isALevel = subject.id.toLowerCase().includes('alevel');
+                            const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                            if (!isALevel) return subject.predicted;
+                            // Convert to A-Level letter grade
+                            if (numericPred >= 8.5) return 'A*';
+                            if (numericPred >= 7.5) return 'A';
+                            if (numericPred >= 6.5) return 'B';
+                            if (numericPred >= 5.5) return 'C';
+                            if (numericPred >= 4.5) return 'D';
+                            if (numericPred >= 3.5) return 'E';
+                            return 'U';
+                          })()}
+                        </span>
                       </div>
                       <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: typeof subject.predicted === 'number' ? `${(subject.predicted / 10) * 100}%` : '0%' }}
+                          animate={{ width: typeof subject.predicted === 'number' ? `${((Math.max(1, subject.predicted) - 1) / 8) * 100}%` : '0%' }}
                           transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                         />
@@ -450,12 +464,25 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target</span>
-                        <span className="text-base font-bold text-[#0F172A] dark:text-white">{subject.target}</span>
+                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
+                          {(() => {
+                            const isALevel = subject.id.toLowerCase().includes('alevel');
+                            if (!isALevel) return subject.target;
+                            // Convert to A-Level letter grade
+                            if (subject.target >= 8.5) return 'A*';
+                            if (subject.target >= 7.5) return 'A';
+                            if (subject.target >= 6.5) return 'B';
+                            if (subject.target >= 5.5) return 'C';
+                            if (subject.target >= 4.5) return 'D';
+                            if (subject.target >= 3.5) return 'E';
+                            return 'U';
+                          })()}
+                        </span>
                       </div>
                       <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: `${(subject.target / 10) * 100}%` }}
+                          animate={{ width: `${((Math.max(1, subject.target) - 1) / 8) * 100}%` }}
                           transition={{ duration: 1.2, delay: 0.3 * index, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                         />
