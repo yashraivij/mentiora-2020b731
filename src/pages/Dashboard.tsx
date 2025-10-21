@@ -1791,6 +1791,8 @@ const Dashboard = () => {
         .filter(pg => pg.subject_id === subjectId)
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
+      console.log(`🔍 ${subjectId} - recentExamCompletion:`, recentExamCompletion?.grade, 'type:', typeof recentExamCompletion?.grade);
+      
       const hasPracticeData = subjectProgress.length > 0;
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
@@ -1851,7 +1853,10 @@ const Dashboard = () => {
           return `${subject.subject_name} (${subject.exam_board})`;
         })(),
         icon: getSubjectIconEmoji(subjectId),
-        predicted: predicted,
+        predicted: (() => {
+          console.log(`✅ ${subjectId} final predicted:`, predicted, 'type:', typeof predicted);
+          return predicted;
+        })(),
         target: target,
         trend: trend,
         strong: "Various topics",
@@ -2634,7 +2639,10 @@ const Dashboard = () => {
                             return (
                               <>
                                 <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
-                                  Predicted {getDisplayGrade(selectedDrawerSubject.predicted)}
+                                  Predicted {(() => {
+                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                    return getDisplayGrade(selectedDrawerSubject.predicted);
+                                  })()}
                                 </Badge>
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
