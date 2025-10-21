@@ -2870,13 +2870,13 @@ const Dashboard = () => {
                                   if (numericGrade === 0) return 'U';
                                   if (!isALevel) return numericGrade.toFixed(1);
                                   
-                                  // Convert to A-Level letter grade
+                                  // Convert numeric grade (1-9) to A-Level letter grade
                                   if (numericGrade >= 8.5) return 'A*';
                                   if (numericGrade >= 7.5) return 'A';
                                   if (numericGrade >= 6.5) return 'B';
                                   if (numericGrade >= 5.5) return 'C';
                                   if (numericGrade >= 4.5) return 'D';
-                                  if (numericGrade >= 3.5) return 'E';
+                                  if (numericGrade >= 2.5) return 'E';
                                   return 'U';
                                 };
                                 
