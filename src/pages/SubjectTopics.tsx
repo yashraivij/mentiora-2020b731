@@ -162,8 +162,16 @@ const SubjectTopics = () => {
   // Determine if subject is A-Level - check both URL param and the subject's ID
   const isALevel = !!(
     subjectId?.toLowerCase().includes('alevel') || 
-    subject?.id.toLowerCase().includes('alevel')
+    subject?.id?.toLowerCase().includes('alevel')
   );
+  
+  // Debug logging
+  console.log('SubjectTopics Debug:', {
+    subjectId,
+    subjectFromCurriculum: subject?.id,
+    isALevel,
+    gradeWillBe: isALevel ? 'LETTERS' : 'NUMBERS'
+  });
 
   // Target Grade Setup Screen
   if (showGradeSetup) {
