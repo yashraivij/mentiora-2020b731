@@ -1799,9 +1799,11 @@ const Dashboard = () => {
         const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
         const combinedGrade = (examGradeNum * 0.7) + (practiceGradeNum * 0.3);
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
+        console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
         // Only exam completion exists
         predicted = recentExamCompletion.grade === 'U' ? 'U' : parseFloat(recentExamCompletion.grade) || 0;
+        console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
         // Only practice data exists
         const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
@@ -2607,6 +2609,7 @@ const Dashboard = () => {
                             // Helper to convert numeric grade to display grade
                             const getDisplayGrade = (numericGrade: number | string) => {
                               const num = typeof numericGrade === 'string' ? parseFloat(numericGrade) : numericGrade;
+                              console.log(`🎯 getDisplayGrade called with:`, numericGrade, '(type:', typeof numericGrade, ') parsed to:', num, 'isALevel:', isALevel);
                               if (isNaN(num) || num === 0) return 'U';
                               if (!isALevel) return num.toString();
                               
