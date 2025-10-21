@@ -748,7 +748,10 @@ export type Database = {
           is_premium: boolean | null
           parent_email: string | null
           plan: string | null
+          premium_until: string | null
+          purchased_package: string | null
           stripe_customer_id: string | null
+          stripe_payment_id: string | null
           subscription_status: string | null
           updated_at: string | null
           username: string | null
@@ -763,7 +766,10 @@ export type Database = {
           is_premium?: boolean | null
           parent_email?: string | null
           plan?: string | null
+          premium_until?: string | null
+          purchased_package?: string | null
           stripe_customer_id?: string | null
+          stripe_payment_id?: string | null
           subscription_status?: string | null
           updated_at?: string | null
           username?: string | null
@@ -778,7 +784,10 @@ export type Database = {
           is_premium?: boolean | null
           parent_email?: string | null
           plan?: string | null
+          premium_until?: string | null
+          purchased_package?: string | null
           stripe_customer_id?: string | null
+          stripe_payment_id?: string | null
           subscription_status?: string | null
           updated_at?: string | null
           username?: string | null
@@ -1537,6 +1546,19 @@ export type Database = {
       update_flashcard_review: {
         Args: { flashcard_id: string; performance: number }
         Returns: undefined
+      }
+      upgrade_user_to_premium: {
+        Args: {
+          customer_id: string
+          expiry_date: string
+          package_name: string
+          payment_id: string
+          user_email: string
+        }
+        Returns: {
+          message: string
+          success: boolean
+        }[]
       }
     }
     Enums: {
