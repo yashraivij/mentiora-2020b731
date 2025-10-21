@@ -1776,6 +1776,24 @@ const Dashboard = () => {
         ? parseFloat(subject.target_grade) || 7
         : subject.target_grade || 7;
       
+      // Helper function to convert letter grades (A-Level) to numeric
+      const convertGradeToNumeric = (grade: any): number => {
+        if (typeof grade === 'number') return grade;
+        if (grade === 'U' || grade === null || grade === undefined) return 0;
+        
+        const gradeStr = String(grade).trim().toUpperCase();
+        const letterGradeMap: {[key: string]: number} = {
+          'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 0
+        };
+        
+        if (letterGradeMap[gradeStr] !== undefined) {
+          return letterGradeMap[gradeStr];
+        }
+        
+        const numericGrade = parseFloat(gradeStr);
+        return isNaN(numericGrade) ? 0 : numericGrade;
+      };
+      
       // Calculate predicted grade using same logic as PredictedGradesGraph
       let predicted: number | string = target;
       
@@ -1797,14 +1815,15 @@ const Dashboard = () => {
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
-        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseFloat(recentExamCompletion.grade) || 0;
+        const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
         const combinedGrade = (examGradeNum * 0.7) + (practiceGradeNum * 0.3);
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
         console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
         // Only exam completion exists
-        predicted = recentExamCompletion.grade === 'U' ? 'U' : parseFloat(recentExamCompletion.grade) || 0;
+        const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
+        predicted = examGradeNum === 0 ? 'U' : examGradeNum;
         console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
         // Only practice data exists
@@ -1812,9 +1831,7 @@ const Dashboard = () => {
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
-        const userSubjectPredictedGrade = typeof subject.predicted_grade === 'string' 
-          ? parseInt(subject.predicted_grade) || 0 
-          : subject.predicted_grade || 0;
+        const userSubjectPredictedGrade = convertGradeToNumeric(subject.predicted_grade);
         predicted = userSubjectPredictedGrade === 0 ? 'U' : userSubjectPredictedGrade;
       }
       
