@@ -2436,6 +2436,15 @@ const Dashboard = () => {
                 Manage Billing
               </Button>
             )}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowPremiumWelcome(true)}
+              className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold"
+            >
+              <Crown className="w-4 h-4 mr-1" />
+              Test Premium
+            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -2449,6 +2458,14 @@ const Dashboard = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2 relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowPremiumWelcome(true)}
+              className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white"
+            >
+              <Crown className="w-4 h-4" />
+            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -5403,26 +5420,6 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Test Premium Welcome Button */}
-              <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center">
-                    <Crown className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-card-foreground">Test Premium Welcome</h3>
-                    <p className="text-card-foreground/80">Preview the premium welcome notification</p>
-                  </div>
-                </div>
-                <Button 
-                  onClick={() => setShowPremiumWelcome(true)}
-                  className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-2xl"
-                >
-                  <Crown className="w-4 h-4 mr-2" />
-                  Show Premium Welcome
-                </Button>
               </div>
 
               {/* Billing Management Card - Only for Premium Users */}
