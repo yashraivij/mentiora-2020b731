@@ -2647,7 +2647,7 @@ const Dashboard = () => {
                                 ) : (
                                   <select
                                     className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
-                                    defaultValue={selectedDrawerSubject.target}
+                                    value={getDisplayGrade(selectedDrawerSubject.target)}
                                     onChange={(e) => {
                                       const subjectData = userSubjectsWithGrades.find(
                                         s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
@@ -2661,6 +2661,7 @@ const Dashboard = () => {
                                           target: isALevel ? letterToNumeric(e.target.value) : parseInt(e.target.value)
                                         });
                                       }
+                                      setEditingTargetGrade(false);
                                     }}
                                     onBlur={() => setEditingTargetGrade(false)}
                                     autoFocus
