@@ -2610,13 +2610,13 @@ const Dashboard = () => {
                               if (isNaN(num) || num === 0) return 'U';
                               if (!isALevel) return num.toString();
                               
-                              // Convert to A-Level letter grade
+                              // Convert numeric grade (1-9) to A-Level letter grade
                               if (num >= 8.5) return 'A*';
                               if (num >= 7.5) return 'A';
                               if (num >= 6.5) return 'B';
                               if (num >= 5.5) return 'C';
                               if (num >= 4.5) return 'D';
-                              if (num >= 3.5) return 'E';
+                              if (num >= 2.5) return 'E';
                               return 'U';
                             };
                             
