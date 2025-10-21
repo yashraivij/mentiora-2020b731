@@ -2928,7 +2928,7 @@ const Dashboard = () => {
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: `${(predictedGradeValue / 10) * 100}%` }}
+                                          animate={{ width: `${(predictedGradeValue / 9) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.3 }}
                                           className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                                         />
@@ -2942,7 +2942,7 @@ const Dashboard = () => {
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: `${(targetGradeValue / 10) * 100}%` }}
+                                          animate={{ width: `${(targetGradeValue / 9) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.4 }}
                                           className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                                         />
@@ -2956,7 +2956,7 @@ const Dashboard = () => {
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: `${(classMedianValue / 10) * 100}%` }}
+                                          animate={{ width: `${(classMedianValue / 9) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.5 }}
                                           className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
                                         />
