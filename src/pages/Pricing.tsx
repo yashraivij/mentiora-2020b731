@@ -55,21 +55,22 @@ const Pricing = () => {
       return;
     }
     
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
     
-    if (!user) {
+    if (!session?.user) {
       toast({
-        title: "Error",
-        description: "You must be logged in to save this information.",
+        title: "Login Required",
+        description: "Please log in to save your parent's email.",
         variant: "destructive"
       });
+      navigate("/login");
       return;
     }
 
     const { error } = await supabase
       .from('paywall_parent_emails')
       .insert({
-        user_id: user.id,
+        user_id: session.user.id,
         parent_email: parentEmail,
         student_name: studentName
       });
