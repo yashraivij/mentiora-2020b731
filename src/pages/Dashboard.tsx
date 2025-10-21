@@ -4018,24 +4018,32 @@ const Dashboard = () => {
                     </div>
                     <div className="p-8">
                       <div className="grid grid-cols-3 gap-3">
-                        {[9, 8, 7, 6, 5, 4, 3, 2, 1].map((grade) => (
-                          <motion.button
-                            key={grade}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => {
-                              addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
-                              setSelectedSubjectForGrade(null);
-                              setShowAddSubjects(false);
-                              setSelectedSubjectGroup(null);
-                            }}
-                            className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
-                          >
-                            <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
-                              {grade}
-                            </div>
-                          </motion.button>
-                        ))}
+                        {(() => {
+                          // Check if subject is A-Level
+                          const isALevel = selectedSubjectForGrade.id.toLowerCase().includes('alevel');
+                          const grades = isALevel 
+                            ? ['A*', 'A', 'B', 'C', 'D', 'E']
+                            : [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                          
+                          return grades.map((grade) => (
+                            <motion.button
+                              key={grade}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
+                                setSelectedSubjectForGrade(null);
+                                setShowAddSubjects(false);
+                                setSelectedSubjectGroup(null);
+                              }}
+                              className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+                            >
+                              <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
+                                {grade}
+                              </div>
+                            </motion.button>
+                          ));
+                        })()}
                       </div>
                     </div>
                   </motion.div>
