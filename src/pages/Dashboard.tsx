@@ -2828,6 +2828,24 @@ const Dashboard = () => {
                                 const subjectIdToMatch = selectedDrawerSubject?.id || '';
                                 const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
+                                // Helper to check if subject is A-Level
+                                const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
+                                
+                                // Helper to convert numeric grade to display grade
+                                const getDisplayGrade = (numericGrade: number) => {
+                                  if (numericGrade === 0) return 'U';
+                                  if (!isALevel) return numericGrade.toFixed(1);
+                                  
+                                  // Convert to A-Level letter grade
+                                  if (numericGrade >= 8.5) return 'A*';
+                                  if (numericGrade >= 7.5) return 'A';
+                                  if (numericGrade >= 6.5) return 'B';
+                                  if (numericGrade >= 5.5) return 'C';
+                                  if (numericGrade >= 4.5) return 'D';
+                                  if (numericGrade >= 3.5) return 'E';
+                                  return 'U';
+                                };
+                                
                                 // Get user's predicted grade for this subject using the direct subject ID
                                 const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
@@ -2871,7 +2889,7 @@ const Dashboard = () => {
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{predictedGradeValue === 0 ? 'U' : predictedGradeValue.toFixed(1)}</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(predictedGradeValue)}</span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
@@ -2885,7 +2903,7 @@ const Dashboard = () => {
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target Grade</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{targetGradeValue}</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(typeof targetGradeValue === 'number' ? targetGradeValue : parseFloat(targetGradeValue) || 0)}</span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
@@ -2899,7 +2917,7 @@ const Dashboard = () => {
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
                                       <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Mentiora Average</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{classMedianValue.toFixed(1)}</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(classMedianValue)}</span>
                                       </div>
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
