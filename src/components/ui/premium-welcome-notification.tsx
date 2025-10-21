@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Crown, X, BookOpen, TrendingUp, Calendar, Brain, Check, Sparkles, FileText } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Crown, X, Check } from 'lucide-react';
 
 interface PremiumWelcomeNotificationProps {
   isVisible: boolean;
@@ -12,198 +9,125 @@ interface PremiumWelcomeNotificationProps {
 
 export function PremiumWelcomeNotification({ isVisible, onClose }: PremiumWelcomeNotificationProps) {
   const premiumFeatures = [
-    {
-      icon: FileText,
-      title: "Predicted 2026 Papers",
-      description: "AI-generated exam papers based on past patterns and current trends",
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-950/30",
-      iconBg: "bg-blue-500"
-    },
-    {
-      icon: Brain,
-      title: "Smart Revision Notes",
-      description: "Auto-generated notes from your mistakes with bulletproof explanations",
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-950/30",
-      iconBg: "bg-purple-500"
-    },
-    {
-      icon: Calendar,
-      title: "Adaptive Weekly Plan",
-      description: "Personalized study schedule that adapts to your progress and goals",
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-50 dark:bg-green-950/30",
-      iconBg: "bg-green-500"
-    },
-    {
-      icon: TrendingUp,
-      title: "Enhanced Analytics",
-      description: "Deep insights into your performance with predictive grade tracking",
-      color: "from-orange-500 to-red-500",
-      bgColor: "bg-orange-50 dark:bg-orange-950/30",
-      iconBg: "bg-orange-500"
-    },
-    {
-      icon: BookOpen,
-      title: "Unlimited Flashcards",
-      description: "Create and study unlimited AI-enhanced flashcard sets",
-      color: "from-indigo-500 to-blue-500",
-      bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
-      iconBg: "bg-indigo-500"
-    },
-    {
-      icon: Sparkles,
-      title: "Priority Support",
-      description: "Get faster responses and dedicated help when you need it",
-      color: "from-yellow-500 to-amber-500",
-      bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
-      iconBg: "bg-yellow-500"
-    }
+    { text: "Predicted 2026 Exam Papers", emoji: "📝" },
+    { text: "Smart Revision Notebook", emoji: "📔" },
+    { text: "Adaptive Weekly Study Plan", emoji: "📅" },
+    { text: "Enhanced Analytics & Insights", emoji: "📊" },
+    { text: "Unlimited AI Flashcards", emoji: "🎯" },
+    { text: "Priority Support", emoji: "⚡" }
   ];
 
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4"
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          style={{ 
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backdropFilter: 'blur(4px)'
+          }}
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl"
+            className="bg-white dark:bg-gray-900 rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-10 max-h-[88vh] overflow-y-auto"
           >
-            <Card className="relative overflow-hidden border-2 border-primary/20 bg-background shadow-2xl">
-              {/* Header Section */}
-              <div className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background border-b border-border p-8">
-                {/* Close Button */}
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-background/80 hover:bg-background border border-border transition-all hover:scale-110"
-                >
-                  <X className="h-4 w-4 text-muted-foreground" />
-                </button>
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              <X className="h-5 w-5 text-gray-500" />
+            </button>
 
-                <div className="flex items-center gap-6">
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ type: "spring", damping: 15, delay: 0.2 }}
-                    className="relative"
-                  >
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
-                      <Crown className="h-10 w-10 text-primary-foreground" />
-                    </div>
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
-                    >
-                      <Check className="h-4 w-4 text-white" />
-                    </motion.div>
-                  </motion.div>
-
-                  <div className="flex-1">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      <Badge className="mb-3 bg-primary/20 text-primary border-primary/30 px-3 py-1">
-                        Premium Activated
-                      </Badge>
-                      <h2 className="text-3xl font-bold text-foreground mb-2">
-                        Welcome to Mentiora Premium
-                      </h2>
-                      <p className="text-muted-foreground text-lg">
-                        You now have access to everything you need to ace your exams
-                      </p>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Features Grid */}
-              <CardContent className="p-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#00B4D8] to-[#0BA5E9] rounded-[16px] mb-6 relative"
+              >
+                <Crown className="h-8 w-8 text-white" />
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="mb-6"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center border-2 border-white dark:border-gray-900"
                 >
-                  <h3 className="text-xl font-bold text-foreground mb-2">Your Premium Features</h3>
-                  <p className="text-muted-foreground">Everything you need to maximize your study efficiency</p>
+                  <Check className="h-3 w-3 text-white" />
                 </motion.div>
+              </motion.div>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-[32px] font-[800] text-black dark:text-white mb-3"
+              >
+                Welcome to Premium! 🎉
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-[16px] text-[#6B7280] dark:text-gray-400"
+              >
+                You now have access to everything you need to ace your exams
+              </motion.p>
+            </div>
 
-                <div className="grid md:grid-cols-2 gap-4 mb-8">
-                  {premiumFeatures.map((feature, index) => {
-                    const Icon = feature.icon;
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                      >
-                        <Card className={`${feature.bgColor} border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg group`}>
-                          <CardContent className="p-5">
-                            <div className="flex gap-4">
-                              <div className={`${feature.iconBg} w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
-                                <Icon className="h-6 w-6 text-white" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-bold text-foreground mb-1 flex items-center gap-2">
-                                  {feature.title}
-                                  <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-                                </h4>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                  {feature.description}
-                                </p>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                {/* CTA Button */}
+            {/* Features List */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="space-y-3 mb-8"
+            >
+              {premiumFeatures.map((feature, index) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1 }}
-                  className="flex gap-4"
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + index * 0.08 }}
+                  className="flex items-center gap-3 p-4 rounded-[12px] bg-[#F0F9FF] dark:bg-gray-800 border border-[#00B4D8]/20"
                 >
-                  <Button
-                    onClick={onClose}
-                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]"
-                  >
-                    <Crown className="h-5 w-5 mr-2" />
-                    Start Using Premium Features
-                  </Button>
+                  <span className="text-[24px] flex-shrink-0">{feature.emoji}</span>
+                  <span className="text-[15px] font-medium text-black dark:text-white flex-1">
+                    {feature.text}
+                  </span>
+                  <Check className="w-5 h-5 text-[#00B4D8] flex-shrink-0" />
                 </motion.div>
+              ))}
+            </motion.div>
 
-                {/* Footer Note */}
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.3 }}
-                  className="text-center text-sm text-muted-foreground mt-6"
-                >
-                  Your premium features are now active. Head to your dashboard to get started!
-                </motion.p>
-              </CardContent>
-            </Card>
+            {/* CTA Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              onClick={onClose}
+              className="w-full bg-[#00B4D8] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+            >
+              Start Using Premium →
+            </motion.button>
+
+            {/* Footer */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.0 }}
+              className="text-[14px] text-[#6B7280] dark:text-gray-500 text-center mt-6"
+            >
+              All features are now active in your dashboard
+            </motion.p>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
