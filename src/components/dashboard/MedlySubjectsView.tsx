@@ -440,7 +440,7 @@ export function MedlySubjectsView({
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            if (!isALevel) return subject.predicted;
+                            if (!isALevel) return Math.round(numericPred);
                             // Convert numeric grade (1-9) to A-Level letter grade
                             if (numericPred >= 8.5) return 'A*';
                             if (numericPred >= 7.5) return 'A';
@@ -467,7 +467,8 @@ export function MedlySubjectsView({
                         <span className="text-base font-bold text-[#0F172A] dark:text-white">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            if (!isALevel) return subject.target;
+                            const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
+                            if (!isALevel) return Math.round(numericTarget);
                             // Convert numeric grade (1-9) to A-Level letter grade
                             if (subject.target >= 8.5) return 'A*';
                             if (subject.target >= 7.5) return 'A';
