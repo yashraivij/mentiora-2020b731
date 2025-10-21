@@ -2636,26 +2636,41 @@ const Dashboard = () => {
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
-                                    // For A-Level subjects, the database stores them as "Subject (A-Level)"
-                                    const baseSubjectName = selectedDrawerSubject.name;
+                                    console.log('=== Target Grade Change Debug ===');
+                                    console.log('1. Selected value:', value);
+                                    console.log('2. Is A-Level:', isALevel);
+                                    console.log('3. Selected drawer subject:', selectedDrawerSubject);
                                     
-                                    const subjectData = userSubjectsWithGrades.find(s => {
-                                      // For A-Level, match "Psychology (A-Level)" with "Psychology"
-                                      if (isALevel) {
-                                        return s.subject_name === `${baseSubjectName} (A-Level)`;
-                                      }
-                                      // For GCSE, use the display name without exam board
-                                      return s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0];
-                                    });
+                                    const subjectDisplayName = getSubjectDisplayName(selectedDrawerSubject).split(' (')[0];
+                                    console.log('4. Subject display name:', subjectDisplayName);
+                                    console.log('5. All user subjects:', userSubjectsWithGrades);
+                                    
+                                    const subjectData = userSubjectsWithGrades.find(
+                                      s => s.subject_name === subjectDisplayName
+                                    );
+                                    console.log('6. Found subject data:', subjectData);
                                     
                                     if (subjectData) {
                                       const valueToSave = isALevel ? letterToNumeric(value).toString() : value;
+                                      console.log('7. Value to save to DB:', valueToSave);
+                                      console.log('8. Calling updateTargetGrade with:', {
+                                        subject_name: subjectData.subject_name,
+                                        exam_board: subjectData.exam_board,
+                                        target_grade: valueToSave
+                                      });
+                                      
                                       updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
+                                      
+                                      const newTarget = isALevel ? letterToNumeric(value) : parseInt(value);
+                                      console.log('9. New target for state:', newTarget);
                                       
                                       setSelectedDrawerSubject({
                                         ...selectedDrawerSubject,
-                                        target: isALevel ? letterToNumeric(value) : parseInt(value)
+                                        target: newTarget
                                       });
+                                      console.log('10. State updated');
+                                    } else {
+                                      console.error('ERROR: Subject data not found!');
                                     }
                                   }}
                                 >
