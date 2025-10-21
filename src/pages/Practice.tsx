@@ -97,6 +97,52 @@ const Practice = () => {
   console.log('URL params:', { subjectId, topicId });
   console.log('Available subjects:', curriculum.map(s => ({ id: s.id, name: s.name })));
   
+  // Helper function to check if subject is A-Level
+  const isALevel = (subjectId: string | undefined) => {
+    return subjectId?.toLowerCase().includes('alevel') || false;
+  };
+
+  // Helper function to convert numeric grade to letter grade for A-Level
+  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
+    if (!isALevel(subjectId)) {
+      return numericGrade.toFixed(1);
+    }
+    
+    // Convert 1-9 scale to A-Level letter grades
+    if (numericGrade >= 8.5) return 'A*';
+    if (numericGrade >= 7.5) return 'A';
+    if (numericGrade >= 6.5) return 'B';
+    if (numericGrade >= 5.5) return 'C';
+    if (numericGrade >= 4.5) return 'D';
+    return 'E';
+  };
+
+  // Helper function to get progress bar labels
+  const getProgressBarLabels = (subjectId: string | undefined) => {
+    if (isALevel(subjectId)) {
+      return { min: 'Grade E', max: 'Grade A*' };
+    }
+    return { min: 'Grade 4.0', max: 'Grade 9.0' };
+  };
+
+  // Helper function to calculate progress percentage
+  const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
+    if (isALevel(subjectId)) {
+      // Map 4-9 scale to E-A* (4=E, 9=A*)
+      return Math.max(0, ((grade - 4) / 5) * 100);
+    }
+    return Math.max(0, ((grade - 4) / 5) * 100);
+  };
+
+  // Helper function to get progress description
+  const getProgressDescription = (grade: number, subjectId: string | undefined) => {
+    const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
+    if (isALevel(subjectId)) {
+      return `Progress: ${percentage}% towards grade A*`;
+    }
+    return `Progress: ${percentage}% towards grade 9`;
+  };
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
@@ -1144,7 +1190,7 @@ const Practice = () => {
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                           <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                            {newPredictedGrade.toFixed(1)}
+                            {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
                       </div>
@@ -1159,7 +1205,7 @@ const Practice = () => {
                         <div className="relative">
                           <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
                           <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                            {oldPredictedGrade.toFixed(1)}
+                            {getDisplayGrade(oldPredictedGrade, subjectId)}
                           </div>
                         </div>
                       </div>
@@ -1183,7 +1229,7 @@ const Practice = () => {
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                           <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                            {newPredictedGrade.toFixed(1)}
+                            {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
                       </div>
@@ -1193,8 +1239,8 @@ const Practice = () => {
                   {/* Animated Progress Bar */}
                   <div className="space-y-3">
                     <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                      <span>Grade 4.0</span>
-                      <span>Grade 9.0</span>
+                      <span>{getProgressBarLabels(subjectId).min}</span>
+                      <span>{getProgressBarLabels(subjectId).max}</span>
                     </div>
                     <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
                       {/* Old grade position - only show if not first practice */}
@@ -1225,7 +1271,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        Progress: <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> towards grade 9
+                        <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
                       </p>
                     </div>
                   </div>
@@ -1258,7 +1304,7 @@ const Practice = () => {
                         Predicted Grade
                       </p>
                       <span className="text-3xl font-bold text-[hsl(195,69%,54%)]">
-                        {newPredictedGrade.toFixed(1)}
+                        {getDisplayGrade(newPredictedGrade, subjectId)}
                       </span>
                     </div>
                     <div className="relative h-3 bg-muted rounded-full overflow-hidden">
