@@ -441,13 +441,13 @@ export function MedlySubjectsView({
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
                             if (!isALevel) return subject.predicted;
-                            // Convert to A-Level letter grade
+                            // Convert numeric grade (1-9) to A-Level letter grade
                             if (numericPred >= 8.5) return 'A*';
                             if (numericPred >= 7.5) return 'A';
                             if (numericPred >= 6.5) return 'B';
                             if (numericPred >= 5.5) return 'C';
                             if (numericPred >= 4.5) return 'D';
-                            if (numericPred >= 3.5) return 'E';
+                            if (numericPred >= 2.5) return 'E';
                             return 'U';
                           })()}
                         </span>
@@ -468,13 +468,13 @@ export function MedlySubjectsView({
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             if (!isALevel) return subject.target;
-                            // Convert to A-Level letter grade
+                            // Convert numeric grade (1-9) to A-Level letter grade
                             if (subject.target >= 8.5) return 'A*';
                             if (subject.target >= 7.5) return 'A';
                             if (subject.target >= 6.5) return 'B';
                             if (subject.target >= 5.5) return 'C';
                             if (subject.target >= 4.5) return 'D';
-                            if (subject.target >= 3.5) return 'E';
+                            if (subject.target >= 2.5) return 'E';
                             return 'U';
                           })()}
                         </span>
