@@ -58,10 +58,13 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
       window.location.href = "/login";
       return;
     }
-    const join = "https://buy.stripe.com/7sY5kC33Wew2daw95e8N207".includes("?") ? "&" : "?";
+    const stripeLink = examYear === "2027" 
+      ? "https://buy.stripe.com/dRm3cu33W4Vsc6sdlu8N208"
+      : "https://buy.stripe.com/7sY5kC33Wew2daw95e8N207";
+    const join = stripeLink.includes("?") ? "&" : "?";
     const successUrl = `${window.location.origin}/payment-success`;
     window.location.href =
-      "https://buy.stripe.com/7sY5kC33Wew2daw95e8N207" + join +
+      stripeLink + join +
       "client_reference_id=" + encodeURIComponent(user.id) +
       "&prefilled_email=" + encodeURIComponent(user.email || "") +
       "&success_url=" + encodeURIComponent(successUrl);
