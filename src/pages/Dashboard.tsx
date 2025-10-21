@@ -86,6 +86,7 @@ import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary"
 import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 
 interface UserProgress {
   subjectId: string;
@@ -197,6 +198,7 @@ const Dashboard = () => {
   const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
   const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -5403,6 +5405,26 @@ const Dashboard = () => {
                 </div>
               </div>
 
+              {/* Test Premium Welcome Button */}
+              <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center">
+                    <Crown className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-card-foreground">Test Premium Welcome</h3>
+                    <p className="text-card-foreground/80">Preview the premium welcome notification</p>
+                  </div>
+                </div>
+                <Button 
+                  onClick={() => setShowPremiumWelcome(true)}
+                  className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-2xl"
+                >
+                  <Crown className="w-4 h-4 mr-2" />
+                  Show Premium Welcome
+                </Button>
+              </div>
+
               {/* Billing Management Card - Only for Premium Users */}
               {isPremium && (
                 <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
@@ -5478,6 +5500,12 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+
+      {/* Premium Welcome Notification */}
+      <PremiumWelcomeNotification 
+        isVisible={showPremiumWelcome}
+        onClose={() => setShowPremiumWelcome(false)}
+      />
     </div>
   );
 };
