@@ -1795,13 +1795,13 @@ const Dashboard = () => {
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
-        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseInt(recentExamCompletion.grade) || 0;
+        const examGradeNum = recentExamCompletion.grade === 'U' ? 0 : parseFloat(recentExamCompletion.grade) || 0;
         const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
-        const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
+        const combinedGrade = (examGradeNum * 0.7) + (practiceGradeNum * 0.3);
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
       } else if (recentExamCompletion) {
         // Only exam completion exists
-        predicted = recentExamCompletion.grade === 'U' ? 'U' : parseInt(recentExamCompletion.grade) || 0;
+        predicted = recentExamCompletion.grade === 'U' ? 'U' : parseFloat(recentExamCompletion.grade) || 0;
       } else if (hasPracticeData) {
         // Only practice data exists
         const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
