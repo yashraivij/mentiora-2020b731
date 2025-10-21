@@ -2630,9 +2630,22 @@ const Dashboard = () => {
                             
                             // Helper to convert numeric grade to display grade
                             const getDisplayGrade = (numericGrade: number | string) => {
-                              const num = typeof numericGrade === 'string' ? parseFloat(numericGrade) : numericGrade;
-                              console.log(`🎯 getDisplayGrade called with:`, numericGrade, '(type:', typeof numericGrade, ') parsed to:', num, 'isALevel:', isALevel);
-                              if (isNaN(num) || num === 0) return 'U';
+                              // Handle string letter grades first
+                              if (typeof numericGrade === 'string') {
+                                const upperGrade = numericGrade.trim().toUpperCase();
+                                // If it's already a letter grade, return it
+                                if (['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'U'].includes(upperGrade)) {
+                                  return upperGrade;
+                                }
+                                // Try to parse as number
+                                const parsed = parseFloat(numericGrade);
+                                if (isNaN(parsed) || parsed === 0) return 'U';
+                                numericGrade = parsed;
+                              }
+                              
+                              const num = typeof numericGrade === 'number' ? numericGrade : 0;
+                              console.log(`🎯 getDisplayGrade called with:`, numericGrade, '(type:', typeof numericGrade, ') num:', num, 'isALevel:', isALevel);
+                              if (num === 0) return 'U';
                               if (!isALevel) return num.toString();
                               
                               // Convert numeric grade (1-9) to A-Level letter grade
@@ -2894,17 +2907,31 @@ const Dashboard = () => {
                                 const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
                                 
                                 // Helper to convert numeric grade to display grade
-                                const getDisplayGrade = (numericGrade: number) => {
-                                  if (numericGrade === 0) return 'U';
-                                  if (!isALevel) return numericGrade.toFixed(1);
+                                const getDisplayGrade = (numericGrade: number | string) => {
+                                  // Handle string letter grades first
+                                  if (typeof numericGrade === 'string') {
+                                    const upperGrade = numericGrade.trim().toUpperCase();
+                                    // If it's already a letter grade, return it
+                                    if (['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'U'].includes(upperGrade)) {
+                                      return upperGrade;
+                                    }
+                                    // Try to parse as number
+                                    const parsed = parseFloat(numericGrade);
+                                    if (isNaN(parsed) || parsed === 0) return 'U';
+                                    numericGrade = parsed;
+                                  }
+                                  
+                                  const num = typeof numericGrade === 'number' ? numericGrade : 0;
+                                  if (num === 0) return 'U';
+                                  if (!isALevel) return num.toFixed(1);
                                   
                                   // Convert numeric grade (1-9) to A-Level letter grade
-                                  if (numericGrade >= 8.5) return 'A*';
-                                  if (numericGrade >= 7.5) return 'A';
-                                  if (numericGrade >= 6.5) return 'B';
-                                  if (numericGrade >= 5.5) return 'C';
-                                  if (numericGrade >= 4.5) return 'D';
-                                  if (numericGrade >= 2.5) return 'E';
+                                  if (num >= 8.5) return 'A*';
+                                  if (num >= 7.5) return 'A';
+                                  if (num >= 6.5) return 'B';
+                                  if (num >= 5.5) return 'C';
+                                  if (num >= 4.5) return 'D';
+                                  if (num >= 2.5) return 'E';
                                   return 'U';
                                 };
                                 
