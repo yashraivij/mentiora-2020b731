@@ -159,17 +159,11 @@ const SubjectTopics = () => {
   const confidenceLevel = "Building consistency";
   const focusTopic = subject?.topics[0]?.name || "Core concepts";
 
-  // Determine if subject is A-Level by checking all A-Level subjects in curriculum
-  const isALevel = (() => {
-    if (!subjectId) return false;
-    
-    // Get all A-Level subject IDs from curriculum
-    const aLevelSubjectIds = curriculum
-      .filter(s => s.id.includes('alevel'))
-      .map(s => s.id);
-    
-    return aLevelSubjectIds.includes(subjectId);
-  })();
+  // Determine if subject is A-Level - check both URL param and the subject's ID
+  const isALevel = !!(
+    subjectId?.toLowerCase().includes('alevel') || 
+    subject?.id.toLowerCase().includes('alevel')
+  );
 
   // Target Grade Setup Screen
   if (showGradeSetup) {

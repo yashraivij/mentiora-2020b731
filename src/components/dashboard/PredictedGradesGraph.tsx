@@ -40,14 +40,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Helper to check if subject is A-Level by looking at curriculum
+  // Helper to check if subject is A-Level - simple string check
   const isALevel = (subjectId: string): boolean => {
-    // Get all A-Level subject IDs from curriculum
-    const aLevelSubjectIds = curriculum
-      .filter(s => s.id.includes('alevel'))
-      .map(s => s.id);
-    
-    return aLevelSubjectIds.includes(subjectId);
+    return subjectId.toLowerCase().includes('alevel');
   };
 
   // Grade to percentage mapping - supports both GCSE and A-Level
