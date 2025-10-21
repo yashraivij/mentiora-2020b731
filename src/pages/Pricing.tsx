@@ -55,30 +55,39 @@ const Pricing = () => {
       return;
     }
     
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (user) {
-        await supabase
-          .from('paywall_parent_emails')
-          .insert({
-            user_id: user.id,
-            parent_email: parentEmail,
-            student_name: studentName
-          });
-      }
-      
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
       toast({
-        title: "Email sent!",
-        description: "We've sent an email to your parent explaining Mentiora.",
+        title: "Error",
+        description: "You must be logged in to save this information.",
+        variant: "destructive"
       });
-    } catch (error) {
+      return;
+    }
+
+    const { error } = await supabase
+      .from('paywall_parent_emails')
+      .insert({
+        user_id: user.id,
+        parent_email: parentEmail,
+        student_name: studentName
+      });
+
+    if (error) {
       console.error('Error saving parent email:', error);
       toast({
-        title: "Saved!",
-        description: "We'll notify your parent about your exam prep plan.",
+        title: "Error",
+        description: `Failed to save: ${error.message}`,
+        variant: "destructive"
       });
+      return;
     }
+    
+    toast({
+      title: "Saved!",
+      description: "We've saved your parent's email and will notify them about Mentiora.",
+    });
     
     setStudentName("");
     setParentEmail("");
