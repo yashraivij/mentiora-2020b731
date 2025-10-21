@@ -2600,45 +2600,85 @@ const Dashboard = () => {
                           </Button>
                         </div>
                         <div className="flex gap-2 sm:gap-3 flex-wrap">
-                          <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
-                            Predicted {selectedDrawerSubject.predicted}
-                          </Badge>
-                          {!editingTargetGrade ? (
-                            <Badge 
-                              className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
-                              onClick={() => setEditingTargetGrade(true)}
-                            >
-                              <span>Target {selectedDrawerSubject.target}</span>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="sm:w-[14px] sm:h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-                                <path d="m15 5 4 4"/>
-                              </svg>
-                            </Badge>
-                          ) : (
-                            <select
-                              className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
-                              defaultValue={selectedDrawerSubject.target}
-                              onChange={(e) => {
-                                const subjectData = userSubjectsWithGrades.find(
-                                  s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
-                                );
-                                if (subjectData) {
-                                  updateTargetGrade(subjectData.subject_name, subjectData.exam_board, e.target.value);
-                                  // Update the drawer subject state to reflect the change
-                                  setSelectedDrawerSubject({
-                                    ...selectedDrawerSubject,
-                                    target: parseInt(e.target.value)
-                                  });
-                                }
-                              }}
-                              onBlur={() => setEditingTargetGrade(false)}
-                              autoFocus
-                            >
-                              {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
-                                <option key={grade} value={grade}>Target {grade}</option>
-                              ))}
-                            </select>
-                          )}
+                          {(() => {
+                            // Helper to check if subject is A-Level
+                            const isALevel = selectedDrawerSubject.id.toLowerCase().includes('alevel');
+                            
+                            // Helper to convert numeric grade to display grade
+                            const getDisplayGrade = (numericGrade: number | string) => {
+                              const num = typeof numericGrade === 'string' ? parseFloat(numericGrade) : numericGrade;
+                              if (isNaN(num) || num === 0) return 'U';
+                              if (!isALevel) return num.toString();
+                              
+                              // Convert to A-Level letter grade
+                              if (num >= 8.5) return 'A*';
+                              if (num >= 7.5) return 'A';
+                              if (num >= 6.5) return 'B';
+                              if (num >= 5.5) return 'C';
+                              if (num >= 4.5) return 'D';
+                              if (num >= 3.5) return 'E';
+                              return 'U';
+                            };
+                            
+                            // Helper to convert letter grade to numeric (for saving to DB)
+                            const letterToNumeric = (letter: string) => {
+                              const map: {[key: string]: number} = {
+                                'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'U': 1
+                              };
+                              return map[letter] || parseInt(letter);
+                            };
+                            
+                            return (
+                              <>
+                                <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
+                                  Predicted {getDisplayGrade(selectedDrawerSubject.predicted)}
+                                </Badge>
+                                {!editingTargetGrade ? (
+                                  <Badge 
+                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
+                                    onClick={() => setEditingTargetGrade(true)}
+                                  >
+                                    <span>Target {getDisplayGrade(selectedDrawerSubject.target)}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="sm:w-[14px] sm:h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                                      <path d="m15 5 4 4"/>
+                                    </svg>
+                                  </Badge>
+                                ) : (
+                                  <select
+                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
+                                    defaultValue={selectedDrawerSubject.target}
+                                    onChange={(e) => {
+                                      const subjectData = userSubjectsWithGrades.find(
+                                        s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
+                                      );
+                                      if (subjectData) {
+                                        const valueToSave = isALevel ? letterToNumeric(e.target.value).toString() : e.target.value;
+                                        updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
+                                        // Update the drawer subject state to reflect the change
+                                        setSelectedDrawerSubject({
+                                          ...selectedDrawerSubject,
+                                          target: isALevel ? letterToNumeric(e.target.value) : parseInt(e.target.value)
+                                        });
+                                      }
+                                    }}
+                                    onBlur={() => setEditingTargetGrade(false)}
+                                    autoFocus
+                                  >
+                                    {isALevel ? (
+                                      ['A*', 'A', 'B', 'C', 'D', 'E'].map(grade => (
+                                        <option key={grade} value={grade}>Target {grade}</option>
+                                      ))
+                                    ) : (
+                                      [9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
+                                        <option key={grade} value={grade}>Target {grade}</option>
+                                      ))
+                                    )}
+                                  </select>
+                                )}
+                              </>
+                            );
+                          })()}
                         </div>
                       </SheetHeader>
 
