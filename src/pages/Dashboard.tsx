@@ -2633,66 +2633,40 @@ const Dashboard = () => {
                                 <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
                                   Predicted {getDisplayGrade(selectedDrawerSubject.predicted)}
                                 </Badge>
-                                {!editingTargetGrade ? (
-                                  <Badge 
-                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
-                                    onClick={() => setEditingTargetGrade(true)}
-                                  >
-                                    <span>Target {getDisplayGrade(selectedDrawerSubject.target)}</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="sm:w-[14px] sm:h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-                                      <path d="m15 5 4 4"/>
-                                    </svg>
-                                  </Badge>
-                                ) : (
-                                  <select
-                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
-                                    value={getDisplayGrade(selectedDrawerSubject.target)}
-                                    onChange={(e) => {
-                                      console.log('Grade changed to:', e.target.value);
-                                      console.log('Selected drawer subject:', selectedDrawerSubject);
+                                <Select
+                                  value={getDisplayGrade(selectedDrawerSubject.target)}
+                                  onValueChange={(value) => {
+                                    const subjectDisplayName = getSubjectDisplayName(selectedDrawerSubject).split(' (')[0];
+                                    const subjectData = userSubjectsWithGrades.find(
+                                      s => s.subject_name === subjectDisplayName
+                                    );
+                                    
+                                    if (subjectData) {
+                                      const valueToSave = isALevel ? letterToNumeric(value).toString() : value;
+                                      updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
                                       
-                                      const subjectDisplayName = getSubjectDisplayName(selectedDrawerSubject).split(' (')[0];
-                                      console.log('Looking for subject:', subjectDisplayName);
-                                      
-                                      const subjectData = userSubjectsWithGrades.find(
-                                        s => s.subject_name === subjectDisplayName
-                                      );
-                                      console.log('Found subject data:', subjectData);
-                                      
-                                      if (subjectData) {
-                                        const valueToSave = isALevel ? letterToNumeric(e.target.value).toString() : e.target.value;
-                                        console.log('Value to save:', valueToSave);
-                                        
-                                        updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
-                                        
-                                        // Update the drawer subject state to reflect the change
-                                        const newTarget = isALevel ? letterToNumeric(e.target.value) : parseInt(e.target.value);
-                                        console.log('New target:', newTarget);
-                                        
-                                        setSelectedDrawerSubject({
-                                          ...selectedDrawerSubject,
-                                          target: newTarget
-                                        });
-                                      } else {
-                                        console.error('Subject data not found!');
-                                      }
-                                      setEditingTargetGrade(false);
-                                    }}
-                                    onBlur={() => setEditingTargetGrade(false)}
-                                    autoFocus
-                                  >
+                                      setSelectedDrawerSubject({
+                                        ...selectedDrawerSubject,
+                                        target: isALevel ? letterToNumeric(value) : parseInt(value)
+                                      });
+                                    }
+                                  }}
+                                >
+                                  <SelectTrigger className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold text-xs sm:text-sm w-auto">
+                                    <SelectValue>Target {getDisplayGrade(selectedDrawerSubject.target)}</SelectValue>
+                                  </SelectTrigger>
+                                  <SelectContent>
                                     {isALevel ? (
                                       ['A*', 'A', 'B', 'C', 'D', 'E'].map(grade => (
-                                        <option key={grade} value={grade}>Target {grade}</option>
+                                        <SelectItem key={grade} value={grade}>Target {grade}</SelectItem>
                                       ))
                                     ) : (
                                       [9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
-                                        <option key={grade} value={grade}>Target {grade}</option>
+                                        <SelectItem key={grade} value={grade.toString()}>Target {grade}</SelectItem>
                                       ))
                                     )}
-                                  </select>
-                                )}
+                                  </SelectContent>
+                                </Select>
                               </>
                             );
                           })()}
