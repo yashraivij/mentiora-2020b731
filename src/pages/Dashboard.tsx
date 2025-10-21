@@ -2649,17 +2649,33 @@ const Dashboard = () => {
                                     className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-primary text-primary bg-background font-semibold cursor-pointer text-xs sm:text-sm"
                                     value={getDisplayGrade(selectedDrawerSubject.target)}
                                     onChange={(e) => {
+                                      console.log('Grade changed to:', e.target.value);
+                                      console.log('Selected drawer subject:', selectedDrawerSubject);
+                                      
+                                      const subjectDisplayName = getSubjectDisplayName(selectedDrawerSubject).split(' (')[0];
+                                      console.log('Looking for subject:', subjectDisplayName);
+                                      
                                       const subjectData = userSubjectsWithGrades.find(
-                                        s => s.subject_name === getSubjectDisplayName(selectedDrawerSubject).split(' (')[0]
+                                        s => s.subject_name === subjectDisplayName
                                       );
+                                      console.log('Found subject data:', subjectData);
+                                      
                                       if (subjectData) {
                                         const valueToSave = isALevel ? letterToNumeric(e.target.value).toString() : e.target.value;
+                                        console.log('Value to save:', valueToSave);
+                                        
                                         updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
+                                        
                                         // Update the drawer subject state to reflect the change
+                                        const newTarget = isALevel ? letterToNumeric(e.target.value) : parseInt(e.target.value);
+                                        console.log('New target:', newTarget);
+                                        
                                         setSelectedDrawerSubject({
                                           ...selectedDrawerSubject,
-                                          target: isALevel ? letterToNumeric(e.target.value) : parseInt(e.target.value)
+                                          target: newTarget
                                         });
+                                      } else {
+                                        console.error('Subject data not found!');
                                       }
                                       setEditingTargetGrade(false);
                                     }}
