@@ -2944,7 +2944,7 @@ const Dashboard = () => {
                                   if (typeof userPredictedGrade.grade === 'string') {
                                     const numGrade = parseFloat(userPredictedGrade.grade);
                                     if (!isNaN(numGrade)) {
-                                      predictedGradeValue = numGrade;
+                                      predictedGradeValue = Math.round(numGrade); // Round to match badge and card
                                     } else {
                                       // Convert letter grade to number
                                       const gradeMap: {[key: string]: number} = {
@@ -2953,7 +2953,7 @@ const Dashboard = () => {
                                       predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
                                     }
                                   } else {
-                                    predictedGradeValue = userPredictedGrade.grade || 0;
+                                    predictedGradeValue = Math.round(userPredictedGrade.grade || 0); // Round to match badge and card
                                   }
                                 } else {
                                   // Fallback: calculate from subject performance
