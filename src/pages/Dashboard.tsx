@@ -1817,7 +1817,7 @@ const Dashboard = () => {
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
-        const combinedGrade = (examGradeNum * 0.7) + (practiceGradeNum * 0.3);
+        const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
         console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
