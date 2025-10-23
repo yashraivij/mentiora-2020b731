@@ -2780,6 +2780,39 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectId = selectedDrawerSubject?.id || '';
                                 
+                                // Hardcoded stats for Physics subject for specific user
+                                if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
+                                  const isPositive = true;
+                                  const change = 12.5;
+                                  const sign = '+';
+                                  
+                                  return (
+                                    <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
+                                      isPositive 
+                                        ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
+                                        : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
+                                    }`}>
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
+                                            {isPositive ? (
+                                              <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
+                                            ) : (
+                                              <TrendingDown className="h-4 w-4 text-[#EF4444]" />
+                                            )}
+                                          </div>
+                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
+                                        </div>
+                                        <div className={`text-3xl font-bold flex items-center gap-2 ${
+                                          isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
+                                        }`}>
+                                          {sign}{Math.abs(change).toFixed(1)}%
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  );
+                                }
+                                
                                 // Get all progress for this subject with scores > 0
                                 const subjectProgress = userProgress.filter(p => 
                                   p.subjectId === subjectId && p.averageScore > 0
@@ -2862,8 +2895,13 @@ const Dashboard = () => {
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
                                     {(() => {
-                                      // Use the subject ID directly from selectedDrawerSubject
+                                      // Hardcoded accuracy for Physics subject for specific user
                                       const subjectId = selectedDrawerSubject?.id || '';
+                                      if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
+                                        return '78';
+                                      }
+                                      
+                                      // Use the subject ID directly from selectedDrawerSubject
                                       // Only include topics with scores > 0
                                       const subjectExams = userProgress.filter(p => p.subjectId === subjectId && p.averageScore > 0);
                                       
@@ -2897,7 +2935,14 @@ const Dashboard = () => {
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Time Saved</div>
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                                    {subjectStudyTime.hours}h {subjectStudyTime.minutes}m
+                                    {(() => {
+                                      // Hardcoded time saved for Physics subject for specific user
+                                      const subjectId = selectedDrawerSubject?.id || '';
+                                      if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
+                                        return '2h 45m';
+                                      }
+                                      return `${subjectStudyTime.hours}h ${subjectStudyTime.minutes}m`;
+                                    })()}
                                   </div>
                                 </CardContent>
                               </Card>
