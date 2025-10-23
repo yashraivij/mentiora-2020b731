@@ -1567,6 +1567,18 @@ const Dashboard = () => {
   
   // Calculate actual metrics from user data
   const profile = useMemo(() => {
+    // Hardcoded stats for specific user
+    if (user?.email === 'yashraivij2004@gmail.com') {
+      return {
+        name: getFirstName(),
+        overallPred: 6,
+        overallTarget: 6,
+        retention: 0.32,
+        bestWindow: "9–11pm",
+        weekMinutes: 75
+      };
+    }
+    
     // Calculate overall predicted grade (average of all subject predictions)
     let overallPred = 0;
     let overallTarget = 0;
