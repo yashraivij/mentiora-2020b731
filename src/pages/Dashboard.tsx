@@ -1567,18 +1567,6 @@ const Dashboard = () => {
   
   // Calculate actual metrics from user data
   const profile = useMemo(() => {
-    // Hardcoded stats for specific user
-    if (user?.email === 'yashraivij2004@gmail.com') {
-      return {
-        name: getFirstName(),
-        overallPred: 6,
-        overallTarget: 6,
-        retention: 0.32,
-        bestWindow: "9–11pm",
-        weekMinutes: 75
-      };
-    }
-    
     // Calculate overall predicted grade (average of all subject predictions)
     let overallPred = 0;
     let overallTarget = 0;
@@ -1829,7 +1817,7 @@ const Dashboard = () => {
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
-        const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
+        const combinedGrade = (examGradeNum * 0.7) + (practiceGradeNum * 0.3);
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
         console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
@@ -2780,39 +2768,6 @@ const Dashboard = () => {
                               {(() => {
                                 const subjectId = selectedDrawerSubject?.id || '';
                                 
-                                // Hardcoded stats for Physics subject for specific user
-                                if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
-                                  const isPositive = true;
-                                  const change = 12.5;
-                                  const sign = '+';
-                                  
-                                  return (
-                                    <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
-                                      isPositive 
-                                        ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
-                                        : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
-                                    }`}>
-                                      <CardContent className="p-5">
-                                        <div className="flex items-center gap-2 mb-2">
-                                          <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
-                                            {isPositive ? (
-                                              <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
-                                            ) : (
-                                              <TrendingDown className="h-4 w-4 text-[#EF4444]" />
-                                            )}
-                                          </div>
-                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
-                                        </div>
-                                        <div className={`text-3xl font-bold flex items-center gap-2 ${
-                                          isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
-                                        }`}>
-                                          {sign}{Math.abs(change).toFixed(1)}%
-                                        </div>
-                                      </CardContent>
-                                    </Card>
-                                  );
-                                }
-                                
                                 // Get all progress for this subject with scores > 0
                                 const subjectProgress = userProgress.filter(p => 
                                   p.subjectId === subjectId && p.averageScore > 0
@@ -2895,13 +2850,8 @@ const Dashboard = () => {
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
                                     {(() => {
-                                      // Hardcoded accuracy for Physics subject for specific user
-                                      const subjectId = selectedDrawerSubject?.id || '';
-                                      if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
-                                        return '78';
-                                      }
-                                      
                                       // Use the subject ID directly from selectedDrawerSubject
+                                      const subjectId = selectedDrawerSubject?.id || '';
                                       // Only include topics with scores > 0
                                       const subjectExams = userProgress.filter(p => p.subjectId === subjectId && p.averageScore > 0);
                                       
@@ -2935,14 +2885,7 @@ const Dashboard = () => {
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Time Saved</div>
                                   </div>
                                   <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                                    {(() => {
-                                      // Hardcoded time saved for Physics subject for specific user
-                                      const subjectId = selectedDrawerSubject?.id || '';
-                                      if (user?.email === 'yashraivij2004@gmail.com' && subjectId.toLowerCase().includes('physics')) {
-                                        return '2h 45m';
-                                      }
-                                      return `${subjectStudyTime.hours}h ${subjectStudyTime.minutes}m`;
-                                    })()}
+                                    {subjectStudyTime.hours}h {subjectStudyTime.minutes}m
                                   </div>
                                 </CardContent>
                               </Card>
@@ -3001,7 +2944,7 @@ const Dashboard = () => {
                                   if (typeof userPredictedGrade.grade === 'string') {
                                     const numGrade = parseFloat(userPredictedGrade.grade);
                                     if (!isNaN(numGrade)) {
-                                      predictedGradeValue = Math.round(numGrade); // Round to match badge and card
+                                      predictedGradeValue = numGrade;
                                     } else {
                                       // Convert letter grade to number
                                       const gradeMap: {[key: string]: number} = {
@@ -3010,7 +2953,7 @@ const Dashboard = () => {
                                       predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
                                     }
                                   } else {
-                                    predictedGradeValue = Math.round(userPredictedGrade.grade || 0); // Round to match badge and card
+                                    predictedGradeValue = userPredictedGrade.grade || 0;
                                   }
                                 } else {
                                   // Fallback: calculate from subject performance
