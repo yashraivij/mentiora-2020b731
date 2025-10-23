@@ -1950,7 +1950,7 @@ const Dashboard = () => {
             user_id: user.id,
             subject_name: subjectName,
             exam_board: examBoard,
-            predicted_grade: targetGrade, // Use target grade as initial predicted grade
+            predicted_grade: "0", // Start at 0 since no practice data yet
             target_grade: targetGrade
           });
 
