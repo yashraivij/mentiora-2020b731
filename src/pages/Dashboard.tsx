@@ -1632,46 +1632,35 @@ const Dashboard = () => {
     // Calculate retention (average score from last 7 days)
     const now = new Date();
     const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const recentProgress = userProgress.filter(p => {
-      const attemptDate = new Date(p.lastAttempt);
-      return !isNaN(attemptDate.getTime()) && attemptDate >= sevenDaysAgo && p.averageScore > 0;
-    });
-    
+    const recentProgress = userProgress.filter(p => 
+      new Date(p.lastAttempt) >= sevenDaysAgo && p.averageScore > 0
+    );
     const retention = recentProgress.length > 0
-      ? Math.min(1, Math.max(0, recentProgress.reduce((sum, p) => sum + p.averageScore, 0) / (recentProgress.length * 100)))
+      ? recentProgress.reduce((sum, p) => sum + p.averageScore, 0) / (recentProgress.length * 100)
       : 0;
-    
-    console.log('Retention calculation:', {
-      recentProgressCount: recentProgress.length,
-      totalScore: recentProgress.reduce((sum, p) => sum + p.averageScore, 0),
-      calculatedRetention: retention,
-      displayRetention: Math.round(retention * 100)
-    });
     
     // Calculate best study time based on performance by hour
     const hourlyPerformance: { [hour: number]: { total: number; count: number } } = {};
     
     userProgress.forEach(p => {
       if (p.averageScore > 0) {
-        const attemptDate = new Date(p.lastAttempt);
-        if (!isNaN(attemptDate.getTime())) {
-          const hour = attemptDate.getHours();
-          if (!hourlyPerformance[hour]) {
-            hourlyPerformance[hour] = { total: 0, count: 0 };
-          }
-          hourlyPerformance[hour].total += p.averageScore;
-          hourlyPerformance[hour].count += 1;
+        const hour = new Date(p.lastAttempt).getHours();
+        if (!hourlyPerformance[hour]) {
+          hourlyPerformance[hour] = { total: 0, count: 0 };
         }
+        hourlyPerformance[hour].total += p.averageScore;
+        hourlyPerformance[hour].count += 1;
       }
     });
     
     // Find the 2-hour window with best average performance
-    let bestWindow = "No data yet";
+    let bestWindow = "--";
     let bestAverage = 0;
     
     if (Object.keys(hourlyPerformance).length > 0) {
       // Try all 2-hour windows
       for (let startHour = 0; startHour < 24; startHour++) {
+        const endHour = (startHour + 2) % 24;
         let windowTotal = 0;
         let windowCount = 0;
         
@@ -1690,25 +1679,12 @@ const Dashboard = () => {
             const endHour = (startHour + 2) % 24;
             const startHour12 = startHour === 0 ? 12 : startHour > 12 ? startHour - 12 : startHour;
             const endHour12 = endHour === 0 ? 12 : endHour > 12 ? endHour - 12 : endHour;
-            const startPeriod = startHour >= 12 ? 'pm' : 'am';
-            const endPeriod = endHour >= 12 ? 'pm' : 'am';
-            
-            // Format the time window more clearly
-            if (startPeriod === endPeriod) {
-              bestWindow = `${startHour12}–${endHour12}${endPeriod}`;
-            } else {
-              bestWindow = `${startHour12}${startPeriod}–${endHour12}${endPeriod}`;
-            }
+            const period = endHour >= 12 ? 'pm' : 'am';
+            bestWindow = `${startHour12}–${endHour12}${period}`;
           }
         }
       }
     }
-    
-    console.log('Best performance window:', {
-      hourlyPerformance,
-      bestWindow,
-      bestAverage
-    });
     
     // For new users with no real data, set weekMinutes to 0
     const actualWeekMinutes = validSubjectsCount === 0 && userProgress.length === 0 ? 0 : weeklyStudyMinutes;
