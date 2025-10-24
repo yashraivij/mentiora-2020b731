@@ -46,9 +46,11 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
   const nextMilestone = milestones.find(m => m > streakCount) || 365;
   const prevMilestone = milestones.filter(m => m <= streakCount).pop() || 0;
   const daysToMilestone = nextMilestone - streakCount;
-  const progress = prevMilestone === nextMilestone 
-    ? 100 
-    : Math.min(100, ((streakCount - prevMilestone) / (nextMilestone - prevMilestone)) * 100);
+  const progress = streakCount < 3 
+    ? (streakCount / 3) * 100
+    : prevMilestone === nextMilestone 
+      ? 100 
+      : Math.min(100, ((streakCount - prevMilestone) / (nextMilestone - prevMilestone)) * 100);
   
   // Calculate MP reward: 100 MP for every 7 days
   const calculateMPReward = (days: number) => Math.floor(days / 7) * 100;
@@ -201,17 +203,28 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
                         {prevMilestone > 0 && <span className="font-semibold">{prevMilestone} days</span>}
                         <span className="font-bold text-black ml-auto flex items-center gap-1.5">
-                          {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
-                          {nextMilestone === 7 ? (
-                            <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                              7 Day Premium Boost
-                            </span>
+                          {streakCount < 3 ? (
+                            <>
+                              {3 - streakCount} {3 - streakCount === 1 ? 'day' : 'days'} until 
+                              <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+                                3 Day Milestone
+                              </span>
+                            </>
                           ) : (
                             <>
-                              <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                                {nextMilestoneMPReward} MP
-                              </span>
-                              <span className="text-base">🏆</span>
+                              {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
+                              {nextMilestone === 7 ? (
+                                <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+                                  7 Day Premium Boost
+                                </span>
+                              ) : (
+                                <>
+                                  <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+                                    {nextMilestoneMPReward} MP
+                                  </span>
+                                  <span className="text-base">🏆</span>
+                                </>
+                              )}
                             </>
                           )}
                         </span>
