@@ -316,8 +316,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     className="mb-6 bg-gray-50 rounded-xl p-4"
                   >
                     <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
-                      <span className="font-semibold">{prevMilestone === 0 ? 'Start' : `${prevMilestone} days`}</span>
-                      <span className="font-semibold text-black">
+                      {prevMilestone > 0 && <span className="font-semibold">{prevMilestone} days</span>}
+                      <span className="font-semibold text-black ml-auto">
                         {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until {nextMilestone}
                       </span>
                     </div>
