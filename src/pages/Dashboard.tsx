@@ -2608,6 +2608,38 @@ const Dashboard = () => {
             <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
+                {/* Dashboard with Gizmo-Style Side Navigation */}
+                <Tabs defaultValue="subjects" className="flex gap-6">
+                  {/* Side Navigation */}
+                  <div className="flex flex-col gap-2 w-52 shrink-0">
+                    <TabsList className="flex flex-col h-fit bg-transparent p-0 gap-1">
+                      <TabsTrigger 
+                        value="subjects" 
+                        className="w-full justify-start rounded-lg px-4 py-3 text-base font-medium data-[state=active]:bg-gray-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      >
+                        <Home className="h-5 w-5 mr-3" />
+                        My Subjects
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="quests" 
+                        className="w-full justify-start rounded-lg px-4 py-3 text-base font-medium data-[state=active]:bg-gray-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      >
+                        <Star className="h-5 w-5 mr-3" />
+                        Daily Quests
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="leaderboard" 
+                        className="w-full justify-start rounded-lg px-4 py-3 text-base font-medium data-[state=active]:bg-gray-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      >
+                        <Trophy className="h-5 w-5 mr-3" />
+                        Leaderboards
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
+                  
+                  {/* Content Area */}
+                  <div className="flex-1 min-w-0">
+                    <TabsContent value="subjects" className="mt-0">
                 <MedlySubjectsView
                   profile={profile}
                   mockSubjects={mockSubjects}
@@ -2625,6 +2657,17 @@ const Dashboard = () => {
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
+                    </TabsContent>
+
+                    <TabsContent value="quests" className="mt-0">
+                      <DailyQuests userId={user?.id || ''} />
+                    </TabsContent>
+                    
+                    <TabsContent value="leaderboard" className="mt-0">
+                      <LeaderboardTable userId={user?.id || ''} />
+                    </TabsContent>
+                  </div>
+                </Tabs>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
