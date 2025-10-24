@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import { X, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +9,113 @@ interface DailyStreakNotificationProps {
   onClose: () => void;
   streakCount: number;
 }
+
+// Premium Glowing Flame SVG Component
+const GlowingFlame = ({ className }: { className?: string }) => {
+  const flameControls = useAnimationControls();
+
+  useEffect(() => {
+    // Flicker animation on mount
+    const sequence = async () => {
+      await flameControls.start({
+        scale: [1, 1.15, 0.95, 1.1, 1],
+        opacity: [1, 0.8, 1, 0.85, 1],
+        transition: { duration: 0.8, times: [0, 0.2, 0.4, 0.7, 1] }
+      });
+    };
+    sequence();
+  }, [flameControls]);
+
+  return (
+    <motion.div animate={flameControls} className={className}>
+      <svg
+        width="120"
+        height="120"
+        viewBox="0 0 120 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="drop-shadow-[0_0_20px_rgba(251,146,60,0.5)]"
+      >
+        <defs>
+          <linearGradient id="flameGradient" x1="60" y1="20" x2="60" y2="100">
+            <stop offset="0%" stopColor="#FB923C" />
+            <stop offset="50%" stopColor="#F97316" />
+            <stop offset="100%" stopColor="#EA580C" />
+          </linearGradient>
+          <filter id="flameGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <motion.path
+          d="M60 20C60 20 45 35 45 50C45 62 51 68 60 68C69 68 75 62 75 50C75 35 60 20 60 20Z"
+          fill="url(#flameGradient)"
+          filter="url(#flameGlow)"
+          animate={{
+            d: [
+              "M60 20C60 20 45 35 45 50C45 62 51 68 60 68C69 68 75 62 75 50C75 35 60 20 60 20Z",
+              "M60 18C60 18 43 33 43 50C43 63 50 70 60 70C70 70 77 63 77 50C77 33 60 18 60 18Z",
+              "M60 20C60 20 45 35 45 50C45 62 51 68 60 68C69 68 75 62 75 50C75 35 60 20 60 20Z",
+            ]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.path
+          d="M60 35C60 35 52 42 52 50C52 56 55 60 60 60C65 60 68 56 68 50C68 42 60 35 60 35Z"
+          fill="#FCD34D"
+          opacity="0.8"
+          animate={{
+            opacity: [0.8, 0.6, 0.8],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <path
+          d="M60 45C60 45 56 48 56 52C56 55 57.5 57 60 57C62.5 57 64 55 64 52C64 48 60 45 60 45Z"
+          fill="#FFFBEB"
+          opacity="0.9"
+        />
+      </svg>
+    </motion.div>
+  );
+};
+
+// Count-up animation hook
+const useCountUp = (end: number, duration: number = 1000) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration]);
+
+  return count;
+};
 
 // Confetti burst animation
 const ConfettiBurst = () => {
@@ -104,6 +211,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
   const [isMinimized, setIsMinimized] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showMilestoneConfetti, setShowMilestoneConfetti] = useState(false);
+  const animatedCount = useCountUp(streakCount, 800);
 
   const milestones = [7, 14, 30, 60, 100, 180, 365];
   const isMilestone = milestones.includes(streakCount);
@@ -178,11 +286,11 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
 
   const getMotivationalMessage = () => {
     const messages = [
-      "You're unstoppable — consistency builds greatness.",
-      "Every day you show up, your future self thanks you.",
-      "Momentum is yours — keep the streak alive.",
-      "Your dedication is inspiring. This is real progress.",
-      "Small steps daily create extraordinary results.",
+      "Consistency compounds. You're building momentum.",
+      "Each day you show up, your future self thanks you.",
+      "You're proving what's possible — keep going.",
+      "Progress is built one day at a time.",
+      "Every streak is a step toward mastery.",
     ];
     
     // Use streak count to rotate through messages
@@ -242,8 +350,12 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-lg"
               >
-                {/* Medly-style card - clean white with soft shadow */}
-                <Card className="relative overflow-hidden bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100">
+                {/* Premium card with floating effect */}
+                <Card className="relative overflow-hidden bg-white rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12),0_0_1px_rgba(0,0,0,0.05)_inset] border border-gray-100/50"
+                  style={{
+                    boxShadow: '0 20px 60px -15px rgba(74, 108, 255, 0.15), 0 0 1px rgba(255,255,255,0.5) inset'
+                  }}
+                >
                   {/* Close button */}
                   <button
                     onClick={handleFullClose}
@@ -253,9 +365,9 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                   </button>
 
                   <CardContent className="relative p-10 text-center">
-                    {/* Flame icon with subtle glow */}
+                    {/* Premium Glowing Flame Icon */}
                     <motion.div
-                      initial={{ scale: 0.8, opacity: 0 }}
+                      initial={{ scale: 0.5, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{
                         type: "spring",
@@ -263,51 +375,53 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                         stiffness: 200,
                         delay: 0.1
                       }}
-                      className="mb-6"
+                      className="mb-6 flex justify-center"
                     >
-                      <div className="inline-block relative">
-                        <div className="absolute inset-0 blur-2xl rounded-full opacity-20"
-                          style={{ backgroundColor: '#0BA5E9' }}
-                        />
-                        <span className="text-8xl relative z-10">🔥</span>
-                      </div>
+                      <GlowingFlame />
                     </motion.div>
 
-                    {/* Streak count */}
+                    {/* Streak count with gradient and glow */}
                     <motion.h1
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.2, duration: 0.5, type: "spring", damping: 20 }}
-                      className="text-6xl font-black text-black mb-3 tracking-tight"
+                      className="text-6xl font-black mb-3 tracking-tight"
+                      style={{
+                        background: 'linear-gradient(135deg, #4A6CFF 0%, #6366F1 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        filter: 'drop-shadow(0 2px 8px rgba(74, 108, 255, 0.3))'
+                      }}
                     >
-                      {streakCount}-Day Streak!
+                      {animatedCount}-Day Streak!
                     </motion.h1>
 
-                    {/* Motivational message */}
+                    {/* Motivational message - refined */}
                     <motion.p
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3, duration: 0.5 }}
-                      className="text-gray-600 text-lg font-medium mb-8 max-w-md mx-auto leading-relaxed"
+                      className="text-gray-500 text-base font-normal mb-8 max-w-md mx-auto leading-relaxed"
                     >
                       {getMotivationalMessage()}
                     </motion.p>
 
-                    {/* Progress to next milestone */}
+                    {/* Progress to next milestone - glowing gradient bar */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4, duration: 0.5 }}
-                      className="mb-6 bg-gray-50 rounded-xl p-4"
+                      className="mb-6 bg-gray-50/50 rounded-xl p-4"
                     >
                       <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
-                        <span className="font-semibold">{prevMilestone} days</span>
-                        <span className="font-semibold text-black">
+                        <span className="font-medium">{prevMilestone} days</span>
+                        <span className="font-semibold text-gray-700">
                           {daysToMilestone} days until {nextMilestone}
                         </span>
                       </div>
                       
-                      <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="relative h-1.5 bg-gray-200/80 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${progress}%` }}
@@ -316,38 +430,65 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                             ease: [0.16, 1, 0.3, 1],
                             delay: 0.7
                           }}
-                          className="absolute inset-y-0 left-0 rounded-full shadow-sm"
-                          style={{ backgroundColor: '#0BA5E9' }}
+                          className="absolute inset-y-0 left-0 rounded-full"
+                          style={{
+                            background: 'linear-gradient(90deg, #4A6CFF 0%, #A5BFFF 100%)',
+                            boxShadow: '0 0 12px rgba(74, 108, 255, 0.5)'
+                          }}
                         />
                       </div>
                     </motion.div>
 
-                    {/* Reward capsule */}
+                    {/* Glassmorphic reward capsule with bounce */}
                     <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
+                      initial={{ scale: 0, opacity: 0, y: 20 }}
+                      animate={{ 
+                        scale: 1, 
+                        opacity: 1, 
+                        y: 0
+                      }}
                       transition={{ 
-                        delay: 0.6,
+                        delay: 0.9,
                         type: "spring",
-                        damping: 12,
+                        damping: 10,
                         stiffness: 200
                       }}
-                      className="inline-flex items-center gap-2 px-5 py-3 bg-gray-100 rounded-xl mb-8 border border-gray-200"
+                      className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl mb-8 backdrop-blur-sm"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(74, 108, 255, 0.08) 0%, rgba(165, 191, 255, 0.12) 100%)',
+                        border: '1px solid rgba(74, 108, 255, 0.15)',
+                        boxShadow: '0 8px 20px -6px rgba(74, 108, 255, 0.25)'
+                      }}
                     >
-                      <span className="text-2xl">💎</span>
-                      <span className="font-bold text-lg text-black">+10 MP earned</span>
+                      <motion.span 
+                        className="text-2xl"
+                        animate={{ 
+                          rotate: [0, -10, 10, -10, 0],
+                          scale: [1, 1.1, 1.1, 1.1, 1]
+                        }}
+                        transition={{ 
+                          delay: 1.2,
+                          duration: 0.6
+                        }}
+                      >
+                        💎
+                      </motion.span>
+                      <span className="font-bold text-lg" style={{ color: '#4A6CFF' }}>+10 MP earned</span>
                     </motion.div>
 
-                    {/* CTA button */}
+                    {/* CTA button - Mentiora blue */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.7, duration: 0.5 }}
+                      transition={{ delay: 1.1, duration: 0.5 }}
                     >
                       <Button
                         onClick={handleFullClose}
-                        className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center justify-center gap-2"
-                        style={{ backgroundColor: '#0BA5E9' }}
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:shadow-2xl"
+                        style={{ 
+                          background: 'linear-gradient(135deg, #4A6CFF 0%, #3b5bdb 100%)',
+                          boxShadow: '0 10px 30px -10px rgba(74, 108, 255, 0.5)'
+                        }}
                       >
                         Keep the Momentum
                         <ArrowRight className="h-5 w-5" />
