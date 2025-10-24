@@ -22,7 +22,6 @@ import {
   X,
   Crown,
 } from "lucide-react";
-import { WeeklyStreakBanner } from "./WeeklyStreakBanner";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -217,11 +216,6 @@ export function MedlySubjectsView({
                 </Button>
               )}
             </motion.div>
-          </div>
-
-          {/* Streak Banner */}
-          <div className="mb-6">
-            <WeeklyStreakBanner currentStreak={currentStreak} />
           </div>
 
           {/* KPI Belt */}

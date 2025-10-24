@@ -88,6 +88,7 @@ import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { StreakDisplay } from "@/components/dashboard/StreakDisplay";
+import { HeaderStreakDisplay } from "@/components/dashboard/HeaderStreakDisplay";
 
 interface UserProgress {
   subjectId: string;
@@ -2430,6 +2431,11 @@ const Dashboard = () => {
             <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
             <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
             {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
+          </div>
+
+          {/* Streak Display - Desktop Only */}
+          <div className="hidden lg:block">
+            <HeaderStreakDisplay currentStreak={currentStreak} />
           </div>
 
           {/* Desktop Actions */}
