@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
+import { TestStreakButton } from "@/components/ui/daily-streak-notification";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
@@ -66,6 +67,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <TestStreakButton />
       {/* NAVIGATION */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
