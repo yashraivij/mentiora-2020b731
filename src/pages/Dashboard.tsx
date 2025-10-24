@@ -968,8 +968,8 @@ const Dashboard = () => {
       const streakCheckToday = new Date(streakCheckDate);
       const todayDateString = streakCheckToday.toISOString().split('T')[0];
       
-      if (lastLoginDate !== todayDateString && stats.currentStreak > 0) {
-        // New day login - show streak notification
+      if (lastLoginDate !== todayDateString && stats.currentStreak >= 2) {
+        // New day login - show streak notification (only for 2+ days)
         setShowDailyStreak(true);
         localStorage.setItem(`lastStreakNotification_${user.id}`, todayDateString);
       }
