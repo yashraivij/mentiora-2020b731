@@ -2626,14 +2626,32 @@ const Dashboard = () => {
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
                 
-                {/* Daily Quests Section */}
+                {/* Community Section with Tabs */}
                 <div className="mt-12">
-                  <DailyQuests userId={user?.id || ''} />
-                </div>
-
-                {/* Leaderboard Section */}
-                <div className="mt-12">
-                  <LeaderboardTable userId={user?.id || ''} />
+                  <Tabs defaultValue="quests" className="w-full">
+                    <TabsList className="mb-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-1 rounded-2xl shadow-[0_8px_32px_rgba(14,165,233,0.12)]">
+                      <TabsTrigger 
+                        value="quests" 
+                        className="rounded-xl px-6 py-2.5 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#64748B] dark:text-gray-400 transition-all"
+                      >
+                        Daily Quests
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="leaderboard" 
+                        className="rounded-xl px-6 py-2.5 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#64748B] dark:text-gray-400 transition-all"
+                      >
+                        Leaderboards
+                      </TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="quests" className="mt-0">
+                      <DailyQuests userId={user?.id || ''} />
+                    </TabsContent>
+                    
+                    <TabsContent value="leaderboard" className="mt-0">
+                      <LeaderboardTable userId={user?.id || ''} />
+                    </TabsContent>
+                  </Tabs>
                 </div>
                 </>
               ) : (
