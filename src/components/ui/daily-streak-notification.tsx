@@ -10,50 +10,18 @@ interface DailyStreakNotificationProps {
   streakCount: number;
 }
 
-// Sparkle particles
-const SparkleParticles = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
+// Confetti burst animation
+const ConfettiBurst = () => {
+  const confetti = Array.from({ length: 40 }, (_, i) => ({
     id: i,
-    x: 10 + Math.random() * 80,
-    y: 10 + Math.random() * 80,
-    delay: Math.random() * 2,
-    duration: 2 + Math.random() * 2,
-  }));
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute w-1 h-1 bg-white rounded-full"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-          }}
-          animate={{
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-// Milestone confetti
-const MilestoneConfetti = () => {
-  const confetti = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    x: 50 + (Math.random() - 0.5) * 100,
-    delay: Math.random() * 0.3,
-    duration: 2 + Math.random() * 1,
+    x: 50 + (Math.random() - 0.5) * 40,
+    y: 50,
     rotation: Math.random() * 360,
+    delay: Math.random() * 0.2,
+    duration: 1.2 + Math.random() * 0.8,
+    xOffset: (Math.random() - 0.5) * 200,
+    yOffset: -100 - Math.random() * 100,
+    colors: ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6'],
   }));
 
   return (
@@ -64,14 +32,62 @@ const MilestoneConfetti = () => {
           className="absolute w-2 h-2 rounded-full"
           style={{
             left: `${piece.x}%`,
-            top: '-20px',
-            background: `linear-gradient(135deg, #4A6CFF, #7CA8FF)`,
+            top: `${piece.y}%`,
+            backgroundColor: piece.colors[Math.floor(Math.random() * piece.colors.length)],
           }}
-          initial={{ y: -20, opacity: 1, rotate: 0 }}
+          initial={{ 
+            x: 0, 
+            y: 0, 
+            opacity: 1, 
+            rotate: 0,
+            scale: 1,
+          }}
+          animate={{
+            x: piece.xOffset,
+            y: piece.yOffset,
+            opacity: [1, 1, 0],
+            rotate: piece.rotation * 2,
+            scale: [1, 1.2, 0.8],
+          }}
+          transition={{
+            duration: piece.duration,
+            delay: piece.delay,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Extra milestone confetti for achievements
+const MilestoneConfetti = () => {
+  const confetti = Array.from({ length: 60 }, (_, i) => ({
+    id: i,
+    x: 50 + (Math.random() - 0.5) * 100,
+    delay: Math.random() * 0.5,
+    duration: 2.5 + Math.random() * 1.5,
+    rotation: Math.random() * 360,
+    colors: ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6', '#F59E0B', '#EF4444'],
+  }));
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+      {confetti.map((piece) => (
+        <motion.div
+          key={piece.id}
+          className="absolute w-3 h-3 rounded-full"
+          style={{
+            left: `${piece.x}%`,
+            top: '-20px',
+            backgroundColor: piece.colors[Math.floor(Math.random() * piece.colors.length)],
+          }}
+          initial={{ y: -20, opacity: 1, rotate: 0, scale: 1 }}
           animate={{
             y: window.innerHeight + 50,
             opacity: [1, 1, 0],
             rotate: piece.rotation * 3,
+            scale: [1, 1.2, 0.8],
           }}
           transition={{
             duration: piece.duration,
@@ -87,6 +103,7 @@ const MilestoneConfetti = () => {
 export function DailyStreakNotification({ isVisible, onClose, streakCount }: DailyStreakNotificationProps) {
   const [isMinimized, setIsMinimized] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showMilestoneConfetti, setShowMilestoneConfetti] = useState(false);
 
   const milestones = [7, 14, 30, 60, 100, 180, 365];
   const isMilestone = milestones.includes(streakCount);
@@ -136,9 +153,14 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     if (isVisible) {
       playCelebrationSound();
       
+      // Always show confetti burst on open
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 2000);
+      
+      // Show extra confetti for milestones
       if (isMilestone) {
-        setShowConfetti(true);
-        setTimeout(() => setShowConfetti(false), 3000);
+        setShowMilestoneConfetti(true);
+        setTimeout(() => setShowMilestoneConfetti(false), 4000);
       }
       
       // Auto-minimize after 4 seconds
@@ -149,6 +171,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
       return () => clearTimeout(timer);
     } else {
       setIsMinimized(false);
+      setShowConfetti(false);
+      setShowMilestoneConfetti(false);
     }
   }, [isVisible, isMilestone]);
 
@@ -178,7 +202,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     <AnimatePresence>
       {isVisible && (
         <>
-          {showConfetti && isMilestone && <MilestoneConfetti />}
+          {showConfetti && <ConfettiBurst />}
+          {showMilestoneConfetti && <MilestoneConfetti />}
           
           {/* Minimized badge in top bar */}
           {isMinimized ? (
@@ -190,7 +215,9 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
               className="fixed top-4 right-4 z-50 cursor-pointer"
               onClick={handleMinimizedClick}
             >
-              <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#4A6CFF] to-[#7CA8FF] rounded-full shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                style={{ backgroundColor: '#0BA5E9' }}
+              >
                 <span className="text-xl">🔥</span>
                 <span className="text-white font-bold text-sm">{streakCount}</span>
               </div>
@@ -215,37 +242,34 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-lg"
               >
-                <Card className="relative overflow-hidden border-0 shadow-2xl">
-                  {/* Glowing gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#4A6CFF] via-[#6B8EFF] to-[#7CA8FF]" />
-                  
-                  {/* Subtle sparkle particles */}
-                  <SparkleParticles />
-                  
+                {/* Medly-style card - clean white with soft shadow */}
+                <Card className="relative overflow-hidden bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100">
                   {/* Close button */}
                   <button
                     onClick={handleFullClose}
-                    className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-sm"
+                    className="absolute top-4 right-4 z-10 p-2 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    <X className="h-4 w-4 text-white" />
+                    <X className="h-5 w-5 text-gray-500" />
                   </button>
 
                   <CardContent className="relative p-10 text-center">
-                    {/* Flame icon with glow */}
+                    {/* Flame icon with subtle glow */}
                     <motion.div
-                      animate={{
-                        opacity: [0.8, 1, 0.8],
-                      }}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
                       transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
+                        type: "spring",
+                        damping: 15,
+                        stiffness: 200,
+                        delay: 0.1
                       }}
                       className="mb-6"
                     >
                       <div className="inline-block relative">
-                        <div className="absolute inset-0 bg-white/30 blur-xl rounded-full" />
-                        <span className="text-7xl relative z-10">🔥</span>
+                        <div className="absolute inset-0 blur-2xl rounded-full opacity-20"
+                          style={{ backgroundColor: '#0BA5E9' }}
+                        />
+                        <span className="text-8xl relative z-10">🔥</span>
                       </div>
                     </motion.div>
 
@@ -253,8 +277,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     <motion.h1
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.2, duration: 0.5 }}
-                      className="text-6xl font-black text-white mb-2 tracking-tight"
+                      transition={{ delay: 0.2, duration: 0.5, type: "spring", damping: 20 }}
+                      className="text-6xl font-black text-black mb-3 tracking-tight"
                     >
                       {streakCount}-Day Streak!
                     </motion.h1>
@@ -264,7 +288,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3, duration: 0.5 }}
-                      className="text-white/90 text-lg font-medium mb-8 max-w-md mx-auto leading-relaxed"
+                      className="text-gray-600 text-lg font-medium mb-8 max-w-md mx-auto leading-relaxed"
                     >
                       {getMotivationalMessage()}
                     </motion.p>
@@ -274,14 +298,16 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4, duration: 0.5 }}
-                      className="mb-6"
+                      className="mb-6 bg-gray-50 rounded-xl p-4"
                     >
-                      <div className="flex justify-between items-center text-sm text-white/70 mb-2 px-1">
-                        <span>{prevMilestone} days</span>
-                        <span className="font-semibold text-white">{daysToMilestone} days until {nextMilestone}-Day Achievement</span>
+                      <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
+                        <span className="font-semibold">{prevMilestone} days</span>
+                        <span className="font-semibold text-black">
+                          {daysToMilestone} days until {nextMilestone}
+                        </span>
                       </div>
                       
-                      <div className="relative h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+                      <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${progress}%` }}
@@ -290,7 +316,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                             ease: [0.16, 1, 0.3, 1],
                             delay: 0.7
                           }}
-                          className="absolute inset-y-0 left-0 bg-white rounded-full shadow-lg"
+                          className="absolute inset-y-0 left-0 rounded-full shadow-sm"
+                          style={{ backgroundColor: '#0BA5E9' }}
                         />
                       </div>
                     </motion.div>
@@ -305,10 +332,10 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                         damping: 12,
                         stiffness: 200
                       }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-md rounded-full mb-8 border border-white/30"
+                      className="inline-flex items-center gap-2 px-5 py-3 bg-gray-100 rounded-xl mb-8 border border-gray-200"
                     >
                       <span className="text-2xl">💎</span>
-                      <span className="text-white font-bold text-lg">+10 MP earned</span>
+                      <span className="font-bold text-lg text-black">+10 MP earned</span>
                     </motion.div>
 
                     {/* CTA button */}
@@ -319,7 +346,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     >
                       <Button
                         onClick={handleFullClose}
-                        className="w-full bg-white hover:bg-white/90 text-[#4A6CFF] font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center justify-center gap-2"
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center justify-center gap-2"
+                        style={{ backgroundColor: '#0BA5E9' }}
                       >
                         Keep the Momentum
                         <ArrowRight className="h-5 w-5" />
