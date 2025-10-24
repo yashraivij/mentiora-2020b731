@@ -2624,6 +2624,7 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
+                  userId={user?.id || ''}
                 />
                 
                 {/* Community Section with Tabs */}

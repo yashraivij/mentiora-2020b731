@@ -22,6 +22,7 @@ import {
   X,
   Crown,
 } from "lucide-react";
+import { DailyQuests } from "./DailyQuests";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -81,6 +82,7 @@ interface MedlySubjectsViewProps {
   removeSubject: (subjectId: string) => void;
   isPremium?: boolean;
   onUpgradeToPremium?: () => void;
+  userId: string;
 }
 
 export function MedlySubjectsView({
@@ -99,6 +101,7 @@ export function MedlySubjectsView({
   removeSubject,
   isPremium = false,
   onUpgradeToPremium,
+  userId,
 }: MedlySubjectsViewProps) {
   
   // Safe defaults for first-time users with no data
@@ -361,6 +364,16 @@ export function MedlySubjectsView({
               </Tooltip>
             </div>
           </TooltipProvider>
+
+          {/* Daily Quests Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-8"
+          >
+            <DailyQuests userId={userId} />
+          </motion.div>
         </div>
       </motion.div>
 
