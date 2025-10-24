@@ -21,8 +21,8 @@ import {
   Play,
   X,
   Crown,
-  Flame,
 } from "lucide-react";
+import { WeeklyStreakBanner } from "./WeeklyStreakBanner";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -219,9 +219,14 @@ export function MedlySubjectsView({
             </motion.div>
           </div>
 
+          {/* Streak Banner */}
+          <div className="mb-6">
+            <WeeklyStreakBanner currentStreak={currentStreak} />
+          </div>
+
           {/* KPI Belt */}
           <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div 
@@ -360,54 +365,6 @@ export function MedlySubjectsView({
                 <TooltipContent className="max-w-xs">
                   <p className="font-medium mb-1">Total time saved this week</p>
                   <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-orange-500/20 dark:border-orange-500/30 shadow-sm hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-500/5">
-                        <Flame className="h-5 w-5 text-orange-500" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5, type: "spring" }}
-                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
-                      >
-                        {currentStreak}
-                      </motion.div>
-                      <motion.div
-                        animate={{
-                          scale: currentStreak > 0 ? [1, 1.2, 1] : 1,
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <Flame className={`h-6 w-6 ${currentStreak > 0 ? 'text-orange-500' : 'text-gray-400'}`} />
-                      </motion.div>
-                    </div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">
-                      {currentStreak === 1 ? "day" : "days"} in a row
-                    </div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Your current study streak</p>
-                  <p className="text-xs text-muted-foreground">Practice daily to maintain your streak and earn bonus MP points. Reach 7 days for a 500 MP reward!</p>
                 </TooltipContent>
               </Tooltip>
             </div>
