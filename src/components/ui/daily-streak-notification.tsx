@@ -209,6 +209,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                               <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
                                 50MP
                               </span>
+                              <span className="text-base">🏆</span>
                             </>
                           ) : (
                             <>
