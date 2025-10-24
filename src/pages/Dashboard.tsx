@@ -2564,6 +2564,7 @@ const Dashboard = () => {
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
                   currentStreak={currentStreak}
+                  userMP={userMP}
                 />
               ) : (
                 // Subject Path View (when a subject is selected for practice)

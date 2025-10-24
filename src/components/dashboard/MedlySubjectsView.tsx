@@ -60,6 +60,7 @@ interface MedlySubjectsViewProps {
     weekMinutes: number;
   };
   currentStreak: number;
+  userMP?: number;
   mockSubjects: Array<{
     id: string;
     name: string;
@@ -103,6 +104,7 @@ export function MedlySubjectsView({
   isPremium = false,
   onUpgradeToPremium,
   currentStreak,
+  userMP = 0,
 }: MedlySubjectsViewProps) {
   
   // Safe defaults for first-time users with no data
@@ -383,11 +385,30 @@ export function MedlySubjectsView({
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.5, type: "spring" }}
-                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1"
                     >
                       {currentStreak || 0}
                     </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">{currentStreak === 1 ? "day" : "days"} in a row</div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mb-3 font-medium">{currentStreak === 1 ? "day" : "days"} in a row</div>
+                    
+                    {/* MP Progress */}
+                    <div className="space-y-1.5 pt-3 border-t border-border">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-[#64748B] dark:text-gray-400 font-medium">MP Progress</span>
+                        <span className="font-bold text-[#0F172A] dark:text-white">{userMP.toLocaleString()}</span>
+                      </div>
+                      <div className="relative h-2 bg-muted rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${(userMP % 1000) / 10}%` }}
+                          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full"
+                        />
+                      </div>
+                      <div className="text-xs text-[#64748B] dark:text-gray-400 text-right font-medium">
+                        {1000 - (userMP % 1000)} to next level
+                      </div>
+                    </div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
