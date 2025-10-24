@@ -208,11 +208,10 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
 
   const getMotivationalMessage = () => {
     const messages = [
-      "Consistency compounds. You're building momentum.",
-      "Each day you show up, your future self thanks you.",
-      "You're proving what's possible — keep going.",
-      "Progress is built one day at a time.",
-      "Every streak is a step toward mastery.",
+      "Consistency compounds — every day builds momentum.",
+      "Small steps today create massive progress tomorrow.",
+      "You're building mastery one focused day at a time.",
+      "Discipline beats motivation — and you're showing up.",
     ];
     
     // Use streak count to rotate through messages
@@ -373,11 +372,10 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                   >
                     <Button
                       onClick={onClose}
-                      className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl flex items-center justify-center gap-2"
+                      className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
                       style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Keep the Momentum
-                      <ArrowRight className="h-5 w-5" />
                     </Button>
                   </motion.div>
                 </CardContent>
