@@ -23,39 +23,32 @@ export const HeaderStreakDisplay = ({ currentStreak }: HeaderStreakDisplayProps)
   };
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 border border-border">
-      {/* Flame icon with streak count */}
-      <div className="flex items-center gap-1.5">
-        <motion.div
-          animate={{
-            scale: currentStreak > 0 ? [1, 1.1, 1] : 1,
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <Flame className={`h-4 w-4 ${currentStreak > 0 ? 'text-orange-500' : 'text-muted-foreground'}`} />
-        </motion.div>
-        <span className="text-sm font-bold text-foreground">{currentStreak}</span>
-      </div>
+    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/30 border border-border/50">
+      {/* Streak count */}
+      <span className="text-sm font-bold text-foreground mr-1">{currentStreak}</span>
       
-      {/* Week dots */}
-      <div className="flex items-center gap-0.5">
+      {/* Fire icons for each day */}
+      <div className="flex items-center gap-1">
         {daysOfWeek.map((day, index) => {
           const isCompleted = isDayCompleted(index);
           const isToday = index === todayIndex;
           
           return (
-            <div
+            <motion.div
               key={index}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                isCompleted
-                  ? 'bg-orange-500'
-                  : 'bg-muted-foreground/20'
-              } ${isToday ? 'ring-1 ring-orange-400 ring-offset-1 ring-offset-background scale-125' : ''}`}
-            />
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.05, type: "spring" }}
+              whileHover={{ scale: 1.15 }}
+            >
+              <Flame 
+                className={`h-4 w-4 transition-all duration-300 ${
+                  isCompleted
+                    ? 'text-red-500 fill-red-500'
+                    : 'text-gray-300 dark:text-gray-600'
+                } ${isToday ? 'drop-shadow-[0_0_4px_rgba(239,68,68,0.5)]' : ''}`}
+              />
+            </motion.div>
           );
         })}
       </div>
