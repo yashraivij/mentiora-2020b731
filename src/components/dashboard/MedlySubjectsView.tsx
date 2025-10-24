@@ -370,38 +370,52 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-orange-500/20 dark:border-orange-500/30 shadow-sm hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300"
+                    className="relative bg-gradient-to-br from-white via-white to-[#0EA5E9]/10 dark:from-gray-800 dark:via-gray-800 dark:to-[#0EA5E9]/20 backdrop-blur-xl rounded-2xl p-5 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 shadow-lg shadow-[#0EA5E9]/20 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 overflow-hidden"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-500/5">
-                        <Flame className="h-5 w-5 text-orange-500" />
+                    {/* Animated glow effect */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 via-transparent to-[#38BDF8]/5"
+                      animate={{ 
+                        opacity: [0.3, 0.6, 0.3]
+                      }}
+                      transition={{ 
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-3">
+                        <motion.div 
+                          className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] shadow-md shadow-[#0EA5E9]/30"
+                          animate={{
+                            scale: currentStreak > 0 ? [1, 1.1, 1] : 1,
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        >
+                          <Flame className="h-5 w-5 text-white" />
+                        </motion.div>
+                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5, type: "spring" }}
-                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
-                      >
-                        {currentStreak}
-                      </motion.div>
-                      <motion.div
-                        animate={{
-                          scale: currentStreak > 0 ? [1, 1.2, 1] : 1,
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <Flame className={`h-6 w-6 ${currentStreak > 0 ? 'text-orange-500' : 'text-gray-400'}`} />
-                      </motion.div>
-                    </div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">
-                      {currentStreak === 1 ? "day" : "days"} in a row
+                      <div className="flex items-baseline gap-1">
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.5, type: "spring" }}
+                          className="text-3xl font-bold bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] bg-clip-text text-transparent"
+                        >
+                          {currentStreak}
+                        </motion.div>
+                        <span className="text-lg font-bold text-[#0EA5E9]">🔥</span>
+                      </div>
+                      <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">
+                        {currentStreak === 1 ? "day" : "days"} in a row
+                      </div>
                     </div>
                   </motion.div>
                 </TooltipTrigger>
