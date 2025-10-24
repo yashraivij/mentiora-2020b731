@@ -285,7 +285,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         >
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-amber-500/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
-            <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-amber-200" />
+            <Sparkles className="w-3.5 h-3.5 absolute -top-0.5 -right-0.5 text-amber-200" />
             1
           </div>
         </motion.div>
@@ -317,7 +317,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         </motion.div>
       );
     }
-    return <span className="text-sm text-muted-foreground font-medium">{rank}</span>;
+    return <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">{rank}</span>;
   };
 
   if (isLoading) {
@@ -325,7 +325,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
       >
         <Skeleton className="h-8 w-48 mb-8" />
         <div className="space-y-3">
@@ -343,7 +343,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
         >
           {/* Premium animated background elements */}
           <motion.div 
@@ -358,47 +358,34 @@ export function LeaderboardTable({ userId }: { userId: string }) {
               ease: "easeInOut"
             }}
           />
-          <motion.div 
-            className="absolute bottom-0 left-0 w-80 h-80 bg-[#0EA5E9]/3 rounded-full blur-3xl"
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{ 
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
-            }}
-          />
 
           <div className="relative z-10">
             {/* Header */}
-            <div className="mb-10">
+            <div className="mb-8">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 backdrop-blur-sm">
-                  <Trophy className="h-6 w-6 text-[#0EA5E9]" />
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                  <Trophy className="h-5 w-5 text-[#0EA5E9]" />
                 </div>
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white">
                   Leaderboard
                 </h2>
               </div>
-              <p className="text-muted-foreground text-base ml-14">
+              <p className="text-[#64748B] dark:text-gray-400 text-sm font-medium ml-14">
                 See how you rank against other students
               </p>
             </div>
 
             {/* Controls */}
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
               <div className="flex gap-2">
                 <Button
                   variant={filterType === 'week' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterType('week')}
                   className={cn(
-                    "rounded-full px-6 h-10 transition-all font-medium shadow-sm",
+                    "rounded-xl px-5 h-9 transition-all font-medium",
                     filterType === 'week' 
-                      ? "bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white shadow-[#0EA5E9]/25" 
+                      ? "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25" 
                       : "hover:bg-[#0EA5E9]/5 hover:text-[#0EA5E9] hover:border-[#0EA5E9]/30"
                   )}
                 >
@@ -409,9 +396,9 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                   size="sm"
                   onClick={() => setFilterType('alltime')}
                   className={cn(
-                    "rounded-full px-6 h-10 transition-all font-medium shadow-sm",
+                    "rounded-xl px-5 h-9 transition-all font-medium",
                     filterType === 'alltime' 
-                      ? "bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white shadow-[#0EA5E9]/25" 
+                      ? "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25" 
                       : "hover:bg-[#0EA5E9]/5 hover:text-[#0EA5E9] hover:border-[#0EA5E9]/30"
                   )}
                 >
@@ -420,12 +407,12 @@ export function LeaderboardTable({ userId }: { userId: string }) {
               </div>
 
               <div className="relative w-full sm:w-72">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B] dark:text-gray-400" />
                 <Input
                   placeholder="Search username..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 rounded-xl h-10 border-border/50 bg-background/50 backdrop-blur-sm focus:bg-background transition-colors"
+                  className="pl-10 rounded-xl h-9 border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl focus:border-[#0EA5E9] transition-colors"
                 />
               </div>
             </div>
@@ -435,38 +422,38 @@ export function LeaderboardTable({ userId }: { userId: string }) {
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-24"
+                className="text-center py-16"
               >
-                <div className="inline-flex p-4 rounded-2xl bg-muted/50 mb-4">
-                  <Trophy className="h-12 w-12 text-muted-foreground/30" />
+                <div className="inline-flex p-4 rounded-2xl bg-[#0EA5E9]/5 mb-4">
+                  <Trophy className="h-12 w-12 text-[#0EA5E9]/30" />
                 </div>
-                <p className="text-base text-muted-foreground">
+                <p className="text-sm font-medium text-[#64748B] dark:text-gray-400">
                   {searchQuery ? 'No matches found' : 'Complete your first quiz to appear here'}
                 </p>
               </motion.div>
             ) : (
-              <div className="overflow-hidden rounded-2xl border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 backdrop-blur-sm bg-white/40 dark:bg-gray-900/40 shadow-inner">
+              <div className="overflow-hidden rounded-2xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 shadow-sm">
                 <div className="overflow-auto max-h-[600px]">
                   <Table>
-                    <TableHeader className="sticky top-0 bg-gradient-to-b from-white/95 to-white/90 dark:from-gray-900/95 dark:to-gray-900/90 backdrop-blur-md z-10 border-b border-[#0EA5E9]/10">
+                    <TableHeader className="sticky top-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md z-10 border-b border-[#0EA5E9]/10">
                       <TableRow className="hover:bg-transparent">
-                        <TableHead className="w-24 font-semibold text-foreground/60 text-xs uppercase tracking-wider">Rank</TableHead>
-                        <TableHead className="font-semibold text-foreground/60 text-xs uppercase tracking-wider">Student</TableHead>
+                        <TableHead className="w-24 font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider">Rank</TableHead>
+                        <TableHead className="font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider">Student</TableHead>
                         <TableHead 
-                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-foreground/60 text-xs uppercase tracking-wider"
+                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider"
                           onClick={() => handleSort('mp_points')}
                         >
                           MP <SortIcon column="mp_points" />
                         </TableHead>
                         <TableHead 
-                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-foreground/60 text-xs uppercase tracking-wider"
+                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider"
                           onClick={() => handleSort('current_streak')}
                         >
                           Streak <SortIcon column="current_streak" />
                         </TableHead>
-                        <TableHead className="font-semibold text-foreground/60 text-xs uppercase tracking-wider">Badges</TableHead>
+                        <TableHead className="font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider">Badges</TableHead>
                         <TableHead 
-                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-foreground/60 text-xs uppercase tracking-wider"
+                          className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold text-[#64748B] dark:text-gray-400 text-xs uppercase tracking-wider"
                           onClick={() => handleSort('quizzes_completed')}
                         >
                           Quizzes <SortIcon column="quizzes_completed" />
@@ -486,12 +473,12 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, scale: 0.95 }}
                               transition={{ delay: index * 0.02 }}
+                              whileHover={{ scale: 1.01, y: -2 }}
                               onClick={() => handleRowClick(entry)}
                               className={cn(
-                                "cursor-pointer transition-all duration-300 border-b border-border/30",
+                                "cursor-pointer transition-all duration-300 border-b border-[#0EA5E9]/10",
                                 "hover:bg-gradient-to-r hover:from-[#0EA5E9]/5 hover:to-transparent hover:shadow-sm",
-                                entry.isCurrentUser && "bg-gradient-to-r from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-transparent shadow-sm",
-                                isTopThree && "hover:from-[#0EA5E9]/8"
+                                entry.isCurrentUser && "bg-gradient-to-r from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-transparent shadow-sm"
                               )}
                             >
                               <TableCell className="py-5">
@@ -499,16 +486,16 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                                   {getRankBadge(entry.rank)}
                                 </div>
                               </TableCell>
-                              <TableCell className="font-medium text-foreground py-5">
+                              <TableCell className="font-medium text-[#0F172A] dark:text-white py-5">
                                 <div className="flex items-center gap-2">
                                   {entry.username}
                                   {entry.isCurrentUser && (
-                                    <Badge variant="secondary" className="text-xs bg-[#0EA5E9]/15 text-[#0EA5E9] border-0 shadow-sm">
+                                    <Badge variant="secondary" className="text-xs bg-[#0EA5E9]/15 text-[#0EA5E9] border-0">
                                       You
                                     </Badge>
                                   )}
                                   {isTopThree && !entry.isCurrentUser && (
-                                    <Sparkles className="w-3.5 h-3.5 text-amber-400 opacity-60" />
+                                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                                   )}
                                 </div>
                               </TableCell>
@@ -519,10 +506,10 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                                 {entry.current_streak > 0 ? (
                                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400">
                                     <span className="font-semibold text-sm">{entry.current_streak}</span>
-                                    <span className="text-xs opacity-75">🔥</span>
+                                    <span className="text-xs">🔥</span>
                                   </div>
                                 ) : (
-                                  <span className="text-muted-foreground/40">—</span>
+                                  <span className="text-[#64748B]/40 dark:text-gray-500">—</span>
                                 )}
                               </TableCell>
                               <TableCell className="py-5">
@@ -531,11 +518,11 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                                     <span className="font-semibold text-sm">{entry.badges_earned}</span>
                                   </div>
                                 ) : (
-                                  <span className="text-muted-foreground/40">—</span>
+                                  <span className="text-[#64748B]/40 dark:text-gray-500">—</span>
                                 )}
                               </TableCell>
                               <TableCell className="py-5">
-                                <span className="font-semibold text-foreground">{entry.quizzes_completed}</span>
+                                <span className="font-semibold text-[#0F172A] dark:text-white">{entry.quizzes_completed}</span>
                               </TableCell>
                             </motion.tr>
                           );
@@ -548,27 +535,31 @@ export function LeaderboardTable({ userId }: { userId: string }) {
             )}
 
             <div className="flex items-center justify-center gap-3 mt-6">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border/50 to-transparent" />
-              <p className="text-xs text-muted-foreground/60 px-4">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#0EA5E9]/20 to-transparent" />
+              <p className="text-xs text-[#64748B] dark:text-gray-400 px-4 font-medium">
                 Updates hourly • {filteredEntries.length} {filteredEntries.length === 1 ? 'student' : 'students'}
               </p>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#0EA5E9]/20 to-transparent" />
             </div>
           </div>
         </motion.div>
       </TooltipProvider>
 
-      {/* Premium User Details Drawer */}
+      {/* User Details Drawer */}
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-        <SheetContent className="bg-gradient-to-b from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-900/50">
+        <SheetContent className="bg-white dark:bg-gray-900">
           {selectedUser && (
             <>
               <SheetHeader className="mb-8">
                 <div className="flex items-center gap-4 mb-3">
                   {getRankBadge(selectedUser.rank)}
                   <div>
-                    <SheetTitle className="text-2xl mb-1">{selectedUser.username}</SheetTitle>
-                    <SheetDescription className="text-sm">Performance details</SheetDescription>
+                    <SheetTitle className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
+                      {selectedUser.username}
+                    </SheetTitle>
+                    <SheetDescription className="text-sm text-[#64748B] dark:text-gray-400">
+                      Performance details
+                    </SheetDescription>
                   </div>
                 </div>
               </SheetHeader>
@@ -577,9 +568,9 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-6 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/15 via-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 shadow-lg"
+                  className="p-6 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/15 via-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20 shadow-sm"
                 >
-                  <p className="text-sm font-medium text-[#0EA5E9]/70 mb-2">Mentiora Points</p>
+                  <p className="text-xs font-semibold text-[#0EA5E9]/70 uppercase tracking-wider mb-2">Mentiora Points</p>
                   <p className="text-5xl font-bold text-[#0EA5E9]">{selectedUser.mp_points}</p>
                 </motion.div>
 
@@ -588,21 +579,20 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-border/50 shadow-sm"
+                    className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm"
                   >
-                    <p className="text-sm text-muted-foreground mb-2">Streak</p>
-                    <p className="text-3xl font-bold text-foreground">{selectedUser.current_streak}</p>
-                    <p className="text-xs text-muted-foreground mt-1">consecutive days</p>
+                    <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-2">Streak</p>
+                    <p className="text-3xl font-bold text-[#0F172A] dark:text-white">{selectedUser.current_streak}</p>
+                    <p className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">days</p>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 }}
-                    className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-border/50 shadow-sm"
+                    className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm"
                   >
-                    <p className="text-sm text-muted-foreground mb-2">Badges</p>
-                    <p className="text-3xl font-bold text-foreground">{selectedUser.badges_earned}</p>
-                    <p className="text-xs text-muted-foreground mt-1">achievements</p>
+                    <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-2">Badges</p>
+                    <p className="text-3xl font-bold text-[#0F172A] dark:text-white">{selectedUser.badges_earned}</p>
                   </motion.div>
                 </div>
 
@@ -610,10 +600,10 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-border/50 shadow-sm"
+                  className="p-5 rounded-2xl bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm"
                 >
-                  <p className="text-sm text-muted-foreground mb-2">Quizzes Completed</p>
-                  <p className="text-3xl font-bold text-foreground">{selectedUser.quizzes_completed}</p>
+                  <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-2">Quizzes</p>
+                  <p className="text-3xl font-bold text-[#0F172A] dark:text-white">{selectedUser.quizzes_completed}</p>
                 </motion.div>
 
                 {selectedUser.top_subject && (
@@ -621,10 +611,10 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.25 }}
-                    className="p-5 rounded-2xl border border-border/50 bg-white dark:bg-gray-800/30"
+                    className="p-5 rounded-2xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 bg-white dark:bg-gray-800/30"
                   >
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Top Subject</p>
-                    <p className="text-lg font-semibold">{selectedUser.top_subject}</p>
+                    <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-1">Top Subject</p>
+                    <p className="text-lg font-bold text-[#0F172A] dark:text-white">{selectedUser.top_subject}</p>
                   </motion.div>
                 )}
 
@@ -632,20 +622,20 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="p-5 rounded-2xl border border-border/50 bg-white dark:bg-gray-800/30"
+                  className="p-5 rounded-2xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 bg-white dark:bg-gray-800/30"
                 >
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Mocks Completed</p>
-                  <p className="text-lg font-semibold">{selectedUser.mocks_completed || 0}</p>
+                  <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-1">Mocks</p>
+                  <p className="text-lg font-bold text-[#0F172A] dark:text-white">{selectedUser.mocks_completed || 0}</p>
                 </motion.div>
 
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
-                  className="p-5 rounded-2xl border border-border/50 bg-white dark:bg-gray-800/30"
+                  className="p-5 rounded-2xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 bg-white dark:bg-gray-800/30"
                 >
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Last Active</p>
-                  <p className="text-lg font-semibold">{formatLastActive(selectedUser.last_active)}</p>
+                  <p className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-1">Last Active</p>
+                  <p className="text-lg font-bold text-[#0F172A] dark:text-white">{formatLastActive(selectedUser.last_active)}</p>
                 </motion.div>
               </div>
             </>
