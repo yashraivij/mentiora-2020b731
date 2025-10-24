@@ -26,11 +26,9 @@ import {
 } from '@/components/ui/sheet';
 import { supabase } from '@/integrations/supabase/client';
 import { 
-  Trophy, 
   Search, 
   ChevronUp, 
-  ChevronDown,
-  Sparkles
+  ChevronDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -277,44 +275,23 @@ export function LeaderboardTable({ userId }: { userId: string }) {
   const getRankBadge = (rank: number) => {
     if (rank === 1) {
       return (
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200 }}
-          className="relative"
-        >
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-amber-500/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
-            <Sparkles className="w-3.5 h-3.5 absolute -top-0.5 -right-0.5 text-amber-200" />
-            1
-          </div>
-        </motion.div>
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 flex items-center justify-center text-white text-sm font-bold shadow-md">
+          1
+        </div>
       );
     }
     if (rank === 2) {
       return (
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, delay: 0.05 }}
-          className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-200 via-slate-300 to-slate-400 flex items-center justify-center text-slate-700 text-sm font-bold shadow-md shadow-slate-400/40"
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/30" />
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-200 via-slate-300 to-slate-400 flex items-center justify-center text-slate-700 text-sm font-bold shadow-sm">
           2
-        </motion.div>
+        </div>
       );
     }
     if (rank === 3) {
       return (
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-          className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 flex items-center justify-center text-white text-sm font-bold shadow-md shadow-amber-700/40"
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/20" />
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 flex items-center justify-center text-white text-sm font-bold shadow-sm">
           3
-        </motion.div>
+        </div>
       );
     }
     return <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">{rank}</span>;
@@ -362,16 +339,11 @@ export function LeaderboardTable({ userId }: { userId: string }) {
           <div className="relative z-10">
             {/* Header */}
             <div className="mb-8">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                  <Trophy className="h-5 w-5 text-[#0EA5E9]" />
-                </div>
-                <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                  Leaderboard
-                </h2>
-              </div>
-              <p className="text-[#64748B] dark:text-gray-400 text-sm font-medium ml-14">
-                See how you rank against other students
+              <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white mb-2">
+                Leaderboard
+              </h2>
+              <p className="text-[#64748B] dark:text-gray-400 text-sm font-medium">
+                See how you rank against other students this week
               </p>
             </div>
 
@@ -424,11 +396,8 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                 animate={{ opacity: 1 }}
                 className="text-center py-16"
               >
-                <div className="inline-flex p-4 rounded-2xl bg-[#0EA5E9]/5 mb-4">
-                  <Trophy className="h-12 w-12 text-[#0EA5E9]/30" />
-                </div>
                 <p className="text-sm font-medium text-[#64748B] dark:text-gray-400">
-                  {searchQuery ? 'No matches found' : 'Complete your first quiz to appear here'}
+                  {searchQuery ? 'No matches found. Try a different search.' : 'Complete your first quiz to appear on the leaderboard'}
                 </p>
               </motion.div>
             ) : (
@@ -493,9 +462,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                                     <Badge variant="secondary" className="text-xs bg-[#0EA5E9]/15 text-[#0EA5E9] border-0">
                                       You
                                     </Badge>
-                                  )}
-                                  {isTopThree && !entry.isCurrentUser && (
-                                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                                   )}
                                 </div>
                               </TableCell>
