@@ -78,7 +78,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     } else if (streakCount === 30) {
       return {
         reward: "+400 MP",
-        message: "Elite users get full access — unlock yours permanently.",
+        message: "Elite users need full access — unlock yours permanently.",
         emoji: "👑"
       };
     } else if (isMilestone) {
