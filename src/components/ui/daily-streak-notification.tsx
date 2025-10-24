@@ -207,7 +207,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                             <>
                               {3 - streakCount} {3 - streakCount === 1 ? 'day' : 'days'} until 
                               <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                                3 Day Milestone
+                                50MP
                               </span>
                             </>
                           ) : (
