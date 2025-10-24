@@ -91,6 +91,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
+import { LeaderboardTable } from "@/components/dashboard/LeaderboardTable";
 
 interface UserProgress {
   subjectId: string;
@@ -2623,6 +2624,11 @@ const Dashboard = () => {
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
+                
+                {/* Leaderboard Section */}
+                <div className="mt-12">
+                  <LeaderboardTable userId={user?.id || ''} />
+                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
