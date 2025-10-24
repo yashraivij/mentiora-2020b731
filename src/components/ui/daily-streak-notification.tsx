@@ -286,29 +286,18 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7, duration: 0.5 }}
-                    className={streakCount === 7 ? "flex gap-3" : ""}
                   >
                     {streakCount === 7 ? (
-                      <>
-                        <Button
-                          onClick={onClose}
-                          className="flex-1 text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
-                          style={{ backgroundColor: '#0BA5E9' }}
-                        >
-                          Claim 24h Boost
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            onClose();
-                            navigate('/pricing');
-                          }}
-                          variant="outline"
-                          className="flex-1 font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl border-2"
-                          style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
-                        >
-                          Claim 7 Day Boost
-                        </Button>
-                      </>
+                      <Button
+                        onClick={() => {
+                          onClose();
+                          navigate('/pricing');
+                        }}
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
+                        style={{ backgroundColor: '#0BA5E9' }}
+                      >
+                        Claim 7 Day Boost
+                      </Button>
                     ) : (
                       <Button
                         onClick={onClose}
