@@ -88,6 +88,7 @@ import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
+import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 
 interface UserProgress {
   subjectId: string;
@@ -201,6 +202,8 @@ const Dashboard = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
   const [showDailyStreak, setShowDailyStreak] = useState(false);
+  const [showStreakBadge, setShowStreakBadge] = useState(false);
+  const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -2446,7 +2449,7 @@ const Dashboard = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
@@ -2474,6 +2477,16 @@ const Dashboard = () => {
                 Manage Billing
               </Button>
             )}
+            
+            {/* Streak Badge */}
+            <HeaderStreakBadge 
+              streakCount={currentStreak}
+              isVisible={showStreakBadge}
+              onClick={() => setShowDailyStreak(true)}
+              isStreakLost={currentStreak === 0}
+              isMilestone={streakBadgeMilestone}
+            />
+            
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -2487,6 +2500,15 @@ const Dashboard = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2 relative">
+            {/* Streak Badge for Mobile */}
+            <HeaderStreakBadge 
+              streakCount={currentStreak}
+              isVisible={showStreakBadge}
+              onClick={() => setShowDailyStreak(true)}
+              isStreakLost={currentStreak === 0}
+              isMilestone={streakBadgeMilestone}
+            />
+            
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -5631,7 +5653,28 @@ const Dashboard = () => {
       {/* Daily Streak Notification */}
       <DailyStreakNotification 
         isVisible={showDailyStreak}
-        onClose={() => setShowDailyStreak(false)}
+        onClose={() => {
+          setShowDailyStreak(false);
+          // Show streak badge in header after closing modal
+          if (currentStreak > 0) {
+            setShowStreakBadge(true);
+            
+            // Check if this is a milestone
+            const milestones = [7, 14, 30, 60, 100, 180, 365];
+            if (milestones.includes(currentStreak)) {
+              setStreakBadgeMilestone(true);
+              toast({
+                title: `🏅 Milestone Unlocked: ${currentStreak}-Day Streak!`,
+                description: "Keep up the amazing work!",
+              });
+              
+              // Remove milestone effect after 24 hours
+              setTimeout(() => {
+                setStreakBadgeMilestone(false);
+              }, 24 * 60 * 60 * 1000);
+            }
+          }
+        }}
         streakCount={currentStreak}
       />
     </div>
