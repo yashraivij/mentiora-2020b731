@@ -211,17 +211,53 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     }
   }, [isVisible, isMilestone]);
 
-  const getMotivationalMessage = () => {
-    const messages = [
-      "Consistency compounds — every day builds momentum.",
-      "Small steps today create massive progress tomorrow.",
-      "You're building mastery one focused day at a time.",
-      "Discipline beats motivation — and you're showing up.",
-    ];
-    
-    // Use streak count to rotate through messages
-    return messages[streakCount % messages.length];
+  const getRewardInfo = () => {
+    if (streakCount === 3) {
+      return {
+        reward: "+100 MP",
+        message: "Keep it up — you're close to your first boost!",
+        emoji: "💎"
+      };
+    } else if (streakCount === 7) {
+      return {
+        reward: "24h Premium Boost",
+        message: "Enjoy Premium for a day — or keep it free for 7 days!",
+        emoji: "⚡"
+      };
+    } else if (streakCount === 14) {
+      return {
+        reward: "50% off first month",
+        message: "You've proven consistency — get rewarded with Premium discount.",
+        emoji: "🎁"
+      };
+    } else if (streakCount === 30) {
+      return {
+        reward: "Mentiora Elite Badge",
+        message: "Elite users get full access — unlock yours permanently.",
+        emoji: "👑"
+      };
+    } else if (isMilestone) {
+      return {
+        reward: `+${currentMPReward} MP BONUS!`,
+        message: `${streakCount}-Day Milestone Unlocked!`,
+        emoji: "🏆"
+      };
+    } else {
+      const messages = [
+        "Consistency compounds — every day builds momentum.",
+        "Small steps today create massive progress tomorrow.",
+        "You're building mastery one focused day at a time.",
+        "Discipline beats motivation — and you're showing up.",
+      ];
+      return {
+        reward: "+10 MP earned",
+        message: messages[streakCount % messages.length],
+        emoji: "💎"
+      };
+    }
   };
+
+  const rewardInfo = getRewardInfo();
 
   return (
     <AnimatePresence>
@@ -309,7 +345,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     transition={{ delay: 0.3, duration: 0.5 }}
                     className="text-gray-600 text-lg font-medium mb-8 max-w-md mx-auto leading-relaxed"
                   >
-                    {getMotivationalMessage()}
+                    {rewardInfo.message}
                   </motion.p>
 
                   {/* Progress to next milestone with smooth animation */}
@@ -356,12 +392,12 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       stiffness: 200
                     }}
                     className={`inline-flex items-center gap-3 px-6 py-4 rounded-xl mb-8 relative overflow-hidden ${
-                      isMilestone 
+                      (isMilestone || [3, 7, 14, 30].includes(streakCount))
                         ? 'bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 shadow-lg' 
                         : 'bg-gray-100 border border-gray-200'
                     }`}
                   >
-                    {isMilestone && (
+                    {(isMilestone || [3, 7, 14, 30].includes(streakCount)) && (
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                         animate={{
@@ -376,25 +412,22 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       />
                     )}
                     <motion.span 
-                      className={isMilestone ? 'text-3xl' : 'text-2xl'}
+                      className={(isMilestone || [3, 7, 14, 30].includes(streakCount)) ? 'text-3xl' : 'text-2xl'}
                       animate={{ 
                         rotate: [0, -10, 10, -10, 0],
-                        scale: isMilestone ? [1, 1.2, 1.2, 1.2, 1] : [1, 1.1, 1.1, 1.1, 1]
+                        scale: (isMilestone || [3, 7, 14, 30].includes(streakCount)) ? [1, 1.2, 1.2, 1.2, 1] : [1, 1.1, 1.1, 1.1, 1]
                       }}
                       transition={{ 
                         delay: 0.9,
                         duration: 0.6
                       }}
                     >
-                      {isMilestone ? '🏆' : '💎'}
+                      {rewardInfo.emoji}
                     </motion.span>
                     <div className="relative z-10">
-                      <span className={`font-black ${isMilestone ? 'text-2xl text-white drop-shadow-lg' : 'text-lg text-black'}`}>
-                        {isMilestone ? `+${currentMPReward} MP BONUS!` : '+10 MP earned'}
+                      <span className={`font-black ${(isMilestone || [3, 7, 14, 30].includes(streakCount)) ? 'text-2xl text-white drop-shadow-lg' : 'text-lg text-black'}`}>
+                        {rewardInfo.reward}
                       </span>
-                      {isMilestone && (
-                        <p className="text-xs text-white/90 font-semibold mt-0.5">{streakCount}-Day Milestone Unlocked!</p>
-                      )}
                     </div>
                   </motion.div>
 

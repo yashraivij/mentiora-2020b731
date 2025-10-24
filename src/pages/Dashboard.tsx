@@ -2478,6 +2478,54 @@ const Dashboard = () => {
               </Button>
             )}
             
+            {/* Test Streak Buttons */}
+            <div className="flex items-center gap-2 border-l border-border pl-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setCurrentStreak(3);
+                  setShowDailyStreak(true);
+                }}
+                className="text-xs"
+              >
+                Test 3d
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setCurrentStreak(7);
+                  setShowDailyStreak(true);
+                }}
+                className="text-xs"
+              >
+                Test 7d
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setCurrentStreak(14);
+                  setShowDailyStreak(true);
+                }}
+                className="text-xs"
+              >
+                Test 14d
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setCurrentStreak(30);
+                  setShowDailyStreak(true);
+                }}
+                className="text-xs"
+              >
+                Test 30d
+              </Button>
+            </div>
+            
             {/* Streak Badge */}
             <HeaderStreakBadge 
               streakCount={currentStreak}
