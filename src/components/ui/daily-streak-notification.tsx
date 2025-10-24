@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, X, Zap, Star, Trophy } from 'lucide-react';
+import { Flame, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface DailyStreakNotificationProps {
   isVisible: boolean;
@@ -11,12 +11,12 @@ interface DailyStreakNotificationProps {
 }
 
 const Confetti = () => {
-  const confettiPieces = Array.from({ length: 40 }, (_, i) => ({
+  const confettiPieces = Array.from({ length: 30 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    delay: Math.random() * 1.5,
+    delay: Math.random() * 2,
     duration: 2 + Math.random() * 1.5,
-    color: ['#FF6B35', '#F7931E', '#FDCA40', '#FB8500', '#FF4500'][Math.floor(Math.random() * 5)]
+    color: ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)]
   }));
 
   return (
@@ -48,30 +48,8 @@ const Confetti = () => {
   );
 };
 
-const FloatingEmoji = ({ emoji, delay }: { emoji: string; delay: number }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0, y: 20 }}
-    animate={{ 
-      opacity: [0, 1, 1, 0],
-      scale: [0, 1.2, 1, 0.8],
-      y: [20, -60, -80, -100],
-      rotate: [0, 10, -10, 0]
-    }}
-    transition={{
-      duration: 2.5,
-      delay,
-      ease: "easeOut"
-    }}
-    className="absolute text-3xl pointer-events-none"
-    style={{ left: '50%', bottom: '40%' }}
-  >
-    {emoji}
-  </motion.div>
-);
-
 export function DailyStreakNotification({ isVisible, onClose, streakCount }: DailyStreakNotificationProps) {
   const [showConfetti, setShowConfetti] = useState(false);
-  const [showEmojis, setShowEmojis] = useState(false);
 
   const playCelebrationSound = () => {
     try {
@@ -89,7 +67,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
           oscillator.type = 'sine';
           
           gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-          gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.01);
+          gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
           gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
           
           oscillator.start(audioContext.currentTime);
@@ -101,7 +79,6 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
       playSound(523.25, 0.1, 0); // C5
       playSound(659.25, 0.1, 100); // E5
       playSound(783.99, 0.15, 200); // G5
-      playSound(1046.50, 0.2, 300); // C6
     } catch (error) {
       console.log('Audio not supported:', error);
     }
@@ -110,37 +87,33 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
   useEffect(() => {
     if (isVisible) {
       setShowConfetti(true);
-      setShowEmojis(true);
       playCelebrationSound();
-      const timer = setTimeout(() => {
-        setShowConfetti(false);
-        setShowEmojis(false);
-      }, 3000);
+      const timer = setTimeout(() => setShowConfetti(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [isVisible]);
 
   const getMessage = () => {
     if (streakCount === 1) {
-      return "You're back! Let's get this streak started! 🎯";
+      return "Welcome back!";
     } else if (streakCount >= 7) {
-      return `${streakCount} days! You're on fire! Keep it going! 🔥`;
+      return `${streakCount} Day Streak! 🔥`;
     } else if (streakCount >= 3) {
-      return `${streakCount} day streak! You're building momentum! 💪`;
+      return `${streakCount} Day Streak!`;
     } else {
-      return `${streakCount} days in a row! Keep up the great work! ⭐`;
+      return `${streakCount} Day Streak!`;
     }
   };
 
   const getMotivation = () => {
     if (streakCount === 1) {
-      return "Every expert was once a beginner. Let's make today count!";
+      return "You're back on track. Let's make today count and build that streak!";
     } else if (streakCount >= 7) {
-      return "Your dedication is incredible! Success is just around the corner.";
+      return "Your dedication is paying off! Keep up this amazing consistency.";
     } else if (streakCount >= 3) {
-      return "Consistency is key to success. You're doing amazing!";
+      return "You're building great study habits! Stay consistent to see real results.";
     } else {
-      return "Small daily improvements lead to stunning results!";
+      return "Consistency is key to success. Keep showing up every day!";
     }
   };
 
@@ -154,137 +127,106 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4"
             onClick={onClose}
           >
             <motion.div
-              initial={{ scale: 0.5, y: 50, opacity: 0, rotateX: -15 }}
-              animate={{ scale: 1, y: 0, opacity: 1, rotateX: 0 }}
-              exit={{ scale: 0.5, y: 50, opacity: 0, rotateX: 15 }}
-              transition={{ type: "spring", damping: 20, stiffness: 300, delay: 0.05 }}
+              initial={{ scale: 0.5, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.5, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 500, delay: 0.05 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-md"
+              className="relative"
             >
-              <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/50 to-red-50/50 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-2xl">
-                {/* Animated Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-orange-500/10 animate-pulse" />
+              <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-emerald-50/80 to-teal-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-teal-950/20 shadow-2xl max-w-md w-full">
+                {/* Mentiora Brand Glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-green-500/10 animate-pulse" />
                 
                 {/* Premium Border */}
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-orange-400 rounded-xl p-[2px]">
-                  <div className="bg-gradient-to-br from-white via-orange-50/50 to-red-50/50 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 rounded-[10px] h-full w-full" />
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-teal-400 to-green-400 rounded-xl p-[2px]">
+                  <div className="bg-gradient-to-br from-white via-emerald-50/80 to-teal-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-teal-950/20 rounded-[10px] h-full w-full" />
                 </div>
 
                 {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 z-10 p-1 rounded-full bg-white/30 hover:bg-white/50 dark:bg-black/30 dark:hover:bg-black/50 transition-colors"
+                  className="absolute top-4 right-4 z-10 p-1 rounded-full bg-white/20 hover:bg-white/30 dark:bg-black/20 dark:hover:bg-black/30 transition-colors"
                 >
                   <X className="h-4 w-4 text-gray-600 dark:text-gray-400" />
                 </button>
 
-                {/* Floating Emojis */}
-                {showEmojis && (
-                  <>
-                    <FloatingEmoji emoji="🔥" delay={0.2} />
-                    <FloatingEmoji emoji="⚡" delay={0.4} />
-                    <FloatingEmoji emoji="⭐" delay={0.6} />
-                  </>
-                )}
+                {/* Floating Elements */}
+                <div className="absolute top-4 right-12 w-3 h-3 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full animate-bounce opacity-80" />
+                <div className="absolute bottom-6 left-8 w-2 h-2 bg-gradient-to-r from-teal-400 to-green-400 rounded-full animate-pulse opacity-60" />
 
-                <div className="relative p-8 text-center">
+                <CardContent className="relative p-8 text-center">
                   {/* Streak Icon with Animation */}
                   <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
+                    initial={{ scale: 0, rotate: -90 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    transition={{ type: "spring", damping: 10, stiffness: 200, delay: 0.1 }}
+                    transition={{ type: "spring", damping: 15, stiffness: 300, delay: 0.1 }}
                     className="relative mx-auto mb-6"
                   >
-                    <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 flex items-center justify-center shadow-2xl shadow-orange-500/40 relative overflow-hidden">
-                      <div className="absolute inset-2 rounded-2xl bg-white/10 backdrop-blur-sm" />
-                      <Flame className="h-12 w-12 text-white relative z-10 drop-shadow-2xl" />
+                    <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-green-500 flex items-center justify-center shadow-2xl shadow-emerald-500/25 relative overflow-hidden">
+                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                      <Flame className="h-10 w-10 text-white relative z-10 drop-shadow-lg" />
                       
                       {/* Rotating Ring */}
                       <motion.div
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 rounded-3xl border-4 border-orange-300/30"
-                      />
-                      
-                      {/* Pulse Effect */}
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.2, 1],
-                          opacity: [0.5, 0, 0.5]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 rounded-3xl bg-orange-400"
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 rounded-3xl border-4 border-emerald-300/30"
                       />
                     </div>
                     
-                    {/* Floating Icons */}
+                    {/* Streak Count Badge */}
                     <motion.div
-                      animate={{ y: [-5, 5, -5], rotate: [0, 180, 360] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-red-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", delay: 0.3, stiffness: 200 }}
+                      className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-teal-400 to-green-400 rounded-full flex items-center justify-center shadow-lg border-4 border-white dark:border-slate-900"
                     >
-                      <Zap className="h-4 w-4 text-white drop-shadow-sm" />
-                    </motion.div>
-                    
-                    <motion.div
-                      animate={{ y: [5, -5, 5], rotate: [360, 180, 0] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute -bottom-2 -left-2 w-7 h-7 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg"
-                    >
-                      <Star className="h-3.5 w-3.5 text-white drop-shadow-sm" />
+                      <span className="text-white font-black text-lg drop-shadow-sm">{streakCount}</span>
                     </motion.div>
                   </motion.div>
 
-                  {/* Streak Count */}
+                  {/* Welcome Text */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="mb-6"
+                    className="space-y-4 mb-6"
                   >
-                    <motion.div
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="text-6xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 dark:from-orange-400 dark:via-red-400 dark:to-orange-400 bg-clip-text text-transparent mb-2"
-                    >
-                      {streakCount}
-                    </motion.div>
-                    <h2 className="text-2xl font-bold text-foreground mb-2">
+                    <h2 className="text-3xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-400 dark:to-green-400 bg-clip-text text-transparent">
                       {getMessage()}
                     </h2>
+                    
                     <p className="text-muted-foreground leading-relaxed">
                       {getMotivation()}
                     </p>
-                  </motion.div>
 
-                  {/* Stats Card */}
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                    className="p-4 bg-gradient-to-r from-orange-100/80 to-red-100/80 dark:from-orange-950/40 dark:to-red-950/40 rounded-2xl border border-orange-200/50 dark:border-orange-800/30 backdrop-blur-sm mb-6"
-                  >
-                    <div className="flex items-center justify-center gap-6">
-                      <div className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <Flame className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-1" />
-                          <span className="text-2xl font-bold text-foreground">{streakCount}</span>
+                    {/* Stats Highlight */}
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                      className="p-4 bg-gradient-to-r from-emerald-100/80 to-teal-100/80 dark:from-emerald-950/40 dark:to-teal-950/40 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm"
+                    >
+                      <div className="flex items-center justify-center gap-6">
+                        <div className="text-center">
+                          <div className="flex items-center justify-center mb-1">
+                            <Flame className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-1" />
+                            <span className="text-2xl font-bold text-foreground">{streakCount}</span>
+                          </div>
+                          <p className="text-xs font-medium text-muted-foreground">Days</p>
                         </div>
-                        <p className="text-xs font-medium text-muted-foreground">Day Streak</p>
-                      </div>
-                      <div className="h-12 w-px bg-orange-300/50 dark:bg-orange-700/50" />
-                      <div className="text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <Trophy className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-1" />
-                          <span className="text-2xl font-bold text-foreground">+10</span>
+                        <div className="h-12 w-px bg-emerald-300/50 dark:bg-emerald-700/50" />
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-foreground mb-1">+10</div>
+                          <p className="text-xs font-medium text-muted-foreground">MP Earned</p>
                         </div>
-                        <p className="text-xs font-medium text-muted-foreground">MP Earned</p>
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
 
                   {/* Action Button */}
@@ -295,9 +237,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                   >
                     <Button
                       onClick={onClose}
-                      className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 hover:from-orange-600 hover:via-red-600 hover:to-orange-600 text-white font-bold px-8 py-6 text-lg rounded-xl shadow-2xl shadow-orange-500/40 hover:shadow-orange-500/60 transition-all duration-300 hover:scale-105"
+                      className="w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-green-500 hover:from-emerald-600 hover:via-teal-600 hover:to-green-600 text-white font-bold px-8 py-3 rounded-xl shadow-2xl shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300 hover:scale-105"
                     >
-                      <Zap className="h-5 w-5 mr-2" />
                       Continue Learning
                     </Button>
                   </motion.div>
@@ -309,9 +250,9 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     transition={{ delay: 0.5 }}
                     className="text-xs text-muted-foreground mt-4"
                   >
-                    Keep practicing daily to maintain your streak! 🎯
+                    Keep your streak alive by practicing daily
                   </motion.p>
-                </div>
+                </CardContent>
               </Card>
             </motion.div>
           </motion.div>
