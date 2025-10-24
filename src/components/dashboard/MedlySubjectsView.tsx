@@ -370,11 +370,11 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-orange-500/20 dark:border-orange-500/30 shadow-sm hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-primary/20 dark:border-primary/30 shadow-sm hover:shadow-md hover:shadow-primary/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-500/5">
-                        <Flame className="h-5 w-5 text-orange-500" />
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5">
+                        <Flame className="h-5 w-5 text-primary" />
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
                     </div>
@@ -386,18 +386,6 @@ export function MedlySubjectsView({
                         className="text-3xl font-bold text-[#0F172A] dark:text-white"
                       >
                         {currentStreak}
-                      </motion.div>
-                      <motion.div
-                        animate={{
-                          scale: currentStreak > 0 ? [1, 1.2, 1] : 1,
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <Flame className={`h-6 w-6 ${currentStreak > 0 ? 'text-orange-500' : 'text-gray-400'}`} />
                       </motion.div>
                     </div>
                     <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">
