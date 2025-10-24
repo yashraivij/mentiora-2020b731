@@ -373,8 +373,8 @@ export function MedlySubjectsView({
                     className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-primary/20 dark:border-primary/30 shadow-sm hover:shadow-md hover:shadow-primary/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5">
-                        <Flame className="h-5 w-5 text-primary" />
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/5">
+                        <Flame className="h-5 w-5 text-orange-500" />
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
                     </div>
