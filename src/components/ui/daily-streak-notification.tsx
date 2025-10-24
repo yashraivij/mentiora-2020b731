@@ -316,8 +316,12 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                   >
                     <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
                       {prevMilestone > 0 && <span className="font-semibold">{prevMilestone} days</span>}
-                      <span className="font-semibold text-black ml-auto">
-                        {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 100 MP
+                      <span className="font-bold text-black ml-auto flex items-center gap-1.5">
+                        {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
+                        <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+                          100 MP
+                        </span>
+                        <span className="text-base">🏆</span>
                       </span>
                     </div>
                     
