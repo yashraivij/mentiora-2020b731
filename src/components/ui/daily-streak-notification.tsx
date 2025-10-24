@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, X, CheckCircle2 } from 'lucide-react';
+import { X, TrendingUp, Award, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -10,118 +10,108 @@ interface DailyStreakNotificationProps {
   streakCount: number;
 }
 
-const Confetti = () => {
-  const confettiPieces = Array.from({ length: 80 }, (_, i) => ({
+const Particles = () => {
+  const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
-    left: 20 + Math.random() * 60, // More centered distribution
-    delay: Math.random() * 0.3,
-    duration: 2 + Math.random() * 1.5,
-    color: ['#00B4D8', '#0BA5E9', '#60A5FA', '#38BDF8', '#7DD3FC', '#BFDBFE'][Math.floor(Math.random() * 6)],
-    size: 4 + Math.random() * 6,
-    rotation: Math.random() * 360,
-    xMovement: (Math.random() - 0.5) * 300,
-    initialY: -50 - Math.random() * 50
+    x: 50 + (Math.random() - 0.5) * 40,
+    y: 40 + Math.random() * 20,
+    delay: Math.random() * 0.8,
+    duration: 3 + Math.random() * 2,
   }));
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
-      {confettiPieces.map((piece) => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
         <motion.div
-          key={piece.id}
-          className="absolute"
+          key={particle.id}
+          className="absolute w-1 h-1 rounded-full bg-[#00B4D8]"
           style={{
-            left: `${piece.left}%`,
-            top: `${piece.initialY}px`,
-            width: `${piece.size}px`,
-            height: `${piece.size}px`,
-            rotate: piece.rotation
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
           }}
-          initial={{ y: 0, opacity: 0, scale: 0 }}
+          initial={{ opacity: 0, scale: 0, y: 0 }}
           animate={{
-            y: [0, window.innerHeight * 0.3, window.innerHeight + 100],
-            opacity: [0, 1, 1, 0.8, 0],
-            scale: [0, 1.2, 1, 0.9, 0.3],
-            rotate: [piece.rotation, piece.rotation + 1080],
-            x: [0, piece.xMovement * 0.5, piece.xMovement]
+            opacity: [0, 0.8, 0.6, 0],
+            scale: [0, 1.5, 1, 0],
+            y: [-20, -80, -120],
+            x: [(Math.random() - 0.5) * 60],
           }}
           transition={{
-            duration: piece.duration,
-            delay: piece.delay,
-            ease: [0.22, 1, 0.36, 1]
+            duration: particle.duration,
+            delay: particle.delay,
+            ease: "easeOut",
           }}
-        >
-          <div 
-            className="w-full h-full rounded-full"
-            style={{ backgroundColor: piece.color }}
-          />
-        </motion.div>
+        />
       ))}
     </div>
   );
 };
 
-const CircularProgress = ({ progress, size = 160 }: { progress: number; size?: number }) => {
-  const radius = (size - 16) / 2;
+const ProgressRing = ({ progress, size = 200 }: { progress: number; size?: number }) => {
+  const strokeWidth = 3;
+  const radius = (size - strokeWidth * 2) / 2;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const offset = circumference - (progress / 100) * circumference;
 
   return (
     <svg width={size} height={size} className="transform -rotate-90">
-      {/* Background circle with glow */}
       <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+        <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#00B4D8" stopOpacity="0.8" />
+          <stop offset="50%" stopColor="#0BA5E9" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.4" />
+        </linearGradient>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
           <feMerge>
             <feMergeNode in="coloredBlur"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
-        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#00B4D8" />
-          <stop offset="50%" stopColor="#0BA5E9" />
-          <stop offset="100%" stopColor="#60A5FA" />
-        </linearGradient>
       </defs>
       
-      {/* Background track */}
+      {/* Background ring */}
       <circle
         cx={size / 2}
         cy={size / 2}
         r={radius}
         fill="none"
         stroke="currentColor"
-        strokeWidth="8"
-        className="text-muted opacity-20"
+        strokeWidth={strokeWidth}
+        className="text-border opacity-30"
       />
       
-      {/* Progress arc */}
+      {/* Progress ring */}
       <motion.circle
         cx={size / 2}
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="url(#progressGradient)"
-        strokeWidth="8"
+        stroke="url(#ringGradient)"
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeDasharray={circumference}
         initial={{ strokeDashoffset: circumference }}
-        animate={{ strokeDashoffset }}
-        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
-        filter="url(#glow)"
+        animate={{ strokeDashoffset: offset }}
+        transition={{ 
+          duration: 2.5, 
+          ease: [0.16, 1, 0.3, 1],
+          delay: 0.5
+        }}
+        filter="url(#softGlow)"
       />
     </svg>
   );
 };
 
 export function DailyStreakNotification({ isVisible, onClose, streakCount }: DailyStreakNotificationProps) {
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [showCheckmark, setShowCheckmark] = useState(false);
+  const [showParticles, setShowParticles] = useState(false);
 
   const playCelebrationSound = () => {
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       
-      const playSound = (frequency: number, duration: number, delay: number) => {
+      const playTone = (frequency: number, duration: number, delay: number, gain = 0.15) => {
         setTimeout(() => {
           const oscillator = audioContext.createOscillator();
           const gainNode = audioContext.createGain();
@@ -133,7 +123,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
           oscillator.type = 'sine';
           
           gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-          gainNode.gain.linearRampToValueAtTime(0.18, audioContext.currentTime + 0.01);
+          gainNode.gain.linearRampToValueAtTime(gain, audioContext.currentTime + 0.02);
           gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
           
           oscillator.start(audioContext.currentTime);
@@ -141,271 +131,226 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
         }, delay);
       };
 
-      // Triumphant celebration sound
-      playSound(523.25, 0.15, 0); // C5
-      playSound(659.25, 0.15, 120); // E5
-      playSound(783.99, 0.2, 240); // G5
-      playSound(1046.50, 0.25, 380); // C6
+      // Sophisticated chime sequence
+      playTone(523.25, 0.2, 0); // C5
+      playTone(659.25, 0.2, 150); // E5
+      playTone(783.99, 0.25, 300); // G5
     } catch (error) {
-      console.log('Audio not supported:', error);
+      console.log('Audio not supported');
     }
   };
 
   useEffect(() => {
     if (isVisible) {
-      setShowConfetti(true);
+      setShowParticles(true);
       playCelebrationSound();
-      
-      // Show checkmark after a brief delay
-      setTimeout(() => setShowCheckmark(true), 600);
-      
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
+      const timer = setTimeout(() => setShowParticles(false), 4000);
       return () => clearTimeout(timer);
-    } else {
-      setShowCheckmark(false);
     }
   }, [isVisible]);
 
+  const getHeadline = () => {
+    if (streakCount === 1) {
+      return "Welcome Back";
+    } else if (streakCount >= 30) {
+      return "Outstanding Commitment";
+    } else if (streakCount >= 14) {
+      return "Remarkable Progress";
+    } else if (streakCount >= 7) {
+      return "Building Momentum";
+    } else {
+      return "Consistency Counts";
+    }
+  };
+
   const getMessage = () => {
     if (streakCount === 1) {
-      return "You're Back!";
+      return "Every journey begins with showing up. You've taken the first step today.";
     } else if (streakCount >= 30) {
-      return `${streakCount} Day Streak! 🌟`;
+      return `${streakCount} consecutive days of dedication. You're proving that greatness is built through daily commitment.`;
+    } else if (streakCount >= 14) {
+      return `${streakCount} days strong. Your consistency is creating the foundation for lasting success.`;
     } else if (streakCount >= 7) {
-      return `${streakCount} Day Streak!`;
+      return `${streakCount} days of focus. You're developing the habits that separate good from great.`;
     } else {
-      return `${streakCount} Days Strong!`;
+      return `${streakCount} days in a row. Small actions repeated daily create extraordinary results.`;
     }
   };
 
-  const getMotivation = () => {
-    if (streakCount === 1) {
-      return "Welcome back! Every journey starts with a single step. Let's build something amazing together.";
-    } else if (streakCount >= 30) {
-      return "Incredible dedication! You're proving that consistency creates excellence. Keep this momentum going!";
-    } else if (streakCount >= 7) {
-      return "Outstanding commitment! You're building habits that will transform your results. Keep it up!";
-    } else {
-      return "Great progress! Daily consistency is the secret to mastery. You're on the right path!";
-    }
-  };
-
-  // Calculate progress to next milestone
-  const milestones = [3, 7, 14, 30, 60, 90, 180, 365];
-  const nextMilestone = milestones.find(m => m > streakCount) || streakCount;
+  // Calculate progress
+  const milestones = [7, 14, 30, 60, 90, 180, 365];
+  const nextMilestone = milestones.find(m => m > streakCount) || 365;
   const prevMilestone = milestones.filter(m => m <= streakCount).pop() || 0;
-  const progressToMilestone = prevMilestone === nextMilestone 
+  const progress = prevMilestone === nextMilestone 
     ? 100 
-    : ((streakCount - prevMilestone) / (nextMilestone - prevMilestone)) * 100;
+    : Math.min(100, ((streakCount - prevMilestone) / (nextMilestone - prevMilestone)) * 100);
 
   return (
     <AnimatePresence>
       {isVisible && (
-        <>
-          {showConfetti && <Confetti />}
-          
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-6"
+          onClick={onClose}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4"
-            onClick={onClose}
+            initial={{ scale: 0.92, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.92, opacity: 0, y: 20 }}
+            transition={{ 
+              type: "spring", 
+              damping: 30, 
+              stiffness: 300,
+              mass: 0.8
+            }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-xl"
           >
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 30 }}
-              transition={{ 
-                type: "spring", 
-                damping: 25, 
-                stiffness: 300,
-                mass: 0.8
-              }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-lg"
-            >
-              <Card className="relative bg-gradient-to-b from-card via-card to-card/95 border-0 shadow-2xl overflow-hidden">
-                {/* Ambient glow effects */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00B4D8]/10 via-transparent to-[#0BA5E9]/10" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-gradient-to-b from-[#00B4D8]/20 to-transparent blur-3xl" />
-                
-                {/* Close Button */}
-                <button
-                  onClick={onClose}
-                  className="absolute top-6 right-6 z-10 p-2.5 rounded-xl bg-muted/50 hover:bg-muted transition-all duration-200 backdrop-blur-sm"
+            {showParticles && <Particles />}
+            
+            <Card className="relative bg-card/95 backdrop-blur-xl border border-border/50 shadow-2xl overflow-hidden">
+              {/* Subtle ambient gradient */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#00B4D8]/5 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                className="absolute top-6 right-6 z-10 p-2 rounded-full hover:bg-muted/50 transition-colors"
+              >
+                <X className="h-4 w-4 text-muted-foreground" />
+              </button>
+
+              <CardContent className="p-12 text-center relative">
+                {/* Streak number - hero element */}
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="mb-8"
                 >
-                  <X className="h-4 w-4 text-muted-foreground" />
-                </button>
-
-                <CardContent className="p-12 text-center relative">
-                  {/* Circular Progress with Flame Icon */}
-                  <motion.div
-                    initial={{ scale: 0, rotate: -15 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ 
-                      type: "spring", 
-                      damping: 12, 
-                      stiffness: 150,
-                      delay: 0.1 
-                    }}
-                    className="relative mx-auto mb-10 w-[160px] h-[160px]"
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <CircularProgress progress={progressToMilestone} size={160} />
-                    </div>
-                    
-                    {/* Center icon container */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ 
-                          type: "spring",
-                          damping: 10,
-                          delay: 0.4 
-                        }}
-                        className="relative"
-                      >
-                        <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] flex items-center justify-center shadow-2xl relative overflow-hidden">
-                          {/* Shine effect */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent" />
-                          <Flame className="h-12 w-12 text-white relative z-10 drop-shadow-lg" />
-                        </div>
-                        
-                        {/* Success checkmark overlay */}
-                        <AnimatePresence>
-                          {showCheckmark && (
-                            <motion.div
-                              initial={{ scale: 0, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
-                              exit={{ scale: 0, opacity: 0 }}
-                              transition={{ type: "spring", damping: 15 }}
-                              className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg border-4 border-card"
-                            >
-                              <CheckCircle2 className="h-5 w-5 text-white" />
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </motion.div>
-                    </div>
-                    
-                    {/* Streak count badge */}
-                    <motion.div
-                      initial={{ scale: 0, y: 10 }}
-                      animate={{ scale: 1, y: 0 }}
-                      transition={{ 
-                        type: "spring",
-                        damping: 15,
-                        delay: 0.6 
-                      }}
-                      className="absolute -bottom-4 left-1/2 -translate-x-1/2"
-                    >
-                      <div className="px-6 py-2.5 bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] rounded-full shadow-xl border-4 border-card">
-                        <span className="text-white font-bold text-xl tracking-tight">{streakCount} {streakCount === 1 ? 'Day' : 'Days'}</span>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Message */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    className="mb-8 mt-6"
-                  >
-                    <h2 className="text-3xl font-bold text-foreground mb-4 tracking-tight">
-                      {getMessage()}
-                    </h2>
-                    
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-md mx-auto">
-                      {getMotivation()}
-                    </p>
-                  </motion.div>
-
-                  {/* Progress to Next Milestone */}
-                  {nextMilestone !== streakCount && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      className="mb-8"
-                    >
-                      <div className="flex items-center justify-between text-sm font-medium mb-3 px-2">
-                        <span className="text-muted-foreground">{prevMilestone} days</span>
-                        <span className="text-[#00B4D8] font-semibold">Next: {nextMilestone} days</span>
-                      </div>
-                      
-                      <div className="relative h-3 bg-muted/50 rounded-full overflow-hidden backdrop-blur-sm">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${progressToMilestone}%` }}
-                          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
-                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] rounded-full"
-                        />
-                      </div>
-                      
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 0.5 }}
-                        className="text-sm text-muted-foreground mt-3"
-                      >
-                        {nextMilestone - streakCount} more {nextMilestone - streakCount === 1 ? 'day' : 'days'} to milestone
-                      </motion.p>
-                    </motion.div>
-                  )}
-
-                  {/* Reward Highlight */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
-                    className="relative bg-gradient-to-br from-[#00B4D8]/15 via-[#0BA5E9]/10 to-[#60A5FA]/15 rounded-2xl p-8 mb-8 overflow-hidden border border-[#00B4D8]/20"
-                  >
-                    {/* Animated shine effect */}
-                    <motion.div
-                      animate={{ 
-                        x: ["-100%", "200%"]
-                      }}
-                      transition={{ 
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatDelay: 2
-                      }}
-                      className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-                    />
-                    
-                    <div className="relative">
-                      <div className="text-6xl font-black mb-2">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA]">
-                          +10 MP
-                        </span>
-                      </div>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        Daily login reward earned
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Action Button */}
-                  <motion.div
+                  <div className="relative inline-block">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00B4D8]/20 to-[#0BA5E9]/20 blur-3xl" />
+                    <h1 className="relative text-8xl font-black tracking-tighter">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA]">
+                        {streakCount}
+                      </span>
+                    </h1>
+                  </div>
+                  <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.5 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-muted-foreground text-sm font-medium tracking-wider uppercase mt-2"
                   >
-                    <Button
-                      onClick={onClose}
-                      className="w-full bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] hover:from-[#0099b8] hover:via-[#0990d0] hover:to-[#4a9fdb] text-white font-bold py-4 text-lg rounded-xl shadow-lg shadow-[#00B4D8]/40 transition-all duration-300 hover:shadow-xl hover:shadow-[#00B4D8]/50 hover:-translate-y-0.5"
-                    >
-                      Continue Your Journey
-                    </Button>
-                  </motion.div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                    {streakCount === 1 ? 'Day' : 'Days'} Consecutive
+                  </motion.p>
+                </motion.div>
+
+                {/* Headline */}
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="text-3xl font-bold text-foreground mb-4 tracking-tight"
+                >
+                  {getHeadline()}
+                </motion.h2>
+
+                {/* Message */}
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                  className="text-muted-foreground text-base leading-relaxed max-w-md mx-auto mb-10"
+                >
+                  {getMessage()}
+                </motion.p>
+
+                {/* Progress visualization */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="mb-10"
+                >
+                  <div className="flex items-center justify-between text-sm mb-4 px-2">
+                    <span className="text-muted-foreground font-medium">{prevMilestone}</span>
+                    <span className="text-[#00B4D8] font-semibold flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4" />
+                      Next: {nextMilestone} days
+                    </span>
+                  </div>
+                  
+                  <div className="relative h-2 bg-muted/30 rounded-full overflow-hidden backdrop-blur-sm">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${progress}%` }}
+                      transition={{ 
+                        duration: 2, 
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.6
+                      }}
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] rounded-full"
+                    />
+                  </div>
+                  
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2 }}
+                    className="text-xs text-muted-foreground mt-3 font-medium"
+                  >
+                    {nextMilestone - streakCount} more {nextMilestone - streakCount === 1 ? 'day' : 'days'} until next milestone
+                  </motion.p>
+                </motion.div>
+
+                {/* Reward section */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="mb-8 py-6 px-8 bg-gradient-to-r from-[#00B4D8]/10 via-[#0BA5E9]/10 to-transparent rounded-2xl border border-[#00B4D8]/20"
+                >
+                  <div className="flex items-center justify-center gap-8">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-1">
+                        <Award className="h-5 w-5 text-[#00B4D8]" />
+                        <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9]">
+                          +10
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-medium">MP Earned</p>
+                    </div>
+                    <div className="h-12 w-px bg-border/50" />
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-1">
+                        <Zap className="h-5 w-5 text-[#00B4D8]" />
+                        <span className="text-3xl font-bold text-foreground">{streakCount}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-medium">Day Streak</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* CTA */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  <Button
+                    onClick={onClose}
+                    className="w-full bg-gradient-to-r from-[#00B4D8] via-[#0BA5E9] to-[#60A5FA] hover:opacity-90 text-white font-semibold py-4 text-base rounded-xl shadow-lg shadow-[#00B4D8]/20 transition-all duration-200"
+                  >
+                    Continue
+                  </Button>
+                </motion.div>
+              </CardContent>
+            </Card>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
