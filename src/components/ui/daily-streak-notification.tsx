@@ -315,11 +315,26 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     transition={{ delay: 0.4, duration: 0.5 }}
                     className="mb-6 bg-gray-50 rounded-xl p-4"
                   >
-                    <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
-                      <span className="font-semibold">{prevMilestone} days</span>
-                      <span className="font-semibold text-black">
-                        {daysToMilestone} days until {nextMilestone}
-                      </span>
+                    <div className="flex justify-between items-center text-sm mb-3 px-1">
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-400 uppercase tracking-wide">Progress</span>
+                        <span className="font-bold text-gray-700">{prevMilestone === 0 ? 'Started' : `${prevMilestone} days`}</span>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <span className="text-xs text-gray-400 uppercase tracking-wide">Current</span>
+                        <span className="font-bold text-[#0BA5E9] text-lg">{streakCount}</span>
+                      </div>
+                      <div className="flex flex-col items-end">
+                        <span className="text-xs text-gray-400 uppercase tracking-wide">Next Goal</span>
+                        <span className="font-bold text-gray-700">{nextMilestone} days</span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-center text-xs text-gray-500 mb-2">
+                      {daysToMilestone === 0 
+                        ? '🎉 Milestone reached!' 
+                        : `${daysToMilestone} ${daysToMilestone === 1 ? 'day' : 'days'} to go`
+                      }
                     </div>
                     
                     <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
@@ -334,6 +349,11 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                         className="absolute inset-y-0 left-0 rounded-full shadow-sm"
                         style={{ backgroundColor: '#0BA5E9' }}
                       />
+                    </div>
+                    
+                    <div className="flex justify-between items-center text-xs text-gray-400 mt-1.5 px-1">
+                      <span>{Math.round(progress)}% complete</span>
+                      <span>{nextMilestone > streakCount ? `${nextMilestone - streakCount} more` : 'Goal reached!'}</span>
                     </div>
                   </motion.div>
 
