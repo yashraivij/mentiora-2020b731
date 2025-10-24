@@ -2460,6 +2460,14 @@ const Dashboard = () => {
               Feedback
             </Button>
             <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowDailyStreak(true)}
+              className="border-2 border-orange-500 text-orange-500 hover:bg-orange-50 font-semibold"
+            >
+              🔥 Test 7-Day Streak
+            </Button>
+            <Button
               variant="ghost"
               size="sm"
               onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
@@ -5665,7 +5673,7 @@ const Dashboard = () => {
             }
           }
         }}
-        streakCount={currentStreak}
+        streakCount={7}
       />
     </div>
   );
