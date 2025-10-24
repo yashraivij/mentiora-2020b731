@@ -1476,10 +1476,7 @@ export type Database = {
       }
     }
     Functions: {
-      calculate_exam_duration: {
-        Args: { exam_uuid: string }
-        Returns: number
-      }
+      calculate_exam_duration: { Args: { exam_uuid: string }; Returns: number }
       calculate_next_review: {
         Args: { current_difficulty: number; performance: number }
         Returns: string
@@ -1492,10 +1489,7 @@ export type Database = {
         Args: { user_id_to_delete: string }
         Returns: undefined
       }
-      get_subscription_stats: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
+      get_subscription_stats: { Args: never; Returns: Json }
       get_top_active_users: {
         Args: { end_date?: string; limit_count?: number; start_date?: string }
         Returns: {
@@ -1520,10 +1514,7 @@ export type Database = {
           total_study_minutes: number
         }[]
       }
-      get_user_streak: {
-        Args: { user_uuid: string }
-        Returns: number
-      }
+      get_user_streak: { Args: { user_uuid: string }; Returns: number }
       get_weekly_study_hours: {
         Args: { user_uuid: string }
         Returns: {
@@ -1535,10 +1526,7 @@ export type Database = {
         Args: { p_points: number; p_user_id: string }
         Returns: number
       }
-      recalculate_daily_usage: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
+      recalculate_daily_usage: { Args: never; Returns: number }
       reset_user_points_based_on_activities: {
         Args: { p_user_id: string }
         Returns: number
