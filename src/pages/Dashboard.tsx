@@ -5537,7 +5537,7 @@ const Dashboard = () => {
               {/* Test Daily Streak Notification */}
               <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-[#00B4D8] rounded-2xl flex items-center justify-center">
                     <Flame className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -5547,10 +5547,10 @@ const Dashboard = () => {
                     <p className="text-muted-foreground">Test the daily streak notification</p>
                   </div>
                 </div>
-                <div className="p-4 rounded-lg bg-orange-50 dark:bg-card border border-orange-200 dark:border-border">
+                <div className="p-4 rounded-lg bg-muted border border-border">
                   <Button 
                     onClick={() => setShowDailyStreak(true)}
-                    className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 hover:from-orange-600 hover:via-red-600 hover:to-orange-600 text-white font-bold"
+                    className="w-full bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9] hover:from-[#0099b8] hover:to-[#0990d0] text-white font-bold"
                   >
                     <Flame className="w-4 h-4 mr-2" />
                     Show Streak Notification
