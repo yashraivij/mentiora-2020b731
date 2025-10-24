@@ -512,28 +512,49 @@ export function MedlySubjectsView({
                           <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
                         </div>
                       ) : (
-                        <div className="space-y-2">
-                          <div className="text-center py-3">
-                            <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
-                              {completedQuestsCount}/{quests.length}
+                        <div className="space-y-3">
+                          {/* Preview first 2 quests */}
+                          {quests.slice(0, 2).map((quest) => (
+                            <div key={quest.id} className="space-y-1">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  {quest.completed && (
+                                    <Check className="h-3 w-3 text-[#16A34A]" />
+                                  )}
+                                  <span className="text-xs font-medium text-[#0F172A] dark:text-white truncate">
+                                    {quest.title}
+                                  </span>
+                                </div>
+                                <span className="text-xs font-bold text-[#FBBF24]">+{quest.reward}</span>
+                              </div>
+                              <Progress 
+                                value={(quest.progress / quest.total) * 100} 
+                                className="h-1.5"
+                              />
                             </div>
-                            <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                              Quests Complete
+                          ))}
+                          
+                          {/* Summary and View All button */}
+                          <div className="pt-2 border-t border-[#E2E8F0] dark:border-gray-700 space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-[#64748B] dark:text-gray-400 font-medium">
+                                {completedQuestsCount}/{quests.length} Complete
+                              </span>
+                              {totalMP > 0 && (
+                                <div className="flex items-center gap-1">
+                                  <Gem className="h-3 w-3 text-[#FBBF24]" />
+                                  <span className="font-bold text-[#FBBF24]">+{totalMP} MP</span>
+                                </div>
+                              )}
                             </div>
                           </div>
-                          {totalMP > 0 && (
-                            <div className="flex items-center justify-center gap-2 pt-2 border-t border-[#E2E8F0] dark:border-gray-700">
-                              <Gem className="h-4 w-4 text-[#FBBF24]" />
-                              <span className="text-sm font-bold text-[#FBBF24]">+{totalMP} MP Earned</span>
-                            </div>
-                          )}
                         </div>
                       )}
                     </motion.div>
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="font-medium mb-1">Click to view all daily quests</p>
-                    <p className="text-xs text-muted-foreground">Earn MP by completing daily tasks</p>
+                    <p className="font-medium mb-1">Daily Quests Preview</p>
+                    <p className="text-xs text-muted-foreground">Click to view all quests and earn MP by completing daily tasks</p>
                   </TooltipContent>
                 </Tooltip>
               )}
