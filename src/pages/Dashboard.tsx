@@ -2559,18 +2559,18 @@ const Dashboard = () => {
         <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
             <div className="max-w-7xl mx-auto">
-              {/* Test Button for Daily Streak Notification */}
-              <div className="mb-6">
-                <Button 
-                  onClick={() => setShowDailyStreak(true)}
-                  className="bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9] hover:from-[#0099b8] hover:to-[#0990d0] text-white font-semibold px-6 py-2.5 rounded-xl shadow-md"
-                >
-                  <Flame className="w-4 h-4 mr-2" />
-                  Test Streak Notification
-                </Button>
-              </div>
-              
               {!selectedSubject ? (
+                <>
+                  {/* Test Button for Daily Streak Notification */}
+                  <div className="mb-6 flex justify-center">
+                    <Button 
+                      onClick={() => setShowDailyStreak(true)}
+                      className="bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9] hover:from-[#0099b8] hover:to-[#0990d0] text-white font-semibold px-6 py-2.5 rounded-xl shadow-md"
+                    >
+                      <Flame className="w-4 h-4 mr-2" />
+                      Test Streak Notification
+                    </Button>
+                  </div>
                 <MedlySubjectsView
                   profile={profile}
                   mockSubjects={mockSubjects}
@@ -2588,6 +2588,7 @@ const Dashboard = () => {
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
+                </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
                 <div>
