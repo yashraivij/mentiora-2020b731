@@ -87,6 +87,7 @@ import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
+import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 
 interface UserProgress {
   subjectId: string;
@@ -199,6 +200,7 @@ const Dashboard = () => {
   const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
+  const [showDailyStreak, setShowDailyStreak] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -956,6 +958,18 @@ const Dashboard = () => {
       setUserStats(stats);
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
+      
+      // Check if this is a new day login and show streak notification
+      const lastLoginDate = localStorage.getItem(`lastStreakNotification_${user.id}`);
+      const streakCheckDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+      const streakCheckToday = new Date(streakCheckDate);
+      const todayDateString = streakCheckToday.toISOString().split('T')[0];
+      
+      if (lastLoginDate !== todayDateString && stats.currentStreak > 0) {
+        // New day login - show streak notification
+        setShowDailyStreak(true);
+        localStorage.setItem(`lastStreakNotification_${user.id}`, todayDateString);
+      }
       
       // Get this week's flashcard count
       const { weekStart } = getUKWeekBoundaries();
@@ -5520,6 +5534,30 @@ const Dashboard = () => {
                 </div>
               </div>
 
+              {/* Test Daily Streak Notification */}
+              <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center">
+                    <Flame className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-card-foreground">
+                      Daily Streak Test
+                    </h3>
+                    <p className="text-muted-foreground">Test the daily streak notification</p>
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-orange-50 dark:bg-card border border-orange-200 dark:border-border">
+                  <Button 
+                    onClick={() => setShowDailyStreak(true)}
+                    className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 hover:from-orange-600 hover:via-red-600 hover:to-orange-600 text-white font-bold"
+                  >
+                    <Flame className="w-4 h-4 mr-2" />
+                    Show Streak Notification
+                  </Button>
+                </div>
+              </div>
+
               {/* Billing Management Card - Only for Premium Users */}
               {isPremium && (
                 <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
@@ -5600,6 +5638,13 @@ const Dashboard = () => {
       <PremiumWelcomeNotification 
         isVisible={showPremiumWelcome}
         onClose={() => setShowPremiumWelcome(false)}
+      />
+
+      {/* Daily Streak Notification */}
+      <DailyStreakNotification 
+        isVisible={showDailyStreak}
+        onClose={() => setShowDailyStreak(false)}
+        streakCount={currentStreak}
       />
     </div>
   );
