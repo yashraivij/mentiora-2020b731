@@ -2625,6 +2625,40 @@ const Dashboard = () => {
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
+                
+                {/* Community Section with Tabs */}
+                <div className="mt-12">
+                  <Tabs defaultValue="quests" className="w-full">
+                    <div className="flex gap-6">
+                      {/* Left Side Navigation */}
+                      <TabsList className="flex flex-col h-fit w-48 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-2 rounded-2xl shadow-[0_8px_32px_rgba(14,165,233,0.12)]">
+                        <TabsTrigger 
+                          value="quests" 
+                          className="w-full justify-start rounded-xl px-4 py-3 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#0F172A] dark:text-gray-300 hover:bg-[#0EA5E9]/10 transition-all"
+                        >
+                          Daily Quests
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="leaderboard" 
+                          className="w-full justify-start rounded-xl px-4 py-3 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#0F172A] dark:text-gray-300 hover:bg-[#0EA5E9]/10 transition-all"
+                        >
+                          Leaderboards
+                        </TabsTrigger>
+                      </TabsList>
+                      
+                      {/* Right Side Content */}
+                      <div className="flex-1">
+                        <TabsContent value="quests" className="mt-0">
+                          <DailyQuests userId={user?.id || ''} />
+                        </TabsContent>
+                        
+                        <TabsContent value="leaderboard" className="mt-0">
+                          <LeaderboardTable userId={user?.id || ''} />
+                        </TabsContent>
+                      </div>
+                    </div>
+                  </Tabs>
+                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
