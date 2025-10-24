@@ -2559,6 +2559,17 @@ const Dashboard = () => {
         <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
             <div className="max-w-7xl mx-auto">
+              {/* Test Button for Daily Streak Notification */}
+              <div className="mb-6">
+                <Button 
+                  onClick={() => setShowDailyStreak(true)}
+                  className="bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9] hover:from-[#0099b8] hover:to-[#0990d0] text-white font-semibold px-6 py-2.5 rounded-xl shadow-md"
+                >
+                  <Flame className="w-4 h-4 mr-2" />
+                  Test Streak Notification
+                </Button>
+              </div>
+              
               {!selectedSubject ? (
                 <MedlySubjectsView
                   profile={profile}
@@ -5531,30 +5542,6 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Test Daily Streak Notification */}
-              <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-[#00B4D8] rounded-2xl flex items-center justify-center">
-                    <Flame className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-card-foreground">
-                      Daily Streak Test
-                    </h3>
-                    <p className="text-muted-foreground">Test the daily streak notification</p>
-                  </div>
-                </div>
-                <div className="p-4 rounded-lg bg-muted border border-border">
-                  <Button 
-                    onClick={() => setShowDailyStreak(true)}
-                    className="w-full bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9] hover:from-[#0099b8] hover:to-[#0990d0] text-white font-bold"
-                  >
-                    <Flame className="w-4 h-4 mr-2" />
-                    Show Streak Notification
-                  </Button>
                 </div>
               </div>
 
