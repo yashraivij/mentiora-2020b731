@@ -489,53 +489,81 @@ export function MedlySubjectsView({
 
               {/* Daily Quests Compact Card */}
               {userId && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      onClick={() => setQuestsDialogOpen(true)}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300 cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
-                          <Star className="h-5 w-5 text-[#FBBF24]" />
-                        </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Daily Quests</span>
-                      </div>
-                      
-                      {questsLoading ? (
-                        <div className="space-y-2">
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          <div className="text-center py-3">
-                            <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
-                              {completedQuestsCount}/{quests.length}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
+                      <Star className="h-5 w-5 text-[#FBBF24]" />
+                    </div>
+                    <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Daily Quests</span>
+                  </div>
+                  
+                  {questsLoading ? (
+                    <div className="space-y-3">
+                      <div className="h-10 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
+                      <div className="h-10 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
+                      <div className="h-10 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {/* Preview first 3 quests */}
+                      {quests.slice(0, 3).map((quest) => (
+                        <div key={quest.id} className="space-y-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                              {quest.completed ? (
+                                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-[#16A34A] to-[#22C55E] flex items-center justify-center">
+                                  <Check className="h-3 w-3 text-white" />
+                                </div>
+                              ) : (
+                                <div className="flex-shrink-0 w-5 h-5 rounded-full border-2 border-[#E2E8F0] dark:border-gray-600" />
+                              )}
+                              <span className={`text-xs font-medium truncate ${quest.completed ? 'text-[#16A34A] dark:text-green-400' : 'text-[#64748B] dark:text-gray-400'}`}>
+                                {quest.title}
+                              </span>
                             </div>
-                            <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                              Quests Complete
+                            <div className="flex items-center gap-1 flex-shrink-0">
+                              <Gem className="h-3 w-3 text-[#FBBF24]" />
+                              <span className="text-xs font-bold text-[#FBBF24]">{quest.reward}</span>
                             </div>
                           </div>
+                          <Progress 
+                            value={(quest.progress / quest.total) * 100} 
+                            className="h-1.5"
+                          />
+                        </div>
+                      ))}
+                      
+                      {/* Summary and View All Button */}
+                      <div className="pt-3 border-t border-[#E2E8F0] dark:border-gray-700 space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-[#64748B] dark:text-gray-400 font-medium">
+                            {completedQuestsCount}/{quests.length} Complete
+                          </span>
                           {totalMP > 0 && (
-                            <div className="flex items-center justify-center gap-2 pt-2 border-t border-[#E2E8F0] dark:border-gray-700">
-                              <Gem className="h-4 w-4 text-[#FBBF24]" />
-                              <span className="text-sm font-bold text-[#FBBF24]">+{totalMP} MP Earned</span>
+                            <div className="flex items-center gap-1">
+                              <Gem className="h-3.5 w-3.5 text-[#FBBF24]" />
+                              <span className="font-bold text-[#FBBF24]">+{totalMP} MP</span>
                             </div>
                           )}
                         </div>
-                      )}
-                    </motion.div>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="font-medium mb-1">Click to view all daily quests</p>
-                    <p className="text-xs text-muted-foreground">Earn MP by completing daily tasks</p>
-                  </TooltipContent>
-                </Tooltip>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => setQuestsDialogOpen(true)}
+                          className="w-full h-8 text-xs rounded-lg text-[#FBBF24] hover:bg-[#FBBF24]/10 dark:hover:bg-[#FBBF24]/20 font-semibold transition-all duration-200"
+                        >
+                          View All Quests
+                          <ChevronRight className="h-3.5 w-3.5 ml-1" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
               )}
             </div>
           </TooltipProvider>
