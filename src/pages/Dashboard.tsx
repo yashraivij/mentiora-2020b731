@@ -2624,12 +2624,8 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
+                  userId={user?.id}
                 />
-                
-                {/* Daily Quests Section */}
-                <div className="mt-12">
-                  <DailyQuests userId={user?.id || ''} />
-                </div>
 
                 {/* Leaderboard Section */}
                 <div className="mt-12">
