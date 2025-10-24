@@ -87,6 +87,7 @@ import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
+import { StreakDisplay } from "@/components/dashboard/StreakDisplay";
 
 interface UserProgress {
   subjectId: string;
@@ -4227,6 +4228,9 @@ const Dashboard = () => {
                     predictedGrades={predictedGrades}
                     userSubjects={userSubjectsWithGrades}
                   />
+
+                  {/* 1.5 Streak Display */}
+                  <StreakDisplay currentStreak={currentStreak} />
 
                   {/* 2. Strengths and Weaknesses */}
                   {userProgress.length > 0 && (
