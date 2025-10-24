@@ -2425,20 +2425,23 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 lg:px-8 py-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 px-4 lg:px-8 py-4">
+          {/* Logo - Left */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
             <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
             {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
           </div>
 
-          {/* Streak Display - Desktop Only */}
-          <div className="hidden lg:block">
+          {/* Streak Display - Center */}
+          <div className="flex-shrink-0">
             <HeaderStreakDisplay currentStreak={currentStreak} />
           </div>
 
-          {/* Desktop Actions */}
+          {/* Spacer to push actions right */}
+          <div className="flex-grow"></div>
+
+          {/* Desktop Actions - Right */}
           <div className="hidden md:flex items-center gap-2">
             <Button
               variant="ghost"
