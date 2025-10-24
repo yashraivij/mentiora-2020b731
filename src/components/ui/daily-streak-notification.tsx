@@ -60,7 +60,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     if (streakCount === 3) {
       return {
         reward: "+100 MP",
-        message: "4 days until 24h Premium Boost!",
+        message: "Consistency compounds — every day builds momentum.",
         emoji: "💎"
       };
     } else if (streakCount === 7) {
