@@ -453,7 +453,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                           className="flex-1 font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl border-2"
                           style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
                         >
-                          Get 7 Days Premium
+                          Claim 7 Day Boost
                         </Button>
                       </>
                     ) : (
