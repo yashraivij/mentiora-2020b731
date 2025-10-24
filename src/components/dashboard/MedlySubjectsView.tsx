@@ -338,7 +338,7 @@ export function MedlySubjectsView({
 
           {/* KPI Belt */}
           <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div 
@@ -479,75 +479,110 @@ export function MedlySubjectsView({
                   <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
                 </TooltipContent>
               </Tooltip>
-
-              {/* Daily Quests Compact Card */}
-              {userId && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
-                          <Star className="h-5 w-5 text-[#FBBF24]" />
-                        </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Daily Quests</span>
-                      </div>
-                      
-                      {questsLoading ? (
-                        <div className="space-y-2">
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          {quests.slice(0, 3).map((quest) => (
-                            <div key={quest.id} className="flex items-center gap-2">
-                              <div className={`flex-shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-                                quest.completed
-                                  ? 'bg-[#16A34A] border-[#16A34A]'
-                                  : 'border-[#E2E8F0] dark:border-gray-600'
-                              }`}>
-                                {quest.completed && <Check className="h-2.5 w-2.5 text-white" />}
-                              </div>
-                              <span className={`text-xs font-medium ${
-                                quest.completed 
-                                  ? 'text-[#16A34A] line-through' 
-                                  : 'text-[#0F172A] dark:text-white'
-                              }`}>
-                                {quest.title}
-                              </span>
-                            </div>
-                          ))}
-                          <div className="flex items-center justify-between pt-2 mt-2 border-t border-[#E2E8F0] dark:border-gray-700">
-                            <span className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                              {completedQuestsCount}/{quests.length} done
-                            </span>
-                            {totalMP > 0 && (
-                              <div className="flex items-center gap-1">
-                                <Gem className="h-3 w-3 text-[#FBBF24]" />
-                                <span className="text-xs font-bold text-[#FBBF24]">+{totalMP}</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="font-medium mb-1">Complete daily quests to earn MP</p>
-                    <p className="text-xs text-muted-foreground">Earn points by logging in, practicing, and maintaining your streak</p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
             </div>
           </TooltipProvider>
         </div>
       </motion.div>
+
+      {/* Daily Quests Section */}
+      {userId && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 shadow-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
+                    <Star className="h-5 w-5 text-[#FBBF24]" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-[#0F172A] dark:text-white">Daily Quests</h3>
+                    <p className="text-xs text-[#64748B] dark:text-gray-400">
+                      Complete tasks to earn MP rewards
+                    </p>
+                  </div>
+                </div>
+                {totalMP > 0 && (
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FBBF24]/10 to-[#F59E0B]/10 border border-[#FBBF24]/20">
+                    <Gem className="h-4 w-4 text-[#FBBF24]" />
+                    <span className="text-sm font-bold text-[#FBBF24]">+{totalMP} MP earned</span>
+                  </div>
+                )}
+              </div>
+
+              {questsLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="h-20 bg-[#F1F5F9] dark:bg-gray-700 rounded-xl animate-pulse" />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {quests.map((quest) => (
+                    <motion.div
+                      key={quest.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className={`p-4 rounded-xl border transition-all duration-200 ${
+                        quest.completed
+                          ? 'bg-gradient-to-br from-[#16A34A]/10 to-[#16A34A]/5 border-[#16A34A]/30'
+                          : 'bg-white dark:bg-gray-800 border-[#E2E8F0] dark:border-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className={`flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-200 mt-0.5 ${
+                          quest.completed
+                            ? 'bg-[#16A34A] border-[#16A34A]'
+                            : 'border-[#E2E8F0] dark:border-gray-600'
+                        }`}>
+                          {quest.completed && <Check className="h-3 w-3 text-white" />}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className={`text-sm font-semibold mb-1 ${
+                            quest.completed 
+                              ? 'text-[#16A34A]' 
+                              : 'text-[#0F172A] dark:text-white'
+                          }`}>
+                            {quest.title}
+                          </h4>
+                          <p className="text-xs text-[#64748B] dark:text-gray-400 mb-2">
+                            {quest.description}
+                          </p>
+                        </div>
+                      </div>
+                      <Progress 
+                        value={(quest.progress / quest.total) * 100} 
+                        className="h-1.5 mb-2"
+                      />
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-[#64748B] dark:text-gray-400">
+                          {quest.progress}/{quest.total}
+                        </span>
+                        <span className="text-xs font-bold text-[#FBBF24]">+{quest.reward} MP</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              {completedQuestsCount === quests.length && quests.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 p-3 rounded-xl bg-gradient-to-r from-[#16A34A]/10 to-[#16A34A]/5 border border-[#16A34A]/20"
+                >
+                  <p className="text-sm text-[#16A34A] font-medium text-center">
+                    🎉 All quests completed! Great work today!
+                  </p>
+                </motion.div>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
       {/* Subject Grid */}
       <div className="space-y-6">
