@@ -2563,6 +2563,7 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
+                  currentStreak={currentStreak}
                 />
               ) : (
                 // Subject Path View (when a subject is selected for practice)
