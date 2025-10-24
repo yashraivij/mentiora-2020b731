@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Flame, Zap, Trophy, Target } from "lucide-react";
+import { Zap, Trophy, Target } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface StreakDisplayProps {
@@ -29,43 +29,30 @@ export const StreakDisplay = ({ currentStreak }: StreakDisplayProps) => {
   };
 
   return (
-    <Card className="relative overflow-hidden border-2 bg-gradient-to-br from-background to-muted/30 hover:shadow-xl transition-all duration-300">
+    <Card className="relative overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-primary/5 via-background to-primary/10 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
       {/* Background glow effect */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${getStreakColor()} opacity-5`}></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-50"></div>
       
       <CardContent className="relative p-6">
         <div className="flex items-start justify-between mb-6">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <motion.div
-                animate={{
-                  scale: currentStreak > 0 ? [1, 1.2, 1] : 1,
-                  rotate: currentStreak > 0 ? [0, 10, -10, 0] : 0,
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Flame className={`h-6 w-6 ${currentStreak > 0 ? 'text-orange-500' : 'text-muted-foreground'}`} />
-              </motion.div>
-              <h3 className="text-lg font-bold text-foreground">Study Streak</h3>
-            </div>
+            <h3 className="text-xl font-bold text-foreground mb-2 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Study Streak
+            </h3>
             <p className="text-sm text-muted-foreground">{getStreakMessage()}</p>
           </div>
           
           {/* Streak counter */}
           <motion.div
-            className={`flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${getStreakColor()} shadow-lg`}
+            className="flex flex-col items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/30"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <div className="text-3xl font-black text-white drop-shadow-lg">
+            <div className="text-4xl font-black text-white drop-shadow-lg">
               {currentStreak}
             </div>
-            <div className="text-xs font-semibold text-white/90">
-              {currentStreak === 1 ? "DAY" : "DAYS"}
+            <div className="text-xs font-semibold text-white/90 uppercase tracking-wide">
+              {currentStreak === 1 ? "Day" : "Days"}
             </div>
           </motion.div>
         </div>
@@ -84,7 +71,7 @@ export const StreakDisplay = ({ currentStreak }: StreakDisplayProps) => {
           
           <div className="relative h-3 bg-muted rounded-full overflow-hidden">
             <motion.div
-              className={`absolute inset-y-0 left-0 bg-gradient-to-r ${getStreakColor()} rounded-full`}
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-primary/70 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(progress, 100)}%` }}
               transition={{ duration: 1, ease: "easeOut" }}
@@ -126,7 +113,7 @@ export const StreakDisplay = ({ currentStreak }: StreakDisplayProps) => {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 shadow-md"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-primary/80 shadow-md"
             >
               <Trophy className="h-3.5 w-3.5 text-white" />
               <span className="text-xs font-bold text-white">Streak Master</span>
@@ -139,12 +126,12 @@ export const StreakDisplay = ({ currentStreak }: StreakDisplayProps) => {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 p-3 rounded-lg bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20"
+            className="mt-4 p-3 rounded-lg bg-primary/10 border border-primary/20"
           >
             <div className="flex items-start gap-2">
-              <Zap className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+              <Zap className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
               <p className="text-xs text-foreground font-medium">
-                Keep practicing daily to unlock the <span className="font-bold text-blue-500">500 MP</span> bonus at 7 days!
+                Keep practicing daily to unlock the <span className="font-bold text-primary">500 MP</span> bonus at 7 days!
               </p>
             </div>
           </motion.div>
