@@ -346,24 +346,47 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       damping: 12,
                       stiffness: 200
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-gray-100 rounded-xl mb-8 border border-gray-200"
+                    className={`inline-flex items-center gap-3 px-6 py-4 rounded-xl mb-8 relative overflow-hidden ${
+                      streakCount === 7 
+                        ? 'bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 shadow-lg' 
+                        : 'bg-gray-100 border border-gray-200'
+                    }`}
                   >
+                    {streakCount === 7 && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                        animate={{
+                          x: ['-100%', '200%']
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatDelay: 1,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    )}
                     <motion.span 
-                      className="text-2xl"
+                      className={streakCount === 7 ? 'text-3xl' : 'text-2xl'}
                       animate={{ 
                         rotate: [0, -10, 10, -10, 0],
-                        scale: [1, 1.1, 1.1, 1.1, 1]
+                        scale: streakCount === 7 ? [1, 1.2, 1.2, 1.2, 1] : [1, 1.1, 1.1, 1.1, 1]
                       }}
                       transition={{ 
                         delay: 0.9,
                         duration: 0.6
                       }}
                     >
-                      💎
+                      {streakCount === 7 ? '🏆' : '💎'}
                     </motion.span>
-                    <span className="font-bold text-lg text-black">
-                      {streakCount === 7 ? '+100 MP bonus' : '+10 MP earned'}
-                    </span>
+                    <div className="relative z-10">
+                      <span className={`font-black ${streakCount === 7 ? 'text-2xl text-white drop-shadow-lg' : 'text-lg text-black'}`}>
+                        {streakCount === 7 ? '+100 MP BONUS!' : '+10 MP earned'}
+                      </span>
+                      {streakCount === 7 && (
+                        <p className="text-xs text-white/90 font-semibold mt-0.5">7-Day Milestone Unlocked!</p>
+                      )}
+                    </div>
                   </motion.div>
 
                   {/* CTA button */}
