@@ -361,7 +361,9 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     >
                       💎
                     </motion.span>
-                    <span className="font-bold text-lg text-black">+10 MP earned</span>
+                    <span className="font-bold text-lg text-black">
+                      {streakCount === 7 ? '+100 MP bonus' : '+10 MP earned'}
+                    </span>
                   </motion.div>
 
                   {/* CTA button */}
