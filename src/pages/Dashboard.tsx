@@ -964,6 +964,17 @@ const Dashboard = () => {
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
       
+      // Show streak badge if user has a streak
+      if (stats.currentStreak > 0) {
+        setShowStreakBadge(true);
+        
+        // Check if it's a milestone
+        const milestones = [7, 14, 30, 60, 100, 180, 365];
+        if (milestones.includes(stats.currentStreak)) {
+          setStreakBadgeMilestone(true);
+        }
+      }
+      
       // Check if this is a new day login and show streak notification
       const lastLoginDate = localStorage.getItem(`lastStreakNotification_${user.id}`);
       const streakCheckDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
