@@ -4185,6 +4185,11 @@ const Dashboard = () => {
                 )}
               </div>
 
+              {/* Streak Display - Always visible */}
+              <div className="max-w-7xl mx-auto mb-8">
+                <StreakDisplay currentStreak={currentStreak} />
+              </div>
+
               {predictedGrades.length === 0 ? (
                 <div className="max-w-2xl mx-auto">
                   <Card className="text-center py-16 px-8 border border-border shadow-xl bg-card/90 backdrop-blur-sm">
@@ -4228,9 +4233,6 @@ const Dashboard = () => {
                     predictedGrades={predictedGrades}
                     userSubjects={userSubjectsWithGrades}
                   />
-
-                  {/* 1.5 Streak Display */}
-                  <StreakDisplay currentStreak={currentStreak} />
 
                   {/* 2. Strengths and Weaknesses */}
                   {userProgress.length > 0 && (
