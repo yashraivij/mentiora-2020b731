@@ -10,6 +10,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Plus,
   Target,
   Download,
@@ -121,6 +127,7 @@ export function MedlySubjectsView({
   
   const [quests, setQuests] = useState<Quest[]>([]);
   const [questsLoading, setQuestsLoading] = useState(true);
+  const [questsDialogOpen, setQuestsDialogOpen] = useState(false);
   
   // Safe defaults for first-time users with no data
   const safeProfile = {
@@ -489,7 +496,8 @@ export function MedlySubjectsView({
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 }}
                       whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300"
+                      onClick={() => setQuestsDialogOpen(true)}
+                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300 cursor-pointer"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
@@ -505,42 +513,27 @@ export function MedlySubjectsView({
                         </div>
                       ) : (
                         <div className="space-y-2">
-                          {quests.slice(0, 3).map((quest) => (
-                            <div key={quest.id} className="flex items-center gap-2">
-                              <div className={`flex-shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-                                quest.completed
-                                  ? 'bg-[#16A34A] border-[#16A34A]'
-                                  : 'border-[#E2E8F0] dark:border-gray-600'
-                              }`}>
-                                {quest.completed && <Check className="h-2.5 w-2.5 text-white" />}
-                              </div>
-                              <span className={`text-xs font-medium ${
-                                quest.completed 
-                                  ? 'text-[#16A34A] line-through' 
-                                  : 'text-[#0F172A] dark:text-white'
-                              }`}>
-                                {quest.title}
-                              </span>
+                          <div className="text-center py-3">
+                            <div className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1">
+                              {completedQuestsCount}/{quests.length}
                             </div>
-                          ))}
-                          <div className="flex items-center justify-between pt-2 mt-2 border-t border-[#E2E8F0] dark:border-gray-700">
-                            <span className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                              {completedQuestsCount}/{quests.length} done
-                            </span>
-                            {totalMP > 0 && (
-                              <div className="flex items-center gap-1">
-                                <Gem className="h-3 w-3 text-[#FBBF24]" />
-                                <span className="text-xs font-bold text-[#FBBF24]">+{totalMP}</span>
-                              </div>
-                            )}
+                            <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                              Quests Complete
+                            </div>
                           </div>
+                          {totalMP > 0 && (
+                            <div className="flex items-center justify-center gap-2 pt-2 border-t border-[#E2E8F0] dark:border-gray-700">
+                              <Gem className="h-4 w-4 text-[#FBBF24]" />
+                              <span className="text-sm font-bold text-[#FBBF24]">+{totalMP} MP Earned</span>
+                            </div>
+                          )}
                         </div>
                       )}
                     </motion.div>
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="font-medium mb-1">Complete daily quests to earn MP</p>
-                    <p className="text-xs text-muted-foreground">Earn points by logging in, practicing, and maintaining your streak</p>
+                    <p className="font-medium mb-1">Click to view all daily quests</p>
+                    <p className="text-xs text-muted-foreground">Earn MP by completing daily tasks</p>
                   </TooltipContent>
                 </Tooltip>
               )}
@@ -762,6 +755,119 @@ export function MedlySubjectsView({
           </p>
         </div>
       </motion.div>
+
+      {/* Daily Quests Dialog */}
+      <Dialog open={questsDialogOpen} onOpenChange={setQuestsDialogOpen}>
+        <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3 text-2xl">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
+                <Star className="h-6 w-6 text-[#FBBF24]" />
+              </div>
+              Daily Quests
+            </DialogTitle>
+          </DialogHeader>
+
+          {questsLoading ? (
+            <div className="space-y-4 py-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="space-y-2">
+                  <div className="h-6 bg-muted rounded animate-pulse" />
+                  <div className="h-4 bg-muted rounded animate-pulse" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-6 py-4">
+              {/* Progress Summary */}
+              <div className="bg-gradient-to-br from-[#FBBF24]/10 to-[#FBBF24]/5 dark:from-[#FBBF24]/20 dark:to-[#FBBF24]/10 rounded-xl p-6 border border-[#FBBF24]/20">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <div className="text-3xl font-bold text-foreground">{completedQuestsCount}/{quests.length}</div>
+                    <div className="text-sm text-muted-foreground font-medium">Quests Completed</div>
+                  </div>
+                  {totalMP > 0 && (
+                    <div className="text-right">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Gem className="h-5 w-5 text-[#FBBF24]" />
+                        <span className="text-3xl font-bold text-[#FBBF24]">+{totalMP}</span>
+                      </div>
+                      <div className="text-sm text-muted-foreground font-medium">MP Earned</div>
+                    </div>
+                  )}
+                </div>
+                <Progress value={(completedQuestsCount / quests.length) * 100} className="h-2.5 mt-4" />
+              </div>
+
+              {/* Quest List */}
+              <div className="space-y-4">
+                {quests.map((quest) => (
+                  <motion.div
+                    key={quest.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-5 rounded-xl border transition-all duration-300 ${
+                      quest.completed
+                        ? 'bg-[#16A34A]/5 border-[#16A34A]/30 dark:bg-[#16A34A]/10'
+                        : 'bg-card border-border hover:border-[#FBBF24]/30'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 mt-0.5 ${
+                          quest.completed
+                            ? 'bg-[#16A34A] border-[#16A34A]'
+                            : 'border-border'
+                        }`}>
+                          {quest.completed && <Check className="h-4 w-4 text-white" />}
+                        </div>
+                        <div className="flex-1">
+                          <h4 className={`font-bold text-base mb-1 ${
+                            quest.completed 
+                              ? 'text-[#16A34A] line-through' 
+                              : 'text-foreground'
+                          }`}>
+                            {quest.title}
+                          </h4>
+                          <p className="text-sm text-muted-foreground">{quest.description}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <Gem className="h-4 w-4 text-[#FBBF24]" />
+                        <span className="text-sm font-bold text-[#FBBF24]">+{quest.reward}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground font-medium">Progress</span>
+                        <span className="font-bold text-foreground">{quest.progress}/{quest.total}</span>
+                      </div>
+                      <Progress 
+                        value={(quest.progress / quest.total) * 100} 
+                        className={`h-2.5 ${quest.completed ? 'bg-[#16A34A]/20' : ''}`}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Completion Message */}
+              {completedQuestsCount === quests.length && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center p-6 bg-gradient-to-br from-[#16A34A]/10 to-[#16A34A]/5 rounded-xl border border-[#16A34A]/30"
+                >
+                  <div className="text-4xl mb-2">🎉</div>
+                  <h3 className="text-lg font-bold text-foreground mb-1">All Quests Complete!</h3>
+                  <p className="text-sm text-muted-foreground">Come back tomorrow for new quests</p>
+                </motion.div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
