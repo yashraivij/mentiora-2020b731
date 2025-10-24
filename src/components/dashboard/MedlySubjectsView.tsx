@@ -22,6 +22,7 @@ import {
   X,
   Crown,
 } from "lucide-react";
+import { StreakCard } from "./StreakCard";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -216,6 +217,11 @@ export function MedlySubjectsView({
                 </Button>
               )}
             </motion.div>
+          </div>
+
+          {/* Streak Card - Prominent placement */}
+          <div className="mb-8">
+            <StreakCard currentStreak={currentStreak} />
           </div>
 
           {/* KPI Belt */}

@@ -2433,11 +2433,6 @@ const Dashboard = () => {
             {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
           </div>
 
-          {/* Streak Display - Center */}
-          <div className="flex-shrink-0">
-            <HeaderStreakDisplay currentStreak={currentStreak} />
-          </div>
-
           {/* Spacer to push actions right */}
           <div className="flex-grow"></div>
 
