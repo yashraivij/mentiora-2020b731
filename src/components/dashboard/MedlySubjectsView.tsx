@@ -21,8 +21,6 @@ import {
   Play,
   X,
   Crown,
-  Flame,
-  Trophy,
 } from "lucide-react";
 
 // Sparkline component
@@ -59,8 +57,6 @@ interface MedlySubjectsViewProps {
     bestWindow: string;
     weekMinutes: number;
   };
-  currentStreak: number;
-  userMP?: number;
   mockSubjects: Array<{
     id: string;
     name: string;
@@ -103,8 +99,6 @@ export function MedlySubjectsView({
   removeSubject,
   isPremium = false,
   onUpgradeToPremium,
-  currentStreak,
-  userMP = 0,
 }: MedlySubjectsViewProps) {
   
   // Safe defaults for first-time users with no data
@@ -224,7 +218,7 @@ export function MedlySubjectsView({
 
           {/* KPI Belt */}
           <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div 
@@ -363,57 +357,6 @@ export function MedlySubjectsView({
                 <TooltipContent className="max-w-xs">
                   <p className="font-medium mb-1">Total time saved this week</p>
                   <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F97316]/20 dark:border-[#F97316]/30 shadow-sm hover:shadow-md hover:shadow-[#F97316]/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F97316]/20 to-[#F97316]/5">
-                        <Flame className="h-5 w-5 text-[#F97316]" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
-                    </div>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5, type: "spring" }}
-                      className="text-3xl font-bold text-[#0F172A] dark:text-white mb-1"
-                    >
-                      {currentStreak || 0}
-                    </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mb-3 font-medium">{currentStreak === 1 ? "day" : "days"} in a row</div>
-                    
-                    {/* MP Progress */}
-                    <div className="space-y-1.5 pt-3 border-t border-border">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-[#64748B] dark:text-gray-400 font-medium">MP Progress</span>
-                        <span className="font-bold text-[#0F172A] dark:text-white">{userMP.toLocaleString()}</span>
-                      </div>
-                      <div className="relative h-2 bg-muted rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${(userMP % 1000) / 10}%` }}
-                          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full"
-                        />
-                      </div>
-                      <div className="text-xs text-[#64748B] dark:text-gray-400 text-right font-medium">
-                        {1000 - (userMP % 1000)} to next level
-                      </div>
-                    </div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Your current study streak</p>
-                  <p className="text-xs text-muted-foreground">Practice daily to maintain your streak and earn bonus MP points. Reach 7 days for a 500 MP reward!</p>
                 </TooltipContent>
               </Tooltip>
             </div>

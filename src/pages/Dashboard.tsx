@@ -87,7 +87,6 @@ import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
-import { StreakDisplay } from "@/components/dashboard/StreakDisplay";
 
 interface UserProgress {
   subjectId: string;
@@ -2563,8 +2562,6 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
-                  currentStreak={currentStreak}
-                  userMP={userMP}
                 />
               ) : (
                 // Subject Path View (when a subject is selected for practice)
@@ -4185,11 +4182,6 @@ const Dashboard = () => {
                     <p className="text-muted-foreground mt-2">You're making great progress</p>
                   </div>
                 )}
-              </div>
-
-              {/* Streak Display - Always visible */}
-              <div className="max-w-7xl mx-auto mb-8">
-                <StreakDisplay currentStreak={currentStreak} />
               </div>
 
               {predictedGrades.length === 0 ? (
