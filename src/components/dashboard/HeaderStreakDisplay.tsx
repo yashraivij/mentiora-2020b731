@@ -23,12 +23,12 @@ export const HeaderStreakDisplay = ({ currentStreak }: HeaderStreakDisplayProps)
   };
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-[#E2E8F0]/50 dark:border-gray-700/50 shadow-sm">
+    <div className="flex items-center gap-3">
       {/* Streak counter */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <motion.div
           animate={{
-            scale: currentStreak > 0 ? [1, 1.1, 1] : 1,
+            scale: currentStreak > 0 ? [1, 1.08, 1] : 1,
           }}
           transition={{
             duration: 2,
@@ -36,16 +36,13 @@ export const HeaderStreakDisplay = ({ currentStreak }: HeaderStreakDisplayProps)
             ease: "easeInOut",
           }}
         >
-          <Flame className={`h-4 w-4 ${currentStreak > 0 ? 'text-orange-500 fill-orange-500' : 'text-[#CBD5E1] dark:text-gray-600'}`} />
+          <Flame className={`h-4 w-4 ${currentStreak > 0 ? 'text-orange-500 fill-orange-500' : 'text-muted-foreground'}`} />
         </motion.div>
-        <span className="text-base font-bold text-[#0F172A] dark:text-white">{currentStreak}</span>
+        <span className="text-sm font-semibold text-foreground">{currentStreak}</span>
       </div>
       
-      {/* Divider */}
-      <div className="w-px h-5 bg-[#E2E8F0] dark:bg-gray-700"></div>
-      
       {/* Week fires */}
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1">
         {daysOfWeek.map((day, index) => {
           const isCompleted = isDayCompleted(index);
           const isToday = index === todayIndex;
@@ -55,19 +52,15 @@ export const HeaderStreakDisplay = ({ currentStreak }: HeaderStreakDisplayProps)
               key={index}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.03, type: "spring" }}
-              className="relative group"
+              transition={{ delay: index * 0.02, type: "spring" }}
             >
               <Flame 
                 className={`h-3.5 w-3.5 transition-all duration-200 ${
                   isCompleted
                     ? 'text-orange-500 fill-orange-500'
-                    : 'text-[#CBD5E1] dark:text-gray-600'
+                    : 'text-muted-foreground/30'
                 } ${isToday ? 'scale-110' : ''}`}
               />
-              {isToday && (
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500"></div>
-              )}
             </motion.div>
           );
         })}
