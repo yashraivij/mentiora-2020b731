@@ -151,6 +151,11 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
   const progress = prevMilestone === nextMilestone 
     ? 100 
     : Math.min(100, ((streakCount - prevMilestone) / (nextMilestone - prevMilestone)) * 100);
+  
+  // Calculate MP reward: 100 MP for every 7 days
+  const calculateMPReward = (days: number) => Math.floor(days / 7) * 100;
+  const currentMPReward = calculateMPReward(streakCount);
+  const nextMilestoneMPReward = calculateMPReward(nextMilestone);
 
   const playCelebrationSound = () => {
     try {
@@ -319,7 +324,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       <span className="font-bold text-black ml-auto flex items-center gap-1.5">
                         {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
                         <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                          100 MP
+                          {nextMilestoneMPReward} MP
                         </span>
                         <span className="text-base">🏆</span>
                       </span>
@@ -351,12 +356,12 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       stiffness: 200
                     }}
                     className={`inline-flex items-center gap-3 px-6 py-4 rounded-xl mb-8 relative overflow-hidden ${
-                      streakCount === 7 
+                      isMilestone 
                         ? 'bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 shadow-lg' 
                         : 'bg-gray-100 border border-gray-200'
                     }`}
                   >
-                    {streakCount === 7 && (
+                    {isMilestone && (
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                         animate={{
@@ -371,24 +376,24 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       />
                     )}
                     <motion.span 
-                      className={streakCount === 7 ? 'text-3xl' : 'text-2xl'}
+                      className={isMilestone ? 'text-3xl' : 'text-2xl'}
                       animate={{ 
                         rotate: [0, -10, 10, -10, 0],
-                        scale: streakCount === 7 ? [1, 1.2, 1.2, 1.2, 1] : [1, 1.1, 1.1, 1.1, 1]
+                        scale: isMilestone ? [1, 1.2, 1.2, 1.2, 1] : [1, 1.1, 1.1, 1.1, 1]
                       }}
                       transition={{ 
                         delay: 0.9,
                         duration: 0.6
                       }}
                     >
-                      {streakCount === 7 ? '🏆' : '💎'}
+                      {isMilestone ? '🏆' : '💎'}
                     </motion.span>
                     <div className="relative z-10">
-                      <span className={`font-black ${streakCount === 7 ? 'text-2xl text-white drop-shadow-lg' : 'text-lg text-black'}`}>
-                        {streakCount === 7 ? '+100 MP BONUS!' : '+10 MP earned'}
+                      <span className={`font-black ${isMilestone ? 'text-2xl text-white drop-shadow-lg' : 'text-lg text-black'}`}>
+                        {isMilestone ? `+${currentMPReward} MP BONUS!` : '+10 MP earned'}
                       </span>
-                      {streakCount === 7 && (
-                        <p className="text-xs text-white/90 font-semibold mt-0.5">7-Day Milestone Unlocked!</p>
+                      {isMilestone && (
+                        <p className="text-xs text-white/90 font-semibold mt-0.5">{streakCount}-Day Milestone Unlocked!</p>
                       )}
                     </div>
                   </motion.div>
