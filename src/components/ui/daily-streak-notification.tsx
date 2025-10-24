@@ -226,9 +226,9 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
       };
     } else if (streakCount === 14) {
       return {
-        reward: "50% off first month",
-        message: "You've proven consistency — get rewarded with Premium discount.",
-        emoji: "🎁"
+        reward: "+200 MP",
+        message: "You've proven consistency — keep building momentum!",
+        emoji: "💎"
       };
     } else if (streakCount === 30) {
       return {
