@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,16 +28,10 @@ import {
 import { supabase } from '@/integrations/supabase/client';
 import { 
   Trophy, 
-  Flame, 
-  Award, 
-  Target, 
   Search, 
   ChevronUp, 
   ChevronDown,
-  Crown,
-  Zap,
-  BookOpen,
-  ExternalLink
+  Crown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -74,7 +68,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
 
   useEffect(() => {
     loadLeaderboardData();
-    const interval = setInterval(loadLeaderboardData, 60000); // Update every minute
+    const interval = setInterval(loadLeaderboardData, 60000);
     return () => clearInterval(interval);
   }, [filterType, userId]);
 
@@ -83,7 +77,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
   }, [entries, searchQuery, sortColumn, sortDirection]);
 
   useEffect(() => {
-    // Auto-scroll to current user's row when data loads
     if (currentUserRowRef.current && !isLoading) {
       const rowRect = currentUserRowRef.current.getBoundingClientRect();
       const tableContainer = currentUserRowRef.current.closest('.overflow-auto');
@@ -103,11 +96,9 @@ export function LeaderboardTable({ userId }: { userId: string }) {
     try {
       setIsLoading(true);
       
-      // Determine date filter
       const now = new Date();
       const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
       
-      // Get user points
       const { data: userPoints, error: pointsError } = await supabase
         .from('user_points')
         .select('user_id, total_points')
@@ -123,13 +114,11 @@ export function LeaderboardTable({ userId }: { userId: string }) {
 
       const userIds = userPoints.map(u => u.user_id);
 
-      // Get profile data
       const { data: profiles } = await supabase
         .from('profiles')
         .select('id, full_name, username, email')
         .in('id', userIds);
 
-      // Get streaks
       const streaksPromises = userIds.map(async (id) => {
         try {
           const { data } = await supabase.rpc('get_user_streak', { user_uuid: id });
@@ -141,7 +130,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
       const streaksData = await Promise.all(streaksPromises);
       const streaksMap = new Map(streaksData.map(s => [s.user_id, s.streak]));
 
-      // Get badges (achievements)
       const { data: achievements } = await supabase
         .from('user_achievements')
         .select('user_id')
@@ -152,7 +140,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         badgesMap.set(a.user_id, (badgesMap.get(a.user_id) || 0) + 1);
       });
 
-      // Get quizzes completed (filter by week if needed)
       let quizzesQuery = supabase
         .from('quizzes')
         .select('user_id')
@@ -170,7 +157,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         quizzesMap.set(q.user_id, (quizzesMap.get(q.user_id) || 0) + 1);
       });
 
-      // Get activity data for additional details
       const { data: activities } = await supabase
         .from('user_activities')
         .select('user_id, created_at, metadata')
@@ -193,7 +179,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         }
       });
 
-      // Get mocks completed
       const { data: exams } = await supabase
         .from('exams')
         .select('user_id')
@@ -205,7 +190,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         mocksMap.set(e.user_id, (mocksMap.get(e.user_id) || 0) + 1);
       });
 
-      // Build leaderboard entries
       const leaderboardEntries: LeaderboardEntry[] = userPoints.map((up, index) => {
         const profile = profiles?.find(p => p.id === up.user_id);
         const displayName = profile?.full_name || profile?.username || profile?.email?.split('@')[0] || 'Anonymous User';
@@ -227,7 +211,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
 
       setEntries(leaderboardEntries);
       
-      // Set current user stats
       const currentUserStats = leaderboardEntries.find(e => e.isCurrentUser);
       setMyStats(currentUserStats || null);
       
@@ -242,14 +225,12 @@ export function LeaderboardTable({ userId }: { userId: string }) {
   const applyFiltersAndSort = () => {
     let filtered = [...entries];
 
-    // Apply search filter
     if (searchQuery.trim()) {
       filtered = filtered.filter(e => 
         e.username.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // Apply sorting
     filtered.sort((a, b) => {
       const aVal = a[sortColumn];
       const bVal = b[sortColumn];
@@ -257,7 +238,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
       return (aVal - bVal) * multiplier;
     });
 
-    // Recalculate ranks after filtering
     filtered = filtered.map((entry, index) => ({ ...entry, rank: index + 1 }));
 
     setFilteredEntries(filtered);
@@ -287,41 +267,40 @@ export function LeaderboardTable({ userId }: { userId: string }) {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 60) return `${diffMins} min${diffMins !== 1 ? 's' : ''} ago`;
-    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
-    return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
   };
 
   const SortIcon = ({ column }: { column: SortColumn }) => {
     if (sortColumn !== column) return null;
     return sortDirection === 'asc' ? 
-      <ChevronUp className="h-4 w-4 inline ml-1" /> : 
-      <ChevronDown className="h-4 w-4 inline ml-1" />;
+      <ChevronUp className="h-3.5 w-3.5 inline ml-1" /> : 
+      <ChevronDown className="h-3.5 w-3.5 inline ml-1" />;
   };
 
   const getRankBadge = (rank: number) => {
-    if (rank === 1) return <Crown className="h-5 w-5 text-yellow-500" />;
-    if (rank === 2) return <Trophy className="h-5 w-5 text-slate-400" />;
-    if (rank === 3) return <Award className="h-5 w-5 text-amber-600" />;
-    return <span className="text-muted-foreground font-semibold">{rank}</span>;
+    if (rank === 1) return <Crown className="h-5 w-5 text-amber-500" />;
+    if (rank === 2) return <div className="w-5 h-5 rounded-full bg-slate-300 dark:bg-slate-600 flex items-center justify-center text-xs font-bold">2</div>;
+    if (rank === 3) return <div className="w-5 h-5 rounded-full bg-amber-700/60 flex items-center justify-center text-xs font-bold text-white">3</div>;
+    return <span className="text-sm text-muted-foreground font-medium">{rank}</span>;
   };
 
   if (isLoading) {
     return (
-      <Card className="w-full">
-        <CardHeader>
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-4 w-96 mt-2" />
-        </CardHeader>
-        <CardContent>
-          <Skeleton className="h-32 w-full mb-4" />
-          <div className="space-y-3">
-            {[...Array(10)].map((_, i) => (
-              <Skeleton key={i} className="h-16 w-full" />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+      >
+        <Skeleton className="h-10 w-64 mb-4" />
+        <Skeleton className="h-32 w-full mb-6" />
+        <div className="space-y-3">
+          {[...Array(8)].map((_, i) => (
+            <Skeleton key={i} className="h-14 w-full" />
+          ))}
+        </div>
+      </motion.div>
     );
   }
 
@@ -331,123 +310,114 @@ export function LeaderboardTable({ userId }: { userId: string }) {
   return (
     <>
       <TooltipProvider>
-        <Card className="w-full theme-transition">
-          <CardHeader className="space-y-4">
-            <div>
-              <CardTitle className="text-3xl font-bold flex items-center gap-2">
-                <Trophy className="h-8 w-8 text-primary" />
-                This Week's Top Students
-              </CardTitle>
-              <CardDescription className="text-base mt-2">
-                Track your progress, compare with others, and keep your streak going strong.
-              </CardDescription>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+        >
+          {/* Animated background elements */}
+          <motion.div 
+            className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                <Trophy className="h-8 w-8 text-[#0EA5E9]" />
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#0EA5E9] to-[#0EA5E9]/70 bg-clip-text text-transparent">
+                  Leaderboard
+                </h2>
+              </div>
+              <p className="text-muted-foreground">
+                Track your progress and compete with top students
+              </p>
             </div>
 
             {/* My Stats Card */}
             {myStats && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mb-6 p-6 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-[#0EA5E9]/20"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    <Target className="h-5 w-5 text-primary" />
-                    My Stats
-                  </h3>
-                  <Badge variant="secondary" className="text-sm">
-                    Rank #{myStats.rank}
+                  <h3 className="text-lg font-semibold text-foreground">Your Stats</h3>
+                  <Badge className="bg-[#0EA5E9] text-white">
+                    #{myStats.rank}
                   </Badge>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex flex-col items-center p-3 rounded-lg bg-background/50 cursor-help">
-                        <Trophy className="h-5 w-5 text-amber-500 mb-1" />
-                        <span className="text-2xl font-bold text-foreground">{myStats.rank}</span>
-                        <span className="text-xs text-muted-foreground">Rank</span>
+                      <div className="text-center p-3 rounded-xl bg-white/80 dark:bg-gray-900/50 cursor-help">
+                        <div className="text-2xl font-bold text-[#0EA5E9]">{myStats.mp_points}</div>
+                        <div className="text-xs text-muted-foreground mt-1">MP</div>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent>Your current position on the leaderboard</TooltipContent>
-                  </Tooltip>
-
-                  <div className="flex flex-col items-center p-3 rounded-lg bg-background/50">
-                    <span className="text-xs text-muted-foreground mb-1">Username</span>
-                    <span className="text-sm font-semibold text-foreground truncate w-full text-center">
-                      {myStats.username}
-                    </span>
-                  </div>
-
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="flex flex-col items-center p-3 rounded-lg bg-background/50 cursor-help">
-                        <Zap className="h-5 w-5 text-primary mb-1" />
-                        <span className="text-2xl font-bold text-foreground">{myStats.mp_points}</span>
-                        <span className="text-xs text-muted-foreground">MP</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      Earn MP by completing quizzes, maintaining streaks, and finishing mocks.
-                    </TooltipContent>
+                    <TooltipContent>Mentiora Points earned</TooltipContent>
                   </Tooltip>
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex flex-col items-center p-3 rounded-lg bg-background/50 cursor-help">
-                        <Flame className="h-5 w-5 text-orange-500 mb-1" />
-                        <span className="text-2xl font-bold text-foreground">{myStats.current_streak}</span>
-                        <span className="text-xs text-muted-foreground">Streak</span>
+                      <div className="text-center p-3 rounded-xl bg-white/80 dark:bg-gray-900/50 cursor-help">
+                        <div className="text-2xl font-bold text-orange-500">{myStats.current_streak}</div>
+                        <div className="text-xs text-muted-foreground mt-1">Day Streak</div>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent>
-                      Consecutive days studied. Hit day 7 for a special reward.
-                    </TooltipContent>
+                    <TooltipContent>Consecutive days studied</TooltipContent>
                   </Tooltip>
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex flex-col items-center p-3 rounded-lg bg-background/50 cursor-help">
-                        <Award className="h-5 w-5 text-green-500 mb-1" />
-                        <span className="text-2xl font-bold text-foreground">{myStats.badges_earned}</span>
-                        <span className="text-xs text-muted-foreground">Badges</span>
+                      <div className="text-center p-3 rounded-xl bg-white/80 dark:bg-gray-900/50 cursor-help">
+                        <div className="text-2xl font-bold text-green-600">{myStats.badges_earned}</div>
+                        <div className="text-xs text-muted-foreground mt-1">Badges</div>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent>Total badges earned for achievements</TooltipContent>
+                    <TooltipContent>Achievements earned</TooltipContent>
                   </Tooltip>
 
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex flex-col items-center p-3 rounded-lg bg-background/50 cursor-help">
-                        <BookOpen className="h-5 w-5 text-blue-500 mb-1" />
-                        <span className="text-2xl font-bold text-foreground">{myStats.quizzes_completed}</span>
-                        <span className="text-xs text-muted-foreground">Quizzes</span>
+                      <div className="text-center p-3 rounded-xl bg-white/80 dark:bg-gray-900/50 cursor-help">
+                        <div className="text-2xl font-bold text-blue-600">{myStats.quizzes_completed}</div>
+                        <div className="text-xs text-muted-foreground mt-1">Quizzes</div>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent>Total quizzes finished this week</TooltipContent>
+                    <TooltipContent>Quizzes completed this week</TooltipContent>
                   </Tooltip>
                 </div>
 
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <p className="text-sm text-muted-foreground">
-                    {quizzesUntilMilestone > 0 ? (
-                      <>You're close to your next milestone — complete <span className="font-semibold text-primary">{quizzesUntilMilestone}</span> more quiz{quizzesUntilMilestone !== 1 ? 'es' : ''} today.</>
-                    ) : (
-                      <>Great work! You've hit your milestone. Keep going!</>
-                    )}
+                {quizzesUntilMilestone > 0 && (
+                  <p className="text-sm text-muted-foreground mt-4 text-center">
+                    Complete <span className="font-semibold text-[#0EA5E9]">{quizzesUntilMilestone}</span> more quiz{quizzesUntilMilestone !== 1 ? 'es' : ''} to reach your next milestone
                   </p>
-                </div>
+                )}
               </motion.div>
             )}
 
             {/* Controls */}
-            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
+            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-6">
               <div className="flex gap-2">
                 <Button
                   variant={filterType === 'week' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterType('week')}
-                  className="rounded-full"
+                  className={cn(
+                    "rounded-full transition-all",
+                    filterType === 'week' && "bg-[#0EA5E9] hover:bg-[#0EA5E9]/90"
+                  )}
                 >
                   This Week
                 </Button>
@@ -455,7 +425,10 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                   variant={filterType === 'alltime' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterType('alltime')}
-                  className="rounded-full"
+                  className={cn(
+                    "rounded-full transition-all",
+                    filterType === 'alltime' && "bg-[#0EA5E9] hover:bg-[#0EA5E9]/90"
+                  )}
                 >
                   All Time
                 </Button>
@@ -467,29 +440,28 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                   placeholder="Search username..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 rounded-xl"
                 />
               </div>
             </div>
-          </CardHeader>
 
-          <CardContent>
+            {/* Table */}
             {filteredEntries.length === 0 ? (
-              <div className="text-center py-12">
-                <Trophy className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-                <p className="text-lg font-medium text-muted-foreground">
-                  {searchQuery ? 'No matches found. Try a different name or clear filters.' : 'Your leaderboard will appear once you complete your first quiz.'}
+              <div className="text-center py-16">
+                <Trophy className="h-16 w-16 text-muted-foreground/20 mx-auto mb-4" />
+                <p className="text-lg text-muted-foreground">
+                  {searchQuery ? 'No matches found' : 'Complete your first quiz to appear on the leaderboard'}
                 </p>
               </div>
             ) : (
-              <div className="overflow-auto max-h-[600px] rounded-lg border">
+              <div className="overflow-auto max-h-[500px] rounded-2xl border border-[#0EA5E9]/20 bg-white/40 dark:bg-gray-900/40 backdrop-blur-sm">
                 <Table>
-                  <TableHeader className="sticky top-0 bg-background z-10">
-                    <TableRow className="hover:bg-transparent">
-                      <TableHead className="w-20">Rank</TableHead>
-                      <TableHead>Username</TableHead>
+                  <TableHeader className="sticky top-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-10">
+                    <TableRow className="hover:bg-transparent border-b border-[#0EA5E9]/10">
+                      <TableHead className="w-16 font-semibold">Rank</TableHead>
+                      <TableHead className="font-semibold">Username</TableHead>
                       <TableHead 
-                        className="cursor-pointer hover:text-foreground transition-colors"
+                        className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold"
                         onClick={() => handleSort('mp_points')}
                       >
                         <Tooltip>
@@ -498,49 +470,34 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                               MP <SortIcon column="mp_points" />
                             </span>
                           </TooltipTrigger>
-                          <TooltipContent>
-                            Earn MP by completing quizzes, maintaining streaks, and finishing mocks.
-                          </TooltipContent>
+                          <TooltipContent>Sort by Mentiora Points</TooltipContent>
                         </Tooltip>
                       </TableHead>
                       <TableHead 
-                        className="cursor-pointer hover:text-foreground transition-colors"
+                        className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold"
                         onClick={() => handleSort('current_streak')}
                       >
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <span className="flex items-center">
-                              Current Streak <SortIcon column="current_streak" />
+                              Streak <SortIcon column="current_streak" />
                             </span>
                           </TooltipTrigger>
-                          <TooltipContent>
-                            Consecutive days studied. Hit day 7 for a special reward.
-                          </TooltipContent>
+                          <TooltipContent>Sort by streak days</TooltipContent>
                         </Tooltip>
                       </TableHead>
-                      <TableHead>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <span>Badges Earned</span>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            Show recent badge names or achievements
-                          </TooltipContent>
-                        </Tooltip>
-                      </TableHead>
+                      <TableHead className="font-semibold">Badges</TableHead>
                       <TableHead 
-                        className="cursor-pointer hover:text-foreground transition-colors"
+                        className="cursor-pointer hover:text-[#0EA5E9] transition-colors font-semibold"
                         onClick={() => handleSort('quizzes_completed')}
                       >
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <span className="flex items-center">
-                              Quizzes Completed <SortIcon column="quizzes_completed" />
+                              Quizzes <SortIcon column="quizzes_completed" />
                             </span>
                           </TooltipTrigger>
-                          <TooltipContent>
-                            Total quizzes finished this week
-                          </TooltipContent>
+                          <TooltipContent>Sort by quizzes completed</TooltipContent>
                         </Tooltip>
                       </TableHead>
                     </TableRow>
@@ -557,8 +514,8 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                           exit={{ opacity: 0 }}
                           onClick={() => handleRowClick(entry)}
                           className={cn(
-                            "cursor-pointer transition-all duration-200 hover:bg-muted/50 group",
-                            entry.isCurrentUser && "bg-primary/10 hover:bg-primary/15 border-l-4 border-l-primary"
+                            "cursor-pointer transition-all duration-200 hover:bg-[#0EA5E9]/5 border-b border-[#0EA5E9]/5",
+                            entry.isCurrentUser && "bg-[#0EA5E9]/10 hover:bg-[#0EA5E9]/15 border-l-4 border-l-[#0EA5E9]"
                           )}
                         >
                           <TableCell className="font-medium">
@@ -566,43 +523,31 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                               {getRankBadge(entry.rank)}
                             </div>
                           </TableCell>
-                          <TableCell className="font-semibold">
+                          <TableCell className="font-medium">
                             {entry.username}
                             {entry.isCurrentUser && (
-                              <Badge variant="secondary" className="ml-2 text-xs">You</Badge>
+                              <Badge variant="secondary" className="ml-2 text-xs bg-[#0EA5E9]/20 text-[#0EA5E9]">You</Badge>
                             )}
                           </TableCell>
                           <TableCell>
-                            <div className="flex items-center gap-2">
-                              <Zap className="h-4 w-4 text-primary" />
-                              <span className="font-bold text-primary">{entry.mp_points}</span>
-                            </div>
+                            <span className="font-semibold text-[#0EA5E9]">{entry.mp_points}</span>
                           </TableCell>
                           <TableCell>
                             {entry.current_streak > 0 ? (
-                              <div className="flex items-center gap-2">
-                                <Flame className="h-4 w-4 text-orange-500" />
-                                <span className="font-semibold">{entry.current_streak} day{entry.current_streak !== 1 ? 's' : ''}</span>
-                              </div>
+                              <span className="font-medium">{entry.current_streak}</span>
                             ) : (
                               <span className="text-muted-foreground">—</span>
                             )}
                           </TableCell>
                           <TableCell>
                             {entry.badges_earned > 0 ? (
-                              <div className="flex items-center gap-2">
-                                <Award className="h-4 w-4 text-green-500" />
-                                <span className="font-semibold">{entry.badges_earned}</span>
-                              </div>
+                              <span className="font-medium">{entry.badges_earned}</span>
                             ) : (
                               <span className="text-muted-foreground">—</span>
                             )}
                           </TableCell>
                           <TableCell>
-                            <div className="flex items-center gap-2">
-                              <BookOpen className="h-4 w-4 text-blue-500" />
-                              <span className="font-semibold">{entry.quizzes_completed}</span>
-                            </div>
+                            <span className="font-medium">{entry.quizzes_completed}</span>
                           </TableCell>
                         </motion.tr>
                       ))}
@@ -613,20 +558,22 @@ export function LeaderboardTable({ userId }: { userId: string }) {
             )}
 
             <p className="text-xs text-muted-foreground text-center mt-4">
-              Ranks update every hour based on MP.
+              Ranks update every hour • {filteredEntries.length} student{filteredEntries.length !== 1 ? 's' : ''}
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </motion.div>
       </TooltipProvider>
 
       {/* User Details Drawer */}
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-        <SheetContent>
+        <SheetContent className="bg-white dark:bg-gray-900">
           {selectedUser && (
             <>
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2">
-                  {getRankBadge(selectedUser.rank)}
+                <SheetTitle className="flex items-center gap-3">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#0EA5E9]/10">
+                    {getRankBadge(selectedUser.rank)}
+                  </div>
                   <span>{selectedUser.username}</span>
                 </SheetTitle>
                 <SheetDescription>
@@ -634,45 +581,43 @@ export function LeaderboardTable({ userId }: { userId: string }) {
                 </SheetDescription>
               </SheetHeader>
 
-              <div className="mt-6 space-y-6">
+              <div className="mt-8 space-y-4">
+                <div className="p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/10 to-[#0EA5E9]/5 border border-[#0EA5E9]/20">
+                  <p className="text-sm text-muted-foreground mb-1">MP Points</p>
+                  <p className="text-3xl font-bold text-[#0EA5E9]">{selectedUser.mp_points}</p>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <p className="text-sm text-muted-foreground mb-1">MP Points</p>
-                    <p className="text-2xl font-bold text-primary">{selectedUser.mp_points}</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <p className="text-sm text-muted-foreground mb-1">Current Streak</p>
+                  <div className="p-4 rounded-xl bg-muted/50">
+                    <p className="text-sm text-muted-foreground mb-1">Streak</p>
                     <p className="text-2xl font-bold">{selectedUser.current_streak} days</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <p className="text-sm text-muted-foreground mb-1">Badges Earned</p>
+                  <div className="p-4 rounded-xl bg-muted/50">
+                    <p className="text-sm text-muted-foreground mb-1">Badges</p>
                     <p className="text-2xl font-bold">{selectedUser.badges_earned}</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <p className="text-sm text-muted-foreground mb-1">Quizzes Completed</p>
-                    <p className="text-2xl font-bold">{selectedUser.quizzes_completed}</p>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="p-4 rounded-lg border">
+                <div className="p-4 rounded-xl bg-muted/50">
+                  <p className="text-sm text-muted-foreground mb-1">Quizzes Completed</p>
+                  <p className="text-2xl font-bold">{selectedUser.quizzes_completed}</p>
+                </div>
+
+                {selectedUser.top_subject && (
+                  <div className="p-4 rounded-xl border">
                     <p className="text-sm font-medium text-muted-foreground">Top Subject</p>
-                    <p className="text-lg font-semibold mt-1">
-                      {selectedUser.top_subject || 'No data yet'}
-                    </p>
+                    <p className="text-lg font-semibold mt-1">{selectedUser.top_subject}</p>
                   </div>
+                )}
 
-                  <div className="p-4 rounded-lg border">
-                    <p className="text-sm font-medium text-muted-foreground">Mocks Completed</p>
-                    <p className="text-lg font-semibold mt-1">{selectedUser.mocks_completed || 0}</p>
-                  </div>
+                <div className="p-4 rounded-xl border">
+                  <p className="text-sm font-medium text-muted-foreground">Mocks Completed</p>
+                  <p className="text-lg font-semibold mt-1">{selectedUser.mocks_completed || 0}</p>
+                </div>
 
-                  <div className="p-4 rounded-lg border">
-                    <p className="text-sm font-medium text-muted-foreground">Last Active</p>
-                    <p className="text-lg font-semibold mt-1">
-                      {formatLastActive(selectedUser.last_active)}
-                    </p>
-                  </div>
+                <div className="p-4 rounded-xl border">
+                  <p className="text-sm font-medium text-muted-foreground">Last Active</p>
+                  <p className="text-lg font-semibold mt-1">{formatLastActive(selectedUser.last_active)}</p>
                 </div>
               </div>
             </>
