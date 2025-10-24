@@ -77,7 +77,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
       };
     } else if (streakCount === 30) {
       return {
-        reward: "Mentiora Elite Badge",
+        reward: "+400 MP",
         message: "Elite users get full access — unlock yours permanently.",
         emoji: "👑"
       };
@@ -191,45 +191,47 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                   </motion.p>
 
                   {/* Progress to next milestone with smooth animation */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                    className="mb-6 bg-gray-50 rounded-xl p-4"
-                  >
-                    <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
-                      {prevMilestone > 0 && <span className="font-semibold">{prevMilestone} days</span>}
-                      <span className="font-bold text-black ml-auto flex items-center gap-1.5">
-                        {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
-                        {nextMilestone === 7 ? (
-                          <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                            7 Day Premium Boost
-                          </span>
-                        ) : (
-                          <>
+                  {streakCount !== 30 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                      className="mb-6 bg-gray-50 rounded-xl p-4"
+                    >
+                      <div className="flex justify-between items-center text-sm text-gray-500 mb-3 px-1">
+                        {prevMilestone > 0 && <span className="font-semibold">{prevMilestone} days</span>}
+                        <span className="font-bold text-black ml-auto flex items-center gap-1.5">
+                          {daysToMilestone} {daysToMilestone === 1 ? 'day' : 'days'} until 
+                          {nextMilestone === 7 ? (
                             <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
-                              {nextMilestoneMPReward} MP
+                              7 Day Premium Boost
                             </span>
-                            <span className="text-base">🏆</span>
-                          </>
-                        )}
-                      </span>
-                    </div>
-                    
-                    <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ 
-                          duration: 1.5, 
-                          ease: [0.16, 1, 0.3, 1],
-                          delay: 0.7
-                        }}
-                        className="absolute inset-y-0 left-0 rounded-full shadow-sm"
-                        style={{ backgroundColor: '#0BA5E9' }}
-                      />
-                    </div>
-                  </motion.div>
+                          ) : (
+                            <>
+                              <span className="text-lg font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 bg-clip-text text-transparent">
+                                {nextMilestoneMPReward} MP
+                              </span>
+                              <span className="text-base">🏆</span>
+                            </>
+                          )}
+                        </span>
+                      </div>
+                      
+                      <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${progress}%` }}
+                          transition={{ 
+                            duration: 1.5, 
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: 0.7
+                          }}
+                          className="absolute inset-y-0 left-0 rounded-full shadow-sm"
+                          style={{ backgroundColor: '#0BA5E9' }}
+                        />
+                      </div>
+                    </motion.div>
+                  )}
 
                   {/* Reward capsule with bounce animation */}
                   <motion.div
@@ -297,6 +299,17 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                         style={{ backgroundColor: '#0BA5E9' }}
                       >
                         Claim 7 Day Boost
+                      </Button>
+                    ) : streakCount === 30 ? (
+                      <Button
+                        onClick={() => {
+                          onClose();
+                          navigate('/pricing');
+                        }}
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
+                        style={{ backgroundColor: '#0BA5E9' }}
+                      >
+                        Get Premium Now
                       </Button>
                     ) : (
                       <Button
