@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, Flame, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,38 +10,9 @@ interface DailyStreakNotificationProps {
   streakCount: number;
 }
 
-// Count-up animation hook
-const useCountUp = (end: number, duration: number = 1000) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      
-      setCount(Math.floor(progress * end));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, [end, duration]);
-
-  return count;
-};
-
 
 export function DailyStreakNotification({ isVisible, onClose, streakCount }: DailyStreakNotificationProps) {
   const [isMinimized, setIsMinimized] = useState(false);
-  const [startCountUp, setStartCountUp] = useState(false);
-  const displayCount = useCountUp(startCountUp ? streakCount : 0, 800);
 
   const milestones = [7, 14, 30, 60, 100, 180, 365];
   const isMilestone = milestones.includes(streakCount);
@@ -94,31 +65,24 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     if (isVisible) {
       playCelebrationSound();
       
-      // Start count-up animation after a brief delay
-      setTimeout(() => setStartCountUp(true), 300);
-      
       // Auto-minimize after 4 seconds
       const timer = setTimeout(() => {
         setIsMinimized(true);
       }, 4000);
       
-      return () => {
-        clearTimeout(timer);
-        setStartCountUp(false);
-      };
+      return () => clearTimeout(timer);
     } else {
       setIsMinimized(false);
-      setStartCountUp(false);
     }
   }, [isVisible]);
 
   const getMotivationalMessage = () => {
     const messages = [
-      "Consistency compounds. You're building momentum.",
-      "Each day you show up, your future self thanks you.",
-      "You're proving what's possible — keep going.",
-      "Every login brings you closer to mastery.",
-      "Your dedication is turning into real progress.",
+      "Every day you show up, you're getting closer to mastery.",
+      "Progress compounds. Keep showing up.",
+      "Another day closer to your best results.",
+      "You're on fire — consistency is everything.",
+      "Your dedication is building something real.",
     ];
     
     // Use streak count to rotate through messages
@@ -148,21 +112,8 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
               className="fixed top-4 right-4 z-50 cursor-pointer group"
               onClick={handleMinimizedClick}
             >
-              <div 
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 bg-white border border-gray-200 relative overflow-hidden"
-              >
-                <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Flame className="h-5 w-5 text-orange-500" />
-                </motion.div>
+              <div className="flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 bg-white border border-gray-200">
+                <Flame className="h-5 w-5 text-orange-500" />
                 <span className="font-bold text-sm text-black">{streakCount}</span>
               </div>
             </motion.div>
@@ -176,261 +127,149 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
               onClick={handleFullClose}
             >
               <motion.div
-                initial={{ y: 60, opacity: 0, scale: 0.95 }}
+                initial={{ y: 40, opacity: 0 }}
                 animate={{ 
                   y: 0, 
                   opacity: 1,
-                  scale: 1
                 }}
-                exit={{ y: 40, opacity: 0, scale: 0.98 }}
+                exit={{ y: 40, opacity: 0 }}
                 transition={{ 
-                  type: "spring",
-                  damping: 25,
-                  stiffness: 300,
-                  duration: 0.6
+                  duration: 0.6, 
+                  ease: [0.16, 1, 0.3, 1]
                 }}
                 onClick={(e) => e.stopPropagation()}
                 className="relative w-full max-w-lg"
               >
-                {/* Premium floating card with gradient background */}
-                <Card 
-                  className="relative overflow-hidden border-0"
+                {/* Mentiora-style card - clean white with 24px radius */}
+                <Card className="relative overflow-hidden bg-white border border-gray-100"
                   style={{ 
                     borderRadius: '24px',
-                    background: 'linear-gradient(180deg, #FFFFFF 0%, #E9F0FF 100%)',
-                    boxShadow: '0 20px 60px rgba(74, 108, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.12)'
                   }}
                 >
                   {/* Close button */}
                   <button
                     onClick={handleFullClose}
-                    className="absolute top-5 right-5 z-10 p-2 rounded-lg hover:bg-white/50 backdrop-blur-sm transition-colors"
+                    className="absolute top-5 right-5 z-10 p-2 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    <X className="h-5 w-5 text-gray-500" />
+                    <X className="h-5 w-5 text-gray-400" />
                   </button>
 
                   <CardContent className="relative p-12 text-center">
-                    {/* Decorative glow effect */}
-                    <div 
-                      className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 opacity-20 blur-3xl pointer-events-none"
-                      style={{
-                        background: 'radial-gradient(circle, #4A6CFF 0%, transparent 70%)',
-                      }}
-                    />
-                    {/* Premium pulsing flame icon */}
+                    {/* Clean vector flame icon */}
                     <motion.div
-                      initial={{ scale: 0.5, opacity: 0 }}
+                      initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ 
                         scale: 1, 
                         opacity: 1,
                       }}
                       transition={{
                         type: "spring",
-                        damping: 15,
+                        damping: 20,
                         stiffness: 200,
                         delay: 0.1
                       }}
-                      className="mb-8 inline-flex items-center justify-center relative"
+                      className="mb-6 inline-flex items-center justify-center"
                     >
-                      {/* Glowing halo */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-full opacity-40 blur-2xl"
-                        style={{ 
-                          background: 'radial-gradient(circle, #FF6B35 0%, #FFA500 50%, transparent 70%)',
-                        }}
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.4, 0.6, 0.4],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-                      
-                      {/* Flame icon with pulse */}
-                      <motion.div 
-                        className="relative p-8 rounded-full"
-                        style={{ 
-                          background: 'linear-gradient(135deg, rgba(74, 108, 255, 0.1), rgba(165, 191, 255, 0.1))',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                        animate={{
-                          scale: [1, 1.05, 1],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        <Flame 
-                          className="h-24 w-24 relative z-10" 
-                          strokeWidth={1.5}
-                          style={{
-                            filter: 'drop-shadow(0 4px 12px rgba(255, 107, 53, 0.4))'
+                      <div className="relative">
+                        {/* Subtle glow effect */}
+                        <div 
+                          className="absolute inset-0 blur-3xl rounded-full opacity-30"
+                          style={{ 
+                            background: 'linear-gradient(135deg, #4A6CFF, #A5BFFF)',
+                            transform: 'scale(1.5)'
                           }}
-                          fill="url(#flameGradient)"
-                          stroke="url(#flameGradient)"
                         />
-                        <svg width="0" height="0">
-                          <defs>
-                            <linearGradient id="flameGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                              <stop offset="0%" stopColor="#FF6B35" />
-                              <stop offset="50%" stopColor="#FFA500" />
-                              <stop offset="100%" stopColor="#FFD700" />
-                            </linearGradient>
-                          </defs>
-                        </svg>
-                      </motion.div>
+                        <div 
+                          className="relative p-6 rounded-full"
+                          style={{ 
+                            background: 'linear-gradient(135deg, #4A6CFF15, #A5BFFF15)',
+                          }}
+                        >
+                          <Flame className="h-20 w-20 text-orange-500" strokeWidth={2} />
+                        </div>
+                      </div>
                     </motion.div>
 
-                    {/* Glowing gradient headline with count-up */}
-                    <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
+                    {/* Gradient streak headline */}
+                    <motion.h1
+                      initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.25, duration: 0.5 }}
-                      className="mb-4 relative"
+                      transition={{ delay: 0.2, duration: 0.5 }}
+                      className="text-6xl font-black mb-3 tracking-tight"
+                      style={{
+                        background: 'linear-gradient(135deg, #4A6CFF, #A5BFFF)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
                     >
-                      <h1
-                        className="text-7xl font-black tracking-tight relative inline-block"
-                        style={{
-                          background: 'linear-gradient(135deg, #4A6CFF 0%, #1E3AFF 100%)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          filter: 'drop-shadow(0 4px 20px rgba(74, 108, 255, 0.3))',
-                        }}
-                      >
-                        🔥 {displayCount}-Day Streak!
-                      </h1>
-                    </motion.div>
+                      {streakCount}-Day Streak!
+                    </motion.h1>
 
                     {/* Motivational subheading */}
                     <motion.p
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.35, duration: 0.5 }}
-                      className="text-gray-700 text-xl font-medium mb-10 max-w-md mx-auto leading-relaxed"
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      className="text-gray-600 text-lg font-medium mb-10 max-w-md mx-auto leading-relaxed"
                     >
                       {getMotivationalMessage()}
                     </motion.p>
 
-                    {/* Animated glowing progress bar */}
+                    {/* Progress bar section */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.45, duration: 0.5 }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
                       className="mb-8"
                     >
-                      <div className="flex justify-between items-center text-sm font-semibold text-gray-600 mb-3">
+                      <div className="flex justify-between items-center text-xs font-semibold text-gray-500 mb-3">
                         <span>{prevMilestone} days</span>
                         <span className="text-gray-800">
                           {daysToMilestone} days until next milestone
                         </span>
                       </div>
                       
-                      <div 
-                        className="relative h-3 rounded-full overflow-hidden"
-                        style={{
-                          background: 'linear-gradient(90deg, rgba(74, 108, 255, 0.1) 0%, rgba(165, 191, 255, 0.1) 100%)',
-                        }}
-                      >
+                      <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${progress}%` }}
                           transition={{ 
-                            duration: 1.5, 
+                            duration: 1.2, 
                             ease: [0.16, 1, 0.3, 1],
-                            delay: 0.7
+                            delay: 0.6
                           }}
-                          className="absolute inset-y-0 left-0 rounded-full relative"
+                          className="absolute inset-y-0 left-0 rounded-full"
                           style={{ 
-                            background: 'linear-gradient(90deg, #4A6CFF 0%, #1E3AFF 100%)',
-                            boxShadow: '0 0 20px rgba(74, 108, 255, 0.5)',
+                            background: 'linear-gradient(90deg, #4A6CFF, #A5BFFF)',
                           }}
-                        >
-                          {/* Shimmer effect */}
-                          <motion.div
-                            className="absolute inset-0 rounded-full"
-                            style={{
-                              background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
-                            }}
-                            animate={{
-                              x: ['-100%', '200%'],
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: "linear",
-                              delay: 1
-                            }}
-                          />
-                        </motion.div>
+                        />
                       </div>
                     </motion.div>
 
-                    {/* Glassmorphism stat card */}
+                    {/* Clean stat card */}
                     <motion.div
-                      initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                      animate={{ scale: 1, opacity: 1, y: 0 }}
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
                       transition={{ 
-                        type: "spring",
-                        damping: 20,
-                        stiffness: 200,
-                        delay: 0.55
+                        delay: 0.5,
+                        duration: 0.5
                       }}
-                      className="rounded-2xl p-6 mb-8 space-y-4 relative backdrop-blur-xl border"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.4)',
-                        borderColor: 'rgba(255, 255, 255, 0.8)',
-                        boxShadow: '0 8px 32px rgba(74, 108, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-                      }}
+                      className="bg-gray-50 rounded-2xl p-6 mb-8 space-y-4"
                     >
-                      {/* MP Earned with sparkle animation */}
+                      {/* MP Earned */}
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <motion.div 
-                            className="p-2 rounded-lg relative"
-                            style={{
-                              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.2))',
-                            }}
-                            animate={{
-                              scale: [1, 1.1, 1],
-                            }}
-                            transition={{
-                              duration: 1.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 1
-                            }}
-                          >
-                            <Sparkles className="h-5 w-5 text-yellow-600" />
-                            {/* Sparkle burst */}
-                            <motion.div
-                              className="absolute inset-0 rounded-lg"
-                              style={{
-                                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)',
-                              }}
-                              animate={{
-                                scale: [1, 1.5, 1],
-                                opacity: [0.5, 0, 0.5],
-                              }}
-                              transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeOut",
-                                delay: 1.2
-                              }}
-                            />
-                          </motion.div>
+                          <div className="p-2 rounded-lg bg-white">
+                            <Sparkles className="h-5 w-5 text-yellow-500" />
+                          </div>
                           <span className="font-bold text-black text-lg">+10 MP Earned</span>
                         </div>
                       </div>
 
                       {/* Current Streak */}
-                      <div className="flex items-center justify-between py-3 border-t border-white/40">
+                      <div className="flex items-center justify-between py-3 border-t border-gray-200">
                         <div className="flex items-center gap-3">
                           <Flame className="h-5 w-5 text-orange-500" />
                           <span className="font-medium text-gray-700">Current Streak</span>
@@ -439,54 +278,26 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                       </div>
 
                       {/* Next Reward */}
-                      <div className="flex items-center justify-between pt-3 border-t border-white/40">
-                        <span className="text-sm font-medium text-gray-600">Next Reward</span>
-                        <span 
-                          className="text-sm font-bold"
-                          style={{
-                            background: 'linear-gradient(135deg, #4A6CFF, #1E3AFF)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                          }}
-                        >
-                          {nextRewardMP} MP
-                        </span>
+                      <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+                        <span className="text-sm font-medium text-gray-500">Next Reward</span>
+                        <span className="text-sm font-bold text-gray-800">{nextRewardMP} MP</span>
                       </div>
                     </motion.div>
 
-                    {/* Premium gradient CTA button with glow and ripple */}
+                    {/* Mentiora blue CTA button */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.65, duration: 0.5 }}
+                      transition={{ delay: 0.7, duration: 0.5 }}
                     >
-                      <motion.button
+                      <Button
                         onClick={handleFullClose}
-                        className="w-full text-white font-bold py-5 text-lg rounded-xl flex items-center justify-center gap-2 relative overflow-hidden group"
-                        style={{ 
-                          background: 'linear-gradient(135deg, #4A6CFF 0%, #1E3AFF 100%)',
-                          boxShadow: '0 8px 24px rgba(74, 108, 255, 0.4)',
-                        }}
-                        whileHover={{ 
-                          scale: 1.02,
-                          boxShadow: '0 12px 32px rgba(74, 108, 255, 0.5)',
-                        }}
-                        whileTap={{ scale: 0.98 }}
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:opacity-90"
+                        style={{ backgroundColor: '#0BA5E9' }}
                       >
-                        {/* Hover ripple effect */}
-                        <motion.div
-                          className="absolute inset-0 rounded-xl"
-                          style={{
-                            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
-                          }}
-                          initial={{ scale: 0, opacity: 0 }}
-                          whileHover={{ scale: 2, opacity: [0, 1, 0] }}
-                          transition={{ duration: 0.6 }}
-                        />
-                        <span className="relative z-10">Keep the Momentum</span>
-                        <ArrowRight className="h-5 w-5 relative z-10" />
-                      </motion.button>
+                        Keep the Momentum
+                        <ArrowRight className="h-5 w-5" />
+                      </Button>
                     </motion.div>
                   </CardContent>
                 </Card>
