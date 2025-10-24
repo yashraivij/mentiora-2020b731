@@ -370,78 +370,24 @@ export function MedlySubjectsView({
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
-                    whileHover={{ scale: 1.03, y: -3 }}
-                    className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/30 dark:to-pink-950/30 rounded-2xl p-6 border-2 border-orange-400/40 dark:border-orange-500/50 shadow-md hover:shadow-xl hover:shadow-orange-500/25 hover:border-orange-500/60 transition-all duration-300"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F97316]/20 dark:border-[#F97316]/30 shadow-sm hover:shadow-md hover:shadow-[#F97316]/10 transition-all duration-300"
                   >
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-pink-500/5 pointer-events-none" />
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-3">
-                          <motion.div 
-                            className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg shadow-orange-500/30"
-                            whileHover={{ rotate: [0, -10, 10, 0] }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <Flame className="h-5 w-5 text-white" />
-                          </motion.div>
-                          <div>
-                            <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider block">Study Streak</span>
-                            <span className="text-xs text-[#94A3B8] dark:text-gray-400 font-medium">{currentStreak === 1 ? "day" : "days"} in a row</span>
-                          </div>
-                        </div>
-                        
-                        <motion.div 
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.4, type: "spring", bounce: 0.3 }}
-                          className="relative"
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 blur-xl opacity-20" />
-                          <div className="relative text-5xl font-black bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
-                            {currentStreak}
-                          </div>
-                        </motion.div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F97316]/20 to-[#F97316]/5">
+                        <Flame className="h-5 w-5 text-[#F97316]" />
                       </div>
-
-                      {/* Progress to next milestone */}
-                      {currentStreak < 7 && (
-                        <div className="space-y-2.5 pt-4 border-t border-orange-200/50 dark:border-orange-800/30">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <Trophy className="h-3.5 w-3.5 text-orange-500" />
-                              <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400">Next reward</span>
-                            </div>
-                            <span className="text-xs font-bold text-orange-600 dark:text-orange-400">500 MP in {7 - currentStreak} days</span>
-                          </div>
-                          <div className="relative h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-full overflow-hidden shadow-inner">
-                            <motion.div
-                              className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-full shadow-lg"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${(currentStreak / 7) * 100}%` }}
-                              transition={{ duration: 1, ease: "easeOut" }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-transparent rounded-full" />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Achievement badge for 7+ days */}
-                      {currentStreak >= 7 && (
-                        <motion.div 
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ type: "spring", bounce: 0.4 }}
-                          className="flex items-center gap-2 pt-4 border-t border-orange-200/50 dark:border-orange-800/30"
-                        >
-                          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 shadow-md">
-                            <Trophy className="h-4 w-4 text-white" />
-                            <span className="text-xs font-bold text-white">Streak Master Active!</span>
-                          </div>
-                        </motion.div>
-                      )}
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
                     </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
+                      {currentStreak || 0}
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">{currentStreak === 1 ? "day" : "days"} in a row</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
