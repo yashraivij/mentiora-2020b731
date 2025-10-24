@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Progress } from "@/components/ui/progress";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { curriculum } from "@/data/curriculum";
@@ -66,6 +67,7 @@ import {
   Maximize2,
   Minimize2,
   Menu,
+  MoreVertical,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -2450,34 +2452,6 @@ const Dashboard = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              data-feedback-fish
-              data-feedback-fish-userid={user?.email || ""}
-              className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
-            >
-              Feedback
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
-              className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
-            >
-              Discord
-            </Button>
-            {isPremium && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={openManageBilling}
-                className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
-              >
-                Manage Billing
-              </Button>
-            )}
-            
             {/* Streak Badge */}
             <HeaderStreakBadge 
               streakCount={currentStreak}
@@ -2488,14 +2462,52 @@ const Dashboard = () => {
             />
             
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleLogout}
-              className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
-            >
-              Sign Out
-            </Button>
+            
+            {/* Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
+                >
+                  <MoreVertical className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-background z-50">
+                <DropdownMenuItem
+                  data-feedback-fish
+                  data-feedback-fish-userid={user?.email || ""}
+                  className="cursor-pointer"
+                >
+                  Feedback
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
+                  className="cursor-pointer"
+                >
+                  Discord
+                </DropdownMenuItem>
+                {isPremium && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={openManageBilling}
+                      className="cursor-pointer"
+                    >
+                      Manage Billing
+                    </DropdownMenuItem>
+                  </>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="cursor-pointer text-red-600 focus:text-red-600"
+                >
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Menu Button */}
