@@ -32,6 +32,7 @@ import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ const Index = () => {
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showStreakTest, setShowStreakTest] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -66,6 +68,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <DailyStreakNotification 
+        isVisible={showStreakTest} 
+        onClose={() => setShowStreakTest(false)} 
+        streakCount={7} 
+      />
       {/* NAVIGATION */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -96,6 +103,13 @@ const Index = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Button 
+              onClick={() => setShowStreakTest(true)} 
+              variant="outline"
+              className="px-4 rounded-lg font-semibold border-2 border-orange-500 text-orange-500 hover:bg-orange-50"
+            >
+              🔥 Test 7-Day Streak
+            </Button>
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#0BA5E9' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
