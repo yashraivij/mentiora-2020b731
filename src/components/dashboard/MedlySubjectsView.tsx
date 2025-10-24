@@ -503,16 +503,6 @@ export function MedlySubjectsView({
                     <Sparkline data={subject.trend} className="text-[#0EA5E9] opacity-80" />
                   </div>
                   
-                  {/* Strong / Focus */}
-                  <div className="mb-5 space-y-2">
-                    <p className="text-xs text-[#64748B] dark:text-gray-400">
-                      <span className="font-bold text-[#16A34A]">✓ Strong:</span> <span className="text-[#475569] dark:text-gray-300">{subject.strong}</span>
-                    </p>
-                    <p className="text-xs text-[#64748B] dark:text-gray-400">
-                      <span className="font-bold text-[#EF4444]">⚠ Focus:</span> <span className="text-[#475569] dark:text-gray-300">{subject.focus}</span>
-                    </p>
-                  </div>
-                  
                   {/* Actions */}
                   <div className="flex flex-col gap-2 pt-2">
                     <Button 
