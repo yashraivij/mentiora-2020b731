@@ -215,7 +215,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
     if (streakCount === 3) {
       return {
         reward: "+100 MP",
-        message: "Keep it up — you're close to your first boost!",
+        message: "4 days until 24h Premium Boost!",
         emoji: "💎"
       };
     } else if (streakCount === 7) {
@@ -431,19 +431,40 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
                     </div>
                   </motion.div>
 
-                  {/* CTA button */}
+                  {/* CTA button(s) */}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7, duration: 0.5 }}
+                    className={streakCount === 7 ? "flex gap-3" : ""}
                   >
-                    <Button
-                      onClick={onClose}
-                      className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
-                      style={{ backgroundColor: '#0BA5E9' }}
-                    >
-                      Keep the Momentum
-                    </Button>
+                    {streakCount === 7 ? (
+                      <>
+                        <Button
+                          onClick={onClose}
+                          className="flex-1 text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
+                          style={{ backgroundColor: '#0BA5E9' }}
+                        >
+                          Claim 24h Boost
+                        </Button>
+                        <Button
+                          onClick={onClose}
+                          variant="outline"
+                          className="flex-1 font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl border-2"
+                          style={{ borderColor: '#0BA5E9', color: '#0BA5E9' }}
+                        >
+                          7 Days Free
+                        </Button>
+                      </>
+                    ) : (
+                      <Button
+                        onClick={onClose}
+                        className="w-full text-white font-bold py-4 text-lg rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl"
+                        style={{ backgroundColor: '#0BA5E9' }}
+                      >
+                        Keep the Momentum
+                      </Button>
+                    )}
                   </motion.div>
                 </CardContent>
               </Card>
