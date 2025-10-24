@@ -92,6 +92,7 @@ import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-noti
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { LeaderboardTable } from "@/components/dashboard/LeaderboardTable";
+import { DailyQuests } from "@/components/dashboard/DailyQuests";
 
 interface UserProgress {
   subjectId: string;
@@ -2625,6 +2626,11 @@ const Dashboard = () => {
                   onUpgradeToPremium={() => navigate('/pricing')}
                 />
                 
+                {/* Daily Quests Section */}
+                <div className="mt-12">
+                  <DailyQuests userId={user?.id || ''} />
+                </div>
+
                 {/* Leaderboard Section */}
                 <div className="mt-12">
                   <LeaderboardTable userId={user?.id || ''} />
