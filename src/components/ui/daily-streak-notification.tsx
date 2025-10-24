@@ -36,30 +36,35 @@ const useCountUp = (end: number, duration: number = 1000) => {
   return count;
 };
 
-// Confetti burst animation
+// Confetti burst animation - explosive burst from center
 const ConfettiBurst = () => {
-  const confetti = Array.from({ length: 40 }, (_, i) => ({
-    id: i,
-    x: 50 + (Math.random() - 0.5) * 40,
-    y: 50,
-    rotation: Math.random() * 360,
-    delay: Math.random() * 0.2,
-    duration: 1.2 + Math.random() * 0.8,
-    xOffset: (Math.random() - 0.5) * 200,
-    yOffset: -100 - Math.random() * 100,
-    colors: ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6'],
-  }));
+  const confetti = Array.from({ length: 80 }, (_, i) => {
+    const angle = (Math.random() * 360) * (Math.PI / 180);
+    const velocity = 150 + Math.random() * 250;
+    const colors = ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6', '#F59E0B', '#EF4444'];
+    
+    return {
+      id: i,
+      x: Math.cos(angle) * velocity,
+      y: Math.sin(angle) * velocity - 100,
+      rotation: Math.random() * 720,
+      delay: Math.random() * 0.1,
+      duration: 1.5 + Math.random() * 0.8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      shape: Math.random() > 0.5 ? 'rounded-sm' : 'rounded-full',
+      width: Math.random() > 0.5 ? 'w-3' : 'w-2',
+      height: Math.random() > 0.5 ? 'h-3' : 'h-4',
+    };
+  });
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden flex items-center justify-center">
       {confetti.map((piece) => (
         <motion.div
           key={piece.id}
-          className="absolute w-2 h-2 rounded-full"
+          className={`absolute ${piece.width} ${piece.height} ${piece.shape}`}
           style={{
-            left: `${piece.x}%`,
-            top: `${piece.y}%`,
-            backgroundColor: piece.colors[Math.floor(Math.random() * piece.colors.length)],
+            backgroundColor: piece.color,
           }}
           initial={{ 
             x: 0, 
@@ -69,16 +74,16 @@ const ConfettiBurst = () => {
             scale: 1,
           }}
           animate={{
-            x: piece.xOffset,
-            y: piece.yOffset,
-            opacity: [1, 1, 0],
-            rotate: piece.rotation * 2,
-            scale: [1, 1.2, 0.8],
+            x: piece.x,
+            y: piece.y,
+            opacity: [1, 1, 0.8, 0],
+            rotate: piece.rotation,
+            scale: [1, 1, 0.8],
           }}
           transition={{
             duration: piece.duration,
             delay: piece.delay,
-            ease: [0.16, 1, 0.3, 1],
+            ease: "easeOut",
           }}
         />
       ))}
@@ -86,34 +91,41 @@ const ConfettiBurst = () => {
   );
 };
 
-// Extra milestone confetti for achievements
+// Extra milestone confetti - falling from top
 const MilestoneConfetti = () => {
-  const confetti = Array.from({ length: 60 }, (_, i) => ({
-    id: i,
-    x: 50 + (Math.random() - 0.5) * 100,
-    delay: Math.random() * 0.5,
-    duration: 2.5 + Math.random() * 1.5,
-    rotation: Math.random() * 360,
-    colors: ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6', '#F59E0B', '#EF4444'],
-  }));
+  const confetti = Array.from({ length: 100 }, (_, i) => {
+    const colors = ['#0BA5E9', '#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6', '#F59E0B', '#EF4444', '#EC4899'];
+    
+    return {
+      id: i,
+      x: Math.random() * 100,
+      delay: Math.random() * 0.5,
+      duration: 2 + Math.random() * 1.5,
+      rotation: Math.random() * 720,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      shape: Math.random() > 0.5 ? 'rounded-sm' : 'rounded-full',
+      width: Math.random() > 0.5 ? 'w-3' : 'w-2',
+      height: Math.random() > 0.5 ? 'h-3' : 'h-4',
+    };
+  });
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
       {confetti.map((piece) => (
         <motion.div
           key={piece.id}
-          className="absolute w-3 h-3 rounded-full"
+          className={`absolute ${piece.width} ${piece.height} ${piece.shape}`}
           style={{
             left: `${piece.x}%`,
             top: '-20px',
-            backgroundColor: piece.colors[Math.floor(Math.random() * piece.colors.length)],
+            backgroundColor: piece.color,
           }}
           initial={{ y: -20, opacity: 1, rotate: 0, scale: 1 }}
           animate={{
             y: window.innerHeight + 50,
-            opacity: [1, 1, 0],
-            rotate: piece.rotation * 3,
-            scale: [1, 1.2, 0.8],
+            opacity: [1, 1, 0.8, 0],
+            rotate: piece.rotation,
+            scale: [1, 1, 0.8],
           }}
           transition={{
             duration: piece.duration,
@@ -182,7 +194,7 @@ export function DailyStreakNotification({ isVisible, onClose, streakCount }: Dai
       
       // Always show confetti burst on open
       setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 2000);
+      setTimeout(() => setShowConfetti(false), 2500);
       
       // Show extra confetti for milestones
       if (isMilestone) {
