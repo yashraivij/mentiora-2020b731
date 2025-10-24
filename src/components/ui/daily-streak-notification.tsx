@@ -5,26 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
 
-// Test component to trigger streak notification
-export function TestStreakButton() {
-  const [showStreak, setShowStreak] = useState(false);
-  return (
-    <>
-      <Button 
-        onClick={() => setShowStreak(true)}
-        className="fixed bottom-4 right-4 z-50"
-      >
-        Test 2-Day Streak
-      </Button>
-      <DailyStreakNotification 
-        isVisible={showStreak}
-        onClose={() => setShowStreak(false)}
-        streakCount={2}
-      />
-    </>
-  );
-}
-
 interface DailyStreakNotificationProps {
   isVisible: boolean;
   onClose: () => void;
