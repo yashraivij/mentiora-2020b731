@@ -22,6 +22,7 @@ import {
   X,
   Crown,
   Flame,
+  Trophy,
 } from "lucide-react";
 
 // Sparkline component
@@ -369,32 +370,105 @@ export function MedlySubjectsView({
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-primary/20 dark:border-primary/30 shadow-sm hover:shadow-md hover:shadow-primary/10 transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 group"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/5">
-                        <Flame className="h-5 w-5 text-orange-500" />
+                    {/* Animated background glow */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-orange-400/20 to-red-400/20"
+                      animate={{
+                        opacity: [0.5, 0.8, 0.5],
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    
+                    {/* Shine effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      animate={{
+                        x: ["-100%", "200%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                        repeatDelay: 2,
+                      }}
+                    />
+
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <motion.div 
+                          className="p-2.5 rounded-xl bg-white/20 backdrop-blur-sm"
+                          animate={{
+                            scale: currentStreak > 0 ? [1, 1.1, 1] : 1,
+                            rotate: currentStreak > 0 ? [0, 5, -5, 0] : 0,
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        >
+                          <Flame className="h-6 w-6 text-white drop-shadow-lg" />
+                        </motion.div>
+                        <span className="text-xs font-bold text-white/90 uppercase tracking-widest">Study Streak</span>
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Study Streak</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5, type: "spring" }}
-                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
-                      >
-                        {currentStreak}
-                      </motion.div>
-                    </div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">
-                      {currentStreak === 1 ? "day" : "days"} in a row
+                      
+                      <div className="flex items-end gap-3 mb-4">
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.5, type: "spring", bounce: 0.5 }}
+                          className="text-5xl font-black text-white drop-shadow-2xl"
+                        >
+                          {currentStreak}
+                        </motion.div>
+                        <div className="text-sm font-bold text-white/90 mb-2 uppercase">
+                          {currentStreak === 1 ? "Day" : "Days"}
+                        </div>
+                      </div>
+
+                      {/* Milestone progress */}
+                      {currentStreak < 7 && (
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between text-xs text-white/80 font-semibold">
+                            <span>{7 - currentStreak} days to 500 MP bonus</span>
+                            <span>{Math.round((currentStreak / 7) * 100)}%</span>
+                          </div>
+                          <div className="h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+                            <motion.div
+                              className="h-full bg-gradient-to-r from-yellow-300 to-white rounded-full shadow-lg"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${(currentStreak / 7) * 100}%` }}
+                              transition={{ duration: 1, ease: "easeOut" }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Milestone badge */}
+                      {currentStreak >= 7 && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", bounce: 0.5 }}
+                          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30"
+                        >
+                          <Trophy className="h-4 w-4 text-yellow-300" />
+                          <span className="text-xs font-bold text-white">🔥 Streak Master!</span>
+                        </motion.div>
+                      )}
                     </div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Your current study streak</p>
+                  <p className="font-medium mb-1">Your current study streak 🔥</p>
                   <p className="text-xs text-muted-foreground">Practice daily to maintain your streak and earn bonus MP points. Reach 7 days for a 500 MP reward!</p>
                 </TooltipContent>
               </Tooltip>
