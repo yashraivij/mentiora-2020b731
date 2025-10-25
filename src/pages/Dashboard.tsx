@@ -91,8 +91,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
-import { LeaderboardTable } from "@/components/dashboard/LeaderboardTable";
-import { DailyQuests } from "@/components/dashboard/DailyQuests";
+import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
 
 interface UserProgress {
   subjectId: string;
@@ -2911,75 +2910,11 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.1 }}
                             >
-                              {(() => {
-                                const subjectId = selectedDrawerSubject?.id || '';
-                                
-                                // Get all progress for this subject with scores > 0
-                                const subjectProgress = userProgress.filter(p => 
-                                  p.subjectId === subjectId && p.averageScore > 0
-                                );
-                                
-                                if (subjectProgress.length === 0) {
-                                  return (
-                                    <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm hover:shadow-lg transition-all duration-300">
-                                      <CardContent className="p-5">
-                                        <div className="flex items-center gap-2 mb-2">
-                                          <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
-                                            <TrendingUp className="h-4 w-4 text-[#94A3B8]" />
-                                          </div>
-                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
-                                        </div>
-                                        <div className="text-3xl font-bold text-[#94A3B8]">
-                                          --
-                                        </div>
-                                      </CardContent>
-                                    </Card>
-                                  );
-                                }
-                                
-                                // Sort by last attempt date
-                                const sorted = [...subjectProgress].sort((a, b) => 
-                                  new Date(b.lastAttempt).getTime() - new Date(a.lastAttempt).getTime()
-                                );
-                                
-                                // Get last 3 attempts average
-                                const recentAttempts = sorted.slice(0, 3);
-                                const recentAvg = recentAttempts.reduce((sum, p) => sum + p.averageScore, 0) / recentAttempts.length;
-                                
-                                // Get overall average
-                                const overallAvg = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length;
-                                
-                                // Calculate difference
-                                const change = recentAvg - overallAvg;
-                                const isPositive = change >= 0;
-                                const sign = isPositive ? '+' : '';
-                                
-                                return (
-                                  <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
-                                    isPositive 
-                                      ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
-                                      : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
-                                  }`}>
-                                    <CardContent className="p-5">
-                                      <div className="flex items-center gap-2 mb-2">
-                                        <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
-                                          {isPositive ? (
-                                            <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
-                                          ) : (
-                                            <TrendingDown className="h-4 w-4 text-[#EF4444]" />
-                                          )}
-                                        </div>
-                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
-                                      </div>
-                                      <div className={`text-3xl font-bold flex items-center gap-2 ${
-                                        isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
-                                      }`}>
-                                        {sign}{Math.abs(change).toFixed(1)}%
-                                      </div>
-                                    </CardContent>
-                                  </Card>
-                                );
-                              })()}
+                              <SubjectRankCard 
+                                selectedDrawerSubject={selectedDrawerSubject}
+                                userProgress={userProgress}
+                                userId={user?.id}
+                              />
                             </motion.div>
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
