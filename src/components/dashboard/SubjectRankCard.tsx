@@ -78,15 +78,15 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
   
   if (loading) {
     return (
-      <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm hover:shadow-lg transition-all duration-300">
+      <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
         <CardContent className="p-5">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
-              <Trophy className="h-4 w-4 text-[#94A3B8]" />
+            <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
+              <Trophy className="h-4 w-4 text-[#16A34A]" />
             </div>
             <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
           </div>
-          <div className="text-3xl font-bold text-[#94A3B8]">
+          <div className="text-3xl font-bold text-[#16A34A]">
             --
           </div>
         </CardContent>
@@ -96,15 +96,15 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
   
   if (!rank || subjectProgress.length === 0) {
     return (
-      <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm hover:shadow-lg transition-all duration-300">
+      <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
         <CardContent className="p-5">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
-              <Trophy className="h-4 w-4 text-[#94A3B8]" />
+            <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
+              <Trophy className="h-4 w-4 text-[#16A34A]" />
             </div>
             <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
           </div>
-          <div className="text-3xl font-bold text-[#94A3B8]">
+          <div className="text-3xl font-bold text-[#16A34A]">
             --
           </div>
         </CardContent>
@@ -112,34 +112,10 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
     );
   }
   
-  // Determine color based on rank (top 10% = gold, top 30% = silver, rest = bronze)
-  const topPercentile = (rank.rank / rank.totalUsers) * 100;
-  const isTopTier = topPercentile <= 10;
-  const isMidTier = topPercentile <= 30;
-  
-  const colorClass = isTopTier 
-    ? 'border-[#F59E0B]/20 bg-gradient-to-br from-white to-[#F59E0B]/5 dark:from-gray-900 dark:to-[#F59E0B]/10 hover:shadow-[#F59E0B]/10'
-    : isMidTier 
-      ? 'border-[#0EA5E9]/20 bg-gradient-to-br from-white to-[#0EA5E9]/5 dark:from-gray-900 dark:to-[#0EA5E9]/10 hover:shadow-[#0EA5E9]/10'
-      : 'border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 hover:shadow-[#94A3B8]/10';
-  
-  const iconColorClass = isTopTier 
-    ? 'bg-[#F59E0B]/10'
-    : isMidTier 
-      ? 'bg-[#0EA5E9]/10'
-      : 'bg-[#94A3B8]/10';
-  
-  const iconTextClass = isTopTier 
-    ? 'text-[#F59E0B]'
-    : isMidTier 
-      ? 'text-[#0EA5E9]'
-      : 'text-[#94A3B8]';
-  
-  const textColorClass = isTopTier 
-    ? 'text-[#F59E0B]'
-    : isMidTier 
-      ? 'text-[#0EA5E9]'
-      : 'text-[#0F172A] dark:text-white';
+  const colorClass = 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10';
+  const iconColorClass = 'bg-[#16A34A]/10';
+  const iconTextClass = 'text-[#16A34A]';
+  const textColorClass = 'text-[#16A34A]';
   
   return (
     <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${colorClass}`}>
