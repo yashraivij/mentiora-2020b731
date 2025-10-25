@@ -208,7 +208,7 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
               onConflict: 'user_id,subject_id,task_id,date'
             });
           
-          // Award MP
+          // Award MP silently
           await supabase.functions.invoke('award-mp', {
             body: {
               action: 'subject_task_completed',
@@ -218,15 +218,6 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
               subjectId: subjectId
             }
           });
-          
-          // Show toast
-          toast(
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-yellow-500" />
-              <span className="font-semibold">+30 MP</span>
-              <span className="text-muted-foreground">• Daily task completed!</span>
-            </div>
-          );
         }
       }
       
