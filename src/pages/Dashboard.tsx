@@ -2466,15 +2466,15 @@ const Dashboard = () => {
             <div
               className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "learn"
-                  ? "bg-[hsl(195_69%_54%)] shadow-lg shadow-[hsl(195_69%_54%)]/40"
-                  : "bg-[hsl(195_69%_54%)]/10 dark:bg-[hsl(195_69%_54%)]/20 group-hover:bg-[hsl(195_69%_54%)]/20 dark:group-hover:bg-[hsl(195_69%_54%)]/30"
+                  ? "bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/50"
+                  : "bg-blue-100 dark:bg-blue-900/20 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/30"
               }`}
             >
-              <Home className={`w-7 h-7 ${activeTab === "learn" ? "text-white" : "text-[hsl(195_69%_44%)] dark:text-[hsl(195_69%_60%)]"}`} />
+              <Home className={`w-7 h-7 ${activeTab === "learn" ? "text-white" : "text-blue-600 dark:text-blue-400"}`} />
             </div>
             <span
               className={`text-xs font-bold tracking-wide ${
-                activeTab === "learn" ? "text-[hsl(195_69%_44%)] dark:text-[hsl(195_69%_60%)]" : "text-muted-foreground"
+                activeTab === "learn" ? "text-blue-600 dark:text-blue-400" : "text-muted-foreground"
               }`}
             >
               LEARN
@@ -2491,22 +2491,22 @@ const Dashboard = () => {
             <div
               className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "quests"
-                  ? "bg-[hsl(142_76%_36%)] shadow-lg shadow-[hsl(142_76%_36%)]/40"
-                  : "bg-[hsl(142_76%_36%)]/10 dark:bg-[hsl(142_76%_36%)]/20 group-hover:bg-[hsl(142_76%_36%)]/20 dark:group-hover:bg-[hsl(142_76%_36%)]/30"
+                  ? "bg-gradient-to-br from-green-400 to-green-500 shadow-lg shadow-green-500/50"
+                  : "bg-green-100 dark:bg-green-900/20 group-hover:bg-green-200 dark:group-hover:bg-green-900/30"
               }`}
             >
-              <Star className={`w-7 h-7 ${activeTab === "quests" ? "text-white" : "text-[hsl(142_76%_26%)] dark:text-[hsl(142_76%_50%)]"}`} />
+              <Star className={`w-7 h-7 ${activeTab === "quests" ? "text-white" : "text-green-600 dark:text-green-400"}`} />
             </div>
             <span
               className={`text-xs font-bold tracking-wide ${
-                activeTab === "quests" ? "text-[hsl(142_76%_26%)] dark:text-[hsl(142_76%_50%)]" : "text-muted-foreground"
+                activeTab === "quests" ? "text-green-600 dark:text-green-400" : "text-muted-foreground"
               }`}
             >
               QUESTS
             </span>
           </button>
 
-          {/* Rank Tab */}
+          {/* Leaderboard Tab */}
           <button
             onClick={() => setActiveTab("leaderboards")}
             className={`group relative flex flex-col items-center gap-2 transition-all duration-300 ${
@@ -2516,18 +2516,18 @@ const Dashboard = () => {
             <div
               className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "leaderboards"
-                  ? "bg-[hsl(24_95%_53%)] shadow-lg shadow-[hsl(24_95%_53%)]/40"
-                  : "bg-[hsl(24_95%_53%)]/10 dark:bg-[hsl(24_95%_53%)]/20 group-hover:bg-[hsl(24_95%_53%)]/20 dark:group-hover:bg-[hsl(24_95%_53%)]/30"
+                  ? "bg-gradient-to-br from-yellow-400 to-yellow-500 shadow-lg shadow-yellow-500/50"
+                  : "bg-yellow-100 dark:bg-yellow-900/20 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/30"
               }`}
             >
-              <Trophy className={`w-7 h-7 ${activeTab === "leaderboards" ? "text-white" : "text-[hsl(24_95%_43%)] dark:text-[hsl(24_95%_60%)]"}`} />
+              <Trophy className={`w-7 h-7 ${activeTab === "leaderboards" ? "text-white" : "text-yellow-600 dark:text-yellow-400"}`} />
             </div>
             <span
               className={`text-xs font-bold tracking-wide ${
-                activeTab === "leaderboards" ? "text-[hsl(24_95%_43%)] dark:text-[hsl(24_95%_60%)]" : "text-muted-foreground"
+                activeTab === "leaderboards" ? "text-yellow-600 dark:text-yellow-400" : "text-muted-foreground"
               }`}
             >
-              RANK
+              BOARD
             </span>
           </button>
         </div>
