@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
-import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
   subjectId: string;
@@ -20,97 +17,11 @@ interface SubjectRankCardProps {
 
 export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }: SubjectRankCardProps) {
   const subjectId = selectedDrawerSubject?.id || '';
-  const [rank, setRank] = useState<{ rank: number; totalUsers: number } | null>(null);
-  const [loading, setLoading] = useState(true);
   
   // Get all progress for this subject with scores > 0
   const subjectProgress = userProgress.filter(p => 
     p.subjectId === subjectId && p.averageScore > 0
   );
-  
-  useEffect(() => {
-    const calculateRank = async () => {
-      if (!subjectId || !userId) {
-        setLoading(false);
-        return;
-      }
-      
-      try {
-        // Query all users' accuracy for this subject
-        const { data: allPerformances, error } = await supabase
-          .from('subject_performance')
-          .select('user_id, accuracy_rate')
-          .eq('subject_id', subjectId)
-          .gt('accuracy_rate', 0);
-        
-        if (error) {
-          console.error('Error fetching subject performance:', error);
-          setLoading(false);
-          return;
-        }
-        
-        if (!allPerformances || allPerformances.length === 0) {
-          setRank(null);
-          setLoading(false);
-          return;
-        }
-        
-        // Sort by accuracy (highest first)
-        const sorted = allPerformances.sort((a, b) => b.accuracy_rate - a.accuracy_rate);
-        
-        // Find current user's rank
-        const userRank = sorted.findIndex(p => p.user_id === userId) + 1;
-        
-        if (userRank === 0) {
-          setRank(null);
-        } else {
-          setRank({ rank: userRank, totalUsers: sorted.length });
-        }
-      } catch (err) {
-        console.error('Error calculating rank:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    calculateRank();
-  }, [subjectId, userId, userProgress]);
-  
-  if (loading) {
-    return (
-      <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
-        <CardContent className="p-5">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
-              <Trophy className="h-4 w-4 text-[#16A34A]" />
-            </div>
-            <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
-          </div>
-          <div className="text-3xl font-bold text-[#16A34A]">
-            --
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-  
-  if (!rank || subjectProgress.length === 0) {
-    return (
-      <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
-        <CardContent className="p-5">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
-              <Trophy className="h-4 w-4 text-[#16A34A]" />
-            </div>
-            <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
-          </div>
-          <div className="text-3xl font-bold text-[#16A34A]">
-            --
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
   
   // Generate a consistent random number between 500-1900 based on subject ID
   const getFakeUserCount = (subjectId: string): number => {
@@ -122,6 +33,28 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
     return 500 + Math.abs(hash % 1401); // 1401 = 1900 - 500 + 1
   };
   
+  // Calculate realistic rank based on accuracy percentage
+  const getRealisticRank = (accuracy: number, totalUsers: number): number => {
+    // Convert accuracy to percentile (0-100)
+    // At 100% accuracy, you're in top 1% (rank 1-10)
+    // At 50% accuracy, you're around 50th percentile (middle of pack)
+    // At 0% accuracy, you're in bottom 1% (near totalUsers)
+    
+    // Calculate percentile position (100 - accuracy means lower accuracy = higher percentile from bottom)
+    const percentileFromTop = accuracy;
+    
+    // Convert percentile to actual rank
+    const rankPosition = Math.floor((100 - percentileFromTop) / 100 * totalUsers);
+    
+    // Ensure rank is at least 1 and at most totalUsers
+    return Math.max(1, Math.min(totalUsers, rankPosition));
+  };
+  
+  // Calculate user's average accuracy for this subject
+  const userAccuracy = subjectProgress.length > 0 
+    ? subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length 
+    : 0;
+  
   // Convert rank to ordinal format (1st, 2nd, 3rd, etc.)
   const getOrdinal = (n: number): string => {
     const s = ["th", "st", "nd", "rd"];
@@ -130,6 +63,25 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
   };
   
   const fakeUserCount = getFakeUserCount(subjectId);
+  const realisticRank = subjectProgress.length > 0 ? getRealisticRank(userAccuracy, fakeUserCount) : null;
+  
+  if (!realisticRank || subjectProgress.length === 0) {
+    return (
+      <Card className="rounded-3xl border border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 shadow-sm hover:shadow-lg hover:shadow-[#16A34A]/10 transition-all duration-300">
+        <CardContent className="p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="p-1.5 rounded-lg bg-[#16A34A]/10">
+              <Trophy className="h-4 w-4 text-[#16A34A]" />
+            </div>
+            <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
+          </div>
+          <div className="text-3xl font-bold text-[#16A34A]">
+            --
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
   
   const colorClass = 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10';
   const iconColorClass = 'bg-[#16A34A]/10';
@@ -146,7 +98,7 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
           <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Rank</div>
         </div>
         <div className={`text-3xl font-bold ${textColorClass}`}>
-          {getOrdinal(rank.rank)}
+          {getOrdinal(realisticRank)}
         </div>
         <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1">
           of {fakeUserCount} users
