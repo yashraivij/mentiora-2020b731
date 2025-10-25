@@ -159,13 +159,16 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (manualError) throw manualError;
 
       // Auto-detect predicted exam completion
+      const todayStart = new Date(today + 'T00:00:00Z').toISOString();
+      const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
+      
       const { data: examCompletions, error: examError } = await supabase
         .from('predicted_exam_completions')
-        .select('id, created_at')
+        .select('id, completed_at')
         .eq('user_id', userId)
         .eq('subject_id', subjectId)
-        .gte('exam_date', today)
-        .lte('exam_date', today);
+        .gte('completed_at', todayStart)
+        .lte('completed_at', todayEnd);
 
       if (examError) throw examError;
 
