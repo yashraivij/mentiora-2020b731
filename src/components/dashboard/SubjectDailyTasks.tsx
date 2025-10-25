@@ -164,22 +164,25 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
-      // Build subject variants to check (e.g., 'physics', 'physics-aqa', 'physics-edexcel')
-      const subjectVariants = [subjectId];
-      const baseSubject = subjectId.split('-')[0]; // Get 'physics' from 'physics-aqa'
-      if (baseSubject !== subjectId) {
-        subjectVariants.push(baseSubject);
-      }
+      // Build subject variants to check
+      // E.g., for 'physics-aqa' check both 'physics-aqa' and 'physics'
+      // For 'physics' check 'physics', 'physics-aqa', 'physics-edexcel', etc.
+      const baseSubject = subjectId.split('-')[0];
       
       const { data: examCompletions } = await supabase
         .from('predicted_exam_completions')
         .select('id, completed_at, subject_id')
         .eq('user_id', userId)
-        .in('subject_id', subjectVariants)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
+      
+      // Filter exams that match our subject (flexible matching)
+      const matchingExams = examCompletions?.filter(exam => {
+        const examBaseSubject = exam.subject_id.split('-')[0];
+        return examBaseSubject === baseSubject || exam.subject_id === subjectId;
+      }) || [];
 
-      const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
+      const hasPredictedExamToday = matchingExams.length > 0;
 
       // If exam was completed today, auto-mark the task
       if (hasPredictedExamToday) {
