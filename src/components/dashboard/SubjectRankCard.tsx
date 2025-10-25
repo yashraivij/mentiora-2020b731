@@ -112,12 +112,24 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
     );
   }
   
+  // Generate a consistent random number between 500-1900 based on subject ID
+  const getFakeUserCount = (subjectId: string): number => {
+    let hash = 0;
+    for (let i = 0; i < subjectId.length; i++) {
+      hash = ((hash << 5) - hash) + subjectId.charCodeAt(i);
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return 500 + Math.abs(hash % 1401); // 1401 = 1900 - 500 + 1
+  };
+  
   // Convert rank to ordinal format (1st, 2nd, 3rd, etc.)
   const getOrdinal = (n: number): string => {
     const s = ["th", "st", "nd", "rd"];
     const v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
+  
+  const fakeUserCount = getFakeUserCount(subjectId);
   
   const colorClass = 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10';
   const iconColorClass = 'bg-[#16A34A]/10';
@@ -137,7 +149,7 @@ export function SubjectRankCard({ selectedDrawerSubject, userProgress, userId }:
           {getOrdinal(rank.rank)}
         </div>
         <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1">
-          of {rank.totalUsers} users
+          of {fakeUserCount} users
         </div>
       </CardContent>
     </Card>
