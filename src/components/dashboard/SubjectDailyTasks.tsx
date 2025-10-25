@@ -186,24 +186,33 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
 
       // Update tasks based on both manual and auto-detected completions
-      const updatedTasks = await Promise.all(
-        tasks.map(async (task) => {
-          const manuallyCompleted = manualTasks?.some(d => d.task_id === task.id && d.completed) || false;
+      const updatedTasks = [];
+      
+      for (const task of tasks) {
+        const manuallyCompleted = manualTasks?.some(d => d.task_id === task.id && d.completed) || false;
+        
+        // Auto-complete predicted exam task if exam was done today
+        if (task.id === 'predicted_exam' && hasPredictedExamToday && !manuallyCompleted) {
+          console.log(`Auto-completing predicted exam task for ${subjectId}`);
+          // Auto-award MP and mark as complete - WAIT for it to finish
+          await autoCompleteTask(task.id, task.mpReward);
+          // Reload to get the updated state from database
+          const { data: updatedManualTasks } = await supabase
+            .from('subject_daily_tasks')
+            .select('task_id, completed')
+            .eq('user_id', userId)
+            .eq('subject_id', subjectId)
+            .eq('date', today);
           
-          // Auto-complete predicted exam task if exam was done today
-          if (task.id === 'predicted_exam' && hasPredictedExamToday && !manuallyCompleted) {
-            console.log('Auto-completing predicted exam task for:', subjectId);
-            // Auto-award MP and mark as complete
-            await autoCompleteTask(task.id, task.mpReward);
-            return { ...task, completed: true };
-          }
-          
-          return {
+          const nowCompleted = updatedManualTasks?.some(d => d.task_id === task.id && d.completed) || false;
+          updatedTasks.push({ ...task, completed: nowCompleted });
+        } else {
+          updatedTasks.push({
             ...task,
             completed: manuallyCompleted
-          };
-        })
-      );
+          });
+        }
+      }
       
       setTasks(updatedTasks);
     } catch (error) {
@@ -217,8 +226,10 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
     try {
       const today = new Date().toISOString().split('T')[0];
 
+      console.log(`Marking task ${taskId} as complete in database for ${subjectId}`);
+
       // Mark as complete in database
-      await supabase
+      const { error: upsertError } = await supabase
         .from('subject_daily_tasks')
         .upsert({
           user_id: userId,
@@ -231,8 +242,15 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           onConflict: 'user_id,subject_id,task_id,date'
         });
 
+      if (upsertError) {
+        console.error('Error upserting task:', upsertError);
+        throw upsertError;
+      }
+
+      console.log(`Task ${taskId} marked as complete, now awarding ${mpReward} MP`);
+
       // Award MP via edge function
-      await supabase.functions.invoke('award-mp', {
+      const { data: mpData, error: mpError } = await supabase.functions.invoke('award-mp', {
         body: {
           action: 'subject_task_completed',
           userId,
@@ -241,6 +259,12 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           subjectId: subjectId
         }
       });
+
+      if (mpError) {
+        console.error('Error awarding MP:', mpError);
+      } else {
+        console.log('MP awarded successfully:', mpData);
+      }
 
       // Show toast notification
       toast(
