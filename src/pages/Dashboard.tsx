@@ -210,7 +210,7 @@ const Dashboard = () => {
   const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[hsl(195_69%_97%)] dark:bg-[hsl(195_69%_15%)]", textColor: "text-[hsl(195_69%_54%)] dark:text-[hsl(195_69%_70%)]", activeColor: "bg-[hsl(195_69%_54%)] dark:bg-[hsl(195_69%_54%)]" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#E0F2FE] dark:bg-[#0EA5E9]/10", textColor: "text-[#0EA5E9] dark:text-[#38BDF8]", activeColor: "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] dark:bg-gradient-to-r dark:from-[#0EA5E9] dark:to-[#38BDF8]" },
     { id: "leaderboards", label: "RANK", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
     { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
