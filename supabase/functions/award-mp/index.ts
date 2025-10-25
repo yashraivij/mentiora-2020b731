@@ -415,6 +415,17 @@ serve(async (req) => {
         }
         break;
 
+      case 'full_marks_question':
+        // Award 10 MP for getting full marks on a question
+        await recordActivity(userId, 'full_marks_question');
+        const fullMarksAwarded = await awardPoints(userId, 10, 'Full marks on question');
+        result = { 
+          success: fullMarksAwarded, 
+          awarded: fullMarksAwarded ? 10 : 0, 
+          message: fullMarksAwarded ? 'Perfect! +10 MP awarded' : 'Failed to award points' 
+        };
+        break;
+
       default:
         return new Response(JSON.stringify({ error: 'Invalid action' }), {
           status: 400,
