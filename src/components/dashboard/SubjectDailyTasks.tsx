@@ -164,6 +164,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
+      console.log(`[SubjectDailyTasks] Checking exams for ${subjectId} between ${todayStart} and ${todayEnd}`);
+      
       // Build subject variants to check (e.g., 'physics', 'physics-aqa', 'physics-edexcel')
       const subjectVariants = [subjectId];
       const baseSubject = subjectId.split('-')[0]; // Get 'physics' from 'physics-aqa'
@@ -171,13 +173,21 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         subjectVariants.push(baseSubject);
       }
       
-      const { data: examCompletions } = await supabase
+      console.log(`[SubjectDailyTasks] Subject variants to check:`, subjectVariants);
+      
+      const { data: examCompletions, error: examError } = await supabase
         .from('predicted_exam_completions')
         .select('id, completed_at, subject_id')
         .eq('user_id', userId)
         .in('subject_id', subjectVariants)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
+      
+      if (examError) {
+        console.error('[SubjectDailyTasks] Error fetching exams:', examError);
+      }
+      
+      console.log(`[SubjectDailyTasks] Found ${examCompletions?.length || 0} exam completions:`, examCompletions);
 
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
       console.log(`[SubjectDailyTasks] Has exam today: ${hasPredictedExamToday}`, examCompletions);
