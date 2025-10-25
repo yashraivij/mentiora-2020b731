@@ -542,31 +542,35 @@ const Practice = () => {
           const totalPossibleMP = shuffledQuestions.length * 10;
           const mpProgress = (currentMP / totalPossibleMP) * 100;
           
-          // Show Medly blue notification with progress bar
+          // Show clean gamified notification
           toast.custom((t) => (
-            <div className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] text-white px-6 py-4 rounded-lg shadow-xl border border-white/20 min-w-[320px] animate-in slide-in-from-top-5 duration-500">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex-1">
-                  <div className="font-bold text-lg">+10 MP Earned!</div>
-                  <div className="text-sm text-white/90">Perfect answer - Full marks achieved</div>
+            <div className="bg-white dark:bg-gray-900 px-8 py-6 rounded-2xl shadow-2xl border-2 border-[hsl(195,69%,54%)] min-w-[340px] animate-in slide-in-from-top-5 duration-500">
+              <div className="flex items-start justify-between mb-4">
+                <div className="space-y-1">
+                  <div className="text-3xl font-black text-[hsl(195,69%,54%)]">+10 MP</div>
+                  <div className="text-sm font-medium text-muted-foreground">Full marks achieved!</div>
                 </div>
                 <button 
                   onClick={() => toast.dismiss(t)}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors -mt-1"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/90">Progress</span>
-                  <span className="font-semibold">{currentMP} / {totalPossibleMP} MP</span>
+              
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Session Progress</span>
+                  <span className="text-sm font-bold text-foreground">{currentMP} / {totalPossibleMP} MP</span>
                 </div>
-                <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
-                  <div 
-                    className="h-full bg-white rounded-full transition-all duration-500 ease-out shadow-lg"
-                    style={{ width: `${mpProgress}%` }}
-                  />
+                <div className="relative">
+                  <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] rounded-full transition-all duration-700 ease-out"
+                      style={{ width: `${mpProgress}%` }}
+                    />
+                  </div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none" />
                 </div>
               </div>
             </div>
@@ -1687,34 +1691,43 @@ const Practice = () => {
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  const currentMP = 50;
-                  const totalPossibleMP = 100;
+                  // Simulate real progress
+                  const fullMarksCount = attempts.filter(a => {
+                    const q = shuffledQuestions.find(sq => sq.id === a.questionId);
+                    return q && a.score === q.marks;
+                  }).length + 1; // +1 for the current one we're testing
+                  const currentMP = fullMarksCount * 10;
+                  const totalPossibleMP = shuffledQuestions.length * 10;
                   const mpProgress = (currentMP / totalPossibleMP) * 100;
                   
                   toast.custom((t) => (
-                    <div className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] text-white px-6 py-4 rounded-lg shadow-xl border border-white/20 min-w-[320px] animate-in slide-in-from-top-5 duration-500">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex-1">
-                          <div className="font-bold text-lg">+10 MP Earned!</div>
-                          <div className="text-sm text-white/90">Perfect answer - Full marks achieved</div>
+                    <div className="bg-white dark:bg-gray-900 px-8 py-6 rounded-2xl shadow-2xl border-2 border-[hsl(195,69%,54%)] min-w-[340px] animate-in slide-in-from-top-5 duration-500">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="space-y-1">
+                          <div className="text-3xl font-black text-[hsl(195,69%,54%)]">+10 MP</div>
+                          <div className="text-sm font-medium text-muted-foreground">Full marks achieved!</div>
                         </div>
                         <button 
                           onClick={() => toast.dismiss(t)}
-                          className="text-white/80 hover:text-white transition-colors"
+                          className="text-muted-foreground hover:text-foreground transition-colors -mt-1"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="w-5 h-5" />
                         </button>
                       </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-white/90">Progress</span>
-                          <span className="font-semibold">{currentMP} / {totalPossibleMP} MP</span>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Session Progress</span>
+                          <span className="text-sm font-bold text-foreground">{currentMP} / {totalPossibleMP} MP</span>
                         </div>
-                        <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
-                          <div 
-                            className="h-full bg-white rounded-full transition-all duration-500 ease-out shadow-lg"
-                            style={{ width: `${mpProgress}%` }}
-                          />
+                        <div className="relative">
+                          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
+                            <div 
+                              className="h-full bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] rounded-full transition-all duration-700 ease-out"
+                              style={{ width: `${mpProgress}%` }}
+                            />
+                          </div>
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none" />
                         </div>
                       </div>
                     </div>
