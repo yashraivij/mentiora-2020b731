@@ -139,27 +139,93 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
-      const { data, error } = await supabase
+      // Load manual task completions
+      const { data: manualTasks, error: manualError } = await supabase
         .from('subject_daily_tasks')
         .select('task_id, completed')
         .eq('user_id', userId)
         .eq('subject_id', subjectId)
         .eq('date', today);
 
-      if (error) throw error;
+      if (manualError) throw manualError;
 
-      if (data && data.length > 0) {
-        setTasks(prevTasks =>
-          prevTasks.map(task => ({
+      // Auto-detect predicted exam completion
+      const { data: examCompletions, error: examError } = await supabase
+        .from('predicted_exam_completions')
+        .select('id, created_at')
+        .eq('user_id', userId)
+        .eq('subject_id', subjectId)
+        .gte('exam_date', today)
+        .lte('exam_date', today);
+
+      if (examError) throw examError;
+
+      const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
+
+      // Update tasks based on both manual and auto-detected completions
+      setTasks(prevTasks =>
+        prevTasks.map(task => {
+          const manuallyCompleted = manualTasks?.some(d => d.task_id === task.id && d.completed) || false;
+          
+          // Auto-complete predicted exam task if exam was done today
+          if (task.id === 'predicted_exam' && hasPredictedExamToday && !manuallyCompleted) {
+            // Auto-award MP and mark as complete
+            autoCompleteTask(task.id, task.mpReward);
+            return { ...task, completed: true };
+          }
+          
+          return {
             ...task,
-            completed: data.some(d => d.task_id === task.id && d.completed)
-          }))
-        );
-      }
+            completed: manuallyCompleted
+          };
+        })
+      );
     } catch (error) {
       console.error('Error loading task completions:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const autoCompleteTask = async (taskId: string, mpReward: number) => {
+    try {
+      const today = new Date().toISOString().split('T')[0];
+
+      // Mark as complete in database
+      await supabase
+        .from('subject_daily_tasks')
+        .upsert({
+          user_id: userId,
+          subject_id: subjectId,
+          task_id: taskId,
+          date: today,
+          completed: true,
+          mp_awarded: mpReward
+        }, {
+          onConflict: 'user_id,subject_id,task_id,date'
+        });
+
+      // Award MP via edge function
+      await supabase.functions.invoke('award-mp', {
+        body: {
+          action: 'subject_task_completed',
+          userId,
+          mpAmount: mpReward,
+          taskId: taskId,
+          subjectId: subjectId
+        }
+      });
+
+      // Show toast notification
+      toast(
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-4 w-4 text-yellow-500" />
+          <span className="font-semibold">+{mpReward} MP</span>
+          <span className="text-muted-foreground">• Daily task completed!</span>
+        </div>
+      );
+    } catch (error) {
+      console.error('Error auto-completing task:', error);
     }
   };
 

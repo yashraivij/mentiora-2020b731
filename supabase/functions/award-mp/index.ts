@@ -309,7 +309,7 @@ serve(async (req) => {
   }
 
   try {
-    const { action, userId, subjectId, topicId, practiceScore, totalMarks } = await req.json();
+    const { action, userId, subjectId, topicId, practiceScore, totalMarks, mpAmount, taskId } = await req.json();
 
     if (!userId) {
       return new Response(JSON.stringify({ error: 'User ID required' }), {
@@ -423,6 +423,28 @@ serve(async (req) => {
           success: fullMarksAwarded, 
           awarded: fullMarksAwarded ? 10 : 0, 
           message: fullMarksAwarded ? 'Perfect! +10 MP awarded' : 'Failed to award points' 
+        };
+        break;
+
+      case 'subject_task_completed':
+        // Award MP for completing a subject daily task
+        if (!mpAmount || !taskId || !subjectId) {
+          return new Response(JSON.stringify({ error: 'MP amount, task ID, and subject ID required' }), {
+            status: 400,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          });
+        }
+        
+        await recordActivity(userId, 'subject_task_completed', { 
+          task_id: taskId, 
+          subject_id: subjectId,
+          mp_awarded: mpAmount 
+        });
+        const taskAwarded = await awardPoints(userId, mpAmount, `Daily task: ${taskId}`);
+        result = { 
+          success: taskAwarded, 
+          awarded: taskAwarded ? mpAmount : 0, 
+          message: taskAwarded ? `Task completed! +${mpAmount} MP awarded` : 'Failed to award points' 
         };
         break;
 
