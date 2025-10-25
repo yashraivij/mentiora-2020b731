@@ -5201,167 +5201,159 @@ const Dashboard = () => {
 
           {activeTab === "quests" && (
             <div className="space-y-8">
-              {/* Hero Section */}
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
-              >
-                {/* Animated background elements */}
-                <motion.div 
-                  className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ 
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                
-                <div className="relative z-10">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
-                    <div>
-                      <motion.h1 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight"
-                      >
-                        Daily Quests
-                      </motion.h1>
-                      <motion.p 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-lg text-[#64748B] dark:text-gray-400 font-light"
-                      >
-                        Complete challenges and earn MP to climb the leaderboard
-                      </motion.p>
-                    </div>
+              {/* Hero Summary Bar - Dashboard Style */}
+              <div className="mb-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                  <div>
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white">
+                      Daily Quests
+                    </h1>
+                    <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1">
+                      Complete challenges and earn MP to climb the leaderboard
+                    </p>
                   </div>
+                </div>
 
-                  {/* MP Progress Display */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-6 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-1">
-                          Daily Goal Progress
+                {/* Summary Stats Grid - Like Dashboard KPI Belt */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                          <Trophy className="h-4 w-4 text-[#0EA5E9]" />
                         </div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-4xl font-bold text-[#0F172A] dark:text-white" data-mp-counter>
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Daily Goal</span>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
                             {Math.min(todayEarnedMP, 50)}
                           </span>
-                          <span className="text-xl font-semibold text-[#64748B] dark:text-gray-400">/ 50 MP</span>
+                          <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">/ 50 MP</span>
                         </div>
+                        <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-1.5" />
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 mb-1">
-                          Total Balance
-                        </div>
-                        <div className="text-3xl font-bold text-[#0EA5E9]">
-                          {userGems.toLocaleString()} MP
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="relative h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        animate={{ width: `${Math.min((todayEarnedMP / 50) * 100, 100)}%` }}
-                        transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-                        className="absolute h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
-                      />
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="text-xs font-medium text-[#64748B] dark:text-gray-400">
-                        {Math.floor((todayEarnedMP / 50) * 100)}% Complete
-                      </div>
-                      <div className="text-xs font-medium text-[#0EA5E9]">
-                        {currentStreak} day streak 🔥
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
+                    </CardContent>
+                  </Card>
 
-              {/* Daily Quests Section */}
+                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                          <Gem className="h-4 w-4 text-[#0EA5E9]" />
+                        </div>
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Total Balance</span>
+                      </div>
+                      <div className="text-2xl font-bold text-[#0EA5E9]">
+                        {userGems.toLocaleString()} MP
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                          <Flame className="h-4 w-4 text-[#0EA5E9]" />
+                        </div>
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Streak</span>
+                      </div>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
+                          {currentStreak}
+                        </span>
+                        <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">days 🔥</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
+                          <Star className="h-4 w-4 text-[#0EA5E9]" />
+                        </div>
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">This Week</span>
+                      </div>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
+                          {userStats?.weeklyTopicsCount || 0}
+                        </span>
+                        <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">topics</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Today's Quests Section */}
               <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Today's Quests</h2>
-                </div>
+                <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">Today's Quests</h2>
                 
-                 {/* Quest 1 - Login */}
-                 <motion.div
-                   initial={{ opacity: 0, y: 20 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ delay: 0.1 }}
-                   className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
-                 >
-                   <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                   
-                   <div className="relative p-6">
-                     <div className="flex items-start justify-between mb-4">
-                       <div className="flex items-start gap-4 flex-1">
-                         <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
-                           <Check className="h-6 w-6 text-[#0EA5E9]" />
-                         </div>
-                         <div className="flex-1">
-                           <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">Log in today</h4>
-                           <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                             Log in to earn MP
-                           </p>
-                         </div>
-                       </div>
-                       <div className="flex items-center gap-3">
-                         <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
-                           <span className="text-lg font-bold text-[#0EA5E9]">+10 MP</span>
-                         </div>
-                         {userStats?.loginToday && (
-                           <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
-                             <Check className="w-5 h-5 text-white" />
-                           </div>
-                         )}
-                       </div>
-                     </div>
-                     
-                     <div className="relative h-3 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                       <motion.div 
-                         initial={{ width: 0 }}
-                         animate={{ width: (userStats?.loginToday || todayEarnedMP >= 10) ? '100%' : '0%' }}
-                         transition={{ duration: 0.8, delay: 0.2 }}
-                         className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
-                       />
-                     </div>
-                   </div>
-                 </motion.div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Quest 1 - Login */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
+                              <Check className="h-5 w-5 text-[#0EA5E9]" />
+                            </div>
+                            <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
+                              🔥 Daily
+                            </Badge>
+                          </div>
+                          {userStats?.loginToday && (
+                            <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        
+                        <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">Log in today</h4>
+                        <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
+                          Log in to earn MP
+                        </p>
+                        
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
+                            <span className="text-xs font-bold text-[#0EA5E9]">+10 MP</span>
+                          </div>
+                          <Progress 
+                            value={(userStats?.loginToday || todayEarnedMP >= 10) ? 100 : 0} 
+                            className="h-2"
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
 
-                 {/* Quest 2 - Rotating Daily Quest */}
-                 {(() => {
-                   const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
-                   const questIndex = dayOfYear % 4;
-                   
-                   const dailyQuests = [
-                     {
-                       title: "Complete 1 practice set",
-                       description: "Answer questions to earn MP",
-                       icon: BookOpen,
-                       reward: 40,
-                       isComplete: userStats?.practiceToday,
-                       progress: userStats?.practiceToday ? 100 : 0
-                     },
+                  {/* Quest 2 - Rotating Daily Quest */}
+                  {(() => {
+                    const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+                    const questIndex = dayOfYear % 4;
+                    
+                    const dailyQuests = [
+                      {
+                        title: "Complete 1 practice set",
+                        description: "Answer questions to earn MP",
+                        icon: BookOpen,
+                        emoji: "🎯",
+                        reward: 40,
+                        isComplete: userStats?.practiceToday,
+                        progress: userStats?.practiceToday ? 100 : 0
+                      },
                       {
                         title: "Create 5 flashcards",
                         description: "Build your flashcard collection",
                         icon: NotebookPen,
+                        emoji: "🧠",
                         reward: 30,
                         isComplete: weeklyFlashcardCount >= 5,
                         progress: Math.min((weeklyFlashcardCount / 5) * 100, 100)
@@ -5370,325 +5362,324 @@ const Dashboard = () => {
                         title: "Study for 30 minutes",
                         description: "Focus on your learning goals",
                         icon: Clock,
+                        emoji: "⏰",
                         reward: 35,
                         isComplete: hasAwardedStudyTime,
                         progress: (studyTimeMinutes / 30) * 100
                       },
-                     {
-                       title: "Score 80%+ on any topic",
-                       description: "Demonstrate topic mastery",
-                       icon: Trophy,
-                       reward: 50,
-                       isComplete: false,
-                       progress: 0
-                     }
-                   ];
-                   
-                   const quest = dailyQuests[questIndex];
-                   const QuestIcon = quest.icon;
-                   
-                   return (
-                     <motion.div
-                       initial={{ opacity: 0, y: 20 }}
-                       animate={{ opacity: 1, y: 0 }}
-                       transition={{ delay: 0.2 }}
-                       className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
-                     >
-                       <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                       
-                       <div className="relative p-6">
-                         <div className="flex items-start justify-between mb-4">
-                           <div className="flex items-start gap-4 flex-1">
-                             <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
-                               {quest.isComplete ? (
-                                 <Check className="h-6 w-6 text-[#0EA5E9]" />
-                               ) : (
-                                 <QuestIcon className="h-6 w-6 text-[#0EA5E9]" />
-                               )}
-                             </div>
-                             <div className="flex-1">
-                               <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">{quest.title}</h4>
-                               <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                                 {quest.description}
-                               </p>
-                             </div>
-                           </div>
-                           <div className="flex items-center gap-3">
-                             <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
-                               <span className="text-lg font-bold text-[#0EA5E9]">
-                                 +{quest.reward} MP
-                               </span>
-                             </div>
-                             {quest.isComplete && (
-                               <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
-                                 <Check className="w-5 h-5 text-white" />
-                               </div>
-                             )}
-                           </div>
-                         </div>
-                         
-                         <div className="relative h-3 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                           <motion.div 
-                             initial={{ width: 0 }}
-                             animate={{ width: `${quest.progress}%` }}
-                             transition={{ duration: 0.8, delay: 0.3 }}
-                             className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
-                           />
-                         </div>
-                       </div>
-                     </motion.div>
-                   );
-                 })()}
-
-                {/* Quest 3 - Bonus Weekly */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-start gap-4 flex-1">
-                        <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
-                          <Star className="h-6 w-6 text-[#0EA5E9]" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">Complete 3 topics</h4>
-                          <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                            Weekly bonus — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
-                          <span className="text-lg font-bold text-[#0EA5E9]">+100 MP</span>
-                        </div>
-                        {(userStats?.weeklyTopicsCount || 0) >= 3 && (
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
-                            <Check className="w-5 h-5 text-white" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                      {
+                        title: "Score 80%+ on any topic",
+                        description: "Demonstrate topic mastery",
+                        icon: Trophy,
+                        emoji: "🏆",
+                        reward: 50,
+                        isComplete: false,
+                        progress: 0
+                      }
+                    ];
                     
-                    <div className="relative h-3 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        animate={{ width: `${Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)}%` }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                    const quest = dailyQuests[questIndex];
+                    const QuestIcon = quest.icon;
+                    
+                    return (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                          <CardContent className="p-6">
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
+                                  {quest.isComplete ? (
+                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
+                                  ) : (
+                                    <QuestIcon className="h-5 w-5 text-[#0EA5E9]" />
+                                  )}
+                                </div>
+                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
+                                  {quest.emoji} Daily
+                                </Badge>
+                              </div>
+                              {quest.isComplete && (
+                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
+                                  <Check className="w-4 h-4 text-white" />
+                                </div>
+                              )}
+                            </div>
+                            
+                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{quest.title}</h4>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
+                              {quest.description}
+                            </p>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
+                                <span className="text-xs font-bold text-[#0EA5E9]">+{quest.reward} MP</span>
+                              </div>
+                              <Progress 
+                                value={quest.progress} 
+                                className="h-2"
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })()}
+
+                  {/* Quest 3 - Bonus Weekly */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
+                              <Star className="h-5 w-5 text-[#0EA5E9]" />
+                            </div>
+                            <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
+                              ⭐ Bonus
+                            </Badge>
+                          </div>
+                          {(userStats?.weeklyTopicsCount || 0) >= 3 && (
+                            <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        
+                        <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">Complete 3 topics</h4>
+                        <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
+                          Weekly bonus — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
+                        </p>
+                        
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
+                            <span className="text-xs font-bold text-[#0EA5E9]">+100 MP</span>
+                          </div>
+                          <Progress 
+                            value={Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)} 
+                            className="h-2"
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </div>
               </div>
 
-              {/* Weekly Quests Section */}
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">This Week's Challenges</h2>
+              {/* This Week's Challenges Section */}
+              <div className="space-y-6 p-8 rounded-3xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-900/50 dark:to-gray-800/50 border border-[#E2E8F0]/30 dark:border-gray-700/30">
+                <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">This Week's Challenges</h2>
                 
-                {/* Rotating Weekly Challenge 1 */}
-                {(() => {
-                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
-                  const challenge1Index = weekOfYear % 4;
-                  
-                  const weeklyChallenges1 = [
-                    {
-                      title: "Complete 5 practice sets",
-                      description: "{current}/5 completed this week",
-                      icon: Trophy,
-                      reward: 250,
-                      target: 5,
-                      current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
-                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 5
-                    },
-                    {
-                      title: "Practice 8 different topics",
-                      description: "{current}/8 topics this week",
-                      icon: Brain,
-                      reward: 250,
-                      target: 8,
-                      current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
-                      isComplete: (userStats?.weeklyTopicsCount || 0) >= 8
-                    },
-                    {
-                      title: "Study for 3 hours total",
-                      description: "{current}/180 minutes this week",
-                      icon: Clock,
-                      reward: 250,
-                      target: 180,
-                      current: 0,
-                      isComplete: false
-                    },
-                    {
-                      title: "Create 20 flashcards",
-                      description: `${weeklyFlashcardCount}/20 flashcards this week`,
-                      icon: NotebookPen,
-                      reward: 250,
-                      target: 20,
-                      current: weeklyFlashcardCount,
-                      isComplete: weeklyFlashcardCount >= 20
-                    }
-                  ];
-                  
-                  const challenge = weeklyChallenges1[challenge1Index];
-                  const ChallengeIcon = challenge.icon;
-                  
-                  return (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      <div className="relative p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-start gap-4 flex-1">
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
-                              {challenge.isComplete ? (
-                                <Check className="h-6 w-6 text-[#0EA5E9]" />
-                              ) : (
-                                <ChallengeIcon className="h-6 w-6 text-[#0EA5E9]" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Rotating Weekly Challenge 1 */}
+                  {(() => {
+                    const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                    const challenge1Index = weekOfYear % 4;
+                    
+                    const weeklyChallenges1 = [
+                      {
+                        title: "Complete 5 practice sets",
+                        description: "{current}/5 completed this week",
+                        icon: Trophy,
+                        emoji: "🏆",
+                        reward: 250,
+                        target: 5,
+                        current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
+                        isComplete: (userStats?.weeklyPracticeCount || 0) >= 5
+                      },
+                      {
+                        title: "Practice 8 different topics",
+                        description: "{current}/8 topics this week",
+                        icon: Brain,
+                        emoji: "🧠",
+                        reward: 250,
+                        target: 8,
+                        current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
+                        isComplete: (userStats?.weeklyTopicsCount || 0) >= 8
+                      },
+                      {
+                        title: "Study for 3 hours total",
+                        description: "{current}/180 minutes this week",
+                        icon: Clock,
+                        emoji: "⏰",
+                        reward: 250,
+                        target: 180,
+                        current: 0,
+                        isComplete: false
+                      },
+                      {
+                        title: "Create 20 flashcards",
+                        description: `${weeklyFlashcardCount}/20 flashcards this week`,
+                        icon: NotebookPen,
+                        emoji: "📝",
+                        reward: 250,
+                        target: 20,
+                        current: weeklyFlashcardCount,
+                        isComplete: weeklyFlashcardCount >= 20
+                      }
+                    ];
+                    
+                    const challenge = weeklyChallenges1[challenge1Index];
+                    const ChallengeIcon = challenge.icon;
+                    
+                    return (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        <Card className="h-full bg-white dark:bg-gray-800 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                          <CardContent className="p-6">
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
+                                  {challenge.isComplete ? (
+                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
+                                  ) : (
+                                    <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
+                                  )}
+                                </div>
+                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
+                                  {challenge.emoji} Weekly
+                                </Badge>
+                              </div>
+                              {challenge.isComplete && (
+                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
+                                  <Check className="w-4 h-4 text-white" />
+                                </div>
                               )}
                             </div>
-                            <div className="flex-1">
-                              <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">{challenge.title}</h4>
-                              <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                                {challenge.description.replace('{current}', challenge.current.toString())}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
-                              <span className="text-lg font-bold text-[#0EA5E9]">
-                                +{challenge.reward} MP
-                              </span>
-                            </div>
-                            {challenge.isComplete && (
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
-                                <Check className="w-5 h-5 text-white" />
+                            
+                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{challenge.title}</h4>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
+                                <span className="text-xs font-bold text-[#0EA5E9]">+{challenge.reward} MP</span>
                               </div>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div className="relative h-3 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%` }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })()}
+                              <Progress 
+                                value={Math.min((challenge.current / challenge.target) * 100, 100)} 
+                                className="h-2"
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })()}
 
-                {/* Rotating Weekly Challenge 2 */}
-                {(() => {
-                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
-                  const challenge2Index = (weekOfYear + 2) % 4;
-                  
-                  const weeklyChallenges2 = [
-                    {
-                      title: "Maintain 7-day streak",
-                      description: "{current}/7 days completed",
-                      icon: Flame,
-                      reward: 500,
-                      target: 7,
-                      current: Math.min(userStats?.currentStreak || 0, 7),
-                      isComplete: (userStats?.currentStreak || 0) >= 7
-                    },
-                    {
-                      title: "Complete 10 practice sets",
-                      description: "{current}/10 completed this week",
-                      icon: Zap,
-                      reward: 500,
-                      target: 10,
-                      current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
-                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 10
-                    },
-                    {
-                      title: "Review 30 flashcards",
-                      description: "{current}/30 reviewed this week",
-                      icon: Eye,
-                      reward: 500,
-                      target: 30,
-                      current: 0,
-                      isComplete: false
-                    },
-                    {
-                      title: "Practice every day this week",
-                      description: "{current}/7 days with practice",
-                      icon: Calendar,
-                      reward: 500,
-                      target: 7,
-                      current: Math.min(userStats?.currentStreak || 0, 7),
-                      isComplete: (userStats?.currentStreak || 0) >= 7
-                    }
-                  ];
-                  
-                  const challenge = weeklyChallenges2[challenge2Index];
-                  const ChallengeIcon = challenge.icon;
-                  
-                  return (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      <div className="relative p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-start gap-4 flex-1">
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
-                              {challenge.isComplete ? (
-                                <Check className="h-6 w-6 text-[#0EA5E9]" />
-                              ) : (
-                                <ChallengeIcon className="h-6 w-6 text-[#0EA5E9]" />
+                  {/* Rotating Weekly Challenge 2 */}
+                  {(() => {
+                    const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                    const challenge2Index = (weekOfYear + 2) % 4;
+                    
+                    const weeklyChallenges2 = [
+                      {
+                        title: "Maintain 7-day streak",
+                        description: "{current}/7 days completed",
+                        icon: Flame,
+                        emoji: "🔥",
+                        reward: 500,
+                        target: 7,
+                        current: Math.min(userStats?.currentStreak || 0, 7),
+                        isComplete: (userStats?.currentStreak || 0) >= 7
+                      },
+                      {
+                        title: "Complete 10 practice sets",
+                        description: "{current}/10 completed this week",
+                        icon: Zap,
+                        emoji: "⚡",
+                        reward: 500,
+                        target: 10,
+                        current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
+                        isComplete: (userStats?.weeklyPracticeCount || 0) >= 10
+                      },
+                      {
+                        title: "Review 30 flashcards",
+                        description: "{current}/30 reviewed this week",
+                        icon: Eye,
+                        emoji: "👁️",
+                        reward: 500,
+                        target: 30,
+                        current: 0,
+                        isComplete: false
+                      },
+                      {
+                        title: "Practice every day this week",
+                        description: "{current}/7 days with practice",
+                        icon: Calendar,
+                        emoji: "📅",
+                        reward: 500,
+                        target: 7,
+                        current: Math.min(userStats?.currentStreak || 0, 7),
+                        isComplete: (userStats?.currentStreak || 0) >= 7
+                      }
+                    ];
+                    
+                    const challenge = weeklyChallenges2[challenge2Index];
+                    const ChallengeIcon = challenge.icon;
+                    
+                    return (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <Card className="h-full bg-white dark:bg-gray-800 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                          <CardContent className="p-6">
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
+                                  {challenge.isComplete ? (
+                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
+                                  ) : (
+                                    <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
+                                  )}
+                                </div>
+                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
+                                  {challenge.emoji} Epic
+                                </Badge>
+                              </div>
+                              {challenge.isComplete && (
+                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
+                                  <Check className="w-4 h-4 text-white" />
+                                </div>
                               )}
                             </div>
-                            <div className="flex-1">
-                              <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">{challenge.title}</h4>
-                              <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                                {challenge.description.replace('{current}', challenge.current.toString())}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
-                              <span className="text-lg font-bold text-[#0EA5E9]">
-                                +{challenge.reward} MP
-                              </span>
-                            </div>
-                            {challenge.isComplete && (
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
-                                <Check className="w-5 h-5 text-white" />
+                            
+                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{challenge.title}</h4>
+                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
+                                <span className="text-xs font-bold text-[#0EA5E9]">+{challenge.reward} MP</span>
                               </div>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div className="relative h-3 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%` }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })()}
+                              <Progress 
+                                value={Math.min((challenge.current / challenge.target) * 100, 100)} 
+                                className="h-2"
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })()}
+                </div>
               </div>
             </div>
           )}
