@@ -367,26 +367,32 @@ const PredictedResults = () => {
         if (existingTask) {
           // Update existing task
           console.log(`🔄 UPDATING EXISTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
-          const { error: taskError } = await supabase
+          const { data: updatedTask, error: taskError } = await supabase
             .from('subject_daily_tasks')
             .update({
               completed: true,
               mp_awarded: 30,
               updated_at: new Date().toISOString()
             })
-            .eq('id', existingTask.id);
+            .eq('id', existingTask.id)
+            .select();
+          
+          console.log('📊 UPDATE RESPONSE - Data:', updatedTask, 'Error:', taskError);
           
           if (taskError) {
-            alert(`✗ ERROR UPDATING TASK: ${taskError.message}`);
+            alert(`✗ ERROR UPDATING TASK: ${taskError.message}\nCode: ${taskError.code}`);
             console.error('✗ ERROR updating task:', taskError);
+          } else if (!updatedTask || updatedTask.length === 0) {
+            alert(`⚠️ UPDATE: No error but no data returned - RLS may have blocked`);
+            console.error('⚠️ Update returned success but no data');
           } else {
             alert(`✅ TASK UPDATED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
-            console.log('✓ Task updated in database');
+            console.log('✓ Task updated in database:', updatedTask);
           }
         } else {
           // Insert new task
           console.log(`📝 INSERTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
-          const { error: taskError } = await supabase
+          const { data: insertedTask, error: taskError } = await supabase
             .from('subject_daily_tasks')
             .insert({
               user_id: user.id,
@@ -395,12 +401,19 @@ const PredictedResults = () => {
               date: today,
               completed: true,
               mp_awarded: 30
-            });
+            })
+            .select();
+          
+          console.log('📊 INSERT RESPONSE - Data:', insertedTask, 'Error:', taskError);
           
           if (taskError) {
+            alert(`❌ ERROR INSERTING: ${taskError.message}\nCode: ${taskError.code}\nDetails: ${taskError.details}`);
             console.error('❌ Error inserting task:', taskError);
+          } else if (!insertedTask || insertedTask.length === 0) {
+            alert(`⚠️ NO ERROR BUT NO DATA RETURNED - RLS may have blocked the insert silently`);
+            console.error('⚠️ Insert returned success but no data - likely RLS issue');
           } else {
-            console.log('✅ Task inserted successfully');
+            console.log('✅ Task inserted successfully:', insertedTask);
             alert(`✅ TASK INSERTED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
           }
         }
