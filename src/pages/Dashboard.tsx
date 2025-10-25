@@ -5202,246 +5202,435 @@ const Dashboard = () => {
 
           {activeTab === "quests" && (
             <div className="space-y-6">
-              {/* Page Header */}
-              <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white mb-2">
-                  Daily Quests
-                </h1>
-                <p className="text-sm text-[#64748B] dark:text-gray-400">
-                  Track your progress and earn MP
-                </p>
-              </div>
-
-              {/* Progress Overview */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
-                  <CardContent className="p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Daily Goal</span>
-                      <Trophy className="h-5 w-5 text-[#0EA5E9]" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                          {Math.min(todayEarnedMP, 50)}
-                        </span>
-                        <span className="text-lg font-medium text-[#64748B] dark:text-gray-400">/ 50</span>
-                      </div>
-                      <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-2" />
-                      <p className="text-xs text-[#64748B] dark:text-gray-400">
-                        {50 - Math.min(todayEarnedMP, 50)} MP to goal
+              {/* Hero Section with Stats */}
+              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/20 dark:via-[#0EA5E9]/10 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-8">
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h1 className="text-3xl font-bold text-[#0F172A] dark:text-white mb-2">
+                        Quest Center
+                      </h1>
+                      <p className="text-sm text-[#64748B] dark:text-gray-400">
+                        Complete quests to level up your learning journey
                       </p>
                     </div>
-                  </CardContent>
-                </Card>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-[#0EA5E9]/20">
+                      <Flame className="h-4 w-4 text-[#0EA5E9]" />
+                      <span className="text-sm font-bold text-[#0F172A] dark:text-white">{currentStreak} Day Streak</span>
+                    </div>
+                  </div>
 
-                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
-                  <CardContent className="p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Total Balance</span>
-                      <Gem className="h-5 w-5 text-[#0EA5E9]" />
-                    </div>
-                    <div className="text-3xl font-bold text-[#0EA5E9] mb-2">
-                      {userGems.toLocaleString()}
-                    </div>
-                    <p className="text-xs text-[#64748B] dark:text-gray-400">
-                      Mentiora Points
-                    </p>
-                  </CardContent>
-                </Card>
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    {/* Daily Progress */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Daily Goal</span>
+                        <Trophy className="h-4 w-4 text-[#0EA5E9]" />
+                      </div>
+                      <div className="flex items-baseline gap-1 mb-2">
+                        <span className="text-2xl font-bold text-[#0EA5E9]">{Math.min(todayEarnedMP, 50)}</span>
+                        <span className="text-sm text-[#64748B] dark:text-gray-400">/ 50 MP</span>
+                      </div>
+                      <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-1.5" />
+                    </motion.div>
 
-                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
-                  <CardContent className="p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Current Streak</span>
-                      <Flame className="h-5 w-5 text-[#0EA5E9]" />
-                    </div>
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                    {/* Total Balance */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Total MP</span>
+                        <Gem className="h-4 w-4 text-[#0EA5E9]" />
+                      </div>
+                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
+                        {userGems.toLocaleString()}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <TrendingUp className="h-3 w-3 text-green-500" />
+                        <span className="text-xs text-green-500">+{todayEarnedMP} today</span>
+                      </div>
+                    </motion.div>
+
+                    {/* Completion Rate */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Quest Rate</span>
+                        <Target className="h-4 w-4 text-[#0EA5E9]" />
+                      </div>
+                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
+                        {(() => {
+                          const loginComplete = userStats?.loginToday ? 1 : 0;
+                          const practiceComplete = userStats?.practiceToday ? 1 : 0;
+                          const topicsComplete = (userStats?.weeklyTopicsCount || 0) >= 3 ? 1 : 0;
+                          const total = loginComplete + practiceComplete + topicsComplete;
+                          return Math.round((total / 3) * 100);
+                        })()}%
+                      </div>
+                      <span className="text-xs text-[#64748B] dark:text-gray-400">Today's completion</span>
+                    </motion.div>
+
+                    {/* Weekly Streak */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Active Days</span>
+                        <Flame className="h-4 w-4 text-[#0EA5E9]" />
+                      </div>
+                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
                         {currentStreak}
-                      </span>
-                      <span className="text-lg font-medium text-[#64748B] dark:text-gray-400">days</span>
-                    </div>
-                    <p className="text-xs text-[#64748B] dark:text-gray-400">
-                      Keep it going! 🔥
-                    </p>
-                  </CardContent>
-                </Card>
+                      </div>
+                      <span className="text-xs text-[#64748B] dark:text-gray-400">Don't break the chain!</span>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
 
-              {/* Today's Quests - List Style */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-bold text-[#0F172A] dark:text-white">Today's Quests</h2>
-                
-                <div className="space-y-3">
-                  {/* Quest 1 - Login */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl ${userStats?.loginToday ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
-                        <Check className={`h-5 w-5 ${userStats?.loginToday ? 'text-white' : 'text-[#0EA5E9]'}`} />
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-bold text-[#0F172A] dark:text-white">Log in today</h3>
-                          <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
-                            +10 MP
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Progress 
-                            value={(userStats?.loginToday || todayEarnedMP >= 10) ? 100 : 0} 
-                            className="h-1.5 flex-1"
-                          />
-                          <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
-                            {(userStats?.loginToday || todayEarnedMP >= 10) ? 'Complete' : '0/1'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
+              {/* Main Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Left Column - Daily Quests */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-[#0F172A] dark:text-white flex items-center gap-2">
+                      <Zap className="h-5 w-5 text-[#0EA5E9]" />
+                      Today's Quests
+                    </h2>
+                    <Badge variant="outline" className="border-[#0EA5E9]/30 text-[#0EA5E9]">
+                      {(() => {
+                        const loginComplete = userStats?.loginToday ? 1 : 0;
+                        const practiceComplete = userStats?.practiceToday ? 1 : 0;
+                        const topicsComplete = (userStats?.weeklyTopicsCount || 0) >= 3 ? 1 : 0;
+                        return loginComplete + practiceComplete + topicsComplete;
+                      })()}/3 Complete
+                    </Badge>
+                  </div>
 
-                  {/* Quest 2 - Rotating Daily */}
-                  {(() => {
-                    const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
-                    const questIndex = dayOfYear % 4;
-                    
-                    const dailyQuests = [
-                      {
-                        title: "Complete 1 practice set",
-                        icon: BookOpen,
-                        reward: 40,
-                        isComplete: userStats?.practiceToday,
-                        progress: userStats?.practiceToday ? 100 : 0,
-                        current: userStats?.practiceToday ? 1 : 0,
-                        target: 1
-                      },
-                      {
-                        title: "Create 5 flashcards",
-                        icon: NotebookPen,
-                        reward: 30,
-                        isComplete: weeklyFlashcardCount >= 5,
-                        progress: Math.min((weeklyFlashcardCount / 5) * 100, 100),
-                        current: Math.min(weeklyFlashcardCount, 5),
-                        target: 5
-                      },
-                      {
-                        title: "Study for 30 minutes",
-                        icon: Clock,
-                        reward: 35,
-                        isComplete: hasAwardedStudyTime,
-                        progress: Math.min((studyTimeMinutes / 30) * 100, 100),
-                        current: Math.min(studyTimeMinutes, 30),
-                        target: 30
-                      },
-                      {
-                        title: "Score 80%+ on any topic",
-                        icon: Target,
-                        reward: 50,
-                        isComplete: false,
-                        progress: 0,
-                        current: 0,
-                        target: 1
-                      }
-                    ];
-                    
-                    const quest = dailyQuests[questIndex];
-                    const QuestIcon = quest.icon;
-                    
-                    return (
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-xl ${quest.isComplete ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
-                            {quest.isComplete ? (
-                              <Check className="h-5 w-5 text-white" />
-                            ) : (
-                              <QuestIcon className="h-5 w-5 text-[#0EA5E9]" />
-                            )}
+                  {/* Quest Cards Grid */}
+                  <div className="grid gap-4">
+                    {/* Quest 1 - Login */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`p-4 rounded-xl transition-all ${
+                          userStats?.loginToday 
+                            ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
+                            : 'bg-[#0EA5E9]/10 group-hover:bg-[#0EA5E9]/20'
+                        }`}>
+                          {userStats?.loginToday ? (
+                            <Check className="h-6 w-6 text-white" />
+                          ) : (
+                            <Check className="h-6 w-6 text-[#0EA5E9]" />
+                          )}
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <h3 className="font-bold text-lg text-[#0F172A] dark:text-white mb-1">Daily Login</h3>
+                              <p className="text-sm text-[#64748B] dark:text-gray-400">Sign in to start your day</p>
+                            </div>
+                            <Badge className={userStats?.loginToday ? "bg-[#0EA5E9] text-white" : "bg-[#0EA5E9]/10 text-[#0EA5E9]"}>
+                              +10 MP
+                            </Badge>
                           </div>
                           
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-bold text-[#0F172A] dark:text-white">{quest.title}</h3>
-                              <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
-                                +{quest.reward} MP
-                              </Badge>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-[#64748B] dark:text-gray-400">Progress</span>
+                              <span className="font-bold text-[#0EA5E9]">{(userStats?.loginToday || todayEarnedMP >= 10) ? '100' : '0'}%</span>
                             </div>
-                            <div className="flex items-center gap-3">
-                              <Progress 
-                                value={quest.progress} 
-                                className="h-1.5 flex-1"
-                              />
-                              <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
-                                {quest.current}/{quest.target}
-                              </span>
-                            </div>
+                            <Progress 
+                              value={(userStats?.loginToday || todayEarnedMP >= 10) ? 100 : 0} 
+                              className="h-2"
+                            />
                           </div>
                         </div>
-                      </motion.div>
-                    );
-                  })()}
-
-                  {/* Quest 3 - Weekly Bonus */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl ${(userStats?.weeklyTopicsCount || 0) >= 3 ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
-                        <Star className={`h-5 w-5 ${(userStats?.weeklyTopicsCount || 0) >= 3 ? 'text-white' : 'text-[#0EA5E9]'}`} />
                       </div>
+                    </motion.div>
+
+                    {/* Quest 2 - Rotating Daily */}
+                    {(() => {
+                      const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+                      const questIndex = dayOfYear % 4;
                       
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-bold text-[#0F172A] dark:text-white">Complete 3 topics</h3>
-                          <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
-                            +100 MP
-                          </Badge>
-                          <Badge variant="secondary" className="text-xs">
-                            Weekly
-                          </Badge>
+                      const dailyQuests = [
+                        {
+                          title: "Practice Master",
+                          description: "Complete 1 practice set today",
+                          icon: BookOpen,
+                          reward: 40,
+                          isComplete: userStats?.practiceToday,
+                          progress: userStats?.practiceToday ? 100 : 0,
+                          current: userStats?.practiceToday ? 1 : 0,
+                          target: 1,
+                          action: () => {
+                            if (userSubjects.length > 0) {
+                              setSelectedSubject(userSubjects[0]);
+                              setSubjectDrawerOpen(true);
+                              setDrawerTab('topics');
+                            }
+                          }
+                        },
+                        {
+                          title: "Flashcard Creator",
+                          description: "Create 5 flashcards on any subject",
+                          icon: NotebookPen,
+                          reward: 30,
+                          isComplete: weeklyFlashcardCount >= 5,
+                          progress: Math.min((weeklyFlashcardCount / 5) * 100, 100),
+                          current: Math.min(weeklyFlashcardCount, 5),
+                          target: 5,
+                          action: () => {
+                            if (userSubjects.length > 0) {
+                              setSelectedSubject(userSubjects[0]);
+                              setSubjectDrawerOpen(true);
+                              setDrawerTab('flashcards');
+                            }
+                          }
+                        },
+                        {
+                          title: "Study Session",
+                          description: "Study for 30 minutes",
+                          icon: Clock,
+                          reward: 35,
+                          isComplete: hasAwardedStudyTime,
+                          progress: Math.min((studyTimeMinutes / 30) * 100, 100),
+                          current: Math.min(studyTimeMinutes, 30),
+                          target: 30,
+                          action: () => {
+                            if (userSubjects.length > 0) {
+                              setSelectedSubject(userSubjects[0]);
+                              setSubjectDrawerOpen(true);
+                              setDrawerTab('topics');
+                            }
+                          }
+                        },
+                        {
+                          title: "High Achiever",
+                          description: "Score 80%+ on any topic",
+                          icon: Target,
+                          reward: 50,
+                          isComplete: false,
+                          progress: 0,
+                          current: 0,
+                          target: 1,
+                          action: () => {
+                            if (userSubjects.length > 0) {
+                              setSelectedSubject(userSubjects[0]);
+                              setSubjectDrawerOpen(true);
+                              setDrawerTab('topics');
+                            }
+                          }
+                        }
+                      ];
+                      
+                      const quest = dailyQuests[questIndex];
+                      const QuestIcon = quest.icon;
+                      
+                      return (
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 hover:shadow-lg transition-all"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className={`p-4 rounded-xl transition-all ${
+                              quest.isComplete 
+                                ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
+                                : 'bg-[#0EA5E9]/10 group-hover:bg-[#0EA5E9]/20'
+                            }`}>
+                              {quest.isComplete ? (
+                                <Check className="h-6 w-6 text-white" />
+                              ) : (
+                                <QuestIcon className="h-6 w-6 text-[#0EA5E9]" />
+                              )}
+                            </div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between mb-3">
+                                <div>
+                                  <h3 className="font-bold text-lg text-[#0F172A] dark:text-white mb-1">{quest.title}</h3>
+                                  <p className="text-sm text-[#64748B] dark:text-gray-400">{quest.description}</p>
+                                </div>
+                                <Badge className={quest.isComplete ? "bg-[#0EA5E9] text-white" : "bg-[#0EA5E9]/10 text-[#0EA5E9]"}>
+                                  +{quest.reward} MP
+                                </Badge>
+                              </div>
+                              
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between text-xs">
+                                  <span className="text-[#64748B] dark:text-gray-400">Progress: {quest.current}/{quest.target}</span>
+                                  <span className="font-bold text-[#0EA5E9]">{Math.round(quest.progress)}%</span>
+                                </div>
+                                <Progress value={quest.progress} className="h-2" />
+                              </div>
+
+                              {!quest.isComplete && (
+                                <Button 
+                                  size="sm" 
+                                  className="mt-3 bg-[#0EA5E9] hover:bg-[#0284c7] text-white"
+                                  onClick={quest.action}
+                                >
+                                  <Play className="h-3 w-3 mr-1" />
+                                  Start
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })()}
+
+                    {/* Quest 3 - Weekly Topics */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="group relative bg-gradient-to-br from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 rounded-2xl p-6 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`p-4 rounded-xl transition-all ${
+                          (userStats?.weeklyTopicsCount || 0) >= 3
+                            ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
+                            : 'bg-white dark:bg-gray-700 group-hover:bg-[#0EA5E9]/10'
+                        }`}>
+                          {(userStats?.weeklyTopicsCount || 0) >= 3 ? (
+                            <Check className="h-6 w-6 text-white" />
+                          ) : (
+                            <Star className="h-6 w-6 text-[#0EA5E9]" />
+                          )}
                         </div>
-                        <div className="flex items-center gap-3">
-                          <Progress 
-                            value={Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)} 
-                            className="h-1.5 flex-1"
-                          />
-                          <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
-                            {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3
-                          </span>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <div className="flex items-center gap-2 mb-1">
+                                <h3 className="font-bold text-lg text-[#0F172A] dark:text-white">Weekly Challenge</h3>
+                                <Badge variant="secondary" className="text-xs">7 Days</Badge>
+                              </div>
+                              <p className="text-sm text-[#64748B] dark:text-gray-400">Complete 3 different topics this week</p>
+                            </div>
+                            <Badge className="bg-[#0EA5E9] text-white">
+                              +100 MP
+                            </Badge>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-[#64748B] dark:text-gray-400">
+                                Progress: {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 topics
+                              </span>
+                              <span className="font-bold text-[#0EA5E9]">
+                                {Math.round(Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100))}%
+                              </span>
+                            </div>
+                            <Progress 
+                              value={Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)} 
+                              className="h-2"
+                            />
+                          </div>
                         </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Right Column - Quick Stats & Weekly Challenges */}
+                <div className="space-y-4">
+                  {/* Performance Summary */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-bold text-[#0F172A] dark:text-white">This Week</h3>
+                      <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0">
+                        <TrendingUp className="h-3 w-3 mr-1" />
+                        Active
+                      </Badge>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
+                        <div className="flex items-center gap-2">
+                          <BookOpen className="h-4 w-4 text-[#0EA5E9]" />
+                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Practice Sets</span>
+                        </div>
+                        <span className="text-lg font-bold text-[#0EA5E9]">{userStats?.weeklyPracticeCount || 0}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
+                        <div className="flex items-center gap-2">
+                          <Brain className="h-4 w-4 text-[#0EA5E9]" />
+                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Topics Learned</span>
+                        </div>
+                        <span className="text-lg font-bold text-[#0EA5E9]">{userStats?.weeklyTopicsCount || 0}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
+                        <div className="flex items-center gap-2">
+                          <NotebookPen className="h-4 w-4 text-[#0EA5E9]" />
+                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Flashcards</span>
+                        </div>
+                        <span className="text-lg font-bold text-[#0EA5E9]">{weeklyFlashcardCount}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-transparent">
+                        <div className="flex items-center gap-2">
+                          <Gem className="h-4 w-4 text-[#0EA5E9]" />
+                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">MP Earned</span>
+                        </div>
+                        <span className="text-lg font-bold text-[#0EA5E9]">+{todayEarnedMP}</span>
                       </div>
                     </div>
                   </motion.div>
-                </div>
-              </div>
 
-              {/* Weekly Challenges */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-bold text-[#0F172A] dark:text-white">Weekly Challenges</h2>
-                  <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0">
-                    Higher Rewards
-                  </Badge>
-                </div>
-                
-                <div className="space-y-3">
-                  {/* Rotating Weekly Challenge 1 */}
-                  {(() => {
-                    const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
-                    const challenge1Index = weekOfYear % 4;
+                  {/* Weekly Mega Challenges */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gradient-to-br from-[#0EA5E9]/10 via-white to-white dark:from-[#0EA5E9]/20 dark:via-gray-800 dark:to-gray-800 rounded-2xl p-6 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-bold text-[#0F172A] dark:text-white flex items-center gap-2">
+                        <Crown className="h-5 w-5 text-[#0EA5E9]" />
+                        Mega Challenges
+                      </h3>
+                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#0284c7] text-white border-0">
+                        2x Rewards
+                      </Badge>
+                    </div>
+
+                    <div className="space-y-3">
+                      {/* Rotating Weekly Challenge 1 */}
+                      {(() => {
+                        const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                        const challenge1Index = weekOfYear % 4;
                     
                     const weeklyChallenges1 = [
                       {
@@ -5598,7 +5787,9 @@ const Dashboard = () => {
                         </div>
                       </motion.div>
                     );
-                  })()}
+                      })()}
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
