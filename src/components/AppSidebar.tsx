@@ -122,17 +122,17 @@ export function AppSidebar() {
                       >
                         <motion.div
                           className={`
-                            flex items-center gap-4 px-4 py-4 rounded-2xl
+                            flex items-center gap-3 px-4 py-3 rounded-full
                             transition-all duration-300 relative overflow-hidden
                             ${active 
-                              ? `${item.activeColor} text-white shadow-xl` 
+                              ? `${item.activeColor} text-white shadow-lg` 
                               : `${item.bgColor} ${item.hoverColor} transition-all duration-200`
                             }
                           `}
-                          whileHover={{ scale: 1.03, x: 4 }}
-                          whileTap={{ scale: 0.97 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           style={{
-                            boxShadow: active ? `0 8px 24px -8px ${item.color}` : 'none'
+                            boxShadow: active ? `0 4px 20px -4px ${item.color}` : 'none'
                           }}
                         >
                           {/* Background glow effect */}
@@ -149,10 +149,10 @@ export function AppSidebar() {
                           
                           <motion.div
                             whileHover={{ rotate: active ? 0 : 5 }}
-                            className="relative z-10"
+                            className="relative z-10 flex-shrink-0"
                           >
                             <item.icon 
-                              className={`h-6 w-6 flex-shrink-0 ${active ? 'text-white' : ''}`}
+                              className={`h-5 w-5 ${active ? 'text-white' : ''}`}
                               style={{ color: active ? 'white' : item.color }}
                               strokeWidth={2.5}
                             />
@@ -162,21 +162,11 @@ export function AppSidebar() {
                             <motion.span 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className={`font-bold text-base relative z-10 ${active ? 'text-white' : ''}`}
+                              className={`font-semibold text-sm relative z-10 flex-1 ${active ? 'text-white' : ''}`}
                               style={{ color: active ? 'white' : item.color }}
                             >
                               {item.label}
                             </motion.span>
-                          )}
-                          
-                          {/* Active indicator pill */}
-                          {active && !isCollapsed && (
-                            <motion.div
-                              layoutId="activePill"
-                              className="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-lg"
-                              initial={false}
-                              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                            />
                           )}
                         </motion.div>
                       </NavLink>
@@ -196,22 +186,23 @@ export function AppSidebar() {
               <NavLink to="/settings" className="group">
                 <motion.div
                   className={`
-                    flex items-center gap-4 px-4 py-4 rounded-2xl
+                    flex items-center gap-3 px-4 py-3 rounded-full
                     transition-all duration-300 relative overflow-hidden
                     ${location.pathname === "/settings"
-                      ? 'bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] text-white shadow-xl shadow-[#6366F1]/30' 
+                      ? 'bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] text-white shadow-lg shadow-[#6366F1]/20' 
                       : 'bg-muted/50 hover:bg-muted transition-all duration-200'
                     }
                   `}
-                  whileHover={{ scale: 1.03, x: 4 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <motion.div
                     whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.3 }}
+                    className="flex-shrink-0"
                   >
                     <Settings 
-                      className={`h-6 w-6 flex-shrink-0 ${location.pathname === "/settings" ? 'text-white' : 'text-[#6366F1]'}`}
+                      className={`h-5 w-5 ${location.pathname === "/settings" ? 'text-white' : 'text-[#6366F1]'}`}
                       strokeWidth={2.5}
                     />
                   </motion.div>
@@ -219,7 +210,7 @@ export function AppSidebar() {
                     <motion.span 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className={`font-bold text-base ${location.pathname === "/settings" ? 'text-white' : 'text-[#6366F1]'}`}
+                      className={`font-semibold text-sm flex-1 ${location.pathname === "/settings" ? 'text-white' : 'text-[#6366F1]'}`}
                     >
                       Settings
                     </motion.span>
