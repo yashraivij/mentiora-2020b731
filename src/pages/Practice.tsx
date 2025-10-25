@@ -1729,7 +1729,7 @@ const Practice = () => {
             }).length * 10} / {shuffledQuestions.length * 10} MP
           </span>
         </div>
-        <div className="w-full bg-muted/50 rounded-full h-1.5 overflow-hidden">
+        <div className="w-full bg-muted/50 rounded-full h-4 overflow-hidden">
           <div 
             className="h-full bg-[hsl(195,69%,54%)] rounded-full transition-all duration-500 ease-out"
             style={{ 
