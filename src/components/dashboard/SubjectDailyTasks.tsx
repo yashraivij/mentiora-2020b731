@@ -153,6 +153,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (showLoading) setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
+      console.log(`[SubjectDailyTasks] Loading task completions for ${subjectId}, user ${userId}, date ${today}`);
+      
       // Load manual task completions
       const { data: manualTasks, error: manualError } = await supabase
         .from('subject_daily_tasks')
@@ -161,13 +163,18 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         .eq('subject_id', subjectId)
         .eq('date', today);
 
-      if (manualError) throw manualError;
+      if (manualError) {
+        console.error('[SubjectDailyTasks] Error loading manual tasks:', manualError);
+        throw manualError;
+      }
+
+      console.log(`[SubjectDailyTasks] Found ${manualTasks?.length || 0} manual task completions:`, manualTasks);
 
       // Auto-detect predicted exam completion
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
-      console.log(`Checking for exam completions for ${subjectId} between ${todayStart} and ${todayEnd}`);
+      console.log(`[SubjectDailyTasks] Checking for exam completions for ${subjectId} between ${todayStart} and ${todayEnd}`);
       
       const { data: examCompletions, error: examError } = await supabase
         .from('predicted_exam_completions')
@@ -178,11 +185,11 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         .lte('completed_at', todayEnd);
 
       if (examError) {
-        console.error('Error fetching exam completions:', examError);
+        console.error('[SubjectDailyTasks] Error fetching exam completions:', examError);
         throw examError;
       }
 
-      console.log(`Found ${examCompletions?.length || 0} exam completions for ${subjectId} today:`, examCompletions);
+      console.log(`[SubjectDailyTasks] Found ${examCompletions?.length || 0} exam completions for ${subjectId} today:`, examCompletions);
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
 
       // Update tasks based on both manual and auto-detected completions
