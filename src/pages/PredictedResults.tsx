@@ -573,7 +573,7 @@ const PredictedResults = () => {
         const today = new Date().toISOString().split('T')[0];
         const baseSubject = subjectId.split('-')[0];
         
-        console.log('[Daily Task Direct] Marking task for:', subjectId, 'base:', baseSubject);
+        console.log('[Daily Task] Starting for:', subjectId, 'base:', baseSubject);
         
         // Mark for all possible subject variants
         const variants = [
@@ -599,24 +599,37 @@ const PredictedResults = () => {
             });
           
           if (!error) {
-            console.log('[Daily Task Direct] Marked for:', variant);
+            console.log('[Daily Task] ✓ Marked complete:', variant);
+          } else {
+            console.error('[Daily Task] Error marking:', variant, error);
           }
         }
         
-        // Award MP
-        await supabase.functions.invoke('award-mp', {
-          body: {
-            action: 'subject_task_completed',
-            userId: user.id,
-            mpAmount: 30,
-            taskId: 'predicted_exam',
-            subjectId: subjectId
-          }
-        });
+        // Award 30 MP directly to user_points
+        const { data: currentPoints } = await supabase
+          .from('user_points')
+          .select('total_points')
+          .eq('user_id', user.id)
+          .maybeSingle();
         
-        console.log('[Daily Task Direct] Complete!');
+        const newTotal = (currentPoints?.total_points || 0) + 30;
+        
+        const { error: pointsError } = await supabase
+          .from('user_points')
+          .upsert({
+            user_id: user.id,
+            total_points: newTotal,
+            updated_at: new Date().toISOString()
+          });
+        
+        if (!pointsError) {
+          console.log('[Daily Task] ✓ Awarded 30 MP. New total:', newTotal);
+          toast.success('+30 MP for completing predicted exam!');
+        }
+        
+        console.log('[Daily Task] ✓ Complete!');
       } catch (error) {
-        console.error('[Daily Task Direct] Error:', error);
+        console.error('[Daily Task] Error:', error);
       }
     };
     
