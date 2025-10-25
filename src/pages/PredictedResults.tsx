@@ -366,6 +366,7 @@ const PredictedResults = () => {
         
         if (existingTask) {
           // Update existing task
+          console.log(`🔄 UPDATING EXISTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
           const { error: taskError } = await supabase
             .from('subject_daily_tasks')
             .update({
@@ -379,7 +380,7 @@ const PredictedResults = () => {
             alert(`✗ ERROR UPDATING TASK: ${taskError.message}`);
             console.error('✗ ERROR updating task:', taskError);
           } else {
-            alert('✓ TASK UPDATED IN DATABASE');
+            alert(`✅ TASK UPDATED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
             console.log('✓ Task updated in database');
           }
         } else {
