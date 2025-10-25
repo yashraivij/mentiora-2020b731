@@ -271,48 +271,83 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
       if (checked) {
-        // Mark as complete
-        const { error } = await supabase
+        // Check if task exists first
+        const { data: existingTask } = await supabase
           .from('subject_daily_tasks')
-          .upsert({
-            user_id: userId,
-            subject_id: subjectId,
-            task_id: taskId,
-            date: today,
-            completed: true,
-            mp_awarded: task.mpReward
-          }, {
-            onConflict: 'user_id,subject_id,task_id,date'
-          });
+          .select('id')
+          .eq('user_id', userId)
+          .eq('subject_id', subjectId)
+          .eq('task_id', taskId)
+          .eq('date', today)
+          .maybeSingle();
 
-        if (error) {
-          console.error('✗ ERROR marking task:', error);
-          throw error;
+        if (existingTask) {
+          // Update existing
+          const { error } = await supabase
+            .from('subject_daily_tasks')
+            .update({
+              completed: true,
+              mp_awarded: task.mpReward,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', existingTask.id);
+
+          if (error) throw error;
+        } else {
+          // Insert new
+          const { error } = await supabase
+            .from('subject_daily_tasks')
+            .insert({
+              user_id: userId,
+              subject_id: subjectId,
+              task_id: taskId,
+              date: today,
+              completed: true,
+              mp_awarded: task.mpReward
+            });
+
+          if (error) throw error;
         }
 
         console.log('✓ Task marked complete');
 
-        // Award MP directly
-        const { data: currentPoints } = await supabase
+        // Award MP - check if user exists first
+        const { data: existingPoints } = await supabase
           .from('user_points')
           .select('total_points')
           .eq('user_id', userId)
           .maybeSingle();
 
-        const newTotal = (currentPoints?.total_points || 0) + task.mpReward;
+        if (existingPoints) {
+          const newTotal = existingPoints.total_points + task.mpReward;
+          const { error: pointsError } = await supabase
+            .from('user_points')
+            .update({
+              total_points: newTotal,
+              updated_at: new Date().toISOString()
+            })
+            .eq('user_id', userId);
 
-        const { error: pointsError } = await supabase
-          .from('user_points')
-          .upsert({
-            user_id: userId,
-            total_points: newTotal,
-            updated_at: new Date().toISOString()
-          });
-
-        if (pointsError) {
-          console.error('✗ ERROR awarding MP:', pointsError);
+          if (pointsError) {
+            console.error('✗ ERROR updating MP:', pointsError);
+          } else {
+            console.log(`✓ Updated ${task.mpReward} MP | New total: ${newTotal}`);
+          }
         } else {
-          console.log(`✓ Awarded ${task.mpReward} MP | New total: ${newTotal}`);
+          const { error: pointsError } = await supabase
+            .from('user_points')
+            .insert({
+              user_id: userId,
+              total_points: task.mpReward,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            });
+
+          if (pointsError) {
+            console.error('✗ ERROR inserting MP:', pointsError);
+          } else {
+            console.log(`✓ Created MP record | Total: ${task.mpReward}`);
+          }
         }
 
         // Update local state
@@ -338,10 +373,7 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           .eq('task_id', taskId)
           .eq('date', today);
 
-        if (error) {
-          console.error('✗ ERROR unchecking task:', error);
-          throw error;
-        }
+        if (error) throw error;
 
         console.log('✓ Task unchecked');
 

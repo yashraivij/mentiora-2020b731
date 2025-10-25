@@ -343,7 +343,7 @@ const PredictedResults = () => {
         alert('✓ EXAM SAVED TO DATABASE');
         console.log('✓ Exam completion saved successfully to database');
         
-        // Mark daily task complete - SIMPLE approach
+        // Mark daily task complete - FIXED approach
         const today = new Date().toISOString().split('T')[0];
         
         alert(`MARKING DAILY TASK FOR: ${subjectId}`);
@@ -354,52 +354,101 @@ const PredictedResults = () => {
         console.log('Date:', today);
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         
-        // Mark task with EXACT subject ID match (no variants)
-        const { error: taskError } = await supabase
+        // Check if task already exists
+        const { data: existingTask } = await supabase
           .from('subject_daily_tasks')
-          .upsert({
-            user_id: user.id,
-            subject_id: subjectId,
-            task_id: 'predicted_exam',
-            date: today,
-            completed: true,
-            mp_awarded: 30
-          }, {
-            onConflict: 'user_id,subject_id,task_id,date'
-          });
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('subject_id', subjectId)
+          .eq('task_id', 'predicted_exam')
+          .eq('date', today)
+          .maybeSingle();
         
-        if (taskError) {
-          alert(`✗ ERROR MARKING TASK: ${taskError.message}`);
-          console.error('✗ ERROR marking task:', taskError);
+        if (existingTask) {
+          // Update existing task
+          const { error: taskError } = await supabase
+            .from('subject_daily_tasks')
+            .update({
+              completed: true,
+              mp_awarded: 30,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', existingTask.id);
+          
+          if (taskError) {
+            alert(`✗ ERROR UPDATING TASK: ${taskError.message}`);
+            console.error('✗ ERROR updating task:', taskError);
+          } else {
+            alert('✓ TASK UPDATED IN DATABASE');
+            console.log('✓ Task updated in database');
+          }
         } else {
-          alert('✓ TASK MARKED IN DATABASE');
-          console.log('✓ Task marked complete in database');
+          // Insert new task
+          const { error: taskError } = await supabase
+            .from('subject_daily_tasks')
+            .insert({
+              user_id: user.id,
+              subject_id: subjectId,
+              task_id: 'predicted_exam',
+              date: today,
+              completed: true,
+              mp_awarded: 30
+            });
+          
+          if (taskError) {
+            alert(`✗ ERROR INSERTING TASK: ${taskError.message}`);
+            console.error('✗ ERROR inserting task:', taskError);
+          } else {
+            alert('✓ TASK INSERTED IN DATABASE');
+            console.log('✓ Task inserted in database');
+          }
         }
         
-        // Award 30 MP directly to user_points table
-        const { data: currentPoints } = await supabase
+        // Award 30 MP - Check if user exists first
+        const { data: existingPoints } = await supabase
           .from('user_points')
           .select('total_points')
           .eq('user_id', user.id)
           .maybeSingle();
         
-        const newTotal = (currentPoints?.total_points || 0) + 30;
-        
-        const { error: pointsError } = await supabase
-          .from('user_points')
-          .upsert({
-            user_id: user.id,
-            total_points: newTotal,
-            updated_at: new Date().toISOString()
-          });
-        
-        if (pointsError) {
-          alert(`✗ ERROR AWARDING MP: ${pointsError.message}`);
-          console.error('✗ ERROR awarding MP:', pointsError);
+        if (existingPoints) {
+          // Update existing points
+          const newTotal = existingPoints.total_points + 30;
+          const { error: pointsError } = await supabase
+            .from('user_points')
+            .update({
+              total_points: newTotal,
+              updated_at: new Date().toISOString()
+            })
+            .eq('user_id', user.id);
+          
+          if (pointsError) {
+            alert(`✗ ERROR UPDATING MP: ${pointsError.message}`);
+            console.error('✗ ERROR updating MP:', pointsError);
+          } else {
+            alert(`✓ UPDATED MP! NEW TOTAL: ${newTotal}`);
+            console.log('✓ Updated MP | New total:', newTotal);
+            toast.success('Daily task complete! +30 MP');
+          }
         } else {
-          alert(`✓ AWARDED 30 MP! NEW TOTAL: ${newTotal}`);
-          console.log('✓ Awarded 30 MP | New total:', newTotal);
-          toast.success('Daily task complete! +30 MP');
+          // Insert new points record
+          const { error: pointsError } = await supabase
+            .from('user_points')
+            .insert({
+              user_id: user.id,
+              total_points: 30,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            });
+          
+          if (pointsError) {
+            alert(`✗ ERROR INSERTING MP: ${pointsError.message}`);
+            console.error('✗ ERROR inserting MP:', pointsError);
+          } else {
+            alert('✓ CREATED MP RECORD! TOTAL: 30');
+            console.log('✓ Created MP record | Total: 30');
+            toast.success('Daily task complete! +30 MP');
+          }
         }
         
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
