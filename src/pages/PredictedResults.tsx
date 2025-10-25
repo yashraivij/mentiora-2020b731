@@ -396,8 +396,8 @@ const PredictedResults = () => {
             });
           
           if (taskError) {
-            alert(`✗ ERROR INSERTING TASK: ${taskError.message}`);
-            console.error('✗ ERROR inserting task:', taskError);
+            alert(`✗ ERROR INSERTING TASK: ${taskError.message}\nCode: ${taskError.code}\nDetails: ${taskError.details || 'none'}\nHint: ${taskError.hint || 'none'}`);
+            console.error('✗ FULL ERROR inserting task:', JSON.stringify(taskError, null, 2));
           } else {
             alert('✓ TASK INSERTED IN DATABASE');
             console.log('✓ Task inserted in database');
