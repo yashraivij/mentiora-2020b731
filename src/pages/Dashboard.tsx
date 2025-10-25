@@ -2454,28 +2454,27 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background flex">
       {/* Left Navigation Sidebar - Desktop Only */}
-      <div className="hidden lg:flex flex-col w-24 border-r border-border/50 backdrop-blur-xl bg-gradient-to-b from-background/95 to-background/80 sticky top-0 h-screen py-8">
-        <div className="flex flex-col items-center gap-8 flex-1 px-3">
+      <div className="hidden lg:flex flex-col w-24 border-r border-border bg-background/50 backdrop-blur-sm sticky top-0 h-screen py-8">
+        <div className="flex flex-col items-center gap-6 flex-1">
           {/* Learn Tab */}
           <button
             onClick={() => setActiveTab("learn")}
-            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
+            className={`group relative flex flex-col items-center gap-2 transition-all duration-300 ${
+              activeTab === "learn" ? "scale-110" : "hover:scale-105"
+            }`}
           >
             <div
-              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
+              className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "learn"
-                  ? "bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/10 backdrop-blur-lg border-2 border-[#0EA5E9]/50 shadow-lg shadow-[#0EA5E9]/20"
-                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-[#0EA5E9]/30 hover:bg-[#0EA5E9]/5 hover:shadow-md"
+                  ? "bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/50"
+                  : "bg-blue-100 dark:bg-blue-900/20 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/30"
               }`}
             >
-              <Home className={`w-6 h-6 transition-all duration-300 ${activeTab === "learn" ? "text-[#0EA5E9] scale-110" : "text-muted-foreground group-hover:text-[#0EA5E9]/70"}`} />
-              {activeTab === "learn" && (
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-transparent animate-pulse" />
-              )}
+              <Home className={`w-7 h-7 ${activeTab === "learn" ? "text-white" : "text-blue-600 dark:text-blue-400"}`} />
             </div>
             <span
-              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
-                activeTab === "learn" ? "text-[#0EA5E9]" : "text-muted-foreground/70 group-hover:text-muted-foreground"
+              className={`text-xs font-bold tracking-wide ${
+                activeTab === "learn" ? "text-blue-600 dark:text-blue-400" : "text-muted-foreground"
               }`}
             >
               LEARN
@@ -2485,23 +2484,22 @@ const Dashboard = () => {
           {/* Quests Tab */}
           <button
             onClick={() => setActiveTab("quests")}
-            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
+            className={`group relative flex flex-col items-center gap-2 transition-all duration-300 ${
+              activeTab === "quests" ? "scale-110" : "hover:scale-105"
+            }`}
           >
             <div
-              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
+              className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "quests"
-                  ? "bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 backdrop-blur-lg border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20"
-                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:shadow-md"
+                  ? "bg-gradient-to-br from-green-400 to-green-500 shadow-lg shadow-green-500/50"
+                  : "bg-green-100 dark:bg-green-900/20 group-hover:bg-green-200 dark:group-hover:bg-green-900/30"
               }`}
             >
-              <Star className={`w-6 h-6 transition-all duration-300 ${activeTab === "quests" ? "text-emerald-500 scale-110" : "text-muted-foreground group-hover:text-emerald-500/70"}`} />
-              {activeTab === "quests" && (
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-transparent animate-pulse" />
-              )}
+              <Star className={`w-7 h-7 ${activeTab === "quests" ? "text-white" : "text-green-600 dark:text-green-400"}`} />
             </div>
             <span
-              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
-                activeTab === "quests" ? "text-emerald-500" : "text-muted-foreground/70 group-hover:text-muted-foreground"
+              className={`text-xs font-bold tracking-wide ${
+                activeTab === "quests" ? "text-green-600 dark:text-green-400" : "text-muted-foreground"
               }`}
             >
               QUESTS
@@ -2511,23 +2509,22 @@ const Dashboard = () => {
           {/* Leaderboard Tab */}
           <button
             onClick={() => setActiveTab("leaderboards")}
-            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
+            className={`group relative flex flex-col items-center gap-2 transition-all duration-300 ${
+              activeTab === "leaderboards" ? "scale-110" : "hover:scale-105"
+            }`}
           >
             <div
-              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
+              className={`w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "leaderboards"
-                  ? "bg-gradient-to-br from-amber-500/20 to-amber-500/10 backdrop-blur-lg border-2 border-amber-500/50 shadow-lg shadow-amber-500/20"
-                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-amber-500/30 hover:bg-amber-500/5 hover:shadow-md"
+                  ? "bg-gradient-to-br from-yellow-400 to-yellow-500 shadow-lg shadow-yellow-500/50"
+                  : "bg-yellow-100 dark:bg-yellow-900/20 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/30"
               }`}
             >
-              <Trophy className={`w-6 h-6 transition-all duration-300 ${activeTab === "leaderboards" ? "text-amber-500 scale-110" : "text-muted-foreground group-hover:text-amber-500/70"}`} />
-              {activeTab === "leaderboards" && (
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500/10 to-transparent animate-pulse" />
-              )}
+              <Trophy className={`w-7 h-7 ${activeTab === "leaderboards" ? "text-white" : "text-yellow-600 dark:text-yellow-400"}`} />
             </div>
             <span
-              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
-                activeTab === "leaderboards" ? "text-amber-500" : "text-muted-foreground/70 group-hover:text-muted-foreground"
+              className={`text-xs font-bold tracking-wide ${
+                activeTab === "leaderboards" ? "text-yellow-600 dark:text-yellow-400" : "text-muted-foreground"
               }`}
             >
               BOARD
