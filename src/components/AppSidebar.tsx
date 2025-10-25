@@ -21,50 +21,50 @@ const navItems = [
     label: "Learn", 
     url: "/dashboard", 
     icon: Home,
-    color: "hsl(199, 89%, 48%)",
-    bgColor: "bg-[#0BA5E9]/10",
-    activeColor: "bg-[#0BA5E9]",
-    hoverColor: "hover:bg-[#0BA5E9]/20"
+    tooltip: "View your subjects and progress",
+    gradient: "from-sky-500 to-blue-600",
+    iconColor: "text-sky-500",
+    activeGlow: "shadow-sky-500/20"
   },
   { 
     id: "leaderboards", 
     label: "Leaderboards", 
     url: "/dashboard?tab=leaderboards", 
     icon: Trophy,
-    color: "hsl(43, 96%, 56%)",
-    bgColor: "bg-[#FBBF24]/10",
-    activeColor: "bg-[#FBBF24]",
-    hoverColor: "hover:bg-[#FBBF24]/20"
+    tooltip: "See where you rank",
+    gradient: "from-amber-500 to-orange-600",
+    iconColor: "text-amber-500",
+    activeGlow: "shadow-amber-500/20"
   },
   { 
     id: "quests", 
     label: "Quests", 
     url: "/dashboard?tab=quests", 
     icon: Star,
-    color: "hsl(142, 71%, 45%)",
-    bgColor: "bg-[#22C55E]/10",
-    activeColor: "bg-[#22C55E]",
-    hoverColor: "hover:bg-[#22C55E]/20"
+    tooltip: "Complete daily challenges",
+    gradient: "from-emerald-500 to-green-600",
+    iconColor: "text-emerald-500",
+    activeGlow: "shadow-emerald-500/20"
   },
   { 
     id: "flashcards", 
     label: "Flashcards", 
     url: "/dashboard?tab=flashcards", 
     icon: Brain,
-    color: "hsl(258, 90%, 66%)",
-    bgColor: "bg-[#A855F7]/10",
-    activeColor: "bg-[#A855F7]",
-    hoverColor: "hover:bg-[#A855F7]/20"
+    tooltip: "Study with AI flashcards",
+    gradient: "from-purple-500 to-violet-600",
+    iconColor: "text-purple-500",
+    activeGlow: "shadow-purple-500/20"
   },
   { 
     id: "profile", 
     label: "Profile", 
     url: "/dashboard?tab=profile", 
     icon: User,
-    color: "hsl(217, 19%, 60%)",
-    bgColor: "bg-[#94A3B8]/10",
-    activeColor: "bg-[#94A3B8]",
-    hoverColor: "hover:bg-[#94A3B8]/20"
+    tooltip: "Manage your account",
+    gradient: "from-slate-500 to-slate-600",
+    iconColor: "text-slate-500",
+    activeGlow: "shadow-slate-500/20"
   },
 ];
 
@@ -82,12 +82,12 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r border-border/50">
-      <SidebarHeader className="p-4 border-b border-border/50">
+      <SidebarHeader className="p-4 border-b border-border/40">
         <div className="flex items-center gap-3">
           <motion.div
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
-            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#0BA5E9] to-[#6366F1] p-2 shadow-lg flex-shrink-0"
+            className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary via-primary to-primary/80 p-2 shadow-md flex-shrink-0"
           >
             <img 
               src={mentioraLogo} 
@@ -97,9 +97,10 @@ export function AppSidebar() {
           </motion.div>
           {!isCollapsed && (
             <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-xl font-bold bg-gradient-to-r from-[#0BA5E9] to-[#6366F1] bg-clip-text text-transparent"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-lg font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
             >
               Mentiora
             </motion.span>
@@ -110,59 +111,59 @@ export function AppSidebar() {
       <SidebarContent className="p-3">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-2">
+            <SidebarMenu className="space-y-1.5">
               {navItems.map((item) => {
                 const active = isActive(item.url);
                 return (
                   <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton asChild tooltip={item.label}>
+                    <SidebarMenuButton asChild tooltip={item.tooltip}>
                       <NavLink
                         to={item.url}
                         className="group relative"
                       >
                         <motion.div
                           className={`
-                            flex items-center gap-4 px-6 py-4 rounded-full
-                            transition-all duration-300 relative overflow-hidden
-                            backdrop-blur-xl border
+                            flex items-center gap-3 px-3.5 py-2.5 rounded-xl
+                            transition-all duration-200 relative overflow-hidden
                             ${active 
-                              ? `bg-white/20 border-white/30 text-white shadow-2xl` 
-                              : `bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20`
+                              ? `bg-gradient-to-r ${item.gradient} shadow-lg ${item.activeGlow}` 
+                              : `hover:bg-accent/50`
                             }
                           `}
-                          whileHover={{ scale: 1.03, x: 4 }}
+                          whileHover={{ scale: active ? 1 : 1.02, x: active ? 0 : 2 }}
                           whileTap={{ scale: 0.98 }}
-                          style={{
-                            boxShadow: active ? `0 8px 32px -8px ${item.color}` : 'none'
-                          }}
+                          transition={{ duration: 0.15 }}
                         >
-                          {/* Background glow effect */}
+                          {/* Active indicator */}
                           {active && (
                             <motion.div
-                              className="absolute inset-0 opacity-20"
-                              style={{
-                                background: `radial-gradient(circle at 30% 50%, white, transparent 70%)`
-                              }}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 0.2 }}
+                              className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"
+                              layoutId="activeIndicator"
+                              transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
                           )}
                           
                           <motion.div
-                            whileHover={{ rotate: active ? 0 : 8, scale: 1.1 }}
+                            whileHover={{ rotate: active ? 0 : 5 }}
+                            transition={{ duration: 0.2 }}
                             className="relative z-10 flex-shrink-0"
                           >
                             <item.icon 
-                              className="h-6 w-6 text-white drop-shadow-lg"
+                              className={`h-5 w-5 transition-colors duration-200 ${
+                                active ? 'text-white' : item.iconColor
+                              }`}
                               strokeWidth={2.5}
                             />
                           </motion.div>
                           
                           {!isCollapsed && (
                             <motion.span 
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="font-bold text-base relative z-10 flex-1 text-white drop-shadow-md"
+                              initial={{ opacity: 0, x: -5 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.15 }}
+                              className={`font-semibold text-sm relative z-10 transition-colors duration-200 ${
+                                active ? 'text-white' : 'text-foreground'
+                              }`}
                             >
                               {item.label}
                             </motion.span>
@@ -178,39 +179,53 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-3 border-t border-border/50">
+      <SidebarFooter className="p-3 border-t border-border/40">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Settings">
+            <SidebarMenuButton asChild tooltip="Manage your preferences">
               <NavLink to="/settings" className="group">
                 <motion.div
                   className={`
-                    flex items-center gap-4 px-6 py-4 rounded-full
-                    transition-all duration-300 relative overflow-hidden
-                    backdrop-blur-xl border
+                    flex items-center gap-3 px-3.5 py-2.5 rounded-xl
+                    transition-all duration-200 relative overflow-hidden
                     ${location.pathname === "/settings"
-                      ? 'bg-white/20 border-white/30 text-white shadow-2xl shadow-[#6366F1]/30' 
-                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                      ? 'bg-gradient-to-r from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20' 
+                      : 'hover:bg-accent/50'
                     }
                   `}
-                  whileHover={{ scale: 1.03, x: 4 }}
+                  whileHover={{ scale: location.pathname === "/settings" ? 1 : 1.02, x: location.pathname === "/settings" ? 0 : 2 }}
                   whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.15 }}
                 >
+                  {/* Active indicator */}
+                  {location.pathname === "/settings" && (
+                    <motion.div
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"
+                      layoutId="activeIndicator"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  
                   <motion.div
-                    whileHover={{ rotate: 90, scale: 1.1 }}
+                    whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.3 }}
                     className="flex-shrink-0"
                   >
                     <Settings 
-                      className="h-6 w-6 text-white drop-shadow-lg"
+                      className={`h-5 w-5 transition-colors duration-200 ${
+                        location.pathname === "/settings" ? 'text-white' : 'text-indigo-500'
+                      }`}
                       strokeWidth={2.5}
                     />
                   </motion.div>
                   {!isCollapsed && (
                     <motion.span 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="font-bold text-base flex-1 text-white drop-shadow-md"
+                      initial={{ opacity: 0, x: -5 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.15 }}
+                      className={`font-semibold text-sm transition-colors duration-200 ${
+                        location.pathname === "/settings" ? 'text-white' : 'text-foreground'
+                      }`}
                     >
                       Settings
                     </motion.span>
