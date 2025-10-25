@@ -545,10 +545,7 @@ const Practice = () => {
           // Show Medly blue notification with progress bar
           toast.custom((t) => (
             <div className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] text-white px-6 py-4 rounded-lg shadow-xl border border-white/20 min-w-[320px] animate-in slide-in-from-top-5 duration-500">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="bg-white/20 rounded-full p-2">
-                  <Star className="w-5 h-5" fill="currentColor" />
-                </div>
+              <div className="flex items-center justify-between mb-3">
                 <div className="flex-1">
                   <div className="font-bold text-lg">+10 MP Earned!</div>
                   <div className="text-sm text-white/90">Perfect answer - Full marks achieved</div>
@@ -1685,6 +1682,51 @@ const Practice = () => {
                 <BookOpen className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <h1 className="text-lg font-semibold text-foreground truncate">{topic?.name}</h1>
               </div>
+              {/* Test notification button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const currentMP = 50;
+                  const totalPossibleMP = 100;
+                  const mpProgress = (currentMP / totalPossibleMP) * 100;
+                  
+                  toast.custom((t) => (
+                    <div className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] text-white px-6 py-4 rounded-lg shadow-xl border border-white/20 min-w-[320px] animate-in slide-in-from-top-5 duration-500">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex-1">
+                          <div className="font-bold text-lg">+10 MP Earned!</div>
+                          <div className="text-sm text-white/90">Perfect answer - Full marks achieved</div>
+                        </div>
+                        <button 
+                          onClick={() => toast.dismiss(t)}
+                          className="text-white/80 hover:text-white transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-white/90">Progress</span>
+                          <span className="font-semibold">{currentMP} / {totalPossibleMP} MP</span>
+                        </div>
+                        <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                          <div 
+                            className="h-full bg-white rounded-full transition-all duration-500 ease-out shadow-lg"
+                            style={{ width: `${mpProgress}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ), {
+                    duration: 4000,
+                    position: 'top-right',
+                  });
+                }}
+                className="hidden md:flex"
+              >
+                Test MP
+              </Button>
             </div>
 
             {/* Center: Modern Progress indicator with fox */}
