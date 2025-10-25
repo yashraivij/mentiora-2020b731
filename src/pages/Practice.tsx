@@ -164,7 +164,6 @@ const Practice = () => {
   const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
   const [beforeSessionGrade, setBeforeSessionGrade] = useState<number | null>(null);
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
-  const [showMPAnimation, setShowMPAnimation] = useState(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -533,9 +532,6 @@ const Practice = () => {
           await supabase.functions.invoke('award-mp', {
             body: { action: 'full_marks_question', userId: user.id }
           });
-          // Show animation
-          setShowMPAnimation(true);
-          setTimeout(() => setShowMPAnimation(false), 2000);
         } catch (error) {
           console.error('Error awarding full marks MP:', error);
         }
@@ -1721,48 +1717,28 @@ const Practice = () => {
       </header>
 
       {/* MP Progress Bar */}
-      <div className="max-w-6xl mx-auto px-6 md:px-8 py-4 relative">
-        <div className="flex items-center justify-between mb-2.5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[hsl(195,69%,54%)] to-[hsl(195,69%,44%)] flex items-center justify-center shadow-md">
-              <Star className="h-4 w-4 text-white fill-white" />
-            </div>
-            <span className="text-sm font-semibold text-foreground">
-              MP Progress
-            </span>
-          </div>
-          <span className="text-sm font-bold bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] bg-clip-text text-transparent">
+      <div className="max-w-6xl mx-auto px-6 md:px-8 py-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-xs font-medium text-muted-foreground">
+            MP Progress
+          </span>
+          <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
             {attempts.filter(a => {
               const q = shuffledQuestions.find(sq => sq.id === a.questionId);
               return q && a.score === q.marks;
             }).length * 10} / {shuffledQuestions.length * 10} MP
           </span>
         </div>
-        <div className="relative w-full bg-gradient-to-r from-muted/50 via-muted/40 to-muted/50 rounded-full h-4 overflow-hidden shadow-inner border border-border/50">
+        <div className="w-full bg-muted/50 rounded-full h-1.5 overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,69%,64%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-500 ease-out shadow-lg relative overflow-hidden"
+            className="h-full bg-[hsl(195,69%,54%)] rounded-full transition-all duration-500 ease-out"
             style={{ 
               width: `${(attempts.filter(a => {
                 const q = shuffledQuestions.find(sq => sq.id === a.questionId);
                 return q && a.score === q.marks;
               }).length / shuffledQuestions.length) * 100}%` 
             }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
-          </div>
-          
-          {/* MP Animation */}
-          {showMPAnimation && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="animate-in zoom-in fade-in duration-300">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] text-white font-bold text-sm shadow-2xl shadow-[hsl(195,69%,54%)]/50 animate-bounce">
-                  <Star className="h-4 w-4 fill-white animate-spin" />
-                  +10 MP
-                  <Star className="h-4 w-4 fill-white animate-spin" />
-                </div>
-              </div>
-            </div>
-          )}
+          />
         </div>
       </div>
 
