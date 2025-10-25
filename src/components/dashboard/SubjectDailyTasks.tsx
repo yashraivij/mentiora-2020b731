@@ -129,21 +129,23 @@ const getSubjectTasks = (subjectId: string): Task[] => {
 export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps) {
   const [tasks, setTasks] = useState<Task[]>(getSubjectTasks(subjectId));
   const [loading, setLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    loadTaskCompletions();
+    loadTaskCompletions(isInitialLoad);
+    setIsInitialLoad(false);
 
-    // Refresh task completions every 5 seconds to detect completed exams
+    // Refresh task completions every 5 seconds silently (no loading state)
     const interval = setInterval(() => {
-      loadTaskCompletions();
+      loadTaskCompletions(false);
     }, 5000);
 
     return () => clearInterval(interval);
   }, [subjectId, userId]);
 
-  const loadTaskCompletions = async () => {
+  const loadTaskCompletions = async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
       // Load manual task completions
@@ -190,7 +192,7 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
     } catch (error) {
       console.error('Error loading task completions:', error);
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
