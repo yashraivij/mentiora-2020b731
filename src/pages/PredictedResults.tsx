@@ -346,8 +346,9 @@ const PredictedResults = () => {
         const today = new Date().toISOString().split('T')[0];
         const baseSubject = subjectId?.split('-')[0] || subjectId;
         
+        console.log('[Daily Task] Marking task complete for subject:', subjectId, 'base:', baseSubject);
+        
         // Get all possible subject variants the user might have as daily task cards
-        // E.g., if they completed 'physics' exam, mark tasks for 'physics', 'physics-aqa', 'physics-edexcel', etc.
         const subjectVariants = [
           subjectId,
           baseSubject,
@@ -356,28 +357,39 @@ const PredictedResults = () => {
           `${baseSubject}-ocr`,
           subjectId?.replace('-paper-2', ''),
           `${baseSubject}-paper-2`
-        ];
+        ].filter(v => v && v !== 'undefined'); // Remove undefined/null values
+        
+        console.log('[Daily Task] Will mark tasks for variants:', subjectVariants);
         
         // Mark task for all matching subject variants
         for (const variant of subjectVariants) {
-          if (variant) {
-            await supabase
-              .from('subject_daily_tasks')
-              .upsert({
-                user_id: user.id,
-                subject_id: variant,
-                task_id: 'predicted_exam',
-                date: today,
-                completed: true,
-                mp_awarded: 30
-              }, {
-                onConflict: 'user_id,subject_id,task_id,date'
-              });
+          const taskData = {
+            user_id: user.id,
+            subject_id: variant,
+            task_id: 'predicted_exam',
+            date: today,
+            completed: true,
+            mp_awarded: 30
+          };
+          
+          console.log('[Daily Task] Upserting task for variant:', variant, taskData);
+          
+          const { error: taskError } = await supabase
+            .from('subject_daily_tasks')
+            .upsert(taskData, {
+              onConflict: 'user_id,subject_id,task_id,date'
+            });
+          
+          if (taskError) {
+            console.error(`[Daily Task] Error upserting task for ${variant}:`, taskError);
+          } else {
+            console.log(`[Daily Task] Successfully marked task for ${variant}`);
           }
         }
         
         // Award MP once
-        await supabase.functions.invoke('award-mp', {
+        console.log('[Daily Task] Awarding MP...');
+        const { error: mpError } = await supabase.functions.invoke('award-mp', {
           body: {
             action: 'subject_task_completed',
             userId: user.id,
@@ -387,7 +399,13 @@ const PredictedResults = () => {
           }
         });
         
-        console.log('Daily task marked as complete');
+        if (mpError) {
+          console.error('[Daily Task] Error awarding MP:', mpError);
+        } else {
+          console.log('[Daily Task] MP awarded successfully');
+        }
+        
+        console.log('[Daily Task] All tasks marked as complete');
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
