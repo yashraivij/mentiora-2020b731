@@ -164,11 +164,18 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
+      // Build subject variants to check (e.g., 'physics', 'physics-aqa', 'physics-edexcel')
+      const subjectVariants = [subjectId];
+      const baseSubject = subjectId.split('-')[0]; // Get 'physics' from 'physics-aqa'
+      if (baseSubject !== subjectId) {
+        subjectVariants.push(baseSubject);
+      }
+      
       const { data: examCompletions } = await supabase
         .from('predicted_exam_completions')
-        .select('id, completed_at')
+        .select('id, completed_at, subject_id')
         .eq('user_id', userId)
-        .eq('subject_id', subjectId)
+        .in('subject_id', subjectVariants)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
 
