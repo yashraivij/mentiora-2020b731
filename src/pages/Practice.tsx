@@ -164,7 +164,6 @@ const Practice = () => {
   const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
   const [beforeSessionGrade, setBeforeSessionGrade] = useState<number | null>(null);
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
-  const [showFullMarksReward, setShowFullMarksReward] = useState(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -535,8 +534,10 @@ const Practice = () => {
           });
           
           if (data?.awarded > 0) {
-            setShowFullMarksReward(true);
-            setTimeout(() => setShowFullMarksReward(false), 3000);
+            toast("🌟 Perfect! +10 MP", {
+              description: "Full marks reward earned",
+              className: "bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 dark:from-amber-950/60 dark:via-yellow-950/50 dark:to-amber-900/40 border-amber-300/60 dark:border-amber-700/50",
+            });
           }
         } catch (error) {
           console.error('Error awarding full marks MP:', error);
@@ -1819,25 +1820,6 @@ const Practice = () => {
                         >
                           <RotateCcw className="w-4 h-4" />
                         </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Full marks MP reward notification */}
-                  {showFullMarksReward && (
-                    <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
-                      <div className="max-w-[85%] space-y-2">
-                        <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 dark:from-amber-950/60 dark:via-yellow-950/50 dark:to-amber-900/40 px-5 py-4 shadow-lg border border-amber-300/60 dark:border-amber-700/50 backdrop-blur-sm">
-                          <div className="flex items-center gap-3">
-                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 dark:from-amber-500 dark:to-yellow-600 flex items-center justify-center shadow-md">
-                              <Star className="h-5 w-5 text-white" />
-                            </div>
-                            <div>
-                              <p className="font-bold text-amber-900 dark:text-amber-100">Perfect! +10 MP</p>
-                              <p className="text-xs text-amber-700 dark:text-amber-300 mt-0.5">Full marks reward earned</p>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   )}
