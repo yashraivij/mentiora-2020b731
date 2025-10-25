@@ -5200,141 +5200,112 @@ const Dashboard = () => {
            )}
 
           {activeTab === "quests" && (
-            <div className="space-y-8">
-              {/* Hero Summary Bar - Dashboard Style */}
-              <div className="mb-8">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                  <div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white">
-                      Daily Quests
-                    </h1>
-                    <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1">
-                      Complete challenges and earn MP to climb the leaderboard
-                    </p>
-                  </div>
-                </div>
-
-                {/* Summary Stats Grid - Like Dashboard KPI Belt */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
-                          <Trophy className="h-4 w-4 text-[#0EA5E9]" />
-                        </div>
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Daily Goal</span>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
-                            {Math.min(todayEarnedMP, 50)}
-                          </span>
-                          <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">/ 50 MP</span>
-                        </div>
-                        <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-1.5" />
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
-                          <Gem className="h-4 w-4 text-[#0EA5E9]" />
-                        </div>
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Total Balance</span>
-                      </div>
-                      <div className="text-2xl font-bold text-[#0EA5E9]">
-                        {userGems.toLocaleString()} MP
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
-                          <Flame className="h-4 w-4 text-[#0EA5E9]" />
-                        </div>
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">Streak</span>
-                      </div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
-                          {currentStreak}
-                        </span>
-                        <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">days 🔥</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-5">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-[#0EA5E9]/10">
-                          <Star className="h-4 w-4 text-[#0EA5E9]" />
-                        </div>
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 uppercase tracking-wide">This Week</span>
-                      </div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold text-[#0F172A] dark:text-white">
-                          {userStats?.weeklyTopicsCount || 0}
-                        </span>
-                        <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">topics</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+            <div className="space-y-6">
+              {/* Page Header */}
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white mb-2">
+                  Daily Quests
+                </h1>
+                <p className="text-sm text-[#64748B] dark:text-gray-400">
+                  Track your progress and earn MP
+                </p>
               </div>
 
-              {/* Today's Quests Section */}
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">Today's Quests</h2>
+              {/* Progress Overview */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Daily Goal</span>
+                      <Trophy className="h-5 w-5 text-[#0EA5E9]" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                          {Math.min(todayEarnedMP, 50)}
+                        </span>
+                        <span className="text-lg font-medium text-[#64748B] dark:text-gray-400">/ 50</span>
+                      </div>
+                      <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-2" />
+                      <p className="text-xs text-[#64748B] dark:text-gray-400">
+                        {50 - Math.min(todayEarnedMP, 50)} MP to goal
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Total Balance</span>
+                      <Gem className="h-5 w-5 text-[#0EA5E9]" />
+                    </div>
+                    <div className="text-3xl font-bold text-[#0EA5E9] mb-2">
+                      {userGems.toLocaleString()}
+                    </div>
+                    <p className="text-xs text-[#64748B] dark:text-gray-400">
+                      Mentiora Points
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-[#64748B] dark:text-gray-400">Current Streak</span>
+                      <Flame className="h-5 w-5 text-[#0EA5E9]" />
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                        {currentStreak}
+                      </span>
+                      <span className="text-lg font-medium text-[#64748B] dark:text-gray-400">days</span>
+                    </div>
+                    <p className="text-xs text-[#64748B] dark:text-gray-400">
+                      Keep it going! 🔥
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Today's Quests - List Style */}
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold text-[#0F172A] dark:text-white">Today's Quests</h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-3">
                   {/* Quest 1 - Login */}
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
+                    className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
                   >
-                    <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
-                              <Check className="h-5 w-5 text-[#0EA5E9]" />
-                            </div>
-                            <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
-                              🔥 Daily
-                            </Badge>
-                          </div>
-                          {userStats?.loginToday && (
-                            <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
-                              <Check className="w-4 h-4 text-white" />
-                            </div>
-                          )}
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-xl ${userStats?.loginToday ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
+                        <Check className={`h-5 w-5 ${userStats?.loginToday ? 'text-white' : 'text-[#0EA5E9]'}`} />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-bold text-[#0F172A] dark:text-white">Log in today</h3>
+                          <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
+                            +10 MP
+                          </Badge>
                         </div>
-                        
-                        <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">Log in today</h4>
-                        <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
-                          Log in to earn MP
-                        </p>
-                        
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
-                            <span className="text-xs font-bold text-[#0EA5E9]">+10 MP</span>
-                          </div>
+                        <div className="flex items-center gap-3">
                           <Progress 
                             value={(userStats?.loginToday || todayEarnedMP >= 10) ? 100 : 0} 
-                            className="h-2"
+                            className="h-1.5 flex-1"
                           />
+                          <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
+                            {(userStats?.loginToday || todayEarnedMP >= 10) ? 'Complete' : '0/1'}
+                          </span>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </motion.div>
 
-                  {/* Quest 2 - Rotating Daily Quest */}
+                  {/* Quest 2 - Rotating Daily */}
                   {(() => {
                     const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
                     const questIndex = dayOfYear % 4;
@@ -5342,39 +5313,39 @@ const Dashboard = () => {
                     const dailyQuests = [
                       {
                         title: "Complete 1 practice set",
-                        description: "Answer questions to earn MP",
                         icon: BookOpen,
-                        emoji: "🎯",
                         reward: 40,
                         isComplete: userStats?.practiceToday,
-                        progress: userStats?.practiceToday ? 100 : 0
+                        progress: userStats?.practiceToday ? 100 : 0,
+                        current: userStats?.practiceToday ? 1 : 0,
+                        target: 1
                       },
                       {
                         title: "Create 5 flashcards",
-                        description: "Build your flashcard collection",
                         icon: NotebookPen,
-                        emoji: "🧠",
                         reward: 30,
                         isComplete: weeklyFlashcardCount >= 5,
-                        progress: Math.min((weeklyFlashcardCount / 5) * 100, 100)
+                        progress: Math.min((weeklyFlashcardCount / 5) * 100, 100),
+                        current: Math.min(weeklyFlashcardCount, 5),
+                        target: 5
                       },
                       {
                         title: "Study for 30 minutes",
-                        description: "Focus on your learning goals",
                         icon: Clock,
-                        emoji: "⏰",
                         reward: 35,
                         isComplete: hasAwardedStudyTime,
-                        progress: (studyTimeMinutes / 30) * 100
+                        progress: Math.min((studyTimeMinutes / 30) * 100, 100),
+                        current: Math.min(studyTimeMinutes, 30),
+                        target: 30
                       },
                       {
                         title: "Score 80%+ on any topic",
-                        description: "Demonstrate topic mastery",
-                        icon: Trophy,
-                        emoji: "🏆",
+                        icon: Target,
                         reward: 50,
                         isComplete: false,
-                        progress: 0
+                        progress: 0,
+                        current: 0,
+                        target: 1
                       }
                     ];
                     
@@ -5383,103 +5354,89 @@ const Dashboard = () => {
                     
                     return (
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
+                        className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
                       >
-                        <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                          <CardContent className="p-6">
-                            <div className="flex items-start justify-between mb-4">
-                              <div className="flex items-center gap-3">
-                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
-                                  {quest.isComplete ? (
-                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
-                                  ) : (
-                                    <QuestIcon className="h-5 w-5 text-[#0EA5E9]" />
-                                  )}
-                                </div>
-                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
-                                  {quest.emoji} Daily
-                                </Badge>
-                              </div>
-                              {quest.isComplete && (
-                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
-                                  <Check className="w-4 h-4 text-white" />
-                                </div>
-                              )}
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl ${quest.isComplete ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
+                            {quest.isComplete ? (
+                              <Check className="h-5 w-5 text-white" />
+                            ) : (
+                              <QuestIcon className="h-5 w-5 text-[#0EA5E9]" />
+                            )}
+                          </div>
+                          
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-bold text-[#0F172A] dark:text-white">{quest.title}</h3>
+                              <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
+                                +{quest.reward} MP
+                              </Badge>
                             </div>
-                            
-                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{quest.title}</h4>
-                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
-                              {quest.description}
-                            </p>
-                            
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
-                                <span className="text-xs font-bold text-[#0EA5E9]">+{quest.reward} MP</span>
-                              </div>
+                            <div className="flex items-center gap-3">
                               <Progress 
                                 value={quest.progress} 
-                                className="h-2"
+                                className="h-1.5 flex-1"
                               />
+                              <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
+                                {quest.current}/{quest.target}
+                              </span>
                             </div>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       </motion.div>
                     );
                   })()}
 
-                  {/* Quest 3 - Bonus Weekly */}
+                  {/* Quest 3 - Weekly Bonus */}
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
+                    className="bg-white dark:bg-gray-800 border border-[#E2E8F0]/50 dark:border-gray-700 rounded-2xl p-5 hover:shadow-md transition-all"
                   >
-                    <Card className="h-full bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
-                              <Star className="h-5 w-5 text-[#0EA5E9]" />
-                            </div>
-                            <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
-                              ⭐ Bonus
-                            </Badge>
-                          </div>
-                          {(userStats?.weeklyTopicsCount || 0) >= 3 && (
-                            <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
-                              <Check className="w-4 h-4 text-white" />
-                            </div>
-                          )}
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-xl ${(userStats?.weeklyTopicsCount || 0) >= 3 ? 'bg-[#0EA5E9]' : 'bg-[#0EA5E9]/10'} transition-colors`}>
+                        <Star className={`h-5 w-5 ${(userStats?.weeklyTopicsCount || 0) >= 3 ? 'text-white' : 'text-[#0EA5E9]'}`} />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-bold text-[#0F172A] dark:text-white">Complete 3 topics</h3>
+                          <Badge variant="outline" className="text-xs border-[#0EA5E9]/30 text-[#0EA5E9]">
+                            +100 MP
+                          </Badge>
+                          <Badge variant="secondary" className="text-xs">
+                            Weekly
+                          </Badge>
                         </div>
-                        
-                        <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">Complete 3 topics</h4>
-                        <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
-                          Weekly bonus — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
-                        </p>
-                        
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
-                            <span className="text-xs font-bold text-[#0EA5E9]">+100 MP</span>
-                          </div>
+                        <div className="flex items-center gap-3">
                           <Progress 
                             value={Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)} 
-                            className="h-2"
+                            className="h-1.5 flex-1"
                           />
+                          <span className="text-xs font-medium text-[#64748B] dark:text-gray-400 whitespace-nowrap">
+                            {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3
+                          </span>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
               </div>
 
-              {/* This Week's Challenges Section */}
-              <div className="space-y-6 p-8 rounded-3xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-900/50 dark:to-gray-800/50 border border-[#E2E8F0]/30 dark:border-gray-700/30">
-                <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">This Week's Challenges</h2>
+              {/* Weekly Challenges */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-bold text-[#0F172A] dark:text-white">Weekly Challenges</h2>
+                  <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0">
+                    Higher Rewards
+                  </Badge>
+                </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-3">
                   {/* Rotating Weekly Challenge 1 */}
                   {(() => {
                     const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
@@ -5488,9 +5445,7 @@ const Dashboard = () => {
                     const weeklyChallenges1 = [
                       {
                         title: "Complete 5 practice sets",
-                        description: "{current}/5 completed this week",
                         icon: Trophy,
-                        emoji: "🏆",
                         reward: 250,
                         target: 5,
                         current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
@@ -5498,9 +5453,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Practice 8 different topics",
-                        description: "{current}/8 topics this week",
                         icon: Brain,
-                        emoji: "🧠",
                         reward: 250,
                         target: 8,
                         current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
@@ -5508,9 +5461,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Study for 3 hours total",
-                        description: "{current}/180 minutes this week",
                         icon: Clock,
-                        emoji: "⏰",
                         reward: 250,
                         target: 180,
                         current: 0,
@@ -5518,9 +5469,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Create 20 flashcards",
-                        description: `${weeklyFlashcardCount}/20 flashcards this week`,
                         icon: NotebookPen,
-                        emoji: "📝",
                         reward: 250,
                         target: 20,
                         current: weeklyFlashcardCount,
@@ -5533,49 +5482,38 @@ const Dashboard = () => {
                     
                     return (
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 }}
+                        className="bg-gradient-to-r from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 rounded-2xl p-5 hover:shadow-md transition-all"
                       >
-                        <Card className="h-full bg-white dark:bg-gray-800 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                          <CardContent className="p-6">
-                            <div className="flex items-start justify-between mb-4">
-                              <div className="flex items-center gap-3">
-                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
-                                  {challenge.isComplete ? (
-                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
-                                  ) : (
-                                    <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
-                                  )}
-                                </div>
-                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
-                                  {challenge.emoji} Weekly
-                                </Badge>
-                              </div>
-                              {challenge.isComplete && (
-                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
-                                  <Check className="w-4 h-4 text-white" />
-                                </div>
-                              )}
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl ${challenge.isComplete ? 'bg-[#0EA5E9]' : 'bg-white dark:bg-gray-700'} transition-colors shadow-sm`}>
+                            {challenge.isComplete ? (
+                              <Check className="h-5 w-5 text-white" />
+                            ) : (
+                              <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
+                            )}
+                          </div>
+                          
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-bold text-[#0F172A] dark:text-white">{challenge.title}</h3>
+                              <Badge className="bg-[#0EA5E9] text-white border-0 text-xs">
+                                +{challenge.reward} MP
+                              </Badge>
                             </div>
-                            
-                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{challenge.title}</h4>
-                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
-                              {challenge.description.replace('{current}', challenge.current.toString())}
-                            </p>
-                            
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
-                                <span className="text-xs font-bold text-[#0EA5E9]">+{challenge.reward} MP</span>
-                              </div>
+                            <div className="flex items-center gap-3">
                               <Progress 
                                 value={Math.min((challenge.current / challenge.target) * 100, 100)} 
-                                className="h-2"
+                                className="h-2 flex-1"
                               />
+                              <span className="text-xs font-bold text-[#0EA5E9] whitespace-nowrap">
+                                {challenge.current}/{challenge.target}
+                              </span>
                             </div>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       </motion.div>
                     );
                   })()}
@@ -5588,9 +5526,7 @@ const Dashboard = () => {
                     const weeklyChallenges2 = [
                       {
                         title: "Maintain 7-day streak",
-                        description: "{current}/7 days completed",
                         icon: Flame,
-                        emoji: "🔥",
                         reward: 500,
                         target: 7,
                         current: Math.min(userStats?.currentStreak || 0, 7),
@@ -5598,9 +5534,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Complete 10 practice sets",
-                        description: "{current}/10 completed this week",
                         icon: Zap,
-                        emoji: "⚡",
                         reward: 500,
                         target: 10,
                         current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
@@ -5608,9 +5542,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Review 30 flashcards",
-                        description: "{current}/30 reviewed this week",
                         icon: Eye,
-                        emoji: "👁️",
                         reward: 500,
                         target: 30,
                         current: 0,
@@ -5618,9 +5550,7 @@ const Dashboard = () => {
                       },
                       {
                         title: "Practice every day this week",
-                        description: "{current}/7 days with practice",
                         icon: Calendar,
-                        emoji: "📅",
                         reward: 500,
                         target: 7,
                         current: Math.min(userStats?.currentStreak || 0, 7),
@@ -5633,49 +5563,38 @@ const Dashboard = () => {
                     
                     return (
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
+                        className="bg-gradient-to-r from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 rounded-2xl p-5 hover:shadow-md transition-all"
                       >
-                        <Card className="h-full bg-white dark:bg-gray-800 border-[#E2E8F0]/50 dark:border-gray-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                          <CardContent className="p-6">
-                            <div className="flex items-start justify-between mb-4">
-                              <div className="flex items-center gap-3">
-                                <div className="p-2.5 rounded-xl bg-[#0EA5E9]/10 shadow-sm">
-                                  {challenge.isComplete ? (
-                                    <Check className="h-5 w-5 text-[#0EA5E9]" />
-                                  ) : (
-                                    <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
-                                  )}
-                                </div>
-                                <Badge variant="outline" className="text-xs font-semibold border-[#0EA5E9]/30 text-[#0EA5E9]">
-                                  {challenge.emoji} Epic
-                                </Badge>
-                              </div>
-                              {challenge.isComplete && (
-                                <div className="w-7 h-7 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-lg flex items-center justify-center shadow-md">
-                                  <Check className="w-4 h-4 text-white" />
-                                </div>
-                              )}
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-xl ${challenge.isComplete ? 'bg-[#0EA5E9]' : 'bg-white dark:bg-gray-700'} transition-colors shadow-sm`}>
+                            {challenge.isComplete ? (
+                              <Check className="h-5 w-5 text-white" />
+                            ) : (
+                              <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
+                            )}
+                          </div>
+                          
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-bold text-[#0F172A] dark:text-white">{challenge.title}</h3>
+                              <Badge className="bg-[#0EA5E9] text-white border-0 text-xs">
+                                +{challenge.reward} MP
+                              </Badge>
                             </div>
-                            
-                            <h4 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">{challenge.title}</h4>
-                            <p className="text-sm text-[#64748B] dark:text-gray-400 mb-4">
-                              {challenge.description.replace('{current}', challenge.current.toString())}
-                            </p>
-                            
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Progress</span>
-                                <span className="text-xs font-bold text-[#0EA5E9]">+{challenge.reward} MP</span>
-                              </div>
+                            <div className="flex items-center gap-3">
                               <Progress 
                                 value={Math.min((challenge.current / challenge.target) * 100, 100)} 
-                                className="h-2"
+                                className="h-2 flex-1"
                               />
+                              <span className="text-xs font-bold text-[#0EA5E9] whitespace-nowrap">
+                                {challenge.current}/{challenge.target}
+                              </span>
                             </div>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       </motion.div>
                     );
                   })()}
