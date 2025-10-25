@@ -560,6 +560,68 @@ const PredictedResults = () => {
       markAllAnswers();
     }
   }, [questions, answers]);
+  
+  // Mark daily task as complete when results page loads
+  useEffect(() => {
+    const markDailyTask = async () => {
+      if (!subjectId || isReview) return; // Don't mark for review mode
+      
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+        
+        const today = new Date().toISOString().split('T')[0];
+        const baseSubject = subjectId.split('-')[0];
+        
+        console.log('[Daily Task Direct] Marking task for:', subjectId, 'base:', baseSubject);
+        
+        // Mark for all possible subject variants
+        const variants = [
+          subjectId,
+          baseSubject,
+          `${baseSubject}-aqa`,
+          `${baseSubject}-edexcel`,
+          `${baseSubject}-ocr`
+        ].filter(v => v);
+        
+        for (const variant of variants) {
+          const { error } = await supabase
+            .from('subject_daily_tasks')
+            .upsert({
+              user_id: user.id,
+              subject_id: variant,
+              task_id: 'predicted_exam',
+              date: today,
+              completed: true,
+              mp_awarded: 30
+            }, {
+              onConflict: 'user_id,subject_id,task_id,date'
+            });
+          
+          if (!error) {
+            console.log('[Daily Task Direct] Marked for:', variant);
+          }
+        }
+        
+        // Award MP
+        await supabase.functions.invoke('award-mp', {
+          body: {
+            action: 'subject_task_completed',
+            userId: user.id,
+            mpAmount: 30,
+            taskId: 'predicted_exam',
+            subjectId: subjectId
+          }
+        });
+        
+        console.log('[Daily Task Direct] Complete!');
+      } catch (error) {
+        console.error('[Daily Task Direct] Error:', error);
+      }
+    };
+    
+    markDailyTask();
+  }, [subjectId, isReview]);
 
   if (isMarking) {
     return (
