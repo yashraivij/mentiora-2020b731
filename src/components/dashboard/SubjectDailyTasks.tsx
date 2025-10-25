@@ -158,36 +158,50 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (showLoading) setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
-      console.log(`[SubjectDailyTasks] Loading for subject: ${subjectId}`);
+      console.log(`[SubjectDailyTasks] === Loading for subject: ${subjectId}, user: ${userId} ===`);
 
       // Check for predicted exam completion today
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
+      
+      console.log(`[SubjectDailyTasks] Date range: ${todayStart} to ${todayEnd}`);
       
       // Build subject variants to check
       // E.g., for 'physics-aqa' check both 'physics-aqa' and 'physics'
       // For 'physics' check 'physics', 'physics-aqa', 'physics-edexcel', etc.
       const baseSubject = subjectId.split('-')[0];
       
-      const { data: examCompletions } = await supabase
+      const { data: examCompletions, error: examError } = await supabase
         .from('predicted_exam_completions')
         .select('id, completed_at, subject_id')
         .eq('user_id', userId)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
       
+      if (examError) {
+        console.error('[SubjectDailyTasks] Error fetching exams:', examError);
+      }
+      
+      console.log(`[SubjectDailyTasks] All exams today (${examCompletions?.length || 0}):`, examCompletions);
+      console.log(`[SubjectDailyTasks] Looking for base subject: ${baseSubject}`);
+      
       // Filter exams that match our subject (flexible matching)
       const matchingExams = examCompletions?.filter(exam => {
         const examBaseSubject = exam.subject_id.split('-')[0];
-        return examBaseSubject === baseSubject || exam.subject_id === subjectId;
+        const matches = examBaseSubject === baseSubject || exam.subject_id === subjectId;
+        console.log(`[SubjectDailyTasks] Checking ${exam.subject_id} (base: ${examBaseSubject}) vs ${subjectId} (base: ${baseSubject}) = ${matches}`);
+        return matches;
       }) || [];
 
       const hasPredictedExamToday = matchingExams.length > 0;
+      console.log(`[SubjectDailyTasks] Matching exams: ${matchingExams.length}, has exam today: ${hasPredictedExamToday}`);
 
       // If exam was completed today, auto-mark the task
       if (hasPredictedExamToday) {
+        console.log('[SubjectDailyTasks] Exam detected! Checking if task already marked...');
+        
         // First, check if already marked in database
-        const { data: existingTask } = await supabase
+        const { data: existingTask, error: checkError } = await supabase
           .from('subject_daily_tasks')
           .select('task_id, completed')
           .eq('user_id', userId)
@@ -196,9 +210,13 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           .eq('date', today)
           .single();
         
+        console.log('[SubjectDailyTasks] Existing task check:', existingTask, 'error:', checkError);
+        
         if (!existingTask) {
+          console.log('[SubjectDailyTasks] No existing task, creating new one...');
+          
           // Mark as complete immediately
-          await supabase
+          const { error: upsertError } = await supabase
             .from('subject_daily_tasks')
             .upsert({
               user_id: userId,
@@ -211,8 +229,14 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
               onConflict: 'user_id,subject_id,task_id,date'
             });
           
+          if (upsertError) {
+            console.error('[SubjectDailyTasks] Error creating task:', upsertError);
+          } else {
+            console.log('[SubjectDailyTasks] Task created successfully!');
+          }
+          
           // Award MP silently
-          await supabase.functions.invoke('award-mp', {
+          const { error: mpError } = await supabase.functions.invoke('award-mp', {
             body: {
               action: 'subject_task_completed',
               userId,
@@ -221,7 +245,17 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
               subjectId: subjectId
             }
           });
+          
+          if (mpError) {
+            console.error('[SubjectDailyTasks] MP award error:', mpError);
+          } else {
+            console.log('[SubjectDailyTasks] MP awarded!');
+          }
+        } else {
+          console.log('[SubjectDailyTasks] Task already exists, skipping creation');
         }
+      } else {
+        console.log('[SubjectDailyTasks] No exam detected for today');
       }
       
       // Load all task completions from database
@@ -233,6 +267,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         .eq('date', today);
 
       if (manualError) throw manualError;
+      
+      console.log('[SubjectDailyTasks] Tasks from DB:', manualTasks);
 
       // Update tasks with completion state
       setTasks(prevTasks =>
@@ -241,6 +277,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           completed: manualTasks?.some(d => d.task_id === task.id && d.completed) || false
         }))
       );
+      
+      console.log('[SubjectDailyTasks] === Finished ===');
     } catch (error) {
       console.error('[SubjectDailyTasks] Error loading task completions:', error);
     } finally {
