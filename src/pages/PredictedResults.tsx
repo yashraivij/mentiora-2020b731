@@ -341,6 +341,53 @@ const PredictedResults = () => {
         toast.error("Failed to save exam results to database");
       } else {
         console.log('Exam completion saved successfully');
+        
+        // Mark the daily task as complete
+        const today = new Date().toISOString().split('T')[0];
+        const baseSubject = subjectId?.split('-')[0] || subjectId;
+        
+        // Get all possible subject variants the user might have as daily task cards
+        // E.g., if they completed 'physics' exam, mark tasks for 'physics', 'physics-aqa', 'physics-edexcel', etc.
+        const subjectVariants = [
+          subjectId,
+          baseSubject,
+          `${baseSubject}-aqa`,
+          `${baseSubject}-edexcel`,
+          `${baseSubject}-ocr`,
+          subjectId?.replace('-paper-2', ''),
+          `${baseSubject}-paper-2`
+        ];
+        
+        // Mark task for all matching subject variants
+        for (const variant of subjectVariants) {
+          if (variant) {
+            await supabase
+              .from('subject_daily_tasks')
+              .upsert({
+                user_id: user.id,
+                subject_id: variant,
+                task_id: 'predicted_exam',
+                date: today,
+                completed: true,
+                mp_awarded: 30
+              }, {
+                onConflict: 'user_id,subject_id,task_id,date'
+              });
+          }
+        }
+        
+        // Award MP once
+        await supabase.functions.invoke('award-mp', {
+          body: {
+            action: 'subject_task_completed',
+            userId: user.id,
+            mpAmount: 30,
+            taskId: 'predicted_exam',
+            subjectId: subjectId
+          }
+        });
+        
+        console.log('Daily task marked as complete');
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
