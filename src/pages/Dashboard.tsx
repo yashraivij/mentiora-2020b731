@@ -3839,6 +3839,332 @@ const Dashboard = () => {
                   )}
                 </SheetContent>
               </Sheet>
+
+              {/* Add Subjects Modal */}
+              {showAddSubjects && (
+                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-4xl w-full max-h-[85vh] overflow-hidden"
+                  >
+                    {/* Header */}
+                    <div className="relative p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          {selectedSubjectGroup && (
+                            <Button
+                              onClick={() => setSelectedSubjectGroup(null)}
+                              variant="ghost"
+                              size="sm"
+                              className="mb-2 text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white"
+                            >
+                              <ChevronRight className="h-4 w-4 rotate-180 mr-1" />
+                              Back to subjects
+                            </Button>
+                          )}
+                          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                            {selectedSubjectGroup ? `Choose Exam Board` : 'Add Subjects'}
+                          </h2>
+                          <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
+                            {selectedSubjectGroup ? 'Select your exam board for ' + selectedSubjectGroup : 'Choose subjects to add to your dashboard'}
+                          </p>
+                        </div>
+                        <Button
+                          onClick={() => {
+                            setShowAddSubjects(false);
+                            setSelectedSubjectGroup(null);
+                          }}
+                          variant="ghost"
+                          size="icon"
+                          className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
+                        >
+                          <X className="h-5 w-5" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
+                      {!selectedSubjectGroup ? (
+                        <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel')} className="w-full">
+                          <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] dark:bg-gray-800 p-1 h-12 rounded-xl">
+                            <TabsTrigger 
+                              value="gcse"
+                              className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
+                            >
+                              GCSE Subjects
+                            </TabsTrigger>
+                            <TabsTrigger 
+                              value="alevel"
+                              className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
+                            >
+                              A-Level Subjects
+                            </TabsTrigger>
+                          </TabsList>
+
+                          {/* GCSE Subjects Grid */}
+                          <TabsContent value="gcse" className="mt-0">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                              {(() => {
+                                const gcseSubjects = [
+                                  { id: 'maths', name: 'Mathematics' },
+                                  { id: 'physics', name: 'Physics' },
+                                  { id: 'chemistry', name: 'Chemistry' },
+                                  { id: 'biology', name: 'Biology' },
+                                  { id: 'english-language', name: 'English Language' },
+                                  { id: 'english-literature', name: 'English Literature' },
+                                  { id: 'geography', name: 'Geography' },
+                                  { id: 'history', name: 'History' },
+                                  { id: 'religious-studies', name: 'Religious Studies' },
+                                  { id: 'computer-science', name: 'Computer Science' },
+                                ];
+
+                                return gcseSubjects.map((subject) => {
+                                  const isAdded = userSubjectsWithGrades.some(
+                                    (userSubject: any) => userSubject.id.toLowerCase().includes(subject.id)
+                                  );
+
+                                  return (
+                                    <motion.button
+                                      key={subject.id}
+                                      whileHover={{ scale: 1.02, y: -2 }}
+                                      whileTap={{ scale: 0.98 }}
+                                      onClick={() => {
+                                        if (!isAdded) {
+                                          setSelectedSubjectGroup(subject.name);
+                                        }
+                                      }}
+                                      disabled={isAdded}
+                                      className={`relative rounded-2xl p-4 transition-all duration-300 ${
+                                        isAdded 
+                                          ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
+                                          : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
+                                      }`}
+                                    >
+                                      {isAdded && (
+                                        <div className="absolute top-3 right-3 w-6 h-6 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
+                                          <Check className="w-4 h-4 text-white" />
+                                        </div>
+                                      )}
+                                      <div className="text-center">
+                                        <div className="text-base font-bold text-[#0F172A] dark:text-white mb-1 line-clamp-2">
+                                          {subject.name}
+                                        </div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                                          {isAdded ? 'Already added' : 'Click to add'}
+                                        </div>
+                                      </div>
+                                    </motion.button>
+                                  );
+                                });
+                              })()}
+                            </div>
+                          </TabsContent>
+
+                          {/* A-Level Subjects Grid */}
+                          <TabsContent value="alevel" className="mt-0">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                              {(() => {
+                                const alevelSubjects = [
+                                  { id: 'maths-aqa-alevel', name: 'Mathematics' },
+                                  { id: 'biology-aqa-alevel', name: 'Biology' },
+                                ];
+
+                                return alevelSubjects.map((subject) => {
+                                  const isAdded = userSubjectsWithGrades.some(
+                                    (userSubject: any) => userSubject.id === subject.id
+                                  );
+
+                                  return (
+                                    <motion.button
+                                      key={subject.id}
+                                      whileHover={{ scale: 1.02, y: -2 }}
+                                      whileTap={{ scale: 0.98 }}
+                                      onClick={() => {
+                                        if (!isAdded) {
+                                          setSelectedSubjectGroup(subject.name);
+                                        }
+                                      }}
+                                      disabled={isAdded}
+                                      className={`relative rounded-2xl p-4 transition-all duration-300 ${
+                                        isAdded 
+                                          ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
+                                          : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
+                                      }`}
+                                    >
+                                      {isAdded && (
+                                        <div className="absolute top-3 right-3 w-6 h-6 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
+                                          <Check className="w-4 h-4 text-white" />
+                                        </div>
+                                      )}
+                                      <div className="text-center">
+                                        <div className="text-base font-bold text-[#0F172A] dark:text-white mb-1 line-clamp-2">
+                                          {subject.name}
+                                        </div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
+                                          {isAdded ? 'Already added' : 'Click to add'}
+                                        </div>
+                                      </div>
+                                    </motion.button>
+                                  );
+                                });
+                              })()}
+                            </div>
+                          </TabsContent>
+                        </Tabs>
+                      ) : (
+                        <div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {(() => {
+                              const subjectExamBoards: { [key: string]: any[] } = {
+                                'Mathematics': [
+                                  { id: 'maths-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
+                                  { id: 'maths-aqa-alevel', name: 'AQA (A-Level)', examBoard: 'AQA', isALevel: true },
+                                ],
+                                'Physics': [
+                                  { id: 'physics-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
+                                ],
+                                'Chemistry': [
+                                  { id: 'chemistry-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
+                                ],
+                                'Biology': [
+                                  { id: 'biology-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
+                                  { id: 'biology-aqa-alevel', name: 'AQA (A-Level)', examBoard: 'AQA', isALevel: true },
+                                ],
+                                'English Language': [
+                                  { id: 'english-language', name: 'AQA', examBoard: 'AQA' },
+                                ],
+                                'English Literature': [
+                                  { id: 'english-literature', name: 'AQA', examBoard: 'AQA' },
+                                ],
+                                'Geography': [
+                                  { id: 'geography', name: 'AQA', examBoard: 'AQA' },
+                                ],
+                                'History': [
+                                  { id: 'history', name: 'AQA', examBoard: 'AQA' },
+                                ],
+                                'Religious Studies': [
+                                  { id: 'religious-studies', name: 'AQA', examBoard: 'AQA' },
+                                ],
+                                'Computer Science': [
+                                  { id: 'computer-science', name: 'OCR', examBoard: 'OCR' },
+                                ],
+                              };
+
+                              const examBoards = subjectExamBoards[selectedSubjectGroup] || [];
+                              return examBoards.map((board) => {
+                                const isAdded = userSubjectsWithGrades.some(
+                                  (userSubject: any) => userSubject.id === board.id
+                                );
+
+                                return (
+                                  <motion.button
+                                    key={board.id}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => {
+                                      if (!isAdded) {
+                                        setSelectedSubjectForGrade({
+                                          id: board.id,
+                                          name: selectedSubjectGroup,
+                                          examBoard: board.examBoard
+                                        });
+                                      }
+                                    }}
+                                    disabled={isAdded}
+                                    className={`relative rounded-2xl p-6 transition-all duration-300 ${
+                                      isAdded 
+                                        ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
+                                        : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
+                                    }`}
+                                  >
+                                    {isAdded && (
+                                      <div className="absolute top-4 right-4 w-8 h-8 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
+                                        <Check className="w-5 h-5 text-white" />
+                                      </div>
+                                    )}
+                                    <div className="text-center">
+                                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-2">
+                                        {board.name}
+                                      </div>
+                                      <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
+                                        {isAdded ? 'Already added' : board.isALevel ? 'A-Level Course' : 'GCSE Course'}
+                                      </div>
+                                    </div>
+                                  </motion.button>
+                                );
+                              });
+                            })()}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+
+                  {/* Grade Selection Modal */}
+                  {selectedSubjectForGrade && (
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                        className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-2xl w-full overflow-hidden"
+                      >
+                        <div className="p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Set Target Grade</h2>
+                              <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
+                                What grade are you aiming for in {selectedSubjectForGrade.name}?
+                              </p>
+                            </div>
+                            <Button
+                              onClick={() => setSelectedSubjectForGrade(null)}
+                              variant="ghost"
+                              size="icon"
+                              className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
+                            >
+                              <X className="h-5 w-5" />
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="p-8">
+                          <div className="grid grid-cols-3 gap-3">
+                            {(() => {
+                              // Check if subject is A-Level
+                              const isALevel = selectedSubjectForGrade.id.toLowerCase().includes('alevel');
+                              const grades = isALevel 
+                                ? ['A*', 'A', 'B', 'C', 'D', 'E']
+                                : [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                              
+                              return grades.map((grade) => (
+                                <motion.button
+                                  key={grade}
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={() => {
+                                    addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
+                                    setSelectedSubjectForGrade(null);
+                                    setShowAddSubjects(false);
+                                    setSelectedSubjectGroup(null);
+                                  }}
+                                  className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
+                                >
+                                  <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
+                                    {grade}
+                                  </div>
+                                </motion.button>
+                              ));
+                            })()}
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -5313,332 +5639,6 @@ const Dashboard = () => {
         }}
         streakCount={currentStreak}
       />
-
-      {/* Add Subjects Modal */}
-      {showAddSubjects && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-4xl w-full max-h-[85vh] overflow-hidden"
-          >
-            {/* Header */}
-            <div className="relative p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <div>
-                  {selectedSubjectGroup && (
-                    <Button
-                      onClick={() => setSelectedSubjectGroup(null)}
-                      variant="ghost"
-                      size="sm"
-                      className="mb-2 text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white"
-                    >
-                      <ChevronRight className="h-4 w-4 rotate-180 mr-1" />
-                      Back to subjects
-                    </Button>
-                  )}
-                  <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                    {selectedSubjectGroup ? `Choose Exam Board` : 'Add Subjects'}
-                  </h2>
-                  <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
-                    {selectedSubjectGroup ? 'Select your exam board for ' + selectedSubjectGroup : 'Choose subjects to add to your dashboard'}
-                  </p>
-                </div>
-                <Button
-                  onClick={() => {
-                    setShowAddSubjects(false);
-                    setSelectedSubjectGroup(null);
-                  }}
-                  variant="ghost"
-                  size="icon"
-                  className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
-              {!selectedSubjectGroup ? (
-                <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel')} className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] dark:bg-gray-800 p-1 h-12 rounded-xl">
-                    <TabsTrigger 
-                      value="gcse"
-                      className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
-                    >
-                      GCSE Subjects
-                    </TabsTrigger>
-                    <TabsTrigger 
-                      value="alevel"
-                      className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
-                    >
-                      A-Level Subjects
-                    </TabsTrigger>
-                  </TabsList>
-
-                  {/* GCSE Subjects Grid */}
-                  <TabsContent value="gcse" className="mt-0">
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {(() => {
-                        const gcseSubjects = [
-                          { id: 'maths', name: 'Mathematics' },
-                          { id: 'physics', name: 'Physics' },
-                          { id: 'chemistry', name: 'Chemistry' },
-                          { id: 'biology', name: 'Biology' },
-                          { id: 'english-language', name: 'English Language' },
-                          { id: 'english-literature', name: 'English Literature' },
-                          { id: 'geography', name: 'Geography' },
-                          { id: 'history', name: 'History' },
-                          { id: 'religious-studies', name: 'Religious Studies' },
-                          { id: 'computer-science', name: 'Computer Science' },
-                        ];
-
-                        return gcseSubjects.map((subject) => {
-                          const isAdded = userSubjectsWithGrades.some(
-                            (userSubject: any) => userSubject.id.toLowerCase().includes(subject.id)
-                          );
-
-                          return (
-                            <motion.button
-                              key={subject.id}
-                              whileHover={{ scale: 1.02, y: -2 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => {
-                                if (!isAdded) {
-                                  setSelectedSubjectGroup(subject.name);
-                                }
-                              }}
-                              disabled={isAdded}
-                              className={`relative rounded-2xl p-4 transition-all duration-300 ${
-                                isAdded 
-                                  ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
-                                  : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
-                              }`}
-                            >
-                              {isAdded && (
-                                <div className="absolute top-3 right-3 w-6 h-6 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
-                                  <Check className="w-4 h-4 text-white" />
-                                </div>
-                              )}
-                              <div className="text-center">
-                                <div className="text-base font-bold text-[#0F172A] dark:text-white mb-1 line-clamp-2">
-                                  {subject.name}
-                                </div>
-                                <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                                  {isAdded ? 'Already added' : 'Click to add'}
-                                </div>
-                              </div>
-                            </motion.button>
-                          );
-                        });
-                      })()}
-                    </div>
-                  </TabsContent>
-
-                  {/* A-Level Subjects Grid */}
-                  <TabsContent value="alevel" className="mt-0">
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {(() => {
-                        const alevelSubjects = [
-                          { id: 'maths-aqa-alevel', name: 'Mathematics' },
-                          { id: 'biology-aqa-alevel', name: 'Biology' },
-                        ];
-
-                        return alevelSubjects.map((subject) => {
-                          const isAdded = userSubjectsWithGrades.some(
-                            (userSubject: any) => userSubject.id === subject.id
-                          );
-
-                          return (
-                            <motion.button
-                              key={subject.id}
-                              whileHover={{ scale: 1.02, y: -2 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => {
-                                if (!isAdded) {
-                                  setSelectedSubjectGroup(subject.name);
-                                }
-                              }}
-                              disabled={isAdded}
-                              className={`relative rounded-2xl p-4 transition-all duration-300 ${
-                                isAdded 
-                                  ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
-                                  : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
-                              }`}
-                            >
-                              {isAdded && (
-                                <div className="absolute top-3 right-3 w-6 h-6 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
-                                  <Check className="w-4 h-4 text-white" />
-                                </div>
-                              )}
-                              <div className="text-center">
-                                <div className="text-base font-bold text-[#0F172A] dark:text-white mb-1 line-clamp-2">
-                                  {subject.name}
-                                </div>
-                                <div className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
-                                  {isAdded ? 'Already added' : 'Click to add'}
-                                </div>
-                              </div>
-                            </motion.button>
-                          );
-                        });
-                      })()}
-                    </div>
-                  </TabsContent>
-                </Tabs>
-              ) : (
-                <div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {(() => {
-                      const subjectExamBoards: { [key: string]: any[] } = {
-                        'Mathematics': [
-                          { id: 'maths-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
-                          { id: 'maths-aqa-alevel', name: 'AQA (A-Level)', examBoard: 'AQA', isALevel: true },
-                        ],
-                        'Physics': [
-                          { id: 'physics-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
-                        ],
-                        'Chemistry': [
-                          { id: 'chemistry-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
-                        ],
-                        'Biology': [
-                          { id: 'biology-edexcel', name: 'Edexcel', examBoard: 'Edexcel' },
-                          { id: 'biology-aqa-alevel', name: 'AQA (A-Level)', examBoard: 'AQA', isALevel: true },
-                        ],
-                        'English Language': [
-                          { id: 'english-language', name: 'AQA', examBoard: 'AQA' },
-                        ],
-                        'English Literature': [
-                          { id: 'english-literature', name: 'AQA', examBoard: 'AQA' },
-                        ],
-                        'Geography': [
-                          { id: 'geography', name: 'AQA', examBoard: 'AQA' },
-                        ],
-                        'History': [
-                          { id: 'history', name: 'AQA', examBoard: 'AQA' },
-                        ],
-                        'Religious Studies': [
-                          { id: 'religious-studies', name: 'AQA', examBoard: 'AQA' },
-                        ],
-                        'Computer Science': [
-                          { id: 'computer-science', name: 'OCR', examBoard: 'OCR' },
-                        ],
-                      };
-
-                      const examBoards = subjectExamBoards[selectedSubjectGroup] || [];
-                      return examBoards.map((board) => {
-                        const isAdded = userSubjectsWithGrades.some(
-                          (userSubject: any) => userSubject.id === board.id
-                        );
-
-                        return (
-                          <motion.button
-                            key={board.id}
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => {
-                              if (!isAdded) {
-                                setSelectedSubjectForGrade({
-                                  id: board.id,
-                                  name: selectedSubjectGroup,
-                                  examBoard: board.examBoard
-                                });
-                              }
-                            }}
-                            disabled={isAdded}
-                            className={`relative rounded-2xl p-6 transition-all duration-300 ${
-                              isAdded 
-                                ? 'bg-[#F1F5F9] dark:bg-gray-800 border-2 border-[#E2E8F0] dark:border-gray-700 opacity-50 cursor-not-allowed' 
-                                : 'bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg'
-                            }`}
-                          >
-                            {isAdded && (
-                              <div className="absolute top-4 right-4 w-8 h-8 bg-[#10B981] rounded-full flex items-center justify-center shadow-lg">
-                                <Check className="w-5 h-5 text-white" />
-                              </div>
-                            )}
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-2">
-                                {board.name}
-                              </div>
-                              <div className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                                {isAdded ? 'Already added' : board.isALevel ? 'A-Level Course' : 'GCSE Course'}
-                              </div>
-                            </div>
-                          </motion.button>
-                        );
-                      });
-                    })()}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Grade Selection Modal */}
-          {selectedSubjectForGrade && (
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.2 }}
-                className="bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 rounded-3xl shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20 max-w-2xl w-full overflow-hidden"
-              >
-                <div className="p-6 border-b border-[#E2E8F0]/50 dark:border-gray-700">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Set Target Grade</h2>
-                      <p className="text-sm text-[#64748B] dark:text-gray-400 mt-1 font-light">
-                        What grade are you aiming for in {selectedSubjectForGrade.name}?
-                      </p>
-                    </div>
-                    <Button
-                      onClick={() => setSelectedSubjectForGrade(null)}
-                      variant="ghost"
-                      size="icon"
-                      className="w-10 h-10 rounded-xl text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 transition-all duration-200"
-                    >
-                      <X className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <div className="grid grid-cols-3 gap-3">
-                    {(() => {
-                      // Check if subject is A-Level
-                      const isALevel = selectedSubjectForGrade.id.toLowerCase().includes('alevel');
-                      const grades = isALevel 
-                        ? ['A*', 'A', 'B', 'C', 'D', 'E']
-                        : [9, 8, 7, 6, 5, 4, 3, 2, 1];
-                      
-                      return grades.map((grade) => (
-                        <motion.button
-                          key={grade}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => {
-                            addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
-                            setSelectedSubjectForGrade(null);
-                            setShowAddSubjects(false);
-                            setSelectedSubjectGroup(null);
-                          }}
-                          className="relative rounded-2xl p-6 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9] hover:shadow-lg transition-all duration-300 group"
-                        >
-                          <div className="text-4xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] transition-colors">
-                            {grade}
-                          </div>
-                        </motion.button>
-                      ));
-                    })()}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </div>
-      )}
       </div>
     </div>
   );
