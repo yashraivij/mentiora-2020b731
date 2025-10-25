@@ -2454,27 +2454,28 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background flex">
       {/* Left Navigation Sidebar - Desktop Only */}
-      <div className="hidden lg:flex flex-col w-24 border-r border-border/50 bg-gradient-to-b from-background/80 to-background/60 backdrop-blur-xl sticky top-0 h-screen py-8">
-        <div className="flex flex-col items-center gap-8 flex-1">
+      <div className="hidden lg:flex flex-col w-24 border-r border-border/50 backdrop-blur-xl bg-gradient-to-b from-background/95 to-background/80 sticky top-0 h-screen py-8">
+        <div className="flex flex-col items-center gap-8 flex-1 px-3">
           {/* Learn Tab */}
           <button
             onClick={() => setActiveTab("learn")}
-            className={`group relative flex flex-col items-center gap-3 transition-all duration-300 ${
-              activeTab === "learn" ? "scale-110" : "hover:scale-105"
-            }`}
+            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
           >
             <div
-              className={`w-16 h-16 rounded-[20px] flex items-center justify-center transition-all duration-300 backdrop-blur-sm ${
+              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "learn"
-                  ? "bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-500 shadow-xl shadow-cyan-500/40 border border-cyan-300/30"
-                  : "bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/30 dark:to-blue-950/20 group-hover:from-cyan-100 group-hover:to-blue-100 dark:group-hover:from-cyan-950/50 dark:group-hover:to-blue-950/40 border border-cyan-200/50 dark:border-cyan-800/30"
+                  ? "bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/10 backdrop-blur-lg border-2 border-[#0EA5E9]/50 shadow-lg shadow-[#0EA5E9]/20"
+                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-[#0EA5E9]/30 hover:bg-[#0EA5E9]/5 hover:shadow-md"
               }`}
             >
-              <Home className={`w-7 h-7 transition-all ${activeTab === "learn" ? "text-white drop-shadow-lg" : "text-cyan-600 dark:text-cyan-400"}`} />
+              <Home className={`w-6 h-6 transition-all duration-300 ${activeTab === "learn" ? "text-[#0EA5E9] scale-110" : "text-muted-foreground group-hover:text-[#0EA5E9]/70"}`} />
+              {activeTab === "learn" && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/10 to-transparent animate-pulse" />
+              )}
             </div>
             <span
-              className={`text-[10px] font-extrabold tracking-wider ${
-                activeTab === "learn" ? "text-cyan-600 dark:text-cyan-400" : "text-muted-foreground"
+              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
+                activeTab === "learn" ? "text-[#0EA5E9]" : "text-muted-foreground/70 group-hover:text-muted-foreground"
               }`}
             >
               LEARN
@@ -2484,50 +2485,52 @@ const Dashboard = () => {
           {/* Quests Tab */}
           <button
             onClick={() => setActiveTab("quests")}
-            className={`group relative flex flex-col items-center gap-3 transition-all duration-300 ${
-              activeTab === "quests" ? "scale-110" : "hover:scale-105"
-            }`}
+            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
           >
             <div
-              className={`w-16 h-16 rounded-[20px] flex items-center justify-center transition-all duration-300 backdrop-blur-sm ${
+              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "quests"
-                  ? "bg-gradient-to-br from-emerald-400 via-emerald-500 to-green-500 shadow-xl shadow-emerald-500/40 border border-emerald-300/30"
-                  : "bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/20 group-hover:from-emerald-100 group-hover:to-green-100 dark:group-hover:from-emerald-950/50 dark:group-hover:to-green-950/40 border border-emerald-200/50 dark:border-emerald-800/30"
+                  ? "bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 backdrop-blur-lg border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20"
+                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:shadow-md"
               }`}
             >
-              <Star className={`w-7 h-7 transition-all ${activeTab === "quests" ? "text-white drop-shadow-lg" : "text-emerald-600 dark:text-emerald-400"}`} />
+              <Star className={`w-6 h-6 transition-all duration-300 ${activeTab === "quests" ? "text-emerald-500 scale-110" : "text-muted-foreground group-hover:text-emerald-500/70"}`} />
+              {activeTab === "quests" && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-transparent animate-pulse" />
+              )}
             </div>
             <span
-              className={`text-[10px] font-extrabold tracking-wider ${
-                activeTab === "quests" ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground"
+              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
+                activeTab === "quests" ? "text-emerald-500" : "text-muted-foreground/70 group-hover:text-muted-foreground"
               }`}
             >
               QUESTS
             </span>
           </button>
 
-          {/* Rank Tab */}
+          {/* Leaderboard Tab */}
           <button
             onClick={() => setActiveTab("leaderboards")}
-            className={`group relative flex flex-col items-center gap-3 transition-all duration-300 ${
-              activeTab === "leaderboards" ? "scale-110" : "hover:scale-105"
-            }`}
+            className="group relative flex flex-col items-center gap-2.5 w-full transition-all duration-300"
           >
             <div
-              className={`w-16 h-16 rounded-[20px] flex items-center justify-center transition-all duration-300 backdrop-blur-sm ${
+              className={`relative w-full aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 ${
                 activeTab === "leaderboards"
-                  ? "bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 shadow-xl shadow-amber-500/40 border border-amber-300/30"
-                  : "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 group-hover:from-amber-100 group-hover:to-orange-100 dark:group-hover:from-amber-950/50 dark:group-hover:to-orange-950/40 border border-amber-200/50 dark:border-amber-800/30"
+                  ? "bg-gradient-to-br from-amber-500/20 to-amber-500/10 backdrop-blur-lg border-2 border-amber-500/50 shadow-lg shadow-amber-500/20"
+                  : "bg-muted/40 backdrop-blur-md border border-border/50 hover:border-amber-500/30 hover:bg-amber-500/5 hover:shadow-md"
               }`}
             >
-              <Trophy className={`w-7 h-7 transition-all ${activeTab === "leaderboards" ? "text-white drop-shadow-lg" : "text-amber-600 dark:text-amber-400"}`} />
+              <Trophy className={`w-6 h-6 transition-all duration-300 ${activeTab === "leaderboards" ? "text-amber-500 scale-110" : "text-muted-foreground group-hover:text-amber-500/70"}`} />
+              {activeTab === "leaderboards" && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500/10 to-transparent animate-pulse" />
+              )}
             </div>
             <span
-              className={`text-[10px] font-extrabold tracking-wider ${
-                activeTab === "leaderboards" ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"
+              className={`text-[10px] font-bold tracking-wider transition-all duration-300 ${
+                activeTab === "leaderboards" ? "text-amber-500" : "text-muted-foreground/70 group-hover:text-muted-foreground"
               }`}
             >
-              RANK
+              BOARD
             </span>
           </button>
         </div>
