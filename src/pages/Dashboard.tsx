@@ -5243,64 +5243,53 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.1 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                          <Gem className="h-5 w-5 text-[#0EA5E9]" />
+                  {/* MP Progress Display */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-6 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider mb-1">
+                          Daily Goal Progress
                         </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Total MP</span>
-                      </div>
-                      <div className="text-3xl font-bold text-[#0F172A] dark:text-white" data-mp-counter>
-                        {userGems.toLocaleString()}
-                      </div>
-                    </motion.div>
-
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.15 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F97316]/20 dark:border-[#F97316]/30 shadow-sm hover:shadow-md hover:shadow-[#F97316]/10 transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F97316]/20 to-[#F97316]/5">
-                          <Flame className="h-5 w-5 text-[#F97316]" />
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-bold text-[#0F172A] dark:text-white" data-mp-counter>
+                            {Math.min(todayEarnedMP, 50)}
+                          </span>
+                          <span className="text-xl font-semibold text-[#64748B] dark:text-gray-400">/ 50 MP</span>
                         </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Streak</span>
                       </div>
-                      <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                        {currentStreak}
-                      </div>
-                      <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">days in a row</div>
-                    </motion.div>
-
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.2 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#10B981]/20 dark:border-[#10B981]/30 shadow-sm hover:shadow-md hover:shadow-[#10B981]/10 transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#10B981]/20 to-[#10B981]/5">
-                          <Zap className="h-5 w-5 text-[#10B981]" />
+                      <div className="text-right">
+                        <div className="text-sm font-semibold text-[#64748B] dark:text-gray-400 mb-1">
+                          Total Balance
                         </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Today's Progress</span>
+                        <div className="text-3xl font-bold text-[#0EA5E9]">
+                          {userGems.toLocaleString()} MP
+                        </div>
                       </div>
-                      <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                        {Math.min(todayEarnedMP, 50)}/50
+                    </div>
+                    
+                    <div className="relative h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${Math.min((todayEarnedMP / 50) * 100, 100)}%` }}
+                        transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+                        className="absolute h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                      />
+                    </div>
+                    
+                    <div className="flex items-center justify-between mt-3">
+                      <div className="text-xs font-medium text-[#64748B] dark:text-gray-400">
+                        {Math.floor((todayEarnedMP / 50) * 100)}% Complete
                       </div>
-                      <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">MP earned today</div>
-                    </motion.div>
-                  </div>
+                      <div className="text-xs font-medium text-[#0EA5E9]">
+                        {currentStreak} day streak 🔥
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
 
@@ -5308,12 +5297,6 @@ const Dashboard = () => {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Today's Quests</h2>
-                  <div className="flex items-center gap-2 bg-gradient-to-r from-[#10B981]/10 to-[#0EA5E9]/10 dark:from-[#10B981]/20 dark:to-[#0EA5E9]/20 px-4 py-2 rounded-xl border border-[#10B981]/20 dark:border-[#10B981]/30">
-                    <Zap className="h-4 w-4 text-[#10B981]" />
-                    <span className="text-sm font-semibold text-[#0F172A] dark:text-white">
-                      {Math.floor((todayEarnedMP / 50) * 100)}% Complete
-                    </span>
-                  </div>
                 </div>
                 
                  {/* Quest 1 - Login */}
@@ -5321,15 +5304,15 @@ const Dashboard = () => {
                    initial={{ opacity: 0, y: 20 }}
                    animate={{ opacity: 1, y: 0 }}
                    transition={{ delay: 0.1 }}
-                   className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#10B981]/30 dark:hover:border-[#10B981]/40 hover:shadow-[0_16px_48px_rgba(16,185,129,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
+                   className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                  >
-                   <div className="absolute inset-0 bg-gradient-to-br from-[#10B981]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                   <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                    
                    <div className="relative p-6">
                      <div className="flex items-start justify-between mb-4">
                        <div className="flex items-start gap-4 flex-1">
-                         <div className="p-3 rounded-2xl bg-gradient-to-br from-[#10B981]/20 to-[#10B981]/5 shadow-sm">
-                           <Check className="h-6 w-6 text-[#10B981]" />
+                         <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
+                           <Check className="h-6 w-6 text-[#0EA5E9]" />
                          </div>
                          <div className="flex-1">
                            <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">Log in today</h4>
@@ -5339,11 +5322,11 @@ const Dashboard = () => {
                          </div>
                        </div>
                        <div className="flex items-center gap-3">
-                         <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#10B981]/10 to-[#0EA5E9]/10 border border-[#10B981]/20">
-                           <span className="text-lg font-bold text-[#10B981]">+10 MP</span>
+                         <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
+                           <span className="text-lg font-bold text-[#0EA5E9]">+10 MP</span>
                          </div>
                          {userStats?.loginToday && (
-                           <div className="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg">
+                           <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
                              <Check className="w-5 h-5 text-white" />
                            </div>
                          )}
@@ -5355,7 +5338,7 @@ const Dashboard = () => {
                          initial={{ width: 0 }}
                          animate={{ width: (userStats?.loginToday || todayEarnedMP >= 10) ? '100%' : '0%' }}
                          transition={{ duration: 0.8, delay: 0.2 }}
-                         className="absolute h-full bg-gradient-to-r from-[#10B981] to-[#0EA5E9] rounded-full shadow-sm"
+                         className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
                        />
                      </div>
                    </div>
@@ -5371,8 +5354,6 @@ const Dashboard = () => {
                        title: "Complete 1 practice set",
                        description: "Answer questions to earn MP",
                        icon: BookOpen,
-                       colorFrom: "#0EA5E9",
-                       colorTo: "#38BDF8",
                        reward: 40,
                        isComplete: userStats?.practiceToday,
                        progress: userStats?.practiceToday ? 100 : 0
@@ -5381,8 +5362,6 @@ const Dashboard = () => {
                         title: "Create 5 flashcards",
                         description: "Build your flashcard collection",
                         icon: NotebookPen,
-                        colorFrom: "#8B5CF6",
-                        colorTo: "#A78BFA",
                         reward: 30,
                         isComplete: weeklyFlashcardCount >= 5,
                         progress: Math.min((weeklyFlashcardCount / 5) * 100, 100)
@@ -5391,8 +5370,6 @@ const Dashboard = () => {
                         title: "Study for 30 minutes",
                         description: "Focus on your learning goals",
                         icon: Clock,
-                        colorFrom: "#06B6D4",
-                        colorTo: "#67E8F9",
                         reward: 35,
                         isComplete: hasAwardedStudyTime,
                         progress: (studyTimeMinutes / 30) * 100
@@ -5401,8 +5378,6 @@ const Dashboard = () => {
                        title: "Score 80%+ on any topic",
                        description: "Demonstrate topic mastery",
                        icon: Trophy,
-                       colorFrom: "#F59E0B",
-                       colorTo: "#FBBF24",
                        reward: 50,
                        isComplete: false,
                        progress: 0
@@ -5424,18 +5399,11 @@ const Dashboard = () => {
                        <div className="relative p-6">
                          <div className="flex items-start justify-between mb-4">
                            <div className="flex items-start gap-4 flex-1">
-                             <div 
-                               className="p-3 rounded-2xl shadow-sm"
-                               style={{
-                                 background: quest.isComplete 
-                                   ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05))'
-                                   : `linear-gradient(135deg, ${quest.colorFrom}20, ${quest.colorTo}10)`
-                               }}
-                             >
+                             <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
                                {quest.isComplete ? (
-                                 <Check className="h-6 w-6 text-[#10B981]" />
+                                 <Check className="h-6 w-6 text-[#0EA5E9]" />
                                ) : (
-                                 <QuestIcon className="h-6 w-6" style={{ color: quest.colorFrom }} />
+                                 <QuestIcon className="h-6 w-6 text-[#0EA5E9]" />
                                )}
                              </div>
                              <div className="flex-1">
@@ -5446,24 +5414,13 @@ const Dashboard = () => {
                              </div>
                            </div>
                            <div className="flex items-center gap-3">
-                             <div 
-                               className="px-4 py-2 rounded-xl border"
-                               style={{
-                                 background: quest.isComplete 
-                                   ? 'linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.1))'
-                                   : `linear-gradient(90deg, ${quest.colorFrom}10, ${quest.colorTo}10)`,
-                                 borderColor: quest.isComplete ? 'rgba(16, 185, 129, 0.2)' : `${quest.colorFrom}30`
-                               }}
-                             >
-                               <span 
-                                 className="text-lg font-bold"
-                                 style={{ color: quest.isComplete ? '#10B981' : quest.colorFrom }}
-                               >
+                             <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
+                               <span className="text-lg font-bold text-[#0EA5E9]">
                                  +{quest.reward} MP
                                </span>
                              </div>
                              {quest.isComplete && (
-                               <div className="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg">
+                               <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
                                  <Check className="w-5 h-5 text-white" />
                                </div>
                              )}
@@ -5475,12 +5432,7 @@ const Dashboard = () => {
                              initial={{ width: 0 }}
                              animate={{ width: `${quest.progress}%` }}
                              transition={{ duration: 0.8, delay: 0.3 }}
-                             className="absolute h-full rounded-full shadow-sm"
-                             style={{
-                               background: quest.isComplete 
-                                 ? 'linear-gradient(90deg, #10B981, #0EA5E9)'
-                                 : `linear-gradient(90deg, ${quest.colorFrom}, ${quest.colorTo})`
-                             }}
+                             className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
                            />
                          </div>
                        </div>
@@ -5493,32 +5445,29 @@ const Dashboard = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="group relative rounded-3xl border-2 border-[#A855F7]/30 dark:border-[#A855F7]/40 hover:border-[#A855F7]/50 dark:hover:border-[#A855F7]/60 hover:shadow-[0_16px_48px_rgba(168,85,247,0.2)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#A855F7]/5 dark:from-gray-800 dark:to-[#A855F7]/10"
+                  className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#A855F7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="relative p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-start gap-4 flex-1">
-                        <div className="p-3 rounded-2xl bg-gradient-to-br from-[#A855F7]/20 to-[#C084FC]/10 shadow-sm">
-                          <Star className="h-6 w-6 text-[#A855F7]" />
+                        <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
+                          <Star className="h-6 w-6 text-[#0EA5E9]" />
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="text-xl font-bold text-[#0F172A] dark:text-white">Bonus: Do 3 topics</h4>
-                            <Badge className="bg-gradient-to-r from-[#A855F7] to-[#C084FC] text-white border-0 text-xs">Bonus</Badge>
-                          </div>
+                          <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-1">Complete 3 topics</h4>
                           <p className="text-sm text-[#64748B] dark:text-gray-400 font-medium">
-                            Weekly challenge — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
+                            Weekly bonus — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#A855F7]/10 to-[#C084FC]/10 border border-[#A855F7]/20">
-                          <span className="text-lg font-bold text-[#A855F7]">+100 MP</span>
+                        <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
+                          <span className="text-lg font-bold text-[#0EA5E9]">+100 MP</span>
                         </div>
                         {(userStats?.weeklyTopicsCount || 0) >= 3 && (
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg">
+                          <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
                             <Check className="w-5 h-5 text-white" />
                           </div>
                         )}
@@ -5530,7 +5479,7 @@ const Dashboard = () => {
                         initial={{ width: 0 }}
                         animate={{ width: `${Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)}%` }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="absolute h-full bg-gradient-to-r from-[#A855F7] to-[#C084FC] rounded-full shadow-sm"
+                        className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
                       />
                     </div>
                   </div>
@@ -5539,12 +5488,7 @@ const Dashboard = () => {
 
               {/* Weekly Quests Section */}
               <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">This Week's Challenges</h2>
-                  <Badge className="bg-gradient-to-r from-[#F59E0B]/10 to-[#EF4444]/10 text-[#F59E0B] dark:text-[#FBBF24] border border-[#F59E0B]/20 text-sm font-semibold px-4 py-2">
-                    High Reward
-                  </Badge>
-                </div>
+                <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">This Week's Challenges</h2>
                 
                 {/* Rotating Weekly Challenge 1 */}
                 {(() => {
@@ -5556,8 +5500,6 @@ const Dashboard = () => {
                       title: "Complete 5 practice sets",
                       description: "{current}/5 completed this week",
                       icon: Trophy,
-                      colorFrom: "#F97316",
-                      colorTo: "#FB923C",
                       reward: 250,
                       target: 5,
                       current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
@@ -5567,8 +5509,6 @@ const Dashboard = () => {
                       title: "Practice 8 different topics",
                       description: "{current}/8 topics this week",
                       icon: Brain,
-                      colorFrom: "#A855F7",
-                      colorTo: "#C084FC",
                       reward: 250,
                       target: 8,
                       current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
@@ -5578,8 +5518,6 @@ const Dashboard = () => {
                       title: "Study for 3 hours total",
                       description: "{current}/180 minutes this week",
                       icon: Clock,
-                      colorFrom: "#0EA5E9",
-                      colorTo: "#38BDF8",
                       reward: 250,
                       target: 180,
                       current: 0,
@@ -5589,8 +5527,6 @@ const Dashboard = () => {
                       title: "Create 20 flashcards",
                       description: `${weeklyFlashcardCount}/20 flashcards this week`,
                       icon: NotebookPen,
-                      colorFrom: "#8B5CF6",
-                      colorTo: "#A78BFA",
                       reward: 250,
                       target: 20,
                       current: weeklyFlashcardCount,
@@ -5606,25 +5542,18 @@ const Dashboard = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#F97316]/30 dark:hover:border-[#F97316]/40 hover:shadow-[0_16px_48px_rgba(249,115,22,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
+                      className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#F97316]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
                       <div className="relative p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-start gap-4 flex-1">
-                            <div 
-                              className="p-3 rounded-2xl shadow-sm"
-                              style={{
-                                background: challenge.isComplete 
-                                  ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05))'
-                                  : `linear-gradient(135deg, ${challenge.colorFrom}20, ${challenge.colorTo}10)`
-                              }}
-                            >
+                            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
                               {challenge.isComplete ? (
-                                <Check className="h-6 w-6 text-[#10B981]" />
+                                <Check className="h-6 w-6 text-[#0EA5E9]" />
                               ) : (
-                                <ChallengeIcon className="h-6 w-6" style={{ color: challenge.colorFrom }} />
+                                <ChallengeIcon className="h-6 w-6 text-[#0EA5E9]" />
                               )}
                             </div>
                             <div className="flex-1">
@@ -5635,24 +5564,13 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-3">
-                            <div 
-                              className="px-4 py-2 rounded-xl border"
-                              style={{
-                                background: challenge.isComplete 
-                                  ? 'linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.1))'
-                                  : `linear-gradient(90deg, ${challenge.colorFrom}10, ${challenge.colorTo}10)`,
-                                borderColor: challenge.isComplete ? 'rgba(16, 185, 129, 0.2)' : `${challenge.colorFrom}30`
-                              }}
-                            >
-                              <span 
-                                className="text-lg font-bold"
-                                style={{ color: challenge.isComplete ? '#10B981' : challenge.colorFrom }}
-                              >
+                            <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
+                              <span className="text-lg font-bold text-[#0EA5E9]">
                                 +{challenge.reward} MP
                               </span>
                             </div>
                             {challenge.isComplete && (
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg">
+                              <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
                                 <Check className="w-5 h-5 text-white" />
                               </div>
                             )}
@@ -5664,12 +5582,7 @@ const Dashboard = () => {
                             initial={{ width: 0 }}
                             animate={{ width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%` }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="absolute h-full rounded-full shadow-sm"
-                            style={{
-                              background: challenge.isComplete 
-                                ? 'linear-gradient(90deg, #10B981, #0EA5E9)'
-                                : `linear-gradient(90deg, ${challenge.colorFrom}, ${challenge.colorTo})`
-                            }}
+                            className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
                           />
                         </div>
                       </div>
@@ -5687,8 +5600,6 @@ const Dashboard = () => {
                       title: "Maintain 7-day streak",
                       description: "{current}/7 days completed",
                       icon: Flame,
-                      colorFrom: "#10B981",
-                      colorTo: "#34D399",
                       reward: 500,
                       target: 7,
                       current: Math.min(userStats?.currentStreak || 0, 7),
@@ -5698,8 +5609,6 @@ const Dashboard = () => {
                       title: "Complete 10 practice sets",
                       description: "{current}/10 completed this week",
                       icon: Zap,
-                      colorFrom: "#EAB308",
-                      colorTo: "#FACC15",
                       reward: 500,
                       target: 10,
                       current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
@@ -5709,8 +5618,6 @@ const Dashboard = () => {
                       title: "Review 30 flashcards",
                       description: "{current}/30 reviewed this week",
                       icon: Eye,
-                      colorFrom: "#EC4899",
-                      colorTo: "#F472B6",
                       reward: 500,
                       target: 30,
                       current: 0,
@@ -5720,8 +5627,6 @@ const Dashboard = () => {
                       title: "Practice every day this week",
                       description: "{current}/7 days with practice",
                       icon: Calendar,
-                      colorFrom: "#14B8A6",
-                      colorTo: "#2DD4BF",
                       reward: 500,
                       target: 7,
                       current: Math.min(userStats?.currentStreak || 0, 7),
@@ -5737,29 +5642,18 @@ const Dashboard = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="group relative rounded-3xl border-2 border-[#EF4444]/30 dark:border-[#EF4444]/40 hover:border-[#EF4444]/50 dark:hover:border-[#EF4444]/60 hover:shadow-[0_16px_48px_rgba(239,68,68,0.2)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-800 dark:to-[#EF4444]/10"
+                      className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                     >
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-gradient-to-r from-[#EF4444] to-[#F97316] text-white border-0 text-xs font-bold px-3 py-1">
-                          EPIC
-                        </Badge>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
                       <div className="relative p-6">
                         <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-start gap-4 flex-1 pr-20">
-                            <div 
-                              className="p-3 rounded-2xl shadow-sm"
-                              style={{
-                                background: challenge.isComplete 
-                                  ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05))'
-                                  : `linear-gradient(135deg, ${challenge.colorFrom}20, ${challenge.colorTo}10)`
-                              }}
-                            >
+                          <div className="flex items-start gap-4 flex-1">
+                            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 shadow-sm">
                               {challenge.isComplete ? (
-                                <Check className="h-6 w-6 text-[#10B981]" />
+                                <Check className="h-6 w-6 text-[#0EA5E9]" />
                               ) : (
-                                <ChallengeIcon className="h-6 w-6" style={{ color: challenge.colorFrom }} />
+                                <ChallengeIcon className="h-6 w-6 text-[#0EA5E9]" />
                               )}
                             </div>
                             <div className="flex-1">
@@ -5770,24 +5664,13 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-3">
-                            <div 
-                              className="px-4 py-2 rounded-xl border"
-                              style={{
-                                background: challenge.isComplete 
-                                  ? 'linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.1))'
-                                  : 'linear-gradient(90deg, rgba(239, 68, 68, 0.1), rgba(249, 115, 22, 0.1))',
-                                borderColor: challenge.isComplete ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.3)'
-                              }}
-                            >
-                              <span 
-                                className="text-lg font-bold"
-                                style={{ color: challenge.isComplete ? '#10B981' : '#EF4444' }}
-                              >
+                            <div className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-[#38BDF8]/10 border border-[#0EA5E9]/20">
+                              <span className="text-lg font-bold text-[#0EA5E9]">
                                 +{challenge.reward} MP
                               </span>
                             </div>
                             {challenge.isComplete && (
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg">
+                              <div className="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg">
                                 <Check className="w-5 h-5 text-white" />
                               </div>
                             )}
@@ -5799,12 +5682,7 @@ const Dashboard = () => {
                             initial={{ width: 0 }}
                             animate={{ width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%` }}
                             transition={{ duration: 0.8, delay: 0.3 }}
-                            className="absolute h-full rounded-full shadow-sm"
-                            style={{
-                              background: challenge.isComplete 
-                                ? 'linear-gradient(90deg, #10B981, #0EA5E9)'
-                                : 'linear-gradient(90deg, #EF4444, #F97316)'
-                            }}
+                            className="absolute h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] rounded-full shadow-sm"
                           />
                         </div>
                       </div>
