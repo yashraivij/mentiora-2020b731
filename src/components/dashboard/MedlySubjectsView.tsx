@@ -2,19 +2,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   Plus,
   Target,
@@ -28,12 +21,7 @@ import {
   Play,
   X,
   Crown,
-  Star,
-  Check,
-  Gem,
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -59,16 +47,6 @@ const Sparkline = ({ data, className = "" }: { data: number[]; className?: strin
     </svg>
   );
 };
-
-interface Quest {
-  id: string;
-  title: string;
-  description: string;
-  progress: number;
-  total: number;
-  completed: boolean;
-  reward: number;
-}
 
 interface MedlySubjectsViewProps {
   profile: {
@@ -103,7 +81,6 @@ interface MedlySubjectsViewProps {
   removeSubject: (subjectId: string) => void;
   isPremium?: boolean;
   onUpgradeToPremium?: () => void;
-  userId?: string;
 }
 
 export function MedlySubjectsView({
@@ -122,12 +99,7 @@ export function MedlySubjectsView({
   removeSubject,
   isPremium = false,
   onUpgradeToPremium,
-  userId,
 }: MedlySubjectsViewProps) {
-  
-  const [quests, setQuests] = useState<Quest[]>([]);
-  const [questsLoading, setQuestsLoading] = useState(true);
-  const [questsDialogOpen, setQuestsDialogOpen] = useState(false);
   
   // Safe defaults for first-time users with no data
   const safeProfile = {
@@ -160,105 +132,6 @@ export function MedlySubjectsView({
   const totalTasks = Object.values(weekPlan).flat().length;
   const completedTasks = weekTasksCompleted.size;
   const progressPercent = (completedTasks / totalTasks) * 100;
-
-  // Load quests data
-  useEffect(() => {
-    const loadQuests = async () => {
-      if (!userId) return;
-      
-      setQuestsLoading(true);
-      try {
-        const today = new Date();
-        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString();
-
-        // Get user's MP points data
-        const { data: mpData } = await supabase
-          .from('user_mp_points' as any)
-          .select('*')
-          .eq('user_id', userId)
-          .maybeSingle() as any;
-
-        // Get today's practice sessions
-        const { data: practiceData } = await supabase
-          .from('practice_sessions' as any)
-          .select('*')
-          .eq('user_id', userId)
-          .gte('completed_at', todayStart) as any;
-
-        // Get study sessions
-        const { data: sessionData } = await supabase
-          .from('study_sessions' as any)
-          .select('*')
-          .eq('user_id', userId)
-          .gte('started_at', todayStart) as any;
-
-        // Get current streak
-        const { data: streakData } = await supabase
-          .from('user_streaks' as any)
-          .select('*')
-          .eq('user_id', userId)
-          .maybeSingle() as any;
-
-        // Calculate quest progress
-        const loginToday = mpData?.last_login_date === today.toISOString().split('T')[0];
-        const practiceCount = practiceData?.length || 0;
-        const studyMinutes = sessionData?.reduce((sum: number, s: any) => sum + (s.duration_minutes || 0), 0) || 0;
-        const currentStreak = streakData?.streak_count || 0;
-
-        const questsData: Quest[] = [
-          {
-            id: 'login',
-            title: 'Daily Login',
-            description: 'Log in today',
-            progress: loginToday ? 1 : 0,
-            total: 1,
-            completed: loginToday,
-            reward: 10,
-          },
-          {
-            id: 'practice',
-            title: 'Complete Practice',
-            description: 'Complete a practice session',
-            progress: Math.min(practiceCount, 1),
-            total: 1,
-            completed: practiceCount >= 1,
-            reward: 40,
-          },
-          {
-            id: 'study',
-            title: 'Study 15 minutes',
-            description: 'Study for at least 15 minutes',
-            progress: Math.min(studyMinutes, 15),
-            total: 15,
-            completed: studyMinutes >= 15,
-            reward: 25,
-          },
-          {
-            id: 'streak',
-            title: '7-Day Streak',
-            description: 'Maintain a 7-day streak',
-            progress: Math.min(currentStreak, 7),
-            total: 7,
-            completed: currentStreak >= 7,
-            reward: 500,
-          },
-        ];
-
-        setQuests(questsData);
-      } catch (error) {
-        console.error('Error loading quests:', error);
-      } finally {
-        setQuestsLoading(false);
-      }
-    };
-
-    loadQuests();
-    const interval = setInterval(loadQuests, 30000); // Refresh every 30 seconds
-    return () => clearInterval(interval);
-  }, [userId]);
-
-  const completedQuestsCount = quests.filter(q => q.completed).length;
-  const totalMP = quests.reduce((sum, q) => sum + (q.completed ? q.reward : 0), 0);
 
   return (
     <div className="space-y-10">
@@ -345,7 +218,7 @@ export function MedlySubjectsView({
 
           {/* KPI Belt */}
           <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div 
@@ -486,78 +359,6 @@ export function MedlySubjectsView({
                   <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
                 </TooltipContent>
               </Tooltip>
-
-              {/* Daily Quests Compact Card */}
-              {userId && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      onClick={() => setQuestsDialogOpen(true)}
-                      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#FBBF24]/20 dark:border-[#FBBF24]/30 shadow-sm hover:shadow-md hover:shadow-[#FBBF24]/10 transition-all duration-300 cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
-                          <Star className="h-5 w-5 text-[#FBBF24]" />
-                        </div>
-                        <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Daily Quests</span>
-                      </div>
-                      
-                      {questsLoading ? (
-                        <div className="space-y-2">
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                          <div className="h-4 bg-[#F1F5F9] dark:bg-gray-700 rounded animate-pulse" />
-                        </div>
-                      ) : (
-                        <div className="space-y-3">
-                          {/* Preview first 2 quests */}
-                          {quests.slice(0, 2).map((quest) => (
-                            <div key={quest.id} className="space-y-1">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  {quest.completed && (
-                                    <Check className="h-3 w-3 text-[#16A34A]" />
-                                  )}
-                                  <span className="text-xs font-medium text-[#0F172A] dark:text-white truncate">
-                                    {quest.title}
-                                  </span>
-                                </div>
-                                <span className="text-xs font-bold text-[#FBBF24]">+{quest.reward}</span>
-                              </div>
-                              <Progress 
-                                value={(quest.progress / quest.total) * 100} 
-                                className="h-1.5"
-                              />
-                            </div>
-                          ))}
-                          
-                          {/* Summary and View All button */}
-                          <div className="pt-2 border-t border-[#E2E8F0] dark:border-gray-700 space-y-2">
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-[#64748B] dark:text-gray-400 font-medium">
-                                {completedQuestsCount}/{quests.length} Complete
-                              </span>
-                              {totalMP > 0 && (
-                                <div className="flex items-center gap-1">
-                                  <Gem className="h-3 w-3 text-[#FBBF24]" />
-                                  <span className="font-bold text-[#FBBF24]">+{totalMP} MP</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="font-medium mb-1">Daily Quests Preview</p>
-                    <p className="text-xs text-muted-foreground">Click to view all quests and earn MP by completing daily tasks</p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
             </div>
           </TooltipProvider>
         </div>
@@ -776,119 +577,6 @@ export function MedlySubjectsView({
           </p>
         </div>
       </motion.div>
-
-      {/* Daily Quests Dialog */}
-      <Dialog open={questsDialogOpen} onOpenChange={setQuestsDialogOpen}>
-        <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-3 text-2xl">
-              <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#FBBF24]/20 to-[#FBBF24]/5">
-                <Star className="h-6 w-6 text-[#FBBF24]" />
-              </div>
-              Daily Quests
-            </DialogTitle>
-          </DialogHeader>
-
-          {questsLoading ? (
-            <div className="space-y-4 py-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="space-y-2">
-                  <div className="h-6 bg-muted rounded animate-pulse" />
-                  <div className="h-4 bg-muted rounded animate-pulse" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-6 py-4">
-              {/* Progress Summary */}
-              <div className="bg-gradient-to-br from-[#FBBF24]/10 to-[#FBBF24]/5 dark:from-[#FBBF24]/20 dark:to-[#FBBF24]/10 rounded-xl p-6 border border-[#FBBF24]/20">
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <div className="text-3xl font-bold text-foreground">{completedQuestsCount}/{quests.length}</div>
-                    <div className="text-sm text-muted-foreground font-medium">Quests Completed</div>
-                  </div>
-                  {totalMP > 0 && (
-                    <div className="text-right">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Gem className="h-5 w-5 text-[#FBBF24]" />
-                        <span className="text-3xl font-bold text-[#FBBF24]">+{totalMP}</span>
-                      </div>
-                      <div className="text-sm text-muted-foreground font-medium">MP Earned</div>
-                    </div>
-                  )}
-                </div>
-                <Progress value={(completedQuestsCount / quests.length) * 100} className="h-2.5 mt-4" />
-              </div>
-
-              {/* Quest List */}
-              <div className="space-y-4">
-                {quests.map((quest) => (
-                  <motion.div
-                    key={quest.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`p-5 rounded-xl border transition-all duration-300 ${
-                      quest.completed
-                        ? 'bg-[#16A34A]/5 border-[#16A34A]/30 dark:bg-[#16A34A]/10'
-                        : 'bg-card border-border hover:border-[#FBBF24]/30'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-4 mb-3">
-                      <div className="flex items-start gap-3 flex-1">
-                        <div className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 mt-0.5 ${
-                          quest.completed
-                            ? 'bg-[#16A34A] border-[#16A34A]'
-                            : 'border-border'
-                        }`}>
-                          {quest.completed && <Check className="h-4 w-4 text-white" />}
-                        </div>
-                        <div className="flex-1">
-                          <h4 className={`font-bold text-base mb-1 ${
-                            quest.completed 
-                              ? 'text-[#16A34A] line-through' 
-                              : 'text-foreground'
-                          }`}>
-                            {quest.title}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">{quest.description}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1.5 flex-shrink-0">
-                        <Gem className="h-4 w-4 text-[#FBBF24]" />
-                        <span className="text-sm font-bold text-[#FBBF24]">+{quest.reward}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground font-medium">Progress</span>
-                        <span className="font-bold text-foreground">{quest.progress}/{quest.total}</span>
-                      </div>
-                      <Progress 
-                        value={(quest.progress / quest.total) * 100} 
-                        className={`h-2.5 ${quest.completed ? 'bg-[#16A34A]/20' : ''}`}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Completion Message */}
-              {completedQuestsCount === quests.length && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center p-6 bg-gradient-to-br from-[#16A34A]/10 to-[#16A34A]/5 rounded-xl border border-[#16A34A]/30"
-                >
-                  <div className="text-4xl mb-2">🎉</div>
-                  <h3 className="text-lg font-bold text-foreground mb-1">All Quests Complete!</h3>
-                  <p className="text-sm text-muted-foreground">Come back tomorrow for new quests</p>
-                </motion.div>
-              )}
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

@@ -2624,13 +2624,7 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
-                  userId={user?.id}
                 />
-
-                {/* Leaderboard Section */}
-                <div className="mt-12">
-                  <LeaderboardTable userId={user?.id || ''} />
-                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
