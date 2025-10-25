@@ -36,6 +36,11 @@ const getSubjectTasks = (subjectId: string): Task[] => {
       { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
     ],
+    'physics-aqa': [
+      { id: 'score_topic', label: 'Get 75%+ on forces & motion', mpReward: 25, completed: false },
+      { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
+      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+    ],
     'physics-edexcel': [
       { id: 'score_topic', label: 'Get 75%+ on forces & motion', mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
@@ -170,24 +175,7 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
       console.log(`[SubjectDailyTasks] Has exam today: ${hasPredictedExamToday}`, examCompletions);
 
-      // If exam was completed, ensure it's marked in database
-      if (hasPredictedExamToday) {
-        console.log('[SubjectDailyTasks] Marking predicted_exam task as complete');
-        await supabase
-          .from('subject_daily_tasks')
-          .upsert({
-            user_id: userId,
-            subject_id: subjectId,
-            task_id: 'predicted_exam',
-            date: today,
-            completed: true,
-            mp_awarded: 30
-          }, {
-            onConflict: 'user_id,subject_id,task_id,date'
-          });
-      }
-
-      // Load all task completions from database
+      // Load existing task completions from database
       const { data: manualTasks, error: manualError } = await supabase
         .from('subject_daily_tasks')
         .select('task_id, completed')
@@ -198,6 +186,33 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (manualError) throw manualError;
 
       console.log('[SubjectDailyTasks] Task completions from DB:', manualTasks);
+
+      // If exam was completed today and not already marked, auto-complete the task
+      if (hasPredictedExamToday) {
+        const alreadyCompleted = manualTasks?.some(d => d.task_id === 'predicted_exam' && d.completed);
+        
+        if (!alreadyCompleted) {
+          console.log('[SubjectDailyTasks] Auto-completing predicted_exam task with MP award');
+          await autoCompleteTask('predicted_exam', 30);
+          
+          // Reload tasks after auto-completion
+          const { data: updatedTasks } = await supabase
+            .from('subject_daily_tasks')
+            .select('task_id, completed')
+            .eq('user_id', userId)
+            .eq('subject_id', subjectId)
+            .eq('date', today);
+          
+          // Update tasks with fresh completion state
+          setTasks(prevTasks =>
+            prevTasks.map(task => ({
+              ...task,
+              completed: updatedTasks?.some(d => d.task_id === task.id && d.completed) || false
+            }))
+          );
+          return; // Exit early since we already updated state
+        }
+      }
 
       // Update tasks with completion state
       setTasks(prevTasks =>
