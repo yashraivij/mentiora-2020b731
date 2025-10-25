@@ -497,10 +497,9 @@ export function MedlySubjectsView({
                     </div>
                   </div>
                   
-                  {/* Sparkline */}
-                  <div className="mb-5 p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wider">Last 6 attempts</div>
-                    <Sparkline data={subject.trend} className="text-[#0EA5E9] opacity-80" />
+                  {/* Daily Tasks */}
+                  <div className="mb-5">
+                    <SubjectDailyTasks subjectId={subject.id} userId={userId} />
                   </div>
                   
                   {/* Actions */}
