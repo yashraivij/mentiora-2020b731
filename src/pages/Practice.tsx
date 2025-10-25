@@ -1748,82 +1748,97 @@ const Practice = () => {
                 />
               ) : (
                 <div className="space-y-4">
-                  {/* User's answer - color based on performance */}
-                  <div className={`p-5 rounded-[20px] shadow-sm border ${
-                    currentAttempt.score === currentQuestion.marks
-                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200/50 dark:border-emerald-800/50'
-                      : currentAttempt.score <= currentQuestion.marks / 2
-                      ? 'bg-red-50 dark:bg-red-950/30 border-red-200/50 dark:border-red-800/50'
-                      : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200/50 dark:border-amber-800/50'
-                  }`}>
-                    <h4 className={`font-bold mb-3 text-sm uppercase tracking-wide ${
-                      currentAttempt.score === currentQuestion.marks
-                        ? 'text-emerald-700 dark:text-emerald-400'
-                        : currentAttempt.score <= currentQuestion.marks / 2
-                        ? 'text-red-700 dark:text-red-400'
-                        : 'text-amber-700 dark:text-amber-400'
-                    }`}>Your Answer</h4>
-                    <p className="text-foreground font-medium leading-relaxed">{userAnswer}</p>
+                  {/* User's answer bubble */}
+                  <div className="flex justify-end">
+                    <div className="max-w-[85%] space-y-2">
+                      <div className="flex items-center gap-2 justify-end px-1">
+                        <span className="text-xs font-medium text-muted-foreground">Your Answer</span>
+                      </div>
+                      <div className={`rounded-3xl rounded-tr-md px-5 py-4 shadow-sm backdrop-blur-sm ${
+                        currentAttempt.score === currentQuestion.marks
+                          ? 'bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 text-white'
+                          : currentAttempt.score <= currentQuestion.marks / 2
+                          ? 'bg-gradient-to-br from-red-500/90 to-red-600/90 text-white'
+                          : 'bg-gradient-to-br from-amber-500/90 to-amber-600/90 text-white'
+                      }`}>
+                        <p className="font-medium leading-relaxed">{userAnswer}</p>
+                      </div>
+                    </div>
                   </div>
                   
-                  {/* Marks display inline */}
+                  {/* Marks display */}
                   {currentAttempt && (
-                    <>
-                      <div className="flex items-center gap-3 mt-4">
-                        <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${
-                          currentAttempt.score === currentQuestion.marks 
-                            ? 'bg-emerald-50 border border-emerald-200' 
-                            : currentAttempt.score <= currentQuestion.marks / 2
-                            ? 'bg-red-50 border border-red-200'
-                            : 'bg-amber-50 border border-amber-200'
-                        }`}>
-                          <span className={`font-bold text-base ${
-                            currentAttempt.score === currentQuestion.marks 
-                              ? 'text-emerald-600' 
-                              : currentAttempt.score <= currentQuestion.marks / 2
-                              ? 'text-red-600'
-                              : 'text-amber-600'
-                          }`}>{currentAttempt.score}/{currentQuestion.marks}</span>
-                          <span className={`text-sm font-medium ${
-                            currentAttempt.score === currentQuestion.marks 
-                              ? 'text-emerald-600' 
-                              : currentAttempt.score <= currentQuestion.marks / 2
-                              ? 'text-red-600'
-                              : 'text-amber-600'
-                          }`}>marks</span>
-                        </div>
+                    <div className="flex justify-end px-1">
+                      <div className="flex items-center gap-2">
                         <button 
                           onClick={() => {
                             setShowFeedback(false);
                             setUserAnswer("");
                           }}
-                          className={
-                            currentAttempt.score === currentQuestion.marks 
-                              ? 'text-emerald-500 hover:text-emerald-600' 
-                              : currentAttempt.score <= currentQuestion.marks / 2
-                              ? 'text-red-500 hover:text-red-600'
-                              : 'text-amber-500 hover:text-amber-600'
-                          }
+                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
+                          title="Try again"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                          </svg>
+                          <RotateCcw className="w-4 h-4" />
                         </button>
+                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
+                          currentAttempt.score === currentQuestion.marks 
+                            ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800' 
+                            : currentAttempt.score <= currentQuestion.marks / 2
+                            ? 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
+                            : 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
+                        }`}>
+                          <span className={`font-bold text-sm ${
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-600 dark:text-emerald-400' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-600 dark:text-red-400'
+                              : 'text-amber-600 dark:text-amber-400'
+                          }`}>{currentAttempt.score}/{currentQuestion.marks}</span>
+                          <span className={`text-xs font-medium ${
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-600 dark:text-emerald-400' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-600 dark:text-red-400'
+                              : 'text-amber-600 dark:text-amber-400'
+                          }`}>marks</span>
+                        </div>
                       </div>
-                      
-                      {/* Model answer */}
+                    </div>
+                  )}
+                  
+                  {currentAttempt && (
+                    <>
+                      {/* Model answer bubble */}
                       {currentAttempt.feedback?.modelAnswer && (
-                        <div className="mt-6 p-5 bg-emerald-50 dark:bg-emerald-950/30 rounded-[20px] shadow-sm border border-emerald-200/50 dark:border-emerald-800/50">
-                          <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
-                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
+                        <div className="flex justify-start mt-6">
+                          <div className="max-w-[85%] space-y-2">
+                            <div className="flex items-center gap-2 px-1">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                              </div>
+                              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
+                            </div>
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
+                            </div>
+                          </div>
                         </div>
                       )}
                       
-                      {/* Teacher feedback */}
+                      {/* Teacher feedback bubble */}
                       {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="mt-6 p-5 bg-blue-50 dark:bg-blue-950/30 rounded-[20px] shadow-sm border border-blue-200/50 dark:border-blue-800/50">
-                          <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
-                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
+                        <div className="flex justify-start">
+                          <div className="max-w-[85%] space-y-2">
+                            <div className="flex items-center gap-2 px-1">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                <Lightbulb className="w-3.5 h-3.5 text-white" />
+                              </div>
+                              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
+                            </div>
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </>
