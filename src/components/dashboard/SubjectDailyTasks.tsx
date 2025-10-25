@@ -175,14 +175,15 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
 
       // Update tasks based on both manual and auto-detected completions
-      setTasks(prevTasks =>
-        prevTasks.map(task => {
+      const updatedTasks = await Promise.all(
+        tasks.map(async (task) => {
           const manuallyCompleted = manualTasks?.some(d => d.task_id === task.id && d.completed) || false;
           
           // Auto-complete predicted exam task if exam was done today
           if (task.id === 'predicted_exam' && hasPredictedExamToday && !manuallyCompleted) {
+            console.log('Auto-completing predicted exam task for:', subjectId);
             // Auto-award MP and mark as complete
-            autoCompleteTask(task.id, task.mpReward);
+            await autoCompleteTask(task.id, task.mpReward);
             return { ...task, completed: true };
           }
           
@@ -192,6 +193,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           };
         })
       );
+      
+      setTasks(updatedTasks);
     } catch (error) {
       console.error('Error loading task completions:', error);
     } finally {
