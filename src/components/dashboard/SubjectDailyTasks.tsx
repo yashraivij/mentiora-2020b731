@@ -153,30 +153,13 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (showLoading) setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
-      console.log(`[SubjectDailyTasks] Loading task completions for ${subjectId}, user ${userId}, date ${today}`);
-      
-      // Load manual task completions
-      const { data: manualTasks, error: manualError } = await supabase
-        .from('subject_daily_tasks')
-        .select('task_id, completed')
-        .eq('user_id', userId)
-        .eq('subject_id', subjectId)
-        .eq('date', today);
+      console.log(`[SubjectDailyTasks] Loading for subject: ${subjectId}`);
 
-      if (manualError) {
-        console.error('[SubjectDailyTasks] Error loading manual tasks:', manualError);
-        throw manualError;
-      }
-
-      console.log(`[SubjectDailyTasks] Found ${manualTasks?.length || 0} manual task completions:`, manualTasks);
-
-      // Auto-detect predicted exam completion
+      // Check for predicted exam completion today
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
-      console.log(`[SubjectDailyTasks] Checking for exam completions for ${subjectId} between ${todayStart} and ${todayEnd}`);
-      
-      const { data: examCompletions, error: examError } = await supabase
+      const { data: examCompletions } = await supabase
         .from('predicted_exam_completions')
         .select('id, completed_at')
         .eq('user_id', userId)
@@ -184,46 +167,47 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
 
-      if (examError) {
-        console.error('[SubjectDailyTasks] Error fetching exam completions:', examError);
-        throw examError;
-      }
-
-      console.log(`[SubjectDailyTasks] Found ${examCompletions?.length || 0} exam completions for ${subjectId} today:`, examCompletions);
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
+      console.log(`[SubjectDailyTasks] Has exam today: ${hasPredictedExamToday}`, examCompletions);
 
-      // Update tasks based on both manual and auto-detected completions
-      const updatedTasks = [];
-      
-      for (const task of tasks) {
-        const manuallyCompleted = manualTasks?.some(d => d.task_id === task.id && d.completed) || false;
-        
-        // Auto-complete predicted exam task if exam was done today
-        if (task.id === 'predicted_exam' && hasPredictedExamToday && !manuallyCompleted) {
-          console.log(`Auto-completing predicted exam task for ${subjectId}`);
-          // Auto-award MP and mark as complete - WAIT for it to finish
-          await autoCompleteTask(task.id, task.mpReward);
-          // Reload to get the updated state from database
-          const { data: updatedManualTasks } = await supabase
-            .from('subject_daily_tasks')
-            .select('task_id, completed')
-            .eq('user_id', userId)
-            .eq('subject_id', subjectId)
-            .eq('date', today);
-          
-          const nowCompleted = updatedManualTasks?.some(d => d.task_id === task.id && d.completed) || false;
-          updatedTasks.push({ ...task, completed: nowCompleted });
-        } else {
-          updatedTasks.push({
-            ...task,
-            completed: manuallyCompleted
+      // If exam was completed, ensure it's marked in database
+      if (hasPredictedExamToday) {
+        console.log('[SubjectDailyTasks] Marking predicted_exam task as complete');
+        await supabase
+          .from('subject_daily_tasks')
+          .upsert({
+            user_id: userId,
+            subject_id: subjectId,
+            task_id: 'predicted_exam',
+            date: today,
+            completed: true,
+            mp_awarded: 30
+          }, {
+            onConflict: 'user_id,subject_id,task_id,date'
           });
-        }
       }
-      
-      setTasks(updatedTasks);
+
+      // Load all task completions from database
+      const { data: manualTasks, error: manualError } = await supabase
+        .from('subject_daily_tasks')
+        .select('task_id, completed')
+        .eq('user_id', userId)
+        .eq('subject_id', subjectId)
+        .eq('date', today);
+
+      if (manualError) throw manualError;
+
+      console.log('[SubjectDailyTasks] Task completions from DB:', manualTasks);
+
+      // Update tasks with completion state
+      setTasks(prevTasks =>
+        prevTasks.map(task => ({
+          ...task,
+          completed: manualTasks?.some(d => d.task_id === task.id && d.completed) || false
+        }))
+      );
     } catch (error) {
-      console.error('Error loading task completions:', error);
+      console.error('[SubjectDailyTasks] Error loading task completions:', error);
     } finally {
       if (showLoading) setLoading(false);
     }
