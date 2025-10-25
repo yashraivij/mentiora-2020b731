@@ -1749,37 +1749,27 @@ const Practice = () => {
               ) : (
                 <div className="space-y-4">
                   {/* User's answer bubble */}
-                  <div className="flex justify-end">
+                  <div className="flex justify-start">
                     <div className="max-w-[85%] space-y-2">
-                      <div className="flex items-center gap-2 justify-end px-1">
-                        <span className="text-xs font-medium text-muted-foreground">Your Answer</span>
+                      <div className="flex items-center gap-2 px-1">
+                        <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
                       </div>
-                      <div className={`rounded-3xl rounded-tr-md px-5 py-4 shadow-sm backdrop-blur-sm ${
+                      <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
                         currentAttempt.score === currentQuestion.marks
-                          ? 'bg-gradient-to-br from-emerald-500/90 to-emerald-600/90 text-white'
+                          ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
                           : currentAttempt.score <= currentQuestion.marks / 2
-                          ? 'bg-gradient-to-br from-red-500/90 to-red-600/90 text-white'
-                          : 'bg-gradient-to-br from-amber-500/90 to-amber-600/90 text-white'
+                          ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
+                          : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
                       }`}>
-                        <p className="font-medium leading-relaxed">{userAnswer}</p>
+                        <p className="text-foreground leading-relaxed">{userAnswer}</p>
                       </div>
                     </div>
                   </div>
                   
                   {/* Marks display */}
                   {currentAttempt && (
-                    <div className="flex justify-end px-1">
+                    <div className="flex justify-start px-1">
                       <div className="flex items-center gap-2">
-                        <button 
-                          onClick={() => {
-                            setShowFeedback(false);
-                            setUserAnswer("");
-                          }}
-                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
-                          title="Try again"
-                        >
-                          <RotateCcw className="w-4 h-4" />
-                        </button>
                         <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
                           currentAttempt.score === currentQuestion.marks 
                             ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800' 
@@ -1802,6 +1792,16 @@ const Practice = () => {
                               : 'text-amber-600 dark:text-amber-400'
                           }`}>marks</span>
                         </div>
+                        <button 
+                          onClick={() => {
+                            setShowFeedback(false);
+                            setUserAnswer("");
+                          }}
+                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
+                          title="Try again"
+                        >
+                          <RotateCcw className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
                   )}
@@ -1813,9 +1813,6 @@ const Practice = () => {
                         <div className="flex justify-start mt-6">
                           <div className="max-w-[85%] space-y-2">
                             <div className="flex items-center gap-2 px-1">
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                              </div>
                               <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
                             </div>
                             <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
@@ -1830,9 +1827,6 @@ const Practice = () => {
                         <div className="flex justify-start">
                           <div className="max-w-[85%] space-y-2">
                             <div className="flex items-center gap-2 px-1">
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
-                                <Lightbulb className="w-3.5 h-3.5 text-white" />
-                              </div>
                               <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
                             </div>
                             <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
