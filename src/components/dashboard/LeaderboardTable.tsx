@@ -12,12 +12,6 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -25,11 +19,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { supabase } from '@/integrations/supabase/client';
-import { 
-  Search, 
-  ChevronUp, 
-  ChevronDown
-} from 'lucide-react';
+import { Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -265,13 +255,6 @@ export function LeaderboardTable({ userId }: { userId: string }) {
     return `${diffDays}d ago`;
   };
 
-  const SortIcon = ({ column }: { column: SortColumn }) => {
-    if (sortColumn !== column) return null;
-    return sortDirection === 'asc' ? 
-      <ChevronUp className="h-3.5 w-3.5 inline ml-1 opacity-50" /> : 
-      <ChevronDown className="h-3.5 w-3.5 inline ml-1 opacity-50" />;
-  };
-
   const getRankBadge = (rank: number) => {
     if (rank === 1) {
       return (
@@ -294,7 +277,7 @@ export function LeaderboardTable({ userId }: { userId: string }) {
         </div>
       );
     }
-    return <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">{rank}</span>;
+    return <span className="text-sm text-muted-foreground font-medium">{rank}</span>;
   };
 
   if (isLoading) {
@@ -316,175 +299,168 @@ export function LeaderboardTable({ userId }: { userId: string }) {
 
   return (
     <>
-      <TooltipProvider>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-card rounded-2xl p-8 border border-border"
-        >
-          <div>
-            {/* Header */}
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-2">
-                Leaderboard
-              </h2>
-              <p className="text-muted-foreground">
-                See how you rank against other students this week
-              </p>
-            </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-card rounded-2xl p-8 border border-border"
+      >
+        {/* Header */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-2">
+            Leaderboards
+          </h2>
+          <p className="text-muted-foreground">
+            See how you rank against other students
+          </p>
+        </div>
 
-            {/* Controls */}
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
-              <div className="flex gap-3">
-                <Button
-                  variant={filterType === 'week' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterType('week')}
-                  className="rounded-lg"
-                >
-                  This Week
-                </Button>
-                <Button
-                  variant={filterType === 'alltime' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setFilterType('alltime')}
-                  className="rounded-lg"
-                >
-                  All Time
-                </Button>
-              </div>
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
+          <div className="flex gap-3">
+            <Button
+              variant={filterType === 'week' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setFilterType('week')}
+              className="rounded-lg"
+            >
+              This Week
+            </Button>
+            <Button
+              variant={filterType === 'alltime' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setFilterType('alltime')}
+              className="rounded-lg"
+            >
+              All Time
+            </Button>
+          </div>
 
-              <div className="relative w-full sm:w-72">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search username..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 rounded-lg"
-                />
-              </div>
-            </div>
+          <div className="relative w-full sm:w-72">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search username..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 rounded-lg"
+            />
+          </div>
+        </div>
 
-            {/* Table */}
-            {filteredEntries.length === 0 ? (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-16"
-              >
-                <p className="text-muted-foreground">
-                  {searchQuery ? 'No matches found. Try a different search.' : 'Complete your first quiz to appear on the leaderboard'}
-                </p>
-              </motion.div>
-            ) : (
-              <div className="overflow-hidden rounded-lg border border-border">
-                <div className="overflow-auto max-h-[600px]">
-                  <Table>
-                    <TableHeader className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 border-b">
-                      <TableRow className="hover:bg-transparent">
-                        <TableHead className="w-20 font-semibold">Rank</TableHead>
-                        <TableHead className="font-semibold">Student</TableHead>
-                        <TableHead 
-                          className="cursor-pointer hover:text-primary transition-colors font-semibold"
-                          onClick={() => handleSort('mp_points')}
-                        >
-                          MP <SortIcon column="mp_points" />
-                        </TableHead>
-                        <TableHead 
-                          className="cursor-pointer hover:text-primary transition-colors font-semibold"
-                          onClick={() => handleSort('current_streak')}
-                        >
-                          Streak <SortIcon column="current_streak" />
-                        </TableHead>
-                        <TableHead className="font-semibold">Badges</TableHead>
-                        <TableHead 
-                          className="cursor-pointer hover:text-primary transition-colors font-semibold"
-                          onClick={() => handleSort('quizzes_completed')}
-                        >
-                          Quizzes <SortIcon column="quizzes_completed" />
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <AnimatePresence mode="popLayout">
-                        {filteredEntries.map((entry, index) => {
-                          const isTopThree = entry.rank <= 3;
-                          return (
-                            <motion.tr
-                              key={entry.user_id}
-                              ref={entry.isCurrentUser ? currentUserRowRef : null}
-                              layout
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, scale: 0.95 }}
-                              transition={{ delay: index * 0.02 }}
-                              onClick={() => handleRowClick(entry)}
-                              className={cn(
-                                "cursor-pointer transition-colors duration-200",
-                                "hover:bg-muted/50",
-                                entry.isCurrentUser && "bg-primary/5 border-l-4 border-l-primary"
-                              )}
-                            >
-                              <TableCell className="py-4">
-                                <div className="flex items-center justify-center">
-                                  {getRankBadge(entry.rank)}
-                                </div>
-                              </TableCell>
-                              <TableCell className="py-4">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-semibold text-foreground">
-                                    {entry.username}
-                                  </span>
-                                  {entry.isCurrentUser && (
-                                    <Badge variant="secondary" className="text-xs">You</Badge>
-                                  )}
-                                </div>
-                              </TableCell>
-                              <TableCell className="py-4">
-                                <span className="font-semibold text-primary">{entry.mp_points}</span>
-                              </TableCell>
-                              <TableCell className="py-4">
-                                {entry.current_streak > 0 ? (
-                                  <div className="inline-flex items-center gap-1.5">
-                                    <span className="font-semibold text-foreground">{entry.current_streak}</span>
-                                    <span className="text-xs">🔥</span>
-                                  </div>
-                                ) : (
-                                  <span className="text-muted-foreground/50">—</span>
-                                )}
-                              </TableCell>
-                              <TableCell className="py-4">
-                                {entry.badges_earned > 0 ? (
-                                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400">
-                                    <span className="font-semibold text-sm">{entry.badges_earned}</span>
-                                  </div>
-                                ) : (
-                                  <span className="text-muted-foreground/50">—</span>
-                                )}
-                              </TableCell>
-                              <TableCell className="py-4">
-                                <span className="font-semibold text-foreground">{entry.quizzes_completed}</span>
-                              </TableCell>
-                            </motion.tr>
-                          );
-                        })}
-                      </AnimatePresence>
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
-            )}
-
-            <div className="flex items-center justify-center gap-3 mt-6">
-              <div className="h-px flex-1 bg-border" />
-              <p className="text-xs text-muted-foreground">
-                Updates hourly • {filteredEntries.length} {filteredEntries.length === 1 ? 'student' : 'students'}
-              </p>
-              <div className="h-px flex-1 bg-border" />
+        {/* Table */}
+        {filteredEntries.length === 0 ? (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <p className="text-muted-foreground">
+              {searchQuery ? 'No matches found. Try a different search.' : 'Complete your first quiz to appear on the leaderboard'}
+            </p>
+          </motion.div>
+        ) : (
+          <div className="overflow-hidden rounded-lg border border-border">
+            <div className="overflow-auto max-h-[600px]">
+              <Table>
+                <TableHeader className="sticky top-0 bg-background/95 backdrop-blur-sm z-10">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="w-20 font-semibold">Rank</TableHead>
+                    <TableHead className="font-semibold">Student</TableHead>
+                    <TableHead 
+                      className="cursor-pointer hover:text-primary transition-colors font-semibold"
+                      onClick={() => handleSort('mp_points')}
+                    >
+                      MP
+                    </TableHead>
+                    <TableHead 
+                      className="cursor-pointer hover:text-primary transition-colors font-semibold"
+                      onClick={() => handleSort('current_streak')}
+                    >
+                      Streak
+                    </TableHead>
+                    <TableHead className="font-semibold">Badges</TableHead>
+                    <TableHead 
+                      className="cursor-pointer hover:text-primary transition-colors font-semibold"
+                      onClick={() => handleSort('quizzes_completed')}
+                    >
+                      Quizzes
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <AnimatePresence mode="popLayout">
+                    {filteredEntries.map((entry, index) => (
+                      <motion.tr
+                        key={entry.user_id}
+                        ref={entry.isCurrentUser ? currentUserRowRef : null}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ delay: index * 0.02 }}
+                        onClick={() => handleRowClick(entry)}
+                        className={cn(
+                          "cursor-pointer transition-colors duration-200",
+                          "hover:bg-muted/50",
+                          entry.isCurrentUser && "bg-primary/5 border-l-4 border-l-primary"
+                        )}
+                      >
+                        <TableCell className="py-4">
+                          <div className="flex items-center justify-center">
+                            {getRankBadge(entry.rank)}
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-foreground">
+                              {entry.username}
+                            </span>
+                            {entry.isCurrentUser && (
+                              <Badge variant="secondary" className="text-xs">You</Badge>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <span className="font-semibold text-primary">{entry.mp_points}</span>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          {entry.current_streak > 0 ? (
+                            <div className="inline-flex items-center gap-1.5">
+                              <span className="font-semibold text-foreground">{entry.current_streak}</span>
+                              <span className="text-xs">🔥</span>
+                            </div>
+                          ) : (
+                            <span className="text-muted-foreground/50">—</span>
+                          )}
+                        </TableCell>
+                        <TableCell className="py-4">
+                          {entry.badges_earned > 0 ? (
+                            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400">
+                              <span className="font-semibold text-sm">{entry.badges_earned}</span>
+                            </div>
+                          ) : (
+                            <span className="text-muted-foreground/50">—</span>
+                          )}
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <span className="font-semibold text-foreground">{entry.quizzes_completed}</span>
+                        </TableCell>
+                      </motion.tr>
+                    ))}
+                  </AnimatePresence>
+                </TableBody>
+              </Table>
             </div>
           </div>
-        </motion.div>
-      </TooltipProvider>
+        )}
+
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <div className="h-px flex-1 bg-border" />
+          <p className="text-xs text-muted-foreground">
+            Updates hourly • {filteredEntries.length} {filteredEntries.length === 1 ? 'student' : 'students'}
+          </p>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+      </motion.div>
 
       {/* User Details Drawer */}
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
