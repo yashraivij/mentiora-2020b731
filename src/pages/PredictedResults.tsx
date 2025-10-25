@@ -340,11 +340,13 @@ const PredictedResults = () => {
         console.error('Database error saving exam completion:', error);
         toast.error("Failed to save exam results to database");
       } else {
+        alert('✓ EXAM SAVED TO DATABASE');
         console.log('✓ Exam completion saved successfully to database');
         
         // Mark daily task complete - SIMPLE approach
         const today = new Date().toISOString().split('T')[0];
         
+        alert(`MARKING DAILY TASK FOR: ${subjectId}`);
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         console.log('DAILY TASK MARKING STARTED');
         console.log('Subject ID:', subjectId);
@@ -367,8 +369,10 @@ const PredictedResults = () => {
           });
         
         if (taskError) {
+          alert(`✗ ERROR MARKING TASK: ${taskError.message}`);
           console.error('✗ ERROR marking task:', taskError);
         } else {
+          alert('✓ TASK MARKED IN DATABASE');
           console.log('✓ Task marked complete in database');
         }
         
@@ -390,8 +394,10 @@ const PredictedResults = () => {
           });
         
         if (pointsError) {
+          alert(`✗ ERROR AWARDING MP: ${pointsError.message}`);
           console.error('✗ ERROR awarding MP:', pointsError);
         } else {
+          alert(`✓ AWARDED 30 MP! NEW TOTAL: ${newTotal}`);
           console.log('✓ Awarded 30 MP | New total:', newTotal);
           toast.success('Daily task complete! +30 MP');
         }
