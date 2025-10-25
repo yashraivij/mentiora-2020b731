@@ -384,6 +384,7 @@ const PredictedResults = () => {
           }
         } else {
           // Insert new task
+          console.log(`📝 INSERTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
           const { error: taskError } = await supabase
             .from('subject_daily_tasks')
             .insert({
@@ -396,9 +397,10 @@ const PredictedResults = () => {
             });
           
           if (taskError) {
-            console.error('Error inserting task:', taskError);
+            console.error('❌ Error inserting task:', taskError);
           } else {
-            console.log('Task inserted successfully');
+            console.log('✅ Task inserted successfully');
+            alert(`✅ TASK INSERTED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
           }
         }
         

@@ -159,10 +159,11 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const today = new Date().toISOString().split('T')[0];
       
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log('LOADING TASK COMPLETIONS');
-      console.log('Subject ID:', subjectId);
-      console.log('User ID:', userId);
-      console.log('Date:', today);
+      console.log('🔍 LOADING TASK COMPLETIONS');
+      console.log(`📂 Subject ID: "${subjectId}"`);
+      console.log(`👤 User ID: "${userId}"`);
+      console.log(`📅 Date: "${today}"`);
+      console.log('🔎 Query: SELECT * FROM subject_daily_tasks WHERE user_id =', userId, 'AND subject_id =', `"${subjectId}"`, 'AND date =', today);
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       
       // Load task completions - EXACT subject ID match only
@@ -179,6 +180,11 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       }
 
       console.log('✓ Loaded tasks from database:', completedTasks);
+      if (completedTasks && completedTasks.length > 0) {
+        console.log(`📊 Found ${completedTasks.length} completed task(s):`, completedTasks.map(t => t.task_id).join(', '));
+      } else {
+        console.log('⚠️ No completed tasks found in database');
+      }
 
       // Update tasks with completion state
       setTasks(prevTasks =>
