@@ -132,6 +132,13 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
 
   useEffect(() => {
     loadTaskCompletions();
+
+    // Refresh task completions every 5 seconds to detect completed exams
+    const interval = setInterval(() => {
+      loadTaskCompletions();
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, [subjectId, userId]);
 
   const loadTaskCompletions = async () => {
