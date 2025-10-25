@@ -2455,8 +2455,8 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background flex">
       {/* Left Sidebar Navigation - Duolingo Style */}
       <div className="hidden lg:flex lg:flex-col lg:w-64 lg:border-r lg:border-border lg:bg-background/50 lg:backdrop-blur-sm">
-        <div className="flex-1 flex flex-col py-8 px-4 space-y-2">
-          {sidebarItems.slice(0, 2).map((item) => {
+        <div className="flex-1 flex flex-col py-8 px-4 space-y-3">
+          {sidebarItems.slice(0, 3).map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
@@ -2467,14 +2467,14 @@ const Dashboard = () => {
                   setSelectedSubject(null);
                 }}
                 className={`
-                  flex items-center gap-4 px-4 py-3 rounded-xl font-bold text-sm transition-all duration-200
+                  flex items-center gap-4 px-5 py-4 rounded-xl font-bold text-sm transition-all duration-200
                   ${isActive 
                     ? `${item.activeColor} text-white shadow-lg` 
                     : `${item.bgColor} ${item.textColor} hover:scale-105`
                   }
                 `}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-6 w-6" />
                 <span>{item.label}</span>
               </button>
             );
