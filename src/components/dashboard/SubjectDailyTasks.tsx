@@ -158,25 +158,43 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       if (showLoading) setLoading(true);
       const today = new Date().toISOString().split('T')[0];
       
-      // Load all task completions from database
-      const { data: manualTasks, error: manualError } = await supabase
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.log('LOADING TASK COMPLETIONS');
+      console.log('Subject ID:', subjectId);
+      console.log('User ID:', userId);
+      console.log('Date:', today);
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      
+      // Load task completions - EXACT subject ID match only
+      const { data: completedTasks, error } = await supabase
         .from('subject_daily_tasks')
-        .select('task_id, completed')
+        .select('task_id, completed, mp_awarded')
         .eq('user_id', userId)
         .eq('subject_id', subjectId)
         .eq('date', today);
 
-      if (manualError) throw manualError;
+      if (error) {
+        console.error('✗ ERROR loading tasks:', error);
+        throw error;
+      }
+
+      console.log('✓ Loaded tasks from database:', completedTasks);
 
       // Update tasks with completion state
       setTasks(prevTasks =>
-        prevTasks.map(task => ({
-          ...task,
-          completed: manualTasks?.some(d => d.task_id === task.id && d.completed) || false
-        }))
+        prevTasks.map(task => {
+          const isCompleted = completedTasks?.some(ct => ct.task_id === task.id && ct.completed) || false;
+          console.log(`Task ${task.id}: ${isCompleted ? '✓ COMPLETE' : '○ incomplete'}`);
+          return {
+            ...task,
+            completed: isCompleted
+          };
+        })
       );
+      
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     } catch (error) {
-      console.error('[SubjectDailyTasks] Error loading task completions:', error);
+      console.error('✗ ERROR in loadTaskCompletions:', error);
     } finally {
       if (showLoading) setLoading(false);
     }
@@ -245,9 +263,15 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
 
     try {
       const today = new Date().toISOString().split('T')[0];
+      
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.log('MANUAL TASK TOGGLE');
+      console.log('Task ID:', taskId);
+      console.log('Checked:', checked);
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
       if (checked) {
-        // Mark as complete and award MP
+        // Mark as complete
         const { error } = await supabase
           .from('subject_daily_tasks')
           .upsert({
@@ -261,25 +285,42 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
             onConflict: 'user_id,subject_id,task_id,date'
           });
 
-        if (error) throw error;
+        if (error) {
+          console.error('✗ ERROR marking task:', error);
+          throw error;
+        }
 
-        // Award MP
-        await supabase.functions.invoke('award-mp', {
-          body: {
-            action: 'subject_task_completed',
-            userId,
-            mpAmount: task.mpReward,
-            taskId: taskId,
-            subjectId: subjectId
-          }
-        });
+        console.log('✓ Task marked complete');
+
+        // Award MP directly
+        const { data: currentPoints } = await supabase
+          .from('user_points')
+          .select('total_points')
+          .eq('user_id', userId)
+          .maybeSingle();
+
+        const newTotal = (currentPoints?.total_points || 0) + task.mpReward;
+
+        const { error: pointsError } = await supabase
+          .from('user_points')
+          .upsert({
+            user_id: userId,
+            total_points: newTotal,
+            updated_at: new Date().toISOString()
+          });
+
+        if (pointsError) {
+          console.error('✗ ERROR awarding MP:', pointsError);
+        } else {
+          console.log(`✓ Awarded ${task.mpReward} MP | New total: ${newTotal}`);
+        }
 
         // Update local state
         setTasks(prevTasks =>
           prevTasks.map(t => (t.id === taskId ? { ...t, completed: true } : t))
         );
 
-        // Show toast with MP reward
+        // Show toast
         toast(
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-yellow-500" />
@@ -297,15 +338,22 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
           .eq('task_id', taskId)
           .eq('date', today);
 
-        if (error) throw error;
+        if (error) {
+          console.error('✗ ERROR unchecking task:', error);
+          throw error;
+        }
+
+        console.log('✓ Task unchecked');
 
         setTasks(prevTasks =>
           prevTasks.map(t => (t.id === taskId ? { ...t, completed: false } : t))
         );
       }
+      
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     } catch (error) {
-      console.error('Error toggling task:', error);
-      toast.error('Failed to update task');
+      console.error('✗ ERROR in handleTaskToggle:', error);
+      toast.error("Failed to update task");
     }
   };
 

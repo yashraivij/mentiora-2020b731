@@ -340,72 +340,65 @@ const PredictedResults = () => {
         console.error('Database error saving exam completion:', error);
         toast.error("Failed to save exam results to database");
       } else {
-        console.log('Exam completion saved successfully');
+        console.log('✓ Exam completion saved successfully to database');
         
-        // Mark the daily task as complete
+        // Mark daily task complete - SIMPLE approach
         const today = new Date().toISOString().split('T')[0];
-        const baseSubject = subjectId?.split('-')[0] || subjectId;
         
-        console.log('[Daily Task] Marking task complete for subject:', subjectId, 'base:', baseSubject);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('DAILY TASK MARKING STARTED');
+        console.log('Subject ID:', subjectId);
+        console.log('User ID:', user.id);
+        console.log('Date:', today);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         
-        // Get all possible subject variants the user might have as daily task cards
-        const subjectVariants = [
-          subjectId,
-          baseSubject,
-          `${baseSubject}-aqa`,
-          `${baseSubject}-edexcel`,
-          `${baseSubject}-ocr`,
-          subjectId?.replace('-paper-2', ''),
-          `${baseSubject}-paper-2`
-        ].filter(v => v && v !== 'undefined'); // Remove undefined/null values
-        
-        console.log('[Daily Task] Will mark tasks for variants:', subjectVariants);
-        
-        // Mark task for all matching subject variants
-        for (const variant of subjectVariants) {
-          const taskData = {
+        // Mark task with EXACT subject ID match (no variants)
+        const { error: taskError } = await supabase
+          .from('subject_daily_tasks')
+          .upsert({
             user_id: user.id,
-            subject_id: variant,
+            subject_id: subjectId,
             task_id: 'predicted_exam',
             date: today,
             completed: true,
             mp_awarded: 30
-          };
-          
-          console.log('[Daily Task] Upserting task for variant:', variant, taskData);
-          
-          const { error: taskError } = await supabase
-            .from('subject_daily_tasks')
-            .upsert(taskData, {
-              onConflict: 'user_id,subject_id,task_id,date'
-            });
-          
-          if (taskError) {
-            console.error(`[Daily Task] Error upserting task for ${variant}:`, taskError);
-          } else {
-            console.log(`[Daily Task] Successfully marked task for ${variant}`);
-          }
-        }
+          }, {
+            onConflict: 'user_id,subject_id,task_id,date'
+          });
         
-        // Award MP once
-        console.log('[Daily Task] Awarding MP...');
-        const { error: mpError } = await supabase.functions.invoke('award-mp', {
-          body: {
-            action: 'subject_task_completed',
-            userId: user.id,
-            mpAmount: 30,
-            taskId: 'predicted_exam',
-            subjectId: subjectId
-          }
-        });
-        
-        if (mpError) {
-          console.error('[Daily Task] Error awarding MP:', mpError);
+        if (taskError) {
+          console.error('✗ ERROR marking task:', taskError);
         } else {
-          console.log('[Daily Task] MP awarded successfully');
+          console.log('✓ Task marked complete in database');
         }
         
-        console.log('[Daily Task] All tasks marked as complete');
+        // Award 30 MP directly to user_points table
+        const { data: currentPoints } = await supabase
+          .from('user_points')
+          .select('total_points')
+          .eq('user_id', user.id)
+          .maybeSingle();
+        
+        const newTotal = (currentPoints?.total_points || 0) + 30;
+        
+        const { error: pointsError } = await supabase
+          .from('user_points')
+          .upsert({
+            user_id: user.id,
+            total_points: newTotal,
+            updated_at: new Date().toISOString()
+          });
+        
+        if (pointsError) {
+          console.error('✗ ERROR awarding MP:', pointsError);
+        } else {
+          console.log('✓ Awarded 30 MP | New total:', newTotal);
+          toast.success('Daily task complete! +30 MP');
+        }
+        
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('DAILY TASK MARKING COMPLETE');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
@@ -560,81 +553,6 @@ const PredictedResults = () => {
       markAllAnswers();
     }
   }, [questions, answers]);
-  
-  // Mark daily task as complete when results page loads
-  useEffect(() => {
-    const markDailyTask = async () => {
-      if (!subjectId || isReview) return; // Don't mark for review mode
-      
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) return;
-        
-        const today = new Date().toISOString().split('T')[0];
-        const baseSubject = subjectId.split('-')[0];
-        
-        console.log('[Daily Task] Starting for:', subjectId, 'base:', baseSubject);
-        
-        // Mark for all possible subject variants
-        const variants = [
-          subjectId,
-          baseSubject,
-          `${baseSubject}-aqa`,
-          `${baseSubject}-edexcel`,
-          `${baseSubject}-ocr`
-        ].filter(v => v);
-        
-        for (const variant of variants) {
-          const { error } = await supabase
-            .from('subject_daily_tasks')
-            .upsert({
-              user_id: user.id,
-              subject_id: variant,
-              task_id: 'predicted_exam',
-              date: today,
-              completed: true,
-              mp_awarded: 30
-            }, {
-              onConflict: 'user_id,subject_id,task_id,date'
-            });
-          
-          if (!error) {
-            console.log('[Daily Task] ✓ Marked complete:', variant);
-          } else {
-            console.error('[Daily Task] Error marking:', variant, error);
-          }
-        }
-        
-        // Award 30 MP directly to user_points
-        const { data: currentPoints } = await supabase
-          .from('user_points')
-          .select('total_points')
-          .eq('user_id', user.id)
-          .maybeSingle();
-        
-        const newTotal = (currentPoints?.total_points || 0) + 30;
-        
-        const { error: pointsError } = await supabase
-          .from('user_points')
-          .upsert({
-            user_id: user.id,
-            total_points: newTotal,
-            updated_at: new Date().toISOString()
-          });
-        
-        if (!pointsError) {
-          console.log('[Daily Task] ✓ Awarded 30 MP. New total:', newTotal);
-          toast.success('+30 MP for completing predicted exam!');
-        }
-        
-        console.log('[Daily Task] ✓ Complete!');
-      } catch (error) {
-        console.error('[Daily Task] Error:', error);
-      }
-    };
-    
-    markDailyTask();
-  }, [subjectId, isReview]);
 
   if (isMarking) {
     return (
