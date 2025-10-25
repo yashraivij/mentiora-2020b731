@@ -1045,6 +1045,42 @@ export type Database = {
         }
         Relationships: []
       }
+      subject_daily_tasks: {
+        Row: {
+          completed: boolean
+          created_at: string
+          date: string
+          id: string
+          mp_awarded: number
+          subject_id: string
+          task_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          date?: string
+          id?: string
+          mp_awarded?: number
+          subject_id: string
+          task_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          date?: string
+          id?: string
+          mp_awarded?: number
+          subject_id?: string
+          task_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       subject_performance: {
         Row: {
           accuracy_rate: number | null

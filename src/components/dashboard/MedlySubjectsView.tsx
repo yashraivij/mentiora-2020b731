@@ -22,6 +22,7 @@ import {
   X,
   Crown,
 } from "lucide-react";
+import { SubjectDailyTasks } from "./SubjectDailyTasks";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -60,18 +61,22 @@ interface MedlySubjectsViewProps {
   mockSubjects: Array<{
     id: string;
     name: string;
-    icon: string;
-    predicted: number | string;
+    icon?: string;
     target: number;
+    pred?: number;
+    predicted?: string | number;
+    ums?: number;
+    umsTarget?: number;
+    progress?: number;
     trend: number[];
-    strong: string;
-    focus: string;
+    strong?: string;
+    focus?: string;
     status: string;
   }>;
-  weekPlan: Record<string, Array<{ s: string; t: string; m: number }>>;
-  getStatusColor: (status: string) => string;
+  weekPlan: any;
+  getStatusColor: (subject: any) => string;
   weekTasksCompleted: Set<string>;
-  setWeekTasksCompleted: (tasks: Set<string>) => void;
+  setWeekTasksCompleted: (completed: Set<string>) => void;
   setShowAddSubjects: (show: boolean) => void;
   setSelectedDrawerSubject: (subject: any) => void;
   setSubjectDrawerOpen: (open: boolean) => void;
@@ -81,6 +86,7 @@ interface MedlySubjectsViewProps {
   removeSubject: (subjectId: string) => void;
   isPremium?: boolean;
   onUpgradeToPremium?: () => void;
+  userId: string;
 }
 
 export function MedlySubjectsView({
@@ -93,6 +99,7 @@ export function MedlySubjectsView({
   setShowAddSubjects,
   setSelectedDrawerSubject,
   setSubjectDrawerOpen,
+  userId,
   setDrawerTab,
   insightFilter,
   setInsightFilter,
