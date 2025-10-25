@@ -1717,36 +1717,28 @@ const Practice = () => {
       </header>
 
       {/* MP Progress Bar */}
-      <div className="max-w-6xl mx-auto px-6 md:px-8 pt-4">
-        <div className="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 dark:from-amber-950/40 dark:via-yellow-950/30 dark:to-amber-950/40 rounded-lg p-4 border border-amber-200/50 dark:border-amber-800/30 shadow-sm">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <Star className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-              <span className="text-sm font-semibold text-amber-900 dark:text-amber-100">
-                MP Available
-              </span>
-            </div>
-            <span className="text-sm font-bold text-amber-700 dark:text-amber-300">
-              {attempts.filter(a => {
+      <div className="max-w-6xl mx-auto px-6 md:px-8 py-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-xs font-medium text-muted-foreground">
+            MP Progress
+          </span>
+          <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
+            {attempts.filter(a => {
+              const q = shuffledQuestions.find(sq => sq.id === a.questionId);
+              return q && a.score === q.marks;
+            }).length * 10} / {shuffledQuestions.length * 10} MP
+          </span>
+        </div>
+        <div className="w-full bg-muted/50 rounded-full h-1.5 overflow-hidden">
+          <div 
+            className="h-full bg-[hsl(195,69%,54%)] rounded-full transition-all duration-500 ease-out"
+            style={{ 
+              width: `${(attempts.filter(a => {
                 const q = shuffledQuestions.find(sq => sq.id === a.questionId);
                 return q && a.score === q.marks;
-              }).length * 10} / {shuffledQuestions.length * 10} MP
-            </span>
-          </div>
-          <div className="w-full bg-amber-200/30 dark:bg-amber-900/20 rounded-full h-2.5 overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-full transition-all duration-500 ease-out shadow-sm"
-              style={{ 
-                width: `${(attempts.filter(a => {
-                  const q = shuffledQuestions.find(sq => sq.id === a.questionId);
-                  return q && a.score === q.marks;
-                }).length / shuffledQuestions.length) * 100}%` 
-              }}
-            />
-          </div>
-          <p className="text-xs text-amber-700/70 dark:text-amber-300/70 mt-2">
-            Earn 10 MP for each question with full marks
-          </p>
+              }).length / shuffledQuestions.length) * 100}%` 
+            }}
+          />
         </div>
       </div>
 
