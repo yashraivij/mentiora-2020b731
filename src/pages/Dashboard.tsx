@@ -2452,10 +2452,41 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+    <div className="min-h-screen bg-background flex">
+      {/* Left Sidebar Navigation - Duolingo Style */}
+      <div className="hidden lg:flex lg:flex-col lg:w-64 lg:border-r lg:border-border lg:bg-background/50 lg:backdrop-blur-sm">
+        <div className="flex-1 flex flex-col py-8 px-4 space-y-2">
+          {sidebarItems.slice(0, 2).map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setSelectedSubject(null);
+                }}
+                className={`
+                  flex items-center gap-4 px-4 py-3 rounded-xl font-bold text-sm transition-all duration-200
+                  ${isActive 
+                    ? `${item.activeColor} text-white shadow-lg` 
+                    : `${item.bgColor} ${item.textColor} hover:scale-105`
+                  }
+                `}
+              >
+                <Icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Main Content Wrapper */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header */}
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+          <div className="flex items-center justify-between px-4 lg:px-8 py-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
@@ -2599,10 +2630,9 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="w-full">
+        {/* Main Content */}
+        <div className="w-full flex-1">
         <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
             <div className="max-w-7xl mx-auto">
@@ -5657,6 +5687,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
+        </div>
       </div>
 
       {/* Premium Welcome Notification */}
@@ -5692,6 +5723,7 @@ const Dashboard = () => {
         }}
         streakCount={currentStreak}
       />
+      </div>
     </div>
   );
 };
