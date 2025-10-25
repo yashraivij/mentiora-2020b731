@@ -1618,7 +1618,7 @@ const Practice = () => {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
               <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
               <p className="text-base font-medium text-foreground">
-                +30 MP added for completing this section
+                +40 MP added for completing this section
               </p>
             </div>
           </div>
