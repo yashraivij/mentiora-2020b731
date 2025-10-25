@@ -1686,60 +1686,6 @@ const Practice = () => {
                 <BookOpen className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <h1 className="text-lg font-semibold text-foreground truncate">{topic?.name}</h1>
               </div>
-              {/* Test notification button */}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  // Simulate real progress
-                  const fullMarksCount = attempts.filter(a => {
-                    const q = shuffledQuestions.find(sq => sq.id === a.questionId);
-                    return q && a.score === q.marks;
-                  }).length + 1; // +1 for the current one we're testing
-                  const currentMP = fullMarksCount * 10;
-                  const totalPossibleMP = shuffledQuestions.length * 10;
-                  const mpProgress = (currentMP / totalPossibleMP) * 100;
-                  
-                  toast.custom((t) => (
-                    <div className="bg-white dark:bg-gray-900 px-8 py-6 rounded-2xl shadow-2xl border-2 border-[hsl(195,69%,54%)] min-w-[340px] animate-in slide-in-from-top-5 duration-500">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="space-y-1">
-                          <div className="text-3xl font-black text-[hsl(195,69%,54%)]">+10 MP</div>
-                          <div className="text-sm font-medium text-muted-foreground">Full marks achieved!</div>
-                        </div>
-                        <button 
-                          onClick={() => toast.dismiss(t)}
-                          className="text-muted-foreground hover:text-foreground transition-colors -mt-1"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Session Progress</span>
-                          <span className="text-sm font-bold text-foreground">{currentMP} / {totalPossibleMP} MP</span>
-                        </div>
-                        <div className="relative">
-                          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
-                            <div 
-                              className="h-full bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] rounded-full transition-all duration-700 ease-out"
-                              style={{ width: `${mpProgress}%` }}
-                            />
-                          </div>
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none" />
-                        </div>
-                      </div>
-                    </div>
-                  ), {
-                    duration: 4000,
-                    position: 'top-right',
-                  });
-                }}
-                className="hidden md:flex"
-              >
-                Test MP
-              </Button>
             </div>
 
             {/* Center: Modern Progress indicator with fox */}
