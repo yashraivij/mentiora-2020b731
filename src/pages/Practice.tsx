@@ -1716,32 +1716,6 @@ const Practice = () => {
         </div>
       </header>
 
-      {/* MP Progress Bar */}
-      <div className="max-w-6xl mx-auto px-6 md:px-8 py-3">
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="text-xs font-medium text-muted-foreground">
-            MP Progress
-          </span>
-          <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
-            {attempts.filter(a => {
-              const q = shuffledQuestions.find(sq => sq.id === a.questionId);
-              return q && a.score === q.marks;
-            }).length * 10} / {shuffledQuestions.length * 10} MP
-          </span>
-        </div>
-        <div className="w-full bg-muted/50 rounded-full h-4 overflow-hidden">
-          <div 
-            className="h-full bg-[hsl(195,69%,54%)] rounded-full transition-all duration-500 ease-out"
-            style={{ 
-              width: `${(attempts.filter(a => {
-                const q = shuffledQuestions.find(sq => sq.id === a.questionId);
-                return q && a.score === q.marks;
-              }).length / shuffledQuestions.length) * 100}%` 
-            }}
-          />
-        </div>
-      </div>
-
       {/* Main Content Area */}
       <main className="max-w-6xl mx-auto p-6 md:p-8">
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
