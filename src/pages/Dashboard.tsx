@@ -210,7 +210,7 @@ const Dashboard = () => {
   const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-primary/10 dark:bg-primary/20", textColor: "text-primary dark:text-primary", activeColor: "bg-primary dark:bg-primary" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[hsl(195_69%_95%)] dark:bg-[hsl(195_69%_20%)]", textColor: "text-[hsl(195_69%_45%)] dark:text-[hsl(195_69%_65%)]", activeColor: "bg-[hsl(195_69%_54%)] dark:bg-[hsl(195_69%_54%)]" },
     { id: "leaderboards", label: "RANK", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
     { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
