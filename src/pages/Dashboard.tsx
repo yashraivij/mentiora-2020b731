@@ -93,6 +93,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { LeaderboardTable } from "@/components/dashboard/LeaderboardTable";
 import { DailyQuests } from "@/components/dashboard/DailyQuests";
+import { DashboardLeaderboard } from "@/components/dashboard/DashboardLeaderboard";
 
 interface UserProgress {
   subjectId: string;
@@ -2708,6 +2709,8 @@ const Dashboard = () => {
                   onUpgradeToPremium={() => navigate('/pricing')}
                   userId={user?.id || ''}
                 />
+                
+                <DashboardLeaderboard userId={user?.id || ''} />
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
