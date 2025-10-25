@@ -19,6 +19,7 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
+import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
 
 interface QuestionAttempt {
   questionId: string;
@@ -1346,57 +1347,12 @@ const Practice = () => {
             </Card>
           </div>
 
-          {/* Performance Summary */}
-          <div className="space-y-5 animate-fade-in" style={{ animationDelay: '600ms' }}>
-            <h2 className="text-2xl font-bold text-foreground">{isFirstPractice ? 'Your Performance' : 'Performance Comparison'}</h2>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              {/* Predicted Grade */}
-              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/5 to-[hsl(195,60%,60%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <CardContent className="p-8 relative">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Predicted Grade
-                      </p>
-                      <span className="text-3xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(newPredictedGrade, subjectId)}
-                      </span>
-                    </div>
-                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
-                      <div 
-                        className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)] rounded-full transition-all duration-1500"
-                        style={{ width: `${(newPredictedGrade / 9) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Target Grade */}
-              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <CardContent className="p-8 relative">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Target Grade
-                      </p>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                        9
-                      </span>
-                    </div>
-                    <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
-                      <div 
-                        className="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-1500"
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+          {/* Daily Tasks Checklist */}
+          <div className="animate-fade-in" style={{ animationDelay: '600ms' }}>
+            <h2 className="text-2xl font-bold text-foreground mb-4">Daily Tasks</h2>
+            {user?.id && subjectId && (
+              <SubjectDailyTasks subjectId={subjectId} userId={user.id} />
+            )}
           </div>
 
           {/* Performance Breakdown */}
