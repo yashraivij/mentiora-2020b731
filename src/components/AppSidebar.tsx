@@ -21,35 +21,50 @@ const navItems = [
     label: "Learn", 
     url: "/dashboard", 
     icon: Home,
-    color: "rgba(11, 165, 233, 0.1)" 
+    gradient: "from-sky-400 to-sky-500",
+    bgColor: "bg-sky-50 dark:bg-sky-900/20",
+    iconColor: "text-sky-600",
+    activeGradient: "from-[#0BA5E9] to-[#0284c7]"
   },
   { 
     id: "leaderboards", 
     label: "Leaderboards", 
     url: "/dashboard?tab=leaderboards", 
     icon: Trophy,
-    color: "rgba(251, 191, 36, 0.1)"
+    gradient: "from-yellow-400 to-amber-500",
+    bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+    iconColor: "text-yellow-600",
+    activeGradient: "from-yellow-400 to-amber-500"
   },
   { 
     id: "quests", 
     label: "Quests", 
     url: "/dashboard?tab=quests", 
     icon: Star,
-    color: "rgba(34, 197, 94, 0.1)"
+    gradient: "from-green-400 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-900/20",
+    iconColor: "text-green-600",
+    activeGradient: "from-green-400 to-emerald-500"
   },
   { 
     id: "flashcards", 
     label: "Flashcards", 
     url: "/dashboard?tab=flashcards", 
     icon: Brain,
-    color: "rgba(168, 85, 247, 0.1)"
+    gradient: "from-purple-400 to-violet-500",
+    bgColor: "bg-purple-50 dark:bg-purple-900/20",
+    iconColor: "text-purple-600",
+    activeGradient: "from-purple-400 to-violet-500"
   },
   { 
     id: "profile", 
     label: "Profile", 
     url: "/dashboard?tab=profile", 
     icon: User,
-    color: "rgba(148, 163, 184, 0.1)"
+    gradient: "from-slate-400 to-slate-500",
+    bgColor: "bg-slate-50 dark:bg-slate-900/20",
+    iconColor: "text-slate-600",
+    activeGradient: "from-slate-400 to-slate-500"
   },
 ];
 
@@ -66,70 +81,91 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-border/50">
-      <SidebarHeader className="p-4 border-b border-border/50">
-        <div className="flex items-center gap-3">
-          <img 
-            src={mentioraLogo} 
-            alt="Mentiora" 
-            className="h-8 w-8 flex-shrink-0"
-          />
+    <Sidebar collapsible="icon" className="border-r border-border/50 bg-background/95 backdrop-blur-sm">
+      <SidebarHeader className="p-6 border-b border-border/50">
+        <motion.div 
+          className="flex items-center gap-3"
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#0BA5E9] to-[#0284c7] p-2 shadow-lg shadow-[#0BA5E9]/25">
+            <img 
+              src={mentioraLogo} 
+              alt="Mentiora" 
+              className="h-full w-full object-contain"
+            />
+          </div>
           {!isCollapsed && (
             <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-xl font-bold text-foreground"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-2xl font-black bg-gradient-to-r from-[#0BA5E9] to-[#0284c7] bg-clip-text text-transparent"
             >
               Mentiora
             </motion.span>
           )}
-        </div>
+        </motion.div>
       </SidebarHeader>
 
-      <SidebarContent className="p-3">
+      <SidebarContent className="p-4">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-2">
-              {navItems.map((item) => {
+            <SidebarMenu className="space-y-3">
+              {navItems.map((item, index) => {
                 const active = isActive(item.url);
                 return (
                   <SidebarMenuItem key={item.id}>
                     <SidebarMenuButton asChild tooltip={item.label}>
-                      <NavLink
-                        to={item.url}
-                        className="group relative"
-                      >
+                      <NavLink to={item.url} className="group relative block">
                         <motion.div
-                          className={`
-                            flex items-center gap-3 px-4 py-3 rounded-xl
-                            transition-all duration-200
-                            ${active 
-                              ? 'bg-[#0BA5E9] text-white shadow-lg shadow-[#0BA5E9]/25' 
-                              : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                            }
-                          `}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="relative overflow-hidden"
                         >
-                          <item.icon 
-                            className={`h-5 w-5 flex-shrink-0 ${active ? 'text-white' : ''}`}
-                          />
-                          {!isCollapsed && (
-                            <motion.span 
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className={`font-semibold text-sm ${active ? 'text-white' : ''}`}
-                            >
-                              {item.label}
-                            </motion.span>
-                          )}
-                          {active && !isCollapsed && (
-                            <motion.div
-                              layoutId="activeTab"
-                              className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"
-                              initial={false}
-                              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                            />
+                          {active ? (
+                            <div className={`
+                              flex items-center gap-4 px-5 py-4 rounded-2xl
+                              bg-gradient-to-r ${item.activeGradient}
+                              text-white shadow-xl shadow-black/10
+                              transform transition-all duration-300
+                            `}>
+                              <div className="relative">
+                                <item.icon className="h-6 w-6 relative z-10" strokeWidth={2.5} />
+                                <div className="absolute inset-0 bg-white/30 rounded-full blur-xl" />
+                              </div>
+                              {!isCollapsed && (
+                                <motion.span 
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  className="font-bold text-base tracking-wide"
+                                >
+                                  {item.label}
+                                </motion.span>
+                              )}
+                            </div>
+                          ) : (
+                            <div className={`
+                              flex items-center gap-4 px-5 py-4 rounded-2xl
+                              ${item.bgColor}
+                              transition-all duration-300
+                              hover:shadow-md hover:scale-[1.02]
+                              group-hover:translate-x-1
+                            `}>
+                              <item.icon 
+                                className={`h-6 w-6 ${item.iconColor} transition-transform duration-300 group-hover:scale-110`} 
+                                strokeWidth={2.5}
+                              />
+                              {!isCollapsed && (
+                                <motion.span 
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  className={`font-bold text-base ${item.iconColor} dark:text-foreground/80`}
+                                >
+                                  {item.label}
+                                </motion.span>
+                              )}
+                            </div>
                           )}
                         </motion.div>
                       </NavLink>
@@ -142,32 +178,58 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-3 border-t border-border/50">
+      <SidebarFooter className="p-4 border-t border-border/50">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
-              <NavLink to="/settings" className="group">
+              <NavLink to="/settings" className="group block">
                 <motion.div
-                  className={`
-                    flex items-center gap-3 px-4 py-3 rounded-xl
-                    transition-all duration-200
-                    ${location.pathname === "/settings"
-                      ? 'bg-[#0BA5E9] text-white shadow-lg shadow-[#0BA5E9]/25' 
-                      : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                    }
-                  `}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  className="relative"
                 >
-                  <Settings className={`h-5 w-5 flex-shrink-0 ${location.pathname === "/settings" ? 'text-white' : ''}`} />
-                  {!isCollapsed && (
-                    <motion.span 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className={`font-semibold text-sm ${location.pathname === "/settings" ? 'text-white' : ''}`}
-                    >
-                      Settings
-                    </motion.span>
+                  {location.pathname === "/settings" ? (
+                    <div className={`
+                      flex items-center gap-4 px-5 py-4 rounded-2xl
+                      bg-gradient-to-r from-slate-400 to-slate-500
+                      text-white shadow-xl shadow-black/10
+                    `}>
+                      <div className="relative">
+                        <Settings className="h-6 w-6 relative z-10" strokeWidth={2.5} />
+                        <div className="absolute inset-0 bg-white/30 rounded-full blur-xl" />
+                      </div>
+                      {!isCollapsed && (
+                        <motion.span 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="font-bold text-base tracking-wide"
+                        >
+                          Settings
+                        </motion.span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className={`
+                      flex items-center gap-4 px-5 py-4 rounded-2xl
+                      bg-slate-50 dark:bg-slate-900/20
+                      transition-all duration-300
+                      hover:shadow-md hover:scale-[1.02]
+                      group-hover:translate-x-1
+                    `}>
+                      <Settings 
+                        className="h-6 w-6 text-slate-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-90" 
+                        strokeWidth={2.5}
+                      />
+                      {!isCollapsed && (
+                        <motion.span 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="font-bold text-base text-slate-600 dark:text-foreground/80"
+                        >
+                          Settings
+                        </motion.span>
+                      )}
+                    </div>
                   )}
                 </motion.div>
               </NavLink>
