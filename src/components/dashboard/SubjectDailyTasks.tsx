@@ -116,6 +116,11 @@ const getSubjectTasks = (subjectId: string): Task[] => {
       { id: 'predicted_exam', label: 'Complete predicted psychology exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
     ],
+    'music-eduqas-gcse': [
+      { id: 'score_topic', label: 'Get 70%+ on a music topic', mpReward: 25, completed: false },
+      { id: 'predicted_exam', label: 'Complete predicted music exam', mpReward: 30, completed: false },
+      { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
+    ],
   };
 
   // Return subject-specific tasks or default tasks
@@ -162,6 +167,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const todayStart = new Date(today + 'T00:00:00Z').toISOString();
       const todayEnd = new Date(today + 'T23:59:59Z').toISOString();
       
+      console.log(`Checking for exam completions for ${subjectId} between ${todayStart} and ${todayEnd}`);
+      
       const { data: examCompletions, error: examError } = await supabase
         .from('predicted_exam_completions')
         .select('id, completed_at')
@@ -170,8 +177,12 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         .gte('completed_at', todayStart)
         .lte('completed_at', todayEnd);
 
-      if (examError) throw examError;
+      if (examError) {
+        console.error('Error fetching exam completions:', examError);
+        throw examError;
+      }
 
+      console.log(`Found ${examCompletions?.length || 0} exam completions for ${subjectId} today:`, examCompletions);
       const hasPredictedExamToday = examCompletions && examCompletions.length > 0;
 
       // Update tasks based on both manual and auto-detected completions
