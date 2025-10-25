@@ -3504,8 +3504,9 @@ const Dashboard = () => {
                                   
                                   const handleStartActivity = (activity: any) => {
                                     if (activity.action === 'flashcards') {
-                                      setActiveTab('flashcards');
-                                      setSubjectDrawerOpen(false);
+                                      // Open the subject drawer with flashcards tab
+                                      setDrawerTab('flashcards');
+                                      setSubjectDrawerOpen(true);
                                     } else if (activity.action === 'practice' && activity.topicId) {
                                       setSubjectDrawerOpen(false);
                                       // Navigate directly to practice page with subject and topic as path params
