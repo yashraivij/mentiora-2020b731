@@ -2997,20 +2997,6 @@ const Dashboard = () => {
                                         />
                                       </div>
                                     </div>
-                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                      <div className="flex items-center justify-between mb-2">
-                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Mentiora Average</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(classMedianValue)}</span>
-                                      </div>
-                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
-                                        <motion.div 
-                                          initial={{ width: 0 }}
-                                          animate={{ width: `${((Math.max(1, classMedianValue) - 1) / 8) * 100}%` }}
-                                          transition={{ duration: 1, delay: 0.5 }}
-                                          className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
-                                        />
-                                      </div>
-                                    </div>
                                   </>
                                 );
                               })()}
