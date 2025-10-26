@@ -90,6 +90,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
+import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
 
 interface UserProgress {
@@ -2454,6 +2455,9 @@ const Dashboard = () => {
               isMilestone={streakBadgeMilestone}
             />
             
+            {/* MP Badge */}
+            <HeaderMPBadge isVisible={showStreakBadge} />
+            
             {/* Dropdown Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -2511,6 +2515,9 @@ const Dashboard = () => {
               isStreakLost={currentStreak === 0}
               isMilestone={streakBadgeMilestone}
             />
+            
+            {/* MP Badge for Mobile */}
+            <HeaderMPBadge isVisible={showStreakBadge} />
             
             <Button
               variant="ghost"

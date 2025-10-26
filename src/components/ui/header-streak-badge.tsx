@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
 
 interface HeaderStreakBadgeProps {
   streakCount: number;
@@ -22,8 +20,6 @@ export function HeaderStreakBadge({
 }: HeaderStreakBadgeProps) {
   const [isFlickering, setIsFlickering] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [mpPoints, setMpPoints] = useState(0);
-  const { user } = useAuth();
 
   useEffect(() => {
     // Check if mobile
@@ -34,29 +30,6 @@ export function HeaderStreakBadge({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  useEffect(() => {
-    // Fetch MP points
-    const fetchMP = async () => {
-      if (!user?.id) return;
-      
-      const { data } = await supabase
-        .from('user_points')
-        .select('total_points')
-        .eq('user_id', user.id)
-        .maybeSingle();
-      
-      setMpPoints(data?.total_points || 0);
-    };
-    
-    fetchMP();
-    
-    // Listen for MP updates
-    const handleMPEarned = () => fetchMP();
-    window.addEventListener('mpEarned', handleMPEarned);
-    
-    return () => window.removeEventListener('mpEarned', handleMPEarned);
-  }, [user?.id]);
 
   useEffect(() => {
     // Flicker animation every 4-6 seconds
@@ -163,17 +136,6 @@ export function HeaderStreakBadge({
                     isStreakLost ? 'Streak lost' : `${streakCount}-Day Streak`
                   )}
                 </span>
-
-                {/* MP Counter */}
-                <div 
-                  data-mp-counter
-                  className={`
-                    relative z-10 px-2 py-0.5 rounded-full text-xs font-bold
-                    ${isMilestone ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}
-                  `}
-                >
-                  {mpPoints} MP
-                </div>
 
                 {/* Milestone sparkle effect */}
                 {isMilestone && !isMobile && (
