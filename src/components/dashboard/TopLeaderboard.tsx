@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, TrendingUp, Award, Medal, Crown, Zap, Target, Clock, ChevronUp, ChevronDown } from 'lucide-react';
+import { Trophy, Flame, TrendingUp, Award, Medal, Crown, Zap, Target, Clock, ChevronUp, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -29,15 +29,12 @@ interface LeaderEntry {
 }
 
 type FilterType = 'week' | 'alltime' | 'friends';
-type SortColumn = 'rank' | 'mp' | 'streak' | 'quizzes';
 
 export function TopLeaderboard({ userId }: { userId?: string }) {
   const [entries, setEntries] = useState<LeaderEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState<FilterType>('week');
   const [currentUserData, setCurrentUserData] = useState<LeaderEntry | null>(null);
-  const [sortColumn, setSortColumn] = useState<SortColumn>('rank');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
   useEffect(() => {
     loadTopStudents();
@@ -207,51 +204,18 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     }
   };
 
-  const handleSort = (column: SortColumn) => {
-    if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortColumn(column);
-      setSortDirection(column === 'rank' ? 'asc' : 'desc');
-    }
+  const getRankColor = (rank: number) => {
+    if (rank === 1) return { bg: "bg-gradient-to-r from-amber-50 to-yellow-100 dark:from-amber-950/30 dark:to-yellow-900/30", border: "border-amber-200 dark:border-amber-800/30", text: "text-amber-600 dark:text-amber-400" };
+    if (rank === 2) return { bg: "bg-gradient-to-r from-slate-50 to-gray-100 dark:from-slate-950/30 dark:to-gray-900/30", border: "border-slate-200 dark:border-slate-800/30", text: "text-slate-600 dark:text-slate-400" };
+    if (rank === 3) return { bg: "bg-gradient-to-r from-orange-50 to-red-100 dark:from-orange-950/30 dark:to-red-900/30", border: "border-orange-200 dark:border-orange-800/30", text: "text-orange-600 dark:text-orange-400" };
+    return { bg: "bg-muted/20", border: "border-border", text: "text-muted-foreground" };
   };
 
-  const sortedEntries = [...entries].sort((a, b) => {
-    let compareValue = 0;
-    switch (sortColumn) {
-      case 'rank':
-        compareValue = a.rank - b.rank;
-        break;
-      case 'mp':
-        compareValue = b.mp_points - a.mp_points;
-        break;
-      case 'streak':
-        compareValue = b.streak - a.streak;
-        break;
-      case 'quizzes':
-        compareValue = (b.quizzes_completed || 0) - (a.quizzes_completed || 0);
-        break;
-    }
-    return sortDirection === 'asc' ? compareValue : -compareValue;
-  });
-
-  const getRankDisplay = (rank: number) => {
-    if (rank === 1) {
-      return (
-        <div className="flex items-center gap-1.5">
-          <Crown className="h-3.5 w-3.5 text-amber-500" />
-          <span className="text-sm font-bold text-foreground">#{rank}</span>
-        </div>
-      );
-    }
-    return <span className="text-sm font-bold text-foreground">#{rank}</span>;
-  };
-
-  const getRankAccent = (rank: number) => {
-    if (rank === 1) return 'before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-amber-400 before:to-amber-500 before:rounded-l-lg';
-    if (rank === 2) return 'before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-slate-300 before:to-slate-400 before:rounded-l-lg';
-    if (rank === 3) return 'before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-orange-400 before:to-orange-500 before:rounded-l-lg';
-    return '';
+  const getRankIcon = (rank: number) => {
+    if (rank === 1) return <Crown className="h-5 w-5 text-amber-500" />;
+    if (rank === 2) return <Medal className="h-5 w-5 text-slate-500" />;
+    if (rank === 3) return <Award className="h-5 w-5 text-orange-500" />;
+    return null;
   };
 
   const formatLastActive = (date?: Date) => {
@@ -278,12 +242,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
-        <Skeleton className="h-32 w-full rounded-xl" />
-        <Skeleton className="h-12 w-full rounded-lg" />
-        <div className="space-y-2">
+      <div className="space-y-6">
+        <Skeleton className="h-40 w-full rounded-3xl" />
+        <div className="space-y-4">
           {[...Array(8)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-lg" />
+            <Skeleton key={i} className="h-28 w-full rounded-3xl" />
           ))}
         </div>
       </div>
@@ -293,266 +256,312 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const progressInfo = getProgressToNextRank();
 
   return (
-    <div className="space-y-4">
-      {/* Header and Analytics Bar */}
-      <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-border">
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-xl font-bold text-foreground">Leaderboard</h2>
+    <div className="space-y-6">
+      {/* Header Card - Premium Style */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative overflow-hidden rounded-3xl bg-card/80 dark:bg-card/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 p-8"
+      >
+        {/* Premium Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-50" />
+        
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground mb-2">Leaderboard</h2>
+              <p className="text-base text-muted-foreground">
+                Compare your MP, streaks, and quiz progress with other students.
+              </p>
+            </div>
             {currentUserData && (
-              <div className="flex items-center gap-1.5 bg-primary/10 px-3 py-1 rounded-full">
-                <Flame className="h-3.5 w-3.5 text-primary" />
-                <span className="text-sm font-bold text-primary">{currentUserData.streak}-Day Streak</span>
+              <div className="flex items-center gap-2 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-900/30 px-4 py-2 rounded-2xl border border-orange-200 dark:border-orange-800/30 shadow-sm">
+                <Flame className="h-5 w-5 text-orange-500" />
+                <span className="text-lg font-bold text-orange-600 dark:text-orange-400">{currentUserData.streak}-Day Streak</span>
               </div>
             )}
           </div>
-          <p className="text-sm text-muted-foreground">
-            Compare your MP, streaks, and quiz progress with other students.
-          </p>
-        </div>
 
-        {/* Compact Analytics Bar */}
-        {currentUserData && (
-          <div className="bg-muted/30 border-b border-border">
-            <div className="grid grid-cols-4 divide-x divide-border">
-              <div className="px-4 py-3">
-                <div className="text-xs text-muted-foreground font-medium mb-0.5">Rank</div>
-                <div className="text-lg font-bold text-foreground">#{currentUserData.rank}</div>
-              </div>
-              <div className="px-4 py-3">
-                <div className="text-xs text-muted-foreground font-medium mb-0.5">Total MP</div>
-                <div className="text-lg font-bold text-foreground">{currentUserData.mp_points.toLocaleString()}</div>
-              </div>
-              <div className="px-4 py-3">
-                <div className="text-xs text-muted-foreground font-medium mb-0.5">This Week's Gain</div>
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
-                  <span className="text-lg font-bold text-emerald-500">+{currentUserData.weekly_gain || 240} MP</span>
+          {/* Analytics Grid - Premium Style */}
+          {currentUserData && (
+            <div className="grid grid-cols-4 gap-4">
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-900/20 p-5 rounded-2xl border border-blue-100 dark:border-blue-800/30 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground font-medium">Your Rank</div>
+                    <div className="text-2xl font-bold text-foreground">#{currentUserData.rank}</div>
+                  </div>
                 </div>
               </div>
-              <div className="px-4 py-3">
-                <div className="text-xs text-muted-foreground font-medium mb-0.5">Streak</div>
-                <div className="flex items-center gap-1">
-                  <Flame className="h-3.5 w-3.5 text-orange-500" />
-                  <span className="text-lg font-bold text-foreground">{currentUserData.streak} days 🔥</span>
+
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-900/20 p-5 rounded-2xl border border-purple-100 dark:border-purple-800/30 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                    <Zap className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground font-medium">Total MP</div>
+                    <div className="text-2xl font-bold text-foreground">{currentUserData.mp_points.toLocaleString()}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-900/20 p-5 rounded-2xl border border-emerald-100 dark:border-emerald-800/30 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
+                    <TrendingUp className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground font-medium">This Week</div>
+                    <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">+{currentUserData.weekly_gain || 240}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-900/20 p-5 rounded-2xl border border-orange-100 dark:border-orange-800/30 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg">
+                    <Flame className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground font-medium">Streak</div>
+                    <div className="text-2xl font-bold text-foreground">{currentUserData.streak} 🔥</div>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            {/* Progress Bar */}
-            {progressInfo && (
-              <div className="px-4 py-2 bg-background/50">
-                <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
-                  <span>Progress to Rank #{progressInfo.nextRank}</span>
-                  <span className="font-semibold">{progressInfo.mpNeeded} MP to go</span>
-                </div>
-                <Progress 
-                  value={Math.min(100, (currentUserData.mp_points / (currentUserData.mp_points + progressInfo.mpNeeded)) * 100)} 
-                  className="h-1.5" 
-                />
+          )}
+
+          {/* Progress Bar */}
+          {progressInfo && (
+            <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl border border-primary/20">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-foreground">Progress to Rank #{progressInfo.nextRank}</span>
+                <span className="text-sm font-bold text-primary">{progressInfo.mpNeeded} MP to go</span>
               </div>
-            )}
+              <Progress 
+                value={Math.min(100, (currentUserData!.mp_points / (currentUserData!.mp_points + progressInfo.mpNeeded)) * 100)} 
+                className="h-3 rounded-full shadow-inner" 
+              />
+            </div>
+          )}
+
+          {/* Filter Tabs */}
+          <div className="flex items-center gap-3 mt-6">
+            <Button
+              variant="ghost"
+              size="lg"
+              onClick={() => setFilterType('week')}
+              className={cn(
+                "rounded-2xl font-semibold transition-all duration-300 px-6 py-3",
+                filterType === 'week'
+                  ? "bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              This Week
+            </Button>
+            <Button
+              variant="ghost"
+              size="lg"
+              onClick={() => setFilterType('alltime')}
+              className={cn(
+                "rounded-2xl font-semibold transition-all duration-300 px-6 py-3",
+                filterType === 'alltime'
+                  ? "bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              All Time
+            </Button>
+            <Button
+              variant="ghost"
+              size="lg"
+              onClick={() => setFilterType('friends')}
+              className={cn(
+                "rounded-2xl font-semibold transition-all duration-300 px-6 py-3",
+                filterType === 'friends'
+                  ? "bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              Friends
+            </Button>
           </div>
-        )}
-
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-1 p-2 bg-muted/20 border-b border-border">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setFilterType('week')}
-            className={cn(
-              "h-8 text-xs font-medium transition-colors rounded-md",
-              filterType === 'week'
-                ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            This Week
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setFilterType('alltime')}
-            className={cn(
-              "h-8 text-xs font-medium transition-colors rounded-md",
-              filterType === 'alltime'
-                ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            All Time
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setFilterType('friends')}
-            className={cn(
-              "h-8 text-xs font-medium transition-colors rounded-md",
-              filterType === 'friends'
-                ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            Friends
-          </Button>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Leaderboard Table */}
-      <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
-        {/* Table Header */}
-        <div className="grid grid-cols-12 gap-3 px-4 py-3 bg-muted/30 border-b border-border text-xs font-semibold text-muted-foreground">
-          <button 
-            onClick={() => handleSort('rank')}
-            className="col-span-1 flex items-center gap-1 hover:text-foreground transition-colors"
-          >
-            Rank
-            {sortColumn === 'rank' && (
-              sortDirection === 'asc' ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
-            )}
-          </button>
-          <div className="col-span-3 text-left">Name</div>
-          <button 
-            onClick={() => handleSort('mp')}
-            className="col-span-2 flex items-center gap-1 hover:text-foreground transition-colors justify-end"
-          >
-            MP
-            {sortColumn === 'mp' && (
-              sortDirection === 'asc' ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
-            )}
-          </button>
-          <button 
-            onClick={() => handleSort('streak')}
-            className="col-span-2 flex items-center gap-1 hover:text-foreground transition-colors justify-end"
-          >
-            Streak
-            {sortColumn === 'streak' && (
-              sortDirection === 'asc' ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
-            )}
-          </button>
-          <div className="col-span-1 text-center">Badges</div>
-          <button 
-            onClick={() => handleSort('quizzes')}
-            className="col-span-2 flex items-center gap-1 hover:text-foreground transition-colors justify-end"
-          >
-            Quizzes
-            {sortColumn === 'quizzes' && (
-              sortDirection === 'asc' ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
-            )}
-          </button>
-          <div className="col-span-1 text-right">Active</div>
-        </div>
-
-        {/* Table Body */}
-        {entries.length === 0 ? (
-          <div className="p-12 text-center">
-            <Trophy className="h-12 w-12 mx-auto mb-3 text-muted-foreground/50" />
-            <h3 className="text-base font-semibold text-foreground mb-1">No leaderboard data yet</h3>
-            <p className="text-sm text-muted-foreground">Complete your first quiz to appear on the leaderboard.</p>
+      {/* Leaderboard Entries - Premium Card Style */}
+      {entries.length === 0 ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-card/80 backdrop-blur-sm rounded-3xl border-0 shadow-lg p-16 text-center"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+            <Trophy className="h-10 w-10 text-primary" />
           </div>
-        ) : (
-          <div>
-            <AnimatePresence mode="popLayout">
-              {sortedEntries.map((entry, index) => (
+          <h3 className="text-2xl font-bold text-foreground mb-3">No leaderboard data yet</h3>
+          <p className="text-base text-muted-foreground max-w-md mx-auto">
+            Complete your first quiz to appear on the leaderboard and start earning MP.
+          </p>
+        </motion.div>
+      ) : (
+        <div className="space-y-4">
+          <AnimatePresence mode="popLayout">
+            {entries.map((entry, index) => {
+              const rankColors = getRankColor(entry.rank);
+              const rankIcon = getRankIcon(entry.rank);
+              
+              return (
                 <TooltipProvider key={entry.user_id}>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <motion.div
                         layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3, delay: index * 0.02 }}
+                        whileHover={{ y: -4, scale: 1.01 }}
                         className={cn(
-                          "relative grid grid-cols-12 gap-3 px-4 py-3 border-b border-border/50 hover:bg-muted/30 transition-colors cursor-pointer group",
-                          entry.isCurrentUser && "bg-primary/5 hover:bg-primary/10 border-l-2 border-l-primary",
-                          getRankAccent(entry.rank)
+                          "group relative overflow-hidden rounded-3xl bg-card/80 dark:bg-card/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer p-6",
+                          entry.isCurrentUser && "ring-2 ring-primary ring-offset-2 ring-offset-background"
                         )}
                       >
-                        {/* Rank */}
-                        <div className="col-span-1 flex items-center">
-                          {getRankDisplay(entry.rank)}
-                        </div>
+                        {/* Premium Background Gradient */}
+                        <div className={cn(
+                          "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                          entry.rank <= 3 
+                            ? "bg-gradient-to-br from-primary/5 via-transparent to-primary/10"
+                            : "bg-gradient-to-br from-muted/50 via-transparent to-muted/30"
+                        )} />
 
-                        {/* Name */}
-                        <div className="col-span-3 flex flex-col justify-center">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-semibold text-foreground truncate">
-                              {entry.username}
-                            </span>
-                            {entry.isCurrentUser && (
-                              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">You</Badge>
-                            )}
+                        {/* Top 3 Accent Line */}
+                        {entry.rank <= 3 && (
+                          <div className={cn(
+                            "absolute left-0 top-0 bottom-0 w-1 rounded-l-3xl",
+                            entry.rank === 1 && "bg-gradient-to-b from-amber-400 to-amber-600",
+                            entry.rank === 2 && "bg-gradient-to-b from-slate-300 to-slate-500",
+                            entry.rank === 3 && "bg-gradient-to-b from-orange-400 to-orange-600"
+                          )} />
+                        )}
+
+                        <div className="relative z-10 flex items-center gap-6">
+                          {/* Rank Badge - Premium Style */}
+                          <div className={cn(
+                            "flex-shrink-0 w-16 h-16 rounded-2xl border shadow-lg flex flex-col items-center justify-center",
+                            rankColors.bg, rankColors.border
+                          )}>
+                            {rankIcon}
+                            <span className={cn("text-lg font-bold", rankColors.text)}>#{entry.rank}</span>
                           </div>
-                          {entry.top_subject && (
-                            <span className="text-xs text-muted-foreground truncate">
-                              Top: {entry.top_subject}
-                            </span>
-                          )}
-                        </div>
 
-                        {/* MP with Progress Bar */}
-                        <div className="col-span-2 flex flex-col justify-center items-end">
-                          <span className="text-sm font-bold text-foreground">
-                            {entry.mp_points.toLocaleString()}
-                          </span>
-                          <div className="w-full mt-0.5">
-                            <Progress 
-                              value={Math.min(100, (entry.mp_points / Math.max(...entries.map(e => e.mp_points))) * 100)} 
-                              className="h-1"
-                            />
+                          {/* User Info */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-3 mb-2">
+                              <h3 className="text-xl font-bold text-foreground truncate">{entry.username}</h3>
+                              {entry.isCurrentUser && (
+                                <Badge className="bg-primary text-primary-foreground border-0 text-xs px-3 py-1 font-semibold shadow-md">
+                                  You
+                                </Badge>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              {entry.top_subject && (
+                                <div className="flex items-center gap-1.5">
+                                  <Target className="h-3.5 w-3.5" />
+                                  <span className="font-medium">Top: {entry.top_subject}</span>
+                                </div>
+                              )}
+                              <div className="flex items-center gap-1.5">
+                                <Clock className="h-3.5 w-3.5" />
+                                <span className="font-medium">{formatLastActive(entry.last_active)}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Stats Grid */}
+                          <div className="flex items-center gap-6">
+                            {/* MP */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Zap className="h-4 w-4 text-purple-500" />
+                                <span className="text-2xl font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground font-medium">Mentiora Points</div>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+
+                            {/* Streak */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Flame className="h-4 w-4 text-orange-500" />
+                                <span className="text-2xl font-bold text-foreground">{entry.streak}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground font-medium">Day Streak</div>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+
+                            {/* Quizzes */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Target className="h-4 w-4 text-blue-500" />
+                                <span className="text-2xl font-bold text-foreground">{entry.quizzes_completed || 0}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground font-medium">Quizzes Done</div>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+
+                            {/* Badges */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Award className="h-4 w-4 text-amber-500" />
+                                <span className="text-2xl font-bold text-foreground">{entry.badges_earned || 0}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground font-medium">Badges</div>
+                            </div>
+                          </div>
+
+                          {/* Arrow Icon */}
+                          <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <ArrowRight className="h-6 w-6 text-primary" />
                           </div>
                         </div>
 
-                        {/* Streak */}
-                        <div className="col-span-2 flex items-center justify-end gap-1">
-                          <Flame className="h-3.5 w-3.5 text-orange-500" />
-                          <span className="text-sm font-semibold text-foreground">{entry.streak}</span>
-                        </div>
-
-                        {/* Badges */}
-                        <div className="col-span-1 flex items-center justify-center">
-                          <div className="flex items-center gap-1">
-                            <Award className="h-3.5 w-3.5 text-amber-500" />
-                            <span className="text-sm font-semibold text-foreground">{entry.badges_earned || 0}</span>
-                          </div>
-                        </div>
-
-                        {/* Quizzes */}
-                        <div className="col-span-2 flex items-center justify-end gap-1">
-                          <Target className="h-3.5 w-3.5 text-primary" />
-                          <span className="text-sm font-semibold text-foreground">{entry.quizzes_completed || 0}</span>
-                        </div>
-
-                        {/* Last Active */}
-                        <div className="col-span-1 flex items-center justify-end">
-                          <span className="text-xs text-muted-foreground">{formatLastActive(entry.last_active)}</span>
-                        </div>
-
-                        {/* Hover accent line */}
-                        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {/* Premium Border Glow */}
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                       </motion.div>
                     </TooltipTrigger>
-                    <TooltipContent side="left" className="max-w-xs">
-                      <div className="space-y-1.5 text-xs">
-                        <div className="font-semibold text-foreground">{entry.username}</div>
-                        <div className="text-muted-foreground">
-                          Total quizzes: {entry.quizzes_completed || 0} | Badges: {entry.badges_earned || 0}
+                    <TooltipContent side="left" className="max-w-xs p-4">
+                      <div className="space-y-2">
+                        <div className="font-bold text-base text-foreground">{entry.username}</div>
+                        <div className="text-sm text-muted-foreground space-y-1">
+                          <div>Total quizzes completed: <span className="font-semibold text-foreground">{entry.quizzes_completed || 0}</span></div>
+                          <div>Badges earned: <span className="font-semibold text-foreground">{entry.badges_earned || 0}</span></div>
+                          {entry.top_subject && (
+                            <div>Most active in: <span className="font-semibold text-foreground">{entry.top_subject}</span></div>
+                          )}
+                          <div>Last active: <span className="font-semibold text-foreground">{formatLastActive(entry.last_active)}</span></div>
                         </div>
-                        {entry.top_subject && (
-                          <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
-                        )}
-                        <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
                       </div>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              ))}
-            </AnimatePresence>
-          </div>
-        )}
-      </div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 }
