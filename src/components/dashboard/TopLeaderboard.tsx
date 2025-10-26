@@ -244,20 +244,20 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   return (
     <div className="space-y-6">
       {/* Page Header - Clean & Minimal */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
-          <h2 className="text-3xl font-bold text-foreground mb-2">Leaderboard</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
+          <p className="text-muted-foreground">
             Compare your MP, streaks, and quiz progress with other students.
           </p>
         </div>
 
         {/* Filter Tabs - Minimal with Underline */}
-        <div className="flex items-center space-x-6 border-b border-border">
+        <div className="flex items-center gap-6 border-b border-border">
           <button
             onClick={() => setFilterType('week')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-3 px-1 font-medium transition-colors relative",
               filterType === 'week'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -271,7 +271,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('alltime')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-3 px-1 font-medium transition-colors relative",
               filterType === 'alltime'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -285,7 +285,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('friends')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-3 px-1 font-medium transition-colors relative",
               filterType === 'friends'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
