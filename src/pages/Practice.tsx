@@ -17,6 +17,7 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
+import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
 
@@ -172,6 +173,8 @@ const Practice = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
+
+  const { showMPReward } = useMPRewards();
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -524,15 +527,9 @@ const Practice = () => {
         playCelebratorySound();
       }
       
-      // Show toast notification if user got full marks
+      // Show MP reward notification if user got full marks
       if (markingResult.marksAwarded === currentQuestion.marks) {
-        toast("Perfect answer! +10 MP", {
-          className: "bg-white dark:bg-gray-950 border-2 border-[#0EA5E9] shadow-lg",
-          description: "You earned 10 MP for getting full marks!",
-          duration: 4000,
-        });
-        // Trigger MP counter update
-        window.dispatchEvent(new CustomEvent('mpEarned'));
+        showMPReward(10, "Perfect answer! +10 MP");
       }
       
       // Generate notebook notes if marks were lost
