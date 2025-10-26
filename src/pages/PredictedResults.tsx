@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight } from "lucide-react";
+import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight, Star } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -991,24 +991,32 @@ const PredictedResults = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 pb-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
           <Button
             onClick={() => navigate('/dashboard')}
             variant="outline"
             size="lg"
-            className="w-full sm:w-auto gap-2 rounded-full px-8 py-6 font-semibold"
+            className="w-full sm:w-auto rounded-full px-8 py-6 font-semibold"
           >
-            <Home className="w-4 h-4" />
             Back to Dashboard
           </Button>
           <Button
             onClick={() => navigate('/predicted-questions')}
             size="lg"
-            className="w-full sm:w-auto gap-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Target className="w-4 h-4" />
             Try Another Exam
           </Button>
+        </div>
+
+        {/* MP Reward Footer */}
+        <div className="text-center py-6 animate-fade-in" style={{ animationDelay: '900ms' }}>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+            <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+            <p className="text-base font-medium text-foreground">
+              +30 MP added for completing this exam
+            </p>
+          </div>
         </div>
       </main>
     </div>
