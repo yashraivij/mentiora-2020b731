@@ -2729,8 +2729,7 @@ const Dashboard = () => {
                                     onClick={() => navigate('/pricing')}
                                     className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 h-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm"
                                   >
-                                    <Crown className="h-3 w-3 mr-1.5" />
-                                    Start Free Trial to See Grade
+                                    Unlock My Results
                                   </Button>
                                 )}
                                 <Select
