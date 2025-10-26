@@ -299,10 +299,10 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       </div>
 
-      {/* Leaderboard Table - League Standings Style */}
+      {/* Leaderboard Cards - Subject Card Style */}
       {entries.length === 0 ? (
-        <div className="bg-card border border-border rounded-lg shadow-sm p-12 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-lg bg-muted flex items-center justify-center">
+        <div className="bg-card border border-border rounded-3xl shadow-sm p-12 text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-muted flex items-center justify-center">
             <Trophy className="h-8 w-8 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold text-foreground mb-2">No data yet</h3>
@@ -311,90 +311,81 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
       ) : (
-        <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
-          {/* Table Header */}
-          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-4">
-            <div className="grid grid-cols-[70px,1fr,160px,130px] gap-6 items-center">
-              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide">Rank</div>
-              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide">Student</div>
-              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide text-right">MP</div>
-              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide text-center">Streak</div>
-            </div>
-          </div>
+        <div className="grid gap-4">
+          <AnimatePresence mode="popLayout">
+            {entries.map((entry, index) => {
+              const getRankBadgeColor = () => {
+                if (entry.rank === 1) return 'bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500/30';
+                if (entry.rank === 2) return 'bg-gray-50 dark:bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
+                if (entry.rank === 3) return 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-500/30';
+                return 'bg-muted/50 text-foreground border-border';
+              };
 
-          {/* Table Body */}
-          <div className="divide-y divide-border">
-            <AnimatePresence mode="popLayout">
-              {entries.map((entry, index) => {
-                const getRankBadgeColor = () => {
-                  if (entry.rank === 1) return 'bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500/30';
-                  if (entry.rank === 2) return 'bg-gray-50 dark:bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
-                  if (entry.rank === 3) return 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-500/30';
-                  return 'bg-muted/50 text-foreground border-border';
-                };
+              return (
+                <TooltipProvider key={entry.user_id}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2, delay: index * 0.01 }}
+                        className={cn(
+                          "group relative bg-card border border-border rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer p-6",
+                          entry.isCurrentUser && "ring-2 ring-primary/50 shadow-md"
+                        )}
+                      >
+                        <div className="flex items-center gap-6">
+                          {/* Rank Badge */}
+                          <div className={cn(
+                            "flex-shrink-0 w-14 h-14 rounded-2xl border-2 flex items-center justify-center font-bold text-lg transition-all shadow-sm",
+                            getRankBadgeColor()
+                          )}>
+                            {entry.rank}
+                          </div>
 
-                return (
-                  <TooltipProvider key={entry.user_id}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <motion.div
-                          layout
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -5 }}
-                          transition={{ duration: 0.15, delay: index * 0.01 }}
-                          className={cn(
-                            "group relative px-6 py-4 hover:bg-muted/20 transition-colors cursor-pointer",
-                            entry.isCurrentUser && "bg-primary/5 hover:bg-primary/10"
-                          )}
-                        >
-                          <div className="grid grid-cols-[70px,1fr,160px,130px] gap-6 items-center">
-                            {/* Rank */}
-                            <div className="flex items-center">
-                              <div className={cn(
-                                "w-12 h-12 rounded-xl border-2 flex items-center justify-center font-bold text-base transition-all shadow-sm",
-                                getRankBadgeColor()
-                              )}>
-                                {entry.rank}
-                              </div>
+                          {/* Student Info */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2.5 mb-1">
+                              <h3 className="text-lg font-bold text-foreground truncate">
+                                {entry.username}
+                              </h3>
+                              {entry.isCurrentUser && (
+                                <Badge variant="outline" className="text-xs px-2.5 py-0.5 h-5 border-primary text-primary font-semibold">
+                                  You
+                                </Badge>
+                              )}
                             </div>
-
-                            {/* Student Name */}
-                            <div className="min-w-0">
-                              <div className="flex items-center gap-2.5 mb-1">
-                                <h3 className="text-base font-semibold text-foreground truncate">
-                                  {entry.username}
-                                </h3>
-                                {entry.isCurrentUser && (
-                                  <Badge variant="outline" className="text-xs px-2 py-0.5 h-5 border-primary text-primary font-medium">
-                                    You
-                                  </Badge>
-                                )}
-                              </div>
-                              <div className="text-xs text-muted-foreground truncate">
-                                {entry.top_subject && `${entry.top_subject} • `}
-                                Active {formatLastActive(entry.last_active)}
-                              </div>
+                            <div className="text-sm text-muted-foreground truncate">
+                              {entry.top_subject && `${entry.top_subject} • `}
+                              Active {formatLastActive(entry.last_active)}
                             </div>
+                          </div>
 
+                          {/* Stats */}
+                          <div className="flex items-center gap-6">
                             {/* MP */}
-                            <div className="text-right">
-                              <div className="flex items-center justify-end gap-2">
+                            <div className="text-center px-4 py-3 rounded-2xl bg-primary/5 border border-primary/10">
+                              <div className="flex items-center justify-center gap-2 mb-1">
                                 <Sparkles className="h-4 w-4 text-primary" />
-                                <span className="text-lg font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
+                                <span className="text-xl font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
                               </div>
+                              <div className="text-xs text-muted-foreground font-medium">MP</div>
                             </div>
 
                             {/* Streak */}
-                            <div className="text-center">
-                              <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20">
+                            <div className="text-center px-4 py-3 rounded-2xl bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20">
+                              <div className="flex items-center justify-center gap-2 mb-1">
                                 <Flame className="h-4 w-4 text-orange-500" />
-                                <span className="text-lg font-bold text-orange-700 dark:text-orange-400">{entry.streak}</span>
+                                <span className="text-xl font-bold text-orange-700 dark:text-orange-400">{entry.streak}</span>
                               </div>
+                              <div className="text-xs text-muted-foreground font-medium">Day Streak</div>
                             </div>
                           </div>
-                        </motion.div>
-                      </TooltipTrigger>
+                        </div>
+                      </motion.div>
+                    </TooltipTrigger>
                     <TooltipContent side="left" className="max-w-xs">
                       <div className="space-y-1 text-sm">
                         <div className="font-semibold">{entry.username}</div>
@@ -408,12 +399,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                         <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
                       </div>
                     </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                );
-              })}
-            </AnimatePresence>
-          </div>
+                  </Tooltip>
+                </TooltipProvider>
+              );
+            })}
+          </AnimatePresence>
         </div>
       )}
 
