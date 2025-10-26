@@ -1094,10 +1094,11 @@ const Practice = () => {
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
       const filteredTopics = weakTopics.filter((id: string) => id !== topicId);
       localStorage.setItem(weakTopicsKey, JSON.stringify(filteredTopics));
+    }
       
-      // Track topic mastery (85%+ score)
-      if (user?.id && subjectId && topicId) {
-        try {
+    // Track topic mastery and complete daily tasks
+    if (user?.id && subjectId && topicId) {
+      try {
           await supabase
             .from('daily_topic_mastery')
             .upsert(
@@ -1322,7 +1323,6 @@ const Practice = () => {
           console.error('Error tracking topic mastery:', error);
         }
       }
-    }
     
     setSessionComplete(true);
     
