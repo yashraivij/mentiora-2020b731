@@ -665,285 +665,254 @@ const PredictedResults = () => {
   const grade = getGrade(percentage, subjectId);
 
   return (
-    <div className={`min-h-screen bg-white ${isPremium ? '' : 'pt-12'}`}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       {/* Clean Medly Header */}
-      <header className="bg-white border-b border-gray-100">
-        <div className="container mx-auto px-6 py-5">
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-800/50 sticky top-0 z-10">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate('/dashboard')}
-                className="text-gray-600 hover:text-black hover:bg-gray-50"
+                className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Dashboard
               </Button>
-              <div className="h-8 w-px bg-gray-200" />
-              <div>
-                <h1 className="text-xl font-semibold text-black">
-                  Predicted Exam Results
-                </h1>
-                <p className="text-sm text-gray-600 mt-0.5">
-                  {subject?.name}
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-10 max-w-5xl">
-        <div className="space-y-8">
-          {/* Clean Grade Card - Medly Style */}
-          <Card className="border border-gray-200 shadow-sm bg-white">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
-                    Your Predicted Grade
-                  </div>
-                  <div className="flex items-baseline gap-3">
-                    <div className="text-7xl font-bold text-black">
-                      {grade}
-                    </div>
-                    <div className="text-2xl text-gray-400 font-medium">
-                      / {isALevel(subjectId) ? 'A*' : '9'}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-4">
-                    <div className="text-base text-gray-600">
-                      <span className="font-semibold text-black">{achievedMarks}</span> / {examTotalMarks} marks
-                    </div>
-                    <div className="h-4 w-px bg-gray-200" />
-                    <div className="text-base text-gray-600">
-                      <span className="font-semibold text-black">{percentage}%</span>
-                    </div>
-                  </div>
+      <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
+        
+        {/* Hero Header */}
+        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
+          <h1 className="text-3xl font-bold text-foreground">
+            Predicted Exam Complete!
+          </h1>
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            You've just finished your <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.
+          </p>
+        </div>
+
+        {/* Performance Summary Card - Overall Score Only */}
+        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
+            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardContent className="p-8 relative">
+              <div className="text-center space-y-4">
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Overall Score
+                  </p>
+                  <p className="text-6xl font-bold text-[hsl(195,69%,54%)]">
+                    {percentage}%
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {achievedMarks} out of {examTotalMarks} marks
+                  </p>
                 </div>
-                <div className="flex flex-col items-end gap-6">
-                  <div className="w-32 h-32 rounded-full border-8 border-gray-100 flex items-center justify-center" style={{ borderColor: '#0BA5E9', borderWidth: '10px' }}>
+                
+                {/* Grade Badge */}
+                <div className="flex justify-center pt-2">
+                  <div className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] shadow-lg">
                     <div className="text-center">
-                      <div className="text-3xl font-bold" style={{ color: '#0BA5E9' }}>
-                        {percentage}
-                      </div>
-                      <div className="text-sm text-gray-500">%</div>
+                      <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">
+                        Predicted Grade
+                      </p>
+                      <p className="text-4xl font-bold text-white">
+                        {grade}
+                      </p>
                     </div>
                   </div>
-                  <Badge 
-                    className="text-base px-4 py-1.5"
-                    style={{ 
-                      backgroundColor: percentage >= 70 ? '#0BA5E9' : percentage >= 50 ? '#6B7280' : '#EF4444',
-                      color: 'white'
-                    }}
-                  >
-                    {percentage >= 70 ? 'Strong Performance' : percentage >= 50 ? 'Good Progress' : 'Keep Practicing'}
-                  </Badge>
-                </div>
-              </div>
-              
-              {/* Clean Progress Bar */}
-              <div className="mt-8">
-                <div className="flex justify-between text-xs text-gray-500 mb-2">
-                  <span>0%</span>
-                  <span>100%</span>
-                </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full rounded-full transition-all duration-500"
-                    style={{ 
-                      width: `${percentage}%`,
-                      backgroundColor: '#0BA5E9'
-                    }}
-                  />
                 </div>
               </div>
             </CardContent>
           </Card>
+        </div>
 
-          {/* Stats Grid - Clean Medly Style */}
-          <div className="grid grid-cols-3 gap-4">
-            <Card className="border border-gray-200 shadow-sm bg-white">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-black mb-2">{achievedMarks}</div>
-                <div className="text-sm text-gray-600">Marks Achieved</div>
-              </CardContent>
-            </Card>
-            <Card className="border border-gray-200 shadow-sm bg-white">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-black mb-2">{questions.length}</div>
-                <div className="text-sm text-gray-600">Questions</div>
-              </CardContent>
-            </Card>
-            <Card className="border border-gray-200 shadow-sm bg-white">
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl font-bold text-black mb-2">{timeElapsed ? Math.round(timeElapsed / 60) : '-'}</div>
-                <div className="text-sm text-gray-600">Minutes</div>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <Card className="bg-card rounded-xl border-0 shadow-md">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{questions.length}</div>
+              <div className="text-xs text-muted-foreground">Questions</div>
+            </CardContent>
+          </Card>
+          <Card className="bg-card rounded-xl border-0 shadow-md">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{achievedMarks}</div>
+              <div className="text-xs text-muted-foreground">Marks Scored</div>
+            </CardContent>
+          </Card>
+          <Card className="bg-card rounded-xl border-0 shadow-md">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{timeElapsed ? Math.round(timeElapsed / 60) : '-'}</div>
+              <div className="text-xs text-muted-foreground">Minutes</div>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* Question by Question Feedback - Clean Medly Style */}
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-black mb-6">Question Breakdown</h2>
+        {/* Question by Question Feedback - Clean Medly Style */}
+        <div className="space-y-4 animate-fade-in" style={{ animationDelay: '600ms' }}>
+          <h2 className="text-2xl font-bold text-foreground mb-6">Question Breakdown</h2>
+          
+          {attempts.map((attempt, index) => {
+            const question = questions[index];
+            const marksPercentage = (attempt.score / question.marks) * 100;
             
-            {attempts.map((attempt, index) => {
-              const question = questions[index];
-              const marksPercentage = (attempt.score / question.marks) * 100;
-              
-              return (
-                <Card key={attempt.questionId} className="border border-gray-200 shadow-sm bg-white">
-                  <CardHeader className="pb-4 border-b border-gray-100">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div 
-                          className="flex items-center justify-center w-10 h-10 rounded-lg text-white font-semibold"
-                          style={{ backgroundColor: '#0BA5E9' }}
-                        >
-                          {index + 1}
-                        </div>
-                        <div>
-                          <CardTitle className="text-lg font-semibold text-black">
-                            Question {index + 1}
-                          </CardTitle>
-                          <p className="text-sm text-gray-500 mt-0.5">
-                            {question.marks} {question.marks === 1 ? 'mark' : 'marks'} available
-                          </p>
-                        </div>
+            return (
+              <Card key={attempt.questionId} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
+                <CardHeader className="pb-4 border-b border-border/50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="flex items-center justify-center w-10 h-10 rounded-lg text-white font-semibold bg-gradient-to-br from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)]"
+                      >
+                        {index + 1}
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-black">
-                            {attempt.score}<span className="text-gray-400">/{question.marks}</span>
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {Math.round(marksPercentage)}%
-                          </div>
-                        </div>
-                        <Badge 
-                          className="px-3 py-1"
-                          style={{ 
-                            backgroundColor: marksPercentage >= 85 ? '#10B981' : marksPercentage >= 60 ? '#0BA5E9' : '#EF4444',
-                            color: 'white'
-                          }}
-                        >
-                          {marksPercentage >= 85 ? 'Excellent' : marksPercentage >= 60 ? 'Good' : 'Review'}
-                        </Badge>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="pt-6 space-y-6">
-                    {/* Question Text */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <HelpCircle className="h-4 w-4" style={{ color: '#0BA5E9' }} />
-                        <h4 className="font-semibold text-black text-sm uppercase tracking-wide">Question</h4>
-                      </div>
-                      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <p className="text-gray-900 leading-relaxed">{question.text || question.question}</p>
-                      </div>
-                    </div>
-
-                    {/* Your Answer */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <User className="h-4 w-4 text-gray-700" />
-                        <h4 className="font-semibold text-black text-sm uppercase tracking-wide">Your Answer</h4>
-                      </div>
-                      <div className="bg-white p-4 rounded-lg border-2 border-gray-200">
-                        <p className="text-gray-900 leading-relaxed">
-                          {attempt.userAnswer || <span className="text-gray-400 italic">No answer provided</span>}
+                      <div>
+                        <CardTitle className="text-lg font-semibold text-foreground">
+                          Question {index + 1}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground mt-0.5">
+                          {question.marks} {question.marks === 1 ? 'mark' : 'marks'} available
                         </p>
                       </div>
                     </div>
-
-                    {/* Model Answer */}
-                    {attempt.feedback.fullMarks ? (
-                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                        <div className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <h4 className="font-semibold text-green-900 mb-1">Perfect Answer!</h4>
-                            <p className="text-sm text-green-800 leading-relaxed">
-                              {attempt.feedback.whyYoursDidnt}
-                            </p>
-                          </div>
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-foreground">
+                          {attempt.score}<span className="text-muted-foreground">/{question.marks}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {Math.round(marksPercentage)}%
                         </div>
                       </div>
-                    ) : (
-                      <>
-                        <div>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Book className="h-4 w-4 text-green-600" />
-                            <h4 className="font-semibold text-black text-sm uppercase tracking-wide">Model Answer</h4>
-                          </div>
-                          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                            <p className="text-gray-900 leading-relaxed">{attempt.feedback.modelAnswer}</p>
-                          </div>
-                        </div>
+                      <Badge 
+                        className="px-3 py-1"
+                        style={{ 
+                          backgroundColor: marksPercentage >= 85 ? 'hsl(142, 76%, 36%)' : marksPercentage >= 60 ? 'hsl(195,69%,54%)' : 'hsl(0, 84%, 60%)',
+                          color: 'white',
+                          border: 'none'
+                        }}
+                      >
+                        {marksPercentage >= 85 ? 'Excellent' : marksPercentage >= 60 ? 'Good' : 'Review'}
+                      </Badge>
+                    </div>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="pt-6 space-y-6">
+                  {/* Question Text */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <HelpCircle className="h-4 w-4 text-[hsl(195,69%,54%)]" />
+                      <h4 className="font-semibold text-foreground text-sm uppercase tracking-wide">Question</h4>
+                    </div>
+                    <div className="bg-[hsl(195,69%,54%)]/5 dark:bg-[hsl(195,69%,54%)]/10 p-4 rounded-lg border border-[hsl(195,69%,54%)]/20">
+                      <p className="text-foreground leading-relaxed">{question.text || question.question}</p>
+                    </div>
+                  </div>
 
-                        {/* Feedback */}
-                        <div>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Lightbulb className="h-4 w-4 text-amber-500" />
-                            <h4 className="font-semibold text-black text-sm uppercase tracking-wide">How to Improve</h4>
-                          </div>
-                          <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
-                            <p className="text-gray-900 leading-relaxed">{attempt.feedback.whyYoursDidnt}</p>
-                          </div>
-                        </div>
+                  {/* Your Answer */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <User className="h-4 w-4 text-muted-foreground" />
+                      <h4 className="font-semibold text-foreground text-sm uppercase tracking-wide">Your Answer</h4>
+                    </div>
+                    <div className="bg-muted/30 p-4 rounded-lg border border-border">
+                      <p className="text-foreground leading-relaxed">
+                        {attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>}
+                      </p>
+                    </div>
+                  </div>
 
-                        {/* Marking Criteria */}
+                  {/* Model Answer */}
+                  {attempt.feedback.fullMarks ? (
+                    <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-lg p-4">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" />
                         <div>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Target className="h-4 w-4" style={{ color: '#0BA5E9' }} />
-                            <h4 className="font-semibold text-black text-sm uppercase tracking-wide">Mark Scheme</h4>
-                          </div>
-                          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-line">
-                              {attempt.feedback.whyThisGetsMark}
-                            </p>
-                          </div>
-                        </div>
-                      </>
-                    )}
-
-                    {/* Spec Reference */}
-                    {attempt.feedback.specLink && (
-                      <div className="pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <BookOpen className="h-4 w-4" />
-                          <span className="font-medium">Specification:</span>
-                          <span>{attempt.feedback.specLink}</span>
+                          <h4 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-1">Perfect Answer!</h4>
+                          <p className="text-sm text-emerald-800 dark:text-emerald-200 leading-relaxed">
+                            {attempt.feedback.whyYoursDidnt}
+                          </p>
                         </div>
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Book className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                          <h4 className="font-semibold text-foreground text-sm uppercase tracking-wide">Model Answer</h4>
+                        </div>
+                        <div className="bg-emerald-50 dark:bg-emerald-950/30 p-4 rounded-lg border border-emerald-200 dark:border-emerald-800/50">
+                          <p className="text-foreground leading-relaxed">{attempt.feedback.modelAnswer}</p>
+                        </div>
+                      </div>
 
-          {/* Action Buttons - Clean Medly Style */}
-          <div className="flex gap-4 pt-6">
-            <Button 
-              onClick={() => navigate('/predicted-questions')}
-              className="flex-1 h-12 text-base font-semibold"
-              style={{ backgroundColor: '#0BA5E9', color: 'white' }}
-            >
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Take Another Exam
-            </Button>
-            <Button 
-              onClick={() => navigate('/dashboard')}
-              variant="outline"
-              className="flex-1 h-12 text-base font-semibold border-2 border-gray-200"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Dashboard
-            </Button>
-          </div>
+                      {/* Feedback */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Lightbulb className="h-4 w-4 text-amber-500" />
+                          <h4 className="font-semibold text-foreground text-sm uppercase tracking-wide">How to Improve</h4>
+                        </div>
+                        <div className="bg-amber-50 dark:bg-amber-950/30 p-4 rounded-lg border border-amber-200 dark:border-amber-800/50">
+                          <p className="text-foreground leading-relaxed">{attempt.feedback.whyYoursDidnt}</p>
+                        </div>
+                      </div>
+
+                      {/* Marking Criteria */}
+                      <div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <Target className="h-4 w-4 text-[hsl(195,69%,54%)]" />
+                          <h4 className="font-semibold text-foreground text-sm uppercase tracking-wide">Mark Scheme</h4>
+                        </div>
+                        <div className="bg-muted/30 p-4 rounded-lg border border-border">
+                          <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
+                            {attempt.feedback.whyThisGetsMark}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Spec Reference */}
+                  {attempt.feedback.specLink && (
+                    <div className="pt-4 border-t border-border/50">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <BookOpen className="h-4 w-4" />
+                        <span className="font-medium">Specification:</span>
+                        <span>{attempt.feedback.specLink}</span>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
+          <Button
+            onClick={() => navigate('/predicted-questions')}
+            className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] hover:from-[hsl(195,69%,60%)] hover:to-[hsl(195,60%,66%)] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
+          >
+            <RotateCcw className="h-4 w-4 mr-2" />
+            Take Another Exam
+          </Button>
+          <Button 
+            onClick={() => navigate('/dashboard')}
+            variant="outline"
+            className="w-full sm:w-auto"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Dashboard
+          </Button>
         </div>
       </div>
     </div>
