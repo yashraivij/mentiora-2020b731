@@ -299,7 +299,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       </div>
 
-      {/* Leaderboard Table - Clean Analytical Layout */}
+      {/* Leaderboard Table - League Standings Style */}
       {entries.length === 0 ? (
         <div className="bg-card border border-border rounded-lg shadow-sm p-12 text-center">
           <div className="w-16 h-16 mx-auto mb-4 rounded-lg bg-muted flex items-center justify-center">
@@ -311,127 +311,122 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
       ) : (
-        <div className="space-y-2">
-          <AnimatePresence mode="popLayout">
-            {entries.map((entry, index) => {
-              const getRankAccent = () => {
-                if (entry.rank === 1) return 'bg-gradient-to-r from-yellow-500/20 to-transparent';
-                if (entry.rank === 2) return 'bg-gradient-to-r from-gray-400/20 to-transparent';
-                if (entry.rank === 3) return 'bg-gradient-to-r from-orange-600/20 to-transparent';
-                return '';
-              };
+        <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
+          {/* Table Header */}
+          <div className="bg-muted/30 border-b border-border px-6 py-3">
+            <div className="grid grid-cols-[60px,1fr,120px,100px,100px,100px] gap-4 items-center">
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Rank</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Student</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-right">MP</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Streak</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Quizzes</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Badges</div>
+            </div>
+          </div>
 
-              return (
-                <TooltipProvider key={entry.user_id}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.div
-                        layout
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2, delay: index * 0.01 }}
-                        className={cn(
-                          "group relative bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer",
-                          entry.isCurrentUser && "ring-1 ring-primary/50 bg-primary/5"
-                        )}
-                      >
-                        {/* Rank Accent for Top 3 */}
-                        {entry.rank <= 3 && (
-                          <div className={cn("absolute left-0 top-0 bottom-0 w-1 rounded-l-lg", getRankAccent())} />
-                        )}
+          {/* Table Body */}
+          <div className="divide-y divide-border">
+            <AnimatePresence mode="popLayout">
+              {entries.map((entry, index) => {
+                const getRankBadgeColor = () => {
+                  if (entry.rank === 1) return 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20';
+                  if (entry.rank === 2) return 'bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-500/20';
+                  if (entry.rank === 3) return 'bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20';
+                  return 'bg-muted text-muted-foreground border-border';
+                };
 
-                        <div className="flex items-center px-6 py-4 gap-6">
-                          {/* Rank */}
-                          <div className="flex-shrink-0 w-12">
-                            <div className="flex items-center justify-center">
-                              <span className="text-lg font-bold text-foreground">#{entry.rank}</span>
-                              {entry.rank === 1 && <span className="ml-1 text-sm">👑</span>}
+                return (
+                  <TooltipProvider key={entry.user_id}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <motion.div
+                          layout
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -5 }}
+                          transition={{ duration: 0.15, delay: index * 0.01 }}
+                          className={cn(
+                            "group relative px-6 py-4 hover:bg-muted/20 transition-colors cursor-pointer",
+                            entry.isCurrentUser && "bg-primary/5 hover:bg-primary/10"
+                          )}
+                        >
+                          <div className="grid grid-cols-[60px,1fr,120px,100px,100px,100px] gap-4 items-center">
+                            {/* Rank */}
+                            <div className="flex items-center">
+                              <div className={cn(
+                                "w-10 h-10 rounded-lg border flex items-center justify-center font-bold text-sm transition-all",
+                                getRankBadgeColor()
+                              )}>
+                                {entry.rank}
+                              </div>
+                            </div>
+
+                            {/* Student Name */}
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <h3 className="text-sm font-semibold text-foreground truncate">
+                                  {entry.username}
+                                </h3>
+                                {entry.isCurrentUser && (
+                                  <Badge variant="outline" className="text-xs px-2 py-0 h-5 border-primary text-primary">
+                                    You
+                                  </Badge>
+                                )}
+                              </div>
+                              <div className="text-xs text-muted-foreground mt-0.5 truncate">
+                                {entry.top_subject && `${entry.top_subject} • `}
+                                Active {formatLastActive(entry.last_active)}
+                              </div>
+                            </div>
+
+                            {/* MP */}
+                            <div className="text-right">
+                              <div className="text-base font-bold text-foreground">
+                                {entry.mp_points.toLocaleString()}
+                              </div>
+                            </div>
+
+                            {/* Streak */}
+                            <div className="text-center">
+                              <div className="flex items-center justify-center gap-1.5">
+                                <Flame className="h-4 w-4 text-orange-500" />
+                                <span className="text-base font-semibold text-foreground">{entry.streak}</span>
+                              </div>
+                            </div>
+
+                            {/* Quizzes */}
+                            <div className="text-center">
+                              <span className="text-base font-semibold text-foreground">
+                                {entry.quizzes_completed || 0}
+                              </span>
+                            </div>
+
+                            {/* Badges */}
+                            <div className="text-center">
+                              <span className="text-base font-semibold text-foreground">
+                                {entry.badges_earned || 0}
+                              </span>
                             </div>
                           </div>
-
-                          {/* Vertical Separator */}
-                          <div className="h-10 w-px bg-border" />
-
-                          {/* User Info */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="text-base font-semibold text-foreground truncate">{entry.username}</h3>
-                              {entry.isCurrentUser && (
-                                <span className="text-xs font-medium text-primary">(You)</span>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                              {entry.top_subject && (
-                                <>
-                                  <span>Top Subject: {entry.top_subject}</span>
-                                  <span>•</span>
-                                </>
-                              )}
-                              <span>Active {formatLastActive(entry.last_active)}</span>
-                            </div>
-                          </div>
-
-                          {/* Vertical Separator */}
-                          <div className="h-10 w-px bg-border" />
-
-                          {/* MP */}
-                          <div className="flex-shrink-0 w-24 text-right">
-                            <div className="text-lg font-bold text-foreground">{entry.mp_points.toLocaleString()}</div>
-                            <div className="text-xs text-muted-foreground">MP</div>
-                          </div>
-
-                          {/* Vertical Separator */}
-                          <div className="h-10 w-px bg-border" />
-
-                          {/* Streak */}
-                          <div className="flex-shrink-0 w-20 text-center">
-                            <div className="flex items-center justify-center gap-1">
-                              <Flame className="h-3.5 w-3.5 text-orange-500" />
-                              <span className="text-base font-semibold text-foreground">{entry.streak}</span>
-                            </div>
-                            <div className="text-xs text-muted-foreground">Streak</div>
-                          </div>
-
-                          {/* Vertical Separator */}
-                          <div className="h-10 w-px bg-border" />
-
-                          {/* Quizzes */}
-                          <div className="flex-shrink-0 w-20 text-center">
-                            <div className="text-base font-semibold text-foreground">{entry.quizzes_completed || 0}</div>
-                            <div className="text-xs text-muted-foreground">Quizzes</div>
-                          </div>
-
-                          {/* Vertical Separator */}
-                          <div className="h-10 w-px bg-border" />
-
-                          {/* Badges */}
-                          <div className="flex-shrink-0 w-20 text-center">
-                            <div className="text-base font-semibold text-foreground">{entry.badges_earned || 0}</div>
-                            <div className="text-xs text-muted-foreground">Badges</div>
-                          </div>
+                        </motion.div>
+                      </TooltipTrigger>
+                      <TooltipContent side="left" className="max-w-xs">
+                        <div className="space-y-1 text-sm">
+                          <div className="font-semibold">{entry.username}</div>
+                          <div className="text-muted-foreground">Total quizzes: {entry.quizzes_completed || 0}</div>
+                          <div className="text-muted-foreground">Badges earned: {entry.badges_earned || 0}</div>
+                          {entry.top_subject && (
+                            <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
+                          )}
+                          <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
                         </div>
-
-                        {/* Hover effect */}
-                        <div className="absolute inset-0 rounded-lg bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300 pointer-events-none" />
-                      </motion.div>
-                    </TooltipTrigger>
-                    <TooltipContent side="left" className="max-w-xs">
-                      <div className="space-y-1 text-sm">
-                        <div className="font-semibold">{entry.username}</div>
-                        <div className="text-muted-foreground">Total quizzes: {entry.quizzes_completed || 0}</div>
-                        <div className="text-muted-foreground">Badges earned: {entry.badges_earned || 0}</div>
-                        {entry.top_subject && (
-                          <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
-                        )}
-                        <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              );
-            })}
-          </AnimatePresence>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                );
+              })}
+            </AnimatePresence>
+          </div>
         </div>
       )}
 
