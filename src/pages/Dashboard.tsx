@@ -2657,16 +2657,6 @@ const Dashboard = () => {
                             <SheetDescription className="text-sm sm:text-base mt-0.5 sm:mt-1 font-medium hidden sm:block">
                               Detailed performance insights
                             </SheetDescription>
-                            {!isPremium && (
-                              <Button
-                                size="sm"
-                                onClick={() => navigate('/pricing')}
-                                className="mt-2 h-8 px-3 text-xs bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold shadow-sm"
-                              >
-                                <Crown className="w-3 h-3 mr-1.5" />
-                                Start Free Trial to Unlock
-                              </Button>
-                            )}
                           </div>
                           <Button
                             variant="outline"
@@ -2726,13 +2716,22 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                {isPremium && (
+                                {isPremium ? (
                                   <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
                                     Predicted {(() => {
                                       console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
                                       return getDisplayGrade(selectedDrawerSubject.predicted);
                                     })()}
                                   </Badge>
+                                ) : (
+                                  <Button
+                                    size="sm"
+                                    onClick={() => navigate('/pricing')}
+                                    className="h-8 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm whitespace-nowrap"
+                                  >
+                                    <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5" />
+                                    Unlock All Data
+                                  </Button>
                                 )}
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
