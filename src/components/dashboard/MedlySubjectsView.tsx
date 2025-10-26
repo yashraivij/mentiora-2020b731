@@ -23,6 +23,7 @@ import {
   Crown,
 } from "lucide-react";
 import { SubjectDailyTasks } from "./SubjectDailyTasks";
+import { cn } from "@/lib/utils";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -443,33 +444,71 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
-                          {(() => {
-                            const isALevel = subject.id.toLowerCase().includes('alevel');
-                            const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            if (!isALevel) {
-                              const rounded = Math.round(numericPred);
-                              return rounded === 0 ? 'U' : rounded;
-                            }
-                            // Convert numeric grade (1-9) to A-Level letter grade
-                            if (numericPred >= 8.5) return 'A*';
-                            if (numericPred >= 7.5) return 'A';
-                            if (numericPred >= 6.5) return 'B';
-                            if (numericPred >= 5.5) return 'C';
-                            if (numericPred >= 4.5) return 'D';
-                            if (numericPred >= 2.5) return 'E';
-                            return 'U';
-                          })()}
-                        </span>
+                        <div className="relative group">
+                          <span className={cn(
+                            "text-base font-bold text-[#0F172A] dark:text-white transition-all duration-300",
+                            !isPremium && "blur-sm select-none"
+                          )}>
+                            {(() => {
+                              const isALevel = subject.id.toLowerCase().includes('alevel');
+                              const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                              if (!isALevel) {
+                                const rounded = Math.round(numericPred);
+                                return rounded === 0 ? 'U' : rounded;
+                              }
+                              // Convert numeric grade (1-9) to A-Level letter grade
+                              if (numericPred >= 8.5) return 'A*';
+                              if (numericPred >= 7.5) return 'A';
+                              if (numericPred >= 6.5) return 'B';
+                              if (numericPred >= 5.5) return 'C';
+                              if (numericPred >= 4.5) return 'D';
+                              if (numericPred >= 2.5) return 'E';
+                              return 'U';
+                            })()}
+                          </span>
+                          {!isPremium && (
+                            <div className="absolute -top-1 -right-1">
+                              <div className="w-4 h-4 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center shadow-lg animate-pulse">
+                                <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                       <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: typeof subject.predicted === 'number' ? `${((Math.max(1, subject.predicted) - 1) / 8) * 100}%` : '0%' }}
                           transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                          className={cn(
+                            "h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm transition-all duration-300",
+                            !isPremium && "opacity-40"
+                          )}
                         />
                       </div>
+                      {!isPremium && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.5 }}
+                          className="mt-2 text-[10px] text-center"
+                        >
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onUpgradeToPremium?.();
+                            }}
+                            className="text-amber-600 dark:text-amber-400 font-semibold hover:underline inline-flex items-center gap-1"
+                          >
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                            </svg>
+                            Upgrade to see your predicted grade
+                          </button>
+                        </motion.div>
+                      )}
                     </div>
                     <div>
                       <div className="flex items-center justify-between mb-2">

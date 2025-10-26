@@ -92,6 +92,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import { cn } from "@/lib/utils";
 
 interface UserProgress {
   subjectId: string;
@@ -2716,12 +2717,44 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
-                                  Predicted {(() => {
-                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
-                                    return getDisplayGrade(selectedDrawerSubject.predicted);
-                                  })()}
-                                </Badge>
+                                <div className="relative group">
+                                  <Badge className={cn(
+                                    "rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm transition-all duration-300",
+                                    !isPremium && "blur-sm select-none"
+                                  )}>
+                                    Predicted {(() => {
+                                      console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                      return getDisplayGrade(selectedDrawerSubject.predicted);
+                                    })()}
+                                  </Badge>
+                                  {!isPremium && (
+                                    <>
+                                      <div className="absolute -top-1 -right-1">
+                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center shadow-lg animate-pulse">
+                                          <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                      <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                        <div className="bg-background border border-border rounded-lg px-3 py-2 shadow-lg whitespace-nowrap text-xs">
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              navigate('/pricing');
+                                            }}
+                                            className="text-amber-600 dark:text-amber-400 font-semibold hover:underline pointer-events-auto inline-flex items-center gap-1"
+                                          >
+                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                                            </svg>
+                                            Upgrade to see grade
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
