@@ -313,14 +313,14 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       ) : (
         <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
           {/* Table Header */}
-          <div className="bg-muted/30 border-b border-border px-6 py-3">
-            <div className="grid grid-cols-[60px,1fr,120px,100px,100px,100px] gap-4 items-center">
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Rank</div>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Student</div>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-right">MP</div>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Streak</div>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Quizzes</div>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Badges</div>
+          <div className="bg-muted/30 border-b border-border px-6 py-3.5">
+            <div className="grid grid-cols-[70px,1fr,140px,110px,110px,110px] gap-6 items-center">
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Rank</div>
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Student</div>
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-right">MP</div>
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Streak</div>
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Quizzes</div>
+              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Badges</div>
             </div>
           </div>
 
@@ -329,10 +329,10 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
             <AnimatePresence mode="popLayout">
               {entries.map((entry, index) => {
                 const getRankBadgeColor = () => {
-                  if (entry.rank === 1) return 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20';
-                  if (entry.rank === 2) return 'bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-500/20';
-                  if (entry.rank === 3) return 'bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20';
-                  return 'bg-muted text-muted-foreground border-border';
+                  if (entry.rank === 1) return 'bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500/30';
+                  if (entry.rank === 2) return 'bg-gray-50 dark:bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
+                  if (entry.rank === 3) return 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-500/30';
+                  return 'bg-muted/50 text-foreground border-border';
                 };
 
                 return (
@@ -350,11 +350,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                             entry.isCurrentUser && "bg-primary/5 hover:bg-primary/10"
                           )}
                         >
-                          <div className="grid grid-cols-[60px,1fr,120px,100px,100px,100px] gap-4 items-center">
+                          <div className="grid grid-cols-[70px,1fr,140px,110px,110px,110px] gap-6 items-center">
                             {/* Rank */}
                             <div className="flex items-center">
                               <div className={cn(
-                                "w-10 h-10 rounded-lg border flex items-center justify-center font-bold text-sm transition-all",
+                                "w-12 h-12 rounded-xl border-2 flex items-center justify-center font-bold text-base transition-all shadow-sm",
                                 getRankBadgeColor()
                               )}>
                                 {entry.rank}
@@ -363,17 +363,17 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
                             {/* Student Name */}
                             <div className="min-w-0">
-                              <div className="flex items-center gap-2">
-                                <h3 className="text-sm font-semibold text-foreground truncate">
+                              <div className="flex items-center gap-2.5 mb-1">
+                                <h3 className="text-base font-semibold text-foreground truncate">
                                   {entry.username}
                                 </h3>
                                 {entry.isCurrentUser && (
-                                  <Badge variant="outline" className="text-xs px-2 py-0 h-5 border-primary text-primary">
+                                  <Badge variant="outline" className="text-xs px-2 py-0.5 h-5 border-primary text-primary font-medium">
                                     You
                                   </Badge>
                                 )}
                               </div>
-                              <div className="text-xs text-muted-foreground mt-0.5 truncate">
+                              <div className="text-xs text-muted-foreground truncate">
                                 {entry.top_subject && `${entry.top_subject} • `}
                                 Active {formatLastActive(entry.last_active)}
                               </div>
@@ -381,7 +381,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
                             {/* MP */}
                             <div className="text-right">
-                              <div className="text-base font-bold text-foreground">
+                              <div className="text-lg font-bold text-foreground">
                                 {entry.mp_points.toLocaleString()}
                               </div>
                             </div>
@@ -390,20 +390,20 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                             <div className="text-center">
                               <div className="flex items-center justify-center gap-1.5">
                                 <Flame className="h-4 w-4 text-orange-500" />
-                                <span className="text-base font-semibold text-foreground">{entry.streak}</span>
+                                <span className="text-lg font-bold text-foreground">{entry.streak}</span>
                               </div>
                             </div>
 
                             {/* Quizzes */}
                             <div className="text-center">
-                              <span className="text-base font-semibold text-foreground">
+                              <span className="text-lg font-bold text-foreground">
                                 {entry.quizzes_completed || 0}
                               </span>
                             </div>
 
                             {/* Badges */}
                             <div className="text-center">
-                              <span className="text-base font-semibold text-foreground">
+                              <span className="text-lg font-bold text-foreground">
                                 {entry.badges_earned || 0}
                               </span>
                             </div>
