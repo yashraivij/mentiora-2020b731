@@ -19,26 +19,20 @@ interface LeaderEntry {
   profile_emoji?: string;
 }
 
-type FilterType = 'week' | 'alltime' | 'friends';
-
 export function TopLeaderboard({ userId }: { userId?: string }) {
   const [entries, setEntries] = useState<LeaderEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterType, setFilterType] = useState<FilterType>('week');
   const [currentUserData, setCurrentUserData] = useState<LeaderEntry | null>(null);
 
   useEffect(() => {
     loadTopStudents();
     const interval = setInterval(loadTopStudents, 120000);
     return () => clearInterval(interval);
-  }, [userId, filterType]);
+  }, [userId]);
 
   const loadTopStudents = async () => {
     try {
       setIsLoading(true);
-
-      const now = new Date();
-      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
       const { data: userPoints, error: pointsError } = await supabase
         .from('user_points')
@@ -88,17 +82,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         badgesMap.set(a.user_id, (badgesMap.get(a.user_id) || 0) + 1);
       });
 
-      let quizzesQuery = supabase
+      const { data: quizzes } = await supabase
         .from('quizzes')
         .select('user_id')
         .eq('completed', true)
         .in('user_id', userIds);
-
-      if (filterType === 'week') {
-        quizzesQuery = quizzesQuery.gte('created_at', weekAgo.toISOString());
-      }
-
-      const { data: quizzes } = await quizzesQuery;
 
       const quizzesMap = new Map<string, number>();
       quizzes?.forEach(q => {
@@ -231,53 +219,13 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-primary/10 p-6 border border-amber-500/20">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-400/20 to-transparent rounded-full blur-3xl" />
-        <div className="relative flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl blur-xl opacity-50 animate-pulse" />
-              <div className="relative p-3 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-2xl">
-                <Trophy className="h-7 w-7 text-white" />
-              </div>
-            </div>
-            <div>
-              <h2 className="text-3xl font-black bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 bg-clip-text text-transparent">
-                Leaderboard
-              </h2>
-              <p className="text-sm text-muted-foreground font-medium mt-0.5">
-                Rise to the top • Earn glory
-              </p>
-            </div>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-bold text-muted-foreground">LIVE</span>
-          </div>
-        </div>
-
-        {/* Filter Tabs */}
-        <div className="relative mt-6 flex items-center gap-2 p-1 rounded-2xl bg-background/60 backdrop-blur-sm border border-border/50">
-          {[
-            { type: 'week' as FilterType, label: 'This Week', icon: '📅' },
-            { type: 'alltime' as FilterType, label: 'All Time', icon: '⭐' },
-            { type: 'friends' as FilterType, label: 'Friends', icon: '👥' }
-          ].map(({ type, label, icon }) => (
-            <button
-              key={type}
-              onClick={() => setFilterType(type)}
-              className={cn(
-                "relative flex-1 px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-300",
-                filterType === type
-                  ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg scale-105"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              )}
-            >
-              <span className="mr-2">{icon}</span>
-              {label}
-            </button>
-          ))}
-        </div>
+      <div className="space-y-2">
+        <h2 className="text-3xl font-black text-foreground">
+          Leaderboard
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Compete with students nationwide
+        </p>
       </div>
 
       {entries.length === 0 ? (
@@ -299,11 +247,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         <>
           {/* Top 3 Podium */}
           {topThree.length > 0 && (
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-card/80 via-card/90 to-amber-500/5 backdrop-blur-xl border border-amber-500/20 shadow-2xl p-8">
-              {/* Static background gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-primary/5" />
-              
-              <div className="relative z-10 flex items-end justify-center gap-4 sm:gap-6">
+            <div className="rounded-3xl border border-border p-8">
+              <div className="flex items-end justify-center gap-4 sm:gap-6">
                 {/* 2nd Place */}
                 {topThree[1] && (
                   <div className="flex flex-col items-center flex-1 max-w-[160px] animate-fade-in" style={{ animationDelay: '0.2s' }}>
