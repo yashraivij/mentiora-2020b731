@@ -219,7 +219,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-nunito">
       {/* Header */}
       <div className="space-y-4">
         <div>
