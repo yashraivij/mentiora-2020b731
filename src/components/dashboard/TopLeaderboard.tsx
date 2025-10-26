@@ -1,16 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, TrendingUp, Award, Target, Clock, ArrowRight, Sparkles } from 'lucide-react';
+import { Trophy, Flame } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -204,28 +196,6 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     }
   };
 
-  const formatLastActive = (date?: Date) => {
-    if (!date) return 'Never';
-    const now = new Date();
-    const diffHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
-    if (diffHours < 1) return 'Just now';
-    if (diffHours < 24) return `${diffHours}h ago`;
-    const diffDays = Math.floor(diffHours / 24);
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays < 7) return `${diffDays}d ago`;
-    return `${Math.floor(diffDays / 7)}w ago`;
-  };
-
-  const getProgressToNextRank = () => {
-    if (!currentUserData || currentUserData.rank === 1) return null;
-    const nextRankEntry = entries.find(e => e.rank === currentUserData.rank - 1);
-    if (!nextRankEntry) return null;
-    
-    const mpNeeded = nextRankEntry.mp_points - currentUserData.mp_points;
-    return { mpNeeded, nextRank: nextRankEntry.rank };
-  };
-
   if (isLoading) {
     return (
       <div className="space-y-6">
@@ -239,11 +209,20 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     );
   }
 
-  const progressInfo = getProgressToNextRank();
+  const getRankColor = (rank: number) => {
+    if (rank === 1) return 'bg-yellow-500 text-white';
+    if (rank === 2) return 'bg-slate-400 text-white';
+    if (rank === 3) return 'bg-orange-500 text-white';
+    return 'bg-primary text-primary-foreground';
+  };
+
+  const getInitials = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
 
   return (
     <div className="space-y-6">
-      {/* Page Header - Clean & Minimal */}
+      {/* Header */}
       <div className="space-y-5">
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
@@ -252,7 +231,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
 
-        {/* Filter Tabs - Minimal with Underline */}
+        {/* Filter Tabs */}
         <div className="flex items-center gap-6 border-b border-border">
           <button
             onClick={() => setFilterType('week')}
@@ -299,11 +278,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       </div>
 
-      {/* Leaderboard List - Compact Vertical */}
+      {/* Leaderboard List - Duolingo Style */}
       {entries.length === 0 ? (
-        <div className="bg-card border border-border rounded-3xl shadow-sm p-12 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-            <Trophy className="h-8 w-8 text-primary" />
+        <div className="bg-card border border-border rounded-2xl p-12 text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+            <Trophy className="h-8 w-8 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold text-foreground mb-2">No data yet</h3>
           <p className="text-sm text-muted-foreground">
@@ -311,163 +290,72 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
       ) : (
-        <div className="space-y-2">
+        <div className="bg-card border border-border rounded-2xl divide-y divide-border">
           <AnimatePresence mode="popLayout">
-            {entries.map((entry, index) => {
-              const getRankStyle = () => {
-                if (entry.rank === 1) return {
-                  gradient: 'from-yellow-500/20 to-amber-500/10',
-                  border: 'border-yellow-500/40',
-                  badge: 'from-yellow-500 to-amber-500 shadow-yellow-500/30',
-                  text: 'text-white',
-                  icon: '👑'
-                };
-                if (entry.rank === 2) return {
-                  gradient: 'from-gray-400/20 to-slate-500/10',
-                  border: 'border-gray-400/40',
-                  badge: 'from-gray-400 to-slate-500 shadow-gray-400/30',
-                  text: 'text-white',
-                  icon: '🥈'
-                };
-                if (entry.rank === 3) return {
-                  gradient: 'from-orange-500/20 to-amber-600/10',
-                  border: 'border-orange-500/40',
-                  badge: 'from-orange-500 to-amber-600 shadow-orange-500/30',
-                  text: 'text-white',
-                  icon: '🥉'
-                };
-                if (entry.rank <= 10) return {
-                  gradient: 'from-primary/10 to-accent/5',
-                  border: 'border-primary/30',
-                  badge: 'from-primary to-accent shadow-primary/20',
-                  text: 'text-primary-foreground',
-                  icon: ''
-                };
-                return {
-                  gradient: 'from-card to-card',
-                  border: 'border-border',
-                  badge: 'from-muted to-muted',
-                  text: 'text-foreground',
-                  icon: ''
-                };
-              };
+            {entries.map((entry, index) => (
+              <motion.div
+                key={entry.user_id}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, delay: index * 0.02 }}
+                className={cn(
+                  "flex items-center gap-4 px-5 py-3 hover:bg-muted/50 transition-colors cursor-pointer",
+                  entry.isCurrentUser && "bg-primary/5"
+                )}
+              >
+                {/* Rank */}
+                <div className={cn(
+                  "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
+                  getRankColor(entry.rank)
+                )}>
+                  {entry.rank}
+                </div>
 
-              const style = getRankStyle();
+                {/* Avatar */}
+                <div className={cn(
+                  "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold border-2",
+                  entry.isCurrentUser 
+                    ? "bg-primary/10 border-primary text-primary" 
+                    : "bg-muted border-border text-muted-foreground"
+                )}>
+                  {getInitials(entry.username)}
+                </div>
 
-              return (
-                <TooltipProvider key={entry.user_id}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.div
-                        layout
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.2, delay: index * 0.01 }}
-                        className={cn(
-                          "group relative rounded-2xl border-2 bg-gradient-to-r shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer py-3 px-4",
-                          `bg-gradient-to-r ${style.gradient}`,
-                          style.border,
-                          entry.isCurrentUser && "ring-2 ring-primary shadow-md"
-                        )}
-                      >
-                        <div className="flex items-center gap-4">
-                          {/* Rank Badge */}
-                          <div className={cn(
-                            "flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center font-bold shadow-lg transition-transform group-hover:scale-105",
-                            style.badge,
-                            style.text
-                          )}>
-                            {style.icon || entry.rank}
-                          </div>
+                {/* Name & Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-semibold text-foreground truncate">
+                      {entry.username}
+                    </h3>
+                    {entry.isCurrentUser && (
+                      <Badge variant="secondary" className="text-xs px-1.5 py-0 h-5">
+                        You
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Flame className="h-3 w-3 text-orange-500" />
+                    <span>{entry.streak} day streak</span>
+                  </div>
+                </div>
 
-                          {/* Student Name */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <h3 className="text-base font-bold text-foreground truncate">
-                                {entry.username}
-                              </h3>
-                              {entry.isCurrentUser && (
-                                <Badge className="text-xs px-2 py-0 h-5 bg-gradient-to-r from-primary to-accent text-primary-foreground border-0">
-                                  You
-                                </Badge>
-                              )}
-                            </div>
-                            <div className="text-xs text-muted-foreground truncate">
-                              {entry.top_subject || 'Active student'} • {formatLastActive(entry.last_active)}
-                            </div>
-                          </div>
-
-                          {/* Stats Row */}
-                          <div className="flex items-center gap-3">
-                            {/* MP Badge */}
-                            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 shadow-sm">
-                              <Sparkles className="h-4 w-4 text-primary flex-shrink-0" />
-                              <div className="text-right">
-                                <div className="text-base font-bold text-foreground leading-none">{entry.mp_points.toLocaleString()}</div>
-                                <div className="text-xs text-muted-foreground">MP</div>
-                              </div>
-                            </div>
-
-                            {/* Streak Badge */}
-                            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 shadow-sm">
-                              <Flame className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                              <div className="text-right">
-                                <div className="text-base font-bold text-orange-700 dark:text-orange-400 leading-none">{entry.streak}</div>
-                                <div className="text-xs text-muted-foreground">Streak</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Shine effect on hover for top 3 */}
-                        {entry.rank <= 3 && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 rounded-2xl pointer-events-none" />
-                        )}
-                      </motion.div>
-                    </TooltipTrigger>
-                    <TooltipContent side="right" className="max-w-xs">
-                      <div className="space-y-1.5 text-sm">
-                        <div className="font-semibold text-base flex items-center gap-2">
-                          {style.icon && <span className="text-lg">{style.icon}</span>}
-                          <span>#{entry.rank} - {entry.username}</span>
-                        </div>
-                        <div className="pt-1.5 space-y-1 border-t border-border">
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Total MP:</span>
-                            <span className="font-semibold">{entry.mp_points.toLocaleString()}</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Streak:</span>
-                            <span className="font-semibold">{entry.streak} days 🔥</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Quizzes:</span>
-                            <span className="font-semibold">{entry.quizzes_completed || 0}</span>
-                          </div>
-                          <div className="flex justify-between gap-4">
-                            <span className="text-muted-foreground">Badges:</span>
-                            <span className="font-semibold">{entry.badges_earned || 0}</span>
-                          </div>
-                          {entry.top_subject && (
-                            <div className="flex justify-between gap-4">
-                              <span className="text-muted-foreground">Top Subject:</span>
-                              <span className="font-semibold">{entry.top_subject}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              );
-            })}
+                {/* MP Points */}
+                <div className="flex-shrink-0 text-right">
+                  <div className="text-base font-bold text-foreground">
+                    {entry.mp_points.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground">MP</div>
+                </div>
+              </motion.div>
+            ))}
           </AnimatePresence>
         </div>
       )}
 
-      {/* Footer Note */}
-      <p className="text-xs text-muted-foreground text-center pt-4">
+      {/* Footer */}
+      <p className="text-xs text-muted-foreground text-center">
         Ranks update hourly based on MP from quizzes, streaks, and daily quests.
       </p>
     </div>
