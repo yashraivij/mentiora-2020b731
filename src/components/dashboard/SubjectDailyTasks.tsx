@@ -473,7 +473,6 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
             className="mt-3 pt-3 border-t border-border/50 text-center"
           >
             <div className="text-xs font-semibold text-green-600 dark:text-green-400 flex items-center justify-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5" />
               All tasks completed!
             </div>
           </motion.div>
