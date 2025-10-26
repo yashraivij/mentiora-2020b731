@@ -219,22 +219,22 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-md">
       {/* Header */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-xl font-bold text-foreground mb-1">Leaderboard</h2>
+          <p className="text-xs text-muted-foreground">
             Compare your MP and streaks with other students
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-6 border-b border-border">
+        <div className="flex items-center gap-4 border-b border-border">
           <button
             onClick={() => setFilterType('week')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-2 px-1 text-xs font-medium transition-colors relative",
               filterType === 'week'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -248,7 +248,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('alltime')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-2 px-1 text-xs font-medium transition-colors relative",
               filterType === 'alltime'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -262,7 +262,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('friends')}
             className={cn(
-              "pb-3 px-1 text-sm font-medium transition-colors relative",
+              "pb-2 px-1 text-xs font-medium transition-colors relative",
               filterType === 'friends'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -278,37 +278,37 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
       {/* Leaderboard List - Duolingo Style */}
       {entries.length === 0 ? (
-        <div className="bg-card rounded-xl p-12 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
-            <Trophy className="h-8 w-8 text-muted-foreground" />
+        <div className="bg-card rounded-xl p-8 text-center">
+          <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-muted flex items-center justify-center">
+            <Trophy className="h-6 w-6 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">No data yet</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="text-sm font-semibold text-foreground mb-1">No data yet</h3>
+          <p className="text-xs text-muted-foreground">
             Start completing quizzes to appear on the leaderboard.
           </p>
         </div>
       ) : (
-        <div className="bg-card rounded-xl overflow-hidden">
+        <div className="bg-card rounded-xl overflow-hidden border border-border/50">
           {entries.map((entry, index) => (
             <div
               key={entry.user_id}
               className={cn(
-                "flex items-center gap-4 px-4 py-3 hover:bg-muted/30 transition-colors",
+                "flex items-center gap-3 px-3 py-2 hover:bg-muted/30 transition-colors",
                 entry.isCurrentUser && "bg-primary/5",
                 index !== entries.length - 1 && "border-b border-border/50"
               )}
             >
               {/* Rank with icon */}
-              <div className="flex items-center gap-2 w-8">
+              <div className="flex items-center gap-1.5 w-7">
                 {getRankIcon(entry.rank)}
-                <span className="text-sm font-medium text-muted-foreground">
+                <span className="text-xs font-medium text-muted-foreground">
                   {entry.rank}
                 </span>
               </div>
 
               {/* Avatar */}
               <div className={cn(
-                "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold",
+                "flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold",
                 entry.isCurrentUser 
                   ? "bg-primary text-primary-foreground" 
                   : "bg-muted text-muted-foreground"
@@ -318,15 +318,15 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
               {/* Name */}
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-medium text-foreground truncate">
+                <h3 className="text-xs font-medium text-foreground truncate">
                   {entry.username}
                 </h3>
               </div>
 
               {/* MP Points */}
               <div className="flex-shrink-0">
-                <span className="text-sm font-medium text-muted-foreground">
-                  {entry.mp_points.toLocaleString()} MP
+                <span className="text-xs font-medium text-muted-foreground">
+                  {entry.mp_points.toLocaleString()} XP
                 </span>
               </div>
             </div>
@@ -334,10 +334,6 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       )}
 
-      {/* Footer */}
-      <p className="text-xs text-muted-foreground text-center">
-        Ranks update hourly based on MP from quizzes, streaks, and daily quests
-      </p>
     </div>
   );
 }
