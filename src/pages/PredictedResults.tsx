@@ -991,21 +991,13 @@ const PredictedResults = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
+        <div className="flex justify-center items-center pt-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
           <Button
             onClick={() => navigate('/dashboard')}
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto rounded-full px-8 py-6 font-semibold"
-          >
-            Back to Dashboard
-          </Button>
-          <Button
-            onClick={() => navigate('/predicted-questions')}
             size="lg"
             className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            Try Another Exam
+            Back to Dashboard
           </Button>
         </div>
 
