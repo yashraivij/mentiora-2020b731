@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Medal, Award, Gem, Flame } from 'lucide-react';
+import { Trophy, Medal, Award, Gem, Sparkles, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface LeaderEntry {
@@ -197,10 +197,10 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <Skeleton className="h-40 w-full rounded-3xl" />
-        <div className="space-y-4">
-          {[...Array(8)].map((_, i) => (
-            <Skeleton key={i} className="h-28 w-full rounded-3xl" />
+        <Skeleton className="h-48 w-full rounded-3xl" />
+        <div className="space-y-3">
+          {[...Array(6)].map((_, i) => (
+            <Skeleton key={i} className="h-24 w-full rounded-3xl" />
           ))}
         </div>
       </div>
@@ -222,18 +222,23 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const restOfLeaderboard = entries.slice(3);
 
   return (
-    <div className="space-y-8 font-nunito">
+    <div className="space-y-6">
       {/* Header */}
       <div className="space-y-4">
-        <div>
-          <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
-          <p className="text-sm text-muted-foreground">
-            Compete with other students across the UK
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg">
+            <Trophy className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-foreground">Leaderboard</h2>
+            <p className="text-sm text-muted-foreground">
+              Compete with students nationwide
+            </p>
+          </div>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-6 border-b border-border">
+        <div className="flex items-center gap-6 border-b border-border/50">
           <button
             onClick={() => setFilterType('week')}
             className={cn(
@@ -245,7 +250,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             This Week
             {filterType === 'week' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             )}
           </button>
           <button
@@ -259,7 +264,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             All Time
             {filterType === 'alltime' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             )}
           </button>
           <button
@@ -273,50 +278,56 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             Friends
             {filterType === 'friends' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             )}
           </button>
         </div>
       </div>
 
       {entries.length === 0 ? (
-        <div className="bg-gradient-to-br from-card via-card to-muted/20 rounded-2xl p-12 text-center border border-border/50">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-            <Trophy className="h-10 w-10 text-primary" />
+        <div className="relative overflow-hidden bg-card/80 backdrop-blur-sm rounded-3xl p-12 text-center border-0 shadow-lg">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-50" />
+          <div className="relative z-10">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 flex items-center justify-center shadow-lg">
+              <Trophy className="h-10 w-10 text-amber-600 dark:text-amber-400" />
+            </div>
+            <h3 className="text-lg font-bold text-foreground mb-2">No data yet</h3>
+            <p className="text-sm text-muted-foreground">
+              Start completing quizzes to appear on the leaderboard
+            </p>
           </div>
-          <h3 className="text-lg font-bold text-foreground mb-2">No data yet</h3>
-          <p className="text-sm text-muted-foreground">
-            Start completing quizzes to appear on the leaderboard.
-          </p>
         </div>
       ) : (
         <>
           {/* Top 3 Podium */}
           {topThree.length > 0 && (
-            <div className="relative">
-              <div className="flex items-end justify-center gap-4 mb-8">
+            <div className="relative overflow-hidden rounded-3xl bg-card/80 backdrop-blur-sm border-0 shadow-lg p-6">
+              {/* Premium Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-primary/5" />
+              
+              <div className="relative z-10 flex items-end justify-center gap-3 sm:gap-4">
                 {/* 2nd Place */}
                 {topThree[1] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                     <div className="relative mb-3">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-xl font-bold text-white shadow-lg ring-4 ring-slate-200/50">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-lg sm:text-xl font-bold text-white shadow-xl ring-2 ring-slate-300/50 dark:ring-slate-500/30">
                         {getInitials(topThree[1].username)}
                       </div>
-                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg">
+                      <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg">
                         <Medal className="h-4 w-4 text-white" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-t-xl p-4 text-center border-2 border-slate-300 dark:border-slate-700 shadow-xl" style={{ height: '140px' }}>
-                      <p className="font-bold text-sm text-foreground truncate mb-2">{topThree[1].username}</p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 text-primary mx-auto w-fit">
-                          <Gem className="h-4 w-4" />
+                    <div className="w-full bg-gradient-to-br from-slate-50/80 to-slate-100/80 dark:from-slate-800/50 dark:to-slate-900/50 backdrop-blur-sm rounded-t-2xl p-3 sm:p-4 text-center border border-slate-200/50 dark:border-slate-700/50 shadow-xl" style={{ minHeight: '140px' }}>
+                      <p className="font-bold text-xs sm:text-sm text-foreground truncate mb-2">{topThree[1].username}</p>
+                      <div className="space-y-1.5">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary shadow-sm">
+                          <Sparkles className="h-3.5 w-3.5" />
                           <span className="text-sm font-bold">{topThree[1].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[1].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1 px-2 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 dark:text-orange-400">
                             <span className="text-sm">🔥</span>
-                            <span className="text-xs font-semibold">{topThree[1].streak}</span>
+                            <span className="text-xs font-bold">{topThree[1].streak}</span>
                           </div>
                         )}
                       </div>
@@ -328,24 +339,24 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[0] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0s' }}>
                     <div className="relative mb-3">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 flex items-center justify-center text-2xl font-bold text-white shadow-2xl ring-4 ring-yellow-200/50 animate-pulse">
+                      <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-600 flex items-center justify-center text-xl sm:text-2xl font-bold text-white shadow-2xl ring-2 ring-amber-200/50 dark:ring-yellow-500/30 animate-pulse">
                         {getInitials(topThree[0].username)}
                       </div>
-                      <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 flex items-center justify-center shadow-xl">
-                        <Trophy className="h-5 w-5 text-white" />
+                      <div className="absolute -top-2 -right-2 w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl">
+                        <Crown className="h-5 w-5 text-white" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-t-xl p-5 text-center border-2 border-yellow-400 dark:border-yellow-600 shadow-2xl" style={{ height: '160px' }}>
-                      <p className="font-bold text-base text-foreground truncate mb-3">{topThree[0].username}</p>
+                    <div className="w-full bg-gradient-to-br from-amber-50/90 to-yellow-100/90 dark:from-amber-900/40 dark:to-yellow-800/40 backdrop-blur-sm rounded-t-2xl p-4 sm:p-5 text-center border border-amber-200/50 dark:border-yellow-600/50 shadow-2xl" style={{ minHeight: '165px' }}>
+                      <p className="font-bold text-sm sm:text-base text-foreground truncate mb-3">{topThree[0].username}</p>
                       <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary via-primary/90 to-primary text-primary-foreground mx-auto w-fit shadow-lg">
-                          <Gem className="h-5 w-5" />
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-lg">
+                          <Sparkles className="h-4 w-4" />
                           <span className="text-base font-bold">{topThree[0].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[0].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 dark:text-orange-400">
                             <span className="text-base">🔥</span>
-                            <span className="text-sm font-semibold">{topThree[0].streak}</span>
+                            <span className="text-sm font-bold">{topThree[0].streak}</span>
                           </div>
                         )}
                       </div>
@@ -357,24 +368,24 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[2] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                     <div className="relative mb-3">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center text-lg font-bold text-white shadow-lg ring-4 ring-orange-200/50">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center text-base sm:text-lg font-bold text-white shadow-xl ring-2 ring-orange-300/50 dark:ring-orange-600/30">
                         {getInitials(topThree[2].username)}
                       </div>
-                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-lg">
+                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-lg bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-lg">
                         <Award className="h-3.5 w-3.5 text-white" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-t-xl p-4 text-center border-2 border-orange-300 dark:border-orange-700 shadow-xl" style={{ height: '120px' }}>
-                      <p className="font-bold text-sm text-foreground truncate mb-2">{topThree[2].username}</p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 text-primary mx-auto w-fit">
-                          <Gem className="h-3.5 w-3.5" />
+                    <div className="w-full bg-gradient-to-br from-orange-50/80 to-orange-100/80 dark:from-orange-900/40 dark:to-orange-800/40 backdrop-blur-sm rounded-t-2xl p-3 sm:p-4 text-center border border-orange-200/50 dark:border-orange-700/50 shadow-xl" style={{ minHeight: '120px' }}>
+                      <p className="font-bold text-xs sm:text-sm text-foreground truncate mb-2">{topThree[2].username}</p>
+                      <div className="space-y-1.5">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary shadow-sm">
+                          <Sparkles className="h-3.5 w-3.5" />
                           <span className="text-sm font-bold">{topThree[2].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[2].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1 px-2 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-600 dark:text-orange-400">
                             <span className="text-xs">🔥</span>
-                            <span className="text-xs font-semibold">{topThree[2].streak}</span>
+                            <span className="text-xs font-bold">{topThree[2].streak}</span>
                           </div>
                         )}
                       </div>
@@ -387,56 +398,70 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
           {/* Rest of Leaderboard */}
           {restOfLeaderboard.length > 0 && (
-            <div className="bg-gradient-to-br from-card to-card/50 rounded-2xl overflow-hidden border border-border/50 shadow-lg">
+            <div className="space-y-2">
               {restOfLeaderboard.map((entry, index) => (
                 <div
                   key={entry.user_id}
                   className={cn(
-                    "flex items-center gap-4 px-5 py-4 transition-all duration-200 hover:bg-primary/5 hover:scale-[1.01] cursor-pointer group",
-                    entry.isCurrentUser && "bg-gradient-to-r from-primary/10 via-primary/5 to-transparent",
-                    index !== restOfLeaderboard.length - 1 && "border-b border-border/30"
+                    "group relative overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-xl cursor-pointer bg-card/80 backdrop-blur-sm border-0",
+                    entry.isCurrentUser && "ring-2 ring-primary/30 shadow-lg shadow-primary/10"
                   )}
                 >
-                  {/* Rank */}
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 group-hover:bg-muted transition-colors">
-                    <span className="text-base font-bold text-foreground">
-                      {entry.rank}
-                    </span>
-                  </div>
-
-                  {/* Avatar */}
+                  {/* Background Gradient */}
                   <div className={cn(
-                    "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold shadow-md transition-transform group-hover:scale-110",
+                    "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
                     entry.isCurrentUser 
-                      ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/20" 
-                      : "bg-gradient-to-br from-muted to-muted/70 text-muted-foreground"
-                  )}>
-                    {getInitials(entry.username)}
-                  </div>
+                      ? "bg-gradient-to-r from-primary/10 via-primary/5 to-transparent"
+                      : "bg-gradient-to-r from-primary/5 via-transparent to-accent/5"
+                  )} />
 
-                  {/* Name */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-foreground truncate">
-                      {entry.username}
-                    </h3>
-                    {entry.isCurrentUser && (
-                      <span className="text-xs text-primary font-semibold">You</span>
-                    )}
-                  </div>
+                  <div className="relative z-10 flex items-center gap-4 px-5 py-4">
+                    {/* Rank */}
+                    <div className={cn(
+                      "flex items-center justify-center w-10 h-10 rounded-xl font-bold text-sm transition-all duration-300",
+                      entry.isCurrentUser
+                        ? "bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-md"
+                        : "bg-muted/30 text-muted-foreground group-hover:bg-muted/50"
+                    )}>
+                      {entry.rank}
+                    </div>
 
-                  {/* Stats */}
-                  <div className="flex-shrink-0 flex items-center gap-2">
-                    {entry.streak > 0 && (
-                      <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-orange-600/10 text-orange-600 dark:text-orange-400 shadow-sm">
-                        <span>🔥</span>
-                        <span className="text-sm font-bold">{entry.streak}</span>
+                    {/* Avatar */}
+                    <div className={cn(
+                      "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg transition-all duration-300 group-hover:scale-110",
+                      entry.isCurrentUser 
+                        ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/30" 
+                        : "bg-gradient-to-br from-accent/20 to-accent/10 text-foreground"
+                    )}>
+                      {getInitials(entry.username)}
+                    </div>
+
+                    {/* Name */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-bold text-foreground truncate">
+                        {entry.username}
+                      </h3>
+                      {entry.isCurrentUser && (
+                        <span className="inline-flex items-center gap-1 text-xs text-primary font-bold mt-0.5">
+                          <span>You</span>
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex-shrink-0 flex items-center gap-2">
+                      {entry.streak > 0 && (
+                        <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-100 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-600 dark:text-orange-400 shadow-sm border border-orange-200/50 dark:border-orange-800/30">
+                          <span>🔥</span>
+                          <span className="text-xs font-bold">{entry.streak}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 text-primary shadow-sm border border-primary/20">
+                        <Sparkles className="h-3.5 w-3.5" />
+                        <span className="text-xs font-bold">
+                          {entry.mp_points.toLocaleString()}
+                        </span>
                       </div>
-                    )}
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-primary/20 text-primary shadow-sm">
-                      <Gem className="h-4 w-4" />
-                      <span className="text-sm font-bold">
-                        {entry.mp_points.toLocaleString()}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -447,9 +472,12 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       )}
 
       {/* Footer */}
-      <p className="text-xs text-muted-foreground text-center font-medium">
-        ⚡ Ranks update hourly • Earn MP from quizzes, streaks, and daily quests
-      </p>
+      <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-muted/30 backdrop-blur-sm border border-border/30">
+        <Sparkles className="h-3.5 w-3.5 text-primary" />
+        <p className="text-xs text-muted-foreground font-medium">
+          Ranks update hourly • Earn MP from quizzes, streaks & quests
+        </p>
+      </div>
     </div>
   );
 }
