@@ -2716,12 +2716,23 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                <Badge className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm ${!isPremium ? 'blur-sm select-none' : ''}`}>
-                                  Predicted {(() => {
-                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
-                                    return getDisplayGrade(selectedDrawerSubject.predicted);
-                                  })()}
-                                </Badge>
+                                {isPremium ? (
+                                  <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
+                                    Predicted {(() => {
+                                      console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                      return getDisplayGrade(selectedDrawerSubject.predicted);
+                                    })()}
+                                  </Badge>
+                                ) : (
+                                  <Button
+                                    size="sm"
+                                    onClick={() => navigate('/pricing')}
+                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 h-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm"
+                                  >
+                                    <Crown className="h-3 w-3 mr-1.5" />
+                                    Start Free Trial to See Grade
+                                  </Button>
+                                )}
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
