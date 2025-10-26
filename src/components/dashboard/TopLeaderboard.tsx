@@ -300,9 +300,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           {/* Top 3 Podium */}
           {topThree.length > 0 && (
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-card/80 via-card/90 to-amber-500/5 backdrop-blur-xl border border-amber-500/20 shadow-2xl p-8">
-              {/* Animated background effects */}
-              <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-amber-400/20 via-orange-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              {/* Static background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-primary/5" />
               
               <div className="relative z-10 flex items-end justify-center gap-4 sm:gap-6">
                 {/* 2nd Place */}
@@ -313,7 +312,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-4xl sm:text-5xl transform group-hover:scale-110 transition-transform duration-300">
                         {getProfileDisplay(topThree[1])}
                       </div>
-                      <div className="absolute -top-2 -right-2 w-9 h-9 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-xl border-2 border-white dark:border-background">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-xl border-2 border-white dark:border-background pointer-events-none">
                         <Medal className="h-5 w-5 text-white" />
                       </div>
                     </div>
@@ -342,16 +341,13 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[0] && (
                   <div className="flex flex-col items-center flex-1 max-w-[180px] animate-fade-in z-10" style={{ animationDelay: '0s' }}>
                     <div className="relative mb-4 group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity animate-pulse" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity" />
                       <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center text-5xl sm:text-6xl transform group-hover:scale-110 transition-transform duration-300">
                         {getProfileDisplay(topThree[0])}
                       </div>
-                      <div className="absolute -top-3 -right-3 w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 flex items-center justify-center shadow-2xl border-4 border-white dark:border-background animate-pulse">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 flex items-center justify-center shadow-2xl border-4 border-white dark:border-background pointer-events-none">
                         <Crown className="h-6 w-6 text-white" />
                       </div>
-                      {/* Floating particles */}
-                      <div className="absolute -top-2 -left-2 w-3 h-3 rounded-full bg-amber-400 animate-ping" />
-                      <div className="absolute -bottom-2 -right-2 w-2 h-2 rounded-full bg-yellow-500 animate-ping" style={{ animationDelay: '0.5s' }} />
                     </div>
                     <div className="w-full bg-gradient-to-br from-amber-100/95 via-yellow-50/95 to-orange-100/90 dark:from-amber-900/50 dark:via-yellow-800/50 dark:to-orange-900/50 backdrop-blur-sm rounded-t-3xl p-5 text-center border-4 border-amber-400/50 dark:border-amber-500/50 shadow-2xl hover:shadow-amber-500/50 transition-all duration-300" style={{ minHeight: '180px' }}>
                       <div className="mb-4">
@@ -382,7 +378,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center text-3xl sm:text-4xl transform group-hover:scale-110 transition-transform duration-300">
                         {getProfileDisplay(topThree[2])}
                       </div>
-                      <div className="absolute -top-1.5 -right-1.5 w-8 h-8 rounded-lg bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-xl border-2 border-white dark:border-background">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-xl border-2 border-white dark:border-background pointer-events-none">
                         <Award className="h-4 w-4 text-white" />
                       </div>
                     </div>
