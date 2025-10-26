@@ -700,101 +700,58 @@ const PredictedResults = () => {
       {/* Main Content */}
       <main className="max-w-5xl mx-auto p-6 md:p-8 space-y-8">
         {/* Hero Section */}
-        <div className="text-center space-y-6 py-8 animate-fade-in">
-          <div className="flex justify-center">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,69%,54%)]/10 flex items-center justify-center animate-scale-in shadow-lg">
-              <Trophy className="w-14 h-14 text-[hsl(195,69%,54%)]" />
-            </div>
-          </div>
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 text-foreground">
-              Predicted Exam Complete!
-            </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Great work on completing the {subject?.name} predicted exam. Review your detailed results below.
-            </p>
-          </div>
-        </div>
-
-        {/* Overall Score Card */}
-        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <CardContent className="p-6 relative">
-              <div className="text-center space-y-3">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Overall Score
-                  </p>
-                  <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
-                    {percentage}%
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {achievedMarks} out of {examTotalMarks} marks
-                  </p>
-                </div>
-                
-                {/* Grade Badge */}
-                <div className="flex justify-center pt-2">
-                  <div className="px-6 py-2 rounded-2xl bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] shadow-lg">
-                    <div className="text-center">
-                      <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">
-                        Predicted Grade
-                      </p>
-                      <p className="text-3xl font-bold text-white">
-                        {grade}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="text-center space-y-4 py-6 animate-fade-in">
+          <h1 className="text-3xl font-bold text-foreground">
+            {subject?.name} Predicted Exam Complete!
+          </h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Review your detailed results below
+          </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-3 gap-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,69%,54%)]/10 flex items-center justify-center flex-shrink-0">
-                  <Target className="w-5 h-5 text-[hsl(195,69%,54%)]" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-2xl font-bold text-foreground">{achievedMarks}/{examTotalMarks}</p>
-                  <p className="text-xs text-muted-foreground">Marks</p>
-                </div>
-              </div>
+        <div className="grid md:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <Card className="bg-card rounded-xl border-0 shadow-sm">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{percentage}%</div>
+              <div className="text-xs text-muted-foreground">Overall Score</div>
             </CardContent>
           </Card>
 
-          <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,69%,54%)]/10 flex items-center justify-center flex-shrink-0">
-                  <FileText className="w-5 h-5 text-[hsl(195,69%,54%)]" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-2xl font-bold text-foreground">{questions.length}</p>
-                  <p className="text-xs text-muted-foreground">Questions</p>
-                </div>
-              </div>
+          <Card className="bg-card rounded-xl border-0 shadow-sm">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{achievedMarks}/{examTotalMarks}</div>
+              <div className="text-xs text-muted-foreground">Marks</div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-card rounded-xl border-0 shadow-sm">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{questions.length}</div>
+              <div className="text-xs text-muted-foreground">Questions</div>
             </CardContent>
           </Card>
 
-          <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,69%,54%)]/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5 text-[hsl(195,69%,54%)]" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-2xl font-bold text-foreground">{timeElapsed ? Math.round(timeElapsed / 60) : '-'}</p>
-                  <p className="text-xs text-muted-foreground">Minutes</p>
-                </div>
-              </div>
+          <Card className="bg-card rounded-xl border-0 shadow-sm">
+            <CardContent className="p-4 text-center">
+              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{timeElapsed ? Math.round(timeElapsed / 60) : '-'}</div>
+              <div className="text-xs text-muted-foreground">Minutes</div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Predicted Grade Badge */}
+        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <div className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] shadow-lg">
+            <div className="text-center">
+              <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">
+                Predicted Grade
+              </p>
+              <p className="text-4xl font-bold text-white">
+                {grade}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Question Breakdown */}
@@ -857,15 +814,9 @@ const PredictedResults = () => {
                     <div className="flex justify-start">
                       <div className="max-w-[85%] space-y-2">
                         <div className="flex items-center gap-2 px-1">
-                          <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
+                          <span className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase">Your Answer</span>
                         </div>
-                        <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
-                          marksPercentage >= 70
-                            ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
-                            : marksPercentage >= 40
-                            ? 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
-                            : 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
-                        }`}>
+                        <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50">
                           <p className="text-foreground leading-relaxed">
                             {attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>}
                           </p>
@@ -873,12 +824,40 @@ const PredictedResults = () => {
                       </div>
                     </div>
 
+                    {/* Marks Display - matching practice page */}
+                    <div className="flex justify-start px-1">
+                      <div className="flex items-center gap-2">
+                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
+                          marksPercentage >= 70
+                            ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800'
+                            : marksPercentage >= 40
+                            ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
+                            : 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
+                        }`}>
+                          <span className={`font-bold text-sm ${
+                            marksPercentage >= 70
+                              ? 'text-emerald-600 dark:text-emerald-400'
+                              : marksPercentage >= 40
+                              ? 'text-amber-600 dark:text-amber-400'
+                              : 'text-red-600 dark:text-red-400'
+                          }`}>{attempt.score}/{question.marks}</span>
+                          <span className={`text-xs font-medium ${
+                            marksPercentage >= 70
+                              ? 'text-emerald-600 dark:text-emerald-400'
+                              : marksPercentage >= 40
+                              ? 'text-amber-600 dark:text-amber-400'
+                              : 'text-red-600 dark:text-red-400'
+                          }`}>marks</span>
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Model Answer Bubble */}
-                    {attempt.feedback.modelAnswer && !attempt.feedback.fullMarks && (
-                      <div className="flex justify-start">
+                    {attempt.feedback.modelAnswer && (
+                      <div className="flex justify-start mt-6">
                         <div className="max-w-[85%] space-y-2">
                           <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
+                            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase">Model Answer</span>
                           </div>
                           <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
                             <p className="text-foreground leading-relaxed">{attempt.feedback.modelAnswer}</p>
@@ -888,42 +867,14 @@ const PredictedResults = () => {
                     )}
 
                     {/* Teacher Feedback Bubble */}
-                    {attempt.feedback.whyYoursDidnt && !attempt.feedback.fullMarks && (
+                    {attempt.feedback.whyYoursDidnt && (
                       <div className="flex justify-start">
                         <div className="max-w-[85%] space-y-2">
                           <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">How to Improve</span>
+                            <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase">Teacher Feedback</span>
                           </div>
                           <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
                             <p className="text-foreground leading-relaxed">{attempt.feedback.whyYoursDidnt}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Full Marks Bubble */}
-                    {attempt.feedback.fullMarks && (
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] space-y-2">
-                          <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Perfect Answer!</span>
-                          </div>
-                          <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
-                            <p className="text-foreground leading-relaxed">{attempt.feedback.whyYoursDidnt}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mark Scheme Bubble */}
-                    {attempt.feedback.whyThisGetsMark && !attempt.feedback.fullMarks && (
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] space-y-2">
-                          <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">Mark Scheme</span>
-                          </div>
-                          <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/50 dark:to-purple-900/30 px-5 py-4 shadow-sm border border-purple-200/50 dark:border-purple-800/50 backdrop-blur-sm">
-                            <p className="text-foreground leading-relaxed whitespace-pre-line">{attempt.feedback.whyThisGetsMark}</p>
                           </div>
                         </div>
                       </div>
