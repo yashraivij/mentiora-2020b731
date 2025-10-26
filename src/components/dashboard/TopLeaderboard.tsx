@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Medal, Award, Gem, Sparkles, Crown } from 'lucide-react';
+import { Crown, Flame, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface LeaderEntry {
   rank: number;
@@ -25,6 +26,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const [entries, setEntries] = useState<LeaderEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUserData, setCurrentUserData] = useState<LeaderEntry | null>(null);
+  const [filterType, setFilterType] = useState<FilterType>('alltime');
 
   useEffect(() => {
     loadTopStudents();
@@ -190,235 +192,327 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     }
   };
 
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const formatLastActive = (date?: Date) => {
+    if (!date) return 'Never';
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    
+    if (hours < 1) return 'Just now';
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days === 1) return 'Yesterday';
+    if (days < 7) return `${days}d ago`;
+    return date.toLocaleDateString();
+  };
+
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <Skeleton className="h-10 w-56" />
-        <Skeleton className="h-80 w-full rounded-3xl" />
-        <div className="space-y-3">
-          {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-20 w-full rounded-2xl" />
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-10 w-48" />
+          <Skeleton className="h-8 w-64" />
+        </div>
+        <Skeleton className="h-32 w-full" />
+        <div className="space-y-2">
+          {[...Array(8)].map((_, i) => (
+            <Skeleton key={i} className="h-16 w-full" />
           ))}
         </div>
       </div>
     );
   }
 
-  const getProfileDisplay = (entry: LeaderEntry, size: 'sm' | 'md' | 'lg' = 'md') => {
-    const sizeClasses = {
-      sm: 'text-xl',
-      md: 'text-3xl',
-      lg: 'text-4xl'
-    };
-    
-    if (entry.profile_emoji) {
-      return <span className={sizeClasses[size]}>{entry.profile_emoji}</span>;
-    }
-    const initials = entry.username.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-    return <span className="text-sm font-semibold text-muted-foreground">{initials}</span>;
-  };
-
   const topThree = entries.slice(0, 3);
   const restOfLeaderboard = entries.slice(3);
 
-  return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-          Leaderboard
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          Top students nationwide
-        </p>
-      </div>
+  // Calculate analytics
+  const totalUsers = entries.length;
+  const avgMP = entries.length > 0 ? Math.round(entries.reduce((sum, e) => sum + e.mp_points, 0) / entries.length) : 0;
+  const topStreak = entries.length > 0 ? Math.max(...entries.map(e => e.streak)) : 0;
+  const fastestRiser = entries.length > 0 ? entries.reduce((max, e) => (e.weekly_gain || 0) > (max.weekly_gain || 0) ? e : max, entries[0]) : null;
 
-      {entries.length === 0 ? (
-        <div className="relative overflow-hidden bg-gradient-to-br from-card via-card to-accent/5 rounded-3xl p-16 text-center border border-border/50 shadow-xl">
-          <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-          <div className="relative">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-              <Trophy className="h-10 w-10 text-primary" />
-            </div>
-            <p className="text-lg font-medium text-muted-foreground">No students on the leaderboard yet</p>
+  return (
+    <TooltipProvider>
+      <div className="space-y-6">
+        {/* Header with Filters */}
+        <div className="flex items-start justify-between">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-bold text-foreground">
+              Leaderboard
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Top performers across Mentiora. Ranked by Mentiora Points (MP) and streak consistency.
+            </p>
+          </div>
+          
+          {/* Filter Tabs */}
+          <div className="flex items-center gap-6">
+            {(['alltime', 'week', 'friends'] as FilterType[]).map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setFilterType(filter)}
+                className={cn(
+                  "text-sm font-medium transition-all pb-1",
+                  filterType === filter
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {filter === 'alltime' ? 'All Time' : filter === 'week' ? 'This Week' : 'Friends'}
+              </button>
+            ))}
           </div>
         </div>
-      ) : (
-        <>
-          {/* Top 3 Podium */}
-          {topThree.length > 0 && (
-            <div className="relative overflow-hidden bg-gradient-to-br from-card via-card to-primary/5 rounded-3xl p-8 border border-border/50 shadow-xl">
-              {/* Premium glass effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/5" />
-              
-              <div className="relative flex items-end justify-center gap-4 sm:gap-8">
-                {/* 2nd Place */}
-                {topThree[1] && (
-                  <div className="flex flex-col items-center flex-1 max-w-[140px]">
-                    <div className="relative mb-6">
-                      <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center shadow-2xl ring-1 ring-border/50 backdrop-blur-sm">
-                        {getProfileDisplay(topThree[1], 'md')}
-                      </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg text-xs font-bold text-accent-foreground">
-                        2
-                      </div>
-                    </div>
-                    <div className="w-full bg-gradient-to-b from-muted/40 to-muted/20 backdrop-blur-sm rounded-t-3xl p-5 text-center border-t border-x border-border/50 shadow-xl" style={{ minHeight: '140px' }}>
-                      <p className="font-bold text-sm text-foreground truncate mb-4">{topThree[1].username}</p>
-                      <div className="space-y-3">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/60 backdrop-blur-sm shadow-lg">
-                          <Gem className="h-3.5 w-3.5 text-primary" />
-                          <span className="text-base font-bold text-foreground">{topThree[1].mp_points.toLocaleString()}</span>
-                        </div>
-                        {topThree[1].streak > 0 && (
-                          <div className="text-xs font-medium text-muted-foreground">
-                            🔥 {topThree[1].streak} day streak
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
 
-                {/* 1st Place */}
-                {topThree[0] && (
-                  <div className="flex flex-col items-center flex-1 max-w-[160px]">
-                    <div className="relative mb-6">
-                      <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-primary via-primary to-primary/80 flex items-center justify-center shadow-2xl ring-2 ring-primary/30 backdrop-blur-sm">
-                        {getProfileDisplay(topThree[0], 'lg')}
-                      </div>
-                      <div className="absolute -top-3 -right-3 w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl">
-                        <Crown className="h-5 w-5 text-white" />
-                      </div>
-                    </div>
-                    <div className="w-full bg-gradient-to-b from-primary/20 to-primary/5 backdrop-blur-sm rounded-t-3xl p-6 text-center border-t border-x border-primary/30 shadow-2xl" style={{ minHeight: '160px' }}>
-                      <p className="font-bold text-base text-foreground truncate mb-4">{topThree[0].username}</p>
-                      <div className="space-y-3">
-                        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-2xl">
-                          <Sparkles className="h-4 w-4" />
-                          <span className="text-lg font-bold">{topThree[0].mp_points.toLocaleString()}</span>
-                        </div>
-                        {topThree[0].streak > 0 && (
-                          <div className="text-sm font-medium text-muted-foreground">
-                            🔥 {topThree[0].streak} day streak
-                          </div>
+        {entries.length === 0 ? (
+          <div className="bg-[#F6F8FA] dark:bg-muted/30 rounded-lg p-12 text-center border border-border/50">
+            <p className="text-sm text-muted-foreground">
+              No rankings yet — complete a quiz to appear on the leaderboard.
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* Top 3 Hero Strip */}
+            {topThree.length > 0 && (
+              <div className="grid grid-cols-3 gap-4">
+                {topThree.map((entry, idx) => (
+                  <Tooltip key={entry.user_id}>
+                    <TooltipTrigger asChild>
+                      <div
+                        className={cn(
+                          "group relative bg-card border rounded-lg p-4 transition-all duration-300 hover:shadow-lg cursor-pointer",
+                          idx === 0 && "bg-[#2F80ED]/[0.02] border-[#2F80ED]/20",
+                          idx === 1 && "bg-muted/30 border-border",
+                          idx === 2 && "bg-muted/20 border-border"
                         )}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                      >
+                        {/* Rank Badge */}
+                        <div className={cn(
+                          "absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-sm",
+                          idx === 0 && "bg-[#2F80ED] text-white",
+                          idx === 1 && "bg-muted text-muted-foreground",
+                          idx === 2 && "bg-muted text-muted-foreground"
+                        )}>
+                          {idx + 1}
+                        </div>
 
-                {/* 3rd Place */}
-                {topThree[2] && (
-                  <div className="flex flex-col items-center flex-1 max-w-[130px]">
-                    <div className="relative mb-6">
-                      <div className="relative w-18 h-18 rounded-2xl bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center shadow-2xl ring-1 ring-border/50 backdrop-blur-sm">
-                        {getProfileDisplay(topThree[2], 'sm')}
-                      </div>
-                      <div className="absolute -top-2 -right-2 w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg text-xs font-bold text-accent-foreground">
-                        3
-                      </div>
-                    </div>
-                    <div className="w-full bg-gradient-to-b from-muted/30 to-muted/10 backdrop-blur-sm rounded-t-3xl p-4 text-center border-t border-x border-border/50 shadow-xl" style={{ minHeight: '120px' }}>
-                      <p className="font-semibold text-xs text-foreground truncate mb-3">{topThree[2].username}</p>
-                      <div className="space-y-2">
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background/60 backdrop-blur-sm shadow-lg">
-                          <Gem className="h-3 w-3 text-primary" />
-                          <span className="text-sm font-bold text-foreground">{topThree[2].mp_points.toLocaleString()}</span>
-                        </div>
-                        {topThree[2].streak > 0 && (
-                          <div className="text-xs font-medium text-muted-foreground">
-                            🔥 {topThree[2].streak}
-                          </div>
+                        {/* Crown for #1 */}
+                        {idx === 0 && (
+                          <Crown className="absolute top-3 left-3 h-4 w-4 text-[#2F80ED]" />
                         )}
+
+                        {/* Avatar */}
+                        <div className="flex justify-center mb-3">
+                          <div className={cn(
+                            "w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold transition-transform group-hover:scale-105",
+                            idx === 0 && "bg-[#2F80ED]/10 text-[#2F80ED] ring-2 ring-[#2F80ED]/20",
+                            idx === 1 && "bg-muted text-muted-foreground",
+                            idx === 2 && "bg-muted text-muted-foreground"
+                          )}>
+                            {getInitials(entry.username)}
+                          </div>
+                        </div>
+
+                        {/* Name */}
+                        <p className={cn(
+                          "text-center font-semibold text-sm mb-2 truncate",
+                          idx === 0 && "text-foreground"
+                        )}>
+                          {entry.username}
+                        </p>
+
+                        {/* Stats */}
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-center gap-1.5">
+                            <span className="text-xs text-muted-foreground">MP</span>
+                            <span className={cn(
+                              "font-bold text-sm",
+                              idx === 0 && "text-[#2F80ED]"
+                            )}>
+                              {entry.mp_points.toLocaleString()}
+                            </span>
+                          </div>
+                          
+                          {entry.streak > 0 && (
+                            <div className="flex items-center justify-center gap-1.5">
+                              <Flame className="h-3 w-3 text-orange-500" />
+                              <span className="text-xs text-muted-foreground">{entry.streak} days</span>
+                            </div>
+                          )}
+
+                          {entry.quizzes_completed && entry.quizzes_completed > 0 && (
+                            <div className="text-xs text-muted-foreground text-center">
+                              {entry.quizzes_completed} quizzes
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                )}
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <div className="text-xs space-y-1">
+                        {entry.top_subject && <p>Top Subject: {entry.top_subject}</p>}
+                        {entry.last_active && <p>Active {formatLastActive(entry.last_active)}</p>}
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </div>
+            )}
+
+            {/* Leaderboard Table */}
+            {restOfLeaderboard.length > 0 && (
+              <div className="border border-border rounded-lg overflow-hidden bg-card">
+                {/* Table Header */}
+                <div className="grid grid-cols-[60px_1fr_100px_80px_80px_120px] gap-4 px-4 py-3 bg-[#F6F8FA] dark:bg-muted/30 border-b border-border">
+                  <div className="text-xs font-medium text-muted-foreground">Rank</div>
+                  <div className="text-xs font-medium text-muted-foreground">Name</div>
+                  <div className="text-xs font-medium text-muted-foreground text-right">MP</div>
+                  <div className="text-xs font-medium text-muted-foreground text-center">Streak</div>
+                  <div className="text-xs font-medium text-muted-foreground text-center">Quizzes</div>
+                  <div className="text-xs font-medium text-muted-foreground text-right">Last Active</div>
+                </div>
+
+                {/* Table Rows */}
+                <div>
+                  {restOfLeaderboard.map((entry, idx) => (
+                    <Tooltip key={entry.user_id}>
+                      <TooltipTrigger asChild>
+                        <div
+                          className={cn(
+                            "grid grid-cols-[60px_1fr_100px_80px_80px_120px] gap-4 px-4 py-3 transition-all duration-200 hover:bg-[#F6F8FA] dark:hover:bg-muted/30 border-b border-border/50 last:border-0 cursor-pointer group",
+                            entry.isCurrentUser && "bg-[#2F80ED]/[0.03] hover:bg-[#2F80ED]/[0.05] border-l-2 border-l-[#2F80ED]"
+                          )}
+                        >
+                          {/* Rank */}
+                          <div className={cn(
+                            "flex items-center justify-center text-sm font-bold",
+                            entry.isCurrentUser ? "text-[#2F80ED]" : "text-muted-foreground"
+                          )}>
+                            {entry.rank}
+                          </div>
+
+                          {/* Name with Avatar */}
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div className={cn(
+                              "w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0",
+                              entry.isCurrentUser 
+                                ? "bg-[#2F80ED]/10 text-[#2F80ED]" 
+                                : "bg-muted text-muted-foreground"
+                            )}>
+                              {getInitials(entry.username)}
+                            </div>
+                            <span className={cn(
+                              "text-sm truncate",
+                              entry.isCurrentUser ? "font-semibold text-foreground" : "text-foreground"
+                            )}>
+                              {entry.username}
+                              {entry.isCurrentUser && <span className="ml-2 text-xs text-[#2F80ED]">(You)</span>}
+                            </span>
+                          </div>
+
+                          {/* MP */}
+                          <div className="flex items-center justify-end">
+                            <span className={cn(
+                              "text-sm font-bold",
+                              entry.isCurrentUser && "text-[#2F80ED]"
+                            )}>
+                              {entry.mp_points.toLocaleString()}
+                            </span>
+                          </div>
+
+                          {/* Streak */}
+                          <div className="flex items-center justify-center">
+                            {entry.streak > 0 ? (
+                              <div className="flex items-center gap-1">
+                                <Flame className="h-3.5 w-3.5 text-orange-500" />
+                                <span className="text-sm font-medium">{entry.streak}</span>
+                              </div>
+                            ) : (
+                              <span className="text-sm text-muted-foreground">—</span>
+                            )}
+                          </div>
+
+                          {/* Quizzes */}
+                          <div className="flex items-center justify-center">
+                            <span className="text-sm text-muted-foreground">
+                              {entry.quizzes_completed || 0}
+                            </span>
+                          </div>
+
+                          {/* Last Active */}
+                          <div className="flex items-center justify-end">
+                            <span className="text-xs text-muted-foreground">
+                              {formatLastActive(entry.last_active)}
+                            </span>
+                          </div>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <div className="text-xs space-y-1">
+                          {entry.top_subject && <p>Top Subject: {entry.top_subject}</p>}
+                          {entry.badges_earned && entry.badges_earned > 0 && <p>Badges: {entry.badges_earned}</p>}
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* Analytics Bar */}
+            <div className="grid grid-cols-4 gap-4 p-4 bg-[#F6F8FA] dark:bg-muted/30 rounded-lg border border-border">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2F80ED]/10 flex items-center justify-center">
+                  <TrendingUp className="h-5 w-5 text-[#2F80ED]" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Total Users</p>
+                  <p className="text-sm font-bold">{totalUsers}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2F80ED]/10 flex items-center justify-center">
+                  <span className="text-sm font-bold text-[#2F80ED]">MP</span>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg MP This Week</p>
+                  <p className="text-sm font-bold">{avgMP}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+                  <Flame className="h-5 w-5 text-orange-500" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Top Streak</p>
+                  <p className="text-sm font-bold">{topStreak} days</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                  <TrendingUp className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Fastest Riser</p>
+                  <p className="text-sm font-bold">+{fastestRiser?.weekly_gain || 0} MP</p>
+                </div>
               </div>
             </div>
-          )}
-
-          {/* Rest of Leaderboard */}
-          {restOfLeaderboard.length > 0 && (
-            <div className="space-y-3">
-              {restOfLeaderboard.map((entry) => (
-                <div
-                  key={entry.user_id}
-                  className={cn(
-                    "group relative overflow-hidden bg-gradient-to-r from-card to-card/50 rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-[1.01] border border-border/50",
-                    entry.isCurrentUser && "ring-2 ring-primary/40 shadow-lg shadow-primary/10 bg-gradient-to-r from-primary/5 to-card/50"
-                  )}
-                >
-                  {/* Subtle hover gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <div className="relative flex items-center gap-5 px-5 py-4">
-                    {/* Rank */}
-                    <div className={cn(
-                      "flex items-center justify-center min-w-[2.5rem] h-10 rounded-xl font-bold text-sm backdrop-blur-sm transition-all",
-                      entry.isCurrentUser
-                        ? "bg-gradient-to-br from-primary/20 to-primary/10 text-primary ring-1 ring-primary/30"
-                        : "bg-muted/50 text-muted-foreground"
-                    )}>
-                      {entry.rank}
-                    </div>
-
-                    {/* Avatar */}
-                    <div className={cn(
-                      "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300",
-                      entry.isCurrentUser 
-                        ? "bg-gradient-to-br from-primary/10 to-primary/5 ring-1 ring-primary/20" 
-                        : "bg-muted/30"
-                    )}>
-                      {getProfileDisplay(entry, 'sm')}
-                    </div>
-
-                    {/* Name */}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-foreground truncate">
-                        {entry.username}
-                      </p>
-                      {entry.isCurrentUser && (
-                        <span className="inline-flex items-center gap-1 text-xs text-primary font-medium mt-0.5">
-                          You
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Stats */}
-                    <div className="flex items-center gap-3">
-                      {entry.streak > 0 && (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 backdrop-blur-sm">
-                          <span className="text-sm">🔥</span>
-                          <span className="text-xs font-bold text-orange-600 dark:text-orange-400">{entry.streak}</span>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm shadow-sm">
-                        <Gem className="h-3.5 w-3.5 text-primary" />
-                        <span className="text-sm font-bold text-foreground">
-                          {entry.mp_points.toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-
-      {/* Footer */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-muted/30 via-muted/20 to-muted/30 px-6 py-4 text-center border border-border/30 backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
-        <div className="relative flex items-center justify-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <p className="text-xs font-medium text-muted-foreground">
-            Updates every 2 minutes
-          </p>
-        </div>
+          </>
+        )}
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
