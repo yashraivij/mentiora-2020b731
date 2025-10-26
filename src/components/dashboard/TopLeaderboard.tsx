@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, Target, TrendingUp, Award, Medal } from 'lucide-react';
+import { Trophy, Flame, Target, TrendingUp, Award, Medal, Crown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -195,34 +195,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     }
   };
 
-  const getRankBadge = (rank: number) => {
-    if (rank === 1) {
-      return (
-        <div className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-amber-500" />
-          <span className="text-lg font-bold text-[#0F172A] dark:text-white">#{rank}</span>
-        </div>
-      );
-    }
-    if (rank === 2) {
-      return (
-        <div className="flex items-center gap-2">
-          <Medal className="h-5 w-5 text-slate-400" />
-          <span className="text-lg font-bold text-[#0F172A] dark:text-white">#{rank}</span>
-        </div>
-      );
-    }
-    if (rank === 3) {
-      return (
-        <div className="flex items-center gap-2">
-          <Award className="h-5 w-5 text-orange-400" />
-          <span className="text-lg font-bold text-[#0F172A] dark:text-white">#{rank}</span>
-        </div>
-      );
-    }
-    return (
-      <span className="text-lg font-bold text-[#64748B] dark:text-gray-400">#{rank}</span>
-    );
+  const getRankIcon = (rank: number) => {
+    if (rank === 1) return <Crown className="h-4 w-4 text-amber-500" />;
+    if (rank === 2) return <Medal className="h-4 w-4 text-slate-400" />;
+    if (rank === 3) return <Award className="h-4 w-4 text-orange-400" />;
+    return null;
   };
 
   const getAvatarColor = (username: string) => {
@@ -244,7 +221,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-8"
       >
-        <div className="rounded-3xl bg-white/90 dark:bg-gray-800/90 p-8 border border-[#E2E8F0]/50 dark:border-gray-700">
+        <div className="rounded-3xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 border border-[#E2E8F0]/50 dark:border-gray-700">
           <Skeleton className="h-8 w-48 mb-2" />
           <Skeleton className="h-5 w-96 mb-6" />
           <Skeleton className="h-6 w-32" />
@@ -254,9 +231,9 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
             <Skeleton key={i} className="h-32 w-full rounded-2xl" />
           ))}
         </div>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {[...Array(6)].map((_, i) => (
-            <Skeleton key={i} className="h-28 w-full rounded-2xl" />
+            <Skeleton key={i} className="h-24 w-full rounded-2xl" />
           ))}
         </div>
       </motion.div>
@@ -327,7 +304,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               >
                 <Flame className="h-5 w-5 text-[#F59E0B]" />
                 <span className="text-lg font-bold text-[#0F172A] dark:text-white">
-                  🔥 {currentUserData.streak}-Day Streak
+                  {currentUserData.streak}-Day Streak
                 </span>
               </motion.div>
             )}
@@ -463,7 +440,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       >
                         {currentUserData.streak}
                       </motion.div>
-                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">days 🔥</span>
+                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">days</span>
                     </div>
                   </motion.div>
                 </TooltipTrigger>
@@ -523,8 +500,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="flex items-center gap-2 mb-6"
+        transition={{ delay: 0.3 }}
+        className="flex items-center gap-2"
       >
         <Button
           variant={filterType === 'week' ? 'default' : 'outline'}
@@ -589,116 +566,113 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               </p>
             </motion.div>
           ) : (
-            entries.map((entry, index) => {
-              const getBorderClass = () => {
-                if (entry.rank === 1) return "border-b-2 border-b-amber-400/50";
-                if (entry.rank === 2) return "border-b-2 border-b-slate-300/50";
-                if (entry.rank === 3) return "border-b-2 border-b-orange-400/50";
-                return "";
-              };
+            entries.map((entry, index) => (
+              <TooltipProvider key={entry.user_id}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.03 }}
+                      whileHover={{ y: -2 }}
+                      className={cn(
+                        "relative group p-5 rounded-2xl backdrop-blur-xl border transition-all duration-200 cursor-pointer",
+                        entry.isCurrentUser
+                          ? "bg-white/90 dark:bg-gray-800/90 border-[#0EA5E9]/30 shadow-sm shadow-[#0EA5E9]/10"
+                          : "bg-white/60 dark:bg-gray-800/60 border-[#E2E8F0]/50 dark:border-gray-700 hover:bg-white/90 dark:hover:bg-gray-800/90 hover:shadow-md hover:border-[#0EA5E9]/20"
+                      )}
+                    >
+                      {/* Left accent line for current user */}
+                      {entry.isCurrentUser && (
+                        <div className="absolute left-0 top-3 bottom-3 w-1 bg-[#0EA5E9] rounded-r" />
+                      )}
 
-              return (
-                <TooltipProvider key={entry.user_id}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.03 }}
-                        className={cn(
-                          "relative group p-5 rounded-2xl border transition-all duration-200 cursor-pointer",
-                          entry.isCurrentUser
-                            ? "bg-white dark:bg-gray-800 border-[#0EA5E9] shadow-sm"
-                            : "bg-white dark:bg-gray-800 border-[#E2E8F0] dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5",
-                          getBorderClass()
-                        )}
-                      >
-                        {/* Left accent line for current user */}
-                        {entry.isCurrentUser && (
-                          <div className="absolute left-0 top-3 bottom-3 w-1 bg-[#0EA5E9] rounded-r" />
-                        )}
+                      <div className={cn(
+                        "flex items-center gap-4",
+                        entry.isCurrentUser && "ml-2"
+                      )}>
+                        {/* Rank */}
+                        <div className="flex-shrink-0 w-16 flex items-center gap-2">
+                          <span className={cn(
+                            "text-lg font-bold",
+                            entry.rank <= 3 ? "text-[#0F172A] dark:text-white" : "text-[#64748B] dark:text-gray-400"
+                          )}>
+                            #{entry.rank}
+                          </span>
+                          {getRankIcon(entry.rank)}
+                        </div>
 
-                        <div className={cn(
-                          "flex items-center gap-4",
-                          entry.isCurrentUser && "ml-2"
-                        )}>
-                          {/* Rank */}
-                          <div className="flex-shrink-0 w-12 flex justify-center">
-                            {getRankBadge(entry.rank)}
+                        {/* Avatar */}
+                        <Avatar className="h-12 w-12 border-2 border-[#E2E8F0]/50 dark:border-gray-700">
+                          <AvatarFallback className={cn("text-white font-semibold bg-gradient-to-br", getAvatarColor(entry.username))}>
+                            {entry.username.substring(0, 2).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+
+                        {/* User Info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-bold text-[#0F172A] dark:text-white truncate">
+                              {entry.username}
+                            </h3>
+                            {entry.isCurrentUser && (
+                              <Badge variant="secondary" className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0 text-xs px-2 py-0">
+                                You
+                              </Badge>
+                            )}
                           </div>
-
-                          {/* Avatar */}
-                          <Avatar className="h-12 w-12 border border-[#E2E8F0] dark:border-gray-700">
-                            <AvatarFallback className={cn("text-white font-semibold bg-gradient-to-br", getAvatarColor(entry.username))}>
-                              {entry.username.substring(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-
-                          {/* User Info */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-bold text-[#0F172A] dark:text-white truncate">
-                                {entry.username}
-                              </h3>
-                              {entry.isCurrentUser && (
-                                <Badge variant="secondary" className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0 text-xs px-2 py-0">
-                                  You
-                                </Badge>
-                              )}
+                          <div className="flex items-center gap-3 text-xs text-[#64748B] dark:text-gray-400 flex-wrap">
+                            <div className="flex items-center gap-1">
+                              <span className="font-bold text-[#0F172A] dark:text-white">
+                                {entry.mp_points.toLocaleString()}
+                              </span>
+                              <span className="font-medium">MP</span>
                             </div>
-                            <div className="flex items-center gap-3 text-xs text-[#64748B] dark:text-gray-400">
-                              <div className="flex items-center gap-1">
-                                <span className="font-bold text-[#0F172A] dark:text-white">
-                                  {entry.mp_points.toLocaleString()}
-                                </span>
-                                <span className="font-medium">MP</span>
-                              </div>
-                              {entry.streak > 0 && (
-                                <>
-                                  <span>•</span>
-                                  <div className="flex items-center gap-1">
-                                    <Flame className="h-3 w-3 text-orange-500" />
-                                    <span className="font-semibold">{entry.streak} days</span>
-                                  </div>
-                                </>
-                              )}
-                              {entry.badges_earned > 0 && (
-                                <>
-                                  <span className="hidden sm:inline">•</span>
-                                  <div className="hidden sm:flex items-center gap-1">
-                                    <Trophy className="h-3 w-3 text-amber-500" />
-                                    <span className="font-semibold">{entry.badges_earned}</span>
-                                  </div>
-                                </>
-                              )}
-                              {entry.quizzes_completed > 0 && (
-                                <>
-                                  <span className="hidden md:inline">•</span>
-                                  <div className="hidden md:flex items-center gap-1">
-                                    <Target className="h-3 w-3 text-[#0EA5E9]" />
-                                    <span className="font-semibold">{entry.quizzes_completed} quizzes</span>
-                                  </div>
-                                </>
-                              )}
-                            </div>
+                            {entry.streak > 0 && (
+                              <>
+                                <span className="hidden sm:inline">•</span>
+                                <div className="flex items-center gap-1">
+                                  <Flame className="h-3 w-3 text-[#F59E0B]" />
+                                  <span className="font-semibold">{entry.streak} days</span>
+                                </div>
+                              </>
+                            )}
+                            {entry.badges_earned > 0 && (
+                              <>
+                                <span className="hidden sm:inline">•</span>
+                                <div className="hidden sm:flex items-center gap-1">
+                                  <Trophy className="h-3 w-3 text-amber-500" />
+                                  <span className="font-semibold">{entry.badges_earned}</span>
+                                </div>
+                              </>
+                            )}
+                            {entry.quizzes_completed > 0 && (
+                              <>
+                                <span className="hidden md:inline">•</span>
+                                <div className="hidden md:flex items-center gap-1">
+                                  <Target className="h-3 w-3 text-[#0EA5E9]" />
+                                  <span className="font-semibold">{entry.quizzes_completed} quizzes</span>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
-                      </motion.div>
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs" side="top">
-                      <div className="space-y-1">
-                        <p className="font-semibold">{entry.username}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {entry.top_subject && `Top Subject: ${entry.top_subject} • `}
-                          {entry.quizzes_completed} Quizzes Completed
-                          {entry.streak > 0 && ` • ${entry.streak}-Day Streak Active`}
-                        </p>
                       </div>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              );
-            })
+                    </motion.div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs" side="top">
+                    <div className="space-y-1">
+                      <p className="font-semibold">{entry.username}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {entry.top_subject && `Top Subject: ${entry.top_subject} • `}
+                        {entry.quizzes_completed} Quizzes Completed
+                        {entry.streak > 0 && ` • ${entry.streak}-Day Streak Active`}
+                      </p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ))
           )}
         </motion.div>
       </AnimatePresence>
