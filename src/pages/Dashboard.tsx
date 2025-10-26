@@ -92,7 +92,6 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
-import { TopLeaderboard } from "@/components/dashboard/TopLeaderboard";
 
 interface UserProgress {
   subjectId: string;
@@ -2611,11 +2610,6 @@ const Dashboard = () => {
                   onUpgradeToPremium={() => navigate('/pricing')}
                   userId={user?.id || ''}
                 />
-
-                {/* Top Students Leaderboard */}
-                <div className="mt-8">
-                  <TopLeaderboard userId={user?.id} />
-                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
