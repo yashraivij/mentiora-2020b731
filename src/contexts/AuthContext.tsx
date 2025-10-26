@@ -105,6 +105,8 @@ const refreshSubscription = async (userId?: string) => {
             
             if (result.awarded > 0) {
               console.log(`Daily login bonus: +${result.awarded} MP`);
+              // Trigger MP counter update in header
+              window.dispatchEvent(new CustomEvent('mpEarned'));
               // Show MP reward toast with sound and progress animation
               showMPReward(result.awarded, "Daily quest complete: Sign in today");
             } else {

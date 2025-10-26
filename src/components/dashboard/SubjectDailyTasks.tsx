@@ -248,6 +248,8 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         console.error('Error awarding MP:', mpError);
       } else {
         console.log('MP awarded successfully:', mpData);
+        // Trigger MP counter update in header
+        window.dispatchEvent(new CustomEvent('mpEarned'));
       }
 
       // Show toast notification
@@ -317,43 +319,23 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
 
         console.log('✓ Task marked complete');
 
-        // Award MP - check if user exists first
-        const { data: existingPoints } = await supabase
-          .from('user_points')
-          .select('total_points')
-          .eq('user_id', userId)
-          .maybeSingle();
-
-        if (existingPoints) {
-          const newTotal = existingPoints.total_points + task.mpReward;
-          const { error: pointsError } = await supabase
-            .from('user_points')
-            .update({
-              total_points: newTotal,
-              updated_at: new Date().toISOString()
-            })
-            .eq('user_id', userId);
-
-          if (pointsError) {
-            console.error('✗ ERROR updating MP:', pointsError);
-          } else {
-            console.log(`✓ Updated ${task.mpReward} MP | New total: ${newTotal}`);
+        // Award MP via edge function
+        const { data: mpData, error: mpError } = await supabase.functions.invoke('award-mp', {
+          body: {
+            action: 'subject_task_completed',
+            userId,
+            mpAmount: task.mpReward,
+            taskId: taskId,
+            subjectId: subjectId
           }
+        });
+
+        if (mpError) {
+          console.error('✗ ERROR awarding MP:', mpError);
         } else {
-          const { error: pointsError } = await supabase
-            .from('user_points')
-            .insert({
-              user_id: userId,
-              total_points: task.mpReward,
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
-            });
-
-          if (pointsError) {
-            console.error('✗ ERROR inserting MP:', pointsError);
-          } else {
-            console.log(`✓ Created MP record | Total: ${task.mpReward}`);
-          }
+          console.log('✓ MP awarded successfully:', mpData);
+          // Trigger MP counter update in header
+          window.dispatchEvent(new CustomEvent('mpEarned'));
         }
 
         // Update local state

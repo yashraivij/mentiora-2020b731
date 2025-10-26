@@ -1550,32 +1550,12 @@ const Dashboard = () => {
     const interval = setInterval(() => {
       setStudyTimeMinutes(prev => {
         const newTime = prev + 1;
-        
-        // Award MP when reaching 30 minutes
-        if (newTime === 30 && !hasAwardedStudyTime) {
-          (async () => {
-            const { data } = await supabase.functions.invoke('award-mp', {
-              body: { 
-                action: 'study_time_30min', 
-                userId: user.id
-              }
-            });
-            
-            if (data?.success) {
-              setHasAwardedStudyTime(true);
-              showMPReward(35, 'Studied for 30 minutes! 📚');
-              setQuestNotificationCount(prev => prev + 1);
-              loadUserStats();
-            }
-          })();
-        }
-        
         return newTime >= 30 ? 30 : newTime;
       });
     }, 60000); // Every minute
     
     return () => clearInterval(interval);
-  }, [user?.id, hasAwardedStudyTime, showMPReward]);
+  }, [user?.id, hasAwardedStudyTime]);
 
   const handleLogout = () => {
     logout();

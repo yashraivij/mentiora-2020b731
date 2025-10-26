@@ -140,24 +140,4 @@ export class MPPointsSystemClient {
       return { success: false, awarded: 0, message: 'Network error' };
     }
   }
-
-  static async awardPracticeCompletion(userId: string, subjectId: string, topicId: string, practiceScore?: number, totalMarks?: number): Promise<{ success: boolean; awarded: number; message: string; breakdown?: any }> {
-    try {
-      const { data } = await supabase.functions.invoke('award-mp', {
-        body: { 
-          action: 'practice_completion', 
-          userId, 
-          subjectId, 
-          topicId,
-          practiceScore,
-          totalMarks
-        }
-      });
-      
-      return data || { success: false, awarded: 0, message: 'Server error' };
-    } catch (error) {
-      console.error('Error awarding practice completion:', error);
-      return { success: false, awarded: 0, message: 'Network error' };
-    }
-  }
 }

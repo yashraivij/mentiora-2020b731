@@ -526,63 +526,6 @@ const Practice = () => {
       if (markingResult.marksAwarded > 0) {
         playCelebratorySound();
       }
-
-      // Award 10MP for full marks
-      if (markingResult.marksAwarded === currentQuestion.marks && user?.id) {
-        try {
-          await supabase.functions.invoke('award-mp', {
-            body: { action: 'full_marks_question', userId: user.id }
-          });
-          
-          // Calculate current MP progress
-          const fullMarksCount = [...attempts, attempt].filter(a => {
-            const q = shuffledQuestions.find(sq => sq.id === a.questionId);
-            return q && a.score === q.marks;
-          }).length;
-          const currentMP = fullMarksCount * 10;
-          const totalPossibleMP = shuffledQuestions.length * 10;
-          const mpProgress = (currentMP / totalPossibleMP) * 100;
-          
-          // Show clean gamified notification
-          toast.custom((t) => (
-            <div className="bg-white dark:bg-gray-900 px-8 py-6 rounded-2xl shadow-2xl border-2 border-[hsl(195,69%,54%)] min-w-[340px] animate-in slide-in-from-top-5 duration-500">
-              <div className="flex items-start justify-between mb-4">
-                <div className="space-y-1">
-                  <div className="text-3xl font-black text-[hsl(195,69%,54%)]">+10 MP</div>
-                  <div className="text-sm font-medium text-muted-foreground">Full marks achieved!</div>
-                </div>
-                <button 
-                  onClick={() => toast.dismiss(t)}
-                  className="text-muted-foreground hover:text-foreground transition-colors -mt-1"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Session Progress</span>
-                  <span className="text-sm font-bold text-foreground">{currentMP} / {totalPossibleMP} MP</span>
-                </div>
-                <div className="relative">
-                  <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,64%)] rounded-full transition-all duration-700 ease-out"
-                      style={{ width: `${mpProgress}%` }}
-                    />
-                  </div>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none" />
-                </div>
-              </div>
-            </div>
-          ), {
-            duration: 4000,
-            position: 'top-right',
-          });
-        } catch (error) {
-          console.error('Error awarding full marks MP:', error);
-        }
-      }
       
       // Generate notebook notes if marks were lost
       const marksLost = currentQuestion.marks - markingResult.marksAwarded;
@@ -717,40 +660,6 @@ const Practice = () => {
     
     // DON'T clear session state yet - need user data for saving
     // clearSessionState();
-    
-    // Handle MP rewards for practice completion server-side
-    if (user?.id && subjectId && topicId) {
-      try {
-        const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
-        const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId, marksEarned, totalMarks);
-        
-        if (result.awarded > 0) {
-          console.log(`Practice completion rewards: +${result.awarded} MP`);
-          
-          // Show toast for practice completion (main reward)
-          if (result.breakdown?.practice > 0) {
-            showMPReward(result.breakdown.practice, "Quest complete: Complete 1 practice set");
-          }
-          
-          if (result.breakdown) {
-            console.log('MP Breakdown:', result.breakdown);
-            
-            // Show additional toasts for weekly bonuses with proper delays
-            if (result.breakdown.weeklyTopics > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly quest: Practice 3 different topics"), 500);
-            }
-            if (result.breakdown.weeklyPractice > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly quest: Complete 5 practice sets"), 1000);
-            }
-            if (result.breakdown.streak > 0) {
-              setTimeout(() => showMPReward(result.breakdown.streak, "Epic quest: 7 day practice streak"), 1500);
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error awarding practice completion MP:', error);
-      }
-    }
     
     // Save progress to both database and localStorage
     const progressKey = `mentiora_progress_${user?.id}`;
