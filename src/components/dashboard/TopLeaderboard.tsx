@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Trophy, Medal, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface LeaderEntry {
@@ -209,11 +207,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     );
   }
 
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'bg-yellow-500 text-white';
-    if (rank === 2) return 'bg-slate-400 text-white';
-    if (rank === 3) return 'bg-orange-500 text-white';
-    return 'bg-primary text-primary-foreground';
+  const getRankIcon = (rank: number) => {
+    if (rank === 1) return <Trophy className="h-4 w-4 text-yellow-500" />;
+    if (rank === 2) return <Medal className="h-4 w-4 text-slate-400" />;
+    if (rank === 3) return <Award className="h-4 w-4 text-orange-600" />;
+    return null;
   };
 
   const getInitials = (name: string) => {
@@ -223,11 +221,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="space-y-5">
+      <div className="space-y-4">
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
-          <p className="text-muted-foreground">
-            Compare your MP, streaks, and quiz progress with other students.
+          <p className="text-sm text-muted-foreground">
+            Compare your MP and streaks with other students
           </p>
         </div>
 
@@ -236,7 +234,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('week')}
             className={cn(
-              "pb-3 px-1 font-medium transition-colors relative",
+              "pb-3 px-1 text-sm font-medium transition-colors relative",
               filterType === 'week'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -250,7 +248,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('alltime')}
             className={cn(
-              "pb-3 px-1 font-medium transition-colors relative",
+              "pb-3 px-1 text-sm font-medium transition-colors relative",
               filterType === 'alltime'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -264,7 +262,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           <button
             onClick={() => setFilterType('friends')}
             className={cn(
-              "pb-3 px-1 font-medium transition-colors relative",
+              "pb-3 px-1 text-sm font-medium transition-colors relative",
               filterType === 'friends'
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -280,7 +278,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
       {/* Leaderboard List - Duolingo Style */}
       {entries.length === 0 ? (
-        <div className="bg-card border border-border rounded-2xl p-12 text-center">
+        <div className="bg-card rounded-xl p-12 text-center">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
             <Trophy className="h-8 w-8 text-muted-foreground" />
           </div>
@@ -290,73 +288,55 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
       ) : (
-        <div className="bg-card border border-border rounded-2xl divide-y divide-border">
-          <AnimatePresence mode="popLayout">
-            {entries.map((entry, index) => (
-              <motion.div
-                key={entry.user_id}
-                layout
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2, delay: index * 0.02 }}
-                className={cn(
-                  "flex items-center gap-4 px-5 py-3 hover:bg-muted/50 transition-colors cursor-pointer",
-                  entry.isCurrentUser && "bg-primary/5"
-                )}
-              >
-                {/* Rank */}
-                <div className={cn(
-                  "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-                  getRankColor(entry.rank)
-                )}>
+        <div className="bg-card rounded-xl overflow-hidden">
+          {entries.map((entry, index) => (
+            <div
+              key={entry.user_id}
+              className={cn(
+                "flex items-center gap-4 px-4 py-3 hover:bg-muted/30 transition-colors",
+                entry.isCurrentUser && "bg-primary/5",
+                index !== entries.length - 1 && "border-b border-border/50"
+              )}
+            >
+              {/* Rank with icon */}
+              <div className="flex items-center gap-2 w-8">
+                {getRankIcon(entry.rank)}
+                <span className="text-sm font-medium text-muted-foreground">
                   {entry.rank}
-                </div>
+                </span>
+              </div>
 
-                {/* Avatar */}
-                <div className={cn(
-                  "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold border-2",
-                  entry.isCurrentUser 
-                    ? "bg-primary/10 border-primary text-primary" 
-                    : "bg-muted border-border text-muted-foreground"
-                )}>
-                  {getInitials(entry.username)}
-                </div>
+              {/* Avatar */}
+              <div className={cn(
+                "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold",
+                entry.isCurrentUser 
+                  ? "bg-primary text-primary-foreground" 
+                  : "bg-muted text-muted-foreground"
+              )}>
+                {getInitials(entry.username)}
+              </div>
 
-                {/* Name & Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-foreground truncate">
-                      {entry.username}
-                    </h3>
-                    {entry.isCurrentUser && (
-                      <Badge variant="secondary" className="text-xs px-1.5 py-0 h-5">
-                        You
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Flame className="h-3 w-3 text-orange-500" />
-                    <span>{entry.streak} day streak</span>
-                  </div>
-                </div>
+              {/* Name */}
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm font-medium text-foreground truncate">
+                  {entry.username}
+                </h3>
+              </div>
 
-                {/* MP Points */}
-                <div className="flex-shrink-0 text-right">
-                  <div className="text-base font-bold text-foreground">
-                    {entry.mp_points.toLocaleString()}
-                  </div>
-                  <div className="text-xs text-muted-foreground">MP</div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              {/* MP Points */}
+              <div className="flex-shrink-0">
+                <span className="text-sm font-medium text-muted-foreground">
+                  {entry.mp_points.toLocaleString()} MP
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
       {/* Footer */}
       <p className="text-xs text-muted-foreground text-center">
-        Ranks update hourly based on MP from quizzes, streaks, and daily quests.
+        Ranks update hourly based on MP from quizzes, streaks, and daily quests
       </p>
     </div>
   );
