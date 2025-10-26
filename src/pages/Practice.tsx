@@ -1203,6 +1203,7 @@ const Practice = () => {
           }
 
           // Check and complete "complete_questions" task
+          console.log('🔍 Starting complete_questions task check');
           const questionThresholds: Record<string, number> = {
             'physics': 15,
             'physics-aqa': 15,
@@ -1239,14 +1240,24 @@ const Practice = () => {
             .gte('created_at', `${today}T00:00:00`)
             .lte('created_at', `${today}T23:59:59`);
 
+          console.log('📊 Checking complete_questions task:', {
+            subjectId,
+            requiredQuestions,
+            todaysActivities: todaysActivities?.length || 0,
+            activities: todaysActivities?.map(a => ({ subject: (a.metadata as any)?.subject_id, marks: (a.metadata as any)?.total_marks }))
+          });
+
           // Sum up total_marks from all activities where subject_id matches
           const questionsAnsweredToday = todaysActivities?.reduce((sum, activity) => {
             const metadata = activity.metadata as any;
             if (metadata?.subject_id && metadata.subject_id.includes(subjectId.split('-')[0])) {
+              console.log(`  ✓ Counting ${metadata.total_marks} questions from ${metadata.subject_id}`);
               return sum + (metadata.total_marks || 0);
             }
             return sum;
           }, 0) || 0;
+          
+          console.log(`📊 Total questions answered today: ${questionsAnsweredToday}/${requiredQuestions}`);
           
           if (questionsAnsweredToday >= requiredQuestions) {
             console.log(`✓ Questions ${questionsAnsweredToday} meets threshold ${requiredQuestions} - completing complete_questions task`);
