@@ -1229,16 +1229,24 @@ const Practice = () => {
 
           const requiredQuestions = questionThresholds[subjectId] || 15;
           
-          // Check total questions answered today
+          // Check total questions answered today by summing total_marks from all topic_practiced activities
           const today = new Date().toISOString().split('T')[0];
-          const { data: todaysMastery } = await supabase
-            .from('daily_topic_mastery')
-            .select('score')
+          const { data: todaysActivities } = await supabase
+            .from('user_activities')
+            .select('metadata')
             .eq('user_id', user.id)
-            .eq('subject_id', subjectId)
-            .eq('date', today);
+            .eq('activity_type', 'topic_practiced')
+            .gte('created_at', `${today}T00:00:00`)
+            .lte('created_at', `${today}T23:59:59`);
 
-          const questionsAnsweredToday = (todaysMastery?.length || 0) * attempts.length;
+          // Sum up total_marks from all activities where subject_id matches
+          const questionsAnsweredToday = todaysActivities?.reduce((sum, activity) => {
+            const metadata = activity.metadata as any;
+            if (metadata?.subject_id && metadata.subject_id.includes(subjectId.split('-')[0])) {
+              return sum + (metadata.total_marks || 0);
+            }
+            return sum;
+          }, 0) || 0;
           
           if (questionsAnsweredToday >= requiredQuestions) {
             console.log(`✓ Questions ${questionsAnsweredToday} meets threshold ${requiredQuestions} - completing complete_questions task`);
