@@ -527,6 +527,11 @@ const Practice = () => {
         playCelebratorySound();
       }
       
+      // Show MP reward notification if user got full marks
+      if (markingResult.marksAwarded === currentQuestion.marks) {
+        showMPReward(10, "Perfect answer! +10 MP");
+      }
+      
       // Generate notebook notes if marks were lost
       const marksLost = currentQuestion.marks - markingResult.marksAwarded;
       if (marksLost > 0 && user?.id) {
