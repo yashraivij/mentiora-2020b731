@@ -192,21 +192,27 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-64 w-full rounded-2xl" />
-        <div className="space-y-2">
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-56" />
+        <Skeleton className="h-80 w-full rounded-3xl" />
+        <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-xl" />
+            <Skeleton key={i} className="h-20 w-full rounded-2xl" />
           ))}
         </div>
       </div>
     );
   }
 
-  const getProfileDisplay = (entry: LeaderEntry) => {
+  const getProfileDisplay = (entry: LeaderEntry, size: 'sm' | 'md' | 'lg' = 'md') => {
+    const sizeClasses = {
+      sm: 'text-xl',
+      md: 'text-3xl',
+      lg: 'text-4xl'
+    };
+    
     if (entry.profile_emoji) {
-      return <span className="text-3xl">{entry.profile_emoji}</span>;
+      return <span className={sizeClasses[size]}>{entry.profile_emoji}</span>;
     }
     const initials = entry.username.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
     return <span className="text-sm font-semibold text-muted-foreground">{initials}</span>;
@@ -216,38 +222,58 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const restOfLeaderboard = entries.slice(3);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-foreground">Leaderboard</h2>
-        <p className="text-sm text-muted-foreground mt-1">
+      <div className="space-y-2">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          Leaderboard
+        </h2>
+        <p className="text-sm text-muted-foreground">
           Top students nationwide
         </p>
       </div>
 
       {entries.length === 0 ? (
-        <div className="bg-card rounded-2xl p-12 text-center">
-          <p className="text-muted-foreground">No students on the leaderboard yet</p>
+        <div className="relative overflow-hidden bg-gradient-to-br from-card via-card to-accent/5 rounded-3xl p-16 text-center border border-border/50 shadow-xl">
+          <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+          <div className="relative">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <Trophy className="h-10 w-10 text-primary" />
+            </div>
+            <p className="text-lg font-medium text-muted-foreground">No students on the leaderboard yet</p>
+          </div>
         </div>
       ) : (
         <>
           {/* Top 3 Podium */}
           {topThree.length > 0 && (
-            <div className="bg-card rounded-2xl p-8">
-              <div className="flex items-end justify-center gap-6">
+            <div className="relative overflow-hidden bg-gradient-to-br from-card via-card to-primary/5 rounded-3xl p-8 border border-border/50 shadow-xl">
+              {/* Premium glass effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/5" />
+              
+              <div className="relative flex items-end justify-center gap-4 sm:gap-8">
                 {/* 2nd Place */}
                 {topThree[1] && (
-                  <div className="flex flex-col items-center flex-1">
-                    <div className="mb-4 flex items-center justify-center w-16 h-16">
-                      {getProfileDisplay(topThree[1])}
+                  <div className="flex flex-col items-center flex-1 max-w-[140px]">
+                    <div className="relative mb-6">
+                      <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center shadow-2xl ring-1 ring-border/50 backdrop-blur-sm">
+                        {getProfileDisplay(topThree[1], 'md')}
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg text-xs font-bold text-accent-foreground">
+                        2
+                      </div>
                     </div>
-                    <div className="w-full bg-muted/30 rounded-t-xl p-4 text-center" style={{ minHeight: '120px' }}>
-                      <div className="text-lg font-bold text-muted-foreground mb-1">#2</div>
-                      <p className="font-semibold text-sm text-foreground truncate mb-3">{topThree[1].username}</p>
-                      <div className="space-y-2">
-                        <div className="text-lg font-bold text-foreground">{topThree[1].mp_points.toLocaleString()}</div>
+                    <div className="w-full bg-gradient-to-b from-muted/40 to-muted/20 backdrop-blur-sm rounded-t-3xl p-5 text-center border-t border-x border-border/50 shadow-xl" style={{ minHeight: '140px' }}>
+                      <p className="font-bold text-sm text-foreground truncate mb-4">{topThree[1].username}</p>
+                      <div className="space-y-3">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/60 backdrop-blur-sm shadow-lg">
+                          <Gem className="h-3.5 w-3.5 text-primary" />
+                          <span className="text-base font-bold text-foreground">{topThree[1].mp_points.toLocaleString()}</span>
+                        </div>
                         {topThree[1].streak > 0 && (
-                          <div className="text-xs text-muted-foreground">🔥 {topThree[1].streak} day streak</div>
+                          <div className="text-xs font-medium text-muted-foreground">
+                            🔥 {topThree[1].streak} day streak
+                          </div>
                         )}
                       </div>
                     </div>
@@ -256,17 +282,26 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
                 {/* 1st Place */}
                 {topThree[0] && (
-                  <div className="flex flex-col items-center flex-1">
-                    <div className="mb-4 flex items-center justify-center w-20 h-20">
-                      {getProfileDisplay(topThree[0])}
+                  <div className="flex flex-col items-center flex-1 max-w-[160px]">
+                    <div className="relative mb-6">
+                      <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-primary via-primary to-primary/80 flex items-center justify-center shadow-2xl ring-2 ring-primary/30 backdrop-blur-sm">
+                        {getProfileDisplay(topThree[0], 'lg')}
+                      </div>
+                      <div className="absolute -top-3 -right-3 w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl">
+                        <Crown className="h-5 w-5 text-white" />
+                      </div>
                     </div>
-                    <div className="w-full bg-primary/10 rounded-t-xl p-5 text-center" style={{ minHeight: '140px' }}>
-                      <div className="text-xl font-bold text-primary mb-1">#1</div>
-                      <p className="font-bold text-base text-foreground truncate mb-3">{topThree[0].username}</p>
-                      <div className="space-y-2">
-                        <div className="text-xl font-bold text-foreground">{topThree[0].mp_points.toLocaleString()}</div>
+                    <div className="w-full bg-gradient-to-b from-primary/20 to-primary/5 backdrop-blur-sm rounded-t-3xl p-6 text-center border-t border-x border-primary/30 shadow-2xl" style={{ minHeight: '160px' }}>
+                      <p className="font-bold text-base text-foreground truncate mb-4">{topThree[0].username}</p>
+                      <div className="space-y-3">
+                        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-2xl">
+                          <Sparkles className="h-4 w-4" />
+                          <span className="text-lg font-bold">{topThree[0].mp_points.toLocaleString()}</span>
+                        </div>
                         {topThree[0].streak > 0 && (
-                          <div className="text-sm text-muted-foreground">🔥 {topThree[0].streak} day streak</div>
+                          <div className="text-sm font-medium text-muted-foreground">
+                            🔥 {topThree[0].streak} day streak
+                          </div>
                         )}
                       </div>
                     </div>
@@ -275,17 +310,26 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
                 {/* 3rd Place */}
                 {topThree[2] && (
-                  <div className="flex flex-col items-center flex-1">
-                    <div className="mb-4 flex items-center justify-center w-14 h-14">
-                      {getProfileDisplay(topThree[2])}
+                  <div className="flex flex-col items-center flex-1 max-w-[130px]">
+                    <div className="relative mb-6">
+                      <div className="relative w-18 h-18 rounded-2xl bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center shadow-2xl ring-1 ring-border/50 backdrop-blur-sm">
+                        {getProfileDisplay(topThree[2], 'sm')}
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg text-xs font-bold text-accent-foreground">
+                        3
+                      </div>
                     </div>
-                    <div className="w-full bg-muted/20 rounded-t-xl p-4 text-center" style={{ minHeight: '100px' }}>
-                      <div className="text-base font-bold text-muted-foreground mb-1">#3</div>
+                    <div className="w-full bg-gradient-to-b from-muted/30 to-muted/10 backdrop-blur-sm rounded-t-3xl p-4 text-center border-t border-x border-border/50 shadow-xl" style={{ minHeight: '120px' }}>
                       <p className="font-semibold text-xs text-foreground truncate mb-3">{topThree[2].username}</p>
                       <div className="space-y-2">
-                        <div className="text-base font-bold text-foreground">{topThree[2].mp_points.toLocaleString()}</div>
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background/60 backdrop-blur-sm shadow-lg">
+                          <Gem className="h-3 w-3 text-primary" />
+                          <span className="text-sm font-bold text-foreground">{topThree[2].mp_points.toLocaleString()}</span>
+                        </div>
                         {topThree[2].streak > 0 && (
-                          <div className="text-xs text-muted-foreground">🔥 {topThree[2].streak}</div>
+                          <div className="text-xs font-medium text-muted-foreground">
+                            🔥 {topThree[2].streak}
+                          </div>
                         )}
                       </div>
                     </div>
@@ -297,48 +341,65 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
           {/* Rest of Leaderboard */}
           {restOfLeaderboard.length > 0 && (
-            <div className="space-y-2">
+            <div className="space-y-3">
               {restOfLeaderboard.map((entry) => (
                 <div
                   key={entry.user_id}
                   className={cn(
-                    "bg-card rounded-xl transition-all hover:bg-accent/5",
-                    entry.isCurrentUser && "ring-1 ring-primary/20"
+                    "group relative overflow-hidden bg-gradient-to-r from-card to-card/50 rounded-2xl transition-all duration-300 hover:shadow-lg hover:scale-[1.01] border border-border/50",
+                    entry.isCurrentUser && "ring-2 ring-primary/40 shadow-lg shadow-primary/10 bg-gradient-to-r from-primary/5 to-card/50"
                   )}
                 >
-                  <div className="flex items-center gap-4 px-4 py-3">
+                  {/* Subtle hover gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative flex items-center gap-5 px-5 py-4">
                     {/* Rank */}
-                    <div className="w-8 text-center">
-                      <span className="text-sm font-semibold text-muted-foreground">
-                        {entry.rank}
-                      </span>
+                    <div className={cn(
+                      "flex items-center justify-center min-w-[2.5rem] h-10 rounded-xl font-bold text-sm backdrop-blur-sm transition-all",
+                      entry.isCurrentUser
+                        ? "bg-gradient-to-br from-primary/20 to-primary/10 text-primary ring-1 ring-primary/30"
+                        : "bg-muted/50 text-muted-foreground"
+                    )}>
+                      {entry.rank}
                     </div>
 
                     {/* Avatar */}
-                    <div className="flex items-center justify-center w-10 h-10">
-                      {getProfileDisplay(entry)}
+                    <div className={cn(
+                      "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300",
+                      entry.isCurrentUser 
+                        ? "bg-gradient-to-br from-primary/10 to-primary/5 ring-1 ring-primary/20" 
+                        : "bg-muted/30"
+                    )}>
+                      {getProfileDisplay(entry, 'sm')}
                     </div>
 
                     {/* Name */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-foreground truncate">
+                      <p className="text-sm font-semibold text-foreground truncate">
                         {entry.username}
                       </p>
                       {entry.isCurrentUser && (
-                        <span className="text-xs text-primary">You</span>
+                        <span className="inline-flex items-center gap-1 text-xs text-primary font-medium mt-0.5">
+                          You
+                        </span>
                       )}
                     </div>
 
                     {/* Stats */}
                     <div className="flex items-center gap-3">
                       {entry.streak > 0 && (
-                        <span className="text-xs text-muted-foreground">
-                          🔥 {entry.streak}
-                        </span>
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 backdrop-blur-sm">
+                          <span className="text-sm">🔥</span>
+                          <span className="text-xs font-bold text-orange-600 dark:text-orange-400">{entry.streak}</span>
+                        </div>
                       )}
-                      <span className="text-sm font-semibold text-foreground">
-                        {entry.mp_points.toLocaleString()}
-                      </span>
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm shadow-sm">
+                        <Gem className="h-3.5 w-3.5 text-primary" />
+                        <span className="text-sm font-bold text-foreground">
+                          {entry.mp_points.toLocaleString()}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -349,10 +410,14 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       )}
 
       {/* Footer */}
-      <div className="text-center">
-        <p className="text-xs text-muted-foreground">
-          Updates every 2 minutes
-        </p>
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-muted/30 via-muted/20 to-muted/30 px-6 py-4 text-center border border-border/30 backdrop-blur-sm">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
+        <div className="relative flex items-center justify-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <p className="text-xs font-medium text-muted-foreground">
+            Updates every 2 minutes
+          </p>
+        </div>
       </div>
     </div>
   );
