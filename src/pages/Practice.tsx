@@ -1113,7 +1113,192 @@ const Practice = () => {
               }
             );
           
-          // Celebratory feedback removed - keeping it clean
+          // Auto-complete "score_topic" daily task if threshold met
+          const scoreThresholds: Record<string, number> = {
+            'physics': 75,
+            'physics-aqa': 75,
+            'physics-edexcel': 75,
+            'chemistry': 75,
+            'chemistry-edexcel': 75,
+            'biology': 70,
+            'biology-edexcel': 70,
+            'biology-aqa-alevel': 75,
+            'mathematics': 80,
+            'maths-edexcel': 80,
+            'maths-aqa-alevel': 75,
+            'english-language': 70,
+            'english-literature': 70,
+            'geography': 70,
+            'geography-paper-2': 70,
+            'history': 70,
+            'religious-studies': 70,
+            'business-edexcel-igcse': 70,
+            'computer-science': 75,
+            'psychology': 70,
+            'music-eduqas-gcse': 70
+          };
+
+          const requiredScore = scoreThresholds[subjectId] || 70;
+          
+          if (averagePercentage >= requiredScore) {
+            console.log(`✓ Score ${averagePercentage.toFixed(1)}% meets threshold ${requiredScore}% - completing score_topic task`);
+            
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Check if task already completed
+            const { data: existingTask } = await supabase
+              .from('subject_daily_tasks')
+              .select('completed')
+              .eq('user_id', user.id)
+              .eq('subject_id', subjectId)
+              .eq('task_id', 'score_topic')
+              .eq('date', today)
+              .maybeSingle();
+            
+            if (!existingTask?.completed) {
+              // Mark task as complete
+              const { error: taskError } = await supabase
+                .from('subject_daily_tasks')
+                .upsert({
+                  user_id: user.id,
+                  subject_id: subjectId,
+                  task_id: 'score_topic',
+                  date: today,
+                  completed: true,
+                  mp_awarded: 25
+                }, {
+                  onConflict: 'user_id,subject_id,task_id,date'
+                });
+
+              if (!taskError) {
+                // Award 25 MP
+                const { data: existingPoints } = await supabase
+                  .from('user_points')
+                  .select('total_points')
+                  .eq('user_id', user.id)
+                  .maybeSingle();
+
+                if (existingPoints) {
+                  await supabase
+                    .from('user_points')
+                    .update({
+                      total_points: existingPoints.total_points + 25,
+                      updated_at: new Date().toISOString()
+                    })
+                    .eq('user_id', user.id);
+                } else {
+                  await supabase
+                    .from('user_points')
+                    .insert({
+                      user_id: user.id,
+                      total_points: 25,
+                      created_at: new Date().toISOString(),
+                      updated_at: new Date().toISOString()
+                    });
+                }
+
+                console.log('✓ score_topic task completed and 25 MP awarded');
+              }
+            }
+          }
+
+          // Check and complete "complete_questions" task
+          const questionThresholds: Record<string, number> = {
+            'physics': 15,
+            'physics-aqa': 15,
+            'physics-edexcel': 15,
+            'chemistry': 15,
+            'chemistry-edexcel': 15,
+            'biology': 15,
+            'biology-edexcel': 15,
+            'biology-aqa-alevel': 12,
+            'mathematics': 25,
+            'maths-edexcel': 25,
+            'maths-aqa-alevel': 18,
+            'english-language': 10,
+            'english-literature': 8,
+            'geography': 20,
+            'geography-paper-2': 20,
+            'history': 12,
+            'religious-studies': 10,
+            'business-edexcel-igcse': 15,
+            'computer-science': 20,
+            'psychology': 15,
+            'music-eduqas-gcse': 12
+          };
+
+          const requiredQuestions = questionThresholds[subjectId] || 15;
+          
+          // Check total questions answered today
+          const today = new Date().toISOString().split('T')[0];
+          const { data: todaysMastery } = await supabase
+            .from('daily_topic_mastery')
+            .select('score')
+            .eq('user_id', user.id)
+            .eq('subject_id', subjectId)
+            .eq('date', today);
+
+          const questionsAnsweredToday = (todaysMastery?.length || 0) * attempts.length;
+          
+          if (questionsAnsweredToday >= requiredQuestions) {
+            console.log(`✓ Questions ${questionsAnsweredToday} meets threshold ${requiredQuestions} - completing complete_questions task`);
+            
+            // Check if task already completed
+            const { data: existingTask } = await supabase
+              .from('subject_daily_tasks')
+              .select('completed')
+              .eq('user_id', user.id)
+              .eq('subject_id', subjectId)
+              .eq('task_id', 'complete_questions')
+              .eq('date', today)
+              .maybeSingle();
+            
+            if (!existingTask?.completed) {
+              // Mark task as complete
+              const { error: taskError } = await supabase
+                .from('subject_daily_tasks')
+                .upsert({
+                  user_id: user.id,
+                  subject_id: subjectId,
+                  task_id: 'complete_questions',
+                  date: today,
+                  completed: true,
+                  mp_awarded: 20
+                }, {
+                  onConflict: 'user_id,subject_id,task_id,date'
+                });
+
+              if (!taskError) {
+                // Award 20 MP
+                const { data: existingPoints } = await supabase
+                  .from('user_points')
+                  .select('total_points')
+                  .eq('user_id', user.id)
+                  .maybeSingle();
+
+                if (existingPoints) {
+                  await supabase
+                    .from('user_points')
+                    .update({
+                      total_points: existingPoints.total_points + 20,
+                      updated_at: new Date().toISOString()
+                    })
+                    .eq('user_id', user.id);
+                } else {
+                  await supabase
+                    .from('user_points')
+                    .insert({
+                      user_id: user.id,
+                      total_points: 20,
+                      created_at: new Date().toISOString(),
+                      updated_at: new Date().toISOString()
+                    });
+                }
+
+                console.log('✓ complete_questions task completed and 20 MP awarded');
+              }
+            }
+          }
         } catch (error) {
           console.error('Error tracking topic mastery:', error);
         }
