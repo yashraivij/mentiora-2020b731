@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, Crown, Star, Zap, Medal } from 'lucide-react';
+import { Trophy, Flame, Crown, TrendingUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LeaderEntry {
@@ -138,52 +136,28 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const getRankDisplay = (rank: number) => {
     if (rank === 1) {
       return (
-        <motion.div 
-          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 shadow-xl"
-          animate={{ 
-            boxShadow: [
-              '0 10px 30px rgba(251, 191, 36, 0.3)',
-              '0 10px 40px rgba(251, 191, 36, 0.5)',
-              '0 10px 30px rgba(251, 191, 36, 0.3)',
-            ]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <Crown className="h-7 w-7 text-amber-900" />
-          <motion.div
-            className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-300 rounded-full flex items-center justify-center"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <Star className="h-3 w-3 text-amber-800 fill-amber-800" />
-          </motion.div>
-        </motion.div>
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#F97316] shadow-md">
+          <Crown className="h-6 w-6 text-white" />
+        </div>
       );
     }
     if (rank === 2) {
       return (
-        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 shadow-lg border-2 border-slate-100">
-          <Medal className="h-6 w-6 text-slate-700" />
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#94A3B8] to-[#64748B] shadow-md">
+          <Trophy className="h-5 w-5 text-white" />
         </div>
       );
     }
     if (rank === 3) {
       return (
-        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 shadow-lg border-2 border-orange-300">
-          <Medal className="h-6 w-6 text-orange-100" />
-        </div>
-      );
-    }
-    if (rank <= 10) {
-      return (
-        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/30 border border-primary/40">
-          <span className="text-xl font-bold text-primary">{rank}</span>
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#EA580C] to-[#DC2626] shadow-md">
+          <Trophy className="h-5 w-5 text-white" />
         </div>
       );
     }
     return (
-      <div className="flex items-center justify-center w-12 h-12">
-        <span className="text-xl font-semibold text-muted-foreground/60">{rank}</span>
+      <div className="flex items-center justify-center w-10 h-10">
+        <span className="text-lg font-semibold text-[#64748B]">{rank}</span>
       </div>
     );
   };
@@ -193,13 +167,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full rounded-3xl bg-gradient-to-br from-background via-muted/30 to-background border border-border/50 overflow-hidden"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
       >
-        <div className="p-8">
-          <Skeleton className="h-10 w-56 mb-3" />
-          <Skeleton className="h-5 w-72" />
-        </div>
-        <div className="px-8 pb-8 space-y-3">
+        <Skeleton className="h-10 w-48 mb-2" />
+        <Skeleton className="h-5 w-72 mb-8" />
+        <div className="space-y-3">
           {[...Array(8)].map((_, i) => (
             <Skeleton key={i} className="h-20 w-full rounded-2xl" />
           ))}
@@ -213,164 +185,130 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full rounded-3xl bg-gradient-to-br from-background via-muted/30 to-background border border-border/50 overflow-hidden shadow-lg"
+      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
     >
-      {/* Header with gradient */}
-      <div className="relative px-8 pt-8 pb-6 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b border-border/50">
+      {/* Animated background element */}
+      <motion.div 
+        className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl pointer-events-none"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Header */}
+      <div className="relative z-10 mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <motion.div
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-          >
-            <Trophy className="h-8 w-8 text-primary" />
-          </motion.div>
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+            <Trophy className="h-6 w-6 text-[#0EA5E9]" />
+          </div>
+          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">
             Top Students
           </h2>
         </div>
-        <p className="text-muted-foreground ml-11">
-          Compete with the best students and climb the ranks
+        <p className="text-[#64748B] dark:text-gray-400 ml-[52px]">
+          The top 25 students by Medly Points. Earn MP to climb the ranks!
         </p>
       </div>
 
-      <div className="p-8">
+      {/* Content */}
+      <div className="relative z-10">
         {entries.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <div className="relative inline-block mb-6">
-              <Trophy className="h-20 w-20 text-muted-foreground/30" />
-              <motion.div
-                className="absolute inset-0"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Trophy className="h-20 w-20 text-primary/20" />
-              </motion.div>
+            <div className="p-4 rounded-2xl bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+              <Trophy className="h-10 w-10 text-[#0EA5E9]" />
             </div>
-            <p className="text-lg text-muted-foreground font-medium">
-              Be the first to earn points and appear on the leaderboard!
+            <p className="text-lg text-[#0F172A] dark:text-white font-semibold mb-2">
+              Be the first to appear on the leaderboard!
             </p>
-            <p className="text-sm text-muted-foreground/60 mt-2">
+            <p className="text-sm text-[#64748B] dark:text-gray-400">
               Complete daily tasks and practice to earn MP
             </p>
           </motion.div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <AnimatePresence mode="popLayout">
-              {entries.slice(0, 25).map((entry, index) => {
-                const isTop3 = entry.rank <= 3;
-                const isTop10 = entry.rank <= 10;
-                
-                return (
-                  <motion.div
-                    key={entry.user_id}
-                    layout
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ 
-                      delay: index * 0.02,
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 30
-                    }}
-                    whileHover={{ scale: 1.02, x: 4 }}
-                    className={`
-                      relative flex items-center gap-4 p-5 rounded-2xl transition-all duration-300 cursor-pointer group
-                      ${entry.isCurrentUser 
-                        ? 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-2 border-primary/50 shadow-lg shadow-primary/20' 
-                        : isTop3
-                        ? 'bg-gradient-to-r from-accent/20 to-transparent border border-accent/30 hover:border-accent/50'
-                        : isTop10
-                        ? 'bg-gradient-to-r from-muted/60 to-transparent border border-border hover:border-primary/30'
-                        : 'bg-muted/40 border border-transparent hover:border-primary/20 hover:bg-muted/60'
-                      }
-                    `}
-                  >
-                    {/* Rank Badge */}
-                    <div className="flex-shrink-0 relative">
-                      {getRankDisplay(entry.rank)}
-                      {isTop3 && (
-                        <motion.div
-                          className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-400/20 to-transparent blur-xl -z-10"
-                          animate={{ opacity: [0.3, 0.6, 0.3] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        />
+              {entries.slice(0, 25).map((entry, index) => (
+                <motion.div
+                  key={entry.user_id}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ 
+                    delay: index * 0.03,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30
+                  }}
+                  whileHover={{ y: -2 }}
+                  className={`
+                    group relative flex items-center gap-4 p-4 rounded-2xl transition-all duration-300
+                    ${entry.isCurrentUser 
+                      ? 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-[#0EA5E9]/40 shadow-[0_4px_16px_rgba(14,165,233,0.15)]' 
+                      : 'bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_4px_16px_rgba(14,165,233,0.1)]'
+                    }
+                  `}
+                >
+                  {/* Rank Display */}
+                  <div className="flex-shrink-0">
+                    {getRankDisplay(entry.rank)}
+                  </div>
+
+                  {/* User Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="font-semibold text-[#0F172A] dark:text-white truncate">
+                        {entry.username}
+                      </p>
+                      {entry.isCurrentUser && (
+                        <span className="px-2 py-0.5 text-xs font-medium bg-[#0EA5E9] text-white rounded-full">
+                          You
+                        </span>
                       )}
                     </div>
-
-                    {/* User Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <p className={`font-bold text-base truncate ${isTop3 ? 'text-foreground' : 'text-foreground/90'}`}>
-                          {entry.username}
-                        </p>
-                        {entry.isCurrentUser && (
-                          <Badge className="text-xs px-2 py-0.5 bg-primary/90 text-primary-foreground border-0">
-                            You
-                          </Badge>
-                        )}
-                        {isTop3 && !entry.isCurrentUser && (
-                          <motion.div
-                            animate={{ rotate: [0, 15, -15, 0] }}
-                            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                          >
-                            <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                          </motion.div>
-                        )}
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-base">💎</span>
+                        <span className="font-semibold text-[#0EA5E9]">{entry.mp_points}</span>
+                        <span className="text-xs text-[#64748B] dark:text-gray-400">MP</span>
                       </div>
-                      <div className="flex items-center gap-4 text-sm">
-                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                          <span className="text-base">💎</span>
-                          <span className="font-bold text-primary">{entry.mp_points}</span>
-                          <span className="text-xs text-muted-foreground font-medium">MP</span>
+                      {entry.streak > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <Flame className="h-4 w-4 text-[#F59E0B]" />
+                          <span className="font-semibold text-[#0F172A] dark:text-white">{entry.streak}</span>
+                          <span className="text-xs text-[#64748B] dark:text-gray-400">
+                            {entry.streak === 1 ? 'day' : 'days'}
+                          </span>
                         </div>
-                        {entry.streak > 0 && (
-                          <motion.div 
-                            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20"
-                            whileHover={{ scale: 1.05 }}
-                          >
-                            <Flame className="h-4 w-4 text-orange-500" />
-                            <span className="font-bold text-orange-600 dark:text-orange-400">{entry.streak}</span>
-                            <span className="text-xs text-orange-600/70 dark:text-orange-400/70 font-medium">
-                              {entry.streak === 1 ? 'day' : 'days'}
-                            </span>
-                          </motion.div>
-                        )}
-                      </div>
+                      )}
                     </div>
+                  </div>
 
-                    {/* Hover Effect Icon */}
-                    {!entry.isCurrentUser && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        whileHover={{ opacity: 1, x: 0 }}
-                        className="flex-shrink-0 text-primary/40 group-hover:text-primary transition-colors"
-                      >
-                        <Zap className="h-5 w-5" />
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
+                  {/* Trend Icon */}
+                  <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <TrendingUp className="h-5 w-5 text-[#0EA5E9]" />
+                  </div>
+                </motion.div>
+              ))}
               
-              {/* Show separator and current user if they're not in top 25 */}
+              {/* Current user if not in top 25 */}
               {entries.length > 25 && (
                 <>
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex items-center gap-4 py-4"
-                  >
-                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-                    <div className="flex items-center gap-2 px-4 py-1 rounded-full bg-muted/50 border border-border">
-                      <span className="text-muted-foreground text-sm font-medium">⋯</span>
-                    </div>
-                    <div className="flex-1 h-px bg-gradient-to-r from-border via-border to-transparent" />
-                  </motion.div>
+                  <div className="flex items-center gap-3 py-3">
+                    <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-gray-700" />
+                    <span className="text-[#64748B] dark:text-gray-400 text-sm">⋯</span>
+                    <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-gray-700" />
+                  </div>
                   
                   {entries.slice(25).map((entry) => (
                     <motion.div
@@ -378,36 +316,36 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       layout
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="relative flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-2 border-primary/50 shadow-lg shadow-primary/20"
+                      className="flex items-center gap-4 p-4 rounded-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-[#0EA5E9]/40 shadow-[0_4px_16px_rgba(14,165,233,0.15)]"
                     >
-                      {/* Rank Badge */}
+                      {/* Rank */}
                       <div className="flex-shrink-0">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 border border-primary/30">
-                          <span className="text-xl font-bold text-primary">{entry.rank}</span>
+                        <div className="flex items-center justify-center w-10 h-10">
+                          <span className="text-lg font-semibold text-[#64748B]">{entry.rank}</span>
                         </div>
                       </div>
 
                       {/* User Info */}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1.5">
-                          <p className="font-bold text-base text-foreground truncate">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="font-semibold text-[#0F172A] dark:text-white truncate">
                             {entry.username}
                           </p>
-                          <Badge className="text-xs px-2 py-0.5 bg-primary/90 text-primary-foreground border-0">
+                          <span className="px-2 py-0.5 text-xs font-medium bg-[#0EA5E9] text-white rounded-full">
                             You
-                          </Badge>
+                          </span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm">
-                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="flex items-center gap-1.5">
                             <span className="text-base">💎</span>
-                            <span className="font-bold text-primary">{entry.mp_points}</span>
-                            <span className="text-xs text-muted-foreground font-medium">MP</span>
+                            <span className="font-semibold text-[#0EA5E9]">{entry.mp_points}</span>
+                            <span className="text-xs text-[#64748B] dark:text-gray-400">MP</span>
                           </div>
                           {entry.streak > 0 && (
-                            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20">
-                              <Flame className="h-4 w-4 text-orange-500" />
-                              <span className="font-bold text-orange-600 dark:text-orange-400">{entry.streak}</span>
-                              <span className="text-xs text-orange-600/70 dark:text-orange-400/70 font-medium">
+                            <div className="flex items-center gap-1.5">
+                              <Flame className="h-4 w-4 text-[#F59E0B]" />
+                              <span className="font-semibold text-[#0F172A] dark:text-white">{entry.streak}</span>
+                              <span className="text-xs text-[#64748B] dark:text-gray-400">
                                 {entry.streak === 1 ? 'day' : 'days'}
                               </span>
                             </div>
@@ -424,14 +362,10 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       </div>
 
       {/* Footer */}
-      <div className="px-8 pb-6">
-        <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-border" />
-          <p className="text-xs text-muted-foreground font-medium">
-            Updates every 2 minutes • {entries.length > 25 ? '25+' : entries.length} {entries.length === 1 ? 'student' : 'students'}
-          </p>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-border" />
-        </div>
+      <div className="relative z-10 mt-6 pt-6 border-t border-[#E2E8F0]/50 dark:border-gray-700">
+        <p className="text-center text-xs text-[#64748B] dark:text-gray-400 font-medium">
+          Updates every 2 minutes • {entries.length > 25 ? '25+' : entries.length} {entries.length === 1 ? 'student' : 'students'}
+        </p>
       </div>
     </motion.div>
   );
