@@ -2964,13 +2964,25 @@ const Dashboard = () => {
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
                                         <span className={`text-lg font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>{getDisplayGrade(predictedGradeValue)}</span>
                                       </div>
-                                      <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
-                                        <motion.div 
-                                          initial={{ width: 0 }}
-                                          animate={{ width: `${((Math.max(1, predictedGradeValue) - 1) / 8) * 100}%` }}
-                                          transition={{ duration: 1, delay: 0.3 }}
-                                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
-                                        />
+                                      <div className="flex items-center gap-2">
+                                        <div className={`flex-1 h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                                          <motion.div 
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${((Math.max(1, predictedGradeValue) - 1) / 8) * 100}%` }}
+                                            transition={{ duration: 1, delay: 0.3 }}
+                                            className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                                          />
+                                        </div>
+                                        {!isPremium && (
+                                          <Button
+                                            size="sm"
+                                            onClick={() => navigate('/pricing')}
+                                            className="h-7 px-3 text-xs bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold shadow-sm whitespace-nowrap"
+                                          >
+                                            <Crown className="w-3 h-3 mr-1" />
+                                            Start Trial
+                                          </Button>
+                                        )}
                                       </div>
                                     </div>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
