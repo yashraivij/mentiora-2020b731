@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Zap, X, Sparkles } from "lucide-react";
+import { Zap, X } from "lucide-react";
 
 interface MPRewardToastProps {
   amount: number;
@@ -13,32 +12,14 @@ interface MPRewardToastProps {
 
 export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
     
-    // Smoothly animate progress from 0 to 100
-    const duration = 7000; // 7 seconds
-    const startTime = Date.now();
-    
-    const animateProgress = () => {
-      const elapsed = Date.now() - startTime;
-      const percentage = Math.min((elapsed / duration) * 100, 100);
-      
-      setProgress(percentage);
-      
-      if (percentage < 100) {
-        requestAnimationFrame(animateProgress);
-      }
-    };
-    
-    requestAnimationFrame(animateProgress);
-    
     const timer = setTimeout(() => {
       setIsVisible(false);
       setTimeout(onClose, 300);
-    }, 8000);
+    }, 4000);
     
     return () => {
       clearTimeout(timer);
@@ -54,108 +35,58 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: -20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: -20 }}
+          initial={{ opacity: 0, y: -20, x: 20 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          exit={{ opacity: 0, y: -20, x: 20 }}
           transition={{ 
             type: "spring", 
             damping: 25, 
-            stiffness: 500,
-            duration: 0.4 
+            stiffness: 500
           }}
-          className="fixed top-6 right-6 z-50 max-w-sm"
+          className="fixed top-6 right-6 z-50 w-80"
         >
-          <Card className="relative overflow-hidden bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-primary/20 border-cyan-400/30 shadow-2xl backdrop-blur-md">
-            {/* Animated accent line at top */}
-            <motion.div 
-              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-primary"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            />
+          <Card className="relative overflow-hidden bg-white dark:bg-gray-900 border-2 border-[#0EA5E9]/30 shadow-lg shadow-[#0EA5E9]/10">
+            {/* Top accent bar */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8]" />
             
-            {/* Subtle sparkle effects */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.4, 0.7, 0.4]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-3 right-3 w-5 h-5 text-cyan-300"
-              >
-                <Sparkles className="w-full h-full" />
-              </motion.div>
-              <motion.div
-                animate={{ 
-                  scale: [1.2, 1, 1.2],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-3 left-3 w-4 h-4 text-blue-400"
-              >
-                <Sparkles className="w-full h-full" />
-              </motion.div>
-            </div>
-
-            <div className="p-5 relative">
+            <div className="p-5">
               {/* Close button */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleClose}
-                className="absolute top-2 right-2 w-7 h-7 p-0 hover:bg-cyan-400/20 text-cyan-700 dark:text-cyan-300"
+                className="absolute top-3 right-3 w-7 h-7 p-0 hover:bg-[#0EA5E9]/10 text-[#64748B] hover:text-[#0EA5E9] rounded-lg"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="h-4 w-4" />
               </Button>
 
-              {/* Main content */}
-              <div className="flex items-start space-x-3 pr-6">
+              {/* Content */}
+              <div className="flex items-start gap-4 pr-8">
                 <motion.div
-                  animate={{ 
-                    scale: [1, 1.15, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
                   transition={{ 
-                    duration: 0.8,
-                    ease: "easeInOut"
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 15,
+                    delay: 0.1
                   }}
-                  className="w-11 h-11 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-400/40 flex-shrink-0"
+                  className="w-12 h-12 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-md shadow-[#0EA5E9]/20 flex-shrink-0"
                 >
                   <Zap className="h-6 w-6 text-white fill-white" />
                 </motion.div>
                 
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 pt-1">
                   <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.4, ease: "backOut" }}
-                    className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-1"
+                    transition={{ delay: 0.15 }}
+                    className="text-2xl font-bold text-[#0EA5E9] mb-1"
                   >
                     +{amount} MP
                   </motion.div>
-                  <div className="text-sm text-cyan-900 dark:text-cyan-100 leading-snug font-medium mb-3">
+                  <div className="text-sm text-[#0F172A] dark:text-white font-medium leading-snug">
                     {message}
-                  </div>
-                  
-                  {/* Progress bar with smooth fill animation */}
-                  <div className="space-y-1.5">
-                    <div className="relative h-2.5 bg-cyan-100 dark:bg-cyan-950 rounded-full overflow-hidden shadow-inner">
-                      <motion.div
-                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-sm"
-                        initial={{ width: "0%" }}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="text-xs text-cyan-700 dark:text-cyan-300 font-semibold">
-                        Quest Complete!
-                      </div>
-                      <div className="text-xs text-cyan-600 dark:text-cyan-400 font-bold">
-                        {Math.round(progress)}%
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
