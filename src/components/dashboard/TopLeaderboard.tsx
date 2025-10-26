@@ -317,7 +317,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[1] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                     <div className="relative mb-3">
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-lg sm:text-xl font-bold text-white shadow-xl ring-2 ring-slate-300/50 dark:ring-slate-500/30">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center text-3xl sm:text-4xl">
                         {getProfileDisplay(topThree[1])}
                       </div>
                       <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg">
@@ -346,7 +346,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[0] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0s' }}>
                     <div className="relative mb-3">
-                      <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-600 flex items-center justify-center text-xl sm:text-2xl font-bold text-white shadow-2xl ring-2 ring-amber-200/50 dark:ring-yellow-500/30 animate-pulse">
+                      <div className="w-18 h-18 sm:w-20 sm:h-20 flex items-center justify-center text-4xl sm:text-5xl">
                         {getProfileDisplay(topThree[0])}
                       </div>
                       <div className="absolute -top-2 -right-2 w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl">
@@ -375,7 +375,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {topThree[2] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                     <div className="relative mb-3">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center text-base sm:text-lg font-bold text-white shadow-xl ring-2 ring-orange-300/50 dark:ring-orange-600/30">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-2xl sm:text-3xl">
                         {getProfileDisplay(topThree[2])}
                       </div>
                       <div className="absolute -top-1 -right-1 w-6 h-6 rounded-lg bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-lg">
@@ -434,12 +434,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                     </div>
 
                     {/* Avatar */}
-                    <div className={cn(
-                      "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg transition-all duration-300 group-hover:scale-110",
-                      entry.isCurrentUser 
-                        ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/30" 
-                        : "bg-gradient-to-br from-accent/20 to-accent/10 text-foreground"
-                    )}>
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110">
                       {getProfileDisplay(entry)}
                     </div>
 
@@ -464,9 +459,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                         </div>
                       )}
                       <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 text-primary shadow-sm border border-primary/20">
-                        <Sparkles className="h-3.5 w-3.5" />
                         <span className="text-xs font-bold">
-                          {entry.mp_points.toLocaleString()}
+                          {entry.mp_points.toLocaleString()} MP
                         </span>
                       </div>
                     </div>
@@ -478,9 +472,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </>
       )}
 
-      {/* Footer */}
+      {/* Header */}
       <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-muted/30 backdrop-blur-sm border border-border/30">
-        <Sparkles className="h-3.5 w-3.5 text-primary" />
         <p className="text-xs text-muted-foreground font-medium">
           Ranks update hourly • Earn MP from quizzes, streaks & quests
         </p>
