@@ -749,6 +749,7 @@ export type Database = {
           parent_email: string | null
           plan: string | null
           premium_until: string | null
+          profile_emoji: string | null
           purchased_package: string | null
           stripe_customer_id: string | null
           stripe_payment_id: string | null
@@ -767,6 +768,7 @@ export type Database = {
           parent_email?: string | null
           plan?: string | null
           premium_until?: string | null
+          profile_emoji?: string | null
           purchased_package?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
@@ -785,6 +787,7 @@ export type Database = {
           parent_email?: string | null
           plan?: string | null
           premium_until?: string | null
+          profile_emoji?: string | null
           purchased_package?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null

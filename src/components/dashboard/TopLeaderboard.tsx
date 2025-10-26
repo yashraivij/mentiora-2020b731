@@ -16,6 +16,7 @@ interface LeaderEntry {
   top_subject?: string;
   weekly_gain?: number;
   last_active?: Date;
+  profile_emoji?: string;
 }
 
 type FilterType = 'week' | 'alltime' | 'friends';
@@ -63,7 +64,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
       const { data: profiles } = await supabase
         .from('profiles')
-        .select('id, full_name, username, email')
+        .select('id, full_name, username, email, profile_emoji')
         .in('id', userIds);
 
       const streaksPromises = userIds.map(async (id) => {
@@ -141,6 +142,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           top_subject: topSubjectMap.get(up.user_id),
           weekly_gain: 0,
           last_active: lastActiveMap.get(up.user_id),
+          profile_emoji: profile?.profile_emoji || '😊',
         };
       });
 
@@ -174,6 +176,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
             top_subject: topSubjectMap.get(userId),
             weekly_gain: 0,
             last_active: lastActiveMap.get(userId),
+            profile_emoji: profile?.profile_emoji || '😊',
           };
 
           setCurrentUserData(userData);
@@ -214,8 +217,12 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     return null;
   };
 
-  const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  const getProfileDisplay = (entry: LeaderEntry) => {
+    if (entry.profile_emoji) {
+      return <span className="text-2xl">{entry.profile_emoji}</span>;
+    }
+    const initials = entry.username.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    return initials;
   };
 
   const topThree = entries.slice(0, 3);
@@ -311,7 +318,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                     <div className="relative mb-3">
                       <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-lg sm:text-xl font-bold text-white shadow-xl ring-2 ring-slate-300/50 dark:ring-slate-500/30">
-                        {getInitials(topThree[1].username)}
+                        {getProfileDisplay(topThree[1])}
                       </div>
                       <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg">
                         <Medal className="h-4 w-4 text-white" />
@@ -340,7 +347,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0s' }}>
                     <div className="relative mb-3">
                       <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-600 flex items-center justify-center text-xl sm:text-2xl font-bold text-white shadow-2xl ring-2 ring-amber-200/50 dark:ring-yellow-500/30 animate-pulse">
-                        {getInitials(topThree[0].username)}
+                        {getProfileDisplay(topThree[0])}
                       </div>
                       <div className="absolute -top-2 -right-2 w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl">
                         <Crown className="h-5 w-5 text-white" />
@@ -369,7 +376,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                     <div className="relative mb-3">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center text-base sm:text-lg font-bold text-white shadow-xl ring-2 ring-orange-300/50 dark:ring-orange-600/30">
-                        {getInitials(topThree[2].username)}
+                        {getProfileDisplay(topThree[2])}
                       </div>
                       <div className="absolute -top-1 -right-1 w-6 h-6 rounded-lg bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-lg">
                         <Award className="h-3.5 w-3.5 text-white" />
@@ -433,7 +440,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                         ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/30" 
                         : "bg-gradient-to-br from-accent/20 to-accent/10 text-foreground"
                     )}>
-                      {getInitials(entry.username)}
+                      {getProfileDisplay(entry)}
                     </div>
 
                     {/* Name */}

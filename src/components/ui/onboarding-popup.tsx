@@ -26,6 +26,7 @@ interface OnboardingData {
   studyPreferences: string[];
   parentUpdates: boolean;
   parentEmail: string | null;
+  profileEmoji: string;
 }
 
 // Extract unique subjects from curriculum by level
@@ -145,6 +146,15 @@ const STUDY_PREFERENCES = [
   },
 ];
 
+const PROFILE_EMOJIS = [
+  '😊', '😎', '🤓', '😄', '🥳', '😇', '🤩', '😁', '😀', '🙂',
+  '😌', '🤗', '🥰', '😏', '🤠', '🧐', '🤔', '🤫', '🤪', '😜',
+  '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐶', '🐱', '🐰', '🐸',
+  '🦄', '🐙', '🦉', '🦆', '🐧', '🦋', '🐝', '🦈', '🐬', '🦑',
+  '🎯', '⚡', '✨', '🔥', '💡', '🌟', '💫', '🎨', '🎸', '🎮',
+  '🚀', '🛸', '🌈', '⭐', '🌙', '☀️', '🌺', '🌻', '🍕', '🍔'
+];
+
 const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
 const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
 
@@ -160,6 +170,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     studyPreferences: [],
     parentUpdates: false,
     parentEmail: null,
+    profileEmoji: '😊',
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [showCompletion, setShowCompletion] = useState(false);
@@ -190,14 +201,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const canContinue = () => {
     switch (currentStep) {
       case 1:
-        return onboardingData.acquisitionSource !== '';
+        return onboardingData.profileEmoji !== '';
       case 2:
-        return onboardingData.yearGroup !== '';
+        return onboardingData.acquisitionSource !== '';
       case 3:
-        return onboardingData.subjects.length > 0;
+        return onboardingData.yearGroup !== '';
       case 4:
-        return onboardingData.studyPreferences.length > 0;
+        return onboardingData.subjects.length > 0;
       case 5:
+        return onboardingData.studyPreferences.length > 0;
+      case 6:
         if (!onboardingData.parentUpdates) return true;
         return onboardingData.parentEmail && isValidEmail(onboardingData.parentEmail);
       default:
@@ -206,7 +219,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const handleNext = () => {
-    if (currentStep === 5) {
+    if (currentStep === 6) {
       handleComplete();
     } else {
       setCurrentStep(currentStep + 1);
@@ -218,7 +231,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const handleSkip = () => {
-    if (currentStep === 1) return;
+    if (currentStep === 1 || currentStep === 2) return;
     handleNext();
   };
 
@@ -232,6 +245,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
+        // Save profile emoji
+        await supabase
+          .from('profiles')
+          .update({ profile_emoji: onboardingData.profileEmoji })
+          .eq('id', user.id);
+
         // Save parent email to onboarding_parent_emails table
         if (onboardingData.parentEmail) {
           await supabase
@@ -274,7 +293,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   const getProgressPercentage = () => {
     if (currentStep === 0) return 0;
-    return (currentStep / 5) * 100;
+    return (currentStep / 6) * 100;
   };
 
   const getCurrentSubjects = () => {
@@ -306,7 +325,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-10 max-h-[88vh] overflow-hidden flex flex-col"
       >
         {/* Progress Bar */}
-        {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
+        {currentStep >= 1 && currentStep <= 6 && !showCompletion && (
           <div className="mb-6 flex-shrink-0">
             <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-2">
               <motion.div
@@ -317,7 +336,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               />
             </div>
             <p className="text-[13px] text-[#6B7280] text-center font-medium">
-              Step {currentStep} of 5
+              Step {currentStep} of 6
             </p>
           </div>
         )}
@@ -347,8 +366,43 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 1: How did you hear about us */}
+            {/* Step 1: Choose emoji profile picture */}
             {currentStep === 1 && (
+              <div>
+                <h2 className="text-[26px] font-bold text-black mb-2">Choose your profile picture</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">Pick an emoji that represents you! It'll be shown on the leaderboard</p>
+                
+                {/* Selected emoji preview */}
+                <div className="flex flex-col items-center mb-5">
+                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#00B4D8]/10 to-[#0BA5E9]/10 flex items-center justify-center mb-3 border-2 border-[#00B4D8]/30">
+                    <span className="text-[56px]">{onboardingData.profileEmoji}</span>
+                  </div>
+                  <p className="text-[13px] text-[#6B7280] font-medium">Your profile emoji</p>
+                </div>
+
+                {/* Emoji grid */}
+                <div className="max-h-[280px] overflow-y-auto">
+                  <div className="grid grid-cols-8 gap-2">
+                    {PROFILE_EMOJIS.map((emoji) => (
+                      <button
+                        key={emoji}
+                        onClick={() => setOnboardingData({ ...onboardingData, profileEmoji: emoji })}
+                        className={`w-full aspect-square rounded-lg flex items-center justify-center text-[28px] transition-all duration-200 hover:scale-110 ${
+                          onboardingData.profileEmoji === emoji
+                            ? 'bg-[#00B4D8] scale-110 shadow-lg'
+                            : 'bg-[#F3F4F6] hover:bg-[#E5E7EB]'
+                        }`}
+                      >
+                        {emoji}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: How did you hear about us */}
+            {currentStep === 2 && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">How did you hear about us?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-5">This helps us understand how students find Mentiora</p>
@@ -385,8 +439,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 2: Year group */}
-            {currentStep === 2 && (
+            {/* Step 3: Year group */}
+            {currentStep === 3 && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">What year are you in?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-5">This helps us show you the right content</p>
@@ -414,8 +468,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 3: Select subjects WITH TABS */}
-            {currentStep === 3 && (
+            {/* Step 4: Select subjects WITH TABS */}
+            {currentStep === 4 && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">Which subjects are you studying?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-4">Select all that apply. You can add more later.</p>
@@ -549,8 +603,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 4: Study preferences */}
-            {currentStep === 4 && (
+            {/* Step 5: Study preferences */}
+            {currentStep === 5 && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">How do you like to study?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-5">Select all that apply. We'll personalize your experience.</p>
@@ -586,8 +640,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 5: Parent updates */}
-            {currentStep === 5 && !showCompletion && (
+            {/* Step 6: Parent updates */}
+            {currentStep === 6 && !showCompletion && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">Keep your parents in the loop?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-5">We can send them weekly progress updates (optional)</p>
@@ -648,7 +702,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 6: Completion animation */}
+            {/* Step 7: Completion animation */}
             {showCompletion && (
               <div className="text-center py-8">
                 <AnimatePresence mode="wait">
@@ -726,7 +780,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         </AnimatePresence>
 
         {/* Navigation buttons */}
-        {currentStep > 0 && currentStep < 6 && !showCompletion && (
+        {currentStep > 0 && currentStep < 7 && !showCompletion && (
           <div className="flex items-center justify-between mt-5 pt-5 border-t border-gray-200 flex-shrink-0">
             {currentStep > 1 && (
               <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline transition-colors duration-200">
@@ -734,7 +788,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </button>
             )}
             <div className="flex-1" />
-            {currentStep !== 1 && (
+            {currentStep !== 1 && currentStep !== 2 && (
               <button onClick={handleSkip} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline mr-4 transition-colors duration-200">
                 Skip
               </button>
