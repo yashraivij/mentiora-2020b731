@@ -29,11 +29,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     try {
       setIsLoading(true);
 
-      // Get top 25 users by MP points
+      // Get top 25 users by MP points (including 0 points for demo purposes)
       const { data: userPoints, error: pointsError } = await supabase
         .from('user_points')
         .select('user_id, total_points')
-        .gt('total_points', 0)
+        .gte('total_points', 0)
         .order('total_points', { ascending: false })
         .limit(25);
 
@@ -44,7 +44,23 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         return;
       }
 
-      const userIds = userPoints.map(u => u.user_id);
+      let userIds = userPoints.map(u => u.user_id);
+      
+      // Check if current user is in top 25
+      const currentUserInTop = userId && userIds.includes(userId);
+      
+      // If current user is not in top 25, fetch their data separately
+      if (userId && !currentUserInTop) {
+        const { data: currentUserPoint } = await supabase
+          .from('user_points')
+          .select('user_id, total_points')
+          .eq('user_id', userId)
+          .single();
+        
+        if (currentUserPoint) {
+          userIds.push(currentUserPoint.user_id);
+        }
+      }
 
       // Get user profiles
       const { data: profiles } = await supabase
@@ -64,7 +80,8 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       const streaksData = await Promise.all(streaksPromises);
       const streaksMap = new Map(streaksData.map(s => [s.user_id, s.streak]));
 
-      const leaderboardEntries: LeaderEntry[] = userPoints.map((up, index) => {
+      // Build leaderboard entries from userPoints
+      let leaderboardEntries: LeaderEntry[] = userPoints.map((up, index) => {
         const profile = profiles?.find(p => p.id === up.user_id);
         const displayName = profile?.full_name || profile?.username || profile?.email?.split('@')[0] || 'Anonymous';
 
@@ -77,6 +94,37 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           isCurrentUser: up.user_id === userId,
         };
       });
+
+      // If current user wasn't in top 25, add them at the end
+      if (userId && !currentUserInTop) {
+        const { data: allPoints } = await supabase
+          .from('user_points')
+          .select('total_points')
+          .order('total_points', { ascending: false });
+        
+        const currentUserData = await supabase
+          .from('user_points')
+          .select('user_id, total_points')
+          .eq('user_id', userId)
+          .single();
+
+        if (currentUserData.data) {
+          const profile = profiles?.find(p => p.id === userId);
+          const displayName = profile?.full_name || profile?.username || profile?.email?.split('@')[0] || 'You';
+          
+          // Calculate actual rank
+          const actualRank = (allPoints?.filter(p => p.total_points > currentUserData.data.total_points).length || 0) + 1;
+
+          leaderboardEntries.push({
+            rank: actualRank,
+            user_id: userId,
+            username: displayName,
+            mp_points: currentUserData.data.total_points,
+            streak: streaksMap.get(userId) || 0,
+            isCurrentUser: true,
+          });
+        }
+      }
 
       setEntries(leaderboardEntries);
     } catch (error) {
@@ -154,7 +202,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         ) : (
           <div className="space-y-3">
             <AnimatePresence mode="popLayout">
-              {entries.map((entry, index) => (
+              {entries.slice(0, 25).map((entry, index) => (
                 <motion.div
                   key={entry.user_id}
                   layout
@@ -200,6 +248,56 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                   </div>
                 </motion.div>
               ))}
+              
+              {/* Show separator and current user if they're not in top 25 */}
+              {entries.length > 25 && (
+                <>
+                  <div className="flex items-center gap-3 py-2">
+                    <div className="flex-1 h-px bg-border" />
+                    <span className="text-muted-foreground text-sm">⋯</span>
+                    <div className="flex-1 h-px bg-border" />
+                  </div>
+                  
+                  {entries.slice(25).map((entry) => (
+                    <motion.div
+                      key={entry.user_id}
+                      layout
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-4 p-4 rounded-xl bg-primary/10 border-2 border-primary shadow-md transition-all duration-200"
+                    >
+                      {/* Rank */}
+                      <div className="flex-shrink-0">
+                        <div className="flex items-center justify-center w-12 h-12">
+                          <span className="text-2xl font-bold text-muted-foreground">{entry.rank}</span>
+                        </div>
+                      </div>
+
+                      {/* User Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="font-semibold text-foreground truncate">
+                            {entry.username}
+                          </p>
+                          <Badge variant="secondary" className="text-xs px-2 py-0">You</Badge>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="flex items-center gap-1.5 text-primary font-semibold">
+                            <span className="text-lg">💎</span>
+                            <span>{entry.mp_points} MP</span>
+                          </div>
+                          {entry.streak > 0 && (
+                            <div className="flex items-center gap-1.5 text-orange-500">
+                              <Flame className="h-4 w-4" />
+                              <span className="font-medium">{entry.streak} day{entry.streak !== 1 ? 's' : ''}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </>
+              )}
             </AnimatePresence>
           </div>
         )}
