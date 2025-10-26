@@ -2716,23 +2716,12 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                {isPremium ? (
-                                  <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
-                                    Predicted {(() => {
-                                      console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
-                                      return getDisplayGrade(selectedDrawerSubject.predicted);
-                                    })()}
-                                  </Badge>
-                                ) : (
-                                  <Button
-                                    size="sm"
-                                    onClick={() => navigate('/pricing')}
-                                    className="h-8 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm whitespace-nowrap"
-                                  >
-                                    <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5" />
-                                    Unlock All Data
-                                  </Button>
-                                )}
+                                <Badge className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                                  Predicted {(() => {
+                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                    return getDisplayGrade(selectedDrawerSubject.predicted);
+                                  })()}
+                                </Badge>
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
