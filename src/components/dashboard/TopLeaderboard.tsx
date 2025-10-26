@@ -325,16 +325,16 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               </div>
 
               {/* Streak and MP Points */}
-              <div className="flex-shrink-0 flex items-center gap-3">
+              <div className="flex-shrink-0 flex items-center gap-2">
                 {entry.streak > 0 && (
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">
                     <span>🔥</span>
-                    <span>{entry.streak}</span>
+                    <span className="text-xs font-semibold">{entry.streak}</span>
                   </div>
                 )}
-                <div className="flex items-center gap-1.5 text-primary">
-                  <Gem className="h-4 w-4" />
-                  <span className="text-sm font-bold">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/10 text-primary">
+                  <Gem className="h-3.5 w-3.5" />
+                  <span className="text-xs font-semibold">
                     {entry.mp_points.toLocaleString()}
                   </span>
                 </div>
