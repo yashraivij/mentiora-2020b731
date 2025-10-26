@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Medal, Award } from 'lucide-react';
+import { Trophy, Medal, Award, Gem, Flame } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface LeaderEntry {
@@ -208,9 +208,9 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   }
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="h-4 w-4 text-yellow-500" />;
-    if (rank === 2) return <Medal className="h-4 w-4 text-slate-400" />;
-    if (rank === 3) return <Award className="h-4 w-4 text-orange-600" />;
+    if (rank === 1) return <Trophy className="h-6 w-6 text-yellow-500" />;
+    if (rank === 2) return <Medal className="h-6 w-6 text-slate-400" />;
+    if (rank === 3) return <Award className="h-6 w-6 text-orange-600" />;
     return null;
   };
 
@@ -225,7 +225,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-1.5">Leaderboard</h2>
           <p className="text-sm text-muted-foreground">
-            Compare your MP and streaks with other students
+            Compete with other students across the UK
           </p>
         </div>
 
@@ -299,11 +299,12 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               )}
             >
               {/* Rank with icon */}
-              <div className="flex items-center gap-2 w-8">
-                {getRankIcon(entry.rank)}
-                <span className="text-sm font-medium text-muted-foreground">
-                  {entry.rank}
-                </span>
+              <div className="flex items-center justify-center gap-2 w-12">
+                {getRankIcon(entry.rank) || (
+                  <span className="text-base font-bold text-muted-foreground">
+                    {entry.rank}
+                  </span>
+                )}
               </div>
 
               {/* Avatar */}
@@ -316,18 +317,27 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {getInitials(entry.username)}
               </div>
 
-              {/* Name */}
+              {/* Name and Streak */}
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-medium text-foreground truncate">
                   {entry.username}
                 </h3>
+                {entry.streak > 0 && (
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                    <span>🔥</span>
+                    <span>{entry.streak} day streak</span>
+                  </div>
+                )}
               </div>
 
               {/* MP Points */}
               <div className="flex-shrink-0">
-                <span className="text-sm font-medium text-muted-foreground">
-                  {entry.mp_points.toLocaleString()} MP
-                </span>
+                <div className="flex items-center gap-1.5 text-primary">
+                  <Gem className="h-4 w-4" />
+                  <span className="text-sm font-bold">
+                    {entry.mp_points.toLocaleString()}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
