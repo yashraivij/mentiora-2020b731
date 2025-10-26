@@ -3359,7 +3359,7 @@ const Dashboard = () => {
                                   // Determine if this item should be blurred (all except first Monday item)
                                   const shouldBlur = !isPremium && i > 0;
                                   
-                                  return (
+                                  const dayCard = (
                                     <motion.div 
                                       key={day}
                                       initial={{ opacity: 0, x: -20 }}
@@ -3465,26 +3465,38 @@ const Dashboard = () => {
                                       </div>
                                     </motion.div>
                                   );
+                                  
+                                  // Insert Premium CTA after Monday for non-premium users
+                                  if (i === 0 && !isPremium) {
+                                    return (
+                                      <>
+                                        {dayCard}
+                                        <motion.div
+                                          initial={{ opacity: 0, y: 10 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          transition={{ delay: 0.1 }}
+                                          className="p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm"
+                                        >
+                                          <div className="text-center space-y-3">
+                                            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Your Full Week</h4>
+                                            <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
+                                              Start your free trial to unlock all notes, complete study plans, and detailed insights
+                                            </p>
+                                            <Button 
+                                              className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                                              onClick={() => navigate('/pricing')}
+                                            >
+                                              Start Free Trial
+                                            </Button>
+                                          </div>
+                                        </motion.div>
+                                      </>
+                                    );
+                                  }
+                                  
+                                  return dayCard;
                                 });
                               })()}
-                              
-                              {/* Premium CTA Overlay for non-premium users */}
-                              {!isPremium && (
-                                <div className="mt-6 p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm">
-                                  <div className="text-center space-y-3">
-                                    <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Full Access</h4>
-                                    <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
-                                      Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
-                                    </p>
-                                    <Button 
-                                      className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
-                                      onClick={() => navigate('/pricing')}
-                                    >
-                                      Upgrade Now
-                                    </Button>
-                                  </div>
-                                </div>
-                              )}
                             </CardContent>
                           </Card>
                         </TabsContent>
