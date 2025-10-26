@@ -2964,7 +2964,7 @@ const Dashboard = () => {
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
                                         <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(predictedGradeValue)}</span>
                                       </div>
-                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                      <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                                         <motion.div 
                                           initial={{ width: 0 }}
                                           animate={{ width: `${((Math.max(1, predictedGradeValue) - 1) / 8) * 100}%` }}

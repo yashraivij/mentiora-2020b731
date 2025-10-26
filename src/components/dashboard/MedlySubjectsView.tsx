@@ -462,7 +462,7 @@ export function MedlySubjectsView({
                           })()}
                         </span>
                       </div>
-                      <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
+                      <div className={`w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: typeof subject.predicted === 'number' ? `${((Math.max(1, subject.predicted) - 1) / 8) * 100}%` : '0%' }}
