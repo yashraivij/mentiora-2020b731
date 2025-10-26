@@ -313,14 +313,12 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       ) : (
         <div className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
           {/* Table Header */}
-          <div className="bg-muted/30 border-b border-border px-6 py-3.5">
-            <div className="grid grid-cols-[70px,1fr,140px,110px,110px,110px] gap-6 items-center">
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Rank</div>
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Student</div>
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-right">MP</div>
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Streak</div>
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Quizzes</div>
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Badges</div>
+          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-4">
+            <div className="grid grid-cols-[70px,1fr,160px,130px] gap-6 items-center">
+              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide">Rank</div>
+              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide">Student</div>
+              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide text-right">MP</div>
+              <div className="text-xs font-semibold text-primary-foreground uppercase tracking-wide text-center">Streak</div>
             </div>
           </div>
 
@@ -350,7 +348,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                             entry.isCurrentUser && "bg-primary/5 hover:bg-primary/10"
                           )}
                         >
-                          <div className="grid grid-cols-[70px,1fr,140px,110px,110px,110px] gap-6 items-center">
+                          <div className="grid grid-cols-[70px,1fr,160px,130px] gap-6 items-center">
                             {/* Rank */}
                             <div className="flex items-center">
                               <div className={cn(
@@ -381,46 +379,35 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
                             {/* MP */}
                             <div className="text-right">
-                              <div className="text-lg font-bold text-foreground">
-                                {entry.mp_points.toLocaleString()}
+                              <div className="flex items-center justify-end gap-2">
+                                <Sparkles className="h-4 w-4 text-primary" />
+                                <span className="text-lg font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
                               </div>
                             </div>
 
                             {/* Streak */}
                             <div className="text-center">
-                              <div className="flex items-center justify-center gap-1.5">
+                              <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20">
                                 <Flame className="h-4 w-4 text-orange-500" />
-                                <span className="text-lg font-bold text-foreground">{entry.streak}</span>
+                                <span className="text-lg font-bold text-orange-700 dark:text-orange-400">{entry.streak}</span>
                               </div>
-                            </div>
-
-                            {/* Quizzes */}
-                            <div className="text-center">
-                              <span className="text-lg font-bold text-foreground">
-                                {entry.quizzes_completed || 0}
-                              </span>
-                            </div>
-
-                            {/* Badges */}
-                            <div className="text-center">
-                              <span className="text-lg font-bold text-foreground">
-                                {entry.badges_earned || 0}
-                              </span>
                             </div>
                           </div>
                         </motion.div>
                       </TooltipTrigger>
-                      <TooltipContent side="left" className="max-w-xs">
-                        <div className="space-y-1 text-sm">
-                          <div className="font-semibold">{entry.username}</div>
-                          <div className="text-muted-foreground">Total quizzes: {entry.quizzes_completed || 0}</div>
-                          <div className="text-muted-foreground">Badges earned: {entry.badges_earned || 0}</div>
-                          {entry.top_subject && (
-                            <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
-                          )}
-                          <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
-                        </div>
-                      </TooltipContent>
+                    <TooltipContent side="left" className="max-w-xs">
+                      <div className="space-y-1 text-sm">
+                        <div className="font-semibold">{entry.username}</div>
+                        <div className="text-muted-foreground">Total MP: {entry.mp_points.toLocaleString()}</div>
+                        <div className="text-muted-foreground">Current streak: {entry.streak} days</div>
+                        <div className="text-muted-foreground">Quizzes completed: {entry.quizzes_completed || 0}</div>
+                        <div className="text-muted-foreground">Badges earned: {entry.badges_earned || 0}</div>
+                        {entry.top_subject && (
+                          <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
+                        )}
+                        <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
+                      </div>
+                    </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 );
