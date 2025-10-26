@@ -443,7 +443,7 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
+                        <span className={`text-base font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;

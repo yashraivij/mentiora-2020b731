@@ -2716,7 +2716,7 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
+                                <Badge className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm ${!isPremium ? 'blur-sm select-none' : ''}`}>
                                   Predicted {(() => {
                                     console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
                                     return getDisplayGrade(selectedDrawerSubject.predicted);
@@ -2960,9 +2960,9 @@ const Dashboard = () => {
                                 return (
                                   <>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                      <div className="flex items-center justify-between mb-2">
+                                       <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(predictedGradeValue)}</span>
+                                        <span className={`text-lg font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>{getDisplayGrade(predictedGradeValue)}</span>
                                       </div>
                                       <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                                         <motion.div 
