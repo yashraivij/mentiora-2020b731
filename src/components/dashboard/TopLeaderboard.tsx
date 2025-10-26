@@ -299,11 +299,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       </div>
 
-      {/* Leaderboard Cards - Subject Card Style */}
+      {/* Leaderboard Grid - Compact & Gamified */}
       {entries.length === 0 ? (
         <div className="bg-card border border-border rounded-3xl shadow-sm p-12 text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-muted flex items-center justify-center">
-            <Trophy className="h-8 w-8 text-muted-foreground" />
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+            <Trophy className="h-8 w-8 text-primary" />
           </div>
           <h3 className="text-lg font-semibold text-foreground mb-2">No data yet</h3>
           <p className="text-sm text-muted-foreground">
@@ -311,15 +311,43 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           </p>
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           <AnimatePresence mode="popLayout">
             {entries.map((entry, index) => {
-              const getRankBadgeColor = () => {
-                if (entry.rank === 1) return 'bg-yellow-50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500/30';
-                if (entry.rank === 2) return 'bg-gray-50 dark:bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
-                if (entry.rank === 3) return 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-500/30';
-                return 'bg-muted/50 text-foreground border-border';
+              const getRankStyle = () => {
+                if (entry.rank === 1) return {
+                  gradient: 'bg-gradient-to-br from-yellow-500/20 via-yellow-400/10 to-amber-500/20',
+                  border: 'border-yellow-500/30',
+                  badge: 'bg-gradient-to-br from-yellow-500 to-amber-500 text-white shadow-lg shadow-yellow-500/50',
+                  icon: '👑'
+                };
+                if (entry.rank === 2) return {
+                  gradient: 'bg-gradient-to-br from-gray-500/20 via-gray-400/10 to-slate-500/20',
+                  border: 'border-gray-500/30',
+                  badge: 'bg-gradient-to-br from-gray-500 to-slate-500 text-white shadow-lg shadow-gray-500/50',
+                  icon: '🥈'
+                };
+                if (entry.rank === 3) return {
+                  gradient: 'bg-gradient-to-br from-orange-500/20 via-orange-400/10 to-amber-600/20',
+                  border: 'border-orange-500/30',
+                  badge: 'bg-gradient-to-br from-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/50',
+                  icon: '🥉'
+                };
+                if (entry.rank <= 10) return {
+                  gradient: 'bg-gradient-to-br from-primary/10 to-accent/10',
+                  border: 'border-primary/20',
+                  badge: 'bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-md',
+                  icon: '⭐'
+                };
+                return {
+                  gradient: 'bg-card',
+                  border: 'border-border',
+                  badge: 'bg-muted text-foreground',
+                  icon: ''
+                };
               };
+
+              const style = getRankStyle();
 
               return (
                 <TooltipProvider key={entry.user_id}>
@@ -327,76 +355,108 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                     <TooltipTrigger asChild>
                       <motion.div
                         layout
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2, delay: index * 0.01 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2, delay: index * 0.02 }}
                         className={cn(
-                          "group relative bg-card border border-border rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer p-6",
-                          entry.isCurrentUser && "ring-2 ring-primary/50 shadow-md"
+                          "group relative rounded-2xl border-2 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer p-4",
+                          style.gradient,
+                          style.border,
+                          entry.isCurrentUser && "ring-2 ring-primary shadow-lg scale-[1.02]"
                         )}
                       >
-                        <div className="flex items-center gap-6">
+                        {/* Background Pattern */}
+                        <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)] rounded-2xl" />
+                        
+                        <div className="relative flex items-center gap-4">
                           {/* Rank Badge */}
                           <div className={cn(
-                            "flex-shrink-0 w-14 h-14 rounded-2xl border-2 flex items-center justify-center font-bold text-lg transition-all shadow-sm",
-                            getRankBadgeColor()
+                            "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-bold text-base transition-all",
+                            style.badge
                           )}>
-                            {entry.rank}
+                            <span className="relative z-10">
+                              {style.icon ? style.icon : `#${entry.rank}`}
+                            </span>
                           </div>
 
                           {/* Student Info */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2.5 mb-1">
-                              <h3 className="text-lg font-bold text-foreground truncate">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="text-base font-bold text-foreground truncate">
                                 {entry.username}
                               </h3>
                               {entry.isCurrentUser && (
-                                <Badge variant="outline" className="text-xs px-2.5 py-0.5 h-5 border-primary text-primary font-semibold">
+                                <Badge className="text-xs px-2 py-0 h-5 bg-gradient-to-r from-primary to-accent text-primary-foreground border-0 shadow-sm">
                                   You
                                 </Badge>
                               )}
                             </div>
-                            <div className="text-sm text-muted-foreground truncate">
-                              {entry.top_subject && `${entry.top_subject} • `}
-                              Active {formatLastActive(entry.last_active)}
+                            <div className="text-xs text-muted-foreground truncate">
+                              {entry.top_subject && `${entry.top_subject}`}
                             </div>
                           </div>
 
-                          {/* Stats */}
-                          <div className="flex items-center gap-6">
+                          {/* Stats - Compact */}
+                          <div className="flex items-center gap-3">
                             {/* MP */}
-                            <div className="text-center px-4 py-3 rounded-2xl bg-primary/5 border border-primary/10">
-                              <div className="flex items-center justify-center gap-2 mb-1">
-                                <Sparkles className="h-4 w-4 text-primary" />
-                                <span className="text-xl font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
+                            <div className="text-right px-3 py-2 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30">
+                              <div className="flex items-center gap-1.5">
+                                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                                <span className="text-base font-bold text-foreground">{entry.mp_points.toLocaleString()}</span>
                               </div>
-                              <div className="text-xs text-muted-foreground font-medium">MP</div>
                             </div>
 
                             {/* Streak */}
-                            <div className="text-center px-4 py-3 rounded-2xl bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20">
-                              <div className="flex items-center justify-center gap-2 mb-1">
-                                <Flame className="h-4 w-4 text-orange-500" />
-                                <span className="text-xl font-bold text-orange-700 dark:text-orange-400">{entry.streak}</span>
+                            <div className="text-right px-3 py-2 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30">
+                              <div className="flex items-center gap-1.5">
+                                <Flame className="h-3.5 w-3.5 text-orange-500" />
+                                <span className="text-base font-bold text-orange-700 dark:text-orange-400">{entry.streak}</span>
                               </div>
-                              <div className="text-xs text-muted-foreground font-medium">Day Streak</div>
                             </div>
                           </div>
                         </div>
+
+                        {/* Top 3 Spotlight Effect */}
+                        {entry.rank <= 3 && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+                        )}
                       </motion.div>
                     </TooltipTrigger>
-                    <TooltipContent side="left" className="max-w-xs">
-                      <div className="space-y-1 text-sm">
-                        <div className="font-semibold">{entry.username}</div>
-                        <div className="text-muted-foreground">Total MP: {entry.mp_points.toLocaleString()}</div>
-                        <div className="text-muted-foreground">Current streak: {entry.streak} days</div>
-                        <div className="text-muted-foreground">Quizzes completed: {entry.quizzes_completed || 0}</div>
-                        <div className="text-muted-foreground">Badges earned: {entry.badges_earned || 0}</div>
-                        {entry.top_subject && (
-                          <div className="text-muted-foreground">Most active in: {entry.top_subject}</div>
-                        )}
-                        <div className="text-muted-foreground">Last active: {formatLastActive(entry.last_active)}</div>
+                    <TooltipContent side="top" className="max-w-xs">
+                      <div className="space-y-1.5 text-sm">
+                        <div className="font-semibold text-base flex items-center gap-2">
+                          {style.icon && <span>{style.icon}</span>}
+                          {entry.username}
+                        </div>
+                        <div className="pt-1 space-y-1 border-t border-border">
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Rank:</span>
+                            <span className="font-semibold">#{entry.rank}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Total MP:</span>
+                            <span className="font-semibold">{entry.mp_points.toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Streak:</span>
+                            <span className="font-semibold">{entry.streak} days 🔥</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Quizzes:</span>
+                            <span className="font-semibold">{entry.quizzes_completed || 0}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-muted-foreground">Badges:</span>
+                            <span className="font-semibold">{entry.badges_earned || 0}</span>
+                          </div>
+                          {entry.top_subject && (
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Top Subject:</span>
+                              <span className="font-semibold">{entry.top_subject}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </TooltipContent>
                   </Tooltip>
