@@ -2716,24 +2716,12 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                <div className="flex items-center gap-2">
-                                  <Badge className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm ${!isPremium ? 'blur-sm select-none' : ''}`}>
-                                    Predicted {(() => {
-                                      console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
-                                      return getDisplayGrade(selectedDrawerSubject.predicted);
-                                    })()}
-                                  </Badge>
-                                  {!isPremium && (
-                                    <Button
-                                      size="sm"
-                                      onClick={() => navigate('/pricing')}
-                                      className="rounded-lg px-3 py-1 h-auto bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all duration-200"
-                                    >
-                                      <Crown className="h-3 w-3 mr-1" />
-                                      Start Free Trial
-                                    </Button>
-                                  )}
-                                </div>
+                                <Badge className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                                  Predicted {(() => {
+                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                    return getDisplayGrade(selectedDrawerSubject.predicted);
+                                  })()}
+                                </Badge>
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
