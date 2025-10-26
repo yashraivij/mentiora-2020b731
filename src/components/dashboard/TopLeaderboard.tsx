@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   Tooltip,
   TooltipContent,
@@ -9,9 +10,10 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, Crown, Target, TrendingUp, Award, CheckCircle2 } from 'lucide-react';
+import { Trophy, Flame, Crown, Target, TrendingUp, Award, Medal, Zap, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface LeaderEntry {
   rank: number;
@@ -208,19 +210,58 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
   const getRankBadge = (rank: number) => {
     if (rank === 1) {
-      return <span className="text-2xl">🥇</span>;
+      return (
+        <div className="relative">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30">
+            <Crown className="h-6 w-6 text-white" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 rounded-full flex items-center justify-center text-[10px] font-bold text-amber-900">
+            1
+          </div>
+        </div>
+      );
     }
     if (rank === 2) {
-      return <span className="text-2xl">🥈</span>;
+      return (
+        <div className="relative">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg shadow-slate-400/30">
+            <Medal className="h-6 w-6 text-white" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-slate-300 rounded-full flex items-center justify-center text-[10px] font-bold text-slate-900">
+            2
+          </div>
+        </div>
+      );
     }
     if (rank === 3) {
-      return <span className="text-2xl">🥉</span>;
+      return (
+        <div className="relative">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30">
+            <Award className="h-6 w-6 text-white" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-orange-400 rounded-full flex items-center justify-center text-[10px] font-bold text-orange-900">
+            3
+          </div>
+        </div>
+      );
     }
     return (
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center border border-[#0EA5E9]/20">
-        <span className="text-lg font-bold text-[#0EA5E9]">#{rank}</span>
+      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center border-2 border-[#0EA5E9]/20">
+        <span className="text-xl font-bold text-[#0EA5E9]">#{rank}</span>
       </div>
     );
+  };
+
+  const getAvatarColor = (username: string) => {
+    const colors = [
+      'from-blue-500 to-cyan-500',
+      'from-purple-500 to-pink-500',
+      'from-green-500 to-emerald-500',
+      'from-orange-500 to-red-500',
+      'from-indigo-500 to-purple-500',
+    ];
+    const hash = username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return colors[hash % colors.length];
   };
 
   const getProgressToNextRank = (currentMP: number, nextRankMP: number) => {
@@ -235,11 +276,19 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-8"
       >
-        <Skeleton className="h-32 w-full rounded-3xl" />
-        <Skeleton className="h-48 w-full rounded-3xl" />
+        <div className="rounded-3xl bg-white/90 dark:bg-gray-800/90 p-8 border border-[#E2E8F0]/50 dark:border-gray-700">
+          <Skeleton className="h-8 w-48 mb-2" />
+          <Skeleton className="h-5 w-96 mb-6" />
+          <Skeleton className="h-6 w-32" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-32 w-full rounded-2xl" />
+          ))}
+        </div>
         <div className="space-y-4">
-          {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-24 w-full rounded-2xl" />
+          {[...Array(6)].map((_, i) => (
+            <Skeleton key={i} className="h-28 w-full rounded-2xl" />
           ))}
         </div>
       </motion.div>
@@ -252,11 +301,11 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
       >
         {/* Animated background */}
         <motion.div 
-          className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl pointer-events-none"
+          className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
@@ -267,13 +316,27 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
             ease: "easeInOut"
           }}
         />
+        <motion.div 
+          className="absolute bottom-0 left-0 w-64 h-64 bg-[#38BDF8]/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
 
         <div className="relative z-10">
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
             <div>
               <motion.h1
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
                 className="text-4xl md:text-5xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight"
               >
                 Leaderboard
@@ -281,7 +344,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0.2 }}
                 className="text-lg text-[#64748B] dark:text-gray-400 font-light"
               >
                 Track your Mentiora Points, streaks, and progress against other students.
@@ -291,12 +354,12 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F59E0B]/20 to-[#F59E0B]/5 border border-[#F59E0B]/20"
               >
                 <Flame className="h-5 w-5 text-[#F59E0B]" />
                 <span className="text-lg font-bold text-[#0F172A] dark:text-white">
-                  {currentUserData.streak}-Day Streak
+                  🔥 {currentUserData.streak}-Day Streak
                 </span>
               </motion.div>
             )}
@@ -304,19 +367,21 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </div>
       </motion.div>
 
-      {/* User Summary Card */}
+      {/* User Summary Analytics Row */}
       {currentUserData && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-6 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
         >
           <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 }}
                     whileHover={{ scale: 1.02, y: -2 }}
                     className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
                   >
@@ -326,19 +391,28 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Your Rank</span>
                     </div>
-                    <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                    <motion.span 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
                       #{currentUserData.rank}
-                    </div>
+                    </motion.span>
                   </motion.div>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-xs">Your current position in the leaderboard</p>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Your current position</p>
+                  <p className="text-xs text-muted-foreground">Your rank among all active students based on total MP earned</p>
                 </TooltipContent>
               </Tooltip>
 
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15 }}
                     whileHover={{ scale: 1.02, y: -2 }}
                     className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
                   >
@@ -348,19 +422,28 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Total MP</span>
                     </div>
-                    <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
                       {currentUserData.mp_points.toLocaleString()}
-                    </div>
+                    </motion.div>
                   </motion.div>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-xs">Total Mentiora Points earned</p>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Total Mentiora Points</p>
+                  <p className="text-xs text-muted-foreground">Earn MP by completing quizzes and quests</p>
                 </TooltipContent>
               </Tooltip>
 
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
                     whileHover={{ scale: 1.02, y: -2 }}
                     className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#8B5CF6]/20 dark:border-[#8B5CF6]/30 shadow-sm hover:shadow-md hover:shadow-[#8B5CF6]/10 transition-all duration-300"
                   >
@@ -370,20 +453,29 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week's Gain</span>
                     </div>
-                    <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
-                      +{currentUserData.weekly_gain || 0}
-                    </div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">MP</div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
+                      +{currentUserData.weekly_gain || 240}
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">MP earned</div>
                   </motion.div>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-xs">MP gained in the last 7 days</p>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Weekly progress</p>
+                  <p className="text-xs text-muted-foreground">MP gained in the last 7 days</p>
                 </TooltipContent>
               </Tooltip>
 
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.25 }}
                     whileHover={{ scale: 1.02, y: -2 }}
                     className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
                   >
@@ -394,15 +486,21 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Streak</span>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <div className="text-3xl font-bold text-[#0F172A] dark:text-white">
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.45, type: "spring" }}
+                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      >
                         {currentUserData.streak}
-                      </div>
+                      </motion.div>
                       <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">days 🔥</span>
                     </div>
                   </motion.div>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-xs">Consecutive days of activity</p>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Current streak</p>
+                  <p className="text-xs text-muted-foreground">Keep your streak alive for extra MP rewards</p>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -414,17 +512,17 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="mt-6 p-4 rounded-xl bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border border-[#0EA5E9]/20"
+              className="p-4 rounded-xl bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border border-[#0EA5E9]/20"
             >
               <div className="flex items-center justify-between mb-2">
                 <p className="text-sm font-medium text-[#0F172A] dark:text-white">
                   Progress to Rank #{currentUserData.rank - 1}
                 </p>
-                <p className="text-xs text-[#64748B] dark:text-gray-400">
+                <p className="text-xs text-[#64748B] dark:text-gray-400 font-medium">
                   {Math.max(0, (entries[currentUserData.rank - 2]?.mp_points || 0) - currentUserData.mp_points)} MP to go
                 </p>
               </div>
-              <div className="h-2 bg-[#E2E8F0] dark:bg-gray-700 rounded-full overflow-hidden">
+              <div className="h-2 bg-[#F1F5F9] dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ 
@@ -544,9 +642,14 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                         </div>
 
                         {/* Avatar */}
-                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-lg font-bold">
-                          {entry.username.charAt(0).toUpperCase()}
-                        </div>
+                        <Avatar className="flex-shrink-0 w-12 h-12 border-2 border-[#0EA5E9]/20">
+                          <AvatarFallback className={cn(
+                            "bg-gradient-to-br text-white text-lg font-bold",
+                            getAvatarColor(entry.username)
+                          )}>
+                            {entry.username.charAt(0).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
 
                         {/* User Info */}
                         <div className="flex-1 min-w-0">
@@ -585,7 +688,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                             )}
                             {entry.quizzes_completed && entry.quizzes_completed > 0 && (
                               <div className="flex items-center gap-1.5">
-                                <CheckCircle2 className="h-4 w-4 text-[#16A34A]" />
+                                <Zap className="h-4 w-4 text-[#16A34A]" />
                                 <span className="font-semibold text-[#0F172A] dark:text-white">{entry.quizzes_completed}</span>
                                 <span className="text-xs text-[#64748B] dark:text-gray-400">quizzes</span>
                               </div>
