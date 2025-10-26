@@ -317,21 +317,21 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {getInitials(entry.username)}
               </div>
 
-              {/* Name and Streak */}
+              {/* Name */}
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-medium text-foreground truncate">
                   {entry.username}
                 </h3>
-                {entry.streak > 0 && (
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                    <span>🔥</span>
-                    <span>{entry.streak} day streak</span>
-                  </div>
-                )}
               </div>
 
-              {/* MP Points */}
-              <div className="flex-shrink-0">
+              {/* Streak and MP Points */}
+              <div className="flex-shrink-0 flex items-center gap-3">
+                {entry.streak > 0 && (
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <span>🔥</span>
+                    <span>{entry.streak}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-1.5 text-primary">
                   <Gem className="h-4 w-4" />
                   <span className="text-sm font-bold">
