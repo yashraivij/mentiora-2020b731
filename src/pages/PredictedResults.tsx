@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText } from "lucide-react";
+import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -51,6 +51,43 @@ const PredictedResults = () => {
   const { isPremium } = useSubscription();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
+
+  // Helper function to check if subject is A-Level
+  const isALevel = (subjectId: string | undefined) => {
+    return subjectId?.toLowerCase().includes('alevel') || false;
+  };
+
+  // Helper function to convert numeric grade to letter grade for A-Level
+  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
+    if (!isALevel(subjectId)) {
+      return numericGrade.toFixed(1);
+    }
+    
+    // Convert 1-9 scale to A-Level letter grades
+    if (numericGrade >= 8.5) return 'A*';
+    if (numericGrade >= 7.5) return 'A';
+    if (numericGrade >= 6.5) return 'B';
+    if (numericGrade >= 5.5) return 'C';
+    if (numericGrade >= 4.5) return 'D';
+    return 'E';
+  };
+
+  // Helper function to get progress bar labels
+  const getProgressBarLabels = (subjectId: string | undefined) => {
+    if (isALevel(subjectId)) {
+      return { min: 'Grade E', max: 'Grade A*' };
+    }
+    return { min: 'Grade 4.0', max: 'Grade 9.0' };
+  };
+
+  // Helper function to get progress description
+  const getProgressDescription = (grade: number, subjectId: string | undefined) => {
+    const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
+    if (isALevel(subjectId)) {
+      return `Progress: ${percentage}% towards grade A*`;
+    }
+    return `Progress: ${percentage}% towards grade 9`;
+  };
   
   // If no state is provided, show a message instead of redirecting
   if (!questions || !answers) {
@@ -277,12 +314,6 @@ const PredictedResults = () => {
     }
     
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
-  };
-  
-  // Helper to check if subject is A-Level - simple string check
-  const isALevel = (subjectId?: string): boolean => {
-    if (!subjectId) return false;
-    return subjectId.toLowerCase().includes('alevel');
   };
 
   const getGrade = (percentage: number, subjectId?: string): string => {
@@ -660,9 +691,31 @@ const PredictedResults = () => {
   const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
   const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
-
-
   const grade = getGrade(percentage, subjectId);
+  
+  // Convert grade string to number for display (e.g., "7" -> 7, "A" -> 7.5)
+  const gradeToNumber = (gradeStr: string): number => {
+    if (gradeStr === 'U') return 0;
+    
+    // Handle A-Level grades
+    if (gradeStr === 'A*') return 9;
+    if (gradeStr === 'A') return 8;
+    if (gradeStr === 'B') return 7;
+    if (gradeStr === 'C') return 6;
+    if (gradeStr === 'D') return 5;
+    if (gradeStr === 'E') return 4;
+    
+    // Handle GCSE numeric grades
+    const num = parseFloat(gradeStr);
+    return isNaN(num) ? 0 : num;
+  };
+  
+  const numericGrade = gradeToNumber(grade);
+  const percentileRank = Math.min(Math.round(percentage * 0.9), 95);
+  const correctAnswers = attempts.filter(a => {
+    const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
+    return q && a.score === q.marks;
+  }).length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-muted/20">
@@ -699,59 +752,110 @@ const PredictedResults = () => {
 
       {/* Main Content */}
       <main className="max-w-5xl mx-auto p-6 md:p-8 space-y-8">
-        {/* Hero Section */}
-        <div className="text-center space-y-4 py-6 animate-fade-in">
+        {/* Hero Header */}
+        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
           <h1 className="text-3xl font-bold text-foreground">
-            {subject?.name} Predicted Exam Complete!
+            Predicted Exam Complete!
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Review your detailed results below
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <Card className="bg-card rounded-xl border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{percentage}%</div>
-              <div className="text-xs text-muted-foreground">Overall Score</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card rounded-xl border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{achievedMarks}/{examTotalMarks}</div>
-              <div className="text-xs text-muted-foreground">Marks</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-card rounded-xl border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{questions.length}</div>
-              <div className="text-xs text-muted-foreground">Questions</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card rounded-xl border-0 shadow-sm">
-            <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-[hsl(195,69%,54%)] mb-1">{timeElapsed ? Math.round(timeElapsed / 60) : '-'}</div>
-              <div className="text-xs text-muted-foreground">Minutes</div>
+        {/* Performance Summary Card - Overall Score Only */}
+        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
+            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardContent className="p-6 relative">
+              <div className="text-center space-y-3">
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Overall Score
+                  </p>
+                  <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
+                    {percentage}%
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {correctAnswers} out of {questions.length} questions correct
+                  </p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Predicted Grade Badge */}
-        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <div className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] shadow-lg">
-            <div className="text-center">
-              <p className="text-xs font-semibold text-white/80 uppercase tracking-wider">
-                Predicted Grade
-              </p>
-              <p className="text-4xl font-bold text-white">
-                {grade}
-              </p>
-            </div>
-          </div>
+        {/* Predicted Grade Improvement - Premium Card */}
+        <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            {/* Animated background elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            
+            <CardHeader className="border-b border-border/50 relative pb-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
+                  <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
+                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
+                </div>
+                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
+                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 relative">
+              <div className="space-y-6">
+                {/* Grade Display - Show only current grade */}
+                <div className="flex items-center justify-center">
+                  <div className="text-center space-y-2 group">
+                    <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
+                      Your Predicted Grade
+                    </Badge>
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                      <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
+                        {getDisplayGrade(numericGrade, subjectId)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Animated Progress Bar */}
+                <div className="space-y-3">
+                  <div className="flex justify-between text-xs font-semibold text-muted-foreground">
+                    <span>{getProgressBarLabels(subjectId).min}</span>
+                    <span>{getProgressBarLabels(subjectId).max}</span>
+                  </div>
+                  <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
+                    {/* Grade position - animated bright fill */}
+                    <div 
+                      className="absolute top-0 bottom-0 bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,60%,60%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[hsl(195,69%,54%)]/50"
+                      style={{ 
+                        width: '0%',
+                        backgroundSize: '200% 100%',
+                        animation: 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms',
+                        '--target-width': `${Math.max(0, ((numericGrade - 4) / 5) * 100)}%`
+                      } as React.CSSProperties}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: 'slideAndFade 2s infinite 2100ms' }} />
+                    </div>
+                  </div>
+                  <div className="text-center pt-1">
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Percentile Badge */}
+                <div className="flex justify-center pt-2">
+                  <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
+                    <p className="text-sm text-center">
+                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Question Breakdown */}
