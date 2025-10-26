@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { supabase } from '@/integrations/supabase/client';
-import { Trophy, Flame, TrendingUp, Award, Medal, Crown } from 'lucide-react';
+import { Trophy, Flame, TrendingUp, Award, Medal, Crown, Zap, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -194,11 +194,33 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
     }
   };
 
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Crown className="h-4 w-4 text-amber-500" />;
-    if (rank === 2) return <Medal className="h-4 w-4 text-slate-400" />;
-    if (rank === 3) return <Award className="h-4 w-4 text-orange-400" />;
-    return null;
+  const getRankBadge = (rank: number) => {
+    if (rank === 1) {
+      return (
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/30">
+          <Crown className="h-5 w-5 text-white" />
+        </div>
+      );
+    }
+    if (rank === 2) {
+      return (
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-300 to-slate-500 shadow-lg shadow-slate-400/30">
+          <Medal className="h-5 w-5 text-white" />
+        </div>
+      );
+    }
+    if (rank === 3) {
+      return (
+        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/30">
+          <Award className="h-5 w-5 text-white" />
+        </div>
+      );
+    }
+    return (
+      <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 border border-[#0EA5E9]/20">
+        <span className="text-lg font-bold text-[#0EA5E9]">{rank}</span>
+      </div>
+    );
   };
 
   if (isLoading) {
@@ -208,13 +230,13 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
       >
-        <div className="rounded-3xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 border border-[#E2E8F0]/50 dark:border-gray-700">
+        <div className="rounded-3xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 border border-[#E2E8F0]/50 dark:border-gray-700 shadow-sm">
           <Skeleton className="h-8 w-48 mb-2" />
           <Skeleton className="h-5 w-96 mb-6" />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-3">
           {[...Array(8)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-xl" />
+            <Skeleton key={i} className="h-20 w-full rounded-2xl" />
           ))}
         </div>
       </motion.div>
@@ -273,18 +295,18 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 className="flex items-center gap-6 text-sm"
               >
                 <div className="text-right">
-                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-0.5">Your Rank</div>
+                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-1">Your Rank</div>
                   <div className="text-2xl font-bold text-[#0F172A] dark:text-white">#{currentUserData.rank}</div>
                 </div>
-                <div className="h-10 w-px bg-[#E2E8F0] dark:bg-gray-700" />
+                <div className="h-12 w-px bg-gradient-to-b from-[#0EA5E9]/0 via-[#0EA5E9]/50 to-[#0EA5E9]/0" />
                 <div className="text-right">
-                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-0.5">Total MP</div>
+                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-1">Total MP</div>
                   <div className="text-2xl font-bold text-[#0F172A] dark:text-white">{currentUserData.mp_points.toLocaleString()}</div>
                 </div>
-                <div className="h-10 w-px bg-[#E2E8F0] dark:bg-gray-700" />
+                <div className="h-12 w-px bg-gradient-to-b from-[#0EA5E9]/0 via-[#0EA5E9]/50 to-[#0EA5E9]/0" />
                 <div className="text-right">
-                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-0.5">Streak</div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="text-xs text-[#64748B] dark:text-gray-400 mb-1">Streak</div>
+                  <div className="flex items-center gap-1.5 justify-end">
                     <Flame className="h-4 w-4 text-[#F59E0B]" />
                     <span className="text-2xl font-bold text-[#0F172A] dark:text-white">{currentUserData.streak}</span>
                   </div>
@@ -307,9 +329,9 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           onClick={() => setFilterType('week')}
           size="sm"
           className={cn(
-            "rounded-lg font-medium transition-all duration-200",
+            "rounded-xl font-medium transition-all duration-200",
             filterType === 'week'
-              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90"
+              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90 shadow-lg shadow-[#0EA5E9]/25"
               : "text-[#64748B] dark:text-gray-400 hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10"
           )}
         >
@@ -320,9 +342,9 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           onClick={() => setFilterType('alltime')}
           size="sm"
           className={cn(
-            "rounded-lg font-medium transition-all duration-200",
+            "rounded-xl font-medium transition-all duration-200",
             filterType === 'alltime'
-              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90"
+              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90 shadow-lg shadow-[#0EA5E9]/25"
               : "text-[#64748B] dark:text-gray-400 hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10"
           )}
         >
@@ -333,9 +355,9 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           onClick={() => setFilterType('friends')}
           size="sm"
           className={cn(
-            "rounded-lg font-medium transition-all duration-200",
+            "rounded-xl font-medium transition-all duration-200",
             filterType === 'friends'
-              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90"
+              ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90 shadow-lg shadow-[#0EA5E9]/25"
               : "text-[#64748B] dark:text-gray-400 hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10"
           )}
         >
@@ -343,7 +365,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
         </Button>
       </motion.div>
 
-      {/* Leaderboard Table */}
+      {/* Leaderboard Entries */}
       <AnimatePresence mode="wait">
         <motion.div
           key={filterType}
@@ -351,12 +373,14 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 overflow-hidden"
+          className="space-y-3"
         >
           {entries.length === 0 ? (
-            <div className="text-center py-20 px-6">
-              <Trophy className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9]/30" />
-              <h3 className="text-lg font-semibold text-[#0F172A] dark:text-white mb-2">
+            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 p-16 text-center shadow-sm">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center">
+                <Trophy className="h-8 w-8 text-[#0EA5E9]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#0F172A] dark:text-white mb-2">
                 No leaderboard data yet
               </h3>
               <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
@@ -364,108 +388,137 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-[#E2E8F0]/50 dark:divide-gray-700">
-              {entries.map((entry, index) => (
-                <TooltipProvider key={entry.user_id}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.02 }}
-                        className={cn(
-                          "group relative px-6 py-4 transition-all duration-200 cursor-pointer",
-                          entry.isCurrentUser
-                            ? "bg-[#0EA5E9]/5"
-                            : "hover:bg-white/80 dark:hover:bg-gray-800/80"
-                        )}
-                      >
-                        {/* Left accent line for current user */}
-                        {entry.isCurrentUser && (
-                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#0EA5E9]" />
-                        )}
+            entries.map((entry, index) => (
+              <TooltipProvider key={entry.user_id}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.02 }}
+                      whileHover={{ y: -2, scale: 1.005 }}
+                      className={cn(
+                        "group relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg",
+                        entry.isCurrentUser
+                          ? "border-2 border-[#0EA5E9]/30 shadow-[#0EA5E9]/10"
+                          : "border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30"
+                      )}
+                    >
+                      {/* Premium shine effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
+                      
+                      {/* Blue divider at bottom */}
+                      {index < entries.length - 1 && (
+                        <div className="absolute bottom-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-[#0EA5E9]/30 to-transparent" />
+                      )}
 
-                        <div className="flex items-center gap-6">
-                          {/* Rank */}
-                          <div className="flex items-center gap-2 w-16">
-                            <span className={cn(
-                              "text-base font-bold tabular-nums",
-                              entry.rank <= 3 ? "text-[#0F172A] dark:text-white" : "text-[#64748B] dark:text-gray-400"
-                            )}>
-                              {entry.rank}
+                      {/* Left accent line for current user */}
+                      {entry.isCurrentUser && (
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0EA5E9] to-[#38BDF8] rounded-l-2xl" />
+                      )}
+
+                      <div className={cn(
+                        "flex items-center gap-5 relative z-10",
+                        entry.isCurrentUser && "ml-1"
+                      )}>
+                        {/* Rank Badge */}
+                        <div className="flex-shrink-0">
+                          {getRankBadge(entry.rank)}
+                        </div>
+
+                        {/* Username */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-bold text-base text-[#0F172A] dark:text-white truncate">
+                              {entry.username}
                             </span>
-                            {getRankIcon(entry.rank)}
+                            {entry.isCurrentUser && (
+                              <Badge className="bg-[#0EA5E9] text-white border-0 text-xs px-2 py-0.5 font-semibold shadow-md shadow-[#0EA5E9]/25">
+                                You
+                              </Badge>
+                            )}
                           </div>
+                          <div className="flex items-center gap-2 text-xs text-[#64748B] dark:text-gray-400">
+                            <span className="font-medium">{entry.top_subject || 'No activity yet'}</span>
+                          </div>
+                        </div>
 
-                          {/* Username */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="font-semibold text-[#0F172A] dark:text-white truncate">
-                                {entry.username}
-                              </span>
-                              {entry.isCurrentUser && (
-                                <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0 text-xs px-2 py-0 font-medium">
-                                  You
-                                </Badge>
-                              )}
+                        {/* Stats Grid */}
+                        <div className="hidden lg:flex items-center gap-6">
+                          <div className="flex items-center gap-2">
+                            <div className="p-2 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                              <Zap className="h-4 w-4 text-[#16A34A]" />
                             </div>
-                          </div>
-
-                          {/* Stats */}
-                          <div className="hidden md:flex items-center gap-8 text-sm">
-                            <div className="text-right">
-                              <div className="font-bold text-[#0F172A] dark:text-white tabular-nums">
+                            <div>
+                              <div className="font-bold text-sm text-[#0F172A] dark:text-white tabular-nums">
                                 {entry.mp_points.toLocaleString()}
                               </div>
                               <div className="text-xs text-[#64748B] dark:text-gray-400">MP</div>
                             </div>
+                          </div>
 
-                            {entry.streak > 0 && (
-                              <div className="text-right">
-                                <div className="flex items-center gap-1 justify-end">
-                                  <Flame className="h-3.5 w-3.5 text-[#F59E0B]" />
-                                  <span className="font-bold text-[#0F172A] dark:text-white tabular-nums">
-                                    {entry.streak}
-                                  </span>
+                          <div className="h-10 w-px bg-gradient-to-b from-[#0EA5E9]/0 via-[#0EA5E9]/30 to-[#0EA5E9]/0" />
+
+                          {entry.streak > 0 && (
+                            <>
+                              <div className="flex items-center gap-2">
+                                <div className="p-2 rounded-lg bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
+                                  <Flame className="h-4 w-4 text-[#F59E0B]" />
                                 </div>
-                                <div className="text-xs text-[#64748B] dark:text-gray-400">days</div>
+                                <div>
+                                  <div className="font-bold text-sm text-[#0F172A] dark:text-white tabular-nums">
+                                    {entry.streak}
+                                  </div>
+                                  <div className="text-xs text-[#64748B] dark:text-gray-400">days</div>
+                                </div>
                               </div>
-                            )}
+                              <div className="h-10 w-px bg-gradient-to-b from-[#0EA5E9]/0 via-[#0EA5E9]/30 to-[#0EA5E9]/0" />
+                            </>
+                          )}
 
-                            {entry.quizzes_completed > 0 && (
-                              <div className="text-right">
-                                <div className="font-bold text-[#0F172A] dark:text-white tabular-nums">
+                          {entry.quizzes_completed > 0 && (
+                            <div className="flex items-center gap-2">
+                              <div className="p-2 rounded-lg bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                                <Target className="h-4 w-4 text-[#0EA5E9]" />
+                              </div>
+                              <div>
+                                <div className="font-bold text-sm text-[#0F172A] dark:text-white tabular-nums">
                                   {entry.quizzes_completed}
                                 </div>
                                 <div className="text-xs text-[#64748B] dark:text-gray-400">quizzes</div>
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
+                        </div>
 
-                          {/* Mobile Stats */}
-                          <div className="md:hidden text-right">
-                            <div className="font-bold text-[#0F172A] dark:text-white tabular-nums">
+                        {/* Mobile Stats */}
+                        <div className="lg:hidden flex items-center gap-2">
+                          <div className="p-2 rounded-lg bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                            <Zap className="h-4 w-4 text-[#16A34A]" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-sm text-[#0F172A] dark:text-white tabular-nums">
                               {entry.mp_points.toLocaleString()}
                             </div>
                             <div className="text-xs text-[#64748B] dark:text-gray-400">MP</div>
                           </div>
                         </div>
-                      </motion.div>
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs" side="top">
-                      <div className="space-y-1">
-                        <p className="font-semibold">{entry.username}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {entry.top_subject && `Top Subject: ${entry.top_subject} • `}
-                          {entry.quizzes_completed} Quizzes Completed
-                          {entry.streak > 0 && ` • ${entry.streak}-Day Streak Active`}
-                        </p>
                       </div>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              ))}
-            </div>
+                    </motion.div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs" side="top">
+                    <div className="space-y-1">
+                      <p className="font-semibold">{entry.username}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {entry.top_subject && `Top Subject: ${entry.top_subject} • `}
+                        {entry.quizzes_completed} Quizzes Completed
+                        {entry.streak > 0 && ` • ${entry.streak}-Day Streak Active`}
+                      </p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ))
           )}
         </motion.div>
       </AnimatePresence>
