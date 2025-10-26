@@ -222,7 +222,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
   const restOfLeaderboard = entries.slice(3);
 
   return (
-    <div className="space-y-8 font-nunito">
+    <div className="space-y-8">
       {/* Header */}
       <div className="space-y-4">
         <div>
@@ -245,7 +245,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             This Week
             {filterType === 'week' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
             )}
           </button>
           <button
@@ -259,7 +259,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             All Time
             {filterType === 'alltime' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
             )}
           </button>
           <button
@@ -273,18 +273,18 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           >
             Friends
             {filterType === 'friends' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
             )}
           </button>
         </div>
       </div>
 
       {entries.length === 0 ? (
-        <div className="bg-gradient-to-br from-card via-card to-muted/20 rounded-2xl p-12 text-center border border-border/50">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-            <Trophy className="h-10 w-10 text-primary" />
+        <div className="bg-card rounded-2xl p-12 text-center border border-border shadow-sm">
+          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+            <Trophy className="h-10 w-10 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-bold text-foreground mb-2">No data yet</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-2">No data yet</h3>
           <p className="text-sm text-muted-foreground">
             Start completing quizzes to appear on the leaderboard.
           </p>
@@ -294,28 +294,31 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
           {/* Top 3 Podium */}
           {topThree.length > 0 && (
             <div className="relative">
-              <div className="flex items-end justify-center gap-4 mb-8">
+              <div className="flex items-end justify-center gap-3 mb-6">
                 {/* 2nd Place */}
                 {topThree[1] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-                    <div className="relative mb-3">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-xl font-bold text-white shadow-lg ring-4 ring-slate-200/50">
+                    <div className="relative mb-4">
+                      <div className="w-16 h-16 rounded-full bg-card flex items-center justify-center text-lg font-bold text-foreground shadow-lg border-2 border-border">
                         {getInitials(topThree[1].username)}
                       </div>
-                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center shadow-lg">
-                        <Medal className="h-4 w-4 text-white" />
+                      <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-card border border-border flex items-center justify-center shadow-md">
+                        <Medal className="h-4 w-4 text-slate-400" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-t-xl p-4 text-center border-2 border-slate-300 dark:border-slate-700 shadow-xl" style={{ height: '140px' }}>
-                      <p className="font-bold text-sm text-foreground truncate mb-2">{topThree[1].username}</p>
+                    <div className="w-full bg-card rounded-t-2xl p-5 text-center border border-border shadow-lg hover:shadow-xl transition-shadow" style={{ height: '150px' }}>
+                      <div className="mb-3">
+                        <p className="font-semibold text-sm text-foreground truncate mb-1">{topThree[1].username}</p>
+                        <span className="text-xs text-muted-foreground">2nd Place</span>
+                      </div>
                       <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 text-primary mx-auto w-fit">
+                        <div className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-primary/10 text-primary mx-auto w-fit">
                           <Gem className="h-4 w-4" />
                           <span className="text-sm font-bold">{topThree[1].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[1].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1 px-2 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
-                            <span className="text-sm">🔥</span>
+                          <div className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                            <span>🔥</span>
                             <span className="text-xs font-semibold">{topThree[1].streak}</span>
                           </div>
                         )}
@@ -327,24 +330,27 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {/* 1st Place */}
                 {topThree[0] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0s' }}>
-                    <div className="relative mb-3">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 flex items-center justify-center text-2xl font-bold text-white shadow-2xl ring-4 ring-yellow-200/50 animate-pulse">
+                    <div className="relative mb-4">
+                      <div className="w-20 h-20 rounded-full bg-card flex items-center justify-center text-xl font-bold text-foreground shadow-2xl border-2 border-yellow-400 dark:border-yellow-500 ring-4 ring-yellow-400/20">
                         {getInitials(topThree[0].username)}
                       </div>
-                      <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 flex items-center justify-center shadow-xl">
-                        <Trophy className="h-5 w-5 text-white" />
+                      <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-card border-2 border-yellow-400 dark:border-yellow-500 flex items-center justify-center shadow-lg">
+                        <Trophy className="h-5 w-5 text-yellow-500" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-t-xl p-5 text-center border-2 border-yellow-400 dark:border-yellow-600 shadow-2xl" style={{ height: '160px' }}>
-                      <p className="font-bold text-base text-foreground truncate mb-3">{topThree[0].username}</p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary via-primary/90 to-primary text-primary-foreground mx-auto w-fit shadow-lg">
+                    <div className="w-full bg-card rounded-t-2xl p-6 text-center border-2 border-yellow-400/50 dark:border-yellow-500/50 shadow-2xl hover:shadow-3xl transition-shadow" style={{ height: '170px' }}>
+                      <div className="mb-4">
+                        <p className="font-bold text-base text-foreground truncate mb-1">{topThree[0].username}</p>
+                        <span className="text-xs font-medium text-yellow-600 dark:text-yellow-500">1st Place</span>
+                      </div>
+                      <div className="space-y-2.5">
+                        <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground mx-auto w-fit shadow-md">
                           <Gem className="h-5 w-5" />
                           <span className="text-base font-bold">{topThree[0].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[0].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
-                            <span className="text-base">🔥</span>
+                          <div className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                            <span>🔥</span>
                             <span className="text-sm font-semibold">{topThree[0].streak}</span>
                           </div>
                         )}
@@ -356,23 +362,26 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
                 {/* 3rd Place */}
                 {topThree[2] && (
                   <div className="flex flex-col items-center flex-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                    <div className="relative mb-3">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center text-lg font-bold text-white shadow-lg ring-4 ring-orange-200/50">
+                    <div className="relative mb-4">
+                      <div className="w-14 h-14 rounded-full bg-card flex items-center justify-center text-base font-bold text-foreground shadow-lg border-2 border-border">
                         {getInitials(topThree[2].username)}
                       </div>
-                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 flex items-center justify-center shadow-lg">
-                        <Award className="h-3.5 w-3.5 text-white" />
+                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-card border border-border flex items-center justify-center shadow-md">
+                        <Award className="h-3.5 w-3.5 text-orange-600" />
                       </div>
                     </div>
-                    <div className="w-full bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-t-xl p-4 text-center border-2 border-orange-300 dark:border-orange-700 shadow-xl" style={{ height: '120px' }}>
-                      <p className="font-bold text-sm text-foreground truncate mb-2">{topThree[2].username}</p>
+                    <div className="w-full bg-card rounded-t-2xl p-4 text-center border border-border shadow-lg hover:shadow-xl transition-shadow" style={{ height: '130px' }}>
+                      <div className="mb-3">
+                        <p className="font-semibold text-sm text-foreground truncate mb-1">{topThree[2].username}</p>
+                        <span className="text-xs text-muted-foreground">3rd Place</span>
+                      </div>
                       <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 text-primary mx-auto w-fit">
+                        <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary mx-auto w-fit">
                           <Gem className="h-3.5 w-3.5" />
                           <span className="text-sm font-bold">{topThree[2].mp_points.toLocaleString()}</span>
                         </div>
                         {topThree[2].streak > 0 && (
-                          <div className="flex items-center justify-center gap-1 px-2 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 mx-auto w-fit">
+                          <div className="flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 mx-auto w-fit">
                             <span className="text-xs">🔥</span>
                             <span className="text-xs font-semibold">{topThree[2].streak}</span>
                           </div>
@@ -387,52 +396,52 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
 
           {/* Rest of Leaderboard */}
           {restOfLeaderboard.length > 0 && (
-            <div className="bg-gradient-to-br from-card to-card/50 rounded-2xl overflow-hidden border border-border/50 shadow-lg">
+            <div className="bg-card rounded-2xl overflow-hidden border border-border shadow-lg">
               {restOfLeaderboard.map((entry, index) => (
                 <div
                   key={entry.user_id}
                   className={cn(
-                    "flex items-center gap-4 px-5 py-4 transition-all duration-200 hover:bg-primary/5 hover:scale-[1.01] cursor-pointer group",
-                    entry.isCurrentUser && "bg-gradient-to-r from-primary/10 via-primary/5 to-transparent",
-                    index !== restOfLeaderboard.length - 1 && "border-b border-border/30"
+                    "flex items-center gap-4 px-5 py-4 transition-all duration-200 hover:bg-muted/30 cursor-pointer group",
+                    entry.isCurrentUser && "bg-primary/5 border-l-2 border-l-primary",
+                    index !== restOfLeaderboard.length - 1 && "border-b border-border/50"
                   )}
                 >
                   {/* Rank */}
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 group-hover:bg-muted transition-colors">
-                    <span className="text-base font-bold text-foreground">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-muted group-hover:bg-muted/80 transition-colors">
+                    <span className="text-sm font-bold text-foreground">
                       {entry.rank}
                     </span>
                   </div>
 
                   {/* Avatar */}
                   <div className={cn(
-                    "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold shadow-md transition-transform group-hover:scale-110",
+                    "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold shadow-sm transition-all group-hover:shadow-md",
                     entry.isCurrentUser 
-                      ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ring-2 ring-primary/20" 
-                      : "bg-gradient-to-br from-muted to-muted/70 text-muted-foreground"
+                      ? "bg-primary text-primary-foreground ring-2 ring-primary/20" 
+                      : "bg-muted text-muted-foreground"
                   )}>
                     {getInitials(entry.username)}
                   </div>
 
                   {/* Name */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-foreground truncate">
+                    <h3 className="text-sm font-semibold text-foreground truncate">
                       {entry.username}
                     </h3>
                     {entry.isCurrentUser && (
-                      <span className="text-xs text-primary font-semibold">You</span>
+                      <span className="text-xs text-primary font-medium">You</span>
                     )}
                   </div>
 
                   {/* Stats */}
                   <div className="flex-shrink-0 flex items-center gap-2">
                     {entry.streak > 0 && (
-                      <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-orange-600/10 text-orange-600 dark:text-orange-400 shadow-sm">
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 shadow-sm">
                         <span>🔥</span>
-                        <span className="text-sm font-bold">{entry.streak}</span>
+                        <span className="text-sm font-semibold">{entry.streak}</span>
                       </div>
                     )}
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-primary/20 text-primary shadow-sm">
+                    <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary/10 text-primary shadow-sm">
                       <Gem className="h-4 w-4" />
                       <span className="text-sm font-bold">
                         {entry.mp_points.toLocaleString()}
@@ -447,7 +456,7 @@ export function TopLeaderboard({ userId }: { userId?: string }) {
       )}
 
       {/* Footer */}
-      <p className="text-xs text-muted-foreground text-center font-medium">
+      <p className="text-xs text-muted-foreground text-center">
         ⚡ Ranks update hourly • Earn MP from quizzes, streaks, and daily quests
       </p>
     </div>
