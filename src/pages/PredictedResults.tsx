@@ -338,15 +338,11 @@ const PredictedResults = () => {
 
       if (error) {
         console.error('Database error saving exam completion:', error);
-        toast.error("Failed to save exam results to database");
       } else {
-        alert('✓ EXAM SAVED TO DATABASE');
         console.log('✓ Exam completion saved successfully to database');
         
         // Mark daily task complete - FIXED approach
         const today = new Date().toISOString().split('T')[0];
-        
-        alert(`MARKING DAILY TASK FOR: ${subjectId}`);
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         console.log('DAILY TASK MARKING STARTED');
         console.log('Subject ID:', subjectId);
@@ -380,13 +376,10 @@ const PredictedResults = () => {
           console.log('📊 UPDATE RESPONSE - Data:', updatedTask, 'Error:', taskError);
           
           if (taskError) {
-            alert(`✗ ERROR UPDATING TASK: ${taskError.message}\nCode: ${taskError.code}`);
             console.error('✗ ERROR updating task:', taskError);
           } else if (!updatedTask || updatedTask.length === 0) {
-            alert(`⚠️ UPDATE: No error but no data returned - RLS may have blocked`);
             console.error('⚠️ Update returned success but no data');
           } else {
-            alert(`✅ TASK UPDATED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
             console.log('✓ Task updated in database:', updatedTask);
           }
         } else {
@@ -407,14 +400,11 @@ const PredictedResults = () => {
           console.log('📊 INSERT RESPONSE - Data:', insertedTask, 'Error:', taskError);
           
           if (taskError) {
-            alert(`❌ ERROR INSERTING: ${taskError.message}\nCode: ${taskError.code}\nDetails: ${taskError.details}`);
             console.error('❌ Error inserting task:', taskError);
           } else if (!insertedTask || insertedTask.length === 0) {
-            alert(`⚠️ NO ERROR BUT NO DATA RETURNED - RLS may have blocked the insert silently`);
             console.error('⚠️ Insert returned success but no data - likely RLS issue');
           } else {
             console.log('✅ Task inserted successfully:', insertedTask);
-            alert(`✅ TASK INSERTED: subject="${subjectId}", task="predicted_exam", date="${today}"`);
           }
         }
         
@@ -437,12 +427,9 @@ const PredictedResults = () => {
             .eq('user_id', user.id);
           
           if (pointsError) {
-            alert(`✗ ERROR UPDATING MP: ${pointsError.message}`);
             console.error('✗ ERROR updating MP:', pointsError);
           } else {
-            alert(`✓ UPDATED MP! NEW TOTAL: ${newTotal}`);
             console.log('✓ Updated MP | New total:', newTotal);
-            toast.success('Daily task complete! +30 MP');
           }
         } else {
           // Insert new points record
@@ -456,12 +443,9 @@ const PredictedResults = () => {
             });
           
           if (pointsError) {
-            alert(`✗ ERROR INSERTING MP: ${pointsError.message}`);
             console.error('✗ ERROR inserting MP:', pointsError);
           } else {
-            alert('✓ CREATED MP RECORD! TOTAL: 30');
             console.log('✓ Created MP record | Total: 30');
-            toast.success('Daily task complete! +30 MP');
           }
         }
         
@@ -471,7 +455,6 @@ const PredictedResults = () => {
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
-      toast.error("Failed to save exam results");
     }
   };
 
