@@ -1415,8 +1415,8 @@ const Practice = () => {
                   {/* Animated Progress Bar */}
                   <div className="space-y-3">
                     <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                      <span>{getProgressBarLabels(subjectId).min}</span>
-                      <span>{getProgressBarLabels(subjectId).max}</span>
+                      <span className={!isPremium ? 'blur-sm' : ''}>{getProgressBarLabels(subjectId).min}</span>
+                      <span className={!isPremium ? 'blur-sm' : ''}>{getProgressBarLabels(subjectId).max}</span>
                     </div>
                     <div className={`relative h-4 bg-muted rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                       {/* Old grade position - only show if not first practice */}
