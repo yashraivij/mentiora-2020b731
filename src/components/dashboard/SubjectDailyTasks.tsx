@@ -92,17 +92,17 @@ const getSubjectTasks = (subjectId: string): Task[] => {
       { id: 'complete_questions', label: 'Answer 10 questions', mpReward: 20, completed: false },
     ],
     'english-literature': [
-      { id: 'score_topic', label: 'Get 70%+ on text analysis', mpReward: 25, completed: false },
+      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted literature exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 8 questions', mpReward: 20, completed: false },
     ],
     'history': [
-      { id: 'score_topic', label: 'Get 70%+ on a history topic', mpReward: 25, completed: false },
+      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted history exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
     ],
     'religious-studies': [
-      { id: 'score_topic', label: 'Get 70%+ on buddhism', mpReward: 25, completed: false },
+      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted RS exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 10 questions', mpReward: 20, completed: false },
     ],
