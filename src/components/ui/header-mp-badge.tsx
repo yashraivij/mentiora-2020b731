@@ -13,8 +13,6 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   const [isMobile, setIsMobile] = useState(false);
   const { user } = useAuth();
 
-  console.log('[HeaderMPBadge] Render - user:', user?.id, 'isVisible:', isVisible);
-
   useEffect(() => {
     // Check if mobile
     const checkMobile = () => {
@@ -26,10 +24,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
-    console.log('[HeaderMPBadge] useEffect triggered - user.id:', user?.id);
-    
     if (!user?.id) {
-      console.log('[HeaderMPBadge] No user ID, skipping fetch');
       setMpPoints(0);
       return;
     }
@@ -37,7 +32,6 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
     // Fetch MP points
     const fetchMP = async () => {
       try {
-        console.log('[HeaderMPBadge] Fetching MP for user:', user.id);
         const { data, error } = await supabase
           .from('user_points')
           .select('total_points')
@@ -45,14 +39,13 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
           .maybeSingle();
         
         if (error) {
-          console.error('[HeaderMPBadge] Error fetching MP:', error);
+          console.error('Error fetching MP:', error);
           return;
         }
         
-        console.log('[HeaderMPBadge] MP fetched:', data?.total_points || 0);
         setMpPoints(data?.total_points || 0);
       } catch (err) {
-        console.error('[HeaderMPBadge] Exception in fetchMP:', err);
+        console.error('Exception in fetchMP:', err);
       }
     };
     
@@ -60,45 +53,33 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
     
     // Listen for MP updates via custom event
     const handleMPEarned = () => {
-      console.log('[HeaderMPBadge] mpEarned event received');
       fetchMP();
     };
     window.addEventListener('mpEarned', handleMPEarned);
     
     // Set up realtime subscription to user_points table
-    let subscription: any = null;
-    try {
-      console.log('[HeaderMPBadge] Setting up realtime subscription');
-      subscription = supabase
-        .channel(`user_points_${user.id}`)
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'user_points',
-            filter: `user_id=eq.${user.id}`
-          },
-          (payload) => {
-            console.log('[HeaderMPBadge] Realtime update received:', payload);
-            if (payload.new && 'total_points' in payload.new) {
-              setMpPoints(payload.new.total_points);
-            }
+    const channel = supabase
+      .channel(`mp_updates_${user.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'user_points',
+          filter: `user_id=eq.${user.id}`
+        },
+        (payload) => {
+          console.log('MP realtime update:', payload);
+          if (payload.new && 'total_points' in payload.new) {
+            setMpPoints((payload.new as any).total_points);
           }
-        )
-        .subscribe((status) => {
-          console.log('[HeaderMPBadge] Subscription status:', status);
-        });
-    } catch (err) {
-      console.error('[HeaderMPBadge] Error setting up subscription:', err);
-    }
+        }
+      )
+      .subscribe();
     
     return () => {
-      console.log('[HeaderMPBadge] Cleaning up');
       window.removeEventListener('mpEarned', handleMPEarned);
-      if (subscription) {
-        subscription.unsubscribe();
-      }
+      supabase.removeChannel(channel);
     };
   }, [user?.id]);
 
