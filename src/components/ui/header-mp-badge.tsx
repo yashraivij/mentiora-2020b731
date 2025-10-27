@@ -26,7 +26,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   useEffect(() => {
     if (!user?.id) {
       setMpPoints(0);
-      return;
+      return () => {}; // Always return cleanup
     }
     
     // Fetch MP points
