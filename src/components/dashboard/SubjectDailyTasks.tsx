@@ -269,6 +269,12 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
+    // Prevent manual checking of score_topic - it can only be auto-completed
+    if (taskId === 'score_topic' && checked) {
+      toast.error("This task is auto-completed when you achieve the required score during practice");
+      return;
+    }
+
     try {
       const today = new Date().toISOString().split('T')[0];
       
@@ -429,11 +435,12 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
                 onCheckedChange={(checked) =>
                   handleTaskToggle(task.id, checked as boolean)
                 }
-                className="rounded-md border-2"
+                disabled={task.id === 'score_topic' && !task.completed}
+                className={`rounded-md border-2 ${task.id === 'score_topic' && !task.completed ? 'cursor-not-allowed opacity-50' : ''}`}
               />
               <label
                 htmlFor={`task-${subjectId}-${task.id}`}
-                className={`flex-1 text-sm cursor-pointer select-none transition-all ${
+                className={`flex-1 text-sm ${task.id === 'score_topic' && !task.completed ? 'cursor-not-allowed' : 'cursor-pointer'} select-none transition-all ${
                   task.completed
                     ? 'text-muted-foreground line-through'
                     : 'text-foreground font-medium'
