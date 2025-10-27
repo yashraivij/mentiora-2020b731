@@ -14,7 +14,6 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   const { user } = useAuth();
 
   useEffect(() => {
-    // Check if mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
@@ -24,38 +23,34 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
-    // Only set up subscription if user exists
-    if (user?.id) {
-      // Fetch MP points
-      const fetchMP = async () => {
-        try {
-          const { data, error } = await supabase
-            .from('user_points')
-            .select('total_points')
-            .eq('user_id', user.id)
-            .maybeSingle();
-          
-          if (error) {
-            console.error('Error fetching MP:', error);
-            return;
-          }
-          
-          setMpPoints(data?.total_points || 0);
-        } catch (err) {
-          console.error('Exception in fetchMP:', err);
-        }
-      };
+    let mounted = true;
+    let channel: any = null;
+    
+    const fetchMP = async () => {
+      if (!user?.id || !mounted) return;
       
+      try {
+        const { data } = await supabase
+          .from('user_points')
+          .select('total_points')
+          .eq('user_id', user.id)
+          .maybeSingle();
+        
+        if (mounted) {
+          setMpPoints(data?.total_points || 0);
+        }
+      } catch (err) {
+        console.error('Error fetching MP:', err);
+      }
+    };
+    
+    if (user?.id) {
       fetchMP();
       
-      // Listen for MP updates via custom event
-      const handleMPEarned = () => {
-        fetchMP();
-      };
+      const handleMPEarned = () => fetchMP();
       window.addEventListener('mpEarned', handleMPEarned);
       
-      // Set up realtime subscription to user_points table
-      const channel = supabase
+      channel = supabase
         .channel(`mp_updates_${user.id}`)
         .on(
           'postgres_changes',
@@ -66,8 +61,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
             filter: `user_id=eq.${user.id}`
           },
           (payload) => {
-            console.log('MP realtime update:', payload);
-            if (payload.new && 'total_points' in payload.new) {
+            if (mounted && payload.new && 'total_points' in payload.new) {
               setMpPoints((payload.new as any).total_points);
             }
           }
@@ -75,11 +69,12 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
         .subscribe();
       
       return () => {
+        mounted = false;
         window.removeEventListener('mpEarned', handleMPEarned);
-        supabase.removeChannel(channel);
+        if (channel) {
+          supabase.removeChannel(channel);
+        }
       };
-    } else {
-      setMpPoints(0);
     }
   }, [user?.id]);
 
@@ -105,7 +100,6 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   cursor-default group
                 "
               >
-                {/* Glow effect on hover */}
                 <motion.div
                   className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
@@ -113,7 +107,6 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   }}
                 />
 
-                {/* Diamond emoji with pulse */}
                 <motion.span
                   className="relative z-10 text-lg"
                   animate={{
@@ -128,12 +121,10 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   💎
                 </motion.span>
 
-                {/* MP Count */}
                 <span className="relative z-10 text-sm font-semibold text-[hsl(195,69%,54%)] whitespace-nowrap">
                   {isMobile ? `${mpPoints}` : `${mpPoints} MP`}
                 </span>
 
-                {/* Pulsing glow */}
                 <motion.div
                   className="absolute inset-0 rounded-full"
                   style={{
