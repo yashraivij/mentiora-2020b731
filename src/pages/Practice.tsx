@@ -180,11 +180,6 @@ const Practice = () => {
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
-  // Test function for MP notification
-  const testMPNotification = () => {
-    showMPReward(10, "Perfect! You got full marks on this question.");
-  };
-  
   // Log subject/topic lookup results
   console.log('Subject lookup:', { found: !!subject, subjectId, subjectName: subject?.name });
   if (subject) {
@@ -1846,18 +1841,6 @@ const Practice = () => {
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
           {/* Left Pane: Question Sheet */}
           <div className="rounded-lg bg-card dark:bg-card/95 shadow-sm border border-border p-8">
-            {/* Test MP Notification Button */}
-            <div className="mb-4">
-              <Button
-                onClick={testMPNotification}
-                variant="outline"
-                size="sm"
-                className="text-xs"
-              >
-                Test MP Notification
-              </Button>
-            </div>
-            
             {/* Question Header */}
             <div className="mb-6">
               <div className="flex items-start justify-between gap-4 mb-4">
