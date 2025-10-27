@@ -24,7 +24,10 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      setMpPoints(0);
+      return;
+    }
     
     // Fetch MP points
     const fetchMP = async () => {
