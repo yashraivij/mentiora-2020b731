@@ -156,7 +156,17 @@ const refreshSubscription = async (userId?: string) => {
             // Handle daily login MP reward server-side (only once per day)
             if (event === 'SIGNED_IN') {
               console.log('New sign-in detected for user:', session.user.email);
-              await checkDailyLoginReward(session.user.id);
+              
+              // Check if user was just created (within last 10 seconds) to avoid showing notification on first signup
+              const userCreatedAt = new Date(session.user.created_at);
+              const now = new Date();
+              const secondsSinceCreation = (now.getTime() - userCreatedAt.getTime()) / 1000;
+              
+              if (secondsSinceCreation > 10) {
+                await checkDailyLoginReward(session.user.id);
+              } else {
+                console.log('Skipping daily login notification for new user signup');
+              }
             }
           }, 0);
         } else if (event === 'SIGNED_OUT') {
