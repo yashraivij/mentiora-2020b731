@@ -1354,17 +1354,6 @@ const Practice = () => {
                 </div>
               </CardHeader>
               <CardContent className="p-6 relative">
-                {!isPremium && (
-                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/60 backdrop-blur-[2px]">
-                    <Button
-                      onClick={() => navigate('/pricing')}
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 font-bold text-lg px-8 py-6"
-                    >
-                      Unlock for Free
-                    </Button>
-                  </div>
-                )}
                 <div className="space-y-6">
                   {/* Grade Comparison */}
                   {isFirstPractice ? (
