@@ -39,11 +39,34 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
     
     fetchMP();
     
-    // Listen for MP updates
+    // Listen for MP updates via custom event
     const handleMPEarned = () => fetchMP();
     window.addEventListener('mpEarned', handleMPEarned);
     
-    return () => window.removeEventListener('mpEarned', handleMPEarned);
+    // Set up realtime subscription to user_points table
+    const subscription = supabase
+      .channel('user_points_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'user_points',
+          filter: `user_id=eq.${user?.id}`
+        },
+        (payload) => {
+          console.log('MP points updated in realtime:', payload);
+          if (payload.new && 'total_points' in payload.new) {
+            setMpPoints(payload.new.total_points);
+          }
+        }
+      )
+      .subscribe();
+    
+    return () => {
+      window.removeEventListener('mpEarned', handleMPEarned);
+      subscription.unsubscribe();
+    };
   }, [user?.id]);
 
   return (
