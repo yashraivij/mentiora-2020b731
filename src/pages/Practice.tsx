@@ -1460,6 +1460,18 @@ const Practice = () => {
                       </p>
                     </div>
                   </div>
+
+                  {/* Unlock CTA for non-premium users */}
+                  {!isPremium && (
+                    <div className="flex justify-center pt-4">
+                      <Button 
+                        onClick={() => navigate('/pricing')}
+                        className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        Unlock for Free
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
