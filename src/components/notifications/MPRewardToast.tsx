@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Zap, X } from "lucide-react";
+import { Progress } from '@/components/ui/progress';
+import { Sparkles, X } from "lucide-react";
 
 interface MPRewardToastProps {
   amount: number;
@@ -12,9 +13,18 @@ interface MPRewardToastProps {
 
 export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [progress, setProgress] = useState(100);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Animate progress bar
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        const newProgress = prev - (100 / 40); // Decrease over 4 seconds (40 steps of 100ms)
+        return newProgress <= 0 ? 0 : newProgress;
+      });
+    }, 100);
     
     const timer = setTimeout(() => {
       setIsVisible(false);
@@ -22,6 +32,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
     }, 4000);
     
     return () => {
+      clearInterval(progressInterval);
       clearTimeout(timer);
     };
   }, [onClose]);
@@ -46,8 +57,15 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
           className="fixed top-6 right-6 z-50 w-80"
         >
           <Card className="relative overflow-hidden bg-white dark:bg-gray-900 border-2 border-[#0EA5E9]/30 shadow-lg shadow-[#0EA5E9]/10">
-            {/* Top accent bar */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8]" />
+            {/* Progress bar at top */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-[#0EA5E9]/20">
+              <motion.div 
+                className="h-full bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8]"
+                initial={{ width: "100%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.1, ease: "linear" }}
+              />
+            </div>
             
             <div className="p-5">
               {/* Close button */}
@@ -71,9 +89,9 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     damping: 15,
                     delay: 0.1
                   }}
-                  className="w-12 h-12 bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-md shadow-[#0EA5E9]/20 flex-shrink-0"
+                  className="w-12 h-12 bg-[#0EA5E9]/10 rounded-xl flex items-center justify-center border border-[#0EA5E9]/20 flex-shrink-0"
                 >
-                  <Zap className="h-6 w-6 text-white fill-white" />
+                  <Sparkles className="h-6 w-6 text-[#0EA5E9]" />
                 </motion.div>
                 
                 <div className="flex-1 min-w-0 pt-1">
