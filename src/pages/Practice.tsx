@@ -494,7 +494,7 @@ const Practice = () => {
           .from('user_activities')
           .insert({
             user_id: user.id,
-            activity_type: 'question_answered'
+            activity_type: 'exam_question_answered'
           });
       } catch (error) {
         console.error('Error recording activity:', error);

@@ -186,6 +186,55 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
         console.log('⚠️ No completed tasks found in database');
       }
 
+      // Check if "complete_questions" task needs auto-completion
+      const questionsTask = tasks.find(t => t.id === 'complete_questions');
+      const questionsTaskCompleted = completedTasks?.some(ct => ct.task_id === 'complete_questions' && ct.completed);
+      
+      if (questionsTask && !questionsTaskCompleted) {
+        // Count questions answered today for this subject
+        const { data: todayActivities } = await supabase
+          .from('user_activities')
+          .select('id')
+          .eq('user_id', userId)
+          .eq('activity_type', 'exam_question_answered')
+          .gte('created_at', `${today}T00:00:00`)
+          .lte('created_at', `${today}T23:59:59`);
+        
+        const questionsAnswered = todayActivities?.length || 0;
+        
+        // Extract required questions from task label (e.g., "Answer 10 questions" -> 10)
+        const requiredQuestions = parseInt(questionsTask.label.match(/\d+/)?.[0] || '10');
+        
+        console.log(`📝 Questions answered today: ${questionsAnswered}/${requiredQuestions}`);
+        
+        if (questionsAnswered >= requiredQuestions) {
+          console.log('✓ Auto-completing "complete_questions" task');
+          await autoCompleteTask('complete_questions', questionsTask.mpReward);
+          // Refresh completions after auto-complete
+          const { data: refreshedTasks } = await supabase
+            .from('subject_daily_tasks')
+            .select('task_id, completed, mp_awarded')
+            .eq('user_id', userId)
+            .eq('subject_id', subjectId)
+            .eq('date', today);
+          
+          if (refreshedTasks) {
+            setTasks(prevTasks =>
+              prevTasks.map(task => {
+                const isCompleted = refreshedTasks?.some(ct => ct.task_id === task.id && ct.completed) || false;
+                return {
+                  ...task,
+                  completed: isCompleted
+                };
+              })
+            );
+          }
+          console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+          if (showLoading) setLoading(false);
+          return;
+        }
+      }
+
       // Update tasks with completion state
       setTasks(prevTasks =>
         prevTasks.map(task => {
