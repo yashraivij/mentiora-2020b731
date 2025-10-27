@@ -165,6 +165,7 @@ const Practice = () => {
   const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
   const [beforeSessionGrade, setBeforeSessionGrade] = useState<number | null>(null);
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
+  const [totalMPEarned, setTotalMPEarned] = useState<number>(0);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -530,6 +531,7 @@ const Practice = () => {
       // Show MP reward notification if user got full marks
       if (markingResult.marksAwarded === currentQuestion.marks) {
         showMPReward(10, "Perfect answer! +10 MP");
+        setTotalMPEarned(prev => prev + 10);
       }
       
       // Generate notebook notes if marks were lost
@@ -1112,6 +1114,7 @@ const Practice = () => {
                     });
                 }
 
+                setTotalMPEarned(prev => prev + 25);
                 console.log('✓ score_topic task completed and 25 MP awarded');
               }
             }
@@ -1229,6 +1232,7 @@ const Practice = () => {
                     });
                 }
 
+                setTotalMPEarned(prev => prev + 20);
                 console.log('✓ complete_questions task completed and 20 MP awarded');
               }
             }
@@ -1704,7 +1708,7 @@ const Practice = () => {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
               <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
               <p className="text-base font-medium text-foreground">
-                +40 MP added for completing this section
+                +{totalMPEarned} MP added for completing this section
               </p>
             </div>
           </div>
