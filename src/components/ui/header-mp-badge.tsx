@@ -24,10 +24,10 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
+    if (!user?.id) return;
+    
     // Fetch MP points
     const fetchMP = async () => {
-      if (!user?.id) return;
-      
       const { data } = await supabase
         .from('user_points')
         .select('total_points')
@@ -45,14 +45,14 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
     
     // Set up realtime subscription to user_points table
     const subscription = supabase
-      .channel('user_points_changes')
+      .channel(`user_points_${user.id}`)
       .on(
         'postgres_changes',
         {
           event: '*',
           schema: 'public',
           table: 'user_points',
-          filter: `user_id=eq.${user?.id}`
+          filter: `user_id=eq.${user.id}`
         },
         (payload) => {
           console.log('MP points updated in realtime:', payload);
