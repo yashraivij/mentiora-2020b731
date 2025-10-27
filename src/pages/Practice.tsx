@@ -532,6 +532,26 @@ const Practice = () => {
       if (markingResult.marksAwarded === currentQuestion.marks) {
         showMPReward(10, "Perfect answer! +10 MP");
         setTotalMPEarned(prev => prev + 10);
+        
+        // Award MP via edge function and update header
+        if (user?.id) {
+          supabase.functions.invoke('award-mp', {
+            body: {
+              action: 'subject_task_completed',
+              userId: user.id,
+              mpAmount: 10,
+              taskId: `practice_${currentQuestion.id}`,
+              subjectId: subjectId || 'unknown'
+            }
+          }).then(({ data, error }) => {
+            if (!error) {
+              console.log('MP awarded successfully:', data);
+              window.dispatchEvent(new CustomEvent('mpEarned'));
+            } else {
+              console.error('Error awarding MP:', error);
+            }
+          });
+        }
       }
       
       // Generate notebook notes if marks were lost
