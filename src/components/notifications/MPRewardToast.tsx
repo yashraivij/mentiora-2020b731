@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Sparkles, X } from "lucide-react";
+import { Trophy, X } from "lucide-react";
 
 interface MPRewardToastProps {
   amount: number;
@@ -81,17 +81,17 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
               {/* Content */}
               <div className="flex items-start gap-4 pr-8">
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
                   transition={{ 
                     type: "spring",
                     stiffness: 200,
                     damping: 15,
                     delay: 0.1
                   }}
-                  className="w-12 h-12 bg-[#0EA5E9]/10 rounded-xl flex items-center justify-center border border-[#0EA5E9]/20 flex-shrink-0"
+                  className="w-12 h-12 bg-[#0EA5E9]/5 rounded-full flex items-center justify-center border-2 border-[#0EA5E9]/30 flex-shrink-0"
                 >
-                  <Sparkles className="h-6 w-6 text-[#0EA5E9]" />
+                  <Trophy className="h-6 w-6 text-[#0EA5E9]" />
                 </motion.div>
                 
                 <div className="flex-1 min-w-0 pt-1">
