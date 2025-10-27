@@ -239,14 +239,14 @@ const Pricing = () => {
           {/* Monthly */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
-            <p className="text-gray-600 mb-6">Start free, then £19.99/month.</p>
+            <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2">
                 <span className="text-5xl font-bold text-gray-900">£0</span>
                 <span className="text-gray-600">/week</span>
               </div>
-              <p className="text-sm text-gray-500 mt-2">Then £19.99/month</p>
+              <p className="text-sm text-gray-500 mt-2">Then £9.99/month</p>
             </div>
 
             <Button
@@ -275,7 +275,7 @@ const Pricing = () => {
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-5xl font-bold">£{examYear === "2026" ? "169.99" : "349.99"}</span>
+                <span className="text-5xl font-bold">£{examYear === "2026" ? "79.99" : "179.99"}</span>
                 <span className="text-white/90">once</span>
               </div>
               <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "199.99" : "449.99"}</span>
@@ -289,7 +289,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-white/80 mt-4 text-center">
-              £{examYear === "2026" ? "169.99" : "349.99"} billed once.
+              £{examYear === "2026" ? "79.99" : "179.99"} billed once.
             </p>
           </Card>
         </motion.div>

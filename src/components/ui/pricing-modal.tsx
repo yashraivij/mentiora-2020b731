@@ -25,8 +25,8 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
   // Dynamic pricing based on exam year
   const pricingData = {
     "2026": {
-      monthlyPrice: "19.99",
-      oneTimePrice: "169.99",
+      monthlyPrice: "9.99",
+      oneTimePrice: "79.99",
       originalPrice: "199.99",
       savingsPercent: "15%",
       endDate: "31st July 2026",
@@ -34,8 +34,8 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
       monthsUntilExam: "16"
     },
     "2027": {
-      monthlyPrice: "19.99",
-      oneTimePrice: "349.99",
+      monthlyPrice: "9.99",
+      oneTimePrice: "179.99",
       originalPrice: "449.99",
       savingsPercent: "20%",
       endDate: "31st July 2027",
