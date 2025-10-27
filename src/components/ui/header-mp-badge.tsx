@@ -13,7 +13,10 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   const [isMobile, setIsMobile] = useState(false);
   const { user } = useAuth();
 
+  console.log('[HeaderMPBadge] Render - user:', user?.id, 'isVisible:', isVisible);
+
   useEffect(() => {
+    // Check if mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
@@ -23,35 +26,51 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
-    let mounted = true;
-    let channel: any = null;
+    console.log('[HeaderMPBadge] useEffect triggered - user.id:', user?.id);
     
+    if (!user?.id) {
+      console.log('[HeaderMPBadge] No user ID, skipping fetch');
+      setMpPoints(0);
+      return;
+    }
+    
+    // Fetch MP points
     const fetchMP = async () => {
-      if (!user?.id || !mounted) return;
-      
       try {
-        const { data } = await supabase
+        console.log('[HeaderMPBadge] Fetching MP for user:', user.id);
+        const { data, error } = await supabase
           .from('user_points')
           .select('total_points')
           .eq('user_id', user.id)
           .maybeSingle();
         
-        if (mounted) {
-          setMpPoints(data?.total_points || 0);
+        if (error) {
+          console.error('[HeaderMPBadge] Error fetching MP:', error);
+          return;
         }
+        
+        console.log('[HeaderMPBadge] MP fetched:', data?.total_points || 0);
+        setMpPoints(data?.total_points || 0);
       } catch (err) {
-        console.error('Error fetching MP:', err);
+        console.error('[HeaderMPBadge] Exception in fetchMP:', err);
       }
     };
     
-    if (user?.id) {
+    fetchMP();
+    
+    // Listen for MP updates via custom event
+    const handleMPEarned = () => {
+      console.log('[HeaderMPBadge] mpEarned event received');
       fetchMP();
-      
-      const handleMPEarned = () => fetchMP();
-      window.addEventListener('mpEarned', handleMPEarned);
-      
-      channel = supabase
-        .channel(`mp_updates_${user.id}`)
+    };
+    window.addEventListener('mpEarned', handleMPEarned);
+    
+    // Set up realtime subscription to user_points table
+    let subscription: any = null;
+    try {
+      console.log('[HeaderMPBadge] Setting up realtime subscription');
+      subscription = supabase
+        .channel(`user_points_${user.id}`)
         .on(
           'postgres_changes',
           {
@@ -61,21 +80,26 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
             filter: `user_id=eq.${user.id}`
           },
           (payload) => {
-            if (mounted && payload.new && 'total_points' in payload.new) {
-              setMpPoints((payload.new as any).total_points);
+            console.log('[HeaderMPBadge] Realtime update received:', payload);
+            if (payload.new && 'total_points' in payload.new) {
+              setMpPoints(payload.new.total_points);
             }
           }
         )
-        .subscribe();
-      
-      return () => {
-        mounted = false;
-        window.removeEventListener('mpEarned', handleMPEarned);
-        if (channel) {
-          supabase.removeChannel(channel);
-        }
-      };
+        .subscribe((status) => {
+          console.log('[HeaderMPBadge] Subscription status:', status);
+        });
+    } catch (err) {
+      console.error('[HeaderMPBadge] Error setting up subscription:', err);
     }
+    
+    return () => {
+      console.log('[HeaderMPBadge] Cleaning up');
+      window.removeEventListener('mpEarned', handleMPEarned);
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
   }, [user?.id]);
 
   return (
@@ -100,6 +124,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   cursor-default group
                 "
               >
+                {/* Glow effect on hover */}
                 <motion.div
                   className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
@@ -107,6 +132,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   }}
                 />
 
+                {/* Diamond emoji with pulse */}
                 <motion.span
                   className="relative z-10 text-lg"
                   animate={{
@@ -121,10 +147,12 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                   💎
                 </motion.span>
 
+                {/* MP Count */}
                 <span className="relative z-10 text-sm font-semibold text-[hsl(195,69%,54%)] whitespace-nowrap">
                   {isMobile ? `${mpPoints}` : `${mpPoints} MP`}
                 </span>
 
+                {/* Pulsing glow */}
                 <motion.div
                   className="absolute inset-0 rounded-full"
                   style={{
