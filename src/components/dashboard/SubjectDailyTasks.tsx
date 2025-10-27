@@ -102,7 +102,7 @@ const getSubjectTasks = (subjectId: string): Task[] => {
       { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
     ],
     'religious-studies': [
-      { id: 'score_topic', label: 'Get 70%+ on ethics', mpReward: 25, completed: false },
+      { id: 'score_topic', label: 'Get 70%+ on buddhism', mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted RS exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: 'Answer 10 questions', mpReward: 20, completed: false },
     ],
