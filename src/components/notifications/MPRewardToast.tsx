@@ -129,7 +129,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     transition={{ delay: 0.15 }}
                     className="text-xl font-bold text-primary tracking-wide"
                   >
-                    Medly Points
+                    Mentiora Points
                   </motion.div>
                   
                   {/* Message */}

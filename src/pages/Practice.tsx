@@ -182,7 +182,7 @@ const Practice = () => {
   
   // Test function for MP notification
   const testMPNotification = () => {
-    showMPReward(40, "Great work! You've completed a practice question.");
+    showMPReward(10, "Perfect! You got full marks on this question.");
   };
   
   // Log subject/topic lookup results
