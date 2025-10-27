@@ -18,121 +18,147 @@ interface Task {
   completed: boolean;
 }
 
-// Subject-specific tasks
+// Get current UK date and use it to vary tasks daily
+const getUKDate = (): Date => {
+  const now = new Date();
+  const ukTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+  return ukTime;
+};
+
+// Get day variation index (0-4) to cycle through different task variations
+const getDayVariation = (): number => {
+  const ukDate = getUKDate();
+  const dayOfYear = Math.floor((ukDate.getTime() - new Date(ukDate.getFullYear(), 0, 0).getTime()) / 86400000);
+  return dayOfYear % 5; // Cycle through 5 variations
+};
+
+// Subject-specific tasks with daily variations
 const getSubjectTasks = (subjectId: string): Task[] => {
+  const variation = getDayVariation();
+  
+  // Percentage variations: 60%, 65%, 70%, 75%, 80%
+  const percentages = [60, 65, 70, 75, 80];
+  const percentage = percentages[variation];
+  
+  // Question count variations for different subjects
+  const getQuestionCount = (base: number): number => {
+    const variations = [-5, -3, 0, 2, 5];
+    return Math.max(5, base + variations[variation]); // Minimum 5 questions
+  };
+  
   const taskMappings: Record<string, Task[]> = {
     'geography': [
-      { id: 'score_topic', label: 'Get 70%+ on natural hazards', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on natural hazards`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted paper 1', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 20 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(20)} questions`, mpReward: 20, completed: false },
     ],
     'geography-paper-2': [
-      { id: 'score_topic', label: 'Get 70%+ on urban issues', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on urban issues`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted paper 2', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 20 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(20)} questions`, mpReward: 20, completed: false },
     ],
     'physics': [
-      { id: 'score_topic', label: 'Get 75%+ on forces & motion', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on forces & motion`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'physics-aqa': [
-      { id: 'score_topic', label: 'Get 75%+ on forces & motion', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on forces & motion`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'physics-edexcel': [
-      { id: 'score_topic', label: 'Get 75%+ on forces & motion', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on forces & motion`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted physics exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'chemistry': [
-      { id: 'score_topic', label: 'Get 75%+ on chemical reactions', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on chemical reactions`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted chemistry exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'chemistry-edexcel': [
-      { id: 'score_topic', label: 'Get 75%+ on chemical reactions', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on chemical reactions`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted chemistry exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'biology': [
-      { id: 'score_topic', label: 'Get 70%+ on cell biology', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on cell biology`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted biology exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'biology-edexcel': [
-      { id: 'score_topic', label: 'Get 70%+ on cell biology', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on cell biology`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted biology exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'biology-aqa-alevel': [
-      { id: 'score_topic', label: 'Get 75%+ on biochemistry', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on biochemistry`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete A-Level biology exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(12)} questions`, mpReward: 20, completed: false },
     ],
     'mathematics': [
-      { id: 'score_topic', label: 'Get 80%+ on algebra', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on algebra`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted maths exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 25 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(25)} questions`, mpReward: 20, completed: false },
     ],
     'maths-edexcel': [
-      { id: 'score_topic', label: 'Get 80%+ on algebra', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on algebra`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted maths exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 25 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(25)} questions`, mpReward: 20, completed: false },
     ],
     'maths-aqa-alevel': [
-      { id: 'score_topic', label: 'Get 75%+ on calculus', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on calculus`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete A-Level maths paper', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 18 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(18)} questions`, mpReward: 20, completed: false },
     ],
     'english-language': [
-      { id: 'score_topic', label: 'Get 70%+ on creative writing', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on creative writing`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted English exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 10 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(10)} questions`, mpReward: 20, completed: false },
     ],
     'english-literature': [
-      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on any topic`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted literature exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 8 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(8)} questions`, mpReward: 20, completed: false },
     ],
     'history': [
-      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on any topic`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted history exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(12)} questions`, mpReward: 20, completed: false },
     ],
     'religious-studies': [
-      { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on any topic`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted RS exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 10 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(10)} questions`, mpReward: 20, completed: false },
     ],
     'business-edexcel-igcse': [
-      { id: 'score_topic', label: 'Get 70%+ on business functions', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on business functions`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted business exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'computer-science': [
-      { id: 'score_topic', label: 'Get 75%+ on algorithms', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on algorithms`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted CS exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 20 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(20)} questions`, mpReward: 20, completed: false },
     ],
     'psychology': [
-      { id: 'score_topic', label: 'Get 70%+ on research methods', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on research methods`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted psychology exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'music-eduqas-gcse': [
-      { id: 'score_topic', label: 'Get 70%+ on a music topic', mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on a music topic`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete predicted music exam', mpReward: 30, completed: false },
-      { id: 'complete_questions', label: 'Answer 12 questions', mpReward: 20, completed: false },
+      { id: 'complete_questions', label: `Answer ${getQuestionCount(12)} questions`, mpReward: 20, completed: false },
     ],
   };
 
   // Return subject-specific tasks or default tasks
   return taskMappings[subjectId] || [
-    { id: 'score_topic', label: 'Get 70%+ on any topic', mpReward: 25, completed: false },
+    { id: 'score_topic', label: `Get ${percentage}%+ on any topic`, mpReward: 25, completed: false },
     { id: 'predicted_exam', label: 'Complete a predicted exam', mpReward: 30, completed: false },
-    { id: 'complete_questions', label: 'Answer 15 questions', mpReward: 20, completed: false },
+    { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
   ];
 };
 
