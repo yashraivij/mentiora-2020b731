@@ -1365,7 +1365,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
+                          <div className={`relative text-6xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1380,7 +1380,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
+                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(oldPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1393,7 +1393,7 @@ const Practice = () => {
                           ) : (
                             <TrendingDown className="h-4 w-4" />
                           )}
-                          <span>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
+                          <span className={!isPremium ? 'blur-sm' : ''}>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
                         </div>
                         <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                       </div>
@@ -1404,7 +1404,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
+                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1418,7 +1418,7 @@ const Practice = () => {
                       <span>{getProgressBarLabels(subjectId).min}</span>
                       <span>{getProgressBarLabels(subjectId).max}</span>
                     </div>
-                    <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
+                    <div className={`relative h-4 bg-muted rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                       {/* Old grade position - only show if not first practice */}
                       {!isFirstPractice && (
                         <div 
@@ -1447,7 +1447,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
+                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
                       </p>
                     </div>
                   </div>
@@ -1456,7 +1456,7 @@ const Practice = () => {
                   <div className="flex justify-center pt-2">
                     <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
                       <p className="text-sm text-center">
-                        <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
+                        <span className="text-xl">👏</span> You scored better than <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{percentileRank}%</span> of students this week
                       </p>
                     </div>
                   </div>
