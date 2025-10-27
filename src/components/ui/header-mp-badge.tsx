@@ -24,63 +24,63 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
   }, []);
 
   useEffect(() => {
-    if (!user?.id) {
-      setMpPoints(0);
-      return () => {}; // Always return cleanup
-    }
-    
-    // Fetch MP points
-    const fetchMP = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('user_points')
-          .select('total_points')
-          .eq('user_id', user.id)
-          .maybeSingle();
-        
-        if (error) {
-          console.error('Error fetching MP:', error);
-          return;
-        }
-        
-        setMpPoints(data?.total_points || 0);
-      } catch (err) {
-        console.error('Exception in fetchMP:', err);
-      }
-    };
-    
-    fetchMP();
-    
-    // Listen for MP updates via custom event
-    const handleMPEarned = () => {
-      fetchMP();
-    };
-    window.addEventListener('mpEarned', handleMPEarned);
-    
-    // Set up realtime subscription to user_points table
-    const channel = supabase
-      .channel(`mp_updates_${user.id}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'user_points',
-          filter: `user_id=eq.${user.id}`
-        },
-        (payload) => {
-          console.log('MP realtime update:', payload);
-          if (payload.new && 'total_points' in payload.new) {
-            setMpPoints((payload.new as any).total_points);
+    // Only set up subscription if user exists
+    if (user?.id) {
+      // Fetch MP points
+      const fetchMP = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('user_points')
+            .select('total_points')
+            .eq('user_id', user.id)
+            .maybeSingle();
+          
+          if (error) {
+            console.error('Error fetching MP:', error);
+            return;
           }
+          
+          setMpPoints(data?.total_points || 0);
+        } catch (err) {
+          console.error('Exception in fetchMP:', err);
         }
-      )
-      .subscribe();
-    
-    return () => {
-      window.removeEventListener('mpEarned', handleMPEarned);
-      supabase.removeChannel(channel);
-    };
+      };
+      
+      fetchMP();
+      
+      // Listen for MP updates via custom event
+      const handleMPEarned = () => {
+        fetchMP();
+      };
+      window.addEventListener('mpEarned', handleMPEarned);
+      
+      // Set up realtime subscription to user_points table
+      const channel = supabase
+        .channel(`mp_updates_${user.id}`)
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'user_points',
+            filter: `user_id=eq.${user.id}`
+          },
+          (payload) => {
+            console.log('MP realtime update:', payload);
+            if (payload.new && 'total_points' in payload.new) {
+              setMpPoints((payload.new as any).total_points);
+            }
+          }
+        )
+        .subscribe();
+      
+      return () => {
+        window.removeEventListener('mpEarned', handleMPEarned);
+        supabase.removeChannel(channel);
+      };
+    } else {
+      setMpPoints(0);
+    }
   }, [user?.id]);
 
   return (
