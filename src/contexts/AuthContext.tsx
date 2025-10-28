@@ -132,8 +132,16 @@ const refreshSubscription = async (userId?: string) => {
       
       if (session?.user) {
         await refreshSubscription(session.user.id);
-        // Check for daily login reward on page load for existing sessions
-        await checkDailyLoginReward(session.user.id);
+        
+        // Check if user was just created (within last 10 seconds) to avoid daily login on first signup
+        const userCreatedAt = new Date(session.user.created_at);
+        const now = new Date();
+        const secondsSinceCreation = (now.getTime() - userCreatedAt.getTime()) / 1000;
+        
+        // Only check for daily login reward for existing users (not brand new signups)
+        if (secondsSinceCreation > 10) {
+          await checkDailyLoginReward(session.user.id);
+        }
       }
       
       setIsLoading(false);
