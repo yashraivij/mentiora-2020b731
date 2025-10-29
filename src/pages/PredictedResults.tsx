@@ -50,7 +50,7 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   
-  const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks, preMarkedAttempts } = location.state || {};
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -641,10 +641,15 @@ const PredictedResults = () => {
   };
   
   useEffect(() => {
-    if (questions && answers) {
+    if (preMarkedAttempts) {
+      // Use pre-marked attempts directly (for test/demo mode)
+      setAttempts(preMarkedAttempts);
+      setIsMarking(false);
+    } else if (questions && answers) {
+      // Mark answers normally
       markAllAnswers();
     }
-  }, [questions, answers]);
+  }, [questions, answers, preMarkedAttempts]);
 
   if (isMarking) {
     return (

@@ -168,18 +168,11 @@ const Dashboard = () => {
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
-  // Test function to generate random predicted grades
+  // Test function to generate random predicted grades (Grade 4 -> Grade 6)
   const generateRandomPredictedResults = () => {
     const testSubjectId = 'maths-edexcel';
-    const possibleGrades = [4, 5, 6, 7, 8, 9];
-    const startGradeIndex = Math.floor(Math.random() * 4); // 0-3 (grades 4-7)
-    const startGrade = possibleGrades[startGradeIndex];
-    const endGrade = possibleGrades[startGradeIndex + 1 + Math.floor(Math.random() * 2)]; // +1 to +2 grades improvement
     
-    // Calculate percentage based on end grade
-    const percentage = 40 + (endGrade - 4) * 10 + Math.floor(Math.random() * 10);
-    
-    // Generate mock questions and answers
+    // Generate mock questions
     const mockQuestions = [
       {
         id: '1',
@@ -228,20 +221,90 @@ const Dashboard = () => {
       }
     ];
     
-    const mockAnswers = mockQuestions.map((q, idx) => ({
+    const mockAnswers = mockQuestions.map((q) => ({
       questionId: q.id,
-      answer: idx < 3 ? 'Student answer provided here' : ''
+      answer: 'Student answer provided here'
     }));
     
     const totalMarks = mockQuestions.reduce((sum, q) => sum + q.marks, 0);
     
+    // Pre-mark attempts to achieve grade 6 (60-70% = grade 6)
+    // For grade 6, we need 60% of total marks = 6 marks out of 9
+    const targetMarks = Math.round(totalMarks * 0.67); // 67% for solid grade 6
+    
+    // Distribute marks across questions to get exactly 6/9 marks (67% = grade 6)
+    const mockAttempts = [
+      {
+        questionId: '1',
+        userAnswer: 'A = πr² = π × 5² = 78.54 cm²',
+        score: 2, // Partial marks
+        feedback: {
+          modelAnswer: 'A = πr² = π × 5² = 78.5 cm² (to 1 d.p.)',
+          whyThisGetsMark: 'AO1 (Knowledge): Demonstrate understanding (1 mark)\nAO2 (Application): Apply formula correctly (1 mark)\nAO3 (Analysis): Round to appropriate degree of accuracy (1 mark)',
+          whyYoursDidnt: 'Good work! You correctly applied the formula and calculated the area. However, the question asks for the answer to 1 decimal place, so 78.5 cm² is the required format.',
+          specLink: '4.3 - Geometry',
+          fullMarks: false
+        }
+      },
+      {
+        questionId: '2',
+        userAnswer: '3x = 15, x = 5',
+        score: 2, // Full marks
+        feedback: {
+          modelAnswer: '3x = 15, x = 5',
+          whyThisGetsMark: 'AO1 (Knowledge): Demonstrate understanding (1 mark)\nAO2 (Application): Apply knowledge correctly (1 mark)',
+          whyYoursDidnt: 'Excellent work! Your answer demonstrates strong understanding and addresses all key points effectively.',
+          specLink: '4.1 - Algebra',
+          fullMarks: true
+        }
+      },
+      {
+        questionId: '3',
+        userAnswer: '(x + 2)(x + 3)',
+        score: 2, // Full marks
+        feedback: {
+          modelAnswer: '(x + 2)(x + 3)',
+          whyThisGetsMark: 'AO1 (Knowledge): Demonstrate understanding (1 mark)\nAO2 (Application): Apply knowledge correctly (1 mark)',
+          whyYoursDidnt: 'Excellent work! Your answer demonstrates strong understanding and addresses all key points effectively.',
+          specLink: '4.1 - Algebra',
+          fullMarks: true
+        }
+      },
+      {
+        questionId: '4',
+        userAnswer: '1/6',
+        score: 0, // Missed
+        feedback: {
+          modelAnswer: '1/6 or 0.167',
+          whyThisGetsMark: 'AO1 (Knowledge): Demonstrate understanding (1 mark)',
+          whyYoursDidnt: 'You need to express the probability as a fraction or decimal. Make sure to show your final answer clearly.',
+          specLink: '4.5 - Probability',
+          fullMarks: false
+        }
+      },
+      {
+        questionId: '5',
+        userAnswer: 'The gradient is 3',
+        score: 0, // Missed
+        feedback: {
+          modelAnswer: 'The gradient is 3',
+          whyThisGetsMark: 'AO1 (Knowledge): Demonstrate understanding (1 mark)',
+          whyYoursDidnt: 'Make sure to identify the gradient from the equation y = mx + c format where m is the gradient.',
+          specLink: '4.2 - Graphs',
+          fullMarks: false
+        }
+      }
+    ];
+    
+    // Navigate with pre-marked attempts to skip loading
     navigate(`/predicted-results/${testSubjectId}`, {
       state: {
         questions: mockQuestions,
         answers: mockAnswers,
-        timeElapsed: Math.floor(Math.random() * 1800) + 600,
-        isReview: false,
-        totalMarks: totalMarks
+        timeElapsed: 1200,
+        isReview: true,
+        totalMarks: totalMarks,
+        preMarkedAttempts: mockAttempts // Pass pre-marked attempts
       }
     });
   };
