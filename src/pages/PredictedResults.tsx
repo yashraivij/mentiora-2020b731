@@ -49,6 +49,7 @@ const PredictedResults = () => {
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
+  const [showConfetti, setShowConfetti] = useState(false);
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks, preMarkedAttempts } = location.state || {};
 
@@ -645,6 +646,12 @@ const PredictedResults = () => {
       // Use pre-marked attempts directly (for test/demo mode)
       setAttempts(preMarkedAttempts);
       setIsMarking(false);
+      
+      // Trigger confetti after a short delay
+      setTimeout(() => {
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 4000);
+      }, 500);
     } else if (questions && answers) {
       // Mark answers normally
       markAllAnswers();
@@ -721,9 +728,41 @@ const PredictedResults = () => {
     const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
     return q && a.score === q.marks;
   }).length;
+  
+  // Confetti Component
+  const Confetti = () => {
+    const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 0.5,
+      duration: 2 + Math.random() * 2,
+      color: ['#0EA5E9', '#38BDF8', '#7DD3FC', '#BAE6FD'][Math.floor(Math.random() * 4)]
+    }));
+
+    return (
+      <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+        {confettiPieces.map((piece) => (
+          <div
+            key={piece.id}
+            className="absolute w-2 h-2 opacity-0"
+            style={{
+              left: `${piece.left}%`,
+              top: '-10px',
+              backgroundColor: piece.color,
+              animation: `confettiFall ${piece.duration}s linear forwards`,
+              animationDelay: `${piece.delay}s`,
+              borderRadius: Math.random() > 0.5 ? '50%' : '0'
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-muted/20">
+      {showConfetti && <Confetti />}
+      
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -808,11 +847,29 @@ const PredictedResults = () => {
             </CardHeader>
             <CardContent className="p-6 relative">
               <div className="space-y-6">
-                {/* Grade Display - Show only current grade */}
-                <div className="flex items-center justify-center">
+                {/* Grade Display - Show before and after grades */}
+                <div className="flex items-center justify-center gap-6">
+                  {/* Before Grade */}
+                  <div className="text-center space-y-2">
+                    <Badge className="mb-1 bg-muted text-muted-foreground border-0 text-xs">
+                      Previous Grade
+                    </Badge>
+                    <div className="relative">
+                      <div className="relative text-4xl font-bold text-muted-foreground/60">
+                        4
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Arrow */}
+                  <div className="flex items-center">
+                    <ArrowRight className="w-8 h-8 text-[hsl(195,69%,54%)] animate-pulse" />
+                  </div>
+                  
+                  {/* After Grade */}
                   <div className="text-center space-y-2 group">
                     <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      Your Predicted Grade
+                      New Predicted Grade
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
