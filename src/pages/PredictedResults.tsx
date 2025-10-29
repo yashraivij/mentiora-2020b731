@@ -736,7 +736,7 @@ const PredictedResults = () => {
       left: Math.random() * 100,
       delay: Math.random() * 0.5,
       duration: 2 + Math.random() * 2,
-      color: ['#0EA5E9', '#38BDF8', '#7DD3FC', '#BAE6FD'][Math.floor(Math.random() * 4)]
+      color: ['#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'][Math.floor(Math.random() * 6)]
     }));
 
     return (
@@ -848,33 +848,35 @@ const PredictedResults = () => {
             <CardContent className="p-6 relative">
               <div className="space-y-6">
                 {/* Grade Display - Show before and after grades */}
-                <div className="flex items-center justify-center gap-6">
-                  {/* Before Grade */}
-                  <div className="text-center space-y-2">
-                    <Badge className="mb-1 bg-muted text-muted-foreground border-0 text-xs">
-                      Previous Grade
+                <div className="flex items-center justify-center gap-12">
+                  <div className="text-center space-y-2 group">
+                    <Badge variant="outline" className="mb-1 border-[hsl(195,69%,54%)]/30 text-xs">
+                      Before
                     </Badge>
                     <div className="relative">
-                      <div className="relative text-4xl font-bold text-muted-foreground/60">
+                      <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                      <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
                         4
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Arrow */}
-                  <div className="flex items-center">
-                    <ArrowRight className="w-8 h-8 text-[hsl(195,69%,54%)] animate-pulse" />
+
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30 text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300">
+                      <TrendingUp className="h-4 w-4" />
+                      <span>+2.0</span>
+                    </div>
+                    <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                   </div>
-                  
-                  {/* After Grade */}
+
                   <div className="text-center space-y-2 group">
                     <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      New Predicted Grade
+                      Now
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(numericGrade, subjectId)}
+                      <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
+                        6
                       </div>
                     </div>
                   </div>
