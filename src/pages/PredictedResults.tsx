@@ -856,7 +856,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        3
+                        6.7
                       </div>
                     </div>
                   </div>
@@ -864,7 +864,7 @@ const PredictedResults = () => {
                   <div className="flex flex-col items-center gap-2">
                     <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30 text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300">
                       <TrendingUp className="h-4 w-4" />
-                      <span>+2.0</span>
+                      <span>+0.0</span>
                     </div>
                     <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                   </div>
@@ -876,7 +876,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        5
+                        6.7
                       </div>
                     </div>
                   </div>
