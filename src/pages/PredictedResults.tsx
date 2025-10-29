@@ -856,7 +856,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        4
+                        7
                       </div>
                     </div>
                   </div>
@@ -876,7 +876,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        6
+                        9
                       </div>
                     </div>
                   </div>
