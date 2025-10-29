@@ -50,9 +50,6 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   const [showConfetti, setShowConfetti] = useState(false);
-  const [beforeGrade, setBeforeGrade] = useState(3.0);
-  const [afterGrade, setAfterGrade] = useState(5.0);
-  const [randomPercentile, setRandomPercentile] = useState(75);
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks, preMarkedAttempts } = location.state || {};
 
@@ -731,25 +728,6 @@ const PredictedResults = () => {
     const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
     return q && a.score === q.marks;
   }).length;
-
-  // Function to generate random grades and percentile
-  const generateRandomGrades = () => {
-    const newBefore = Math.round((Math.random() * 4 + 3) * 10) / 10; // 3.0 to 7.0
-    const improvement = Math.round((Math.random() * 2.5 + 0.5) * 10) / 10; // 0.5 to 3.0
-    const newAfter = Math.round((newBefore + improvement) * 10) / 10;
-    const newPercentile = Math.round(Math.random() * 30 + 65); // 65 to 95
-    
-    setBeforeGrade(newBefore);
-    setAfterGrade(Math.min(newAfter, 9.0)); // Cap at 9.0
-    setRandomPercentile(newPercentile);
-  };
-
-  // Generate random grades on mount
-  useEffect(() => {
-    generateRandomGrades();
-  }, []);
-
-  const improvement = Math.round((afterGrade - beforeGrade) * 10) / 10;
   
   // Confetti Component
   const Confetti = () => {
@@ -878,7 +856,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        {beforeGrade.toFixed(1)}
+                        3
                       </div>
                     </div>
                   </div>
@@ -886,7 +864,7 @@ const PredictedResults = () => {
                   <div className="flex flex-col items-center gap-2">
                     <div className="px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30 text-white font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300">
                       <TrendingUp className="h-4 w-4" />
-                      <span>+{improvement.toFixed(1)}</span>
+                      <span>+2.0</span>
                     </div>
                     <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                   </div>
@@ -898,7 +876,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
-                        {afterGrade.toFixed(1)}
+                        5
                       </div>
                     </div>
                   </div>
@@ -935,21 +913,9 @@ const PredictedResults = () => {
                 <div className="flex justify-center pt-2">
                   <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
                     <p className="text-sm text-center">
-                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{randomPercentile}%</span> of students this week
+                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
                     </p>
                   </div>
-                </div>
-
-                {/* Regenerate Button */}
-                <div className="flex justify-center pt-4">
-                  <Button
-                    onClick={generateRandomGrades}
-                    variant="outline"
-                    className="gap-2"
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                    Generate New Prediction
-                  </Button>
                 </div>
               </div>
             </CardContent>
