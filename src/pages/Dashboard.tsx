@@ -168,6 +168,84 @@ const Dashboard = () => {
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
+  // Test function to generate random predicted grades
+  const generateRandomPredictedResults = () => {
+    const testSubjectId = 'maths-edexcel';
+    const possibleGrades = [4, 5, 6, 7, 8, 9];
+    const startGradeIndex = Math.floor(Math.random() * 4); // 0-3 (grades 4-7)
+    const startGrade = possibleGrades[startGradeIndex];
+    const endGrade = possibleGrades[startGradeIndex + 1 + Math.floor(Math.random() * 2)]; // +1 to +2 grades improvement
+    
+    // Calculate percentage based on end grade
+    const percentage = 40 + (endGrade - 4) * 10 + Math.floor(Math.random() * 10);
+    
+    // Generate mock questions and answers
+    const mockQuestions = [
+      {
+        id: '1',
+        questionNumber: 1,
+        text: 'Calculate the area of a circle with radius 5cm.',
+        marks: 3,
+        section: 'Geometry',
+        modelAnswer: 'A = πr² = π × 5² = 78.5 cm² (to 1 d.p.)',
+        specReference: '4.3 - Geometry'
+      },
+      {
+        id: '2',
+        questionNumber: 2,
+        text: 'Solve the equation 3x + 5 = 20',
+        marks: 2,
+        section: 'Algebra',
+        modelAnswer: '3x = 15, x = 5',
+        specReference: '4.1 - Algebra'
+      },
+      {
+        id: '3',
+        questionNumber: 3,
+        text: 'Factorise x² + 5x + 6',
+        marks: 2,
+        section: 'Algebra',
+        modelAnswer: '(x + 2)(x + 3)',
+        specReference: '4.1 - Algebra'
+      },
+      {
+        id: '4',
+        questionNumber: 4,
+        text: 'Calculate the probability of rolling a 6 on a fair dice.',
+        marks: 1,
+        section: 'Probability',
+        modelAnswer: '1/6 or 0.167',
+        specReference: '4.5 - Probability'
+      },
+      {
+        id: '5',
+        questionNumber: 5,
+        text: 'Find the gradient of the line y = 3x + 2',
+        marks: 1,
+        section: 'Graphs',
+        modelAnswer: 'The gradient is 3',
+        specReference: '4.2 - Graphs'
+      }
+    ];
+    
+    const mockAnswers = mockQuestions.map((q, idx) => ({
+      questionId: q.id,
+      answer: idx < 3 ? 'Student answer provided here' : ''
+    }));
+    
+    const totalMarks = mockQuestions.reduce((sum, q) => sum + q.marks, 0);
+    
+    navigate(`/predicted-results/${testSubjectId}`, {
+      state: {
+        questions: mockQuestions,
+        answers: mockAnswers,
+        timeElapsed: Math.floor(Math.random() * 1800) + 600,
+        isReview: false,
+        totalMarks: totalMarks
+      }
+    });
+  };
+
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [notebookLoading, setNotebookLoading] = useState(false);
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
@@ -2610,6 +2688,17 @@ const Dashboard = () => {
                   onUpgradeToPremium={() => navigate('/pricing')}
                   userId={user?.id || ''}
                 />
+                
+                {/* Test Button for Random Predicted Grades */}
+                <div className="mt-8 flex justify-center">
+                  <Button
+                    onClick={generateRandomPredictedResults}
+                    variant="outline"
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600 shadow-lg"
+                  >
+                    🎲 Test Random Grade Results
+                  </Button>
+                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
