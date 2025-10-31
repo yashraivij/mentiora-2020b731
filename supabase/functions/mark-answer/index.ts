@@ -213,14 +213,9 @@ GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
    - CALCULATION VERIFICATION: Double-check all arithmetic operations for accuracy
    - SCIENTIFIC NOTATION: Ensure proper format for standard form (e.g., 3.2 × 10^7 not 32 × 10^6)
    - Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
-   - 🚨🚨🚨 CHEMISTRY SPECIFIC RULE: For CHEMISTRY questions, students can receive FULL marks for correct answers WITHOUT working out. Chemistry does not require working to be shown for full marks - just the correct answer is sufficient.
-   - 🚨🚨🚨 CRITICAL ALTERNATIVE METHODS RULE (MATHS/PHYSICS): Students can solve problems using DIFFERENT valid mathematical methods. If a student uses an alternative approach (e.g., calculating 2^5 as 32, then 2^-2 as 0.25, then applying BODMAS) that is mathematically correct and reaches the right answer, this is COMPLETELY ACCEPTABLE. Award FULL marks.
-   - 🚨🚨🚨 CRITICAL WORKING MARKS RULE (MATHS/PHYSICS): If the student's final numerical answer is CORRECT and they have shown ANY valid working (calculations, steps, method), award FULL marks. DO NOT deduct marks for using a different method than the model answer. Alternative valid methods that reach the correct answer demonstrate FULL understanding.
-   - ACCEPT ALL VALID MATHEMATICAL APPROACHES: Whether a student uses index laws (2^5-2-4) OR calculates each power separately (2^5=32, 2^-2=0.25, 2^4=16) and then applies BODMAS - BOTH ARE CORRECT. Award full marks for either approach if the final answer is correct.
-   - DO NOT penalize students for informal working notation or layout - focus on mathematical correctness and validity of the method
-   - If a student shows ANY calculation process (even if different from the model answer) and arrives at the correct answer, this demonstrates full understanding
-   - For MATHS/PHYSICS: Only deduct marks if working is COMPLETELY missing when explicitly required by the question, OR if the working contains mathematical errors
-   - For CHEMISTRY: Working is NOT required for full marks - correct answer alone is sufficient
+   - 🚨 CRITICAL WORKING MARKS RULE: If the student's final numerical answer is CORRECT and they have shown ANY working (calculations, steps, method), award FULL marks regardless of formatting or presentation style. Only deduct marks if working is COMPLETELY missing when explicitly required by the question.
+   - DO NOT penalize students for informal working notation or layout - focus on mathematical correctness
+   - If a student shows the calculation process and arrives at the correct answer, this demonstrates full understanding
    - Double-check all formula applications and arithmetic before making any marking decisions
    - FACTUAL ACCURACY: Verify all scientific facts, formulas, and constants are correct
 6. COMMAND WORDS: Strictly apply GCSE command word requirements:
