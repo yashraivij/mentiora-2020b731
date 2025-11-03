@@ -26,6 +26,27 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
 
   useEffect(() => {
     loadLeaderboardData();
+
+    // Set up real-time subscription for user_points changes
+    const pointsChannel = supabase
+      .channel('leaderboard-points-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'user_points'
+        },
+        () => {
+          // Reload leaderboard when points change
+          loadLeaderboardData();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(pointsChannel);
+    };
   }, [currentUserId]);
 
   const loadLeaderboardData = async () => {
@@ -145,7 +166,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
       );
     }
     return (
-      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground text-sm font-semibold">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-sm font-bold shadow-md">
         {rank}
       </div>
     );
