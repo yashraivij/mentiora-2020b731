@@ -260,7 +260,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
               className="relative"
             >
               <div className="relative bg-gradient-to-br from-yellow-200 via-amber-300 to-yellow-400 dark:from-yellow-600 dark:via-amber-700 dark:to-yellow-800 rounded-2xl p-6 shadow-2xl border-2 border-yellow-400 dark:border-yellow-600">
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 flex items-center justify-center text-white text-2xl font-bold shadow-2xl border-4 border-white dark:border-gray-900 animate-pulse">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 flex items-center justify-center text-white text-2xl font-bold shadow-2xl border-4 border-white dark:border-gray-900">
                   👑
                 </div>
                 <div className="text-center pt-4">
