@@ -243,7 +243,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
                   {top3[1].current_streak > 0 && (
                     <div className="flex items-center justify-center gap-1 text-orange-500">
                       <Flame className="w-4 h-4" />
-                      <span className="text-sm font-semibold">{top3[1].current_streak}🔥</span>
+                      <span className="text-sm font-semibold">{top3[1].current_streak}</span>
                     </div>
                   )}
                 </div>
@@ -272,7 +272,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
                   {top3[0].current_streak > 0 && (
                     <div className="flex items-center justify-center gap-1.5 text-orange-600 dark:text-orange-400">
                       <Flame className="w-5 h-5" />
-                      <span className="text-base font-semibold">{top3[0].current_streak}🔥</span>
+                      <span className="text-base font-semibold">{top3[0].current_streak}</span>
                     </div>
                   )}
                 </div>
@@ -301,7 +301,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
                   {top3[2].current_streak > 0 && (
                     <div className="flex items-center justify-center gap-1 text-orange-500">
                       <Flame className="w-4 h-4" />
-                      <span className="text-sm font-semibold">{top3[2].current_streak}🔥</span>
+                      <span className="text-sm font-semibold">{top3[2].current_streak}</span>
                     </div>
                   )}
                 </div>
