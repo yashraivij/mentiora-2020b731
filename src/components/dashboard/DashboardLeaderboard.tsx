@@ -168,6 +168,9 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
     return null;
   }
 
+  const top3 = topUsers.slice(0, 3);
+  const rest = topUsers.slice(3);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -190,7 +193,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
       />
       
       {/* Header */}
-      <div className="relative z-10 mb-6 flex items-center gap-3">
+      <div className="relative z-10 mb-8 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/25">
           <Trophy className="w-5 h-5 text-white" />
         </div>
@@ -200,38 +203,197 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
         </div>
       </div>
 
-      {/* Leaderboard List */}
-      <div className="relative z-10 space-y-2">
-        {topUsers.map((entry, index) => (
+      {/* Top 3 Podium */}
+      <div className="relative z-10 mb-8">
+        <div className="grid grid-cols-3 gap-4 mb-2">
+          {/* 2nd Place */}
+          {top3[1] && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="relative pt-8"
+            >
+              <div className="relative bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 dark:from-slate-700 dark:via-slate-800 dark:to-slate-900 rounded-2xl p-6 shadow-xl border-2 border-slate-300 dark:border-slate-600">
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-slate-300 via-slate-400 to-slate-500 flex items-center justify-center text-white text-xl font-bold shadow-lg border-4 border-white dark:border-gray-900">
+                  2
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-bold text-foreground truncate mb-2">{top3[1].username}</p>
+                  <div className="flex items-center justify-center gap-1.5 mb-2">
+                    <TrendingUp className="w-5 h-5 text-[#0EA5E9]" />
+                    <span className="text-2xl font-bold text-[#0EA5E9]">{top3[1].mp_points}</span>
+                  </div>
+                  {top3[1].current_streak > 0 && (
+                    <div className="flex items-center justify-center gap-1 text-orange-500">
+                      <Flame className="w-4 h-4" />
+                      <span className="text-sm font-semibold">{top3[1].current_streak}🔥</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* 1st Place */}
+          {top3[0] && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              className="relative"
+            >
+              <div className="relative bg-gradient-to-br from-yellow-200 via-amber-300 to-yellow-400 dark:from-yellow-600 dark:via-amber-700 dark:to-yellow-800 rounded-2xl p-6 shadow-2xl border-2 border-yellow-400 dark:border-yellow-600">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 flex items-center justify-center text-white text-2xl font-bold shadow-2xl border-4 border-white dark:border-gray-900 animate-pulse">
+                  👑
+                </div>
+                <div className="text-center pt-4">
+                  <p className="text-base font-bold text-gray-900 dark:text-white truncate mb-3">{top3[0].username}</p>
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <TrendingUp className="w-6 h-6 text-[#0EA5E9]" />
+                    <span className="text-3xl font-bold text-[#0EA5E9]">{top3[0].mp_points}</span>
+                  </div>
+                  {top3[0].current_streak > 0 && (
+                    <div className="flex items-center justify-center gap-1.5 text-orange-600 dark:text-orange-400">
+                      <Flame className="w-5 h-5" />
+                      <span className="text-base font-semibold">{top3[0].current_streak}🔥</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* 3rd Place */}
+          {top3[2] && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="relative pt-12"
+            >
+              <div className="relative bg-gradient-to-br from-orange-100 via-orange-200 to-orange-300 dark:from-orange-800 dark:via-orange-900 dark:to-orange-950 rounded-2xl p-6 shadow-xl border-2 border-orange-300 dark:border-orange-700">
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 flex items-center justify-center text-white text-xl font-bold shadow-lg border-4 border-white dark:border-gray-900">
+                  3
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-bold text-foreground truncate mb-2">{top3[2].username}</p>
+                  <div className="flex items-center justify-center gap-1.5 mb-2">
+                    <TrendingUp className="w-5 h-5 text-[#0EA5E9]" />
+                    <span className="text-2xl font-bold text-[#0EA5E9]">{top3[2].mp_points}</span>
+                  </div>
+                  {top3[2].current_streak > 0 && (
+                    <div className="flex items-center justify-center gap-1 text-orange-500">
+                      <Flame className="w-4 h-4" />
+                      <span className="text-sm font-semibold">{top3[2].current_streak}🔥</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+      {/* Rest of Leaderboard Table */}
+      {rest.length > 0 && (
+        <div className="relative z-10">
+          <div className="mb-4">
+            <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          </div>
+          
+          <div className="space-y-2">
+            {rest.map((entry, index) => (
+              <motion.div
+                key={entry.user_id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 + index * 0.05 }}
+                className={`
+                  flex items-center gap-4 p-4 rounded-xl transition-all duration-200
+                  ${entry.isCurrentUser 
+                    ? 'bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40' 
+                    : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 border border-border'
+                  }
+                `}
+              >
+                {/* Rank Badge */}
+                <div className="flex-shrink-0">
+                  {getRankBadge(entry.rank)}
+                </div>
+
+                {/* Username */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-semibold text-foreground truncate">
+                      {entry.username}
+                    </p>
+                    {entry.isCurrentUser && (
+                      <Badge variant="secondary" className="text-xs px-2 py-0 bg-[#0EA5E9]/20 text-[#0EA5E9] border-[#0EA5E9]/30">
+                        You
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+
+                {/* MP Points */}
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20">
+                  <TrendingUp className="w-4 h-4 text-[#0EA5E9]" />
+                  <span className="text-sm font-bold text-[#0EA5E9]">
+                    {entry.mp_points}
+                  </span>
+                  <span className="text-xs text-[#0EA5E9]/70">MP</span>
+                </div>
+
+                {/* Streak */}
+                {entry.current_streak > 0 && (
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-orange-50 dark:bg-orange-500/10">
+                    <Flame className="w-4 h-4 text-orange-500" />
+                    <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">
+                      {entry.current_streak}
+                    </span>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Current User Entry (if not in top 5) */}
+      {currentUserEntry && (
+        <>
+          <div className="relative py-4 mt-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-dashed border-border" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-background px-3 text-xs text-muted-foreground">
+                Your Rank
+              </span>
+            </div>
+          </div>
+
           <motion.div
-            key={entry.user_id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.05 }}
-            className={`
-              flex items-center gap-4 p-4 rounded-xl transition-all duration-200
-              ${entry.isCurrentUser 
-                ? 'bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40' 
-                : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 border border-border'
-              }
-            `}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-4 p-4 rounded-xl bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40"
           >
             {/* Rank Badge */}
             <div className="flex-shrink-0">
-              {getRankBadge(entry.rank)}
+              {getRankBadge(currentUserEntry.rank)}
             </div>
 
             {/* Username */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-semibold text-foreground truncate">
-                  {entry.username}
+                  {currentUserEntry.username}
                 </p>
-                {entry.isCurrentUser && (
-                  <Badge variant="secondary" className="text-xs px-2 py-0 bg-[#0EA5E9]/20 text-[#0EA5E9] border-[#0EA5E9]/30">
-                    You
-                  </Badge>
-                )}
+                <Badge variant="secondary" className="text-xs px-2 py-0 bg-[#0EA5E9]/20 text-[#0EA5E9] border-[#0EA5E9]/30">
+                  You
+                </Badge>
               </div>
             </div>
 
@@ -239,82 +401,23 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20">
               <TrendingUp className="w-4 h-4 text-[#0EA5E9]" />
               <span className="text-sm font-bold text-[#0EA5E9]">
-                {entry.mp_points}
+                {currentUserEntry.mp_points}
               </span>
               <span className="text-xs text-[#0EA5E9]/70">MP</span>
             </div>
 
             {/* Streak */}
-            {entry.current_streak > 0 && (
+            {currentUserEntry.current_streak > 0 && (
               <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-orange-50 dark:bg-orange-500/10">
                 <Flame className="w-4 h-4 text-orange-500" />
                 <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">
-                  {entry.current_streak}
+                  {currentUserEntry.current_streak}
                 </span>
               </div>
             )}
           </motion.div>
-        ))}
-
-        {/* Current User Entry (if not in top 5) */}
-        {currentUserEntry && (
-          <>
-            <div className="relative py-3">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-dashed border-border" />
-              </div>
-              <div className="relative flex justify-center">
-                <span className="bg-background px-3 text-xs text-muted-foreground">
-                  Your Rank
-                </span>
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center gap-4 p-4 rounded-xl bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40"
-            >
-              {/* Rank Badge */}
-              <div className="flex-shrink-0">
-                {getRankBadge(currentUserEntry.rank)}
-              </div>
-
-              {/* Username */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-foreground truncate">
-                    {currentUserEntry.username}
-                  </p>
-                  <Badge variant="secondary" className="text-xs px-2 py-0 bg-[#0EA5E9]/20 text-[#0EA5E9] border-[#0EA5E9]/30">
-                    You
-                  </Badge>
-                </div>
-              </div>
-
-              {/* MP Points */}
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20">
-                <TrendingUp className="w-4 h-4 text-[#0EA5E9]" />
-                <span className="text-sm font-bold text-[#0EA5E9]">
-                  {currentUserEntry.mp_points}
-                </span>
-                <span className="text-xs text-[#0EA5E9]/70">MP</span>
-              </div>
-
-              {/* Streak */}
-              {currentUserEntry.current_streak > 0 && (
-                <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-orange-50 dark:bg-orange-500/10">
-                  <Flame className="w-4 h-4 text-orange-500" />
-                  <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">
-                    {currentUserEntry.current_streak}
-                  </span>
-                </div>
-              )}
-            </motion.div>
-          </>
-        )}
-      </div>
+        </>
+      )}
     </motion.div>
   );
 }
