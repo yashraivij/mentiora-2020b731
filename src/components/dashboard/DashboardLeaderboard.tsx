@@ -32,13 +32,13 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
     try {
       setIsLoading(true);
 
-      // Get top 5 users by points
+      // Get top 10 users by points
       const { data: userPoints, error: pointsError } = await supabase
         .from('user_points')
         .select('user_id, total_points')
         .gt('total_points', 0)
         .order('total_points', { ascending: false })
-        .limit(5);
+        .limit(10);
 
       if (pointsError || !userPoints) {
         console.error('Error fetching points:', pointsError);
@@ -83,7 +83,7 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
 
       setTopUsers(leaderboard);
 
-      // If current user is not in top 5, get their rank
+      // If current user is not in top 10, get their rank
       if (currentUserId && !leaderboard.find(u => u.user_id === currentUserId)) {
         const { data: allUsers } = await supabase
           .from('user_points')
@@ -193,14 +193,9 @@ export function DashboardLeaderboard({ currentUserId }: DashboardLeaderboardProp
       />
       
       {/* Header */}
-      <div className="relative z-10 mb-8 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#0EA5E9]/25">
-          <Trophy className="w-5 h-5 text-white" />
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold text-[#0F172A] dark:text-white">Leaderboard</h2>
-          <p className="text-sm text-[#64748B] dark:text-gray-400">Top performers this week</p>
-        </div>
+      <div className="relative z-10 mb-8">
+        <h2 className="text-3xl font-bold text-foreground tracking-tight mb-1">Leaderboard</h2>
+        <p className="text-sm text-[#64748B] dark:text-gray-400">Top performers this week</p>
       </div>
 
       {/* Top 3 Podium */}
