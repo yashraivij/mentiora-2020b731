@@ -611,12 +611,14 @@ const Dashboard = () => {
         // Helper to get subject_id from name and exam board
         const getSubjectId = (subjectName: string, examBoard: string): string => {
           const board = examBoard.toLowerCase();
+          // Normalize subject name (remove duplicate A-Level)
+          const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
           
           // Handle A-level subjects
-          if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-          if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-          if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-          if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+          if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+          if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+          if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
+          if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
           
           // Handle subjects with exam board in name
           if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -668,12 +670,14 @@ const Dashboard = () => {
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
             const subjectName = record.subject_name;
+            // Normalize subject name (remove duplicate A-Level)
+            const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
             
             // Handle A-level subjects
-            if (subjectName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
-            if (subjectName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
-            if (subjectName === "Physics (A-Level)" && examBoard === "aqa") return "physics-aqa-alevel";
-            if (subjectName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
+            if (normalizedName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
+            if (normalizedName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            if (normalizedName === "Physics (A-Level)" && examBoard === "aqa") return "physics-aqa-alevel";
+            if (normalizedName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
             
             // Handle subjects with exam board in name
             if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -1593,10 +1597,12 @@ const Dashboard = () => {
       // Get subject ID to find progress
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        // Normalize subject name (remove duplicate A-Level)
+        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
+        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
         if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
         if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
@@ -1753,12 +1759,14 @@ const Dashboard = () => {
       // Derive subject ID from name and exam board (same logic as loadUserSubjects)
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
+        // Normalize subject name (remove duplicate A-Level)
+        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
         
         // Handle A-level subjects
-        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
+        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -1868,10 +1876,10 @@ const Dashboard = () => {
       return {
         id: subjectId,
         name: (() => {
-          // For A-Level subjects, replace "(A-Level)" with the exam board
+          // For A-Level subjects, show with exam board
           if (subject.subject_name.includes('(A-Level)')) {
             const baseName = subject.subject_name.replace('(A-Level)', '').trim();
-            return `${baseName} (${subject.exam_board})`;
+            return `${baseName} (A-Level) (${subject.exam_board})`;
           }
           // Check if exam board is already in the subject name (for other subjects)
           const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
@@ -1939,9 +1947,8 @@ const Dashboard = () => {
     if (!subject) return;
 
     try {
-      // Determine if this is an A-level subject and modify the name accordingly
-      const isALevel = subjectId.includes('alevel');
-      const subjectName = isALevel ? `${subject.name} (A-Level)` : subject.name;
+      // Use the subject name directly from curriculum (already includes (A-Level) if applicable)
+      const subjectName = subject.name;
       
       // Check if subject already exists
       const { data: existing } = await supabase
@@ -2044,12 +2051,14 @@ const Dashboard = () => {
     const dbSubject = userSubjectsWithGrades.find((subject) => {
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
+        // Normalize subject name (remove duplicate A-Level)
+        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
         
         // Handle A-level subjects
-        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
+        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -3011,13 +3020,6 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="topics" className="space-y-4 mt-8">
-                          {(() => {
-                            console.log('🔍 TOPICS TAB OPENED - selectedDrawerSubject:', selectedDrawerSubject);
-                            console.log('🔍 Subject ID:', selectedDrawerSubject?.id);
-                            console.log('🔍 All curriculum IDs:', curriculum.map(s => s.id));
-                            console.log('🔍 Physics subjects in curriculum:', curriculum.filter(s => s.id.includes('physics')));
-                            return null;
-                          })()}
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
                               <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Topic Mastery</CardTitle>
@@ -3025,18 +3027,21 @@ const Dashboard = () => {
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
                               {(() => {
+                                // DEBUGGING: Log when Topics tab is viewed
+                                console.log('=== TOPICS TAB RENDERING ===');
+                                console.log('selectedDrawerSubject:', selectedDrawerSubject);
+                                console.log('selectedDrawerSubject.id:', selectedDrawerSubject?.id);
+                                console.log('selectedDrawerSubject.name:', selectedDrawerSubject?.name);
+                                console.log('Curriculum has physics-aqa-alevel?', curriculum.some(s => s.id === 'physics-aqa-alevel'));
+                                console.log('Total curriculum subjects:', curriculum.length);
+                                
                                 // Get topics only from the selected drawer subject
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  console.log('🔍 Topics Tab Debug:', {
-                                    selectedDrawerSubjectId: selectedDrawerSubject.id,
-                                    selectedDrawerSubjectName: selectedDrawerSubject.name,
-                                    curriculumIds: curriculum.map(s => ({ id: s.id, name: s.name, topicsCount: s.topics?.length || 0 })),
-                                    physicsMatches: curriculum.filter(s => s.id.includes('physics')).map(s => ({ id: s.id, name: s.name, topicsCount: s.topics?.length || 0 }))
-                                  });
+                                  // Find subject in curriculum using the exact ID
                                   const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
-                                  console.log('🎯 Found subject:', subject ? { id: subject.id, name: subject.name, topicsCount: subject.topics?.length } : 'NOT FOUND');
+                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
                                   
                                   if (subject) {
                                     console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
