@@ -168,6 +168,16 @@ const Dashboard = () => {
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
+  // Track subject level changes
+  useEffect(() => {
+    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
+  }, [activeSubjectLevel]);
+
+  // Track subject group selection
+  useEffect(() => {
+    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
+  }, [selectedSubjectGroup]);
+
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [notebookLoading, setNotebookLoading] = useState(false);
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
@@ -1961,8 +1971,15 @@ const Dashboard = () => {
   const addSubject = async (subjectId: string, targetGrade: string, examBoard: string = "AQA") => {
     if (!user?.id) return;
     
+    console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
+    
     const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) return;
+    if (!subject) {
+      console.error('❌ Subject not found in curriculum:', subjectId);
+      return;
+    }
+
+    console.log('✅ Found subject:', { id: subject.id, name: subject.name });
 
     try {
       // Use the subject name directly from curriculum (already includes (A-Level) if applicable)
@@ -4122,8 +4139,24 @@ const Dashboard = () => {
                                   subjectId: subject.id,
                                   subjectName: subject.name,
                                   examBoard: examBoard,
-                                  activeSubjectLevel
+                                  activeSubjectLevel,
+                                  isAlevelId: subject.id.includes('alevel')
                                 });
+                                
+                                // Safety check: ensure correct level subject is selected
+                                const expectedHasAlevel = activeSubjectLevel === 'alevel';
+                                const actualHasAlevel = subject.id.includes('alevel');
+                                
+                                if (expectedHasAlevel !== actualHasAlevel) {
+                                  console.error('⚠️ Level mismatch! Expected:', activeSubjectLevel, 'but got subject:', subject.id);
+                                  toast({
+                                    title: "Error",
+                                    description: "Subject level mismatch. Please try again.",
+                                    variant: "destructive"
+                                  });
+                                  return;
+                                }
+                                
                                 setSelectedSubjectForGrade({
                                   id: subject.id,
                                   name: subject.name,
@@ -4195,11 +4228,16 @@ const Dashboard = () => {
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
-                                console.log('✅ Adding subject:', {
+                                const logData = {
                                   subjectId: selectedSubjectForGrade.id,
+                                  subjectName: selectedSubjectForGrade.name,
                                   grade: grade.toString(),
-                                  examBoard: selectedSubjectForGrade.examBoard
-                                });
+                                  examBoard: selectedSubjectForGrade.examBoard,
+                                  activeSubjectLevel,
+                                  isAlevelId: selectedSubjectForGrade.id.includes('alevel')
+                                };
+                                console.log('✅ Adding subject with grade:', logData);
+                                
                                 addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
                                 setSelectedSubjectForGrade(null);
                                 setShowAddSubjects(false);
