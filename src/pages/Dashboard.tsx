@@ -1939,6 +1939,18 @@ const Dashboard = () => {
     return "Off target";
   };
 
+  // Sync selectedDrawerSubject with latest mockSubjects data when drawer is open
+  useEffect(() => {
+    if (subjectDrawerOpen && selectedDrawerSubject && mockSubjects.length > 0) {
+      const freshSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
+      if (freshSubject && freshSubject.predicted !== selectedDrawerSubject.predicted) {
+        // Update with fresh predicted grade
+        setSelectedDrawerSubject(freshSubject);
+      }
+    }
+  }, [mockSubjects, subjectDrawerOpen, selectedDrawerSubject]);
+
+
   const filteredSubjects = userSubjects.length > 0
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
@@ -2740,20 +2752,9 @@ const Dashboard = () => {
                                 {isPremium ? (
                                   <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
                                     Predicted {(() => {
-                                      console.log('=== DRAWER BADGE RENDERING ===');
-                                      console.log('selectedDrawerSubject.id:', selectedDrawerSubject?.id);
-                                      console.log('selectedDrawerSubject.predicted:', selectedDrawerSubject?.predicted);
-                                      console.log('mockSubjects count:', mockSubjects.length);
-                                      console.log('mockSubjects IDs:', mockSubjects.map(s => s.id));
-                                      
-                                      // Get the correct predicted value from mockSubjects, not from selectedDrawerSubject state
-                                      const currentSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
-                                      console.log('Found currentSubject:', currentSubject ? `YES - predicted: ${currentSubject.predicted}` : 'NO');
-                                      
-                                      const predictedValue = currentSubject?.predicted ?? selectedDrawerSubject.predicted;
-                                      console.log('Final predictedValue to display:', predictedValue, 'type:', typeof predictedValue);
-                                      console.log('Will display as grade:', getDisplayGrade(predictedValue));
-                                      
+                                      // ALWAYS get fresh predicted value from mockSubjects array
+                                      const freshSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
+                                      const predictedValue = freshSubject?.predicted ?? selectedDrawerSubject.predicted;
                                       return getDisplayGrade(predictedValue);
                                     })()}
                                   </Badge>
