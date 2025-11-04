@@ -168,9 +168,11 @@ const Dashboard = () => {
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
-  // Track subject level changes
+  // Track subject level changes and reset group selection
   useEffect(() => {
     console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
+    // Clear selected subject group when level changes to prevent mismatches
+    setSelectedSubjectGroup(null);
   }, [activeSubjectLevel]);
 
   // Track subject group selection
