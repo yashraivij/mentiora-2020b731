@@ -3011,6 +3011,13 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="topics" className="space-y-4 mt-8">
+                          {(() => {
+                            console.log('🔍 TOPICS TAB OPENED - selectedDrawerSubject:', selectedDrawerSubject);
+                            console.log('🔍 Subject ID:', selectedDrawerSubject?.id);
+                            console.log('🔍 All curriculum IDs:', curriculum.map(s => s.id));
+                            console.log('🔍 Physics subjects in curriculum:', curriculum.filter(s => s.id.includes('physics')));
+                            return null;
+                          })()}
                           <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
                             <CardHeader className="pb-4">
                               <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">Topic Mastery</CardTitle>
