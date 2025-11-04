@@ -611,8 +611,8 @@ const Dashboard = () => {
         // Helper to get subject_id from name and exam board
         const getSubjectId = (subjectName: string, examBoard: string): string => {
           const board = examBoard.toLowerCase();
-          // Normalize subject name (remove duplicate A-Level)
-          const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+          // Normalize subject name (remove ALL duplicate A-Level markers)
+          const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
           
           // Handle A-level subjects
           if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
@@ -670,8 +670,8 @@ const Dashboard = () => {
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
             const subjectName = record.subject_name;
-            // Normalize subject name (remove duplicate A-Level)
-            const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+            // Normalize subject name (remove ALL duplicate A-Level markers)
+            const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
             
             // Handle A-level subjects
             if (normalizedName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
@@ -1597,8 +1597,8 @@ const Dashboard = () => {
       // Get subject ID to find progress
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove duplicate A-Level)
-        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+        // Normalize subject name (remove ALL duplicate A-Level markers)
+        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
@@ -1759,8 +1759,8 @@ const Dashboard = () => {
       // Derive subject ID from name and exam board (same logic as loadUserSubjects)
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove duplicate A-Level)
-        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+        // Normalize subject name (remove ALL duplicate A-Level markers)
+        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
         // Handle A-level subjects
         if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
@@ -1876,21 +1876,23 @@ const Dashboard = () => {
       return {
         id: subjectId,
         name: (() => {
-          // For A-Level subjects, show with exam board
-          if (subject.subject_name.includes('(A-Level)')) {
-            const baseName = subject.subject_name.replace('(A-Level)', '').trim();
-            return `${baseName} (A-Level) (${subject.exam_board})`;
+          // Clean up subject name - remove all A-Level markers
+          let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
+          
+          // For A-Level subjects, add single A-Level marker with exam board
+          if (subjectId.includes('alevel')) {
+            return `${cleanName} (A-Level) (${subject.exam_board})`;
           }
-          // Check if exam board is already in the subject name (for other subjects)
+          // Check if exam board is already in the subject name
           const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
           if (hasExamBoard) {
             return subject.subject_name;
           }
-          // Override exam board display for specific subjects
+          // Override for specific subjects
           if (subjectId === 'music-eduqas-gcse') {
             return `${subject.subject_name} (Eduqas)`;
           }
-          // Use database exam board for others
+          // Add exam board for others
           return `${subject.subject_name} (${subject.exam_board})`;
         })(),
         icon: getSubjectIconEmoji(subjectId),
@@ -2051,8 +2053,8 @@ const Dashboard = () => {
     const dbSubject = userSubjectsWithGrades.find((subject) => {
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove duplicate A-Level)
-        const normalizedName = subjectName.replace('(A-Level) (A-Level)', '(A-Level)').trim();
+        // Normalize subject name (remove ALL duplicate A-Level markers)
+        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
         // Handle A-level subjects
         if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
