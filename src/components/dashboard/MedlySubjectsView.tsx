@@ -398,8 +398,12 @@ export function MedlySubjectsView({
               <Card 
                 className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                 onClick={() => {
-                  console.log('📌 Opening drawer with subject:', subject);
-                  console.log('📌 Subject predicted:', subject.predicted, 'target:', subject.target);
+                  console.log('=== SUBJECT CARD CLICKED ===');
+                  console.log('Subject ID:', subject.id);
+                  console.log('Subject name:', subject.name);
+                  console.log('Subject predicted:', subject.predicted, 'type:', typeof subject.predicted);
+                  console.log('Subject target:', subject.target, 'type:', typeof subject.target);
+                  console.log('Full subject object:', subject);
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
                 }}
