@@ -37257,5 +37257,2079 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'physics-aqa-alevel',
+    name: 'Physics (A-Level)',
+    topics: [
+      {
+        id: '3.1-measurements-errors',
+        name: '3.1 Measurements and Errors',
+        questions: [
+          {
+            id: 'phys-3.1-q1',
+            question: 'State the seven SI base units and give one example of a derived unit.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The seven SI base units are: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), and candela (cd). Example of derived unit: newton (N) which equals kg m s^(-2).',
+            markingCriteria: {
+              breakdown: [
+                'All seven base units stated (3 marks)',
+                'Correct derived unit example (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.1'
+          },
+          {
+            id: 'phys-3.1-q2',
+            question: 'Convert 5.2 MJ to eV. Use 1 eV = 1.6 * 10^(-19) J.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '5.2 MJ = 5.2 * 10^6 J. Number of eV = (5.2 * 10^6) / (1.6 * 10^(-19)) = 3.25 * 10^25 eV.',
+            markingCriteria: {
+              breakdown: [
+                'Convert MJ to J: 5.2 * 10^6 J (1 mark)',
+                'Correct division setup (1 mark)',
+                'Answer: 3.25 * 10^25 eV (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.1-q3',
+            question: 'Distinguish between random and systematic errors, giving one example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Random errors cause unpredictable variation in readings, both above and below the true value. Example: reading a stopwatch due to human reaction time. Systematic errors cause readings to be consistently too high or too low. Example: a zero error on a measuring instrument.',
+            markingCriteria: {
+              breakdown: [
+                'Random errors: unpredictable variation above/below true value (1 mark)',
+                'Example of random error (1 mark)',
+                'Systematic errors: consistent bias in one direction (1 mark)',
+                'Example of systematic error (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2'
+          },
+          {
+            id: 'phys-3.1-q4',
+            question: 'A student measures the diameter of a wire as 0.52 mm ± 0.02 mm. Calculate the percentage uncertainty.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Percentage uncertainty = (absolute uncertainty / measured value) * 100 = (0.02 / 0.52) * 100 = 3.8% or 3.85%.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula or method (1 mark)',
+                'Answer: 3.8% or 3.85% (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.1-q5',
+            question: 'Two resistances are measured as R1 = 10.0 Ω ± 0.5 Ω and R2 = 15.0 Ω ± 0.3 Ω. They are connected in series. Calculate the total resistance and its absolute uncertainty.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Total resistance R = R1 + R2 = 10.0 + 15.0 = 25.0 Ω. When adding, absolute uncertainties add: ΔR = 0.5 + 0.3 = 0.8 Ω. Answer: 25.0 ± 0.8 Ω.',
+            markingCriteria: {
+              breakdown: [
+                'Total resistance: 25.0 Ω (1 mark)',
+                'Absolute uncertainties add (1 mark)',
+                'Total uncertainty: 0.8 Ω (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'phys-3.1-q6',
+            question: 'Explain what is meant by the precision, repeatability, and resolution of a measurement.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Precision refers to how closely repeated measurements agree with each other. Repeatability means getting consistent results when the same person repeats a measurement under the same conditions. Resolution is the smallest change in the quantity being measured that gives a recognizable change in reading.',
+            markingCriteria: {
+              breakdown: [
+                'Precision: closeness of repeated measurements (1 mark)',
+                'Repeatability: consistency when repeated (1 mark)',
+                'Resolution: smallest detectable change (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2'
+          },
+          {
+            id: 'phys-3.1-q7',
+            question: 'A graph of force F against extension x has a gradient of 25 ± 2 N/m. The gradient is used to calculate the spring constant k. State k and estimate its uncertainty.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The gradient represents the spring constant k. Therefore k = 25 ± 2 N/m or 25 N/m with 8% uncertainty.',
+            markingCriteria: {
+              breakdown: [
+                'k = 25 N/m (1 mark)',
+                'Uncertainty = ± 2 N/m or 8% (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2'
+          },
+          {
+            id: 'phys-3.1-q8',
+            question: 'A value is measured as 4850. How many significant figures does this have? Express this value to 2 significant figures.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '4850 has 3 or 4 significant figures (ambiguous without context). To 2 significant figures: 4900 or 4.9 * 10^3.',
+            markingCriteria: {
+              breakdown: [
+                'Identifies 3 or 4 sig figs (1 mark)',
+                'To 2 s.f.: 4900 or 4.9 * 10^3 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2'
+          },
+          {
+            id: 'phys-3.1-q9',
+            question: 'Estimate the order of magnitude of the number of air molecules in a typical classroom (dimensions 10 m * 8 m * 3 m) at room temperature and pressure.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Volume V = 10 * 8 * 3 = 240 m^3. At RTP, 1 mole occupies approximately 24 * 10^(-3) m^3. Number of moles n = 240 / (24 * 10^(-3)) = 10^4 mol. Number of molecules N = n * NA = 10^4 * 6 * 10^23 ≈ 6 * 10^27. Order of magnitude: 10^27 or 10^28.',
+            markingCriteria: {
+              breakdown: [
+                'Volume calculation: 240 m^3 (1 mark)',
+                'Number of moles: ~10^4 (1 mark)',
+                'Use of Avogadro constant (1 mark)',
+                'Order of magnitude 10^27 or 10^28 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.1-q10',
+            question: 'A student measures time t = 2.4 s ± 0.1 s and uses it to calculate frequency f = 1/t. Calculate f and estimate its percentage uncertainty.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'f = 1/t = 1/2.4 = 0.417 Hz or 0.42 Hz. Percentage uncertainty in t = (0.1/2.4) * 100 = 4.17%. For f = 1/t, percentage uncertainty is the same: approximately 4%.',
+            markingCriteria: {
+              breakdown: [
+                'f = 0.42 Hz or 0.417 Hz (1 mark)',
+                'Percentage uncertainty in t calculated (1 mark)',
+                'Same percentage uncertainty for f: ~4% (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.1.2',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.2-particles-radiation',
+        name: '3.2 Particles and Radiation',
+        questions: [
+          {
+            id: 'phys-3.2-q1',
+            question: 'Define the proton number Z, nucleon number A, and calculate the specific charge of a nucleus with Z = 6 and A = 12. Proton charge = 1.6 * 10^(-19) C, nucleon mass ≈ 1.67 * 10^(-27) kg.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Proton number Z is the number of protons in the nucleus. Nucleon number A is the total number of protons and neutrons. Charge Q = Z * 1.6 * 10^(-19) = 6 * 1.6 * 10^(-19) = 9.6 * 10^(-19) C. Mass m = A * 1.67 * 10^(-27) = 12 * 1.67 * 10^(-27) = 2.0 * 10^(-26) kg. Specific charge = Q/m = (9.6 * 10^(-19)) / (2.0 * 10^(-26)) = 4.8 * 10^7 C/kg.',
+            markingCriteria: {
+              breakdown: [
+                'Definitions of Z and A (1 mark)',
+                'Charge Q = 9.6 * 10^(-19) C (1 mark)',
+                'Mass m = 2.0 * 10^(-26) kg (1 mark)',
+                'Specific charge = 4.8 * 10^7 C/kg (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.2-q2',
+            question: 'Describe the strong nuclear force and explain how it varies with separation between nucleons.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The strong nuclear force acts between nucleons (protons and neutrons). It is attractive at separations of about 0.5 fm to 3 fm. Below about 0.5 fm it becomes repulsive, preventing nucleons from collapsing into each other. Beyond about 3 fm the strong force rapidly falls to zero. It has a very short range compared to electromagnetic forces.',
+            markingCriteria: {
+              breakdown: [
+                'Acts between nucleons (1 mark)',
+                'Attractive at 0.5-3 fm (1 mark)',
+                'Repulsive below 0.5 fm (1 mark)',
+                'Short range / falls to zero beyond 3 fm (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1'
+          },
+          {
+            id: 'phys-3.2-q3',
+            question: 'Write an equation for the alpha decay of uranium-238 and state what happens to the proton number and nucleon number.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'U-238 → Th-234 + He-4 (alpha particle). Or: 92^238U → 90^234Th + 2^4He. Proton number decreases by 2. Nucleon number decreases by 4.',
+            markingCriteria: {
+              breakdown: [
+                'Correct equation with isotope notation (1 mark)',
+                'Proton number decreases by 2 (1 mark)',
+                'Nucleon number decreases by 4 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1'
+          },
+          {
+            id: 'phys-3.2-q4',
+            question: 'Explain why a neutrino (or antineutrino) must be emitted during beta-minus decay.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'In beta-minus decay, a neutron changes into a proton, electron, and antineutrino. Energy and momentum must be conserved. Observations showed that the electron did not always carry away all the expected energy. To conserve energy and momentum, an antineutrino must also be emitted, carrying away the missing energy.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to energy/momentum conservation (1 mark)',
+                'Electron does not carry all energy (1 mark)',
+                'Antineutrino accounts for missing energy (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1'
+          },
+          {
+            id: 'phys-3.2-q5',
+            question: 'Calculate the energy of a photon with wavelength 500 nm. Use h = 6.63 * 10^(-34) J s and c = 3.0 * 10^8 m/s.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'E = hf = hc/λ. λ = 500 nm = 500 * 10^(-9) m = 5.0 * 10^(-7) m. E = (6.63 * 10^(-34) * 3.0 * 10^8) / (5.0 * 10^(-7)) = 3.98 * 10^(-19) J ≈ 4.0 * 10^(-19) J.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula E = hc/λ (1 mark)',
+                'Wavelength conversion to metres (1 mark)',
+                'Energy = 4.0 * 10^(-19) J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.2-q6',
+            question: 'Describe what happens during pair production and state the minimum photon energy required to produce an electron-positron pair. Electron mass = 9.11 * 10^(-31) kg, c = 3.0 * 10^8 m/s.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pair production occurs when a photon (gamma ray) creates a particle and its antiparticle, typically an electron and positron. The photon must have energy greater than the combined rest mass energy of the particles. Minimum energy = 2 * m * c^2 = 2 * 9.11 * 10^(-31) * (3.0 * 10^8)^2 = 1.64 * 10^(-13) J or 1.02 MeV.',
+            markingCriteria: {
+              breakdown: [
+                'Photon creates particle-antiparticle pair (1 mark)',
+                'Energy must exceed rest mass energy (1 mark)',
+                'Correct calculation setup 2mc^2 (1 mark)',
+                'Minimum energy 1.64 * 10^(-13) J or 1.02 MeV (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.2-q7',
+            question: 'State the four fundamental forces and give the exchange particle for the electromagnetic force and the weak nuclear force.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The four fundamental forces are: gravitational, electromagnetic, weak nuclear, and strong nuclear. Exchange particle for electromagnetic force: photon (virtual photon). Exchange particle for weak nuclear force: W+ or W- or Z0 bosons.',
+            markingCriteria: {
+              breakdown: [
+                'All four forces named (1 mark)',
+                'Electromagnetic: photon (1 mark)',
+                'Weak: W+/W-/Z0 boson (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.2'
+          },
+          {
+            id: 'phys-3.2-q8',
+            question: 'Classify the following particles as baryons, mesons, or leptons: proton, electron, pion, neutron, muon.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Baryons: proton, neutron. Mesons: pion. Leptons: electron, muon.',
+            markingCriteria: {
+              breakdown: [
+                'Baryons: proton and neutron (1 mark)',
+                'Mesons: pion (1 mark)',
+                'Leptons: electron and muon (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.2'
+          },
+          {
+            id: 'phys-3.2-q9',
+            question: 'State the quark composition of a proton and a neutron.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Proton: uud (up up down). Neutron: udd (up down down).',
+            markingCriteria: {
+              breakdown: [
+                'Proton: uud (1 mark)',
+                'Neutron: udd (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.2'
+          },
+          {
+            id: 'phys-3.2-q10',
+            question: 'A kaon (K+) has strangeness S = +1 and decays via the weak interaction. Explain why strangeness may not be conserved in this decay.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Strangeness is conserved in strong and electromagnetic interactions but can change by ±1 in weak interactions. Since the kaon decays via the weak interaction, strangeness does not need to be conserved.',
+            markingCriteria: {
+              breakdown: [
+                'Strangeness conserved in strong/EM but not weak (1 mark)',
+                'Weak interaction allows strangeness to change (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.2.2'
+          }
+        ]
+      },
+      {
+        id: '3.3-waves',
+        name: '3.3 Waves',
+        questions: [
+          {
+            id: 'phys-3.3-q1',
+            question: 'Define amplitude, frequency, wavelength, and wave speed for a progressive wave.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Amplitude is the maximum displacement from the equilibrium position. Frequency is the number of complete oscillations per second. Wavelength is the distance between two successive points in phase (e.g., crest to crest). Wave speed is the distance traveled by the wave per unit time, v = f * λ.',
+            markingCriteria: {
+              breakdown: [
+                'Amplitude: maximum displacement (1 mark)',
+                'Frequency: oscillations per second (1 mark)',
+                'Wavelength: distance between points in phase (1 mark)',
+                'Wave speed: v = fλ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.1'
+          },
+          {
+            id: 'phys-3.3-q2',
+            question: 'Explain the difference between longitudinal and transverse waves, giving one example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'In transverse waves, oscillations are perpendicular to the direction of energy transfer. Example: electromagnetic waves or waves on a string. In longitudinal waves, oscillations are parallel to the direction of energy transfer. Example: sound waves.',
+            markingCriteria: {
+              breakdown: [
+                'Transverse: oscillations perpendicular to energy transfer (1 mark)',
+                'Example of transverse wave (1 mark)',
+                'Longitudinal: oscillations parallel to energy transfer (1 mark)',
+                'Example of longitudinal wave (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.1'
+          },
+          {
+            id: 'phys-3.3-q3',
+            question: 'Explain what is meant by polarisation and why it can only occur with transverse waves.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Polarisation is when oscillations are restricted to one plane only. This can only occur with transverse waves because their oscillations are perpendicular to the direction of energy transfer, allowing restriction to a particular plane. Longitudinal waves cannot be polarised because oscillations are parallel to energy transfer.',
+            markingCriteria: {
+              breakdown: [
+                'Polarisation: oscillations in one plane (1 mark)',
+                'Only transverse waves can be polarised (1 mark)',
+                'Explanation: oscillations perpendicular to direction (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.1'
+          },
+          {
+            id: 'phys-3.3-q4',
+            question: 'A stationary wave is formed on a string of length 1.2 m vibrating at its fundamental frequency. The wave speed on the string is 48 m/s. Calculate the frequency.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'For fundamental frequency, λ = 2L = 2 * 1.2 = 2.4 m. Using v = fλ: f = v/λ = 48/2.4 = 20 Hz.',
+            markingCriteria: {
+              breakdown: [
+                'Wavelength λ = 2L = 2.4 m (1 mark)',
+                'Correct formula v = fλ (1 mark)',
+                'Frequency f = 20 Hz (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.3-q5',
+            question: 'Describe how nodes and antinodes are formed in a stationary wave.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A stationary wave is formed when two progressive waves of the same frequency and amplitude traveling in opposite directions superpose. At nodes, the waves always meet in antiphase causing destructive interference, resulting in zero amplitude. At antinodes, the waves always meet in phase causing constructive interference, resulting in maximum amplitude.',
+            markingCriteria: {
+              breakdown: [
+                'Two waves superpose (1 mark)',
+                'Nodes: destructive interference / zero amplitude (1 mark)',
+                'Antinodes: constructive interference / maximum amplitude (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.2'
+          },
+          {
+            id: 'phys-3.3-q6',
+            question: 'In a Young\'s double slit experiment, light of wavelength 600 nm passes through slits separated by 0.5 mm. The screen is 2.0 m away. Calculate the fringe spacing.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'w = λD/s. λ = 600 nm = 600 * 10^(-9) m, D = 2.0 m, s = 0.5 mm = 0.5 * 10^(-3) m. w = (600 * 10^(-9) * 2.0) / (0.5 * 10^(-3)) = 2.4 * 10^(-3) m = 2.4 mm.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula w = λD/s (1 mark)',
+                'Unit conversions (1 mark)',
+                'w = 2.4 mm or 2.4 * 10^(-3) m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.3-q7',
+            question: 'State the conditions required for two sources to produce a stable interference pattern.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The sources must be coherent (constant phase difference). They must have the same frequency (or wavelength). They should have similar amplitudes for clear fringes.',
+            markingCriteria: {
+              breakdown: [
+                'Coherent sources (1 mark)',
+                'Same frequency/wavelength (1 mark)',
+                'Similar amplitudes (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.3'
+          },
+          {
+            id: 'phys-3.3-q8',
+            question: 'A diffraction grating has 300 lines per mm. Light of wavelength 550 nm is incident normally. Calculate the angle of the second order maximum.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'd = 1/(300 * 10^3) = 3.33 * 10^(-6) m. λ = 550 nm = 550 * 10^(-9) m. Using d sinθ = nλ with n = 2: sinθ = (2 * 550 * 10^(-9)) / (3.33 * 10^(-6)) = 0.330. θ = arcsin(0.330) = 19.3° or 19°.',
+            markingCriteria: {
+              breakdown: [
+                'd = 3.33 * 10^(-6) m (1 mark)',
+                'Correct formula d sinθ = nλ (1 mark)',
+                'sinθ = 0.330 (1 mark)',
+                'θ = 19° or 19.3° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.3-q9',
+            question: 'Light passes from air (n = 1.00) into glass (n = 1.50) at an angle of incidence of 40°. Calculate the angle of refraction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using Snell\'s law: n1 sinθ1 = n2 sinθ2. 1.00 * sin(40°) = 1.50 * sinθ2. sinθ2 = sin(40°) / 1.50 = 0.643 / 1.50 = 0.429. θ2 = arcsin(0.429) = 25.4° or 25°.',
+            markingCriteria: {
+              breakdown: [
+                'Snell\'s law correctly applied (1 mark)',
+                'sinθ2 = 0.429 (1 mark)',
+                'θ2 = 25° or 25.4° (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.4',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.3-q10',
+            question: 'Explain what is meant by total internal reflection and state the condition for it to occur.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Total internal reflection occurs when light traveling in a denser medium hits the boundary with a less dense medium and all the light is reflected back into the denser medium. This occurs when the angle of incidence is greater than the critical angle and light is traveling from denser to less dense medium.',
+            markingCriteria: {
+              breakdown: [
+                'All light reflected at boundary (1 mark)',
+                'Angle of incidence > critical angle (1 mark)',
+                'Light traveling from denser to less dense (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.3.4'
+          }
+        ]
+      },
+      {
+        id: '3.4-mechanics-materials',
+        name: '3.4 Mechanics and Materials',
+        questions: [
+          {
+            id: 'phys-3.4-q1',
+            question: 'A force of 20 N acts at 30° above the horizontal. Calculate the horizontal and vertical components of this force.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Horizontal component Fx = F cos(30°) = 20 * 0.866 = 17.3 N. Vertical component Fy = F sin(30°) = 20 * 0.5 = 10 N.',
+            markingCriteria: {
+              breakdown: [
+                'Fx = F cos(30°) (1 mark)',
+                'Fx = 17.3 N (1 mark)',
+                'Fy = 10 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q2',
+            question: 'State the principle of moments and apply it to a uniform beam of length 2.0 m and weight 50 N supported at its midpoint. A 30 N weight hangs 0.8 m from the left end. Calculate the force needed at the right end to balance the beam.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Principle of moments: sum of clockwise moments = sum of anticlockwise moments about any point. Taking moments about the pivot (centre): Clockwise moment = 30 * (1.0 - 0.8) = 30 * 0.2 = 6 N m. For balance: F * 1.0 = 6, so F = 6 N.',
+            markingCriteria: {
+              breakdown: [
+                'Principle of moments stated (1 mark)',
+                'Clockwise moment = 6 N m (1 mark)',
+                'Correct equation setup (1 mark)',
+                'F = 6 N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q3',
+            question: 'A car accelerates uniformly from rest to 25 m/s in 10 s. Calculate the acceleration and the distance traveled.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Using v = u + at: 25 = 0 + a * 10, so a = 2.5 m/s^2. Using s = ut + (1/2)at^2: s = 0 + 0.5 * 2.5 * 10^2 = 125 m. Or using v^2 = u^2 + 2as: 625 = 0 + 2 * 2.5 * s, s = 125 m.',
+            markingCriteria: {
+              breakdown: [
+                'Acceleration a = 2.5 m/s^2 (2 marks)',
+                'Distance s = 125 m (2 marks)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q4',
+            question: 'A projectile is launched horizontally at 20 m/s from a height of 45 m. Calculate the time of flight and horizontal range. Use g = 10 m/s^2.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Vertical motion: s = ut + (1/2)gt^2. 45 = 0 + 0.5 * 10 * t^2, so t^2 = 9, t = 3 s. Horizontal motion: range = horizontal velocity * time = 20 * 3 = 60 m.',
+            markingCriteria: {
+              breakdown: [
+                'Vertical equation s = (1/2)gt^2 (1 mark)',
+                'Time t = 3 s (1 mark)',
+                'Range = v * t (1 mark)',
+                'Range = 60 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q5',
+            question: 'State Newton\'s third law and give an example.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Newton\'s third law: for every action there is an equal and opposite reaction. Example: when you push on a wall, the wall pushes back on you with equal force.',
+            markingCriteria: {
+              breakdown: [
+                'Law stated correctly (1 mark)',
+                'Suitable example (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1'
+          },
+          {
+            id: 'phys-3.4-q6',
+            question: 'A car of mass 1000 kg traveling at 15 m/s collides with a stationary car of mass 800 kg. After collision they move together. Calculate their common velocity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Using conservation of momentum: m1u1 + m2u2 = (m1 + m2)v. 1000 * 15 + 800 * 0 = (1000 + 800) * v. 15000 = 1800v. v = 15000/1800 = 8.33 m/s or 8.3 m/s.',
+            markingCriteria: {
+              breakdown: [
+                'Conservation of momentum applied (1 mark)',
+                'Correct equation setup (1 mark)',
+                'Calculation (1 mark)',
+                'v = 8.3 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q7',
+            question: 'A force of 150 N pulls a box at constant velocity through a distance of 8 m at an angle of 20° to the horizontal. Calculate the work done.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'W = Fs cosθ = 150 * 8 * cos(20°) = 150 * 8 * 0.940 = 1128 J ≈ 1100 J or 1130 J.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula W = Fs cosθ (1 mark)',
+                'Substitution (1 mark)',
+                'W ≈ 1100 J or 1130 J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q8',
+            question: 'A spring has a spring constant k = 200 N/m. Calculate the elastic potential energy stored when it is extended by 0.15 m.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'E = (1/2)kx^2 = 0.5 * 200 * (0.15)^2 = 0.5 * 200 * 0.0225 = 2.25 J.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula E = (1/2)kx^2 (1 mark)',
+                'E = 2.25 J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.4-q9',
+            question: 'Define stress, strain, and the Young modulus.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Stress = force per unit cross-sectional area, σ = F/A, measured in Pa. Strain = extension per unit original length, ε = ΔL/L, no units. Young modulus E = stress/strain = (F/A)/(ΔL/L) = FL/(AΔL), measured in Pa.',
+            markingCriteria: {
+              breakdown: [
+                'Stress = F/A in Pa (1 mark)',
+                'Strain = ΔL/L (no units) (1 mark)',
+                'Young modulus E = stress/strain (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.2'
+          },
+          {
+            id: 'phys-3.4-q10',
+            question: 'A wire of length 2.0 m and cross-sectional area 1.0 * 10^(-6) m^2 extends by 0.004 m under a tensile force of 80 N. Calculate the Young modulus of the material.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'E = (F * L) / (A * ΔL) = (80 * 2.0) / (1.0 * 10^(-6) * 0.004) = 160 / (4.0 * 10^(-9)) = 4.0 * 10^10 Pa.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula E = FL/(AΔL) (1 mark)',
+                'Substitution (1 mark)',
+                'E = 4.0 * 10^10 Pa (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.4.2',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.5-electricity',
+        name: '3.5 Electricity',
+        questions: [
+          {
+            id: 'phys-3.5-q1',
+            question: 'Define electric current and state the equation relating charge, current, and time.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electric current is the rate of flow of charge. I = ΔQ/Δt, where I is current in amperes, Q is charge in coulombs, and t is time in seconds.',
+            markingCriteria: {
+              breakdown: [
+                'Current is rate of flow of charge (1 mark)',
+                'I = Q/t or I = ΔQ/Δt (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1'
+          },
+          {
+            id: 'phys-3.5-q2',
+            question: 'A current of 0.5 A flows through a conductor for 2 minutes. Calculate the charge transferred.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Q = I * t. Time = 2 minutes = 120 s. Q = 0.5 * 120 = 60 C.',
+            markingCriteria: {
+              breakdown: [
+                'Time converted to seconds: 120 s (1 mark)',
+                'Q = 60 C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.5-q3',
+            question: 'Define potential difference and resistance.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Potential difference is the energy transferred per unit charge, V = W/Q, measured in volts. Resistance is the opposition to current flow, R = V/I, measured in ohms.',
+            markingCriteria: {
+              breakdown: [
+                'V = W/Q (energy per charge) (1 mark)',
+                'R = V/I (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1'
+          },
+          {
+            id: 'phys-3.5-q4',
+            question: 'Sketch the I-V characteristic for an ohmic conductor and explain its shape.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The I-V graph is a straight line through the origin with positive gradient. This shows that current is directly proportional to voltage (Ohm\'s law). The gradient equals 1/R, where R is constant.',
+            markingCriteria: {
+              breakdown: [
+                'Straight line through origin (1 mark)',
+                'Shows I ∝ V (1 mark)',
+                'Gradient = 1/R or R is constant (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1'
+          },
+          {
+            id: 'phys-3.5-q5',
+            question: 'A wire of length 3.0 m and cross-sectional area 2.0 * 10^(-7) m^2 has resistance 0.85 Ω. Calculate the resistivity of the material.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'ρ = RA/L = (0.85 * 2.0 * 10^(-7)) / 3.0 = 1.7 * 10^(-7) / 3.0 = 5.67 * 10^(-8) Ω m ≈ 5.7 * 10^(-8) Ω m.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula ρ = RA/L (1 mark)',
+                'Substitution (1 mark)',
+                'ρ = 5.7 * 10^(-8) Ω m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.5-q6',
+            question: 'Explain why the resistance of a metallic conductor increases with temperature.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'As temperature increases, the metal ions vibrate more vigorously with greater amplitude. This increases the frequency of collisions between charge carriers (electrons) and the vibrating ions. This increases resistance to the flow of current.',
+            markingCriteria: {
+              breakdown: [
+                'Ions vibrate more at higher temperature (1 mark)',
+                'More collisions between electrons and ions (1 mark)',
+                'Resistance increases (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1'
+          },
+          {
+            id: 'phys-3.5-q7',
+            question: 'Three resistors of 6 Ω, 12 Ω, and 4 Ω are connected in parallel. Calculate the total resistance.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '1/R = 1/6 + 1/12 + 1/4 = 2/12 + 1/12 + 3/12 = 6/12 = 1/2. Therefore R = 2 Ω.',
+            markingCriteria: {
+              breakdown: [
+                'Correct parallel formula 1/R = 1/R1 + 1/R2 + 1/R3 (1 mark)',
+                'Correct addition (1 mark)',
+                'R = 2 Ω (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.5-q8',
+            question: 'A lamp is rated at 60 W, 240 V. Calculate the current drawn and the resistance of the lamp when operating at normal brightness.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'P = IV, so I = P/V = 60/240 = 0.25 A. R = V/I = 240/0.25 = 960 Ω.',
+            markingCriteria: {
+              breakdown: [
+                'I = P/V (1 mark)',
+                'I = 0.25 A (1 mark)',
+                'R = V/I (1 mark)',
+                'R = 960 Ω (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.5-q9',
+            question: 'A potential divider consists of a 10 kΩ resistor and a thermistor in series across a 12 V supply. When the thermistor resistance is 5 kΩ, calculate the voltage across it.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'V_out = (R2 / (R1 + R2)) * V_in = (5000 / (10000 + 5000)) * 12 = (5/15) * 12 = 4 V.',
+            markingCriteria: {
+              breakdown: [
+                'Potential divider formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'V = 4 V (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.5-q10',
+            question: 'A cell has EMF 6.0 V and internal resistance 0.5 Ω. It is connected to a 5.5 Ω external resistor. Calculate the terminal potential difference.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Total resistance R = 5.5 + 0.5 = 6.0 Ω. Current I = ε/R = 6.0/6.0 = 1.0 A. Terminal p.d. V = ε - Ir = 6.0 - (1.0 * 0.5) = 5.5 V. Or V = IR_external = 1.0 * 5.5 = 5.5 V.',
+            markingCriteria: {
+              breakdown: [
+                'Current I = 1.0 A (1 mark)',
+                'V = ε - Ir or V = IR (1 mark)',
+                'Calculation (1 mark)',
+                'V = 5.5 V (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.5.1',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.6-further-mechanics-thermal',
+        name: '3.6 Further Mechanics & Thermal Physics',
+        questions: [
+          {
+            id: 'phys-3.6-q1',
+            question: 'Define angular velocity and state its relationship with linear velocity for circular motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Angular velocity ω is the rate of change of angle, measured in rad/s. For circular motion, v = ωr, where v is linear velocity and r is radius.',
+            markingCriteria: {
+              breakdown: [
+                'ω is rate of change of angle in rad/s (1 mark)',
+                'v = ωr (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1'
+          },
+          {
+            id: 'phys-3.6-q2',
+            question: 'A particle moves in a circle of radius 0.8 m at constant speed 4 m/s. Calculate the angular velocity and centripetal acceleration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'ω = v/r = 4/0.8 = 5 rad/s. a = v^2/r = 4^2/0.8 = 16/0.8 = 20 m/s^2. Or a = ω^2r = 5^2 * 0.8 = 20 m/s^2.',
+            markingCriteria: {
+              breakdown: [
+                'ω = v/r (1 mark)',
+                'ω = 5 rad/s (1 mark)',
+                'a = v^2/r or a = ω^2r (1 mark)',
+                'a = 20 m/s^2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.6-q3',
+            question: 'State the conditions for simple harmonic motion (SHM) and give the defining equation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'For SHM, the acceleration is proportional to displacement from equilibrium and directed towards the equilibrium position. a = -ω^2x.',
+            markingCriteria: {
+              breakdown: [
+                'a proportional to x and directed to equilibrium (1 mark)',
+                'a = -ω^2x (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1'
+          },
+          {
+            id: 'phys-3.6-q4',
+            question: 'A mass-spring system oscillates with SHM. The mass is 0.2 kg and spring constant is 50 N/m. Calculate the period of oscillation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'T = 2π√(m/k) = 2π√(0.2/50) = 2π√(0.004) = 2π * 0.0632 = 0.397 s ≈ 0.40 s.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula T = 2π√(m/k) (1 mark)',
+                'Calculation (1 mark)',
+                'T ≈ 0.40 s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.6-q5',
+            question: 'For a particle in SHM with amplitude A and angular frequency ω, state the expressions for maximum velocity and maximum acceleration.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Maximum velocity v_max = ωA. Maximum acceleration a_max = ω^2A.',
+            markingCriteria: {
+              breakdown: [
+                'v_max = ωA (1 mark)',
+                'a_max = ω^2A (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1'
+          },
+          {
+            id: 'phys-3.6-q6',
+            question: 'Explain what is meant by damping in an oscillating system and describe one practical use of damping.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Damping is when energy is removed from an oscillating system, usually by friction or air resistance, causing amplitude to decrease over time. Practical use: car suspension systems use damping to prevent excessive bouncing and provide a smooth ride.',
+            markingCriteria: {
+              breakdown: [
+                'Energy removed from system (1 mark)',
+                'Amplitude decreases (1 mark)',
+                'Practical example (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.1'
+          },
+          {
+            id: 'phys-3.6-q7',
+            question: 'Define internal energy and state the two ways it can be increased.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Internal energy is the sum of randomly distributed kinetic and potential energies of particles in a system. It can be increased by: (1) heating the system, transferring energy to particles, or (2) doing work on the system.',
+            markingCriteria: {
+              breakdown: [
+                'Sum of kinetic and potential energies of particles (1 mark)',
+                'Heating (1 mark)',
+                'Doing work on system (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.2'
+          },
+          {
+            id: 'phys-3.6-q8',
+            question: 'Calculate the energy required to raise the temperature of 2.0 kg of water from 20°C to 100°C. Specific heat capacity of water = 4200 J/(kg K).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Q = mcΔθ = 2.0 * 4200 * (100 - 20) = 2.0 * 4200 * 80 = 672000 J = 672 kJ or 6.72 * 10^5 J.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula Q = mcΔθ (1 mark)',
+                'Temperature change = 80 K (1 mark)',
+                'Q = 672 kJ or 6.72 * 10^5 J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.6-q9',
+            question: 'A gas occupies 0.03 m^3 at 100 kPa and 300 K. Calculate the number of moles of gas. R = 8.31 J/(mol K).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'pV = nRT. n = pV/(RT) = (100 * 10^3 * 0.03) / (8.31 * 300) = 3000 / 2493 = 1.20 mol.',
+            markingCriteria: {
+              breakdown: [
+                'pV = nRT rearranged correctly (1 mark)',
+                'Pressure converted to Pa: 100 * 10^3 Pa (1 mark)',
+                'n = 1.20 mol (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.6-q10',
+            question: 'Explain the relationship between mean square speed of gas molecules and temperature using kinetic theory.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'From kinetic theory: (1/2)m(c_rms)^2 = (3/2)kT. This shows that mean kinetic energy is proportional to absolute temperature. Therefore (c_rms)^2 is proportional to T, so root mean square speed increases with temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Mean KE proportional to T (1 mark)',
+                'Equation (1/2)m(c_rms)^2 = (3/2)kT (1 mark)',
+                '(c_rms)^2 proportional to T (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.6.2'
+          }
+        ]
+      },
+      {
+        id: '3.7-fields',
+        name: '3.7 Fields and Their Consequences',
+        questions: [
+          {
+            id: 'phys-3.7-q1',
+            question: 'State Newton\'s law of gravitation and use it to calculate the force between two 50 kg masses separated by 2.0 m. G = 6.67 * 10^(-11) N m^2 kg^(-2).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Newton\'s law: F = Gm1m2/r^2. F = (6.67 * 10^(-11) * 50 * 50) / (2.0)^2 = (6.67 * 10^(-11) * 2500) / 4 = 4.17 * 10^(-8) N.',
+            markingCriteria: {
+              breakdown: [
+                'Law stated or F = Gm1m2/r^2 (1 mark)',
+                'Correct substitution (1 mark)',
+                'Calculation (1 mark)',
+                'F = 4.17 * 10^(-8) N (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.7-q2',
+            question: 'Define gravitational field strength and state its unit.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gravitational field strength g is the force per unit mass experienced by a small test mass placed in the field. Unit: N/kg or m/s^2.',
+            markingCriteria: {
+              breakdown: [
+                'Force per unit mass (1 mark)',
+                'Unit: N/kg or m/s^2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.1'
+          },
+          {
+            id: 'phys-3.7-q3',
+            question: 'Calculate the orbital speed of a satellite in circular orbit at height 300 km above Earth\'s surface. Earth radius = 6400 km, g at surface = 9.8 m/s^2.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Orbital radius r = 6400 + 300 = 6700 km = 6.7 * 10^6 m. For orbit: mv^2/r = GMm/r^2, so v^2 = GM/r. GM = gR^2 = 9.8 * (6.4 * 10^6)^2. v = √(gR^2/r) = √(9.8 * (6.4 * 10^6)^2 / (6.7 * 10^6)) = √(9.8 * 6.4^2 * 10^12 / 6.7 * 10^6) = √(6.0 * 10^7) = 7740 m/s ≈ 7.7 km/s.',
+            markingCriteria: {
+              breakdown: [
+                'r = 6.7 * 10^6 m (1 mark)',
+                'v^2 = GM/r or v = √(gR^2/r) (1 mark)',
+                'Calculation (1 mark)',
+                'v ≈ 7.7 km/s or 7740 m/s (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.7-q4',
+            question: 'State Coulomb\'s law and calculate the force between two point charges of +3.0 μC and -2.0 μC separated by 0.5 m in a vacuum. ε0 = 8.85 * 10^(-12) F/m.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Coulomb\'s law: F = (1/(4πε0)) * (Q1Q2/r^2). F = (9.0 * 10^9 * 3.0 * 10^(-6) * 2.0 * 10^(-6)) / (0.5)^2 = (9.0 * 10^9 * 6.0 * 10^(-12)) / 0.25 = 0.216 N ≈ 0.22 N. Force is attractive.',
+            markingCriteria: {
+              breakdown: [
+                'Law stated or F = kQ1Q2/r^2 (1 mark)',
+                'Correct substitution (1 mark)',
+                'F ≈ 0.22 N (1 mark)',
+                'Force is attractive (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.7-q5',
+            question: 'Define electric field strength and state whether it is a scalar or vector quantity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electric field strength E is the force per unit positive charge experienced by a small test charge placed in the field. It is a vector quantity.',
+            markingCriteria: {
+              breakdown: [
+                'Force per unit positive charge (1 mark)',
+                'Vector quantity (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.2'
+          },
+          {
+            id: 'phys-3.7-q6',
+            question: 'A parallel plate capacitor has plate separation 5.0 mm and a potential difference of 250 V across it. Calculate the electric field strength between the plates.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'E = V/d = 250 / (5.0 * 10^(-3)) = 50000 V/m = 5.0 * 10^4 V/m.',
+            markingCriteria: {
+              breakdown: [
+                'E = V/d (1 mark)',
+                'E = 5.0 * 10^4 V/m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.7-q7',
+            question: 'A 10 μF capacitor is charged to 12 V. Calculate the charge stored and the energy stored.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Q = CV = 10 * 10^(-6) * 12 = 1.2 * 10^(-4) C = 120 μC. E = (1/2)QV = 0.5 * 1.2 * 10^(-4) * 12 = 7.2 * 10^(-4) J = 0.72 mJ. Or E = (1/2)CV^2 = 0.5 * 10 * 10^(-6) * 144 = 7.2 * 10^(-4) J.',
+            markingCriteria: {
+              breakdown: [
+                'Q = CV (1 mark)',
+                'Q = 120 μC (1 mark)',
+                'E = (1/2)QV or (1/2)CV^2 (1 mark)',
+                'E = 0.72 mJ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.7-q8',
+            question: 'A capacitor discharges through a resistor. Explain why the discharge is exponential.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'As the capacitor discharges, the voltage across it decreases. Since V = Q/C and I = V/R, the current also decreases. The rate of discharge (dQ/dt = -I) is proportional to the charge remaining, leading to exponential decay Q = Q0 * e^(-t/RC).',
+            markingCriteria: {
+              breakdown: [
+                'Voltage/current decreases as charge decreases (1 mark)',
+                'Rate of discharge proportional to charge remaining (1 mark)',
+                'Exponential relationship Q = Q0e^(-t/RC) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.3'
+          },
+          {
+            id: 'phys-3.7-q9',
+            question: 'State the equation for the force on a current-carrying conductor in a magnetic field and explain when the force is maximum.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'F = BIL sinθ, where θ is the angle between the current direction and the magnetic field. The force is maximum when θ = 90°, i.e., when the conductor is perpendicular to the field. Then F = BIL.',
+            markingCriteria: {
+              breakdown: [
+                'F = BIL sinθ (1 mark)',
+                'Maximum when θ = 90° (1 mark)',
+                'Perpendicular to field (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.4'
+          },
+          {
+            id: 'phys-3.7-q10',
+            question: 'State Faraday\'s law of electromagnetic induction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The induced EMF is proportional to the rate of change of magnetic flux linkage. ε = -N(dΦ/dt) or ε = -d(NΦ)/dt.',
+            markingCriteria: {
+              breakdown: [
+                'Induced EMF proportional to rate of change of flux linkage (1 mark)',
+                'ε = -N(dΦ/dt) or equivalent (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.7.5'
+          }
+        ]
+      },
+      {
+        id: '3.8-nuclear-physics',
+        name: '3.8 Nuclear Physics',
+        questions: [
+          {
+            id: 'phys-3.8-q1',
+            question: 'Describe the Rutherford scattering experiment and state what it revealed about atomic structure.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Alpha particles were fired at thin gold foil. Most passed straight through with little deflection. A small number were deflected through large angles, some back towards the source. This showed that the atom is mostly empty space with a tiny, dense, positively charged nucleus at the center.',
+            markingCriteria: {
+              breakdown: [
+                'Alpha particles fired at gold foil (1 mark)',
+                'Most passed through / small deflection (1 mark)',
+                'Some deflected at large angles (1 mark)',
+                'Conclusion: tiny dense positive nucleus (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1'
+          },
+          {
+            id: 'phys-3.8-q2',
+            question: 'Compare the properties of alpha, beta, and gamma radiation in terms of ionising power and penetrating power.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha: highly ionising, low penetrating power (stopped by paper). Beta: moderately ionising, moderate penetrating power (stopped by few mm of aluminium). Gamma: weakly ionising, high penetrating power (reduced by thick lead).',
+            markingCriteria: {
+              breakdown: [
+                'Alpha: highly ionising, low penetration (1 mark)',
+                'Beta: moderate on both (1 mark)',
+                'Gamma: weakly ionising, high penetration (1 mark)',
+                'Absorbers mentioned (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1'
+          },
+          {
+            id: 'phys-3.8-q3',
+            question: 'A radioactive source has activity 800 Bq and half-life 6 hours. Calculate the activity after 18 hours.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Number of half-lives = 18/6 = 3. After 3 half-lives: A = A0 * (1/2)^3 = 800 * (1/8) = 100 Bq.',
+            markingCriteria: {
+              breakdown: [
+                'Number of half-lives = 3 (1 mark)',
+                'A = A0(1/2)^n (1 mark)',
+                'A = 100 Bq (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.8-q4',
+            question: 'Define activity and decay constant, and state the relationship between them.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Activity A is the rate of decay (number of disintegrations per second), measured in becquerels (Bq). Decay constant λ is the probability of decay per unit time. Relationship: A = λN, where N is the number of undecayed nuclei.',
+            markingCriteria: {
+              breakdown: [
+                'Activity: rate of decay in Bq (1 mark)',
+                'Decay constant: probability of decay per unit time (1 mark)',
+                'A = λN (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1'
+          },
+          {
+            id: 'phys-3.8-q5',
+            question: 'A sample has half-life 20 days. Calculate the decay constant in s^(-1).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'λ = ln2 / T(1/2). T(1/2) = 20 days = 20 * 24 * 3600 = 1.728 * 10^6 s. λ = 0.693 / (1.728 * 10^6) = 4.01 * 10^(-7) s^(-1) ≈ 4.0 * 10^(-7) s^(-1).',
+            markingCriteria: {
+              breakdown: [
+                'λ = ln2 / T(1/2) (1 mark)',
+                'Half-life converted to seconds (1 mark)',
+                'λ ≈ 4.0 * 10^(-7) s^(-1) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.8-q6',
+            question: 'The radius of a nucleus is given by R = R0 * A^(1/3), where R0 = 1.2 fm. Calculate the radius of a uranium-238 nucleus.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'R = 1.2 * 10^(-15) * 238^(1/3) = 1.2 * 10^(-15) * 6.20 = 7.44 * 10^(-15) m ≈ 7.4 fm.',
+            markingCriteria: {
+              breakdown: [
+                'Correct substitution (1 mark)',
+                'R ≈ 7.4 fm or 7.4 * 10^(-15) m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.8-q7',
+            question: 'Define binding energy and explain why iron-56 is one of the most stable nuclei.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Binding energy is the energy required to separate all the nucleons in a nucleus. Iron-56 has one of the highest binding energies per nucleon, making it very stable. Nuclei lighter than iron can release energy by fusion, heavier nuclei by fission.',
+            markingCriteria: {
+              breakdown: [
+                'Binding energy: energy to separate nucleons (1 mark)',
+                'Fe-56 has high binding energy per nucleon (1 mark)',
+                'Most stable / fusion below, fission above (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.1'
+          },
+          {
+            id: 'phys-3.8-q8',
+            question: 'Describe the process of nuclear fission and give one example of a fissile isotope.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Nuclear fission is when a heavy nucleus splits into two lighter nuclei of roughly equal size, releasing energy and neutrons. Example: uranium-235.',
+            markingCriteria: {
+              breakdown: [
+                'Heavy nucleus splits into two lighter nuclei (1 mark)',
+                'Energy and neutrons released (1 mark)',
+                'Example: U-235 or Pu-239 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.2'
+          },
+          {
+            id: 'phys-3.8-q9',
+            question: 'State two safety features of a nuclear reactor.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Control rods (absorb neutrons to control reaction rate). Moderator (slows down neutrons). Coolant (removes heat). Concrete shielding (absorbs radiation). (Any two.)',
+            markingCriteria: {
+              breakdown: [
+                'First safety feature (1 mark)',
+                'Second safety feature (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.2'
+          },
+          {
+            id: 'phys-3.8-q10',
+            question: 'Describe the process of nuclear fusion and explain why it requires very high temperatures.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Nuclear fusion is when two light nuclei combine to form a heavier nucleus, releasing energy. High temperatures are required to give nuclei enough kinetic energy to overcome the electrostatic repulsion between positive charges and get close enough for the strong nuclear force to bind them.',
+            markingCriteria: {
+              breakdown: [
+                'Light nuclei combine to form heavier nucleus (1 mark)',
+                'High temperature needed (1 mark)',
+                'To overcome electrostatic repulsion (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.8.2'
+          }
+        ]
+      },
+      {
+        id: '3.9-astrophysics',
+        name: '3.9 Astrophysics',
+        questions: [
+          {
+            id: 'phys-3.9-q1',
+            question: 'State the Rayleigh criterion for the resolving power of a telescope.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Rayleigh criterion states that two point sources are just resolved when the central maximum of one diffraction pattern coincides with the first minimum of the other. θ ≈ λ/D, where θ is the minimum angle of resolution, λ is wavelength, and D is the diameter of the aperture.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of just resolved (1 mark)',
+                'θ ≈ λ/D (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.1'
+          },
+          {
+            id: 'phys-3.9-q2',
+            question: 'Calculate the resolving power of a telescope with aperture diameter 2.0 m observing light of wavelength 550 nm.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'θ ≈ λ/D = (550 * 10^(-9)) / 2.0 = 2.75 * 10^(-7) rad.',
+            markingCriteria: {
+              breakdown: [
+                'θ = λ/D (1 mark)',
+                'Conversions (1 mark)',
+                'θ = 2.75 * 10^(-7) rad (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.9-q3',
+            question: 'Define luminosity and apparent magnitude of a star.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Luminosity is the total energy emitted by a star per second (total power output). Apparent magnitude m is a measure of how bright a star appears from Earth.',
+            markingCriteria: {
+              breakdown: [
+                'Luminosity: total power output (1 mark)',
+                'Apparent magnitude: brightness as seen from Earth (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.2'
+          },
+          {
+            id: 'phys-3.9-q4',
+            question: 'A star has apparent magnitude m = 5 and absolute magnitude M = 0. Calculate its distance in parsecs using m - M = 5 log(d/10).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '5 - 0 = 5 log(d/10). 5 = 5 log(d/10). log(d/10) = 1. d/10 = 10^1 = 10. d = 100 pc.',
+            markingCriteria: {
+              breakdown: [
+                'Correct substitution (1 mark)',
+                'Solving for d (1 mark)',
+                'd = 100 pc (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.9-q5',
+            question: 'State Wien\'s displacement law and use it to calculate the peak wavelength of a star with surface temperature 6000 K. Wien constant = 2.9 * 10^(-3) m K.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Wien\'s law: λ_max * T = constant. λ_max = (2.9 * 10^(-3)) / 6000 = 4.83 * 10^(-7) m ≈ 483 nm.',
+            markingCriteria: {
+              breakdown: [
+                'λ_max T = constant (1 mark)',
+                'Correct substitution (1 mark)',
+                'λ_max ≈ 483 nm (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.9-q6',
+            question: 'State the spectral classes of stars in order of decreasing temperature.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'O, B, A, F, G, K, M (hottest to coolest).',
+            markingCriteria: {
+              breakdown: [
+                'O, B, A, F, G, K, M in correct order (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.2'
+          },
+          {
+            id: 'phys-3.9-q7',
+            question: 'Describe the main features of the Hertzsprung-Russell diagram.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The H-R diagram plots luminosity (or absolute magnitude) against temperature (or spectral class/color). Main sequence runs diagonally from top left (hot, bright) to bottom right (cool, dim). Giants and supergiants are above the main sequence. White dwarfs are below the main sequence in the bottom left.',
+            markingCriteria: {
+              breakdown: [
+                'Luminosity vs temperature axes (1 mark)',
+                'Main sequence diagonal (1 mark)',
+                'Giants/supergiants above (1 mark)',
+                'White dwarfs below (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.2'
+          },
+          {
+            id: 'phys-3.9-q8',
+            question: 'Calculate the Schwarzschild radius for a black hole with mass 10 times the Sun\'s mass. Solar mass = 2.0 * 10^30 kg, G = 6.67 * 10^(-11) N m^2 kg^(-2), c = 3.0 * 10^8 m/s.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Rs = 2GM/c^2. M = 10 * 2.0 * 10^30 = 2.0 * 10^31 kg. Rs = (2 * 6.67 * 10^(-11) * 2.0 * 10^31) / (3.0 * 10^8)^2 = (2.67 * 10^21) / (9.0 * 10^16) = 2.97 * 10^4 m ≈ 30 km.',
+            markingCriteria: {
+              breakdown: [
+                'Rs = 2GM/c^2 (1 mark)',
+                'Correct substitution (1 mark)',
+                'Rs ≈ 30 km or 3.0 * 10^4 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.9-q9',
+            question: 'State Hubble\'s law and explain what it tells us about the universe.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hubble\'s law: v = H0 * d, where v is recession velocity, d is distance, and H0 is the Hubble constant. It shows that galaxies are moving away from us with velocity proportional to distance. This provides evidence that the universe is expanding.',
+            markingCriteria: {
+              breakdown: [
+                'v = H0d (1 mark)',
+                'Galaxies receding, velocity proportional to distance (1 mark)',
+                'Evidence for expanding universe (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.4'
+          },
+          {
+            id: 'phys-3.9-q10',
+            question: 'Describe two pieces of evidence for the Big Bang theory.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cosmic microwave background radiation (CMB): uniform radiation at 2.7 K from all directions, predicted remnant of Big Bang. Hubble\'s law / red shift of galaxies: shows universe is expanding, implying it was once smaller and denser. Abundance of light elements: observed ratios of H, He, Li match Big Bang nucleosynthesis predictions.',
+            markingCriteria: {
+              breakdown: [
+                'CMB radiation at 2.7 K (1 mark)',
+                'Explanation of CMB (1 mark)',
+                'Red shift / expansion (1 mark)',
+                'Light element abundance (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.9.4'
+          }
+        ]
+      },
+      {
+        id: '3.10-medical-physics',
+        name: '3.10 Medical Physics',
+        questions: [
+          {
+            id: 'phys-3.10-q1',
+            question: 'State the lens equation and use it to calculate the image distance when an object is placed 0.25 m from a converging lens of focal length 0.20 m.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '1/f = 1/u + 1/v. 1/0.20 = 1/0.25 + 1/v. 1/v = 1/0.20 - 1/0.25 = 5 - 4 = 1. v = 1.0 m.',
+            markingCriteria: {
+              breakdown: [
+                '1/f = 1/u + 1/v (1 mark)',
+                'Correct rearrangement (1 mark)',
+                'v = 1.0 m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.10-q2',
+            question: 'Explain how a converging lens corrects hypermetropia (long sight).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'In hypermetropia, the eye lens cannot refract light enough, so images of near objects form behind the retina. A converging lens adds extra converging power, bringing the image forward onto the retina. This allows near objects to be seen clearly.',
+            markingCriteria: {
+              breakdown: [
+                'Image forms behind retina (1 mark)',
+                'Converging lens adds power (1 mark)',
+                'Brings image onto retina (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.1'
+          },
+          {
+            id: 'phys-3.10-q3',
+            question: 'Define sound intensity level in decibels and calculate the intensity level of a sound with intensity 1.0 * 10^(-6) W/m^2. Use I0 = 1.0 * 10^(-12) W/m^2.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'IL = 10 log(I/I0). IL = 10 log((1.0 * 10^(-6)) / (1.0 * 10^(-12))) = 10 log(10^6) = 10 * 6 = 60 dB.',
+            markingCriteria: {
+              breakdown: [
+                'IL = 10 log(I/I0) (1 mark)',
+                'Correct substitution (1 mark)',
+                'IL = 60 dB (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.10-q4',
+            question: 'Describe how an electrocardiogram (ECG) is used to monitor heart function.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Electrodes are placed on the skin to detect electrical signals produced by the heart during each beat. The ECG displays voltage changes over time, showing the P wave (atrial contraction), QRS complex (ventricular contraction), and T wave (ventricular recovery). Abnormalities indicate heart problems.',
+            markingCriteria: {
+              breakdown: [
+                'Electrodes detect electrical signals from heart (1 mark)',
+                'Shows voltage changes / waveform (1 mark)',
+                'Identifies abnormalities (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.2'
+          },
+          {
+            id: 'phys-3.10-q5',
+            question: 'Define acoustic impedance Z and state its unit.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Acoustic impedance Z is the product of density and speed of sound in a medium: Z = ρc. Unit: kg m^(-2) s^(-1) or Pa s m^(-1).',
+            markingCriteria: {
+              breakdown: [
+                'Z = ρc (1 mark)',
+                'Unit: kg m^(-2) s^(-1) (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.3'
+          },
+          {
+            id: 'phys-3.10-q6',
+            question: 'Calculate the intensity reflection coefficient at a boundary where Z1 = 1.5 * 10^6 kg m^(-2) s^(-1) and Z2 = 6.0 * 10^6 kg m^(-2) s^(-1).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Ir/Ii = ((Z2 - Z1)/(Z2 + Z1))^2 = ((6.0 - 1.5)/(6.0 + 1.5))^2 = (4.5/7.5)^2 = (0.6)^2 = 0.36 or 36%.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Substitution (1 mark)',
+                'Ir/Ii = 0.36 or 36% (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.10-q7',
+            question: 'Explain why a coupling gel is used in ultrasound scanning.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The gel has acoustic impedance similar to tissue and excludes air. This reduces reflection at the skin surface and allows more ultrasound to enter the body, improving image quality.',
+            markingCriteria: {
+              breakdown: [
+                'Matches impedance / excludes air (1 mark)',
+                'Reduces reflection / improves transmission (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.3'
+          },
+          {
+            id: 'phys-3.10-q8',
+            question: 'X-rays pass through tissue with linear attenuation coefficient μ = 0.60 cm^(-1). Calculate the fraction of intensity transmitted through 5.0 cm of tissue.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'I = I0 * e^(-μx) = I0 * e^(-0.60 * 5.0) = I0 * e^(-3.0) = I0 * 0.0498. Fraction transmitted = 0.050 or 5.0%.',
+            markingCriteria: {
+              breakdown: [
+                'I = I0 e^(-μx) (1 mark)',
+                'Correct substitution (1 mark)',
+                'Fraction ≈ 0.050 or 5% (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.4',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.10-q9',
+            question: 'State one advantage and one disadvantage of using MRI compared to X-ray imaging.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Advantage: MRI provides excellent soft tissue contrast without ionising radiation. Disadvantage: MRI is more expensive and takes longer than X-ray.',
+            markingCriteria: {
+              breakdown: [
+                'Advantage: no ionising radiation / better soft tissue contrast (1 mark)',
+                'Disadvantage: expensive / slow / unsuitable for metal implants (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.4'
+          },
+          {
+            id: 'phys-3.10-q10',
+            question: 'Explain why technetium-99m is suitable for use as a medical tracer.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'It emits gamma radiation which can be detected outside the body. It has a short half-life (6 hours), reducing radiation dose to patient. It is readily taken up by specific tissues and can be attached to various compounds.',
+            markingCriteria: {
+              breakdown: [
+                'Emits gamma / can be detected (1 mark)',
+                'Short half-life / low dose (1 mark)',
+                'Can be attached to compounds / specific uptake (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.10.5'
+          }
+        ]
+      },
+      {
+        id: '3.11-engineering-physics',
+        name: '3.11 Engineering Physics',
+        questions: [
+          {
+            id: 'phys-3.11-q1',
+            question: 'Define moment of inertia and state its unit.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Moment of inertia I is the sum of mr^2 for all particles in a rotating body: I = Σmr^2. It measures resistance to angular acceleration. Unit: kg m^2.',
+            markingCriteria: {
+              breakdown: [
+                'I = Σmr^2 / resistance to angular acceleration (1 mark)',
+                'Unit: kg m^2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.1'
+          },
+          {
+            id: 'phys-3.11-q2',
+            question: 'A flywheel with moment of inertia 5.0 kg m^2 rotates at 200 rad/s. Calculate its rotational kinetic energy.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Ek = (1/2)Iω^2 = 0.5 * 5.0 * (200)^2 = 0.5 * 5.0 * 40000 = 100000 J = 100 kJ.',
+            markingCriteria: {
+              breakdown: [
+                'Ek = (1/2)Iω^2 (1 mark)',
+                'Ek = 100 kJ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.11-q3',
+            question: 'State the equation for torque T in terms of moment of inertia I and angular acceleration α.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'T = Iα (analogous to F = ma for linear motion).',
+            markingCriteria: {
+              breakdown: [
+                'T = Iα (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.1'
+          },
+          {
+            id: 'phys-3.11-q4',
+            question: 'State the principle of conservation of angular momentum.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In the absence of external torques, the total angular momentum of a system remains constant. L = Iω = constant.',
+            markingCriteria: {
+              breakdown: [
+                'Angular momentum conserved without external torque (1 mark)',
+                'L = Iω = constant (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.1'
+          },
+          {
+            id: 'phys-3.11-q5',
+            question: 'A motor delivers power of 15 kW at angular velocity 300 rad/s. Calculate the torque provided.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P = Tω. T = P/ω = 15000/300 = 50 N m.',
+            markingCriteria: {
+              breakdown: [
+                'P = Tω (1 mark)',
+                'T = 50 N m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.1',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.11-q6',
+            question: 'State the first law of thermodynamics.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The increase in internal energy of a system equals the heat supplied to the system plus the work done on the system. ΔU = Q + W (or ΔU = Q - W depending on sign convention).',
+            markingCriteria: {
+              breakdown: [
+                'Energy conservation statement (1 mark)',
+                'ΔU = Q + W or equivalent (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.2'
+          },
+          {
+            id: 'phys-3.11-q7',
+            question: 'A gas expands at constant pressure from 0.02 m^3 to 0.05 m^3 against external pressure 200 kPa. Calculate the work done by the gas.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'W = pΔV = 200 * 10^3 * (0.05 - 0.02) = 200000 * 0.03 = 6000 J = 6.0 kJ.',
+            markingCriteria: {
+              breakdown: [
+                'W = pΔV (1 mark)',
+                'ΔV = 0.03 m^3 (1 mark)',
+                'W = 6.0 kJ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.11-q8',
+            question: 'Describe what happens in an isothermal process for an ideal gas.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In an isothermal process, temperature remains constant. For an ideal gas, internal energy does not change (ΔU = 0), so heat supplied equals work done: Q = W. pV = constant.',
+            markingCriteria: {
+              breakdown: [
+                'Constant temperature / ΔU = 0 (1 mark)',
+                'Q = W or pV = constant (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.2'
+          },
+          {
+            id: 'phys-3.11-q9',
+            question: 'Define the efficiency of a heat engine.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Efficiency η = (useful work output) / (heat input) = W/Qin. Or η = (Qin - Qout) / Qin. Often expressed as a percentage.',
+            markingCriteria: {
+              breakdown: [
+                'η = W/Qin or (Qin - Qout)/Qin (1 mark)',
+                'Work output / heat input (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.2'
+          },
+          {
+            id: 'phys-3.11-q10',
+            question: 'A heat pump has coefficient of performance (COP) of 3.5. If 2000 J of work is done, how much heat is delivered?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'COP = Qout / W. Qout = COP * W = 3.5 * 2000 = 7000 J = 7.0 kJ.',
+            markingCriteria: {
+              breakdown: [
+                'COP = Qout/W (1 mark)',
+                'Qout = 7.0 kJ (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.11.2',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: '3.12-turning-points',
+        name: '3.12 Turning Points in Physics',
+        questions: [
+          {
+            id: 'phys-3.12-q1',
+            question: 'Describe Thomson\'s experiment to determine the charge-to-mass ratio (e/m) of the electron.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Electrons were accelerated in an electron gun then passed through perpendicular electric and magnetic fields. The fields were adjusted until the beam was undeflected (forces balanced). From this, the velocity was calculated. The magnetic field was then switched off and the electric deflection measured. Using F = eE and centripetal force equations, e/m was calculated.',
+            markingCriteria: {
+              breakdown: [
+                'Perpendicular E and B fields (1 mark)',
+                'Fields balanced / velocity determined (1 mark)',
+                'Electric deflection measured (1 mark)',
+                'e/m calculated from forces (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.1'
+          },
+          {
+            id: 'phys-3.12-q2',
+            question: 'Describe Millikan\'s oil drop experiment and what it demonstrated.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Charged oil droplets were observed falling in air between parallel plates. An electric field was applied to balance the weight of a droplet (mg = qE). By measuring droplet radius (from terminal velocity) and adjusting the field, the charge q on droplets was calculated. Results showed charge was quantised in multiples of 1.6 * 10^(-19) C, the elementary charge e.',
+            markingCriteria: {
+              breakdown: [
+                'Oil drops balanced by electric field (1 mark)',
+                'Charge calculated from mg = qE (1 mark)',
+                'Charge was quantised (1 mark)',
+                'Elementary charge e = 1.6 * 10^(-19) C (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.1'
+          },
+          {
+            id: 'phys-3.12-q3',
+            question: 'State the photoelectric effect equation and define the work function φ.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'hf = φ + Ek(max), where hf is photon energy, φ is work function, and Ek(max) is maximum kinetic energy of emitted electrons. Work function φ is the minimum energy needed to remove an electron from the surface of a metal.',
+            markingCriteria: {
+              breakdown: [
+                'hf = φ + Ek(max) (1 mark)',
+                'Work function: minimum energy to remove electron (1 mark)',
+                'From metal surface (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.2'
+          },
+          {
+            id: 'phys-3.12-q4',
+            question: 'Light of wavelength 400 nm is incident on a metal surface with work function 3.0 eV. Calculate the maximum kinetic energy of emitted electrons. Use h = 6.63 * 10^(-34) J s, c = 3.0 * 10^8 m/s, 1 eV = 1.6 * 10^(-19) J.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'E = hc/λ = (6.63 * 10^(-34) * 3.0 * 10^8) / (400 * 10^(-9)) = 4.97 * 10^(-19) J. Convert to eV: 4.97 * 10^(-19) / 1.6 * 10^(-19) = 3.11 eV. Ek(max) = hf - φ = 3.11 - 3.0 = 0.11 eV or 1.76 * 10^(-20) J.',
+            markingCriteria: {
+              breakdown: [
+                'E = hc/λ (1 mark)',
+                'Photon energy ≈ 3.1 eV (1 mark)',
+                'Ek(max) = hf - φ (1 mark)',
+                'Ek(max) = 0.11 eV (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.12-q5',
+            question: 'State the de Broglie wavelength equation and calculate the wavelength of an electron traveling at 1.0 * 10^6 m/s. Use h = 6.63 * 10^(-34) J s, electron mass = 9.11 * 10^(-31) kg.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'λ = h / p = h / (mv) = (6.63 * 10^(-34)) / (9.11 * 10^(-31) * 1.0 * 10^6) = 7.28 * 10^(-10) m ≈ 0.73 nm.',
+            markingCriteria: {
+              breakdown: [
+                'λ = h/p or λ = h/(mv) (1 mark)',
+                'Correct substitution (1 mark)',
+                'λ ≈ 0.73 nm or 7.3 * 10^(-10) m (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.2',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.12-q6',
+            question: 'Explain how electron diffraction provides evidence for wave-particle duality.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When electrons pass through a thin graphite film, a diffraction pattern of rings is observed. Diffraction is a wave property, so this shows electrons behave as waves. The pattern spacing matches the de Broglie wavelength calculated from the electron momentum, confirming wave-particle duality.',
+            markingCriteria: {
+              breakdown: [
+                'Diffraction pattern observed (1 mark)',
+                'Diffraction is a wave property (1 mark)',
+                'Evidence for wave-particle duality (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.2'
+          },
+          {
+            id: 'phys-3.12-q7',
+            question: 'State the two postulates of Einstein\'s special relativity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(1) The laws of physics are the same in all inertial frames of reference. (2) The speed of light in a vacuum is the same for all observers, regardless of their motion or the motion of the source.',
+            markingCriteria: {
+              breakdown: [
+                'Laws of physics same in all inertial frames (1 mark)',
+                'Speed of light constant for all observers (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.3'
+          },
+          {
+            id: 'phys-3.12-q8',
+            question: 'A spacecraft travels at 0.6c relative to Earth. Calculate the time dilation factor γ.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'γ = 1 / √(1 - v^2/c^2) = 1 / √(1 - 0.6^2) = 1 / √(1 - 0.36) = 1 / √0.64 = 1 / 0.8 = 1.25.',
+            markingCriteria: {
+              breakdown: [
+                'γ = 1/√(1 - v^2/c^2) (1 mark)',
+                'γ = 1.25 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.12-q9',
+            question: 'State the mass-energy equivalence equation and calculate the energy equivalent of 1.0 kg of matter. Use c = 3.0 * 10^8 m/s.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'E = mc^2. E = 1.0 * (3.0 * 10^8)^2 = 1.0 * 9.0 * 10^16 = 9.0 * 10^16 J.',
+            markingCriteria: {
+              breakdown: [
+                'E = mc^2 (1 mark)',
+                'Calculation (1 mark)',
+                'E = 9.0 * 10^16 J (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.12-q10',
+            question: 'Describe the Michelson-Morley experiment and state its significance.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The experiment used an interferometer to detect differences in the speed of light in perpendicular directions, testing for the luminiferous ether. No difference was detected (null result), regardless of Earth\'s motion. This showed the ether did not exist and the speed of light is constant in all frames. This was key evidence for special relativity.',
+            markingCriteria: {
+              breakdown: [
+                'Interferometer tested speed of light in different directions (1 mark)',
+                'Null result / no difference detected (1 mark)',
+                'Showed ether does not exist (1 mark)',
+                'Evidence for special relativity / constant c (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.12.3'
+          }
+        ]
+      },
+      {
+        id: '3.13-electronics',
+        name: '3.13 Electronics',
+        questions: [
+          {
+            id: 'phys-3.13-q1',
+            question: 'Describe the structure and basic operation of a MOSFET.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A MOSFET has source, drain, and gate terminals. The gate is insulated from the channel by a thin oxide layer. When a voltage is applied to the gate (VGS), an electric field is created which attracts charge carriers, forming a conducting channel between source and drain. Current flows from drain to source (IDS) when VDS is applied. Above a threshold voltage, the MOSFET conducts.',
+            markingCriteria: {
+              breakdown: [
+                'Source, drain, gate structure (1 mark)',
+                'Gate voltage VGS controls channel (1 mark)',
+                'Conducts when VGS > threshold (1 mark)',
+                'Current IDS flows drain to source (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.1'
+          },
+          {
+            id: 'phys-3.13-q2',
+            question: 'Explain the function of a Zener diode in voltage regulation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A Zener diode is designed to operate in reverse bias at its breakdown voltage (Zener voltage). When the voltage across it exceeds the Zener voltage, it conducts and maintains a constant voltage across its terminals. This stabilizes the output voltage even when input voltage or load current varies.',
+            markingCriteria: {
+              breakdown: [
+                'Operates in reverse bias (1 mark)',
+                'Conducts at Zener/breakdown voltage (1 mark)',
+                'Maintains constant voltage / voltage regulation (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.1'
+          },
+          {
+            id: 'phys-3.13-q3',
+            question: 'Distinguish between analogue and digital signals.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Analogue signals vary continuously and can take any value within a range. Digital signals have discrete levels, typically two (e.g., 0 and 1 or low and high voltage).',
+            markingCriteria: {
+              breakdown: [
+                'Analogue: continuous / any value (1 mark)',
+                'Digital: discrete levels / binary (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.2'
+          },
+          {
+            id: 'phys-3.13-q4',
+            question: 'Explain what is meant by sampling and quantisation in analogue-to-digital conversion.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sampling is measuring the analogue signal at regular time intervals. Quantisation is converting each sampled value to the nearest discrete level from a set of fixed values. Higher sampling rate and more quantisation levels improve digital representation of the original signal.',
+            markingCriteria: {
+              breakdown: [
+                'Sampling: measuring at regular intervals (1 mark)',
+                'Quantisation: converting to discrete levels (1 mark)',
+                'Higher rates/levels improve representation (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.2'
+          },
+          {
+            id: 'phys-3.13-q5',
+            question: 'Calculate the resonant frequency of an LC circuit with L = 50 mH and C = 20 μF.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'f0 = 1 / (2π√(LC)) = 1 / (2π√(50 * 10^(-3) * 20 * 10^(-6))) = 1 / (2π√(1.0 * 10^(-6))) = 1 / (2π * 1.0 * 10^(-3)) = 1 / (6.28 * 10^(-3)) = 159 Hz ≈ 160 Hz.',
+            markingCriteria: {
+              breakdown: [
+                'f0 = 1/(2π√(LC)) (1 mark)',
+                'Correct substitution (1 mark)',
+                'f0 ≈ 160 Hz (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.3',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'phys-3.13-q6',
+            question: 'State three characteristics of an ideal op-amp.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Infinite open-loop gain. Infinite input impedance (no current flows into inputs). Zero output impedance. (Also acceptable: infinite bandwidth, zero offset voltage.)',
+            markingCriteria: {
+              breakdown: [
+                'Infinite gain (1 mark)',
+                'Infinite input impedance (1 mark)',
+                'Zero output impedance (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.4'
+          },
+          {
+            id: 'phys-3.13-q7',
+            question: 'An inverting op-amp amplifier has Rin = 10 kΩ and Rf = 100 kΩ. Calculate the voltage gain.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Voltage gain = -Rf / Rin = -100 / 10 = -10.',
+            markingCriteria: {
+              breakdown: [
+                'Gain = -Rf/Rin (1 mark)',
+                'Gain = -10 (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.4',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'phys-3.13-q8',
+            question: 'State the truth table for a NAND gate.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A B | Output\n0 0 | 1\n0 1 | 1\n1 0 | 1\n1 1 | 0',
+            markingCriteria: {
+              breakdown: [
+                'Correct inputs (1 mark)',
+                'Correct outputs (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.5'
+          },
+          {
+            id: 'phys-3.13-q9',
+            question: 'Explain the difference between amplitude modulation (AM) and frequency modulation (FM).',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'In AM, the amplitude of the carrier wave varies in proportion to the signal, while frequency remains constant. In FM, the frequency of the carrier wave varies in proportion to the signal, while amplitude remains constant. FM is less susceptible to noise.',
+            markingCriteria: {
+              breakdown: [
+                'AM: amplitude varies, frequency constant (1 mark)',
+                'FM: frequency varies, amplitude constant (1 mark)',
+                'FM less susceptible to noise (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.6'
+          },
+          {
+            id: 'phys-3.13-q10',
+            question: 'Explain what is meant by bandwidth in a communication system and why it is important.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Bandwidth is the range of frequencies that can be transmitted by a system. A larger bandwidth allows more information to be transmitted per unit time (higher data rate). It is important because it limits the quality and amount of data that can be sent, e.g., video requires more bandwidth than audio.',
+            markingCriteria: {
+              breakdown: [
+                'Bandwidth: range of frequencies transmitted (1 mark)',
+                'Larger bandwidth = higher data rate (1 mark)',
+                'Limits quality/amount of data (1 mark)'
+              ]
+            },
+            specReference: 'AQA A-Level Physics 3.13.6'
+          }
+        ]
+      }
+    ]
   }
   ];
