@@ -4008,6 +4008,7 @@ const Dashboard = () => {
                                         <Card 
                                           className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
                                           onClick={() => {
+                                            console.log('🔵 A-Level subject clicked:', baseName, 'activeSubjectLevel:', activeSubjectLevel);
                                             setSelectedSubjectGroup(baseName);
                                           }}
                                         >
@@ -4044,10 +4045,18 @@ const Dashboard = () => {
                               // Exclude geography-paper-2 from exam board selection
                               if (subject.id === 'geography-paper-2') return false;
                               
+                              console.log(`🔍 Filtering subject ${subject.id} (${subject.name}):`, {
+                                activeSubjectLevel,
+                                includesAlevel: subject.id.includes('alevel'),
+                                selectedSubjectGroup
+                              });
+                              
                               // Filter by level first
                               const isCorrectLevel = activeSubjectLevel === 'gcse' 
                                 ? !subject.id.includes('alevel') 
                                 : subject.id.includes('alevel');
+                              
+                              console.log(`  isCorrectLevel: ${isCorrectLevel}`);
                               
                               if (!isCorrectLevel) return false;
                               
@@ -4057,7 +4066,9 @@ const Dashboard = () => {
                               if (baseName.startsWith('Geography')) baseName = 'Geography';
                               // Normalize Maths to Mathematics for matching
                               if (baseName === 'Maths') baseName = 'Mathematics';
-                              return baseName === selectedSubjectGroup;
+                              const matches = baseName === selectedSubjectGroup;
+                              console.log(`  baseName: ${baseName}, matches selectedSubjectGroup: ${matches}`);
+                              return matches;
                             })
                             .sort((a, b) => {
                               // AQA always comes first
@@ -4106,13 +4117,19 @@ const Dashboard = () => {
                                 >
                                   <Card 
                                     className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
-                                    onClick={() => {
-                                      setSelectedSubjectForGrade({
-                                        id: subject.id,
-                                        name: subject.name,
-                                        examBoard: examBoard
-                                      });
-                                    }}
+                              onClick={() => {
+                                console.log('📗 Exam board clicked:', {
+                                  subjectId: subject.id,
+                                  subjectName: subject.name,
+                                  examBoard: examBoard,
+                                  activeSubjectLevel
+                                });
+                                setSelectedSubjectForGrade({
+                                  id: subject.id,
+                                  name: subject.name,
+                                  examBoard: examBoard
+                                });
+                              }}
                                   >
                                     <CardContent className="p-6">
                                       <div className="text-center">
@@ -4178,6 +4195,11 @@ const Dashboard = () => {
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
+                                console.log('✅ Adding subject:', {
+                                  subjectId: selectedSubjectForGrade.id,
+                                  grade: grade.toString(),
+                                  examBoard: selectedSubjectForGrade.examBoard
+                                });
                                 addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
                                 setSelectedSubjectForGrade(null);
                                 setShowAddSubjects(false);
