@@ -37264,7 +37264,7 @@ export const curriculum: Subject[] = [
     topics: [
       {
         id: '3.1-measurements-errors',
-        name: '3.1 Measurements and Errors',
+        name: 'Measurements and their errors',
         questions: [
           {
             id: 'phys-3.1-q1',
@@ -37423,7 +37423,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.2-particles-radiation',
-        name: '3.2 Particles and Radiation',
+        name: 'Particles and radiation',
         questions: [
           {
             id: 'phys-3.2-q1',
@@ -37583,7 +37583,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.3-waves',
-        name: '3.3 Waves',
+        name: 'Waves',
         questions: [
           {
             id: 'phys-3.3-q1',
@@ -37746,7 +37746,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.4-mechanics-materials',
-        name: '3.4 Mechanics and Materials',
+        name: 'Mechanics and materials',
         questions: [
           {
             id: 'phys-3.4-q1',
@@ -37910,7 +37910,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.5-electricity',
-        name: '3.5 Electricity',
+        name: 'Electricity',
         questions: [
           {
             id: 'phys-3.5-q1',
@@ -38071,7 +38071,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.6-further-mechanics-thermal',
-        name: '3.6 Further Mechanics & Thermal Physics',
+        name: 'Further mechanics and thermal physics',
         questions: [
           {
             id: 'phys-3.6-q1',
@@ -38229,7 +38229,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.7-fields',
-        name: '3.7 Fields and Their Consequences',
+        name: 'Fields and their consequences',
         questions: [
           {
             id: 'phys-3.7-q1',
@@ -38390,7 +38390,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.8-nuclear-physics',
-        name: '3.8 Nuclear Physics',
+        name: 'Nuclear physics',
         questions: [
           {
             id: 'phys-3.8-q1',
@@ -38549,7 +38549,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.9-astrophysics',
-        name: '3.9 Astrophysics',
+        name: 'Astrophysics',
         questions: [
           {
             id: 'phys-3.9-q1',
@@ -38707,7 +38707,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.10-medical-physics',
-        name: '3.10 Medical Physics',
+        name: 'Medical physics',
         questions: [
           {
             id: 'phys-3.10-q1',
@@ -38864,7 +38864,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.11-engineering-physics',
-        name: '3.11 Engineering Physics',
+        name: 'Engineering physics',
         questions: [
           {
             id: 'phys-3.11-q1',
@@ -39014,7 +39014,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.12-turning-points',
-        name: '3.12 Turning Points in Physics',
+        name: 'Turning points in physics',
         questions: [
           {
             id: 'phys-3.12-q1',
@@ -39176,7 +39176,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: '3.13-electronics',
-        name: '3.13 Electronics',
+        name: 'Electronics',
         questions: [
           {
             id: 'phys-3.13-q1',
