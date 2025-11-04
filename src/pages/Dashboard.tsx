@@ -1821,6 +1821,8 @@ const Dashboard = () => {
       // Calculate predicted grade using same logic as PredictedGradesGraph
       let predicted: number | string = target;
       
+      console.log(`🔍 [${subjectId}] Starting calculation - target: ${target}`);
+      
       // Get practice progress for this subject
       const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
       const currSubject = curriculum.find(s => s.id === subjectId);
@@ -1828,12 +1830,14 @@ const Dashboard = () => {
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const practicePercentage = Math.round(totalScore / totalTopics);
       
+      console.log(`🔍 [${subjectId}] Practice data - progress count: ${subjectProgress.length}, percentage: ${practicePercentage}`);
+      
       // Get most recent predicted exam completion for this subject
       const recentExamCompletion = predictedGrades
         .filter(pg => pg.subject_id === subjectId)
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
-      console.log(`🔍 ${subjectId} - recentExamCompletion:`, recentExamCompletion?.grade, 'type:', typeof recentExamCompletion?.grade);
+      console.log(`🔍 [${subjectId}] Exam completion:`, recentExamCompletion?.grade, 'subject_id:', recentExamCompletion?.subject_id);
       
       const hasPracticeData = subjectProgress.length > 0;
       
@@ -1897,7 +1901,7 @@ const Dashboard = () => {
         })(),
         icon: getSubjectIconEmoji(subjectId),
         predicted: (() => {
-          console.log(`✅ ${subjectId} final predicted:`, predicted, 'type:', typeof predicted);
+          console.log(`🔍 [${subjectId}] FINAL predicted value:`, predicted, 'type:', typeof predicted);
           return predicted;
         })(),
         target: target,
