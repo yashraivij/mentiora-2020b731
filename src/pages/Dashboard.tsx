@@ -1718,6 +1718,7 @@ const Dashboard = () => {
     const emojiMap: { [key: string]: string } = {
       "physics": "🧲",
       "physics-edexcel": "🧲",
+      "physics-aqa-alevel": "⚛️",
       "chemistry": "🧪",
       "chemistry-edexcel": "🧪",
       "biology": "🧬",
@@ -3021,8 +3022,17 @@ const Dashboard = () => {
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
+                                  console.log('🔍 Topics Tab Debug:', {
+                                    selectedDrawerSubjectId: selectedDrawerSubject.id,
+                                    selectedDrawerSubjectName: selectedDrawerSubject.name,
+                                    curriculumIds: curriculum.map(s => ({ id: s.id, name: s.name, topicsCount: s.topics?.length || 0 })),
+                                    physicsMatches: curriculum.filter(s => s.id.includes('physics')).map(s => ({ id: s.id, name: s.name, topicsCount: s.topics?.length || 0 }))
+                                  });
                                   const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
+                                  console.log('🎯 Found subject:', subject ? { id: subject.id, name: subject.name, topicsCount: subject.topics?.length } : 'NOT FOUND');
+                                  
                                   if (subject) {
+                                    console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
                                     subject.topics.forEach(topic => {
                                       const topicProgress = userProgress.find(
                                         p => p.subjectId === selectedDrawerSubject.id && p.topicId === topic.id
