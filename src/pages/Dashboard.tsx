@@ -2740,8 +2740,11 @@ const Dashboard = () => {
                                 {isPremium ? (
                                   <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
                                     Predicted {(() => {
-                                      console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
-                                      return getDisplayGrade(selectedDrawerSubject.predicted);
+                                      // Get the correct predicted value from mockSubjects, not from selectedDrawerSubject state
+                                      const currentSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
+                                      const predictedValue = currentSubject?.predicted ?? selectedDrawerSubject.predicted;
+                                      console.log(`🎯 Drawer Badge - currentSubject predicted:`, predictedValue, 'selectedDrawerSubject.predicted:', selectedDrawerSubject.predicted);
+                                      return getDisplayGrade(predictedValue);
                                     })()}
                                   </Badge>
                                 ) : (
