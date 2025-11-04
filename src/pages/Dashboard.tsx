@@ -615,6 +615,7 @@ const Dashboard = () => {
           // Handle A-level subjects
           if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
           if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+          if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
           if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
           
           // Handle subjects with exam board in name
@@ -671,6 +672,7 @@ const Dashboard = () => {
             // Handle A-level subjects
             if (subjectName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
             if (subjectName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            if (subjectName === "Physics (A-Level)" && examBoard === "aqa") return "physics-aqa-alevel";
             if (subjectName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
             
             // Handle subjects with exam board in name
@@ -1593,6 +1595,7 @@ const Dashboard = () => {
         const board = examBoard.toLowerCase();
         if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
         if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
         if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
@@ -1753,6 +1756,7 @@ const Dashboard = () => {
         // Handle A-level subjects
         if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
         if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
@@ -2043,6 +2047,7 @@ const Dashboard = () => {
         // Handle A-level subjects
         if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
         if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
