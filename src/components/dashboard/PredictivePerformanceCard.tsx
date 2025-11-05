@@ -92,20 +92,22 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const calculateCombinedGrade = (subjectId: string) => {
-    // Get practice progress
-    const practicePercentage = getSubjectProgress(subjectId);
-    const practiceGrade = getPredictedGrade(practicePercentage);
-    
     // Get most recent predicted exam completion for this subject
     const recentExamCompletion = predictedExamCompletions
       .filter(completion => completion.subject_id === subjectId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
+    // CRITICAL FIX: Check if there's actual attempt data, not just 0% scores
+    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
+    
     // If no practice data and no exam completion, don't show subject
-    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
     if (!hasPracticeData && !recentExamCompletion) {
       return null;
     }
+    
+    // Get practice progress only if there's actual data
+    const practicePercentage = hasPracticeData ? getSubjectProgress(subjectId) : 0;
+    const practiceGrade = getPredictedGrade(practicePercentage);
     
     // If only exam completion, use that grade (convert to number for calculations)
     if (!hasPracticeData && recentExamCompletion) {
