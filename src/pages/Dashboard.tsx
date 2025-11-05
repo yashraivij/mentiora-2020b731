@@ -1844,16 +1844,6 @@ const Dashboard = () => {
         if (grade === 'U' || grade === null || grade === undefined) return 0;
         
         const gradeStr = String(grade).trim().toUpperCase();
-        
-        // Check if it's a percentage grade (e.g., "37%")
-        if (gradeStr.includes('%')) {
-          const percentage = parseFloat(gradeStr);
-          if (!isNaN(percentage)) {
-            // Convert percentage to A-Level grade: 30-39% = E = 4, 40-49% = D = 5, etc.
-            return percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
-          }
-        }
-        
         const letterGradeMap: {[key: string]: number} = {
           'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 0
         };
@@ -1878,14 +1868,12 @@ const Dashboard = () => {
         p.subjectId === baseSubjectName ||
         p.subjectId.split('-')[0] === baseSubjectName
       );
+      const currSubject = curriculum.find(s => s.id === subjectId);
+      const totalTopics = currSubject?.topics.length || 1;
+      const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+      const practicePercentage = Math.round(totalScore / totalTopics);
       
-      // CRITICAL FIX: Calculate practice percentage from ATTEMPTED topics only, not all topics
-      const attemptedTopics = subjectProgress.filter(p => p.attempts > 0);
-      const practicePercentage = attemptedTopics.length > 0
-        ? Math.round(attemptedTopics.reduce((sum, p) => sum + p.averageScore, 0) / attemptedTopics.length)
-        : 0;
-      
-      console.log(`🔍 [${subjectId}] Practice data - attempted topics: ${attemptedTopics.length}, percentage: ${practicePercentage}%`, attemptedTopics);
+      console.log(`🔍 [${subjectId}] Practice data - progress count: ${subjectProgress.length}, percentage: ${practicePercentage}`);
       
       // Get most recent predicted exam completion for this subject - also with flexible matching
       const recentExamCompletion = predictedGrades
@@ -1899,7 +1887,7 @@ const Dashboard = () => {
       console.log(`🔍 [${subjectId}] Exam completion:`, recentExamCompletion?.grade, 'subject_id:', recentExamCompletion?.subject_id);
       
       // CRITICAL FIX: Check if there's actual attempt data with attempts > 0
-      const hasPracticeData = attemptedTopics.length > 0;
+      const hasPracticeData = subjectProgress.some(p => p.attempts > 0);
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
@@ -1918,7 +1906,7 @@ const Dashboard = () => {
         // Only practice data exists - use correct A-Level grade thresholds
         const practiceGrade = practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0;
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
-        console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage, '% -> grade:', practiceGrade);
+        console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage);
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
         const userSubjectPredictedGrade = convertGradeToNumeric(subject.predicted_grade);
