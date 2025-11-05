@@ -1844,6 +1844,16 @@ const Dashboard = () => {
         if (grade === 'U' || grade === null || grade === undefined) return 0;
         
         const gradeStr = String(grade).trim().toUpperCase();
+        
+        // Check if it's a percentage grade (e.g., "37%")
+        if (gradeStr.includes('%')) {
+          const percentage = parseFloat(gradeStr);
+          if (!isNaN(percentage)) {
+            // Convert percentage to A-Level grade: 30-39% = E = 4, 40-49% = D = 5, etc.
+            return percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
+          }
+        }
+        
         const letterGradeMap: {[key: string]: number} = {
           'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 0
         };
