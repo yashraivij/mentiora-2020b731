@@ -92,17 +92,31 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const calculateCombinedGrade = (subjectId: string) => {
-    // Get practice progress
-    const practicePercentage = getSubjectProgress(subjectId);
+    // Get practice progress - match both exact ID and base subject name
+    const baseSubjectName = subjectId.split('-')[0];
+    const matchingProgress = userProgress.filter(p => 
+      p.subjectId === subjectId || 
+      p.subjectId === baseSubjectName ||
+      p.subjectId.split('-')[0] === baseSubjectName
+    );
+    
+    // Calculate practice percentage from matching progress
+    const practicePercentage = matchingProgress.length > 0
+      ? Math.round(matchingProgress.reduce((sum, p) => sum + p.averageScore, 0) / matchingProgress.length)
+      : 0;
     const practiceGrade = getPredictedGrade(practicePercentage);
     
-    // Get most recent predicted exam completion for this subject
+    // Get most recent predicted exam completion for this subject - also with flexible matching
     const recentExamCompletion = predictedExamCompletions
-      .filter(completion => completion.subject_id === subjectId)
+      .filter(completion => 
+        completion.subject_id === subjectId ||
+        completion.subject_id === baseSubjectName ||
+        completion.subject_id.split('-')[0] === baseSubjectName
+      )
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
     // Check if there's actual practice data with attempts > 0
-    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
+    const hasPracticeData = matchingProgress.some(p => p.attempts > 0);
     if (!hasPracticeData && !recentExamCompletion) {
       return null;
     }
