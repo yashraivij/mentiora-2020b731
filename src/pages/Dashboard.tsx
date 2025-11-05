@@ -3012,6 +3012,13 @@ const Dashboard = () => {
                                   const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
                                   const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
                                   
+                                  console.log(`🎯 ${subjectIdToMatch} accuracy calculation:`, {
+                                    totalAttempts,
+                                    totalScore,
+                                    currentAccuracy,
+                                    subjectProgressData
+                                  });
+                                  
                                   if (currentAccuracy > 0) {
                                     // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
                                     if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
@@ -3021,6 +3028,8 @@ const Dashboard = () => {
                                     else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
                                     else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
                                     else predictedGradeValue = 0; // U
+                                    
+                                    console.log(`🎯 ${subjectIdToMatch} final grade:`, predictedGradeValue, 'from accuracy:', currentAccuracy);
                                   }
                                 }
                                 
