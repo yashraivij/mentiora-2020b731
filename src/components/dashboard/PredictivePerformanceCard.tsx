@@ -101,8 +101,8 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
       .filter(completion => completion.subject_id === subjectId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
-    // If no practice data and no exam completion, don't show subject
-    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
+    // Check if there's actual practice data with attempts > 0
+    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
     if (!hasPracticeData && !recentExamCompletion) {
       return null;
     }
