@@ -1861,8 +1861,13 @@ const Dashboard = () => {
       
       console.log(`🔍 [${subjectId}] Starting calculation - target: ${target}`);
       
-      // Get practice progress for this subject
-      const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+      // Get practice progress for this subject - match both exact ID and base subject name
+      const baseSubjectName = subjectId.split('-')[0];
+      const subjectProgress = userProgress.filter(p => 
+        p.subjectId === subjectId || 
+        p.subjectId === baseSubjectName ||
+        p.subjectId.split('-')[0] === baseSubjectName
+      );
       const currSubject = curriculum.find(s => s.id === subjectId);
       const totalTopics = currSubject?.topics.length || 1;
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
@@ -1870,9 +1875,13 @@ const Dashboard = () => {
       
       console.log(`🔍 [${subjectId}] Practice data - progress count: ${subjectProgress.length}, percentage: ${practicePercentage}`);
       
-      // Get most recent predicted exam completion for this subject
+      // Get most recent predicted exam completion for this subject - also with flexible matching
       const recentExamCompletion = predictedGrades
-        .filter(pg => pg.subject_id === subjectId)
+        .filter(pg => 
+          pg.subject_id === subjectId ||
+          pg.subject_id === baseSubjectName ||
+          pg.subject_id.split('-')[0] === baseSubjectName
+        )
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
       console.log(`🔍 [${subjectId}] Exam completion:`, recentExamCompletion?.grade, 'subject_id:', recentExamCompletion?.subject_id);
@@ -1883,7 +1892,8 @@ const Dashboard = () => {
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
-        const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        // Use correct A-Level grade thresholds: 30-39% = E = 4, 40-49% = D = 5, etc.
+        const practiceGradeNum = practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0;
         const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
         console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
@@ -1893,9 +1903,10 @@ const Dashboard = () => {
         predicted = examGradeNum === 0 ? 'U' : examGradeNum;
         console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
-        // Only practice data exists
-        const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
+        // Only practice data exists - use correct A-Level grade thresholds
+        const practiceGrade = practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0;
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
+        console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage);
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
         const userSubjectPredictedGrade = convertGradeToNumeric(subject.predicted_grade);
