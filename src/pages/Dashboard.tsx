@@ -763,31 +763,46 @@ const Dashboard = () => {
     try {
       console.log('📊 Loading predicted grades for user:', user.id);
       
-      const { data, error } = await supabase
-        .from('predicted_exam_completions')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error loading predicted grades:', error);
-        return;
-      }
-
-      console.log('📊 Raw predicted exam completions:', data);
-
-      // Group by subject_id and get the latest prediction for each subject
-      const latestGrades = data?.reduce((acc: any, grade: any) => {
-        if (!acc[grade.subject_id] || new Date(grade.created_at) > new Date(acc[grade.subject_id].created_at)) {
-          acc[grade.subject_id] = grade;
+      // Calculate predicted grades from current userProgress instead of database
+      const gradesBySubject = userSubjects.map((subject: any) => {
+        const subjectIdToMatch = subject.id || '';
+        const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
+        const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
+        
+        let predictedGradeValue = 0;
+        let percentage = 0;
+        
+        if (hasAttempts) {
+          // Calculate from CURRENT practice accuracy (most accurate)
+          const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
+          const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
+          const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
+          percentage = currentAccuracy;
+          
+          if (currentAccuracy > 0) {
+            // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
+            if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
+            else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
+            else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
+            else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
+            else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
+            else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
+            else predictedGradeValue = 0; // U
+          }
         }
-        return acc;
-      }, {});
+        
+        return {
+          subject_id: subject.name || subjectIdToMatch,
+          grade: predictedGradeValue.toString(),
+          percentage: percentage,
+          target_grade: subject.target || '7',
+          created_at: new Date().toISOString()
+        };
+      });
 
-      console.log('📊 Latest grades by subject:', latestGrades);
-      console.log('📊 User subjects from curriculum:', userSubjects);
+      console.log('📊 Calculated grades from userProgress:', gradesBySubject);
       
-      setPredictedGrades(Object.values(latestGrades || {}));
+      setPredictedGrades(gradesBySubject);
     } catch (error) {
       console.error('Error loading predicted grades:', error);
     }
