@@ -143,15 +143,14 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const getPredictedGrade = (percentage: number) => {
-    if (percentage >= 85) return 9;
-    if (percentage >= 75) return 8;
-    if (percentage >= 65) return 7;
-    if (percentage >= 55) return 6;
-    if (percentage >= 45) return 5;
-    if (percentage >= 35) return 4;
-    if (percentage >= 25) return 3;
-    if (percentage >= 15) return 2;
-    return 0; // Return 0 for U grade
+    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
+    if (percentage >= 80) return 9; // A*
+    if (percentage >= 70) return 8; // A
+    if (percentage >= 60) return 7; // B
+    if (percentage >= 50) return 6; // C
+    if (percentage >= 40) return 5; // D
+    if (percentage >= 30) return 4; // E
+    return 0; // U
   };
 
   const getGradeColor = (grade: number) => {
