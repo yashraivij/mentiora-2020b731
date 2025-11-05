@@ -2988,8 +2988,14 @@ const Dashboard = () => {
                                   return 'U';
                                 };
                                 
-                                // Get user's predicted grade for this subject using the direct subject ID
-                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
+                                // Get user's predicted grade for this subject using flexible matching
+                                // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
+                                const baseSubjectName = subjectIdToMatch.split('-')[0]; // Extract "biology" from "biology-aqa-alevel"
+                                const userPredictedGrade = predictedGrades.find(pg => 
+                                  pg.subject_id === subjectIdToMatch || 
+                                  pg.subject_id === baseSubjectName ||
+                                  pg.subject_id.split('-')[0] === baseSubjectName
+                                );
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 // CRITICAL FIX: Check if there's actual attempt data first
