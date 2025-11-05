@@ -446,7 +446,15 @@ export function MedlySubjectsView({
                         <span className={`text-base font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                            
+                            // CRITICAL: Convert percentage grades to numeric (e.g., "37%" -> 4)
+                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
+                              const percentage = parseFloat(subject.predicted);
+                              if (!isNaN(percentage)) {
+                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
+                              }
+                            }
                             if (!isALevel) {
                               const rounded = Math.round(numericPred);
                               return rounded === 0 ? 'U' : rounded;
