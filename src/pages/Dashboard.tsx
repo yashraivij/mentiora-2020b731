@@ -1984,8 +1984,12 @@ const Dashboard = () => {
     console.log('✅ Found subject:', { id: subject.id, name: subject.name });
 
     try {
-      // Use the subject name directly from curriculum (already includes (A-Level) if applicable)
-      const subjectName = subject.name;
+      // CRITICAL FIX: Append (A-Level) to subject name if it's an A-Level subject
+      // The curriculum stores A-Level subjects with "alevel" in the ID but not in the name
+      const isALevel = subjectId.toLowerCase().includes('alevel');
+      const subjectName = isALevel && !subject.name.includes('(A-Level)') 
+        ? `${subject.name} (A-Level)` 
+        : subject.name;
       
       // Check if subject already exists
       const { data: existing } = await supabase
@@ -4085,6 +4089,11 @@ const Dashboard = () => {
                               if (baseName.startsWith('Geography')) baseName = 'Geography';
                               // Normalize Maths to Mathematics for matching
                               if (baseName === 'Maths') baseName = 'Mathematics';
+                              
+                              // CRITICAL FIX: selectedSubjectGroup is just the base name (e.g., "Biology")
+                              // but we need to ensure we're matching the right level
+                              // The level filtering above (lines 4074-4080) already ensures correct level
+                              // so here we just match the base name
                               const matches = baseName === selectedSubjectGroup;
                               console.log(`  baseName: ${baseName}, matches selectedSubjectGroup: ${matches}`);
                               return matches;
