@@ -3029,8 +3029,15 @@ const Dashboard = () => {
                                   });
                                   
                                   if (subjectPerf?.accuracy_rate && subjectPerf.accuracy_rate > 0) {
-                                    // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
-                                    predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
+                                    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
+                                    const percentage = subjectPerf.accuracy_rate;
+                                    if (percentage >= 80) predictedGradeValue = 9; // A*
+                                    else if (percentage >= 70) predictedGradeValue = 8; // A
+                                    else if (percentage >= 60) predictedGradeValue = 7; // B
+                                    else if (percentage >= 50) predictedGradeValue = 6; // C
+                                    else if (percentage >= 40) predictedGradeValue = 5; // D
+                                    else if (percentage >= 30) predictedGradeValue = 4; // E
+                                    else predictedGradeValue = 0; // U
                                   }
                                 }
                                 
