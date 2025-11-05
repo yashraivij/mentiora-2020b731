@@ -1851,7 +1851,8 @@ const Dashboard = () => {
       
       console.log(`🔍 [${subjectId}] Exam completion:`, recentExamCompletion?.grade, 'subject_id:', recentExamCompletion?.subject_id);
       
-      const hasPracticeData = subjectProgress.length > 0;
+      // CRITICAL FIX: Check if there's actual attempt data with attempts > 0
+      const hasPracticeData = subjectProgress.some(p => p.attempts > 0);
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
@@ -2991,7 +2992,11 @@ const Dashboard = () => {
                                 const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
-                                if (userPredictedGrade) {
+                                // CRITICAL FIX: Check if there's actual attempt data first
+                                const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
+                                const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
+                                
+                                if (userPredictedGrade && (hasAttempts || userPredictedGrade.grade !== '0')) {
                                   // Parse the grade
                                   if (typeof userPredictedGrade.grade === 'string') {
                                     const numGrade = parseFloat(userPredictedGrade.grade);
@@ -3000,15 +3005,15 @@ const Dashboard = () => {
                                     } else {
                                       // Convert letter grade to number
                                       const gradeMap: {[key: string]: number} = {
-                                        'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
+                                        'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 0
                                       };
                                       predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
                                     }
                                   } else {
                                     predictedGradeValue = userPredictedGrade.grade || 0;
                                   }
-                                } else {
-                                  // Fallback: calculate from subject performance
+                                } else if (hasAttempts) {
+                                  // Fallback: calculate from subject performance only if there are attempts
                                   const subjectPerf = userSubjectsWithGrades.find(s => {
                                     return curriculumSubject && s.subject_name === curriculumSubject.name;
                                   });
@@ -3017,6 +3022,9 @@ const Dashboard = () => {
                                     // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
                                     predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
                                   }
+                                } else {
+                                  // No attempts - default to U (0)
+                                  predictedGradeValue = 0;
                                 }
                                 
                                 // Get platform average for this subject (average of all students)
