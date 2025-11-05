@@ -457,7 +457,7 @@ export function MedlySubjectsView({
                             if (numericPred >= 6.5) return 'B';
                             if (numericPred >= 5.5) return 'C';
                             if (numericPred >= 4.5) return 'D';
-                            if (numericPred >= 2.5) return 'E';
+                            if (numericPred >= 3.5) return 'E';
                             return 'U';
                           })()}
                         </span>
