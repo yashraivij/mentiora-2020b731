@@ -3002,41 +3002,24 @@ const Dashboard = () => {
                                 const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
                                 const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
                                 
-                                // ONLY use predicted grade or calculate if there are attempts
+                                // ONLY calculate if there are attempts - ALWAYS use current practice accuracy
                                 if (!hasAttempts) {
                                   // No attempts - always default to U (0)
                                   predictedGradeValue = 0;
-                                } else if (userPredictedGrade) {
-                                  // Parse the grade
-                                  if (typeof userPredictedGrade.grade === 'string') {
-                                    const numGrade = parseFloat(userPredictedGrade.grade);
-                                    if (!isNaN(numGrade)) {
-                                      predictedGradeValue = numGrade;
-                                    } else {
-                                      // Convert letter grade to number
-                                      const gradeMap: {[key: string]: number} = {
-                                        'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 0
-                                      };
-                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
-                                    }
-                                  } else {
-                                    predictedGradeValue = userPredictedGrade.grade || 0;
-                                  }
                                 } else {
-                                  // Fallback: calculate from subject performance only if there are attempts
-                                  const subjectPerf = userSubjectsWithGrades.find(s => {
-                                    return curriculumSubject && s.subject_name === curriculumSubject.name;
-                                  });
+                                  // Calculate from CURRENT practice accuracy (most accurate)
+                                  const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
+                                  const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
+                                  const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
                                   
-                                  if (subjectPerf?.accuracy_rate && subjectPerf.accuracy_rate > 0) {
+                                  if (currentAccuracy > 0) {
                                     // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-                                    const percentage = subjectPerf.accuracy_rate;
-                                    if (percentage >= 80) predictedGradeValue = 9; // A*
-                                    else if (percentage >= 70) predictedGradeValue = 8; // A
-                                    else if (percentage >= 60) predictedGradeValue = 7; // B
-                                    else if (percentage >= 50) predictedGradeValue = 6; // C
-                                    else if (percentage >= 40) predictedGradeValue = 5; // D
-                                    else if (percentage >= 30) predictedGradeValue = 4; // E
+                                    if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
+                                    else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
+                                    else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
+                                    else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
+                                    else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
+                                    else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
                                     else predictedGradeValue = 0; // U
                                   }
                                 }
