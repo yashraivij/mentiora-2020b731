@@ -766,7 +766,14 @@ const Dashboard = () => {
       // Calculate predicted grades from current userProgress instead of database
       const gradesBySubject = userSubjects.map((subject: any) => {
         const subjectIdToMatch = subject.id || '';
-        const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
+        
+        // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
+        const baseSubjectName = subjectIdToMatch.split('-')[0];
+        const subjectProgressData = userProgress.filter(p => 
+          p.subjectId === subjectIdToMatch || 
+          p.subjectId === baseSubjectName ||
+          p.subjectId.split('-')[0] === baseSubjectName
+        );
         const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
         
         let predictedGradeValue = 0;
@@ -779,6 +786,8 @@ const Dashboard = () => {
           const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
           percentage = currentAccuracy;
           
+          console.log(`📊 ${subject.name} (${subjectIdToMatch}): accuracy=${currentAccuracy}%, attempts=${totalAttempts}`);
+          
           if (currentAccuracy > 0) {
             // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
             if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
@@ -788,6 +797,8 @@ const Dashboard = () => {
             else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
             else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
             else predictedGradeValue = 0; // U
+            
+            console.log(`📊 ${subject.name} final grade: ${predictedGradeValue} (${currentAccuracy}%)`);
           }
         }
         
