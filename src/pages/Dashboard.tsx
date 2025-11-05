@@ -2996,7 +2996,11 @@ const Dashboard = () => {
                                 const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
                                 const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
                                 
-                                if (userPredictedGrade && (hasAttempts || userPredictedGrade.grade !== '0')) {
+                                // ONLY use predicted grade or calculate if there are attempts
+                                if (!hasAttempts) {
+                                  // No attempts - always default to U (0)
+                                  predictedGradeValue = 0;
+                                } else if (userPredictedGrade) {
                                   // Parse the grade
                                   if (typeof userPredictedGrade.grade === 'string') {
                                     const numGrade = parseFloat(userPredictedGrade.grade);
@@ -3012,7 +3016,7 @@ const Dashboard = () => {
                                   } else {
                                     predictedGradeValue = userPredictedGrade.grade || 0;
                                   }
-                                } else if (hasAttempts) {
+                                } else {
                                   // Fallback: calculate from subject performance only if there are attempts
                                   const subjectPerf = userSubjectsWithGrades.find(s => {
                                     return curriculumSubject && s.subject_name === curriculumSubject.name;
@@ -3022,9 +3026,6 @@ const Dashboard = () => {
                                     // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
                                     predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
                                   }
-                                } else {
-                                  // No attempts - default to U (0)
-                                  predictedGradeValue = 0;
                                 }
                                 
                                 // Get platform average for this subject (average of all students)
