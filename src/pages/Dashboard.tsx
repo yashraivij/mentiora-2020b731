@@ -1873,7 +1873,7 @@ const Dashboard = () => {
       // Calculate predicted grade using same logic as PredictedGradesGraph
       let predicted: number | string = target;
       
-      console.log(`🔍 [${subjectId}] Starting calculation - target: ${target}`);
+      console.log(`🔍 [${subjectId}] Starting calculation - target: ${target}, subject.predicted_grade:`, subject.predicted_grade);
       
       // Get practice progress for this subject - match both exact ID and base subject name
       const baseSubjectName = subjectId.split('-')[0];
@@ -1929,8 +1929,11 @@ const Dashboard = () => {
         console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage);
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
+        console.log(`🔍 [${subjectId}] No exam/practice data. Using subject.predicted_grade:`, subject.predicted_grade);
         const userSubjectPredictedGrade = convertGradeToNumeric(subject.predicted_grade);
+        console.log(`🔍 [${subjectId}] Converted to numeric:`, userSubjectPredictedGrade);
         predicted = userSubjectPredictedGrade === 0 ? 'U' : userSubjectPredictedGrade;
+        console.log(`🔍 [${subjectId}] Final predicted (from DB):`, predicted);
       }
       
       // Get actual trend from last 6 exam attempts for this subject
