@@ -446,6 +446,12 @@ export function MedlySubjectsView({
                         <span className={`text-base font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
                             console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
+                            
+                            // Handle string 'U' directly - don't try to parse it
+                            if (subject.predicted === 'U' || subject.predicted === 'u') {
+                              return 'U';
+                            }
+                            
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
                             
@@ -479,6 +485,11 @@ export function MedlySubjectsView({
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: (() => {
+                            // Handle string 'U' - show 0% progress
+                            if (subject.predicted === 'U' || subject.predicted === 'u') {
+                              return '0%';
+                            }
+                            
                             let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
                             
                             // Convert percentage grades to numeric
