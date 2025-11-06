@@ -789,14 +789,28 @@ const Dashboard = () => {
           console.log(`📊 ${subject.name} (${subjectIdToMatch}): accuracy=${currentAccuracy}%, attempts=${totalAttempts}`);
           
           if (currentAccuracy > 0) {
-            // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-            if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
-            else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
-            else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
-            else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
-            else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
-            else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
-            else predictedGradeValue = 0; // U
+            // Check if A-Level subject to use correct thresholds
+            const isALevel = subject.id && subject.id.includes('alevel');
+            
+            if (isALevel) {
+              // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
+              if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
+              else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
+              else if (currentAccuracy >= 70) predictedGradeValue = 7; // B
+              else if (currentAccuracy >= 60) predictedGradeValue = 6; // C
+              else if (currentAccuracy >= 50) predictedGradeValue = 5; // D
+              else if (currentAccuracy >= 40) predictedGradeValue = 4; // E
+              else predictedGradeValue = 0; // U
+            } else {
+              // GCSE thresholds: Grade 4=30%, Grade 5=40%, etc.
+              if (currentAccuracy >= 80) predictedGradeValue = 9;
+              else if (currentAccuracy >= 70) predictedGradeValue = 8;
+              else if (currentAccuracy >= 60) predictedGradeValue = 7;
+              else if (currentAccuracy >= 50) predictedGradeValue = 6;
+              else if (currentAccuracy >= 40) predictedGradeValue = 5;
+              else if (currentAccuracy >= 30) predictedGradeValue = 4;
+              else predictedGradeValue = 0;
+            }
             
             console.log(`📊 ${subject.name} final grade: ${predictedGradeValue} (${currentAccuracy}%)`);
           }
@@ -1892,8 +1906,11 @@ const Dashboard = () => {
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
-        // Use correct A-Level grade thresholds: 30-39% = E = 4, 40-49% = D = 5, etc.
-        const practiceGradeNum = practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0;
+        // Use correct A-Level grade thresholds: 40-49% = E = 4, 50-59% = D = 5, etc.
+        const isALevel = subjectId.includes('alevel');
+        const practiceGradeNum = isALevel 
+          ? (practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : 0)
+          : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
         console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
@@ -1903,8 +1920,11 @@ const Dashboard = () => {
         predicted = examGradeNum === 0 ? 'U' : examGradeNum;
         console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
-        // Only practice data exists - use correct A-Level grade thresholds
-        const practiceGrade = practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0;
+        // Only practice data exists - use correct A-Level grade thresholds (E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%)
+        const isALevel = subjectId.includes('alevel');
+        const practiceGrade = isALevel
+          ? (practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : 0)
+          : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
         console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage);
       } else {
