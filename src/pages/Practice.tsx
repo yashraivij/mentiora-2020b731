@@ -949,7 +949,7 @@ const Practice = () => {
         
         // Use the before session grade that was captured when questions were generated
         const oldGrade = beforeSessionGrade !== null ? beforeSessionGrade : 0;
-        const isFirstSession = beforeSessionGrade === null || beforeSessionGrade === 0;
+        const isFirstSession = beforeSessionGrade === null;
         
         let newPredictedGrade: number;
         
