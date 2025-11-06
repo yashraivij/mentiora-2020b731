@@ -445,6 +445,7 @@ export function MedlySubjectsView({
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
                         <span className={`text-base font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
+                            console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
                             
@@ -455,6 +456,8 @@ export function MedlySubjectsView({
                                 numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
                               }
                             }
+                            
+                            console.log(`🎯 [${subject.id}] isALevel: ${isALevel}, numericPred: ${numericPred}`);
                             
                             if (!isALevel) {
                               const rounded = Math.round(numericPred);
@@ -467,6 +470,7 @@ export function MedlySubjectsView({
                             if (numericPred >= 5.5) return 'C';
                             if (numericPred >= 4.5) return 'D';
                             if (numericPred >= 3.5) return 'E';
+                            console.log(`🎯 [${subject.id}] Returning U because numericPred < 3.5`);
                             return 'U';
                           })()}
                         </span>
