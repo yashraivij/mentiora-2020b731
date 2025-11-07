@@ -1847,11 +1847,6 @@ const Dashboard = () => {
       
       const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       
-      // Parse target grade
-      const target = typeof subject.target_grade === 'string'
-        ? parseFloat(subject.target_grade) || 7
-        : subject.target_grade || 7;
-      
       // Helper function to convert letter grades (A-Level) to numeric
       const convertGradeToNumeric = (grade: any): number => {
         if (typeof grade === 'number') return grade;
@@ -1867,13 +1862,15 @@ const Dashboard = () => {
         }
         
         const numericGrade = parseFloat(gradeStr);
-        return isNaN(numericGrade) ? 0 : numericGrade;
+        return isNaN(numericGrade) ? 7 : numericGrade;
       };
+      
+      // Parse target grade using the same conversion function
+      const target = convertGradeToNumeric(subject.target_grade) || 7;
+      
       
       // Calculate predicted grade using same logic as PredictedGradesGraph
       let predicted: number | string = target;
-      
-      console.log(`🔍 [${subjectId}] Starting calculation - target: ${target}, subject.predicted_grade:`, subject.predicted_grade);
       
       // Get practice progress for this subject - match both exact ID and base subject name
       const baseSubjectName = subjectId.split('-')[0];
@@ -1887,8 +1884,6 @@ const Dashboard = () => {
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const practicePercentage = Math.round(totalScore / totalTopics);
       
-      console.log(`🔍 [${subjectId}] Practice data - progress count: ${subjectProgress.length}, percentage: ${practicePercentage}`);
-      
       // Get most recent predicted exam completion for this subject - also with flexible matching
       const recentExamCompletion = predictedGrades
         .filter(pg => 
@@ -1897,8 +1892,6 @@ const Dashboard = () => {
           pg.subject_id.split('-')[0] === baseSubjectName
         )
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-      
-      console.log(`🔍 [${subjectId}] Exam completion:`, recentExamCompletion?.grade, 'subject_id:', recentExamCompletion?.subject_id);
       
       // CRITICAL FIX: Check if there's actual attempt data with attempts > 0
       const hasPracticeData = subjectProgress.some(p => p.attempts > 0);
@@ -1913,12 +1906,10 @@ const Dashboard = () => {
           : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
-        console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
         // Only exam completion exists
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         predicted = examGradeNum === 0 ? 'U' : examGradeNum;
-        console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
         // Only practice data exists - use correct A-Level grade thresholds (E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%)
         const isALevel = subjectId.includes('alevel');
@@ -1926,14 +1917,10 @@ const Dashboard = () => {
           ? (practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : 0)
           : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
-        console.log(`📊 ${subjectId} predicted (practice only):`, predicted, 'from percentage:', practicePercentage);
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
-        console.log(`🔍 [${subjectId}] No exam/practice data. Using subject.predicted_grade:`, subject.predicted_grade);
         const userSubjectPredictedGrade = convertGradeToNumeric(subject.predicted_grade);
-        console.log(`🔍 [${subjectId}] Converted to numeric:`, userSubjectPredictedGrade);
         predicted = userSubjectPredictedGrade === 0 ? 'U' : userSubjectPredictedGrade;
-        console.log(`🔍 [${subjectId}] Final predicted (from DB):`, predicted);
       }
       
       // Get actual trend from last 6 exam attempts for this subject
