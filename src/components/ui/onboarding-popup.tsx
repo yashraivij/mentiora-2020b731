@@ -269,7 +269,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               user_id: user.id,
               subject_name: subject?.name || subjectWithGrade.id,
               exam_board: subject?.examBoard || 'AQA',
-              predicted_grade: 'Not Set',
+              predicted_grade: 'U',
               target_grade: subjectWithGrade.targetGrade,
               priority_level: 3
             };
