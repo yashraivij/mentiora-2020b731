@@ -1870,7 +1870,7 @@ const Dashboard = () => {
       
       
       // Calculate predicted grade using same logic as PredictedGradesGraph
-      let predicted: number | string = target;
+      let predicted: number | string = 0; // Start with 'U' for new subjects
       
       // Get practice progress for this subject - match both exact ID and base subject name
       const baseSubjectName = subjectId.split('-')[0];
