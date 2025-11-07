@@ -63,6 +63,7 @@ interface MedlySubjectsViewProps {
     name: string;
     icon?: string;
     target: number;
+    target_grade?: string; // Original letter grade for A-Level subjects
     pred?: number;
     predicted?: string | number;
     ums?: number;
@@ -513,19 +514,14 @@ export function MedlySubjectsView({
                         <span className="text-base font-bold text-[#0F172A] dark:text-white">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
-                            if (!isALevel) {
-                              const rounded = Math.round(numericTarget);
-                              return rounded === 0 ? 'U' : rounded;
+                            // Use original target_grade for A-Level subjects if available
+                            if (isALevel && subject.target_grade && typeof subject.target_grade === 'string') {
+                              return subject.target_grade;
                             }
-                            // Convert numeric grade (1-9) to A-Level letter grade
-                            if (subject.target >= 8.5) return 'A*';
-                            if (subject.target >= 7.5) return 'A';
-                            if (subject.target >= 6.5) return 'B';
-                            if (subject.target >= 5.5) return 'C';
-                            if (subject.target >= 4.5) return 'D';
-                            if (subject.target >= 2.5) return 'E';
-                            return 'U';
+                            // For GCSE or when target_grade is not available, use numeric target
+                            const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
+                            const rounded = Math.round(numericTarget);
+                            return rounded === 0 ? 'U' : rounded;
                           })()}
                         </span>
                       </div>

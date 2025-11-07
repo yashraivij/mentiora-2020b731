@@ -1965,6 +1965,7 @@ const Dashboard = () => {
           return predicted;
         })(),
         target: target,
+        target_grade: subject.target_grade, // Preserve original letter grade for display
         trend: trend,
         strong: "Various topics",
         focus: "Core concepts",
