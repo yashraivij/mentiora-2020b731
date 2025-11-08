@@ -1494,7 +1494,7 @@ const Practice = () => {
                   {!isPremium && (
                     <div className="flex justify-center pt-4">
                       <Button 
-                        onClick={() => setShowPricingModal(true)}
+                        onClick={() => navigate('/pricing')}
                         className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                       >
                         Unlock for Free
