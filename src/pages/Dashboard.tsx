@@ -1880,9 +1880,9 @@ const Dashboard = () => {
         p.subjectId.split('-')[0] === baseSubjectName
       );
       const currSubject = curriculum.find(s => s.id === subjectId);
-      const totalTopics = currSubject?.topics.length || 1;
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
-      const practicePercentage = Math.round(totalScore / totalTopics);
+      const attemptedTopics = subjectProgress.length; // Number of topics actually attempted
+      const practicePercentage = attemptedTopics > 0 ? Math.round(totalScore / attemptedTopics) : 0;
       
       // Get most recent predicted exam completion for this subject - also with flexible matching
       const recentExamCompletion = predictedGrades
