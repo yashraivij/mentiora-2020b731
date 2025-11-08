@@ -514,11 +514,24 @@ export function MedlySubjectsView({
                         <span className="text-base font-bold text-[#0F172A] dark:text-white">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            // Use original target_grade for A-Level subjects if available
-                            if (isALevel && subject.target_grade && typeof subject.target_grade === 'string') {
-                              return subject.target_grade;
+                            
+                            // For A-Level subjects, convert numeric grades to letter grades
+                            if (isALevel) {
+                              // If we have a letter grade already, use it
+                              if (subject.target_grade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(subject.target_grade)) {
+                                return subject.target_grade;
+                              }
+                              
+                              // Convert numeric to letter grade for A-Level
+                              const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
+                              const rounded = Math.round(numericTarget);
+                              const numToLetterMap: {[key: number]: string} = {
+                                9: 'A*', 8: 'A', 7: 'B', 6: 'C', 5: 'D', 4: 'E', 0: 'U'
+                              };
+                              return numToLetterMap[rounded] || 'U';
                             }
-                            // For GCSE or when target_grade is not available, use numeric target
+                            
+                            // For GCSE, use numeric grades
                             const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
                             const rounded = Math.round(numericTarget);
                             return rounded === 0 ? 'U' : rounded;
