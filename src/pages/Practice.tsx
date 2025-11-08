@@ -738,8 +738,22 @@ const Practice = () => {
 
       setFeedbackText(data.feedbackText);
       
-      // Create audio element and play feedback immediately
-      const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+      // Convert base64 to blob and create object URL for better audio support
+      const base64Data = data.audioContent;
+      const binaryString = atob(base64Data);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      
+      console.log('Audio blob created:', {
+        blobSize: audioBlob.size,
+        blobType: audioBlob.type,
+        urlCreated: !!audioUrl
+      });
+      
       const audio = new Audio(audioUrl);
       audio.volume = 1.0;
       
@@ -751,11 +765,13 @@ const Practice = () => {
       
       audio.onended = () => {
         console.log('Audio playback ended');
+        URL.revokeObjectURL(audioUrl); // Clean up
         setIsPlayingFeedback(false);
       };
       
       audio.onerror = (e) => {
         console.error('Audio playback error:', e, audio.error);
+        URL.revokeObjectURL(audioUrl); // Clean up
         toast.error("Failed to play audio feedback");
         setIsPlayingFeedback(false);
       };
@@ -774,6 +790,7 @@ const Practice = () => {
         toast.success("🎧 AI Teacher Feedback Playing!");
       }).catch(err => {
         console.error('Play promise rejected:', err);
+        URL.revokeObjectURL(audioUrl); // Clean up
         toast.error(`Failed to play audio: ${err.message}`);
         setIsPlayingFeedback(false);
       });
