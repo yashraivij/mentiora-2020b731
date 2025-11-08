@@ -1369,8 +1369,8 @@ const Practice = () => {
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
             <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
