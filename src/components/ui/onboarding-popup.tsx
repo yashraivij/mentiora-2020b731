@@ -274,6 +274,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             return {
               user_id: user.id,
+              subject_id: subjectWithGrade.id, // Keep the full subject ID (e.g., "biology-aqa-alevel")
               subject_name: subjectName,
               exam_board: subject?.examBoard || 'AQA',
               predicted_grade: 'U',
