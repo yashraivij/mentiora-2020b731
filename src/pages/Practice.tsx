@@ -327,11 +327,22 @@ const Practice = () => {
         
         // Convert base64 to audio and play (handle large data in chunks)
         try {
-          const binaryString = atob(data.audioContent);
+          // Decode base64 in chunks to avoid "string too long" errors
+          const base64 = data.audioContent;
+          const chunkSize = 1024 * 1024; // 1MB chunks
+          let binaryString = '';
+          
+          for (let i = 0; i < base64.length; i += chunkSize) {
+            const chunk = base64.substring(i, i + chunkSize);
+            binaryString += atob(chunk);
+          }
+          
           const bytes = new Uint8Array(binaryString.length);
           for (let i = 0; i < binaryString.length; i++) {
             bytes[i] = binaryString.charCodeAt(i);
           }
+          
+          console.log('Decoded audio bytes:', bytes.length);
           
           const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
           const audioUrl = URL.createObjectURL(audioBlob);
