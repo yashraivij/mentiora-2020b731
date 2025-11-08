@@ -325,32 +325,41 @@ const Practice = () => {
         console.log('Audio content received, length:', data.audioContent.length);
         setVoiceFeedbackText(data.feedbackText || '');
         
-        // Convert base64 to audio and play
-        const audioBlob = new Blob(
-          [Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0))],
-          { type: 'audio/mpeg' }
-        );
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        
-        console.log('Audio element created, attempting to play...');
-        setAudioElement(audio);
-        
-        audio.onended = () => {
-          console.log('Audio playback ended');
+        // Convert base64 to audio and play (handle large data in chunks)
+        try {
+          const binaryString = atob(data.audioContent);
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          
+          const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const audio = new Audio(audioUrl);
+          
+          console.log('Audio element created, attempting to play...');
+          setAudioElement(audio);
+          
+          audio.onended = () => {
+            console.log('Audio playback ended');
+            setIsPlayingVoice(false);
+            URL.revokeObjectURL(audioUrl);
+          };
+          
+          audio.onerror = (e) => {
+            console.error('Audio playback error:', e);
+            setIsPlayingVoice(false);
+            toast.error('Failed to play audio feedback');
+            URL.revokeObjectURL(audioUrl);
+          };
+          
+          await audio.play();
+          console.log('Audio started playing');
+        } catch (decodeError) {
+          console.error('Error decoding audio:', decodeError);
+          toast.error('Failed to decode audio data');
           setIsPlayingVoice(false);
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        audio.onerror = (e) => {
-          console.error('Audio playback error:', e);
-          setIsPlayingVoice(false);
-          toast.error('Failed to play audio feedback');
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        await audio.play();
-        console.log('Audio started playing');
+        }
       } else {
         console.error('No audio content in response');
         toast.error('No audio feedback received');
