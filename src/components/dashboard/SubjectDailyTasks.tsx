@@ -217,21 +217,28 @@ export function SubjectDailyTasks({ subjectId, userId }: SubjectDailyTasksProps)
       const questionsTaskCompleted = completedTasks?.some(ct => ct.task_id === 'complete_questions' && ct.completed);
       
       if (questionsTask && !questionsTaskCompleted) {
-        // Count questions answered today for this subject
+        // Count questions answered today for this subject only
         const { data: todayActivities } = await supabase
           .from('user_activities')
-          .select('id')
+          .select('id, metadata')
           .eq('user_id', userId)
           .eq('activity_type', 'exam_question_answered')
           .gte('created_at', `${today}T00:00:00`)
           .lte('created_at', `${today}T23:59:59`);
         
-        const questionsAnswered = todayActivities?.length || 0;
+        // Filter activities for this specific subject
+        const subjectActivities = todayActivities?.filter(
+          activity => {
+            const metadata = activity.metadata as { subject_id?: string } | null;
+            return metadata?.subject_id === subjectId;
+          }
+        ) || [];
+        const questionsAnswered = subjectActivities.length;
         
         // Extract required questions from task label (e.g., "Answer 10 questions" -> 10)
         const requiredQuestions = parseInt(questionsTask.label.match(/\d+/)?.[0] || '10');
         
-        console.log(`📝 Questions answered today: ${questionsAnswered}/${requiredQuestions}`);
+        console.log(`📝 Questions answered today for ${subjectId}: ${questionsAnswered}/${requiredQuestions}`);
         
         if (questionsAnswered >= requiredQuestions) {
           console.log('✓ Auto-completing "complete_questions" task');
