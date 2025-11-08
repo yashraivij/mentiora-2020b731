@@ -1491,8 +1491,13 @@ const Practice = () => {
                   {!isPremium && (
                     <div className="flex justify-center pt-4">
                       <Button 
-                        onClick={() => setShowPricingModal(true)}
-                        className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('Unlock for Free button clicked!');
+                          setShowPricingModal(true);
+                        }}
+                        className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                       >
                         Unlock for Free
                       </Button>
@@ -2198,10 +2203,13 @@ const Practice = () => {
         />
       )}
 
-      {/* Pricing Modal */}
+      {/* Pricing Modal - Debug: {showPricingModal ? 'OPEN' : 'CLOSED'} */}
       <PricingModal 
         open={showPricingModal} 
-        onOpenChange={setShowPricingModal}
+        onOpenChange={(open) => {
+          console.log('PricingModal onOpenChange called with:', open);
+          setShowPricingModal(open);
+        }}
       />
     </div>
   );
