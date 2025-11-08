@@ -629,6 +629,7 @@ const Dashboard = () => {
           // Handle A-level subjects
           if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
           if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+          if (normalizedName === "Chemistry (A-Level)" && board === "aqa") return "chemistry-aqa-alevel";
           if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
           if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
           
@@ -959,22 +960,14 @@ const Dashboard = () => {
 
       if (error) {
         console.error('Error loading notebook entries:', error);
-        toast({
-          title: "Error",
-          description: "Failed to load notebook entries",
-          variant: "destructive"
-        });
+        // Silently fail - notebook entries are pre-loaded but not critical
         return;
       }
 
       setEntries(data || []);
     } catch (error) {
       console.error('Error loading notebook entries:', error);
-      toast({
-        title: "Error", 
-        description: "Failed to load notebook entries",
-        variant: "destructive"
-      });
+      // Silently fail - notebook entries are pre-loaded but not critical
     } finally {
       setNotebookLoading(false);
     }
