@@ -738,26 +738,45 @@ const Practice = () => {
 
       setFeedbackText(data.feedbackText);
       
-      // Create audio element and play feedback
+      // Create audio element and play feedback immediately
       const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
       const audio = new Audio(audioUrl);
+      audio.volume = 1.0;
       
-      audio.onended = () => setIsPlayingFeedback(false);
+      console.log('Audio element created, setting up playback...');
+      
+      audio.onloadeddata = () => {
+        console.log('Audio data loaded, duration:', audio.duration);
+      };
+      
+      audio.onended = () => {
+        console.log('Audio playback ended');
+        setIsPlayingFeedback(false);
+      };
+      
       audio.onerror = (e) => {
-        console.error('Audio playback error:', e);
+        console.error('Audio playback error:', e, audio.error);
         toast.error("Failed to play audio feedback");
         setIsPlayingFeedback(false);
       };
       
+      audio.onplay = () => {
+        console.log('Audio started playing');
+      };
+      
       setFeedbackAudio(audio);
       setIsPlayingFeedback(true);
-      audio.play().catch(err => {
+      
+      // Play immediately
+      console.log('Attempting to play audio...');
+      audio.play().then(() => {
+        console.log('Audio play promise resolved successfully');
+        toast.success("🎧 AI Teacher Feedback Playing!");
+      }).catch(err => {
         console.error('Play promise rejected:', err);
-        toast.error("Failed to play audio feedback");
+        toast.error(`Failed to play audio: ${err.message}`);
         setIsPlayingFeedback(false);
       });
-      
-      toast.success("Feedback ready!");
     } catch (error) {
       console.error('Error getting feedback:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
