@@ -515,18 +515,19 @@ export function MedlySubjectsView({
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             
-                            // For A-Level subjects, convert numeric grades to letter grades
+                            // For A-Level subjects, always convert to letter grades
                             if (isALevel) {
-                              // If we have a letter grade already, use it
-                              if (subject.target_grade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(subject.target_grade)) {
-                                return subject.target_grade;
+                              // Check if target_grade is already a valid letter grade
+                              const targetGrade = subject.target_grade?.toString().trim().toUpperCase();
+                              if (targetGrade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(targetGrade)) {
+                                return targetGrade;
                               }
                               
-                              // Convert numeric to letter grade for A-Level
+                              // Convert numeric target to letter grade for A-Level
                               const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
                               const rounded = Math.round(numericTarget);
                               const numToLetterMap: {[key: number]: string} = {
-                                9: 'A*', 8: 'A', 7: 'B', 6: 'C', 5: 'D', 4: 'E', 0: 'U'
+                                9: 'A*', 8: 'A', 7: 'B', 6: 'C', 5: 'D', 4: 'E', 3: 'E', 2: 'E', 1: 'U', 0: 'U'
                               };
                               return numToLetterMap[rounded] || 'U';
                             }
