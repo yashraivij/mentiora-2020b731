@@ -659,13 +659,15 @@ const Dashboard = () => {
         
         // Merge performance data with subject data (including last_6_scores)
         const enrichedData = subjectsWithTrends.map(subject => {
-          const expectedSubjectId = getSubjectId(subject.subject_name, subject.exam_board);
+          // Use subject_id from database if available, otherwise derive it from name
+          const expectedSubjectId = subject.subject_id || getSubjectId(subject.subject_name, subject.exam_board);
           const perf = perfData?.find(p => 
             p.subject_id === expectedSubjectId && 
             p.exam_board.toLowerCase() === subject.exam_board.toLowerCase()
           );
           return {
             ...subject,
+            subject_id: expectedSubjectId, // Ensure subject_id is always set
             study_hours: perf?.study_hours || 0,
             accuracy_rate: perf?.accuracy_rate || 0,
             last_6_scores: subject.last_6_scores // Keep the last_6_scores from earlier query
@@ -680,6 +682,9 @@ const Dashboard = () => {
         
         const subjectIds = subjectsWithTrends
           .map((record) => {
+            // Use subject_id from database if available, otherwise derive it from name
+            if (record.subject_id) return record.subject_id;
+            
             const examBoard = record.exam_board.toLowerCase();
             const subjectName = record.subject_name;
             // Normalize subject name (remove ALL duplicate A-Level markers)
@@ -2061,6 +2066,7 @@ const Dashboard = () => {
           .from("user_subjects")
           .insert({
             user_id: user.id,
+            subject_id: subjectId, // Store the full subject ID (e.g., "biology-aqa-alevel")
             subject_name: subjectName,
             exam_board: examBoard,
             predicted_grade: "0", // Start at 0 since no practice data yet

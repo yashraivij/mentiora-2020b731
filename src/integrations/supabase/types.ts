@@ -1351,6 +1351,7 @@ export type Database = {
           id: string
           predicted_grade: string
           priority_level: number | null
+          subject_id: string | null
           subject_name: string
           target_grade: string | null
           updated_at: string
@@ -1362,6 +1363,7 @@ export type Database = {
           id?: string
           predicted_grade: string
           priority_level?: number | null
+          subject_id?: string | null
           subject_name: string
           target_grade?: string | null
           updated_at?: string
@@ -1373,6 +1375,7 @@ export type Database = {
           id?: string
           predicted_grade?: string
           priority_level?: number | null
+          subject_id?: string | null
           subject_name?: string
           target_grade?: string | null
           updated_at?: string
