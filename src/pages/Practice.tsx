@@ -21,6 +21,7 @@ import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
 import { PricingModal } from "@/components/ui/pricing-modal";
+import { Volume2, VolumeX, Loader2 } from "lucide-react";
 
 interface QuestionAttempt {
   questionId: string;
@@ -169,6 +170,9 @@ const Practice = () => {
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
   const [totalMPEarned, setTotalMPEarned] = useState<number>(0);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
+  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
+  const [voiceFeedbackText, setVoiceFeedbackText] = useState<string>('');
   
   const {
     notification,
@@ -259,6 +263,89 @@ const Practice = () => {
       createConfetti();
     }
   }, [sessionComplete, showConfetti]);
+
+  // Voice feedback function
+  const playVoiceFeedback = async () => {
+    if (isPlayingVoice) {
+      // Stop current audio
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }
+      setIsPlayingVoice(false);
+      return;
+    }
+
+    try {
+      setIsPlayingVoice(true);
+      
+      const correctAnswers = attempts.filter(a => {
+        const q = shuffledQuestions.find(qu => qu.id === a.questionId);
+        return q && a.score === q.marks;
+      }).length;
+      
+      const averagePercentage = (correctAnswers / shuffledQuestions.length) * 100;
+      
+      const oldPredictedGrade = existingGradeData?.grade ? parseFloat(existingGradeData.grade) : 0;
+      const newPredictedGrade = existingGradeData?.currentGrade ? parseFloat(existingGradeData.currentGrade) : 0;
+      const gradeImprovement = newPredictedGrade - oldPredictedGrade;
+      const isFirstPractice = existingGradeData?.isFirst || false;
+      
+      const { data, error } = await supabase.functions.invoke('ai-teacher-feedback', {
+        body: {
+          score: correctAnswers,
+          totalQuestions: shuffledQuestions.length,
+          predictedGrade: getDisplayGrade(newPredictedGrade, subjectId || ''),
+          subjectName: subject?.name || 'this subject',
+          gradeImprovement: gradeImprovement,
+          isFirstPractice: isFirstPractice
+        }
+      });
+
+      if (error) throw error;
+
+      if (data?.audioContent) {
+        setVoiceFeedbackText(data.feedbackText || '');
+        
+        // Convert base64 to audio and play
+        const audioBlob = new Blob(
+          [Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0))],
+          { type: 'audio/mpeg' }
+        );
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        
+        setAudioElement(audio);
+        
+        audio.onended = () => {
+          setIsPlayingVoice(false);
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        audio.onerror = () => {
+          setIsPlayingVoice(false);
+          toast.error('Failed to play audio feedback');
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        await audio.play();
+      }
+    } catch (error) {
+      console.error('Error playing voice feedback:', error);
+      toast.error('Failed to generate voice feedback');
+      setIsPlayingVoice(false);
+    }
+  };
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }
+    };
+  }, [audioElement]);
 
   // Save session state to localStorage
   const saveSessionState = () => {
@@ -1341,6 +1428,33 @@ const Practice = () => {
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
             </p>
+            
+            {/* AI Voice Feedback Button */}
+            <div className="flex justify-center pt-3">
+              <Button
+                onClick={playVoiceFeedback}
+                disabled={isPlayingVoice}
+                className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] hover:from-[hsl(195,69%,64%)] hover:to-[hsl(195,60%,70%)] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              >
+                {isPlayingVoice ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>Playing...</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="h-5 w-5" />
+                    <span>Hear AI Teacher Feedback</span>
+                  </>
+                )}
+              </Button>
+            </div>
+            
+            {voiceFeedbackText && (
+              <p className="text-sm text-muted-foreground italic max-w-2xl mx-auto pt-2">
+                "{voiceFeedbackText}"
+              </p>
+            )}
           </div>
 
           {/* Performance Summary Card - Overall Score Only */}
