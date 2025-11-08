@@ -94,7 +94,7 @@ Analyze the student's explanation and provide structured feedback following the 
       throw new Error('ELEVENLABS_API_KEY not configured');
     }
 
-    const ttsResponse = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
+    const ttsResponse = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL/stream', {
       method: 'POST',
       headers: {
         'xi-api-key': ELEVENLABS_API_KEY,
@@ -103,6 +103,7 @@ Analyze the student's explanation and provide structured feedback following the 
       body: JSON.stringify({
         text: feedbackText,
         model_id: 'eleven_turbo_v2_5',
+        output_format: 'mp3_44100_128',
         voice_settings: {
           stability: 0.5,
           similarity_boost: 0.75,
