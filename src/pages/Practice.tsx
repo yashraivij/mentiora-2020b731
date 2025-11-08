@@ -1270,17 +1270,19 @@ const Practice = () => {
     console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
-  // Helper function to convert percentage to GCSE grade
+  // Helper function to convert percentage to GCSE/A-Level grade
+  // A-Level: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
+  // GCSE: Similar scale with numeric grades 9-1
   const percentageToGrade = (percentage: number): number => {
     if (percentage >= 90) return 9.0;
-    if (percentage >= 80) return 8.0 + ((percentage - 80) / 10);
-    if (percentage >= 70) return 7.0 + ((percentage - 70) / 10);
-    if (percentage >= 60) return 6.0 + ((percentage - 60) / 10);
-    if (percentage >= 50) return 5.0 + ((percentage - 50) / 10);
-    if (percentage >= 40) return 4.0 + ((percentage - 40) / 10);
-    if (percentage >= 30) return 3.0 + ((percentage - 30) / 10);
-    if (percentage >= 20) return 2.0 + ((percentage - 20) / 10);
-    if (percentage >= 10) return 1.0 + ((percentage - 10) / 10);
+    if (percentage >= 80) return 9.0; // A* = 9
+    if (percentage >= 70) return 8.0 + ((percentage - 70) / 10); // A = 8.0-8.9
+    if (percentage >= 60) return 7.0 + ((percentage - 60) / 10); // B = 7.0-7.9
+    if (percentage >= 50) return 6.0 + ((percentage - 50) / 10); // C = 6.0-6.9
+    if (percentage >= 40) return 5.0 + ((percentage - 40) / 10); // D = 5.0-5.9
+    if (percentage >= 30) return 4.0 + ((percentage - 30) / 10); // E = 4.0-4.9
+    if (percentage >= 20) return 3.0 + ((percentage - 20) / 10);
+    if (percentage >= 10) return 2.0 + ((percentage - 10) / 10);
     return percentage / 10; // 0-9% = 0.0-0.9 (U grade)
   };
 
