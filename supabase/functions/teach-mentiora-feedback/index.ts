@@ -75,8 +75,12 @@ Analyze the student's explanation and provide structured feedback following the 
 
     if (!analysisResponse.ok) {
       const errorText = await analysisResponse.text();
-      console.error('Analysis API error:', analysisResponse.status, errorText);
-      throw new Error(`Analysis failed: ${errorText}`);
+      console.error('OpenAI Analysis API error:', {
+        status: analysisResponse.status,
+        statusText: analysisResponse.statusText,
+        error: errorText
+      });
+      throw new Error(`Analysis API failed (${analysisResponse.status}): ${errorText}`);
     }
 
     const analysisData = await analysisResponse.json();
@@ -101,8 +105,12 @@ Analyze the student's explanation and provide structured feedback following the 
 
     if (!ttsResponse.ok) {
       const errorText = await ttsResponse.text();
-      console.error('TTS API error:', ttsResponse.status, errorText);
-      throw new Error(`TTS failed: ${errorText}`);
+      console.error('OpenAI TTS API error:', {
+        status: ttsResponse.status,
+        statusText: ttsResponse.statusText,
+        error: errorText
+      });
+      throw new Error(`TTS API failed (${ttsResponse.status}): ${errorText}`);
     }
 
     // Convert audio to base64 in chunks to avoid stack overflow

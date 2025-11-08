@@ -709,6 +709,12 @@ const Practice = () => {
 
     setIsFeedbackLoading(true);
     try {
+      console.log('Calling teach-mentiora-feedback with:', {
+        transcription: transcription.substring(0, 100) + '...',
+        question: currentQuestion.question.substring(0, 100) + '...',
+        subject: subject?.name
+      });
+
       const { data, error } = await supabase.functions.invoke('teach-mentiora-feedback', {
         body: {
           transcription,
@@ -718,7 +724,17 @@ const Practice = () => {
         }
       });
 
-      if (error) throw error;
+      console.log('Edge function response:', { hasData: !!data, error });
+
+      if (error) {
+        console.error('Edge function error details:', error);
+        throw error;
+      }
+
+      if (!data || !data.feedbackText || !data.audioContent) {
+        console.error('Invalid response from edge function:', data);
+        throw new Error('Invalid response from AI teacher');
+      }
 
       setFeedbackText(data.feedbackText);
       
@@ -727,19 +743,25 @@ const Practice = () => {
       const audio = new Audio(audioUrl);
       
       audio.onended = () => setIsPlayingFeedback(false);
-      audio.onerror = () => {
+      audio.onerror = (e) => {
+        console.error('Audio playback error:', e);
         toast.error("Failed to play audio feedback");
         setIsPlayingFeedback(false);
       };
       
       setFeedbackAudio(audio);
       setIsPlayingFeedback(true);
-      audio.play();
+      audio.play().catch(err => {
+        console.error('Play promise rejected:', err);
+        toast.error("Failed to play audio feedback");
+        setIsPlayingFeedback(false);
+      });
       
       toast.success("Feedback ready!");
     } catch (error) {
       console.error('Error getting feedback:', error);
-      toast.error("Failed to get feedback. Please try again.");
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      toast.error(`Failed to get feedback: ${errorMessage}`);
     } finally {
       setIsFeedbackLoading(false);
     }
