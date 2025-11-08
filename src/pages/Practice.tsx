@@ -320,17 +320,32 @@ const Practice = () => {
         console.error('Supabase function error:', error);
         throw error;
       }
+      
+      console.log('Response data:', data);
+      console.log('Has audioContent:', !!data?.audioContent);
+      console.log('Has feedbackText:', !!data?.feedbackText);
 
       if (data?.audioContent) {
         console.log('Audio content received, length:', data.audioContent.length);
+        console.log('First 50 chars of base64:', data.audioContent.substring(0, 50));
         setVoiceFeedbackText(data.feedbackText || '');
         
         // Use data URI directly - no need to decode base64
         try {
+          console.log('Creating data URI...');
           const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
-          const audio = new Audio(audioUrl);
+          console.log('Data URI created, length:', audioUrl.length);
           
-          console.log('Audio element created with data URI, attempting to play...');
+          const audio = new Audio();
+          console.log('Audio element created');
+          
+          audio.onloadstart = () => console.log('Audio loading started');
+          audio.onloadeddata = () => console.log('Audio data loaded');
+          audio.oncanplay = () => console.log('Audio can play');
+          
+          audio.src = audioUrl;
+          
+          console.log('Audio source set, attempting to play...');
           setAudioElement(audio);
           
           audio.onended = () => {
@@ -339,15 +354,33 @@ const Practice = () => {
           };
           
           audio.onerror = (e) => {
-            console.error('Audio playback error:', e);
+            console.error('Audio element error event:', e);
+            console.error('Audio error details:', {
+              error: audio.error,
+              code: audio.error?.code,
+              message: audio.error?.message
+            });
             setIsPlayingVoice(false);
             toast.error('Failed to play audio feedback');
           };
           
-          await audio.play();
-          console.log('Audio started playing');
+          console.log('Calling audio.play()...');
+          const playPromise = audio.play();
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('Audio started playing successfully');
+              })
+              .catch(playError => {
+                console.error('Play promise rejected:', playError);
+                setIsPlayingVoice(false);
+                toast.error(`Audio playback failed: ${playError.message}`);
+              });
+          }
         } catch (decodeError) {
           console.error('Error creating audio:', decodeError);
+          console.error('Error stack:', decodeError.stack);
           toast.error('Failed to decode audio data');
           setIsPlayingVoice(false);
         }
