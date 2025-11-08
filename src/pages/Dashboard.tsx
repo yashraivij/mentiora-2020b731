@@ -3482,8 +3482,13 @@ const Dashboard = () => {
                                       // Navigate directly to practice page with subject and topic as path params
                                       navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
-                                      setActiveTab('notebook');
-                                      setSubjectDrawerOpen(false);
+                                      // Open the subject drawer with notes tab
+                                      const subject = curriculum.find(s => s.id === subjectId);
+                                      if (subject) {
+                                        setSelectedDrawerSubject(subject);
+                                        setDrawerTab('notes');
+                                        setSubjectDrawerOpen(true);
+                                      }
                                     }
                                   };
                                   
