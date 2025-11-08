@@ -16,6 +16,7 @@ interface PricingModalProps {
 }
 
 export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
+  console.log('PricingModal render - open state:', open);
   const { openPaymentLink } = useSubscription();
   const [examYear, setExamYear] = useState<"2026" | "2027">("2026");
   const [studentName, setStudentName] = useState("");
