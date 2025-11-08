@@ -575,7 +575,7 @@ const Dashboard = () => {
     try {
       const { data, error } = await supabase
         .from("user_subjects")
-        .select("subject_name, exam_board, predicted_grade, target_grade")
+        .select("subject_id, subject_name, exam_board, predicted_grade, target_grade")
         .eq("user_id", user.id)
         .order('created_at', { ascending: true });
       
