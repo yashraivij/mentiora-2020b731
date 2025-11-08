@@ -20,6 +20,7 @@ import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
+import { PricingModal } from "@/components/ui/pricing-modal";
 
 interface QuestionAttempt {
   questionId: string;
@@ -69,6 +70,7 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  const [showPricingModal, setShowPricingModal] = useState(false);
   
   // Subject colors mapping
   const subjectColors: { [key: string]: { bg: string } } = {
@@ -1489,7 +1491,7 @@ const Practice = () => {
                   {!isPremium && (
                     <div className="flex justify-center pt-4">
                       <Button 
-                        onClick={() => navigate('/pricing')}
+                        onClick={() => setShowPricingModal(true)}
                         className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         Unlock for Free
@@ -2195,6 +2197,12 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
+
+      {/* Pricing Modal */}
+      <PricingModal 
+        open={showPricingModal} 
+        onOpenChange={setShowPricingModal}
+      />
     </div>
   );
 };
