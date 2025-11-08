@@ -14,7 +14,7 @@ serve(async (req) => {
   try {
     const { score, totalQuestions, predictedGrade, subjectName, gradeImprovement, isFirstPractice } = await req.json();
 
-    if (!score === undefined || !totalQuestions || !predictedGrade || !subjectName) {
+    if (score === undefined || !totalQuestions || !predictedGrade || !subjectName) {
       throw new Error('Missing required fields');
     }
 
@@ -80,11 +80,18 @@ serve(async (req) => {
       throw new Error(error.error?.message || 'Failed to generate speech');
     }
 
-    // Convert audio buffer to base64
+    // Convert audio buffer to base64 (chunk to avoid stack overflow)
     const arrayBuffer = await response.arrayBuffer();
-    const base64Audio = btoa(
-      String.fromCharCode(...new Uint8Array(arrayBuffer))
-    );
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    // Process in chunks to avoid maximum call stack size exceeded
+    let binary = '';
+    const chunkSize = 0x8000; // 32KB chunks
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, Math.min(i + chunkSize, uint8Array.length));
+      binary += String.fromCharCode.apply(null, Array.from(chunk));
+    }
+    const base64Audio = btoa(binary);
 
     console.log('Speech generated successfully, audio length:', base64Audio.length);
 
