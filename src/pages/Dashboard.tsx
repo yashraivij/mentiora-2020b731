@@ -1899,10 +1899,10 @@ const Dashboard = () => {
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
-        // Use correct A-Level grade thresholds: 40-49% = E = 4, 50-59% = D = 5, etc.
+        // Use correct A-Level grade thresholds: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
         const isALevel = subjectId.includes('alevel');
         const practiceGradeNum = isALevel 
-          ? (practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : 0)
+          ? (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0)
           : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
@@ -1911,10 +1911,10 @@ const Dashboard = () => {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         predicted = examGradeNum === 0 ? 'U' : examGradeNum;
       } else if (hasPracticeData) {
-        // Only practice data exists - use correct A-Level grade thresholds (E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%)
+        // Only practice data exists - use correct A-Level grade thresholds: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
         const isALevel = subjectId.includes('alevel');
         const practiceGrade = isALevel
-          ? (practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : 0)
+          ? (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0)
           : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
       } else {
@@ -2803,12 +2803,13 @@ const Dashboard = () => {
                               if (!isALevel) return num.toString();
                               
                               // Convert numeric grade (1-9) to A-Level letter grade
-                              if (num >= 8.5) return 'A*';
-                              if (num >= 7.5) return 'A';
-                              if (num >= 6.5) return 'B';
-                              if (num >= 5.5) return 'C';
-                              if (num >= 4.5) return 'D';
-                              if (num >= 2.5) return 'E';
+                              // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
+                              if (num >= 9) return 'A*';
+                              if (num >= 8) return 'A';
+                              if (num >= 7) return 'B';
+                              if (num >= 6) return 'C';
+                              if (num >= 5) return 'D';
+                              if (num >= 4) return 'E';
                               return 'U';
                             };
                             
@@ -3028,12 +3029,13 @@ const Dashboard = () => {
                                   if (!isALevel) return num.toFixed(1);
                                   
                                   // Convert numeric grade (1-9) to A-Level letter grade
-                                  if (num >= 8.5) return 'A*';
-                                  if (num >= 7.5) return 'A';
-                                  if (num >= 6.5) return 'B';
-                                  if (num >= 5.5) return 'C';
-                                  if (num >= 4.5) return 'D';
-                                  if (num >= 2.5) return 'E';
+                                  // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
+                                  if (num >= 9) return 'A*';
+                                  if (num >= 8) return 'A';
+                                  if (num >= 7) return 'B';
+                                  if (num >= 6) return 'C';
+                                  if (num >= 5) return 'D';
+                                  if (num >= 4) return 'E';
                                   return 'U';
                                 };
                                 

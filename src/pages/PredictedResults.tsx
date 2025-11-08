@@ -64,12 +64,14 @@ const PredictedResults = () => {
     }
     
     // Convert 1-9 scale to A-Level letter grades
-    if (numericGrade >= 8.5) return 'A*';
-    if (numericGrade >= 7.5) return 'A';
-    if (numericGrade >= 6.5) return 'B';
-    if (numericGrade >= 5.5) return 'C';
-    if (numericGrade >= 4.5) return 'D';
-    return 'E';
+    // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
+    if (numericGrade >= 9) return 'A*';
+    if (numericGrade >= 8) return 'A';
+    if (numericGrade >= 7) return 'B';
+    if (numericGrade >= 6) return 'C';
+    if (numericGrade >= 5) return 'D';
+    if (numericGrade >= 4) return 'E';
+    return 'U';
   };
 
   // Helper function to get progress bar labels
@@ -319,12 +321,13 @@ const PredictedResults = () => {
   const getGrade = (percentage: number, subjectId?: string): string => {
     if (isALevel(subjectId)) {
       // A-Level letter grades
-      if (percentage >= 90) return "A*";
-      if (percentage >= 80) return "A";
-      if (percentage >= 70) return "B";
-      if (percentage >= 60) return "C";
-      if (percentage >= 50) return "D";
-      if (percentage >= 40) return "E";
+      // 80%+ = A*, 70%+ = A, 60%+ = B, 50%+ = C, 40%+ = D, 30%+ = E
+      if (percentage >= 80) return "A*";
+      if (percentage >= 70) return "A";
+      if (percentage >= 60) return "B";
+      if (percentage >= 50) return "C";
+      if (percentage >= 40) return "D";
+      if (percentage >= 30) return "E";
       return "U";
     } else {
       // GCSE number grades
@@ -697,7 +700,8 @@ const PredictedResults = () => {
   const gradeToNumber = (gradeStr: string): number => {
     if (gradeStr === 'U') return 0;
     
-    // Handle A-Level grades
+    // Handle A-Level grades - must match numberToGrade in PredictedGradesGraph
+    // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
     if (gradeStr === 'A*') return 9;
     if (gradeStr === 'A') return 8;
     if (gradeStr === 'B') return 7;
