@@ -1456,11 +1456,11 @@ const Practice = () => {
             </p>
             
             {/* AI Voice Feedback Button */}
-            <div className="flex justify-center pt-3">
+            <div className="flex justify-center pt-3 relative z-50">
               <Button
                 onClick={playVoiceFeedback}
                 disabled={isPlayingVoice}
-                className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] hover:from-[hsl(195,69%,64%)] hover:to-[hsl(195,60%,70%)] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] hover:from-[hsl(195,69%,64%)] hover:to-[hsl(195,60%,70%)] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 cursor-pointer relative z-50"
               >
                 {isPlayingVoice ? (
                   <>
