@@ -86,45 +86,45 @@ Analyze the student's explanation and provide structured feedback following the 
     const analysisData = await analysisResponse.json();
     const feedbackText = analysisData.choices[0].message.content;
 
-    console.log('Feedback generated, creating audio...');
+    console.log('Feedback generated, creating audio with ElevenLabs...');
 
-    // Generate voice feedback using OpenAI TTS
-    const ttsResponse = await fetch('https://api.openai.com/v1/audio/speech', {
+    // Generate voice feedback using ElevenLabs TTS
+    const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY');
+    if (!ELEVENLABS_API_KEY) {
+      throw new Error('ELEVENLABS_API_KEY not configured');
+    }
+
+    const ttsResponse = await fetch('https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'xi-api-key': ELEVENLABS_API_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'tts-1',
-        input: feedbackText,
-        voice: 'nova', // Warm, friendly voice
-        response_format: 'mp3',
+        text: feedbackText,
+        model_id: 'eleven_turbo_v2_5',
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+        }
       }),
     });
 
     if (!ttsResponse.ok) {
       const errorText = await ttsResponse.text();
-      console.error('OpenAI TTS API error:', {
+      console.error('ElevenLabs TTS API error:', {
         status: ttsResponse.status,
         statusText: ttsResponse.statusText,
         error: errorText
       });
-      throw new Error(`TTS API failed (${ttsResponse.status}): ${errorText}`);
+      throw new Error(`ElevenLabs TTS failed (${ttsResponse.status}): ${errorText}`);
     }
 
-    // Convert audio to base64 in chunks to avoid stack overflow
+    // Convert audio to base64
     const arrayBuffer = await ttsResponse.arrayBuffer();
-    const uint8Array = new Uint8Array(arrayBuffer);
-    const chunkSize = 32768;
-    let binary = '';
-    
-    for (let i = 0; i < uint8Array.length; i += chunkSize) {
-      const chunk = uint8Array.subarray(i, Math.min(i + chunkSize, uint8Array.length));
-      binary += String.fromCharCode(...chunk);
-    }
-    
-    const base64Audio = btoa(binary);
+    const base64Audio = btoa(
+      new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
 
     console.log('Audio feedback generated successfully');
 
