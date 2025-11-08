@@ -265,9 +265,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectWithGrade => {
             const subject = allSubjects.find(s => s.id === subjectWithGrade.id);
+            
+            // Check if this is an A-Level subject and append "(A-Level)" to the name
+            const isALevel = subjectWithGrade.id.toLowerCase().includes('alevel');
+            const subjectName = isALevel && subject?.name && !subject.name.includes('(A-Level)')
+              ? `${subject.name} (A-Level)`
+              : subject?.name || subjectWithGrade.id;
+            
             return {
               user_id: user.id,
-              subject_name: subject?.name || subjectWithGrade.id,
+              subject_name: subjectName,
               exam_board: subject?.examBoard || 'AQA',
               predicted_grade: 'U',
               target_grade: subjectWithGrade.targetGrade,
