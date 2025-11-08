@@ -107,6 +107,9 @@ Analyze the student's explanation and provide structured feedback following the 
       }),
     });
 
+    console.log('ElevenLabs response status:', ttsResponse.status);
+    console.log('ElevenLabs response headers:', Object.fromEntries(ttsResponse.headers.entries()));
+
     if (!ttsResponse.ok) {
       const errorText = await ttsResponse.text();
       console.error('ElevenLabs TTS API error:', {
@@ -119,9 +122,13 @@ Analyze the student's explanation and provide structured feedback following the 
 
     // Convert audio to base64
     const arrayBuffer = await ttsResponse.arrayBuffer();
+    console.log('Audio received, size:', arrayBuffer.byteLength, 'bytes');
+    
     const base64Audio = btoa(
       new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
     );
+    
+    console.log('Base64 encoded, length:', base64Audio.length);
 
     console.log('Audio feedback generated successfully');
 
