@@ -325,49 +325,29 @@ const Practice = () => {
         console.log('Audio content received, length:', data.audioContent.length);
         setVoiceFeedbackText(data.feedbackText || '');
         
-        // Convert base64 to audio and play (handle large data in chunks)
+        // Use data URI directly - no need to decode base64
         try {
-          // Decode base64 in chunks to avoid "string too long" errors
-          const base64 = data.audioContent;
-          const chunkSize = 1024 * 1024; // 1MB chunks
-          let binaryString = '';
-          
-          for (let i = 0; i < base64.length; i += chunkSize) {
-            const chunk = base64.substring(i, i + chunkSize);
-            binaryString += atob(chunk);
-          }
-          
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-          }
-          
-          console.log('Decoded audio bytes:', bytes.length);
-          
-          const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
-          const audioUrl = URL.createObjectURL(audioBlob);
+          const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
           const audio = new Audio(audioUrl);
           
-          console.log('Audio element created, attempting to play...');
+          console.log('Audio element created with data URI, attempting to play...');
           setAudioElement(audio);
           
           audio.onended = () => {
             console.log('Audio playback ended');
             setIsPlayingVoice(false);
-            URL.revokeObjectURL(audioUrl);
           };
           
           audio.onerror = (e) => {
             console.error('Audio playback error:', e);
             setIsPlayingVoice(false);
             toast.error('Failed to play audio feedback');
-            URL.revokeObjectURL(audioUrl);
           };
           
           await audio.play();
           console.log('Audio started playing');
         } catch (decodeError) {
-          console.error('Error decoding audio:', decodeError);
+          console.error('Error creating audio:', decodeError);
           toast.error('Failed to decode audio data');
           setIsPlayingVoice(false);
         }
