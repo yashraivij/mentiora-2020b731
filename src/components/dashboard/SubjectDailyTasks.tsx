@@ -93,7 +93,7 @@ const getSubjectTasks = (subjectId: string): Task[] => {
       { id: 'complete_questions', label: `Answer ${getQuestionCount(15)} questions`, mpReward: 20, completed: false },
     ],
     'biology-aqa-alevel': [
-      { id: 'score_topic', label: `Get ${percentage}%+ on biochemistry`, mpReward: 25, completed: false },
+      { id: 'score_topic', label: `Get ${percentage}%+ on Biological Molecules`, mpReward: 25, completed: false },
       { id: 'predicted_exam', label: 'Complete A-Level biology exam', mpReward: 30, completed: false },
       { id: 'complete_questions', label: `Answer ${getQuestionCount(12)} questions`, mpReward: 20, completed: false },
     ],
