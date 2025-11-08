@@ -436,7 +436,7 @@ export function MedlySubjectsView({
                   
                   {/* Subject Name */}
                   <h3 className="text-xl font-bold text-[#0F172A] dark:text-white mb-4 line-clamp-2 tracking-tight">
-                    {subject.name}
+                    {subject.name.replace(/\s*\(A-Level\)/g, '')}
                   </h3>
                   
                   {/* Dual Progress Bars */}

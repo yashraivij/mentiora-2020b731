@@ -279,7 +279,7 @@ const Dashboard = () => {
 
   // Function to get subject display name with exam board
   const getSubjectDisplayName = (subject: any) => {
-    let name = subject.name;
+    let name = subject.name.replace(/\s*\(A-Level\)/g, ''); // Remove (A-Level) suffix
     
     // For subjects that already have exam board in their name, return as-is
     if (name.includes('(AQA)') || name.includes('(Edexcel)') || name.includes('(OCR)') || name.includes('(Eduqas)')) {
