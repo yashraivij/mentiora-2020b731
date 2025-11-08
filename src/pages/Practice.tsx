@@ -21,7 +21,6 @@ import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
 import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
 import { PricingModal } from "@/components/ui/pricing-modal";
-import { Volume2, VolumeX, Loader2 } from "lucide-react";
 
 interface QuestionAttempt {
   questionId: string;
@@ -170,9 +169,6 @@ const Practice = () => {
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
   const [totalMPEarned, setTotalMPEarned] = useState<number>(0);
   const chatScrollRef = useRef<HTMLDivElement>(null);
-  const [isPlayingVoice, setIsPlayingVoice] = useState(false);
-  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
-  const [voiceFeedbackText, setVoiceFeedbackText] = useState<string>('');
   
   const {
     notification,
@@ -263,148 +259,6 @@ const Practice = () => {
       createConfetti();
     }
   }, [sessionComplete, showConfetti]);
-
-  // Voice feedback function
-  const playVoiceFeedback = async () => {
-    console.log('🎙️ Voice feedback button clicked');
-    
-    if (isPlayingVoice) {
-      console.log('Already playing voice, stopping...');
-      // Stop current audio
-      if (audioElement) {
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      }
-      setIsPlayingVoice(false);
-      return;
-    }
-
-    try {
-      console.log('Starting voice feedback generation...');
-      setIsPlayingVoice(true);
-      
-      const correctAnswers = attempts.filter(a => {
-        const q = shuffledQuestions.find(qu => qu.id === a.questionId);
-        return q && a.score === q.marks;
-      }).length;
-      
-      console.log('Calculated correctAnswers:', correctAnswers, 'out of', shuffledQuestions.length);
-      
-      const averagePercentage = (correctAnswers / shuffledQuestions.length) * 100;
-      
-      const oldPredictedGrade = existingGradeData?.grade ? parseFloat(existingGradeData.grade) : 0;
-      const newPredictedGrade = existingGradeData?.currentGrade ? parseFloat(existingGradeData.currentGrade) : 0;
-      const gradeImprovement = newPredictedGrade - oldPredictedGrade;
-      const isFirstPractice = existingGradeData?.isFirst || false;
-      
-      console.log('Grade data:', { oldPredictedGrade, newPredictedGrade, gradeImprovement, isFirstPractice });
-      
-      const requestBody = {
-        score: correctAnswers,
-        totalQuestions: shuffledQuestions.length,
-        predictedGrade: getDisplayGrade(newPredictedGrade, subjectId || ''),
-        subjectName: subject?.name || 'this subject',
-        gradeImprovement: gradeImprovement,
-        isFirstPractice: isFirstPractice
-      };
-      
-      console.log('Calling ai-teacher-feedback with:', requestBody);
-      
-      const { data, error } = await supabase.functions.invoke('ai-teacher-feedback', {
-        body: requestBody
-      });
-
-      console.log('Response received:', { data, error });
-
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw error;
-      }
-      
-      console.log('Response data:', data);
-      console.log('Has audioContent:', !!data?.audioContent);
-      console.log('Has feedbackText:', !!data?.feedbackText);
-
-      if (data?.audioContent) {
-        console.log('Audio content received, length:', data.audioContent.length);
-        console.log('First 50 chars of base64:', data.audioContent.substring(0, 50));
-        setVoiceFeedbackText(data.feedbackText || '');
-        
-        // Use data URI directly - no need to decode base64
-        try {
-          console.log('Creating data URI...');
-          const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
-          console.log('Data URI created, length:', audioUrl.length);
-          
-          const audio = new Audio();
-          console.log('Audio element created');
-          
-          audio.onloadstart = () => console.log('Audio loading started');
-          audio.onloadeddata = () => console.log('Audio data loaded');
-          audio.oncanplay = () => console.log('Audio can play');
-          
-          audio.src = audioUrl;
-          
-          console.log('Audio source set, attempting to play...');
-          setAudioElement(audio);
-          
-          audio.onended = () => {
-            console.log('Audio playback ended');
-            setIsPlayingVoice(false);
-          };
-          
-          audio.onerror = (e) => {
-            console.error('Audio element error event:', e);
-            console.error('Audio error details:', {
-              error: audio.error,
-              code: audio.error?.code,
-              message: audio.error?.message
-            });
-            setIsPlayingVoice(false);
-            toast.error('Failed to play audio feedback');
-          };
-          
-          console.log('Calling audio.play()...');
-          const playPromise = audio.play();
-          
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                console.log('Audio started playing successfully');
-              })
-              .catch(playError => {
-                console.error('Play promise rejected:', playError);
-                setIsPlayingVoice(false);
-                toast.error(`Audio playback failed: ${playError.message}`);
-              });
-          }
-        } catch (decodeError) {
-          console.error('Error creating audio:', decodeError);
-          console.error('Error stack:', decodeError.stack);
-          toast.error('Failed to decode audio data');
-          setIsPlayingVoice(false);
-        }
-      } else {
-        console.error('No audio content in response');
-        toast.error('No audio feedback received');
-        setIsPlayingVoice(false);
-      }
-    } catch (error) {
-      console.error('Error playing voice feedback:', error);
-      toast.error('Failed to generate voice feedback');
-      setIsPlayingVoice(false);
-    }
-  };
-
-  // Cleanup audio on unmount
-  useEffect(() => {
-    return () => {
-      if (audioElement) {
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      }
-    };
-  }, [audioElement]);
 
   // Save session state to localStorage
   const saveSessionState = () => {
@@ -1487,33 +1341,6 @@ const Practice = () => {
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
             </p>
-            
-            {/* AI Voice Feedback Button */}
-            <div className="flex justify-center pt-3 relative z-50">
-              <Button
-                onClick={playVoiceFeedback}
-                disabled={isPlayingVoice}
-                className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,60%,60%)] hover:from-[hsl(195,69%,64%)] hover:to-[hsl(195,60%,70%)] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 cursor-pointer relative z-50"
-              >
-                {isPlayingVoice ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    <span>Playing...</span>
-                  </>
-                ) : (
-                  <>
-                    <Volume2 className="h-5 w-5" />
-                    <span>Hear AI Teacher Feedback</span>
-                  </>
-                )}
-              </Button>
-            </div>
-            
-            {voiceFeedbackText && (
-              <p className="text-sm text-muted-foreground italic max-w-2xl mx-auto pt-2">
-                "{voiceFeedbackText}"
-              </p>
-            )}
           </div>
 
           {/* Performance Summary Card - Overall Score Only */}
