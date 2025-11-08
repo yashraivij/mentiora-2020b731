@@ -266,7 +266,10 @@ const Practice = () => {
 
   // Voice feedback function
   const playVoiceFeedback = async () => {
+    console.log('🎙️ Voice feedback button clicked');
+    
     if (isPlayingVoice) {
+      console.log('Already playing voice, stopping...');
       // Stop current audio
       if (audioElement) {
         audioElement.pause();
@@ -277,12 +280,15 @@ const Practice = () => {
     }
 
     try {
+      console.log('Starting voice feedback generation...');
       setIsPlayingVoice(true);
       
       const correctAnswers = attempts.filter(a => {
         const q = shuffledQuestions.find(qu => qu.id === a.questionId);
         return q && a.score === q.marks;
       }).length;
+      
+      console.log('Calculated correctAnswers:', correctAnswers, 'out of', shuffledQuestions.length);
       
       const averagePercentage = (correctAnswers / shuffledQuestions.length) * 100;
       
@@ -291,20 +297,32 @@ const Practice = () => {
       const gradeImprovement = newPredictedGrade - oldPredictedGrade;
       const isFirstPractice = existingGradeData?.isFirst || false;
       
+      console.log('Grade data:', { oldPredictedGrade, newPredictedGrade, gradeImprovement, isFirstPractice });
+      
+      const requestBody = {
+        score: correctAnswers,
+        totalQuestions: shuffledQuestions.length,
+        predictedGrade: getDisplayGrade(newPredictedGrade, subjectId || ''),
+        subjectName: subject?.name || 'this subject',
+        gradeImprovement: gradeImprovement,
+        isFirstPractice: isFirstPractice
+      };
+      
+      console.log('Calling ai-teacher-feedback with:', requestBody);
+      
       const { data, error } = await supabase.functions.invoke('ai-teacher-feedback', {
-        body: {
-          score: correctAnswers,
-          totalQuestions: shuffledQuestions.length,
-          predictedGrade: getDisplayGrade(newPredictedGrade, subjectId || ''),
-          subjectName: subject?.name || 'this subject',
-          gradeImprovement: gradeImprovement,
-          isFirstPractice: isFirstPractice
-        }
+        body: requestBody
       });
 
-      if (error) throw error;
+      console.log('Response received:', { data, error });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
 
       if (data?.audioContent) {
+        console.log('Audio content received, length:', data.audioContent.length);
         setVoiceFeedbackText(data.feedbackText || '');
         
         // Convert base64 to audio and play
@@ -315,20 +333,28 @@ const Practice = () => {
         const audioUrl = URL.createObjectURL(audioBlob);
         const audio = new Audio(audioUrl);
         
+        console.log('Audio element created, attempting to play...');
         setAudioElement(audio);
         
         audio.onended = () => {
+          console.log('Audio playback ended');
           setIsPlayingVoice(false);
           URL.revokeObjectURL(audioUrl);
         };
         
-        audio.onerror = () => {
+        audio.onerror = (e) => {
+          console.error('Audio playback error:', e);
           setIsPlayingVoice(false);
           toast.error('Failed to play audio feedback');
           URL.revokeObjectURL(audioUrl);
         };
         
         await audio.play();
+        console.log('Audio started playing');
+      } else {
+        console.error('No audio content in response');
+        toast.error('No audio feedback received');
+        setIsPlayingVoice(false);
       }
     } catch (error) {
       console.error('Error playing voice feedback:', error);
