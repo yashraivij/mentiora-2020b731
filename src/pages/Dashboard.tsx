@@ -1815,6 +1815,7 @@ const Dashboard = () => {
         
         // Handle A-level subjects
         if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (normalizedName === "Chemistry (A-Level)" && board === "aqa") return "chemistry-aqa-alevel";
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
