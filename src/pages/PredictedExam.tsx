@@ -7294,6 +7294,96 @@ Write a story about a moment of fear.
               </div>
             </div>
           
+          {/* Addictive Progress Bar */}
+          <div className="mt-6 px-2">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-slate-900">Progress</span>
+                <div className="px-2 py-0.5 rounded-full bg-[#3BAFDA]/10 text-xs font-bold text-[#3BAFDA] animate-pulse">
+                  {answers.length}/{examQuestions.length}
+                </div>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-[#3BAFDA] to-[#2E9DBF] bg-clip-text text-transparent">
+                {Math.round((answers.length / examQuestions.length) * 100)}%
+              </span>
+            </div>
+            
+            {/* Animated Progress Bar */}
+            <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+              {/* Background shimmer effect */}
+              <div 
+                className="absolute inset-0 opacity-30"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(59, 175, 218, 0.3) 50%, transparent 100%)',
+                  backgroundSize: '200% 100%',
+                  animation: 'shimmer 2s infinite linear'
+                }}
+              />
+              
+              {/* Main progress fill with gradient */}
+              <div 
+                className="h-full relative transition-all duration-700 ease-out"
+                style={{ 
+                  width: `${(answers.length / examQuestions.length) * 100}%`,
+                  background: 'linear-gradient(90deg, #3BAFDA, #2E9DBF, #3BAFDA)',
+                  backgroundSize: '200% 100%',
+                  animation: 'shimmer 3s infinite linear',
+                  boxShadow: '0 0 20px rgba(59, 175, 218, 0.6)'
+                }}
+              >
+                {/* Shine effect overlay */}
+                <div 
+                  className="absolute inset-0 opacity-60"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%)',
+                    animation: 'slide 2s infinite ease-in-out'
+                  }}
+                />
+              </div>
+              
+              {/* Milestone dots */}
+              {[25, 50, 75].map((milestone) => {
+                const currentProgress = (answers.length / examQuestions.length) * 100;
+                const isPassed = currentProgress >= milestone;
+                return (
+                  <div
+                    key={milestone}
+                    className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-500 z-10 ${
+                      isPassed ? 'bg-white scale-150 shadow-lg' : 'bg-gray-300 scale-100'
+                    }`}
+                    style={{ 
+                      left: `${milestone}%`,
+                      boxShadow: isPassed ? '0 0 12px rgba(59, 175, 218, 0.8)' : 'none',
+                      animation: isPassed ? 'pulse 2s infinite' : 'none'
+                    }}
+                  />
+                );
+              })}
+            </div>
+            
+            {/* Motivational message */}
+            <div className="mt-2 text-center">
+              {answers.length === 0 && (
+                <p className="text-xs text-gray-500">Start answering to see your progress!</p>
+              )}
+              {answers.length > 0 && answers.length < examQuestions.length * 0.25 && (
+                <p className="text-xs text-[#3BAFDA] font-medium animate-pulse">Great start! Keep going! 🚀</p>
+              )}
+              {answers.length >= examQuestions.length * 0.25 && answers.length < examQuestions.length * 0.5 && (
+                <p className="text-xs text-[#3BAFDA] font-medium animate-pulse">You're building momentum! 💪</p>
+              )}
+              {answers.length >= examQuestions.length * 0.5 && answers.length < examQuestions.length * 0.75 && (
+                <p className="text-xs text-[#3BAFDA] font-medium animate-pulse">Halfway there! You're crushing it! 🔥</p>
+              )}
+              {answers.length >= examQuestions.length * 0.75 && answers.length < examQuestions.length && (
+                <p className="text-xs text-[#3BAFDA] font-medium animate-pulse">Almost done! Finish strong! ⭐</p>
+              )}
+              {answers.length === examQuestions.length && (
+                <p className="text-xs text-emerald-600 font-semibold animate-pulse">All questions answered! Ready to submit! 🎉</p>
+              )}
+            </div>
+          </div>
+
           {/* Timer and progress row */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-5 pt-5 border-t border-gray-200">
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-destructive/10 dark:bg-destructive/5 border-destructive/50 dark:border-destructive/30' : 'bg-card border-border'}`}>
