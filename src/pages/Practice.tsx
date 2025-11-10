@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, Bot } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -1980,34 +1980,29 @@ const Practice = () => {
                   
                   {currentAttempt && (
                     <>
-                      {/* Teacher feedback bubble */}
-                      {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="flex gap-3 justify-start mt-6">
-                          <div className="flex gap-2 max-w-[85%]">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                              <Bot className="h-4 w-4 text-white" />
+                      {/* Model answer bubble */}
+                      {currentAttempt.feedback?.modelAnswer && (
+                        <div className="flex justify-start mt-6">
+                          <div className="max-w-[85%] space-y-2">
+                            <div className="flex items-center gap-2 px-1">
+                              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
                             </div>
-                            <div className="px-4 py-3 rounded-xl text-sm bg-muted/50 border border-border/50">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
-                              {currentAttempt.feedback?.modelAnswer && (
-                                <p className="mt-3 pt-3 border-t border-border/30 text-sm text-muted-foreground">
-                                  Here's how I would write the answer:
-                                </p>
-                              )}
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                             </div>
                           </div>
                         </div>
                       )}
                       
-                      {/* Model answer bubble */}
-                      {currentAttempt.feedback?.modelAnswer && (
-                        <div className="flex gap-3 justify-start mt-2">
-                          <div className="flex gap-2 max-w-[85%]">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                              <Bot className="h-4 w-4 text-white" />
+                      {/* Teacher feedback bubble */}
+                      {currentAttempt.feedback?.whyYoursDidnt && (
+                        <div className="flex justify-start">
+                          <div className="max-w-[85%] space-y-2">
+                            <div className="flex items-center gap-2 px-1">
+                              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
                             </div>
-                            <div className="px-4 py-3 rounded-xl text-sm bg-muted/50 border border-border/50">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
                             </div>
                           </div>
                         </div>
