@@ -2083,164 +2083,115 @@ const Practice = () => {
               </div>
             </div>
 
-            {/* Interactive Learning Journey Progress Bar */}
-            <div className="mt-6 w-full">
-              {/* Progress percentage */}
-              <div className="flex items-center justify-between mb-3 px-1">
-                <span className="text-sm font-semibold text-foreground">Your Learning Journey</span>
-                <div className="flex items-center gap-2">
-                  <div className="px-2.5 py-1 rounded-full bg-primary/10 text-xs font-bold text-primary">
-                    {attempts.length}/{shuffledQuestions.length}
-                  </div>
-                  <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                    {Math.round((attempts.length / shuffledQuestions.length) * 100)}%
-                  </span>
-                </div>
-              </div>
+            {/* Learning Journey Progress Bar */}
+            <div className="mt-4 mb-2 w-full">
+              {(() => {
+                const stages = [
+                  { label: 'Warm-Up', threshold: 20 },
+                  { label: 'Understand', threshold: 40 },
+                  { label: 'Test', threshold: 60 },
+                  { label: 'Fix', threshold: 80 },
+                  { label: 'Master', threshold: 100 }
+                ];
+                
+                const currentProgress = (attempts.length / shuffledQuestions.length) * 100;
+                const currentStageIndex = stages.findIndex(stage => currentProgress < stage.threshold);
+                const activeStage = currentStageIndex === -1 ? stages.length - 1 : currentStageIndex;
+                
+                return (
+                  <div className="space-y-2">
+                    {/* Stage labels above bar */}
+                    <div className="flex justify-between px-1">
+                      {stages.map((stage, index) => {
+                        const stagePosition = (index * 20) + 10; // Center of each 20% segment
+                        const isActive = index === activeStage;
+                        const isPassed = currentProgress > stage.threshold - 10;
+                        
+                        return (
+                          <div
+                            key={stage.label}
+                            className="flex-1 text-center relative"
+                            style={{ marginLeft: index === 0 ? '-10%' : '0', marginRight: index === stages.length - 1 ? '-10%' : '0' }}
+                          >
+                            <span className={`text-[10px] font-semibold transition-all duration-300 ${
+                              isActive
+                                ? 'text-primary'
+                                : isPassed
+                                ? 'text-primary/60'
+                                : 'text-muted-foreground/60'
+                            }`}>
+                              {stage.label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
 
-              {/* 5-Stage Segmented Progress Bar */}
-              <div className="relative w-full">
-                {(() => {
-                  const stages = [
-                    { label: 'Warm-Up', threshold: 20 },
-                    { label: 'Understand the Basics', threshold: 40 },
-                    { label: 'Test Yourself', threshold: 60 },
-                    { label: 'Fix Mistakes', threshold: 80 },
-                    { label: 'Master the Topic', threshold: 100 }
-                  ];
-                  
-                  const currentProgress = (attempts.length / shuffledQuestions.length) * 100;
-                  const currentStageIndex = stages.findIndex(stage => currentProgress < stage.threshold);
-                  const activeStage = currentStageIndex === -1 ? stages.length - 1 : currentStageIndex;
-                  
-                  return (
-                    <>
-                      {/* Progress segments */}
-                      <div className="flex gap-2 mb-3">
-                        {stages.map((stage, index) => {
-                          const isCompleted = currentProgress >= stage.threshold;
-                          const isActive = index === activeStage;
-                          const isFinal = index === stages.length - 1;
-                          const segmentProgress = Math.min(
-                            Math.max(
-                              ((currentProgress - (index * 20)) / 20) * 100,
-                              0
-                            ),
-                            100
-                          );
-                          
-                          return (
-                            <div
-                              key={stage.label}
-                              className="flex-1 relative"
-                            >
-                              {/* Segment container */}
-                              <div className={`h-2.5 rounded-full overflow-hidden transition-all duration-500 ${
-                                isActive 
-                                  ? 'ring-2 ring-primary/50 ring-offset-2 ring-offset-background' 
-                                  : ''
-                              }`}>
-                                {/* Background */}
-                                <div className="absolute inset-0 bg-secondary/50" />
-                                
-                                {/* Progress fill */}
-                                <div
-                                  className={`h-full transition-all duration-700 ease-out relative ${
-                                    isFinal && isCompleted
-                                      ? 'animate-pulse'
-                                      : ''
-                                  }`}
-                                  style={{
-                                    width: `${segmentProgress}%`,
-                                    background: isCompleted 
-                                      ? 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.85), hsl(var(--primary)))'
-                                      : isActive
-                                      ? 'linear-gradient(90deg, hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))'
-                                      : 'hsl(var(--muted-foreground) / 0.2)',
-                                    boxShadow: isActive || isCompleted
-                                      ? '0 0 16px hsl(var(--primary) / 0.5)'
-                                      : 'none'
-                                  }}
-                                >
-                                  {/* Shine effect for active/completed */}
-                                  {(isActive || isCompleted) && (
-                                    <div
-                                      className="absolute inset-0 opacity-40"
-                                      style={{
-                                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)',
-                                        backgroundSize: '200% 100%',
-                                        animation: 'shimmer 2s infinite linear'
-                                      }}
-                                    />
-                                  )}
-                                  
-                                  {/* Extra glow for final stage */}
-                                  {isFinal && isCompleted && (
-                                    <div
-                                      className="absolute inset-0"
-                                      style={{
-                                        background: 'radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, transparent 70%)',
-                                        animation: 'pulse 2s infinite'
-                                      }}
-                                    />
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      
-                      {/* Stage labels */}
-                      <div className="flex gap-2">
-                        {stages.map((stage, index) => {
-                          const isCompleted = currentProgress >= stage.threshold;
-                          const isActive = index === activeStage;
-                          
-                          return (
-                            <div
-                              key={`label-${stage.label}`}
-                              className="flex-1 text-center"
-                            >
-                              <span className={`text-[10px] font-medium transition-all duration-300 ${
-                                isActive
-                                  ? 'text-primary font-bold'
-                                  : isCompleted
-                                  ? 'text-primary/70'
-                                  : 'text-muted-foreground'
-                              }`}>
-                                {stage.label}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      
-                      {/* Encouraging message based on stage */}
-                      <div className="mt-3 text-center">
-                        {activeStage === 0 && attempts.length > 0 && (
-                          <p className="text-xs text-primary font-medium">Great start! Let's ease into it 🌟</p>
-                        )}
-                        {activeStage === 1 && (
-                          <p className="text-xs text-primary font-medium">You're getting the hang of it! 💡</p>
-                        )}
-                        {activeStage === 2 && (
-                          <p className="text-xs text-primary font-medium">Time to challenge yourself! 🚀</p>
-                        )}
-                        {activeStage === 3 && (
-                          <p className="text-xs text-primary font-medium">Learn from mistakes - you're improving! 🔥</p>
-                        )}
-                        {activeStage === 4 && currentProgress < 100 && (
-                          <p className="text-xs text-primary font-medium">Almost there - become a master! ⭐</p>
-                        )}
+                    {/* Single continuous progress bar */}
+                    <div className="relative h-3 bg-secondary/40 rounded-full overflow-hidden shadow-inner">
+                      {/* Progress fill */}
+                      <div
+                        className="h-full relative transition-all duration-700 ease-out"
+                        style={{
+                          width: `${currentProgress}%`,
+                          background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.9))',
+                          boxShadow: currentProgress === 100 
+                            ? '0 0 20px hsl(var(--primary) / 0.8)' 
+                            : '0 0 12px hsl(var(--primary) / 0.4)'
+                        }}
+                      >
+                        {/* Shimmer effect */}
+                        <div
+                          className="absolute inset-0 opacity-30"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)',
+                            backgroundSize: '200% 100%',
+                            animation: 'shimmer 2s infinite linear'
+                          }}
+                        />
+                        
+                        {/* Pulse effect when complete */}
                         {currentProgress === 100 && (
-                          <p className="text-xs text-emerald-600 font-semibold animate-pulse">Journey complete! You've mastered it! 🎉</p>
+                          <div
+                            className="absolute inset-0 animate-pulse"
+                            style={{
+                              background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.4) 0%, transparent 70%)'
+                            }}
+                          />
                         )}
                       </div>
-                    </>
-                  );
-                })()}
-              </div>
+                      
+                      {/* Stage milestone markers */}
+                      {stages.map((stage, index) => {
+                        const markerPosition = index * 20;
+                        const isPassed = currentProgress >= markerPosition;
+                        
+                        if (index === 0) return null; // Skip first marker at 0%
+                        
+                        return (
+                          <div
+                            key={`marker-${index}`}
+                            className={`absolute top-0 bottom-0 w-0.5 transition-all duration-500 ${
+                              isPassed ? 'bg-background/80' : 'bg-border/30'
+                            }`}
+                            style={{ left: `${markerPosition}%` }}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    {/* Progress info and message */}
+                    <div className="flex items-center justify-between px-1">
+                      <span className="text-xs text-muted-foreground font-medium">
+                        {attempts.length}/{shuffledQuestions.length} questions
+                      </span>
+                      <span className="text-sm font-bold text-primary">
+                        {Math.round(currentProgress)}%
+                      </span>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>
