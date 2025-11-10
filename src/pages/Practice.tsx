@@ -160,10 +160,6 @@ const Practice = () => {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
-  const [fillGapAnswer, setFillGapAnswer] = useState("");
-  const [multipleChoiceAnswer, setMultipleChoiceAnswer] = useState<string | null>(null);
-  const [trueFalseAnswer, setTrueFalseAnswer] = useState<boolean | null>(null);
-  const [showInteractiveResult, setShowInteractiveResult] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
@@ -629,12 +625,6 @@ const Practice = () => {
     setChatMessages(prev => [...prev, userMessage]);
     setChatMessage("");
     setIsChatLoading(true);
-    
-    // Reset interactive states when sending new message
-    setShowInteractiveResult(false);
-    setFillGapAnswer("");
-    setMultipleChoiceAnswer(null);
-    setTrueFalseAnswer(null);
 
     try {
       // If this is the first message, use 'intro' stage, otherwise determine stage
@@ -683,80 +673,6 @@ const Practice = () => {
     } finally {
       setIsChatLoading(false);
     }
-  };
-
-  // Parse fill-gap format from AI response
-  const parseFillGapMessage = (content: string) => {
-    if (!content.includes('[FILL-GAP]')) return null;
-    
-    const parts = content.split('[FILL-GAP]');
-    const intro = parts[0].trim();
-    const fillGapSection = parts[1];
-    
-    const promptMatch = fillGapSection.match(/Prompt:\s*(.+?)(?=\n)/s);
-    const statementMatch = fillGapSection.match(/Statement:\s*(.+?)(?=\n(?:Answer|Answers):)/s);
-    const answerMatch = fillGapSection.match(/Answers?:\s*(.+?)$/s);
-    
-    if (!promptMatch || !statementMatch || !answerMatch) return null;
-    
-    return {
-      intro,
-      prompt: promptMatch[1].trim(),
-      statement: statementMatch[1].trim(),
-      correctAnswers: answerMatch[1].trim().split('|').map(a => a.trim())
-    };
-  };
-
-  // Parse multiple choice format
-  const parseMultipleChoiceMessage = (content: string) => {
-    if (!content.includes('[MULTIPLE-CHOICE]')) return null;
-    
-    const parts = content.split('[MULTIPLE-CHOICE]');
-    const intro = parts[0].trim();
-    const mcSection = parts[1];
-    
-    const questionMatch = mcSection.match(/Question:\s*(.+?)(?=\nA\))/s);
-    const optionAMatch = mcSection.match(/A\)\s*(.+?)(?=\nB\))/s);
-    const optionBMatch = mcSection.match(/B\)\s*(.+?)(?=\nC\))/s);
-    const optionCMatch = mcSection.match(/C\)\s*(.+?)(?=\nD\))/s);
-    const optionDMatch = mcSection.match(/D\)\s*(.+?)(?=\nCorrect:)/s);
-    const correctMatch = mcSection.match(/Correct:\s*([A-D])/);
-    
-    if (!questionMatch || !optionAMatch || !optionBMatch || !optionCMatch || !optionDMatch || !correctMatch) return null;
-    
-    return {
-      intro,
-      question: questionMatch[1].trim(),
-      options: {
-        A: optionAMatch[1].trim(),
-        B: optionBMatch[1].trim(),
-        C: optionCMatch[1].trim(),
-        D: optionDMatch[1].trim()
-      },
-      correct: correctMatch[1] as 'A' | 'B' | 'C' | 'D'
-    };
-  };
-
-  // Parse true/false format
-  const parseTrueFalseMessage = (content: string) => {
-    if (!content.includes('[TRUE-FALSE]')) return null;
-    
-    const parts = content.split('[TRUE-FALSE]');
-    const intro = parts[0].trim();
-    const tfSection = parts[1];
-    
-    const statementMatch = tfSection.match(/Statement:\s*(.+?)(?=\nCorrect:)/s);
-    const correctMatch = tfSection.match(/Correct:\s*(true|false)/i);
-    const explanationMatch = tfSection.match(/Explanation:\s*(.+?)$/s);
-    
-    if (!statementMatch || !correctMatch) return null;
-    
-    return {
-      intro,
-      statement: statementMatch[1].trim(),
-      correct: correctMatch[1].toLowerCase() === 'true',
-      explanation: explanationMatch ? explanationMatch[1].trim() : ''
-    };
   };
 
   const finishSession = async () => {
@@ -2122,193 +2038,17 @@ const Practice = () => {
             <div ref={chatScrollRef} className="flex-1 overflow-auto mb-4 space-y-3">
               {chatMessages.length > 0 ? (
                 <>
-                  {chatMessages.map((msg) => {
-                    // Check if this is an interactive question
-                    const fillGapData = msg.role === 'assistant' ? parseFillGapMessage(msg.content) : null;
-                    const mcData = msg.role === 'assistant' ? parseMultipleChoiceMessage(msg.content) : null;
-                    const tfData = msg.role === 'assistant' ? parseTrueFalseMessage(msg.content) : null;
-                    
-                    return (
-                      <div key={msg.id}>
-                        {/* Regular message bubble */}
-                        {msg.role === 'user' ? (
-                          <div className="flex justify-end">
-                            <div className="rounded-[20px] p-4 text-sm font-medium max-w-[80%] bg-primary text-primary-foreground">
-                              {msg.content}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex justify-start">
-                            <div className="rounded-[20px] p-4 text-sm font-medium max-w-[80%] bg-muted text-foreground">
-                              {/* Show intro text if available */}
-                              {fillGapData?.intro || mcData?.intro || tfData?.intro || msg.content}
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* Fill-in-the-gap interactive UI */}
-                        {fillGapData && (
-                          <div className="mt-3 ml-0 space-y-3">
-                            <div className="bg-background/80 border border-border rounded-xl p-4 max-w-[90%]">
-                              <p className="text-xs font-medium text-muted-foreground mb-3">{fillGapData.prompt}</p>
-                              <p className="text-sm text-foreground mb-3 leading-relaxed">
-                                {fillGapData.statement}
-                              </p>
-                              <div className="space-y-2">
-                                {fillGapData.correctAnswers.map((_, index) => (
-                                  <Input
-                                    key={index}
-                                    value={fillGapAnswer.split('|')[index] || ''}
-                                    onChange={(e) => {
-                                      const answers = fillGapAnswer.split('|');
-                                      answers[index] = e.target.value;
-                                      setFillGapAnswer(answers.join('|'));
-                                    }}
-                                    placeholder={`Answer ${fillGapData.correctAnswers.length > 1 ? index + 1 : ''}`}
-                                    disabled={showInteractiveResult}
-                                    className="text-sm"
-                                  />
-                                ))}
-                              </div>
-                              
-                              {!showInteractiveResult ? (
-                                <Button
-                                  onClick={() => {
-                                    setShowInteractiveResult(true);
-                                    const userAnswers = fillGapAnswer.split('|').map(a => a.trim().toLowerCase());
-                                    const correctAnswers = fillGapData.correctAnswers.map(a => a.toLowerCase());
-                                    const allCorrect = userAnswers.every((ans, idx) => ans === correctAnswers[idx]);
-                                    
-                                    if (allCorrect) {
-                                      sendChatMessage(`I got it! ${fillGapData.correctAnswers.join(' and ')}`);
-                                    } else {
-                                      sendChatMessage(`I think it's ${fillGapAnswer.split('|').join(' and ')}`);
-                                    }
-                                  }}
-                                  disabled={!fillGapAnswer.trim()}
-                                  className="mt-3 w-full"
-                                  size="sm"
-                                >
-                                  Check Answer
-                                </Button>
-                              ) : (
-                                <div className="mt-3 space-y-2">
-                                  {fillGapData.correctAnswers.map((correct, index) => {
-                                    const userAns = (fillGapAnswer.split('|')[index] || '').trim().toLowerCase();
-                                    const isCorrect = userAns === correct.toLowerCase();
-                                    return (
-                                      <div key={index} className={`text-xs p-2 rounded ${isCorrect ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400'}`}>
-                                        {isCorrect ? '✓' : '✗'} Correct answer: <span className="font-semibold">{correct}</span>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* Multiple choice interactive UI */}
-                        {mcData && (
-                          <div className="mt-3 ml-0 space-y-3">
-                            <div className="bg-background/80 border border-border rounded-xl p-4 max-w-[90%]">
-                              <p className="text-sm font-medium text-foreground mb-3">{mcData.question}</p>
-                              <div className="space-y-2">
-                                {Object.entries(mcData.options).map(([letter, text]) => (
-                                  <button
-                                    key={letter}
-                                    onClick={() => {
-                                      if (!showInteractiveResult) {
-                                        setMultipleChoiceAnswer(letter);
-                                      }
-                                    }}
-                                    disabled={showInteractiveResult}
-                                    className={`w-full text-left p-3 rounded-lg border text-sm transition-all ${
-                                      multipleChoiceAnswer === letter
-                                        ? 'bg-primary/10 border-primary text-foreground'
-                                        : 'bg-background border-border hover:bg-muted text-foreground'
-                                    } ${showInteractiveResult && letter === mcData.correct ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-500' : ''} ${showInteractiveResult && multipleChoiceAnswer === letter && letter !== mcData.correct ? 'bg-red-50 dark:bg-red-950/30 border-red-500' : ''}`}
-                                  >
-                                    <span className="font-semibold">{letter})</span> {text}
-                                  </button>
-                                ))}
-                              </div>
-                              
-                              {!showInteractiveResult ? (
-                                <Button
-                                  onClick={() => {
-                                    setShowInteractiveResult(true);
-                                    const isCorrect = multipleChoiceAnswer === mcData.correct;
-                                    sendChatMessage(isCorrect ? `${multipleChoiceAnswer} is correct!` : `I think it's ${multipleChoiceAnswer}`);
-                                  }}
-                                  disabled={!multipleChoiceAnswer}
-                                  className="mt-3 w-full"
-                                  size="sm"
-                                >
-                                  Submit Answer
-                                </Button>
-                              ) : (
-                                <div className={`mt-3 text-xs p-2 rounded ${multipleChoiceAnswer === mcData.correct ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400'}`}>
-                                  {multipleChoiceAnswer === mcData.correct ? '✓ Correct!' : `✗ Correct answer: ${mcData.correct}`}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* True/False interactive UI */}
-                        {tfData && (
-                          <div className="mt-3 ml-0 space-y-3">
-                            <div className="bg-background/80 border border-border rounded-xl p-4 max-w-[90%]">
-                              <p className="text-sm text-foreground mb-3 leading-relaxed">{tfData.statement}</p>
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => {
-                                    if (!showInteractiveResult) {
-                                      setTrueFalseAnswer(true);
-                                      setShowInteractiveResult(true);
-                                      sendChatMessage(true === tfData.correct ? 'True is correct!' : 'I think it\'s true');
-                                    }
-                                  }}
-                                  disabled={showInteractiveResult}
-                                  className={`flex-1 p-3 rounded-lg border text-sm font-medium transition-all ${
-                                    trueFalseAnswer === true && showInteractiveResult
-                                      ? tfData.correct ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-500 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-950/30 border-red-500 text-red-700 dark:text-red-400'
-                                      : 'bg-background border-border hover:bg-muted text-foreground'
-                                  }`}
-                                >
-                                  True
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    if (!showInteractiveResult) {
-                                      setTrueFalseAnswer(false);
-                                      setShowInteractiveResult(true);
-                                      sendChatMessage(false === tfData.correct ? 'False is correct!' : 'I think it\'s false');
-                                    }
-                                  }}
-                                  disabled={showInteractiveResult}
-                                  className={`flex-1 p-3 rounded-lg border text-sm font-medium transition-all ${
-                                    trueFalseAnswer === false && showInteractiveResult
-                                      ? !tfData.correct ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-500 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-950/30 border-red-500 text-red-700 dark:text-red-400'
-                                      : 'bg-background border-border hover:bg-muted text-foreground'
-                                  }`}
-                                >
-                                  False
-                                </button>
-                              </div>
-                              
-                              {showInteractiveResult && tfData.explanation && (
-                                <div className="mt-3 text-xs p-2 rounded bg-muted text-muted-foreground">
-                                  {tfData.explanation}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
+                  {chatMessages.map((msg) => (
+                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`rounded-[20px] p-4 text-sm font-medium max-w-[80%] ${
+                        msg.role === 'user' 
+                          ? 'bg-primary text-primary-foreground' 
+                          : 'bg-muted text-foreground'
+                      }`}>
+                        {msg.content}
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                   {isChatLoading && (
                     <div className="flex justify-start">
                       <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
@@ -2334,12 +2074,6 @@ const Practice = () => {
                   <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                     Let&apos;s go through it together.
                   </div>
-                  <button
-                    onClick={() => sendChatMessage("Let's start")}
-                    className="w-full bg-primary text-primary-foreground rounded-lg p-3 text-sm font-medium hover:bg-primary/90 transition-colors"
-                  >
-                    Start Learning
-                  </button>
                 </div>
               ) : (
                 <div className="flex flex-col h-full">
