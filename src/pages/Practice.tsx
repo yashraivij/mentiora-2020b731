@@ -2025,14 +2025,12 @@ const Practice = () => {
                             <span className="text-xs font-semibold text-primary">Your Tutor</span>
                           </div>
                         )}
-                        <div className={`rounded-3xl px-5 py-4 shadow-sm backdrop-blur-sm border ${
+                        <div className={`rounded-[20px] px-5 py-4 ${
                           msg.role === 'user'
-                            ? 'rounded-tr-md bg-primary/10 border-primary/20'
-                            : 'rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50'
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-muted text-foreground'
                         }`}>
-                          <p className={`leading-relaxed whitespace-pre-wrap ${
-                            msg.role === 'user' ? 'text-foreground' : 'text-blue-900 dark:text-blue-100'
-                          }`}>{msg.content}</p>
+                          <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                         </div>
                       </div>
                     </div>
@@ -2048,11 +2046,11 @@ const Practice = () => {
                           </div>
                           <span className="text-xs font-semibold text-primary">Your Tutor</span>
                         </div>
-                        <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50">
+                        <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
                           <div className="flex gap-1">
-                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce"></div>
-                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"></div>
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
                       </div>
