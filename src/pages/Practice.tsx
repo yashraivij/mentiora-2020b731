@@ -586,12 +586,40 @@ const Practice = () => {
         );
       }
       
+      // Start guided tutoring conversation
+      await startGuidedConversation(markingResult);
+      
     } catch (error) {
       console.error('Error marking answer:', error);
       toast.error("Error processing your answer. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Start a guided conversation after marking
+  const startGuidedConversation = async (markingResult: any) => {
+    const percentage = (markingResult.marksAwarded / currentQuestion.marks) * 100;
+    
+    let initialMessage = "";
+    
+    if (percentage === 100) {
+      initialMessage = `Excellent work! You got full marks (${markingResult.marksAwarded}/${currentQuestion.marks})! Your answer was spot on. 🌟\n\nLet me know if you want me to explain anything further, or press next to continue!`;
+    } else if (percentage >= 70) {
+      initialMessage = `Good effort! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. You're on the right track!\n\nLet me ask you one question to help strengthen your answer:\n\nWhat key detail could you add to make this answer even better?`;
+    } else if (percentage >= 30) {
+      initialMessage = `Thanks for having a go! You got ${markingResult.marksAwarded}/${currentQuestion.marks} marks. I can see you understand some parts, and that's a great start 😊\n\nLet me help you build on this. First question:\n\nWhat is the main concept this question is asking about?`;
+    } else {
+      initialMessage = `No problem at all! It looks like you weren't quite sure how to approach this, and that's completely okay — we'll work through it together 💪\n\nLet's start simple:\n\nCan you identify what topic or concept this question relates to? Just one or two words is fine.`;
+    }
+    
+    const tutorMessage = {
+      id: Date.now().toString(),
+      role: 'assistant' as const,
+      content: initialMessage
+    };
+    
+    setChatMessages([tutorMessage]);
   };
 
   const handleNextQuestion = async () => {
@@ -627,7 +655,7 @@ const Practice = () => {
     setIsChatLoading(true);
 
     try {
-      // If this is the first message, use 'intro' stage, otherwise determine stage
+      // Determine conversation stage based on progress
       let currentStage = chatStage;
       if (chatMessages.length === 0) {
         currentStage = 'intro';
@@ -661,12 +689,23 @@ const Practice = () => {
       };
 
       setChatMessages(prev => [...prev, assistantMessage]);
-      setChatStage(currentStage);
       setHintCount(prev => prev + 1);
+      setChatStage(currentStage);
 
-      if (hintCount >= 4 && currentStage !== 'final') {
-        setChatStage('final');
+      // After several exchanges, reveal the model answer
+      if (hintCount >= 2 && currentAttempt) {
+        const modelAnswerMessage = {
+          id: (Date.now() + 2).toString(),
+          role: 'assistant' as const,
+          content: `Great job working through this! Here's how to phrase a perfect answer:\n\n"${currentAttempt.feedback.modelAnswer}"\n\nReady for the next question? 🚀`
+        };
+        
+        setTimeout(() => {
+          setChatMessages(prev => [...prev, modelAnswerMessage]);
+          setChatStage('final');
+        }, 1000);
       }
+
     } catch (error) {
       console.error('Error sending message:', error);
       toast.error("Failed to send message. Please try again.");
@@ -1919,29 +1958,35 @@ const Practice = () => {
                   className="w-full h-full min-h-[400px] border border-border focus:ring-0 text-base resize-none p-4 bg-background/50 dark:bg-background/30 rounded-md text-foreground"
                 />
               ) : (
-                <div className="space-y-4">
-                  {/* User's answer bubble */}
-                  <div className="flex justify-start">
+                /* Conversational Tutoring Interface */
+                <div className="space-y-4 min-h-[400px]">
+                  {/* User's submitted answer */}
+                  <div className="flex justify-end">
                     <div className="max-w-[85%] space-y-2">
-                      <div className="flex items-center gap-2 px-1">
+                      <div className="flex items-center gap-2 px-1 justify-end">
                         <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
                       </div>
-                      <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
-                        currentAttempt.score === currentQuestion.marks
-                          ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
-                          : currentAttempt.score <= currentQuestion.marks / 2
-                          ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
-                          : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
-                      }`}>
+                      <div className="rounded-3xl rounded-tr-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-primary/10 border-primary/20">
                         <p className="text-foreground leading-relaxed">{userAnswer}</p>
                       </div>
                     </div>
                   </div>
                   
-                   {/* Marks display */}
+                  {/* Marks display */}
                   {currentAttempt && (
-                    <div className="flex justify-start px-1">
+                    <div className="flex justify-end px-1">
                       <div className="flex items-center gap-2">
+                        <button 
+                          onClick={() => {
+                            setShowFeedback(false);
+                            setUserAnswer("");
+                            setChatMessages([]);
+                          }}
+                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
+                          title="Try again"
+                        >
+                          <RotateCcw className="w-4 h-4" />
+                        </button>
                         <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
                           currentAttempt.score === currentQuestion.marks 
                             ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800' 
@@ -1964,51 +2009,96 @@ const Practice = () => {
                               : 'text-amber-600 dark:text-amber-400'
                           }`}>marks</span>
                         </div>
-                        <button 
-                          onClick={() => {
-                            setShowFeedback(false);
-                            setUserAnswer("");
-                          }}
-                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
-                          title="Try again"
-                        >
-                          <RotateCcw className="w-4 h-4" />
-                        </button>
                       </div>
                     </div>
                   )}
                   
-                  {currentAttempt && (
-                    <>
-                      {/* Model answer bubble */}
-                      {currentAttempt.feedback?.modelAnswer && (
-                        <div className="flex justify-start mt-6">
-                          <div className="max-w-[85%] space-y-2">
-                            <div className="flex items-center gap-2 px-1">
-                              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
+                  {/* Tutor conversation messages */}
+                  {chatMessages.map((msg) => (
+                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className="max-w-[85%] space-y-2">
+                        {msg.role === 'assistant' && (
+                          <div className="flex items-center gap-2 px-1">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
+                              👩‍🏫
                             </div>
-                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
-                            </div>
+                            <span className="text-xs font-semibold text-primary">Your Tutor</span>
+                          </div>
+                        )}
+                        <div className={`rounded-3xl px-5 py-4 shadow-sm backdrop-blur-sm border ${
+                          msg.role === 'user'
+                            ? 'rounded-tr-md bg-primary/10 border-primary/20'
+                            : 'rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50'
+                        }`}>
+                          <p className="text-foreground leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Loading state */}
+                  {isChatLoading && (
+                    <div className="flex justify-start">
+                      <div className="max-w-[85%] space-y-2">
+                        <div className="flex items-center gap-2 px-1">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
+                            👩‍🏫
+                          </div>
+                          <span className="text-xs font-semibold text-primary">Your Tutor</span>
+                        </div>
+                        <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50">
+                          <div className="flex gap-1">
+                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
+                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
-                      )}
-                      
-                      {/* Teacher feedback bubble */}
-                      {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="flex justify-start">
-                          <div className="max-w-[85%] space-y-2">
-                            <div className="flex items-center gap-2 px-1">
-                              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
-                            </div>
-                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </>
+                      </div>
+                    </div>
                   )}
+                  
+                  {/* Model answer reveal (only after guided conversation or if user requests) */}
+                  {currentAttempt && hintCount >= 2 && currentAttempt.feedback?.modelAnswer && (
+                    <div className="mt-6 p-4 rounded-xl border-2 border-dashed border-primary/30 bg-gradient-to-br from-emerald-50/50 to-emerald-100/30 dark:from-emerald-950/30 dark:to-emerald-900/20">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs">
+                          ✓
+                        </div>
+                        <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Model Answer</span>
+                      </div>
+                      <p className="text-sm text-foreground/90 leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
+                    </div>
+                  )}
+                  
+                  {/* Chat input at bottom of feedback area */}
+                  <div className="sticky bottom-0 pt-4 bg-gradient-to-t from-card via-card to-transparent pb-2">
+                    <div className="flex gap-2">
+                      <Input
+                        value={chatMessage}
+                        onChange={(e) => setChatMessage(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
+                            e.preventDefault();
+                            sendChatMessage(chatMessage);
+                          }
+                        }}
+                        placeholder="Type your response..."
+                        disabled={isChatLoading}
+                        className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
+                      />
+                      <Button 
+                        onClick={() => {
+                          if (chatMessage.trim()) {
+                            sendChatMessage(chatMessage);
+                          }
+                        }}
+                        disabled={!chatMessage.trim() || isChatLoading}
+                        className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
+                      >
+                        <Send className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -2027,16 +2117,22 @@ const Practice = () => {
             ) : null}
           </div>
 
-          {/* Right Pane: Ask mentiora */}
+          {/* Right Pane: Your Tutor */}
           <aside className="flex flex-col h-[600px]">
-            {/* Header */}
-            <div className="mb-4">
-              <h2 className="text-base font-semibold text-foreground">Ask mentiora</h2>
+            {/* Tutor Header */}
+            <div className="mb-4 flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                👩‍🏫
+              </div>
+              <div>
+                <h2 className="text-base font-semibold text-foreground">Your Tutor</h2>
+                <p className="text-xs text-muted-foreground">Supportive & Encouraging</p>
+              </div>
             </div>
 
-            {/* Feedback content or chat messages */}
+            {/* Feedback content or pre-answer help */}
             <div ref={chatScrollRef} className="flex-1 overflow-auto mb-4 space-y-3">
-              {chatMessages.length > 0 ? (
+              {chatMessages.length > 0 && !showFeedback ? (
                 <>
                   {chatMessages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -2061,68 +2157,66 @@ const Practice = () => {
                     </div>
                   )}
                 </>
-              ) : showFeedback && currentAttempt ? (
-                <div className="space-y-3">
-                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
-                    You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
-                  </div>
-                  {currentAttempt.score === 0 && (
-                    <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
-                      It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
-                    </div>
-                  )}
-                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
-                    Let&apos;s go through it together.
-                  </div>
-                </div>
               ) : (
                 <div className="flex flex-col h-full">
                   <div className="flex-1" />
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => sendChatMessage("I don't understand this problem")}
-                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
-                    >
-                      I don&apos;t understand this problem
-                    </button>
-                    <button
-                      onClick={() => sendChatMessage("Can you walk me through this step by step")}
-                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
-                    >
-                      Can you walk me through this step by step
-                    </button>
-                  </div>
+                  {!showFeedback && (
+                    <div className="space-y-3">
+                      <div className="text-xs text-muted-foreground mb-2 text-center">
+                        Need help understanding the question?
+                      </div>
+                      <button
+                        onClick={() => sendChatMessage("I don't understand this problem")}
+                        className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
+                      >
+                        I don&apos;t understand this problem
+                      </button>
+                      <button
+                        onClick={() => sendChatMessage("Can you walk me through this step by step")}
+                        className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
+                      >
+                        Can you walk me through this step by step
+                      </button>
+                    </div>
+                  )}
+                  {showFeedback && (
+                    <div className="text-center text-sm text-muted-foreground p-4">
+                      <p>Your tutor feedback is shown in the main answer area 👈</p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Reply input at very bottom - always available */}
-            <div className="flex gap-2">
-              <Input
-                value={chatMessage}
-                onChange={(e) => setChatMessage(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
-                    e.preventDefault();
-                    sendChatMessage(chatMessage);
-                  }
-                }}
-                placeholder="Reply"
-                disabled={isChatLoading}
-                className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
-              />
-              <Button 
-                onClick={() => {
-                  if (chatMessage.trim()) {
-                    sendChatMessage(chatMessage);
-                  }
-                }}
-                disabled={!chatMessage.trim() || isChatLoading}
-                className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
-              >
-                <Send className="h-4 w-4 rotate-45" />
-              </Button>
-            </div>
+            {/* Reply input at very bottom - only show if not in feedback mode */}
+            {!showFeedback && (
+              <div className="flex gap-2">
+                <Input
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
+                      e.preventDefault();
+                      sendChatMessage(chatMessage);
+                    }
+                  }}
+                  placeholder="Ask for help..."
+                  disabled={isChatLoading}
+                  className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
+                />
+                <Button 
+                  onClick={() => {
+                    if (chatMessage.trim()) {
+                      sendChatMessage(chatMessage);
+                    }
+                  }}
+                  disabled={!chatMessage.trim() || isChatLoading}
+                  className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
+                >
+                  <Send className="h-4 w-4 rotate-45" />
+                </Button>
+              </div>
+            )}
           </aside>
         </div>
       </main>
