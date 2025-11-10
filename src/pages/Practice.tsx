@@ -2083,93 +2083,163 @@ const Practice = () => {
               </div>
             </div>
 
-            {/* Addictive Progress Bar */}
-            <div className="mt-6 px-2">
-              <div className="flex items-center justify-between mb-2">
+            {/* Interactive Learning Journey Progress Bar */}
+            <div className="mt-6 w-full">
+              {/* Progress percentage */}
+              <div className="flex items-center justify-between mb-3 px-1">
+                <span className="text-sm font-semibold text-foreground">Your Learning Journey</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">Progress</span>
-                  <div className="px-2 py-0.5 rounded-full bg-primary/10 text-xs font-bold text-primary animate-pulse">
+                  <div className="px-2.5 py-1 rounded-full bg-primary/10 text-xs font-bold text-primary">
                     {attempts.length}/{shuffledQuestions.length}
                   </div>
+                  <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                    {Math.round((attempts.length / shuffledQuestions.length) * 100)}%
+                  </span>
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                  {Math.round((attempts.length / shuffledQuestions.length) * 100)}%
-                </span>
               </div>
-              
-              {/* Animated Progress Bar */}
-              <div className="relative h-3 bg-secondary rounded-full overflow-hidden shadow-inner">
-                {/* Background shimmer effect */}
-                <div 
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.3) 50%, transparent 100%)',
-                    backgroundSize: '200% 100%',
-                    animation: 'shimmer 2s infinite linear'
-                  }}
-                />
-                
-                {/* Main progress fill with gradient */}
-                <div 
-                  className="h-full relative transition-all duration-700 ease-out"
-                  style={{ 
-                    width: `${(attempts.length / shuffledQuestions.length) * 100}%`,
-                    background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary)))',
-                    backgroundSize: '200% 100%',
-                    animation: 'shimmer 3s infinite linear',
-                    boxShadow: '0 0 20px hsl(var(--primary) / 0.6)'
-                  }}
-                >
-                  {/* Shine effect overlay */}
-                  <div 
-                    className="absolute inset-0 opacity-60"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%)',
-                      animation: 'slide 2s infinite ease-in-out'
-                    }}
-                  />
-                </div>
-                
-                {/* Milestone dots */}
-                {[25, 50, 75].map((milestone) => {
+
+              {/* 5-Stage Segmented Progress Bar */}
+              <div className="relative w-full">
+                {(() => {
+                  const stages = [
+                    { label: 'Warm-Up', threshold: 20 },
+                    { label: 'Understand the Basics', threshold: 40 },
+                    { label: 'Test Yourself', threshold: 60 },
+                    { label: 'Fix Mistakes', threshold: 80 },
+                    { label: 'Master the Topic', threshold: 100 }
+                  ];
+                  
                   const currentProgress = (attempts.length / shuffledQuestions.length) * 100;
-                  const isPassed = currentProgress >= milestone;
+                  const currentStageIndex = stages.findIndex(stage => currentProgress < stage.threshold);
+                  const activeStage = currentStageIndex === -1 ? stages.length - 1 : currentStageIndex;
+                  
                   return (
-                    <div
-                      key={milestone}
-                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-500 z-10 ${
-                        isPassed ? 'bg-primary-foreground scale-150 shadow-lg' : 'bg-muted-foreground/30 scale-100'
-                      }`}
-                      style={{ 
-                        left: `${milestone}%`,
-                        boxShadow: isPassed ? '0 0 12px hsl(var(--primary) / 0.8)' : 'none',
-                        animation: isPassed ? 'pulse 2s infinite' : 'none'
-                      }}
-                    />
+                    <>
+                      {/* Progress segments */}
+                      <div className="flex gap-2 mb-3">
+                        {stages.map((stage, index) => {
+                          const isCompleted = currentProgress >= stage.threshold;
+                          const isActive = index === activeStage;
+                          const isFinal = index === stages.length - 1;
+                          const segmentProgress = Math.min(
+                            Math.max(
+                              ((currentProgress - (index * 20)) / 20) * 100,
+                              0
+                            ),
+                            100
+                          );
+                          
+                          return (
+                            <div
+                              key={stage.label}
+                              className="flex-1 relative"
+                            >
+                              {/* Segment container */}
+                              <div className={`h-2.5 rounded-full overflow-hidden transition-all duration-500 ${
+                                isActive 
+                                  ? 'ring-2 ring-primary/50 ring-offset-2 ring-offset-background' 
+                                  : ''
+                              }`}>
+                                {/* Background */}
+                                <div className="absolute inset-0 bg-secondary/50" />
+                                
+                                {/* Progress fill */}
+                                <div
+                                  className={`h-full transition-all duration-700 ease-out relative ${
+                                    isFinal && isCompleted
+                                      ? 'animate-pulse'
+                                      : ''
+                                  }`}
+                                  style={{
+                                    width: `${segmentProgress}%`,
+                                    background: isCompleted 
+                                      ? 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.85), hsl(var(--primary)))'
+                                      : isActive
+                                      ? 'linear-gradient(90deg, hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))'
+                                      : 'hsl(var(--muted-foreground) / 0.2)',
+                                    boxShadow: isActive || isCompleted
+                                      ? '0 0 16px hsl(var(--primary) / 0.5)'
+                                      : 'none'
+                                  }}
+                                >
+                                  {/* Shine effect for active/completed */}
+                                  {(isActive || isCompleted) && (
+                                    <div
+                                      className="absolute inset-0 opacity-40"
+                                      style={{
+                                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)',
+                                        backgroundSize: '200% 100%',
+                                        animation: 'shimmer 2s infinite linear'
+                                      }}
+                                    />
+                                  )}
+                                  
+                                  {/* Extra glow for final stage */}
+                                  {isFinal && isCompleted && (
+                                    <div
+                                      className="absolute inset-0"
+                                      style={{
+                                        background: 'radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, transparent 70%)',
+                                        animation: 'pulse 2s infinite'
+                                      }}
+                                    />
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      
+                      {/* Stage labels */}
+                      <div className="flex gap-2">
+                        {stages.map((stage, index) => {
+                          const isCompleted = currentProgress >= stage.threshold;
+                          const isActive = index === activeStage;
+                          
+                          return (
+                            <div
+                              key={`label-${stage.label}`}
+                              className="flex-1 text-center"
+                            >
+                              <span className={`text-[10px] font-medium transition-all duration-300 ${
+                                isActive
+                                  ? 'text-primary font-bold'
+                                  : isCompleted
+                                  ? 'text-primary/70'
+                                  : 'text-muted-foreground'
+                              }`}>
+                                {stage.label}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      
+                      {/* Encouraging message based on stage */}
+                      <div className="mt-3 text-center">
+                        {activeStage === 0 && attempts.length > 0 && (
+                          <p className="text-xs text-primary font-medium">Great start! Let's ease into it 🌟</p>
+                        )}
+                        {activeStage === 1 && (
+                          <p className="text-xs text-primary font-medium">You're getting the hang of it! 💡</p>
+                        )}
+                        {activeStage === 2 && (
+                          <p className="text-xs text-primary font-medium">Time to challenge yourself! 🚀</p>
+                        )}
+                        {activeStage === 3 && (
+                          <p className="text-xs text-primary font-medium">Learn from mistakes - you're improving! 🔥</p>
+                        )}
+                        {activeStage === 4 && currentProgress < 100 && (
+                          <p className="text-xs text-primary font-medium">Almost there - become a master! ⭐</p>
+                        )}
+                        {currentProgress === 100 && (
+                          <p className="text-xs text-emerald-600 font-semibold animate-pulse">Journey complete! You've mastered it! 🎉</p>
+                        )}
+                      </div>
+                    </>
                   );
-                })}
-              </div>
-              
-              {/* Motivational message */}
-              <div className="mt-2 text-center">
-                {attempts.length === 0 && (
-                  <p className="text-xs text-muted-foreground">Start answering to see your progress!</p>
-                )}
-                {attempts.length > 0 && attempts.length < shuffledQuestions.length * 0.25 && (
-                  <p className="text-xs text-primary font-medium animate-pulse">Great start! Keep going! 🚀</p>
-                )}
-                {attempts.length >= shuffledQuestions.length * 0.25 && attempts.length < shuffledQuestions.length * 0.5 && (
-                  <p className="text-xs text-primary font-medium animate-pulse">You're building momentum! 💪</p>
-                )}
-                {attempts.length >= shuffledQuestions.length * 0.5 && attempts.length < shuffledQuestions.length * 0.75 && (
-                  <p className="text-xs text-primary font-medium animate-pulse">Halfway there! You're crushing it! 🔥</p>
-                )}
-                {attempts.length >= shuffledQuestions.length * 0.75 && attempts.length < shuffledQuestions.length && (
-                  <p className="text-xs text-primary font-medium animate-pulse">Almost done! Finish strong! ⭐</p>
-                )}
-                {attempts.length === shuffledQuestions.length && (
-                  <p className="text-xs text-emerald-600 font-semibold animate-pulse">All questions completed! Amazing work! 🎉</p>
-                )}
+                })()}
               </div>
             </div>
           </div>
