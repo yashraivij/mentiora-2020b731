@@ -162,6 +162,9 @@ const Practice = () => {
   const [hintCount, setHintCount] = useState(0);
   const [fillGapAnswer, setFillGapAnswer] = useState("");
   const [showFillGapResult, setShowFillGapResult] = useState(false);
+  const [multipleChoiceAnswer, setMultipleChoiceAnswer] = useState<string | null>(null);
+  const [trueFalseAnswer, setTrueFalseAnswer] = useState<boolean | null>(null);
+  const [showInteractiveResult, setShowInteractiveResult] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
@@ -190,16 +193,70 @@ const Practice = () => {
     const fillGapSection = parts[1];
     
     const promptMatch = fillGapSection.match(/Prompt:\s*(.+?)(?=\nStatement:)/s);
-    const statementMatch = fillGapSection.match(/Statement:\s*(.+?)(?=\nAnswer:)/s);
-    const answerMatch = fillGapSection.match(/Answer:\s*(.+?)$/s);
+    const statementMatch = fillGapSection.match(/Statement:\s*(.+?)(?=\nAnswers?:)/s);
+    const answerMatch = fillGapSection.match(/Answers?:\s*(.+?)$/s);
     
     if (!promptMatch || !statementMatch || !answerMatch) return null;
+    
+    // Split answers by | for multiple blanks
+    const answers = answerMatch[1].trim().split('|').map(a => a.trim());
     
     return {
       intro,
       prompt: promptMatch[1].trim(),
       statement: statementMatch[1].trim(),
-      correctAnswer: answerMatch[1].trim()
+      correctAnswers: answers
+    };
+  };
+
+  // Parse multiple choice format from AI response
+  const parseMultipleChoiceMessage = (content: string) => {
+    if (!content.includes('[MULTIPLE-CHOICE]')) return null;
+    
+    const parts = content.split('[MULTIPLE-CHOICE]');
+    const intro = parts[0].trim();
+    const mcSection = parts[1];
+    
+    const questionMatch = mcSection.match(/Question:\s*(.+?)(?=\n[A-D]\))/s);
+    const optionsMatch = mcSection.match(/([A-D]\).+?)(?=\nCorrect:)/s);
+    const correctMatch = mcSection.match(/Correct:\s*([A-D])/);
+    
+    if (!questionMatch || !optionsMatch || !correctMatch) return null;
+    
+    // Parse options
+    const optionsText = optionsMatch[1];
+    const options = ['A', 'B', 'C', 'D'].map(letter => {
+      const match = optionsText.match(new RegExp(`${letter}\\)\\s*(.+?)(?=\\n[A-D]\\)|$)`, 's'));
+      return match ? match[1].trim() : null;
+    }).filter(Boolean);
+    
+    return {
+      intro,
+      question: questionMatch[1].trim(),
+      options,
+      correctAnswer: correctMatch[1].trim()
+    };
+  };
+
+  // Parse true/false format from AI response
+  const parseTrueFalseMessage = (content: string) => {
+    if (!content.includes('[TRUE-FALSE]')) return null;
+    
+    const parts = content.split('[TRUE-FALSE]');
+    const intro = parts[0].trim();
+    const tfSection = parts[1];
+    
+    const statementMatch = tfSection.match(/Statement:\s*(.+?)(?=\nCorrect:)/s);
+    const correctMatch = tfSection.match(/Correct:\s*(true|false)/i);
+    const explanationMatch = tfSection.match(/Explanation:\s*(.+?)$/s);
+    
+    if (!statementMatch || !correctMatch) return null;
+    
+    return {
+      intro,
+      statement: statementMatch[1].trim(),
+      correctAnswer: correctMatch[1].trim().toLowerCase() === 'true',
+      explanation: explanationMatch ? explanationMatch[1].trim() : null
     };
   };
 
@@ -661,6 +718,9 @@ const Practice = () => {
       setChatStage('intro');
       setFillGapAnswer("");
       setShowFillGapResult(false);
+      setMultipleChoiceAnswer(null);
+      setTrueFalseAnswer(null);
+      setShowInteractiveResult(false);
     } else {
       await finishSession();
     }
@@ -2042,6 +2102,8 @@ const Practice = () => {
                   {/* Tutor conversation messages */}
                   {chatMessages.map((msg, index) => {
                     const fillGapData = msg.role === 'assistant' ? parseFillGapMessage(msg.content) : null;
+                    const multipleChoiceData = msg.role === 'assistant' ? parseMultipleChoiceMessage(msg.content) : null;
+                    const trueFalseData = msg.role === 'assistant' ? parseTrueFalseMessage(msg.content) : null;
                     const isLastMessage = index === chatMessages.length - 1;
                     
                     return (
@@ -2068,7 +2130,7 @@ const Practice = () => {
                               <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-blue-50/50 to-blue-100/30 dark:from-blue-950/30 dark:to-blue-900/20">
                                 <div className="mb-3">
                                   <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
-                                    Fill in the blank
+                                    Fill in the blank{fillGapData.correctAnswers.length > 1 ? 's' : ''}
                                   </Badge>
                                 </div>
                                 
@@ -2080,18 +2142,17 @@ const Practice = () => {
                                   {fillGapData.statement}
                                 </p>
                                 
-                                {!showFillGapResult && isLastMessage ? (
+                                {!showInteractiveResult && isLastMessage ? (
                                   <div className="space-y-3">
                                     <Input
-                                      placeholder="Type your answer..."
+                                      placeholder={fillGapData.correctAnswers.length > 1 ? "Type answers separated by commas..." : "Type your answer..."}
                                       value={fillGapAnswer}
                                       onChange={(e) => setFillGapAnswer(e.target.value)}
                                       onKeyDown={(e) => {
                                         if (e.key === 'Enter' && fillGapAnswer.trim()) {
                                           e.preventDefault();
-                                          setShowFillGapResult(true);
+                                          setShowInteractiveResult(true);
                                           
-                                          // Add user's answer to chat
                                           setTimeout(() => {
                                             const userMsg = {
                                               id: Date.now().toString(),
@@ -2100,9 +2161,7 @@ const Practice = () => {
                                             };
                                             setChatMessages(prev => [...prev, userMsg]);
                                             setFillGapAnswer("");
-                                            setShowFillGapResult(false);
-                                            
-                                            // Send to AI for feedback
+                                            setShowInteractiveResult(false);
                                             sendChatMessage(fillGapAnswer);
                                           }, 1500);
                                         }
@@ -2113,8 +2172,7 @@ const Practice = () => {
                                     <Button 
                                       onClick={() => {
                                         if (fillGapAnswer.trim()) {
-                                          setShowFillGapResult(true);
-                                          
+                                          setShowInteractiveResult(true);
                                           setTimeout(() => {
                                             const userMsg = {
                                               id: Date.now().toString(),
@@ -2123,8 +2181,7 @@ const Practice = () => {
                                             };
                                             setChatMessages(prev => [...prev, userMsg]);
                                             setFillGapAnswer("");
-                                            setShowFillGapResult(false);
-                                            
+                                            setShowInteractiveResult(false);
                                             sendChatMessage(fillGapAnswer);
                                           }, 1500);
                                         }
@@ -2136,19 +2193,164 @@ const Practice = () => {
                                       Check Answer
                                     </Button>
                                   </div>
-                                ) : showFillGapResult && isLastMessage ? (
+                                ) : showInteractiveResult && isLastMessage ? (
                                   <div className="space-y-3">
                                     <div className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-border">
                                       <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
                                       <p className="font-medium text-foreground">{fillGapAnswer}</p>
                                     </div>
+                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
+                                      <p className="text-xs text-muted-foreground mb-1">Correct answer{fillGapData.correctAnswers.length > 1 ? 's' : ''}:</p>
+                                      <p className="font-medium text-foreground">{fillGapData.correctAnswers.join(', ')}</p>
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          ) : multipleChoiceData ? (
+                            // Render multiple choice interactive component
+                            <div className="space-y-3">
+                              {multipleChoiceData.intro && (
+                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
+                                  <p className="leading-relaxed">{multipleChoiceData.intro}</p>
+                                </div>
+                              )}
+                              
+                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-purple-50/50 to-purple-100/30 dark:from-purple-950/30 dark:to-purple-900/20">
+                                <div className="mb-3">
+                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
+                                    Multiple Choice
+                                  </Badge>
+                                </div>
+                                
+                                <p className="text-base font-medium mb-4 text-foreground">
+                                  {multipleChoiceData.question}
+                                </p>
+                                
+                                {!showInteractiveResult && isLastMessage ? (
+                                  <div className="space-y-2">
+                                    {['A', 'B', 'C', 'D'].map((letter, idx) => multipleChoiceData.options[idx] && (
+                                      <button
+                                        key={letter}
+                                        onClick={() => {
+                                          setMultipleChoiceAnswer(letter);
+                                          setShowInteractiveResult(true);
+                                          setTimeout(() => {
+                                            const userMsg = {
+                                              id: Date.now().toString(),
+                                              role: 'user' as const,
+                                              content: `${letter}) ${multipleChoiceData.options[idx]}`
+                                            };
+                                            setChatMessages(prev => [...prev, userMsg]);
+                                            setMultipleChoiceAnswer(null);
+                                            setShowInteractiveResult(false);
+                                            sendChatMessage(`${letter}) ${multipleChoiceData.options[idx]}`);
+                                          }, 1500);
+                                        }}
+                                        className="w-full text-left p-4 rounded-lg border-2 border-border hover:border-primary hover:bg-primary/5 transition-all duration-200 bg-white dark:bg-gray-800"
+                                      >
+                                        <span className="font-bold text-primary mr-3">{letter})</span>
+                                        <span className="text-foreground">{multipleChoiceData.options[idx]}</span>
+                                      </button>
+                                    ))}
+                                  </div>
+                                ) : showInteractiveResult && isLastMessage ? (
+                                  <div className="space-y-3">
                                     <div className={`p-3 rounded-lg border ${
-                                      fillGapAnswer.toLowerCase().trim() === fillGapData.correctAnswer.toLowerCase().trim()
+                                      multipleChoiceAnswer === multipleChoiceData.correctAnswer
                                         ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
-                                        : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'
+                                        : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
                                     }`}>
+                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
+                                      <p className="font-medium text-foreground">{multipleChoiceAnswer}</p>
+                                    </div>
+                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
                                       <p className="text-xs text-muted-foreground mb-1">Correct answer:</p>
-                                      <p className="font-medium text-foreground">{fillGapData.correctAnswer}</p>
+                                      <p className="font-medium text-foreground">{multipleChoiceData.correctAnswer}</p>
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          ) : trueFalseData ? (
+                            // Render true/false interactive component
+                            <div className="space-y-3">
+                              {trueFalseData.intro && (
+                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
+                                  <p className="leading-relaxed">{trueFalseData.intro}</p>
+                                </div>
+                              )}
+                              
+                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-amber-50/50 to-amber-100/30 dark:from-amber-950/30 dark:to-amber-900/20">
+                                <div className="mb-3">
+                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
+                                    True or False
+                                  </Badge>
+                                </div>
+                                
+                                <p className="text-base font-medium mb-4 text-foreground">
+                                  {trueFalseData.statement}
+                                </p>
+                                
+                                {!showInteractiveResult && isLastMessage ? (
+                                  <div className="grid grid-cols-2 gap-3">
+                                    <Button
+                                      onClick={() => {
+                                        setTrueFalseAnswer(true);
+                                        setShowInteractiveResult(true);
+                                        setTimeout(() => {
+                                          const userMsg = {
+                                            id: Date.now().toString(),
+                                            role: 'user' as const,
+                                            content: 'True'
+                                          };
+                                          setChatMessages(prev => [...prev, userMsg]);
+                                          setTrueFalseAnswer(null);
+                                          setShowInteractiveResult(false);
+                                          sendChatMessage('True');
+                                        }, 1500);
+                                      }}
+                                      className="h-16 text-lg font-semibold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                                    >
+                                      True
+                                    </Button>
+                                    <Button
+                                      onClick={() => {
+                                        setTrueFalseAnswer(false);
+                                        setShowInteractiveResult(true);
+                                        setTimeout(() => {
+                                          const userMsg = {
+                                            id: Date.now().toString(),
+                                            role: 'user' as const,
+                                            content: 'False'
+                                          };
+                                          setChatMessages(prev => [...prev, userMsg]);
+                                          setTrueFalseAnswer(null);
+                                          setShowInteractiveResult(false);
+                                          sendChatMessage('False');
+                                        }, 1500);
+                                      }}
+                                      className="h-16 text-lg font-semibold bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                                    >
+                                      False
+                                    </Button>
+                                  </div>
+                                ) : showInteractiveResult && isLastMessage ? (
+                                  <div className="space-y-3">
+                                    <div className={`p-3 rounded-lg border ${
+                                      trueFalseAnswer === trueFalseData.correctAnswer
+                                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                                        : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
+                                    }`}>
+                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
+                                      <p className="font-medium text-foreground">{trueFalseAnswer ? 'True' : 'False'}</p>
+                                    </div>
+                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
+                                      <p className="text-xs text-muted-foreground mb-1">Correct answer:</p>
+                                      <p className="font-medium text-foreground">{trueFalseData.correctAnswer ? 'True' : 'False'}</p>
+                                      {trueFalseData.explanation && (
+                                        <p className="text-sm text-foreground/70 mt-2 italic">{trueFalseData.explanation}</p>
+                                      )}
                                     </div>
                                   </div>
                                 ) : null}
