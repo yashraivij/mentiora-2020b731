@@ -1984,13 +1984,13 @@ const Practice = () => {
                       {currentAttempt.feedback?.whyYoursDidnt && (
                         <div className="flex gap-3 justify-start mt-6">
                           <div className="flex gap-2 max-w-[85%]">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
-                              <Bot className="h-4 w-4" />
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                              <Bot className="h-4 w-4 text-white" />
                             </div>
-                            <div className="px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
-                              {currentAttempt.feedback.whyYoursDidnt}
+                            <div className="px-4 py-3 rounded-xl text-sm bg-muted/50 border border-border/50">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
                               {currentAttempt.feedback?.modelAnswer && (
-                                <p className="mt-3 pt-3 border-t border-border/30 text-sm opacity-90">
+                                <p className="mt-3 pt-3 border-t border-border/30 text-sm text-muted-foreground">
                                   Here's how I would write the answer:
                                 </p>
                               )}
@@ -2003,11 +2003,11 @@ const Practice = () => {
                       {currentAttempt.feedback?.modelAnswer && (
                         <div className="flex gap-3 justify-start mt-2">
                           <div className="flex gap-2 max-w-[85%]">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
-                              <Bot className="h-4 w-4" />
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                              <Bot className="h-4 w-4 text-white" />
                             </div>
-                            <div className="px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
-                              {currentAttempt.feedback.modelAnswer}
+                            <div className="px-4 py-3 rounded-xl text-sm bg-muted/50 border border-border/50">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                             </div>
                           </div>
                         </div>
