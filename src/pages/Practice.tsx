@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, Check } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -160,6 +160,8 @@ const Practice = () => {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
+  const [fillGapAnswer, setFillGapAnswer] = useState("");
+  const [showFillGapResult, setShowFillGapResult] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
@@ -178,6 +180,28 @@ const Practice = () => {
   } = usePersonalizedNotifications();
 
   const { showMPReward } = useMPRewards();
+  
+  // Parse fill-gap format from AI response
+  const parseFillGapMessage = (content: string) => {
+    if (!content.includes('[FILL-GAP]')) return null;
+    
+    const parts = content.split('[FILL-GAP]');
+    const intro = parts[0].trim();
+    const fillGapSection = parts[1];
+    
+    const promptMatch = fillGapSection.match(/Prompt:\s*(.+?)(?=\nStatement:)/s);
+    const statementMatch = fillGapSection.match(/Statement:\s*(.+?)(?=\nAnswer:)/s);
+    const answerMatch = fillGapSection.match(/Answer:\s*(.+?)$/s);
+    
+    if (!promptMatch || !statementMatch || !answerMatch) return null;
+    
+    return {
+      intro,
+      prompt: promptMatch[1].trim(),
+      statement: statementMatch[1].trim(),
+      correctAnswer: answerMatch[1].trim()
+    };
+  };
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -635,6 +659,8 @@ const Practice = () => {
       setChatMessages([]);
       setHintCount(0);
       setChatStage('intro');
+      setFillGapAnswer("");
+      setShowFillGapResult(false);
     } else {
       await finishSession();
     }
@@ -2014,27 +2040,134 @@ const Practice = () => {
                   )}
                   
                   {/* Tutor conversation messages */}
-                  {chatMessages.map((msg) => (
-                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className="max-w-[85%] space-y-2">
-                        {msg.role === 'assistant' && (
-                          <div className="flex items-center gap-2 px-1">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
-                              👩‍🏫
+                  {chatMessages.map((msg, index) => {
+                    const fillGapData = msg.role === 'assistant' ? parseFillGapMessage(msg.content) : null;
+                    const isLastMessage = index === chatMessages.length - 1;
+                    
+                    return (
+                      <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div className="max-w-[85%] space-y-2 w-full">
+                          {msg.role === 'assistant' && (
+                            <div className="flex items-center gap-2 px-1">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
+                                👩‍🏫
+                              </div>
+                              <span className="text-xs font-semibold text-primary">Your Tutor</span>
                             </div>
-                            <span className="text-xs font-semibold text-primary">Your Tutor</span>
-                          </div>
-                        )}
-                        <div className={`rounded-[20px] px-5 py-4 ${
-                          msg.role === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted text-foreground'
-                        }`}>
-                          <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                          )}
+                          
+                          {fillGapData ? (
+                            // Render fill-in-gap interactive component
+                            <div className="space-y-3">
+                              {fillGapData.intro && (
+                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
+                                  <p className="leading-relaxed">{fillGapData.intro}</p>
+                                </div>
+                              )}
+                              
+                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-blue-50/50 to-blue-100/30 dark:from-blue-950/30 dark:to-blue-900/20">
+                                <div className="mb-3">
+                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
+                                    Fill in the blank
+                                  </Badge>
+                                </div>
+                                
+                                {fillGapData.prompt && (
+                                  <p className="text-sm text-foreground/80 mb-4">{fillGapData.prompt}</p>
+                                )}
+                                
+                                <p className="text-base font-medium mb-4 text-foreground">
+                                  {fillGapData.statement}
+                                </p>
+                                
+                                {!showFillGapResult && isLastMessage ? (
+                                  <div className="space-y-3">
+                                    <Input
+                                      placeholder="Type your answer..."
+                                      value={fillGapAnswer}
+                                      onChange={(e) => setFillGapAnswer(e.target.value)}
+                                      onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && fillGapAnswer.trim()) {
+                                          e.preventDefault();
+                                          setShowFillGapResult(true);
+                                          
+                                          // Add user's answer to chat
+                                          setTimeout(() => {
+                                            const userMsg = {
+                                              id: Date.now().toString(),
+                                              role: 'user' as const,
+                                              content: fillGapAnswer
+                                            };
+                                            setChatMessages(prev => [...prev, userMsg]);
+                                            setFillGapAnswer("");
+                                            setShowFillGapResult(false);
+                                            
+                                            // Send to AI for feedback
+                                            sendChatMessage(fillGapAnswer);
+                                          }, 1500);
+                                        }
+                                      }}
+                                      className="text-center bg-white dark:bg-gray-800"
+                                      autoFocus
+                                    />
+                                    <Button 
+                                      onClick={() => {
+                                        if (fillGapAnswer.trim()) {
+                                          setShowFillGapResult(true);
+                                          
+                                          setTimeout(() => {
+                                            const userMsg = {
+                                              id: Date.now().toString(),
+                                              role: 'user' as const,
+                                              content: fillGapAnswer
+                                            };
+                                            setChatMessages(prev => [...prev, userMsg]);
+                                            setFillGapAnswer("");
+                                            setShowFillGapResult(false);
+                                            
+                                            sendChatMessage(fillGapAnswer);
+                                          }, 1500);
+                                        }
+                                      }}
+                                      disabled={!fillGapAnswer.trim()}
+                                      className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold py-5 disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                                    >
+                                      <Check className="h-4 w-4 mr-2" />
+                                      Check Answer
+                                    </Button>
+                                  </div>
+                                ) : showFillGapResult && isLastMessage ? (
+                                  <div className="space-y-3">
+                                    <div className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-border">
+                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
+                                      <p className="font-medium text-foreground">{fillGapAnswer}</p>
+                                    </div>
+                                    <div className={`p-3 rounded-lg border ${
+                                      fillGapAnswer.toLowerCase().trim() === fillGapData.correctAnswer.toLowerCase().trim()
+                                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                                        : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'
+                                    }`}>
+                                      <p className="text-xs text-muted-foreground mb-1">Correct answer:</p>
+                                      <p className="font-medium text-foreground">{fillGapData.correctAnswer}</p>
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          ) : (
+                            // Regular text message
+                            <div className={`rounded-[20px] px-5 py-4 ${
+                              msg.role === 'user'
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-muted text-foreground'
+                            }`}>
+                              <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                   
                   {/* Loading state */}
                   {isChatLoading && (
