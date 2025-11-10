@@ -2082,6 +2082,96 @@ const Practice = () => {
                 })}
               </div>
             </div>
+
+            {/* Addictive Progress Bar */}
+            <div className="mt-6 px-2">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground">Progress</span>
+                  <div className="px-2 py-0.5 rounded-full bg-primary/10 text-xs font-bold text-primary animate-pulse">
+                    {attempts.length}/{shuffledQuestions.length}
+                  </div>
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  {Math.round((attempts.length / shuffledQuestions.length) * 100)}%
+                </span>
+              </div>
+              
+              {/* Animated Progress Bar */}
+              <div className="relative h-3 bg-secondary rounded-full overflow-hidden shadow-inner">
+                {/* Background shimmer effect */}
+                <div 
+                  className="absolute inset-0 opacity-30"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.3) 50%, transparent 100%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 2s infinite linear'
+                  }}
+                />
+                
+                {/* Main progress fill with gradient */}
+                <div 
+                  className="h-full relative transition-all duration-700 ease-out"
+                  style={{ 
+                    width: `${(attempts.length / shuffledQuestions.length) * 100}%`,
+                    background: 'linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary)))',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 3s infinite linear',
+                    boxShadow: '0 0 20px hsl(var(--primary) / 0.6)'
+                  }}
+                >
+                  {/* Shine effect overlay */}
+                  <div 
+                    className="absolute inset-0 opacity-60"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%)',
+                      animation: 'slide 2s infinite ease-in-out'
+                    }}
+                  />
+                </div>
+                
+                {/* Milestone dots */}
+                {[25, 50, 75].map((milestone) => {
+                  const currentProgress = (attempts.length / shuffledQuestions.length) * 100;
+                  const isPassed = currentProgress >= milestone;
+                  return (
+                    <div
+                      key={milestone}
+                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-500 z-10 ${
+                        isPassed ? 'bg-primary-foreground scale-150 shadow-lg' : 'bg-muted-foreground/30 scale-100'
+                      }`}
+                      style={{ 
+                        left: `${milestone}%`,
+                        boxShadow: isPassed ? '0 0 12px hsl(var(--primary) / 0.8)' : 'none',
+                        animation: isPassed ? 'pulse 2s infinite' : 'none'
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              
+              {/* Motivational message */}
+              <div className="mt-2 text-center">
+                {attempts.length === 0 && (
+                  <p className="text-xs text-muted-foreground">Start answering to see your progress!</p>
+                )}
+                {attempts.length > 0 && attempts.length < shuffledQuestions.length * 0.25 && (
+                  <p className="text-xs text-primary font-medium animate-pulse">Great start! Keep going! 🚀</p>
+                )}
+                {attempts.length >= shuffledQuestions.length * 0.25 && attempts.length < shuffledQuestions.length * 0.5 && (
+                  <p className="text-xs text-primary font-medium animate-pulse">You're building momentum! 💪</p>
+                )}
+                {attempts.length >= shuffledQuestions.length * 0.5 && attempts.length < shuffledQuestions.length * 0.75 && (
+                  <p className="text-xs text-primary font-medium animate-pulse">Halfway there! You're crushing it! 🔥</p>
+                )}
+                {attempts.length >= shuffledQuestions.length * 0.75 && attempts.length < shuffledQuestions.length && (
+                  <p className="text-xs text-primary font-medium animate-pulse">Almost done! Finish strong! ⭐</p>
+                )}
+                {attempts.length === shuffledQuestions.length && (
+                  <p className="text-xs text-emerald-600 font-semibold animate-pulse">All questions completed! Amazing work! 🎉</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </header>
