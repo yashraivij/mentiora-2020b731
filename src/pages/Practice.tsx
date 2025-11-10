@@ -604,13 +604,13 @@ const Practice = () => {
     let initialMessage = "";
     
     if (percentage === 100) {
-      initialMessage = `Excellent work! You got full marks (${markingResult.marksAwarded}/${currentQuestion.marks})! Your answer was spot on. 🌟\n\nLet me know if you want me to explain anything further, or press next to continue!`;
+      initialMessage = `Excellent work! You got full marks (${markingResult.marksAwarded}/${currentQuestion.marks})! Your answer was spot on.\n\nLet me know if you want me to explain anything further, or press next to continue!`;
     } else if (percentage >= 70) {
       initialMessage = `Good effort! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. You're on the right track!\n\nLet me ask you one question to help strengthen your answer:\n\nWhat key detail could you add to make this answer even better?`;
     } else if (percentage >= 30) {
-      initialMessage = `Thanks for having a go! You got ${markingResult.marksAwarded}/${currentQuestion.marks} marks. I can see you understand some parts, and that's a great start 😊\n\nLet me help you build on this. First question:\n\nWhat is the main concept this question is asking about?`;
+      initialMessage = `Thanks for having a go! You got ${markingResult.marksAwarded}/${currentQuestion.marks} marks. I can see you understand some parts, and that's a great start.\n\nLet me help you build on this. First question:\n\nWhat is the main concept this question is asking about?`;
     } else {
-      initialMessage = `No problem at all! It looks like you weren't quite sure how to approach this, and that's completely okay — we'll work through it together 💪\n\nLet's start simple:\n\nCan you identify what topic or concept this question relates to? Just one or two words is fine.`;
+      initialMessage = `No problem at all! It looks like you weren't quite sure how to approach this, and that's completely okay — we'll work through it together.\n\nLet's start simple:\n\nCan you identify what topic or concept this question relates to? Just one or two words is fine.`;
     }
     
     const tutorMessage = {
@@ -697,7 +697,7 @@ const Practice = () => {
         const modelAnswerMessage = {
           id: (Date.now() + 2).toString(),
           role: 'assistant' as const,
-          content: `Great job working through this! Here's how to phrase a perfect answer:\n\n"${currentAttempt.feedback.modelAnswer}"\n\nReady for the next question? 🚀`
+          content: `Great job working through this! Here's how I would write the answer to get full marks:\n\n"${currentAttempt.feedback.modelAnswer}"\n\nReady for the next question?`
         };
         
         setTimeout(() => {
@@ -2030,7 +2030,9 @@ const Practice = () => {
                             ? 'rounded-tr-md bg-primary/10 border-primary/20'
                             : 'rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50'
                         }`}>
-                          <p className="text-foreground leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                          <p className={`leading-relaxed whitespace-pre-wrap ${
+                            msg.role === 'user' ? 'text-foreground' : 'text-blue-900 dark:text-blue-100'
+                          }`}>{msg.content}</p>
                         </div>
                       </div>
                     </div>
@@ -2048,9 +2050,9 @@ const Practice = () => {
                         </div>
                         <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 border-blue-200/50 dark:border-blue-800/50">
                           <div className="flex gap-1">
-                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
-                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce"></div>
+                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
                       </div>
@@ -2179,9 +2181,26 @@ const Practice = () => {
                       </button>
                     </div>
                   )}
-                  {showFeedback && (
-                    <div className="text-center text-sm text-muted-foreground p-4">
-                      <p>Your tutor feedback is shown in the main answer area 👈</p>
+                  {showFeedback && currentAttempt && (
+                    <div className="space-y-3">
+                      <div className="text-center text-sm text-muted-foreground p-4">
+                        <p>Your tutor feedback is shown in the main answer area</p>
+                      </div>
+                      <Button
+                        onClick={() => {
+                          const modelAnswerMessage = {
+                            id: (Date.now() + 3).toString(),
+                            role: 'assistant' as const,
+                            content: `Here's how I would write the answer to get full marks:\n\n"${currentAttempt.feedback.modelAnswer}"`
+                          };
+                          setChatMessages(prev => [...prev, modelAnswerMessage]);
+                          setChatStage('final');
+                        }}
+                        variant="outline"
+                        className="w-full border-primary/30 hover:bg-primary/5 text-foreground"
+                      >
+                        Show Model Answer
+                      </Button>
                     </div>
                   )}
                 </div>
