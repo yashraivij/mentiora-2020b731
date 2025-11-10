@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, Check } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -160,11 +160,6 @@ const Practice = () => {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
-  const [fillGapAnswer, setFillGapAnswer] = useState("");
-  const [showFillGapResult, setShowFillGapResult] = useState(false);
-  const [multipleChoiceAnswer, setMultipleChoiceAnswer] = useState<string | null>(null);
-  const [trueFalseAnswer, setTrueFalseAnswer] = useState<boolean | null>(null);
-  const [showInteractiveResult, setShowInteractiveResult] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
@@ -183,82 +178,6 @@ const Practice = () => {
   } = usePersonalizedNotifications();
 
   const { showMPReward } = useMPRewards();
-  
-  // Parse fill-gap format from AI response
-  const parseFillGapMessage = (content: string) => {
-    if (!content.includes('[FILL-GAP]')) return null;
-    
-    const parts = content.split('[FILL-GAP]');
-    const intro = parts[0].trim();
-    const fillGapSection = parts[1];
-    
-    const promptMatch = fillGapSection.match(/Prompt:\s*(.+?)(?=\nStatement:)/s);
-    const statementMatch = fillGapSection.match(/Statement:\s*(.+?)(?=\nAnswers?:)/s);
-    const answerMatch = fillGapSection.match(/Answers?:\s*(.+?)$/s);
-    
-    if (!promptMatch || !statementMatch || !answerMatch) return null;
-    
-    // Split answers by | for multiple blanks
-    const answers = answerMatch[1].trim().split('|').map(a => a.trim());
-    
-    return {
-      intro,
-      prompt: promptMatch[1].trim(),
-      statement: statementMatch[1].trim(),
-      correctAnswers: answers
-    };
-  };
-
-  // Parse multiple choice format from AI response
-  const parseMultipleChoiceMessage = (content: string) => {
-    if (!content.includes('[MULTIPLE-CHOICE]')) return null;
-    
-    const parts = content.split('[MULTIPLE-CHOICE]');
-    const intro = parts[0].trim();
-    const mcSection = parts[1];
-    
-    const questionMatch = mcSection.match(/Question:\s*(.+?)(?=\n[A-D]\))/s);
-    const optionsMatch = mcSection.match(/([A-D]\).+?)(?=\nCorrect:)/s);
-    const correctMatch = mcSection.match(/Correct:\s*([A-D])/);
-    
-    if (!questionMatch || !optionsMatch || !correctMatch) return null;
-    
-    // Parse options
-    const optionsText = optionsMatch[1];
-    const options = ['A', 'B', 'C', 'D'].map(letter => {
-      const match = optionsText.match(new RegExp(`${letter}\\)\\s*(.+?)(?=\\n[A-D]\\)|$)`, 's'));
-      return match ? match[1].trim() : null;
-    }).filter(Boolean);
-    
-    return {
-      intro,
-      question: questionMatch[1].trim(),
-      options,
-      correctAnswer: correctMatch[1].trim()
-    };
-  };
-
-  // Parse true/false format from AI response
-  const parseTrueFalseMessage = (content: string) => {
-    if (!content.includes('[TRUE-FALSE]')) return null;
-    
-    const parts = content.split('[TRUE-FALSE]');
-    const intro = parts[0].trim();
-    const tfSection = parts[1];
-    
-    const statementMatch = tfSection.match(/Statement:\s*(.+?)(?=\nCorrect:)/s);
-    const correctMatch = tfSection.match(/Correct:\s*(true|false)/i);
-    const explanationMatch = tfSection.match(/Explanation:\s*(.+?)$/s);
-    
-    if (!statementMatch || !correctMatch) return null;
-    
-    return {
-      intro,
-      statement: statementMatch[1].trim(),
-      correctAnswer: correctMatch[1].trim().toLowerCase() === 'true',
-      explanation: explanationMatch ? explanationMatch[1].trim() : null
-    };
-  };
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -667,40 +586,12 @@ const Practice = () => {
         );
       }
       
-      // Start guided tutoring conversation
-      await startGuidedConversation(markingResult);
-      
     } catch (error) {
       console.error('Error marking answer:', error);
       toast.error("Error processing your answer. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  // Start a guided conversation after marking
-  const startGuidedConversation = async (markingResult: any) => {
-    const percentage = (markingResult.marksAwarded / currentQuestion.marks) * 100;
-    
-    let initialMessage = "";
-    
-    if (percentage === 100) {
-      initialMessage = `Excellent work! You got full marks (${markingResult.marksAwarded}/${currentQuestion.marks})! Your answer was spot on.\n\nLet me know if you want me to explain anything further, or press next to continue!`;
-    } else if (percentage >= 70) {
-      initialMessage = `Good effort! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. You're on the right track!\n\nLet me ask you one question to help strengthen your answer:\n\nWhat key detail could you add to make this answer even better?`;
-    } else if (percentage >= 30) {
-      initialMessage = `Thanks for having a go! You got ${markingResult.marksAwarded}/${currentQuestion.marks} marks. I can see you understand some parts, and that's a great start.\n\nLet me help you build on this. First question:\n\nWhat is the main concept this question is asking about?`;
-    } else {
-      initialMessage = `No problem at all! It looks like you weren't quite sure how to approach this, and that's completely okay — we'll work through it together.\n\nLet's start simple:\n\nCan you identify what topic or concept this question relates to? Just one or two words is fine.`;
-    }
-    
-    const tutorMessage = {
-      id: Date.now().toString(),
-      role: 'assistant' as const,
-      content: initialMessage
-    };
-    
-    setChatMessages([tutorMessage]);
   };
 
   const handleNextQuestion = async () => {
@@ -716,11 +607,6 @@ const Practice = () => {
       setChatMessages([]);
       setHintCount(0);
       setChatStage('intro');
-      setFillGapAnswer("");
-      setShowFillGapResult(false);
-      setMultipleChoiceAnswer(null);
-      setTrueFalseAnswer(null);
-      setShowInteractiveResult(false);
     } else {
       await finishSession();
     }
@@ -741,7 +627,7 @@ const Practice = () => {
     setIsChatLoading(true);
 
     try {
-      // Determine conversation stage based on progress
+      // If this is the first message, use 'intro' stage, otherwise determine stage
       let currentStage = chatStage;
       if (chatMessages.length === 0) {
         currentStage = 'intro';
@@ -775,23 +661,12 @@ const Practice = () => {
       };
 
       setChatMessages(prev => [...prev, assistantMessage]);
-      setHintCount(prev => prev + 1);
       setChatStage(currentStage);
+      setHintCount(prev => prev + 1);
 
-      // After several exchanges, reveal the model answer
-      if (hintCount >= 2 && currentAttempt) {
-        const modelAnswerMessage = {
-          id: (Date.now() + 2).toString(),
-          role: 'assistant' as const,
-          content: `Great job working through this! Here's how I would write the answer to get full marks:\n\n"${currentAttempt.feedback.modelAnswer}"\n\nReady for the next question?`
-        };
-        
-        setTimeout(() => {
-          setChatMessages(prev => [...prev, modelAnswerMessage]);
-          setChatStage('final');
-        }, 1000);
+      if (hintCount >= 4 && currentStage !== 'final') {
+        setChatStage('final');
       }
-
     } catch (error) {
       console.error('Error sending message:', error);
       toast.error("Failed to send message. Please try again.");
@@ -2044,35 +1919,29 @@ const Practice = () => {
                   className="w-full h-full min-h-[400px] border border-border focus:ring-0 text-base resize-none p-4 bg-background/50 dark:bg-background/30 rounded-md text-foreground"
                 />
               ) : (
-                /* Conversational Tutoring Interface */
-                <div className="space-y-4 min-h-[400px]">
-                  {/* User's submitted answer */}
-                  <div className="flex justify-end">
+                <div className="space-y-4">
+                  {/* User's answer bubble */}
+                  <div className="flex justify-start">
                     <div className="max-w-[85%] space-y-2">
-                      <div className="flex items-center gap-2 px-1 justify-end">
+                      <div className="flex items-center gap-2 px-1">
                         <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
                       </div>
-                      <div className="rounded-3xl rounded-tr-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-primary/10 border-primary/20">
+                      <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
+                        currentAttempt.score === currentQuestion.marks
+                          ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
+                          : currentAttempt.score <= currentQuestion.marks / 2
+                          ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
+                          : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
+                      }`}>
                         <p className="text-foreground leading-relaxed">{userAnswer}</p>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Marks display */}
+                   {/* Marks display */}
                   {currentAttempt && (
-                    <div className="flex justify-end px-1">
+                    <div className="flex justify-start px-1">
                       <div className="flex items-center gap-2">
-                        <button 
-                          onClick={() => {
-                            setShowFeedback(false);
-                            setUserAnswer("");
-                            setChatMessages([]);
-                          }}
-                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
-                          title="Try again"
-                        >
-                          <RotateCcw className="w-4 h-4" />
-                        </button>
                         <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
                           currentAttempt.score === currentQuestion.marks 
                             ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800' 
@@ -2095,345 +1964,51 @@ const Practice = () => {
                               : 'text-amber-600 dark:text-amber-400'
                           }`}>marks</span>
                         </div>
+                        <button 
+                          onClick={() => {
+                            setShowFeedback(false);
+                            setUserAnswer("");
+                          }}
+                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
+                          title="Try again"
+                        >
+                          <RotateCcw className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
                   )}
                   
-                  {/* Tutor conversation messages */}
-                  {chatMessages.map((msg, index) => {
-                    const fillGapData = msg.role === 'assistant' ? parseFillGapMessage(msg.content) : null;
-                    const multipleChoiceData = msg.role === 'assistant' ? parseMultipleChoiceMessage(msg.content) : null;
-                    const trueFalseData = msg.role === 'assistant' ? parseTrueFalseMessage(msg.content) : null;
-                    const isLastMessage = index === chatMessages.length - 1;
-                    
-                    return (
-                      <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className="max-w-[85%] space-y-2 w-full">
-                          {msg.role === 'assistant' && (
+                  {currentAttempt && (
+                    <>
+                      {/* Model answer bubble */}
+                      {currentAttempt.feedback?.modelAnswer && (
+                        <div className="flex justify-start mt-6">
+                          <div className="max-w-[85%] space-y-2">
                             <div className="flex items-center gap-2 px-1">
-                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
-                                👩‍🏫
-                              </div>
-                              <span className="text-xs font-semibold text-primary">Your Tutor</span>
+                              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
                             </div>
-                          )}
-                          
-                          {fillGapData ? (
-                            // Render fill-in-gap interactive component
-                            <div className="space-y-3">
-                              {fillGapData.intro && (
-                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
-                                  <p className="leading-relaxed">{fillGapData.intro}</p>
-                                </div>
-                              )}
-                              
-                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-blue-50/50 to-blue-100/30 dark:from-blue-950/30 dark:to-blue-900/20">
-                                <div className="mb-3">
-                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
-                                    Fill in the blank{fillGapData.correctAnswers.length > 1 ? 's' : ''}
-                                  </Badge>
-                                </div>
-                                
-                                {fillGapData.prompt && (
-                                  <p className="text-sm text-foreground/80 mb-4">{fillGapData.prompt}</p>
-                                )}
-                                
-                                <p className="text-base font-medium mb-4 text-foreground">
-                                  {fillGapData.statement}
-                                </p>
-                                
-                                {!showInteractiveResult && isLastMessage ? (
-                                  <div className="space-y-3">
-                                    <Input
-                                      placeholder={fillGapData.correctAnswers.length > 1 ? "Type answers separated by commas..." : "Type your answer..."}
-                                      value={fillGapAnswer}
-                                      onChange={(e) => setFillGapAnswer(e.target.value)}
-                                      onKeyDown={(e) => {
-                                        if (e.key === 'Enter' && fillGapAnswer.trim()) {
-                                          e.preventDefault();
-                                          setShowInteractiveResult(true);
-                                          
-                                          setTimeout(() => {
-                                            const userMsg = {
-                                              id: Date.now().toString(),
-                                              role: 'user' as const,
-                                              content: fillGapAnswer
-                                            };
-                                            setChatMessages(prev => [...prev, userMsg]);
-                                            setFillGapAnswer("");
-                                            setShowInteractiveResult(false);
-                                            sendChatMessage(fillGapAnswer);
-                                          }, 1500);
-                                        }
-                                      }}
-                                      className="text-center bg-white dark:bg-gray-800"
-                                      autoFocus
-                                    />
-                                    <Button 
-                                      onClick={() => {
-                                        if (fillGapAnswer.trim()) {
-                                          setShowInteractiveResult(true);
-                                          setTimeout(() => {
-                                            const userMsg = {
-                                              id: Date.now().toString(),
-                                              role: 'user' as const,
-                                              content: fillGapAnswer
-                                            };
-                                            setChatMessages(prev => [...prev, userMsg]);
-                                            setFillGapAnswer("");
-                                            setShowInteractiveResult(false);
-                                            sendChatMessage(fillGapAnswer);
-                                          }, 1500);
-                                        }
-                                      }}
-                                      disabled={!fillGapAnswer.trim()}
-                                      className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold py-5 disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
-                                    >
-                                      <Check className="h-4 w-4 mr-2" />
-                                      Check Answer
-                                    </Button>
-                                  </div>
-                                ) : showInteractiveResult && isLastMessage ? (
-                                  <div className="space-y-3">
-                                    <div className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-border">
-                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
-                                      <p className="font-medium text-foreground">{fillGapAnswer}</p>
-                                    </div>
-                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
-                                      <p className="text-xs text-muted-foreground mb-1">Correct answer{fillGapData.correctAnswers.length > 1 ? 's' : ''}:</p>
-                                      <p className="font-medium text-foreground">{fillGapData.correctAnswers.join(', ')}</p>
-                                    </div>
-                                  </div>
-                                ) : null}
-                              </div>
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                             </div>
-                          ) : multipleChoiceData ? (
-                            // Render multiple choice interactive component
-                            <div className="space-y-3">
-                              {multipleChoiceData.intro && (
-                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
-                                  <p className="leading-relaxed">{multipleChoiceData.intro}</p>
-                                </div>
-                              )}
-                              
-                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-purple-50/50 to-purple-100/30 dark:from-purple-950/30 dark:to-purple-900/20">
-                                <div className="mb-3">
-                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
-                                    Multiple Choice
-                                  </Badge>
-                                </div>
-                                
-                                <p className="text-base font-medium mb-4 text-foreground">
-                                  {multipleChoiceData.question}
-                                </p>
-                                
-                                {!showInteractiveResult && isLastMessage ? (
-                                  <div className="space-y-2">
-                                    {['A', 'B', 'C', 'D'].map((letter, idx) => multipleChoiceData.options[idx] && (
-                                      <button
-                                        key={letter}
-                                        onClick={() => {
-                                          setMultipleChoiceAnswer(letter);
-                                          setShowInteractiveResult(true);
-                                          setTimeout(() => {
-                                            const userMsg = {
-                                              id: Date.now().toString(),
-                                              role: 'user' as const,
-                                              content: `${letter}) ${multipleChoiceData.options[idx]}`
-                                            };
-                                            setChatMessages(prev => [...prev, userMsg]);
-                                            setMultipleChoiceAnswer(null);
-                                            setShowInteractiveResult(false);
-                                            sendChatMessage(`${letter}) ${multipleChoiceData.options[idx]}`);
-                                          }, 1500);
-                                        }}
-                                        className="w-full text-left p-4 rounded-lg border-2 border-border hover:border-primary hover:bg-primary/5 transition-all duration-200 bg-white dark:bg-gray-800"
-                                      >
-                                        <span className="font-bold text-primary mr-3">{letter})</span>
-                                        <span className="text-foreground">{multipleChoiceData.options[idx]}</span>
-                                      </button>
-                                    ))}
-                                  </div>
-                                ) : showInteractiveResult && isLastMessage ? (
-                                  <div className="space-y-3">
-                                    <div className={`p-3 rounded-lg border ${
-                                      multipleChoiceAnswer === multipleChoiceData.correctAnswer
-                                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
-                                        : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
-                                    }`}>
-                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
-                                      <p className="font-medium text-foreground">{multipleChoiceAnswer}</p>
-                                    </div>
-                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
-                                      <p className="text-xs text-muted-foreground mb-1">Correct answer:</p>
-                                      <p className="font-medium text-foreground">{multipleChoiceData.correctAnswer}</p>
-                                    </div>
-                                  </div>
-                                ) : null}
-                              </div>
-                            </div>
-                          ) : trueFalseData ? (
-                            // Render true/false interactive component
-                            <div className="space-y-3">
-                              {trueFalseData.intro && (
-                                <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
-                                  <p className="leading-relaxed">{trueFalseData.intro}</p>
-                                </div>
-                              )}
-                              
-                              <div className="border-2 border-primary/20 rounded-xl p-5 bg-gradient-to-br from-amber-50/50 to-amber-100/30 dark:from-amber-950/30 dark:to-amber-900/20">
-                                <div className="mb-3">
-                                  <Badge variant="outline" className="mb-2 bg-white/50 dark:bg-gray-800/50">
-                                    True or False
-                                  </Badge>
-                                </div>
-                                
-                                <p className="text-base font-medium mb-4 text-foreground">
-                                  {trueFalseData.statement}
-                                </p>
-                                
-                                {!showInteractiveResult && isLastMessage ? (
-                                  <div className="grid grid-cols-2 gap-3">
-                                    <Button
-                                      onClick={() => {
-                                        setTrueFalseAnswer(true);
-                                        setShowInteractiveResult(true);
-                                        setTimeout(() => {
-                                          const userMsg = {
-                                            id: Date.now().toString(),
-                                            role: 'user' as const,
-                                            content: 'True'
-                                          };
-                                          setChatMessages(prev => [...prev, userMsg]);
-                                          setTrueFalseAnswer(null);
-                                          setShowInteractiveResult(false);
-                                          sendChatMessage('True');
-                                        }, 1500);
-                                      }}
-                                      className="h-16 text-lg font-semibold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                                    >
-                                      True
-                                    </Button>
-                                    <Button
-                                      onClick={() => {
-                                        setTrueFalseAnswer(false);
-                                        setShowInteractiveResult(true);
-                                        setTimeout(() => {
-                                          const userMsg = {
-                                            id: Date.now().toString(),
-                                            role: 'user' as const,
-                                            content: 'False'
-                                          };
-                                          setChatMessages(prev => [...prev, userMsg]);
-                                          setTrueFalseAnswer(null);
-                                          setShowInteractiveResult(false);
-                                          sendChatMessage('False');
-                                        }, 1500);
-                                      }}
-                                      className="h-16 text-lg font-semibold bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                                    >
-                                      False
-                                    </Button>
-                                  </div>
-                                ) : showInteractiveResult && isLastMessage ? (
-                                  <div className="space-y-3">
-                                    <div className={`p-3 rounded-lg border ${
-                                      trueFalseAnswer === trueFalseData.correctAnswer
-                                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
-                                        : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
-                                    }`}>
-                                      <p className="text-xs text-muted-foreground mb-1">Your answer:</p>
-                                      <p className="font-medium text-foreground">{trueFalseAnswer ? 'True' : 'False'}</p>
-                                    </div>
-                                    <div className="p-3 rounded-lg border bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800">
-                                      <p className="text-xs text-muted-foreground mb-1">Correct answer:</p>
-                                      <p className="font-medium text-foreground">{trueFalseData.correctAnswer ? 'True' : 'False'}</p>
-                                      {trueFalseData.explanation && (
-                                        <p className="text-sm text-foreground/70 mt-2 italic">{trueFalseData.explanation}</p>
-                                      )}
-                                    </div>
-                                  </div>
-                                ) : null}
-                              </div>
-                            </div>
-                          ) : (
-                            // Regular text message
-                            <div className={`rounded-[20px] px-5 py-4 ${
-                              msg.role === 'user'
-                                ? 'bg-primary text-primary-foreground'
-                                : 'bg-muted text-foreground'
-                            }`}>
-                              <p className="leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                  
-                  {/* Loading state */}
-                  {isChatLoading && (
-                    <div className="flex justify-start">
-                      <div className="max-w-[85%] space-y-2">
-                        <div className="flex items-center gap-2 px-1">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white text-xs">
-                            👩‍🏫
-                          </div>
-                          <span className="text-xs font-semibold text-primary">Your Tutor</span>
-                        </div>
-                        <div className="rounded-[20px] px-5 py-4 bg-muted text-foreground">
-                          <div className="flex gap-1">
-                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"></div>
-                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Model answer reveal (only after guided conversation or if user requests) */}
-                  {currentAttempt && hintCount >= 2 && currentAttempt.feedback?.modelAnswer && (
-                    <div className="mt-6 p-4 rounded-xl border-2 border-dashed border-primary/30 bg-gradient-to-br from-emerald-50/50 to-emerald-100/30 dark:from-emerald-950/30 dark:to-emerald-900/20">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs">
-                          ✓
+                      )}
+                      
+                      {/* Teacher feedback bubble */}
+                      {currentAttempt.feedback?.whyYoursDidnt && (
+                        <div className="flex justify-start">
+                          <div className="max-w-[85%] space-y-2">
+                            <div className="flex items-center gap-2 px-1">
+                              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
+                            </div>
+                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
+                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
+                            </div>
+                          </div>
                         </div>
-                        <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Model Answer</span>
-                      </div>
-                      <p className="text-sm text-foreground/90 leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
-                    </div>
+                      )}
+                    </>
                   )}
-                  
-                  {/* Chat input at bottom of feedback area */}
-                  <div className="sticky bottom-0 pt-4 bg-gradient-to-t from-card via-card to-transparent pb-2">
-                    <div className="flex gap-2">
-                      <Input
-                        value={chatMessage}
-                        onChange={(e) => setChatMessage(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
-                            e.preventDefault();
-                            sendChatMessage(chatMessage);
-                          }
-                        }}
-                        placeholder="Type your response..."
-                        disabled={isChatLoading}
-                        className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
-                      />
-                      <Button 
-                        onClick={() => {
-                          if (chatMessage.trim()) {
-                            sendChatMessage(chatMessage);
-                          }
-                        }}
-                        disabled={!chatMessage.trim() || isChatLoading}
-                        className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
-                      >
-                        <Send className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               )}
             </div>
@@ -2452,22 +2027,16 @@ const Practice = () => {
             ) : null}
           </div>
 
-          {/* Right Pane: Your Tutor */}
+          {/* Right Pane: Ask mentiora */}
           <aside className="flex flex-col h-[600px]">
-            {/* Tutor Header */}
-            <div className="mb-4 flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                👩‍🏫
-              </div>
-              <div>
-                <h2 className="text-base font-semibold text-foreground">Your Tutor</h2>
-                <p className="text-xs text-muted-foreground">Supportive & Encouraging</p>
-              </div>
+            {/* Header */}
+            <div className="mb-4">
+              <h2 className="text-base font-semibold text-foreground">Ask mentiora</h2>
             </div>
 
-            {/* Feedback content or pre-answer help */}
+            {/* Feedback content or chat messages */}
             <div ref={chatScrollRef} className="flex-1 overflow-auto mb-4 space-y-3">
-              {chatMessages.length > 0 && !showFeedback ? (
+              {chatMessages.length > 0 ? (
                 <>
                   {chatMessages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -2492,83 +2061,68 @@ const Practice = () => {
                     </div>
                   )}
                 </>
+              ) : showFeedback && currentAttempt ? (
+                <div className="space-y-3">
+                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
+                    You got {currentAttempt.score} out of {currentQuestion.marks} marks for this question.
+                  </div>
+                  {currentAttempt.score === 0 && (
+                    <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
+                      It looks like you weren&apos;t sure how to answer, and that&apos;s completely okay!
+                    </div>
+                  )}
+                  <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
+                    Let&apos;s go through it together.
+                  </div>
+                </div>
               ) : (
                 <div className="flex flex-col h-full">
                   <div className="flex-1" />
-                  {!showFeedback && (
-                    <div className="space-y-3">
-                      <div className="text-xs text-muted-foreground mb-2 text-center">
-                        Need help understanding the question?
-                      </div>
-                      <button
-                        onClick={() => sendChatMessage("I don't understand this problem")}
-                        className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
-                      >
-                        I don&apos;t understand this problem
-                      </button>
-                      <button
-                        onClick={() => sendChatMessage("Can you walk me through this step by step")}
-                        className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
-                      >
-                        Can you walk me through this step by step
-                      </button>
-                    </div>
-                  )}
-                  {showFeedback && currentAttempt && (
-                    <div className="space-y-3">
-                      <div className="text-center text-sm text-muted-foreground p-4">
-                        <p>Your tutor feedback is shown in the main answer area</p>
-                      </div>
-                      <Button
-                        onClick={() => {
-                          const modelAnswerMessage = {
-                            id: (Date.now() + 3).toString(),
-                            role: 'assistant' as const,
-                            content: `Here's how I would write the answer to get full marks:\n\n"${currentAttempt.feedback.modelAnswer}"`
-                          };
-                          setChatMessages(prev => [...prev, modelAnswerMessage]);
-                          setChatStage('final');
-                        }}
-                        variant="outline"
-                        className="w-full border-primary/30 hover:bg-primary/5 text-foreground"
-                      >
-                        Show Model Answer
-                      </Button>
-                    </div>
-                  )}
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => sendChatMessage("I don't understand this problem")}
+                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      I don&apos;t understand this problem
+                    </button>
+                    <button
+                      onClick={() => sendChatMessage("Can you walk me through this step by step")}
+                      className="w-full text-left text-sm text-foreground hover:text-foreground/90 p-3 rounded-lg hover:bg-muted transition-colors"
+                    >
+                      Can you walk me through this step by step
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Reply input at very bottom - only show if not in feedback mode */}
-            {!showFeedback && (
-              <div className="flex gap-2">
-                <Input
-                  value={chatMessage}
-                  onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
-                      e.preventDefault();
-                      sendChatMessage(chatMessage);
-                    }
-                  }}
-                  placeholder="Ask for help..."
-                  disabled={isChatLoading}
-                  className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
-                />
-                <Button 
-                  onClick={() => {
-                    if (chatMessage.trim()) {
-                      sendChatMessage(chatMessage);
-                    }
-                  }}
-                  disabled={!chatMessage.trim() || isChatLoading}
-                  className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
-                >
-                  <Send className="h-4 w-4 rotate-45" />
-                </Button>
-              </div>
-            )}
+            {/* Reply input at very bottom - always available */}
+            <div className="flex gap-2">
+              <Input
+                value={chatMessage}
+                onChange={(e) => setChatMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey && chatMessage.trim()) {
+                    e.preventDefault();
+                    sendChatMessage(chatMessage);
+                  }
+                }}
+                placeholder="Reply"
+                disabled={isChatLoading}
+                className="h-11 px-4 flex-1 border border-border focus:ring-1 focus:ring-primary rounded-lg text-sm"
+              />
+              <Button 
+                onClick={() => {
+                  if (chatMessage.trim()) {
+                    sendChatMessage(chatMessage);
+                  }
+                }}
+                disabled={!chatMessage.trim() || isChatLoading}
+                className="h-11 w-11 p-0 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center disabled:opacity-50"
+              >
+                <Send className="h-4 w-4 rotate-45" />
+              </Button>
+            </div>
           </aside>
         </div>
       </main>
