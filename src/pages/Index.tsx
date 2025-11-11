@@ -69,14 +69,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* TEST ONBOARDING BUTTON - Fixed position */}
-      <button
-        onClick={() => setShowOnboarding(true)}
-        className="fixed bottom-6 left-6 z-[60] px-5 py-3 bg-orange-500 text-white rounded-xl shadow-2xl hover:bg-orange-600 transition-all font-bold text-sm hover:scale-105"
-      >
-        🧪 Test Onboarding
-      </button>
-
       {/* NAVIGATION */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
