@@ -889,29 +889,43 @@ const Index = () => {
                     const subjectEmojiMap: Record<string, string> = {
                       "biology": "🧬",
                       "chemistry": "🧪",
-                      "physics": "🧲",
+                      "physics": "⚛️",
                       "maths": "📐",
                       "mathematics": "📐",
-                      "english language": "✍️",
-                      "english literature": "📖",
+                      "english": "📖",
+                      "english language": "📖",
+                      "english literature": "📚",
                       "computer science": "💻",
+                      "computer": "💻",
                       "geography": "🌍",
-                      "history": "⏳",
+                      "history": "🏛️",
                       "psychology": "🧠",
                       "business": "💼",
                       "religious studies": "⛪",
+                      "religious": "⛪",
                       "combined science": "🔬",
-                      "spanish": "🇪🇸"
+                      "spanish": "🇪🇸",
+                      "music": "🎵",
+                      "statistics": "📊"
                     };
 
                     const parseSubjectId = (id: string) => {
                       const parts = id.split('-');
                       const subjectName = parts[0];
-                      const board = parts[1]?.toUpperCase();
-                      let level = "GCSE";
                       
-                      if (id.includes('alevel')) level = "A-Level";
-                      else if (id.includes('igcse')) level = "IGCSE";
+                      let board = null;
+                      let level = null;
+                      
+                      // Check for board names anywhere in the ID
+                      if (id.toLowerCase().includes('aqa')) board = 'AQA';
+                      else if (id.toLowerCase().includes('edexcel')) board = 'Edexcel';
+                      else if (id.toLowerCase().includes('ocr')) board = 'OCR';
+                      else if (id.toLowerCase().includes('eduqas')) board = 'Eduqas';
+                      
+                      // Check for levels
+                      if (id.toLowerCase().includes('alevel')) level = 'A-Level';
+                      else if (id.toLowerCase().includes('igcse')) level = 'IGCSE';
+                      else if (id.toLowerCase().includes('gcse')) level = 'GCSE';
                       
                       return { subjectName, board, level };
                     };
@@ -919,12 +933,22 @@ const Index = () => {
                     const filteredSubjects = subjects.filter(subject => {
                       const { board, level } = parseSubjectId(subject.id);
                       
-                      if (selectedExamBoard && board !== selectedExamBoard.toUpperCase()) {
-                        return false;
+                      // If exam board filter is active, only keep subjects that:
+                      // - Have a matching board, OR
+                      // - Have no board specified (show generic subjects in all boards)
+                      if (selectedExamBoard) {
+                        if (board && board !== selectedExamBoard) {
+                          return false;
+                        }
                       }
                       
-                      if (selectedQualificationLevel && level !== selectedQualificationLevel) {
-                        return false;
+                      // If level filter is active, only keep subjects that:
+                      // - Have a matching level, OR
+                      // - Have no level specified (show generic subjects in all levels)
+                      if (selectedQualificationLevel) {
+                        if (level && level !== selectedQualificationLevel) {
+                          return false;
+                        }
                       }
                       
                       return true;
@@ -933,8 +957,12 @@ const Index = () => {
                     const uniqueSubjects = Array.from(
                       new Map(
                         filteredSubjects.map(subject => {
-                          const { subjectName } = parseSubjectId(subject.id);
-                          return [subjectName, subject];
+                          // Use the actual name for deduplication, removing board/level suffixes
+                          const cleanName = subject.name
+                            .replace(/\s*\(.*?\)\s*/g, '') // Remove "(AQA)", "(Edexcel)", etc.
+                            .trim()
+                            .toLowerCase();
+                          return [cleanName, subject];
                         })
                       ).values()
                     );
@@ -958,7 +986,13 @@ const Index = () => {
 
                     return uniqueSubjects.map((subject, i) => {
                       const { subjectName } = parseSubjectId(subject.id);
-                      const emoji = subjectEmojiMap[subjectName.toLowerCase()] || "📚";
+                      const cleanSubjectName = subject.name
+                        .replace(/\s*\(.*?\)\s*/g, '')
+                        .trim()
+                        .toLowerCase();
+                      const emoji = subjectEmojiMap[cleanSubjectName] || 
+                                    subjectEmojiMap[subjectName.toLowerCase()] || 
+                                    "📚";
                       
                       return (
                         <motion.div
