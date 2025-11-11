@@ -36,6 +36,7 @@ const PredictedExam = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  const { subjects, getSubject } = useCurriculum();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -51,7 +52,7 @@ const PredictedExam = () => {
     clearNotification
   } = usePersonalizedNotifications();
   
-  const subject = curriculum.find(s => s.id === subjectId || subjectId?.startsWith(s.id + '-paper-'));
+  const subject = getSubject(subjectId || "") || subjects.find(s => subjectId?.startsWith(s.id + '-paper-'));
   
   if (!subject) {
     navigate('/predicted-questions');

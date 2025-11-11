@@ -654,8 +654,8 @@ const Dashboard = () => {
           if (subjectName === "Computer Science") return "computer-science";
           if (subjectName === "Spanish") return "spanish-aqa";
           
-          // Fallback: try to find by name in curriculum
-          const subject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+          // Fallback: try to find by name in subjects
+          const subject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
           return subject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
         };
         
@@ -722,8 +722,8 @@ const Dashboard = () => {
             if (subjectName === "Computer Science") return "computer-science";
             if (subjectName === "Spanish") return "spanish-aqa";
 
-            // Fallback: try to find by name in curriculum
-            const subject = curriculum.find(
+            // Fallback: try to find by name in subjects
+            const subject = subjects.find(
               (s) => s.name.toLowerCase() === subjectName.toLowerCase()
             );
             return subject?.id;
@@ -976,7 +976,7 @@ const Dashboard = () => {
 
   // Get topic completion status
   const getTopicStatus = (subjectId: string, topicIndex: number) => {
-    const subject = curriculum.find(s => s.id === subjectId);
+    const subject = getSubject(subjectId);
     if (!subject) return "available";
     
     const topic = subject.topics[topicIndex];
@@ -994,7 +994,7 @@ const Dashboard = () => {
 
   // Get subject progress
   const getSubjectProgress = (subjectId: string) => {
-    const subject = curriculum.find(s => s.id === subjectId);
+    const subject = getSubject(subjectId);
     if (!subject) return { completed: 0, total: 0 };
     
     const completedTopics = subject.topics.filter(topic => {
@@ -1500,7 +1500,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (location.state?.openSubjectDrawer && location.state?.subjectId) {
       console.log('Opening subject drawer from navigation state:', location.state);
-      const subject = curriculum.find(s => s.id === location.state.subjectId);
+      const subject = getSubject(location.state.subjectId);
       console.log('Found subject:', subject);
       if (subject) {
         setSelectedDrawerSubject(subject);
@@ -1662,13 +1662,13 @@ const Dashboard = () => {
         if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
         if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
         if (subjectName === "Biology") return "biology";
-        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
       const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-      const currSubject = curriculum.find(s => s.id === subjectId);
+      const currSubject = getSubject(subjectId);
       const totalTopics = currSubject?.topics.length || 1;
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const practicePercentage = Math.round(totalScore / totalTopics);
@@ -1844,8 +1844,8 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
-        // Fallback: try to find by name in curriculum
-        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        // Fallback: try to find by name in subjects
+        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
@@ -1883,7 +1883,7 @@ const Dashboard = () => {
         p.subjectId === baseSubjectName ||
         p.subjectId.split('-')[0] === baseSubjectName
       );
-      const currSubject = curriculum.find(s => s.id === subjectId);
+      const currSubject = getSubject(subjectId);
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const attemptedTopics = subjectProgress.length; // Number of topics actually attempted
       const practicePercentage = attemptedTopics > 0 ? Math.round(totalScore / attemptedTopics) : 0;
@@ -2017,10 +2017,10 @@ const Dashboard = () => {
 
 
   const filteredSubjects = userSubjects.length > 0
-    ? curriculum.filter((subject) => userSubjects.includes(subject.id))
+    ? subjects.filter((subject) => userSubjects.includes(subject.id))
     : [];
 
-  const availableSubjects = curriculum.filter((subject) => !userSubjects.includes(subject.id));
+  const availableSubjects = subjects.filter((subject) => !userSubjects.includes(subject.id));
 
   // Add subject function
   const addSubject = async (subjectId: string, targetGrade: string, examBoard: string = "AQA") => {
@@ -2028,7 +2028,7 @@ const Dashboard = () => {
     
     console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
     
-    const subject = curriculum.find(s => s.id === subjectId);
+    const subject = getSubject(subjectId);
     if (!subject) {
       console.error('❌ Subject not found in curriculum:', subjectId);
       return;
@@ -2175,8 +2175,8 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
-        // Fallback: try to find by name in curriculum
-        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        // Fallback: try to find by name in subjects
+        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
@@ -2733,13 +2733,13 @@ const Dashboard = () => {
                       ← Back
                     </Button>
                     <h2 className="text-3xl font-semibold text-foreground">
-                      {curriculum.find(s => s.id === selectedSubject)?.name}
+                      {getSubject(selectedSubject)?.name}
                     </h2>
                   </div>
 
                   <div className="flex justify-center">
                     <div className="max-w-md">
-                      {renderTopicPath(curriculum.find(s => s.id === selectedSubject))}
+                      {renderTopicPath(getSubject(selectedSubject))}
                     </div>
                   </div>
                 </div>
@@ -3008,7 +3008,7 @@ const Dashboard = () => {
                               {(() => {
                                 // Use the subject ID directly instead of mapping from name
                                 const subjectIdToMatch = selectedDrawerSubject?.id || '';
-                                const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
+                                const curriculumSubject = getSubject(subjectIdToMatch);
                                 
                                 // Helper to check if subject is A-Level
                                 const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
@@ -3144,16 +3144,16 @@ const Dashboard = () => {
                                 console.log('selectedDrawerSubject:', selectedDrawerSubject);
                                 console.log('selectedDrawerSubject.id:', selectedDrawerSubject?.id);
                                 console.log('selectedDrawerSubject.name:', selectedDrawerSubject?.name);
-                                console.log('Curriculum has physics-aqa-alevel?', curriculum.some(s => s.id === 'physics-aqa-alevel'));
-                                console.log('Total curriculum subjects:', curriculum.length);
+                                console.log('Curriculum has physics-aqa-alevel?', subjects.some(s => s.id === 'physics-aqa-alevel'));
+                                console.log('Total curriculum subjects:', subjects.length);
                                 
                                 // Get topics only from the selected drawer subject
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  // Find subject in curriculum using the exact ID
-                                  const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
-                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
+                                  // Find subject using the exact ID
+                                  const subject = getSubject(selectedDrawerSubject.id);
+                                  console.log('Found subject?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
                                   
                                   if (subject) {
                                     console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
@@ -3372,7 +3372,7 @@ const Dashboard = () => {
                                 
                                 // If no progress data, initialize from curriculum
                                 if (subjectTopics.length === 0) {
-                                  const curriculumSubject = curriculum.find(s => s.id === selectedDrawerSubject.id);
+                                  const curriculumSubject = getSubject(selectedDrawerSubject.id);
                                   if (curriculumSubject?.topics) {
                                     subjectTopics = curriculumSubject.topics.slice(0, 7).map(t => ({
                                       subjectId: selectedDrawerSubject.id,
@@ -3487,7 +3487,7 @@ const Dashboard = () => {
                                       navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       // Open the subject drawer with notes tab
-                                      const subject = curriculum.find(s => s.id === subjectId);
+                                      const subject = getSubject(subjectId);
                                       if (subject) {
                                         setSelectedDrawerSubject(subject);
                                         setDrawerTab('notes');

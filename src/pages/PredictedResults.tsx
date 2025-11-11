@@ -49,6 +49,7 @@ const PredictedResults = () => {
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
+  const { getSubject } = useCurriculum();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
 
@@ -134,7 +135,7 @@ const PredictedResults = () => {
     );
   }
 
-  const subject = curriculum.find(s => s.id === subjectId);
+  const subject = getSubject(subjectId || "");
   
   if (!subject) {
     navigate('/predicted-questions');

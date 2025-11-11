@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { subjects } = useCurriculum();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -492,12 +493,12 @@ const PredictedQuestions = () => {
                  </CardContent>
                </Card>
 
-                {curriculum
-                   .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science' && subject.id !== 'maths-aqa-alevel')
-                   .map((subject) => renderSubjectCard(subject))}
+                 {subjects
+                    .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science' && subject.id !== 'maths-aqa-alevel')
+                    .map((subject) => renderSubjectCard(subject))}
 
-                {/* Maths AQA A-Level Card */}
-                {renderSubjectCard(curriculum.find(s => s.id === 'maths-aqa-alevel')!)}
+                 {/* Maths AQA A-Level Card */}
+                 {renderSubjectCard(subjects.find(s => s.id === 'maths-aqa-alevel')!)}
             </div>
           </TabsContent>
 
@@ -626,7 +627,7 @@ const PredictedQuestions = () => {
                     </>
                   )}
 
-                  {curriculum
+                  {subjects
                     .filter((subject) => {
                        // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, physics-edexcel, and statistics-edexcel-gcse only in edexcel tab
                        if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'statistics-edexcel-gcse') {
