@@ -19,7 +19,10 @@ import {
   Send,
   Zap,
   Circle,
-  Sparkles
+  Sparkles,
+  MessageCircle,
+  Bot,
+  User
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
@@ -582,144 +585,153 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-5xl font-bold text-black mb-5 leading-tight">
-              Unlike any other app<br />
-              A <span style={{ color: '#3B82F6' }}>personalised tutor</span>.
+              How Mentiora Works
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Mentiora teaches you how to answer every question
-              in your exams to get full marks.
+              Everything you need to reach your target grade
             </p>
           </motion.div>
 
-          <div className="max-w-7xl mx-auto space-y-16">
-            {/* Block 1: Your Personal Tutor - Visual LEFT | Content RIGHT */}
+          {/* 3-Card Horizontal Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            
+            {/* Card 1: Question Practice */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-2xl p-6 shadow-lg"
             >
-              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                {/* Visual LEFT */}
-                <div className="flex-1 w-full">
-                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
-                    <div className="space-y-4">
-                      <div className="bg-[#3B82F6] text-white p-4 rounded-2xl rounded-bl-none max-w-[85%]">
-                        <p className="text-sm font-medium">Hi Mentiora, What did this question mean by potential energy?</p>
-                      </div>
-                      <div className="bg-gray-100 text-gray-900 p-4 rounded-2xl rounded-br-none max-w-[85%] ml-auto">
-                        <p className="text-sm font-semibold mb-2">Potential energy</p>
-                        <p className="text-sm">When a liquid turns into a solid, the particles lose energy and move closer together...</p>
-                      </div>
+              <div className="text-4xl mb-3">📝</div>
+              <h3 className="text-xl font-bold mb-2 text-black">Smart Question Bank</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Practice with questions pulled from real past papers - automatically filtered by topic and difficulty
+              </p>
+              
+              {/* Accurate Mini Mockup */}
+              <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
+                <div className="flex justify-between items-start mb-2">
+                  <p className="text-xs text-gray-700">
+                    Explain the process of photosynthesis in plants.
+                  </p>
+                  <span className="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-medium whitespace-nowrap ml-2">
+                    6 marks
+                  </span>
+                </div>
+                <div className="border border-gray-300 rounded-lg p-2 bg-gray-50 h-16 mb-2">
+                  <p className="text-[10px] text-gray-400">Type your answer here...</p>
+                </div>
+                <button className="w-full py-1.5 rounded-lg text-white text-xs font-medium" style={{ backgroundColor: '#2563EB' }}>
+                  Submit Answer
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Card 2: Chat Assistant */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white rounded-2xl p-6 shadow-lg"
+            >
+              <div className="text-4xl mb-3">💬</div>
+              <h3 className="text-xl font-bold mb-2 text-black">Study Helper Chat</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Get instant guidance when you're stuck - ask questions and work through problems step-by-step
+              </p>
+              
+              {/* Accurate Mini Mockup */}
+              <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <div className="px-3 py-2 text-white text-[10px] font-medium flex items-center gap-1" style={{ background: 'linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)' }}>
+                  <MessageCircle className="h-3 w-3" />
+                  Study Helper
+                </div>
+                <div className="p-3 space-y-2 bg-gray-50">
+                  {/* Assistant message */}
+                  <div className="flex gap-1.5">
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px]" style={{ background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)' }}>
+                      <Bot className="h-2.5 w-2.5 text-white" />
+                    </div>
+                    <div className="flex-1 bg-white border border-gray-200 rounded-lg p-2">
+                      <p className="text-[9px] text-gray-700">
+                        Let's work through this together! What do you think is the first step?
+                      </p>
+                    </div>
+                  </div>
+                  {/* User message */}
+                  <div className="flex gap-1.5 justify-end">
+                    <div className="bg-blue-500 rounded-lg p-2 max-w-[70%]">
+                      <p className="text-[9px] text-white">
+                        I'm not sure where to start...
+                      </p>
+                    </div>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#2563EB' }}>
+                      <User className="h-2.5 w-2.5 text-white" />
                     </div>
                   </div>
                 </div>
-
-                {/* Content RIGHT */}
-                <div className="flex-1 space-y-6">
-                  <div className="text-6xl lg:text-7xl mb-4">📕</div>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
-                    Your Personal Tutor
-                  </h3>
-                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                    Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.
-                  </p>
+                <div className="px-3 py-2 border-t border-gray-200 flex gap-1">
+                  <div className="flex-1 border border-gray-300 rounded-md px-2 py-1">
+                    <p className="text-[9px] text-gray-400">Type your message...</p>
+                  </div>
+                  <button className="px-2 py-1 rounded-md text-white" style={{ backgroundColor: '#2563EB' }}>
+                    <Send className="h-2.5 w-2.5" />
+                  </button>
                 </div>
               </div>
             </motion.div>
 
-            {/* Block 2: Your Exam Guide - Content LEFT | Visual RIGHT */}
+            {/* Card 3: Analytics */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white rounded-2xl p-6 shadow-lg"
             >
-              <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12">
-                {/* Visual RIGHT */}
-                <div className="flex-1 w-full">
-                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-bold text-gray-900 mb-4">Unit 1: Cell Biology</h4>
-                      <div className="space-y-3">
-                        <div className="p-3 bg-[#3B82F6] text-white rounded-lg font-medium">
-                          Eukaryotes and prokaryoti...
-                        </div>
-                        <div className="p-3 bg-gray-50 text-gray-700 rounded-lg">
-                          Animal and plant cells
-                        </div>
-                        <div className="p-3 bg-gray-50 text-gray-700 rounded-lg">
-                          Cell specialisation
-                        </div>
-                      </div>
-                    </div>
+              <div className="text-4xl mb-3">📊</div>
+              <h3 className="text-xl font-bold mb-2 text-black">Real-Time Analytics</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Track your predicted grade and see exactly which topics need more work
+              </p>
+              
+              {/* Accurate Mini Mockup */}
+              <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm space-y-3">
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                    <Target className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs font-semibold text-emerald-600">Mastered Topics</p>
+                    <p className="text-2xl font-bold text-emerald-600">12</p>
+                    <p className="text-[9px] text-gray-500">85%+ average score</p>
                   </div>
                 </div>
-
-                {/* Content LEFT */}
-                <div className="flex-1 space-y-6">
-                  <div className="text-6xl lg:text-7xl mb-4">📝</div>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
-                    Your Exam Guide
-                  </h3>
-                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                    Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.
-                  </p>
+                
+                <div className="space-y-1">
+                  <div className="flex justify-between text-[9px] text-gray-600">
+                    <span>Biology</span>
+                    <span>78%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5">
+                    <div className="h-1.5 rounded-full" style={{ width: '78%', backgroundColor: '#2563EB' }}></div>
+                  </div>
+                </div>
+                
+                <div className="space-y-1">
+                  <div className="flex justify-between text-[9px] text-gray-600">
+                    <span>Chemistry</span>
+                    <span>92%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5">
+                    <div className="h-1.5 rounded-full" style={{ width: '92%', backgroundColor: '#2563EB' }}></div>
+                  </div>
                 </div>
               </div>
             </motion.div>
-
-            {/* Block 3: Your Examiner - Visual LEFT | Content RIGHT */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
-            >
-              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                {/* Visual LEFT */}
-                <div className="flex-1 w-full">
-                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-bold text-gray-900 mb-4">Your marks awarded</h4>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-green-500" />
-                          <span className="text-gray-700">Leaves become damaged</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-green-500" />
-                          <span className="text-gray-700">Less chloroplasts</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
-                          <span className="text-gray-400">Less photosynthesis</span>
-                        </div>
-                      </div>
-                      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                        <p className="text-sm text-gray-700">
-                          You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content RIGHT */}
-                <div className="flex-1 space-y-6">
-                  <div className="text-6xl lg:text-7xl mb-4">✍️</div>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
-                    Your Examiner
-                  </h3>
-                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
-                    Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            
           </div>
         </div>
       </section>
