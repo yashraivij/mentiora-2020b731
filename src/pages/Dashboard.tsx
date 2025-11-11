@@ -4138,16 +4138,28 @@ const Dashboard = () => {
                               // Exclude geography-paper-2 from exam board selection
                               if (subject.id === 'geography-paper-2') return false;
                               
-                              // CRITICAL: When selecting Geography in A-Level tab, exclude all GCSE Geography variants
-                              if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
-                                // Only show geography subjects that explicitly have 'alevel' in their ID
-                                if (!subject.id.includes('alevel')) return false;
+                              // CRITICAL: Explicitly exclude base 'geography' (GCSE) when in A-level tab
+                              if (activeSubjectLevel === 'alevel' && subject.id === 'geography') {
+                                console.log('❌ Excluding GCSE geography from A-level tab:', subject.id);
+                                return false;
                               }
                               
-                              // CRITICAL: When selecting Geography in GCSE tab, exclude all A-Level Geography variants
+                              // CRITICAL: When selecting Geography in A-Level tab, ONLY show geography-aqa-alevel
+                              if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
+                                // Must be exactly 'geography-aqa-alevel'
+                                if (subject.id !== 'geography-aqa-alevel') {
+                                  console.log('❌ Excluding non-A-level geography:', subject.id);
+                                  return false;
+                                }
+                                console.log('✅ Showing A-level geography:', subject.id);
+                              }
+                              
+                              // CRITICAL: When selecting Geography in GCSE tab, exclude geography-aqa-alevel
                               if (activeSubjectLevel === 'gcse' && selectedSubjectGroup === 'Geography') {
-                                // Exclude any geography with 'alevel' in ID
-                                if (subject.id.includes('alevel')) return false;
+                                if (subject.id === 'geography-aqa-alevel') {
+                                  console.log('❌ Excluding A-level geography from GCSE tab:', subject.id);
+                                  return false;
+                                }
                               }
                               
                               console.log(`🔍 Filtering subject ${subject.id} (${subject.name}):`, {
