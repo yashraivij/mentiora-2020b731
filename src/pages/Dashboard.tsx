@@ -221,7 +221,7 @@ const Dashboard = () => {
   const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#E0F2FE] dark:bg-[#0EA5E9]/10", textColor: "text-[#0EA5E9] dark:text-[#38BDF8]", activeColor: "bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] dark:bg-gradient-to-r dark:from-[#0EA5E9] dark:to-[#38BDF8]" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#DBEAFE] dark:bg-[#3B82F6]/10", textColor: "text-[#3B82F6] dark:text-[#60A5FA]", activeColor: "bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] dark:bg-gradient-to-r dark:from-[#3B82F6] dark:to-[#60A5FA]" },
     { id: "leaderboards", label: "RANK", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
     { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
@@ -2573,7 +2573,7 @@ const Dashboard = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
+                  className="hover:bg-transparent hover:text-[#3B82F6] transition-colors duration-200"
                 >
                   <MoreVertical className="h-5 w-5" />
                 </Button>
@@ -2632,7 +2632,7 @@ const Dashboard = () => {
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="hover:bg-transparent hover:text-[#0EA5E9]"
+              className="hover:bg-transparent hover:text-[#3B82F6]"
             >
               <Menu className="h-5 w-5" />
             </Button>
@@ -2946,11 +2946,11 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.15 }}
                             >
-                              <Card className="rounded-3xl border border-[#0EA5E9]/20 bg-gradient-to-br from-white to-[#0EA5E9]/5 dark:from-gray-900 dark:to-[#0EA5E9]/10 shadow-sm hover:shadow-lg hover:shadow-[#0EA5E9]/10 transition-all duration-300">
+                              <Card className="rounded-3xl border border-[#3B82F6]/20 bg-gradient-to-br from-white to-[#3B82F6]/5 dark:from-gray-900 dark:to-[#3B82F6]/10 shadow-sm hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300">
                                 <CardContent className="p-5">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-[#0EA5E9]/10">
-                                      <Target className="h-4 w-4 text-[#0EA5E9]" />
+                                    <div className="p-1.5 rounded-lg bg-[#3B82F6]/10">
+                                      <Target className="h-4 w-4 text-[#3B82F6]" />
                                     </div>
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Accuracy</div>
                                   </div>
@@ -3105,7 +3105,7 @@ const Dashboard = () => {
                                           initial={{ width: 0 }}
                                           animate={{ width: predictedGradeValue === 0 ? '0%' : `${((predictedGradeValue - 1) / 8) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.3 }}
-                                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
                                         />
                                       </div>
                                     </div>
@@ -3208,7 +3208,7 @@ const Dashboard = () => {
                                         <Button 
                                           size="sm" 
                                           onClick={() => navigate(`/practice/${topic.subjectId}/${topic.topicId}`)}
-                                          className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25"
+                                          className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-md shadow-[#3B82F6]/25"
                                         >
                                           Revise
                                         </Button>
@@ -3252,10 +3252,10 @@ const Dashboard = () => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         onClick={() => isPremium ? navigate('/predicted-exam/geography') : navigate('/pricing')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -3264,7 +3264,7 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
                                             Start
                                           </Badge>
                                         </div>
@@ -3274,10 +3274,10 @@ const Dashboard = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.1 }}
                                         onClick={() => isPremium ? navigate('/predicted-exam/geography-paper-2') : navigate('/pricing')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -3286,7 +3286,7 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
                                             Start
                                           </Badge>
                                         </div>
@@ -3304,10 +3304,10 @@ const Dashboard = () => {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     onClick={() => isPremium ? navigate(`/predicted-exam/${selectedDrawerSubject.id}`) : navigate('/pricing')}
-                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                   >
                                     <div className="flex items-center gap-4">
-                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                         {subjectEmoji}
                                       </div>
                                       <div>
@@ -3316,7 +3316,7 @@ const Dashboard = () => {
                                       </div>
                                     </div>
                                     <div className="text-right">
-                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
+                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
                                         Start
                                       </Badge>
                                     </div>
@@ -3504,14 +3504,14 @@ const Dashboard = () => {
                                       initial={{ opacity: 0, x: -20 }}
                                       animate={{ opacity: 1, x: 0 }}
                                       transition={{ delay: i * 0.05 }}
-                                      className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm' : ''}`}
+                                      className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm' : ''}`}
                                     >
                                       <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                                         <div>
                                           <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
                                           <span className="text-xs text-[#64748B] dark:text-gray-400 ml-2">— {dayThemes[i]}</span>
                                         </div>
-                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
+                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#3B82F6] text-[#3B82F6] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
                                       </div>
                                       
                                       <div className="space-y-3">
@@ -3547,7 +3547,7 @@ const Dashboard = () => {
                                               <div className="flex gap-2 flex-shrink-0">
                                                 <Button 
                                                   size="sm" 
-                                                  className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
+                                                  className="rounded-lg bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-sm text-xs px-3 h-8"
                                                   onClick={() => handleStartActivity(activity)}
                                                 >
                                                   <Play className="h-3 w-3 mr-1" />
@@ -3622,7 +3622,7 @@ const Dashboard = () => {
                                               Start your free trial to unlock all notes, complete study plans, and detailed insights
                                             </p>
                                             <Button 
-                                              className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                                              className="rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/25 hover:shadow-xl hover:shadow-[#3B82F6]/30 transition-all duration-300 font-medium"
                                               onClick={() => navigate('/pricing')}
                                             >
                                               Start Free Trial
@@ -3674,7 +3674,7 @@ const Dashboard = () => {
                                           setSubjectDrawerOpen(false);
                                           setActiveTab("learn");
                                         }}
-                                        className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm"
+                                        className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-sm"
                                       >
                                         Start Practicing
                                       </Button>

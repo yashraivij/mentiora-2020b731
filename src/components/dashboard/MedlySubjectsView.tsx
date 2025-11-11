@@ -147,14 +147,14 @@ export function MedlySubjectsView({
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20"
       >
         {/* Premium gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0EA5E9]/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#3B82F6]/5 pointer-events-none" />
         
         {/* Animated background elements */}
         <motion.div 
-          className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
@@ -166,7 +166,7 @@ export function MedlySubjectsView({
           }}
         />
         <motion.div 
-          className="absolute bottom-0 left-0 w-64 h-64 bg-[#38BDF8]/5 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-64 h-64 bg-[#60A5FA]/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.4, 0.2]
@@ -186,7 +186,7 @@ export function MedlySubjectsView({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight"
+                className="text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight"
               >
                 Your Subjects
               </motion.h1>
@@ -207,7 +207,7 @@ export function MedlySubjectsView({
             >
               <Button 
                 onClick={() => setShowAddSubjects(true)}
-                className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                className="rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/25 hover:shadow-xl hover:shadow-[#3B82F6]/30 transition-all duration-300 font-medium"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
@@ -234,11 +234,11 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                        <Target className="h-5 w-5 text-[#0EA5E9]" />
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
+                        <Target className="h-5 w-5 text-[#3B82F6]" />
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Overall Progress</span>
                     </div>
@@ -247,12 +247,12 @@ export function MedlySubjectsView({
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.3, type: "spring" }}
-                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                        className="text-3xl font-bold text-foreground"
                       >
                         {safeProfile.overallPred}
                       </motion.span>
                       <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">→</span>
-                      <span className="text-xl font-bold text-[#0EA5E9]">{safeProfile.overallTarget}</span>
+                      <span className="text-xl font-bold text-[#3B82F6]">{safeProfile.overallTarget}</span>
                     </div>
                     <div className="mt-3 flex gap-2">
                       <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden">
@@ -260,7 +260,7 @@ export function MedlySubjectsView({
                           initial={{ width: 0 }}
                           animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
                           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
                         />
                       </div>
                     </div>
@@ -291,7 +291,7 @@ export function MedlySubjectsView({
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.35, type: "spring" }}
-                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      className="text-3xl font-bold text-foreground"
                     >
                       {Math.round(safeProfile.retention * 100)}%
                     </motion.div>
@@ -323,7 +323,7 @@ export function MedlySubjectsView({
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.4, type: "spring" }}
-                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      className="text-3xl font-bold text-foreground"
                     >
                       {safeProfile.bestWindow}
                     </motion.div>
@@ -343,11 +343,11 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.25 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
-                        <Calendar className="h-5 w-5 text-[#0EA5E9]" />
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
+                        <Calendar className="h-5 w-5 text-[#3B82F6]" />
                       </div>
                       <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week</span>
                     </div>
@@ -355,7 +355,7 @@ export function MedlySubjectsView({
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.45, type: "spring" }}
-                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      className="text-3xl font-bold text-foreground"
                     >
                       {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
                     </motion.div>
@@ -375,13 +375,13 @@ export function MedlySubjectsView({
       {/* Subject Grid */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Your Subjects</h2>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Your Subjects</h2>
           {insightFilter && (
             <Button 
               variant="ghost"
               size="sm"
               onClick={() => setInsightFilter(null)}
-              className="text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 rounded-xl"
+              className="text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl"
             >
               Clear filter <X className="h-4 w-4 ml-1" />
             </Button>
@@ -397,7 +397,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
+                className="group relative rounded-3xl border border-border hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/40 hover:shadow-[0_16px_48px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-background to-muted/20"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -434,8 +434,8 @@ export function MedlySubjectsView({
                     </motion.div>
                   </div>
                   
-                  {/* Subject Name */}
-                  <h3 className="text-xl font-bold text-[#0F172A] dark:text-white mb-4 line-clamp-2 tracking-tight">
+                   {/* Subject Name */}
+                  <h3 className="text-xl font-bold text-foreground mb-4 line-clamp-2 tracking-tight">
                     {subject.name.replace(/\s*\(A-Level\)/g, '')}
                   </h3>
                   
@@ -444,7 +444,7 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className={`text-base font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                        <span className={`text-base font-bold text-foreground ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
                             console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
                             
@@ -504,14 +504,14 @@ export function MedlySubjectsView({
                             return `${((Math.max(1, numericPred) - 1) / 8) * 100}%`;
                           })() }}
                           transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
                         />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target</span>
-                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
+                        <span className="text-base font-bold text-foreground">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             
@@ -560,7 +560,7 @@ export function MedlySubjectsView({
                     <Button 
                       size="sm"
                       variant="ghost"
-                      className="w-full rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 justify-center font-semibold border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200"
+                      className="w-full rounded-xl text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 justify-center font-semibold border border-[#3B82F6]/20 hover:border-[#3B82F6]/30 transition-all duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -571,7 +571,7 @@ export function MedlySubjectsView({
                     </Button>
                     <Button 
                       size="sm"
-                      className="w-full rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25 hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all duration-300"
+                      className="w-full rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-md shadow-[#3B82F6]/25 hover:shadow-lg hover:shadow-[#3B82F6]/30 transition-all duration-300"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -594,19 +594,19 @@ export function MedlySubjectsView({
             transition={{ delay: 0.1 * filteredMockSubjects.length }}
           >
             <Card 
-              className="group rounded-3xl border-2 border-dashed border-[#0EA5E9]/30 hover:border-[#0EA5E9]/60 hover:bg-gradient-to-br hover:from-[#0EA5E9]/5 hover:to-[#38BDF8]/5 transition-all duration-500 cursor-pointer h-full"
+              className="group rounded-3xl border-2 border-dashed border-[#3B82F6]/30 hover:border-[#3B82F6]/60 hover:bg-gradient-to-br hover:from-[#3B82F6]/5 hover:to-[#60A5FA]/5 transition-all duration-500 cursor-pointer h-full"
               onClick={() => setShowAddSubjects(true)}
             >
               <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[400px]">
                 <motion.div 
-                  className="p-6 rounded-full bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 mb-6 group-hover:scale-110 transition-transform duration-300"
+                  className="p-6 rounded-full bg-gradient-to-br from-[#3B82F6]/10 to-[#60A5FA]/10 mb-6 group-hover:scale-110 transition-transform duration-300"
                   whileHover={{ rotate: 90 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
-                  <Plus className="h-10 w-10 text-[#0EA5E9]" />
+                  <Plus className="h-10 w-10 text-[#3B82F6]" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-[#0F172A] mb-2">Add subject</h3>
-                <p className="text-sm text-[#64748B] text-center font-medium">
+                <h3 className="text-xl font-bold text-foreground mb-2">Add subject</h3>
+                <p className="text-sm text-muted-foreground text-center font-medium">
                   Start tracking a new subject
                 </p>
               </CardContent>
@@ -623,9 +623,9 @@ export function MedlySubjectsView({
         transition={{ delay: 0.6 }}
         className="text-center py-12 px-6"
       >
-        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#0EA5E9]/5 via-white to-[#38BDF8]/5 dark:from-[#0EA5E9]/10 dark:via-gray-800 dark:to-[#38BDF8]/10 border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
+        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#3B82F6]/5 via-white to-[#60A5FA]/5 dark:from-[#3B82F6]/10 dark:via-gray-800 dark:to-[#60A5FA]/10 border border-[#3B82F6]/10 dark:border-[#3B82F6]/20">
           <p className="text-lg text-[#475569] dark:text-gray-300 font-medium leading-relaxed">
-            Small, consistent study sessions beat cramming. <span className="text-[#0EA5E9] font-bold">You've got this.</span>
+            Small, consistent study sessions beat cramming. <span className="text-[#3B82F6] font-bold">You've got this.</span>
           </p>
         </div>
       </motion.div>
