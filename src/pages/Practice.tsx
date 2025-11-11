@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { curriculum, Question } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
+import { Question } from "@/data/curriculum/types";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
@@ -70,6 +71,7 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  const { subjects, getSubject, getTopic } = useCurriculum();
   const [showPricingModal, setShowPricingModal] = useState(false);
   
   // Subject colors mapping
@@ -98,7 +100,7 @@ const Practice = () => {
   // Debug logging at component entry
   console.log('=== Practice Component Rendered ===');
   console.log('URL params:', { subjectId, topicId });
-  console.log('Available subjects:', curriculum.map(s => ({ id: s.id, name: s.name })));
+  console.log('Available subjects:', subjects.map(s => ({ id: s.id, name: s.name })));
   
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -179,7 +181,7 @@ const Practice = () => {
 
   const { showMPReward } = useMPRewards();
 
-  const subject = curriculum.find(s => s.id === subjectId);
+  const subject = getSubject(subjectId || "");
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
@@ -780,7 +782,7 @@ const Practice = () => {
     let fetchedPredictedGrade: number | null = null;
     if (user?.id && subjectId) {
       try {
-        const subject = curriculum.find(s => s.id === subjectId);
+        const subject = getSubject(subjectId);
         const subjectName = subject?.name || '';
         
         console.log('🔍 Fetching predicted grade for:', { subjectId, subjectName, userId: user.id });
@@ -831,8 +833,8 @@ const Practice = () => {
     // Update subject_performance table in Supabase
     if (user?.id && subjectId) {
       try {
-        const subject = curriculum.find(s => s.id === subjectId);
-        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
+        const subject = getSubject(subjectId);
+        const examBoard = subjectId.includes('aqa') ? 'AQA' :
                          subjectId.includes('edexcel') ? 'Edexcel' : 
                          subjectId.includes('ocr') ? 'OCR' : 'AQA';
         

@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StressTracker } from "@/lib/stressTracker";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import { cn } from "@/lib/utils";
 
 interface DashboardStressMonitorProps {
@@ -22,6 +22,8 @@ export const DashboardStressMonitor = ({
   userProgress, 
   onSubjectClick 
 }: DashboardStressMonitorProps) => {
+  const { subjects } = useCurriculum();
+  
   // Always show the component, even without data
 
   // Get stress levels for all subjects with progress
@@ -35,7 +37,7 @@ export const DashboardStressMonitor = ({
   const subjectStressLevels = userId && subjectsWithProgress.length > 0 
     ? subjectsWithProgress.map(subjectId => {
         const stressLevel = StressTracker.getStressLevel(userId, subjectId);
-        const subject = curriculum.find(s => s.id === subjectId);
+        const subject = subjects.find(s => s.id === subjectId);
         return {
           subjectId,
           subjectName: subject?.name || subjectId,

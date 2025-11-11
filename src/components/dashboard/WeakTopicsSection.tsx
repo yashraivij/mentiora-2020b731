@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, ArrowRight, CheckCircle } from "lucide-react";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 
 interface WeakTopicsSectionProps {
   weakTopics: string[];
@@ -17,8 +17,10 @@ interface WeakTopicsSectionProps {
 }
 
 export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: WeakTopicsSectionProps) => {
+  const { subjects } = useCurriculum();
+  
   const getTopicInfo = (topicId: string) => {
-    for (const subject of curriculum) {
+    for (const subject of subjects) {
       const topic = subject.topics.find(t => t.id === topicId);
       if (topic) {
         return { subject, topic };

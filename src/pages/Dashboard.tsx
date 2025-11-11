@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -143,6 +143,7 @@ const Dashboard = () => {
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
   const { showMPReward } = useMPRewards();
+  const { subjects, getSubject } = useCurriculum();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();

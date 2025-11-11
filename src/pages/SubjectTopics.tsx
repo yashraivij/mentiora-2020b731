@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import { ArrowLeft, Target, TrendingUp, Clock, Zap, Brain, Flame, CheckCircle2, Rocket, Send, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -22,13 +22,14 @@ const SubjectTopics = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { subjects, getSubject } = useCurriculum();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
   const [targetGrade, setTargetGrade] = useState<string | null>(null);
   const [showGradeSetup, setShowGradeSetup] = useState(true);
   const [completedTasks, setCompletedTasks] = useState<boolean[]>([false, false, false]);
   const [chatMessage, setChatMessage] = useState("");
 
-  const subject = curriculum.find(s => s.id === subjectId);
+  const subject = getSubject(subjectId || "");
 
   useEffect(() => {
     const loadProgress = async () => {

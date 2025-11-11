@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Clock, AlertCircle, CheckCircle, Crown, Target, BookOpen, FileText } from "lucide-react";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useToast } from "@/hooks/use-toast";
