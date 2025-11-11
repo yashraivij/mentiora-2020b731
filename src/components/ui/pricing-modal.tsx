@@ -127,27 +127,21 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
       <DialogContent className="max-w-[900px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <motion.div 
-            className="flex items-center justify-center gap-4 mb-4"
+            className="flex flex-col items-center justify-center mb-4"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold text-gray-900">Start</h1>
-            <motion.div 
-              className="relative"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
-            >
-              <div className="w-16 h-16 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
-                <img 
-                  src={mentioraLogo} 
-                  alt="Mentiora" 
-                  className="w-10 h-10"
-                />
-              </div>
-            </motion.div>
-            <h1 className="text-4xl font-bold text-gray-900">for free.</h1>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full mb-4">
+              <img src={mentioraLogo} alt="Mentiora" className="h-5 w-5" />
+              <span className="text-sm font-semibold text-gray-900">Mentiora</span>
+            </div>
+            <h1 className="text-4xl font-bold text-center text-gray-900">
+              All-in-one exam prep.{" "}
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                One simple price.
+              </span>
+            </h1>
           </motion.div>
         </DialogHeader>
 
@@ -159,7 +153,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            Pay just once to get all-in-one access until {currentPricing.endDate}, or subscribe to on-the-go learning.
+            Study smarter with 2,500+ questions, AI tutoring, and predicted papers—all built for your exact exam board.
           </motion.p>
 
           {!showParentForm ? (
@@ -174,7 +168,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               >
                 <button
                   onClick={() => setShowParentForm(true)}
-                  className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
+                  className="text-blue-600 font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
                 >
                   Ask my parents <ChevronRight className="w-4 h-4" />
                 </button>
@@ -190,9 +184,9 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               >
                 <button
                   onClick={() => setExamYear("2026")}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2 rounded-xl text-sm font-semibold transition-all ${
                     examYear === "2026"
-                      ? "bg-gray-900 text-white"
+                      ? "bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-500/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -200,9 +194,9 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                 </button>
                 <button
                   onClick={() => setExamYear("2027")}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2 rounded-xl text-sm font-semibold transition-all ${
                     examYear === "2027"
-                      ? "bg-gray-900 text-white"
+                      ? "bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-500/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -227,70 +221,56 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Card className="border-2 border-gray-200 rounded-3xl p-6 hover:shadow-lg transition-shadow">
-                      <h3 className="text-xl font-bold mb-2">Monthly</h3>
-                      <p className="text-gray-600 text-sm mb-4">Monthly billing, full access, cancel anytime.</p>
+                    <Card className="border-2 border-gray-200/50 rounded-2xl p-8 shadow-xl backdrop-blur-sm bg-white/80 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-500/10 to-cyan-400/10 rounded-full blur-3xl -z-10" />
                       
-                      <div className="mb-6">
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-4xl font-bold text-gray-900">£{currentPricing.monthlyPrice}</span>
-                          <span className="text-gray-600 text-sm">/month</span>
+                      <div className="flex items-start justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold mb-2 text-gray-900">7-Day Free Trial</h3>
+                          <p className="text-gray-600">Start free, then continue monthly.</p>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">
-                          ~£{(parseFloat(currentPricing.monthlyPrice) * parseFloat(currentPricing.monthsUntilExam)).toFixed(0)} total until {examYear} exams
-                        </p>
+                        <div className="px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-full text-xs font-bold">
+                          Popular
+                        </div>
+                      </div>
+                      
+                      <div className="mb-8">
+                        <div className="flex items-baseline gap-2 mb-1">
+                          <span className="text-5xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">£0</span>
+                          <span className="text-gray-600">/week</span>
+                        </div>
+                        <p className="text-gray-500">Then £{currentPricing.monthlyPrice}/month after trial</p>
                       </div>
 
                       <Button
                         onClick={handleUpgrade}
-                        variant="outline"
-                        className="w-full h-12 rounded-full text-sm font-semibold border-2 border-gray-900 hover:bg-gray-50"
+                        className="w-full h-14 rounded-2xl text-base font-bold bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all mb-3"
                       >
-                        Subscribe Monthly
+                        Start Free Trial
                       </Button>
 
-                      <p className="text-xs text-gray-500 mt-3 text-center">
-                        £{currentPricing.monthlyPrice} billed monthly. Cancel anytime.
+                      <p className="text-xs text-gray-500 text-center">
+                        Cancel anytime • No commitment • Full access
                       </p>
+                      
+                      <div className="mt-6 pt-6 border-t border-gray-200">
+                        <button
+                          onClick={handleOneTimePayment}
+                          className="w-full text-sm text-center text-gray-600 hover:text-gray-900"
+                        >
+                          Or get <span className="font-semibold text-blue-600">{examYear} Exam Access for £{currentPricing.oneTimePrice}</span> <span className="ml-1 px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-xs font-bold">Save {currentPricing.savingsPercent}</span>
+                        </button>
+                      </div>
                     </Card>
                   </motion.div>
 
-                  {/* Exam Access Card */}
+                  {/* Removed second card */}
                   <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    <Card className="border-2 border-gray-200 rounded-3xl p-6 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
-                      <div className="absolute top-4 right-4 bg-white text-[#00A8FF] px-3 py-1 rounded-full text-xs font-bold">
-                        Save {currentPricing.savingsPercent}
-                      </div>
-                      
-                      <h3 className="text-xl font-bold mb-2">{examYear} Exams</h3>
-                      <p className="mb-4 text-white/90 text-sm">
-                        One-time payment. Get unlimited access until {currentPricing.endDate}.
-                      </p>
-                      
-                      <div className="mb-6">
-                        <div className="flex items-baseline gap-2 mb-1">
-                          <span className="text-4xl font-bold">£{currentPricing.oneTimePrice}</span>
-                          <span className="text-white/90 text-sm">once</span>
-                        </div>
-                        <span className="text-white/70 line-through">{currentPricing.originalPrice}</span>
-                      </div>
-
-                      <Button
-                        onClick={handleOneTimePayment}
-                        className="w-full h-12 rounded-full text-sm font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
-                      >
-                        Get Exam Access
-                      </Button>
-
-                      <p className="text-xs text-white/80 mt-3 text-center">
-                        £{currentPricing.oneTimePrice} billed once. Offer ends {currentPricing.offerEnds}.
-                      </p>
-                    </Card>
                   </motion.div>
                 </motion.div>
               </AnimatePresence>
@@ -313,7 +293,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.4, delay: i * 0.05 }}
                     >
-                      <Check className="w-5 h-5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                      <Check className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                       <p className="text-gray-700 text-sm leading-relaxed">{feature}</p>
                     </motion.div>
                   ))}
@@ -397,9 +377,9 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   >
                     <Button 
                       onClick={handleSendParentEmail}
-                      className="w-full h-12 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-white font-semibold"
+                      className="w-full h-12 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/30"
                     >
-                      Send Email
+                      Send Email to My Parents
                     </Button>
                   </motion.div>
                 </div>
