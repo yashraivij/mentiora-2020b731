@@ -9,16 +9,23 @@ export const useCurriculum = () => {
 
   useEffect(() => {
     const loadSubjects = async () => {
+      console.log('📚 useCurriculum: Starting to load curriculum...');
       try {
         setIsLoading(true);
         const data = await CurriculumService.getSubjects();
+        console.log('📚 useCurriculum: Successfully loaded curriculum', {
+          subjectCount: data.length,
+          subjects: data.map(s => ({ id: s.id, name: s.name, topicCount: s.topics.length }))
+        });
         setSubjects(data);
         setError(null);
       } catch (err) {
-        console.error('Error loading curriculum:', err);
+        console.error('❌ useCurriculum: Error loading curriculum:', err);
+        console.error('❌ Error details:', JSON.stringify(err, null, 2));
         setError(err as Error);
       } finally {
         setIsLoading(false);
+        console.log('📚 useCurriculum: Loading complete');
       }
     };
 

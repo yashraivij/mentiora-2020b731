@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
-import { Question } from "@/data/curriculum";
+import { Question } from "@/data/curriculum/types";
+import { CurriculumService } from "@/services/curriculumService";
 
 interface NotebookEntry {
   subject: string;
@@ -43,7 +44,7 @@ export class NotebookGenerator {
       });
 
       // Find the actual subject and topic names from curriculum
-      const { curriculum } = await import('@/data/curriculum');
+      const curriculum = await CurriculumService.getSubjects();
       const subject = curriculum.find(s => s.id === subjectId);
       const subjectName = subject?.name || subjectId;
       
