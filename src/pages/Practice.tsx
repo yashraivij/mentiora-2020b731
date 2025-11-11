@@ -9,8 +9,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -75,13 +75,45 @@ const Practice = () => {
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [selectedTutorId, setSelectedTutorId] = useState<string>('miss_patel');
   const [tutorName, setTutorName] = useState<string>('Miss Patel');
+  const [tutorAvatar, setTutorAvatar] = useState<string>('/lovable-uploads/miss-patel-avatar.png');
+  const [showTutorModal, setShowTutorModal] = useState(false);
   
   const TUTOR_OPTIONS = [
-    { id: 'miss_patel', name: 'Miss Patel', avatar: '/lovable-uploads/miss-patel-avatar.png' },
-    { id: 'mr_chen', name: 'Mr. Chen', avatar: '/lovable-uploads/mr-chen-avatar.png' },
-    { id: 'ms_johnson', name: 'Ms. Johnson', avatar: '/lovable-uploads/ms-johnson-avatar.png' },
-    { id: 'mr_williams', name: 'Mr. Williams', avatar: '/lovable-uploads/mr-williams-avatar.png' },
-    { id: 'dr_singh', name: 'Dr. Singh', avatar: '/lovable-uploads/dr-singh-avatar.png' }
+    { 
+      id: 'miss_patel', 
+      name: 'Miss Patel', 
+      avatar: '/lovable-uploads/miss-patel-avatar.png',
+      personality: 'Warm and encouraging',
+      specialty: 'Breaks down complex topics into simple steps'
+    },
+    { 
+      id: 'mr_chen', 
+      name: 'Mr. Chen', 
+      avatar: '/lovable-uploads/mr-chen-avatar.png',
+      personality: 'Analytical and precise',
+      specialty: 'Excels at mathematical reasoning and logic'
+    },
+    { 
+      id: 'ms_johnson', 
+      name: 'Ms. Johnson', 
+      avatar: '/lovable-uploads/ms-johnson-avatar.png',
+      personality: 'Creative and inspiring',
+      specialty: 'Makes learning fun with real-world examples'
+    },
+    { 
+      id: 'mr_williams', 
+      name: 'Mr. Williams', 
+      avatar: '/lovable-uploads/mr-williams-avatar.png',
+      personality: 'Patient and supportive',
+      specialty: 'Great at building confidence in struggling students'
+    },
+    { 
+      id: 'dr_singh', 
+      name: 'Dr. Singh', 
+      avatar: '/lovable-uploads/dr-singh-avatar.png',
+      personality: 'Challenging and thorough',
+      specialty: 'Pushes high-achievers to reach their full potential'
+    }
   ];
   
   // Subject colors mapping
@@ -248,6 +280,7 @@ const Practice = () => {
           const tutor = TUTOR_OPTIONS.find(t => t.id === data.selected_tutor_id);
           if (tutor) {
             setTutorName(tutor.name);
+            setTutorAvatar(tutor.avatar);
           }
         }
       }
@@ -269,6 +302,8 @@ const Practice = () => {
       const tutor = TUTOR_OPTIONS.find(t => t.id === newTutorId);
       if (tutor) {
         setTutorName(tutor.name);
+        setTutorAvatar(tutor.avatar);
+        setShowTutorModal(false);
         toast.success(`Switched to ${tutor.name}`);
       }
     }
@@ -2082,27 +2117,21 @@ const Practice = () => {
 
           {/* Right Pane: Ask tutor */}
           <aside className="flex flex-col h-[600px]">
-            {/* Header with tutor selector */}
-            <div className="mb-4 flex items-center gap-2">
+            {/* Header with tutor avatar and change button */}
+            <div className="mb-4 flex items-center gap-3">
+              <Avatar className="w-8 h-8">
+                <AvatarImage src={tutorAvatar} alt={tutorName} />
+                <AvatarFallback>{tutorName[0]}</AvatarFallback>
+              </Avatar>
               <h2 className="text-base font-semibold text-foreground">Ask {tutorName}</h2>
-              <Select value={selectedTutorId} onValueChange={handleTutorChange}>
-                <SelectTrigger className="w-[140px] h-8 text-xs">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {TUTOR_OPTIONS.map((tutor) => (
-                    <SelectItem key={tutor.id} value={tutor.id}>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="w-5 h-5">
-                          <AvatarImage src={tutor.avatar} alt={tutor.name} />
-                          <AvatarFallback>{tutor.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <span>{tutor.name}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="ml-auto h-7 text-xs text-muted-foreground hover:text-foreground"
+                onClick={() => setShowTutorModal(true)}
+              >
+                Change
+              </Button>
             </div>
 
             {/* Feedback content or chat messages */}
@@ -2271,6 +2300,36 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
+
+      {/* Tutor Selection Modal */}
+      <Dialog open={showTutorModal} onOpenChange={setShowTutorModal}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Select Your Tutor</DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+            {TUTOR_OPTIONS.map((tutor) => (
+              <button
+                key={tutor.id}
+                onClick={() => handleTutorChange(tutor.id)}
+                className={`p-4 rounded-lg border-2 transition-all hover:border-primary hover:shadow-md ${
+                  selectedTutorId === tutor.id 
+                    ? 'border-primary bg-primary/5' 
+                    : 'border-border bg-card'
+                }`}
+              >
+                <Avatar className="w-20 h-20 mx-auto mb-3">
+                  <AvatarImage src={tutor.avatar} alt={tutor.name} />
+                  <AvatarFallback>{tutor.name[0]}</AvatarFallback>
+                </Avatar>
+                <h3 className="font-semibold text-sm mb-1">{tutor.name}</h3>
+                <p className="text-xs text-muted-foreground mb-2">{tutor.personality}</p>
+                <p className="text-xs text-muted-foreground italic">{tutor.specialty}</p>
+              </button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Pricing Modal */}
       <PricingModal 
