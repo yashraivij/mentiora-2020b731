@@ -50,11 +50,11 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
         
         if (profile?.selected_tutor_id) {
           const TUTOR_OPTIONS = [
-            { id: 'miss_patel', name: 'Miss Patel', avatar: '/src/assets/avatars/cat-avatar.png' },
-            { id: 'mr_chen', name: 'Mr. Chen', avatar: '/src/assets/avatars/bear-avatar.png' },
-            { id: 'ms_johnson', name: 'Ms. Johnson', avatar: '/src/assets/avatars/fox-avatar.png' },
-            { id: 'mr_williams', name: 'Mr. Williams', avatar: '/src/assets/avatars/dog-avatar.png' },
-            { id: 'dr_singh', name: 'Dr. Singh', avatar: '/src/assets/avatars/rabbit-avatar.png' }
+            { id: 'miss_patel', name: 'Miss Patel', avatar: '/lovable-uploads/miss-patel-avatar.png' },
+            { id: 'mr_chen', name: 'Mr. Chen', avatar: '/lovable-uploads/mr-chen-avatar.png' },
+            { id: 'ms_johnson', name: 'Ms. Johnson', avatar: '/lovable-uploads/ms-johnson-avatar.png' },
+            { id: 'mr_williams', name: 'Mr. Williams', avatar: '/lovable-uploads/mr-williams-avatar.png' },
+            { id: 'dr_singh', name: 'Dr. Singh', avatar: '/lovable-uploads/dr-singh-avatar.png' }
           ];
           const tutor = TUTOR_OPTIONS.find(t => t.id === profile.selected_tutor_id);
           if (tutor) {

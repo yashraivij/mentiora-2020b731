@@ -151,35 +151,35 @@ const TUTOR_OPTIONS = [
   {
     id: 'miss_patel',
     name: 'Miss Patel',
-    avatar: '/src/assets/avatars/cat-avatar.png',
+    avatar: '/lovable-uploads/miss-patel-avatar.png',
     personality: 'Patient and supportive, breaks down complex topics step-by-step',
     specialty: 'Sciences'
   },
   {
     id: 'mr_chen',
     name: 'Mr. Chen',
-    avatar: '/src/assets/avatars/bear-avatar.png',
+    avatar: '/lovable-uploads/mr-chen-avatar.png',
     personality: 'Methodical and clear, focuses on understanding core concepts',
     specialty: 'Maths & Physics'
   },
   {
     id: 'ms_johnson',
     name: 'Ms. Johnson',
-    avatar: '/src/assets/avatars/fox-avatar.png',
+    avatar: '/lovable-uploads/ms-johnson-avatar.png',
     personality: 'Energetic and creative, makes learning fun with examples',
     specialty: 'English & Humanities'
   },
   {
     id: 'mr_williams',
     name: 'Mr. Williams',
-    avatar: '/src/assets/avatars/dog-avatar.png',
+    avatar: '/lovable-uploads/mr-williams-avatar.png',
     personality: 'Straight to the point, focuses on exam technique',
     specialty: 'All subjects'
   },
   {
     id: 'dr_singh',
     name: 'Dr. Singh',
-    avatar: '/src/assets/avatars/rabbit-avatar.png',
+    avatar: '/lovable-uploads/dr-singh-avatar.png',
     personality: 'Detailed and thorough, ensures deep understanding',
     specialty: 'Advanced topics'
   }
@@ -424,19 +424,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <p className="text-[15px] text-[#6B7280] mb-5">Choose a tutor who will guide you when you need help</p>
                 
                 {/* Tutor grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-[360px] overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto">
                   {TUTOR_OPTIONS.map((tutor) => (
                     <button
                       key={tutor.id}
                       onClick={() => setOnboardingData({ ...onboardingData, selectedTutor: tutor.id })}
-                      className={`relative p-3 rounded-xl border-2 transition-all ${
+                      className={`relative p-4 rounded-xl border-2 transition-all ${
                         onboardingData.selectedTutor === tutor.id
                           ? 'border-[#00B4D8] bg-[#F0F9FF] scale-[1.02]'
                           : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:shadow-lg'
                       }`}
                     >
                       {/* Avatar */}
-                      <div className="w-16 h-16 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#E5E7EB]">
+                      <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#E5E7EB]">
                         <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
                       </div>
                       
@@ -444,7 +444,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <h4 className="text-sm font-bold text-center mb-1">{tutor.name}</h4>
                       
                       {/* Personality */}
-                      <p className="text-xs text-[#6B7280] text-center line-clamp-2 mb-1">{tutor.personality}</p>
+                      <p className="text-xs text-[#6B7280] text-center line-clamp-3 mb-1">{tutor.personality}</p>
                       
                       {/* Specialty */}
                       <p className="text-[10px] text-[#00B4D8] text-center font-medium">{tutor.specialty}</p>
