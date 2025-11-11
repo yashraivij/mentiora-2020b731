@@ -35,6 +35,7 @@ import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Index = () => {
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [sliderMonths, setSliderMonths] = useState(6);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -1374,241 +1376,178 @@ const Index = () => {
       </section>
 
 
-      {/* PRICING SECTION */}
-      <section id="pricing" className="py-20 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
+      {/* VALUE CALCULATOR SECTION */}
+      <section id="pricing" className="py-20 px-6 relative overflow-hidden">
+        {/* Dark gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        
+        <div className="max-w-5xl mx-auto relative z-10">
           {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-5xl font-bold leading-tight mb-5">
-              <span className="text-black">Personalised tutoring</span>
-              <br />
-              <span style={{ color: '#3B82F6' }}>at a fraction of the cost</span>
+            <h2 className="text-5xl font-bold leading-tight mb-5 text-white">
+              Calculate your savings
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Trained to be more effective than personal tutoring,
-              <br />
-              at just 5% of the cost of private tuition.
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              See how much you'll save compared to private tutoring
             </p>
           </motion.div>
 
-          {/* Main Comparison - Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
-            {/* LEFT COLUMN: Effectiveness Graph */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-              className="w-full"
-            >
-              {/* Graph Title */}
-              <h3 className="text-2xl font-bold mb-6 md:mb-8" style={{ color: '#3B82F6' }}>
-                68% grade improvement
-              </h3>
-
-              {/* Graph Container */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-8 h-auto min-h-[300px] md:h-[450px]">
-                <svg
-                  viewBox="0 0 600 380"
-                  className="w-full h-full"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  {/* Y-axis label (rotated) */}
-                  <text
-                    x="-190"
-                    y="25"
-                    transform="rotate(-90)"
-                    className="text-sm fill-gray-500"
-                    textAnchor="middle"
-                    fontSize="14"
-                  >
-                    Average grades
-                  </text>
-
-                  {/* X-axis label */}
-                  <text
-                    x="350"
-                    y="365"
-                    className="text-sm fill-gray-500"
-                    textAnchor="middle"
-                    fontSize="14"
-                  >
-                    Hours spent learning
-                  </text>
-
-                  {/* Gray curve - Non-personal education */}
-                  <motion.path
-                    d="M 80,300 Q 200,240 350,210 Q 480,190 560,185"
-                    fill="none"
-                    stroke="#D1D5DB"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                  />
-
-                  {/* Blue curve - Personalised education */}
-                  <motion.path
-                    d="M 80,300 Q 180,120 300,70 Q 420,30 520,20"
-                    fill="none"
-                    stroke="#3B82F6"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                  />
-
-                  {/* Personalised education label */}
-                  <motion.g
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ delay: 1.7, duration: 0.4 }}
-                  >
-                    {/* Mentiora logo image */}
-                    <image
-                      href={mentioraLogo}
-                      x="355"
-                      y="56"
-                      width="20"
-                      height="20"
-                    />
-                    
-                    {/* Label text */}
-                    <text
-                      x="382"
-                      y="71"
-                      className="text-base fill-black font-semibold"
-                      fontSize="16"
-                    >
-                      Personalised education
-                    </text>
-                  </motion.g>
-
-                  {/* Non-personal education label */}
-                  <motion.g
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ delay: 1.9, duration: 0.4 }}
-                  >
-                    {/* Label text */}
-                    <text
-                      x="295"
-                      y="246"
-                      className="text-base fill-black font-semibold"
-                      fontSize="16"
-                    >
-                      Non-personal education
-                    </text>
-                  </motion.g>
-                </svg>
+          {/* Main Calculator Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12"
+          >
+            {/* Large Animated Savings Display */}
+            <div className="text-center mb-12">
+              <div className="text-gray-400 text-sm uppercase tracking-wider mb-3">
+                Total Savings
               </div>
-            </motion.div>
-
-            {/* RIGHT COLUMN: Cost Comparison */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center justify-center"
-            >
-              {/* Title above bar chart */}
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                key={sliderMonths}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              >
+                £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </motion.div>
+              <div className="text-gray-400 text-lg mt-2">
+                over {sliderMonths} {sliderMonths === 1 ? 'month' : 'months'}
+              </div>
+            </div>
+
+            {/* Interactive Slider */}
+            <div className="mb-16 px-4">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-white font-semibold text-lg">
+                  How many months will you study?
+                </label>
+                <div className="text-3xl font-bold text-blue-400">
+                  {sliderMonths}
+                </div>
+              </div>
+              <Slider
+                value={[sliderMonths]}
+                onValueChange={(value) => setSliderMonths(value[0])}
+                min={1}
+                max={12}
+                step={1}
+                className="cursor-pointer"
+              />
+              <div className="flex justify-between text-sm text-gray-400 mt-2">
+                <span>1 month</span>
+                <span>12 months</span>
+              </div>
+            </div>
+
+            {/* Breakdown Cards */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Private Tutoring Cost */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-red-500/10 border border-red-500/20 rounded-xl p-6"
+              >
+                <div className="text-red-400 text-sm font-semibold mb-2">
+                  Private Tutoring
+                </div>
+                <motion.div
+                  key={`tutoring-${sliderMonths}`}
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  £{(500 * sliderMonths).toLocaleString('en-GB')}
+                </motion.div>
+                <div className="text-gray-400 text-sm">
+                  £500/month × {sliderMonths}
+                </div>
+              </motion.div>
+
+              {/* Mentiora Cost */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <img src={mentioraLogo} alt="Mentiora" className="h-4 w-4" />
+                  <div className="text-blue-400 text-sm font-semibold">
+                    Mentiora
+                  </div>
+                </div>
+                <motion.div
+                  key={`mentiora-${sliderMonths}`}
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  £{(9.99 * sliderMonths).toFixed(2)}
+                </motion.div>
+                <div className="text-gray-400 text-sm">
+                  £9.99/month × {sliderMonths}
+                </div>
+              </motion.div>
+
+              {/* Your Savings */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="mb-8"
+                className="bg-green-500/10 border border-green-500/20 rounded-xl p-6"
               >
-                <h3 className="text-2xl font-bold text-center leading-tight">
-                  <span className="text-black">95% cheaper than</span>
-                  <br />
-                  <span style={{ color: '#3B82F6' }}>private tutoring</span>
-                </h3>
+                <div className="text-green-400 text-sm font-semibold mb-2">
+                  You Save
+                </div>
+                <motion.div
+                  key={`savings-${sliderMonths}`}
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </motion.div>
+                <div className="text-gray-400 text-sm">
+                  {Math.round(((500 - 9.99) / 500) * 100)}% cheaper
+                </div>
               </motion.div>
+            </div>
 
-              {/* Bar Chart */}
-              <div className="flex items-end gap-12 h-[350px]">
-                {/* Personal Tutoring - Tall Gray Bar */}
-                <div className="flex flex-col items-center justify-end h-full">
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                    className="mb-3"
-                  >
-                    <div className="text-2xl font-bold text-gray-700">
-                      £500<span className="text-base">/month</span>
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div
-                    className="bg-gray-300 rounded-t-md relative"
-                    style={{ width: '80px', height: '240px' }}
-                    initial={{ scaleY: 0, originY: 1 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-                  />
-                  
-                  <div className="text-sm text-gray-600 mt-3 font-medium">Personal tutoring</div>
-                </div>
-
-                {/* Mentiora - Small Blue Bar */}
-                <div className="flex flex-col items-center justify-end h-full">
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1 }}
-                    className="mb-3"
-                  >
-                    <div className="text-2xl font-bold text-black">
-                      £9.99<span className="text-base">/month</span>
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div
-                    className="rounded-t-md relative"
-                    style={{ width: '80px', height: '48px', backgroundColor: '#3B82F6' }}
-                    initial={{ scaleY: 0, originY: 1 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-                  />
-                  
-                  <motion.div 
-                    className="flex items-center gap-2 mt-3"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.4 }}
-                  >
-                    <img 
-                      src={mentioraLogo} 
-                      alt="Mentiora" 
-                      className="h-5 w-5"
-                    />
-                    <span className="text-base font-bold" style={{ color: '#3B82F6' }}>mentiora</span>
-                  </motion.div>
-                </div>
-              </div>
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="text-center mt-10"
+            >
+              <Button 
+                size="lg"
+                onClick={() => navigate(user ? '/dashboard' : '/register')}
+                className="text-white text-lg font-semibold px-12 py-6 rounded-lg shadow-lg hover:scale-105 transition-all"
+                style={{ backgroundColor: '#3B82F6' }}
+              >
+                Start saving today
+              </Button>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
