@@ -577,7 +577,7 @@ const Index = () => {
 
 
       {/* HOW MENTIORA WORKS SECTION */}
-      <section id="about" className="py-20 px-6 bg-white">
+      <section id="about" className="py-20 px-6 bg-gradient-to-br from-blue-50/30 to-white">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -585,130 +585,66 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-3">
               How Mentiora Works
             </h2>
             <p className="text-xl text-gray-600">
-              See it in action
+              Three powerful tools. One platform.
             </p>
           </motion.div>
 
-          {/* Panel 1: Smart Question Bank */}
-          <div className="py-16 px-6 bg-gradient-to-br from-blue-50 to-white rounded-3xl mb-8">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                {/* Text Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
-                    Smart Question Bank
-                  </h3>
-                  <p className="text-xl text-gray-600">
-                    Practice with real past paper questions
-                  </p>
-                </motion.div>
-                
-                {/* Image Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative"
-                >
-                  <img 
-                    src="/lovable-uploads/practice-mockup.png" 
-                    alt="Practice question interface showing a biology question with answer box"
-                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent rounded-2xl pointer-events-none" />
-                </motion.div>
-              </div>
-            </div>
-          </div>
+          {/* 3-Column Grid */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-8"
+          >
+            {/* Column 1: Smart Question Bank */}
+            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
+              <div className="text-5xl mb-4">📝</div>
+              <h3 className="text-2xl font-bold text-black mb-3">Smart Question Bank</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Practice with real past paper questions filtered by topic and difficulty. Get instant AI feedback that explains exactly what gets marks and what doesn't.
+              </p>
+              <img 
+                src="/lovable-uploads/practice-mockup.png" 
+                alt="Practice question interface"
+                className="rounded-xl shadow-lg w-full"
+              />
+            </motion.div>
 
-          {/* Panel 2: Study Helper Chat */}
-          <div className="py-16 px-6 bg-gradient-to-br from-purple-50 to-white rounded-3xl mb-8">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                {/* Image Side (Left on desktop) */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative md:order-1"
-                >
-                  <img 
-                    src="/lovable-uploads/chat-mockup.png" 
-                    alt="AI chat interface showing conversation with Study Helper"
-                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent rounded-2xl pointer-events-none" />
-                </motion.div>
+            {/* Column 2: AI Study Helper */}
+            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
+              <div className="text-5xl mb-4">💬</div>
+              <h3 className="text-2xl font-bold text-black mb-3">AI Study Helper</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Stuck on a question? Chat with your personal AI tutor who guides you step-by-step. No answers given away—just the hints you need to figure it out yourself.
+              </p>
+              <img 
+                src="/lovable-uploads/chat-mockup.png" 
+                alt="AI chat interface"
+                className="rounded-xl shadow-lg w-full"
+              />
+            </motion.div>
 
-                {/* Text Side (Right on desktop) */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="md:order-2"
-                >
-                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
-                    AI Study Helper
-                  </h3>
-                  <p className="text-xl text-gray-600">
-                    Get unstuck with step-by-step guidance
-                  </p>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-
-          {/* Panel 3: Real-Time Analytics */}
-          <div className="py-16 px-6 bg-gradient-to-br from-green-50 to-white rounded-3xl">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                {/* Text Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
-                    Track Your Progress
-                  </h3>
-                  <p className="text-xl text-gray-600">
-                    See your predicted grade improve in real-time
-                  </p>
-                </motion.div>
-                
-                {/* Image Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative"
-                >
-                  <img 
-                    src="/lovable-uploads/analytics-mockup.png" 
-                    alt="Analytics dashboard showing mastered topics and subject performance"
-                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 to-transparent rounded-2xl pointer-events-none" />
-                </motion.div>
-              </div>
-            </div>
-          </div>
+            {/* Column 3: Track Your Progress */}
+            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
+              <div className="text-5xl mb-4">📊</div>
+              <h3 className="text-2xl font-bold text-black mb-3">Track Your Progress</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                See your predicted grade improve in real-time. Track which topics you've mastered and which need more work—all updated automatically as you practice.
+              </p>
+              <img 
+                src="/lovable-uploads/analytics-mockup.png" 
+                alt="Analytics dashboard"
+                className="rounded-xl shadow-lg w-full"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
