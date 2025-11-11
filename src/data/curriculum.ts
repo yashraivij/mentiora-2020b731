@@ -39841,6 +39841,286 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
           }
         ]
+      },
+      {
+        id: 'glacial-systems',
+        name: 'Glacial Systems and Landscapes',
+        questions: [
+          {
+            id: 'geo-gs-q1',
+            question: 'Define the term "glacial budget" and explain its significance.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Glacial budget refers to the balance between accumulation (inputs of snow and ice) and ablation (outputs through melting, sublimation, and calving) in a glacier system. It is measured over one year, typically from the end of one summer to the end of the next. A positive budget means accumulation exceeds ablation, causing the glacier to advance. A negative budget means ablation exceeds accumulation, causing retreat. The budget determines whether a glacier is growing or shrinking and is significant because it reflects climate conditions and controls glacier behaviour and landscape formation.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: balance between accumulation and ablation (1 mark)',
+                'Accumulation (inputs) and ablation (outputs) explained (1 mark)',
+                'Positive budget causes advance, negative causes retreat (1 mark)',
+                'Significance: reflects climate/controls glacier behaviour (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q2',
+            question: 'Describe the characteristics of a corrie (cirque).',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A corrie is an armchair-shaped hollow found in mountainous terrain, formed by glacial erosion. It has a steep back wall, typically 100-200 metres high, created by plucking and freeze-thaw weathering. The floor is overdeepened by rotational erosion, often containing a small lake (tarn) after ice melts. A rock lip at the front marks where ice exited the corrie with less erosive power. The corrie faces north or northeast in the Northern Hemisphere due to reduced solar radiation and increased snow accumulation. Classic examples include Red Tarn in the Lake District.',
+            markingCriteria: {
+              breakdown: [
+                'Armchair-shaped hollow (1 mark)',
+                'Steep back wall from plucking/freeze-thaw (1 mark)',
+                'Overdeepened floor, often with tarn (1 mark)',
+                'Rock lip at front or directional aspect (north/northeast) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q3',
+            question: 'Explain the process of plucking in glacial erosion.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Plucking occurs when glacial ice freezes onto bedrock and, as the glacier moves, tears away blocks of rock. Meltwater penetrates cracks and joints in the bedrock at the base and sides of the glacier. When temperatures drop below 0°C (particularly through pressure release or at night), this water refreezes, expanding and widening cracks. The ice bonds strongly to the rock fragments. As the glacier moves forward through basal sliding or internal deformation, the frozen ice pulls away chunks of bedrock, particularly from the lee side of obstacles. The plucked material becomes embedded in the ice and contributes to further erosion through abrasion. Plucking is most effective where bedrock is well-jointed and temperatures fluctuate around freezing point.',
+            markingCriteria: {
+              breakdown: [
+                'Meltwater enters cracks in bedrock (1 mark)',
+                'Water freezes and bonds ice to rock (1 mark)',
+                'Glacier movement tears away rock blocks (1 mark)',
+                'Most effective on lee side/well-jointed rock (1 mark)',
+                'Plucked material used for abrasion or temperature conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q4',
+            question: 'Distinguish between warm-based and cold-based glaciers.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Warm-based glaciers have basal ice at or near the pressure melting point, typically above -5°C, allowing meltwater to exist at the base. This enables basal sliding, where the glacier slides over bedrock on a thin film of water, resulting in rapid movement (up to 1-2 metres per day) and significant erosion through plucking and abrasion. They are common in temperate regions like Iceland and the Alps. The meltwater also transports sediment, creating fluvioglacial features.\n\nCold-based glaciers have basal ice well below pressure melting point (often below -20°C) and are frozen to the bedrock. Movement occurs only through internal deformation (ice crystals slowly deforming), resulting in very slow advance (centimetres per year) and minimal erosion. They preserve underlying landforms and are typical of polar regions like Antarctica. Cold-based glaciers lack meltwater at the base, so they produce little fluvioglacial activity. Temperature, pressure, and ice thickness determine which type forms - thicker ice creates more pressure, potentially generating warmth through friction.',
+            markingCriteria: {
+              breakdown: [
+                'Warm-based: basal ice at/near melting point (1 mark)',
+                'Warm-based: enables basal sliding, rapid movement, significant erosion (1 mark)',
+                'Cold-based: basal ice well below melting point, frozen to bedrock (1 mark)',
+                'Cold-based: only internal deformation, slow movement, minimal erosion (1 mark)',
+                'Location examples or meltwater/fluvioglacial differences (1 mark)',
+                'Factors controlling glacier type (temperature, pressure, thickness) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q5',
+            question: 'Explain the formation of a roche moutonnée.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'A roche moutonnée is an asymmetrical rock outcrop shaped by glacial erosion. The upstream (stoss) side facing the direction of ice flow has a gentle, smooth slope created by abrasion as the glacier passes over it. Ice carrying embedded rock fragments acts like sandpaper, smoothing and polishing the surface, often creating striations (scratches) aligned with ice flow direction. The downstream (lee) side is steep and jagged, formed by plucking. As ice moves over the obstacle, pressure is released on the lee side, causing basal ice to refreeze into cracks. When the glacier continues moving, it tears away rock blocks, creating the steep, rough face. The name comes from French, meaning "sheep rock" due to its resemblance to a resting sheep. Examples are widespread in the Lake District and Scottish Highlands.',
+            markingCriteria: {
+              breakdown: [
+                'Asymmetrical rock outcrop shaped by glacial erosion (1 mark)',
+                'Stoss side: gentle, smooth slope from abrasion (1 mark)',
+                'Striations/polishing on stoss side (1 mark)',
+                'Lee side: steep, jagged from plucking (1 mark)',
+                'Explanation of pressure release causing plucking on lee side (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q6',
+            question: 'Describe the characteristics and formation of drumlins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Drumlins are streamlined, elongated hills composed of glacial till (unsorted sediment). They are typically 10-50 metres high, 100-500 metres wide, and up to 1-2 kilometres long, resembling an inverted spoon or egg. The steep, blunt end (stoss) faces the direction from which the ice advanced, while the tapered, gently sloping end (lee) points in the direction of ice flow. \n\nFormation theories include: (1) deposition of sediment around a bedrock obstacle or pre-existing mound, which the ice streamlines; (2) reshaping of previously deposited moraine by later ice advance; (3) deposition in the lodgement zone beneath moving ice where debris accumulates. The exact mechanism remains debated, but all theories involve deposition and moulding by ice under pressure. Drumlins rarely occur alone - they typically form in swarms of hundreds creating "basket of eggs" topography, indicating systematic ice flow patterns. Classic drumlin fields exist in Northern Ireland, Yorkshire, and the Great Lakes region of North America.',
+            markingCriteria: {
+              breakdown: [
+                'Streamlined elongated hills of glacial till (1 mark)',
+                'Dimensions and shape description (inverted spoon/egg) (1 mark)',
+                'Steep stoss end, tapered lee end aligned with ice flow (1 mark)',
+                'Formation theory: deposition around obstacle or reshaping (1 mark)',
+                'Occur in swarms creating "basket of eggs" topography (1 mark)',
+                'Named example or lodgement zone reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q7',
+            question: 'Explain how eskers are formed.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Eskers are long, sinuous ridges of stratified sand and gravel deposited by meltwater streams flowing within, on, or beneath glaciers. As glaciers melt, supraglacial (surface), englacial (within), or subglacial (beneath) meltwater streams form tunnels through the ice. These streams carry large volumes of sediment eroded from the glacier bed or valley sides. When ice melts completely, the sediment that filled these tunnels is deposited on the valley floor as a winding ridge. The stratified (layered) nature of the sediment indicates deposition by flowing water rather than direct ice deposition. Eskers can be several kilometres long and 10-30 metres high. Their sinuous path reflects the former course of the meltwater stream through the ice. They provide evidence of former ice extent and direction. The Trim esker in Ireland extends over 14km.',
+            markingCriteria: {
+              breakdown: [
+                'Long sinuous ridges of stratified sand and gravel (1 mark)',
+                'Deposited by meltwater streams in/on/under glacier (1 mark)',
+                'Streams carry sediment through ice tunnels (1 mark)',
+                'When ice melts, sediment remains as ridge (1 mark)',
+                'Stratified sediment indicates water deposition or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q8',
+            question: 'Explain the formation of pingos in periglacial environments.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Pingos are ice-cored hills found in periglacial regions, typically 3-70 metres high and up to 600 metres in diameter. Two main types exist:\n\nOpen-system (East Greenland type) pingos form in valley bottoms where groundwater is under pressure. As water moves through permafrost, it encounters an impermeable frozen layer and is forced upwards. The water freezes upon reaching cold surface layers, expanding and pushing up overlying sediment to create a dome. Continued water supply sustains growth over decades or centuries.\n\nClosed-system (Mackenzie type) pingos form where lakes drain or infill in areas of continuous permafrost. The saturated ground (talik) beneath the former lake begins to freeze from all sides and below as permafrost advances. The freezing water expands by about 9%, creating pressure that pushes sediment upward into a dome with an ice core.\n\nBoth types eventually develop cracks in the summit as the dome grows. If the ice core melts (during warmer periods), the pingo collapses, leaving a circular rampart and central depression. These relict features are found in areas like Wales that were formerly periglacial.',
+            markingCriteria: {
+              breakdown: [
+                'Ice-cored hills in periglacial regions (1 mark)',
+                'Open-system: groundwater under pressure pushes upward and freezes (1 mark)',
+                'Closed-system: lake drainage, water freezes from all sides causing expansion (1 mark)',
+                'Freezing water expands creating upward pressure (1 mark)',
+                'Collapse when ice melts leaving rampart (1 mark)',
+                'Dimensions or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q9',
+            question: 'Assess the impacts of climate change on glacial environments.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Climate change profoundly impacts glacial environments through warming temperatures, affecting physical landscapes, ecosystems, and human systems.\n\nPhysical impacts are extensive. Glacier retreat is accelerating globally - the Alps have lost 50% of glacier volume since 1900, with rates increasing since 1980. Iceland\'s Vatnajökull glacier retreats 50-100 metres annually. Negative mass balance results from increased ablation exceeding accumulation. This creates feedback loops - reduced ice cover lowers albedo (reflectivity), increasing heat absorption and accelerating melting. Glacial lakes expand behind retreating ice, creating glacial lake outburst flood (GLOF) hazards. In Nepal, over 3,000 glacial lakes now exist, with 47 considered dangerous. Landscape evolution accelerates - exposed valley sides become unstable without ice support, increasing rockfalls and landslides. The 2017 Bondo rockslide in Switzerland killed eight people.\n\nHydrological impacts affect billions. Glacier melt initially increases river flow - Himalayan rivers show 20-30% flow increases currently. However, as glaciers shrink, long-term water security diminishes. The Hindu Kush Himalaya region supplies water to 2 billion people across Asia. Seasonal flow patterns change - meltwater peaks earlier in spring, reducing summer water availability for agriculture and hydropower. Peru\'s glaciers supply 80% of Lima\'s water but have shrunk 40% since 1970, threatening future supply.\n\nEcological consequences include habitat loss. Species adapted to cold environments face extinction - the ice worm survives only in glacier ice and has nowhere to retreat. Alpine plant zones shift upslope by 25-50 metres per decade, outcompeting cold-adapted species. Changes disrupt traditional migration patterns and breeding cycles.\n\nSocio-economic impacts are severe. Tourism dependent on glaciers declines - Swiss ski resorts lose €200 million annually due to reduced snow. Hydroelectric power generation becomes unreliable with changing meltwater patterns. Agricultural communities lose irrigation water - Bolivia\'s Chacaltaya glacier disappeared in 2009, affecting La Paz\'s water supply. Traditional indigenous lifestyles depending on ice are threatened.\n\nGeohazards increase. Increased meltwater lubricates glacier beds, accelerating movement and potentially causing surges. Ice avalanches become more frequent. In 2017, Greenland experienced ice avalanches killing four people in Nuugaatsiaq. Permafrost thaw in periglacial areas destabilizes infrastructure - Alaska spends $35 million annually repairing damage. Methane release from thawing permafrost creates additional warming feedback.\n\nPositive impacts exist but are limited. Newly exposed land becomes available for development or agriculture. Extended navigation seasons in Arctic waters benefit shipping. Tourism to "last chance to see" glaciers temporarily increases.\n\nMitigation efforts show mixed results. Glacier engineering (covering ice with reflective blankets) is attempted in ski resorts but is costly and impractical at scale. Adaptation strategies include building early warning systems for GLOFs, developing alternative water sources (reservoirs, desalination), and economic diversification away from glacier-dependent activities.\n\nIn conclusion, climate change creates overwhelmingly negative impacts on glacial environments across environmental, hydrological, ecological, and socio-economic dimensions. While local adaptations provide some resilience, the scale and rate of change exceed many communities\' capacity to adapt. Global emissions reduction is essential to slow glacier loss, though already committed warming means continued impacts are inevitable. The transformation of glacial environments represents one of the most visible and consequential aspects of anthropogenic climate change.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic statements about glacier retreat, limited development',
+                'Level 2 (5-8 marks): Clear explanation of multiple impacts with examples, some assessment',
+                'Level 3 (9-12 marks): Sophisticated assessment of diverse impacts (physical, hydrological, ecological, socio-economic), detailed examples with data, consideration of scale and interconnections, evaluation of positive/negative effects and adaptation strategies, well-supported conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q10',
+            question: 'Evaluate the effectiveness of strategies to manage the impacts of tourism in glacial environments.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Glacial environments face increasing tourism pressure while being exceptionally fragile ecosystems. Management strategies vary in effectiveness across environmental, economic, and social dimensions.\n\nRegulatory approaches establish rules limiting access and behaviour. The Antarctic Treaty System designates protected areas with strict visitor limits - maximum 100 people ashore at once, no approach within 5 metres of wildlife. This preserves pristine conditions effectively but relies on operator compliance. Iceland\'s Vatnajökull National Park restricts vehicle access, requiring guided tours to sensitive areas. This reduces environmental damage but creates economic bottlenecks and excludes budget travellers. Effectiveness depends on enforcement capacity - developing nations often lack resources for adequate monitoring. Nepal\'s Khumbu region has regulations but enforcement is inconsistent, limiting effectiveness.\n\nInfrastructure management channels visitors to reduce dispersed impacts. Boardwalks and designated paths at New Zealand\'s Franz Josef Glacier concentrate foot traffic, protecting fragile vegetation. However, infrastructure itself causes environmental damage and visual intrusion. The Gornergrat railway in Switzerland provides glacier access without vehicles, effectively reducing emissions but represents massive construction impact. Visitor centres educate tourists about environmental sensitivity - Norway\'s Jostedalsbreen centre reports 80% of visitors modify behaviour after visiting. Yet effectiveness diminishes once visitors leave controlled areas.\n\nCapacity limits prevent overcrowding damage. Torres del Paine in Patagonia limits daily visitors to 100 in certain zones, preserving trail quality and reducing wildlife disturbance. However, limits create equity issues - wealthy tourists can afford high permit prices while others are excluded. Demand often exceeds capacity, encouraging illegal access. The Everest Base Camp trek nominally limits numbers but hundreds daily still travel the route, exceeding sustainable levels. Seasonal closures protect wildlife breeding seasons and allow environmental recovery - effective environmentally but economically damaging to communities dependent on tourism income.\n\nEconomic instruments attempt sustainable funding. Park entrance fees in Canadian Rockies generate $20 million annually for conservation. Higher fees for glacier tours theoretically reduce demand while funding protection. However, this creates economic barriers, making wilderness experiences privilege of the wealthy rather than public goods. Fee revenues often don\'t match management costs - Iceland\'s tourism infrastructure costs exceed visitor fees by 40%, requiring taxpayer subsidies. Conservation levies on accommodation (Queenstown, NZ, charges 2.5%) distribute costs more broadly and are politically more acceptable, though revenues may not directly fund glacier protection.\n\nCertification schemes promote responsible operators. Iceland\'s "Vakinn" quality label requires environmental standards compliance. Tour operators meeting standards gain marketing advantages, creating market incentives for sustainability. However, certification is voluntary - uncertified operators continue operating at lower costs, creating unfair competition. Effectiveness depends on tourist awareness - studies show only 35% of visitors actively seek certified operators. Greenwashing concerns arise when standards are weak or monitoring insufficient.\n\nEducation and interpretation programs aim to modify visitor behaviour. Interpretive signs at Switzerland\'s Aletsch Glacier explain glacier retreat and climate change, encouraging pro-environmental attitudes. Research shows education increases understanding but behaviour change is inconsistent - knowledge-action gaps persist. Virtual reality experiences (Glacier 3000, Switzerland) allow "visits" without physical presence, reducing pressure. However, uptake is limited and cannot replace authentic experiences for most tourists.\n\nCommunity-based tourism management empowers local populations. In Greenland, Inuit communities control tourism development, ensuring cultural respect and fair economic distribution. This creates local ownership and sustainable practices. However, economic pressure can compromise conservation - communities may prioritize income over protection. Power imbalances between communities and large tour operators limit effectiveness - companies headquartered elsewhere extract profits while leaving communities with environmental costs.\n\nTechnology-based solutions include real-time monitoring systems tracking visitor numbers and environmental impacts. GPS tracking identifies problem areas for targeted management. However, technology implementation is expensive and requires technical capacity many glacial regions lack. Climate change monitoring stations inform adaptive management but don\'t address tourism pressures directly.\n\nInternational cooperation addresses transboundary issues. The Alpine Convention commits eight nations to sustainable development, including tourism management across borders. This enables coordinated approaches and best practice sharing. However, implementation varies by country and enforcement mechanisms are weak. Different national interests create conflicts - Austria emphasizes ski tourism while Switzerland prioritizes conservation.\n\nLimitations exist across all strategies. Climate change impacts overwhelm management efforts - glacier retreat creates hazards (rockfalls, floods) regardless of tourism management quality. Economic dependence on tourism makes communities resistant to restrictive measures - Chamonix derives 60% of income from Mont Blanc tourism, limiting political will for access restrictions. Covid-19 demonstrated vulnerability - glacier communities faced economic collapse when tourism ceased, questioning sustainability models. Balancing conservation and access creates inherent tensions - protecting environments may require excluding people, conflicting with democratic access principles.\n\nIn conclusion, no single strategy sufficiently manages tourism impacts in glacial environments. Most effective approaches combine multiple strategies: regulations preventing worst damage, infrastructure channeling visitors, economic instruments funding management, and community involvement ensuring local benefits. Context matters critically - strategies effective in wealthy nations (infrastructure investment, enforcement) may be impractical in developing countries. Integrated management frameworks like UNESCO World Heritage status provide comprehensive approaches but require substantial resources and political commitment. Fundamentally, addressing tourism pressure requires managing tourism growth itself - without demand management, even excellent strategies become overwhelmed. As climate change transforms glacial environments, adaptive management allowing strategy evolution is essential. The most sustainable approach may involve reducing visitor numbers through pricing or quotas while ensuring economic alternatives for glacier-dependent communities, though this conflicts with goals of accessible outdoor recreation. Effectiveness ultimately depends on balancing multiple, often competing objectives while recognizing that perfect solutions rarely exist.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-5 marks): Simple description of management strategies, minimal evaluation',
+                'Level 2 (6-10 marks): Clear explanation of multiple strategies with examples, some evaluation of effectiveness',
+                'Level 3 (11-13 marks): Detailed analysis of diverse strategies, good examples, clear evaluation of successes and limitations',
+                'Level 4 (14-16 marks): Sophisticated evaluation of multiple strategies across scales and contexts, specific detailed examples, assessment of effectiveness criteria, consideration of trade-offs and conflicts, recognition of context-dependency, integrated approaches, well-supported nuanced conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          }
+        ]
+      },
+      {
+        id: 'hazards',
+        name: 'Hazards',
+        questions: [
+          {
+            id: 'geo-haz-q1',
+            question: 'Define the term "natural hazard" and explain why hazard perception varies.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A natural hazard is a naturally occurring event or phenomenon that has the potential to threaten life, property, and economic activity. Hazards only become significant when they interact with vulnerable human populations. Hazard perception varies due to multiple factors. Economic development influences perception - wealthier nations often view hazards as more manageable through technology and infrastructure, while developing nations may see them as inevitable catastrophes. Cultural factors affect attitudes - some societies adopt fatalistic views accepting hazards as acts of God, while others emphasize human control and mitigation. Personal experience matters significantly - people who have experienced disasters directly perceive risk more seriously than those learning about them remotely. Education and information access shapes understanding of hazard risks. The Park Model shows responses evolve through relief, rehabilitation, and reconstruction phases, affecting future perception.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: naturally occurring event threatening people/property (1 mark)',
+                'Economic factors affect perception (wealth enables mitigation) (1 mark)',
+                'Cultural factors (fatalism vs control attitudes) (1 mark)',
+                'Personal experience influences perception (1 mark)',
+                'Education/media or other valid factor (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q2',
+            question: 'Describe the distribution of earthquakes and explain why they occur in these locations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Earthquakes are concentrated along plate boundaries, forming distinct belts. The Pacific Ring of Fire, circling the Pacific Ocean from South America through California, Alaska, Japan, Philippines, and New Zealand, experiences 90% of the world\'s earthquakes. This occurs at convergent boundaries where oceanic plates subduct beneath continental plates (e.g., Nazca under South American plate) and transform boundaries like the San Andreas Fault. Earthquakes result from sudden energy release as plates overcome friction and slip.\n\nThe Alpine-Himalayan belt extends from the Mediterranean through Turkey, Iran, Himalayas to Indonesia, marking the collision zone between the Eurasian plate and the African and Indo-Australian plates. Convergent boundaries here create intense seismic activity. The Mid-Atlantic Ridge represents a divergent boundary where the Eurasian and North American plates separate, though earthquakes here are generally weaker due to less friction at spreading centres. Intraplate earthquakes occasionally occur away from boundaries, caused by ancient fault lines or human activity (fracking, reservoir construction), but these are rarer and less predictable.',
+            markingCriteria: {
+              breakdown: [
+                'Pacific Ring of Fire location and percentage (90%) (1 mark)',
+                'Explanation: subduction zones and transform faults at convergent/transform boundaries (1 mark)',
+                'Alpine-Himalayan belt location (1 mark)',
+                'Explanation: continental collision zones (1 mark)',
+                'Mid-Atlantic Ridge or other divergent boundary (1 mark)',
+                'Intraplate earthquakes or friction/energy release mechanism (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q3',
+            question: 'Using a named example, analyse the impacts of a volcanic eruption.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'The 2010 Eyjafjallajökull eruption in Iceland demonstrates diverse volcanic impacts. Iceland sits on the Mid-Atlantic Ridge where the Eurasian and North American plates diverge.\n\nPrimary hazards included lava flows destroying 20 farms and pyroclastic flows burning vegetation. Volcanic ash ejected 250 million cubic metres of tephra 11km high. Although no deaths occurred, these hazards forced the evacuation of 800 people. Ice cap melting triggered glacial outburst floods (jökulhlaups) washing away roads and bridges, damaging Route 1 (main highway) requiring €10 million repairs.\n\nSecondary impacts were more significant. Volcanic ash drifting across Europe caused unprecedented aviation disruption - 100,000 flights cancelled over six days, stranding 10 million passengers and costing airlines €1.1 billion. The ash contained sharp glass particles that could damage jet engines, prompting blanket flight bans. This secondary impact far exceeded local primary effects. Tourism initially declined 30% due to fear and inaccessibility, though later increased as people wanted to see the volcano, demonstrating complex economic effects. Agricultural impacts included ash contamination of grazing land, though volcanic ash ultimately enriched soil fertility. Local water supplies were contaminated by fluoride from ash, affecting livestock.\n\nLonger-term impacts show both costs and benefits. Infrastructure repair costs reached €100 million. However, geothermal energy potential increased. Tourism eventually benefited from the "disaster brand" - visitor numbers rose 40% in subsequent years. The eruption renewed interest in volcanic monitoring, leading to improved early warning systems. Global attention highlighted Iceland\'s vulnerability but also its resilience, attracting research and investment. The event demonstrated how modern interconnected systems amplify hazard impacts far beyond the immediate locality, with aviation disruption creating global consequences from a relatively minor eruption.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-3 marks): Basic statements about impacts, limited detail, named example',
+                'Level 2 (4-6 marks): Clear explanation of primary and secondary impacts with some detail, case study applied',
+                'Level 3 (7-9 marks): Detailed analysis of diverse impacts, specific data/evidence from case study (Eyjafjallajökull or equivalent), consideration of short/long-term and local/global effects, recognition of interconnections'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q4',
+            question: 'Explain how a tsunami is generated by an earthquake.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Tsunamis are generated when underwater earthquakes cause sudden vertical displacement of the ocean floor. This typically occurs at subduction zones where one tectonic plate slides beneath another. When stress accumulated along the fault is suddenly released, the overlying plate snaps upward or the subducting plate drops downward, displacing the entire water column above. The vertical movement must be significant (typically magnitude 7.0+ and shallow focus less than 70km deep) to generate a tsunami. The displaced water forms waves that radiate outward in all directions from the epicentre at speeds of 500-800 km/h in deep ocean. Wave height in open ocean is small (less than 1 metre) but wavelength is huge (100-200km). As waves approach shallow coastal water, friction with the seabed slows the wave front, causing wave height to dramatically increase (10-30+ metres) while wavelength decreases. The 2011 Tōhoku earthquake (magnitude 9.0) off Japan generated a tsunami reaching 40 metres height in some locations.',
+            markingCriteria: {
+              breakdown: [
+                'Underwater earthquake causes vertical displacement of ocean floor (1 mark)',
+                'Typically at subduction zones, must be magnitude 7.0+ and shallow (1 mark)',
+                'Entire water column displaced, waves radiate outward (1 mark)',
+                'Fast in deep water (500-800 km/h), low height (1 mark)',
+                'Slows approaching coast, wave height increases dramatically (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q5',
+            question: 'Compare the formation and characteristics of tropical storms in different ocean basins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical storms (hurricanes, typhoons, cyclones) form in six major ocean basins with similar formation requirements but differing characteristics. All require sea surface temperatures above 26.5°C, Coriolis effect (5-20° latitude), low wind shear, and atmospheric instability.\n\nThe North Atlantic basin produces hurricanes affecting Caribbean and USA (June-November), averaging 12 storms annually with 6 becoming hurricanes. The North Pacific (West) creates typhoons hitting Philippines, Japan, and China (May-December), generating the most storms (26 annually) due to extensive warm water. These are often strongest globally - Typhoon Haiyan (2013) reached 315 km/h winds. The North Indian Ocean has two seasons (April-June, September-November) due to monsoon influence, producing 5-6 cyclones annually of typically lower intensity but causing devastating impacts in densely populated Bangladesh and India. The South Pacific and South Indian Ocean produce cyclones (November-April southern summer) affecting Madagascar, Mozambique, and Pacific islands, with fewer storms (10-12 combined) due to cooler waters.\n\nKey differences include rotation - northern hemisphere storms rotate counterclockwise while southern hemisphere rotate clockwise due to Coriolis effect. Intensity varies by basin - Western Pacific produces strongest storms due to warmest, most extensive ocean area. Atlantic hurricanes often have longer tracks, sometimes reaching Europe as extratropical storms. The Northeast Pacific is second most active but storms rarely make landfall due to westward movement into open ocean. No tropical storms form directly at the equator (within 5° latitude) due to insufficient Coriolis effect to initiate rotation.',
+            markingCriteria: {
+              breakdown: [
+                'Formation requirements: 26.5°C water, Coriolis effect, low wind shear (1 mark)',
+                'Different basins identified: Atlantic, Pacific, Indian (1 mark)',
+                'Frequency variations between basins (1 mark)',
+                'Intensity differences (Western Pacific strongest) (1 mark)',
+                'Rotation differences (hemispheres) or seasonal variations (1 mark)',
+                'Specific examples or landfall patterns (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q6',
+            question: 'Using named examples, evaluate the effectiveness of prediction and monitoring in reducing the impacts of tectonic hazards.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Prediction and monitoring technologies offer varying effectiveness in managing tectonic hazards, with significant differences between volcanic and seismic events.\n\nVolcanic eruption monitoring is relatively effective. Seismometers detect increased earthquake activity as magma rises - before Mount Pinatubo erupted in 1991, 400 earthquakes per day were recorded, up from background levels of 10-20. This enabled evacuation of 60,000 people from the danger zone, preventing an estimated 20,000 deaths despite the violent VEI 6 eruption. Ground deformation monitoring using GPS and tilt meters detects bulging as magma accumulates. Gas emissions monitoring identifies increased sulfur dioxide (SO2) release - levels at Pinatubo increased from 500 to 13,000 tonnes/day. Thermal imaging identifies heat anomalies. This multi-parameter monitoring at volcanoes like Mount St Helens, Vesuvius, and in Iceland provides days to weeks warning, allowing effective evacuations. Success depends on monitoring network quality - Indonesia\'s 127 active volcanoes have varying monitoring levels, affecting warning effectiveness.\n\nHowever, limitations exist. Prediction remains imprecise regarding eruption timing and magnitude. Mount Ontake in Japan (2014) killed 63 hikers despite monitoring, as the phreatic eruption gave minimal warning. Monitoring is expensive - establishing comprehensive networks costs millions, challenging for developing nations. False alarms create economic costs and reduce public trust - if evacuations occur without eruptions, future warnings may be ignored. The 1976 Guadeloupe evacuation (3 months, no major eruption) cost $300 million and created credibility issues.\n\nEarthquake prediction is notably less effective. Despite extensive research, reliable short-term prediction (hours-days) remains impossible. No scientifically validated precursor signals exist. Long-term probability assessments identify high-risk zones (e.g., 70% probability of magnitude 6.7+ earthquake in San Francisco Bay Area within 30 years) but cannot specify timing. This enables building codes and preparedness but not immediate life-saving evacuations. The 2011 Tōhoku earthquake, despite Japan\'s world-leading monitoring, struck without sufficient warning for evacuation. Early warning systems, however, show effectiveness. Japan\'s system detected P-waves and sent alerts via phones and TV 15-90 seconds before destructive S-waves arrived, allowing bullet trains to automatically brake and people to take cover. This prevented injuries and infrastructure damage, though tsunami warning time was insufficient for coastal areas.\n\nMonitoring infrastructure differences affect outcomes. Japan invests $100+ million annually in earthquake monitoring with 1,000+ seismometers providing dense coverage. This enabled the early warning system\'s effectiveness. In contrast, Haiti had minimal seismic monitoring before the 2010 earthquake (magnitude 7.0) that killed 220,000 people. Even with monitoring, poverty and poor building standards meant vulnerability was extremely high. This illustrates that monitoring effectiveness depends on capacity to respond - warnings are useless without evacuation infrastructure, communication systems, and prepared populations.\n\nTsunami warning systems demonstrate monitoring success. The Pacific Tsunami Warning Center, established after the 1960 Chile earthquake, uses seabed sensors (DART buoys) and seismometers to detect tsunamis and model their propagation. The 2010 Chile earthquake triggered warnings that saved lives in Hawaii, Japan, and elsewhere. However, the 2004 Indian Ocean tsunami killed 230,000 people partly because no warning system existed for that region. One was established afterward, showing reactive rather than proactive approaches. Warnings require sufficient lead time - coastal areas near epicenters receive inadequate warning (15-30 minutes) for effective evacuation of all residents.\n\nCommunication is critical for monitoring effectiveness. Sri Lanka received tsunami warnings in 2004 but lacked systems to alert coastal populations. Japan\'s comprehensive warning dissemination via multiple channels (TV, radio, phones, sirens) maximizes effectiveness. Language barriers and literacy levels affect warning comprehension. Cultural factors influence response - some communities ignore warnings due to past false alarms or cultural beliefs.\n\nIn conclusion, monitoring and prediction show differential effectiveness. Volcanic eruption monitoring is relatively successful, providing actionable warnings that have demonstrably saved thousands of lives where monitoring networks exist and authorities respond appropriately. Earthquake prediction remains ineffective for short-term forecasting, though early warning systems provide crucial seconds-to-minutes that reduce casualties and damage in well-prepared societies. Tsunami monitoring is effective given sufficient detection infrastructure and lead time. Effectiveness fundamentally depends on investment in monitoring technology, communication systems, public education, and socio-economic capacity to implement protective measures. The most effective approach combines monitoring with building resilience through construction standards, land-use planning, education, and preparedness drills. Monitoring enables timely response but cannot replace long-term hazard mitigation strategies.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic description of monitoring methods, minimal evaluation',
+                'Level 2 (5-8 marks): Clear explanation of monitoring for different hazards with examples, some evaluation of effectiveness',
+                'Level 3 (9-12 marks): Sophisticated evaluation of prediction/monitoring effectiveness across different hazards (volcanic/seismic/tsunami), specific detailed examples (Pinatubo, Tōhoku, Haiti), assessment of successes and limitations, consideration of socio-economic context affecting effectiveness, recognition of communication and response capacity, balanced conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          }
+        ]
       }
     ]
   }
