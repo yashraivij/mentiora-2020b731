@@ -4138,6 +4138,18 @@ const Dashboard = () => {
                               // Exclude geography-paper-2 from exam board selection
                               if (subject.id === 'geography-paper-2') return false;
                               
+                              // CRITICAL: When selecting Geography in A-Level tab, exclude all GCSE Geography variants
+                              if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
+                                // Only show geography subjects that explicitly have 'alevel' in their ID
+                                if (!subject.id.includes('alevel')) return false;
+                              }
+                              
+                              // CRITICAL: When selecting Geography in GCSE tab, exclude all A-Level Geography variants
+                              if (activeSubjectLevel === 'gcse' && selectedSubjectGroup === 'Geography') {
+                                // Exclude any geography with 'alevel' in ID
+                                if (subject.id.includes('alevel')) return false;
+                              }
+                              
                               console.log(`🔍 Filtering subject ${subject.id} (${subject.name}):`, {
                                 activeSubjectLevel,
                                 includesAlevel: subject.id.includes('alevel'),
