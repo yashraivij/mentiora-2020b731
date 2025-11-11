@@ -27,6 +27,7 @@ interface OnboardingData {
   parentUpdates: boolean;
   parentEmail: string | null;
   profileEmoji: string;
+  selectedTutor: string;
 }
 
 // Extract unique subjects from curriculum by level
@@ -146,6 +147,44 @@ const STUDY_PREFERENCES = [
   },
 ];
 
+const TUTOR_OPTIONS = [
+  {
+    id: 'miss_patel',
+    name: 'Miss Patel',
+    avatar: '/src/assets/avatars/cat-avatar.png',
+    personality: 'Patient and supportive, breaks down complex topics step-by-step',
+    specialty: 'Sciences'
+  },
+  {
+    id: 'mr_chen',
+    name: 'Mr. Chen',
+    avatar: '/src/assets/avatars/bear-avatar.png',
+    personality: 'Methodical and clear, focuses on understanding core concepts',
+    specialty: 'Maths & Physics'
+  },
+  {
+    id: 'ms_johnson',
+    name: 'Ms. Johnson',
+    avatar: '/src/assets/avatars/fox-avatar.png',
+    personality: 'Energetic and creative, makes learning fun with examples',
+    specialty: 'English & Humanities'
+  },
+  {
+    id: 'mr_williams',
+    name: 'Mr. Williams',
+    avatar: '/src/assets/avatars/dog-avatar.png',
+    personality: 'Straight to the point, focuses on exam technique',
+    specialty: 'All subjects'
+  },
+  {
+    id: 'dr_singh',
+    name: 'Dr. Singh',
+    avatar: '/src/assets/avatars/rabbit-avatar.png',
+    personality: 'Detailed and thorough, ensures deep understanding',
+    specialty: 'Advanced topics'
+  }
+];
+
 const PROFILE_EMOJIS = [
   '😊', '😎', '🤓', '😄', '🥳', '😇', '🤩', '😁', '😀', '🙂',
   '😌', '🤗', '🥰', '😏', '🤠', '🧐', '🤔', '🤫', '🤪', '😜',
@@ -171,6 +210,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     parentUpdates: false,
     parentEmail: null,
     profileEmoji: '😊',
+    selectedTutor: 'miss_patel',
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [showCompletion, setShowCompletion] = useState(false);
@@ -201,7 +241,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const canContinue = () => {
     switch (currentStep) {
       case 1:
-        return onboardingData.profileEmoji !== '';
+        return onboardingData.selectedTutor !== '';
       case 2:
         return onboardingData.acquisitionSource !== '';
       case 3:
@@ -245,10 +285,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // Save profile emoji
+        // Save profile emoji and selected tutor
         await supabase
           .from('profiles')
-          .update({ profile_emoji: onboardingData.profileEmoji })
+          .update({ 
+            profile_emoji: onboardingData.profileEmoji,
+            selected_tutor_id: onboardingData.selectedTutor
+          })
           .eq('id', user.id);
 
         // Save parent email to onboarding_parent_emails table
@@ -374,37 +417,46 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 1: Choose emoji profile picture */}
+            {/* Step 1: Select Your Tutor */}
             {currentStep === 1 && (
               <div>
-                <h2 className="text-[26px] font-bold text-black mb-2">Choose your profile picture</h2>
-                <p className="text-[15px] text-[#6B7280] mb-5">Pick an emoji that represents you! It'll be shown on the leaderboard</p>
+                <h2 className="text-[26px] font-bold text-black mb-2">Select Your Tutor</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">Choose a tutor who will guide you when you need help</p>
                 
-                {/* Selected emoji preview */}
-                <div className="flex flex-col items-center mb-5">
-                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#00B4D8]/10 to-[#0BA5E9]/10 flex items-center justify-center mb-3 border-2 border-[#00B4D8]/30">
-                    <span className="text-[56px]">{onboardingData.profileEmoji}</span>
-                  </div>
-                  <p className="text-[13px] text-[#6B7280] font-medium">Your profile emoji</p>
-                </div>
-
-                {/* Emoji grid */}
-                <div className="max-h-[280px] overflow-y-auto">
-                  <div className="grid grid-cols-8 gap-2">
-                    {PROFILE_EMOJIS.map((emoji) => (
-                      <button
-                        key={emoji}
-                        onClick={() => setOnboardingData({ ...onboardingData, profileEmoji: emoji })}
-                        className={`w-full aspect-square rounded-lg flex items-center justify-center text-[28px] transition-all duration-200 hover:scale-110 ${
-                          onboardingData.profileEmoji === emoji
-                            ? 'bg-[#00B4D8] scale-110 shadow-lg'
-                            : 'bg-[#F3F4F6] hover:bg-[#E5E7EB]'
-                        }`}
-                      >
-                        {emoji}
-                      </button>
-                    ))}
-                  </div>
+                {/* Tutor grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-[360px] overflow-y-auto">
+                  {TUTOR_OPTIONS.map((tutor) => (
+                    <button
+                      key={tutor.id}
+                      onClick={() => setOnboardingData({ ...onboardingData, selectedTutor: tutor.id })}
+                      className={`relative p-3 rounded-xl border-2 transition-all ${
+                        onboardingData.selectedTutor === tutor.id
+                          ? 'border-[#00B4D8] bg-[#F0F9FF] scale-[1.02]'
+                          : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:shadow-lg'
+                      }`}
+                    >
+                      {/* Avatar */}
+                      <div className="w-16 h-16 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#E5E7EB]">
+                        <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
+                      </div>
+                      
+                      {/* Name */}
+                      <h4 className="text-sm font-bold text-center mb-1">{tutor.name}</h4>
+                      
+                      {/* Personality */}
+                      <p className="text-xs text-[#6B7280] text-center line-clamp-2 mb-1">{tutor.personality}</p>
+                      
+                      {/* Specialty */}
+                      <p className="text-[10px] text-[#00B4D8] text-center font-medium">{tutor.specialty}</p>
+                      
+                      {/* Selected indicator */}
+                      {onboardingData.selectedTutor === tutor.id && (
+                        <div className="absolute top-2 right-2 w-5 h-5 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}

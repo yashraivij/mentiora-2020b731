@@ -30,7 +30,45 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
   const [stage, setStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
   const [hasProcessedInitialMessage, setHasProcessedInitialMessage] = useState(false);
+  const [tutorInfo, setTutorInfo] = useState({
+    name: 'Study Helper',
+    avatar: null as string | null,
+    id: 'miss_patel'
+  });
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  // Fetch tutor info on mount
+  useEffect(() => {
+    const fetchTutorInfo = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('selected_tutor_id')
+          .eq('id', user.id)
+          .maybeSingle();
+        
+        if (profile?.selected_tutor_id) {
+          const TUTOR_OPTIONS = [
+            { id: 'miss_patel', name: 'Miss Patel', avatar: '/src/assets/avatars/cat-avatar.png' },
+            { id: 'mr_chen', name: 'Mr. Chen', avatar: '/src/assets/avatars/bear-avatar.png' },
+            { id: 'ms_johnson', name: 'Ms. Johnson', avatar: '/src/assets/avatars/fox-avatar.png' },
+            { id: 'mr_williams', name: 'Mr. Williams', avatar: '/src/assets/avatars/dog-avatar.png' },
+            { id: 'dr_singh', name: 'Dr. Singh', avatar: '/src/assets/avatars/rabbit-avatar.png' }
+          ];
+          const tutor = TUTOR_OPTIONS.find(t => t.id === profile.selected_tutor_id);
+          if (tutor) {
+            setTutorInfo({
+              name: tutor.name,
+              avatar: tutor.avatar,
+              id: tutor.id
+            });
+          }
+        }
+      }
+    };
+    fetchTutorInfo();
+  }, []);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -207,7 +245,7 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
             <MessageCircle className="h-4 w-4 text-white" />
           </div>
           <CardTitle className="text-sm font-semibold text-white drop-shadow-sm">
-            Study Helper
+            {tutorInfo.name}
           </CardTitle>
         </div>
         <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-white/20 text-white">
@@ -237,7 +275,7 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
                     message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                   }`}
                 >
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 ${
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shadow-lg border-2 border-white/30 ${
                     message.role === 'user' 
                       ? 'text-white' 
                       : 'text-white'
@@ -245,7 +283,11 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
                     {message.role === 'user' ? (
                       <User className="h-4 w-4" />
                     ) : (
-                      <Bot className="h-4 w-4" />
+                      tutorInfo.avatar ? (
+                        <img src={tutorInfo.avatar} alt={tutorInfo.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <Bot className="h-4 w-4" />
+                      )
                     )}
                   </div>
                   <div
@@ -264,8 +306,12 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
             {isLoading && (
               <div className="flex gap-3 justify-start">
                 <div className="flex gap-2">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
-                    <Bot className="h-4 w-4" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center overflow-hidden shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
+                    {tutorInfo.avatar ? (
+                      <img src={tutorInfo.avatar} alt={tutorInfo.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <Bot className="h-4 w-4" />
+                    )}
                   </div>
                   <div className="px-4 py-3 rounded-xl text-sm shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
                     <div className="flex gap-1">

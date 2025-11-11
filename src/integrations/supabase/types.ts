@@ -118,6 +118,118 @@ export type Database = {
           },
         ]
       }
+      curriculum_questions: {
+        Row: {
+          calculator_guidance: string | null
+          created_at: string | null
+          difficulty: string
+          id: string
+          marking_criteria: Json
+          marks: number
+          model_answer: string
+          order_index: number
+          question: string
+          spec_reference: string
+          topic_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          calculator_guidance?: string | null
+          created_at?: string | null
+          difficulty: string
+          id: string
+          marking_criteria: Json
+          marks: number
+          model_answer: string
+          order_index: number
+          question: string
+          spec_reference: string
+          topic_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          calculator_guidance?: string | null
+          created_at?: string | null
+          difficulty?: string
+          id?: string
+          marking_criteria?: Json
+          marks?: number
+          model_answer?: string
+          order_index?: number
+          question?: string
+          spec_reference?: string
+          topic_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculum_questions_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "curriculum_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      curriculum_subjects: {
+        Row: {
+          created_at: string | null
+          exam_board: string | null
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          exam_board?: string | null
+          id: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          exam_board?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      curriculum_topics: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          order_index: number
+          subject_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          name: string
+          order_index: number
+          subject_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          order_index?: number
+          subject_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "curriculum_topics_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "curriculum_subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_topic_mastery: {
         Row: {
           created_at: string
@@ -752,6 +864,7 @@ export type Database = {
           premium_until: string | null
           profile_emoji: string | null
           purchased_package: string | null
+          selected_tutor_id: string | null
           stripe_customer_id: string | null
           stripe_payment_id: string | null
           subscription_status: string | null
@@ -772,6 +885,7 @@ export type Database = {
           premium_until?: string | null
           profile_emoji?: string | null
           purchased_package?: string | null
+          selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
           subscription_status?: string | null
@@ -792,6 +906,7 @@ export type Database = {
           premium_until?: string | null
           profile_emoji?: string | null
           purchased_package?: string | null
+          selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
           subscription_status?: string | null
