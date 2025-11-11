@@ -576,170 +576,138 @@ const Index = () => {
       </section>
 
 
-      {/* UNLIKE ANY OTHER APP SECTION */}
-      <section id="about" className="py-24 px-6 bg-white">
+      {/* HOW MENTIORA WORKS SECTION */}
+      <section id="about" className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-3">
               How Mentiora Works
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Three powerful tools. One platform.
+            <p className="text-xl text-gray-600">
+              See it in action
             </p>
           </motion.div>
 
-          {/* 3-Card Horizontal Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            
-            {/* Card 1: Question Practice */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="h-1.5 bg-gradient-to-r from-blue-600 to-blue-400"></div>
-              <div className="p-6 md:p-8">
-                <h3 className="text-2xl font-bold mb-3 text-black">Smart Question Bank</h3>
-                <p className="text-gray-700 text-base mb-6">
-                  Practice with questions pulled from real past papers - automatically filtered by topic and difficulty
-                </p>
+          {/* Panel 1: Smart Question Bank */}
+          <div className="py-16 px-6 bg-gradient-to-br from-blue-50 to-white rounded-3xl mb-8">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Text Side */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
+                    Smart Question Bank
+                  </h3>
+                  <p className="text-xl text-gray-600">
+                    Practice with real past paper questions
+                  </p>
+                </motion.div>
                 
-                {/* Accurate Mini Mockup */}
-                <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                  <div className="flex justify-between items-start mb-3">
-                    <p className="text-sm text-gray-700">
-                      Explain the process of photosynthesis in plants.
-                    </p>
-                    <span className="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium whitespace-nowrap ml-2">
-                      6 marks
-                    </span>
-                  </div>
-                  <div className="border border-gray-300 rounded-lg p-3 bg-gray-50 h-20 mb-3">
-                    <p className="text-xs text-gray-400">Type your answer here...</p>
-                  </div>
-                  <button className="w-full py-2 rounded-lg text-white text-sm font-medium" style={{ backgroundColor: '#3B82F6' }}>
-                    Submit Answer
-                  </button>
-                </div>
+                {/* Image Side */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative"
+                >
+                  <img 
+                    src="/lovable-uploads/practice-mockup.png" 
+                    alt="Practice question interface showing a biology question with answer box"
+                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent rounded-2xl pointer-events-none" />
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
+          </div>
 
-            {/* Card 2: Chat Assistant */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="h-1.5 bg-gradient-to-r from-purple-600 to-purple-400"></div>
-              <div className="p-6 md:p-8">
-                <h3 className="text-2xl font-bold mb-3 text-black">Study Helper Chat</h3>
-                <p className="text-gray-700 text-base mb-6">
-                  Get instant guidance when you're stuck - ask questions and work through problems step-by-step
-                </p>
-                
-                {/* Accurate Mini Mockup */}
-                <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                  <div className="px-4 py-2.5 text-white text-xs font-medium flex items-center gap-2" style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)' }}>
-                    <MessageCircle className="h-3.5 w-3.5" />
-                    Study Helper
-                  </div>
-                  <div className="p-4 space-y-2.5 bg-gray-50">
-                    {/* Assistant message */}
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)' }}>
-                        <Bot className="h-3 w-3 text-white" />
-                      </div>
-                      <div className="flex-1 bg-white border border-gray-200 rounded-lg p-2.5">
-                        <p className="text-xs text-gray-700">
-                          Let's work through this together! What do you think is the first step?
-                        </p>
-                      </div>
-                    </div>
-                    {/* User message */}
-                    <div className="flex gap-2 justify-end">
-                      <div className="bg-blue-500 rounded-lg p-2.5 max-w-[70%]">
-                        <p className="text-xs text-white">
-                          I'm not sure where to start...
-                        </p>
-                      </div>
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#3B82F6' }}>
-                        <User className="h-3 w-3 text-white" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="px-4 py-2.5 border-t border-gray-200 flex gap-2">
-                    <div className="flex-1 border border-gray-300 rounded-md px-3 py-1.5">
-                      <p className="text-xs text-gray-400">Type your message...</p>
-                    </div>
-                    <button className="px-3 py-1.5 rounded-md text-white" style={{ backgroundColor: '#3B82F6' }}>
-                      <Send className="h-3 w-3" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          {/* Panel 2: Study Helper Chat */}
+          <div className="py-16 px-6 bg-gradient-to-br from-purple-50 to-white rounded-3xl mb-8">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Image Side (Left on desktop) */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative md:order-1"
+                >
+                  <img 
+                    src="/lovable-uploads/chat-mockup.png" 
+                    alt="AI chat interface showing conversation with Study Helper"
+                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent rounded-2xl pointer-events-none" />
+                </motion.div>
 
-            {/* Card 3: Analytics */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="h-1.5 bg-gradient-to-r from-emerald-600 to-emerald-400"></div>
-              <div className="p-6 md:p-8">
-                <h3 className="text-2xl font-bold mb-3 text-black">Real-Time Analytics</h3>
-                <p className="text-gray-700 text-base mb-6">
-                  Track your predicted grade and see exactly which topics need more work
-                </p>
-                
-                {/* Accurate Mini Mockup */}
-                <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <Target className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-semibold text-emerald-600">Mastered Topics</p>
-                      <p className="text-3xl font-bold text-emerald-600">12</p>
-                      <p className="text-xs text-gray-500">85%+ average score</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs text-gray-600">
-                      <span>Biology</span>
-                      <span>78%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="h-2 rounded-full" style={{ width: '78%', backgroundColor: '#3B82F6' }}></div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs text-gray-600">
-                      <span>Chemistry</span>
-                      <span>92%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="h-2 rounded-full" style={{ width: '92%', backgroundColor: '#3B82F6' }}></div>
-                    </div>
-                  </div>
-                </div>
+                {/* Text Side (Right on desktop) */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="md:order-2"
+                >
+                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
+                    AI Study Helper
+                  </h3>
+                  <p className="text-xl text-gray-600">
+                    Get unstuck with step-by-step guidance
+                  </p>
+                </motion.div>
               </div>
-            </motion.div>
-            
+            </div>
+          </div>
+
+          {/* Panel 3: Real-Time Analytics */}
+          <div className="py-16 px-6 bg-gradient-to-br from-green-50 to-white rounded-3xl">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Text Side */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h3 className="text-4xl md:text-5xl font-bold text-black mb-4">
+                    Track Your Progress
+                  </h3>
+                  <p className="text-xl text-gray-600">
+                    See your predicted grade improve in real-time
+                  </p>
+                </motion.div>
+                
+                {/* Image Side */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative"
+                >
+                  <img 
+                    src="/lovable-uploads/analytics-mockup.png" 
+                    alt="Analytics dashboard showing mastered topics and subject performance"
+                    className="rounded-2xl shadow-2xl w-full border border-gray-200"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 to-transparent rounded-2xl pointer-events-none" />
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
