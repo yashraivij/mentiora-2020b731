@@ -4239,7 +4239,7 @@ const Dashboard = () => {
                                 >
                                   <Card 
                                     className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
-                              onClick={() => {
+                                onClick={() => {
                                 console.log('📗 Exam board clicked:', {
                                   subjectId: subject.id,
                                   subjectName: subject.name,
@@ -4247,6 +4247,19 @@ const Dashboard = () => {
                                   activeSubjectLevel,
                                   isAlevelId: subject.id.includes('alevel')
                                 });
+                                
+                                // CRITICAL SAFEGUARD: Prevent wrong Geography subject from being selected
+                                if (selectedSubjectGroup === 'Geography' && activeSubjectLevel === 'alevel') {
+                                  if (subject.id !== 'geography-aqa-alevel') {
+                                    console.error('❌ BLOCKED: Attempted to select wrong Geography subject in A-level mode:', subject.id);
+                                    toast({
+                                      title: "Error",
+                                      description: "Invalid subject selected. Please try again.",
+                                      variant: "destructive"
+                                    });
+                                    return;
+                                  }
+                                }
                                 
                                 // Safety check: ensure correct level subject is selected
                                 const expectedHasAlevel = activeSubjectLevel === 'alevel';
@@ -4261,6 +4274,12 @@ const Dashboard = () => {
                                   });
                                   return;
                                 }
+                                
+                                console.log('✅ Setting selected subject for grade:', {
+                                  id: subject.id,
+                                  name: subject.name,
+                                  examBoard: examBoard
+                                });
                                 
                                 setSelectedSubjectForGrade({
                                   id: subject.id,
@@ -4333,17 +4352,29 @@ const Dashboard = () => {
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
+                                // CRITICAL SAFEGUARD: Double-check subject ID before adding
+                                let finalSubjectId = selectedSubjectForGrade.id;
+                                
+                                // If in A-level mode and Geography, force use of geography-aqa-alevel
+                                if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
+                                  if (finalSubjectId !== 'geography-aqa-alevel') {
+                                    console.error('🚨 CRITICAL: Wrong Geography ID detected, correcting from', finalSubjectId, 'to geography-aqa-alevel');
+                                    finalSubjectId = 'geography-aqa-alevel';
+                                  }
+                                }
+                                
                                 const logData = {
-                                  subjectId: selectedSubjectForGrade.id,
+                                  originalSubjectId: selectedSubjectForGrade.id,
+                                  finalSubjectId: finalSubjectId,
                                   subjectName: selectedSubjectForGrade.name,
                                   grade: grade.toString(),
                                   examBoard: selectedSubjectForGrade.examBoard,
                                   activeSubjectLevel,
-                                  isAlevelId: selectedSubjectForGrade.id.includes('alevel')
+                                  isAlevelId: finalSubjectId.includes('alevel')
                                 };
                                 console.log('✅ Adding subject with grade:', logData);
                                 
-                                addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
+                                addSubject(finalSubjectId, grade.toString(), selectedSubjectForGrade.examBoard);
                                 setSelectedSubjectForGrade(null);
                                 setShowAddSubjects(false);
                                 setSelectedSubjectGroup(null);
