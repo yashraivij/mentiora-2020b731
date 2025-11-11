@@ -71,7 +71,7 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const { subjects, getSubject, getTopic } = useCurriculum();
+  const { subjects, getSubject, getTopic, isLoading: curriculumLoading } = useCurriculum();
   const [showPricingModal, setShowPricingModal] = useState(false);
   
   // Subject colors mapping
@@ -180,6 +180,18 @@ const Practice = () => {
   } = usePersonalizedNotifications();
 
   const { showMPReward } = useMPRewards();
+
+  // Show loading state while curriculum data is loading
+  if (curriculumLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-muted-foreground">Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
 
   const subject = getSubject(subjectId || "");
   const topic = subject?.topics.find(t => t.id === topicId);

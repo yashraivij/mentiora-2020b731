@@ -49,9 +49,21 @@ const PredictedResults = () => {
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
-  const { getSubject } = useCurriculum();
+  const { getSubject, isLoading: curriculumLoading } = useCurriculum();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
+
+  // Show loading state while curriculum data is loading
+  if (curriculumLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-muted-foreground">Loading results...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {

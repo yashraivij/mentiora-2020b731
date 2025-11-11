@@ -36,7 +36,7 @@ const PredictedExam = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const { subjects, getSubject } = useCurriculum();
+  const { subjects, getSubject, isLoading: curriculumLoading } = useCurriculum();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -51,6 +51,18 @@ const PredictedExam = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
+  
+  // Show loading state while curriculum data is loading
+  if (curriculumLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-muted-foreground">Loading exam...</p>
+        </div>
+      </div>
+    );
+  }
   
   const subject = getSubject(subjectId || "") || subjects.find(s => subjectId?.startsWith(s.id + '-paper-'));
   
