@@ -141,35 +141,32 @@ const Pricing = () => {
       </div>
 
       <div className="max-w-[900px] mx-auto px-6 py-12">
-        {/* Logo Badge */}
+        {/* Main Headline */}
         <motion.div 
-          className="flex justify-center mb-6"
+          className="flex items-center justify-center gap-4 mb-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full">
-            <img src={mentioraLogo} alt="Mentiora" className="h-5 w-5" />
-            <span className="text-sm font-semibold text-gray-900">Mentiora</span>
+          <h1 className="text-5xl font-bold text-gray-900">
+            Start
+          </h1>
+          {/* Mentiora Logo Graphic */}
+          <div className="relative">
+            <div className="w-20 h-20 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
+              <img 
+                src={mentioraLogo} 
+                alt="Mentiora" 
+                className="w-12 h-12"
+              />
+            </div>
           </div>
+          <h1 className="text-5xl font-bold text-gray-900">
+            for free.
+          </h1>
         </motion.div>
-
-        {/* Main Headline */}
-        <motion.h1 
-          className="text-5xl md:text-6xl font-bold text-center text-gray-900 mb-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          All-in-one exam prep.{" "}
-          <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-            One simple price.
-          </span>
-        </motion.h1>
 
         <motion.p 
           className="text-center text-gray-600 text-lg mb-6 max-w-[700px] mx-auto"
@@ -177,9 +174,9 @@ const Pricing = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Study smarter with 2,500+ questions, AI tutoring, and predicted papers—all built for your exact exam board.
+          Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
         </motion.p>
 
         {/* Ask My Parents Link */}
@@ -189,11 +186,11 @@ const Pricing = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <button
             onClick={() => document.getElementById('parents-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-blue-600 font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
+            className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
           >
             Ask my parents <ChevronRight className="w-4 h-4" />
           </button>
@@ -201,18 +198,18 @@ const Pricing = () => {
 
         {/* Exam Year Toggle */}
         <motion.div 
-          className="flex justify-center gap-3 mb-8"
+          className="flex justify-center gap-2 mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <button
             onClick={() => setExamYear("2026")}
-            className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            className={`px-8 py-3 rounded-full text-base font-medium transition-all ${
               examYear === "2026"
-                ? "bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-500/30"
+                ? "bg-gray-900 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -220,9 +217,9 @@ const Pricing = () => {
           </button>
           <button
             onClick={() => setExamYear("2027")}
-            className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            className={`px-8 py-3 rounded-full text-base font-medium transition-all ${
               examYear === "2027"
-                ? "bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-500/30"
+                ? "bg-gray-900 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -230,135 +227,94 @@ const Pricing = () => {
           </button>
         </motion.div>
 
-        {/* Pricing Tabs */}
+        {/* Pricing Cards */}
         <motion.div 
-          className="flex justify-center gap-1 mb-8 bg-gray-100 rounded-2xl p-1 max-w-md mx-auto"
+          className="grid md:grid-cols-2 gap-6 mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <button
-            className="flex-1 px-6 py-3 rounded-xl text-sm font-semibold bg-white text-gray-900 shadow-sm"
-          >
-            Monthly
-          </button>
-          <button
-            className="flex-1 px-6 py-3 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900"
-          >
-            Exam Access
-          </button>
-        </motion.div>
-
-        {/* Single Pricing Card */}
-        <motion.div 
-          className="mb-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <Card className="border-2 border-gray-200/50 rounded-2xl p-10 max-w-2xl mx-auto shadow-xl backdrop-blur-sm bg-white/80 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-cyan-400/10 rounded-full blur-3xl -z-10" />
+          {/* Monthly */}
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
+            <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
+            <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
             
-            <div className="flex items-start justify-between mb-8">
-              <div>
-                <h3 className="text-3xl font-bold mb-2 text-gray-900">7-Day Free Trial</h3>
-                <p className="text-gray-600 text-lg">Start free, then continue monthly.</p>
+            <div className="mb-8">
+              <div className="flex items-baseline gap-2">
+                <span className="text-5xl font-bold text-gray-900">£0</span>
+                <span className="text-gray-600">/week</span>
               </div>
-              <div className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-full text-sm font-bold backdrop-blur-sm">
-                Popular
-              </div>
-            </div>
-            
-            <div className="mb-10">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-6xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">£0</span>
-                <span className="text-gray-600 text-xl">/week</span>
-              </div>
-              <p className="text-gray-500 text-lg">Then £9.99/month after trial</p>
+              <p className="text-sm text-gray-500 mt-2">Then £9.99/month</p>
             </div>
 
             <Button
               onClick={handleUpgrade}
-              className="w-full h-16 rounded-2xl text-lg font-bold bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all"
+              variant="outline"
+              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#00A8FF] hover:bg-white transition-colors"
             >
               Start Free Trial
             </Button>
 
-            <p className="text-sm text-gray-500 mt-6 text-center">
-              Cancel anytime • No commitment • Full access
+            <p className="text-sm text-gray-500 mt-4 text-center">
+              Cancel anytime.
+            </p>
+          </Card>
+
+          {/* 2026 Exams */}
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
+            <div className="absolute top-6 right-6 bg-white text-[#00A8FF] px-4 py-1 rounded-full text-sm font-bold">
+              Save {examYear === "2026" ? "15%" : "20%"}
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2">{examYear} Exams</h3>
+            <p className="mb-6 text-white/90">
+              One-time payment. Get unlimited access until {examYear === "2026" ? "31st July 2026" : "31st July 2027"}.
+            </p>
+            
+            <div className="mb-8">
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-5xl font-bold">£{examYear === "2026" ? "79.99" : "179.99"}</span>
+                <span className="text-white/90">once</span>
+              </div>
+              <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "199.99" : "449.99"}</span>
+            </div>
+
+            <Button
+              onClick={handleOneTimePayment}
+              className="w-full h-14 rounded-full text-base font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
+            >
+              Get Exam Access
+            </Button>
+
+            <p className="text-sm text-white/80 mt-4 text-center">
+              £{examYear === "2026" ? "79.99" : "179.99"} billed once.
             </p>
           </Card>
         </motion.div>
 
-        {/* Comparison Line */}
+        {/* Features List */}
         <motion.div 
-          className="text-center mb-16 max-w-2xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.7 }}
-        >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full">
-            <span className="text-sm text-gray-600">Or get</span>
-            <button
-              onClick={handleOneTimePayment}
-              className="text-sm font-semibold text-blue-600 hover:text-blue-700"
-            >
-              {examYear} Exam Access for £{examYear === "2026" ? "79.99" : "179.99"}
-            </button>
-            <span className="px-2 py-0.5 bg-blue-600 text-white rounded-full text-xs font-bold">
-              Save {examYear === "2026" ? "15%" : "20%"}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Features Grid */}
-        <motion.div 
-          className="mb-24 max-w-[1000px] mx-auto"
+          className="mb-24 max-w-[700px] mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Everything you need to ace your exams
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { icon: "📚", title: "2,500+ Practice Questions", text: "Exam-style questions with instant marking and detailed feedback for every subject." },
-              { icon: "🤖", title: "24/7 AI Tutor", text: "Get step-by-step explanations for every concept and question, anytime you need help." },
-              { icon: "📊", title: "Real-Time Analytics", text: "Track your performance with detailed insights showing strengths, weaknesses, and predicted grades." },
-              { icon: "🎯", title: "Adaptive Study Plans", text: "Personalized weekly plans tailored to your learning pace and exam goals." },
-              { icon: "🔮", title: "Predicted Papers", text: "Exclusive access to Mentiora's 2026 Predicted Papers to prepare for your exams." },
-              { icon: "💡", title: "Smart Flashcards", text: "Create and review custom flashcards powered by spaced repetition for better retention." },
-            ].map((feature, i) => (
-              <motion.div
-                key={i}
-                className="flex gap-4 p-6 bg-white border-2 border-gray-200/50 rounded-2xl hover:border-blue-300/50 hover:shadow-lg transition-all"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <div className="text-4xl">{feature.icon}</div>
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{feature.text}</p>
-                </div>
-              </motion.div>
+          <div className="space-y-4">
+            {features.map((feature, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <Check className="w-6 h-6 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
+              </div>
             ))}
           </div>
 
           <p className="text-center mt-12 text-gray-600">
-            <a href="mailto:contact@mentiora.com" className="text-blue-600 hover:text-blue-700 font-medium">
-              Interested for a school or classroom? Contact us here →
+            <a href="mailto:contact@mentiora.com" className="underline hover:text-gray-900">
+              Interested for a school or classroom? Contact us here.
             </a>
           </p>
         </motion.div>
@@ -377,20 +333,25 @@ const Pricing = () => {
           </motion.h2>
 
           <motion.div 
-            className="max-w-2xl mx-auto"
+            className="grid md:grid-cols-2 gap-12 items-start"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <Card className="border-2 border-gray-200/50 rounded-2xl p-10 shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 text-center">
+            {/* Left Column - Form */}
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">
                 Most students have their subscription covered by their parents.
               </h3>
               
-              <p className="text-gray-600 mb-8 text-center leading-relaxed">
-                We understand that conversations about subscriptions can be awkward. Mentiora can send an email on your behalf to explain the subscription details.
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                We understand that conversations about subscriptions can be awkward.
+              </p>
+              
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Mentiora can send an email on your behalf to explain the subscription details.
               </p>
 
               <div className="space-y-4 mb-6">
@@ -402,7 +363,7 @@ const Pricing = () => {
                     placeholder="Enter your name"
                     value={studentName}
                     onChange={(e) => setStudentName(e.target.value)}
-                    className="h-12 rounded-xl"
+                    className="h-12 rounded-lg"
                   />
                 </div>
                 
@@ -415,138 +376,434 @@ const Pricing = () => {
                     placeholder="Enter their email address"
                     value={parentEmail}
                     onChange={(e) => setParentEmail(e.target.value)}
-                    className="h-12 rounded-xl"
+                    className="h-12 rounded-lg"
                   />
                 </div>
               </div>
 
               <Button 
                 onClick={handleSendParentEmail}
-                className="w-full h-14 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold text-base shadow-lg shadow-blue-500/30"
+                className="w-full h-14 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-white font-semibold text-base"
               >
-                Send Email to My Parents
+                Send Email
               </Button>
-            </Card>
+            </div>
+
+            {/* Right Column - Email on Laptop */}
+            <div className="relative flex items-center justify-center pt-8">
+              <div className="relative w-full max-w-xl">
+                {/* Laptop Screen */}
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-lg p-2 shadow-2xl">
+                  {/* Screen bezel */}
+                  <div className="bg-black rounded-lg p-1 shadow-inner">
+                    {/* Browser Chrome */}
+                    <div className="bg-white rounded-md overflow-hidden">
+                      {/* Browser toolbar */}
+                      <div className="flex items-center gap-2 px-2 py-1.5 bg-gray-100 border-b border-gray-200">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                        </div>
+                        <div className="flex-1 bg-white rounded px-2 py-0.5 text-[9px] text-gray-600">
+                          mently.app/get-parent
+                        </div>
+                      </div>
+                      
+                      {/* Email Content */}
+                      <div className="p-4 bg-white h-[240px] overflow-hidden">
+                        {/* Email Header */}
+                        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
+                          <div className="w-7 h-7 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                            M
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900 text-xs">Mentiora</div>
+                            <div className="text-[9px] text-gray-500">hello@mentiora.com</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <div>
+                            <div className="text-[8px] text-gray-500 mb-0.5">To: Parent/Guardian</div>
+                            <h3 className="text-xs font-bold text-gray-900">
+                              Help Your Child Get Through GCSEs
+                            </h3>
+                          </div>
+                          
+                          <div className="space-y-1.5 text-[10px] text-gray-700 leading-relaxed">
+                            <p className="text-gray-600">Dear parent or guardian,</p>
+                            
+                            <p>Your child has expressed interest in using Mentiora for GCSE prep...</p>
+                            
+                            <div className="space-y-1">
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">2,500+ exam-style questions with instant marking</span>
+                              </div>
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">24/7 tutoring with step-by-step explanations</span>
+                              </div>
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">Predicted Papers & performance analytics</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Laptop Base */}
+                <div className="relative">
+                  {/* Keyboard section */}
+                  <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 px-4 py-3 rounded-b-md shadow-2xl">
+                    {/* Keyboard keys */}
+                    <div className="space-y-0.5 opacity-30">
+                      <div className="flex gap-0.5 justify-center">
+                        {[...Array(13)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-0.5 justify-center px-2">
+                        {[...Array(12)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-0.5 justify-center">
+                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        {[...Array(10)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                      </div>
+                      <div className="flex gap-0.5 justify-center px-12">
+                        <div className="flex-1 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                      </div>
+                    </div>
+                    {/* Trackpad */}
+                    <div className="mt-1.5 mx-auto w-24 h-12 bg-gray-700 rounded border border-gray-600 opacity-20 shadow-inner"></div>
+                  </div>
+                  {/* Bottom edge */}
+                  <div className="mx-auto w-2/3 h-1.5 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg shadow-2xl opacity-80"></div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Universities Trusted By Section */}
-        <motion.div 
-          className="mb-32"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl font-bold text-center mb-3 text-gray-900">
-            Trusted by students getting into top universities
-          </h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">
-            Join 10,000+ students studying for Russell Group universities
-          </p>
-          
-          {/* Static Grid of Logos */}
-          <div className="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-12 items-center justify-items-center max-w-4xl mx-auto">
-            <img src={oxfordLogo} alt="Oxford" className="h-14 object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 hover:scale-110" />
-            <img src={bristolLogo} alt="Bristol" className="h-14 object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 hover:scale-110" />
-            <img src={birminghamLogo} alt="Birmingham" className="h-14 object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 hover:scale-110" />
-            <img src={newcastleLogo} alt="Newcastle" className="h-14 object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 hover:scale-110" />
-            <img src={bathLogo} alt="Bath" className="h-14 object-contain grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100 hover:scale-110" />
-          </div>
-        </motion.div>
+        {/* Russell Group Section */}
+        <div className="mb-32">
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
+            Helping GCSE & A-Level students<br />get into Russell Group universities
+          </motion.h2>
 
-        {/* Teacher Discount Section */}
-        <motion.div 
-          className="mb-32"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="border-2 border-blue-200/50 rounded-2xl p-12 text-center bg-gradient-to-br from-blue-50/50 to-cyan-50/50">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-2xl mb-6">
-              <span className="text-3xl">👨‍🏫</span>
-            </div>
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              Teacher discount codes
-            </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
-              If you're a teacher at a school or tutoring centre and want discount codes for your students, email us.
-            </p>
-            <a 
-              href="mailto:teachers@mentiora.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-2xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all shadow-lg shadow-blue-500/30"
-            >
-              Get Discount Codes <ChevronRight className="w-5 h-5" />
-            </a>
-          </Card>
-        </motion.div>
-
-        {/* FAQ Section */}
-        <motion.div
-          className="mb-24"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="max-w-3xl mx-auto space-y-3">
-            {[
-              { icon: "📚", q: "What specifications do you support?", a: "We support AQA, Edexcel, and OCR exam boards for GCSEs, IGCSEs, and A-levels across 40+ subjects. Our content is specifically tailored to each specification to ensure you're studying exactly what you need for your exams." },
-              { icon: "✅", q: "How does the marking work?", a: "Our AI marking system evaluates your answers using the actual mark schemes from exam boards. You'll get instant feedback showing exactly where you gained or lost marks, along with detailed explanations of model answers so you can learn and improve." },
-              { icon: "❌", q: "Can I cancel my subscription?", a: "Yes, you can cancel your monthly subscription at any time with no cancellation fees. Your access will continue until the end of your current billing period. For one-time exam access purchases, you'll keep access until the specified end date." },
-              { icon: "🎯", q: "Do you support my exam board?", a: "We currently support AQA, Edexcel, and OCR for most subjects. If you don't see your specific exam board or subject, please reach out to us at contact@mentiora.com and we'll let you know when it will be available." }
-            ].map((faq, i) => (
+          {/* University Logos Strip */}
+          <motion.div 
+            className="py-8 px-6 overflow-hidden bg-white"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="relative">
               <motion.div
-                key={i}
-                className={`border-2 border-gray-200/50 rounded-2xl overflow-hidden hover:border-blue-300/50 transition-all ${
-                  i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
-                }`}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="flex items-center gap-12"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 25,
+                    ease: "linear",
+                  },
+                }}
               >
-                <button
-                  onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
-                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-blue-50/30 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{faq.icon}</span>
-                    <span className="font-semibold text-gray-900 text-lg pr-4">{faq.q}</span>
-                  </div>
-                  <ChevronDown 
-                    className={`w-5 h-5 text-gray-600 flex-shrink-0 transition-transform ${
-                      expandedFAQ === i ? 'rotate-180' : ''
-                    }`}
+                {/* First set of logos */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
                   />
-                </button>
-                <AnimatePresence>
-                  {expandedFAQ === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-8 pb-6 pl-[68px] text-gray-600 leading-relaxed">
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                {/* Second set - duplicate for seamless loop */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Teacher Section */}
+          <motion.div 
+            className="flex items-center justify-center gap-8 max-w-[700px] mx-auto bg-gray-50 rounded-2xl p-8 mt-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex-1">
+              <h3 className="text-xl font-bold mb-4 text-gray-900">
+                Ask your teacher for your school's 20% discount code.
+              </h3>
+              
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                School teachers in every country are eligible to receive a free, personalised discount code offering students 20% off any Mently subscription.
+              </p>
+              
+              <p className="text-gray-600">
+                No school code yet? Ask them to email{" "}
+                <a href="mailto:yash@mentiora.com" className="text-[#00A8FF] font-medium hover:underline">
+                  yash@mentiora.com
+                </a>{" "}
+                for one.
+              </p>
+            </div>
+            
+            {/* Teacher Emoji */}
+            <div className="flex-shrink-0">
+              <div className="text-8xl">👩‍🏫</div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* FAQs Section */}
+        <div className="mb-24 max-w-[800px] mx-auto">
+          <motion.h2 
+            className="text-5xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
+            FAQs
+          </motion.h2>
+
+          <motion.div 
+            className="space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {/* FAQ Item 1 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 0 ? null : 0)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Is Mentiora specific to the GCSE and A-Level specification?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 0 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 0 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ Item 2 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 1 ? null : 1)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  How are answers marked on Mentiora?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 1 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 1 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ Item 3 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 2 ? null : 2)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Can I cancel my subscription at any time?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 2 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 2 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ Item 4 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 3 ? null : 3)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Which exam boards does Mentiora support?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 3 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 3 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
