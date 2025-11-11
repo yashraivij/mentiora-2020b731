@@ -1377,9 +1377,7 @@ const Index = () => {
 
 
       {/* VALUE CALCULATOR SECTION */}
-      <section id="pricing" className="py-20 px-6 relative overflow-hidden">
-        {/* Dark gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      <section id="pricing" className="py-20 px-6 relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
         
         <div className="max-w-5xl mx-auto relative z-10">
           {/* Section Header */}
@@ -1390,10 +1388,10 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className="text-5xl font-bold leading-tight mb-5 text-white">
+            <h2 className="text-5xl font-bold leading-tight mb-5 text-black">
               Calculate your savings
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
               See how much you'll save compared to private tutoring
             </p>
           </motion.div>
@@ -1404,11 +1402,11 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12"
+            className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-lg"
           >
             {/* Large Animated Savings Display */}
             <div className="text-center mb-12">
-              <div className="text-gray-400 text-sm uppercase tracking-wider mb-3">
+              <div className="text-gray-500 text-sm uppercase tracking-wider mb-3">
                 Total Savings
               </div>
               <motion.div
@@ -1416,11 +1414,11 @@ const Index = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent"
               >
                 £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </motion.div>
-              <div className="text-gray-400 text-lg mt-2">
+              <div className="text-gray-600 text-lg mt-2">
                 over {sliderMonths} {sliderMonths === 1 ? 'month' : 'months'}
               </div>
             </div>
@@ -1428,7 +1426,7 @@ const Index = () => {
             {/* Interactive Slider */}
             <div className="mb-16 px-4">
               <div className="flex items-center justify-between mb-4">
-                <label className="text-white font-semibold text-lg">
+                <label className="text-black font-semibold text-lg">
                   How many months will you study?
                 </label>
                 <div className="text-3xl font-bold text-blue-400">
@@ -1443,7 +1441,7 @@ const Index = () => {
                 step={1}
                 className="cursor-pointer"
               />
-              <div className="flex justify-between text-sm text-gray-400 mt-2">
+              <div className="flex justify-between text-sm text-gray-500 mt-2">
                 <span>1 month</span>
                 <span>12 months</span>
               </div>
@@ -1457,9 +1455,9 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="bg-red-500/10 border border-red-500/20 rounded-xl p-6"
+                className="bg-red-50 border border-red-200 rounded-xl p-6"
               >
-                <div className="text-red-400 text-sm font-semibold mb-2">
+                <div className="text-red-600 text-sm font-semibold mb-2">
                   Private Tutoring
                 </div>
                 <motion.div
@@ -1467,11 +1465,11 @@ const Index = () => {
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-white mb-1"
+                  className="text-3xl font-bold text-black mb-1"
                 >
                   £{(500 * sliderMonths).toLocaleString('en-GB')}
                 </motion.div>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-500 text-sm">
                   £500/month × {sliderMonths}
                 </div>
               </motion.div>
@@ -1482,11 +1480,11 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6"
+                className="bg-blue-50 border border-blue-200 rounded-xl p-6"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <img src={mentioraLogo} alt="Mentiora" className="h-4 w-4" />
-                  <div className="text-blue-400 text-sm font-semibold">
+                  <div className="text-blue-600 text-sm font-semibold">
                     Mentiora
                   </div>
                 </div>
@@ -1495,11 +1493,11 @@ const Index = () => {
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-white mb-1"
+                  className="text-3xl font-bold text-black mb-1"
                 >
                   £{(9.99 * sliderMonths).toFixed(2)}
                 </motion.div>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-500 text-sm">
                   £9.99/month × {sliderMonths}
                 </div>
               </motion.div>
@@ -1510,9 +1508,9 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="bg-green-500/10 border border-green-500/20 rounded-xl p-6"
+                className="bg-green-50 border border-green-200 rounded-xl p-6"
               >
-                <div className="text-green-400 text-sm font-semibold mb-2">
+                <div className="text-green-600 text-sm font-semibold mb-2">
                   You Save
                 </div>
                 <motion.div
@@ -1520,11 +1518,11 @@ const Index = () => {
                   initial={{ scale: 0.9 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-white mb-1"
+                  className="text-3xl font-bold text-black mb-1"
                 >
                   £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </motion.div>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-500 text-sm">
                   {Math.round(((500 - 9.99) / 500) * 100)}% cheaper
                 </div>
               </motion.div>
