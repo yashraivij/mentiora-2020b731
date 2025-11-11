@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { X, MessageCircle, Send, Bot, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -22,10 +21,9 @@ interface ChatAssistantProps {
   isOpen: boolean;
   onClose: () => void;
   initialMessage?: string;
-  isAnswerIncorrect?: boolean;
 }
 
-export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessage, isAnswerIncorrect = false }: ChatAssistantProps) => {
+export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessage }: ChatAssistantProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +31,6 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
   const [hintCount, setHintCount] = useState(0);
   const [hasProcessedInitialMessage, setHasProcessedInitialMessage] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -51,12 +48,11 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
       initializeConversation();
     }
     
-    // Reset states when chat is closed
+    // Reset the flag when chat is closed
     if (!isOpen) {
       setHasProcessedInitialMessage(false);
     }
   }, [isOpen]);
-  
 
   // Send initial message if provided
   useEffect(() => {
@@ -200,7 +196,6 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose, initialMessa
       setIsLoading(false);
     }
   };
-
 
   if (!isOpen) return null;
 

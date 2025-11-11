@@ -8,9 +8,3 @@ verify_jwt = false
 
 [functions.chat-assistant]
 verify_jwt = true
-
-[functions.transcribe-speech]
-verify_jwt = false
-
-[functions.teach-mentiora-feedback]
-verify_jwt = false

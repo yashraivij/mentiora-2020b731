@@ -39331,5 +39331,797 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'geography-aqa-alevel',
+    name: 'Geography',
+    topics: [
+      {
+        id: 'water-carbon-cycles',
+        name: 'Water and Carbon Cycles',
+        questions: [
+          {
+            id: 'geo-wcc-q1',
+            question: 'Explain what is meant by the term "dynamic equilibrium" in natural systems.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Dynamic equilibrium occurs when inputs and outputs in a system are balanced, but the system is constantly adjusting to maintain this balance. Unlike static equilibrium, the stores and flows within the system continue to change, but overall the system remains in balance. For example, in a drainage basin, precipitation inputs may vary seasonally, but the system adjusts through changes in evapotranspiration and runoff to maintain equilibrium.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: inputs and outputs balanced (1 mark)',
+                'System constantly adjusting (1 mark)',
+                'Stores and flows change but balance maintained (1 mark)',
+                'Example of natural system showing dynamic equilibrium (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q2',
+            question: 'Describe the main stores in the global water cycle.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The largest store is the oceans, containing approximately 97% of global water. Ice sheets and glaciers (cryosphere) store about 2% of water. Groundwater in aquifers stores less than 1%. Surface water in lakes and rivers stores a small amount. The atmosphere stores water vapour, representing only 0.001% of total water. Biological water stored in living organisms represents a negligible amount.',
+            markingCriteria: {
+              breakdown: [
+                'Oceans (largest store, ~97%) (1 mark)',
+                'Cryosphere/ice sheets/glaciers (~2%) (1 mark)',
+                'Groundwater/aquifers (<1%) (1 mark)',
+                'Atmosphere/surface water/biological (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q3',
+            question: 'Explain how deforestation in tropical rainforests affects the water cycle.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Deforestation significantly disrupts the water cycle in tropical rainforests. Tree removal reduces interception, meaning more precipitation reaches the ground directly, increasing surface runoff and flood risk. Evapotranspiration decreases because trees no longer transpire water vapour, reducing atmospheric moisture and potentially decreasing rainfall. Infiltration rates decline as soil becomes compacted without tree roots, further increasing runoff. Water storage in vegetation biomass is lost. In the Amazon rainforest, studies show deforestation has reduced evapotranspiration by up to 25%, affecting regional rainfall patterns and potentially creating a drier climate.',
+            markingCriteria: {
+              breakdown: [
+                'Reduced interception, increased surface runoff (1 mark)',
+                'Decreased evapotranspiration (1 mark)',
+                'Reduced infiltration due to soil compaction (1 mark)',
+                'Loss of vegetation water storage (1 mark)',
+                'Impact on rainfall/climate (1 mark)',
+                'Reference to Amazon or specific example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q4',
+            question: 'Describe the main stores in the global carbon cycle and their relative sizes.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'The largest carbon store is sedimentary rocks (limestone and fossil fuels) containing approximately 100 million gigatonnes. Oceans store about 38,000 gigatonnes of carbon, mostly as dissolved carbon dioxide. Fossil fuel deposits store around 4,000 gigatonnes. Soil organic matter stores approximately 1,500 gigatonnes. The atmosphere stores about 750 gigatonnes as carbon dioxide. Terrestrial ecosystems (plants and animals) store roughly 560 gigatonnes in biomass.',
+            markingCriteria: {
+              breakdown: [
+                'Sedimentary rocks (largest, ~100 million Gt) (1 mark)',
+                'Oceans (~38,000 Gt) (1 mark)',
+                'Fossil fuels (~4,000 Gt) (1 mark)',
+                'Soil organic matter (~1,500 Gt) (1 mark)',
+                'Atmosphere (~750 Gt) and/or terrestrial ecosystems (~560 Gt) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q5',
+            question: 'Explain the role of positive feedback in the carbon cycle, using a named example.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Positive feedback amplifies changes in a system, moving it further from equilibrium. In the carbon cycle, warming temperatures can trigger the release of methane from thawing permafrost in Arctic regions. As methane is a powerful greenhouse gas, this increases atmospheric warming, which causes more permafrost to thaw, releasing more methane. This creates a self-reinforcing cycle. In Siberia, permafrost thaw has accelerated, with studies showing methane emissions increasing by 30% in some areas. Another example is reduced carbon storage in tropical rainforests due to drought stress, where trees die and decompose, releasing CO2, which contributes to further warming and drought.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: positive feedback amplifies change (1 mark)',
+                'Named example (e.g., permafrost methane release) (1 mark)',
+                'Explanation of initial change (e.g., warming causes thaw) (1 mark)',
+                'Explanation of amplifying effect (e.g., methane increases warming) (1 mark)',
+                'Self-reinforcing cycle identified (1 mark)',
+                'Specific detail or data (e.g., Siberian permafrost, 30% increase) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q6',
+            question: 'Analyse how human activities have altered the carbon cycle since the Industrial Revolution.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'Human activities have significantly altered the global carbon cycle since 1750. Fossil fuel combustion for energy and transport has released approximately 400 gigatonnes of carbon into the atmosphere, transferring carbon from long-term geological stores to the atmosphere at unprecedented rates. Atmospheric CO2 concentrations have increased from 280ppm to over 420ppm. Deforestation, particularly in tropical regions like the Amazon and Southeast Asia, has reduced carbon storage in biomass and increased CO2 emissions, with an estimated 2.9 billion tonnes released annually. Land use changes and agriculture have depleted soil carbon stores through oxidation. Cement production contributes about 8% of global CO2 emissions through calcination of limestone. Ocean acidification has occurred as oceans absorb about 25% of anthropogenic CO2, affecting marine carbon cycling. These changes have disrupted the natural carbon balance, with emissions exceeding natural sequestration capacity by approximately 4 gigatonnes annually.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-3 marks): Basic statements about human impact, limited detail',
+                'Level 2 (4-6 marks): Clear explanation of specific activities (fossil fuels, deforestation) with some data',
+                'Level 3 (7-9 marks): Detailed analysis of multiple impacts with data/examples, understanding of system disruption and temporal change since Industrial Revolution'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q7',
+            question: 'Using a drainage basin you have studied, explain how its water balance varies seasonally.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'In the River Tees drainage basin in northern England, the water balance shows marked seasonal variation. During winter months (November-February), precipitation is high (averaging 100-150mm per month) while potential evapotranspiration is low (10-20mm) due to cold temperatures and limited daylight. This creates a water surplus, with high soil moisture storage and significant runoff, often leading to winter flooding. In summer months (June-August), precipitation decreases to 50-80mm while potential evapotranspiration increases to 60-80mm due to warmer temperatures and increased vegetation growth. This can create a water deficit, with soil moisture utilisation depleting stores and lower river discharge. The water balance equation P = E + R ± S demonstrates this, where winter surplus means R (runoff) and S (storage) increase, while summer deficit means S decreases.',
+            markingCriteria: {
+              breakdown: [
+                'Named drainage basin (River Tees or equivalent) (1 mark)',
+                'Winter conditions: high precipitation, low evapotranspiration (1 mark)',
+                'Winter surplus with high runoff/storage (1 mark)',
+                'Summer conditions: lower precipitation, higher evapotranspiration (1 mark)',
+                'Summer deficit with depleted storage (1 mark)',
+                'Specific data/figures or reference to water balance equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q8',
+            question: 'Explain how photosynthesis and respiration link the water and carbon cycles.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Photosynthesis directly links both cycles as plants take in carbon dioxide from the atmosphere and water from the soil to produce glucose and oxygen. The equation 6CO2 + 6H2O → C6H12O6 + 6O2 shows this integration. This removes carbon from the atmosphere and transfers it to biomass, while moving water from soil through plants. Respiration reverses this process, as organisms break down glucose using oxygen to release energy, producing carbon dioxide and water: C6H12O6 + 6O2 → 6CO2 + 6H2O. This returns carbon to the atmosphere and water to the environment. Together, these processes create fundamental flows connecting both cycles.',
+            markingCriteria: {
+              breakdown: [
+                'Photosynthesis takes in CO2 and H2O (1 mark)',
+                'Produces glucose and oxygen, linking both cycles (1 mark)',
+                'Respiration releases CO2 and H2O (1 mark)',
+                'Recognition of opposing/complementary processes or chemical equation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q9',
+            question: 'Assess the effectiveness of tropical rainforests as carbon sinks.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Tropical rainforests are highly effective carbon sinks, storing approximately 250 gigatonnes of carbon in biomass and soil, representing about 40% of terrestrial carbon storage despite covering only 6% of Earth\'s land surface. The Amazon rainforest alone stores around 150-200 gigatonnes. Their effectiveness derives from high Net Primary Productivity (NPP) due to year-round warmth, moisture, and sunlight, enabling rapid photosynthesis and carbon sequestration rates of 2.4 tonnes per hectare annually.\n\nHowever, effectiveness is increasingly compromised. Deforestation removes approximately 18 million acres annually, converting rainforests from carbon sinks to sources, releasing 1.5 gigatonnes of carbon yearly. In the Amazon, 17% has been lost since 1970. Climate change creates additional stress through increased drought frequency, reducing photosynthetic capacity. The 2005 and 2010 Amazon droughts caused the forest to become a temporary carbon source as dying trees released CO2.\n\nFurthermore, forest degradation from selective logging and fragmentation reduces carbon storage capacity without complete clearance. Studies show degraded forests store 40% less carbon than intact forests. The carbon stored is also vulnerable - stored in vegetation rather than stable geological stores, meaning disturbance rapidly releases it.\n\nNevertheless, where protected, rainforests remain crucial carbon sinks. Conservation efforts in Costa Rica have shown forests can regenerate, increasing carbon storage by 25% over 20 years. Overall, while currently effective, their future effectiveness depends critically on protection and climate stabilisation.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic statements about carbon storage, limited development',
+                'Level 2 (5-8 marks): Clear explanation of effectiveness with some data, identifies threats',
+                'Level 3 (9-12 marks): Sophisticated assessment with detailed evidence, evaluates both effectiveness and limitations, specific examples (Amazon), considers future prospects, reaches supported judgement'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          },
+          {
+            id: 'geo-wcc-q10',
+            question: 'Evaluate the extent to which human interventions can successfully manage the impacts of climate change on the water cycle.',
+            marks: 20,
+            difficulty: 'hard',
+            modelAnswer: 'Human interventions to manage climate change impacts on the water cycle operate at multiple scales with varying success. At the global scale, mitigation efforts aim to reduce greenhouse gas emissions through renewable energy adoption and carbon capture. The Paris Agreement commits nations to limiting warming to 1.5-2°C, which would reduce water cycle disruption. However, progress has been slow - global emissions continue rising, reaching 36.8 gigatonnes CO2 in 2022. This suggests mitigation alone cannot fully manage impacts within necessary timeframes.\n\nAdaptation strategies show more immediate effectiveness. Water storage infrastructure helps manage changing precipitation patterns. China\'s South-North Water Transfer Project moves water from wet to dry regions, demonstrating large-scale intervention capacity. In California, desalination plants like the Carlsbad facility produce 50 million gallons daily, addressing drought impacts. However, such projects are economically viable only in developed nations and can have environmental costs - desalination produces brine waste and requires significant energy.\n\nNature-based solutions offer promising alternatives. Wetland restoration in the UK (e.g., Somerset Levels) enhances natural water storage, reducing flood risk from increased winter rainfall. Studies show restored wetlands can reduce downstream flooding by 30%. Reforestation projects increase evapotranspiration and regulate runoff. China\'s Grain-to-Green programme has improved water retention across 32 million hectares. These approaches are often more cost-effective and sustainable than engineered solutions.\n\nIntegrated Water Resource Management (IWRM) frameworks coordinate multiple interventions. Singapore\'s "Four National Taps" strategy combining catchment water, imported water, desalinated water, and recycled NEWater demonstrates successful adaptation, achieving water security despite limited natural resources. This holistic approach addresses multiple climate impacts simultaneously.\n\nHowever, limitations exist. Many interventions address symptoms rather than causes. Water transfer projects don\'t reduce overall drought risk and can create dependency. Effectiveness varies regionally - developing nations in sub-Saharan Africa lack resources for large infrastructure. The Sahel region experiences increasing water scarcity yet has limited adaptation capacity. Furthermore, interventions can have unintended consequences - dams alter river ecosystems and can increase methane emissions.\n\nThe temporal scale matters critically. While interventions can manage current impacts, continued emissions will create increasingly severe disruption. The IPCC projects 4-5°C warming without rapid mitigation would fundamentally alter the hydrological cycle beyond adaptation capacity. Glacial melt threatening water supplies for 2 billion people in Asia cannot be reversed by current interventions.\n\nIn conclusion, human interventions show moderate success managing current climate change impacts on the water cycle, particularly through diverse adaptation strategies in well-resourced regions. However, effectiveness is limited by continued emissions, resource inequality, and the scale of projected future changes. Successful long-term management requires combining aggressive mitigation with context-appropriate adaptation, supported by international cooperation and investment. Without addressing root causes through emissions reduction, adaptation measures alone will prove insufficient.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-5 marks): Simple statements about interventions, limited examples',
+                'Level 2 (6-10 marks): Clear description of interventions with examples, some evaluation',
+                'Level 3 (11-15 marks): Detailed analysis of multiple intervention types, good use of examples, clear evaluation of success/limitations',
+                'Level 4 (16-20 marks): Sophisticated evaluation weighing multiple factors, diverse case studies, consideration of temporal/spatial scale, synoptic links to climate change, well-supported conclusion addressing "extent" of question'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Water and Carbon Cycles)'
+          }
+        ]
+      },
+      {
+        id: 'hot-desert-systems',
+        name: 'Hot Desert Systems and Landscapes',
+        questions: [
+          {
+            id: 'geo-hds-q1',
+            question: 'Define the term "aridity" and explain how it is measured.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Aridity refers to the dryness of a climate where precipitation is significantly lower than potential evapotranspiration. It is commonly measured using the aridity index, calculated as the ratio of precipitation to potential evapotranspiration (P/PET). An aridity index below 0.05 indicates hyper-arid conditions (extreme deserts), 0.05-0.20 indicates arid conditions (deserts), and 0.20-0.50 indicates semi-arid conditions.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: dryness/precipitation lower than evapotranspiration (1 mark)',
+                'Aridity index: P/PET ratio (1 mark)',
+                'Classification values or threshold (e.g., <0.05 hyper-arid) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q2',
+            question: 'Describe the global distribution of hot deserts.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Hot deserts are primarily located in two subtropical belts around 20-30° north and south of the equator, corresponding to areas of high atmospheric pressure (subtropical anticyclones). Major examples include the Sahara and Arabian deserts in North Africa and the Middle East, the Kalahari and Namib in southern Africa, the Great Victoria and Great Sandy deserts in Australia, and the Mojave and Sonoran deserts in North America. Some deserts also occur in rain shadow areas on the leeward side of mountain ranges, such as the Atacama Desert in South America.',
+            markingCriteria: {
+              breakdown: [
+                'Location at 20-30° north/south of equator (1 mark)',
+                'Association with subtropical high pressure (1 mark)',
+                'At least two named examples with correct locations (1 mark)',
+                'Reference to rain shadow deserts or specific continent (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q3',
+            question: 'Explain how thermal fracture (insolation weathering) operates in hot desert environments.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Thermal fracture occurs due to extreme diurnal (daily) temperature fluctuations in deserts, often exceeding 40°C between day and night. During the day, intense solar radiation heats rock surfaces to over 80°C, causing expansion of the outer rock layers. At night, rapid radiative cooling causes contraction. Different minerals within rocks expand and contract at different rates, creating stress within the rock structure. Repeated heating and cooling cycles cause the rock to fracture and outer layers to peel away (exfoliation), breaking down into smaller fragments. This process is particularly effective on dark-coloured rocks which absorb more heat.',
+            markingCriteria: {
+              breakdown: [
+                'Extreme diurnal temperature range/fluctuations (1 mark)',
+                'Expansion during heating, contraction during cooling (1 mark)',
+                'Differential expansion of minerals creates stress (1 mark)',
+                'Repeated cycles cause fracture/exfoliation/breakdown (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q4',
+            question: 'Describe the characteristics and formation of barchan dunes.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Barchan dunes are crescent-shaped sand dunes with distinctive horns pointing downwind. They typically form in areas with limited sand supply, relatively flat terrain, and consistent unidirectional winds. The windward slope (facing the wind) is gentle (10-15°), while the leeward slope is steep (30-34°) at the angle of repose. Sand is transported up the windward slope by wind, accumulating at the crest before avalanching down the slip face. The horns extend downwind because sand moves faster at the edges where there is less friction. Barchans migrate across the desert surface, moving 10-30 metres per year. They are common in the Sahara and Arabian deserts.',
+            markingCriteria: {
+              breakdown: [
+                'Crescent shape with horns pointing downwind (1 mark)',
+                'Formation conditions: limited sand, unidirectional wind (1 mark)',
+                'Windward slope gentle, leeward slope steep/slip face (1 mark)',
+                'Sand transported up windward, avalanches down leeward (1 mark)',
+                'Migration/movement or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q5',
+            question: 'Explain how wind processes transport and deposit sediment in desert environments.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Wind transports sediment through three main processes. Suspension moves the finest particles (clay and silt under 0.15mm) high into the atmosphere, sometimes for thousands of kilometres - Saharan dust regularly reaches the Caribbean. Saltation is the most important process, where medium sand grains (0.15-0.25mm) bounce along the surface in a series of hops, typically rising 1-2 metres. About 75% of wind transport occurs through saltation. Surface creep moves the coarsest particles (over 0.25mm) by rolling or sliding along the ground, dislodged by saltating grains.\n\nDeposition occurs when wind velocity decreases below the threshold velocity needed to transport particles. This commonly happens when wind encounters obstacles (rocks, vegetation), creating sheltered areas where sand accumulates. Deposition also occurs where wind velocity naturally decreases, such as on the leeward side of dunes. The sorting of sediment by wind creates distinctive deposits, with finer material carried further from source areas.',
+            markingCriteria: {
+              breakdown: [
+                'Suspension: finest particles, carried high/far (1 mark)',
+                'Saltation: sand grains bounce, most important process (1 mark)',
+                'Surface creep: coarsest particles roll/slide (1 mark)',
+                'Deposition when wind velocity decreases (1 mark)',
+                'Deposition in sheltered areas/behind obstacles (1 mark)',
+                'Sorting of sediment or specific example/data (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q6',
+            question: 'Describe the characteristics of wadis and explain their formation.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Wadis are dry ephemeral river channels found in desert environments that only contain water during and immediately after rare rainfall events. They have distinctive flat, sandy floors and steep sides, often cutting through desert terrain. Wadis form through episodic fluvial erosion during flash floods. When rare intense rainfall occurs (sometimes once every few years), large volumes of water rapidly concentrate in channels, as infiltration is limited by hard, impermeable surfaces and sparse vegetation. The sudden water flow has high energy and erosive power, transporting large amounts of sediment and carving steep-sided channels. Between flood events, wind may rework sediment on the wadi floor. Large wadis can be several kilometres wide and extend for hundreds of kilometres, such as Wadi Rum in Jordan.',
+            markingCriteria: {
+              breakdown: [
+                'Dry river channels, ephemeral/seasonal flow (1 mark)',
+                'Flat floor, steep sides (1 mark)',
+                'Formed by episodic flash floods/intense rainfall (1 mark)',
+                'High energy flow causes erosion and channel cutting (1 mark)',
+                'Limited infiltration or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q7',
+            question: 'Analyse the causes of desertification in a region you have studied.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'In the Sahel region of Africa, spanning countries from Mauritania to Sudan, desertification has multiple interconnected causes. Climate change has reduced average rainfall by 20-30% since the 1960s, with more frequent droughts including severe events in 1973, 1984, and 2012. Higher temperatures (increasing by 0.5-0.8°C) have increased evapotranspiration, intensifying water stress. These climatic factors create the context for land degradation.\n\nHuman activities significantly accelerate the process. Population growth has increased from 30 million (1950) to over 200 million people, intensifying pressure on marginal lands. Overgrazing by cattle, goats, and sheep exceeds vegetation regeneration capacity - animal numbers doubled in 30 years while rainfall declined. This removes protective vegetation cover, exposing soil to wind erosion. Overcultivation without fallow periods depletes soil nutrients and organic matter. In Burkina Faso, continuous cropping has reduced soil fertility by 40%.\n\nDeforestation for fuelwood (used by 80% of households) and clearing for agriculture removes trees that stabilise soil and reduce wind speeds. This is compounded by poor irrigation practices causing salinisation. Political instability and poverty limit implementation of sustainable land management. The interaction of climatic stress and unsustainable land use creates a positive feedback - degraded land reflects more solar radiation, reducing local rainfall, which increases degradation pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-3 marks): Basic statements about causes (climate or human), limited detail',
+                'Level 2 (4-6 marks): Clear explanation of multiple causes with some detail, named region',
+                'Level 3 (7-9 marks): Detailed analysis of interconnected physical and human causes, specific data/examples from studied region (Sahel or equivalent), recognition of interaction between factors'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q8',
+            question: 'Explain how yardangs are formed in desert environments.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Yardangs are streamlined, wind-sculpted ridges aligned parallel to the prevailing wind direction. They form through differential erosion by wind abrasion in areas with rock layers of varying resistance. The wind, carrying sand particles, acts like sandpaper, particularly effectively within 1-2 metres of the ground where saltation concentrates sediment. Softer, less resistant rock layers are preferentially eroded, while harder layers remain as ridges. The abrasion creates a distinctive streamlined shape with a steep, blunt upwind face and a tapered downwind tail, resembling an inverted boat hull. Yardangs can range from metres to kilometres in length and are particularly well-developed in the Lut Desert of Iran.',
+            markingCriteria: {
+              breakdown: [
+                'Streamlined ridges aligned with prevailing wind (1 mark)',
+                'Formed by wind abrasion/differential erosion (1 mark)',
+                'Softer rocks eroded preferentially, harder rocks remain (1 mark)',
+                'Distinctive shape: steep upwind face, tapered downwind tail (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q9',
+            question: 'Assess the impacts of desertification on people and the environment.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Desertification creates severe environmental and socio-economic impacts across affected regions. Environmental impacts are fundamental and self-reinforcing. Soil degradation through erosion removes fertile topsoil - in the Sahel, soil loss rates reach 20-40 tonnes per hectare annually. This reduces soil organic matter and nutrient content, decreasing land productivity by 25-50%. Vegetation cover declines, reducing biodiversity as species lose habitats. In northern Africa, mammal populations have decreased by 70% in degraded areas. Water resources deteriorate as reduced infiltration lowers groundwater recharge, while increased runoff causes siltation of water bodies. Dust storms increase in frequency, with health and visibility impacts extending hundreds of kilometres.\n\nSocio-economic impacts affect millions. Agricultural productivity declines force farmers to either intensify use of remaining productive land (accelerating degradation) or abandon farming. In Burkina Faso, 500,000 hectares have become uncultivable since 1975. Food insecurity increases - crop yields can fall by 40-60%, threatening livelihoods of communities dependent on subsistence agriculture. The Sahel faces recurrent food crises affecting 20 million people.\n\nEconomic impacts are substantial. Loss of productive land reduces GDP - desertification costs affected countries 2-5% of agricultural GDP annually. Livestock productivity decreases with reduced grazing, impacting pastoral communities. Rural poverty intensifies, with per capita incomes falling 20-30% in degraded areas.\n\nSocial consequences include large-scale rural-urban migration and displacement. Climate refugees from the Sahel number millions, creating pressure on urban areas and crossing international borders, contributing to regional instability. Competition for decreasing resources can trigger conflict - Lake Chad has shrunk 90% since 1960, creating tensions among Nigeria, Chad, Cameroon, and Niger.\n\nHealth impacts include malnutrition, respiratory problems from dust, and water-borne diseases as clean water becomes scarcer. However, impacts vary spatially - wealthier nations can mitigate effects through technology and imports, while developing nations face severe consequences. Temporal aspects matter - short-term droughts may be reversible, but long-term degradation can cause permanent land loss.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic statements about impacts, limited detail',
+                'Level 2 (5-8 marks): Clear explanation of environmental and socio-economic impacts with examples',
+                'Level 3 (9-12 marks): Sophisticated assessment of diverse impacts with detailed evidence, specific examples/data, consideration of scale and interconnections, evaluation of severity/significance'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          },
+          {
+            id: 'geo-hds-q10',
+            question: 'Evaluate strategies to combat desertification. Refer to specific examples in your answer.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Strategies to combat desertification operate at multiple scales with varying effectiveness. Top-down approaches involve large-scale government-led interventions. China\'s Great Green Wall project, launched in 1978, aims to plant 100 billion trees across 4,500km to stabilise soil and create sheltered microclimates. Over 66 billion trees have been planted across 13 provinces, increasing forest cover from 5% to 13% and reducing sandstorm frequency in Beijing by 20%. However, critics note survival rates average only 15-30% due to inappropriate species selection and insufficient water. Monoculture plantations lack biodiversity and ecosystem resilience.\n\nThe African Great Green Wall initiative spans 8,000km from Senegal to Djibouti, aiming to restore 100 million hectares. Progress has been slow - only 4 million hectares completed by 2020, hindered by political instability, funding gaps ($4.3 billion needed), and coordination challenges across 11 countries. Nevertheless, successful sections in Senegal have restored 27,000 hectares, improving food security for 2.5 million people.\n\nBottom-up, community-led approaches show promising results. In Niger, farmer-managed natural regeneration (FMNR) has restored 5 million hectares since 1985 by protecting naturally regenerating trees rather than planting. This low-cost approach ($20 per hectare vs $300 for tree planting) integrates with farming, providing fuelwood while improving soil fertility and water retention. Crop yields have increased 15-25%, benefiting 2.5 million people. The technique\'s success relies on local knowledge and creates immediate benefits, encouraging participation.\n\nTerrace construction and stone barriers in Burkina Faso (zaï pits) capture water and organic matter, rehabilitating degraded land. Over 300,000 hectares have been treated, increasing millet yields by 50-100%. These techniques require labour but use local resources, making them sustainable and replicable.\n\nSoil management strategies include reducing tillage, applying organic matter, and using cover crops. In Kenya, conservation agriculture has increased yields by 20-30% while reducing erosion. Controlled grazing systems, establishing rotational grazing rather than continuous use, allow vegetation recovery. In the Sahel, grazing reserves have helped restore pasture productivity.\n\nWater conservation through micro-catchments, sand dams, and improved irrigation efficiency addresses water scarcity. Kenya has constructed over 3,000 sand dams storing 40 billion litres, providing dry-season water access. However, these require technical expertise and initial investment, limiting adoption in poorest areas.\n\nAlternative livelihoods reduce pressure on land. Ecotourism in areas like Morocco\'s desert regions provides income without degradation. However, this requires infrastructure investment and may not suit all locations.\n\nPolicy and governance matter critically. Secure land tenure encourages long-term investment in land improvement - where farmers own land, they\'re 40% more likely to implement conservation measures. International cooperation through UNCCD (UN Convention to Combat Desertification) provides frameworks, though implementation varies. Funding remains insufficient - global desertification responses receive under $3 billion annually while costs exceed $42 billion.\n\nLimitations exist across strategies. Large-scale approaches require sustained funding and political will, often lacking in affected countries. Climate change may undermine efforts - if rainfall continues declining, even restored land may degrade. Success requires addressing root causes including poverty and population pressure, not just symptoms.\n\nIn conclusion, strategies show moderate success where they combine ecological restoration with socio-economic support, use appropriate technologies, involve local communities, and receive sustained resourcing. Community-led approaches like FMNR demonstrate high cost-effectiveness and social acceptance. However, the scale of desertification (12 million hectares degraded annually) exceeds current restoration capacity. Effective response requires integrated approaches combining top-down resources with bottom-up implementation, supported by governance reform and addressing climate change and poverty.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-5 marks): Basic description of strategies, limited evaluation',
+                'Level 2 (6-10 marks): Clear explanation of different strategies with examples, some evaluation of effectiveness',
+                'Level 3 (11-13 marks): Detailed analysis of multiple strategies with good examples, clear evaluation of successes/limitations',
+                'Level 4 (14-16 marks): Sophisticated evaluation of diverse strategies across scales, specific detailed examples (FMNR Niger, Great Green Walls), assessment of cost-effectiveness and sustainability, consideration of limitations and context, well-supported conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hot Desert Systems)'
+          }
+        ]
+      },
+      {
+        id: 'coastal-systems',
+        name: 'Coastal Systems and Landscapes',
+        questions: [
+          {
+            id: 'geo-cs-q1',
+            question: 'Define the term "fetch" and explain its importance in coastal systems.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Fetch is the maximum distance of open water over which wind can blow uninterrupted to generate waves. Longer fetch allows wind to transfer more energy to the water surface, creating larger, more powerful waves. This is important because wave energy controls the rate and type of coastal erosion and sediment transport. For example, the southwest coast of England faces a long fetch across the Atlantic Ocean, resulting in high-energy waves and significant coastal erosion.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: distance of open water/uninterrupted wind (1 mark)',
+                'Longer fetch creates larger/more powerful waves (1 mark)',
+                'Importance: controls erosion rates or example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q2',
+            question: 'Describe the process of hydraulic action in coastal erosion.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hydraulic action occurs when waves crash against cliffs and force water and air into cracks and fissures in the rock. The water compresses air in these cracks, creating high pressure. When the wave retreats, the compressed air explosively expands, exerting an outward force that can weaken and break rock apart. Repeated cycles of compression and expansion gradually widen cracks and can cause rock to fracture and detach. This process is most effective on rocks with many joints and bedding planes.',
+            markingCriteria: {
+              breakdown: [
+                'Waves force water/air into cracks (1 mark)',
+                'Air compressed creating pressure, then expands (1 mark)',
+                'Repeated cycles weaken and break rock (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q3',
+            question: 'Explain how a wave-cut platform is formed.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Wave-cut platforms form through continuous marine erosion at the base of cliffs. Waves attack the cliff base between high and low tide marks, where erosion processes (hydraulic action, abrasion, corrosion) are most concentrated. This creates a wave-cut notch at the cliff base. As the notch deepens, the overlying rock becomes unsupported and unstable. Eventually, the overhanging rock collapses due to gravity and weathering, and debris is removed by waves. This process repeats, causing the cliff to retreat inland over time. The former cliff base, now a gently sloping rocky platform extending seaward, is the wave-cut platform. The platform has a gradient of 1-4° and is typically covered at high tide. The Holderness coast shows wave-cut platforms exposed at low tide where cliffs have retreated up to 200 metres.',
+            markingCriteria: {
+              breakdown: [
+                'Wave erosion concentrated at cliff base (1 mark)',
+                'Wave-cut notch forms through erosion (1 mark)',
+                'Overhanging rock becomes unstable (1 mark)',
+                'Rock collapses and debris removed (1 mark)',
+                'Process repeats causing cliff retreat (1 mark)',
+                'Platform left as former cliff base or specific feature (e.g., 1-4° gradient) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q4',
+            question: 'Describe the sequence of landform development from cave to stack.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The sequence begins when waves attack weaknesses (joints, faults, or bands of softer rock) in a headland. Erosion enlarges these weaknesses into a cave. If caves form on opposite sides of a narrow headland, continued erosion may cut through, creating an arch. The arch has an unsupported roof that is weathered by sub-aerial processes (freeze-thaw, chemical weathering) and eroded by waves at its base. Eventually, the weakened arch roof collapses, leaving an isolated pillar of rock called a stack. Further erosion at the stack base and weathering of its top may cause it to collapse, leaving a stump which is only visible at low tide. Examples include Old Harry Rocks on the Dorset coast, where this sequence is visible.',
+            markingCriteria: {
+              breakdown: [
+                'Cave forms through erosion of weakness in headland (1 mark)',
+                'Caves on opposite sides meet to form arch (1 mark)',
+                'Arch roof weakened by erosion and weathering (1 mark)',
+                'Arch collapse creates isolated stack (1 mark)',
+                'Stack eroded to stump or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q5',
+            question: 'Explain how a spit is formed.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Spits form through longshore drift depositing sediment in areas where the coastline changes direction, such as at river mouths or estuary entrances. Waves approach the coast at an angle due to prevailing winds, transporting sediment along the shore through longshore drift. When the coast turns inland, the transported material continues in the original direction of longshore drift, extending outward into open water as an elongated ridge. Deposition occurs because water deepens beyond the turn, reducing wave energy. The spit grows in length over time as more material accumulates. The end of the spit often curves landward (recurved end) due to secondary wave action from a different direction or refraction. Behind the spit, a sheltered area develops where salt marsh or mudflats may form. Spurn Head at the mouth of the Humber Estuary extends 5.5km and demonstrates these features, with multiple recurved ends showing changes in wind direction over time.',
+            markingCriteria: {
+              breakdown: [
+                'Longshore drift transports sediment along coast (1 mark)',
+                'Coastline changes direction (e.g., at river mouth) (1 mark)',
+                'Sediment continues in original direction, deposited as ridge (1 mark)',
+                'Deposition due to deeper water/reduced energy (1 mark)',
+                'Recurved end formed by secondary waves/refraction (1 mark)',
+                'Named example or sheltered area feature (salt marsh) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q6',
+            question: 'Distinguish between eustatic and isostatic sea-level change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Eustatic sea-level change refers to global changes in sea level caused by variations in the volume of water in the oceans. This occurs through thermal expansion of warming water or through changes in ice volume (melting glaciers and ice sheets adding water, or ice formation removing water). Eustatic changes affect coastlines worldwide simultaneously. Current post-glacial melting is causing eustatic rise of approximately 3mm per year.\n\nIsostatic sea-level change refers to local or regional changes in land height relative to the sea. This occurs through crustal uplift or subsidence. During glacial periods, ice sheets depress the land beneath them. When ice melts, the land slowly rebounds (isostatic rebound), causing relative sea-level fall. Scotland is currently rising at 1-2mm per year due to post-glacial rebound, while southeast England is subsiding.',
+            markingCriteria: {
+              breakdown: [
+                'Eustatic: global/worldwide change in sea level (1 mark)',
+                'Caused by change in ocean water volume (thermal/ice) (1 mark)',
+                'Isostatic: local/regional change in land height (1 mark)',
+                'Caused by crustal uplift/subsidence or example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q7',
+            question: 'Using a case study of coastal management you have studied, analyse the costs and benefits of the management strategies used.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'The Holderness coast in East Yorkshire demonstrates both benefits and costs of coastal management. This is Europe\'s fastest-eroding coastline, losing 1-2 metres annually due to soft boulder clay cliffs, long fetch across the North Sea, and powerful destructive waves.\n\nAt Mappleton, hard engineering was implemented in 1991 costing £2 million. Two rock groynes trap sediment moved by longshore drift, widening the beach which absorbs wave energy. A rock armour revetment protects the cliff base from wave attack. Benefits include successfully protecting Mappleton village - erosion rates dropped from 2.5m to 0.3m annually. The B1242 coast road and properties valued at over £1 million were saved. The wider beach provides tourism value.\n\nHowever, significant costs exist. The rock groynes interrupt longshore drift, starving downdrift areas of sediment. South of Mappleton, at Cowden, erosion rates increased from 1.5m to 2.5m annually as the beach narrowed. Over 20 properties have been lost. This demonstrates sediment cell disruption - protecting one area disadvantages another. Economic costs include high construction and maintenance expenses (£2 million initial, £500,000 maintenance over 20 years). Visual impact degrades landscape quality.\n\nAt Withernsea, a concrete seawall constructed in 1875 protects the town, costing £6.3 million to maintain. Benefits include protecting 4,000 residents and tourism infrastructure (holiday parks, seafront) generating £8 million annually. However, the wall causes beach lowering through reflection of wave energy, requiring constant repair. Terminal groyne syndrome has developed.\n\nIn contrast, unprotected stretches like Great Cowden experience natural erosion, losing 30 properties since 1990. The cost-benefit analysis favours large settlements, creating ethical issues about selective protection based on economic value.\n\nEnvironmental costs include habitat loss as cliffs erode more slowly, reducing sediment supply to create coastal habitats elsewhere. The strategy demonstrates that hard engineering creates a managed but artificial coastline with redistributed rather than solved problems.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-3 marks): Basic statements about management, limited analysis',
+                'Level 2 (4-6 marks): Clear explanation of strategies with costs and benefits, case study named',
+                'Level 3 (7-9 marks): Detailed analysis of specific strategies with costs and benefits, specific data/evidence from case study (Holderness or equivalent), evaluation of effectiveness and trade-offs'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q8',
+            question: 'Explain the process of longshore drift.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Longshore drift is the transport of sediment along the coast by wave action. It occurs when waves approach the coast at an angle, determined by the prevailing wind direction. As waves break, the swash carries sediment up the beach at the same angle as the wave approach. Gravity causes the backwash to carry material directly down the steepest gradient of the beach, perpendicular to the coastline. This creates a zigzag movement of sediment along the shore. With repeated wave cycles, large volumes of material are transported - on the Holderness coast, 500,000 cubic metres of sediment move southward annually. The direction of longshore drift can be identified by the accumulation of sediment on the updrift side of groynes or other coastal structures.',
+            markingCriteria: {
+              breakdown: [
+                'Waves approach coast at an angle (1 mark)',
+                'Swash carries material up beach at angle (1 mark)',
+                'Backwash returns material straight down slope (1 mark)',
+                'Zigzag movement transports sediment along coast (1 mark)',
+                'Example or evidence of direction (e.g., groyne accumulation) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q9',
+            question: 'Assess the extent to which soft engineering is more sustainable than hard engineering for coastal management.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Soft engineering approaches generally demonstrate greater sustainability through ecological, economic, and adaptability advantages, though context determines appropriateness.\n\nEconomic sustainability favours soft engineering. Beach nourishment costs £5-10 per cubic metre compared to £5,000+ per metre for seawalls. Poole Bay beach nourishment cost £4.5 million to protect assets worth over £500 million, while providing 50 years protection. Maintenance costs are lower - adding more sediment as needed costs less than repairing concrete structures damaged by wave reflection. However, soft engineering requires ongoing intervention rather than the perceived permanence of hard structures, creating recurring costs.\n\nEcologically, soft engineering is significantly more sustainable. Beaches provide natural habitats supporting diverse species, unlike concrete barriers that create biological deserts. Managed realignment projects like Medmerry (2013) created 183 hectares of intertidal habitat, increasing bird populations by 50%. Beach nourishment using compatible sediment maintains natural processes. Dune regeneration at Formby Point stores carbon while providing habitat. Hard engineering fragments habitats and alters sediment cells, causing downdrift erosion as seen at Barton-on-Sea following Bournemouth\'s defences.\n\nSustainability also relates to working with natural processes rather than against them. Soft approaches absorb wave energy naturally rather than reflecting it, avoiding beach lowering and scour. They allow coastal evolution and sediment redistribution. Hard engineering creates rigid, unchanging coastlines that require escalating intervention as problems transfer elsewhere.\n\nClimate change adaptation enhances soft engineering\'s sustainability. Rising sea levels and increased storminess may overwhelm hard defences designed for past conditions. Upgrading requires expensive reconstruction. Soft defences can be adapted incrementally - adding more sand or allowing managed retreat. Medmerry\'s realignment provides space for coastal processes to adjust naturally to sea-level rise.\n\nHowever, limitations exist. Soft engineering suits low-value or moderate-risk coastlines but may inadequately protect high-value urban areas. Sandbanks in Poole requires hard defences due to property values exceeding £10 million per hectare. Immediate protection certainty from seawalls reassures residents and insurers, while beach nourishment\'s gradual sediment loss creates perceived insecurity.\n\nSpace requirements limit soft engineering applicability - managed realignment needs available land for flooding, impractical where infrastructure exists inland. Beach nourishment requires sediment sources, increasingly scarce with environmental regulations restricting dredging. Lyme Regis uses hard engineering because cliffs provide no beach space and sediment supply.\n\nPublic perception affects sustainability. Communities often prefer visible hard structures over natural-looking beaches, fearing abandonment. Managed realignment faces opposition from landowners despite compensation, as seen at Fairfield (delayed 15 years). Education about long-term benefits is necessary.\n\nCost-benefit ratios vary. For London Thames Barrier (hard engineering), protecting assets worth £200 billion justifies £535 million construction. For rural Norfolk coast, managed realignment costs £50,000 per hectare versus hard defence costs of £5 million per km that would be economically unsustainable.\n\nIn conclusion, soft engineering is generally more environmentally, economically, and adaptively sustainable for most coastal settings, particularly facing climate change uncertainty. Its ability to work with natural processes creates resilient, cost-effective management while providing ecological benefits. However, context matters critically - high-value or high-risk locations may require hard engineering where protection certainty outweighs sustainability concerns. Optimal strategies often integrate both approaches: hard defences protecting critical infrastructure with soft engineering elsewhere, as demonstrated by the North Norfolk coast\'s holistic SMP (Shoreline Management Plan) approach.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic comparison of approaches, limited development',
+                'Level 2 (5-8 marks): Clear comparison of sustainability aspects with examples, some assessment',
+                'Level 3 (9-12 marks): Sophisticated assessment of multiple sustainability dimensions (economic, ecological, adaptive), detailed examples (Medmerry, Poole Bay), evaluation of contexts where each is appropriate, consideration of limitations, well-supported conclusion addressing "extent"'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          },
+          {
+            id: 'geo-cs-q10',
+            question: 'Evaluate the view that coastal management should focus on protecting high-value areas and allow natural processes elsewhere.',
+            marks: 20,
+            difficulty: 'hard',
+            modelAnswer: 'The strategic approach of prioritising high-value coastal protection while permitting natural erosion elsewhere reflects cost-benefit economic logic but raises complex ethical, ecological, and practical challenges. This evaluation requires examining effectiveness, equity, and sustainability.\n\nEconomic arguments strongly support selective protection. Protecting London via the Thames Barrier (£535 million construction, £200 billion assets protected) demonstrates logical resource allocation - a cost-benefit ratio exceeding 350:1. Similarly, defending Sandbanks (£10+ million property values per hectare) economically justifies £10,000+ per metre defences. In contrast, protecting depopulating rural areas like Happisburgh (18 residents, properties worth £50,000-100,000) costs more than property values, failing conventional cost-benefit tests. UK government policy through SMPs (Shoreline Management Plans) explicitly adopts this approach - the North Norfolk SMP designates 40% of coastline for "no active intervention", focusing resources on Cromer and Great Yarmouth.\n\nThis approach aligns with natural coastal processes. Allowing undefended erosion maintains sediment supply essential for downdrift coasts. Holderness cliff erosion contributes 500,000m³ annually to the Lincolnshire coast, sustaining beaches and salt marshes. Interrupting this through comprehensive defence would starve sediment cells, causing wider coastal degradation. Natural coastal evolution allows habitat migration with sea-level rise, supporting biodiversity. The Blackwater Estuary\'s managed realignment created 115 hectares of intertidal habitat, demonstrating that non-intervention/strategic retreat can enhance ecological value.\n\nClimate change adaptation supports flexibility over rigid defence. Sea-level rise of 60cm-1.1m projected by 2100 threatens to overwhelm fixed defences designed for current conditions. Upgrading would cost an estimated £18-30 billion nationally. Allowing retreat where feasible creates adaptive space for coastal processes, as demonstrated at Medmerry where 7km of new flood defence set inland protects Selsey while creating 183 hectares of salt marsh that rises with sea level. This "accommodation space" approach is more sustainable than escalating hard defence in lost battles against nature.\n\nHowever, significant ethical challenges arise. This approach creates "winners" (protected urban populations) and "losers" (abandoned rural communities). At Happisburgh, 35 properties have been lost since 1990 with inadequate compensation - insurance is unavailable in unprotected areas, and compensation schemes are limited. Residents argue they shouldn\'t be sacrificed for broader coastal management. This raises justice questions about sacrificing individuals for collective efficiency.\n\nThe distinction between "high" and "low" value is problematic. Economic assessments ignore intangible values - cultural heritage, community identity, archaeological sites. The medieval village of Dunwich, eroded over centuries, represents irreplaceable historical loss unmeasured by cost-benefit analysis. Farming communities losing productive agricultural land lose livelihoods beyond property valuations. Indigenous knowledge and long-established communities have value beyond GDP contribution.\n\nPractical limitations exist in defining boundaries. Edge effects create problems - unprotected areas immediately adjacent to defended zones experience intensified erosion (terminal groyne syndrome). Skipsea, south of protected Bridlington, experiences increased erosion rates. This creates growing "buffer zones" of damage, expanding the required protection area over time. Furthermore, predicting future "value" is uncertain - areas currently low-value may gain importance. Renewable energy installations (offshore wind) or changed agricultural/tourism uses could increase future value of currently unprotected areas.\n\nSocial impacts include rural depopulation and community breakdown. Young people won\'t establish lives in areas facing inevitable loss, accelerating decline beyond erosion rates. This creates self-fulfilling decline - reducing population further decreases economic justification for defence. Mental health impacts of uncertainty and losses are documented but unquantified in cost-benefit analyses.\n\nAlternative approaches merit consideration. A rights-based framework might establish minimum protection standards regardless of economic value, as suggested by some environmental justice advocates. Insurance-based systems could distribute costs more equitably. Greater investment in soft engineering and adaptation (relocatable buildings, land-use change support) might enable sustainable habitation in erosion zones without expensive hard defence. Community buyout schemes could provide dignified retreat rather than abandonment.\n\nInternational comparisons show varied approaches. Netherlands protects all coastline regardless of value, reflecting cultural identity and existential threat (26% of land below sea level). However, costs exceed 1% of GDP, impractical for many nations. This suggests economic capacity influences feasible strategies.\n\nLong-term perspectives matter. Accepting natural processes aligns with geological timescales - UK coastlines have continuously evolved over millennia. Attempting comprehensive protection is ultimately futile against nature\'s power. However, this conflicts with human timescales - individual lifetimes and property ownership operate on decades, not millennia. Reconciling these temporal scales is philosophically and practically challenging.\n\nIn conclusion, while economic logic and ecological sustainability support focusing protection on high-value areas and permitting natural processes elsewhere, this approach is insufficient as sole policy. It must be tempered by ethical considerations, adequate support for affected communities, and recognition that "value" encompasses more than economic cost-benefit ratios. An optimal strategy would combine economic prioritisation with: fair compensation schemes, support for community adaptation, protection of irreplaceable heritage regardless of economic value, and investment in innovative soft engineering enabling habitation within dynamic coastal zones. The view has substantial merit as a guiding principle but requires ethical constraints and social support mechanisms to be defensible. Completely free-market approaches abandoning low-value areas without support are unjust, while attempting to defend all coastline is economically and environmentally unsustainable. The answer lies in pragmatic prioritisation combined with compassionate transition support.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-5 marks): Simple description of management approaches, minimal evaluation',
+                'Level 2 (6-10 marks): Clear explanation of economic and practical arguments with examples, some evaluation',
+                'Level 3 (11-15 marks): Detailed analysis of arguments for and against selective protection, good use of examples, consideration of ethical/practical issues',
+                'Level 4 (16-20 marks): Sophisticated evaluation balancing economic, ethical, ecological, and practical dimensions, diverse detailed examples (Thames Barrier, Happisburgh, Medmerry, Sandbanks), consideration of alternative approaches and international context, synoptic thinking about sustainability and climate adaptation, nuanced conclusion recognizing complexity and proposing conditional position'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Coastal Systems)'
+          }
+        ]
+      },
+      {
+        id: 'glacial-systems',
+        name: 'Glacial Systems and Landscapes',
+        questions: [
+          {
+            id: 'geo-gs-q1',
+            question: 'Define the term "glacial budget" and explain its significance.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Glacial budget refers to the balance between accumulation (inputs of snow and ice) and ablation (outputs through melting, sublimation, and calving) in a glacier system. It is measured over one year, typically from the end of one summer to the end of the next. A positive budget means accumulation exceeds ablation, causing the glacier to advance. A negative budget means ablation exceeds accumulation, causing retreat. The budget determines whether a glacier is growing or shrinking and is significant because it reflects climate conditions and controls glacier behaviour and landscape formation.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: balance between accumulation and ablation (1 mark)',
+                'Accumulation (inputs) and ablation (outputs) explained (1 mark)',
+                'Positive budget causes advance, negative causes retreat (1 mark)',
+                'Significance: reflects climate/controls glacier behaviour (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q2',
+            question: 'Describe the characteristics of a corrie (cirque).',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A corrie is an armchair-shaped hollow found in mountainous terrain, formed by glacial erosion. It has a steep back wall, typically 100-200 metres high, created by plucking and freeze-thaw weathering. The floor is overdeepened by rotational erosion, often containing a small lake (tarn) after ice melts. A rock lip at the front marks where ice exited the corrie with less erosive power. The corrie faces north or northeast in the Northern Hemisphere due to reduced solar radiation and increased snow accumulation. Classic examples include Red Tarn in the Lake District.',
+            markingCriteria: {
+              breakdown: [
+                'Armchair-shaped hollow (1 mark)',
+                'Steep back wall from plucking/freeze-thaw (1 mark)',
+                'Overdeepened floor, often with tarn (1 mark)',
+                'Rock lip at front or directional aspect (north/northeast) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q3',
+            question: 'Explain the process of plucking in glacial erosion.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Plucking occurs when glacial ice freezes onto bedrock and, as the glacier moves, tears away blocks of rock. Meltwater penetrates cracks and joints in the bedrock at the base and sides of the glacier. When temperatures drop below 0°C (particularly through pressure release or at night), this water refreezes, expanding and widening cracks. The ice bonds strongly to the rock fragments. As the glacier moves forward through basal sliding or internal deformation, the frozen ice pulls away chunks of bedrock, particularly from the lee side of obstacles. The plucked material becomes embedded in the ice and contributes to further erosion through abrasion. Plucking is most effective where bedrock is well-jointed and temperatures fluctuate around freezing point.',
+            markingCriteria: {
+              breakdown: [
+                'Meltwater enters cracks in bedrock (1 mark)',
+                'Water freezes and bonds ice to rock (1 mark)',
+                'Glacier movement tears away rock blocks (1 mark)',
+                'Most effective on lee side/well-jointed rock (1 mark)',
+                'Plucked material used for abrasion or temperature conditions (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q4',
+            question: 'Distinguish between warm-based and cold-based glaciers.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Warm-based glaciers have basal ice at or near the pressure melting point, typically above -5°C, allowing meltwater to exist at the base. This enables basal sliding, where the glacier slides over bedrock on a thin film of water, resulting in rapid movement (up to 1-2 metres per day) and significant erosion through plucking and abrasion. They are common in temperate regions like Iceland and the Alps. The meltwater also transports sediment, creating fluvioglacial features.\n\nCold-based glaciers have basal ice well below pressure melting point (often below -20°C) and are frozen to the bedrock. Movement occurs only through internal deformation (ice crystals slowly deforming), resulting in very slow advance (centimetres per year) and minimal erosion. They preserve underlying landforms and are typical of polar regions like Antarctica. Cold-based glaciers lack meltwater at the base, so they produce little fluvioglacial activity. Temperature, pressure, and ice thickness determine which type forms - thicker ice creates more pressure, potentially generating warmth through friction.',
+            markingCriteria: {
+              breakdown: [
+                'Warm-based: basal ice at/near melting point (1 mark)',
+                'Warm-based: enables basal sliding, rapid movement, significant erosion (1 mark)',
+                'Cold-based: basal ice well below melting point, frozen to bedrock (1 mark)',
+                'Cold-based: only internal deformation, slow movement, minimal erosion (1 mark)',
+                'Location examples or meltwater/fluvioglacial differences (1 mark)',
+                'Factors controlling glacier type (temperature, pressure, thickness) (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q5',
+            question: 'Explain the formation of a roche moutonnée.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'A roche moutonnée is an asymmetrical rock outcrop shaped by glacial erosion. The upstream (stoss) side facing the direction of ice flow has a gentle, smooth slope created by abrasion as the glacier passes over it. Ice carrying embedded rock fragments acts like sandpaper, smoothing and polishing the surface, often creating striations (scratches) aligned with ice flow direction. The downstream (lee) side is steep and jagged, formed by plucking. As ice moves over the obstacle, pressure is released on the lee side, causing basal ice to refreeze into cracks. When the glacier continues moving, it tears away rock blocks, creating the steep, rough face. The name comes from French, meaning "sheep rock" due to its resemblance to a resting sheep. Examples are widespread in the Lake District and Scottish Highlands.',
+            markingCriteria: {
+              breakdown: [
+                'Asymmetrical rock outcrop shaped by glacial erosion (1 mark)',
+                'Stoss side: gentle, smooth slope from abrasion (1 mark)',
+                'Striations/polishing on stoss side (1 mark)',
+                'Lee side: steep, jagged from plucking (1 mark)',
+                'Explanation of pressure release causing plucking on lee side (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q6',
+            question: 'Describe the characteristics and formation of drumlins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Drumlins are streamlined, elongated hills composed of glacial till (unsorted sediment). They are typically 10-50 metres high, 100-500 metres wide, and up to 1-2 kilometres long, resembling an inverted spoon or egg. The steep, blunt end (stoss) faces the direction from which the ice advanced, while the tapered, gently sloping end (lee) points in the direction of ice flow. \n\nFormation theories include: (1) deposition of sediment around a bedrock obstacle or pre-existing mound, which the ice streamlines; (2) reshaping of previously deposited moraine by later ice advance; (3) deposition in the lodgement zone beneath moving ice where debris accumulates. The exact mechanism remains debated, but all theories involve deposition and moulding by ice under pressure. Drumlins rarely occur alone - they typically form in swarms of hundreds creating "basket of eggs" topography, indicating systematic ice flow patterns. Classic drumlin fields exist in Northern Ireland, Yorkshire, and the Great Lakes region of North America.',
+            markingCriteria: {
+              breakdown: [
+                'Streamlined elongated hills of glacial till (1 mark)',
+                'Dimensions and shape description (inverted spoon/egg) (1 mark)',
+                'Steep stoss end, tapered lee end aligned with ice flow (1 mark)',
+                'Formation theory: deposition around obstacle or reshaping (1 mark)',
+                'Occur in swarms creating "basket of eggs" topography (1 mark)',
+                'Named example or lodgement zone reference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q7',
+            question: 'Explain how eskers are formed.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Eskers are long, sinuous ridges of stratified sand and gravel deposited by meltwater streams flowing within, on, or beneath glaciers. As glaciers melt, supraglacial (surface), englacial (within), or subglacial (beneath) meltwater streams form tunnels through the ice. These streams carry large volumes of sediment eroded from the glacier bed or valley sides. When ice melts completely, the sediment that filled these tunnels is deposited on the valley floor as a winding ridge. The stratified (layered) nature of the sediment indicates deposition by flowing water rather than direct ice deposition. Eskers can be several kilometres long and 10-30 metres high. Their sinuous path reflects the former course of the meltwater stream through the ice. They provide evidence of former ice extent and direction. The Trim esker in Ireland extends over 14km.',
+            markingCriteria: {
+              breakdown: [
+                'Long sinuous ridges of stratified sand and gravel (1 mark)',
+                'Deposited by meltwater streams in/on/under glacier (1 mark)',
+                'Streams carry sediment through ice tunnels (1 mark)',
+                'When ice melts, sediment remains as ridge (1 mark)',
+                'Stratified sediment indicates water deposition or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q8',
+            question: 'Explain the formation of pingos in periglacial environments.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Pingos are ice-cored hills found in periglacial regions, typically 3-70 metres high and up to 600 metres in diameter. Two main types exist:\n\nOpen-system (East Greenland type) pingos form in valley bottoms where groundwater is under pressure. As water moves through permafrost, it encounters an impermeable frozen layer and is forced upwards. The water freezes upon reaching cold surface layers, expanding and pushing up overlying sediment to create a dome. Continued water supply sustains growth over decades or centuries.\n\nClosed-system (Mackenzie type) pingos form where lakes drain or infill in areas of continuous permafrost. The saturated ground (talik) beneath the former lake begins to freeze from all sides and below as permafrost advances. The freezing water expands by about 9%, creating pressure that pushes sediment upward into a dome with an ice core.\n\nBoth types eventually develop cracks in the summit as the dome grows. If the ice core melts (during warmer periods), the pingo collapses, leaving a circular rampart and central depression. These relict features are found in areas like Wales that were formerly periglacial.',
+            markingCriteria: {
+              breakdown: [
+                'Ice-cored hills in periglacial regions (1 mark)',
+                'Open-system: groundwater under pressure pushes upward and freezes (1 mark)',
+                'Closed-system: lake drainage, water freezes from all sides causing expansion (1 mark)',
+                'Freezing water expands creating upward pressure (1 mark)',
+                'Collapse when ice melts leaving rampart (1 mark)',
+                'Dimensions or named example (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q9',
+            question: 'Assess the impacts of climate change on glacial environments.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Climate change profoundly impacts glacial environments through warming temperatures, affecting physical landscapes, ecosystems, and human systems.\n\nPhysical impacts are extensive. Glacier retreat is accelerating globally - the Alps have lost 50% of glacier volume since 1900, with rates increasing since 1980. Iceland\'s Vatnajökull glacier retreats 50-100 metres annually. Negative mass balance results from increased ablation exceeding accumulation. This creates feedback loops - reduced ice cover lowers albedo (reflectivity), increasing heat absorption and accelerating melting. Glacial lakes expand behind retreating ice, creating glacial lake outburst flood (GLOF) hazards. In Nepal, over 3,000 glacial lakes now exist, with 47 considered dangerous. Landscape evolution accelerates - exposed valley sides become unstable without ice support, increasing rockfalls and landslides. The 2017 Bondo rockslide in Switzerland killed eight people.\n\nHydrological impacts affect billions. Glacier melt initially increases river flow - Himalayan rivers show 20-30% flow increases currently. However, as glaciers shrink, long-term water security diminishes. The Hindu Kush Himalaya region supplies water to 2 billion people across Asia. Seasonal flow patterns change - meltwater peaks earlier in spring, reducing summer water availability for agriculture and hydropower. Peru\'s glaciers supply 80% of Lima\'s water but have shrunk 40% since 1970, threatening future supply.\n\nEcological consequences include habitat loss. Species adapted to cold environments face extinction - the ice worm survives only in glacier ice and has nowhere to retreat. Alpine plant zones shift upslope by 25-50 metres per decade, outcompeting cold-adapted species. Changes disrupt traditional migration patterns and breeding cycles.\n\nSocio-economic impacts are severe. Tourism dependent on glaciers declines - Swiss ski resorts lose €200 million annually due to reduced snow. Hydroelectric power generation becomes unreliable with changing meltwater patterns. Agricultural communities lose irrigation water - Bolivia\'s Chacaltaya glacier disappeared in 2009, affecting La Paz\'s water supply. Traditional indigenous lifestyles depending on ice are threatened.\n\nGeohazards increase. Increased meltwater lubricates glacier beds, accelerating movement and potentially causing surges. Ice avalanches become more frequent. In 2017, Greenland experienced ice avalanches killing four people in Nuugaatsiaq. Permafrost thaw in periglacial areas destabilizes infrastructure - Alaska spends $35 million annually repairing damage. Methane release from thawing permafrost creates additional warming feedback.\n\nPositive impacts exist but are limited. Newly exposed land becomes available for development or agriculture. Extended navigation seasons in Arctic waters benefit shipping. Tourism to "last chance to see" glaciers temporarily increases.\n\nMitigation efforts show mixed results. Glacier engineering (covering ice with reflective blankets) is attempted in ski resorts but is costly and impractical at scale. Adaptation strategies include building early warning systems for GLOFs, developing alternative water sources (reservoirs, desalination), and economic diversification away from glacier-dependent activities.\n\nIn conclusion, climate change creates overwhelmingly negative impacts on glacial environments across environmental, hydrological, ecological, and socio-economic dimensions. While local adaptations provide some resilience, the scale and rate of change exceed many communities\' capacity to adapt. Global emissions reduction is essential to slow glacier loss, though already committed warming means continued impacts are inevitable. The transformation of glacial environments represents one of the most visible and consequential aspects of anthropogenic climate change.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic statements about glacier retreat, limited development',
+                'Level 2 (5-8 marks): Clear explanation of multiple impacts with examples, some assessment',
+                'Level 3 (9-12 marks): Sophisticated assessment of diverse impacts (physical, hydrological, ecological, socio-economic), detailed examples with data, consideration of scale and interconnections, evaluation of positive/negative effects and adaptation strategies, well-supported conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          },
+          {
+            id: 'geo-gs-q10',
+            question: 'Evaluate the effectiveness of strategies to manage the impacts of tourism in glacial environments.',
+            marks: 16,
+            difficulty: 'hard',
+            modelAnswer: 'Glacial environments face increasing tourism pressure while being exceptionally fragile ecosystems. Management strategies vary in effectiveness across environmental, economic, and social dimensions.\n\nRegulatory approaches establish rules limiting access and behaviour. The Antarctic Treaty System designates protected areas with strict visitor limits - maximum 100 people ashore at once, no approach within 5 metres of wildlife. This preserves pristine conditions effectively but relies on operator compliance. Iceland\'s Vatnajökull National Park restricts vehicle access, requiring guided tours to sensitive areas. This reduces environmental damage but creates economic bottlenecks and excludes budget travellers. Effectiveness depends on enforcement capacity - developing nations often lack resources for adequate monitoring. Nepal\'s Khumbu region has regulations but enforcement is inconsistent, limiting effectiveness.\n\nInfrastructure management channels visitors to reduce dispersed impacts. Boardwalks and designated paths at New Zealand\'s Franz Josef Glacier concentrate foot traffic, protecting fragile vegetation. However, infrastructure itself causes environmental damage and visual intrusion. The Gornergrat railway in Switzerland provides glacier access without vehicles, effectively reducing emissions but represents massive construction impact. Visitor centres educate tourists about environmental sensitivity - Norway\'s Jostedalsbreen centre reports 80% of visitors modify behaviour after visiting. Yet effectiveness diminishes once visitors leave controlled areas.\n\nCapacity limits prevent overcrowding damage. Torres del Paine in Patagonia limits daily visitors to 100 in certain zones, preserving trail quality and reducing wildlife disturbance. However, limits create equity issues - wealthy tourists can afford high permit prices while others are excluded. Demand often exceeds capacity, encouraging illegal access. The Everest Base Camp trek nominally limits numbers but hundreds daily still travel the route, exceeding sustainable levels. Seasonal closures protect wildlife breeding seasons and allow environmental recovery - effective environmentally but economically damaging to communities dependent on tourism income.\n\nEconomic instruments attempt sustainable funding. Park entrance fees in Canadian Rockies generate $20 million annually for conservation. Higher fees for glacier tours theoretically reduce demand while funding protection. However, this creates economic barriers, making wilderness experiences privilege of the wealthy rather than public goods. Fee revenues often don\'t match management costs - Iceland\'s tourism infrastructure costs exceed visitor fees by 40%, requiring taxpayer subsidies. Conservation levies on accommodation (Queenstown, NZ, charges 2.5%) distribute costs more broadly and are politically more acceptable, though revenues may not directly fund glacier protection.\n\nCertification schemes promote responsible operators. Iceland\'s "Vakinn" quality label requires environmental standards compliance. Tour operators meeting standards gain marketing advantages, creating market incentives for sustainability. However, certification is voluntary - uncertified operators continue operating at lower costs, creating unfair competition. Effectiveness depends on tourist awareness - studies show only 35% of visitors actively seek certified operators. Greenwashing concerns arise when standards are weak or monitoring insufficient.\n\nEducation and interpretation programs aim to modify visitor behaviour. Interpretive signs at Switzerland\'s Aletsch Glacier explain glacier retreat and climate change, encouraging pro-environmental attitudes. Research shows education increases understanding but behaviour change is inconsistent - knowledge-action gaps persist. Virtual reality experiences (Glacier 3000, Switzerland) allow "visits" without physical presence, reducing pressure. However, uptake is limited and cannot replace authentic experiences for most tourists.\n\nCommunity-based tourism management empowers local populations. In Greenland, Inuit communities control tourism development, ensuring cultural respect and fair economic distribution. This creates local ownership and sustainable practices. However, economic pressure can compromise conservation - communities may prioritize income over protection. Power imbalances between communities and large tour operators limit effectiveness - companies headquartered elsewhere extract profits while leaving communities with environmental costs.\n\nTechnology-based solutions include real-time monitoring systems tracking visitor numbers and environmental impacts. GPS tracking identifies problem areas for targeted management. However, technology implementation is expensive and requires technical capacity many glacial regions lack. Climate change monitoring stations inform adaptive management but don\'t address tourism pressures directly.\n\nInternational cooperation addresses transboundary issues. The Alpine Convention commits eight nations to sustainable development, including tourism management across borders. This enables coordinated approaches and best practice sharing. However, implementation varies by country and enforcement mechanisms are weak. Different national interests create conflicts - Austria emphasizes ski tourism while Switzerland prioritizes conservation.\n\nLimitations exist across all strategies. Climate change impacts overwhelm management efforts - glacier retreat creates hazards (rockfalls, floods) regardless of tourism management quality. Economic dependence on tourism makes communities resistant to restrictive measures - Chamonix derives 60% of income from Mont Blanc tourism, limiting political will for access restrictions. Covid-19 demonstrated vulnerability - glacier communities faced economic collapse when tourism ceased, questioning sustainability models. Balancing conservation and access creates inherent tensions - protecting environments may require excluding people, conflicting with democratic access principles.\n\nIn conclusion, no single strategy sufficiently manages tourism impacts in glacial environments. Most effective approaches combine multiple strategies: regulations preventing worst damage, infrastructure channeling visitors, economic instruments funding management, and community involvement ensuring local benefits. Context matters critically - strategies effective in wealthy nations (infrastructure investment, enforcement) may be impractical in developing countries. Integrated management frameworks like UNESCO World Heritage status provide comprehensive approaches but require substantial resources and political commitment. Fundamentally, addressing tourism pressure requires managing tourism growth itself - without demand management, even excellent strategies become overwhelmed. As climate change transforms glacial environments, adaptive management allowing strategy evolution is essential. The most sustainable approach may involve reducing visitor numbers through pricing or quotas while ensuring economic alternatives for glacier-dependent communities, though this conflicts with goals of accessible outdoor recreation. Effectiveness ultimately depends on balancing multiple, often competing objectives while recognizing that perfect solutions rarely exist.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-5 marks): Simple description of management strategies, minimal evaluation',
+                'Level 2 (6-10 marks): Clear explanation of multiple strategies with examples, some evaluation of effectiveness',
+                'Level 3 (11-13 marks): Detailed analysis of diverse strategies, good examples, clear evaluation of successes and limitations',
+                'Level 4 (14-16 marks): Sophisticated evaluation of multiple strategies across scales and contexts, specific detailed examples, assessment of effectiveness criteria, consideration of trade-offs and conflicts, recognition of context-dependency, integrated approaches, well-supported nuanced conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Glacial Systems)'
+          }
+        ]
+      },
+      {
+        id: 'hazards',
+        name: 'Hazards',
+        questions: [
+          {
+            id: 'geo-haz-q1',
+            question: 'Define the term "natural hazard" and explain why hazard perception varies.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'A natural hazard is a naturally occurring event or phenomenon that has the potential to threaten life, property, and economic activity. Hazards only become significant when they interact with vulnerable human populations. Hazard perception varies due to multiple factors. Economic development influences perception - wealthier nations often view hazards as more manageable through technology and infrastructure, while developing nations may see them as inevitable catastrophes. Cultural factors affect attitudes - some societies adopt fatalistic views accepting hazards as acts of God, while others emphasize human control and mitigation. Personal experience matters significantly - people who have experienced disasters directly perceive risk more seriously than those learning about them remotely. Education and information access shapes understanding of hazard risks. The Park Model shows responses evolve through relief, rehabilitation, and reconstruction phases, affecting future perception.',
+            markingCriteria: {
+              breakdown: [
+                'Definition: naturally occurring event threatening people/property (1 mark)',
+                'Economic factors affect perception (wealth enables mitigation) (1 mark)',
+                'Cultural factors (fatalism vs control attitudes) (1 mark)',
+                'Personal experience influences perception (1 mark)',
+                'Education/media or other valid factor (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q2',
+            question: 'Describe the distribution of earthquakes and explain why they occur in these locations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Earthquakes are concentrated along plate boundaries, forming distinct belts. The Pacific Ring of Fire, circling the Pacific Ocean from South America through California, Alaska, Japan, Philippines, and New Zealand, experiences 90% of the world\'s earthquakes. This occurs at convergent boundaries where oceanic plates subduct beneath continental plates (e.g., Nazca under South American plate) and transform boundaries like the San Andreas Fault. Earthquakes result from sudden energy release as plates overcome friction and slip.\n\nThe Alpine-Himalayan belt extends from the Mediterranean through Turkey, Iran, Himalayas to Indonesia, marking the collision zone between the Eurasian plate and the African and Indo-Australian plates. Convergent boundaries here create intense seismic activity. The Mid-Atlantic Ridge represents a divergent boundary where the Eurasian and North American plates separate, though earthquakes here are generally weaker due to less friction at spreading centres. Intraplate earthquakes occasionally occur away from boundaries, caused by ancient fault lines or human activity (fracking, reservoir construction), but these are rarer and less predictable.',
+            markingCriteria: {
+              breakdown: [
+                'Pacific Ring of Fire location and percentage (90%) (1 mark)',
+                'Explanation: subduction zones and transform faults at convergent/transform boundaries (1 mark)',
+                'Alpine-Himalayan belt location (1 mark)',
+                'Explanation: continental collision zones (1 mark)',
+                'Mid-Atlantic Ridge or other divergent boundary (1 mark)',
+                'Intraplate earthquakes or friction/energy release mechanism (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q3',
+            question: 'Using a named example, analyse the impacts of a volcanic eruption.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'The 2010 Eyjafjallajökull eruption in Iceland demonstrates diverse volcanic impacts. Iceland sits on the Mid-Atlantic Ridge where the Eurasian and North American plates diverge.\n\nPrimary hazards included lava flows destroying 20 farms and pyroclastic flows burning vegetation. Volcanic ash ejected 250 million cubic metres of tephra 11km high. Although no deaths occurred, these hazards forced the evacuation of 800 people. Ice cap melting triggered glacial outburst floods (jökulhlaups) washing away roads and bridges, damaging Route 1 (main highway) requiring €10 million repairs.\n\nSecondary impacts were more significant. Volcanic ash drifting across Europe caused unprecedented aviation disruption - 100,000 flights cancelled over six days, stranding 10 million passengers and costing airlines €1.1 billion. The ash contained sharp glass particles that could damage jet engines, prompting blanket flight bans. This secondary impact far exceeded local primary effects. Tourism initially declined 30% due to fear and inaccessibility, though later increased as people wanted to see the volcano, demonstrating complex economic effects. Agricultural impacts included ash contamination of grazing land, though volcanic ash ultimately enriched soil fertility. Local water supplies were contaminated by fluoride from ash, affecting livestock.\n\nLonger-term impacts show both costs and benefits. Infrastructure repair costs reached €100 million. However, geothermal energy potential increased. Tourism eventually benefited from the "disaster brand" - visitor numbers rose 40% in subsequent years. The eruption renewed interest in volcanic monitoring, leading to improved early warning systems. Global attention highlighted Iceland\'s vulnerability but also its resilience, attracting research and investment. The event demonstrated how modern interconnected systems amplify hazard impacts far beyond the immediate locality, with aviation disruption creating global consequences from a relatively minor eruption.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-3 marks): Basic statements about impacts, limited detail, named example',
+                'Level 2 (4-6 marks): Clear explanation of primary and secondary impacts with some detail, case study applied',
+                'Level 3 (7-9 marks): Detailed analysis of diverse impacts, specific data/evidence from case study (Eyjafjallajökull or equivalent), consideration of short/long-term and local/global effects, recognition of interconnections'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q4',
+            question: 'Explain how a tsunami is generated by an earthquake.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Tsunamis are generated when underwater earthquakes cause sudden vertical displacement of the ocean floor. This typically occurs at subduction zones where one tectonic plate slides beneath another. When stress accumulated along the fault is suddenly released, the overlying plate snaps upward or the subducting plate drops downward, displacing the entire water column above. The vertical movement must be significant (typically magnitude 7.0+ and shallow focus less than 70km deep) to generate a tsunami. The displaced water forms waves that radiate outward in all directions from the epicentre at speeds of 500-800 km/h in deep ocean. Wave height in open ocean is small (less than 1 metre) but wavelength is huge (100-200km). As waves approach shallow coastal water, friction with the seabed slows the wave front, causing wave height to dramatically increase (10-30+ metres) while wavelength decreases. The 2011 Tōhoku earthquake (magnitude 9.0) off Japan generated a tsunami reaching 40 metres height in some locations.',
+            markingCriteria: {
+              breakdown: [
+                'Underwater earthquake causes vertical displacement of ocean floor (1 mark)',
+                'Typically at subduction zones, must be magnitude 7.0+ and shallow (1 mark)',
+                'Entire water column displaced, waves radiate outward (1 mark)',
+                'Fast in deep water (500-800 km/h), low height (1 mark)',
+                'Slows approaching coast, wave height increases dramatically (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q5',
+            question: 'Compare the formation and characteristics of tropical storms in different ocean basins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical storms (hurricanes, typhoons, cyclones) form in six major ocean basins with similar formation requirements but differing characteristics. All require sea surface temperatures above 26.5°C, Coriolis effect (5-20° latitude), low wind shear, and atmospheric instability.\n\nThe North Atlantic basin produces hurricanes affecting Caribbean and USA (June-November), averaging 12 storms annually with 6 becoming hurricanes. The North Pacific (West) creates typhoons hitting Philippines, Japan, and China (May-December), generating the most storms (26 annually) due to extensive warm water. These are often strongest globally - Typhoon Haiyan (2013) reached 315 km/h winds. The North Indian Ocean has two seasons (April-June, September-November) due to monsoon influence, producing 5-6 cyclones annually of typically lower intensity but causing devastating impacts in densely populated Bangladesh and India. The South Pacific and South Indian Ocean produce cyclones (November-April southern summer) affecting Madagascar, Mozambique, and Pacific islands, with fewer storms (10-12 combined) due to cooler waters.\n\nKey differences include rotation - northern hemisphere storms rotate counterclockwise while southern hemisphere rotate clockwise due to Coriolis effect. Intensity varies by basin - Western Pacific produces strongest storms due to warmest, most extensive ocean area. Atlantic hurricanes often have longer tracks, sometimes reaching Europe as extratropical storms. The Northeast Pacific is second most active but storms rarely make landfall due to westward movement into open ocean. No tropical storms form directly at the equator (within 5° latitude) due to insufficient Coriolis effect to initiate rotation.',
+            markingCriteria: {
+              breakdown: [
+                'Formation requirements: 26.5°C water, Coriolis effect, low wind shear (1 mark)',
+                'Different basins identified: Atlantic, Pacific, Indian (1 mark)',
+                'Frequency variations between basins (1 mark)',
+                'Intensity differences (Western Pacific strongest) (1 mark)',
+                'Rotation differences (hemispheres) or seasonal variations (1 mark)',
+                'Specific examples or landfall patterns (1 mark)'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          },
+          {
+            id: 'geo-haz-q6',
+            question: 'Using named examples, evaluate the effectiveness of prediction and monitoring in reducing the impacts of tectonic hazards.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Prediction and monitoring technologies offer varying effectiveness in managing tectonic hazards, with significant differences between volcanic and seismic events.\n\nVolcanic eruption monitoring is relatively effective. Seismometers detect increased earthquake activity as magma rises - before Mount Pinatubo erupted in 1991, 400 earthquakes per day were recorded, up from background levels of 10-20. This enabled evacuation of 60,000 people from the danger zone, preventing an estimated 20,000 deaths despite the violent VEI 6 eruption. Ground deformation monitoring using GPS and tilt meters detects bulging as magma accumulates. Gas emissions monitoring identifies increased sulfur dioxide (SO2) release - levels at Pinatubo increased from 500 to 13,000 tonnes/day. Thermal imaging identifies heat anomalies. This multi-parameter monitoring at volcanoes like Mount St Helens, Vesuvius, and in Iceland provides days to weeks warning, allowing effective evacuations. Success depends on monitoring network quality - Indonesia\'s 127 active volcanoes have varying monitoring levels, affecting warning effectiveness.\n\nHowever, limitations exist. Prediction remains imprecise regarding eruption timing and magnitude. Mount Ontake in Japan (2014) killed 63 hikers despite monitoring, as the phreatic eruption gave minimal warning. Monitoring is expensive - establishing comprehensive networks costs millions, challenging for developing nations. False alarms create economic costs and reduce public trust - if evacuations occur without eruptions, future warnings may be ignored. The 1976 Guadeloupe evacuation (3 months, no major eruption) cost $300 million and created credibility issues.\n\nEarthquake prediction is notably less effective. Despite extensive research, reliable short-term prediction (hours-days) remains impossible. No scientifically validated precursor signals exist. Long-term probability assessments identify high-risk zones (e.g., 70% probability of magnitude 6.7+ earthquake in San Francisco Bay Area within 30 years) but cannot specify timing. This enables building codes and preparedness but not immediate life-saving evacuations. The 2011 Tōhoku earthquake, despite Japan\'s world-leading monitoring, struck without sufficient warning for evacuation. Early warning systems, however, show effectiveness. Japan\'s system detected P-waves and sent alerts via phones and TV 15-90 seconds before destructive S-waves arrived, allowing bullet trains to automatically brake and people to take cover. This prevented injuries and infrastructure damage, though tsunami warning time was insufficient for coastal areas.\n\nMonitoring infrastructure differences affect outcomes. Japan invests $100+ million annually in earthquake monitoring with 1,000+ seismometers providing dense coverage. This enabled the early warning system\'s effectiveness. In contrast, Haiti had minimal seismic monitoring before the 2010 earthquake (magnitude 7.0) that killed 220,000 people. Even with monitoring, poverty and poor building standards meant vulnerability was extremely high. This illustrates that monitoring effectiveness depends on capacity to respond - warnings are useless without evacuation infrastructure, communication systems, and prepared populations.\n\nTsunami warning systems demonstrate monitoring success. The Pacific Tsunami Warning Center, established after the 1960 Chile earthquake, uses seabed sensors (DART buoys) and seismometers to detect tsunamis and model their propagation. The 2010 Chile earthquake triggered warnings that saved lives in Hawaii, Japan, and elsewhere. However, the 2004 Indian Ocean tsunami killed 230,000 people partly because no warning system existed for that region. One was established afterward, showing reactive rather than proactive approaches. Warnings require sufficient lead time - coastal areas near epicenters receive inadequate warning (15-30 minutes) for effective evacuation of all residents.\n\nCommunication is critical for monitoring effectiveness. Sri Lanka received tsunami warnings in 2004 but lacked systems to alert coastal populations. Japan\'s comprehensive warning dissemination via multiple channels (TV, radio, phones, sirens) maximizes effectiveness. Language barriers and literacy levels affect warning comprehension. Cultural factors influence response - some communities ignore warnings due to past false alarms or cultural beliefs.\n\nIn conclusion, monitoring and prediction show differential effectiveness. Volcanic eruption monitoring is relatively successful, providing actionable warnings that have demonstrably saved thousands of lives where monitoring networks exist and authorities respond appropriately. Earthquake prediction remains ineffective for short-term forecasting, though early warning systems provide crucial seconds-to-minutes that reduce casualties and damage in well-prepared societies. Tsunami monitoring is effective given sufficient detection infrastructure and lead time. Effectiveness fundamentally depends on investment in monitoring technology, communication systems, public education, and socio-economic capacity to implement protective measures. The most effective approach combines monitoring with building resilience through construction standards, land-use planning, education, and preparedness drills. Monitoring enables timely response but cannot replace long-term hazard mitigation strategies.',
+            markingCriteria: {
+              breakdown: [
+                'Level 1 (1-4 marks): Basic description of monitoring methods, minimal evaluation',
+                'Level 2 (5-8 marks): Clear explanation of monitoring for different hazards with examples, some evaluation of effectiveness',
+                'Level 3 (9-12 marks): Sophisticated evaluation of prediction/monitoring effectiveness across different hazards (volcanic/seismic/tsunami), specific detailed examples (Pinatubo, Tōhoku, Haiti), assessment of successes and limitations, consideration of socio-economic context affecting effectiveness, recognition of communication and response capacity, balanced conclusion'
+              ]
+            },
+            specReference: 'AQA Geography Physical Paper 1 (Hazards)'
+          }
+        ]
+      }
+    ]
   }
   ];
