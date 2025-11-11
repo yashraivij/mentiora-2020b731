@@ -9,6 +9,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -71,6 +73,16 @@ const Practice = () => {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [selectedTutorId, setSelectedTutorId] = useState<string>('miss_patel');
+  const [tutorName, setTutorName] = useState<string>('Miss Patel');
+  
+  const TUTOR_OPTIONS = [
+    { id: 'miss_patel', name: 'Miss Patel', avatar: '/lovable-uploads/miss-patel-avatar.png' },
+    { id: 'mr_chen', name: 'Mr. Chen', avatar: '/lovable-uploads/mr-chen-avatar.png' },
+    { id: 'ms_johnson', name: 'Ms. Johnson', avatar: '/lovable-uploads/ms-johnson-avatar.png' },
+    { id: 'mr_williams', name: 'Mr. Williams', avatar: '/lovable-uploads/mr-williams-avatar.png' },
+    { id: 'dr_singh', name: 'Dr. Singh', avatar: '/lovable-uploads/dr-singh-avatar.png' }
+  ];
   
   // Subject colors mapping
   const subjectColors: { [key: string]: { bg: string } } = {
@@ -220,6 +232,47 @@ const Practice = () => {
     };
     fetchExistingGrade();
   }, [sessionComplete, user?.id, subjectId]);
+
+  // Fetch selected tutor from profile
+  useEffect(() => {
+    const fetchSelectedTutor = async () => {
+      if (user?.id) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('selected_tutor_id')
+          .eq('id', user.id)
+          .single();
+        
+        if (data?.selected_tutor_id) {
+          setSelectedTutorId(data.selected_tutor_id);
+          const tutor = TUTOR_OPTIONS.find(t => t.id === data.selected_tutor_id);
+          if (tutor) {
+            setTutorName(tutor.name);
+          }
+        }
+      }
+    };
+    fetchSelectedTutor();
+  }, [user?.id]);
+
+  // Handler to change tutor
+  const handleTutorChange = async (newTutorId: string) => {
+    if (!user?.id) return;
+    
+    const { error } = await supabase
+      .from('profiles')
+      .update({ selected_tutor_id: newTutorId })
+      .eq('id', user.id);
+    
+    if (!error) {
+      setSelectedTutorId(newTutorId);
+      const tutor = TUTOR_OPTIONS.find(t => t.id === newTutorId);
+      if (tutor) {
+        setTutorName(tutor.name);
+        toast.success(`Switched to ${tutor.name}`);
+      }
+    }
+  };
 
   // Confetti effect when session completes
   useEffect(() => {
@@ -2027,11 +2080,29 @@ const Practice = () => {
             ) : null}
           </div>
 
-          {/* Right Pane: Ask mentiora */}
+          {/* Right Pane: Ask tutor */}
           <aside className="flex flex-col h-[600px]">
-            {/* Header */}
-            <div className="mb-4">
-              <h2 className="text-base font-semibold text-foreground">Ask mentiora</h2>
+            {/* Header with tutor selector */}
+            <div className="mb-4 flex items-center gap-2">
+              <h2 className="text-base font-semibold text-foreground">Ask {tutorName}</h2>
+              <Select value={selectedTutorId} onValueChange={handleTutorChange}>
+                <SelectTrigger className="w-[140px] h-8 text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {TUTOR_OPTIONS.map((tutor) => (
+                    <SelectItem key={tutor.id} value={tutor.id}>
+                      <div className="flex items-center gap-2">
+                        <Avatar className="w-5 h-5">
+                          <AvatarImage src={tutor.avatar} alt={tutor.name} />
+                          <AvatarFallback>{tutor.name[0]}</AvatarFallback>
+                        </Avatar>
+                        <span>{tutor.name}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Feedback content or chat messages */}
