@@ -1654,6 +1654,7 @@ const Dashboard = () => {
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
         if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
         if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
@@ -1792,6 +1793,7 @@ const Dashboard = () => {
       "english-literature": "📖",
       "geography": "🌍",
       "geography-paper-2": "🌍",
+      "geography-aqa-alevel": "🌍",
       "history": "⏳",
       "religious-studies": "⛪",
       "business-edexcel-igcse": "💼",
@@ -1819,6 +1821,7 @@ const Dashboard = () => {
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
