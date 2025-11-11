@@ -20,14 +20,8 @@ export class CurriculumService {
       cache.subjects &&
       Date.now() - cache.lastFetch < cache.CACHE_TTL
     ) {
-      console.log("✅ Returning cached curriculum data", {
-        subjectCount: cache.subjects.length,
-        cacheAge: Date.now() - cache.lastFetch,
-      });
       return cache.subjects;
     }
-
-    console.log("🔄 Fetching curriculum from database...");
 
     try {
       // Fetch subjects
@@ -36,12 +30,7 @@ export class CurriculumService {
         .select("*")
         .order("name");
 
-      if (subjectsError) {
-        console.error("❌ Error fetching subjects:", subjectsError);
-        throw subjectsError;
-      }
-
-      console.log(`✅ Fetched ${subjects?.length || 0} subjects`);
+      if (subjectsError) throw subjectsError;
 
       // Fetch all topics
       const { data: topics, error: topicsError } = await supabase
@@ -49,12 +38,7 @@ export class CurriculumService {
         .select("*")
         .order("order_index");
 
-      if (topicsError) {
-        console.error("❌ Error fetching topics:", topicsError);
-        throw topicsError;
-      }
-
-      console.log(`✅ Fetched ${topics?.length || 0} topics`);
+      if (topicsError) throw topicsError;
 
       // Fetch all questions
       const { data: questions, error: questionsError } = await supabase
@@ -62,12 +46,7 @@ export class CurriculumService {
         .select("*")
         .order("order_index");
 
-      if (questionsError) {
-        console.error("❌ Error fetching questions:", questionsError);
-        throw questionsError;
-      }
-
-      console.log(`✅ Fetched ${questions?.length || 0} questions`);
+      if (questionsError) throw questionsError;
 
       // Group questions by topic
       const questionsByTopic = new Map<string, Question[]>();
@@ -119,18 +98,18 @@ export class CurriculumService {
       cache.subjects = result;
       cache.lastFetch = Date.now();
 
-      console.log("✅ Successfully loaded curriculum:", {
-        subjects: result.length,
-        topics: topics?.length || 0,
-        questions: questions?.length || 0,
-        timestamp: new Date().toISOString(),
-      });
-
       return result;
     } catch (error) {
-      console.error("❌ FATAL: Failed to fetch curriculum from database:", error);
-      console.error("Error details:", JSON.stringify(error, null, 2));
-      throw error; // Fail loudly so we can see the real error
+      console.error("Failed to fetch curriculum from database:", error);
+      
+      // Fallback to static file if database fails
+      try {
+        const { curriculum } = await import("@/data/curriculum");
+        return curriculum;
+      } catch (fallbackError) {
+        console.error("Fallback to static curriculum also failed:", fallbackError);
+        throw new Error("Unable to load curriculum data");
+      }
     }
   }
 

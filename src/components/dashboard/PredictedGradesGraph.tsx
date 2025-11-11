@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { useSubscription } from "@/hooks/useSubscription";
 
 interface GradeData {
@@ -36,7 +36,6 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
-  const { subjects: curriculum } = useCurriculum();
   const { isPremium, isLoading: subscriptionLoading } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);

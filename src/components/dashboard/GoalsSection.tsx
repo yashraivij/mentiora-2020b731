@@ -10,7 +10,7 @@ import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 
 interface Goal {
   id: string;
@@ -34,7 +34,6 @@ const PRESET_TIMES = [
 
 export function GoalsSection() {
   const { user } = useAuth();
-  const { subjects } = useCurriculum();
   const [goals, setGoals] = useState<Goal[]>([]);
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -201,7 +200,7 @@ export function GoalsSection() {
           is_active: true
         };
       } else {
-        const subject = subjects.find(s => s.id === selectedSubject);
+        const subject = curriculum.find(s => s.id === selectedSubject);
         goalData = {
           user_id: user.id,
           goal_type: 'daily_topic_mastery',
@@ -504,7 +503,7 @@ export function GoalsSection() {
                           <SelectValue placeholder="Choose subject" />
                         </SelectTrigger>
                         <SelectContent className="bg-card border-border">
-                          {subjects.map((subject) => (
+                          {curriculum.map((subject) => (
                             <SelectItem key={subject.id} value={subject.id} className="text-foreground hover:bg-accent">
                               <div className="flex items-center space-x-2">
                                 <BookOpen className="h-4 w-4 text-muted-foreground" />

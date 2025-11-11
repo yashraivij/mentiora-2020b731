@@ -1,4 +1,5 @@
-// Re-export curriculum types
-// The curriculum data is now loaded from the database via CurriculumService
+// This file will eventually re-export all curriculum subjects from individual files
+// For now it re-exports from the main curriculum.ts file
 
 export type { Subject, Topic, Question } from './types';
+export { curriculum } from '../curriculum';

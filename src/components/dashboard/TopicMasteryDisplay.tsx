@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle, Brain, BookOpen } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
 
 interface TopicMasteryGoal {
@@ -26,7 +26,6 @@ interface MasteryProgress {
 
 export function TopicMasteryDisplay() {
   const { user } = useAuth();
-  const { subjects: curriculum } = useCurriculum();
   const navigate = useNavigate();
   const [masteryProgress, setMasteryProgress] = useState<MasteryProgress[]>([]);
   const [loading, setLoading] = useState(true);
