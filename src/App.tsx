@@ -24,7 +24,6 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
-import AdminMigrate from "./pages/AdminMigrate";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -100,11 +99,6 @@ const App: React.FC = () => (
               <Route path="/flashcards" element={
                 <ProtectedRoute>
                   <Flashcards />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin-migrate" element={
-                <ProtectedRoute>
-                  <AdminMigrate />
                 </ProtectedRoute>
               } />
               <Route path="*" element={<NotFound />} />

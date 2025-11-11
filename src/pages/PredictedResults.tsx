@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight, Star } from "lucide-react";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -49,21 +49,8 @@ const PredictedResults = () => {
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
-  const { getSubject, isLoading: curriculumLoading } = useCurriculum();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
-
-  // Show loading state while curriculum data is loading
-  if (curriculumLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Loading results...</p>
-        </div>
-      </div>
-    );
-  }
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -147,7 +134,7 @@ const PredictedResults = () => {
     );
   }
 
-  const subject = getSubject(subjectId || "");
+  const subject = curriculum.find(s => s.id === subjectId);
   
   if (!subject) {
     navigate('/predicted-questions');

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -13,23 +13,10 @@ import { useToast } from "@/hooks/use-toast";
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { subjects, isLoading: curriculumLoading } = useCurriculum();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
-
-  // Show loading state while curriculum data is loading
-  if (curriculumLoading || loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Loading subjects...</p>
-        </div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -505,12 +492,12 @@ const PredictedQuestions = () => {
                  </CardContent>
                </Card>
 
-                 {subjects
-                    .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science' && subject.id !== 'maths-aqa-alevel')
-                    .map((subject) => renderSubjectCard(subject))}
+                {curriculum
+                   .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science' && subject.id !== 'maths-aqa-alevel')
+                   .map((subject) => renderSubjectCard(subject))}
 
-                 {/* Maths AQA A-Level Card */}
-                 {renderSubjectCard(subjects.find(s => s.id === 'maths-aqa-alevel')!)}
+                {/* Maths AQA A-Level Card */}
+                {renderSubjectCard(curriculum.find(s => s.id === 'maths-aqa-alevel')!)}
             </div>
           </TabsContent>
 
@@ -639,7 +626,7 @@ const PredictedQuestions = () => {
                     </>
                   )}
 
-                  {subjects
+                  {curriculum
                     .filter((subject) => {
                        // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, physics-edexcel, and statistics-edexcel-gcse only in edexcel tab
                        if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'statistics-edexcel-gcse') {

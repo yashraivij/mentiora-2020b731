@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Clock, AlertCircle, CheckCircle, Crown, Target, BookOpen, FileText } from "lucide-react";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useToast } from "@/hooks/use-toast";
@@ -36,7 +36,6 @@ const PredictedExam = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const { subjects, getSubject, isLoading: curriculumLoading } = useCurriculum();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -52,19 +51,7 @@ const PredictedExam = () => {
     clearNotification
   } = usePersonalizedNotifications();
   
-  // Show loading state while curriculum data is loading
-  if (curriculumLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Loading exam...</p>
-        </div>
-      </div>
-    );
-  }
-  
-  const subject = getSubject(subjectId || "") || subjects.find(s => subjectId?.startsWith(s.id + '-paper-'));
+  const subject = curriculum.find(s => s.id === subjectId || subjectId?.startsWith(s.id + '-paper-'));
   
   if (!subject) {
     navigate('/predicted-questions');

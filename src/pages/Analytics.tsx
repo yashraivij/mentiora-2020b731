@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, TrendingUp, AlertTriangle, Target, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
@@ -21,7 +21,6 @@ interface AnalyticsData {
 const Analytics = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { subjects } = useCurriculum();
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
 
@@ -83,14 +82,14 @@ const Analytics = () => {
   }, [user?.id]);
 
   const getTopicName = (topicId: string) => {
-    const topic = subjects
+    const topic = curriculum
       .flatMap(s => s.topics)
       .find(t => t.id === topicId);
     return topic?.name || 'Unknown Topic';
   };
 
   const getSubjectName = (subjectId: string) => {
-    const subject = subjects.find(s => s.id === subjectId);
+    const subject = curriculum.find(s => s.id === subjectId);
     return subject?.name || 'Unknown Subject';
   };
 
@@ -266,7 +265,7 @@ const Analytics = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {subjects.map((subject) => {
+              {curriculum.map((subject) => {
                 const subjectData = analyticsData.filter(d => d.subjectId === subject.id);
                 const subjectScore = subjectData.length > 0 ? 
                   subjectData.reduce((sum, d) => sum + d.averageScore, 0) / subjectData.length : 0;

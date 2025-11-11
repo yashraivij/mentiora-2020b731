@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -143,7 +143,6 @@ const Dashboard = () => {
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
   const { showMPReward } = useMPRewards();
-  const { subjects, getSubject } = useCurriculum();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -654,8 +653,8 @@ const Dashboard = () => {
           if (subjectName === "Computer Science") return "computer-science";
           if (subjectName === "Spanish") return "spanish-aqa";
           
-          // Fallback: try to find by name in subjects
-          const subject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+          // Fallback: try to find by name in curriculum
+          const subject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
           return subject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
         };
         
@@ -722,8 +721,8 @@ const Dashboard = () => {
             if (subjectName === "Computer Science") return "computer-science";
             if (subjectName === "Spanish") return "spanish-aqa";
 
-            // Fallback: try to find by name in subjects
-            const subject = subjects.find(
+            // Fallback: try to find by name in curriculum
+            const subject = curriculum.find(
               (s) => s.name.toLowerCase() === subjectName.toLowerCase()
             );
             return subject?.id;
@@ -976,7 +975,7 @@ const Dashboard = () => {
 
   // Get topic completion status
   const getTopicStatus = (subjectId: string, topicIndex: number) => {
-    const subject = getSubject(subjectId);
+    const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) return "available";
     
     const topic = subject.topics[topicIndex];
@@ -994,7 +993,7 @@ const Dashboard = () => {
 
   // Get subject progress
   const getSubjectProgress = (subjectId: string) => {
-    const subject = getSubject(subjectId);
+    const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) return { completed: 0, total: 0 };
     
     const completedTopics = subject.topics.filter(topic => {
@@ -1500,7 +1499,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (location.state?.openSubjectDrawer && location.state?.subjectId) {
       console.log('Opening subject drawer from navigation state:', location.state);
-      const subject = getSubject(location.state.subjectId);
+      const subject = curriculum.find(s => s.id === location.state.subjectId);
       console.log('Found subject:', subject);
       if (subject) {
         setSelectedDrawerSubject(subject);
@@ -1655,20 +1654,19 @@ const Dashboard = () => {
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
-        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
         if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
         if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
         if (subjectName === "Physics") return board === "edexcel" ? "physics-edexcel" : "physics";
         if (subjectName === "Chemistry") return board === "edexcel" ? "chemistry-edexcel" : "chemistry";
         if (subjectName === "Biology") return "biology";
-        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
       const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-      const currSubject = getSubject(subjectId);
+      const currSubject = curriculum.find(s => s.id === subjectId);
       const totalTopics = currSubject?.topics.length || 1;
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const practicePercentage = Math.round(totalScore / totalTopics);
@@ -1794,7 +1792,6 @@ const Dashboard = () => {
       "english-literature": "📖",
       "geography": "🌍",
       "geography-paper-2": "🌍",
-      "geography-aqa-alevel": "🌍",
       "history": "⏳",
       "religious-studies": "⛪",
       "business-edexcel-igcse": "💼",
@@ -1822,7 +1819,6 @@ const Dashboard = () => {
         if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
         if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
         if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
-        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -1844,8 +1840,8 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
-        // Fallback: try to find by name in subjects
-        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        // Fallback: try to find by name in curriculum
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
@@ -1883,7 +1879,7 @@ const Dashboard = () => {
         p.subjectId === baseSubjectName ||
         p.subjectId.split('-')[0] === baseSubjectName
       );
-      const currSubject = getSubject(subjectId);
+      const currSubject = curriculum.find(s => s.id === subjectId);
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
       const attemptedTopics = subjectProgress.length; // Number of topics actually attempted
       const practicePercentage = attemptedTopics > 0 ? Math.round(totalScore / attemptedTopics) : 0;
@@ -2017,10 +2013,10 @@ const Dashboard = () => {
 
 
   const filteredSubjects = userSubjects.length > 0
-    ? subjects.filter((subject) => userSubjects.includes(subject.id))
+    ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
 
-  const availableSubjects = subjects.filter((subject) => !userSubjects.includes(subject.id));
+  const availableSubjects = curriculum.filter((subject) => !userSubjects.includes(subject.id));
 
   // Add subject function
   const addSubject = async (subjectId: string, targetGrade: string, examBoard: string = "AQA") => {
@@ -2028,7 +2024,7 @@ const Dashboard = () => {
     
     console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
     
-    const subject = getSubject(subjectId);
+    const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) {
       console.error('❌ Subject not found in curriculum:', subjectId);
       return;
@@ -2175,8 +2171,8 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
-        // Fallback: try to find by name in subjects
-        const currSubject = subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+        // Fallback: try to find by name in curriculum
+        const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
       };
       
@@ -2733,13 +2729,13 @@ const Dashboard = () => {
                       ← Back
                     </Button>
                     <h2 className="text-3xl font-semibold text-foreground">
-                      {getSubject(selectedSubject)?.name}
+                      {curriculum.find(s => s.id === selectedSubject)?.name}
                     </h2>
                   </div>
 
                   <div className="flex justify-center">
                     <div className="max-w-md">
-                      {renderTopicPath(getSubject(selectedSubject))}
+                      {renderTopicPath(curriculum.find(s => s.id === selectedSubject))}
                     </div>
                   </div>
                 </div>
@@ -3008,7 +3004,7 @@ const Dashboard = () => {
                               {(() => {
                                 // Use the subject ID directly instead of mapping from name
                                 const subjectIdToMatch = selectedDrawerSubject?.id || '';
-                                const curriculumSubject = getSubject(subjectIdToMatch);
+                                const curriculumSubject = curriculum.find(c => c.id === subjectIdToMatch);
                                 
                                 // Helper to check if subject is A-Level
                                 const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
@@ -3144,16 +3140,16 @@ const Dashboard = () => {
                                 console.log('selectedDrawerSubject:', selectedDrawerSubject);
                                 console.log('selectedDrawerSubject.id:', selectedDrawerSubject?.id);
                                 console.log('selectedDrawerSubject.name:', selectedDrawerSubject?.name);
-                                console.log('Curriculum has physics-aqa-alevel?', subjects.some(s => s.id === 'physics-aqa-alevel'));
-                                console.log('Total curriculum subjects:', subjects.length);
+                                console.log('Curriculum has physics-aqa-alevel?', curriculum.some(s => s.id === 'physics-aqa-alevel'));
+                                console.log('Total curriculum subjects:', curriculum.length);
                                 
                                 // Get topics only from the selected drawer subject
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  // Find subject using the exact ID
-                                  const subject = getSubject(selectedDrawerSubject.id);
-                                  console.log('Found subject?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
+                                  // Find subject in curriculum using the exact ID
+                                  const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
+                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
                                   
                                   if (subject) {
                                     console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
@@ -3372,7 +3368,7 @@ const Dashboard = () => {
                                 
                                 // If no progress data, initialize from curriculum
                                 if (subjectTopics.length === 0) {
-                                  const curriculumSubject = getSubject(selectedDrawerSubject.id);
+                                  const curriculumSubject = curriculum.find(s => s.id === selectedDrawerSubject.id);
                                   if (curriculumSubject?.topics) {
                                     subjectTopics = curriculumSubject.topics.slice(0, 7).map(t => ({
                                       subjectId: selectedDrawerSubject.id,
@@ -3487,7 +3483,7 @@ const Dashboard = () => {
                                       navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       // Open the subject drawer with notes tab
-                                      const subject = getSubject(subjectId);
+                                      const subject = curriculum.find(s => s.id === subjectId);
                                       if (subject) {
                                         setSelectedDrawerSubject(subject);
                                         setDrawerTab('notes');
@@ -4142,30 +4138,6 @@ const Dashboard = () => {
                               // Exclude geography-paper-2 from exam board selection
                               if (subject.id === 'geography-paper-2') return false;
                               
-                              // CRITICAL: Explicitly exclude base 'geography' (GCSE) when in A-level tab
-                              if (activeSubjectLevel === 'alevel' && subject.id === 'geography') {
-                                console.log('❌ Excluding GCSE geography from A-level tab:', subject.id);
-                                return false;
-                              }
-                              
-                              // CRITICAL: When selecting Geography in A-Level tab, ONLY show geography-aqa-alevel
-                              if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
-                                // Must be exactly 'geography-aqa-alevel'
-                                if (subject.id !== 'geography-aqa-alevel') {
-                                  console.log('❌ Excluding non-A-level geography:', subject.id);
-                                  return false;
-                                }
-                                console.log('✅ Showing A-level geography:', subject.id);
-                              }
-                              
-                              // CRITICAL: When selecting Geography in GCSE tab, exclude geography-aqa-alevel
-                              if (activeSubjectLevel === 'gcse' && selectedSubjectGroup === 'Geography') {
-                                if (subject.id === 'geography-aqa-alevel') {
-                                  console.log('❌ Excluding A-level geography from GCSE tab:', subject.id);
-                                  return false;
-                                }
-                              }
-                              
                               console.log(`🔍 Filtering subject ${subject.id} (${subject.name}):`, {
                                 activeSubjectLevel,
                                 includesAlevel: subject.id.includes('alevel'),
@@ -4243,7 +4215,7 @@ const Dashboard = () => {
                                 >
                                   <Card 
                                     className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
-                                onClick={() => {
+                              onClick={() => {
                                 console.log('📗 Exam board clicked:', {
                                   subjectId: subject.id,
                                   subjectName: subject.name,
@@ -4251,19 +4223,6 @@ const Dashboard = () => {
                                   activeSubjectLevel,
                                   isAlevelId: subject.id.includes('alevel')
                                 });
-                                
-                                // CRITICAL SAFEGUARD: Prevent wrong Geography subject from being selected
-                                if (selectedSubjectGroup === 'Geography' && activeSubjectLevel === 'alevel') {
-                                  if (subject.id !== 'geography-aqa-alevel') {
-                                    console.error('❌ BLOCKED: Attempted to select wrong Geography subject in A-level mode:', subject.id);
-                                    toast({
-                                      title: "Error",
-                                      description: "Invalid subject selected. Please try again.",
-                                      variant: "destructive"
-                                    });
-                                    return;
-                                  }
-                                }
                                 
                                 // Safety check: ensure correct level subject is selected
                                 const expectedHasAlevel = activeSubjectLevel === 'alevel';
@@ -4278,12 +4237,6 @@ const Dashboard = () => {
                                   });
                                   return;
                                 }
-                                
-                                console.log('✅ Setting selected subject for grade:', {
-                                  id: subject.id,
-                                  name: subject.name,
-                                  examBoard: examBoard
-                                });
                                 
                                 setSelectedSubjectForGrade({
                                   id: subject.id,
@@ -4356,29 +4309,17 @@ const Dashboard = () => {
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
-                                // CRITICAL SAFEGUARD: Double-check subject ID before adding
-                                let finalSubjectId = selectedSubjectForGrade.id;
-                                
-                                // If in A-level mode and Geography, force use of geography-aqa-alevel
-                                if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
-                                  if (finalSubjectId !== 'geography-aqa-alevel') {
-                                    console.error('🚨 CRITICAL: Wrong Geography ID detected, correcting from', finalSubjectId, 'to geography-aqa-alevel');
-                                    finalSubjectId = 'geography-aqa-alevel';
-                                  }
-                                }
-                                
                                 const logData = {
-                                  originalSubjectId: selectedSubjectForGrade.id,
-                                  finalSubjectId: finalSubjectId,
+                                  subjectId: selectedSubjectForGrade.id,
                                   subjectName: selectedSubjectForGrade.name,
                                   grade: grade.toString(),
                                   examBoard: selectedSubjectForGrade.examBoard,
                                   activeSubjectLevel,
-                                  isAlevelId: finalSubjectId.includes('alevel')
+                                  isAlevelId: selectedSubjectForGrade.id.includes('alevel')
                                 };
                                 console.log('✅ Adding subject with grade:', logData);
                                 
-                                addSubject(finalSubjectId, grade.toString(), selectedSubjectForGrade.examBoard);
+                                addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
                                 setSelectedSubjectForGrade(null);
                                 setShowAddSubjects(false);
                                 setSelectedSubjectGroup(null);

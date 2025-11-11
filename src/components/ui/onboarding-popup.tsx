@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -30,10 +30,10 @@ interface OnboardingData {
 }
 
 // Extract unique subjects from curriculum by level
-const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse', subjects: any[]) => {
+const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
   const subjectMap: { [key: string]: { id: string; name: string; examBoard: string; emoji: string } } = {};
   
-  subjects.forEach((subject) => {
+  curriculum.forEach((subject) => {
     const subjectId = subject.id.toLowerCase();
     // Remove exam board from subject name if it exists (e.g., "Biology (Edexcel)" -> "Biology")
     const subjectName = subject.name.replace(/\s*\([^)]*\)\s*/g, '').trim();
@@ -88,79 +88,77 @@ const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse', subjects: any[])
   return Object.values(subjectMap).sort((a, b) => a.name.localeCompare(b.name));
 };
 
+const GCSE_SUBJECTS = getSubjectsByLevel('gcse');
+const ALEVEL_SUBJECTS = getSubjectsByLevel('alevel');
+const IGCSE_SUBJECTS = getSubjectsByLevel('igcse');
+
+const ACQUISITION_SOURCES = [
+  { id: 'google', label: 'Google search', emoji: '🔍' },
+  { id: 'social', label: 'TikTok / Instagram / Social media', emoji: '📱' },
+  { id: 'friend', label: 'Friend or classmate', emoji: '👥' },
+  { id: 'parent', label: 'My parent told me', emoji: '👨‍👩‍👧' },
+  { id: 'school', label: 'School or teacher', emoji: '🏫' },
+  { id: 'youtube', label: 'YouTube video', emoji: '🎬' },
+  { id: 'blog', label: 'Blog post or article', emoji: '📰' },
+  { id: 'reddit', label: 'Reddit or online forum', emoji: '💬' },
+  { id: 'ad', label: 'Online ad', emoji: '🌐' },
+  { id: 'other', label: 'Other', emoji: '✍️' },
+];
+
+const YEAR_GROUPS = [
+  { id: 'year10', label: 'Year 10 (GCSE)', emoji: '📚' },
+  { id: 'year11', label: 'Year 11 (GCSE)', emoji: '📚' },
+  { id: 'year12', label: 'Year 12 (A-Level/AS)', emoji: '🎓' },
+  { id: 'year13', label: 'Year 13 (A-Level)', emoji: '🎓' },
+  { id: 'other', label: 'Other (IGCSE, IB, etc.)', emoji: '🌍' },
+];
+
+const STUDY_PREFERENCES = [
+  { 
+    id: 'practice', 
+    title: 'Practice questions', 
+    description: 'Learn by doing lots of exam-style questions',
+    emoji: '📝'
+  },
+  { 
+    id: 'reading', 
+    title: 'Reading explanations', 
+    description: 'Learn by reading detailed notes and explanations',
+    emoji: '📖'
+  },
+  { 
+    id: 'visual', 
+    title: 'Visual learning', 
+    description: 'Learn best with diagrams, videos, and animations',
+    emoji: '🎥'
+  },
+  { 
+    id: 'flashcards', 
+    title: 'Flashcards', 
+    description: 'Learn by memorizing key facts with flashcards',
+    emoji: '🎯'
+  },
+  { 
+    id: 'past-papers', 
+    title: 'Past papers', 
+    description: 'Learn by practicing full past exam papers',
+    emoji: '📊'
+  },
+];
+
+const PROFILE_EMOJIS = [
+  '😊', '😎', '🤓', '😄', '🥳', '😇', '🤩', '😁', '😀', '🙂',
+  '😌', '🤗', '🥰', '😏', '🤠', '🧐', '🤔', '🤫', '🤪', '😜',
+  '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐶', '🐱', '🐰', '🐸',
+  '🦄', '🐙', '🦉', '🦆', '🐧', '🦋', '🐝', '🦈', '🐬', '🦑',
+  '🎯', '⚡', '✨', '🔥', '💡', '🌟', '💫', '🎨', '🎸', '🎮',
+  '🚀', '🛸', '🌈', '⭐', '🌙', '☀️', '🌺', '🌻', '🍕', '🍔'
+];
+
+const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
+const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
+
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
-  const { subjects: curriculumSubjects } = useCurriculum();
-  
-  const GCSE_SUBJECTS = getSubjectsByLevel('gcse', curriculumSubjects);
-  const ALEVEL_SUBJECTS = getSubjectsByLevel('alevel', curriculumSubjects);
-  const IGCSE_SUBJECTS = getSubjectsByLevel('igcse', curriculumSubjects);
-
-  const ACQUISITION_SOURCES = [
-    { id: 'google', label: 'Google search', emoji: '🔍' },
-    { id: 'social', label: 'TikTok / Instagram / Social media', emoji: '📱' },
-    { id: 'friend', label: 'Friend or classmate', emoji: '👥' },
-    { id: 'parent', label: 'My parent told me', emoji: '👨‍👩‍👧' },
-    { id: 'school', label: 'School or teacher', emoji: '🏫' },
-    { id: 'youtube', label: 'YouTube video', emoji: '🎬' },
-    { id: 'blog', label: 'Blog post or article', emoji: '📰' },
-    { id: 'reddit', label: 'Reddit or online forum', emoji: '💬' },
-    { id: 'ad', label: 'Online ad', emoji: '🌐' },
-    { id: 'other', label: 'Other', emoji: '✍️' },
-  ];
-
-  const YEAR_GROUPS = [
-    { id: 'year10', label: 'Year 10 (GCSE)', emoji: '📚' },
-    { id: 'year11', label: 'Year 11 (GCSE)', emoji: '📚' },
-    { id: 'year12', label: 'Year 12 (A-Level/AS)', emoji: '🎓' },
-    { id: 'year13', label: 'Year 13 (A-Level)', emoji: '🎓' },
-    { id: 'other', label: 'Other (IGCSE, IB, etc.)', emoji: '🌍' },
-  ];
-
-  const STUDY_PREFERENCES = [
-    { 
-      id: 'practice', 
-      title: 'Practice questions', 
-      description: 'Learn by doing lots of exam-style questions',
-      emoji: '📝'
-    },
-    { 
-      id: 'reading', 
-      title: 'Reading explanations', 
-      description: 'Learn by reading detailed notes and explanations',
-      emoji: '📖'
-    },
-    { 
-      id: 'visual', 
-      title: 'Visual learning', 
-      description: 'Learn best with diagrams, videos, and animations',
-      emoji: '🎥'
-    },
-    { 
-      id: 'flashcards', 
-      title: 'Flashcards', 
-      description: 'Learn by memorizing key facts with flashcards',
-      emoji: '🎯'
-    },
-    { 
-      id: 'past-papers', 
-      title: 'Past papers', 
-      description: 'Learn by practicing full past exam papers',
-      emoji: '📊'
-    },
-  ];
-
-  const PROFILE_EMOJIS = [
-    '😊', '😎', '🤓', '😄', '🥳', '😇', '🤩', '😁', '😀', '🙂',
-    '😌', '🤗', '🥰', '😏', '🤠', '🧐', '🤔', '🤫', '🤪', '😜',
-    '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐶', '🐱', '🐰', '🐸',
-    '🦄', '🐙', '🦉', '🦆', '🐧', '🦋', '🐝', '🦈', '🐬', '🦑',
-    '🎯', '⚡', '✨', '🔥', '💡', '🌟', '💫', '🎨', '🎸', '🎮',
-    '🚀', '🛸', '🌈', '⭐', '🌙', '☀️', '🌺', '🌻', '🍕', '🍔'
-  ];
-
-  const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
-  const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
-
   const [currentStep, setCurrentStep] = useState(0);
   const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<string | null>(null);

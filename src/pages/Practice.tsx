@@ -6,9 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCurriculum } from "@/hooks/useCurriculum";
-import { Question } from "@/data/curriculum/types";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
+import { curriculum, Question } from "@/data/curriculum";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, Mic, StopCircle, Volume2, Sparkles, Bot } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -71,7 +70,6 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const { subjects, getSubject, getTopic, isLoading: curriculumLoading } = useCurriculum();
   const [showPricingModal, setShowPricingModal] = useState(false);
   
   // Subject colors mapping
@@ -100,7 +98,7 @@ const Practice = () => {
   // Debug logging at component entry
   console.log('=== Practice Component Rendered ===');
   console.log('URL params:', { subjectId, topicId });
-  console.log('Available subjects:', subjects.map(s => ({ id: s.id, name: s.name })));
+  console.log('Available subjects:', curriculum.map(s => ({ id: s.id, name: s.name })));
   
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -162,6 +160,18 @@ const Practice = () => {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatStage, setChatStage] = useState<'intro' | 'guiding' | 'struggling' | 'answer_check' | 'final'>('intro');
   const [hintCount, setHintCount] = useState(0);
+  
+  // Teach Mentiora Mode states
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcription, setTranscription] = useState("");
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [isFeedbackLoading, setIsFeedbackLoading] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackAudio, setFeedbackAudio] = useState<HTMLAudioElement | null>(null);
+  const [isPlayingFeedback, setIsPlayingFeedback] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
   const [actualPredictedGrade, setActualPredictedGrade] = useState<number | null>(null);
@@ -181,19 +191,7 @@ const Practice = () => {
 
   const { showMPReward } = useMPRewards();
 
-  // Show loading state while curriculum data is loading
-  if (curriculumLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Loading questions...</p>
-        </div>
-      </div>
-    );
-  }
-
-  const subject = getSubject(subjectId || "");
+  const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
@@ -621,8 +619,205 @@ const Practice = () => {
       setChatMessages([]);
       setHintCount(0);
       setChatStage('intro');
+      // Reset Teach Mentiora Mode states
+      setTranscription("");
+      setFeedbackText("");
+      if (feedbackAudio) {
+        feedbackAudio.pause();
+        setFeedbackAudio(null);
+      }
+      setIsPlayingFeedback(false);
+      setIsRecording(false);
+      setIsTranscribing(false);
+      setIsFeedbackLoading(false);
     } else {
       await finishSession();
+    }
+  };
+
+  // Teach Mentiora Mode functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        await transcribeAudio(audioBlob);
+        
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+      toast.success("Recording started! Speak clearly...");
+    } catch (error) {
+      console.error('Error starting recording:', error);
+      toast.error("Failed to access microphone. Please check permissions.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      setIsTranscribing(true);
+    }
+  };
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    try {
+      // Convert blob to base64
+      const reader = new FileReader();
+      reader.readAsDataURL(audioBlob);
+      
+      reader.onloadend = async () => {
+        const base64Audio = (reader.result as string).split(',')[1];
+        
+        const { data, error } = await supabase.functions.invoke('transcribe-speech', {
+          body: { audio: base64Audio }
+        });
+
+        if (error) throw error;
+
+        setTranscription(data.text);
+        toast.success("Transcription complete!");
+      };
+    } catch (error) {
+      console.error('Error transcribing audio:', error);
+      toast.error("Failed to transcribe audio. Please try again.");
+    } finally {
+      setIsTranscribing(false);
+    }
+  };
+
+  const submitExplanation = async () => {
+    if (!transcription.trim()) {
+      toast.error("Please record your explanation first");
+      return;
+    }
+
+    setIsFeedbackLoading(true);
+    try {
+      console.log('Calling teach-mentiora-feedback with:', {
+        transcription: transcription.substring(0, 100) + '...',
+        question: currentQuestion.question.substring(0, 100) + '...',
+        subject: subject?.name
+      });
+
+      const { data, error } = await supabase.functions.invoke('teach-mentiora-feedback', {
+        body: {
+          transcription,
+          question: currentQuestion.question,
+          modelAnswer: currentQuestion.modelAnswer,
+          subject: subject?.name || ""
+        }
+      });
+
+      console.log('Edge function response:', { hasData: !!data, error });
+
+      if (error) {
+        console.error('Edge function error details:', error);
+        throw error;
+      }
+
+      if (!data || !data.feedbackText || !data.audioContent) {
+        console.error('Invalid response from edge function:', data);
+        throw new Error('Invalid response from AI teacher');
+      }
+
+      setFeedbackText(data.feedbackText);
+      
+      // Convert base64 to blob and create object URL for better audio support
+      const base64Data = data.audioContent;
+      const binaryString = atob(base64Data);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const audioBlob = new Blob([bytes], { type: 'audio/mpeg' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      
+      console.log('Audio blob created:', {
+        blobSize: audioBlob.size,
+        blobType: audioBlob.type,
+        urlCreated: !!audioUrl
+      });
+      
+      const audio = new Audio(audioUrl);
+      audio.volume = 1.0;
+      
+      console.log('Audio element created, setting up playback...');
+      
+      audio.onloadeddata = () => {
+        console.log('Audio data loaded, duration:', audio.duration);
+      };
+      
+      audio.onended = () => {
+        console.log('Audio playback ended');
+        URL.revokeObjectURL(audioUrl); // Clean up
+        setIsPlayingFeedback(false);
+      };
+      
+      audio.onerror = (e) => {
+        console.error('Audio playback error:', e, audio.error);
+        URL.revokeObjectURL(audioUrl); // Clean up
+        toast.error("Failed to play audio feedback");
+        setIsPlayingFeedback(false);
+      };
+      
+      audio.onplay = () => {
+        console.log('Audio started playing');
+      };
+      
+      setFeedbackAudio(audio);
+      setIsPlayingFeedback(true);
+      
+      // Play immediately
+      console.log('Attempting to play audio...');
+      audio.play().then(() => {
+        console.log('Audio play promise resolved successfully');
+        toast.success("🎧 AI Teacher Feedback Playing!");
+      }).catch(err => {
+        console.error('Play promise rejected:', err);
+        URL.revokeObjectURL(audioUrl); // Clean up
+        toast.error(`Failed to play audio: ${err.message}`);
+        setIsPlayingFeedback(false);
+      });
+    } catch (error) {
+      console.error('Error getting feedback:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      toast.error(`Failed to get feedback: ${errorMessage}`);
+    } finally {
+      setIsFeedbackLoading(false);
+    }
+  };
+
+  const retryExplanation = () => {
+    setTranscription("");
+    setFeedbackText("");
+    if (feedbackAudio) {
+      feedbackAudio.pause();
+      setFeedbackAudio(null);
+    }
+    setIsPlayingFeedback(false);
+  };
+
+  const playFeedbackAgain = () => {
+    if (feedbackAudio) {
+      feedbackAudio.currentTime = 0;
+      feedbackAudio.play();
+      setIsPlayingFeedback(true);
     }
   };
 
@@ -794,7 +989,7 @@ const Practice = () => {
     let fetchedPredictedGrade: number | null = null;
     if (user?.id && subjectId) {
       try {
-        const subject = getSubject(subjectId);
+        const subject = curriculum.find(s => s.id === subjectId);
         const subjectName = subject?.name || '';
         
         console.log('🔍 Fetching predicted grade for:', { subjectId, subjectName, userId: user.id });
@@ -845,8 +1040,8 @@ const Practice = () => {
     // Update subject_performance table in Supabase
     if (user?.id && subjectId) {
       try {
-        const subject = getSubject(subjectId);
-        const examBoard = subjectId.includes('aqa') ? 'AQA' :
+        const subject = curriculum.find(s => s.id === subjectId);
+        const examBoard = subjectId.includes('aqa') ? 'AQA' : 
                          subjectId.includes('edexcel') ? 'Edexcel' : 
                          subjectId.includes('ocr') ? 'OCR' : 'AQA';
         
@@ -2088,6 +2283,135 @@ const Practice = () => {
                   <div className="bg-muted rounded-[20px] p-4 text-sm text-foreground font-medium">
                     Let&apos;s go through it together.
                   </div>
+                  
+                  {/* Teach Mentiora Mode - Only show if answer was incorrect */}
+                  {currentAttempt.score < currentQuestion.marks && (
+                    <div className="mt-4 p-4 rounded-lg border-2 border-primary/20" style={{ background: 'var(--gradient-accent)' }}>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <Sparkles className="h-4 w-4 text-white animate-pulse" />
+                          <h3 className="text-sm font-semibold text-white">Teach Mentiora What You Understand</h3>
+                          <Badge variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
+                            BETA
+                          </Badge>
+                        </div>
+                      </div>
+                      
+                      <p className="text-xs text-white/90 mb-3">
+                        Explain the topic back to me verbally. I'll analyze your understanding and give you targeted feedback!
+                      </p>
+
+                      {/* Recording Controls */}
+                      {!transcription && !feedbackText && (
+                        <div className="space-y-3">
+                          <Button
+                            onClick={isRecording ? stopRecording : startRecording}
+                            disabled={isTranscribing}
+                            className={`w-full shadow-lg text-white transition-all duration-200 ${
+                              isRecording ? 'animate-pulse' : ''
+                            }`}
+                            style={{ background: isRecording ? 'hsl(0 84% 60%)' : 'var(--gradient-primary)' }}
+                          >
+                            {isRecording ? (
+                              <>
+                                <StopCircle className="h-4 w-4 mr-2" />
+                                Stop Recording
+                              </>
+                            ) : isTranscribing ? (
+                              <>Processing...</>
+                            ) : (
+                              <>
+                                <Mic className="h-4 w-4 mr-2" />
+                                Start Recording
+                              </>
+                            )}
+                          </Button>
+                          
+                          {isRecording && (
+                            <div className="text-xs text-white text-center animate-pulse">
+                              🎤 Recording... Speak clearly about the topic
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Transcription Display */}
+                      {transcription && !feedbackText && (
+                        <div className="space-y-3">
+                          <div className="p-3 rounded-lg bg-white/10 border border-white/20">
+                            <p className="text-xs font-medium text-white mb-2">Your Explanation:</p>
+                            <p className="text-xs text-white/90">{transcription}</p>
+                          </div>
+                          
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={submitExplanation}
+                              disabled={isFeedbackLoading}
+                              className="flex-1 shadow-lg text-white"
+                              style={{ background: 'var(--gradient-primary)' }}
+                            >
+                              {isFeedbackLoading ? (
+                                <>Analyzing...</>
+                              ) : (
+                                <>
+                                  <Volume2 className="h-4 w-4 mr-2" />
+                                  Get Feedback
+                                </>
+                              )}
+                            </Button>
+                            
+                            <Button
+                              onClick={retryExplanation}
+                              variant="outline"
+                              className="text-white border-white/30 hover:bg-white/20"
+                            >
+                              <RotateCcw className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Feedback Display */}
+                      {feedbackText && (
+                        <div className="space-y-3">
+                          <div className="p-3 rounded-lg bg-white/10 border border-white/20 max-h-48 overflow-y-auto">
+                            <p className="text-xs font-medium text-white mb-2 flex items-center gap-2">
+                              <Bot className="h-4 w-4" />
+                              Mentiora's Feedback:
+                            </p>
+                            <div className="text-xs text-white/90 whitespace-pre-wrap">{feedbackText}</div>
+                          </div>
+                          
+                          {isPlayingFeedback && (
+                            <div className="text-xs text-white text-center flex items-center justify-center gap-2 animate-pulse">
+                              <Volume2 className="h-4 w-4" />
+                              Playing feedback...
+                            </div>
+                          )}
+                          
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={playFeedbackAgain}
+                              disabled={isPlayingFeedback}
+                              variant="outline"
+                              className="flex-1 text-white border-white/30 hover:bg-white/20"
+                            >
+                              <Volume2 className="h-4 w-4 mr-2" />
+                              Replay
+                            </Button>
+                            
+                            <Button
+                              onClick={retryExplanation}
+                              className="flex-1 shadow-lg text-white"
+                              style={{ background: 'var(--gradient-primary)' }}
+                            >
+                              Try Again
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="flex flex-col h-full">
