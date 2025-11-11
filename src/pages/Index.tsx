@@ -1379,7 +1379,7 @@ const Index = () => {
       {/* VALUE CALCULATOR SECTION */}
       <section id="pricing" className="py-20 px-6 relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
         
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-4xl mx-auto relative z-10">
           {/* Section Header */}
           <motion.div
             initial="hidden"
@@ -1402,10 +1402,10 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-lg"
+            className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg"
           >
             {/* Large Animated Savings Display */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <div className="text-gray-500 text-sm uppercase tracking-wider mb-3">
                 Total Savings
               </div>
@@ -1414,7 +1414,7 @@ const Index = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent"
+                className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
               >
                 £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </motion.div>
@@ -1424,7 +1424,7 @@ const Index = () => {
             </div>
 
             {/* Interactive Slider */}
-            <div className="mb-16 px-4">
+            <div className="mb-10 px-4">
               <div className="flex items-center justify-between mb-4">
                 <label className="text-black font-semibold text-lg">
                   How many months will you study?
@@ -1508,9 +1508,9 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="bg-green-50 border border-green-200 rounded-xl p-6"
+                className="bg-blue-50 border border-blue-200 rounded-xl p-6"
               >
-                <div className="text-green-600 text-sm font-semibold mb-2">
+                <div className="text-blue-600 text-sm font-semibold mb-2">
                   You Save
                 </div>
                 <motion.div
