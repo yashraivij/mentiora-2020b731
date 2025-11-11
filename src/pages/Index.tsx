@@ -26,55 +26,24 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
-import { supabase } from "@/integrations/supabase/client";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
 import birminghamLogo from "@/assets/birmingham-logo.png";
 import oxfordLogo from "@/assets/oxford-logo.png";
 import bathLogo from "@/assets/bath-logo.png";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-
-interface Subject {
-  id: string;
-  name: string;
-  exam_board: string | null;
-}
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [userAnswer, setUserAnswer] = useState("");
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [selectedExamBoard, setSelectedExamBoard] = useState<string | null>(null);
-  const [selectedQualificationLevel, setSelectedQualificationLevel] = useState<string | null>(null);
-
-  // Fetch subjects from Supabase
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('curriculum_subjects')
-          .select('id, name, exam_board');
-        
-        if (error) throw error;
-        setSubjects(data || []);
-      } catch (error) {
-        console.error('Error fetching subjects:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSubjects();
-  }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -805,212 +774,52 @@ const Index = () => {
               <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Exam Boards We Support</h3>
               <div className="flex flex-wrap justify-center gap-4">
                 {[
-                  { name: "AQA", levels: ["GCSE", "A-Level"] },
-                  { name: "Edexcel", levels: ["GCSE", "IGCSE"] },
-                  { name: "OCR", levels: ["GCSE"] }
+                  { name: "AQA", level: "GCSE & A-Level" },
+                  { name: "Edexcel", level: "GCSE & IGCSE" },
+                  { name: "OCR", level: "GCSE" }
                 ].map((board, i) => (
                   <motion.div
                     key={i}
                     whileHover={{ scale: 1.05 }}
-                    onClick={() => {
-                      setSelectedExamBoard(selectedExamBoard === board.name ? null : board.name);
-                      setSelectedQualificationLevel(null);
-                    }}
-                    className={`bg-gradient-to-br from-white to-gray-50 border-2 rounded-xl px-6 py-4 hover:shadow-lg transition-all duration-300 cursor-pointer ${
-                      selectedExamBoard === board.name 
-                        ? 'border-[#3B82F6] bg-blue-50 shadow-lg' 
-                        : 'border-gray-200 hover:border-[#3B82F6]'
-                    }`}
+                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#3B82F6] hover:shadow-lg transition-all duration-300 cursor-pointer"
                   >
                     <div className="text-xl font-bold text-black mb-1">{board.name}</div>
-                    <div className="text-xs text-gray-500">{board.levels.join(" & ")}</div>
+                    <div className="text-xs text-gray-500">{board.level}</div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Qualification Level Filter */}
-            {selectedExamBoard && (
-              <motion.div 
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-8"
-              >
-                <div className="flex flex-wrap justify-center gap-3">
-                  {(() => {
-                    const boardConfig = {
-                      "AQA": ["A-Level", "GCSE"],
-                      "Edexcel": ["GCSE", "IGCSE"],
-                      "OCR": ["GCSE"]
-                    };
-                    const levels = boardConfig[selectedExamBoard as keyof typeof boardConfig] || [];
-                    
-                    return levels.map((level) => (
-                      <button
-                        key={level}
-                        onClick={() => setSelectedQualificationLevel(selectedQualificationLevel === level ? null : level)}
-                        className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                          selectedQualificationLevel === level
-                            ? 'bg-[#3B82F6] text-white shadow-md'
-                            : 'bg-white text-gray-700 border border-gray-300 hover:border-[#3B82F6] hover:text-[#3B82F6]'
-                        }`}
-                      >
-                        {level}
-                      </button>
-                    ));
-                  })()}
-                  <button
-                    onClick={() => {
-                      setSelectedExamBoard(null);
-                      setSelectedQualificationLevel(null);
-                    }}
-                    className="px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-300"
-                  >
-                    Clear Filters
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
             {/* Subjects */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">
-                {selectedExamBoard || selectedQualificationLevel ? 'Filtered Subjects' : 'Subjects Available'}
-              </h3>
-              
-              {isLoading ? (
-                <div className="text-center py-12">
-                  <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#3B82F6] border-r-transparent"></div>
-                  <p className="mt-4 text-gray-600">Loading subjects...</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {(() => {
-                    const subjectEmojiMap: Record<string, string> = {
-                      "biology": "🧬",
-                      "chemistry": "🧪",
-                      "physics": "⚛️",
-                      "maths": "📐",
-                      "mathematics": "📐",
-                      "english": "📖",
-                      "english language": "📖",
-                      "english literature": "📚",
-                      "computer science": "💻",
-                      "computer": "💻",
-                      "geography": "🌍",
-                      "history": "🏛️",
-                      "psychology": "🧠",
-                      "business": "💼",
-                      "religious studies": "⛪",
-                      "religious": "⛪",
-                      "combined science": "🔬",
-                      "spanish": "🇪🇸",
-                      "music": "🎵",
-                      "statistics": "📊"
-                    };
-
-                    const parseSubjectId = (id: string) => {
-                      const parts = id.split('-');
-                      const subjectName = parts[0];
-                      
-                      let board = null;
-                      let level = null;
-                      
-                      // Check for board names anywhere in the ID
-                      if (id.toLowerCase().includes('aqa')) board = 'AQA';
-                      else if (id.toLowerCase().includes('edexcel')) board = 'Edexcel';
-                      else if (id.toLowerCase().includes('ocr')) board = 'OCR';
-                      else if (id.toLowerCase().includes('eduqas')) board = 'Eduqas';
-                      
-                      // Check for levels
-                      if (id.toLowerCase().includes('alevel')) level = 'A-Level';
-                      else if (id.toLowerCase().includes('igcse')) level = 'IGCSE';
-                      else if (id.toLowerCase().includes('gcse')) level = 'GCSE';
-                      
-                      return { subjectName, board, level };
-                    };
-
-                    const filteredSubjects = subjects.filter(subject => {
-                      const { board, level } = parseSubjectId(subject.id);
-                      
-                      // If exam board filter is active, only keep subjects that:
-                      // - Have a matching board, OR
-                      // - Have no board specified (show generic subjects in all boards)
-                      if (selectedExamBoard) {
-                        if (board && board !== selectedExamBoard) {
-                          return false;
-                        }
-                      }
-                      
-                      // If level filter is active, only keep subjects that:
-                      // - Have a matching level, OR
-                      // - Have no level specified (show generic subjects in all levels)
-                      if (selectedQualificationLevel) {
-                        if (level && level !== selectedQualificationLevel) {
-                          return false;
-                        }
-                      }
-                      
-                      return true;
-                    });
-
-                    const uniqueSubjects = Array.from(
-                      new Map(
-                        filteredSubjects.map(subject => {
-                          // Use the actual name for deduplication, removing board/level suffixes
-                          const cleanName = subject.name
-                            .replace(/\s*\(.*?\)\s*/g, '') // Remove "(AQA)", "(Edexcel)", etc.
-                            .trim()
-                            .toLowerCase();
-                          return [cleanName, subject];
-                        })
-                      ).values()
-                    );
-
-                    if (uniqueSubjects.length === 0) {
-                      return (
-                        <div className="col-span-full text-center py-12">
-                          <p className="text-gray-500 mb-4">No subjects available for this combination</p>
-                          <button
-                            onClick={() => {
-                              setSelectedExamBoard(null);
-                              setSelectedQualificationLevel(null);
-                            }}
-                            className="text-[#3B82F6] hover:underline"
-                          >
-                            Clear filters to see all subjects
-                          </button>
-                        </div>
-                      );
-                    }
-
-                    return uniqueSubjects.map((subject, i) => {
-                      const { subjectName } = parseSubjectId(subject.id);
-                      const cleanSubjectName = subject.name
-                        .replace(/\s*\(.*?\)\s*/g, '')
-                        .trim()
-                        .toLowerCase();
-                      const emoji = subjectEmojiMap[cleanSubjectName] || 
-                                    subjectEmojiMap[subjectName.toLowerCase()] || 
-                                    "📚";
-                      
-                      return (
-                        <motion.div
-                          key={subject.id}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.05 }}
-                          whileHover={{ scale: 1.05 }}
-                          className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#3B82F6] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
-                        >
-                          <div className="text-3xl mb-2">{emoji}</div>
-                          <div className="text-xs font-medium text-gray-900 capitalize">{subject.name}</div>
-                        </motion.div>
-                      );
-                    });
-                  })()}
-                </div>
-              )}
+              <h3 className="text-lg font-semibold text-gray-700 text-center mb-6">Subjects Available</h3>
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {[
+                  { name: "Biology", emoji: "🧬" },
+                  { name: "Chemistry", emoji: "🧪" },
+                  { name: "Physics", emoji: "🧲" },
+                  { name: "Maths", emoji: "📐" },
+                  { name: "English Language", emoji: "✍️" },
+                  { name: "English Literature", emoji: "📖" },
+                  { name: "Computer Science", emoji: "💻" },
+                  { name: "Geography", emoji: "🌍" },
+                  { name: "History", emoji: "⏳" },
+                  { name: "Psychology", emoji: "🧠" },
+                  { name: "Business", emoji: "💼" },
+                  { name: "Religious Studies", emoji: "⛪" },
+                  { name: "Combined Science", emoji: "🔬" },
+                  { name: "Spanish", emoji: "🇪🇸" }
+                ].map((subject, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#3B82F6] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
+                  >
+                    <div className="text-3xl mb-2">{subject.emoji}</div>
+                    <div className="text-xs font-medium text-gray-900">{subject.name}</div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
