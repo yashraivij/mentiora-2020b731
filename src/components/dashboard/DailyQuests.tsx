@@ -131,7 +131,7 @@ export function DailyQuests({ userId }: DailyQuestsProps) {
 
   if (isLoading) {
     return (
-      <div className="rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
+      <div className="rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20">
         <div className="animate-pulse space-y-4">
           <div className="h-6 w-32 bg-muted rounded" />
           <div className="h-4 w-48 bg-muted rounded" />
@@ -149,11 +149,11 @@ export function DailyQuests({ userId }: DailyQuestsProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
+      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20"
     >
       {/* Animated background */}
       <motion.div 
-        className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
+        className="absolute top-0 right-0 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -172,7 +172,7 @@ export function DailyQuests({ userId }: DailyQuestsProps) {
             <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white">
               Daily Quests
             </h2>
-            <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0 text-sm font-semibold">
+            <Badge className="bg-[#3B82F6]/10 text-[#3B82F6] border-0 text-sm font-semibold">
               {completedCount}/{quests.length} Complete
             </Badge>
           </div>
@@ -197,7 +197,7 @@ export function DailyQuests({ userId }: DailyQuestsProps) {
                     "relative p-5 rounded-2xl border transition-all duration-300",
                     quest.completed
                       ? "bg-gradient-to-r from-[#16A34A]/10 via-[#16A34A]/5 to-transparent border-[#16A34A]/20 dark:border-[#16A34A]/30"
-                      : "bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 hover:shadow-md hover:shadow-[#0EA5E9]/10"
+                      : "bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-[#3B82F6]/20 dark:border-[#3B82F6]/30 hover:shadow-md hover:shadow-[#3B82F6]/10"
                   )}
                 >
                   <div className="flex items-start gap-4">
@@ -206,7 +206,7 @@ export function DailyQuests({ userId }: DailyQuestsProps) {
                       "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all",
                       quest.completed
                         ? "bg-[#16A34A] text-white shadow-md shadow-[#16A34A]/30"
-                        : "bg-[#0EA5E9]/10 text-[#0EA5E9]"
+                        : "bg-[#3B82F6]/10 text-[#3B82F6]"
                     )}>
                       {quest.completed ? (
                         <Check className="h-5 w-5" />

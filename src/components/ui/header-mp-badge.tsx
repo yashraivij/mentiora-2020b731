@@ -119,7 +119,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                 data-mp-counter
                 className="
                   relative flex items-center gap-2 px-3 py-1.5 rounded-full
-                  bg-[hsl(195,69%,54%)]/10 backdrop-blur-md border border-[hsl(195,69%,54%)]/30
+                  bg-[hsl(217,91%,60%)]/10 backdrop-blur-md border border-[hsl(217,91%,60%)]/30
                   shadow-sm hover:shadow-md transition-all duration-300
                   cursor-default group
                 "
@@ -128,7 +128,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                 <motion.div
                   className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
-                    boxShadow: '0 0 20px hsl(195 69% 54% / 0.3), inset 0 0 10px hsl(195 69% 54% / 0.2)'
+                    boxShadow: '0 0 20px hsl(217 91% 60% / 0.3), inset 0 0 10px hsl(217 91% 60% / 0.2)'
                   }}
                 />
 
@@ -148,7 +148,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                 </motion.span>
 
                 {/* MP Count */}
-                <span className="relative z-10 text-sm font-semibold text-[hsl(195,69%,54%)] whitespace-nowrap">
+                <span className="relative z-10 text-sm font-semibold text-[hsl(217,91%,60%)] whitespace-nowrap">
                   {isMobile ? `${mpPoints}` : `${mpPoints} MP`}
                 </span>
 
@@ -156,7 +156,7 @@ export function HeaderMPBadge({ isVisible }: HeaderMPBadgeProps) {
                 <motion.div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: 'radial-gradient(circle, hsl(195 69% 54% / 0.2) 0%, transparent 70%)'
+                    background: 'radial-gradient(circle, hsl(217 91% 60% / 0.2) 0%, transparent 70%)'
                   }}
                   animate={{
                     opacity: [0.3, 0.5, 0.3],

@@ -380,7 +380,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           <div className="mb-6 flex-shrink-0">
             <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-2">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#00B4D8] to-[#0BA5E9]"
+                className="h-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]"
                 initial={{ width: 0 }}
                 animate={{ width: `${getProgressPercentage()}%` }}
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
@@ -409,7 +409,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <p className="text-[18px] text-[#6B7280] mb-10">Let's personalize your learning in under a minute</p>
                 <button
                   onClick={() => setCurrentStep(1)}
-                  className="w-full bg-[#00B4D8] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+                  className="w-full bg-[#3B82F6] text-white font-semibold text-[16px] py-[18px] px-12 rounded-[12px] hover:bg-[#2563eb] transition-all shadow-[0px_4px_16px_rgba(59,130,246,0.3)] hover:translate-y-[-2px]"
                 >
                   Let's go →
                 </button>
@@ -431,8 +431,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       onClick={() => setOnboardingData({ ...onboardingData, selectedTutor: tutor.id })}
                       className={`relative p-4 rounded-xl border-2 transition-all ${
                         onboardingData.selectedTutor === tutor.id
-                          ? 'border-[#00B4D8] bg-[#F0F9FF] scale-[1.02]'
-                          : 'border-[#E5E7EB] hover:border-[#00B4D8] hover:shadow-lg'
+                          ? 'border-[#3B82F6] bg-[#F0F9FF] scale-[1.02]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6] hover:shadow-lg'
                       }`}
                     >
                       {/* Avatar */}
@@ -447,11 +447,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <p className="text-xs text-[#6B7280] text-center line-clamp-3 mb-1">{tutor.personality}</p>
                       
                       {/* Specialty */}
-                      <p className="text-[10px] text-[#00B4D8] text-center font-medium">{tutor.specialty}</p>
+                      <p className="text-[10px] text-[#3B82F6] text-center font-medium">{tutor.specialty}</p>
                       
                       {/* Selected indicator */}
                       {onboardingData.selectedTutor === tutor.id && (
-                        <div className="absolute top-2 right-2 w-5 h-5 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                        <div className="absolute top-2 right-2 w-5 h-5 bg-[#3B82F6] rounded-full flex items-center justify-center">
                           <Check className="w-3 h-3 text-white" />
                         </div>
                       )}
@@ -473,8 +473,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       onClick={() => setOnboardingData({ ...onboardingData, acquisitionSource: source.id })}
                       className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
                         onboardingData.acquisitionSource === source.id
-                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -482,7 +482,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <span className="text-[15px] font-medium">{source.label}</span>
                       </div>
                       {onboardingData.acquisitionSource === source.id && (
-                        <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                        <Check className="w-[20px] h-[20px] text-[#3B82F6]" />
                       )}
                     </button>
                   ))}
@@ -493,7 +493,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     placeholder="Please specify..."
                     value={onboardingData.acquisitionSourceOther || ''}
                     onChange={(e) => setOnboardingData({ ...onboardingData, acquisitionSourceOther: e.target.value })}
-                    className="w-full px-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                    className="w-full px-4 py-3 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#3B82F6]"
                   />
                 )}
               </div>
@@ -511,8 +511,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       onClick={() => setOnboardingData({ ...onboardingData, yearGroup: year.id })}
                       className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
                         onboardingData.yearGroup === year.id
-                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -520,7 +520,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <span className="text-[15px] font-medium">{year.label}</span>
                       </div>
                       {onboardingData.yearGroup === year.id && (
-                        <Check className="w-[20px] h-[20px] text-[#00B4D8]" />
+                        <Check className="w-[20px] h-[20px] text-[#3B82F6]" />
                       )}
                     </button>
                   ))}
@@ -540,7 +540,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={() => setSubjectLevel('gcse')}
                     className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
                       subjectLevel === 'gcse'
-                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        ? 'bg-[#3B82F6] text-white shadow-md'
                         : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
                     }`}
                   >
@@ -550,7 +550,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={() => setSubjectLevel('alevel')}
                     className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
                       subjectLevel === 'alevel'
-                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        ? 'bg-[#3B82F6] text-white shadow-md'
                         : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
                     }`}
                   >
@@ -560,7 +560,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={() => setSubjectLevel('igcse')}
                     className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
                       subjectLevel === 'igcse'
-                        ? 'bg-[#00B4D8] text-white shadow-md'
+                        ? 'bg-[#3B82F6] text-white shadow-md'
                         : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
                     }`}
                   >
@@ -575,7 +575,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     placeholder="Search subjects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-11 pr-4 py-2.5 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8] text-[14px]"
+                    className="w-full pl-11 pr-4 py-2.5 border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#3B82F6] text-[14px]"
                   />
                   <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[18px]">🔍</span>
                 </div>
@@ -603,8 +603,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             }}
                             className={`w-full flex items-center justify-between p-2.5 rounded-[10px] border-2 transition-all duration-200 ${
                               isSelected
-                                ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                                : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                                ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                                : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                             }`}
                           >
                             <div className="flex items-center gap-2.5">
@@ -618,7 +618,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               </div>
                             </div>
                             {isSelected && (
-                              <Check className="w-[16px] h-[16px] text-[#00B4D8] flex-shrink-0" />
+                              <Check className="w-[16px] h-[16px] text-[#3B82F6] flex-shrink-0" />
                             )}
                           </button>
                           
@@ -641,7 +641,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                       setOnboardingData({ ...onboardingData, subjects: newSubjects });
                                       setSelectedSubjectForGrade(null);
                                     }}
-                                    className="px-3 py-1.5 text-[13px] font-semibold rounded-md border-2 border-[#E5E7EB] hover:border-[#00B4D8] hover:bg-[#F0F9FF] transition-all"
+                                    className="px-3 py-1.5 text-[13px] font-semibold rounded-md border-2 border-[#E5E7EB] hover:border-[#3B82F6] hover:bg-[#F0F9FF] transition-all"
                                   >
                                     {grade}
                                   </button>
@@ -656,7 +656,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 {onboardingData.subjects.length > 0 && (
-                  <p className="text-[13px] text-[#00B4D8] font-semibold text-center mb-2">
+                  <p className="text-[13px] text-[#3B82F6] font-semibold text-center mb-2">
                     {onboardingData.subjects.length} subject{onboardingData.subjects.length !== 1 ? 's' : ''} selected
                   </p>
                 )}
@@ -680,8 +680,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       }}
                       className={`w-full flex items-start justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                         onboardingData.studyPreferences.includes(pref.id)
-                          ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                          : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                       }`}
                     >
                       <div className="flex items-start gap-2.5 text-left">
@@ -692,7 +692,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         </div>
                       </div>
                       {onboardingData.studyPreferences.includes(pref.id) && (
-                        <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0 mt-1" />
+                        <Check className="w-[18px] h-[18px] text-[#3B82F6] flex-shrink-0 mt-1" />
                       )}
                     </button>
                   ))}
@@ -711,8 +711,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: true })}
                     className={`w-full flex items-center justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                       onboardingData.parentUpdates
-                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                        : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                        ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -720,7 +720,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <span className="text-[14px] font-medium">Yes, send weekly updates</span>
                     </div>
                     {onboardingData.parentUpdates && (
-                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                      <Check className="w-[18px] h-[18px] text-[#3B82F6]" />
                     )}
                   </button>
 
@@ -728,8 +728,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={() => setOnboardingData({ ...onboardingData, parentUpdates: false, parentEmail: null })}
                     className={`w-full flex items-center justify-between p-3 rounded-[12px] border-2 transition-all duration-200 ${
                       !onboardingData.parentUpdates
-                        ? 'border-[#00B4D8] bg-[#F0F9FF]'
-                        : 'border-[#E5E7EB] hover:border-[#00B4D8]'
+                        ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                        : 'border-[#E5E7EB] hover:border-[#3B82F6]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -737,7 +737,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <span className="text-[14px] font-medium">No thanks, just me</span>
                     </div>
                     {!onboardingData.parentUpdates && (
-                      <Check className="w-[18px] h-[18px] text-[#00B4D8]" />
+                      <Check className="w-[18px] h-[18px] text-[#3B82F6]" />
                     )}
                   </button>
                 </div>
@@ -752,7 +752,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       placeholder="parent@example.com"
                       value={onboardingData.parentEmail || ''}
                       onChange={(e) => setOnboardingData({ ...onboardingData, parentEmail: e.target.value })}
-                      className="w-full px-4 py-2.5 text-[14px] border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#00B4D8]"
+                      className="w-full px-4 py-2.5 text-[14px] border border-[#D1D5DB] rounded-[10px] focus:outline-none focus:border-[#3B82F6]"
                     />
                     {onboardingData.parentEmail && !isValidEmail(onboardingData.parentEmail) && (
                       <p className="text-[12px] text-red-500 mt-1.5">Please enter a valid email address</p>
@@ -774,7 +774,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <div className="w-20 h-20 mx-auto mb-6 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#3B82F6] rounded-full flex items-center justify-center">
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -794,7 +794,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <div className="w-20 h-20 mx-auto mb-6 bg-[#00B4D8] rounded-full flex items-center justify-center">
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#3B82F6] rounded-full flex items-center justify-center">
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
@@ -827,7 +827,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <p className="text-[16px] text-[#6B7280] mb-8">Let's start your learning journey</p>
                       <button
                         onClick={handleFinish}
-                        className="bg-[#00B4D8] text-white font-semibold text-[16px] py-[16px] px-12 rounded-[12px] hover:bg-[#0099b8] transition-all shadow-[0px_4px_16px_rgba(0,180,216,0.3)] hover:translate-y-[-2px]"
+                        className="bg-[#3B82F6] text-white font-semibold text-[16px] py-[16px] px-12 rounded-[12px] hover:bg-[#2563eb] transition-all shadow-[0px_4px_16px_rgba(59,130,246,0.3)] hover:translate-y-[-2px]"
                       >
                         Go to Dashboard →
                       </button>
@@ -858,7 +858,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               disabled={!canContinue()}
               className={`px-8 py-3 rounded-[10px] font-semibold text-[14px] transition-all duration-200 ${
                 canContinue()
-                  ? 'bg-[#00B4D8] text-white hover:bg-[#0099b8] hover:shadow-md hover:-translate-y-0.5'
+                  ? 'bg-[#3B82F6] text-white hover:bg-[#2563eb] hover:shadow-md hover:-translate-y-0.5'
                   : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
               }`}
             >

@@ -123,7 +123,7 @@ export const FlashcardInsights = ({
             onClick={() => setShowLibrary(false)}
             variant="outline"
             size="sm"
-            className="border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 font-bold rounded-xl"
+            className="border-2 border-[#3B82F6] text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 font-bold rounded-xl"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Insights
@@ -133,7 +133,7 @@ export const FlashcardInsights = ({
         {filteredFlashcardSets.length === 0 ? (
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardContent className="text-center py-12">
-              <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
+              <Brain className="h-12 w-12 mx-auto mb-4 text-[#3B82F6] opacity-50" />
               <p className="text-sm text-muted-foreground">No flashcards yet. Create some to get started!</p>
             </CardContent>
           </Card>
@@ -191,7 +191,7 @@ export const FlashcardInsights = ({
                               setRenamingSetId(set.id);
                               setNewSetName(set.title);
                             }}
-                            className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
+                            className="h-7 w-7 p-0 text-[#64748B] hover:text-[#3B82F6] hover:bg-[#3B82F6]/10 transition-colors"
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
@@ -224,7 +224,7 @@ export const FlashcardInsights = ({
                       </div>
                     )}
                     <div className="flex items-center gap-3">
-                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                      <Badge className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
                         {set.flashcards?.length || 0} cards
                       </Badge>
                       <span className="text-xs text-[#64748B] dark:text-gray-400">
@@ -238,7 +238,7 @@ export const FlashcardInsights = ({
                         setSelectedSet(set);
                         setViewMode("flashcards");
                       }}
-                      className="flex-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                      className="flex-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
                     >
                       <Eye className="h-4 w-4 mr-2" />
                       Review
@@ -249,7 +249,7 @@ export const FlashcardInsights = ({
                         setViewMode("learn");
                       }}
                       variant="outline"
-                      className="flex-1 border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 font-bold rounded-xl"
+                      className="flex-1 border-2 border-[#3B82F6] text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 font-bold rounded-xl"
                     >
                       <Play className="h-4 w-4 mr-2" />
                       Study
@@ -317,19 +317,19 @@ export const FlashcardInsights = ({
       <TabsList className="grid w-full grid-cols-3 mb-4 bg-white dark:bg-gray-900 border border-[#E2E8F0]/50 dark:border-gray-800 rounded-xl shadow-sm p-1">
         <TabsTrigger 
           value="insights"
-          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#3B82F6] data-[state=active]:to-[#60A5FA] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
           Insights
         </TabsTrigger>
         <TabsTrigger 
           value="library"
-          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#3B82F6] data-[state=active]:to-[#60A5FA] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
           Sets
         </TabsTrigger>
         <TabsTrigger 
           value="create"
-          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#0EA5E9] data-[state=active]:to-[#38BDF8] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
+          className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#3B82F6] data-[state=active]:to-[#60A5FA] data-[state=active]:text-white data-[state=active]:shadow-md font-bold tracking-tight transition-all duration-300 text-xs"
         >
           Create New
         </TabsTrigger>
@@ -340,15 +340,15 @@ export const FlashcardInsights = ({
         <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-            <Brain className="h-4 w-4 text-[#0EA5E9]" />
+            <Brain className="h-4 w-4 text-[#3B82F6]" />
             Statistics
           </CardTitle>
         </CardHeader>
           <CardContent>
           <div className="grid gap-4 md:grid-cols-3">
             {/* Total Sets */}
-            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30 shadow-md">
-              <div className="text-3xl font-bold text-[#0EA5E9] mb-1 tracking-tight">
+            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#60A5FA]/10 dark:from-[#3B82F6]/30 dark:to-[#60A5FA]/20 border border-[#3B82F6]/30 dark:border-[#3B82F6]/30 shadow-md">
+              <div className="text-3xl font-bold text-[#3B82F6] mb-1 tracking-tight">
                 {totalSets}
               </div>
               <div className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wide">
@@ -357,8 +357,8 @@ export const FlashcardInsights = ({
             </div>
 
             {/* Total Cards */}
-            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30 shadow-md">
-              <div className="text-3xl font-bold text-[#0EA5E9] mb-1 tracking-tight">
+            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#60A5FA]/10 dark:from-[#3B82F6]/30 dark:to-[#60A5FA]/20 border border-[#3B82F6]/30 dark:border-[#3B82F6]/30 shadow-md">
+              <div className="text-3xl font-bold text-[#3B82F6] mb-1 tracking-tight">
                 {totalCards}
               </div>
               <div className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wide">
@@ -367,8 +367,8 @@ export const FlashcardInsights = ({
             </div>
 
             {/* Avg Per Set */}
-            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#38BDF8]/10 dark:from-[#0EA5E9]/30 dark:to-[#38BDF8]/20 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/30 shadow-md">
-              <div className="text-3xl font-bold text-[#0EA5E9] mb-1 tracking-tight">
+            <div className="text-center p-4 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#60A5FA]/10 dark:from-[#3B82F6]/30 dark:to-[#60A5FA]/20 border border-[#3B82F6]/30 dark:border-[#3B82F6]/30 shadow-md">
+              <div className="text-3xl font-bold text-[#3B82F6] mb-1 tracking-tight">
                 {avgCardsPerSet}
               </div>
               <div className="text-xs font-bold text-[#64748B] dark:text-gray-400 tracking-wide">
@@ -385,7 +385,7 @@ export const FlashcardInsights = ({
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-[#0EA5E9]" />
+                <BookOpen className="h-4 w-4 text-[#3B82F6]" />
                 Top Subjects
               </CardTitle>
             </CardHeader>
@@ -422,7 +422,7 @@ export const FlashcardInsights = ({
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-bold text-[#0F172A] dark:text-white tracking-tight flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-[#0EA5E9]" />
+                <TrendingUp className="h-4 w-4 text-[#3B82F6]" />
                 Learning Progress
               </CardTitle>
             </CardHeader>
@@ -468,7 +468,7 @@ export const FlashcardInsights = ({
                 <Button 
                   onClick={() => setShowLibrary(true)}
                   variant="outline"
-                  className="w-full border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl font-bold h-10 group text-sm"
+                  className="w-full border-2 border-[#3B82F6] text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl font-bold h-10 group text-sm"
                 >
                   <Brain className="h-4 w-4 mr-2" />
                   View All Flashcards
@@ -502,7 +502,7 @@ export const FlashcardInsights = ({
         {filteredFlashcardSets.length === 0 ? (
           <Card className="rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
             <CardContent className="text-center py-12">
-              <Brain className="h-12 w-12 mx-auto mb-4 text-[#0EA5E9] opacity-50" />
+              <Brain className="h-12 w-12 mx-auto mb-4 text-[#3B82F6] opacity-50" />
               <p className="text-sm text-muted-foreground">No flashcards yet. Create some to get started!</p>
             </CardContent>
           </Card>
@@ -559,7 +559,7 @@ export const FlashcardInsights = ({
                                 setRenamingSetId(set.id);
                                 setNewSetName(set.title);
                               }}
-                              className="h-7 w-7 p-0 text-[#64748B] hover:text-[#0EA5E9] hover:bg-[#0EA5E9]/10 transition-colors"
+                              className="h-7 w-7 p-0 text-[#64748B] hover:text-[#3B82F6] hover:bg-[#3B82F6]/10 transition-colors"
                             >
                               <Pencil className="h-3.5 w-3.5" />
                             </Button>
@@ -597,7 +597,7 @@ export const FlashcardInsights = ({
                     </div>
                   </div>
                   <div className="flex items-center gap-3 mt-3">
-                    <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
+                    <Badge className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white border-0 font-bold shadow-md px-2.5 py-1 text-xs">
                       {set.flashcards?.length || 0} cards
                     </Badge>
                   </div>
@@ -620,7 +620,7 @@ export const FlashcardInsights = ({
                             transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
                             style={{ transformStyle: "preserve-3d" }}
                           >
-                            <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 dark:hover:border-[#0EA5E9]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
+                            <Card className="min-h-28 border-2 border-[#E2E8F0] dark:border-gray-700 hover:border-[#3B82F6]/50 dark:hover:border-[#3B82F6]/50 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl">
                               <CardContent className="p-4">
                                 <AnimatePresence mode="wait">
                                   {!isFlipped ? (
@@ -631,7 +631,7 @@ export const FlashcardInsights = ({
                                       exit={{ opacity: 0 }}
                                       transition={{ duration: 0.2 }}
                                     >
-                                      <Badge variant="outline" className="mb-2 font-bold text-[#0EA5E9] border-[#0EA5E9] text-xs">
+                                      <Badge variant="outline" className="mb-2 font-bold text-[#3B82F6] border-[#3B82F6] text-xs">
                                         Question
                                       </Badge>
                                       <p className="text-sm font-medium text-[#0F172A] dark:text-white leading-relaxed">
