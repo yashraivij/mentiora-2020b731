@@ -591,94 +591,136 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                icon: "📕",
-                title: "Your Personal Tutor",
-                description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div style={{ backgroundColor: '#3B82F6' }} className="rounded-lg p-3 mb-4 text-white text-sm">
-                      Hi Mentiora, What did this question mean by potential energy?
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="font-bold text-sm mb-2">Potential energy</p>
-                      <p className="text-xs text-gray-700 leading-relaxed">
-                        When a liquid turns into a solid, the particles lose energy and move closer together...
-                      </p>
+          <div className="max-w-7xl mx-auto space-y-16">
+            {/* Block 1: Your Personal Tutor - Visual LEFT | Content RIGHT */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
+            >
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                {/* Visual LEFT */}
+                <div className="flex-1 w-full">
+                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
+                    <div className="space-y-4">
+                      <div className="bg-[#3B82F6] text-white p-4 rounded-2xl rounded-bl-none max-w-[85%]">
+                        <p className="text-sm font-medium">Hi Mentiora, What did this question mean by potential energy?</p>
+                      </div>
+                      <div className="bg-gray-100 text-gray-900 p-4 rounded-2xl rounded-br-none max-w-[85%] ml-auto">
+                        <p className="text-sm font-semibold mb-2">Potential energy</p>
+                        <p className="text-sm">When a liquid turns into a solid, the particles lose energy and move closer together...</p>
+                      </div>
                     </div>
                   </div>
-                )
-              },
-              {
-                icon: "📝",
-                title: "Your Exam Guide",
-                description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div className="border-b border-gray-200 pb-2 mb-3">
-                      <div className="font-semibold text-sm">Unit 1: Cell Biology</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div style={{ color: '#3B82F6', backgroundColor: '#BFDBFE' }} className="text-sm px-3 py-2 rounded">
-                        Eukaryotes and prokaryoti...
+                </div>
+
+                {/* Content RIGHT */}
+                <div className="flex-1 space-y-6">
+                  <div className="text-6xl lg:text-7xl mb-4">📕</div>
+                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
+                    Your Personal Tutor
+                  </h3>
+                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
+                    Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Block 2: Your Exam Guide - Content LEFT | Visual RIGHT */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
+            >
+              <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12">
+                {/* Visual RIGHT */}
+                <div className="flex-1 w-full">
+                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-bold text-gray-900 mb-4">Unit 1: Cell Biology</h4>
+                      <div className="space-y-3">
+                        <div className="p-3 bg-[#3B82F6] text-white rounded-lg font-medium">
+                          Eukaryotes and prokaryoti...
+                        </div>
+                        <div className="p-3 bg-gray-50 text-gray-700 rounded-lg">
+                          Animal and plant cells
+                        </div>
+                        <div className="p-3 bg-gray-50 text-gray-700 rounded-lg">
+                          Cell specialisation
+                        </div>
                       </div>
-                      <div className="text-sm px-3 py-2 text-gray-700">Animal and plant cells</div>
-                      <div className="text-sm px-3 py-2 text-gray-700">Cell specialisation</div>
-                    </div>
-                  </div>
-                )
-              },
-              {
-                icon: "✍️",
-                title: "Your Examiner",
-                description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
-                visual: (
-                  <div className="bg-white rounded-xl p-6 mt-6">
-                    <div className="font-semibold text-sm mb-4">Your marks awarded</div>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Leaves become damaged</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        <span className="text-sm">Less chloroplasts</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4" />
-                        <span className="text-sm text-gray-400">Less photosynthesis</span>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700">
-                      You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
                     </div>
                   </div>
-                )
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-              >
-                <Card className="bg-white border-0 shadow-lg rounded-2xl overflow-hidden h-full">
-                  <CardContent className="p-8">
-                    <div className="text-5xl mb-6">{feature.icon}</div>
-                    <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
-                    <p className="text-base text-gray-600 leading-relaxed mb-6">{feature.description}</p>
-                    {feature.visual}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+                </div>
+
+                {/* Content LEFT */}
+                <div className="flex-1 space-y-6">
+                  <div className="text-6xl lg:text-7xl mb-4">📝</div>
+                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
+                    Your Exam Guide
+                  </h3>
+                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
+                    Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Block 3: Your Examiner - Visual LEFT | Content RIGHT */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-white rounded-3xl p-6 lg:p-12 shadow-xl"
+            >
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                {/* Visual LEFT */}
+                <div className="flex-1 w-full">
+                  <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 shadow-lg">
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-bold text-gray-900 mb-4">Your marks awarded</h4>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-green-500" />
+                          <span className="text-gray-700">Leaves become damaged</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-green-500" />
+                          <span className="text-gray-700">Less chloroplasts</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
+                          <span className="text-gray-400">Less photosynthesis</span>
+                        </div>
+                      </div>
+                      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                        <p className="text-sm text-gray-700">
+                          You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content RIGHT */}
+                <div className="flex-1 space-y-6">
+                  <div className="text-6xl lg:text-7xl mb-4">✍️</div>
+                  <h3 className="text-3xl lg:text-4xl font-bold text-black leading-tight">
+                    Your Examiner
+                  </h3>
+                  <p className="text-base lg:text-lg text-gray-700 leading-relaxed">
+                    Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
