@@ -55,17 +55,4 @@ async function migrateCurriculum() {
   }
 }
 
-// Run if this script is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  migrateCurriculum()
-    .then(() => {
-      console.log("Migration script completed");
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error("Migration script failed:", error);
-      process.exit(1);
-    });
-}
-
 export { migrateCurriculum };
