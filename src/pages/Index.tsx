@@ -754,11 +754,10 @@ const Index = () => {
             className="text-center mb-12"
           >
             <h2 className="text-5xl font-bold text-black mb-4 leading-tight">
-              The only tutor that's<br />
-              <span style={{ color: '#3B82F6' }}>specific to your exam curriculum</span>
+              Study what <span style={{ color: '#3B82F6' }}>actually gets marks</span>.
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Other tutoring platforms are not based on Exam Board Curriculums.<br />
+              Aligned to your <span style={{ color: '#3B82F6' }}>exact exam board</span>. No filler. No wasted time.<br />
               Don't see your subject? <a href="mailto:yash@mentiora.com?subject=Subject Request" style={{ color: '#3B82F6' }} className="underline hover:opacity-80 transition-opacity">Request it here</a>.
             </p>
           </motion.div>
