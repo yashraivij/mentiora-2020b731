@@ -461,17 +461,15 @@ const Pricing = () => {
                       </div>
                       <div className="text-xs text-gray-500 mb-1">To: Parent/Guardian</div>
                       <h3 className="text-base font-bold text-gray-900">
-                        Supporting {studentName || "Your Child"}'s GCSE Revision
+                        Supporting {studentName || "Your Child"}'s Revision
                       </h3>
                     </div>
                     
-                    {/* Email Body */}
-                    <div className="px-6 py-4 space-y-3 text-sm text-gray-700 leading-relaxed">
+                      {/* Email Body */}
+                      <div className="px-6 py-4 space-y-3 text-xs text-gray-700 leading-relaxed">
                       <p className="text-gray-600">Hi there,</p>
                       
-                      <p>My name is Yash, and I'm the founder of Mentiora. {studentName || "Your child"} has asked me to reach out about our GCSE revision platform.</p>
-                      
-                      <p>Mentiora is used by thousands of students to prepare for their exams. Here's what they get access to:</p>
+                      <p>My name is Yash, and I'm the founder of Mentiora. {studentName || "Your child"} has asked me to reach out about our revision platform. Mentiora is used by thousands of students preparing for their exams. Here's what they get access to:</p>
                       
                   <div className="space-y-2.5">
                     <div className="flex items-start gap-3">
@@ -496,14 +494,12 @@ const Pricing = () => {
                     </div>
                   </div>
                       
-                      <p>It costs <span className="font-bold">£9.99/month</span> – about what you'd spend on one coffee per week, and far less than a single tutoring session.</p>
-                      
-                      <p>If you have any questions, feel free to reply to this email.</p>
+                      <p>It costs <span className="font-bold">£9.99/month</span> – about what you'd spend on one coffee per week, and far less than a single tutoring session. If you have any questions, feel free to reply to this email.</p>
                       
                       <p className="pt-2">
                         <span className="block">Best regards,</span>
                         <span className="block font-semibold">Yash</span>
-                        <span className="block text-xs text-gray-500">Founder, Mentiora</span>
+                        <span className="block text-[10px] text-gray-500">Founder, Mentiora</span>
                       </p>
                     </div>
                   </div>
