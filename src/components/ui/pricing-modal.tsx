@@ -139,7 +139,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
                 <img 
                   src={mentioraLogo} 
                   alt="Mentiora" 
@@ -159,7 +159,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5 }}
           >
-            Pay just once to get all-in-one access until {currentPricing.endDate}, or subscribe to on-the-go learning.
+            Get complete revision support for less than the cost of one tutoring session.
           </motion.p>
 
           {!showParentForm ? (
@@ -174,7 +174,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
               >
                 <button
                   onClick={() => setShowParentForm(true)}
-                  className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
+                  className="text-[#3B82F6] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
                 >
                   Ask my parents <ChevronRight className="w-4 h-4" />
                 </button>
@@ -262,8 +262,8 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    <Card className="border-2 border-gray-200 rounded-3xl p-6 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
-                      <div className="absolute top-4 right-4 bg-white text-[#00A8FF] px-3 py-1 rounded-full text-xs font-bold">
+                    <Card className="border-2 border-gray-200 rounded-3xl p-6 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
+                      <div className="absolute top-4 right-4 bg-white text-[#3B82F6] px-3 py-1 rounded-full text-xs font-bold">
                         Save {currentPricing.savingsPercent}
                       </div>
                       
@@ -282,7 +282,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
 
                       <Button
                         onClick={handleOneTimePayment}
-                        className="w-full h-12 rounded-full text-sm font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
+                        className="w-full h-12 rounded-full text-sm font-semibold bg-white text-[#3B82F6] hover:bg-gray-50"
                       >
                         Get Exam Access
                       </Button>
@@ -313,7 +313,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.4, delay: i * 0.05 }}
                     >
-                      <Check className="w-5 h-5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                      <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
                       <p className="text-gray-700 text-sm leading-relaxed">{feature}</p>
                     </motion.div>
                   ))}
@@ -397,7 +397,7 @@ export const PricingModal = ({ open, onOpenChange }: PricingModalProps) => {
                   >
                     <Button 
                       onClick={handleSendParentEmail}
-                      className="w-full h-12 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-white font-semibold"
+                      className="w-full h-12 rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold"
                     >
                       Send Email
                     </Button>
