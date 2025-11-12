@@ -531,14 +531,14 @@ const Pricing = () => {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* FAQ Item 1 */}
+            {/* FAQ 1 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 0 ? null : 0)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  Is Mentiora specific to the GCSE and A-Level specification?
+                  What makes Mentiora different from other study apps?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 0 ? 180 : 0 }}
@@ -557,21 +557,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
+                      Mentiora is fully aligned with your exact exam board and specification, so every question, note, and paper matches what you'll be tested on — nothing extra, nothing missing.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ Item 2 */}
+            {/* FAQ 2 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 1 ? null : 1)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  How are answers marked on Mentiora?
+                  Can Mentiora really replace a private tutor?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 1 ? 180 : 0 }}
@@ -590,21 +590,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
+                      It's designed to. Mentiora gives step-by-step feedback, weekly study plans, and real predicted grades — all personalised to your progress. Many students use it alongside school or tutoring, but it's built to stand alone.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ Item 3 */}
+            {/* FAQ 3 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 2 ? null : 2)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  Can I cancel my subscription at any time?
+                  How accurate are the predicted grades?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 2 ? 180 : 0 }}
@@ -623,21 +623,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
+                      Your predicted grades update as you answer more questions. They're based on exam-board mark schemes and your past performance, so you can see how close you are to your target at any time.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ Item 4 */}
+            {/* FAQ 4 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 3 ? null : 3)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  Which exam boards does Mentiora support?
+                  How often is the content updated?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 3 ? 180 : 0 }}
@@ -656,7 +656,238 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
+                      We keep Mentiora fully up-to-date with the latest exam specifications and question trends. New questions and topics are added regularly, especially before each exam season.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 5 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 4 ? null : 4)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Can parents track progress too?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 4 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 4 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Yes — you can share progress summaries with parents. They'll see improvement over time, current predicted grades, and areas for focus.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 6 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 5 ? null : 5)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  What if my child's subject isn't listed?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 5 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 5 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      You can request any subject. Our team adds new subjects based on student demand, so if it's not available yet, it likely will be soon.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 7 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 6 ? null : 6)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  How is my data kept safe?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 6 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 6 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      We take privacy seriously. Your data is never shared or sold, and all progress and personal information are securely stored.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 8 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 7 ? null : 7)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Can I cancel anytime?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 7 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 7 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Absolutely. There's no contract — you can cancel or change your plan whenever you like, directly from your account settings.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 9 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 8 ? null : 8)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Does Mentiora work on phones and tablets?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 8 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 8 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Yes! Mentiora is fully responsive, so you can revise from your laptop, tablet, or phone whenever it suits you.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 10 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 9 ? null : 9)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  Do you offer discounts for families or schools?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 9 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 9 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Yes — we offer flexible pricing for siblings, small groups, and schools. Just get in touch to find out more.
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* FAQ 11 */}
+            <div className="border-b border-gray-200">
+              <button 
+                onClick={() => setExpandedFAQ(expandedFAQ === 10 ? null : 10)}
+                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
+              >
+                <span className="text-lg font-medium text-gray-900 pr-8">
+                  What if I need help while using Mentiora?
+                </span>
+                <motion.div
+                  animate={{ rotate: expandedFAQ === 10 ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {expandedFAQ === 10 && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
+                      Our support team is here 24/7. Whether it's a technical issue or a study question, you can reach out anytime from within the app.
                     </div>
                   </motion.div>
                 )}
