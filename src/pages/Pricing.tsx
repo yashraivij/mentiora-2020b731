@@ -360,7 +360,7 @@ const Pricing = () => {
             variants={fadeInUp}
             transition={{ duration: 0.5 }}
           >
-            Want help asking your parents?
+            Let's tell your parents together.
           </motion.h2>
 
           <motion.div 
@@ -473,20 +473,28 @@ const Pricing = () => {
                       
                       <p>Mentiora is used by thousands of students to prepare for their exams. Here's what they get access to:</p>
                       
-                      <div className="space-y-2.5">
-                        <div className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>2,500+ exam-board-specific practice questions with instant AI marking</span>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>24/7 AI tutor for step-by-step help when they're stuck</span>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>Predicted exam papers and detailed performance analytics</span>
-                        </div>
-                      </div>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
+                      <span className="text-xs leading-relaxed">Practice that mirrors the real exam, with thousands of carefully written, exam-style questions per subject.</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
+                      <span className="text-xs leading-relaxed">Instant feedback and worked solutions that help you understand why an answer is correct, not just what it is.</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
+                      <span className="text-xs leading-relaxed">Progress analytics built for results — track your predicted grades, weak topics, and improvement over time.</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
+                      <span className="text-xs leading-relaxed">24/7 expert support and explanations, available whenever you get stuck or need clarity.</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
+                      <span className="text-xs leading-relaxed">Exclusive 2026 Predicted Papers, written by experienced exam specialists to reflect your exact specification.</span>
+                    </div>
+                  </div>
                       
                       <p>It costs <span className="font-bold">£9.99/month</span> – about what you'd spend on one coffee per week, and far less than a single tutoring session.</p>
                       
