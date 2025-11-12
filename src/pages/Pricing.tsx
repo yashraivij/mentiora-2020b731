@@ -230,7 +230,7 @@ const Pricing = () => {
 
         {/* Pricing Cards */}
         <motion.div 
-          className="grid md:grid-cols-3 gap-6 mb-16"
+          className="grid md:grid-cols-3 gap-8 mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -238,7 +238,7 @@ const Pricing = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           {/* Monthly */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <Card className="border-2 border-gray-200 rounded-3xl p-10 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
             <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
             
@@ -264,8 +264,8 @@ const Pricing = () => {
           </Card>
 
           {/* 2026 Exams */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
-            <div className="absolute top-6 right-6 bg-white text-[#3B82F6] px-4 py-1 rounded-full text-sm font-bold">
+          <Card className="border-2 border-gray-200 rounded-3xl p-10 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
+            <div className="absolute top-4 right-4 bg-white text-[#3B82F6] px-4 py-1 rounded-full text-sm font-bold z-10">
               Save {examYear === "2026" ? "15%" : "20%"}
             </div>
             
@@ -295,15 +295,17 @@ const Pricing = () => {
           </Card>
 
           {/* Enterprise for Schools */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <Card className="border-2 border-gray-200 rounded-3xl p-10 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
             <p className="text-gray-600 mb-6">For schools and institutions.</p>
             
             <div className="mb-8">
-              <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-bold text-gray-900">Custom</span>
-              </div>
-              <p className="text-sm text-gray-500 mt-2">Pricing tailored to your needs</p>
+              <p className="text-lg font-semibold text-gray-900 mb-3">
+                Schools get 25% off with a free discount code.
+              </p>
+              <p className="text-sm text-gray-500">
+                Custom pricing and volume discounts available for larger institutions.
+              </p>
             </div>
 
             <Button
@@ -315,7 +317,7 @@ const Pricing = () => {
             </Button>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              Volume discounts available.
+              Get your school discount code today.
             </p>
           </Card>
         </motion.div>
