@@ -155,7 +155,7 @@ const Pricing = () => {
           </h1>
           {/* Mentiora Logo Graphic */}
           <div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
+            <div className="w-20 h-20 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
               <img 
                 src={mentioraLogo} 
                 alt="Mentiora" 
@@ -176,7 +176,7 @@ const Pricing = () => {
           variants={fadeInUp}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
+          Get complete revision support for less than the cost of one tutoring session.
         </motion.p>
 
         {/* Ask My Parents Link */}
@@ -190,7 +190,7 @@ const Pricing = () => {
         >
           <button
             onClick={() => document.getElementById('parents-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
+            className="text-[#3B82F6] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
           >
             Ask my parents <ChevronRight className="w-4 h-4" />
           </button>
@@ -252,7 +252,7 @@ const Pricing = () => {
             <Button
               onClick={handleUpgrade}
               variant="outline"
-              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#00A8FF] hover:bg-white transition-colors"
+              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#3B82F6] hover:bg-white transition-colors"
             >
               Start Free Trial
             </Button>
@@ -263,8 +263,8 @@ const Pricing = () => {
           </Card>
 
           {/* 2026 Exams */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
-            <div className="absolute top-6 right-6 bg-white text-[#00A8FF] px-4 py-1 rounded-full text-sm font-bold">
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
+            <div className="absolute top-6 right-6 bg-white text-[#3B82F6] px-4 py-1 rounded-full text-sm font-bold">
               Save {examYear === "2026" ? "15%" : "20%"}
             </div>
             
@@ -283,7 +283,7 @@ const Pricing = () => {
 
             <Button
               onClick={handleOneTimePayment}
-              className="w-full h-14 rounded-full text-base font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
+              className="w-full h-14 rounded-full text-base font-semibold bg-white text-[#3B82F6] hover:bg-gray-50"
             >
               Get Exam Access
             </Button>
@@ -306,7 +306,7 @@ const Pricing = () => {
           <div className="space-y-4">
             {features.map((feature, i) => (
               <div key={i} className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-[#3B82F6] flex-shrink-0 mt-0.5" />
                 <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
               </div>
             ))}
@@ -383,7 +383,7 @@ const Pricing = () => {
 
               <Button 
                 onClick={handleSendParentEmail}
-                className="w-full h-14 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-white font-semibold text-base"
+                className="w-full h-14 rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base"
               >
                 Send Email
               </Button>
@@ -414,7 +414,7 @@ const Pricing = () => {
                       <div className="p-4 bg-white h-[240px] overflow-hidden">
                         {/* Email Header */}
                         <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
-                          <div className="w-7 h-7 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                          <div className="w-7 h-7 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white font-bold text-xs">
                             M
                           </div>
                           <div>
@@ -438,15 +438,15 @@ const Pricing = () => {
                             
                             <div className="space-y-1">
                               <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
                                 <span className="text-[9px]">2,500+ exam-style questions with instant marking</span>
                               </div>
                               <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
                                 <span className="text-[9px]">24/7 tutoring with step-by-step explanations</span>
                               </div>
                               <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
                                 <span className="text-[9px]">Predicted Papers & performance analytics</span>
                               </div>
                             </div>
@@ -636,7 +636,7 @@ const Pricing = () => {
               
               <p className="text-gray-600">
                 No school code yet? Ask them to email{" "}
-                <a href="mailto:yash@mentiora.com" className="text-[#00A8FF] font-medium hover:underline">
+                <a href="mailto:yash@mentiora.com" className="text-[#3B82F6] font-medium hover:underline">
                   yash@mentiora.com
                 </a>{" "}
                 for one.
