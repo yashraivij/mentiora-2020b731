@@ -51,7 +51,8 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
     const { data: subjects, error: subjectsError } = await supabase
       .from("curriculum_subjects")
       .select("*")
-      .order("name");
+      .order("name")
+      .limit(10000);
 
     if (subjectsError) throw subjectsError;
     if (!subjects || subjects.length === 0) {
@@ -65,7 +66,8 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
     const { data: topics, error: topicsError } = await supabase
       .from("curriculum_topics")
       .select("*")
-      .order("subject_id, order_index");
+      .order("subject_id, order_index")
+      .limit(10000);
 
     if (topicsError) throw topicsError;
     console.log(`✅ Fetched ${topics?.length || 0} topics`);
@@ -74,7 +76,8 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
     const { data: questions, error: questionsError } = await supabase
       .from("curriculum_questions")
       .select("*")
-      .order("topic_id, order_index");
+      .order("topic_id, order_index")
+      .limit(10000);
 
     if (questionsError) throw questionsError;
     console.log(`✅ Fetched ${questions?.length || 0} questions`);
