@@ -364,7 +364,7 @@ const Pricing = () => {
           </motion.h2>
 
           <motion.div 
-            className="flex flex-col items-center max-w-2xl mx-auto"
+            className="flex flex-col md:flex-row items-start justify-center gap-8 max-w-6xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -372,17 +372,17 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             {/* Form Card */}
-            <div className="w-full bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12">
-              <h3 className="text-xl font-bold mb-3 text-gray-900 text-center">
-                Most students have their subscription covered by their parents.
+            <div className="w-full md:w-[480px] bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+              <h3 className="text-xl font-bold mb-3 text-gray-900">
+                Not sure how to ask?
               </h3>
               
-              <p className="text-gray-600 mb-2 leading-relaxed text-center">
-                We understand that conversations about subscriptions can be awkward.
+              <p className="text-gray-600 mb-3 leading-relaxed">
+                We get it – asking for help with subscription costs can feel awkward.
               </p>
               
-              <p className="text-gray-600 mb-8 leading-relaxed text-center">
-                Mentiora can send an email on your behalf to explain the subscription details.
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Let us do the talking. We'll send a professional email to your parent or guardian explaining what Mentiora is and how it helps with exam prep.
               </p>
 
               <div className="space-y-4 mb-6">
@@ -421,9 +421,9 @@ const Pricing = () => {
             </div>
 
             {/* iPhone Mockup */}
-            <div className="relative">
+            <div className="relative flex-shrink-0">
               {/* iPhone Frame */}
-              <div className="relative w-[340px] bg-black rounded-[3rem] p-3 shadow-2xl">
+              <div className="relative w-[280px] bg-black rounded-[3rem] p-3 shadow-2xl">
                 {/* Screen */}
                 <div className="relative bg-white rounded-[2.5rem] overflow-hidden">
                   {/* Notch */}
@@ -447,7 +447,7 @@ const Pricing = () => {
                   </div>
 
                   {/* Email App Content */}
-                  <div className="bg-white h-[580px] overflow-hidden">
+                  <div className="bg-white h-[500px] overflow-hidden">
                     {/* Email Header */}
                     <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
                       <div className="flex items-center gap-3 mb-3">
@@ -456,39 +456,47 @@ const Pricing = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="font-semibold text-gray-900 text-sm truncate">Mentiora</div>
-                          <div className="text-xs text-gray-500 truncate">hello@mentiora.com</div>
+                          <div className="text-xs text-gray-500 truncate">yash@mentiora.com</div>
                         </div>
                       </div>
                       <div className="text-xs text-gray-500 mb-1">To: Parent/Guardian</div>
                       <h3 className="text-base font-bold text-gray-900">
-                        Help Your Child Get Through GCSEs
+                        Supporting {studentName || "Your Child"}'s GCSE Revision
                       </h3>
                     </div>
                     
                     {/* Email Body */}
                     <div className="px-6 py-4 space-y-3 text-sm text-gray-700 leading-relaxed">
-                      <p className="text-gray-600">Dear parent or guardian,</p>
+                      <p className="text-gray-600">Hi there,</p>
                       
-                      <p>Your child has expressed interest in using Mentiora for GCSE prep. Mentiora is an AI-powered revision platform used by thousands of GCSE students.</p>
+                      <p>My name is Yash, and I'm the founder of Mentiora. {studentName || "Your child"} has asked me to reach out about our GCSE revision platform.</p>
                       
-                      <p className="font-semibold text-gray-900">What's included:</p>
+                      <p>Mentiora is used by thousands of students to prepare for their exams. Here's what they get access to:</p>
                       
                       <div className="space-y-2.5">
                         <div className="flex items-start gap-3">
                           <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>2,500+ exam-style questions with instant marking</span>
+                          <span>2,500+ exam-board-specific practice questions with instant AI marking</span>
                         </div>
                         <div className="flex items-start gap-3">
                           <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>24/7 tutoring with step-by-step explanations</span>
+                          <span>24/7 AI tutor for step-by-step help when they're stuck</span>
                         </div>
                         <div className="flex items-start gap-3">
                           <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                          <span>Predicted Papers & performance analytics</span>
+                          <span>Predicted exam papers and detailed performance analytics</span>
                         </div>
                       </div>
                       
-                      <p>Starting at just <span className="font-bold">£9.99/month</span> - less than the cost of a single tutoring session.</p>
+                      <p>It costs <span className="font-bold">£9.99/month</span> – about what you'd spend on one coffee per week, and far less than a single tutoring session.</p>
+                      
+                      <p>If you have any questions, feel free to reply to this email.</p>
+                      
+                      <p className="pt-2">
+                        <span className="block">Best regards,</span>
+                        <span className="block font-semibold">Yash</span>
+                        <span className="block text-xs text-gray-500">Founder, Mentiora</span>
+                      </p>
                     </div>
                   </div>
                 </div>
