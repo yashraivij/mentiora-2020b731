@@ -141,7 +141,7 @@ const Pricing = () => {
         </div>
       </div>
 
-      <div className="max-w-[900px] mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Headline */}
         <motion.div 
           className="flex items-center justify-center gap-4 mb-4"
@@ -238,7 +238,7 @@ const Pricing = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           {/* Monthly */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-10 hover:shadow-lg transition-shadow">
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
             <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
             
@@ -264,7 +264,7 @@ const Pricing = () => {
           </Card>
 
           {/* 2026 Exams */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-10 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
             <div className="absolute top-4 right-4 bg-white text-[#3B82F6] px-4 py-1 rounded-full text-sm font-bold z-10">
               Save {examYear === "2026" ? "15%" : "20%"}
             </div>
@@ -295,7 +295,7 @@ const Pricing = () => {
           </Card>
 
           {/* Enterprise for Schools */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-10 hover:shadow-lg transition-shadow">
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
             <p className="text-gray-600 mb-6">For schools and institutions.</p>
             
