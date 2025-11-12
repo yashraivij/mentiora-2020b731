@@ -310,7 +310,8 @@ const Pricing = () => {
               const restOfFeature = feature.substring(firstSentencePart.length);
               
               return (
-                <div key={i} className="py-6 first:pt-0 last:pb-0">
+                <div key={i} className="py-6 first:pt-0 last:pb-0 flex items-start gap-4">
+                  <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                   <p className="text-gray-700 text-base leading-relaxed">
                     <span className="font-semibold text-gray-900">{firstSentencePart}</span>
                     {restOfFeature}
