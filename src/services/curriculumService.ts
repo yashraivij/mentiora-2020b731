@@ -52,7 +52,7 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
       .from("curriculum_subjects")
       .select("*")
       .order("name")
-      .limit(10000);
+      .range(0, 9999);
 
     if (subjectsError) throw subjectsError;
     if (!subjects || subjects.length === 0) {
@@ -67,7 +67,7 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
       .from("curriculum_topics")
       .select("*")
       .order("subject_id, order_index")
-      .limit(10000);
+      .range(0, 9999);
 
     if (topicsError) throw topicsError;
     console.log(`✅ Fetched ${topics?.length || 0} topics`);
@@ -77,7 +77,7 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
       .from("curriculum_questions")
       .select("*")
       .order("topic_id, order_index")
-      .limit(10000);
+      .range(0, 9999);
 
     if (questionsError) throw questionsError;
     console.log(`✅ Fetched ${questions?.length || 0} questions`);
