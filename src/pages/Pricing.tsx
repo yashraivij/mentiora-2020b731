@@ -557,7 +557,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Mentiora is fully aligned with your exact exam board and specification, so every question, note, and paper matches what you'll be tested on — nothing extra, nothing missing.
+                      Mentiora is fully aligned with your exact exam board and specification, so every question, note, and paper matches what you'll be tested on. Nothing extra, nothing missing.
                     </div>
                   </motion.div>
                 )}
@@ -590,7 +590,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      It's designed to. Mentiora gives step-by-step feedback, weekly study plans, and real predicted grades — all personalised to your progress. Many students use it alongside school or tutoring, but it's built to stand alone.
+                      It's designed to. Mentiora gives step-by-step feedback, weekly study plans, and real predicted grades, all personalised to your progress. Many students use it alongside school or tutoring, but it's built to stand alone.
                     </div>
                   </motion.div>
                 )}
@@ -689,7 +689,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes — you can share progress summaries with parents. They'll see improvement over time, current predicted grades, and areas for focus.
+                      Yes, you can share progress summaries with parents. They'll see improvement over time, current predicted grades, and areas for focus.
                     </div>
                   </motion.div>
                 )}
@@ -788,7 +788,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Absolutely. There's no contract — you can cancel or change your plan whenever you like, directly from your account settings.
+                      Absolutely. There's no contract. You can cancel or change your plan whenever you like, directly from your account settings.
                     </div>
                   </motion.div>
                 )}
@@ -854,7 +854,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes — we offer flexible pricing for siblings, small groups, and schools. Just get in touch to find out more.
+                      Yes, we offer flexible pricing for siblings, small groups, and schools. Just get in touch to find out more.
                     </div>
                   </motion.div>
                 )}
