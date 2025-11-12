@@ -305,11 +305,19 @@ const Pricing = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="divide-y divide-gray-200">
-            {features.map((feature, i) => (
-              <div key={i} className="py-6 first:pt-0 last:pb-0">
-                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
-              </div>
-            ))}
+            {features.map((feature, i) => {
+              const firstSentencePart = feature.split(/[,.]/, 1)[0];
+              const restOfFeature = feature.substring(firstSentencePart.length);
+              
+              return (
+                <div key={i} className="py-6 first:pt-0 last:pb-0">
+                  <p className="text-gray-700 text-base leading-relaxed">
+                    <span className="font-semibold text-gray-900">{firstSentencePart}</span>
+                    {restOfFeature}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           <p className="text-center mt-12 text-gray-600">
