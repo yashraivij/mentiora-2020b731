@@ -297,8 +297,8 @@ export default function TestCurriculum() {
                     </div>
                   )}
 
-                  {/* Export Button */}
-                  <div className="pt-4 border-t border-orange-200">
+                  {/* Export Buttons */}
+                  <div className="pt-4 border-t border-orange-200 space-y-2">
                     <Button
                       onClick={() => {
                         const data = {
@@ -323,6 +323,49 @@ export default function TestCurriculum() {
                       className="w-full"
                     >
                       Export Missing Data as JSON
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        // Generate SQL INSERT statements
+                        let sql = "-- Import Missing Curriculum Data\n\n";
+                        
+                        // Topics
+                        if (missingData.topics.length > 0) {
+                          sql += "-- Insert Missing Topics\n";
+                          missingData.topics.forEach((item, idx) => {
+                            const { topic, subjectId } = item;
+                            sql += `INSERT INTO public.curriculum_topics (id, subject_id, name, order_index) VALUES ('${topic.id}', '${subjectId}', E'${topic.name.replace(/'/g, "\\'")}', ${idx});\n`;
+                          });
+                          sql += "\n";
+                        }
+                        
+                        // Questions
+                        if (missingData.questions.length > 0) {
+                          sql += "-- Insert Missing Questions\n";
+                          missingData.questions.forEach((item, idx) => {
+                            const { question, topicId } = item;
+                            const markingCriteriaJson = JSON.stringify({
+                              breakdown: question.markingCriteria.breakdown
+                            }).replace(/'/g, "''");
+                            
+                            sql += `INSERT INTO public.curriculum_questions (id, topic_id, question, marks, difficulty, model_answer, marking_criteria, spec_reference, calculator_guidance, order_index) VALUES `;
+                            sql += `('${question.id}', '${topicId}', E'${question.question.replace(/'/g, "\\'")}', ${question.marks}, '${question.difficulty}', E'${question.modelAnswer.replace(/'/g, "\\'")}', '${markingCriteriaJson}'::jsonb, E'${question.specReference.replace(/'/g, "\\'")}', `;
+                            sql += question.calculatorGuidance ? `'${question.calculatorGuidance}'` : 'NULL';
+                            sql += `, ${idx});\n`;
+                          });
+                        }
+                        
+                        const blob = new Blob([sql], { type: "text/plain" });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "import-missing-curriculum.sql";
+                        a.click();
+                        URL.revokeObjectURL(url);
+                      }}
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                    >
+                      Generate SQL Import Script
                     </Button>
                   </div>
                 </div>
