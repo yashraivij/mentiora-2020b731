@@ -304,13 +304,10 @@ const Pricing = () => {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="space-y-6">
+          <div className="divide-y divide-gray-200">
             {features.map((feature, i) => (
-              <div key={i} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center text-white font-bold text-sm shadow-md">
-                  {i + 1}
-                </div>
-                <p className="text-gray-700 text-base leading-relaxed pt-1">{feature}</p>
+              <div key={i} className="py-6 first:pt-0 last:pb-0">
+                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
               </div>
             ))}
           </div>
