@@ -591,7 +591,7 @@ const Index = () => {
               How Mentiora Works
             </h2>
             <p className="text-xl text-gray-600">
-              Three powerful tools. One platform.
+              Everything you need to revise smarter, not harder.
             </p>
           </motion.div>
 
@@ -601,48 +601,200 @@ const Index = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-3 gap-12"
           >
             {/* Column 1: Smart Question Bank */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
               <div className="text-5xl mb-4">📝</div>
-              <h3 className="text-2xl font-bold text-black mb-3">Smart Question Bank</h3>
+              <h3 className="text-2xl font-bold text-black mb-3">Practice Real Exam Questions</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Practice with real past paper questions filtered by topic and difficulty. Get instant AI feedback that explains exactly what gets marks and what doesn't.
+                Answer past paper questions filtered by your topics. Submit your answer and get instant, detailed feedback on what earned marks and what didn't—just like a real exam.
               </p>
-              <img 
-                src="/lovable-uploads/practice-mockup.png" 
-                alt="Practice question interface"
-                className="rounded-xl shadow-lg w-full"
-              />
+              
+              {/* Question Mockup */}
+              <div className="w-full max-w-[400px] bg-white rounded-xl shadow-lg p-6 space-y-4">
+                {/* Question Card */}
+                <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-sm text-black font-medium flex-1">
+                      Explain the difference between ionic and covalent bonding. Include reference to electron transfer and sharing.
+                    </p>
+                    <span className="px-2 py-1 rounded-md text-xs font-bold text-white whitespace-nowrap" style={{ backgroundColor: '#3B82F6' }}>
+                      [6 marks]
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Text Area */}
+                <div className="border border-gray-300 rounded-lg p-3 bg-white min-h-[120px]">
+                  <p className="text-sm text-gray-400">Your answer appears here...</p>
+                </div>
+                
+                {/* Submit Button */}
+                <div className="flex justify-end">
+                  <button 
+                    className="px-6 py-2.5 rounded-lg font-semibold text-sm text-white shadow-sm"
+                    style={{ backgroundColor: '#3B82F6' }}
+                  >
+                    Submit Answer
+                  </button>
+                </div>
+              </div>
             </motion.div>
 
             {/* Column 2: AI Study Helper */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
               <div className="text-5xl mb-4">💬</div>
-              <h3 className="text-2xl font-bold text-black mb-3">AI Study Helper</h3>
+              <h3 className="text-2xl font-bold text-black mb-3">Get Unstuck, Instantly</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Stuck on a question? Chat with your personal AI tutor who guides you step-by-step. No answers given away—just the hints you need to figure it out yourself.
+                Stuck on a concept? Ask your AI tutor anything. It won't give away answers—it guides you with hints and questions until you understand it yourself.
               </p>
-              <img 
-                src="/lovable-uploads/chat-mockup.png" 
-                alt="AI chat interface"
-                className="rounded-xl shadow-lg w-full"
-              />
+              
+              {/* Chat Mockup */}
+              <div className="w-full max-w-[400px] bg-white rounded-xl shadow-lg p-6 space-y-3">
+                {/* Student Message 1 */}
+                <div className="flex justify-end">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-sm max-w-[280px]"
+                    style={{
+                      backgroundColor: '#3B82F6',
+                      color: 'white'
+                    }}
+                  >
+                    <p className="text-sm font-medium">
+                      I don't understand ionic bonding 😅
+                    </p>
+                  </div>
+                </div>
+                
+                {/* AI Response 1 */}
+                <div className="flex justify-start">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm max-w-[280px]"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      color: '#000000',
+                      border: '1px solid #e5e7eb'
+                    }}
+                  >
+                    <p className="text-sm font-medium mb-1">
+                      Let me help! 💡
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      What do you know about electrons and atoms?
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Student Message 2 */}
+                <div className="flex justify-end">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-sm max-w-[280px]"
+                    style={{
+                      backgroundColor: '#3B82F6',
+                      color: 'white'
+                    }}
+                  >
+                    <p className="text-sm font-medium">
+                      Atoms want full outer shells?
+                    </p>
+                  </div>
+                </div>
+                
+                {/* AI Response 2 */}
+                <div className="flex justify-start">
+                  <div 
+                    className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm max-w-[280px]"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      color: '#000000',
+                      border: '1px solid #e5e7eb'
+                    }}
+                  >
+                    <p className="text-sm font-medium">
+                      Exactly! Now, what happens when one atom gives electrons to another?
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Input Box */}
+                <div className="border border-gray-300 rounded-lg p-3 bg-white">
+                  <p className="text-sm text-gray-400">Ask a question...</p>
+                </div>
+              </div>
             </motion.div>
 
             {/* Column 3: Track Your Progress */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
               <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-2xl font-bold text-black mb-3">Track Your Progress</h3>
+              <h3 className="text-2xl font-bold text-black mb-3">Watch Your Grade Improve</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                See your predicted grade improve in real-time. Track which topics you've mastered and which need more work—all updated automatically as you practice.
+                See your predicted grade update in real-time as you practice. Track which topics you've mastered and which need work—all calculated automatically.
               </p>
-              <img 
-                src="/lovable-uploads/analytics-mockup.png" 
-                alt="Analytics dashboard"
-                className="rounded-xl shadow-lg w-full"
-              />
+              
+              {/* Dashboard Subject Card Mockup */}
+              <div className="w-full max-w-[280px] bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div className="p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl">🧪</span>
+                      <h3 className="text-lg font-bold text-black">Chemistry</h3>
+                    </div>
+                  </div>
+                  
+                  {/* Predicted Section */}
+                  <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                      <span className="text-2xl font-bold text-black">7</span>
+                    </div>
+                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full rounded-full"
+                        style={{ width: '78%', backgroundColor: '#3B82F6' }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Target Section */}
+                  <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                      <span className="text-2xl font-bold text-black">9</span>
+                    </div>
+                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-green-500 rounded-full"
+                        style={{ width: '70%' }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Last 6 Attempts Section */}
+                  <div className="bg-gray-100 rounded-lg px-4 py-3">
+                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
+                    <div className="h-12 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 200 48" preserveAspectRatio="none">
+                        <polyline
+                          fill="none"
+                          stroke="#3B82F6"
+                          strokeWidth="3"
+                          points="0,40 40,35 80,28 120,20 160,12 200,6"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Topics Button */}
+                  <button 
+                    className="w-full py-3 rounded-lg font-bold text-sm text-white"
+                    style={{ backgroundColor: '#3B82F6' }}
+                  >
+                    Topics
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
