@@ -608,7 +608,7 @@ const Index = () => {
               <div className="text-5xl mb-4">📝</div>
               <h3 className="text-2xl font-bold text-black mb-3">Practice Real Exam Questions</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Answer past paper questions filtered by your topics. Submit your answer and get instant, detailed feedback on what earned marks and what didn't—just like a real exam.
+                Work through realistic, exam-style questions written to match your exact specification. Each one is built to reflect the style, difficulty, and wording of upcoming exams, so you're always revising what's most likely to appear.
               </p>
               
               {/* Question Mockup */}
@@ -647,7 +647,7 @@ const Index = () => {
               <div className="text-5xl mb-4">💬</div>
               <h3 className="text-2xl font-bold text-black mb-3">Get Unstuck, Instantly</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Stuck on a concept? Ask your AI tutor anything. It won't give away answers—it guides you with hints and questions until you understand it yourself.
+                Stuck on a concept? Ask your tutor anything. It won't give away answers, it guides you with hints and questions until you understand it yourself.
               </p>
               
               {/* Chat Mockup */}
@@ -729,7 +729,7 @@ const Index = () => {
               <div className="text-5xl mb-4">📊</div>
               <h3 className="text-2xl font-bold text-black mb-3">Watch Your Grade Improve</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                See your predicted grade update in real-time as you practice. Track which topics you've mastered and which need work—all calculated automatically.
+                See your predicted grade update in real-time as you practice. Track which topics you've mastered and which need work, all calculated automatically.
               </p>
               
               {/* Dashboard Subject Card Mockup */}
