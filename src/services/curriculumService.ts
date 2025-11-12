@@ -62,25 +62,60 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
 
     console.log(`✅ Fetched ${subjects.length} subjects`);
 
-    // Fetch all topics
-    const { data: topics, error: topicsError } = await supabase
-      .from("curriculum_topics")
-      .select("*")
-      .order("subject_id, order_index")
-      .range(0, 9999);
+    // Fetch all topics with pagination
+    const allTopics: any[] = [];
+    let topicOffset = 0;
+    const pageSize = 1000;
+    let hasMoreTopics = true;
 
-    if (topicsError) throw topicsError;
-    console.log(`✅ Fetched ${topics?.length || 0} topics`);
+    while (hasMoreTopics) {
+      const { data: topicPage, error: topicsError } = await supabase
+        .from("curriculum_topics")
+        .select("*")
+        .order("subject_id, order_index")
+        .range(topicOffset, topicOffset + pageSize - 1);
 
-    // Fetch all questions
-    const { data: questions, error: questionsError } = await supabase
-      .from("curriculum_questions")
-      .select("*")
-      .order("topic_id, order_index")
-      .range(0, 9999);
+      if (topicsError) throw topicsError;
+      
+      if (topicPage && topicPage.length > 0) {
+        allTopics.push(...topicPage);
+        console.log(`✅ Fetched topics ${topicOffset + 1} to ${topicOffset + topicPage.length}`);
+        hasMoreTopics = topicPage.length === pageSize;
+        topicOffset += pageSize;
+      } else {
+        hasMoreTopics = false;
+      }
+    }
 
-    if (questionsError) throw questionsError;
-    console.log(`✅ Fetched ${questions?.length || 0} questions`);
+    const topics = allTopics;
+    console.log(`✅ Total topics fetched: ${topics.length}`);
+
+    // Fetch all questions with pagination
+    const allQuestions: any[] = [];
+    let questionOffset = 0;
+    let hasMoreQuestions = true;
+
+    while (hasMoreQuestions) {
+      const { data: questionPage, error: questionsError } = await supabase
+        .from("curriculum_questions")
+        .select("*")
+        .order("topic_id, order_index")
+        .range(questionOffset, questionOffset + pageSize - 1);
+
+      if (questionsError) throw questionsError;
+      
+      if (questionPage && questionPage.length > 0) {
+        allQuestions.push(...questionPage);
+        console.log(`✅ Fetched questions ${questionOffset + 1} to ${questionOffset + questionPage.length}`);
+        hasMoreQuestions = questionPage.length === pageSize;
+        questionOffset += pageSize;
+      } else {
+        hasMoreQuestions = false;
+      }
+    }
+
+    const questions = allQuestions;
+    console.log(`✅ Total questions fetched: ${questions.length}`);
 
     // Transform into nested structure
     const curriculum: Subject[] = subjects.map((subject) => {
