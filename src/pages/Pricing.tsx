@@ -364,24 +364,24 @@ const Pricing = () => {
           </motion.h2>
 
           <motion.div 
-            className="grid md:grid-cols-2 gap-12 items-start"
+            className="flex flex-col items-center max-w-2xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* Left Column - Form */}
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">
+            {/* Form Card */}
+            <div className="w-full bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12">
+              <h3 className="text-xl font-bold mb-3 text-gray-900 text-center">
                 Most students have their subscription covered by their parents.
               </h3>
               
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="text-gray-600 mb-2 leading-relaxed text-center">
                 We understand that conversations about subscriptions can be awkward.
               </p>
               
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <p className="text-gray-600 mb-8 leading-relaxed text-center">
                 Mentiora can send an email on your behalf to explain the subscription details.
               </p>
 
@@ -420,106 +420,77 @@ const Pricing = () => {
               </Button>
             </div>
 
-            {/* Right Column - Email on Laptop */}
-            <div className="relative flex items-center justify-center pt-8">
-              <div className="relative w-full max-w-xl">
-                {/* Laptop Screen */}
-                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-lg p-2 shadow-2xl">
-                  {/* Screen bezel */}
-                  <div className="bg-black rounded-lg p-1 shadow-inner">
-                    {/* Browser Chrome */}
-                    <div className="bg-white rounded-md overflow-hidden">
-                      {/* Browser toolbar */}
-                      <div className="flex items-center gap-2 px-2 py-1.5 bg-gray-100 border-b border-gray-200">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+            {/* iPhone Mockup */}
+            <div className="relative">
+              {/* iPhone Frame */}
+              <div className="relative w-[340px] bg-black rounded-[3rem] p-3 shadow-2xl">
+                {/* Screen */}
+                <div className="relative bg-white rounded-[2.5rem] overflow-hidden">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
+                  
+                  {/* Status Bar */}
+                  <div className="relative bg-white pt-8 px-6 pb-2 flex items-center justify-between text-xs">
+                    <span className="font-semibold">9:41</span>
+                    <div className="flex items-center gap-1">
+                      <div className="flex gap-0.5">
+                        <div className="w-1 h-3 bg-black rounded-full"></div>
+                        <div className="w-1 h-3 bg-black rounded-full"></div>
+                        <div className="w-1 h-3 bg-black rounded-full"></div>
+                        <div className="w-1 h-3 bg-gray-300 rounded-full"></div>
+                      </div>
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" strokeWidth="2"/>
+                        <path d="M22 10v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Email App Content */}
+                  <div className="bg-white h-[580px] overflow-hidden">
+                    {/* Email Header */}
+                    <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                          M
                         </div>
-                        <div className="flex-1 bg-white rounded px-2 py-0.5 text-[9px] text-gray-600">
-                          mently.app/get-parent
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-gray-900 text-sm truncate">Mentiora</div>
+                          <div className="text-xs text-gray-500 truncate">hello@mentiora.com</div>
+                        </div>
+                      </div>
+                      <div className="text-xs text-gray-500 mb-1">To: Parent/Guardian</div>
+                      <h3 className="text-base font-bold text-gray-900">
+                        Help Your Child Get Through GCSEs
+                      </h3>
+                    </div>
+                    
+                    {/* Email Body */}
+                    <div className="px-6 py-4 space-y-3 text-sm text-gray-700 leading-relaxed">
+                      <p className="text-gray-600">Dear parent or guardian,</p>
+                      
+                      <p>Your child has expressed interest in using Mentiora for GCSE prep. Mentiora is an AI-powered revision platform used by thousands of GCSE students.</p>
+                      
+                      <p className="font-semibold text-gray-900">What's included:</p>
+                      
+                      <div className="space-y-2.5">
+                        <div className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
+                          <span>2,500+ exam-style questions with instant marking</span>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
+                          <span>24/7 tutoring with step-by-step explanations</span>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
+                          <span>Predicted Papers & performance analytics</span>
                         </div>
                       </div>
                       
-                      {/* Email Content */}
-                      <div className="p-4 bg-white h-[240px] overflow-hidden">
-                        {/* Email Header */}
-                        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
-                          <div className="w-7 h-7 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white font-bold text-xs">
-                            M
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-900 text-xs">Mentiora</div>
-                            <div className="text-[9px] text-gray-500">hello@mentiora.com</div>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div>
-                            <div className="text-[8px] text-gray-500 mb-0.5">To: Parent/Guardian</div>
-                            <h3 className="text-xs font-bold text-gray-900">
-                              Help Your Child Get Through GCSEs
-                            </h3>
-                          </div>
-                          
-                          <div className="space-y-1.5 text-[10px] text-gray-700 leading-relaxed">
-                            <p className="text-gray-600">Dear parent or guardian,</p>
-                            
-                            <p>Your child has expressed interest in using Mentiora for GCSE prep...</p>
-                            
-                            <div className="space-y-1">
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">2,500+ exam-style questions with instant marking</span>
-                              </div>
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">24/7 tutoring with step-by-step explanations</span>
-                              </div>
-                              <div className="flex items-start gap-1.5">
-                                <Check className="w-2.5 h-2.5 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                                <span className="text-[9px]">Predicted Papers & performance analytics</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <p>Starting at just <span className="font-bold">£9.99/month</span> - less than the cost of a single tutoring session.</p>
                     </div>
                   </div>
-                </div>
-                
-                {/* Laptop Base */}
-                <div className="relative">
-                  {/* Keyboard section */}
-                  <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 px-4 py-3 rounded-b-md shadow-2xl">
-                    {/* Keyboard keys */}
-                    <div className="space-y-0.5 opacity-30">
-                      <div className="flex gap-0.5 justify-center">
-                        {[...Array(13)].map((_, i) => (
-                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                        ))}
-                      </div>
-                      <div className="flex gap-0.5 justify-center px-2">
-                        {[...Array(12)].map((_, i) => (
-                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                        ))}
-                      </div>
-                      <div className="flex gap-0.5 justify-center">
-                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                        {[...Array(10)].map((_, i) => (
-                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                        ))}
-                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                      </div>
-                      <div className="flex gap-0.5 justify-center px-12">
-                        <div className="flex-1 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
-                      </div>
-                    </div>
-                    {/* Trackpad */}
-                    <div className="mt-1.5 mx-auto w-24 h-12 bg-gray-700 rounded border border-gray-600 opacity-20 shadow-inner"></div>
-                  </div>
-                  {/* Bottom edge */}
-                  <div className="mx-auto w-2/3 h-1.5 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg shadow-2xl opacity-80"></div>
                 </div>
               </div>
             </div>
