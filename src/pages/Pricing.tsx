@@ -230,7 +230,7 @@ const Pricing = () => {
 
         {/* Pricing Cards */}
         <motion.div 
-          className="grid md:grid-cols-2 gap-6 mb-16"
+          className="grid md:grid-cols-3 gap-6 mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -291,6 +291,31 @@ const Pricing = () => {
 
             <p className="text-sm text-white/80 mt-4 text-center">
               £{examYear === "2026" ? "79.99" : "179.99"} billed once.
+            </p>
+          </Card>
+
+          {/* Enterprise for Schools */}
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
+            <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
+            <p className="text-gray-600 mb-6">For schools and institutions.</p>
+            
+            <div className="mb-8">
+              <div className="flex items-baseline gap-2">
+                <span className="text-5xl font-bold text-gray-900">Custom</span>
+              </div>
+              <p className="text-sm text-gray-500 mt-2">Pricing tailored to your needs</p>
+            </div>
+
+            <Button
+              onClick={() => window.location.href = 'mailto:yash@mentiora.com?subject=Enterprise Inquiry for Schools'}
+              variant="outline"
+              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
+            >
+              Contact Sales
+            </Button>
+
+            <p className="text-sm text-gray-500 mt-4 text-center">
+              Volume discounts available.
             </p>
           </Card>
         </motion.div>
