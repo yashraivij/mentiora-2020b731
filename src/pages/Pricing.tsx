@@ -95,16 +95,17 @@ const Pricing = () => {
   };
 
   const features = [
-    "Get an adaptive personalised weekly study plan tailored to your learning pace and exam goals.",
-    "Practice with 2,500+ exam-style questions per subject with instant marking and feedback.",
-    "Track your performance with real-time analytics showing strengths, weaknesses and predicted grades.",
-    "Access 24/7 tutoring with step-by-step explanations for every concept and question.",
-    "Get exclusive access to Mentiora's 2026 Predicted Papers.",
-    "Create and review custom flashcards powered by spaced repetition for better retention.",
-    "Study efficiently with exam-focused notes for every topic in your curriculum.",
-    "Monitor stress levels with adaptive learning recommendations to maintain optimal study performance.",
-    "Access 40+ subjects from GCSEs, IGCSEs, and A Levels across multiple examination boards including AQA, Edexcel, and OCR.",
-    "Start immediately - change or cancel your plan anytime."
+    "A personalised weekly study plan that adjusts to your learning pace, subjects, and target grades.",
+    "Practice that mirrors the real exam, with thousands of carefully written, exam-style questions per subject.",
+    "Instant feedback and worked solutions that help you understand why an answer is correct, not just what it is.",
+    "Progress analytics built for results — track your predicted grades, weak topics, and improvement over time.",
+    "24/7 expert support and explanations, available whenever you get stuck or need clarity.",
+    "Exclusive 2026 Predicted Papers, written by experienced exam specialists to reflect your exact specification.",
+    "Custom flashcards with spaced repetition, ensuring the right topics resurface just before you forget them.",
+    "Condensed revision notes for every topic, written around what examiners actually reward.",
+    "Adaptive study insights that balance challenge and progress to help maintain focus and reduce burnout.",
+    "Full access to 40+ GCSE, IGCSE, and A Level subjects across AQA, Edexcel, and OCR exam boards.",
+    "Start instantly. Cancel or change your plan anytime — no hidden fees, no commitment."
   ];
 
   const fadeInUp = {
@@ -303,11 +304,13 @@ const Pricing = () => {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="space-y-4">
+          <div className="space-y-6">
             {features.map((feature, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-[#3B82F6] flex-shrink-0 mt-0.5" />
-                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
+              <div key={i} className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center text-white font-bold text-sm shadow-md">
+                  {i + 1}
+                </div>
+                <p className="text-gray-700 text-base leading-relaxed pt-1">{feature}</p>
               </div>
             ))}
           </div>
