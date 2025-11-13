@@ -1,6 +1,22 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { Subject, Topic, Question } from "./curriculumService";
 
+// Temporary type workaround until Supabase types regenerate
+interface CustomExamConfigRow {
+  id: string;
+  user_id: string;
+  title: string;
+  subject_id: string;
+  exam_board: string | null;
+  selected_topics: string[];
+  timer_minutes: number;
+  difficulty_filter: string;
+  target_marks: number;
+  question_count: number;
+  last_taken_at: string | null;
+  created_at: string;
+}
+
 export interface CustomExamConfig {
   id?: string;
   userId?: string;
@@ -177,7 +193,7 @@ export async function saveCustomExamConfig(
   }
 
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .insert({
       user_id: user.id,
       title: config.title,
@@ -190,7 +206,7 @@ export async function saveCustomExamConfig(
       question_count: config.questionCount
     })
     .select('id')
-    .single();
+    .single() as any;
 
   if (error) {
     throw error;
@@ -206,13 +222,17 @@ export async function loadCustomExamConfig(
   configId: string
 ): Promise<CustomExamConfig> {
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .select('*')
     .eq('id', configId)
-    .single();
+    .single() as { data: CustomExamConfigRow | null; error: any };
 
   if (error) {
     throw error;
+  }
+
+  if (!data) {
+    throw new Error('Configuration not found');
   }
 
   return {
@@ -239,13 +259,17 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
   }
 
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .select('*')
     .eq('user_id', user.id)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false }) as { data: CustomExamConfigRow[] | null; error: any };
 
   if (error) {
     throw error;
+  }
+
+  if (!data) {
+    return [];
   }
 
   return data.map(d => ({
@@ -267,9 +291,9 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
  */
 export async function updateLastTaken(configId: string): Promise<void> {
   const { error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .update({ last_taken_at: new Date().toISOString() })
-    .eq('id', configId);
+    .eq('id', configId) as any;
 
   if (error) {
     throw error;
@@ -281,9 +305,9 @@ export async function updateLastTaken(configId: string): Promise<void> {
  */
 export async function deleteCustomExamConfig(configId: string): Promise<void> {
   const { error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .delete()
-    .eq('id', configId);
+    .eq('id', configId) as any;
 
   if (error) {
     throw error;
