@@ -7151,12 +7151,14 @@ Write a story about a moment of fear.
       })();
     }
     
-    navigate(`/predicted-results/${subjectId}`, {
+    navigate(`/predicted-results/${subjectId || 'custom'}`, {
       state: { 
         questions: examQuestions, 
         answers: answers,
         timeElapsed: getExamDuration() * 60 - timeLeft,
-        totalMarks: getTotalMarks()
+        totalMarks: getTotalMarks(),
+        isCustomExam: isCustomExam,
+        customExamTitle: customExamTitle
       } 
     });
   };
@@ -7383,21 +7385,28 @@ Write a story about a moment of fear.
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <h1 className="text-lg font-semibold text-slate-900 truncate">
-                {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
-                 subjectId === 'history' ? 'History Predicted Exam – Paper 1' : 
-                 subjectId === 'religious-studies' ? 'Religious Studies Predicted Exam – Component 1' : 
-                 subjectId === 'geography' ? `Geography Predicted Exam – ${geographyPaperType}` : 
-                 subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Predicted Exam – Paper 1' :
-                 subjectId === 'geography-b-ocr' ? 'Geography B (OCR) Predicted Exam – Paper 1' :
-                 subjectId === 'geography-paper-2' ? 'Geography Predicted Exam – Paper 2' :
-                 subjectId === 'maths' ? 'AQA Maths Predicted Exam – Paper 1 (Non-Calculator)' :
-                 subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) Predicted Exam – Paper 1: Pure Mathematics' :
-                 subjectId === 'computer-science' ? 'Computer Science Predicted Exam – Paper 1' :
-                 subjectId === 'psychology' ? 'Psychology Predicted Exam – Component 01' :
-                 subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Predicted Exam – Paper 1' :
-                 subjectId?.includes('-paper-2') ? `${subject.name} Predicted Exam – Paper 2` :
-                 subjectId?.includes('-paper-3') ? `${subject.name} Predicted Exam – Paper 3` :
-                 `${subject.name} Predicted Exam – Paper 1`}
+                {isCustomExam ? (
+                  <span className="flex items-center gap-2">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary">Custom Exam</Badge>
+                    {customExamTitle}
+                  </span>
+                ) : (
+                  subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
+                  subjectId === 'history' ? 'History Predicted Exam – Paper 1' : 
+                  subjectId === 'religious-studies' ? 'Religious Studies Predicted Exam – Component 1' : 
+                  subjectId === 'geography' ? `Geography Predicted Exam – ${geographyPaperType}` : 
+                  subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Predicted Exam – Paper 1' :
+                  subjectId === 'geography-b-ocr' ? 'Geography B (OCR) Predicted Exam – Paper 1' :
+                  subjectId === 'geography-paper-2' ? 'Geography Predicted Exam – Paper 2' :
+                  subjectId === 'maths' ? 'AQA Maths Predicted Exam – Paper 1 (Non-Calculator)' :
+                  subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) Predicted Exam – Paper 1: Pure Mathematics' :
+                  subjectId === 'computer-science' ? 'Computer Science Predicted Exam – Paper 1' :
+                  subjectId === 'psychology' ? 'Psychology Predicted Exam – Component 01' :
+                  subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Predicted Exam – Paper 1' :
+                  subjectId?.includes('-paper-2') ? `${subject.name} Predicted Exam – Paper 2` :
+                  subjectId?.includes('-paper-3') ? `${subject.name} Predicted Exam – Paper 3` :
+                  `${subject.name} Predicted Exam – Paper 1`
+                )}
               </h1>
             </div>
 
