@@ -1110,6 +1110,97 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     console.log('subject name:', subject?.name);
     const questions: ExamQuestion[] = [];
     
+    // Special handling for AQA Geography A-level Paper 1
+    if (subjectId === 'geography-aqa-alevel') {
+      console.log('🌍 Generating AQA Geography A-level Paper 1...');
+      
+      const waterCarbonTopic = subject?.topics.find(t => t.id === 'water-carbon-cycles');
+      const hotDesertTopic = subject?.topics.find(t => t.id === 'hot-desert-systems-landscapes');
+      const coastalTopic = subject?.topics.find(t => t.id === 'coastal-systems-landscapes');
+      const glacialTopic = subject?.topics.find(t => t.id === 'glacial-systems-landscapes');
+      const hazardsTopic = subject?.topics.find(t => t.id === 'hazards');
+      const ecosystemsTopic = subject?.topics.find(t => t.id === 'ecosystems-under-stress');
+      
+      const paper1Questions: ExamQuestion[] = [];
+      
+      // Section A: Water and carbon cycles (mandatory, 36 marks)
+      const sectionAQuestions = waterCarbonTopic?.questions.filter(q => q.id.startsWith('geo-paper1-1')) || [];
+      sectionAQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: index + 1,
+          text: `SECTION A – Water and carbon cycles (mandatory)\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section A - Water and Carbon Cycles'
+        });
+      });
+      
+      // Section B: Options (one of: Hot Desert, Coastal, Glacial) - 36 marks each
+      // Hot Desert option
+      const hotDesertQuestions = hotDesertTopic?.questions.filter(q => q.id.startsWith('geo-paper1-2')) || [];
+      hotDesertQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: 6 + index,
+          text: `SECTION B – Option A: Hot desert systems and landscapes\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section B - Hot Desert Systems'
+        });
+      });
+      
+      // Coastal option
+      const coastalQuestions = coastalTopic?.questions.filter(q => q.id.startsWith('geo-paper1-2')) || [];
+      coastalQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: 6 + index,
+          text: `SECTION B – Option B: Coastal systems and landscapes\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section B - Coastal Systems'
+        });
+      });
+      
+      // Glacial option
+      const glacialQuestions = glacialTopic?.questions.filter(q => q.id.startsWith('geo-paper1-2')) || [];
+      glacialQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: 6 + index,
+          text: `SECTION B – Option C: Glacial systems and landscapes\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section B - Glacial Systems'
+        });
+      });
+      
+      // Section C: Options (one of: Hazards, Ecosystems) - 48 marks each
+      // Hazards option
+      const hazardsQuestions = hazardsTopic?.questions.filter(q => q.id.startsWith('geo-paper1-3')) || [];
+      hazardsQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: 10 + index,
+          text: `SECTION C – Option A: Hazards\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section C - Hazards'
+        });
+      });
+      
+      // Ecosystems option
+      const ecosystemsQuestions = ecosystemsTopic?.questions.filter(q => q.id.startsWith('geo-paper1-3')) || [];
+      ecosystemsQuestions.forEach((q, index) => {
+        paper1Questions.push({
+          id: q.id,
+          questionNumber: 10 + index,
+          text: `SECTION C – Option B: Ecosystems under stress\n\n${q.question}\n\n[${q.marks} marks]`,
+          marks: q.marks,
+          section: 'Section C - Ecosystems Under Stress'
+        });
+      });
+      
+      console.log('✅ Generated', paper1Questions.length, 'Geography A-level Paper 1 questions');
+      return paper1Questions;
+    }
+    
     // Special handling for English Literature Edexcel 2026 Predicted Exam
     if (subjectId === 'english-literature-edexcel') {
       return [
