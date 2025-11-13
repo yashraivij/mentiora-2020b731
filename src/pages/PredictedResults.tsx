@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight, Star } from "lucide-react";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -44,6 +44,7 @@ interface QuestionAttempt {
 
 const PredictedResults = () => {
   const { subjectId } = useParams();
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const location = useLocation();
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);

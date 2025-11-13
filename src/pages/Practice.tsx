@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { curriculum, Question } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
+import type { Question } from "@/services/curriculumService";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -69,6 +70,7 @@ const Practice = () => {
   const { subjectId, topicId } = useParams();
   console.log('📍 URL params extracted:', { subjectId, topicId });
   
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();

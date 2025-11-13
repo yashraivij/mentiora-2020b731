@@ -24,7 +24,6 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
-import TestCurriculum from "./pages/TestCurriculum";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -102,7 +101,6 @@ const App: React.FC = () => (
                   <Flashcards />
                 </ProtectedRoute>
               } />
-              <Route path="/test-curriculum" element={<TestCurriculum />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

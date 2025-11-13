@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -31,7 +31,7 @@ interface OnboardingData {
 }
 
 // Extract unique subjects from curriculum by level
-const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
+const getSubjectsByLevel = (curriculum: any[], level: 'gcse' | 'alevel' | 'igcse') => {
   const subjectMap: { [key: string]: { id: string; name: string; examBoard: string; emoji: string } } = {};
   
   curriculum.forEach((subject) => {
@@ -88,10 +88,6 @@ const getSubjectsByLevel = (level: 'gcse' | 'alevel' | 'igcse') => {
   
   return Object.values(subjectMap).sort((a, b) => a.name.localeCompare(b.name));
 };
-
-const GCSE_SUBJECTS = getSubjectsByLevel('gcse');
-const ALEVEL_SUBJECTS = getSubjectsByLevel('alevel');
-const IGCSE_SUBJECTS = getSubjectsByLevel('igcse');
 
 const ACQUISITION_SOURCES = [
   { id: 'google', label: 'Google search', emoji: '🔍' },
@@ -198,6 +194,7 @@ const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
 const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const [currentStep, setCurrentStep] = useState(0);
   const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<string | null>(null);
@@ -348,12 +345,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const getCurrentSubjects = () => {
-    if (subjectLevel === 'gcse') return GCSE_SUBJECTS;
-    if (subjectLevel === 'alevel') return ALEVEL_SUBJECTS;
-    return IGCSE_SUBJECTS;
+    if (curriculumLoading) return [];
+    return getSubjectsByLevel(curriculum, subjectLevel);
   };
 
   const currentSubjects = getCurrentSubjects();
+  const GCSE_SUBJECTS = getSubjectsByLevel(curriculum, 'gcse');
+  const ALEVEL_SUBJECTS = getSubjectsByLevel(curriculum, 'alevel');
+  const IGCSE_SUBJECTS = getSubjectsByLevel(curriculum, 'igcse');
   const filteredSubjects = currentSubjects.filter(subject =>
     subject.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

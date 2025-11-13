@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import { ArrowLeft, Target, TrendingUp, Clock, Zap, Brain, Flame, CheckCircle2, Rocket, Send, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -20,6 +20,7 @@ interface TopicProgress {
 
 const SubjectTopics = () => {
   const { subjectId } = useParams();
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);

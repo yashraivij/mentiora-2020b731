@@ -10,7 +10,7 @@ export interface Question {
   markingCriteria: Record<string, any>;
   specReference?: string;
   calculatorGuidance?: string;
-  orderIndex: number;
+  orderIndex?: number;
 }
 
 export interface Topic {

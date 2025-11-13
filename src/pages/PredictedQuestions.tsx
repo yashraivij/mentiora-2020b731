@@ -5,12 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const PredictedQuestions = () => {
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);

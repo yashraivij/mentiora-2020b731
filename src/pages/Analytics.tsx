@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { curriculum } from "@/data/curriculum";
+import { useCurriculum } from "@/hooks/useCurriculum";
 import { ArrowLeft, TrendingUp, AlertTriangle, Target, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
@@ -21,6 +21,7 @@ interface AnalyticsData {
 const Analytics = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
 
