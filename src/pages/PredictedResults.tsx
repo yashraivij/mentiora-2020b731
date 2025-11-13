@@ -51,7 +51,7 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   
-  const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle } = location.state || {};
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -760,10 +760,14 @@ const PredictedResults = () => {
         {/* Hero Header */}
         <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
           <h1 className="text-3xl font-bold text-foreground">
-            Predicted Exam Complete!
+            {isCustomExam ? 'Custom Exam Complete!' : 'Predicted Exam Complete!'}
           </h1>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-            You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.
+            {isCustomExam ? (
+              <>You've just finished <span className="font-semibold text-[hsl(195,69%,54%)]">{customExamTitle}</span> — here's how you did.</>
+            ) : (
+              <>You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.</>
+            )}
           </p>
         </div>
 
@@ -775,11 +779,16 @@ const PredictedResults = () => {
               <div className="text-center space-y-3">
                 <div className="space-y-1">
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Overall Score
+                    {isCustomExam ? 'Your Exam Grade' : 'Overall Score'}
                   </p>
                   <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
                     {percentage}%
                   </p>
+                  {isCustomExam && (
+                    <p className="text-sm font-semibold text-muted-foreground mt-2">
+                      If this was the actual exam, you would achieve: <span className="text-[hsl(195,69%,54%)] font-bold">Grade {grade}</span>
+                    </p>
+                  )}
                   <p className="text-sm text-muted-foreground">
                     {correctAnswers} out of {questions.length} questions correct
                   </p>

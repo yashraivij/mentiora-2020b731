@@ -7156,7 +7156,9 @@ Write a story about a moment of fear.
         questions: examQuestions, 
         answers: answers,
         timeElapsed: getExamDuration() * 60 - timeLeft,
-        totalMarks: getTotalMarks()
+        totalMarks: getTotalMarks(),
+        isCustomExam: isCustomExam,
+        customExamTitle: customExamTitle
       } 
     });
   };
@@ -7191,10 +7193,16 @@ Write a story about a moment of fear.
               <div className="relative">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3BAFDA]/10 border border-[#3BAFDA]/20 mb-3">
                   <div className="w-2 h-2 rounded-full bg-[#3BAFDA] animate-pulse"></div>
-                  <span className="text-sm font-medium text-[#3BAFDA]">Predicted Exam</span>
+                  <span className="text-sm font-medium text-[#3BAFDA]">
+                    {isCustomExam ? 'Custom Paper' : 'Predicted Exam'}
+                  </span>
                 </div>
-                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
-                <p className="text-muted-foreground text-lg">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
+                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+                  {isCustomExam ? customExamTitle : (subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`)}
+                </h1>
+                <p className="text-muted-foreground text-lg">
+                  {isCustomExam ? `Custom Paper • ${getExamDuration()} minutes` : `${getBadgeText(subjectId || '')} • ${getExamDuration()} minutes`}
+                </p>
               </div>
             </div>
 
