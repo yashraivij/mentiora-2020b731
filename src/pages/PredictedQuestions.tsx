@@ -343,6 +343,49 @@ const PredictedQuestions = () => {
       </header>
 
       <div className="relative z-10 container mx-auto px-6 pt-4 pb-8 max-w-6xl">
+        {/* Build My Exam Paper Feature Card */}
+        <Card className="border-2 border-primary bg-gradient-to-br from-primary/10 to-primary/5 mb-8">
+          <CardHeader>
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <Badge className="bg-primary mb-2">NEW</Badge>
+                <CardTitle className="text-2xl mb-2">Build My Exam Paper</CardTitle>
+                <CardDescription className="text-base">
+                  Create personalized practice papers tailored to your needs. 
+                  <span className="font-semibold text-foreground">
+                    {" "}Stop repeating the same questions
+                  </span> 
+                  {" "}- generate unique exams every time from our extensive question bank.
+                </CardDescription>
+              </div>
+              <Sparkles className="h-8 w-8 text-primary flex-shrink-0" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="text-center">
+                <Target className="h-6 w-6 mx-auto mb-1 text-primary" />
+                <p className="text-sm font-medium">Choose Topics</p>
+              </div>
+              <div className="text-center">
+                <Clock className="h-6 w-6 mx-auto mb-1 text-primary" />
+                <p className="text-sm font-medium">Set Timer</p>
+              </div>
+              <div className="text-center">
+                <Zap className="h-6 w-6 mx-auto mb-1 text-primary" />
+                <p className="text-sm font-medium">Pick Difficulty</p>
+              </div>
+            </div>
+            <Button 
+              className="w-full bg-primary hover:bg-primary/90"
+              onClick={() => navigate('/build-exam')}
+            >
+              <Rocket className="mr-2 h-4 w-4" />
+              Build My Exam Paper
+            </Button>
+          </CardContent>
+        </Card>
+        
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
