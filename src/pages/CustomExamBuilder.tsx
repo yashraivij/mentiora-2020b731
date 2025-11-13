@@ -59,7 +59,13 @@ const CustomExamBuilder = () => {
   ) || [];
 
   const handleSubjectSelect = (subjectId: string) => {
-    setConfig({ ...config, subjectId, selectedTopics: [], examBoard: null });
+    const subject = curriculum.find(s => s.id === subjectId);
+    setConfig({ 
+      ...config, 
+      subjectId, 
+      selectedTopics: [], 
+      examBoard: subject?.examBoard || null 
+    });
     setStep(2);
   };
 
@@ -130,10 +136,14 @@ const CustomExamBuilder = () => {
       // Navigate to exam page
       navigate(`/predicted-exam/custom/${configId}`);
     } catch (error) {
-      console.error('Error generating exam:', error);
+      console.error('❌ Error generating exam:', error);
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'An unexpected error occurred';
+      
       toast({
         title: "Generation failed",
-        description: "Unable to create exam. Please try again.",
+        description: errorMessage,
         variant: "destructive"
       });
       setIsGenerating(false);

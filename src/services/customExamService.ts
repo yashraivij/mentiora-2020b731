@@ -187,31 +187,58 @@ export async function generateCustomExam(
 export async function saveCustomExamConfig(
   config: CustomExamConfig
 ): Promise<string> {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    throw new Error('User not authenticated');
+  // Use getSession() for better RLS compatibility - includes JWT token
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  
+  if (sessionError) {
+    console.error('❌ Session error:', sessionError);
+    throw new Error(`Authentication error: ${sessionError.message}`);
   }
+  
+  if (!session?.user?.id) {
+    console.error('❌ No valid session or user ID found');
+    throw new Error('You must be logged in to create custom exams');
+  }
+
+  const userId = session.user.id;
+  console.log('✅ User authenticated:', userId);
+
+  const insertData = {
+    user_id: userId,
+    title: config.title,
+    subject_id: config.subjectId,
+    exam_board: config.examBoard || null,
+    selected_topics: config.selectedTopics,
+    timer_minutes: config.timerMinutes,
+    difficulty_filter: config.difficultyFilter,
+    target_marks: config.targetMarks,
+    question_count: config.questionCount || 0
+  };
+
+  console.log('📤 Inserting config:', JSON.stringify(insertData, null, 2));
 
   const { data, error } = await supabase
     .from('custom_exam_configs' as any)
-    .insert({
-      user_id: user.id,
-      title: config.title,
-      subject_id: config.subjectId,
-      exam_board: config.examBoard,
-      selected_topics: config.selectedTopics,
-      timer_minutes: config.timerMinutes,
-      difficulty_filter: config.difficultyFilter,
-      target_marks: config.targetMarks,
-      question_count: config.questionCount
-    })
+    .insert(insertData)
     .select('id')
     .single() as any;
 
   if (error) {
-    throw error;
+    console.error('❌ Database error:', {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code
+    });
+    throw new Error(`Failed to save exam configuration: ${error.message}`);
   }
 
+  if (!data?.id) {
+    console.error('❌ No ID returned from insert');
+    throw new Error('Failed to save exam configuration: No ID returned');
+  }
+
+  console.log('✅ Config saved with ID:', data.id);
   return data.id;
 }
 
