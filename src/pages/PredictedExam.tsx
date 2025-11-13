@@ -6801,6 +6801,7 @@ Write a story about a moment of fear.
       geography: 90, // 1h 30min
       "geography-a-edexcel": 90, // 1h 30min
       "geography-b-ocr": 90, // 1h 30min
+      "geography-aqa-alevel": 150, // 2h 30min (AQA A-Level Geography Paper 1)
       "computer-science": 120, // 2h
       psychology: 90, // 1h 30min
       "psychology-aqa-alevel": 120, // 2h (AQA A-Level Psychology Paper 1)
@@ -6841,6 +6842,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'geography-b-ocr') {
       return 70; // OCR Geography B Papers 01/02: 70 marks each, Paper 03: 60 marks
+    }
+    if (subjectId === 'geography-aqa-alevel') {
+      return 120; // AQA A-Level Geography Paper 1: 120 marks (Section A: 36, Section B: 36, Section C: 48)
     }
     if (subjectId === 'history-edexcel-gcse') {
       return 52; // History Edexcel Paper 1: 52 marks total (4+12+20+4+8+12)
