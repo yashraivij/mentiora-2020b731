@@ -1115,9 +1115,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       console.log('🌍 Generating AQA Geography A-level Paper 1...');
       
       const waterCarbonTopic = subject?.topics.find(t => t.id === 'water-carbon-cycles');
-      const hotDesertTopic = subject?.topics.find(t => t.id === 'hot-desert-systems-landscapes');
-      const coastalTopic = subject?.topics.find(t => t.id === 'coastal-systems-landscapes');
-      const glacialTopic = subject?.topics.find(t => t.id === 'glacial-systems-landscapes');
+      const hotDesertTopic = subject?.topics.find(t => t.id === 'hot-desert-systems');
+      const coastalTopic = subject?.topics.find(t => t.id === 'coastal-systems');
+      const glacialTopic = subject?.topics.find(t => t.id === 'glacial-systems');
       const hazardsTopic = subject?.topics.find(t => t.id === 'hazards');
       const ecosystemsTopic = subject?.topics.find(t => t.id === 'ecosystems-under-stress');
       
