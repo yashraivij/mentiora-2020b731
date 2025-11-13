@@ -90,8 +90,10 @@ const CustomExamBuilder = () => {
       return;
     }
 
-    if (!config.title || config.title.trim() === "") {
-      setConfig({ ...config, title: `Custom ${selectedSubject?.name || 'Exam'} Paper` });
+    let examTitle = config.title;
+    if (!examTitle || examTitle.trim() === "") {
+      examTitle = `Custom ${selectedSubject?.name || 'Exam'} Paper`;
+      setConfig({ ...config, title: examTitle });
     }
 
     setIsGenerating(true);
@@ -103,16 +105,17 @@ const CustomExamBuilder = () => {
       if (questions.length === 0) {
         toast({
           title: "No questions available",
-          description: "Try selecting different topics or difficulty levels",
+          description: "No questions match your criteria. Try adjusting your selection.",
           variant: "destructive"
         });
         setIsGenerating(false);
         return;
       }
 
-      // Save configuration
+      // Save the configuration
       const configId = await saveCustomExamConfig({
         ...config,
+        title: examTitle,
         questionCount: questions.length
       } as CustomExamConfig);
 
