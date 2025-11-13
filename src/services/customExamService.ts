@@ -177,7 +177,7 @@ export async function saveCustomExamConfig(
   }
 
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .insert({
       user_id: user.id,
       title: config.title,
@@ -196,7 +196,7 @@ export async function saveCustomExamConfig(
     throw error;
   }
 
-  return data.id;
+  return (data as any).id;
 }
 
 /**
@@ -206,7 +206,7 @@ export async function loadCustomExamConfig(
   configId: string
 ): Promise<CustomExamConfig> {
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .select('*')
     .eq('id', configId)
     .single();
@@ -215,17 +215,18 @@ export async function loadCustomExamConfig(
     throw error;
   }
 
+  const record = data as any;
   return {
-    id: data.id,
-    userId: data.user_id,
-    title: data.title,
-    subjectId: data.subject_id,
-    examBoard: data.exam_board,
-    selectedTopics: data.selected_topics,
-    timerMinutes: data.timer_minutes,
-    difficultyFilter: data.difficulty_filter as any,
-    targetMarks: data.target_marks,
-    questionCount: data.question_count
+    id: record.id,
+    userId: record.user_id,
+    title: record.title,
+    subjectId: record.subject_id,
+    examBoard: record.exam_board,
+    selectedTopics: record.selected_topics,
+    timerMinutes: record.timer_minutes,
+    difficultyFilter: record.difficulty_filter,
+    targetMarks: record.target_marks,
+    questionCount: record.question_count
   };
 }
 
@@ -239,7 +240,7 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
   }
 
   const { data, error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .select('*')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
@@ -248,7 +249,7 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
     throw error;
   }
 
-  return data.map(d => ({
+  return (data as any[]).map(d => ({
     id: d.id,
     userId: d.user_id,
     title: d.title,
@@ -256,7 +257,7 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
     examBoard: d.exam_board,
     selectedTopics: d.selected_topics,
     timerMinutes: d.timer_minutes,
-    difficultyFilter: d.difficulty_filter as any,
+    difficultyFilter: d.difficulty_filter,
     targetMarks: d.target_marks,
     questionCount: d.question_count
   }));
@@ -267,7 +268,7 @@ export async function getUserExamConfigs(): Promise<CustomExamConfig[]> {
  */
 export async function updateLastTaken(configId: string): Promise<void> {
   const { error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .update({ last_taken_at: new Date().toISOString() })
     .eq('id', configId);
 
@@ -281,7 +282,7 @@ export async function updateLastTaken(configId: string): Promise<void> {
  */
 export async function deleteCustomExamConfig(configId: string): Promise<void> {
   const { error } = await supabase
-    .from('custom_exam_configs')
+    .from('custom_exam_configs' as any)
     .delete()
     .eq('id', configId);
 
