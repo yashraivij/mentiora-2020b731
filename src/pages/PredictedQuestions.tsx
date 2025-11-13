@@ -343,6 +343,65 @@ const PredictedQuestions = () => {
       </header>
 
       <div className="relative z-10 container mx-auto px-6 pt-4 pb-8 max-w-6xl">
+        {/* Build My Exam Paper Feature Card - NEW */}
+        <div className="mb-8 animate-fade-in">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-[hsl(195,69%,54%)]/10 via-card to-[hsl(195,69%,54%)]/5 border-2 border-[hsl(195,69%,54%)]/30 hover:border-[hsl(195,69%,54%)]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[hsl(195,69%,54%)]/20">
+            <div className="absolute top-4 right-4">
+              <Badge className="bg-[hsl(195,69%,54%)] text-white font-bold px-3 py-1 border-0">
+                NEW
+              </Badge>
+            </div>
+            
+            <CardContent className="p-6 md:p-8">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                {/* Icon */}
+                <div className="flex-shrink-0">
+                  <div className="p-4 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,69%,54%)]/10 rounded-2xl border border-[hsl(195,69%,54%)]/30">
+                    <Rocket className="h-12 w-12 text-[hsl(195,69%,54%)]" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="flex-grow text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                    Build My Exam Paper
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Stop doing the same past paper questions over and over. Create custom practice papers with your choice of topics, difficulty, and timing.
+                  </p>
+                  
+                  {/* Features */}
+                  <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
+                    <Badge variant="secondary" className="bg-[hsl(195,69%,54%)]/10 text-[hsl(195,69%,54%)] border-[hsl(195,69%,54%)]/20">
+                      <Target className="h-3 w-3 mr-1" />
+                      Choose Topics
+                    </Badge>
+                    <Badge variant="secondary" className="bg-[hsl(195,69%,54%)]/10 text-[hsl(195,69%,54%)] border-[hsl(195,69%,54%)]/20">
+                      <Clock className="h-3 w-3 mr-1" />
+                      Set Timer
+                    </Badge>
+                    <Badge variant="secondary" className="bg-[hsl(195,69%,54%)]/10 text-[hsl(195,69%,54%)] border-[hsl(195,69%,54%)]/20">
+                      <Zap className="h-3 w-3 mr-1" />
+                      Pick Difficulty
+                    </Badge>
+                  </div>
+                </div>
+                
+                {/* CTA Button */}
+                <div className="flex-shrink-0">
+                  <Button
+                    onClick={() => navigate('/build-exam')}
+                    className="bg-gradient-to-r from-[hsl(195,69%,54%)] to-[hsl(195,69%,54%)]/80 hover:from-[hsl(195,69%,54%)]/90 hover:to-[hsl(195,69%,54%)]/70 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Rocket className="h-4 w-4 mr-2" />
+                    Build My Exam Paper
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
