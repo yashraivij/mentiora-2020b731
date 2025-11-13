@@ -51,7 +51,7 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   
-  const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle } = location.state || {};
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -800,10 +800,18 @@ const PredictedResults = () => {
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
                   <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
-                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
+                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
+                    {isCustomExam ? 'Exam Results' : 'Grade Improvement'}
+                  </span>
                 </div>
-                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
+                <CardTitle className="text-2xl font-bold">
+                  {isCustomExam ? 'Your Exam Grade' : 'Predicted Grade'}
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {isCustomExam 
+                    ? 'Based on your performance in this custom exam' 
+                    : 'Based on your recent performance'}
+                </p>
               </div>
             </CardHeader>
             <CardContent className="p-6 relative">
@@ -812,7 +820,7 @@ const PredictedResults = () => {
                 <div className="flex items-center justify-center">
                   <div className="text-center space-y-2 group">
                     <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      Your Predicted Grade
+                      {isCustomExam ? 'Your Exam Grade' : 'Your Predicted Grade'}
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
@@ -820,6 +828,11 @@ const PredictedResults = () => {
                         {getDisplayGrade(numericGrade, subjectId)}
                       </div>
                     </div>
+                    {isCustomExam && (
+                      <p className="text-sm text-muted-foreground font-medium mt-3">
+                        If this was the actual exam, you would achieve: <span className="font-bold text-foreground">{getDisplayGrade(numericGrade, subjectId)}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
