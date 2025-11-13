@@ -24,6 +24,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
+import CustomExamBuilder from "./pages/CustomExamBuilder";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -70,7 +71,17 @@ const App: React.FC = () => (
                   <PredictedQuestions />
                 </ProtectedRoute>
               } />
+              <Route path="/build-exam" element={
+                <ProtectedRoute>
+                  <CustomExamBuilder />
+                </ProtectedRoute>
+              } />
               <Route path="/predicted-exam/:subjectId" element={
+                <ProtectedRoute>
+                  <PredictedExam />
+                </ProtectedRoute>
+              } />
+              <Route path="/predicted-exam/custom/:configId" element={
                 <ProtectedRoute>
                   <PredictedExam />
                 </ProtectedRoute>

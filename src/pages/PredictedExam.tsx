@@ -31,12 +31,17 @@ interface ExamAnswer {
 }
 
 const PredictedExam = () => {
-  const { subjectId } = useParams();
+  const { subjectId, configId } = useParams();
   const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
+  
+  const [isCustomExam, setIsCustomExam] = useState(false);
+  const [customExamTitle, setCustomExamTitle] = useState("");
+  const [customTimerMinutes, setCustomTimerMinutes] = useState(90);
+  const [customTotalMarks, setCustomTotalMarks] = useState(100);
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -6771,15 +6776,68 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
+    // Check if this is a custom exam
+    if (configId && configId.startsWith('custom')) {
+      setIsCustomExam(true);
+      
+      // Load custom exam data from sessionStorage
+      const customExamData = sessionStorage.getItem(`custom-exam-${configId}`);
+      if (customExamData) {
+        try {
+          const questions = JSON.parse(customExamData);
+          console.log('✅ Loaded custom exam with', questions.length, 'questions');
+          setExamQuestions(questions);
+          
+          // Load config data from localStorage if available
+          const configData = localStorage.getItem(`custom-config-${configId}`);
+          if (configData) {
+            const config = JSON.parse(configData);
+            setCustomExamTitle(config.title || 'Custom Exam');
+            setCustomTimerMinutes(config.timerMinutes || 90);
+            setCustomTotalMarks(config.targetMarks || questions.reduce((sum: number, q: any) => sum + q.marks, 0));
+          } else {
+            // Calculate total marks from questions
+            const totalMarks = questions.reduce((sum: number, q: any) => sum + q.marks, 0);
+            setCustomTotalMarks(totalMarks);
+            setCustomExamTitle('Custom Exam');
+          }
+          return;
+        } catch (error) {
+          console.error('Error loading custom exam:', error);
+          toast({
+            title: "Error loading exam",
+            description: "Unable to load custom exam data",
+            variant: "destructive"
+          });
+          navigate('/build-exam');
+          return;
+        }
+      } else {
+        toast({
+          title: "Exam not found",
+          description: "Custom exam data not available",
+          variant: "destructive"
+        });
+        navigate('/build-exam');
+        return;
+      }
+    }
+    
+    // Regular predicted exam generation
     console.log('🔄 useEffect triggered for exam questions generation');
     console.log('Current subjectId:', subjectId);
     const newQuestions = generateExamQuestions();
     console.log('Setting exam questions, count:', newQuestions.length);
     console.log('First question preview:', newQuestions[0]?.text);
     setExamQuestions(newQuestions);
-  }, [subjectId, subject]); // Added subject as dependency
+  }, [subjectId, subject, configId]); // Added configId as dependency
 
   const getExamDuration = () => {
+    // Return custom timer for custom exams
+    if (isCustomExam) {
+      return customTimerMinutes;
+    }
+    
     const durations = {
       chemistry: 135, // 2h 15min
       biology: 105, // 1h 45min (AQA Biology Paper 1)
@@ -6813,6 +6871,11 @@ Write a story about a moment of fear.
   };
 
   const getTotalMarks = () => {
+    // Return custom marks for custom exams
+    if (isCustomExam) {
+      return customTotalMarks;
+    }
+    
     if (subjectId === 'english-language') {
       return 80; // Section A: 40 marks (4+8+8+20) + Section B: 40 marks
     }
