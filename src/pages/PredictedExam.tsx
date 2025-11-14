@@ -59,7 +59,8 @@ const PredictedExam = () => {
   
   const subject = curriculum.find(s => s.id === subjectId || subjectId?.startsWith(s.id + '-paper-'));
   
-  if (!subject) {
+  // Only redirect if not a custom exam
+  if (!subject && !configId) {
     navigate('/predicted-questions');
     return null;
   }
@@ -6776,10 +6777,10 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
-    console.log('🔍 Route params:', { subjectId, configId, isCustom: subjectId === 'custom' });
+    console.log('🔍 Route params:', { subjectId, configId, isCustomExam: configId && !subjectId });
     
-    // Check if this is a custom exam
-    if (subjectId === 'custom' && configId) {
+    // Check if this is a custom exam (has configId but no subjectId)
+    if (configId && !subjectId) {
       setIsCustomExam(true);
       
       // Load custom exam data from sessionStorage

@@ -230,6 +230,51 @@ export type Database = {
           },
         ]
       }
+      custom_exam_configs: {
+        Row: {
+          created_at: string
+          difficulty_filter: string
+          exam_board: string | null
+          id: string
+          last_taken_at: string | null
+          question_count: number
+          selected_topics: string[]
+          subject_id: string
+          target_marks: number
+          timer_minutes: number
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          difficulty_filter?: string
+          exam_board?: string | null
+          id?: string
+          last_taken_at?: string | null
+          question_count?: number
+          selected_topics?: string[]
+          subject_id: string
+          target_marks?: number
+          timer_minutes?: number
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          difficulty_filter?: string
+          exam_board?: string | null
+          id?: string
+          last_taken_at?: string | null
+          question_count?: number
+          selected_topics?: string[]
+          subject_id?: string
+          target_marks?: number
+          timer_minutes?: number
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       daily_topic_mastery: {
         Row: {
           created_at: string
@@ -1644,6 +1689,19 @@ export type Database = {
       calculate_subject_accuracy: {
         Args: { exam_board?: string; subject: string; user_uuid: string }
         Returns: number
+      }
+      create_custom_exam_config: {
+        Args: {
+          p_difficulty_filter: string
+          p_exam_board: string
+          p_question_count: number
+          p_selected_topics: string[]
+          p_subject_id: string
+          p_target_marks: number
+          p_timer_minutes: number
+          p_title: string
+        }
+        Returns: string
       }
       delete_user_account: {
         Args: { user_id_to_delete: string }
