@@ -7098,7 +7098,7 @@ Write a story about a moment of fear.
                 const marksLost = question.marks - markingResult.marksAwarded;
                 
                 // Handle personalized notification for wrong answers
-                if (marksLost > 0) {
+                if (marksLost > 0 && subject) {
                   const topicName = getTopicNameFromQuestionId(question.id);
                   handlePredictedExamWrongAnswer(
                     question.questionNumber,
@@ -7405,6 +7405,13 @@ Write a story about a moment of fear.
     );
   }
 
+  console.log('🎯 Rendering exam view:', { 
+    isCustomExam, 
+    customExamTitle, 
+    questionsCount: examQuestions.length,
+    hasSubject: !!subject 
+  });
+
   return (
     <div className={`min-h-screen ${isPremium ? 'pt-2' : 'pt-16'}`} style={{ backgroundColor: '#ffffff' }}>
       {/* Medly-style Top Navigation */}
@@ -7428,7 +7435,8 @@ Write a story about a moment of fear.
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <h1 className="text-lg font-semibold text-slate-900 truncate">
-                {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
+                {isCustomExam ? (customExamTitle || 'Custom Exam') :
+                 subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
                  subjectId === 'history' ? 'History Predicted Exam – Paper 1' : 
                  subjectId === 'religious-studies' ? 'Religious Studies Predicted Exam – Component 1' : 
                  subjectId === 'geography' ? `Geography Predicted Exam – ${geographyPaperType}` : 
@@ -7440,9 +7448,9 @@ Write a story about a moment of fear.
                  subjectId === 'computer-science' ? 'Computer Science Predicted Exam – Paper 1' :
                  subjectId === 'psychology' ? 'Psychology Predicted Exam – Component 01' :
                  subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Predicted Exam – Paper 1' :
-                 subjectId?.includes('-paper-2') ? `${subject.name} Predicted Exam – Paper 2` :
-                 subjectId?.includes('-paper-3') ? `${subject.name} Predicted Exam – Paper 3` :
-                 `${subject.name} Predicted Exam – Paper 1`}
+                 subjectId?.includes('-paper-2') ? `${subject?.name || 'Subject'} Predicted Exam – Paper 2` :
+                 subjectId?.includes('-paper-3') ? `${subject?.name || 'Subject'} Predicted Exam – Paper 3` :
+                 `${subject?.name || 'Subject'} Predicted Exam – Paper 1`}
               </h1>
             </div>
 
