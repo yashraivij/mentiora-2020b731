@@ -292,9 +292,12 @@ const CustomExamBuilder = () => {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <CardTitle className="text-base">{topic.name}</CardTitle>
-                          <CardDescription className="mt-1">
-                            {topic.questions.length} questions available
-                          </CardDescription>
+                  <CardDescription className="mt-1">
+                    {topic.questions.length} questions available
+                    {config.difficultyFilter && config.difficultyFilter !== 'mixed' && config.difficultyFilter !== 'predicted-2026' && 
+                      ` (${topic.questions.filter(q => q.difficulty === config.difficultyFilter).length} ${config.difficultyFilter})`
+                    }
+                  </CardDescription>
                         </div>
                         <Checkbox checked={isSelected} />
                       </div>
@@ -321,13 +324,30 @@ const CustomExamBuilder = () => {
 
         {/* Step 3: Exam Configuration */}
         {step === 3 && (
-          <div className="space-y-8">
+            <div className="space-y-8">
             <div className="text-center space-y-2 mb-8">
               <h2 className="text-3xl font-bold">Configure Your Exam</h2>
               <p className="text-muted-foreground">
                 Customize timer, difficulty, and question types
               </p>
             </div>
+
+            {config.selectedTopics && config.selectedTopics.length > 0 && (
+              <Card className="border-primary/20 bg-primary/5">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    Expected Distribution
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    With {config.questionCount} questions across {config.selectedTopics.length} topic(s), 
+                    you'll get approximately <strong>{Math.floor(config.questionCount / config.selectedTopics.length)}-{Math.ceil(config.questionCount / config.selectedTopics.length)}</strong> questions per topic.
+                  </p>
+                </CardContent>
+              </Card>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Timer Length */}
