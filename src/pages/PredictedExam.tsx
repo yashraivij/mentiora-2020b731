@@ -42,6 +42,7 @@ const PredictedExam = () => {
   const [customExamTitle, setCustomExamTitle] = useState("");
   const [customTimerMinutes, setCustomTimerMinutes] = useState(90);
   const [customTotalMarks, setCustomTotalMarks] = useState(100);
+  const [isLoadingCustomExam, setIsLoadingCustomExam] = useState(false);
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -6782,6 +6783,7 @@ Write a story about a moment of fear.
     // Check if this is a custom exam (has configId but no subjectId)
     if (configId && !subjectId) {
       setIsCustomExam(true);
+      setIsLoadingCustomExam(true);
       
       // Load custom exam data from sessionStorage
       const customExamData = sessionStorage.getItem(`custom-exam-${configId}`);
@@ -6804,6 +6806,7 @@ Write a story about a moment of fear.
             setCustomTotalMarks(totalMarks);
             setCustomExamTitle('Custom Exam');
           }
+          setIsLoadingCustomExam(false);
           return;
         } catch (error) {
           console.error('Error loading custom exam:', error);
@@ -6812,6 +6815,7 @@ Write a story about a moment of fear.
             description: "Unable to load custom exam data",
             variant: "destructive"
           });
+          setIsLoadingCustomExam(false);
           navigate('/build-exam');
           return;
         }
@@ -6821,6 +6825,7 @@ Write a story about a moment of fear.
           description: "Custom exam data not available",
           variant: "destructive"
         });
+        setIsLoadingCustomExam(false);
         navigate('/build-exam');
         return;
       }
@@ -7167,6 +7172,35 @@ Write a story about a moment of fear.
   };
 
   const progress = (answers.length / examQuestions.length) * 100;
+
+  // Show loading state while custom exam data is loading
+  if (isCustomExam && isLoadingCustomExam) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3BAFDA] mx-auto"></div>
+          <p className="text-muted-foreground">Loading your custom exam...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if exam has no questions
+  if (examQuestions.length === 0 && !curriculumLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <AlertCircle className="h-12 w-12 text-destructive mx-auto" />
+          <h2 className="text-2xl font-bold">No Questions Found</h2>
+          <p className="text-muted-foreground">Unable to load exam questions</p>
+          <Button onClick={() => navigate('/predicted-questions')}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Exams
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   if (!examStarted) {
     return (
