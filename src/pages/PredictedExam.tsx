@@ -6776,8 +6776,10 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
+    console.log('🔍 Route params:', { subjectId, configId, isCustom: subjectId === 'custom' });
+    
     // Check if this is a custom exam
-    if (configId && configId.startsWith('custom')) {
+    if (subjectId === 'custom' && configId) {
       setIsCustomExam(true);
       
       // Load custom exam data from sessionStorage

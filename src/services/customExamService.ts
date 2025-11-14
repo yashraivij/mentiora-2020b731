@@ -203,8 +203,8 @@ export async function saveCustomExamConfig(
   console.log('✅ User authenticated:', session.user.id);
   console.log('📤 Creating config:', config.title);
 
-  // Call the secure database function
-  const { data, error } = await supabase.rpc('create_custom_exam_config', {
+  // Call the secure database function (type cast until types are regenerated)
+  const { data, error } = await (supabase.rpc as any)('create_custom_exam_config', {
     p_title: config.title,
     p_subject_id: config.subjectId,
     p_exam_board: config.examBoard || null,
@@ -226,7 +226,7 @@ export async function saveCustomExamConfig(
   }
 
   console.log('✅ Config saved with ID:', data);
-  return data;
+  return data as string;
 }
 
 /**

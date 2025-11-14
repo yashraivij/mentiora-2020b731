@@ -127,6 +127,13 @@ const CustomExamBuilder = () => {
 
       // Store questions in sessionStorage for the exam page
       sessionStorage.setItem(`custom-exam-${configId}`, JSON.stringify(questions));
+      
+      // Store config metadata in localStorage for the exam page
+      localStorage.setItem(`custom-config-${configId}`, JSON.stringify({
+        title: examTitle,
+        timerMinutes: config.timerMinutes,
+        targetMarks: config.targetMarks
+      }));
 
       toast({
         title: "✨ Exam generated!",
