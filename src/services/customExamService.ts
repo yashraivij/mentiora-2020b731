@@ -84,11 +84,31 @@ export async function generateCustomExam(
     });
   });
 
-  // Apply difficulty filter
-  let filteredQuestions = allQuestions;
+  // Organize questions by topic and apply filters
+  const questionsByTopic = new Map<string, Question[]>();
   
+  for (const topicId of config.selectedTopics) {
+    const topic = selectedTopics.find(t => t.id === topicId);
+    if (!topic) continue;
+
+    let topicQuestions = [...topic.questions];
+
+    // Apply difficulty filter (except for predicted-2026 which is handled separately)
+    if (config.difficultyFilter && config.difficultyFilter !== 'mixed' && config.difficultyFilter !== 'predicted-2026') {
+      topicQuestions = topicQuestions.filter(q => q.difficulty === config.difficultyFilter);
+    }
+
+    if (topicQuestions.length > 0) {
+      questionsByTopic.set(topicId, shuffleArray(topicQuestions));
+    }
+  }
+
+  if (questionsByTopic.size === 0) {
+    throw new Error('No questions match your criteria');
+  }
+
+  // For predicted-2026, handle separately with mixed difficulties
   if (config.difficultyFilter === 'predicted-2026') {
-    // Predicted 2026: 30% easy, 50% medium, 20% hard
     const easyQuestions = allQuestions.filter(q => q.difficulty === 'easy');
     const mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
     const hardQuestions = allQuestions.filter(q => q.difficulty === 'hard');
@@ -97,88 +117,97 @@ export async function generateCustomExam(
     const targetMedium = Math.ceil(config.questionCount * 0.5);
     const targetHard = Math.floor(config.questionCount * 0.2);
     
-    filteredQuestions = [
+    const selectedQuestions: ExamQuestion[] = [];
+    let questionNumber = 1;
+    
+    const selected = [
       ...shuffleArray(easyQuestions).slice(0, targetEasy),
       ...shuffleArray(mediumQuestions).slice(0, targetMedium),
       ...shuffleArray(hardQuestions).slice(0, targetHard)
     ];
-  } else if (config.difficultyFilter !== 'mixed') {
-    filteredQuestions = allQuestions.filter(q => 
-      q.difficulty === config.difficultyFilter
-    );
-  }
-
-  // Shuffle the filtered questions
-  filteredQuestions = shuffleArray(filteredQuestions);
-
-  // Select questions until target marks reached
-  const selectedQuestions: ExamQuestion[] = [];
-  let currentMarks = 0;
-  let questionNumber = 1;
-  const topicDistribution = new Map<string, number>();
-
-  // Initialize topic distribution
-  selectedTopics.forEach(t => topicDistribution.set(t.id, 0));
-
-  for (const question of filteredQuestions) {
-    // Check if we've reached target marks (with tolerance)
-    if (currentMarks >= config.targetMarks) {
-      break;
-    }
-
-    // Ensure diversity - no more than 40% from single topic
-    const topicCount = topicDistribution.get(question.topicId) || 0;
-    const maxPerTopic = Math.ceil(config.questionCount * 0.4);
     
-    if (topicCount >= maxPerTopic && selectedQuestions.length > 5) {
-      continue;
-    }
-
-    // Add question
-    selectedQuestions.push({
-      id: question.id,
-      questionNumber: questionNumber++,
-      text: question.question,
-      marks: question.marks,
-      topicId: question.topicId,
-      difficulty: question.difficulty,
-      markingCriteria: question.markingCriteria,
-      modelAnswer: question.modelAnswer,
-      specReference: question.specReference
+    shuffleArray(selected).forEach(question => {
+      selectedQuestions.push({
+        id: question.id,
+        questionNumber: questionNumber++,
+        text: question.question,
+        marks: question.marks,
+        topicId: question.topicId,
+        difficulty: question.difficulty,
+        markingCriteria: question.markingCriteria,
+        modelAnswer: question.modelAnswer,
+        specReference: question.specReference
+      });
     });
 
-    currentMarks += question.marks;
-    topicDistribution.set(question.topicId, topicCount + 1);
+    return selectedQuestions.slice(0, config.questionCount);
   }
 
-  // Ensure minimum 2 questions per topic (if available)
-  for (const topic of selectedTopics) {
-    const topicCount = topicDistribution.get(topic.id) || 0;
-    if (topicCount < 2) {
-      const additionalQuestions = filteredQuestions
-        .filter(q => 
-          q.topicId === topic.id && 
-          !selectedQuestions.some(sq => sq.id === q.id)
-        )
-        .slice(0, 2 - topicCount);
+  // Calculate questions per topic for even distribution
+  const questionsPerTopic = Math.floor(config.questionCount / questionsByTopic.size);
+  const remainder = config.questionCount % questionsByTopic.size;
 
-      additionalQuestions.forEach(q => {
+  // Select questions using round-robin for even distribution
+  const selectedQuestions: ExamQuestion[] = [];
+  const topicIds = Array.from(questionsByTopic.keys());
+  const topicPointers = new Map<string, number>();
+  topicIds.forEach(id => topicPointers.set(id, 0));
+
+  // First pass: distribute evenly
+  for (let i = 0; i < questionsPerTopic; i++) {
+    for (const topicId of topicIds) {
+      const questions = questionsByTopic.get(topicId)!;
+      const pointer = topicPointers.get(topicId)!;
+      
+      if (pointer < questions.length) {
+        const question = questions[pointer];
         selectedQuestions.push({
-          id: q.id,
+          id: question.id,
           questionNumber: selectedQuestions.length + 1,
-          text: q.question,
-          marks: q.marks,
-          topicId: q.topicId,
-          difficulty: q.difficulty,
-          markingCriteria: q.markingCriteria,
-          modelAnswer: q.modelAnswer,
-          specReference: q.specReference
+          text: question.question,
+          marks: question.marks,
+          topicId: topicId,
+          difficulty: question.difficulty,
+          markingCriteria: question.markingCriteria,
+          modelAnswer: question.modelAnswer,
+          specReference: question.specReference
         });
-      });
+        topicPointers.set(topicId, pointer + 1);
+      }
     }
   }
 
-  return selectedQuestions;
+  // Second pass: add remainder questions
+  for (let i = 0; i < remainder && selectedQuestions.length < config.questionCount; i++) {
+    const topicId = topicIds[i % topicIds.length];
+    const questions = questionsByTopic.get(topicId)!;
+    const pointer = topicPointers.get(topicId)!;
+    
+    if (pointer < questions.length) {
+      const question = questions[pointer];
+      selectedQuestions.push({
+        id: question.id,
+        questionNumber: selectedQuestions.length + 1,
+        text: question.question,
+        marks: question.marks,
+        topicId: topicId,
+        difficulty: question.difficulty,
+        markingCriteria: question.markingCriteria,
+        modelAnswer: question.modelAnswer,
+        specReference: question.specReference
+      });
+      topicPointers.set(topicId, pointer + 1);
+    }
+  }
+
+  // Shuffle final selection to mix up the order
+  const finalQuestions = shuffleArray(selectedQuestions);
+
+  if (finalQuestions.length < 5) {
+    throw new Error(`Not enough questions generated. Only ${finalQuestions.length} questions available.`);
+  }
+
+  return finalQuestions;
 }
 
 /**
