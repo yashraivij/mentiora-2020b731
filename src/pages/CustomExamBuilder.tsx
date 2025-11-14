@@ -9,7 +9,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Target, Sparkles, Rocket, AlertCircle, Crown } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Target, Sparkles, Rocket, AlertCircle, Crown, Info } from "lucide-react";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useCurriculum } from "@/hooks/useCurriculum";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
@@ -293,10 +294,12 @@ const CustomExamBuilder = () => {
                         <div className="flex-1">
                           <CardTitle className="text-base">{topic.name}</CardTitle>
                   <CardDescription className="mt-1">
-                    {topic.questions.length} questions available
-                    {config.difficultyFilter && config.difficultyFilter !== 'mixed' && config.difficultyFilter !== 'predicted-2026' && 
-                      ` (${topic.questions.filter(q => q.difficulty === config.difficultyFilter).length} ${config.difficultyFilter})`
-                    }
+                    {topic.questions.length} total questions
+                    {config.difficultyFilter && config.difficultyFilter !== 'mixed' && config.difficultyFilter !== 'predicted-2026' && (
+                      <span className="text-yellow-600 dark:text-yellow-500 ml-2 font-medium">
+                        ({topic.questions.filter(q => q.difficulty === config.difficultyFilter).length} {config.difficultyFilter})
+                      </span>
+                    )}
                   </CardDescription>
                         </div>
                         <Checkbox checked={isSelected} />
@@ -332,22 +335,70 @@ const CustomExamBuilder = () => {
               </p>
             </div>
 
-            {config.selectedTopics && config.selectedTopics.length > 0 && (
-              <Card className="border-primary/20 bg-primary/5">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm flex items-center gap-2">
-                    <Sparkles className="h-4 w-4" />
-                    Expected Distribution
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    With {config.questionCount} questions across {config.selectedTopics.length} topic(s), 
-                    you'll get approximately <strong>{Math.floor(config.questionCount / config.selectedTopics.length)}-{Math.ceil(config.questionCount / config.selectedTopics.length)}</strong> questions per topic.
-                  </p>
-                </CardContent>
-              </Card>
-            )}
+            {config.selectedTopics && config.selectedTopics.length > 0 && (() => {
+              const totalAvailable = config.selectedTopics.reduce((sum, topicId) => {
+                const topic = selectedSubject?.topics.find(t => t.id === topicId);
+                if (!topic) return sum;
+                const count = config.difficultyFilter === 'mixed' || config.difficultyFilter === 'predicted-2026'
+                  ? topic.questions.length
+                  : topic.questions.filter(q => q.difficulty === config.difficultyFilter).length;
+                return sum + count;
+              }, 0);
+
+              return (
+                <>
+                  {totalAvailable < config.questionCount && (
+                    <Alert variant="destructive" className="mb-4">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertTitle>Limited Questions Available</AlertTitle>
+                      <AlertDescription>
+                        Only {totalAvailable} questions available at "{config.difficultyFilter}" difficulty.
+                        Consider selecting "Mixed" difficulty or choosing more topics.
+                      </AlertDescription>
+                    </Alert>
+                  )}
+                  
+                  <Card className="mb-6 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/30">
+                    <CardHeader>
+                      <CardTitle className="text-sm flex items-center gap-2">
+                        <Info className="w-4 h-4" />
+                        Expected Distribution
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        With {config.selectedTopics.length} topic(s) selected and "{config.difficultyFilter}" difficulty:
+                      </p>
+                      <ul className="text-sm space-y-2">
+                        {config.selectedTopics.map(topicId => {
+                          const topic = selectedSubject?.topics.find(t => t.id === topicId);
+                          if (!topic) return null;
+                          const availableAtDifficulty = config.difficultyFilter === 'mixed' || config.difficultyFilter === 'predicted-2026'
+                            ? topic.questions.length 
+                            : topic.questions.filter(q => q.difficulty === config.difficultyFilter).length;
+                          
+                          return (
+                            <li key={topicId} className="flex justify-between items-center">
+                              <span className="text-muted-foreground">{topic.name}:</span>
+                              <span className="font-medium">
+                                ~{Math.floor(config.questionCount / config.selectedTopics.length)} questions
+                                <span className="text-xs text-muted-foreground ml-2">({availableAtDifficulty} available)</span>
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      {totalAvailable < config.questionCount && (
+                        <p className="text-sm text-orange-600 dark:text-orange-500 mt-4 font-medium flex items-center gap-2">
+                          <AlertCircle className="w-4 h-4" />
+                          System will include adjacent difficulties to meet your request.
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
+                </>
+              );
+            })()}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Timer Length */}
