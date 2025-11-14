@@ -90,11 +90,13 @@ const PredictedExam = () => {
     let marks = question.marks;
     
     // Try to find the original question in curriculum to get difficulty
-    for (const topic of subject.topics) {
-      const originalQ = topic.questions.find(q => q.question === question.text);
-      if (originalQ) {
-        difficulty = originalQ.difficulty;
-        break;
+    if (subject && subject.topics) {
+      for (const topic of subject.topics) {
+        const originalQ = topic.questions.find(q => q.question === question.text);
+        if (originalQ) {
+          difficulty = originalQ.difficulty;
+          break;
+        }
       }
     }
     
@@ -471,10 +473,12 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   // Helper function to get topic name from any question ID
   const getTopicNameFromQuestionId = (questionId: string): string => {
     // For regular curriculum questions, extract from the curriculum
-    for (const topic of subject.topics) {
-      const foundQuestion = topic.questions.find(q => q.id === questionId);
-      if (foundQuestion) {
-        return topic.name;
+    if (subject && subject.topics) {
+      for (const topic of subject.topics) {
+        const foundQuestion = topic.questions.find(q => q.id === questionId);
+        if (foundQuestion) {
+          return topic.name;
+        }
       }
     }
     
@@ -1506,7 +1510,7 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
     }
     
     // Special handling for English Literature premium exam format
-    if (subjectId === 'english-literature') {
+    if (subjectId === 'english-literature' && subject && subject.topics) {
       // Section A: Shakespeare plays
       const shakespearePlays = subject.topics.filter(topic => 
         ['macbeth', 'romeo-and-juliet', 'the-tempest', 'merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
@@ -6424,7 +6428,7 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology' && subjectId !== 'psychology-aqa-alevel') {
+    if (subject && subject.topics && subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology' && subjectId !== 'psychology-aqa-alevel') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
