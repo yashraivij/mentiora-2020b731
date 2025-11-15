@@ -151,6 +151,64 @@ const Dashboard = () => {
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [examType, setExamType] = useState<string | null>(null);
   const [checkingExamType, setCheckingExamType] = useState(true);
+  
+  // All state hooks must be declared before any conditional returns
+  const [activeTab, setActiveTab] = useState<string>("learn");
+  const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [userMP, setUserMP] = useState(0);
+  const [userHearts, setUserHearts] = useState(5);
+  const [userGems, setUserGems] = useState(0);
+  const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
+  const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
+  const [userStats, setUserStats] = useState<any>(null);
+  const [weeklyStudyMinutes, setWeeklyStudyMinutes] = useState(0);
+  const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
+  const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
+  const [todayEarnedMP, setTodayEarnedMP] = useState(0);
+  const [showAddSubjects, setShowAddSubjects] = useState(false);
+  const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
+  const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
+  const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
+  const [editingTargetGrade, setEditingTargetGrade] = useState(false);
+  const [entries, setEntries] = useState<NotebookEntryData[]>([]);
+  const [notebookLoading, setNotebookLoading] = useState(false);
+  const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
+  const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('recent');
+  const [flashcardView, setFlashcardView] = useState<"create" | "library" | "cards">("create");
+  const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
+  const [flashcardsLoading, setFlashcardsLoading] = useState(false);
+  const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
+  const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
+  const [individualFlashcards, setIndividualFlashcards] = useState<any[]>([]);
+  const [cardsLoading, setCardsLoading] = useState(false);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [questNotificationCount, setQuestNotificationCount] = useState(0);
+  const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
+  const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
+  const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
+  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
+  const [newSetName, setNewSetName] = useState("");
+  const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
+  const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
+  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
+  const [insightFilter, setInsightFilter] = useState<string | null>(null);
+  const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
+  const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
+  const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
+  const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
+  const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
+  const [showDailyStreak, setShowDailyStreak] = useState(false);
+  const [showStreakBadge, setShowStreakBadge] = useState(false);
+  const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
+  
+  const isMobile = useIsMobile();
 
   // Check if user is SAT user and redirect to SAT dashboard
   useEffect(() => {
@@ -177,7 +235,18 @@ const Dashboard = () => {
     checkExamType();
   }, [user?.id]);
 
-  // Render SAT Dashboard for SAT users
+  // Track subject level changes and reset group selection
+  useEffect(() => {
+    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
+    setSelectedSubjectGroup(null);
+  }, [activeSubjectLevel]);
+
+  // Track subject group selection
+  useEffect(() => {
+    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
+  }, [selectedSubjectGroup]);
+
+  // Render SAT Dashboard for SAT users (after all hooks are declared)
   if (checkingExamType) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -189,78 +258,6 @@ const Dashboard = () => {
   if (examType === 'sat' || examType === 'SAT') {
     return <SATDashboard />;
   }
-  const [activeTab, setActiveTab] = useState<string>("learn");
-  const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
-  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-  const [currentStreak, setCurrentStreak] = useState(0);
-  const [userMP, setUserMP] = useState(0);
-  const [userHearts, setUserHearts] = useState(5);
-  const [userGems, setUserGems] = useState(0);
-  const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
-  const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
-  const [userStats, setUserStats] = useState<any>(null);
-  const [weeklyStudyMinutes, setWeeklyStudyMinutes] = useState(0);
-  const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
-  const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
-  const [todayEarnedMP, setTodayEarnedMP] = useState(0);
-  const [showAddSubjects, setShowAddSubjects] = useState(false);
-  const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
-  const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
-  const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
-  const [editingTargetGrade, setEditingTargetGrade] = useState(false);
-  const isMobile = useIsMobile();
-
-  // Track subject level changes and reset group selection
-  useEffect(() => {
-    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
-    // Clear selected subject group when level changes to prevent mismatches
-    setSelectedSubjectGroup(null);
-  }, [activeSubjectLevel]);
-
-  // Track subject group selection
-  useEffect(() => {
-    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
-  }, [selectedSubjectGroup]);
-
-  const [entries, setEntries] = useState<NotebookEntryData[]>([]);
-  const [notebookLoading, setNotebookLoading] = useState(false);
-  const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
-  const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<string>('recent');
-  
-  // Flashcards state
-  const [flashcardView, setFlashcardView] = useState<"create" | "library" | "cards">("create");
-  const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
-  const [flashcardsLoading, setFlashcardsLoading] = useState(false);
-  const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
-  const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
-  const [individualFlashcards, setIndividualFlashcards] = useState<any[]>([]);
-  const [cardsLoading, setCardsLoading] = useState(false);
-  const [editingCardId, setEditingCardId] = useState<string | null>(null);
-  const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
-  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
-  const [questNotificationCount, setQuestNotificationCount] = useState(0);
-  const [weeklyFlashcardCount, setWeeklyFlashcardCount] = useState(0);
-  const [studyTimeMinutes, setStudyTimeMinutes] = useState(0);
-  const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
-  const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
-  const [newSetName, setNewSetName] = useState("");
-  
-  // Medly dashboard state
-  const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
-  const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
-  const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
-  const [insightFilter, setInsightFilter] = useState<string | null>(null);
-  const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
-  const [classMedianGrades, setClassMedianGrades] = useState<{[key: string]: number}>({});
-  const [completedActivities, setCompletedActivities] = useState<Set<string>>(new Set());
-  const [subjectStudyTime, setSubjectStudyTime] = useState<{hours: number, minutes: number}>({hours: 0, minutes: 0});
-  const [isDrawerMaximized, setIsDrawerMaximized] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
-  const [showDailyStreak, setShowDailyStreak] = useState(false);
-  const [showStreakBadge, setShowStreakBadge] = useState(false);
-  const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#DBEAFE] dark:bg-[#3B82F6]/10", textColor: "text-[#3B82F6] dark:text-[#60A5FA]", activeColor: "bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] dark:bg-gradient-to-r dark:from-[#3B82F6] dark:to-[#60A5FA]" },
