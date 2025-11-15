@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,6 +6,13 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useCurriculum } from "@/hooks/useCurriculum";
+import { AnimatedAvatar } from "@/components/ui/AnimatedAvatar";
+import { CelebrationOverlay } from "@/components/ui/CelebrationOverlay";
+import { playTutorVoice, TUTOR_VOICE_LINES, initTutorVoiceSystem } from "@/lib/tutorVoice";
+import avaAvatar from "@/assets/avatars/ava-avatar-new.png";
+import lucasAvatar from "@/assets/avatars/lucas-avatar-new.png";
+import drRiveraAvatar from "@/assets/avatars/dr-rivera-avatar-new.png";
+import jaydenAvatar from "@/assets/avatars/jayden-avatar-new.png";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -146,53 +153,61 @@ const STUDY_PREFERENCES = [
 
 const TUTOR_OPTIONS = [
   {
-    id: 'ava',
-    name: 'Ava',
-    avatar: '/src/assets/avatars/ava-avatar.png',
-    style: 'Calm, patient, low-pressure learning',
-    voiceLine: '"We take this step by step. No rush, no pressure — just progress."',
-    bestFor: 'Anxiety / low confidence',
-    teachingVibe: 'Slow pacing, check-ins, supportive reminders',
-    welcomeMessage: "Hey — I'm Ava. I'll be with you through every step. I'll help you learn at a pace that feels right, and I'll check in to keep you improving. Ready?",
-    color: '#7CB9E8', // Soft pastel blue
-    emoji: '🌸'
+    id: "ava",
+    name: "Ava",
+    avatar: avaAvatar,
+    style: "Calm & patient mentor",
+    color: "#7CB9E8",
+    animationType: 'wave' as const,
+    bestFor: "Students who feel overwhelmed",
+    teachingApproach: [
+      "Takes time to explain concepts thoroughly",
+      "Encourages questions without judgment",
+      "Creates a supportive learning environment"
+    ],
   },
   {
-    id: 'lucas',
-    name: 'Lucas',
-    avatar: '/src/assets/avatars/lucas-avatar.png',
-    style: 'Direct, efficient, structured',
-    voiceLine: '"Tell me your deadline, and we\'ll crush it. No fluff."',
-    bestFor: 'High performers / limited time',
-    teachingVibe: 'Rapid recall, fast feedback, minimal small talk',
-    welcomeMessage: "I'm Lucas — let's get straight to it. I'll help you move fast, stay focused, and make every minute count. You've got this.",
-    color: '#1E3A5F', // Dark navy
-    emoji: '⚡'
+    id: "lucas",
+    name: "Lucas",
+    avatar: lucasAvatar,
+    style: "Efficient & structured coach",
+    color: "#1E3A5F",
+    animationType: 'nod' as const,
+    bestFor: "Students with tight deadlines",
+    teachingApproach: [
+      "Gets straight to the point",
+      "Helps prioritize effectively",
+      "Builds confidence quickly"
+    ],
   },
   {
-    id: 'dr_rivera',
-    name: 'Dr. Rivera',
-    avatar: '/src/assets/avatars/dr-rivera-avatar.png',
-    style: 'Academic, deep thinker',
-    voiceLine: '"You\'ll understand the why, not just the answer."',
-    bestFor: 'Students who overthink or enjoy depth',
-    teachingVibe: 'Socratic questions, diagrams, step-by-step reasoning',
-    welcomeMessage: "Hello, I'm Dr. Rivera. I'll make sure you truly understand every concept — not just memorize it. Together, we'll build real mastery.",
-    color: '#5F9C96', // Muted teal
-    emoji: '📚'
+    id: "dr-rivera",
+    name: "Dr. Rivera",
+    avatar: drRiveraAvatar,
+    style: "Academic excellence guide",
+    color: "#5F9C96",
+    animationType: 'glasses-adjust' as const,
+    bestFor: "Students who want mastery, not memorization",
+    teachingApproach: [
+      "Breaks down every concept deeply",
+      "Connects ideas across topics",
+      "Teaches like a university professor"
+    ],
   },
   {
-    id: 'jayden',
-    name: 'Jayden',
-    avatar: '/src/assets/avatars/jayden-avatar.png',
-    style: 'Motivational & fun',
-    voiceLine: '"Alright — let\'s make this fun and beat procrastination together."',
-    bestFor: 'Low motivation / ADHD style learners',
-    teachingVibe: 'Challenges, energy, encouragement, streak focus',
-    welcomeMessage: "Hey! I'm Jayden. We're going to make this fun and keep you showing up. I believe in you — let's make studying something you actually want to do.",
-    color: '#FF7F50', // Warm coral
-    emoji: '🎯'
-  }
+    id: "jayden",
+    name: "Jayden",
+    avatar: jaydenAvatar,
+    style: "Motivational energy booster",
+    color: "#FF7F50",
+    animationType: 'enthusiastic-wave' as const,
+    bestFor: "Students who struggle with motivation",
+    teachingApproach: [
+      "Keeps learning engaging and fun",
+      "Celebrates every win",
+      "Makes studying feel achievable"
+    ],
+  },
 ];
 
 const TEACHING_STYLES = [
@@ -252,6 +267,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     teachingStyle: '',
   });
   const [showTutorWelcome, setShowTutorWelcome] = useState<boolean>(false);
+  const [showCelebration, setShowCelebration] = useState<boolean>(false);
+  const [hoveredTutor, setHoveredTutor] = useState<string | null>(null);
   const [showTeachingStyle, setShowTeachingStyle] = useState<boolean>(false);
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -494,7 +511,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       onClick={() => {
                         setOnboardingData({ ...onboardingData, selectedTutor: tutor.id });
                         setShowTutorWelcome(true);
+                        setShowCelebration(true);
+                        playTutorVoice(tutor.id);
+                        setTimeout(() => setShowCelebration(false), 1500);
                       }}
+                      onMouseEnter={() => setHoveredTutor(tutor.id)}
+                      onMouseLeave={() => setHoveredTutor(null)}
                       whileHover={{ 
                         scale: 1.02, 
                         y: -6,
@@ -552,21 +574,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
                         </motion.div>
                         
-                        {/* Emoji indicator floating above */}
-                        <motion.div
-                          className="absolute -top-2 -right-2 text-2xl"
-                          animate={{
-                            y: [0, -4, 0],
-                            rotate: [0, 10, -10, 0]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                        >
-                          {tutor.emoji}
-                        </motion.div>
                       </div>
                       
                       {/* Name */}
@@ -579,33 +586,33 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         {tutor.style}
                       </p>
                       
-                      {/* Voice line in quotes */}
-                      <div className="mb-4 px-4">
-                        <p 
-                          className="text-base text-center font-medium leading-relaxed"
-                          style={{ color: tutor.color }}
-                        >
-                          {tutor.voiceLine}
+                      {/* Voice line */}
+                      <div className="mb-4 px-3 py-3 rounded-lg" style={{ backgroundColor: `${tutor.color}08` }}>
+                        <p className="text-sm text-center leading-relaxed italic" style={{ color: tutor.color }}>
+                          "{TUTOR_VOICE_LINES[tutor.id]}"
                         </p>
                       </div>
                       
                       {/* Best for badge */}
-                      <div className="flex justify-center mb-2">
-                        <div 
-                          className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
-                          style={{
-                            backgroundColor: `${tutor.color}15`,
-                            color: tutor.color
-                          }}
-                        >
-                          🔹 Best for: {tutor.bestFor}
-                        </div>
+                      <div className="inline-flex items-center justify-center w-full px-4 py-2 rounded-lg text-sm font-medium mb-4 border-2"
+                        style={{ borderColor: tutor.color, color: tutor.color }}>
+                        Best for: {tutor.bestFor}
                       </div>
                       
-                      {/* Teaching vibe */}
-                      <p className="text-xs text-muted-foreground text-center mb-4">
-                        Teaching vibe: {tutor.teachingVibe}
-                      </p>
+                      {/* Teaching approach */}
+                      <div className="space-y-2 mb-6">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wide font-semibold">
+                          Teaching approach:
+                        </p>
+                        <ul className="space-y-1.5">
+                          {tutor.teachingApproach.map((point, idx) => (
+                            <li key={idx} className="text-sm text-muted-foreground flex items-start">
+                              <span className="mr-2 mt-1 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: tutor.color }} />
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                       
                       {/* Welcome message with "lock-in" feel */}
                       <AnimatePresence>
@@ -635,14 +642,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 👋
                               </div>
                             </motion.div>
-                            
-                            <p className="text-base text-foreground text-center leading-relaxed mb-5">
-                              <strong>Awesome — I'll be your coach.</strong>
-                            </p>
-                            
-                            <p className="text-sm text-foreground/80 italic text-center leading-relaxed mb-5">
-                              "{tutor.welcomeMessage}"
-                            </p>
                             
                             <button
                               onClick={(e) => {
@@ -1190,6 +1189,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           </div>
         )}
       </motion.div>
+
+      {/* Celebration Overlay */}
+      {showCelebration && onboardingData.selectedTutor && (
+        <CelebrationOverlay
+          isVisible={showCelebration}
+          tutorName={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name || ""}
+          tutorAvatar={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.avatar || ""}
+          tutorColor={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color || ""}
+          animationType={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.animationType || 'wave'}
+        />
+      )}
     </div>
   );
 };
