@@ -28,6 +28,7 @@ interface OnboardingData {
   parentEmail: string | null;
   profileEmoji: string;
   selectedTutor: string;
+  teachingStyle: string;
 }
 
 // Extract unique subjects from curriculum by level
@@ -145,39 +146,67 @@ const STUDY_PREFERENCES = [
 
 const TUTOR_OPTIONS = [
   {
-    id: 'miss_patel',
-    name: 'Miss Patel',
+    id: 'ava',
+    name: 'Ava',
     avatar: '/lovable-uploads/miss-patel-avatar.png',
-    personality: 'Patient and supportive, breaks down complex topics step-by-step',
-    specialty: 'Sciences'
+    style: 'Calm & Supportive',
+    bestFor: 'Best for: anxiety or low confidence',
+    welcomeMessage: "Hey — I'm Ava. I'll be with you through every step. I'll help you learn at a pace that feels right, and I'll check in to keep you improving. Ready?",
+    color: '#8B5CF6'
   },
   {
-    id: 'mr_chen',
-    name: 'Mr. Chen',
+    id: 'lucas',
+    name: 'Lucas',
     avatar: '/lovable-uploads/mr-chen-avatar.png',
-    personality: 'Methodical and clear, focuses on understanding core concepts',
-    specialty: 'Maths & Physics'
+    style: 'Direct & Fast-Paced',
+    bestFor: 'Best for: quick learners or people with limited time',
+    welcomeMessage: "I'm Lucas — let's get straight to it. I'll help you move fast, stay focused, and make every minute count. You've got this.",
+    color: '#3B82F6'
   },
   {
-    id: 'ms_johnson',
-    name: 'Ms. Johnson',
-    avatar: '/lovable-uploads/ms-johnson-avatar.png',
-    personality: 'Energetic and creative, makes learning fun with examples',
-    specialty: 'English & Humanities'
-  },
-  {
-    id: 'mr_williams',
-    name: 'Mr. Williams',
-    avatar: '/lovable-uploads/mr-williams-avatar.png',
-    personality: 'Straight to the point, focuses on exam technique',
-    specialty: 'All subjects'
-  },
-  {
-    id: 'dr_singh',
-    name: 'Dr. Singh',
+    id: 'dr_rivera',
+    name: 'Dr. Rivera',
     avatar: '/lovable-uploads/dr-singh-avatar.png',
-    personality: 'Detailed and thorough, ensures deep understanding',
-    specialty: 'Advanced topics'
+    style: 'Detailed & Thorough',
+    bestFor: 'Best for: understanding concepts deeply',
+    welcomeMessage: "Hello, I'm Dr. Rivera. I'll make sure you truly understand every concept — not just memorize it. Together, we'll build real mastery.",
+    color: '#10B981'
+  },
+  {
+    id: 'jayden',
+    name: 'Jayden',
+    avatar: '/lovable-uploads/mr-williams-avatar.png',
+    style: 'Motivational & Fun',
+    bestFor: 'Best for: procrastination or low motivation',
+    welcomeMessage: "Hey! I'm Jayden. We're going to make this fun and keep you showing up. I believe in you — let's make studying something you actually want to do.",
+    color: '#F59E0B'
+  }
+];
+
+const TEACHING_STYLES = [
+  { 
+    id: 'concise', 
+    label: 'Short and simple',
+    description: 'Quick explanations, straight to the point',
+    icon: '⚡'
+  },
+  { 
+    id: 'detailed', 
+    label: 'Detailed explanations',
+    description: 'In-depth breakdown of every concept',
+    icon: '📚'
+  },
+  { 
+    id: 'balanced', 
+    label: 'A mix of both',
+    description: 'Balance between depth and brevity',
+    icon: '⚖️'
+  },
+  { 
+    id: 'adaptive', 
+    label: 'Decide for me',
+    description: 'Let your tutor adapt to your needs',
+    icon: '🎯'
   }
 ];
 
@@ -207,8 +236,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     parentUpdates: false,
     parentEmail: null,
     profileEmoji: '😊',
-    selectedTutor: 'miss_patel',
+    selectedTutor: '',
+    teachingStyle: '',
   });
+  const [showTutorWelcome, setShowTutorWelcome] = useState<boolean>(false);
+  const [showTeachingStyle, setShowTeachingStyle] = useState<boolean>(false);
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionStage, setCompletionStage] = useState(0);
@@ -238,7 +271,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const canContinue = () => {
     switch (currentStep) {
       case 1:
-        return onboardingData.selectedTutor !== '';
+        return onboardingData.selectedTutor !== '' && onboardingData.teachingStyle !== '';
       case 2:
         return onboardingData.acquisitionSource !== '';
       case 3:
@@ -256,6 +289,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const handleNext = () => {
+    if (currentStep === 1) {
+      // Reset tutor selection states when moving to next main step
+      setShowTutorWelcome(false);
+      setShowTeachingStyle(false);
+      setShowConfirmation(false);
+    }
+    
     if (currentStep === 6) {
       handleComplete();
     } else {
@@ -287,7 +327,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           .from('profiles')
           .update({ 
             profile_emoji: onboardingData.profileEmoji,
-            selected_tutor_id: onboardingData.selectedTutor
+            selected_tutor_id: onboardingData.selectedTutor,
           })
           .eq('id', user.id);
 
@@ -416,48 +456,201 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 1: Select Your Tutor */}
-            {currentStep === 1 && (
+            {/* Step 1: Select Your Tutor - Initial View */}
+            {currentStep === 1 && !showTeachingStyle && !showConfirmation && (
               <div>
-                <h2 className="text-[26px] font-bold text-black mb-2">Select Your Tutor</h2>
-                <p className="text-[15px] text-[#6B7280] mb-5">Choose a tutor who will guide you when you need help</p>
+                <h2 className="text-[28px] font-bold text-black mb-2 text-center">
+                  Choose your tutor — the coach who will guide you to your best score.
+                </h2>
+                <p className="text-[16px] text-[#6B7280] mb-6 text-center max-w-xl mx-auto">
+                  They'll learn how you study, help you through mistakes, and celebrate every win.
+                </p>
                 
-                {/* Tutor grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto">
+                {/* Tutor cards grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[500px] overflow-y-auto pb-4">
                   {TUTOR_OPTIONS.map((tutor) => (
-                    <button
+                    <motion.button
                       key={tutor.id}
-                      onClick={() => setOnboardingData({ ...onboardingData, selectedTutor: tutor.id })}
-                      className={`relative p-4 rounded-xl border-2 transition-all ${
-                        onboardingData.selectedTutor === tutor.id
-                          ? 'border-[#3B82F6] bg-[#F0F9FF] scale-[1.02]'
-                          : 'border-[#E5E7EB] hover:border-[#3B82F6] hover:shadow-lg'
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, selectedTutor: tutor.id });
+                        setShowTutorWelcome(true);
+                      }}
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`relative p-6 rounded-2xl border-2 transition-all ${
+                        onboardingData.selectedTutor === tutor.id && showTutorWelcome
+                          ? 'border-[hsl(var(--primary))] bg-gradient-to-br from-white to-primary/5 shadow-xl'
+                          : 'border-border hover:border-primary hover:shadow-lg bg-card'
                       }`}
+                      style={{
+                        borderColor: onboardingData.selectedTutor === tutor.id && showTutorWelcome ? tutor.color : undefined
+                      }}
                     >
-                      {/* Avatar */}
-                      <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#E5E7EB]">
-                        <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
+                      {/* Avatar with glow effect */}
+                      <div className="relative w-24 h-24 mx-auto mb-4">
+                        <div 
+                          className="absolute inset-0 rounded-full blur-lg opacity-30"
+                          style={{ backgroundColor: tutor.color }}
+                        ></div>
+                        <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+                          <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
+                        </div>
                       </div>
                       
                       {/* Name */}
-                      <h4 className="text-sm font-bold text-center mb-1">{tutor.name}</h4>
+                      <h3 className="text-xl font-bold text-center mb-2" style={{ color: tutor.color }}>
+                        {tutor.name}
+                      </h3>
                       
-                      {/* Personality */}
-                      <p className="text-xs text-[#6B7280] text-center line-clamp-3 mb-1">{tutor.personality}</p>
-                      
-                      {/* Specialty */}
-                      <p className="text-[10px] text-[#3B82F6] text-center font-medium">{tutor.specialty}</p>
-                      
-                      {/* Selected indicator */}
-                      {onboardingData.selectedTutor === tutor.id && (
-                        <div className="absolute top-2 right-2 w-5 h-5 bg-[#3B82F6] rounded-full flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white" />
+                      {/* Style tag */}
+                      <div className="flex justify-center mb-3">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-muted">
+                          <span className="text-xs font-medium text-muted-foreground">{tutor.style}</span>
                         </div>
-                      )}
-                    </button>
+                      </div>
+                      
+                      {/* Best for */}
+                      <p className="text-sm text-muted-foreground text-center mb-4">{tutor.bestFor}</p>
+                      
+                      {/* Welcome message - shows when selected */}
+                      <AnimatePresence>
+                        {onboardingData.selectedTutor === tutor.id && showTutorWelcome && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="mt-4 p-4 rounded-xl border"
+                            style={{
+                              backgroundColor: `${tutor.color}10`,
+                              borderColor: `${tutor.color}30`
+                            }}
+                          >
+                            <p className="text-sm text-foreground italic leading-relaxed mb-4">
+                              "{tutor.welcomeMessage}"
+                            </p>
+                            
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setShowTeachingStyle(true);
+                              }}
+                              className="w-full py-2 rounded-lg font-medium text-white transition-all hover:opacity-90"
+                              style={{ backgroundColor: tutor.color }}
+                            >
+                              Continue with {tutor.name}
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.button>
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* Step 1b: Teaching Style Preference */}
+            {currentStep === 1 && showTeachingStyle && !showConfirmation && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+              >
+                <button
+                  onClick={() => setShowTeachingStyle(false)}
+                  className="mb-4 text-sm text-muted-foreground hover:text-foreground flex items-center gap-2"
+                >
+                  ← Back to tutors
+                </button>
+                
+                <h2 className="text-[26px] font-bold text-black mb-2 text-center">
+                  How should I teach you?
+                </h2>
+                <p className="text-[15px] text-muted-foreground mb-6 text-center">
+                  This helps me tailor my explanations to your learning style
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {TEACHING_STYLES.map((style) => (
+                    <button
+                      key={style.id}
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, teachingStyle: style.id });
+                        setShowConfirmation(true);
+                      }}
+                      className="p-5 rounded-xl border-2 border-border hover:border-primary hover:shadow-lg transition-all bg-card text-left"
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="text-3xl">{style.icon}</span>
+                        <div>
+                          <h4 className="font-bold text-base mb-1">{style.label}</h4>
+                          <p className="text-sm text-muted-foreground">{style.description}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Step 1c: Confirmation */}
+            {currentStep === 1 && showConfirmation && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-8"
+              >
+                {/* Celebration animation */}
+                <div className="mb-6 relative">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    <div className="w-32 h-32 mx-auto mb-4 relative">
+                      <div 
+                        className="absolute inset-0 rounded-full blur-2xl opacity-40"
+                        style={{ backgroundColor: TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color }}
+                      ></div>
+                      <img 
+                        src={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.avatar} 
+                        alt="Your tutor" 
+                        className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-2xl"
+                      />
+                    </div>
+                  </motion.div>
+                  
+                  {/* Floating stars animation */}
+                  <motion.div
+                    animate={{ y: [-10, -20, -10], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute top-0 left-1/2 transform -translate-x-1/2 text-4xl"
+                  >
+                    ✨
+                  </motion.div>
+                </div>
+                
+                <h2 className="text-[28px] font-bold text-black mb-3">
+                  Great choice — {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} is now your tutor.
+                </h2>
+                
+                <p className="text-[16px] text-muted-foreground mb-8 max-w-md mx-auto leading-relaxed">
+                  {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} will personalise your plan based on your exam date, goals, and how you like to study.
+                </p>
+                
+                <button
+                  onClick={handleNext}
+                  className="px-8 py-4 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all text-lg hover:opacity-90"
+                  style={{ 
+                    backgroundColor: TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color 
+                  }}
+                >
+                  Start with {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name}
+                </button>
+                
+                <p className="text-xs text-muted-foreground mt-4">
+                  You can switch tutors later, but most students stay with their first choice.
+                </p>
+              </motion.div>
             )}
 
             {/* Step 2: How did you hear about us */}
@@ -839,9 +1032,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         </AnimatePresence>
 
         {/* Navigation buttons */}
-        {currentStep > 0 && currentStep < 7 && !showCompletion && (
+        {currentStep > 0 && currentStep < 7 && !showCompletion && !showConfirmation && (
           <div className="flex items-center justify-between mt-5 pt-5 border-t border-gray-200 flex-shrink-0">
-            {currentStep > 1 && (
+            {currentStep > 1 && !showTeachingStyle && (
               <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline transition-colors duration-200">
                 Back
               </button>
@@ -852,17 +1045,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 Skip
               </button>
             )}
-            <button
-              onClick={handleNext}
-              disabled={!canContinue()}
-              className={`px-8 py-3 rounded-[10px] font-semibold text-[14px] transition-all duration-200 ${
-                canContinue()
-                  ? 'bg-[#3B82F6] text-white hover:bg-[#2563eb] hover:shadow-md hover:-translate-y-0.5'
-                  : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
-              }`}
-            >
-              Continue
-            </button>
+            {!showTeachingStyle && (
+              <button
+                onClick={handleNext}
+                disabled={!canContinue()}
+                className={`px-8 py-3 rounded-[10px] font-semibold text-[14px] transition-all duration-200 ${
+                  canContinue()
+                    ? 'bg-[#3B82F6] text-white hover:bg-[#2563eb] hover:shadow-md hover:-translate-y-0.5'
+                    : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
+                }`}
+              >
+                Continue
+              </button>
+            )}
           </div>
         )}
       </motion.div>
