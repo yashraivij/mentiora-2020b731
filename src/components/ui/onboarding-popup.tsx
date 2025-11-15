@@ -13,6 +13,7 @@ import avaAvatar from "@/assets/avatars/ava-avatar-new.png";
 import lucasAvatar from "@/assets/avatars/lucas-avatar-new.png";
 import drRiveraAvatar from "@/assets/avatars/dr-rivera-avatar-new.png";
 import jaydenAvatar from "@/assets/avatars/jayden-avatar-new.png";
+import { format } from "date-fns";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -28,7 +29,12 @@ interface SubjectWithGrade {
 interface OnboardingData {
   acquisitionSource: string;
   acquisitionSourceOther: string | null;
-  yearGroup: string;
+  examType: 'gcse' | 'alevel' | 'igcse' | 'sat' | '';
+  satExamDate: string | null;
+  satConfidenceLevel: string | null;
+  satTargetRange: string | null;
+  satDiagnosticComplete: boolean;
+  satDiagnosticResults: string[] | null;
   subjects: SubjectWithGrade[];
   studyPreferences: string[];
   parentUpdates: boolean;
@@ -108,6 +114,154 @@ const ACQUISITION_SOURCES = [
   { id: 'reddit', label: 'Reddit or online forum', emoji: '💬' },
   { id: 'ad', label: 'Online ad', emoji: '🌐' },
   { id: 'other', label: 'Other', emoji: '✍️' },
+];
+
+const EXAM_TYPES = [
+  { 
+    id: 'gcse' as const, 
+    label: 'GCSE', 
+    description: 'General Certificate of Secondary Education',
+    emoji: '📚',
+    color: 'hsl(217, 91%, 60%)'
+  },
+  { 
+    id: 'alevel' as const, 
+    label: 'A-Level', 
+    description: 'Advanced Level qualification',
+    emoji: '🎓',
+    color: 'hsl(258, 90%, 66%)'
+  },
+  { 
+    id: 'igcse' as const, 
+    label: 'IGCSE', 
+    description: 'International GCSE',
+    emoji: '🌍',
+    color: 'hsl(160, 84%, 39%)'
+  },
+  { 
+    id: 'sat' as const, 
+    label: 'SAT', 
+    description: 'College admission test',
+    emoji: '🎯',
+    color: 'hsl(38, 92%, 50%)'
+  },
+];
+
+const SAT_PRESET_DATES = [
+  { label: 'March 2026', date: new Date(2026, 2, 14) },
+  { label: 'May 2026', date: new Date(2026, 4, 6) },
+  { label: 'August 2026', date: new Date(2026, 7, 29) },
+  { label: 'December 2026', date: new Date(2026, 11, 5) },
+];
+
+const SAT_CONFIDENCE_LEVELS = [
+  {
+    id: 'starting',
+    label: "I'm starting from scratch",
+    description: "Haven't studied much yet",
+    emoji: '🌱',
+    color: 'hsl(0, 84%, 60%)'
+  },
+  {
+    id: 'learning',
+    label: "I understand some, but need structure",
+    description: "Know basics, need guidance",
+    emoji: '📖',
+    color: 'hsl(38, 92%, 50%)'
+  },
+  {
+    id: 'okay',
+    label: "I feel okay — just need to improve",
+    description: "Solid foundation, room to grow",
+    emoji: '💪',
+    color: 'hsl(160, 84%, 39%)'
+  },
+  {
+    id: 'confident',
+    label: "I'm close — I want a top score",
+    description: "Strong skills, aiming high",
+    emoji: '🚀',
+    color: 'hsl(258, 90%, 66%)'
+  },
+];
+
+const SAT_TARGET_RANGES = [
+  {
+    id: 'pass',
+    range: '900–1100',
+    label: 'Just want a solid pass',
+    description: 'Meet basic requirements',
+    color: 'hsl(160, 84%, 39%)'
+  },
+  {
+    id: 'good',
+    range: '1100–1250',
+    label: 'Good score for most colleges',
+    description: 'Competitive for many schools',
+    color: 'hsl(217, 91%, 60%)'
+  },
+  {
+    id: 'competitive',
+    range: '1250–1450',
+    label: 'Competitive schools',
+    description: 'Target selective universities',
+    color: 'hsl(258, 90%, 66%)'
+  },
+  {
+    id: 'top',
+    range: '1450–1550+',
+    label: "I'm aiming Ivy / top-tier",
+    description: 'Elite university admissions',
+    color: 'hsl(38, 92%, 50%)'
+  },
+];
+
+const SAT_DIAGNOSTIC_QUESTIONS = [
+  {
+    id: 'math1',
+    type: 'Math',
+    question: 'If 3x + 7 = 22, what is the value of x?',
+    options: ['x = 3', 'x = 5', 'x = 7', 'x = 9'],
+    correct: 1
+  },
+  {
+    id: 'reading1',
+    type: 'Reading',
+    question: 'Which transition word best connects these two ideas: "The study was thorough. ___ the results were inconclusive."',
+    options: ['Moreover', 'However', 'Therefore', 'Similarly'],
+    correct: 1
+  },
+  {
+    id: 'math2',
+    type: 'Math',
+    question: 'A rectangle has a length of 12 and width of 5. What is its perimeter?',
+    options: ['17', '34', '60', '24'],
+    correct: 1
+  },
+  {
+    id: 'reading2',
+    type: 'Writing',
+    question: 'Which sentence is grammatically correct?',
+    options: [
+      'Neither the students nor the teacher were present.',
+      'Neither the students nor the teacher was present.',
+      'Neither the student nor the teachers was present.',
+      'Neither the student nor the teachers were present.'
+    ],
+    correct: 1
+  },
+  {
+    id: 'logic1',
+    type: 'Logic',
+    question: 'If all roses are flowers, and some flowers are red, which must be true?',
+    options: [
+      'All roses are red',
+      'Some roses might be red',
+      'No roses are red',
+      'All red things are roses'
+    ],
+    correct: 1
+  },
 ];
 
 const YEAR_GROUPS = [
@@ -257,7 +411,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     acquisitionSource: '',
     acquisitionSourceOther: null,
-    yearGroup: '',
+    examType: '',
+    satExamDate: null,
+    satConfidenceLevel: null,
+    satTargetRange: null,
+    satDiagnosticComplete: false,
+    satDiagnosticResults: null,
     subjects: [],
     studyPreferences: [],
     parentUpdates: false,
@@ -274,6 +433,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const [searchQuery, setSearchQuery] = useState('');
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionStage, setCompletionStage] = useState(0);
+  
+  // SAT-specific states
+  const [showSATConfirmation, setShowSATConfirmation] = useState(false);
+  const [satFlowStep, setSATFlowStep] = useState(0);
+  const [showDateHelper, setShowDateHelper] = useState(false);
+  const [diagnosticStarted, setDiagnosticStarted] = useState(false);
+  const [diagnosticQuestionIndex, setDiagnosticQuestionIndex] = useState(0);
+  const [diagnosticAnswers, setDiagnosticAnswers] = useState<string[]>([]);
+  const [showDiagnosticAnalysis, setShowDiagnosticAnalysis] = useState(false);
   
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -304,8 +472,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       case 2:
         return onboardingData.acquisitionSource !== '';
       case 3:
-        return onboardingData.yearGroup !== '';
+        if (onboardingData.examType === 'sat') {
+          return onboardingData.satDiagnosticComplete;
+        }
+        return onboardingData.examType !== '';
       case 4:
+        if (onboardingData.examType === 'sat') return true;
         return onboardingData.subjects.length > 0;
       case 5:
         return onboardingData.studyPreferences.length > 0;
@@ -315,6 +487,25 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       default:
         return true;
     }
+  };
+
+  const getTotalSteps = () => {
+    if (onboardingData.examType === 'sat') {
+      return 5; // Tutor, Acquisition, SAT flow, Study prefs, Parent updates
+    }
+    return 6; // Tutor, Acquisition, Exam type, Subjects, Study prefs, Parent updates
+  };
+
+  const getCurrentDisplayStep = () => {
+    if (currentStep === 0) return 0;
+    if (currentStep === 1) return 1;
+    if (currentStep === 2) return 2;
+    if (currentStep === 3) return 3;
+    if (currentStep === 4 && onboardingData.examType === 'sat') return 4;
+    if (currentStep === 4) return 4;
+    if (currentStep === 5) return onboardingData.examType === 'sat' ? 4 : 5;
+    if (currentStep === 6) return onboardingData.examType === 'sat' ? 5 : 6;
+    return currentStep;
   };
 
   const handleNext = () => {
@@ -327,13 +518,29 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     
     if (currentStep === 6) {
       handleComplete();
+    } else if (currentStep === 3 && onboardingData.examType === 'sat' && !onboardingData.satDiagnosticComplete) {
+      return;
+    } else if (currentStep === 4 && onboardingData.examType === 'sat') {
+      setCurrentStep(5);
     } else {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
-    setCurrentStep(currentStep - 1);
+    if (currentStep === 3 && satFlowStep > 0) {
+      setSATFlowStep(Math.max(0, satFlowStep - 1));
+    } else {
+      setCurrentStep(currentStep - 1);
+      if (currentStep === 4 && onboardingData.examType === 'sat') {
+        setSATFlowStep(0);
+        setOnboardingData({
+          ...onboardingData,
+          satDiagnosticComplete: false,
+          satDiagnosticResults: null
+        });
+      }
+    }
   };
 
   const handleSkip = () => {
@@ -351,14 +558,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // Save profile emoji and selected tutor
-        await supabase
-          .from('profiles')
-          .update({ 
-            profile_emoji: onboardingData.profileEmoji,
-            selected_tutor_id: onboardingData.selectedTutor,
-          })
-          .eq('id', user.id);
+        const profileUpdate: any = {
+          profile_emoji: onboardingData.profileEmoji,
+          selected_tutor_id: onboardingData.selectedTutor,
+          exam_type: onboardingData.examType,
+        };
+
+        if (onboardingData.examType === 'sat') {
+          profileUpdate.sat_exam_date = onboardingData.satExamDate;
+          profileUpdate.sat_confidence_level = onboardingData.satConfidenceLevel;
+          profileUpdate.sat_target_range = onboardingData.satTargetRange;
+          profileUpdate.sat_diagnostic_results = onboardingData.satDiagnosticResults;
+        }
+
+        await supabase.from('profiles').update(profileUpdate).eq('id', user.id);
 
         // Save parent email to onboarding_parent_emails table
         if (onboardingData.parentEmail) {
@@ -370,7 +583,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             });
         }
 
-        if (onboardingData.subjects.length > 0) {
+        if (onboardingData.examType !== 'sat' && onboardingData.subjects.length > 0) {
           const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectWithGrade => {
             const subject = allSubjects.find(s => s.id === subjectWithGrade.id);
@@ -410,7 +623,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   const getProgressPercentage = () => {
     if (currentStep === 0) return 0;
-    return (currentStep / 6) * 100;
+    return (getCurrentDisplayStep() / getTotalSteps()) * 100;
   };
 
   const getCurrentSubjects = () => {
@@ -455,7 +668,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               />
             </div>
             <p className="text-[13px] text-[#6B7280] text-center font-medium">
-              Step {currentStep} of 6
+              Step {getCurrentDisplayStep()} of {getTotalSteps()}
             </p>
           </div>
         )}
@@ -490,7 +703,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               <div>
                 {/* Step indicator - smaller, above */}
                 <p className="text-xs text-muted-foreground text-center mb-4 uppercase tracking-wide">
-                  Step 1 of 6
+                  Step 1 of {getTotalSteps()}
                 </p>
 
                 {/* Main headline - emotional */}
@@ -809,28 +1022,63 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 3: Year group */}
-            {currentStep === 3 && (
+            {/* Step 3: Exam Type Selection */}
+            {currentStep === 3 && !showSATConfirmation && satFlowStep === 0 && (
               <div>
-                <h2 className="text-[26px] font-bold text-black mb-2">What year are you in?</h2>
-                <p className="text-[15px] text-[#6B7280] mb-5">This helps us show you the right content</p>
-                <div className="space-y-2.5">
-                  {YEAR_GROUPS.map((year) => (
+                <h2 className="text-[28px] font-bold text-foreground mb-3">
+                  What exams are you taking?
+                </h2>
+                <p className="text-[15px] text-muted-foreground mb-6">
+                  Choose your exam type so we can personalise your learning path
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {EXAM_TYPES.map((exam) => (
                     <button
-                      key={year.id}
-                      onClick={() => setOnboardingData({ ...onboardingData, yearGroup: year.id })}
-                      className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
-                        onboardingData.yearGroup === year.id
-                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
-                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
+                      key={exam.id}
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, examType: exam.id });
+                        if (exam.id === 'sat') {
+                          setShowSATConfirmation(true);
+                          setTimeout(() => {
+                            setShowSATConfirmation(false);
+                            setSATFlowStep(1);
+                          }, 2500);
+                        } else {
+                          setSubjectLevel(exam.id === 'alevel' ? 'alevel' : exam.id === 'igcse' ? 'igcse' : 'gcse');
+                        }
+                      }}
+                      className={`relative p-6 rounded-2xl border-2 transition-all duration-300 ${
+                        onboardingData.examType === exam.id
+                          ? 'shadow-lg scale-[1.02]'
+                          : 'border-border hover:border-primary hover:shadow-md'
                       }`}
+                      style={{
+                        borderColor: onboardingData.examType === exam.id ? exam.color : undefined,
+                        backgroundColor: onboardingData.examType === exam.id ? `${exam.color}08` : undefined,
+                      }}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-[24px]">{year.emoji}</span>
-                        <span className="text-[15px] font-medium">{year.label}</span>
+                      <div className="flex items-start gap-4">
+                        <div 
+                          className="text-[48px] w-20 h-20 flex items-center justify-center rounded-xl"
+                          style={{ backgroundColor: `${exam.color}15` }}
+                        >
+                          {exam.emoji}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <h3 className="text-[20px] font-bold text-foreground mb-1">
+                            {exam.label}
+                          </h3>
+                          <p className="text-[14px] text-muted-foreground">
+                            {exam.description}
+                          </p>
+                        </div>
                       </div>
-                      {onboardingData.yearGroup === year.id && (
-                        <Check className="w-[20px] h-[20px] text-[#3B82F6]" />
+                      
+                      {onboardingData.examType === exam.id && (
+                        <div className="absolute top-4 right-4">
+                          <Check className="w-6 h-6" style={{ color: exam.color }} />
+                        </div>
                       )}
                     </button>
                   ))}
@@ -838,8 +1086,364 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
             )}
 
-            {/* Step 4: Select subjects WITH TABS */}
-            {currentStep === 4 && (
+            {/* SAT Confirmation Screen */}
+            {currentStep === 3 && showSATConfirmation && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="text-center py-12"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [0, 1.2, 1] }}
+                  transition={{ duration: 0.5, times: [0, 0.6, 1] }}
+                  className="mb-6"
+                >
+                  <div className="w-24 h-24 mx-auto bg-gradient-to-br rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, hsl(38, 92%, 50%), hsl(0, 84%, 60%))' }}>
+                    <Check className="w-12 h-12 text-white" strokeWidth={3} />
+                  </div>
+                </motion.div>
+                
+                <motion.h2 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-[32px] font-bold text-foreground mb-3"
+                >
+                  Awesome — SAT prep locked in. 🎯
+                </motion.h2>
+                
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-[18px] text-muted-foreground font-medium"
+                >
+                  Let's personalise it.
+                </motion.p>
+                
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 2.5, ease: "linear" }}
+                  className="h-1 mt-8 max-w-md mx-auto rounded-full origin-left"
+                  style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                />
+              </motion.div>
+            )}
+
+            {/* SAT Flow - Step 1: Exam Date */}
+            {currentStep === 3 && satFlowStep === 1 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-foreground mb-3">
+                  📅 When are you taking the SAT?
+                </h2>
+                <p className="text-[15px] text-muted-foreground mb-6">
+                  We'll build your study plan around your deadline
+                </p>
+                
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {SAT_PRESET_DATES.map((preset) => (
+                    <button
+                      key={preset.label}
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, satExamDate: preset.date.toISOString() });
+                        setSATFlowStep(2);
+                      }}
+                      className="p-4 rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 transition-all text-left"
+                    >
+                      <div className="text-[18px] font-semibold text-foreground">
+                        {preset.label}
+                      </div>
+                      <div className="text-[13px] text-muted-foreground mt-1">
+                        {format(preset.date, 'MMMM d, yyyy')}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+                
+                <button
+                  onClick={() => setShowDateHelper(true)}
+                  className="w-full p-4 rounded-xl border-2 border-dashed border-border hover:border-primary transition-all text-muted-foreground hover:text-primary"
+                >
+                  <span className="text-[15px] font-medium">
+                    Not sure yet → Help me choose a timeline
+                  </span>
+                </button>
+                
+                {showDateHelper && (
+                  <div className="mt-4 p-5 rounded-xl" style={{ backgroundColor: 'hsl(38, 92%, 95%)', border: '2px solid hsl(38, 92%, 50%)' }}>
+                    <p className="text-[15px] mb-3" style={{ color: 'hsl(38, 92%, 20%)' }}>
+                      <strong>No stress</strong> — we'll set a default pace and adjust as we learn how you study.
+                    </p>
+                    <button
+                      onClick={() => {
+                        const defaultDate = new Date();
+                        defaultDate.setMonth(defaultDate.getMonth() + 6);
+                        setOnboardingData({ ...onboardingData, satExamDate: defaultDate.toISOString() });
+                        setSATFlowStep(2);
+                      }}
+                      className="w-full py-3 rounded-lg font-semibold text-white transition-all"
+                      style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                    >
+                      Set flexible timeline
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* SAT Flow - Step 2: Confidence Level */}
+            {currentStep === 3 && satFlowStep === 2 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-foreground mb-3">
+                  How do you currently feel about the SAT?
+                </h2>
+                <p className="text-[15px] text-muted-foreground mb-6">
+                  Be honest — this helps us match the right pace for you
+                </p>
+                
+                <div className="space-y-3">
+                  {SAT_CONFIDENCE_LEVELS.map((level) => (
+                    <button
+                      key={level.id}
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, satConfidenceLevel: level.id });
+                        setSATFlowStep(3);
+                      }}
+                      className={`w-full p-5 rounded-xl border-2 transition-all text-left ${
+                        onboardingData.satConfidenceLevel === level.id
+                          ? 'shadow-md'
+                          : 'border-border hover:border-primary'
+                      }`}
+                      style={{
+                        borderColor: onboardingData.satConfidenceLevel === level.id ? level.color : undefined,
+                        backgroundColor: onboardingData.satConfidenceLevel === level.id ? `${level.color}08` : undefined,
+                      }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div 
+                          className="text-[40px] w-16 h-16 flex items-center justify-center rounded-lg flex-shrink-0"
+                          style={{ backgroundColor: `${level.color}15` }}
+                        >
+                          {level.emoji}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-[17px] font-semibold text-foreground mb-1">
+                            {level.label}
+                          </h3>
+                          <p className="text-[14px] text-muted-foreground">
+                            {level.description}
+                          </p>
+                        </div>
+                        {onboardingData.satConfidenceLevel === level.id && (
+                          <Check className="w-5 h-5 flex-shrink-0" style={{ color: level.color }} />
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* SAT Flow - Step 3: Target Score Range */}
+            {currentStep === 3 && satFlowStep === 3 && (
+              <div>
+                <h2 className="text-[28px] font-bold text-foreground mb-3">
+                  What's your goal?
+                </h2>
+                <p className="text-[15px] text-muted-foreground mb-6">
+                  We'll tailor difficulty and pacing to your target
+                </p>
+                
+                <div className="space-y-3">
+                  {SAT_TARGET_RANGES.map((target) => (
+                    <button
+                      key={target.id}
+                      onClick={() => {
+                        setOnboardingData({ ...onboardingData, satTargetRange: target.id });
+                        setSATFlowStep(4);
+                      }}
+                      className={`w-full p-5 rounded-xl border-2 transition-all text-left ${
+                        onboardingData.satTargetRange === target.id
+                          ? 'shadow-md'
+                          : 'border-border hover:border-primary'
+                      }`}
+                      style={{
+                        borderColor: onboardingData.satTargetRange === target.id ? target.color : undefined,
+                        backgroundColor: onboardingData.satTargetRange === target.id ? `${target.color}08` : undefined,
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div 
+                            className="inline-block px-3 py-1 rounded-full text-[13px] font-bold text-white mb-2"
+                            style={{ backgroundColor: target.color }}
+                          >
+                            {target.range}
+                          </div>
+                          <h3 className="text-[17px] font-semibold text-foreground mb-1">
+                            {target.label}
+                          </h3>
+                          <p className="text-[14px] text-muted-foreground">
+                            {target.description}
+                          </p>
+                        </div>
+                        {onboardingData.satTargetRange === target.id && (
+                          <Check className="w-5 h-5 ml-4 flex-shrink-0" style={{ color: target.color }} />
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* SAT Flow - Step 4: Diagnostic Intro */}
+            {currentStep === 3 && satFlowStep === 4 && !diagnosticStarted && !showDiagnosticAnalysis && (
+              <div className="text-center py-8">
+                <div className="w-32 h-32 mx-auto mb-6 relative">
+                  <img 
+                    src={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.avatar}
+                    alt="Your tutor"
+                    className="w-full h-full rounded-full"
+                  />
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute -bottom-2 -right-2 text-[40px]"
+                  >
+                    📋
+                  </motion.div>
+                </div>
+                
+                <h2 className="text-[28px] font-bold text-foreground mb-3">
+                  Before we build your plan, let's do a quick warm-up.
+                </h2>
+                <p className="text-[16px] text-muted-foreground mb-2">
+                  Just 5 questions — no pressure.
+                </p>
+                <p className="text-[14px] text-muted-foreground mb-8">
+                  This helps us understand your starting point
+                </p>
+                
+                <button
+                  onClick={() => setDiagnosticStarted(true)}
+                  className="px-8 py-4 rounded-xl font-semibold text-white text-[17px] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                  style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                >
+                  Start Mini Assessment →
+                </button>
+              </div>
+            )}
+
+            {/* SAT Flow - Step 4: Diagnostic Questions */}
+            {currentStep === 3 && satFlowStep === 4 && diagnosticStarted && !showDiagnosticAnalysis && (
+              <div>
+                <div className="mb-6">
+                  <div className="flex justify-between text-[13px] text-muted-foreground mb-2">
+                    <span>Question {diagnosticQuestionIndex + 1} of 5</span>
+                    <span>{SAT_DIAGNOSTIC_QUESTIONS[diagnosticQuestionIndex].type}</span>
+                  </div>
+                  <div className="h-2 bg-border rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${((diagnosticQuestionIndex + 1) / 5) * 100}%` }}
+                      className="h-full"
+                      style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                    />
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <h3 className="text-[20px] font-semibold text-foreground mb-4">
+                    {SAT_DIAGNOSTIC_QUESTIONS[diagnosticQuestionIndex].question}
+                  </h3>
+                  
+                  <div className="space-y-3">
+                    {SAT_DIAGNOSTIC_QUESTIONS[diagnosticQuestionIndex].options.map((option, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          const newAnswers = [...diagnosticAnswers, idx.toString()];
+                          setDiagnosticAnswers(newAnswers);
+                          
+                          if (diagnosticQuestionIndex < 4) {
+                            setTimeout(() => setDiagnosticQuestionIndex(diagnosticQuestionIndex + 1), 300);
+                          } else {
+                            setTimeout(() => setShowDiagnosticAnalysis(true), 500);
+                          }
+                        }}
+                        className="w-full p-4 rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 transition-all text-left text-[15px]"
+                      >
+                        <span className="font-medium text-foreground">{String.fromCharCode(65 + idx)}.</span> {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SAT Flow - Step 4: Diagnostic Analysis */}
+            {currentStep === 3 && satFlowStep === 4 && showDiagnosticAnalysis && (
+              <div className="text-center py-8">
+                <div className="w-32 h-32 mx-auto mb-6 relative">
+                  <img 
+                    src={TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.avatar}
+                    alt="Your tutor"
+                    className="w-full h-full rounded-full"
+                  />
+                  <motion.div
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                    className="absolute -bottom-2 -right-2 text-[40px]"
+                  >
+                    📋
+                  </motion.div>
+                </div>
+                
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-[24px] font-semibold text-foreground mb-2"
+                >
+                  Give me a second — I'm analysing your answers.
+                </motion.h2>
+                
+                <div className="flex justify-center gap-2 mb-6">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                    />
+                  ))}
+                </div>
+                
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 2.5, ease: "linear" }}
+                  onAnimationComplete={() => {
+                    setOnboardingData({
+                      ...onboardingData,
+                      satDiagnosticComplete: true,
+                      satDiagnosticResults: diagnosticAnswers
+                    });
+                    setCurrentStep(5);
+                    setSATFlowStep(0);
+                  }}
+                  className="h-1 mt-8 max-w-md mx-auto rounded-full origin-left"
+                  style={{ backgroundColor: 'hsl(38, 92%, 50%)' }}
+                />
+              </div>
+            )}
+
+            {/* Step 4: Select subjects (SKIP FOR SAT) */}
+            {currentStep === 4 && onboardingData.examType !== 'sat' && (
               <div>
                 <h2 className="text-[26px] font-bold text-black mb-2">Which subjects are you studying?</h2>
                 <p className="text-[15px] text-[#6B7280] mb-4">Select all that apply. You can add more later.</p>
@@ -1150,7 +1754,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         </AnimatePresence>
 
         {/* Navigation buttons */}
-        {currentStep > 0 && currentStep < 7 && !showCompletion && !showConfirmation && (
+        {currentStep > 0 && currentStep < 7 && !showCompletion && !showConfirmation && !showSATConfirmation && satFlowStep === 0 && (
           <div className="flex items-center justify-between mt-5 pt-5 border-t border-gray-200 flex-shrink-0">
             {currentStep > 1 && !showTeachingStyle && (
               <button onClick={handleBack} className="text-[#6B7280] hover:text-black font-medium text-[14px] underline transition-colors duration-200">
@@ -1180,10 +1784,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     : '#D1D5DB'
                 }}
               >
-                {currentStep === 1 && onboardingData.selectedTutor
-                  ? `Continue with ${TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name}`
-                  : 'Continue'
-                }
+                {currentStep === 6 ? 'Finish' : 'Continue'}
               </button>
             )}
           </div>
