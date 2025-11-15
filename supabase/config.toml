@@ -1,5 +1,8 @@
 project_id = "mkmrasgbrhwtycwpdtke"
 
+[functions.seed-sat-questions]
+verify_jwt = false
+
 [functions.stripe-webhook]
 verify_jwt = false
 
