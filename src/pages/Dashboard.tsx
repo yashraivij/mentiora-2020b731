@@ -764,6 +764,33 @@ const Dashboard = () => {
     }
   };
 
+  // Helper to check if subject is A-Level
+  const isALevelSubject = (subjectId: string): boolean => {
+    return subjectId.toLowerCase().includes('alevel');
+  };
+
+  // Helper to convert grades to numeric values
+  const gradeToNumber = (gradeString: string, subjectId: string): number => {
+    if (!gradeString || gradeString === 'U') return 0;
+    
+    if (isALevelSubject(subjectId)) {
+      // A-Level: Convert letter grades to numbers (A*=9, A=8, B=7, C=6, D=5, E=4)
+      switch (gradeString.toUpperCase()) {
+        case 'A*': return 9;
+        case 'A': return 8;
+        case 'B': return 7;
+        case 'C': return 6;
+        case 'D': return 5;
+        case 'E': return 4;
+        default: return 0;
+      }
+    } else {
+      // GCSE: Already numeric (9, 8, 7, 6, 5, 4, 3, 2, 1)
+      const parsed = parseInt(gradeString);
+      return isNaN(parsed) ? 0 : Math.max(0, Math.min(9, parsed));
+    }
+  };
+
   // Load predicted grades from database
   const loadPredictedGrades = async () => {
     if (!user?.id) return;
@@ -787,20 +814,25 @@ const Dashboard = () => {
       // Create a map of exam completions by subject (flexible matching)
       const examCompletionsMap = new Map();
       examCompletions?.forEach(completion => {
+        // Extract base subject: "biology-aqa-alevel" → "biology", "maths" → "maths"
         const baseSubject = completion.subject_id.split('-')[0].toLowerCase();
-        // Store the latest completion for each base subject
-        if (!examCompletionsMap.has(baseSubject)) {
-          examCompletionsMap.set(baseSubject, completion);
-        }
+        
+        // Store ALL matching variations to maximize matching
+        examCompletionsMap.set(baseSubject, completion);
+        examCompletionsMap.set(completion.subject_id.toLowerCase(), completion);
       });
 
       // 2. Calculate predicted grades from current userProgress
       const gradesBySubject = userSubjects.map((subject: any) => {
-        const subjectIdToMatch = subject.id || '';
-        const baseSubjectName = subjectIdToMatch.split('-')[0].toLowerCase();
+        const subjectIdToMatch = (subject.id || '').toLowerCase();
+        const baseSubjectName = subjectIdToMatch.split('-')[0];
         
-        // Check if we have an exam completion for this subject
-        const examCompletion = examCompletionsMap.get(baseSubjectName);
+        // Check if we have an exam completion for this subject (try multiple matching strategies)
+        const examCompletion = 
+          examCompletionsMap.get(subjectIdToMatch) ||           // Exact match: "maths-aqa"
+          examCompletionsMap.get(baseSubjectName) ||            // Base match: "maths"
+          examCompletionsMap.get(`${baseSubjectName}-aqa-alevel`) || // Try alevel variant
+          examCompletionsMap.get(`${baseSubjectName}-aqa`);
         
         // Match both exact ID and base subject name for practice data
         const subjectProgressData = userProgress.filter(p => 
@@ -851,7 +883,7 @@ const Dashboard = () => {
         // 3. Merge database and practice grades intelligently
         if (examCompletion) {
           // Convert database grade to numeric value
-          const examGradeValue = parseFloat(examCompletion.grade) || 0;
+          const examGradeValue = gradeToNumber(examCompletion.grade, examCompletion.subject_id);
           const examPercentage = examCompletion.percentage || 0;
           
           if (hasAttempts && practiceGradeValue > 0) {
