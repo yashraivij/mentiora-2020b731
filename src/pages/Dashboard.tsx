@@ -92,6 +92,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import SATDashboard from "./SATDashboard";
 
 interface UserProgress {
   subjectId: string;
@@ -148,6 +149,46 @@ const Dashboard = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
+  const [examType, setExamType] = useState<string | null>(null);
+  const [checkingExamType, setCheckingExamType] = useState(true);
+
+  // Check if user is SAT user and redirect to SAT dashboard
+  useEffect(() => {
+    const checkExamType = async () => {
+      if (!user?.id) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('exam_type')
+          .eq('id', user.id)
+          .single();
+
+        if (!error && data) {
+          setExamType(data.exam_type);
+        }
+      } catch (error) {
+        console.error('Error checking exam type:', error);
+      } finally {
+        setCheckingExamType(false);
+      }
+    };
+
+    checkExamType();
+  }, [user?.id]);
+
+  // Render SAT Dashboard for SAT users
+  if (checkingExamType) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (examType === 'sat' || examType === 'SAT') {
+    return <SATDashboard />;
+  }
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
