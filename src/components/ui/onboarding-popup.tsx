@@ -148,38 +148,38 @@ const TUTOR_OPTIONS = [
   {
     id: 'ava',
     name: 'Ava',
-    avatar: '/src/assets/avatars/fox-avatar.png',
-    style: '🦊 Calm & Supportive',
+    avatar: '/src/assets/avatars/ava-avatar.png',
+    style: 'Calm & Supportive',
     bestFor: 'Best for: anxiety or low confidence',
     welcomeMessage: "Hey — I'm Ava. I'll be with you through every step. I'll help you learn at a pace that feels right, and I'll check in to keep you improving. Ready?",
-    color: '#8B5CF6'
+    color: '#7CB9E8' // Soft pastel blue
   },
   {
     id: 'lucas',
     name: 'Lucas',
-    avatar: '/src/assets/avatars/dog-avatar.png',
-    style: '🐶 Direct & Fast-Paced',
+    avatar: '/src/assets/avatars/lucas-avatar.png',
+    style: 'Direct & Fast-Paced',
     bestFor: 'Best for: quick learners or people with limited time',
     welcomeMessage: "I'm Lucas — let's get straight to it. I'll help you move fast, stay focused, and make every minute count. You've got this.",
-    color: '#3B82F6'
+    color: '#1E3A5F' // Dark navy
   },
   {
     id: 'dr_rivera',
     name: 'Dr. Rivera',
-    avatar: '/src/assets/avatars/cat-avatar.png',
-    style: '🐱 Detailed & Thorough',
+    avatar: '/src/assets/avatars/dr-rivera-avatar.png',
+    style: 'Detailed & Thorough',
     bestFor: 'Best for: understanding concepts deeply',
     welcomeMessage: "Hello, I'm Dr. Rivera. I'll make sure you truly understand every concept — not just memorize it. Together, we'll build real mastery.",
-    color: '#10B981'
+    color: '#5F9C96' // Muted teal
   },
   {
     id: 'jayden',
     name: 'Jayden',
-    avatar: '/src/assets/avatars/bear-avatar.png',
-    style: '🐻 Motivational & Fun',
+    avatar: '/src/assets/avatars/jayden-avatar.png',
+    style: 'Motivational & Fun',
     bestFor: 'Best for: procrastination or low motivation',
     welcomeMessage: "Hey! I'm Jayden. We're going to make this fun and keep you showing up. I believe in you — let's make studying something you actually want to do.",
-    color: '#F59E0B'
+    color: '#FF7F50' // Warm coral
   }
 ];
 
