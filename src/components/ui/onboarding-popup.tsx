@@ -424,7 +424,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.95 }}
         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-10 max-h-[88vh] overflow-hidden flex flex-col"
+        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[1100px] p-10 max-h-[88vh] overflow-hidden flex flex-col"
       >
         {/* Progress Bar */}
         {currentStep >= 1 && currentStep <= 6 && !showCompletion && (
@@ -477,7 +477,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </p>
 
                 {/* Main headline - emotional */}
-                <h2 className="text-[32px] font-bold text-black mb-3 text-center leading-tight">
+                <h2 className="text-[28px] font-bold text-black mb-3 text-center leading-tight">
                   Pick the coach who fits your personality.
                 </h2>
 
@@ -487,7 +487,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </p>
                 
                 {/* Tutor cards grid */}
-                <div className="grid grid-cols-1 gap-6 pb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
                   {TUTOR_OPTIONS.map((tutor) => (
                     <motion.button
                       key={tutor.id}
@@ -501,7 +501,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         boxShadow: `0 20px 40px ${tutor.color}20`
                       }}
                       whileTap={{ scale: 0.98 }}
-                      className={`relative p-8 rounded-2xl border-2 transition-all ${
+                      className={`relative p-6 rounded-2xl border-2 transition-all ${
                         onboardingData.selectedTutor === tutor.id && showTutorWelcome
                           ? 'shadow-2xl'
                           : 'border-border hover:shadow-lg bg-card'
@@ -534,7 +534,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       )}
 
                       {/* Avatar with enhanced glow + wave animation on hover */}
-                      <div className="relative w-32 h-32 mx-auto mb-6">
+                      <div className="relative w-24 h-24 mx-auto mb-4">
                         <motion.div 
                           className="absolute inset-0 rounded-full blur-xl"
                           style={{ backgroundColor: tutor.color }}
@@ -580,7 +580,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </p>
                       
                       {/* Voice line in quotes */}
-                      <div className="mb-5 px-4">
+                      <div className="mb-4 px-4">
                         <p 
                           className="text-base text-center font-medium leading-relaxed"
                           style={{ color: tutor.color }}
