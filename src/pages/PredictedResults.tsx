@@ -52,6 +52,9 @@ const PredictedResults = () => {
   const { isPremium } = useSubscription();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle, customSubjectId } = location.state || {};
+  
+  // For custom exams, use the actual subject ID for grade calculations
+  const actualSubjectIdForGrading = isCustomExam ? customSubjectId : subjectId;
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -366,7 +369,7 @@ const PredictedResults = () => {
       const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
       const achievedMarks = markedAttempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
       const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
-      const grade = getGrade(percentage, subjectId);
+      const grade = getGrade(percentage, actualSubjectIdForGrading);
 
       const examCompletion = {
         user_id: user.id,
@@ -705,7 +708,7 @@ const PredictedResults = () => {
   const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
   const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
-  const grade = getGrade(percentage, subjectId);
+  const grade = getGrade(percentage, actualSubjectIdForGrading);
   
   // Convert grade string to number for display (e.g., "7" -> 7, "A" -> 7.5)
   const gradeToNumber = (gradeStr: string): number => {
@@ -836,7 +839,7 @@ const PredictedResults = () => {
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(numericGrade, subjectId)}
+                        {getDisplayGrade(numericGrade, actualSubjectIdForGrading)}
                       </div>
                     </div>
                   </div>
@@ -845,8 +848,8 @@ const PredictedResults = () => {
                 {/* Animated Progress Bar */}
                 <div className="space-y-3">
                   <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                    <span>{getProgressBarLabels(subjectId).min}</span>
-                    <span>{getProgressBarLabels(subjectId).max}</span>
+                    <span>{getProgressBarLabels(actualSubjectIdForGrading).min}</span>
+                    <span>{getProgressBarLabels(actualSubjectIdForGrading).max}</span>
                   </div>
                   <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
                     {/* Grade position - animated bright fill */}
@@ -864,7 +867,7 @@ const PredictedResults = () => {
                   </div>
                   <div className="text-center pt-1">
                     <p className="text-sm text-muted-foreground">
-                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
+                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, actualSubjectIdForGrading).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
                     </p>
                   </div>
                 </div>
