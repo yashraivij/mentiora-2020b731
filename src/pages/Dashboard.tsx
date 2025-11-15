@@ -771,57 +771,110 @@ const Dashboard = () => {
     try {
       console.log('📊 Loading predicted grades for user:', user.id);
       
-      // Calculate predicted grades from current userProgress instead of database
+      // 1. Fetch actual exam completions from database
+      const { data: examCompletions, error: examError } = await supabase
+        .from('predicted_exam_completions')
+        .select('subject_id, grade, percentage, created_at, achieved_marks, total_marks')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (examError) {
+        console.error('Error fetching exam completions:', examError);
+      }
+
+      console.log('📊 Fetched exam completions from database:', examCompletions);
+
+      // Create a map of exam completions by subject (flexible matching)
+      const examCompletionsMap = new Map();
+      examCompletions?.forEach(completion => {
+        const baseSubject = completion.subject_id.split('-')[0].toLowerCase();
+        // Store the latest completion for each base subject
+        if (!examCompletionsMap.has(baseSubject)) {
+          examCompletionsMap.set(baseSubject, completion);
+        }
+      });
+
+      // 2. Calculate predicted grades from current userProgress
       const gradesBySubject = userSubjects.map((subject: any) => {
         const subjectIdToMatch = subject.id || '';
+        const baseSubjectName = subjectIdToMatch.split('-')[0].toLowerCase();
         
-        // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
-        const baseSubjectName = subjectIdToMatch.split('-')[0];
+        // Check if we have an exam completion for this subject
+        const examCompletion = examCompletionsMap.get(baseSubjectName);
+        
+        // Match both exact ID and base subject name for practice data
         const subjectProgressData = userProgress.filter(p => 
           p.subjectId === subjectIdToMatch || 
           p.subjectId === baseSubjectName ||
-          p.subjectId.split('-')[0] === baseSubjectName
+          p.subjectId.split('-')[0].toLowerCase() === baseSubjectName
         );
         const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
         
         let predictedGradeValue = 0;
         let percentage = 0;
         
+        // Calculate practice-based grade if available
+        let practiceGradeValue = 0;
+        let practicePercentage = 0;
+        
         if (hasAttempts) {
-          // Calculate from CURRENT practice accuracy (most accurate)
           const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
           const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
           const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
-          percentage = currentAccuracy;
-          
-          console.log(`📊 ${subject.name} (${subjectIdToMatch}): accuracy=${currentAccuracy}%, attempts=${totalAttempts}`);
+          practicePercentage = currentAccuracy;
           
           if (currentAccuracy > 0) {
-            // Check if A-Level subject to use correct thresholds
             const isALevel = subject.id && subject.id.includes('alevel');
             
             if (isALevel) {
               // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
-              if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
-              else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
-              else if (currentAccuracy >= 70) predictedGradeValue = 7; // B
-              else if (currentAccuracy >= 60) predictedGradeValue = 6; // C
-              else if (currentAccuracy >= 50) predictedGradeValue = 5; // D
-              else if (currentAccuracy >= 40) predictedGradeValue = 4; // E
-              else predictedGradeValue = 0; // U
+              if (currentAccuracy >= 90) practiceGradeValue = 9; // A*
+              else if (currentAccuracy >= 80) practiceGradeValue = 8; // A
+              else if (currentAccuracy >= 70) practiceGradeValue = 7; // B
+              else if (currentAccuracy >= 60) practiceGradeValue = 6; // C
+              else if (currentAccuracy >= 50) practiceGradeValue = 5; // D
+              else if (currentAccuracy >= 40) practiceGradeValue = 4; // E
+              else practiceGradeValue = 0; // U
             } else {
-              // GCSE thresholds: Grade 4=30%, Grade 5=40%, etc.
-              if (currentAccuracy >= 80) predictedGradeValue = 9;
-              else if (currentAccuracy >= 70) predictedGradeValue = 8;
-              else if (currentAccuracy >= 60) predictedGradeValue = 7;
-              else if (currentAccuracy >= 50) predictedGradeValue = 6;
-              else if (currentAccuracy >= 40) predictedGradeValue = 5;
-              else if (currentAccuracy >= 30) predictedGradeValue = 4;
-              else predictedGradeValue = 0;
+              // GCSE thresholds
+              if (currentAccuracy >= 80) practiceGradeValue = 9;
+              else if (currentAccuracy >= 70) practiceGradeValue = 8;
+              else if (currentAccuracy >= 60) practiceGradeValue = 7;
+              else if (currentAccuracy >= 50) practiceGradeValue = 6;
+              else if (currentAccuracy >= 40) practiceGradeValue = 5;
+              else if (currentAccuracy >= 30) practiceGradeValue = 4;
+              else practiceGradeValue = 0;
             }
-            
-            console.log(`📊 ${subject.name} final grade: ${predictedGradeValue} (${currentAccuracy}%)`);
           }
+        }
+
+        // 3. Merge database and practice grades intelligently
+        if (examCompletion) {
+          // Convert database grade to numeric value
+          const examGradeValue = parseFloat(examCompletion.grade) || 0;
+          const examPercentage = examCompletion.percentage || 0;
+          
+          if (hasAttempts && practiceGradeValue > 0) {
+            // Both sources available: weighted average (70% exam, 30% practice)
+            predictedGradeValue = Math.round((examGradeValue * 0.7) + (practiceGradeValue * 0.3));
+            percentage = Math.round((examPercentage * 0.7) + (practicePercentage * 0.3));
+            console.log(`📊 ${subject.name}: Combined grade ${predictedGradeValue} (exam: ${examGradeValue}, practice: ${practiceGradeValue})`);
+          } else {
+            // Only exam data available
+            predictedGradeValue = examGradeValue;
+            percentage = examPercentage;
+            console.log(`📊 ${subject.name}: Using database grade ${predictedGradeValue} (${percentage}%)`);
+          }
+        } else if (hasAttempts) {
+          // Only practice data available
+          predictedGradeValue = practiceGradeValue;
+          percentage = practicePercentage;
+          console.log(`📊 ${subject.name}: Using practice grade ${predictedGradeValue} (${percentage}%)`);
+        } else {
+          // No data available
+          predictedGradeValue = 0;
+          percentage = 0;
+          console.log(`📊 ${subject.name}: No data, grade U`);
         }
         
         return {
@@ -833,7 +886,7 @@ const Dashboard = () => {
         };
       });
 
-      console.log('📊 Calculated grades from userProgress:', gradesBySubject);
+      console.log('📊 Final merged grades:', gradesBySubject);
       
       setPredictedGrades(gradesBySubject);
     } catch (error) {
