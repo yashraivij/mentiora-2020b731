@@ -900,6 +900,7 @@ export type Database = {
           created_at: string | null
           current_period_end: string | null
           email: string
+          exam_type: string | null
           first_name: string | null
           full_name: string | null
           id: string
@@ -909,6 +910,20 @@ export type Database = {
           premium_until: string | null
           profile_emoji: string | null
           purchased_package: string | null
+          sat_baseline_score_high: number | null
+          sat_baseline_score_low: number | null
+          sat_confidence_level: string | null
+          sat_daily_minutes: number | null
+          sat_diagnostic_completed: boolean | null
+          sat_exam_date: string | null
+          sat_last_session_date: string | null
+          sat_next_session_date: string | null
+          sat_predicted_score_high: number | null
+          sat_predicted_score_low: number | null
+          sat_streak_days: number | null
+          sat_strength_domains: string[] | null
+          sat_target_band: string | null
+          sat_weak_domains: string[] | null
           selected_tutor_id: string | null
           stripe_customer_id: string | null
           stripe_payment_id: string | null
@@ -921,6 +936,7 @@ export type Database = {
           created_at?: string | null
           current_period_end?: string | null
           email: string
+          exam_type?: string | null
           first_name?: string | null
           full_name?: string | null
           id: string
@@ -930,6 +946,20 @@ export type Database = {
           premium_until?: string | null
           profile_emoji?: string | null
           purchased_package?: string | null
+          sat_baseline_score_high?: number | null
+          sat_baseline_score_low?: number | null
+          sat_confidence_level?: string | null
+          sat_daily_minutes?: number | null
+          sat_diagnostic_completed?: boolean | null
+          sat_exam_date?: string | null
+          sat_last_session_date?: string | null
+          sat_next_session_date?: string | null
+          sat_predicted_score_high?: number | null
+          sat_predicted_score_low?: number | null
+          sat_streak_days?: number | null
+          sat_strength_domains?: string[] | null
+          sat_target_band?: string | null
+          sat_weak_domains?: string[] | null
           selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
@@ -942,6 +972,7 @@ export type Database = {
           created_at?: string | null
           current_period_end?: string | null
           email?: string
+          exam_type?: string | null
           first_name?: string | null
           full_name?: string | null
           id?: string
@@ -951,6 +982,20 @@ export type Database = {
           premium_until?: string | null
           profile_emoji?: string | null
           purchased_package?: string | null
+          sat_baseline_score_high?: number | null
+          sat_baseline_score_low?: number | null
+          sat_confidence_level?: string | null
+          sat_daily_minutes?: number | null
+          sat_diagnostic_completed?: boolean | null
+          sat_exam_date?: string | null
+          sat_last_session_date?: string | null
+          sat_next_session_date?: string | null
+          sat_predicted_score_high?: number | null
+          sat_predicted_score_low?: number | null
+          sat_streak_days?: number | null
+          sat_strength_domains?: string[] | null
+          sat_target_band?: string | null
+          sat_weak_domains?: string[] | null
           selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
@@ -1096,6 +1141,135 @@ export type Database = {
           redeemed_at?: string
           reward_description?: string
           reward_title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      sat_daily_plans: {
+        Row: {
+          activities: Json
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          id: string
+          plan_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activities?: Json
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          plan_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activities?: Json
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          plan_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      sat_questions: {
+        Row: {
+          choices: Json | null
+          correct_answer: string
+          created_at: string
+          difficulty: string
+          domain: string
+          explanation: string
+          id: string
+          passage_text: string | null
+          question_text: string
+          question_type: string
+          tags: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          choices?: Json | null
+          correct_answer: string
+          created_at?: string
+          difficulty: string
+          domain: string
+          explanation: string
+          id?: string
+          passage_text?: string | null
+          question_text: string
+          question_type: string
+          tags?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          choices?: Json | null
+          correct_answer?: string
+          created_at?: string
+          difficulty?: string
+          domain?: string
+          explanation?: string
+          id?: string
+          passage_text?: string | null
+          question_text?: string
+          question_type?: string
+          tags?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sat_session_logs: {
+        Row: {
+          answers: Json | null
+          correct: number
+          created_at: string
+          domains_improved: string[] | null
+          domains_needing_review: string[] | null
+          id: string
+          incorrect: number
+          questions_answered: number
+          score_delta: number | null
+          session_date: string
+          session_type: string
+          time_spent_minutes: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json | null
+          correct?: number
+          created_at?: string
+          domains_improved?: string[] | null
+          domains_needing_review?: string[] | null
+          id?: string
+          incorrect?: number
+          questions_answered?: number
+          score_delta?: number | null
+          session_date?: string
+          session_type: string
+          time_spent_minutes?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json | null
+          correct?: number
+          created_at?: string
+          domains_improved?: string[] | null
+          domains_needing_review?: string[] | null
+          id?: string
+          incorrect?: number
+          questions_answered?: number
+          score_delta?: number | null
+          session_date?: string
+          session_type?: string
+          time_spent_minutes?: number
           updated_at?: string
           user_id?: string
         }
