@@ -9,6 +9,7 @@ import { SATQuestion, SATAnswer } from '@/types/sat';
 import { Loader2, Clock } from 'lucide-react';
 import { DiagnosticResults } from '@/components/sat/DiagnosticResults';
 import { generateDiagnosticTest, scoreDigagnostic } from '@/services/satDiagnosticService';
+import { generateDailyPlan } from '@/services/satPlanGenerator';
 
 export default function SATDiagnostic() {
   const { user } = useAuth();
@@ -106,6 +107,11 @@ export default function SATDiagnostic() {
 
       setResults(diagnosticResults);
       setShowResults(true);
+
+      // Generate first daily plan
+      if (user?.id) {
+        await generateDailyPlan(user.id);
+      }
     } catch (error) {
       console.error('Error completing test:', error);
     }
