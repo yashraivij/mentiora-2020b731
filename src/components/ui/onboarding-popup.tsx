@@ -149,37 +149,49 @@ const TUTOR_OPTIONS = [
     id: 'ava',
     name: 'Ava',
     avatar: '/src/assets/avatars/ava-avatar.png',
-    style: 'Calm & Supportive',
-    bestFor: 'Best for: anxiety or low confidence',
+    style: 'Calm, patient, low-pressure learning',
+    voiceLine: '"We take this step by step. No rush, no pressure — just progress."',
+    bestFor: 'Anxiety / low confidence',
+    teachingVibe: 'Slow pacing, check-ins, supportive reminders',
     welcomeMessage: "Hey — I'm Ava. I'll be with you through every step. I'll help you learn at a pace that feels right, and I'll check in to keep you improving. Ready?",
-    color: '#7CB9E8' // Soft pastel blue
+    color: '#7CB9E8', // Soft pastel blue
+    emoji: '🌸'
   },
   {
     id: 'lucas',
     name: 'Lucas',
     avatar: '/src/assets/avatars/lucas-avatar.png',
-    style: 'Direct & Fast-Paced',
-    bestFor: 'Best for: quick learners or people with limited time',
+    style: 'Direct, efficient, structured',
+    voiceLine: '"Tell me your deadline, and we\'ll crush it. No fluff."',
+    bestFor: 'High performers / limited time',
+    teachingVibe: 'Rapid recall, fast feedback, minimal small talk',
     welcomeMessage: "I'm Lucas — let's get straight to it. I'll help you move fast, stay focused, and make every minute count. You've got this.",
-    color: '#1E3A5F' // Dark navy
+    color: '#1E3A5F', // Dark navy
+    emoji: '⚡'
   },
   {
     id: 'dr_rivera',
     name: 'Dr. Rivera',
     avatar: '/src/assets/avatars/dr-rivera-avatar.png',
-    style: 'Detailed & Thorough',
-    bestFor: 'Best for: understanding concepts deeply',
+    style: 'Academic, deep thinker',
+    voiceLine: '"You\'ll understand the why, not just the answer."',
+    bestFor: 'Students who overthink or enjoy depth',
+    teachingVibe: 'Socratic questions, diagrams, step-by-step reasoning',
     welcomeMessage: "Hello, I'm Dr. Rivera. I'll make sure you truly understand every concept — not just memorize it. Together, we'll build real mastery.",
-    color: '#5F9C96' // Muted teal
+    color: '#5F9C96', // Muted teal
+    emoji: '📚'
   },
   {
     id: 'jayden',
     name: 'Jayden',
     avatar: '/src/assets/avatars/jayden-avatar.png',
-    style: 'Motivational & Fun',
-    bestFor: 'Best for: procrastination or low motivation',
+    style: 'Motivational & fun',
+    voiceLine: '"Alright — let\'s make this fun and beat procrastination together."',
+    bestFor: 'Low motivation / ADHD style learners',
+    teachingVibe: 'Challenges, energy, encouragement, streak focus',
     welcomeMessage: "Hey! I'm Jayden. We're going to make this fun and keep you showing up. I believe in you — let's make studying something you actually want to do.",
-    color: '#FF7F50' // Warm coral
+    color: '#FF7F50', // Warm coral
+    emoji: '🎯'
   }
 ];
 
@@ -459,11 +471,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 1: Select Your Tutor - Initial View */}
             {currentStep === 1 && !showTeachingStyle && !showConfirmation && (
               <div>
-                <h2 className="text-[28px] font-bold text-black mb-2 text-center">
-                  Choose your tutor — the coach who will guide you to your best score.
+                {/* Step indicator - smaller, above */}
+                <p className="text-xs text-muted-foreground text-center mb-4 uppercase tracking-wide">
+                  Step 1 of 6
+                </p>
+
+                {/* Main headline - emotional */}
+                <h2 className="text-[32px] font-bold text-black mb-3 text-center leading-tight">
+                  Pick the coach who fits your personality.
                 </h2>
-                <p className="text-[16px] text-[#6B7280] mb-6 text-center max-w-xl mx-auto">
-                  They'll learn how you study, help you through mistakes, and celebrate every win.
+
+                {/* Subheading - emphasizes relationship */}
+                <p className="text-[17px] text-muted-foreground mb-8 text-center max-w-2xl mx-auto leading-relaxed">
+                  They'll be with you all the way to exam day — learning how you think, adapting to your habits, and celebrating every win with you.
                 </p>
                 
                 {/* Tutor cards grid */}
@@ -475,57 +495,152 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         setOnboardingData({ ...onboardingData, selectedTutor: tutor.id });
                         setShowTutorWelcome(true);
                       }}
-                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileHover={{ 
+                        scale: 1.02, 
+                        y: -6,
+                        boxShadow: `0 20px 40px ${tutor.color}20`
+                      }}
                       whileTap={{ scale: 0.98 }}
                       className={`relative p-8 rounded-2xl border-2 transition-all ${
                         onboardingData.selectedTutor === tutor.id && showTutorWelcome
-                          ? 'border-[hsl(var(--primary))] bg-gradient-to-br from-white to-primary/5 shadow-xl'
-                          : 'border-border hover:border-primary hover:shadow-lg bg-card'
+                          ? 'shadow-2xl'
+                          : 'border-border hover:shadow-lg bg-card'
                       }`}
                       style={{
-                        borderColor: onboardingData.selectedTutor === tutor.id && showTutorWelcome ? tutor.color : undefined
+                        borderColor: onboardingData.selectedTutor === tutor.id && showTutorWelcome 
+                          ? tutor.color 
+                          : undefined,
+                        backgroundColor: onboardingData.selectedTutor === tutor.id && showTutorWelcome
+                          ? `${tutor.color}05`
+                          : undefined
                       }}
                     >
-                      {/* Avatar with glow effect */}
+                      {/* Animated glow ring on selection */}
+                      {onboardingData.selectedTutor === tutor.id && showTutorWelcome && (
+                        <motion.div
+                          className="absolute inset-0 rounded-2xl"
+                          style={{
+                            boxShadow: `0 0 0 3px ${tutor.color}40, 0 0 20px ${tutor.color}30`
+                          }}
+                          animate={{
+                            opacity: [0.6, 1, 0.6]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      )}
+
+                      {/* Avatar with enhanced glow + wave animation on hover */}
                       <div className="relative w-32 h-32 mx-auto mb-6">
-                        <div 
-                          className="absolute inset-0 rounded-full blur-xl opacity-40"
+                        <motion.div 
+                          className="absolute inset-0 rounded-full blur-xl"
                           style={{ backgroundColor: tutor.color }}
-                        ></div>
-                        <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl">
+                          animate={{
+                            opacity: onboardingData.selectedTutor === tutor.id && showTutorWelcome ? 0.6 : 0.3,
+                            scale: onboardingData.selectedTutor === tutor.id && showTutorWelcome ? 1.1 : 1
+                          }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        <motion.div 
+                          className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl"
+                          whileHover={{ scale: 1.05, rotate: [0, -2, 2, 0] }}
+                          transition={{ duration: 0.4 }}
+                        >
                           <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
-                        </div>
+                        </motion.div>
+                        
+                        {/* Emoji indicator floating above */}
+                        <motion.div
+                          className="absolute -top-2 -right-2 text-2xl"
+                          animate={{
+                            y: [0, -4, 0],
+                            rotate: [0, 10, -10, 0]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          {tutor.emoji}
+                        </motion.div>
                       </div>
                       
                       {/* Name */}
-                      <h3 className="text-2xl font-bold text-center mb-3" style={{ color: tutor.color }}>
+                      <h3 className="text-2xl font-bold text-center mb-2" style={{ color: tutor.color }}>
                         {tutor.name}
                       </h3>
                       
-                      {/* Style tag */}
-                      <div className="flex justify-center mb-3">
-                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-muted">
-                          <span className="text-sm font-medium text-muted-foreground">{tutor.style}</span>
+                      {/* Style descriptor */}
+                      <p className="text-sm text-muted-foreground text-center mb-4 italic">
+                        {tutor.style}
+                      </p>
+                      
+                      {/* Voice line in quotes */}
+                      <div className="mb-5 px-4">
+                        <p 
+                          className="text-base text-center font-medium leading-relaxed"
+                          style={{ color: tutor.color }}
+                        >
+                          {tutor.voiceLine}
+                        </p>
+                      </div>
+                      
+                      {/* Best for badge */}
+                      <div className="flex justify-center mb-2">
+                        <div 
+                          className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+                          style={{
+                            backgroundColor: `${tutor.color}15`,
+                            color: tutor.color
+                          }}
+                        >
+                          🔹 Best for: {tutor.bestFor}
                         </div>
                       </div>
                       
-                      {/* Best for */}
-                      <p className="text-base text-muted-foreground text-center mb-4">{tutor.bestFor}</p>
+                      {/* Teaching vibe */}
+                      <p className="text-xs text-muted-foreground text-center mb-4">
+                        Teaching vibe: {tutor.teachingVibe}
+                      </p>
                       
-                      {/* Welcome message - shows when selected */}
+                      {/* Welcome message with "lock-in" feel */}
                       <AnimatePresence>
                         {onboardingData.selectedTutor === tutor.id && showTutorWelcome && (
                           <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="mt-6 p-5 rounded-xl border"
+                            initial={{ opacity: 0, height: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, height: 'auto', scale: 1 }}
+                            exit={{ opacity: 0, height: 0, scale: 0.9 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                            className="mt-6 p-6 rounded-xl border-2"
                             style={{
-                              backgroundColor: `${tutor.color}10`,
-                              borderColor: `${tutor.color}30`
+                              backgroundColor: `${tutor.color}08`,
+                              borderColor: `${tutor.color}40`
                             }}
                           >
-                            <p className="text-base text-foreground italic leading-relaxed mb-5">
+                            {/* "Locked in" indicator */}
+                            <motion.div
+                              initial={{ scale: 0, rotate: -180 }}
+                              animate={{ scale: 1, rotate: 0 }}
+                              transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+                              className="flex justify-center mb-3"
+                            >
+                              <div 
+                                className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
+                                style={{ backgroundColor: tutor.color }}
+                              >
+                                👋
+                              </div>
+                            </motion.div>
+                            
+                            <p className="text-base text-foreground text-center leading-relaxed mb-5">
+                              <strong>Awesome — I'll be your coach.</strong>
+                            </p>
+                            
+                            <p className="text-sm text-foreground/80 italic text-center leading-relaxed mb-5">
                               "{tutor.welcomeMessage}"
                             </p>
                             
@@ -534,10 +649,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 e.stopPropagation();
                                 setShowTeachingStyle(true);
                               }}
-                              className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90 text-base"
+                              className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90 text-base shadow-md hover:shadow-lg"
                               style={{ backgroundColor: tutor.color }}
                             >
-                              Continue with {tutor.name}
+                              Continue with {tutor.name} →
                             </button>
                           </motion.div>
                         )}
@@ -630,22 +745,26 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
                 
                 <h2 className="text-[28px] font-bold text-black mb-3">
-                  Great choice — {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} is now your tutor.
+                  Perfect choice — {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} is now your personal coach.
                 </h2>
                 
                 <p className="text-[16px] text-muted-foreground mb-8 max-w-md mx-auto leading-relaxed">
-                  {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} will personalise your plan based on your exam date, goals, and how you like to study.
+                  {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} will personalise your entire learning experience based on your exam date, goals, and study preferences. You're in good hands.
                 </p>
                 
                 <button
                   onClick={handleNext}
-                  className="px-8 py-4 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all text-lg hover:opacity-90"
+                  className="px-10 py-4 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all text-lg hover:-translate-y-1"
                   style={{ 
                     backgroundColor: TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color 
                   }}
                 >
-                  Start with {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name}
+                  Start training with {TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name} →
                 </button>
+                
+                <p className="text-xs text-muted-foreground mt-5">
+                  💡 You can switch tutors later, but most students build a strong relationship and stick with their first choice.
+                </p>
                 
                 <p className="text-xs text-muted-foreground mt-4">
                   You can switch tutors later, but most students stay with their first choice.
@@ -1049,13 +1168,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               <button
                 onClick={handleNext}
                 disabled={!canContinue()}
-                className={`px-8 py-3 rounded-[10px] font-semibold text-[14px] transition-all duration-200 ${
+                className={`px-8 py-3 rounded-[10px] font-semibold text-[15px] transition-all duration-200 ${
                   canContinue()
-                    ? 'bg-[#3B82F6] text-white hover:bg-[#2563eb] hover:shadow-md hover:-translate-y-0.5'
+                    ? 'text-white hover:shadow-md hover:-translate-y-0.5'
                     : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
                 }`}
+                style={{
+                  backgroundColor: canContinue() && currentStep === 1 && onboardingData.selectedTutor 
+                    ? TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color 
+                    : canContinue() 
+                    ? '#3B82F6' 
+                    : '#D1D5DB'
+                }}
               >
-                Continue
+                {currentStep === 1 && onboardingData.selectedTutor
+                  ? `Continue with ${TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.name}`
+                  : 'Continue'
+                }
               </button>
             )}
           </div>
