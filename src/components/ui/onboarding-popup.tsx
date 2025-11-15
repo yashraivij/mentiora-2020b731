@@ -148,8 +148,8 @@ const TUTOR_OPTIONS = [
   {
     id: 'ava',
     name: 'Ava',
-    avatar: '/lovable-uploads/miss-patel-avatar.png',
-    style: 'Calm & Supportive',
+    avatar: '/src/assets/avatars/fox-avatar.png',
+    style: '🦊 Calm & Supportive',
     bestFor: 'Best for: anxiety or low confidence',
     welcomeMessage: "Hey — I'm Ava. I'll be with you through every step. I'll help you learn at a pace that feels right, and I'll check in to keep you improving. Ready?",
     color: '#8B5CF6'
@@ -157,8 +157,8 @@ const TUTOR_OPTIONS = [
   {
     id: 'lucas',
     name: 'Lucas',
-    avatar: '/lovable-uploads/mr-chen-avatar.png',
-    style: 'Direct & Fast-Paced',
+    avatar: '/src/assets/avatars/dog-avatar.png',
+    style: '🐶 Direct & Fast-Paced',
     bestFor: 'Best for: quick learners or people with limited time',
     welcomeMessage: "I'm Lucas — let's get straight to it. I'll help you move fast, stay focused, and make every minute count. You've got this.",
     color: '#3B82F6'
@@ -166,8 +166,8 @@ const TUTOR_OPTIONS = [
   {
     id: 'dr_rivera',
     name: 'Dr. Rivera',
-    avatar: '/lovable-uploads/dr-singh-avatar.png',
-    style: 'Detailed & Thorough',
+    avatar: '/src/assets/avatars/cat-avatar.png',
+    style: '🐱 Detailed & Thorough',
     bestFor: 'Best for: understanding concepts deeply',
     welcomeMessage: "Hello, I'm Dr. Rivera. I'll make sure you truly understand every concept — not just memorize it. Together, we'll build real mastery.",
     color: '#10B981'
@@ -175,8 +175,8 @@ const TUTOR_OPTIONS = [
   {
     id: 'jayden',
     name: 'Jayden',
-    avatar: '/lovable-uploads/mr-williams-avatar.png',
-    style: 'Motivational & Fun',
+    avatar: '/src/assets/avatars/bear-avatar.png',
+    style: '🐻 Motivational & Fun',
     bestFor: 'Best for: procrastination or low motivation',
     welcomeMessage: "Hey! I'm Jayden. We're going to make this fun and keep you showing up. I believe in you — let's make studying something you actually want to do.",
     color: '#F59E0B'
@@ -467,7 +467,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </p>
                 
                 {/* Tutor cards grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[500px] overflow-y-auto pb-4">
+                <div className="grid grid-cols-1 gap-6 pb-4">
                   {TUTOR_OPTIONS.map((tutor) => (
                     <motion.button
                       key={tutor.id}
@@ -477,7 +477,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       }}
                       whileHover={{ scale: 1.03, y: -4 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`relative p-6 rounded-2xl border-2 transition-all ${
+                      className={`relative p-8 rounded-2xl border-2 transition-all ${
                         onboardingData.selectedTutor === tutor.id && showTutorWelcome
                           ? 'border-[hsl(var(--primary))] bg-gradient-to-br from-white to-primary/5 shadow-xl'
                           : 'border-border hover:border-primary hover:shadow-lg bg-card'
@@ -487,30 +487,30 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       }}
                     >
                       {/* Avatar with glow effect */}
-                      <div className="relative w-24 h-24 mx-auto mb-4">
+                      <div className="relative w-32 h-32 mx-auto mb-6">
                         <div 
-                          className="absolute inset-0 rounded-full blur-lg opacity-30"
+                          className="absolute inset-0 rounded-full blur-xl opacity-40"
                           style={{ backgroundColor: tutor.color }}
                         ></div>
-                        <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl">
                           <img src={tutor.avatar} alt={tutor.name} className="w-full h-full object-cover" />
                         </div>
                       </div>
                       
                       {/* Name */}
-                      <h3 className="text-xl font-bold text-center mb-2" style={{ color: tutor.color }}>
+                      <h3 className="text-2xl font-bold text-center mb-3" style={{ color: tutor.color }}>
                         {tutor.name}
                       </h3>
                       
                       {/* Style tag */}
                       <div className="flex justify-center mb-3">
                         <div className="inline-flex items-center px-3 py-1 rounded-full bg-muted">
-                          <span className="text-xs font-medium text-muted-foreground">{tutor.style}</span>
+                          <span className="text-sm font-medium text-muted-foreground">{tutor.style}</span>
                         </div>
                       </div>
                       
                       {/* Best for */}
-                      <p className="text-sm text-muted-foreground text-center mb-4">{tutor.bestFor}</p>
+                      <p className="text-base text-muted-foreground text-center mb-4">{tutor.bestFor}</p>
                       
                       {/* Welcome message - shows when selected */}
                       <AnimatePresence>
@@ -519,13 +519,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="mt-4 p-4 rounded-xl border"
+                            className="mt-6 p-5 rounded-xl border"
                             style={{
                               backgroundColor: `${tutor.color}10`,
                               borderColor: `${tutor.color}30`
                             }}
                           >
-                            <p className="text-sm text-foreground italic leading-relaxed mb-4">
+                            <p className="text-base text-foreground italic leading-relaxed mb-5">
                               "{tutor.welcomeMessage}"
                             </p>
                             
@@ -534,7 +534,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 e.stopPropagation();
                                 setShowTeachingStyle(true);
                               }}
-                              className="w-full py-2 rounded-lg font-medium text-white transition-all hover:opacity-90"
+                              className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90 text-base"
                               style={{ backgroundColor: tutor.color }}
                             >
                               Continue with {tutor.name}
