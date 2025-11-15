@@ -25,9 +25,6 @@ import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
 import CustomExamBuilder from "./pages/CustomExamBuilder";
-import SATDiagnostic from "./pages/SATDiagnostic";
-import SATDashboard from "./pages/SATDashboard";
-import SATSession from "./pages/SATSession";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -113,21 +110,6 @@ const App: React.FC = () => (
               <Route path="/flashcards" element={
                 <ProtectedRoute>
                   <Flashcards />
-                </ProtectedRoute>
-              } />
-              <Route path="/sat-diagnostic" element={
-                <ProtectedRoute>
-                  <SATDiagnostic />
-                </ProtectedRoute>
-              } />
-              <Route path="/sat-dashboard" element={
-                <ProtectedRoute>
-                  <SATDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/sat-session/:planId" element={
-                <ProtectedRoute>
-                  <SATSession />
                 </ProtectedRoute>
               } />
               <Route path="*" element={<NotFound />} />

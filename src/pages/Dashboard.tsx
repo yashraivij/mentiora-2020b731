@@ -92,7 +92,6 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
-import SATDashboard from "./SATDashboard";
 
 interface UserProgress {
   subjectId: string;
@@ -149,10 +148,6 @@ const Dashboard = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
-  const [examType, setExamType] = useState<string | null>(null);
-  const [checkingExamType, setCheckingExamType] = useState(true);
-  
-  // All state hooks must be declared before any conditional returns
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
@@ -172,11 +167,27 @@ const Dashboard = () => {
   const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Track subject level changes and reset group selection
+  useEffect(() => {
+    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
+    // Clear selected subject group when level changes to prevent mismatches
+    setSelectedSubjectGroup(null);
+  }, [activeSubjectLevel]);
+
+  // Track subject group selection
+  useEffect(() => {
+    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
+  }, [selectedSubjectGroup]);
+
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [notebookLoading, setNotebookLoading] = useState(false);
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('recent');
+  
+  // Flashcards state
   const [flashcardView, setFlashcardView] = useState<"create" | "library" | "cards">("create");
   const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
   const [flashcardsLoading, setFlashcardsLoading] = useState(false);
@@ -193,6 +204,8 @@ const Dashboard = () => {
   const [hasAwardedStudyTime, setHasAwardedStudyTime] = useState(false);
   const [renamingSetId, setRenamingSetId] = useState<string | null>(null);
   const [newSetName, setNewSetName] = useState("");
+  
+  // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
   const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
@@ -207,57 +220,6 @@ const Dashboard = () => {
   const [showDailyStreak, setShowDailyStreak] = useState(false);
   const [showStreakBadge, setShowStreakBadge] = useState(false);
   const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
-  
-  const isMobile = useIsMobile();
-
-  // Check if user is SAT user and redirect to SAT dashboard
-  useEffect(() => {
-    const checkExamType = async () => {
-      if (!user?.id) return;
-      
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('exam_type')
-          .eq('id', user.id)
-          .single();
-
-        if (!error && data) {
-          setExamType(data.exam_type);
-        }
-      } catch (error) {
-        console.error('Error checking exam type:', error);
-      } finally {
-        setCheckingExamType(false);
-      }
-    };
-
-    checkExamType();
-  }, [user?.id]);
-
-  // Track subject level changes and reset group selection
-  useEffect(() => {
-    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
-    setSelectedSubjectGroup(null);
-  }, [activeSubjectLevel]);
-
-  // Track subject group selection
-  useEffect(() => {
-    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
-  }, [selectedSubjectGroup]);
-
-  // Render SAT Dashboard for SAT users (after all hooks are declared)
-  if (checkingExamType) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (examType === 'sat' || examType === 'SAT') {
-    return <SATDashboard />;
-  }
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#DBEAFE] dark:bg-[#3B82F6]/10", textColor: "text-[#3B82F6] dark:text-[#60A5FA]", activeColor: "bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] dark:bg-gradient-to-r dark:from-[#3B82F6] dark:to-[#60A5FA]" },
