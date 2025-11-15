@@ -618,7 +618,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const handleFinish = () => {
     onSubjectsAdded();
     onClose();
-    navigate('/dashboard');
+    
+    // Redirect SAT users to diagnostic test
+    if (onboardingData.examType === 'sat') {
+      navigate('/sat-diagnostic');
+    } else {
+      navigate('/dashboard');
+    }
   };
 
   const getProgressPercentage = () => {
