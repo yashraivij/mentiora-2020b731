@@ -7163,14 +7163,18 @@ Write a story about a moment of fear.
       })();
     }
     
-    navigate(`/predicted-results/${subjectId}`, {
+    // For custom exams, use 'custom-exam' as the subjectId in URL
+    const resultSubjectId = isCustomExam ? 'custom-exam' : subjectId;
+    
+    navigate(`/predicted-results/${resultSubjectId}`, {
       state: { 
         questions: examQuestions, 
         answers: answers,
         timeElapsed: getExamDuration() * 60 - timeLeft,
         totalMarks: getTotalMarks(),
         isCustomExam: isCustomExam,
-        customExamTitle: customExamTitle
+        customExamTitle: customExamTitle,
+        customSubjectId: isCustomExam ? subjectId : undefined
       } 
     });
   };

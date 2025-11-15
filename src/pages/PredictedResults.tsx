@@ -51,7 +51,7 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   
-  const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle, customSubjectId } = location.state || {};
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
@@ -135,9 +135,13 @@ const PredictedResults = () => {
     );
   }
 
-  const subject = curriculum.find(s => s.id === subjectId);
+  // For custom exams, subject lookup is optional
+  const subject = isCustomExam 
+    ? curriculum.find(s => s.id === customSubjectId)
+    : curriculum.find(s => s.id === subjectId);
   
-  if (!subject) {
+  // Only redirect if it's not a custom exam and subject not found
+  if (!subject && !isCustomExam) {
     navigate('/predicted-questions');
     return null;
   }
@@ -253,6 +257,10 @@ const PredictedResults = () => {
       return "4.1 - Cell Biology";
     }
     
+    // Handle custom exams
+    if (isCustomExam) {
+      return customExamTitle ? `${customExamTitle} - Specification` : 'Custom Exam Specification';
+    }
     return `${subject.charAt(0).toUpperCase() + subject.slice(1)} Specification`;
   };
 
@@ -362,7 +370,9 @@ const PredictedResults = () => {
 
       const examCompletion = {
         user_id: user.id,
-        subject_id: subjectId === 'geography-paper-2' ? 'geography' : subjectId?.replace('-paper-2', '') || subjectId,
+        subject_id: isCustomExam 
+          ? (customSubjectId || 'custom-exam')
+          : (subjectId === 'geography-paper-2' ? 'geography' : subjectId?.replace('-paper-2', '') || subjectId),
         exam_date: new Date().toISOString().split('T')[0],
         total_marks: examTotalMarks,
         achieved_marks: achievedMarks,
