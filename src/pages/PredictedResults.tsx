@@ -1084,14 +1084,30 @@ const PredictedResults = () => {
                               (() => {
                                 const questionText = question.text || question.question || '';
                                 const userChoice = attempt.userAnswer;
-                                const extractChoice = (letter: string, nextLetter?: string) => {
-                                  const pattern = nextLetter 
-                                    ? new RegExp(`${letter}\\)\\s*(.+?)\\s*${nextLetter}\\)`, 's')
-                                    : new RegExp(`${letter}\\)\\s*(.+?)$`, 's');
-                                  const match = questionText.match(pattern);
-                                  return match ? match[1].trim() : '';
+                                const extractChoice = (letter: string) => {
+                                  // Find where this choice starts
+                                  const choiceStart = questionText.indexOf(`${letter})`);
+                                  if (choiceStart === -1) return '';
+                                  
+                                  // Find where the next choice starts (or end of text)
+                                  const nextLetters = ['A', 'B', 'C', 'D'];
+                                  const currentIndex = nextLetters.indexOf(letter);
+                                  let choiceEnd = questionText.length;
+                                  
+                                  // Look for the next choice marker
+                                  for (let i = currentIndex + 1; i < nextLetters.length; i++) {
+                                    const nextStart = questionText.indexOf(`${nextLetters[i]})`, choiceStart + 2);
+                                    if (nextStart !== -1) {
+                                      choiceEnd = nextStart;
+                                      break;
+                                    }
+                                  }
+                                  
+                                  // Extract text between this choice and next (or end)
+                                  const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
+                                  return choiceText.trim();
                                 };
-                                const choiceText = userChoice ? extractChoice(userChoice, userChoice === 'D' ? undefined : String.fromCharCode(userChoice.charCodeAt(0) + 1)) : '';
+                                const choiceText = userChoice ? extractChoice(userChoice) : '';
                                 return (
                                   <span>
                                     <span className="font-semibold">{userChoice})</span> {choiceText || <span className="text-muted-foreground italic font-normal">Not answered</span>}

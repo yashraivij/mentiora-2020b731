@@ -6029,6 +6029,20 @@ Write a story about a moment of fear.
         });
       });
       
+      // Validate SAT question quality
+      const incompleteQuestions = satQuestions.filter(q => {
+        const text = q.text.toLowerCase();
+        return (
+          (text.includes('passage') || text.includes('extract') || text.includes('text above') || text.includes('according to the')) &&
+          !text.match(/[A-D]\)/) // Has reference to passage but no choices
+        );
+      });
+
+      if (incompleteQuestions.length > 0) {
+        console.warn(`⚠️ Found ${incompleteQuestions.length} incomplete SAT questions that reference missing passages:`, 
+          incompleteQuestions.map(q => ({ id: q.id, questionNumber: q.questionNumber })));
+      }
+
       console.log(`✅ Generated ${satQuestions.length} SAT questions (${questionsPerModule} per module)`);
       return satQuestions;
     }
@@ -7640,7 +7654,18 @@ Write a story about a moment of fear.
                 
                 {/* Question text */}
                 <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
-                  {examQuestions[currentQuestion].text}
+                  {(() => {
+                    // For SAT questions, separate passage from choices
+                    if (subjectId?.startsWith('sat-') && examQuestions[currentQuestion].marks === 1) {
+                      const fullText = examQuestions[currentQuestion].text;
+                      const aIndex = fullText.indexOf('A)');
+                      if (aIndex !== -1) {
+                        // Display only the passage/stem, choices shown below as buttons
+                        return fullText.substring(0, aIndex).trim();
+                      }
+                    }
+                    return examQuestions[currentQuestion].text;
+                  })()}
                 </p>
               </div>
               
@@ -7658,18 +7683,34 @@ Write a story about a moment of fear.
               (() => {
                 // Extract actual choice text from the question
                 const questionText = examQuestions[currentQuestion].text;
-                const extractChoice = (letter: string, nextLetter?: string) => {
-                  const pattern = nextLetter 
-                    ? new RegExp(`${letter}\\)\\s*(.+?)\\s*${nextLetter}\\)`, 's')
-                    : new RegExp(`${letter}\\)\\s*(.+?)$`, 's');
-                  const match = questionText.match(pattern);
-                  return match ? match[1].trim() : `Choice ${letter}`;
+                const extractChoice = (letter: string) => {
+                  // Find where this choice starts
+                  const choiceStart = questionText.indexOf(`${letter})`);
+                  if (choiceStart === -1) return `Choice ${letter}`;
+                  
+                  // Find where the next choice starts (or end of text)
+                  const nextLetters = ['A', 'B', 'C', 'D'];
+                  const currentIndex = nextLetters.indexOf(letter);
+                  let choiceEnd = questionText.length;
+                  
+                  // Look for the next choice marker
+                  for (let i = currentIndex + 1; i < nextLetters.length; i++) {
+                    const nextStart = questionText.indexOf(`${nextLetters[i]})`, choiceStart + 2);
+                    if (nextStart !== -1) {
+                      choiceEnd = nextStart;
+                      break;
+                    }
+                  }
+                  
+                  // Extract text between this choice and next (or end)
+                  const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
+                  return choiceText.trim();
                 };
                 
                 const choices = {
-                  A: extractChoice('A', 'B'),
-                  B: extractChoice('B', 'C'),
-                  C: extractChoice('C', 'D'),
+                  A: extractChoice('A'),
+                  B: extractChoice('B'),
+                  C: extractChoice('C'),
                   D: extractChoice('D')
                 };
 
