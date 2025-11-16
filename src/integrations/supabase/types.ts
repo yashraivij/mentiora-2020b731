@@ -923,6 +923,7 @@ export type Database = {
           sat_streak_days: number | null
           sat_strength_domains: string[] | null
           sat_target_band: string | null
+          sat_target_score: number | null
           sat_weak_domains: string[] | null
           selected_tutor_id: string | null
           stripe_customer_id: string | null
@@ -959,6 +960,7 @@ export type Database = {
           sat_streak_days?: number | null
           sat_strength_domains?: string[] | null
           sat_target_band?: string | null
+          sat_target_score?: number | null
           sat_weak_domains?: string[] | null
           selected_tutor_id?: string | null
           stripe_customer_id?: string | null
@@ -995,6 +997,7 @@ export type Database = {
           sat_streak_days?: number | null
           sat_strength_domains?: string[] | null
           sat_target_band?: string | null
+          sat_target_score?: number | null
           sat_weak_domains?: string[] | null
           selected_tutor_id?: string | null
           stripe_customer_id?: string | null

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, TrendingUp, Brain, RotateCcw, Target, Calendar, LineChart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CheckCircle2, TrendingUp, Brain, RotateCcw, Target, Calendar, LineChart, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface StrategyViewProps {
   onContinue: () => void;
@@ -40,6 +42,8 @@ const strategies = [
 ];
 
 export function StrategyView({ onContinue }: StrategyViewProps) {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 p-6 flex items-center justify-center">
       <div className="max-w-3xl w-full space-y-8">
@@ -121,12 +125,13 @@ export function StrategyView({ onContinue }: StrategyViewProps) {
           transition={{ delay: 1 }}
           className="flex justify-center"
         >
-          <button
-            onClick={onContinue}
-            className="px-12 py-4 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+          <Button
+            size="lg"
+            onClick={() => navigate('/dashboard')}
+            className="px-12 py-4 text-lg font-semibold shadow-lg"
           >
             Build my study plan
-          </button>
+          </Button>
         </motion.div>
       </div>
     </div>
