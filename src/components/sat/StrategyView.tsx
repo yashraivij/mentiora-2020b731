@@ -122,7 +122,7 @@ export function StrategyView({ onContinue }: StrategyViewProps) {
           className="flex justify-center"
         >
           <button
-            onClick={onContinue}
+            onClick={() => window.location.href = '/dashboard'}
             className="px-12 py-4 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
           >
             Build my study plan
