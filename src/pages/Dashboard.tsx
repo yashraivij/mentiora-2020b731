@@ -177,17 +177,24 @@ const Dashboard = () => {
     const checkExamType = async () => {
       if (!user?.id) return;
       
+      console.log('🔍 Dashboard: Checking exam type for user:', user.id);
+      
       try {
         const { data, error } = await supabase
           .from('profiles')
-          .select('exam_type')
+          .select('exam_type, sat_diagnostic_completed')
           .eq('id', user.id)
           .single();
         
         if (error) throw error;
+        
+        console.log('✅ Dashboard: Exam type data:', data);
+        console.log('📊 Dashboard: exam_type =', data?.exam_type);
+        console.log('📊 Dashboard: sat_diagnostic_completed =', data?.sat_diagnostic_completed);
+        
         setExamType(data?.exam_type || null);
       } catch (error) {
-        console.error('Error fetching exam type:', error);
+        console.error('❌ Dashboard: Error fetching exam type:', error);
       } finally {
         setExamTypeLoading(false);
       }
@@ -198,8 +205,11 @@ const Dashboard = () => {
 
   // Render SAT Dashboard for SAT users
   if (examType === 'sat') {
+    console.log('🎯 Dashboard: Rendering SAT Dashboard');
     return <SATDashboard />;
   }
+  
+  console.log('📚 Dashboard: Rendering regular dashboard, examType:', examType);
 
   // Show loading while checking exam type
   if (examTypeLoading) {

@@ -10,13 +10,21 @@ const DOMAINS = [
 ];
 
 export async function generateDiagnosticTest(): Promise<SATQuestion[]> {
+  console.log('🔍 satDiagnosticService: Fetching SAT questions from database...');
+  
   // Fetch questions from all domains with balanced difficulty
   const { data: allQuestions, error } = await supabase
     .from('sat_questions')
     .select('*');
 
-  if (error) throw error;
+  console.log('📊 satDiagnosticService: Query result - error:', error, 'questions count:', allQuestions?.length);
+
+  if (error) {
+    console.error('❌ satDiagnosticService: Database error:', error);
+    throw error;
+  }
   if (!allQuestions || allQuestions.length === 0) {
+    console.error('❌ satDiagnosticService: No questions found in database');
     throw new Error('No SAT questions available. Please seed the database first.');
   }
 
