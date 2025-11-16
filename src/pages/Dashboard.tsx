@@ -3018,6 +3018,11 @@ const Dashboard = () => {
                         </div>
                       </SheetHeader>
 
+                      {/* Check if current subject is SAT */}
+                      {(() => {
+                        const isSATSubject = selectedDrawerSubject?.id?.startsWith('sat-');
+                        
+                        return (
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-4 sm:mt-8">
                         {/* Mobile Dropdown */}
                         <div className="sm:hidden">
@@ -3028,7 +3033,7 @@ const Dashboard = () => {
                             <SelectContent className="bg-background border-border">
                               <SelectItem value="overview">Overview</SelectItem>
                               <SelectItem value="topics">Topics</SelectItem>
-                              <SelectItem value="papers">Papers</SelectItem>
+                              {!isSATSubject && <SelectItem value="papers">Papers</SelectItem>}
                               <SelectItem value="plan">Plan</SelectItem>
                               <SelectItem value="notes">Notes</SelectItem>
                               <SelectItem value="flashcards">Flashcards</SelectItem>
@@ -3037,16 +3042,18 @@ const Dashboard = () => {
                         </div>
                         
                         {/* Desktop Tabs */}
-                        <TabsList className="hidden sm:grid w-full grid-cols-6 rounded-2xl p-1.5 bg-muted border border-border">
+                        <TabsList className={`hidden sm:grid w-full ${isSATSubject ? 'grid-cols-5' : 'grid-cols-6'} rounded-2xl p-1.5 bg-muted border border-border`}>
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Overview
                           </TabsTrigger>
                           <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Topics
                           </TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
-                            Papers
-                          </TabsTrigger>
+                          {!isSATSubject && (
+                            <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
+                              Papers
+                            </TabsTrigger>
+                          )}
                           <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Plan
                           </TabsTrigger>
@@ -4018,6 +4025,8 @@ const Dashboard = () => {
                           </Card>
                         </TabsContent>
                       </Tabs>
+                        );
+                      })()}
                     </>
                   )}
                 </SheetContent>
