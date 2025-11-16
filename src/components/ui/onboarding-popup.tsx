@@ -200,16 +200,10 @@ const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
 
 const SAT_SUBJECTS = [
   {
-    id: 'sat-reading-writing',
-    name: 'SAT Reading and Writing',
+    id: 'sat',
+    name: 'SAT',
     examBoard: 'College Board',
-    emoji: '📖'
-  },
-  {
-    id: 'sat-math',
-    name: 'SAT Math',
-    examBoard: 'College Board',
-    emoji: '🔢'
+    emoji: '🎓'
   }
 ];
 
@@ -253,20 +247,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, [onboardingData, currentStep]);
 
-  // Auto-select all SAT subjects when SAT tab is selected
+  // Auto-select SAT subject when SAT tab is selected
   useEffect(() => {
     if (subjectLevel === 'sat') {
-      const hasSATSubjects = onboardingData.subjects.some(s => s.id.startsWith('sat-'));
+      const hasSATSubject = onboardingData.subjects.some(s => s.id === 'sat');
       
-      if (!hasSATSubjects) {
-        const satSubjects = SAT_SUBJECTS.map(subject => ({
-          id: subject.id,
-          targetGrade: '1400'
-        }));
-        
+      if (!hasSATSubject) {
         setOnboardingData({
           ...onboardingData,
-          subjects: [...onboardingData.subjects, ...satSubjects]
+          subjects: [...onboardingData.subjects, {
+            id: 'sat',
+            targetGrade: '1400'
+          }]
         });
       }
     }
@@ -349,12 +341,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             // Check if this is an A-Level or SAT subject
             const isALevel = subjectWithGrade.id.toLowerCase().includes('alevel');
-            const isSAT = subjectWithGrade.id.toLowerCase().startsWith('sat-');
+            const isSAT = subjectWithGrade.id === 'sat';
             
             const subjectName = isALevel && subject?.name && !subject.name.includes('(A-Level)')
               ? `${subject.name} (A-Level)`
-              : isSAT && subject?.name && !subject.name.includes('(SAT)')
-                ? `${subject.name} (SAT)`
+              : isSAT && subject?.name
+                ? subject.name
                 : subject?.name || subjectWithGrade.id;
             
             return {
@@ -641,7 +633,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       const isSelected = onboardingData.subjects.some(s => s.id === subject.id);
                       const subjectData = onboardingData.subjects.find(s => s.id === subject.id);
                       const isSelectingGrade = selectedSubjectForGrade === subject.id;
-                      const isSAT = subject.id.startsWith('sat-');
+                      const isSAT = subject.id === 'sat';
                       
                       return (
                         <div key={subject.id} className="space-y-2">
