@@ -1773,7 +1773,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 Skip
               </button>
             )}
-            {!showTeachingStyle && (
+            {!showTeachingStyle && currentStep !== 1 && (
               <button
                 onClick={handleNext}
                 disabled={!canContinue()}
