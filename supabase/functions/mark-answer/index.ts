@@ -149,17 +149,33 @@ serve(async (req) => {
       });
     }
 
+    // Detect exam type from subject
+    const isSAT = subject && subject.toLowerCase().startsWith('sat-');
+    const examType = isSAT ? 'SAT' : 'GCSE/A-Level';
+    
     // Check if this is a math question that might need the formula sheet
-    const isMath = subject && (subject.toLowerCase().includes('math') || subject.toLowerCase().includes('m1') || subject.toLowerCase().includes('m2') || subject.toLowerCase().includes('m3') || subject.toLowerCase().includes('m4') || subject.toLowerCase().includes('m5') || subject.toLowerCase().includes('m6'));
+    const isMath = subject && (
+      subject.toLowerCase().includes('math') || 
+      subject.toLowerCase().includes('m1') || 
+      subject.toLowerCase().includes('m2') || 
+      subject.toLowerCase().includes('m3') || 
+      subject.toLowerCase().includes('m4') || 
+      subject.toLowerCase().includes('m5') || 
+      subject.toLowerCase().includes('m6') ||
+      subject.toLowerCase().includes('sat-advanced-math') ||
+      subject.toLowerCase().startsWith('sat-gt-')
+    );
+    
     const formulaKeywords = ['trapezium', 'trapezoid', 'prism', 'volume', 'circle', 'circumference', 'radius', 'diameter', 'π', 'pi', 'quadratic', 'ax²', 'ax2', 'pythagoras', 'hypotenuse', 'right triangle', 'sin', 'cos', 'tan', 'sine rule', 'cosine rule', 'trigonometry', 'compound interest', 'probability', 'P(A', 'P(B'];
     
     const questionText = `${question} ${modelAnswer}`.toLowerCase();
-    const needsFormulaSheet = isMath && formulaKeywords.some(keyword => questionText.includes(keyword.toLowerCase()));
+    const needsFormulaSheet = !isSAT && isMath && formulaKeywords.some(keyword => questionText.includes(keyword.toLowerCase()));
     
     const formulaSheetNote = needsFormulaSheet ? 
       '\n\nIMPORTANT: If this question involves formulas, make sure to mention in your feedback that students can find help using the AQA GCSE Maths formula sheet. Include this as a helpful tip in your feedback.' : '';
 
-    const prompt = `You are an expert GCSE examiner with extensive experience marking official AQA, Edexcel, OCR, and WJEC GCSE papers. You must mark this answer with the same precision and standards as official GCSE marking.
+    // Create exam-specific prompts
+    const gcsePrompt = `You are an expert GCSE examiner with extensive experience marking official AQA, Edexcel, OCR, and WJEC GCSE papers. You must mark this answer with the same precision and standards as official GCSE marking.
 
 SUBJECT: ${subject || 'GCSE Subject'} - Apply GCSE-specific marking criteria
 
@@ -273,6 +289,59 @@ Respond in this exact JSON format:
   "feedback": "[warm, encouraging feedback that celebrates successes and gently guides improvement - use simple, friendly language]",
   "assessment": "[positive, motivating assessment that builds confidence]"
 }`;
+
+    const satPrompt = `You are an expert SAT examiner with extensive experience marking official College Board SAT tests. You must mark this answer with the same precision and standards as official SAT marking.
+
+SUBJECT: ${subject || 'SAT Subject'} - Apply SAT-specific marking criteria
+
+QUESTION: ${question}
+
+STUDENT'S ANSWER: ${normalizedUserAnswer}
+
+MODEL ANSWER: ${modelAnswer}
+
+MARKING CRITERIA:
+${typeof markingCriteria === 'string' ? markingCriteria : 
+  markingCriteria.explanation || 
+  markingCriteria.answer || 
+  JSON.stringify(markingCriteria)}
+
+TOTAL MARKS: ${totalMarks}
+
+SAT MARKING STANDARDS:
+1. MULTIPLE CHOICE QUESTIONS: The answer is either completely correct (full marks) or incorrect (zero marks). No partial credit.
+2. PASSAGE-BASED QUESTIONS: Evaluate reading comprehension, textual evidence, and logical reasoning based on the passage.
+3. MATHEMATICS QUESTIONS: 
+   - Accept mathematically equivalent answers (e.g., 0.5 = 1/2, 2π = 6.28...)
+   - Accept answers in different but equivalent forms (simplified vs unsimplified)
+   - For grid-in questions, follow official SAT rules for acceptable answer formats
+4. WRITING & LANGUAGE QUESTIONS: Check if the answer improves clarity, follows standard English conventions, and enhances the passage's effectiveness.
+5. EVIDENCE-BASED QUESTIONS: Require that answers are directly supported by information in the passage or data provided.
+
+CRITICAL FEEDBACK REQUIREMENTS:
+- Base all feedback strictly on what the student actually wrote
+- For multiple choice, if incorrect, briefly explain why the correct answer is right
+- For math questions, show the reasoning behind the correct answer
+- For reading questions, reference the passage to support the correct answer
+- Be specific about what concept or skill the student should review
+
+TONE AND LANGUAGE REQUIREMENTS:
+- Use encouraging, positive language throughout
+- Start feedback with something the student did well (even if partial attempt)
+- Use phrases like "Great try!", "You're thinking in the right direction!", "Good effort!"
+- Explain concepts clearly - use simple, accessible language
+- Avoid harsh criticism - instead use "Let's review..." or "Remember that..."
+- End with motivation like "Keep practicing!", "You're making progress!", or "Try reviewing this concept!"
+
+Respond in this exact JSON format:
+{
+  "marksAwarded": [number],
+  "feedback": "[warm, encouraging feedback that celebrates effort and guides improvement - use simple, friendly language]",
+  "assessment": "[positive, motivating assessment that builds confidence]"
+}`;
+
+    // Select the appropriate prompt based on exam type
+    const prompt = isSAT ? satPrompt : gcsePrompt;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
