@@ -247,18 +247,38 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, [onboardingData, currentStep]);
 
-  // Auto-select SAT subject when SAT tab is selected
+  // Auto-select SAT subject when SAT tab is selected, clear others
   useEffect(() => {
     if (subjectLevel === 'sat') {
       const hasSATSubject = onboardingData.subjects.some(s => s.id === 'sat');
+      const hasNonSATSubjects = onboardingData.subjects.some(s => s.id !== 'sat');
       
-      if (!hasSATSubject) {
+      // If switching to SAT and there are non-SAT subjects, clear them
+      if (hasNonSATSubjects) {
         setOnboardingData({
           ...onboardingData,
-          subjects: [...onboardingData.subjects, {
+          subjects: [{
             id: 'sat',
             targetGrade: '1400'
           }]
+        });
+      } else if (!hasSATSubject) {
+        // Just add SAT if no subjects exist
+        setOnboardingData({
+          ...onboardingData,
+          subjects: [{
+            id: 'sat',
+            targetGrade: '1400'
+          }]
+        });
+      }
+    } else {
+      // If switching away from SAT, remove SAT subject
+      const hasSATSubject = onboardingData.subjects.some(s => s.id === 'sat');
+      if (hasSATSubject) {
+        setOnboardingData({
+          ...onboardingData,
+          subjects: onboardingData.subjects.filter(s => s.id !== 'sat')
         });
       }
     }
