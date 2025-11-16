@@ -461,6 +461,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, [onboardingData, currentStep]);
 
+  // Debug Step 1 state changes
+  useEffect(() => {
+    if (currentStep === 1) {
+      console.log('📊 Step 1 States:', { 
+        selectedTutor: onboardingData.selectedTutor, 
+        teachingStyle: onboardingData.teachingStyle,
+        showTutorWelcome, 
+        showTeachingStyle, 
+        showConfirmation 
+      });
+    }
+  }, [currentStep, onboardingData.selectedTutor, onboardingData.teachingStyle, showTutorWelcome, showTeachingStyle, showConfirmation]);
+
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -725,14 +738,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 {/* Tutor cards grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
                   {TUTOR_OPTIONS.map((tutor) => (
-                    <motion.button
+                    <motion.div
                       key={tutor.id}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => {
+                        console.log('🎯 Tutor card clicked:', tutor.id);
                         setOnboardingData({ ...onboardingData, selectedTutor: tutor.id });
                         setShowTutorWelcome(true);
                         setShowCelebration(true);
                         playTutorVoice(tutor.id);
                         setTimeout(() => setShowCelebration(false), 1500);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          console.log('🎯 Tutor card clicked (keyboard):', tutor.id);
+                          setOnboardingData({ ...onboardingData, selectedTutor: tutor.id });
+                          setShowTutorWelcome(true);
+                          setShowCelebration(true);
+                          playTutorVoice(tutor.id);
+                          setTimeout(() => setShowCelebration(false), 1500);
+                        }
                       }}
                       onMouseEnter={() => setHoveredTutor(tutor.id)}
                       onMouseLeave={() => setHoveredTutor(null)}
@@ -742,7 +769,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         boxShadow: `0 20px 40px ${tutor.color}20`
                       }}
                       whileTap={{ scale: 0.98 }}
-                      className={`relative p-6 rounded-2xl border-2 transition-all ${
+                      className={`relative p-6 rounded-2xl border-2 transition-all cursor-pointer ${
                         onboardingData.selectedTutor === tutor.id && showTutorWelcome
                           ? 'shadow-2xl'
                           : 'border-border hover:shadow-lg bg-card'
@@ -865,6 +892,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
+                                console.log('✅ Continue with tutor clicked, showing teaching styles');
                                 setShowTeachingStyle(true);
                               }}
                               className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90 text-base shadow-md hover:shadow-lg"
@@ -875,7 +903,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    </motion.button>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -1773,7 +1801,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 Skip
               </button>
             )}
-            {!showTeachingStyle && currentStep !== 1 && (
+            {!showTeachingStyle && (
               <button
                 onClick={handleNext}
                 disabled={!canContinue()}
