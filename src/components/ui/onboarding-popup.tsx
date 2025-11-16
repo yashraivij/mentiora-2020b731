@@ -481,7 +481,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const canContinue = () => {
     switch (currentStep) {
       case 1:
-        return onboardingData.selectedTutor !== '' && onboardingData.teachingStyle !== '';
+        return true; // Always allow continuing on step 1 (tutor selection is optional)
       case 2:
         return onboardingData.acquisitionSource !== '';
       case 3:
@@ -523,6 +523,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   const handleNext = () => {
     if (currentStep === 1) {
+      // Set default values if user skipped tutor selection
+      if (!onboardingData.selectedTutor) {
+        console.log('Setting default tutor and teaching style');
+        setOnboardingData({
+          ...onboardingData,
+          selectedTutor: 'ava',
+          teachingStyle: 'guided'
+        });
+      }
+      
       // Reset tutor selection states when moving to next main step
       setShowTutorWelcome(false);
       setShowTeachingStyle(false);
@@ -1804,26 +1814,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 Skip
               </button>
             )}
-            {!showTeachingStyle && (
-              <button
-                onClick={handleNext}
-                disabled={!canContinue()}
-                className={`px-8 py-3 rounded-[10px] font-semibold text-[15px] transition-all duration-200 ${
-                  canContinue()
-                    ? 'text-white hover:shadow-md hover:-translate-y-0.5'
-                    : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
-                }`}
-                style={{
-                  backgroundColor: canContinue() && currentStep === 1 && onboardingData.selectedTutor 
-                    ? TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color 
-                    : canContinue() 
-                    ? '#3B82F6' 
-                    : '#D1D5DB'
-                }}
-              >
-                {currentStep === 6 ? 'Finish' : 'Continue'}
-              </button>
-            )}
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className={`px-8 py-3 rounded-[10px] font-semibold text-[15px] transition-all duration-200 ${
+                canContinue()
+                  ? 'text-white hover:shadow-md hover:-translate-y-0.5'
+                  : 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
+              }`}
+              style={{
+                backgroundColor: canContinue() && currentStep === 1 && onboardingData.selectedTutor 
+                  ? TUTOR_OPTIONS.find(t => t.id === onboardingData.selectedTutor)?.color 
+                  : canContinue() 
+                  ? '#3B82F6'
+                  : '#D1D5DB'
+              }}
+            >
+              {currentStep === 6 ? 'Finish' : 'Continue'}
+            </button>
           </div>
         )}
       </motion.div>
