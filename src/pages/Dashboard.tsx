@@ -2042,9 +2042,24 @@ const Dashboard = () => {
     
     console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
     
-    const subject = curriculum.find(s => s.id === subjectId);
+    // Try to find in curriculum first
+    let subject = curriculum.find(s => s.id === subjectId);
+    
+    // If not found in curriculum, check if it's a SAT topic
+    if (!subject && subjectId.startsWith('sat-')) {
+      const satTopic = SAT_TOPICS.find(t => t.id === subjectId);
+      if (satTopic) {
+        // Create a mock subject object for SAT topics
+        subject = {
+          id: satTopic.id,
+          name: satTopic.name,
+          topics: []
+        };
+      }
+    }
+    
     if (!subject) {
-      console.error('❌ Subject not found in curriculum:', subjectId);
+      console.error('❌ Subject not found in curriculum or SAT topics:', subjectId);
       return;
     }
 
