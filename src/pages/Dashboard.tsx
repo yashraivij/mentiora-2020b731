@@ -3577,25 +3577,25 @@ const Dashboard = () => {
                                     // Monday - Kickstart
                                     [
                                       { text: `Create 10 flashcards on ${topicName}`, mins: 15, action: 'flashcards' },
-                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId, subjectId }
                                     ],
                                     // Tuesday - Strengthen Recall
                                     [
                                       { text: `Make and review flashcards on ${topicName}`, mins: 10, action: 'flashcards' },
-                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId, subjectId }
                                     ],
                                     // Wednesday - Mid-week Mastery
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 25, action: 'practice', topicId }
+                                      { text: `Complete practice test on ${topicName}`, mins: 25, action: 'practice', topicId, subjectId }
                                     ],
                                     // Thursday - Apply & Connect
                                     [
-                                      { text: `Practice questions on ${topicName}`, mins: 20, action: 'practice', topicId },
+                                      { text: `Practice questions on ${topicName}`, mins: 20, action: 'practice', topicId, subjectId },
                                       { text: `Review smart revision notes`, mins: 10, action: 'notebook' }
                                     ],
                                     // Friday - Checkpoint
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 35, action: 'practice', topicId }
+                                      { text: `Complete practice test on ${topicName}`, mins: 35, action: 'practice', topicId, subjectId }
                                     ],
                                     // Saturday - Light Review
                                     [
@@ -3603,7 +3603,7 @@ const Dashboard = () => {
                                     ],
                                     // Sunday - Reset & Plan
                                     [
-                                      { text: `Weekly recap practice on ${topicName}`, mins: 35, action: 'practice', topicId }
+                                      { text: `Weekly recap practice on ${topicName}`, mins: 35, action: 'practice', topicId, subjectId }
                                     ]
                                   ];
                                   return { activities: activitiesMap[dayIndex], subjectId };
@@ -3623,7 +3623,7 @@ const Dashboard = () => {
                                     } else if (activity.action === 'practice' && activity.topicId) {
                                       setSubjectDrawerOpen(false);
                                       // Navigate directly to practice page with subject and topic as path params
-                                      navigate(`/practice/${subjectId}/${activity.topicId}`);
+                                      navigate(`/practice/${activity.subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       // Open the subject drawer with notes tab
                                       const subject = curriculum.find(s => s.id === subjectId);
