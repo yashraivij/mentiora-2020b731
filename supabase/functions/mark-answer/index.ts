@@ -290,12 +290,37 @@ Respond in this exact JSON format:
   "assessment": "[positive, motivating assessment that builds confidence]"
 }`;
 
+    // Detect and format multiple-choice information for SAT questions
+    let multipleChoiceInfo = '';
+    if (isSAT && markingCriteria.choices && Array.isArray(markingCriteria.choices)) {
+      const letterToIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+      const studentChoiceIndex = letterToIndex[normalizedUserAnswer.toUpperCase()];
+      const studentChoiceText = markingCriteria.choices[studentChoiceIndex] || normalizedUserAnswer;
+      
+      const choicesFormatted = markingCriteria.choices.map((choice, idx) => 
+        `${['A', 'B', 'C', 'D'][idx]}) ${choice}`
+      ).join('\n');
+      
+      const correctAnswerIndex = markingCriteria.choices.indexOf(markingCriteria.answer);
+      const correctAnswerLetter = ['A', 'B', 'C', 'D'][correctAnswerIndex];
+      
+      multipleChoiceInfo = `
+AVAILABLE CHOICES:
+${choicesFormatted}
+
+STUDENT'S ANSWER: ${normalizedUserAnswer} - "${studentChoiceText}"
+
+CORRECT ANSWER: ${correctAnswerLetter} - "${markingCriteria.answer}"
+
+${markingCriteria.explanation ? `EXPLANATION: ${markingCriteria.explanation}` : ''}`;
+    }
+
     const satPrompt = `You are an expert SAT examiner with extensive experience marking official College Board SAT tests. You must mark this answer with the same precision and standards as official SAT marking.
 
 SUBJECT: ${subject || 'SAT Subject'} - Apply SAT-specific marking criteria
 
 QUESTION: ${question}
-
+${multipleChoiceInfo || `
 STUDENT'S ANSWER: ${normalizedUserAnswer}
 
 MODEL ANSWER: ${modelAnswer}
@@ -304,7 +329,7 @@ MARKING CRITERIA:
 ${typeof markingCriteria === 'string' ? markingCriteria : 
   markingCriteria.explanation || 
   markingCriteria.answer || 
-  JSON.stringify(markingCriteria)}
+  JSON.stringify(markingCriteria)}`}
 
 TOTAL MARKS: ${totalMarks}
 
@@ -318,9 +343,18 @@ SAT MARKING STANDARDS:
 4. WRITING & LANGUAGE QUESTIONS: Check if the answer improves clarity, follows standard English conventions, and enhances the passage's effectiveness.
 5. EVIDENCE-BASED QUESTIONS: Require that answers are directly supported by information in the passage or data provided.
 
-CRITICAL FEEDBACK REQUIREMENTS:
-- Base all feedback strictly on what the student actually wrote
-- For multiple choice, if incorrect, briefly explain why the correct answer is right
+CRITICAL FEEDBACK REQUIREMENTS FOR MULTIPLE CHOICE:
+- Acknowledge what the student selected using the full choice text (not just the letter)
+- If CORRECT: Explain why this choice is right using 2-3 sentences that reference the question context
+- If INCORRECT: 
+  * First, briefly explain why the student's selected choice is not the best answer (1-2 sentences)
+  * Then, explain why the correct answer is right using 2-3 sentences that reference specific details
+  * For Reading/Writing questions: Reference the passage or context directly
+  * For Math questions: Show the logical reasoning or calculation steps
+- Make the feedback educational and detailed enough to help the student understand the concept
+- Minimum 3-4 sentences of substantive feedback
+
+FOR OTHER QUESTION TYPES:
 - For math questions, show the reasoning behind the correct answer
 - For reading questions, reference the passage to support the correct answer
 - Be specific about what concept or skill the student should review
@@ -336,7 +370,7 @@ TONE AND LANGUAGE REQUIREMENTS:
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[warm, encouraging feedback that celebrates effort and guides improvement - use simple, friendly language]",
+  "feedback": "[warm, encouraging feedback that celebrates effort and guides improvement - use simple, friendly language - 3-4 sentences minimum for multiple choice]",
   "assessment": "[positive, motivating assessment that builds confidence]"
 }`;
 
