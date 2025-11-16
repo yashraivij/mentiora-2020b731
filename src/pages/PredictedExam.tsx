@@ -5975,6 +5975,64 @@ Write a story about a moment of fear.
       return questions;
     }
     
+    // Special handling for SAT subjects - use actual MC questions from database
+    if (subjectId?.startsWith('sat-')) {
+      console.log('🎓 Generating SAT predicted exam...');
+      
+      const isMath = subjectId.includes('math');
+      const questionsPerModule = isMath ? 22 : 27; // Math: 22 per module, R&W: 27 per module
+      
+      // Get all questions from all topics for this subject
+      const allQuestions = subject?.topics.flatMap(topic => 
+        topic.questions.map(q => ({
+          ...q,
+          topicName: topic.name
+        }))
+      ) || [];
+      
+      console.log(`Found ${allQuestions.length} total SAT questions`);
+      
+      // Shuffle questions for variety
+      const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+      
+      // Module 1: First set of questions (slightly easier)
+      const module1Questions = shuffled
+        .filter(q => q.difficulty === 'easy' || q.difficulty === 'medium')
+        .slice(0, questionsPerModule);
+      
+      // Module 2: Second set of questions (slightly harder)
+      const module2Questions = shuffled
+        .filter(q => q.difficulty === 'medium' || q.difficulty === 'hard')
+        .slice(0, questionsPerModule);
+      
+      const satQuestions: ExamQuestion[] = [];
+      
+      // Add Module 1 questions
+      module1Questions.forEach((q, index) => {
+        satQuestions.push({
+          id: q.id,
+          questionNumber: index + 1,
+          text: `**Module 1, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
+          marks: 1, // SAT questions are always 1 mark
+          section: 'Module 1'
+        });
+      });
+      
+      // Add Module 2 questions
+      module2Questions.forEach((q, index) => {
+        satQuestions.push({
+          id: q.id,
+          questionNumber: questionsPerModule + index + 1,
+          text: `**Module 2, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
+          marks: 1,
+          section: 'Module 2'
+        });
+      });
+      
+      console.log(`✅ Generated ${satQuestions.length} SAT questions (${questionsPerModule} per module)`);
+      return satQuestions;
+    }
+
     // Generate realistic GCSE predicted exam questions - DIFFERENT from practice questions
     const generatePredictedExamQuestions = (subjectId: string, topics: any[]) => {
       const predictedQuestions: ExamQuestion[] = [];
@@ -6850,6 +6908,12 @@ Write a story about a moment of fear.
       return customTimerMinutes;
     }
     
+    // SAT subjects - specific timing per section
+    if (subjectId?.startsWith('sat-')) {
+      const isMath = subjectId.includes('math');
+      return isMath ? 70 : 64; // Math: 70 minutes (35 per module), R&W: 64 minutes (32 per module)
+    }
+    
     const durations = {
       chemistry: 135, // 2h 15min
       biology: 105, // 1h 45min (AQA Biology Paper 1)
@@ -7293,7 +7357,17 @@ Write a story about a moment of fear.
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
-                {subjectId === 'english-literature' ? (
+                {subjectId?.startsWith('sat-') ? (
+                  <ul className="text-sm space-y-2">
+                    <li>• <strong>Digital SAT Format:</strong> This exam follows the official SAT structure</li>
+                    <li>• <strong>Module 1:</strong> {subjectId.includes('math') ? '22' : '27'} questions (Foundation level)</li>
+                    <li>• <strong>Module 2:</strong> {subjectId.includes('math') ? '22' : '27'} questions (Advanced level)</li>
+                    <li>• <strong>Time:</strong> {getExamDuration()} minutes total ({subjectId.includes('math') ? '35' : '32'} minutes per module)</li>
+                    <li>• <strong>Format:</strong> All questions are multiple choice (A, B, C, D)</li>
+                    <li>• <strong>Scoring:</strong> Each question is worth 1 mark</li>
+                    <li>• Select your answer by clicking on the choice buttons</li>
+                  </ul>
+                ) : subjectId === 'english-literature' ? (
                   <ul className="text-sm space-y-2">
                     <li>• <strong>Section A:</strong> Choose ONE Shakespeare question to answer</li>
                     <li>• <strong>Section B:</strong> Choose ONE 19th Century novel question to answer</li>
@@ -7577,19 +7651,56 @@ Write a story about a moment of fear.
             </div>
           </div>
 
-          {/* Answer area - dynamic size based on marks */}
+          {/* Answer area - dynamic size based on marks OR multiple choice for SAT */}
           <div className="mb-6">
-            <Textarea
-              value={getAnswer(examQuestions[currentQuestion].id)}
-              onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
-              placeholder=""
-              className={`w-full border border-gray-300 focus:ring-0 text-base resize-y p-4 bg-transparent rounded-md ${
-                examQuestions[currentQuestion].marks <= 2 ? 'min-h-[150px]' :
-                examQuestions[currentQuestion].marks <= 4 ? 'min-h-[250px]' :
-                examQuestions[currentQuestion].marks <= 6 ? 'min-h-[350px]' :
-                'min-h-[400px]'
-              }`}
-            />
+            {subjectId?.startsWith('sat-') && examQuestions[currentQuestion].marks === 1 ? (
+              /* SAT Multiple Choice Options */
+              <div className="space-y-3">
+                {['A', 'B', 'C', 'D'].map((option) => {
+                  const isSelected = getAnswer(examQuestions[currentQuestion].id) === option;
+                  return (
+                    <button
+                      key={option}
+                      onClick={() => handleAnswerChange(examQuestions[currentQuestion].id, option)}
+                      className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
+                        isSelected
+                          ? 'border-[#3BAFDA] bg-[#3BAFDA]/10 shadow-sm'
+                          : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold ${
+                          isSelected
+                            ? 'border-[#3BAFDA] bg-[#3BAFDA] text-white'
+                            : 'border-gray-400 text-gray-700'
+                        }`}>
+                          {option}
+                        </div>
+                        <span className="text-base text-slate-900">
+                          {option === 'A' && 'Choice A'}
+                          {option === 'B' && 'Choice B'}
+                          {option === 'C' && 'Choice C'}
+                          {option === 'D' && 'Choice D'}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              /* Regular Text Area for Non-SAT Questions */
+              <Textarea
+                value={getAnswer(examQuestions[currentQuestion].id)}
+                onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
+                placeholder=""
+                className={`w-full border border-gray-300 focus:ring-0 text-base resize-y p-4 bg-transparent rounded-md ${
+                  examQuestions[currentQuestion].marks <= 2 ? 'min-h-[150px]' :
+                  examQuestions[currentQuestion].marks <= 4 ? 'min-h-[250px]' :
+                  examQuestions[currentQuestion].marks <= 6 ? 'min-h-[350px]' :
+                  'min-h-[400px]'
+                }`}
+              />
+            )}
           </div>
 
           {/* Bottom action area */}
