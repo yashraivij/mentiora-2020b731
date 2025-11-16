@@ -1543,9 +1543,9 @@ const Dashboard = () => {
     
     // If not found, OR found but has 0 topics, and it's a SAT subject, fetch topics directly from database
     if ((!subjectWithTopics || (subjectWithTopics && subjectWithTopics.topics.length === 0)) && selectedDrawerSubject.id.startsWith('sat-')) {
-        console.log('🔍 SAT subject not in curriculum, fetching topics directly for:', selectedDrawerSubject.id);
+        console.log('🔍 SAT subject needs topics, fetching for:', selectedDrawerSubject.id, '| Name:', selectedDrawerSubject.name);
         
-        const { data: topics, error } = await supabase
+        let { data: topics, error } = await supabase
           .from('curriculum_topics')
           .select('id, name, order_index, subject_id')
           .eq('subject_id', selectedDrawerSubject.id)
@@ -1553,6 +1553,30 @@ const Dashboard = () => {
         
         if (!error && topics) {
           console.log('✅ Fetched', topics.length, 'topics directly from database');
+          
+          // If 0 topics found, try alternate ID formats
+          if (topics.length === 0) {
+            const alternateId = selectedDrawerSubject.id
+              .replace('sat-standard-english-conventions', 'sat-english-conventions')
+              .replace('sat-expression-of-ideas', 'sat-expression-ideas')
+              .replace('sat-problem-solving-&-data-analysis', 'sat-problem-solving-data')
+              .replace('sat-geometry-&-trigonometry', 'sat-geometry-trigonometry');
+            
+            if (alternateId !== selectedDrawerSubject.id) {
+              console.log('🔄 Trying alternate ID:', alternateId);
+              const { data: altTopics, error: altError } = await supabase
+                .from('curriculum_topics')
+                .select('id, name, order_index, subject_id')
+                .eq('subject_id', alternateId)
+                .order('order_index');
+              
+              if (!altError && altTopics && altTopics.length > 0) {
+                topics = altTopics;
+                console.log('✅ Found', topics.length, 'topics with alternate ID');
+              }
+            }
+          }
+          
           subjectWithTopics = {
             id: selectedDrawerSubject.id,
             name: selectedDrawerSubject.name,
@@ -1563,6 +1587,8 @@ const Dashboard = () => {
               orderIndex: t.order_index
             }))
           };
+        } else if (error) {
+          console.error('❌ Error fetching topics:', error);
         }
       }
       
@@ -1883,9 +1909,24 @@ const Dashboard = () => {
         // Handle SAT topics first - check if subject name starts with "SAT:"
         if (subjectName.startsWith('SAT:')) {
           const topicName = subjectName.replace(/^SAT:\s*/i, '').replace(/\s*\(College Board\)/i, '').trim();
-          // Convert topic name to ID format
-          const topicId = topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-');
-          return `sat-${topicId}`;
+          
+          // Map to exact database IDs
+          const satSubjectMap: {[key: string]: string} = {
+            'Information & Ideas': 'sat-information-ideas',
+            'Information and Ideas': 'sat-information-ideas',
+            'Craft & Structure': 'sat-craft-structure',
+            'Craft and Structure': 'sat-craft-structure',
+            'Expression of Ideas': 'sat-expression-ideas',
+            'Standard English Conventions': 'sat-english-conventions',
+            'Algebra': 'sat-algebra',
+            'Advanced Math': 'sat-advanced-math',
+            'Problem Solving & Data Analysis': 'sat-problem-solving-data',
+            'Problem Solving and Data Analysis': 'sat-problem-solving-data',
+            'Geometry & Trigonometry': 'sat-geometry-trigonometry',
+            'Geometry and Trigonometry': 'sat-geometry-trigonometry',
+          };
+          
+          return satSubjectMap[topicName] || `sat-${topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')}`;
         }
         
         // Normalize subject name (remove ALL duplicate A-Level markers)
