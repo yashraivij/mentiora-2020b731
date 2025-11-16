@@ -292,17 +292,49 @@ Respond in this exact JSON format:
 
     // Detect and format multiple-choice information for SAT questions
     let multipleChoiceInfo = '';
-    if (isSAT && markingCriteria.choices && Array.isArray(markingCriteria.choices)) {
+    const hasMCQChoices = isSAT && markingCriteria.choices && 
+      (Array.isArray(markingCriteria.choices) || typeof markingCriteria.choices === 'object');
+    
+    if (hasMCQChoices) {
+      const isArray = Array.isArray(markingCriteria.choices);
       const letterToIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
-      const studentChoiceIndex = letterToIndex[normalizedUserAnswer.toUpperCase()];
-      const studentChoiceText = markingCriteria.choices[studentChoiceIndex] || normalizedUserAnswer;
+      const letters = ['A', 'B', 'C', 'D'];
       
-      const choicesFormatted = markingCriteria.choices.map((choice, idx) => 
-        `${['A', 'B', 'C', 'D'][idx]}) ${choice}`
-      ).join('\n');
+      // Get student's choice text
+      let studentChoiceText;
+      if (isArray) {
+        const studentChoiceIndex = letterToIndex[normalizedUserAnswer.toUpperCase()];
+        studentChoiceText = markingCriteria.choices[studentChoiceIndex] || normalizedUserAnswer;
+      } else {
+        studentChoiceText = markingCriteria.choices[normalizedUserAnswer.toUpperCase()] || normalizedUserAnswer;
+      }
       
-      const correctAnswerIndex = markingCriteria.choices.indexOf(markingCriteria.answer);
-      const correctAnswerLetter = ['A', 'B', 'C', 'D'][correctAnswerIndex];
+      // Format all choices
+      let choicesFormatted;
+      if (isArray) {
+        choicesFormatted = markingCriteria.choices.map((choice, idx) => 
+          `${letters[idx]}) ${choice}`
+        ).join('\n');
+      } else {
+        choicesFormatted = letters.map(letter => 
+          `${letter}) ${markingCriteria.choices[letter] || 'N/A'}`
+        ).join('\n');
+      }
+      
+      // Get correct answer info - clean any "Explanation:" suffix from model answer
+      const cleanModelAnswer = modelAnswer.split('\n')[0].split('Explanation:')[0].trim();
+      let correctAnswerLetter;
+      let correctAnswerText;
+      
+      if (isArray) {
+        const correctAnswerIndex = markingCriteria.choices.indexOf(markingCriteria.answer || cleanModelAnswer);
+        correctAnswerLetter = letters[correctAnswerIndex >= 0 ? correctAnswerIndex : 0];
+        correctAnswerText = markingCriteria.answer || cleanModelAnswer;
+      } else {
+        // For object format, the correct answer is likely a key or the model answer itself
+        correctAnswerLetter = cleanModelAnswer;
+        correctAnswerText = markingCriteria.choices[cleanModelAnswer] || markingCriteria.answer || cleanModelAnswer;
+      }
       
       multipleChoiceInfo = `
 AVAILABLE CHOICES:
@@ -310,7 +342,7 @@ ${choicesFormatted}
 
 STUDENT'S ANSWER: ${normalizedUserAnswer} - "${studentChoiceText}"
 
-CORRECT ANSWER: ${correctAnswerLetter} - "${markingCriteria.answer}"
+CORRECT ANSWER: ${correctAnswerLetter} - "${correctAnswerText}"
 
 ${markingCriteria.explanation ? `EXPLANATION: ${markingCriteria.explanation}` : ''}`;
     }
