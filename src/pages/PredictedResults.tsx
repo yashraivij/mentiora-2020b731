@@ -885,6 +885,87 @@ const PredictedResults = () => {
           </Card>
         </div>
 
+        {/* SAT Module Performance Breakdown */}
+        {subjectId?.startsWith('sat-') && (
+          <div className="space-y-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <h2 className="text-2xl font-bold text-foreground">Module Performance</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Module 1 Card */}
+              <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                    <BookOpen className="h-5 w-5 text-[hsl(195,69%,54%)]" />
+                    Module 1
+                  </CardTitle>
+                  <CardDescription>Foundation Questions</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {(() => {
+                    const module1Attempts = attempts.filter(a => {
+                      const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
+                      return q?.section === 'Module 1';
+                    });
+                    const module1Correct = module1Attempts.filter(a => a.score === 1).length;
+                    const module1Total = module1Attempts.length;
+                    const module1Percentage = module1Total > 0 ? Math.round((module1Correct / module1Total) * 100) : 0;
+                    
+                    return (
+                      <>
+                        <div className="text-center mb-3">
+                          <div className="text-3xl font-bold text-[hsl(195,69%,54%)]">
+                            {module1Correct}/{module1Total}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {module1Percentage}% correct
+                          </div>
+                        </div>
+                        <Progress value={module1Percentage} className="h-2" />
+                      </>
+                    );
+                  })()}
+                </CardContent>
+              </Card>
+              
+              {/* Module 2 Card */}
+              <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                    <Target className="h-5 w-5 text-[hsl(195,69%,54%)]" />
+                    Module 2
+                  </CardTitle>
+                  <CardDescription>Advanced Questions</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {(() => {
+                    const module2Attempts = attempts.filter(a => {
+                      const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
+                      return q?.section === 'Module 2';
+                    });
+                    const module2Correct = module2Attempts.filter(a => a.score === 1).length;
+                    const module2Total = module2Attempts.length;
+                    const module2Percentage = module2Total > 0 ? Math.round((module2Correct / module2Total) * 100) : 0;
+                    
+                    return (
+                      <>
+                        <div className="text-center mb-3">
+                          <div className="text-3xl font-bold text-[hsl(195,69%,54%)]">
+                            {module2Correct}/{module2Total}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {module2Percentage}% correct
+                          </div>
+                        </div>
+                        <Progress value={module2Percentage} className="h-2" />
+                      </>
+                    );
+                  })()}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
         {/* Question Breakdown */}
         <div className="space-y-6 animate-fade-in" style={{ animationDelay: '600ms' }}>
           <h2 className="text-2xl font-bold text-foreground">Question Breakdown</h2>
@@ -949,7 +1030,15 @@ const PredictedResults = () => {
                         </div>
                         <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50">
                           <p className="text-foreground leading-relaxed">
-                            {attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>}
+                            {subjectId?.startsWith('sat-') && question.marks === 1 ? (
+                              /* SAT Multiple Choice - Show selected letter */
+                              <span className="font-semibold">
+                                Choice {attempt.userAnswer || <span className="text-muted-foreground italic font-normal">Not answered</span>}
+                              </span>
+                            ) : (
+                              /* Regular answer display */
+                              attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>
+                            )}
                           </p>
                         </div>
                       </div>
