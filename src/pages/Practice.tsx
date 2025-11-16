@@ -607,7 +607,11 @@ const Practice = () => {
       
       const feedback = {
         modelAnswer: currentQuestion.modelAnswer,
-        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
+        whyThisGetsMark: currentQuestion.markingCriteria.breakdown 
+          ? currentQuestion.markingCriteria.breakdown.join('\n')
+          : (currentQuestion.markingCriteria.explanation || 
+             currentQuestion.markingCriteria.answer || 
+             'See model answer above'),
         whyYoursDidnt: markingResult.feedback,
         specLink: currentQuestion.specReference
       };
