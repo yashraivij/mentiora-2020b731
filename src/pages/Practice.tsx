@@ -1858,8 +1858,8 @@ const Practice = () => {
 
           {/* Footer Message */}
           <div className="text-center py-6">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
-              <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/20 dark:from-[hsl(195,69%,54%)]/10 dark:to-[hsl(195,69%,54%)]/20 border border-[hsl(195,69%,54%)]/30 dark:border-[hsl(195,69%,54%)]/30">
+              <Star className="h-5 w-5 text-[hsl(195,69%,54%)]" />
               <p className="text-base font-medium text-foreground">
                 +{totalMPEarned} MP added for completing this section
               </p>
