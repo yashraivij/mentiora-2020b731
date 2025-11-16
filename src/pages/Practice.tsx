@@ -151,23 +151,40 @@ const Practice = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  // Helper function to convert numeric grade to letter grade for A-Level
+  // Helper function to check if subject is SAT
+  const isSAT = (subjectId: string | undefined) => {
+    return subjectId?.toLowerCase().startsWith('sat-') || false;
+  };
+
+  // Helper function to convert numeric grade to display format based on subject type
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
-    if (!isALevel(subjectId)) {
-      return numericGrade.toFixed(1);
+    // Handle SAT scores (400-1600 scale)
+    if (isSAT(subjectId)) {
+      const satScore = Math.round(400 + ((numericGrade - 1) / 8) * 1200);
+      return satScore.toString();
     }
     
-    // Convert 1-9 scale to A-Level letter grades
-    if (numericGrade >= 8.5) return 'A*';
-    if (numericGrade >= 7.5) return 'A';
-    if (numericGrade >= 6.5) return 'B';
-    if (numericGrade >= 5.5) return 'C';
-    if (numericGrade >= 4.5) return 'D';
-    return 'E';
+    // Handle A-Level letter grades
+    if (isALevel(subjectId)) {
+      if (numericGrade >= 8.5) return 'A*';
+      if (numericGrade >= 7.5) return 'A';
+      if (numericGrade >= 6.5) return 'B';
+      if (numericGrade >= 5.5) return 'C';
+      if (numericGrade >= 4.5) return 'D';
+      return 'E';
+    }
+    
+    // Default to GCSE numeric grades (1-9)
+    return numericGrade.toFixed(1);
   };
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
+    // SAT total scores
+    if (isSAT(subjectId)) {
+      return { min: '400', max: '1600' };
+    }
+    
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -176,15 +193,23 @@ const Practice = () => {
 
   // Helper function to calculate progress percentage
   const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
-    if (isALevel(subjectId)) {
-      // Map 4-9 scale to E-A* (4=E, 9=A*)
-      return Math.max(0, ((grade - 4) / 5) * 100);
+    // For SAT: Grade 1 = 0%, Grade 9 = 100% (maps to 400-1600)
+    if (isSAT(subjectId)) {
+      return Math.max(0, Math.round(((grade - 1) / 8) * 100));
     }
+    // For GCSE/A-Level: Grade 4 = 0%, Grade 9 = 100%
     return Math.max(0, ((grade - 4) / 5) * 100);
   };
 
   // Helper function to get progress description
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
+    // SAT description
+    if (isSAT(subjectId)) {
+      const satScore = Math.round(400 + ((grade - 1) / 8) * 1200);
+      const percentage = getProgressPercentage(grade, subjectId);
+      return `Progress: ${percentage}% towards ${satScore} total score`;
+    }
+    
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
     if (isALevel(subjectId)) {
       return `Progress: ${percentage}% towards grade A*`;
@@ -1555,7 +1580,9 @@ const Practice = () => {
                           style={{ 
                             width: '0%',
                             animation: 'fillProgress 1s ease-out 600ms forwards',
-                            '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
+                            '--target-width': isSAT(subjectId) 
+                              ? `${Math.max(0, ((oldPredictedGrade - 1) / 8) * 100)}%`
+                              : `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
                           } as React.CSSProperties}
                         />
                       )}
@@ -1568,7 +1595,9 @@ const Practice = () => {
                           animation: isFirstPractice 
                             ? 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms'
                             : 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
-                          '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
+                          '--target-width': isSAT(subjectId)
+                            ? `${Math.max(0, ((newPredictedGrade - 1) / 8) * 100)}%`
+                            : `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: isFirstPractice ? 'slideAndFade 2s infinite 2100ms' : 'slideAndFade 2s infinite 2700ms' }} />
@@ -1576,7 +1605,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
+                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{getProgressPercentage(newPredictedGrade, subjectId)}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${getProgressPercentage(newPredictedGrade, subjectId)}% `, '')}
                       </p>
                     </div>
                   </div>

@@ -1817,6 +1817,15 @@ const Dashboard = () => {
       "psychology": "🧠",
       "psychology-aqa-alevel": "🧠",
       "spanish-aqa": "🇪🇸",
+      // SAT subjects
+      "sat-information-ideas": "📖",
+      "sat-craft-structure": "✍️",
+      "sat-expression-ideas": "💭",
+      "sat-english-conventions": "📝",
+      "sat-algebra": "🔢",
+      "sat-advanced-math": "📐",
+      "sat-problem-solving-data": "📊",
+      "sat-geometry-trigonometry": "📏",
     };
     return emojiMap[subjectId] || "📚";
   };
