@@ -2076,9 +2076,9 @@ const Practice = () => {
                         <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
                       </div>
                       <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
-                        currentAttempt.score === currentQuestion.marks
+                        currentAttempt && currentAttempt.score === currentQuestion.marks
                           ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
-                          : currentAttempt.score <= currentQuestion.marks / 2
+                          : currentAttempt && currentAttempt.score <= currentQuestion.marks / 2
                           ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
                           : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
                       }`}>
