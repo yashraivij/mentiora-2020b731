@@ -7250,7 +7250,7 @@ Write a story about a moment of fear.
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3BAFDA] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3B82F6] mx-auto"></div>
           <p className="text-muted-foreground">Loading your custom exam...</p>
         </div>
       </div>
@@ -7298,11 +7298,11 @@ Write a story about a moment of fear.
           <div className="space-y-6">
             {/* Title Section with Premium Badge */}
             <div className="relative">
-              <div className="absolute -top-2 -left-2 w-20 h-20 bg-[#3BAFDA]/20 rounded-full blur-2xl"></div>
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-[#3B82F6]/20 rounded-full blur-2xl"></div>
               <div className="relative">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3BAFDA]/10 border border-[#3BAFDA]/20 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-[#3BAFDA] animate-pulse"></div>
-                  <span className="text-sm font-medium text-[#3BAFDA]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-[#3B82F6] animate-pulse"></div>
+                  <span className="text-sm font-medium text-[#3B82F6]">
                     {isCustomExam ? 'Custom Paper' : 'Predicted Exam'}
                   </span>
                 </div>
@@ -7317,28 +7317,24 @@ Write a story about a moment of fear.
 
             {/* Premium Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/10 hover:border-[#3B82F6]/40 hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <FileText className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-bold text-[#3BAFDA]">{examQuestions.length}</p>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
+...
+                      <p className="text-3xl font-bold text-[#3B82F6]">{examQuestions.length}</p>
                       <p className="text-sm text-muted-foreground font-medium">Questions</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/10 hover:border-[#3B82F6]/40 hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Clock className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-bold text-[#3BAFDA]">{getExamDuration()}min</p>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
+...
+                      <p className="text-3xl font-bold text-[#3B82F6]">{getExamDuration()}min</p>
                       <p className="text-sm text-muted-foreground font-medium">Time Limit</p>
                     </div>
                   </div>
@@ -7347,13 +7343,13 @@ Write a story about a moment of fear.
             </div>
 
             {/* Instructions Card */}
-            <Card className="border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/5 shadow-lg">
-              <CardHeader className="border-b border-[#3BAFDA]/10 bg-[#3BAFDA]/5">
+            <Card className="border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/5 shadow-lg">
+              <CardHeader className="border-b border-[#3B82F6]/10 bg-[#3B82F6]/5">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-[#3BAFDA] shadow-md">
+                  <div className="p-2 rounded-lg bg-[#3B82F6] shadow-md">
                     <AlertCircle className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-[#3BAFDA]">Exam Instructions</span>
+                  <span className="text-[#3B82F6]">Exam Instructions</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
@@ -7472,7 +7468,7 @@ Write a story about a moment of fear.
             <Button 
               onClick={startExam}
               size="lg"
-              className="w-full h-14 text-lg font-semibold bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white border-0 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] hover:scale-[1.02] transition-all duration-300"
+              className="w-full h-14 text-lg font-semibold bg-[#3B82F6] hover:bg-[#2563EB] text-white border-0 shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:scale-[1.02] transition-all duration-300"
             >
               <span className="flex items-center gap-2">
                 Start Exam
@@ -7598,7 +7594,7 @@ Write a story about a moment of fear.
             </div>
             <Button
               onClick={handleSubmit}
-              className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Target className="h-4 w-4 mr-2" />
               Submit for Marking
@@ -7655,38 +7651,57 @@ Write a story about a moment of fear.
           <div className="mb-6">
             {subjectId?.startsWith('sat-') && examQuestions[currentQuestion].marks === 1 ? (
               /* SAT Multiple Choice Options */
-              <div className="space-y-3">
-                {['A', 'B', 'C', 'D'].map((option) => {
-                  const isSelected = getAnswer(examQuestions[currentQuestion].id) === option;
-                  return (
-                    <button
-                      key={option}
-                      onClick={() => handleAnswerChange(examQuestions[currentQuestion].id, option)}
-                      className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
-                        isSelected
-                          ? 'border-[#3BAFDA] bg-[#3BAFDA]/10 shadow-sm'
-                          : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold ${
-                          isSelected
-                            ? 'border-[#3BAFDA] bg-[#3BAFDA] text-white'
-                            : 'border-gray-400 text-gray-700'
-                        }`}>
-                          {option}
-                        </div>
-                        <span className="text-base text-slate-900">
-                          {option === 'A' && 'Choice A'}
-                          {option === 'B' && 'Choice B'}
-                          {option === 'C' && 'Choice C'}
-                          {option === 'D' && 'Choice D'}
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+              (() => {
+                // Extract actual choice text from the question
+                const questionText = examQuestions[currentQuestion].text;
+                const extractChoice = (letter: string, nextLetter?: string) => {
+                  const pattern = nextLetter 
+                    ? new RegExp(`${letter}\\)\\s*(.+?)\\s*${nextLetter}\\)`, 's')
+                    : new RegExp(`${letter}\\)\\s*(.+?)$`, 's');
+                  const match = questionText.match(pattern);
+                  return match ? match[1].trim() : `Choice ${letter}`;
+                };
+                
+                const choices = {
+                  A: extractChoice('A', 'B'),
+                  B: extractChoice('B', 'C'),
+                  C: extractChoice('C', 'D'),
+                  D: extractChoice('D')
+                };
+
+                return (
+                  <div className="space-y-3">
+                    {(['A', 'B', 'C', 'D'] as const).map((option) => {
+                      const isSelected = getAnswer(examQuestions[currentQuestion].id) === option;
+                      return (
+                        <button
+                          key={option}
+                          onClick={() => handleAnswerChange(examQuestions[currentQuestion].id, option)}
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
+                            isSelected
+                              ? 'border-[#3B82F6] bg-[#3B82F6]/10 shadow-sm'
+                              : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold flex-shrink-0 ${
+                              isSelected
+                                ? 'border-[#3B82F6] bg-[#3B82F6] text-white'
+                                : 'border-gray-400 text-gray-700'
+                            }`}>
+                              {option}
+                            </div>
+                            <span className="text-base text-slate-900 pt-1">
+                              {choices[option]}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })()
+            
             ) : (
               /* Regular Text Area for Non-SAT Questions */
               <Textarea
@@ -7712,7 +7727,7 @@ Write a story about a moment of fear.
             {currentQuestion === examQuestions.length - 1 ? (
               <Button
                 onClick={handleSubmit}
-                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
+                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
               >
                 <Target className="h-4 w-4 mr-2" />
                 Submit for Marking
@@ -7720,7 +7735,7 @@ Write a story about a moment of fear.
             ) : (
               <Button
                 onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
-                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Next Question
               </Button>
