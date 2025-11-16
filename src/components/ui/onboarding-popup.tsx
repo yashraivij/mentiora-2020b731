@@ -103,10 +103,10 @@ const ACQUISITION_SOURCES = [
 ];
 
 const YEAR_GROUPS = [
-  { id: 'year10', label: 'Year 10 (GCSE)', emoji: '📚' },
-  { id: 'year11', label: 'Year 11 (GCSE)', emoji: '📚' },
-  { id: 'year12', label: 'Year 12 (A-Level/AS)', emoji: '🎓' },
-  { id: 'year13', label: 'Year 13 (A-Level)', emoji: '🎓' },
+  { id: 'year10', label: 'Grade 9/Year 10 (GCSE)', emoji: '📚' },
+  { id: 'year11', label: 'Grade 10/Year 11 (GCSE)', emoji: '📚' },
+  { id: 'year12', label: 'Grade 11/Year 12 (A-Level/AS)', emoji: '🎓' },
+  { id: 'year13', label: 'Grade 12/Year 13 (A-Level)', emoji: '🎓' },
   { id: 'other', label: 'Other (IGCSE, IB, etc.)', emoji: '🌍' },
 ];
 
