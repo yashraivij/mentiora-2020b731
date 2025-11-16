@@ -222,6 +222,7 @@ const Dashboard = () => {
   // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
+  const [drawerSubjectWithTopics, setDrawerSubjectWithTopics] = useState<any>(null);
   const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
@@ -1529,6 +1530,48 @@ const Dashboard = () => {
     }
   }, [location.state, navigate, setActiveTab]);
 
+  // Fetch topics for drawer subject when it changes
+  useEffect(() => {
+    const fetchDrawerTopics = async () => {
+      if (!selectedDrawerSubject) {
+        setDrawerSubjectWithTopics(null);
+        return;
+      }
+
+      // Try to find subject in curriculum first
+      let subjectWithTopics = curriculum.find(s => s.id === selectedDrawerSubject.id);
+      
+      // If not found and it's a SAT subject, fetch topics directly from database
+      if (!subjectWithTopics && selectedDrawerSubject.id.startsWith('sat-')) {
+        console.log('🔍 SAT subject not in curriculum, fetching topics directly for:', selectedDrawerSubject.id);
+        
+        const { data: topics, error } = await supabase
+          .from('curriculum_topics')
+          .select('id, name, order_index, subject_id')
+          .eq('subject_id', selectedDrawerSubject.id)
+          .order('order_index');
+        
+        if (!error && topics) {
+          console.log('✅ Fetched', topics.length, 'topics directly from database');
+          subjectWithTopics = {
+            id: selectedDrawerSubject.id,
+            name: selectedDrawerSubject.name,
+            topics: topics.map(t => ({
+              id: t.id,
+              name: t.name,
+              questions: [],
+              orderIndex: t.order_index
+            }))
+          };
+        }
+      }
+      
+      setDrawerSubjectWithTopics(subjectWithTopics);
+    };
+
+    fetchDrawerTopics();
+  }, [selectedDrawerSubject, curriculum]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (user?.id) {
@@ -2068,21 +2111,8 @@ const Dashboard = () => {
     // Try to find in curriculum first
     let subject = curriculum.find(s => s.id === subjectId);
     
-    // If not found in curriculum, check if it's a SAT topic
-    if (!subject && subjectId.startsWith('sat-')) {
-      const satTopic = SAT_TOPICS.find(t => t.id === subjectId);
-      if (satTopic) {
-        // Create a mock subject object for SAT topics
-        subject = {
-          id: satTopic.id,
-          name: satTopic.name,
-          topics: []
-        };
-      }
-    }
-    
     if (!subject) {
-      console.error('❌ Subject not found in curriculum or SAT topics:', subjectId);
+      console.error('❌ Subject not found in curriculum:', subjectId);
       return;
     }
 
@@ -3205,9 +3235,9 @@ const Dashboard = () => {
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  // Find subject in curriculum using the exact ID
-                                  const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
-                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
+                                  // Use the pre-fetched subject with topics from state
+                                  const subject = drawerSubjectWithTopics;
+                                  console.log('Found subject in state?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
                                   
                                   if (subject) {
                                     console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));

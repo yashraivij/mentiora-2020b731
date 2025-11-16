@@ -61,6 +61,7 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
     }
 
     console.log(`✅ Fetched ${subjects.length} subjects`);
+    console.log('SAT subjects in curriculum:', subjects.filter(s => s.id.startsWith('sat-')).map(s => ({ id: s.id, name: s.name })));
 
     // Fetch all topics with pagination
     const allTopics: any[] = [];
