@@ -7321,7 +7321,9 @@ Write a story about a moment of fear.
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
-...
+                      <FileText className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
                       <p className="text-3xl font-bold text-[#3B82F6]">{examQuestions.length}</p>
                       <p className="text-sm text-muted-foreground font-medium">Questions</p>
                     </div>
@@ -7333,7 +7335,9 @@ Write a story about a moment of fear.
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
                     <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
-...
+                      <Clock className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
                       <p className="text-3xl font-bold text-[#3B82F6]">{getExamDuration()}min</p>
                       <p className="text-sm text-muted-foreground font-medium">Time Limit</p>
                     </div>
