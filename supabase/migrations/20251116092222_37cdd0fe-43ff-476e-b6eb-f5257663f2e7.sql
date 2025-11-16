@@ -1,0 +1,93 @@
+-- Batch 2: Craft & Structure - Part 2 (Text Organization + Rhetorical Strategy - 24 questions)
+
+INSERT INTO sat_questions (domain, question_type, difficulty, question_text, passage_text, choices, correct_answer, explanation, tags) VALUES
+
+-- Text Organization (12 questions)
+('Craft & Structure', 'mcq', 'easy',
+'Which choice most logically completes the text?',
+'Plant cells contain chloroplasts that perform photosynthesis, converting light energy into chemical energy. Animal cells lack chloroplasts and cannot produce their own food through photosynthesis. _____, animal cells must obtain energy by consuming other organisms.',
+'{"A": "Similarly", "B": "For example", "C": "Therefore", "D": "However"}',
+'C',
+'{"rationale": "Therefore indicates a logical conclusion. Since animal cells cannot photosynthesize, the logical consequence is they must obtain energy from other sources. This is a cause-effect relationship.", "why_others_wrong": {"A": "Similarly indicates similarity, but the sentences show difference and consequence", "B": "For example introduces an illustration, not a conclusion", "D": "However introduces contrast, but this is a logical consequence not a contrast"}}',
+ARRAY['text-organization', 'logical-transitions', 'causal-relationships']),
+
+('Craft & Structure', 'mcq', 'easy',
+'Where should the following sentence be inserted? Moreover, recent studies suggest this trend will intensify.',
+'Urban temperatures continue rising faster than rural areas. [1] This urban heat island effect results from heat-absorbing concrete and asphalt replacing vegetation. [2] Cities can become 5 to 7 degrees warmer than surrounding countryside. [3] Climate change amplifies these differences as extreme heat events become more frequent. [4]',
+'{"A": "Position 1", "B": "Position 2", "C": "Position 3", "D": "Position 4"}',
+'D',
+'{"rationale": "Moreover indicates additional supporting information. The sentence about intensifying trends logically follows the discussion of climate change amplifying differences—it adds to that point rather than interrupting earlier descriptive statements.", "why_others_wrong": {"A": "Would interrupt the explanation of what causes the effect", "B": "Would separate cause from magnitude", "C": "Would break the flow from magnitude to amplification"}}',
+ARRAY['text-organization', 'sentence-placement', 'logical-flow']),
+
+('Craft & Structure', 'mcq', 'medium',
+'The writer wants to add a sentence that introduces the main topic. Which choice best accomplishes this goal?',
+'[Choice to add] Antibiotics revolutionized medicine by enabling doctors to treat previously fatal bacterial infections. Penicillin, the first widely available antibiotic, saved countless lives during World War II. However, bacteria evolve resistance to these drugs when antibiotics are overused or misused.',
+'{"A": "Many people take antibiotics when they have infections.", "B": "The discovery of antibiotics represents one of medicines greatest achievements.", "C": "Penicillin was discovered accidentally by Alexander Fleming in 1928.", "D": "Bacterial infections can be dangerous if left untreated."}',
+'B',
+'{"rationale": "The passage discusses antibiotics revolutionary impact, historical significance, and ongoing challenges. Choice B introduces the overarching theme of antibiotics as a major medical achievement, setting up both the positive impact and later complication.", "why_others_wrong": {"A": "Too narrow and obvious; does not frame the passages scope", "C": "Too specific; would work better as detail within the passage", "D": "States background information but does not introduce antibiotics specifically"}}',
+ARRAY['text-organization', 'topic-sentences', 'introduction']),
+
+('Craft & Structure', 'mcq', 'medium',
+'Which transition best connects the two paragraphs?',
+'Paragraph 1 concludes: Early personal computers were expensive, difficult to use, and limited in capability. Paragraph 2 begins: _____ by the mid-1990s, user-friendly interfaces and falling prices brought computers into millions of homes.',
+'{"A": "Similarly,", "B": "Nevertheless,", "C": "For instance,", "D": "In other words,"}',
+'B',
+'{"rationale": "Nevertheless indicates contrast despite expectation. Paragraph 1 describes limitations that might have prevented adoption, while Paragraph 2 describes widespread adoption happening anyway. This contrasts expectations.", "why_others_wrong": {"A": "Similarly indicates likeness, but the paragraphs contrast limitations with adoption", "C": "For instance provides an example, but paragraph 2 describes a contrasting development", "D": "In other words restates the same idea, but paragraph 2 introduces new information"}}',
+ARRAY['text-organization', 'paragraph-transitions', 'contrast']),
+
+('Craft & Structure', 'mcq', 'hard',
+'The writer wants to add a concluding sentence. Which choice best maintains the passages analytical tone while summarizing its main argument?',
+'Social media platforms fundamentally changed how people share information and form communities. These technologies enable instant global communication and have facilitated social movements and political organization. However, they also enable misinformation spread, create echo chambers, and have been linked to increased anxiety and depression among heavy users. The platforms algorithms prioritize engagement over accuracy, often amplifying controversial content.',
+'{"A": "Social media is awesome but also terrible!", "B": "Everyone should immediately delete their social media accounts.", "C": "These platforms present complex trade-offs between connectivity benefits and psychological costs.", "D": "I think social media will probably continue to exist for many years."}',
+'C',
+'{"rationale": "Choice C maintains analytical tone (complex trade-offs, benefits, costs) and accurately summarizes the passages balanced presentation of both positive and negative aspects without oversimplifying or becoming informal.", "why_others_wrong": {"A": "Informal tone (awesome, terrible) clashes with passages analytical approach", "B": "Too extreme and prescriptive; passage presents analysis not recommendations", "D": "First-person opinion breaks analytical tone; statement is trivial"}}',
+ARRAY['text-organization', 'concluding-statements', 'tone-consistency']),
+
+-- Rhetorical Strategy (12 questions)
+('Craft & Structure', 'mcq', 'easy',
+'Which choice best describes the rhetorical strategy used in the passage?',
+'Consider your daily routine. You likely check your phone within minutes of waking. Throughout the day, you glance at notifications dozens of times. Before sleep, you scroll through social media. These habits are not accidental—tech companies employ psychologists to design products that capture and hold your attention.',
+'{"A": "Presenting statistical data to support a claim", "B": "Using second-person address to make the argument personally relevant", "C": "Comparing historical and modern practices", "D": "Defining technical terms for a general audience"}',
+'B',
+'{"rationale": "The passage directly addresses the reader using you throughout, describing their likely behaviors to make the point personally relevant before revealing the strategic design behind these patterns. This second-person strategy engages readers by implicating them in the phenomenon.", "why_others_wrong": {"A": "No statistics appear; uses direct address instead", "C": "No historical comparison is made", "D": "No technical terms are defined"}}',
+ARRAY['rhetorical-strategy', 'second-person', 'audience-engagement']),
+
+('Craft & Structure', 'mcq', 'easy',
+'The authors use of the phrase once believed in the passage primarily serves to',
+'Dinosaurs were once believed to be cold-blooded reptiles, slow-moving and dependent on external heat sources. However, analysis of bone structure, growth rates, and fossilized feather impressions has revolutionized our understanding. Modern paleontologists now recognize many dinosaurs as active, possibly warm-blooded creatures more closely related to birds than to modern reptiles.',
+'{"A": "introduce an outdated view that subsequent evidence contradicts", "B": "establish the authors expertise in paleontology", "C": "prove that all current dinosaur theories will eventually be disproven", "D": "demonstrate that scientists frequently make careless errors"}',
+'A',
+'{"rationale": "Once believed signals a formerly held view that has been superseded. The passage then presents new evidence (bone structure, growth rates) that led to revised understanding, making this a classic then-versus-now rhetorical structure.", "why_others_wrong": {"B": "The phrase indicates knowledge evolution, not author credentials", "C": "Too extreme; passage shows one theory updated, not that all theories are wrong", "D": "Presents normal scientific progress, not carelessness"}}',
+ARRAY['rhetorical-strategy', 'knowledge-evolution', 'scientific-progress']),
+
+('Craft & Structure', 'mcq', 'medium',
+'The authors use of questions in the passage primarily functions to',
+'How do migrating birds navigate thousands of miles with such precision? What mechanisms allow them to return to the exact same nesting sites year after year? These questions have fascinated scientists for over a century. Research now reveals birds use multiple navigation systems simultaneously: magnetic field detection, star patterns, sun position, and even olfactory landmarks. This redundancy ensures successful migration even when individual systems fail.',
+'{"A": "establish mystery that the passage will then resolve", "B": "present opposing viewpoints for readers to evaluate", "C": "challenge accepted scientific consensus", "D": "express the authors personal confusion"}',
+'A',
+'{"rationale": "The questions raise intriguing mysteries about bird navigation, creating reader curiosity. The passage then provides answers through research findings. This question-then-answer structure is a common rhetorical strategy for engaging readers.", "why_others_wrong": {"B": "Questions are answered, not left as competing viewpoints", "C": "Questions express wonder, not challenge; answers confirm scientific understanding", "D": "Questions are rhetorical devices, not genuine author confusion"}}',
+ARRAY['rhetorical-strategy', 'rhetorical-questions', 'reader-engagement']),
+
+('Craft & Structure', 'mcq', 'medium',
+'The comparison to a computer in the passage primarily serves to',
+'The human brain processes information in ways that superficially resemble a computer: receiving inputs, processing data, and producing outputs. However, this analogy breaks down upon closer examination. Unlike computers that process information serially through fixed logic gates, the brain operates through massively parallel connections between billions of neurons. Neural networks continuously reorganize themselves based on experience. Thoughts emerge from complex interactions across brain regions rather than following programmed sequences. The computer metaphor, while intuitive, ultimately obscures more than it reveals about cognition.',
+'{"A": "establish a familiar comparison that the author will then complicate", "B": "prove that brains and computers function identically", "C": "argue that computers are superior to human brains", "D": "dismiss all metaphors as unhelpful in neuroscience"}',
+'A',
+'{"rationale": "The passage explicitly uses the brain-as-computer comparison, acknowledges it (superficially resemble), then systematically shows how the analogy fails (however, this analogy breaks down). This is classic rhetorical strategy of introducing familiar idea then adding nuance.", "why_others_wrong": {"B": "Passage emphasizes differences, not identity", "C": "No superiority claim; discusses differences not rankings", "D": "Only critiques this specific metaphor, does not dismiss all metaphors"}}',
+ARRAY['rhetorical-strategy', 'analogy', 'complication']),
+
+('Craft & Structure', 'mcq', 'hard',
+'The authors strategic repetition of the phrase they told us serves primarily to',
+'They told us the war would last weeks, not years. They told us it would cost billions, not trillions. They told us we would be welcomed as liberators. They told us weapons of mass destruction posed an imminent threat. Each assurance proved false. Each promise went unkept. The gap between official statements and observable reality eventually eroded public trust completely.',
+'{"A": "demonstrate the complexity of wartime decision-making", "B": "emphasize a pattern of false assurances through accumulation", "C": "present a balanced evaluation of military strategy", "D": "explain why initial intelligence was inaccurate"}',
+'B',
+'{"rationale": "The anaphora (repeated they told us) builds rhetorical force by accumulating false promises. Each repetition adds weight, and the structure emphasizes the pattern of deception rather than treating claims individually. This creates emotional and logical impact.", "why_others_wrong": {"A": "Passage condemns rather than explaining complexity sympathetically", "C": "Clearly one-sided critique, not balanced evaluation", "D": "Focus is on pattern of false claims, not explaining errors"}}',
+ARRAY['rhetorical-strategy', 'anaphora', 'repetition', 'persuasion']),
+
+('Craft & Structure', 'mcq', 'hard',
+'The shift from third-person to first-person perspective in the second paragraph primarily functions to',
+'Historians debate the causes of World War I, examining alliance systems, imperial competition, and nationalist tensions. Multiple factors converged to create the crisis. When Archduke Franz Ferdinand was assassinated in June 1914, diplomatic failures transformed a regional conflict into global catastrophe. But let me be clear about what this historical analysis obscures: real people—soldiers in trenches, families awaiting news, children orphaned by violence—experienced this political failure as personal tragedy. The abstract forces historians discuss manifested as concrete suffering for millions.',
+'{"A": "establish the authors credibility as a historian", "B": "introduce subjective opinion after presenting objective facts", "C": "shift from analytical distance to moral engagement with human consequences", "D": "indicate the authors personal family history with the war"}',
+'C',
+'{"rationale": "The shift from third-person historical analysis to first-person but let me be clear marks a deliberate rhetorical move from detached scholarly discussion to engaged moral commentary about human suffering. The author makes this transition explicit.", "why_others_wrong": {"A": "Author establishes engagement, not credentials", "B": "Too simple; both sections have perspective, but the shift emphasizes moral dimension", "D": "No personal family connection is mentioned"}}',
+ARRAY['rhetorical-strategy', 'point-of-view-shifts', 'moral-engagement']);
