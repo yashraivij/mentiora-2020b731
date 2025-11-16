@@ -1827,6 +1827,15 @@ const Dashboard = () => {
       // Derive subject ID from name and exam board (same logic as loadUserSubjects)
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
+        
+        // Handle SAT topics first - check if subject name starts with "SAT:"
+        if (subjectName.startsWith('SAT:')) {
+          const topicName = subjectName.replace(/^SAT:\s*/i, '').replace(/\s*\(College Board\)/i, '').trim();
+          // Convert topic name to ID format
+          const topicId = topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-');
+          return `sat-${topicId}`;
+        }
+        
         // Normalize subject name (remove ALL duplicate A-Level markers)
         const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
