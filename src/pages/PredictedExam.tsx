@@ -7696,12 +7696,27 @@ Write a story about a moment of fear.
                 const getChoices = () => {
                   // Check if choices are in markingCriteria (SAT questions)
                   if (question.markingCriteria?.choices) {
-                    return {
-                      A: question.markingCriteria.choices.A || 'Choice A',
-                      B: question.markingCriteria.choices.B || 'Choice B',
-                      C: question.markingCriteria.choices.C || 'Choice C',
-                      D: question.markingCriteria.choices.D || 'Choice D'
-                    };
+                    const choices = question.markingCriteria.choices;
+                    
+                    // Handle array format (SAT Math questions)
+                    if (Array.isArray(choices)) {
+                      return {
+                        A: choices[0] || 'Choice A',
+                        B: choices[1] || 'Choice B',
+                        C: choices[2] || 'Choice C',
+                        D: choices[3] || 'Choice D'
+                      };
+                    }
+                    
+                    // Handle object format (fallback for other formats)
+                    if (typeof choices === 'object') {
+                      return {
+                        A: choices.A || 'Choice A',
+                        B: choices.B || 'Choice B',
+                        C: choices.C || 'Choice C',
+                        D: choices.D || 'Choice D'
+                      };
+                    }
                   }
                   
                   // Otherwise, extract from question text (existing logic)

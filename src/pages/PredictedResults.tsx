@@ -1087,8 +1087,22 @@ const PredictedResults = () => {
                                 // Helper to get the choice text for the user's answer
                                 const getUserChoiceText = () => {
                                   // Check if choices are in markingCriteria (SAT questions)
-                                  if (question.markingCriteria?.choices && question.markingCriteria.choices[userChoice]) {
-                                    return question.markingCriteria.choices[userChoice];
+                                  if (question.markingCriteria?.choices) {
+                                    const choices = question.markingCriteria.choices;
+                                    
+                                    // Handle array format (SAT Math questions)
+                                    if (Array.isArray(choices)) {
+                                      const letterIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+                                      const index = letterIndex[userChoice];
+                                      if (index !== undefined && choices[index]) {
+                                        return choices[index];
+                                      }
+                                    }
+                                    
+                                    // Handle object format (fallback for other formats)
+                                    if (typeof choices === 'object' && choices[userChoice]) {
+                                      return choices[userChoice];
+                                    }
                                   }
                                   
                                   // Otherwise, extract from question text (existing logic)

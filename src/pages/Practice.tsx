@@ -2069,7 +2069,11 @@ const Practice = () => {
                   // Multiple-choice button layout for SAT
                   <div className="space-y-3">
                     {['A', 'B', 'C', 'D'].map((letter) => {
-                      const choiceText = currentQuestion.markingCriteria.choices[letter];
+                      const choices = currentQuestion.markingCriteria.choices;
+                      const letterIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+                      const choiceText = Array.isArray(choices) 
+                        ? choices[letterIndex[letter]] 
+                        : choices[letter];
                       const isSelected = userAnswer === letter;
                       
                       return (
