@@ -92,6 +92,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import SATDashboard from "./SATDashboard";
 
 interface UserProgress {
   subjectId: string;
@@ -147,6 +148,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
+  const [examType, setExamType] = useState<string | null>(null);
+  const [examTypeLoading, setExamTypeLoading] = useState(true);
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -168,6 +171,44 @@ const Dashboard = () => {
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
+
+  // Check if user is an SAT user
+  useEffect(() => {
+    const checkExamType = async () => {
+      if (!user?.id) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('exam_type')
+          .eq('id', user.id)
+          .single();
+        
+        if (error) throw error;
+        setExamType(data?.exam_type || null);
+      } catch (error) {
+        console.error('Error fetching exam type:', error);
+      } finally {
+        setExamTypeLoading(false);
+      }
+    };
+    
+    checkExamType();
+  }, [user?.id]);
+
+  // Render SAT Dashboard for SAT users
+  if (examType === 'sat') {
+    return <SATDashboard />;
+  }
+
+  // Show loading while checking exam type
+  if (examTypeLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   // Track subject level changes and reset group selection
   useEffect(() => {

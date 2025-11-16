@@ -22,6 +22,7 @@ export default function SATDiagnostic() {
   const [testStartTime] = useState<number>(Date.now());
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadDiagnostic();
@@ -29,11 +30,20 @@ export default function SATDiagnostic() {
 
   const loadDiagnostic = async () => {
     try {
+      console.log('Loading SAT diagnostic questions...');
       const diagnosticQuestions = await generateDiagnosticTest();
+      console.log('Loaded questions:', diagnosticQuestions.length);
+      
+      if (!diagnosticQuestions || diagnosticQuestions.length === 0) {
+        setError('No questions available. Please try again later.');
+        return;
+      }
+      
       setQuestions(diagnosticQuestions);
       setStartTime(Date.now());
     } catch (error) {
       console.error('Error loading diagnostic:', error);
+      setError('Failed to load diagnostic test. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -115,6 +125,27 @@ export default function SATDiagnostic() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error || questions.length === 0) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-4">
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl font-bold text-foreground">Unable to Load Diagnostic Test</h2>
+          <p className="text-muted-foreground max-w-md">
+            {error || 'No questions are currently available. Please contact support or try again later.'}
+          </p>
+          <div className="flex gap-3 justify-center">
+            <Button onClick={() => loadDiagnostic()} variant="outline">
+              Try Again
+            </Button>
+            <Button onClick={() => navigate('/dashboard')}>
+              Return to Dashboard
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
