@@ -7683,36 +7683,47 @@ Write a story about a moment of fear.
               (() => {
                 // Extract actual choice text from the question
                 const questionText = examQuestions[currentQuestion].text;
-                const extractChoice = (letter: string) => {
-                  // Find where this choice starts
-                  const choiceStart = questionText.indexOf(`${letter})`);
-                  if (choiceStart === -1) return `Choice ${letter}`;
-                  
-                  // Find where the next choice starts (or end of text)
-                  const nextLetters = ['A', 'B', 'C', 'D'];
-                  const currentIndex = nextLetters.indexOf(letter);
-                  let choiceEnd = questionText.length;
-                  
-                  // Look for the next choice marker
-                  for (let i = currentIndex + 1; i < nextLetters.length; i++) {
-                    const nextStart = questionText.indexOf(`${nextLetters[i]})`, choiceStart + 2);
-                    if (nextStart !== -1) {
-                      choiceEnd = nextStart;
-                      break;
-                    }
-                  }
-                  
-                  // Extract text between this choice and next (or end)
-                  const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
-                  return choiceText.trim();
-                };
+        const extractChoice = (letter: string) => {
+          // Strategy: Find where actual choices start by locating the question mark
+          // then looking for the first A) after that
+          const lastQuestionMark = questionText.lastIndexOf('?');
+          const searchStart = lastQuestionMark > -1 ? lastQuestionMark : 0;
+          
+          // Find this choice marker AFTER the question stem
+          const choiceStart = questionText.indexOf(`${letter})`, searchStart);
+          if (choiceStart === -1) return `Choice ${letter}`;
+          
+          // Find where the next choice starts (or end of text)
+          const nextLetters = ['A', 'B', 'C', 'D'];
+          const currentIndex = nextLetters.indexOf(letter);
+          let choiceEnd = questionText.length;
+          
+          // Look for the next choice marker (with newline for precision)
+          for (let i = currentIndex + 1; i < nextLetters.length; i++) {
+            const nextStart = questionText.indexOf(`\n${nextLetters[i]})`, choiceStart + 2);
+            if (nextStart !== -1) {
+              choiceEnd = nextStart;
+              break;
+            }
+          }
+          
+          // Extract text between this choice and next (or end)
+          const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
+          return choiceText.trim();
+        };
                 
-                const choices = {
-                  A: extractChoice('A'),
-                  B: extractChoice('B'),
-                  C: extractChoice('C'),
-                  D: extractChoice('D')
-                };
+        const choices = {
+          A: extractChoice('A'),
+          B: extractChoice('B'),
+          C: extractChoice('C'),
+          D: extractChoice('D')
+        };
+
+        // Log if any extraction failed
+        if (Object.values(choices).some(c => c.startsWith('Choice '))) {
+          console.warn('⚠️ Failed to extract some SAT choices for question:', examQuestions[currentQuestion].id);
+          console.log('Question text preview:', questionText.substring(0, 500));
+        }
 
                 return (
                   <div className="space-y-3">
