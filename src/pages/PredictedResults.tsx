@@ -1082,23 +1082,27 @@ const PredictedResults = () => {
                             {isSAT(subjectId) && question.marks === 1 ? (
                               /* SAT Multiple Choice - Show selected letter with full choice text */
                               (() => {
-                                const questionText = question.text || question.question || '';
                                 const userChoice = attempt.userAnswer;
-                                const extractChoice = (letter: string) => {
-                                  // Strategy: Find where actual choices start by locating the question mark
+                                
+                                // Helper to get the choice text for the user's answer
+                                const getUserChoiceText = () => {
+                                  // Check if choices are in markingCriteria (SAT questions)
+                                  if (question.markingCriteria?.choices && question.markingCriteria.choices[userChoice]) {
+                                    return question.markingCriteria.choices[userChoice];
+                                  }
+                                  
+                                  // Otherwise, extract from question text (existing logic)
+                                  const questionText = question.text || question.question || '';
                                   const lastQuestionMark = questionText.lastIndexOf('?');
                                   const searchStart = lastQuestionMark > -1 ? lastQuestionMark : 0;
+                                  const choiceStart = questionText.indexOf(`${userChoice})`, searchStart);
                                   
-                                  // Find this choice marker AFTER the question stem
-                                  const choiceStart = questionText.indexOf(`${letter})`, searchStart);
                                   if (choiceStart === -1) return '';
                                   
-                                  // Find where the next choice starts (or end of text)
                                   const nextLetters = ['A', 'B', 'C', 'D'];
-                                  const currentIndex = nextLetters.indexOf(letter);
+                                  const currentIndex = nextLetters.indexOf(userChoice);
                                   let choiceEnd = questionText.length;
                                   
-                                  // Look for the next choice marker (with newline for precision)
                                   for (let i = currentIndex + 1; i < nextLetters.length; i++) {
                                     const nextStart = questionText.indexOf(`\n${nextLetters[i]})`, choiceStart + 2);
                                     if (nextStart !== -1) {
@@ -1107,11 +1111,11 @@ const PredictedResults = () => {
                                     }
                                   }
                                   
-                                  // Extract text between this choice and next (or end)
                                   const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
                                   return choiceText.trim();
                                 };
-                                const choiceText = userChoice ? extractChoice(userChoice) : '';
+                                
+                                const choiceText = userChoice ? getUserChoiceText() : '';
                                 return (
                                   <span>
                                     <span className="font-semibold">{userChoice})</span> {choiceText || <span className="text-muted-foreground italic font-normal">Not answered</span>}
