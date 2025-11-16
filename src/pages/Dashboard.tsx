@@ -170,6 +170,7 @@ const Dashboard = () => {
   const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
+  const [satDiagnosticCompleted, setSatDiagnosticCompleted] = useState(false);
   const isMobile = useIsMobile();
 
   // Check if user is an SAT user
@@ -193,6 +194,7 @@ const Dashboard = () => {
         console.log('📊 Dashboard: sat_diagnostic_completed =', data?.sat_diagnostic_completed);
         
         setExamType(data?.exam_type || null);
+        setSatDiagnosticCompleted(data?.sat_diagnostic_completed || false);
       } catch (error) {
         console.error('❌ Dashboard: Error fetching exam type:', error);
       } finally {
@@ -205,7 +207,72 @@ const Dashboard = () => {
 
   // Render SAT Dashboard for SAT users
   if (examType === 'sat') {
-    console.log('🎯 Dashboard: Rendering SAT Dashboard');
+    console.log('🎯 Dashboard: Rendering SAT Dashboard, diagnostic completed:', satDiagnosticCompleted);
+    
+    // Show incomplete state if diagnostic not completed
+    if (!satDiagnosticCompleted) {
+      return (
+        <div className="min-h-screen bg-background p-4 md:p-8">
+          <div className="max-w-3xl mx-auto mt-20">
+            <Card className="p-8 text-center">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-10 h-10 text-primary" />
+                </div>
+                <h1 className="text-3xl font-bold mb-3">Almost There!</h1>
+                <p className="text-muted-foreground text-lg">
+                  Complete your diagnostic test to get your personalized SAT study plan
+                </p>
+              </div>
+              
+              <div className="mb-8">
+                <div className="flex justify-center items-center gap-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                      <Check className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-sm">Created Account</span>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                      <Check className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-sm">Selected SAT</span>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                      <span className="text-sm font-semibold">3</span>
+                    </div>
+                    <span className="text-sm font-semibold">Diagnostic Test</span>
+                  </div>
+                </div>
+                <Progress value={75} className="h-2" />
+              </div>
+              
+              <div className="space-y-4">
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/sat-diagnostic')}
+                  className="w-full text-lg"
+                >
+                  Continue to Diagnostic Test
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => navigate('/settings')}
+                  className="w-full"
+                >
+                  Go to Settings
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </div>
+      );
+    }
+    
     return <SATDashboard />;
   }
   
