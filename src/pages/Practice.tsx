@@ -463,10 +463,16 @@ const Practice = () => {
       
       const shuffled = shuffleArray(filteredQuestions);
       
-      console.log('Shuffled questions count:', shuffled.length);
-      console.log('Final shuffled questions:', shuffled.map(q => q.id));
+      // Limit to 10 questions for SAT topics only
+      const finalQuestions = subject?.id.startsWith('sat-') 
+        ? shuffled.slice(0, 10) 
+        : shuffled;
       
-      setShuffledQuestions(shuffled);
+      console.log('Shuffled questions count:', shuffled.length);
+      console.log('Final questions count:', finalQuestions.length);
+      console.log('Final shuffled questions:', finalQuestions.map(q => q.id));
+      
+      setShuffledQuestions(finalQuestions);
     }
     
     setIsLoadingQuestions(false);
