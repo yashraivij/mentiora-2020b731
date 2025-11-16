@@ -1849,7 +1849,7 @@ const Practice = () => {
             <Button
               onClick={() => navigate('/dashboard')}
               size="lg"
-              className="px-10 py-6 rounded-xl text-base font-semibold bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,48%)] text-white shadow-lg shadow-[hsl(195,69%,54%)]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="px-10 py-6 rounded-xl text-base font-semibold bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white shadow-lg shadow-[#3B82F6]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Continue to Dashboard
               <ArrowRight className="h-5 w-5 ml-2" />
