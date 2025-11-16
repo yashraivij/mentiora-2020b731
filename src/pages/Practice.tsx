@@ -456,6 +456,13 @@ const Practice = () => {
     
     console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
     
+    // Don't redirect if curriculum is still loading - wait for it
+    if (curriculumLoading) {
+      console.log('⏳ Waiting for curriculum to load...');
+      return;
+    }
+
+    // Only redirect if curriculum is loaded AND subject/topic not found
     if (!subject || !topic) {
       console.error('❌ REDIRECT: Subject or topic not found');
       console.error('Looking for subjectId:', subjectId);
@@ -500,7 +507,7 @@ const Practice = () => {
     }
     
     setIsLoadingQuestions(false);
-  }, [subject, topic, navigate, topicId, user?.id]);
+  }, [subject, topic, navigate, topicId, user?.id, curriculumLoading]);
 
   // Save state whenever important values change
   useEffect(() => {
