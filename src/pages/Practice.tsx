@@ -160,7 +160,7 @@ const Practice = () => {
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
     // Handle SAT scores (400-1600 scale)
     if (isSAT(subjectId)) {
-      const satScore = Math.round(400 + ((numericGrade - 1) / 8) * 1200);
+      const satScore = Math.max(400, Math.round(400 + ((numericGrade - 1) / 8) * 1200));
       return satScore.toString();
     }
     
@@ -195,7 +195,7 @@ const Practice = () => {
   const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
     // For SAT: Grade 1 = 0%, Grade 9 = 100% (maps to 400-1600)
     if (isSAT(subjectId)) {
-      return Math.max(0, Math.round(((grade - 1) / 8) * 100));
+      return Math.max(0, Math.min(100, Math.round(((grade - 1) / 8) * 100)));
     }
     // For GCSE/A-Level: Grade 4 = 0%, Grade 9 = 100%
     return Math.max(0, ((grade - 4) / 5) * 100);
@@ -205,9 +205,8 @@ const Practice = () => {
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
     // SAT description
     if (isSAT(subjectId)) {
-      const satScore = Math.round(400 + ((grade - 1) / 8) * 1200);
       const percentage = getProgressPercentage(grade, subjectId);
-      return `Progress: ${percentage}% towards ${satScore} total score`;
+      return `Progress: ${percentage}% towards 1600 total score`;
     }
     
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
@@ -1464,7 +1463,7 @@ const Practice = () => {
               Section Complete!
             </h1>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
+              You've just finished <span className="font-semibold text-[hsl(195,69%,54%)]">{topic?.name}</span> — here's how you did.
             </p>
           </div>
 
