@@ -1420,6 +1420,20 @@ const Practice = () => {
     return percentage / 10; // 0-9% = 0.0-0.9 (U grade)
   };
 
+  // Show loading state while curriculum is loading or subject/topic not found
+  if (curriculumLoading || !subject || !topic) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
+          <p className="text-muted-foreground">
+            {curriculumLoading ? 'Loading curriculum...' : 'Loading practice questions...'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (sessionComplete) {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
