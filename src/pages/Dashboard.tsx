@@ -302,6 +302,11 @@ const Dashboard = () => {
       return name;
     }
     
+    // For SAT subjects (College Board), return name without exam board
+    if (subject.id && subject.id.startsWith('sat-')) {
+      return name;
+    }
+    
     // For specific Edexcel subjects
     if (subject.id === 'maths-edexcel') {
       return `Mathematics (Edexcel)`;
@@ -3546,7 +3551,16 @@ const Dashboard = () => {
                                   // Format topic name: remove prefixes like "c1-", "b2-" etc and capitalize
                                   const formatTopicName = (topicId: string) => {
                                     if (!topicId) return "Review Topics";
-                                    // Remove prefix patterns like c1-, b2-, p3- etc
+                                    
+                                    // Look up actual topic name from drawerSubjectWithTopics first
+                                    if (drawerSubjectWithTopics?.topics) {
+                                      const topic = drawerSubjectWithTopics.topics.find(t => t.id === topicId);
+                                      if (topic?.name) {
+                                        return topic.name; // Use actual name from database
+                                      }
+                                    }
+                                    
+                                    // Fallback: Remove prefix patterns like c1-, b2-, p3- etc
                                     const withoutPrefix = topicId.replace(/^[a-z]\d+-/i, '');
                                     // Replace hyphens with spaces and capitalize each word
                                     return withoutPrefix
