@@ -88,33 +88,3 @@ export interface DomainScore {
   total: number;
   percentage: number;
 }
-
-export interface DomainProgress {
-  domain: string;
-  domainId: string;
-  questionsAnswered: number;
-  correctAnswers: number;
-  accuracy: number;
-  lastAttempt: Date | null;
-  masteryLevel: 'beginner' | 'developing' | 'strong' | 'expert';
-  scoreContribution: number;
-  attempts: number;
-}
-
-export interface SATWeeklyReview {
-  id?: string;
-  user_id: string;
-  week_start_date: string;
-  week_end_date: string;
-  sessions_completed: number;
-  total_questions_answered: number;
-  baseline_score_low: number;
-  baseline_score_high: number;
-  updated_score_low: number;
-  updated_score_high: number;
-  improvement_percentage: number;
-  areas_mastered: string[];
-  trending_domains: Record<string, { correct: number; total: number }>;
-  created_at?: string;
-  updated_at?: string;
-}
