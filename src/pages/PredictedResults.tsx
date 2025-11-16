@@ -61,8 +61,19 @@ const PredictedResults = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  // Helper function to convert numeric grade to letter grade for A-Level
-  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
+  const isSAT = (subjectId: string | undefined) => {
+    return subjectId?.toLowerCase().startsWith('sat-') || false;
+  };
+
+  // Helper function to convert numeric grade to letter grade for A-Level or SAT score
+  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined, percentage?: number) => {
+    if (isSAT(subjectId)) {
+      // SAT shows raw score out of total questions (54 for full exam: 27 per module)
+      const totalQuestions = 54;
+      const rawScore = Math.round((percentage || 0) / 100 * totalQuestions);
+      return `${rawScore}/${totalQuestions}`;
+    }
+    
     if (!isALevel(subjectId)) {
       return numericGrade.toFixed(1);
     }
@@ -80,6 +91,9 @@ const PredictedResults = () => {
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
+    if (isSAT(subjectId)) {
+      return { min: '0/54', max: '54/54' };
+    }
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -87,12 +101,16 @@ const PredictedResults = () => {
   };
 
   // Helper function to get progress description
-  const getProgressDescription = (grade: number, subjectId: string | undefined) => {
-    const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
-    if (isALevel(subjectId)) {
-      return `Progress: ${percentage}% towards grade A*`;
+  const getProgressDescription = (grade: number, subjectId: string | undefined, percentage?: number) => {
+    if (isSAT(subjectId)) {
+      const percentile = Math.min(99, Math.round(percentage || 0));
+      return `${percentile}th percentile (estimated)`;
     }
-    return `Progress: ${percentage}% towards grade 9`;
+    const progressPercentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
+    if (isALevel(subjectId)) {
+      return `Progress: ${progressPercentage}% towards grade A*`;
+    }
+    return `Progress: ${progressPercentage}% towards grade 9`;
   };
   
   // If no state is provided, show a message instead of redirecting
@@ -151,6 +169,24 @@ const PredictedResults = () => {
 
   // Use exact same Smart marking system as Practice.tsx - OPTIMIZED
   const markAnswerWithSmart = async (question: ExamQuestion, answer: string, modelAnswer: string) => {
+    // For SAT multiple choice questions (1 mark), use simple letter comparison
+    if (isSAT(subjectId) && question.marks === 1) {
+      // Extract correct answer letter from model answer (e.g., "A)", "B)", etc.)
+      const correctLetterMatch = modelAnswer.match(/^([A-D])\)/);
+      const correctLetter = correctLetterMatch ? correctLetterMatch[1] : modelAnswer.trim().charAt(0).toUpperCase();
+      const userLetter = answer.trim().toUpperCase();
+      
+      const isCorrect = userLetter === correctLetter;
+      
+      return {
+        marksAwarded: isCorrect ? 1 : 0,
+        feedback: isCorrect 
+          ? `Correct! The answer is ${correctLetter}.`
+          : `Incorrect. The correct answer is ${correctLetter}.`,
+        assessment: isCorrect ? "Excellent" : "Needs Improvement"
+      };
+    }
+
     try {
       console.log('Calling Smart marking function with:', { 
         question: question.text || question.question, 
@@ -819,14 +855,23 @@ const PredictedResults = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
             <CardHeader className="border-b border-border/50 relative pb-4">
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
-                  <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
-                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
+                {/* Predicted Grade Improvement - Updated for SAT */}
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
+                    <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
+                    <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
+                      {isSAT(actualSubjectIdForGrading) ? 'Your Score' : 'Grade Improvement'}
+                    </span>
+                  </div>
+                  <CardTitle className="text-2xl font-bold">
+                    {isSAT(actualSubjectIdForGrading) ? 'Your SAT Score' : 'Predicted Grade'}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {isSAT(actualSubjectIdForGrading) 
+                      ? 'Your performance on this practice test' 
+                      : 'Based on your recent performance'}
+                  </p>
                 </div>
-                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
-              </div>
             </CardHeader>
             <CardContent className="p-6 relative">
               <div className="space-y-6">
@@ -834,12 +879,12 @@ const PredictedResults = () => {
                 <div className="flex items-center justify-center">
                   <div className="text-center space-y-2 group">
                     <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      Your Predicted Grade
+                      {isSAT(actualSubjectIdForGrading) ? 'Your Score' : 'Your Predicted Grade'}
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(numericGrade, actualSubjectIdForGrading)}
+                        {getDisplayGrade(numericGrade, actualSubjectIdForGrading, percentage)}
                       </div>
                     </div>
                   </div>
@@ -867,7 +912,11 @@ const PredictedResults = () => {
                   </div>
                   <div className="text-center pt-1">
                     <p className="text-sm text-muted-foreground">
-                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, actualSubjectIdForGrading).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
+                      <span className="font-bold text-[hsl(195,69%,54%)]">
+                        {isSAT(actualSubjectIdForGrading) 
+                          ? `${Math.min(99, Math.round(percentage))}th` 
+                          : `${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%`}
+                      </span> {getProgressDescription(numericGrade, actualSubjectIdForGrading, percentage).replace(/^\d+(?:th|%)?\s*/, '')}
                     </p>
                   </div>
                 </div>
@@ -1030,11 +1079,25 @@ const PredictedResults = () => {
                         </div>
                         <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50">
                           <p className="text-foreground leading-relaxed">
-                            {subjectId?.startsWith('sat-') && question.marks === 1 ? (
-                              /* SAT Multiple Choice - Show selected letter */
-                              <span className="font-semibold">
-                                Choice {attempt.userAnswer || <span className="text-muted-foreground italic font-normal">Not answered</span>}
-                              </span>
+                            {isSAT(subjectId) && question.marks === 1 ? (
+                              /* SAT Multiple Choice - Show selected letter with full choice text */
+                              (() => {
+                                const questionText = question.text || question.question || '';
+                                const userChoice = attempt.userAnswer;
+                                const extractChoice = (letter: string, nextLetter?: string) => {
+                                  const pattern = nextLetter 
+                                    ? new RegExp(`${letter}\\)\\s*(.+?)\\s*${nextLetter}\\)`, 's')
+                                    : new RegExp(`${letter}\\)\\s*(.+?)$`, 's');
+                                  const match = questionText.match(pattern);
+                                  return match ? match[1].trim() : '';
+                                };
+                                const choiceText = userChoice ? extractChoice(userChoice, userChoice === 'D' ? undefined : String.fromCharCode(userChoice.charCodeAt(0) + 1)) : '';
+                                return (
+                                  <span>
+                                    <span className="font-semibold">{userChoice})</span> {choiceText || <span className="text-muted-foreground italic font-normal">Not answered</span>}
+                                  </span>
+                                );
+                              })()
                             ) : (
                               /* Regular answer display */
                               attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>
