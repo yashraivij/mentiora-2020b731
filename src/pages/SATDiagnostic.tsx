@@ -8,6 +8,8 @@ import { Progress } from '@/components/ui/progress';
 import { SATQuestion, SATAnswer } from '@/types/sat';
 import { Loader2, Clock, AlertCircle, RefreshCw, Home } from 'lucide-react';
 import { DiagnosticResults } from '@/components/sat/DiagnosticResults';
+import { DiagnosticResultsScreen } from '@/components/sat/DiagnosticResultsScreen';
+import { StrategyView } from '@/components/sat/StrategyView';
 import { generateDiagnosticTest, scoreDigagnostic } from '@/services/satDiagnosticService';
 import { generateDailyPlan } from '@/services/satPlanGenerator';
 
@@ -27,6 +29,7 @@ export default function SATDiagnostic() {
   const [startTime, setStartTime] = useState<number>(Date.now());
   const [testStartTime] = useState<number>(Date.now());
   const [showResults, setShowResults] = useState(false);
+  const [flowStep, setFlowStep] = useState<'test' | 'results' | 'strategy' | 'plan'>('test');
   const [results, setResults] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -126,7 +129,7 @@ export default function SATDiagnostic() {
         })
         .eq('id', user?.id);
 
-      // Generate first daily plan automatically
+      // Generate first daily plan automatically (but don't navigate yet)
       await generateDailyPlan(user.id!, {
         sat_weak_domains: diagnosticResults.weaknesses.map(w => w.domain),
         sat_strength_domains: diagnosticResults.strengths.map(s => s.domain),
@@ -134,6 +137,7 @@ export default function SATDiagnostic() {
       });
 
       setResults(diagnosticResults);
+      setFlowStep('results');
       setShowResults(true);
     } catch (error) {
       console.error('Error completing test:', error);
@@ -178,6 +182,34 @@ export default function SATDiagnostic() {
           </details>
         </Card>
       </div>
+    );
+  }
+
+  // Show new flow steps after test completion
+  if (flowStep === 'results' && results) {
+    return (
+      <DiagnosticResultsScreen 
+        results={results}
+        onContinue={() => setFlowStep('strategy')}
+      />
+    );
+  }
+
+  if (flowStep === 'strategy') {
+    return (
+      <StrategyView 
+        onContinue={() => navigate('/sat-dashboard')}
+      />
+    );
+  }
+
+  // Legacy support for old results screen (fallback)
+  if (showResults && results && flowStep === 'test') {
+    return (
+      <DiagnosticResults 
+        results={results}
+        onContinue={() => navigate('/sat-dashboard')}
+      />
     );
   }
 

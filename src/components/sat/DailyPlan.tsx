@@ -28,19 +28,28 @@ interface DailyPlanProps {
 
 const activityTypeConfig = {
   warmup: {
-    label: '🔥 Warm-up',
+    label: '⭐ Warm-up',
     color: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
-    description: 'Build confidence with easier questions'
+    description: 'Build confidence with easier questions',
+    icon: '⭐'
   },
   core_focus: {
-    label: '🎯 Core Focus',
+    label: '🔥 Focus',
     color: 'bg-primary/10 text-primary border-primary/20',
-    description: 'Target your weak areas'
+    description: 'Target your weak areas',
+    icon: '🔥'
   },
   boost: {
-    label: '⚡ Challenge Boost',
+    label: '⚡ Optional Challenge',
     color: 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-    description: 'Push your limits'
+    description: 'Push your limits',
+    icon: '⚡'
+  },
+  review: {
+    label: '🔄 Review Your Mistakes',
+    color: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
+    description: 'Learn from past errors',
+    icon: '🔄'
   }
 };
 
@@ -97,19 +106,19 @@ export function DailyPlan({ plan, loading }: DailyPlanProps) {
           <div>
             <CardTitle className="flex items-center gap-2">
               <Target className="h-5 w-5 text-primary" />
-              Today's Study Plan
+              Today's Plan
             </CardTitle>
             <CardDescription>
               {isAllCompleted ? (
                 <span className="text-green-500 font-medium">🎉 All activities completed!</span>
               ) : (
-                `${completedCount} of ${totalActivities} activities completed`
+                <span className="text-muted-foreground font-medium">~{totalMinutes} minutes</span>
               )}
             </CardDescription>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold text-primary">{totalMinutes}</div>
-            <div className="text-xs text-muted-foreground">minutes</div>
+            <div className="text-lg font-semibold text-muted-foreground">{totalQuestions}</div>
+            <div className="text-xs text-muted-foreground">questions</div>
           </div>
         </div>
         <Progress value={progressPercentage} className="h-2 mt-4" />
@@ -117,7 +126,9 @@ export function DailyPlan({ plan, loading }: DailyPlanProps) {
 
       <CardContent className="space-y-3">
         {activities.map((activity, index) => {
-          const config = activityTypeConfig[activity.type];
+          const config = activityTypeConfig[activity.type as keyof typeof activityTypeConfig] || activityTypeConfig.core_focus;
+          const questionCount = activity.question_ids.length;
+          
           return (
             <div
               key={index}
@@ -125,38 +136,26 @@ export function DailyPlan({ plan, loading }: DailyPlanProps) {
                 activity.completed
                   ? 'bg-muted/50 opacity-75'
                   : 'bg-card hover:border-primary/30'
-              }`}
+              } ${config.color}`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Badge variant="outline" className={config.color}>
-                      {config.label}
-                    </Badge>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">{config.icon}</span>
+                    <span className="font-semibold text-sm">{config.label.replace(/^[🔥⭐⚡🔄]\s*/, '')}</span>
                     {activity.completed && (
-                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      <CheckCircle2 className="h-4 w-4 text-green-500 ml-auto" />
                     )}
                   </div>
-                  <h4 className="font-semibold text-sm">{activity.domain}</h4>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {config.description}
-                  </p>
+                  <h4 className="font-semibold">{activity.domain}</h4>
                   <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {activity.estimated_minutes} min
                     </span>
-                    <span>•</span>
-                    <span>{activity.question_ids.length} questions</span>
+                    <span>{questionCount} question{questionCount !== 1 ? 's' : ''}</span>
                   </div>
                 </div>
-                {activity.completed ? (
-                  <div className="text-green-500 text-sm font-medium">
-                    Done
-                  </div>
-                ) : (
-                  <Play className="h-5 w-5 text-muted-foreground" />
-                )}
               </div>
             </div>
           );

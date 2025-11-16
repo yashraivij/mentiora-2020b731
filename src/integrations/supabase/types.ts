@@ -1275,6 +1275,68 @@ export type Database = {
         }
         Relationships: []
       }
+      sat_weekly_reviews: {
+        Row: {
+          areas_mastered: string[] | null
+          baseline_score_high: number | null
+          baseline_score_low: number | null
+          created_at: string | null
+          id: string
+          improvement_percentage: number | null
+          sessions_completed: number | null
+          total_questions_answered: number | null
+          trending_domains: Json | null
+          updated_at: string | null
+          updated_score_high: number | null
+          updated_score_low: number | null
+          user_id: string
+          week_end_date: string
+          week_start_date: string
+        }
+        Insert: {
+          areas_mastered?: string[] | null
+          baseline_score_high?: number | null
+          baseline_score_low?: number | null
+          created_at?: string | null
+          id?: string
+          improvement_percentage?: number | null
+          sessions_completed?: number | null
+          total_questions_answered?: number | null
+          trending_domains?: Json | null
+          updated_at?: string | null
+          updated_score_high?: number | null
+          updated_score_low?: number | null
+          user_id: string
+          week_end_date: string
+          week_start_date: string
+        }
+        Update: {
+          areas_mastered?: string[] | null
+          baseline_score_high?: number | null
+          baseline_score_low?: number | null
+          created_at?: string | null
+          id?: string
+          improvement_percentage?: number | null
+          sessions_completed?: number | null
+          total_questions_answered?: number | null
+          trending_domains?: Json | null
+          updated_at?: string | null
+          updated_score_high?: number | null
+          updated_score_low?: number | null
+          user_id?: string
+          week_end_date?: string
+          week_start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sat_weekly_reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       session_analytics: {
         Row: {
           avg_response_time: number | null
