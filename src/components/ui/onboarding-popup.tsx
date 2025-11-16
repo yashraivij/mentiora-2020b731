@@ -9,6 +9,7 @@ import { useCurriculum } from "@/hooks/useCurriculum";
 import { AnimatedAvatar } from "@/components/ui/AnimatedAvatar";
 import { CelebrationOverlay } from "@/components/ui/CelebrationOverlay";
 import { playTutorVoice, TUTOR_VOICE_LINES, initTutorVoiceSystem } from "@/lib/tutorVoice";
+import { SAT_TOPICS } from "@/services/satTopicsConfig";
 import avaAvatar from "@/assets/avatars/ava-avatar-new.png";
 import lucasAvatar from "@/assets/avatars/lucas-avatar-new.png";
 import drRiveraAvatar from "@/assets/avatars/dr-rivera-avatar-new.png";
@@ -504,9 +505,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   const getTotalSteps = () => {
     if (onboardingData.examType === 'sat') {
-      return 5; // Tutor, Acquisition, SAT flow, Study prefs, Parent updates
+      return 6; // SAT users skip subject selection (step 4)
     }
-    return 6; // Tutor, Acquisition, Exam type, Subjects, Study prefs, Parent updates
+    return 7; // Normal flow includes step 4
   };
 
   const getCurrentDisplayStep = () => {
@@ -539,31 +540,29 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       setShowConfirmation(false);
     }
     
+    // SAT users skip step 4 (subject selection) - jump from 3 to 5
+    if (currentStep === 3 && onboardingData.examType === 'sat') {
+      setCurrentStep(5);
+      return;
+    }
+    
     if (currentStep === 6) {
       handleComplete();
-    } else if (currentStep === 3 && onboardingData.examType === 'sat' && !onboardingData.satDiagnosticComplete) {
-      return;
-    } else if (currentStep === 4 && onboardingData.examType === 'sat') {
-      setCurrentStep(5);
     } else {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handleBack = () => {
-    if (currentStep === 3 && satFlowStep > 0) {
-      setSATFlowStep(Math.max(0, satFlowStep - 1));
-    } else {
-      setCurrentStep(currentStep - 1);
-      if (currentStep === 4 && onboardingData.examType === 'sat') {
-        setSATFlowStep(0);
-        setOnboardingData({
-          ...onboardingData,
-          satDiagnosticComplete: false,
-          satDiagnosticResults: null
-        });
-      }
+    if (currentStep === 0) return;
+    
+    // SAT users going back from step 5 should go to step 3 (not 4)
+    if (currentStep === 5 && onboardingData.examType === 'sat') {
+      setCurrentStep(3);
+      return;
     }
+
+    setCurrentStep(currentStep - 1);
   };
 
   const handleSkip = () => {
@@ -606,7 +605,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             });
         }
 
-        if (onboardingData.examType !== 'sat' && onboardingData.subjects.length > 0) {
+        // Insert subjects based on exam type
+        if (onboardingData.examType === 'sat') {
+          // Auto-assign all 7 SAT topics for SAT users
+          const satTopicEntries = SAT_TOPICS.map(topic => ({
+            user_id: user.id,
+            subject_id: topic.id,
+            subject_name: topic.name,
+            exam_board: 'College Board',
+            predicted_grade: 'Not assessed',
+            target_grade: '1400',
+            priority_level: 3
+          }));
+
+          const { error: topicsError } = await supabase
+            .from('user_subjects')
+            .insert(satTopicEntries);
+
+          if (topicsError) {
+            console.error('Error inserting SAT topics:', topicsError);
+          }
+        } else if (onboardingData.subjects.length > 0) {
+          // Insert selected subjects for GCSE/A-Level/IGCSE users
           const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectWithGrade => {
             const subject = allSubjects.find(s => s.id === subjectWithGrade.id);
@@ -642,12 +662,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     onSubjectsAdded();
     onClose();
     
-    // Redirect SAT users to diagnostic test
-    if (onboardingData.examType === 'sat') {
-      navigate('/sat-diagnostic');
-    } else {
-      navigate('/dashboard');
-    }
+    // All users go to dashboard now
+    navigate('/dashboard');
   };
 
   const getProgressPercentage = () => {
@@ -1089,7 +1105,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           setShowSATConfirmation(true);
                           setTimeout(() => {
                             setShowSATConfirmation(false);
-                            setSATFlowStep(1);
+                            // Jump directly to step 5 (study preferences)
+                            setCurrentStep(5);
                           }, 2500);
                         } else {
                           setSubjectLevel(exam.id === 'alevel' ? 'alevel' : exam.id === 'igcse' ? 'igcse' : 'gcse');
