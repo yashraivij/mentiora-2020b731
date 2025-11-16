@@ -1085,8 +1085,12 @@ const PredictedResults = () => {
                                 const questionText = question.text || question.question || '';
                                 const userChoice = attempt.userAnswer;
                                 const extractChoice = (letter: string) => {
-                                  // Find where this choice starts
-                                  const choiceStart = questionText.indexOf(`${letter})`);
+                                  // Strategy: Find where actual choices start by locating the question mark
+                                  const lastQuestionMark = questionText.lastIndexOf('?');
+                                  const searchStart = lastQuestionMark > -1 ? lastQuestionMark : 0;
+                                  
+                                  // Find this choice marker AFTER the question stem
+                                  const choiceStart = questionText.indexOf(`${letter})`, searchStart);
                                   if (choiceStart === -1) return '';
                                   
                                   // Find where the next choice starts (or end of text)
@@ -1094,9 +1098,9 @@ const PredictedResults = () => {
                                   const currentIndex = nextLetters.indexOf(letter);
                                   let choiceEnd = questionText.length;
                                   
-                                  // Look for the next choice marker
+                                  // Look for the next choice marker (with newline for precision)
                                   for (let i = currentIndex + 1; i < nextLetters.length; i++) {
-                                    const nextStart = questionText.indexOf(`${nextLetters[i]})`, choiceStart + 2);
+                                    const nextStart = questionText.indexOf(`\n${nextLetters[i]})`, choiceStart + 2);
                                     if (nextStart !== -1) {
                                       choiceEnd = nextStart;
                                       break;
