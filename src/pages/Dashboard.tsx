@@ -92,7 +92,6 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
-import SATDashboard from "./SATDashboard";
 
 interface UserProgress {
   subjectId: string;
@@ -148,8 +147,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const [examType, setExamType] = useState<string | null>(null);
-  const [examTypeLoading, setExamTypeLoading] = useState(true);
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -170,122 +167,7 @@ const Dashboard = () => {
   const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
-  const [satDiagnosticCompleted, setSatDiagnosticCompleted] = useState(false);
   const isMobile = useIsMobile();
-
-  // Check if user is an SAT user
-  useEffect(() => {
-    const checkExamType = async () => {
-      if (!user?.id) return;
-      
-      console.log('🔍 Dashboard: Checking exam type for user:', user.id);
-      
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('exam_type, sat_diagnostic_completed')
-          .eq('id', user.id)
-          .single();
-        
-        if (error) throw error;
-        
-        console.log('✅ Dashboard: Exam type data:', data);
-        console.log('📊 Dashboard: exam_type =', data?.exam_type);
-        console.log('📊 Dashboard: sat_diagnostic_completed =', data?.sat_diagnostic_completed);
-        
-        setExamType(data?.exam_type || null);
-        setSatDiagnosticCompleted(data?.sat_diagnostic_completed || false);
-      } catch (error) {
-        console.error('❌ Dashboard: Error fetching exam type:', error);
-      } finally {
-        setExamTypeLoading(false);
-      }
-    };
-    
-    checkExamType();
-  }, [user?.id]);
-
-  // Render SAT Dashboard for SAT users
-  if (examType === 'sat') {
-    console.log('🎯 Dashboard: Rendering SAT Dashboard, diagnostic completed:', satDiagnosticCompleted);
-    
-    // Show incomplete state if diagnostic not completed
-    if (!satDiagnosticCompleted) {
-      return (
-        <div className="min-h-screen bg-background p-4 md:p-8">
-          <div className="max-w-3xl mx-auto mt-20">
-            <Card className="p-8 text-center">
-              <div className="mb-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-10 h-10 text-primary" />
-                </div>
-                <h1 className="text-3xl font-bold mb-3">Almost There!</h1>
-                <p className="text-muted-foreground text-lg">
-                  Complete your diagnostic test to get your personalized SAT study plan
-                </p>
-              </div>
-              
-              <div className="mb-8">
-                <div className="flex justify-center items-center gap-4 mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                      <Check className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <span className="text-sm">Created Account</span>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                      <Check className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <span className="text-sm">Selected SAT</span>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                      <span className="text-sm font-semibold">3</span>
-                    </div>
-                    <span className="text-sm font-semibold">Diagnostic Test</span>
-                  </div>
-                </div>
-                <Progress value={75} className="h-2" />
-              </div>
-              
-              <div className="space-y-4">
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate('/sat-diagnostic')}
-                  className="w-full text-lg"
-                >
-                  Continue to Diagnostic Test
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => navigate('/settings')}
-                  className="w-full"
-                >
-                  Go to Settings
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </div>
-      );
-    }
-    
-    return <SATDashboard />;
-  }
-  
-  console.log('📚 Dashboard: Rendering regular dashboard, examType:', examType);
-
-  // Show loading while checking exam type
-  if (examTypeLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   // Track subject level changes and reset group selection
   useEffect(() => {
@@ -882,33 +764,6 @@ const Dashboard = () => {
     }
   };
 
-  // Helper to check if subject is A-Level
-  const isALevelSubject = (subjectId: string): boolean => {
-    return subjectId.toLowerCase().includes('alevel');
-  };
-
-  // Helper to convert grades to numeric values
-  const gradeToNumber = (gradeString: string, subjectId: string): number => {
-    if (!gradeString || gradeString === 'U') return 0;
-    
-    if (isALevelSubject(subjectId)) {
-      // A-Level: Convert letter grades to numbers (A*=9, A=8, B=7, C=6, D=5, E=4)
-      switch (gradeString.toUpperCase()) {
-        case 'A*': return 9;
-        case 'A': return 8;
-        case 'B': return 7;
-        case 'C': return 6;
-        case 'D': return 5;
-        case 'E': return 4;
-        default: return 0;
-      }
-    } else {
-      // GCSE: Already numeric (9, 8, 7, 6, 5, 4, 3, 2, 1)
-      const parsed = parseInt(gradeString);
-      return isNaN(parsed) ? 0 : Math.max(0, Math.min(9, parsed));
-    }
-  };
-
   // Load predicted grades from database
   const loadPredictedGrades = async () => {
     if (!user?.id) return;
@@ -916,115 +771,57 @@ const Dashboard = () => {
     try {
       console.log('📊 Loading predicted grades for user:', user.id);
       
-      // 1. Fetch actual exam completions from database
-      const { data: examCompletions, error: examError } = await supabase
-        .from('predicted_exam_completions')
-        .select('subject_id, grade, percentage, created_at, achieved_marks, total_marks')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (examError) {
-        console.error('Error fetching exam completions:', examError);
-      }
-
-      console.log('📊 Fetched exam completions from database:', examCompletions);
-
-      // Create a map of exam completions by subject (flexible matching)
-      const examCompletionsMap = new Map();
-      examCompletions?.forEach(completion => {
-        // Extract base subject: "biology-aqa-alevel" → "biology", "maths" → "maths"
-        const baseSubject = completion.subject_id.split('-')[0].toLowerCase();
-        
-        // Store ALL matching variations to maximize matching
-        examCompletionsMap.set(baseSubject, completion);
-        examCompletionsMap.set(completion.subject_id.toLowerCase(), completion);
-      });
-
-      // 2. Calculate predicted grades from current userProgress
+      // Calculate predicted grades from current userProgress instead of database
       const gradesBySubject = userSubjects.map((subject: any) => {
-        const subjectIdToMatch = (subject.id || '').toLowerCase();
+        const subjectIdToMatch = subject.id || '';
+        
+        // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
         const baseSubjectName = subjectIdToMatch.split('-')[0];
-        
-        // Check if we have an exam completion for this subject (try multiple matching strategies)
-        const examCompletion = 
-          examCompletionsMap.get(subjectIdToMatch) ||           // Exact match: "maths-aqa"
-          examCompletionsMap.get(baseSubjectName) ||            // Base match: "maths"
-          examCompletionsMap.get(`${baseSubjectName}-aqa-alevel`) || // Try alevel variant
-          examCompletionsMap.get(`${baseSubjectName}-aqa`);
-        
-        // Match both exact ID and base subject name for practice data
         const subjectProgressData = userProgress.filter(p => 
           p.subjectId === subjectIdToMatch || 
           p.subjectId === baseSubjectName ||
-          p.subjectId.split('-')[0].toLowerCase() === baseSubjectName
+          p.subjectId.split('-')[0] === baseSubjectName
         );
         const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
         
         let predictedGradeValue = 0;
         let percentage = 0;
         
-        // Calculate practice-based grade if available
-        let practiceGradeValue = 0;
-        let practicePercentage = 0;
-        
         if (hasAttempts) {
+          // Calculate from CURRENT practice accuracy (most accurate)
           const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
           const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
           const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
-          practicePercentage = currentAccuracy;
+          percentage = currentAccuracy;
+          
+          console.log(`📊 ${subject.name} (${subjectIdToMatch}): accuracy=${currentAccuracy}%, attempts=${totalAttempts}`);
           
           if (currentAccuracy > 0) {
+            // Check if A-Level subject to use correct thresholds
             const isALevel = subject.id && subject.id.includes('alevel');
             
             if (isALevel) {
               // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
-              if (currentAccuracy >= 90) practiceGradeValue = 9; // A*
-              else if (currentAccuracy >= 80) practiceGradeValue = 8; // A
-              else if (currentAccuracy >= 70) practiceGradeValue = 7; // B
-              else if (currentAccuracy >= 60) practiceGradeValue = 6; // C
-              else if (currentAccuracy >= 50) practiceGradeValue = 5; // D
-              else if (currentAccuracy >= 40) practiceGradeValue = 4; // E
-              else practiceGradeValue = 0; // U
+              if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
+              else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
+              else if (currentAccuracy >= 70) predictedGradeValue = 7; // B
+              else if (currentAccuracy >= 60) predictedGradeValue = 6; // C
+              else if (currentAccuracy >= 50) predictedGradeValue = 5; // D
+              else if (currentAccuracy >= 40) predictedGradeValue = 4; // E
+              else predictedGradeValue = 0; // U
             } else {
-              // GCSE thresholds
-              if (currentAccuracy >= 80) practiceGradeValue = 9;
-              else if (currentAccuracy >= 70) practiceGradeValue = 8;
-              else if (currentAccuracy >= 60) practiceGradeValue = 7;
-              else if (currentAccuracy >= 50) practiceGradeValue = 6;
-              else if (currentAccuracy >= 40) practiceGradeValue = 5;
-              else if (currentAccuracy >= 30) practiceGradeValue = 4;
-              else practiceGradeValue = 0;
+              // GCSE thresholds: Grade 4=30%, Grade 5=40%, etc.
+              if (currentAccuracy >= 80) predictedGradeValue = 9;
+              else if (currentAccuracy >= 70) predictedGradeValue = 8;
+              else if (currentAccuracy >= 60) predictedGradeValue = 7;
+              else if (currentAccuracy >= 50) predictedGradeValue = 6;
+              else if (currentAccuracy >= 40) predictedGradeValue = 5;
+              else if (currentAccuracy >= 30) predictedGradeValue = 4;
+              else predictedGradeValue = 0;
             }
+            
+            console.log(`📊 ${subject.name} final grade: ${predictedGradeValue} (${currentAccuracy}%)`);
           }
-        }
-
-        // 3. Merge database and practice grades intelligently
-        if (examCompletion) {
-          // Convert database grade to numeric value
-          const examGradeValue = gradeToNumber(examCompletion.grade, examCompletion.subject_id);
-          const examPercentage = examCompletion.percentage || 0;
-          
-          if (hasAttempts && practiceGradeValue > 0) {
-            // Both sources available: weighted average (70% exam, 30% practice)
-            predictedGradeValue = Math.round((examGradeValue * 0.7) + (practiceGradeValue * 0.3));
-            percentage = Math.round((examPercentage * 0.7) + (practicePercentage * 0.3));
-            console.log(`📊 ${subject.name}: Combined grade ${predictedGradeValue} (exam: ${examGradeValue}, practice: ${practiceGradeValue})`);
-          } else {
-            // Only exam data available
-            predictedGradeValue = examGradeValue;
-            percentage = examPercentage;
-            console.log(`📊 ${subject.name}: Using database grade ${predictedGradeValue} (${percentage}%)`);
-          }
-        } else if (hasAttempts) {
-          // Only practice data available
-          predictedGradeValue = practiceGradeValue;
-          percentage = practicePercentage;
-          console.log(`📊 ${subject.name}: Using practice grade ${predictedGradeValue} (${percentage}%)`);
-        } else {
-          // No data available
-          predictedGradeValue = 0;
-          percentage = 0;
-          console.log(`📊 ${subject.name}: No data, grade U`);
         }
         
         return {
@@ -1036,7 +833,7 @@ const Dashboard = () => {
         };
       });
 
-      console.log('📊 Final merged grades:', gradesBySubject);
+      console.log('📊 Calculated grades from userProgress:', gradesBySubject);
       
       setPredictedGrades(gradesBySubject);
     } catch (error) {

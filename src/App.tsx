@@ -25,8 +25,6 @@ import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
 import CustomExamBuilder from "./pages/CustomExamBuilder";
-import SATDiagnostic from "./pages/SATDiagnostic";
-import SATSession from "./pages/SATSession";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -51,16 +49,6 @@ const App: React.FC = () => (
               <Route path="/dashboard" element={
                 <ProtectedRoute>
                   <Dashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/sat-diagnostic" element={
-                <ProtectedRoute>
-                  <SATDiagnostic />
-                </ProtectedRoute>
-              } />
-              <Route path="/sat-session" element={
-                <ProtectedRoute>
-                  <SATSession />
                 </ProtectedRoute>
               } />
               <Route path="/subject/:subjectId" element={
