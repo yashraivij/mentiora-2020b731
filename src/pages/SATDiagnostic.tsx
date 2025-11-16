@@ -38,9 +38,9 @@ export default function SATDiagnostic() {
     try {
       setLoading(true);
       setError(null);
-      console.log('Loading SAT diagnostic questions...');
+      console.log('🎯 SATDiagnostic: Starting to load diagnostic test...');
       const diagnosticQuestions = await generateDiagnosticTest();
-      console.log('Loaded questions:', diagnosticQuestions.length);
+      console.log('✅ SATDiagnostic: Successfully loaded', diagnosticQuestions.length, 'questions');
       
       if (!diagnosticQuestions || diagnosticQuestions.length === 0) {
         setError('No questions available. Please contact support if this persists.');
@@ -49,9 +49,13 @@ export default function SATDiagnostic() {
       
       setQuestions(diagnosticQuestions);
       setStartTime(Date.now());
-    } catch (error) {
-      console.error('Error loading diagnostic:', error);
-      setError('Failed to load diagnostic test. Check your internet connection and try again.');
+    } catch (error: any) {
+      console.error('💥 SATDiagnostic: Failed to load diagnostic:', {
+        error,
+        message: error?.message,
+        stack: error?.stack
+      });
+      setError(error?.message || 'Unable to load SAT diagnostic test. Please try again or contact support.');
     } finally {
       setLoading(false);
     }
@@ -162,11 +166,16 @@ export default function SATDiagnostic() {
               <RefreshCw className="w-4 h-4 mr-2" />
               Try Again
             </Button>
-            <Button variant="outline" onClick={() => navigate('/dashboard')} className="w-full">
+            <Button variant="outline" onClick={() => navigate('/sat-dashboard')} className="w-full">
               <Home className="w-4 h-4 mr-2" />
-              Back to Dashboard
+              Go to Dashboard
             </Button>
           </div>
+          <details className="mt-4 text-xs text-left text-muted-foreground bg-muted p-3 rounded">
+            <summary className="cursor-pointer font-semibold mb-2">Technical Details</summary>
+            <p className="font-mono break-all">{error}</p>
+            <p className="mt-2">If this persists, please contact support with this error message.</p>
+          </details>
         </Card>
       </div>
     );

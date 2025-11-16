@@ -12,42 +12,68 @@ const DOMAINS = [
 export async function generateDiagnosticTest(): Promise<SATQuestion[]> {
   console.log('🔍 satDiagnosticService: Fetching SAT questions from database...');
   
-  // Fetch questions from all domains with balanced difficulty
-  const { data: allQuestions, error } = await supabase
-    .from('sat_questions')
-    .select('*');
+  try {
+    // Fetch questions from all domains with balanced difficulty
+    const { data: allQuestions, error } = await supabase
+      .from('sat_questions')
+      .select('*');
 
-  console.log('📊 satDiagnosticService: Query result - error:', error, 'questions count:', allQuestions?.length);
+    console.log('📊 satDiagnosticService: Query result:', {
+      error: error ? {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      } : null,
+      questionsCount: allQuestions?.length,
+      sampleQuestion: allQuestions?.[0] ? {
+        id: allQuestions[0].id,
+        domain: allQuestions[0].domain,
+        difficulty: allQuestions[0].difficulty
+      } : null
+    });
 
-  if (error) {
-    console.error('❌ satDiagnosticService: Database error:', error);
-    throw error;
-  }
-  if (!allQuestions || allQuestions.length === 0) {
-    console.error('❌ satDiagnosticService: No questions found in database');
-    throw new Error('No SAT questions available. Please seed the database first.');
-  }
-
-  // Group questions by domain
-  const questionsByDomain: Record<string, any[]> = {};
-  DOMAINS.forEach(domain => {
-    questionsByDomain[domain] = allQuestions.filter(q => q.domain === domain);
-  });
-
-  // Select 4 questions per domain (2 easy, 1 medium, 1 hard) = 20 total
-  const selectedQuestions: any[] = [];
-  
-  DOMAINS.forEach(domain => {
-    const domainQuestions = questionsByDomain[domain] || [];
-    const easy = domainQuestions.filter(q => q.difficulty === 'easy').slice(0, 2);
-    const medium = domainQuestions.filter(q => q.difficulty === 'medium').slice(0, 1);
-    const hard = domainQuestions.filter(q => q.difficulty === 'hard').slice(0, 1);
+    if (error) {
+      console.error('❌ satDiagnosticService: Database error:', {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      });
+      throw new Error(`Failed to fetch SAT questions: ${error.message}`);
+    }
     
-    selectedQuestions.push(...easy, ...medium, ...hard);
-  });
+    if (!allQuestions || allQuestions.length === 0) {
+      console.error('❌ satDiagnosticService: No questions found in database');
+      throw new Error('No SAT questions available in the database. Please contact support.');
+    }
 
-  // Shuffle questions
-  return selectedQuestions.sort(() => Math.random() - 0.5) as SATQuestion[];
+    console.log('✅ satDiagnosticService: Successfully fetched questions');
+
+    // Group questions by domain
+    const questionsByDomain: Record<string, any[]> = {};
+    DOMAINS.forEach(domain => {
+      questionsByDomain[domain] = allQuestions.filter(q => q.domain === domain);
+    });
+
+    // Select 4 questions per domain (2 easy, 1 medium, 1 hard) = 20 total
+    const selectedQuestions: any[] = [];
+    
+    DOMAINS.forEach(domain => {
+      const domainQuestions = questionsByDomain[domain] || [];
+      const easy = domainQuestions.filter(q => q.difficulty === 'easy').slice(0, 2);
+      const medium = domainQuestions.filter(q => q.difficulty === 'medium').slice(0, 1);
+      const hard = domainQuestions.filter(q => q.difficulty === 'hard').slice(0, 1);
+      
+      selectedQuestions.push(...easy, ...medium, ...hard);
+    });
+
+    // Shuffle questions
+    return selectedQuestions.sort(() => Math.random() - 0.5) as SATQuestion[];
+  } catch (err) {
+    console.error('💥 satDiagnosticService: Unexpected error:', err);
+    throw err;
+  }
 }
 
 export async function scoreDigagnostic(
