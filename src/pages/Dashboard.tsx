@@ -1538,11 +1538,11 @@ const Dashboard = () => {
         return;
       }
 
-      // Try to find subject in curriculum first
-      let subjectWithTopics = curriculum.find(s => s.id === selectedDrawerSubject.id);
-      
-      // If not found and it's a SAT subject, fetch topics directly from database
-      if (!subjectWithTopics && selectedDrawerSubject.id.startsWith('sat-')) {
+    // Try to find subject in curriculum first
+    let subjectWithTopics = curriculum.find(s => s.id === selectedDrawerSubject.id);
+    
+    // If not found, OR found but has 0 topics, and it's a SAT subject, fetch topics directly from database
+    if ((!subjectWithTopics || (subjectWithTopics && subjectWithTopics.topics.length === 0)) && selectedDrawerSubject.id.startsWith('sat-')) {
         console.log('🔍 SAT subject not in curriculum, fetching topics directly for:', selectedDrawerSubject.id);
         
         const { data: topics, error } = await supabase
