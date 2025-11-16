@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { SATQuestion, SATAnswer } from '@/types/sat';
-import { Loader2, Clock } from 'lucide-react';
+import { Loader2, Clock, AlertCircle, RefreshCw, Home } from 'lucide-react';
 import { DiagnosticResults } from '@/components/sat/DiagnosticResults';
 import { generateDiagnosticTest, scoreDigagnostic } from '@/services/satDiagnosticService';
 import { generateDailyPlan } from '@/services/satPlanGenerator';
@@ -14,6 +14,11 @@ import { generateDailyPlan } from '@/services/satPlanGenerator';
 export default function SATDiagnostic() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  
+  // Redirect if not logged in
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<SATQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -31,12 +36,14 @@ export default function SATDiagnostic() {
 
   const loadDiagnostic = async () => {
     try {
+      setLoading(true);
+      setError(null);
       console.log('Loading SAT diagnostic questions...');
       const diagnosticQuestions = await generateDiagnosticTest();
       console.log('Loaded questions:', diagnosticQuestions.length);
       
       if (!diagnosticQuestions || diagnosticQuestions.length === 0) {
-        setError('No questions available. Please try again later.');
+        setError('No questions available. Please contact support if this persists.');
         return;
       }
       
@@ -44,7 +51,7 @@ export default function SATDiagnostic() {
       setStartTime(Date.now());
     } catch (error) {
       console.error('Error loading diagnostic:', error);
-      setError('Failed to load diagnostic test. Please try again.');
+      setError('Failed to load diagnostic test. Check your internet connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -139,21 +146,28 @@ export default function SATDiagnostic() {
 
   if (error || questions.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-4">
-        <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold text-foreground">Unable to Load Diagnostic Test</h2>
-          <p className="text-muted-foreground max-w-md">
-            {error || 'No questions are currently available. Please contact support or try again later.'}
-          </p>
-          <div className="flex gap-3 justify-center">
-            <Button onClick={() => loadDiagnostic()} variant="outline">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+        <Card className="p-8 max-w-md w-full text-center">
+          <div className="mb-6">
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <AlertCircle className="w-8 h-8 text-red-600" />
+            </div>
+            <h2 className="text-xl font-semibold mb-2">Unable to Load Test</h2>
+            <p className="text-muted-foreground">
+              {error || 'No questions are currently available. Please contact support if this persists.'}
+            </p>
+          </div>
+          <div className="space-y-3">
+            <Button onClick={loadDiagnostic} className="w-full" size="lg">
+              <RefreshCw className="w-4 h-4 mr-2" />
               Try Again
             </Button>
-            <Button onClick={() => navigate('/dashboard')}>
-              Return to Dashboard
+            <Button variant="outline" onClick={() => navigate('/dashboard')} className="w-full">
+              <Home className="w-4 h-4 mr-2" />
+              Back to Dashboard
             </Button>
           </div>
-        </div>
+        </Card>
       </div>
     );
   }

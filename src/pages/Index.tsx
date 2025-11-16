@@ -453,7 +453,7 @@ const Index = () => {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#3B82F6';
                 }}
-                onClick={() => navigate(user ? '/dashboard' : '/register')}
+                onClick={() => navigate('/register')}
               >
                 Try now for free
               </Button>
@@ -1624,7 +1624,7 @@ const Index = () => {
             </p>
             <Button 
               size="lg"
-              onClick={() => navigate(user ? '/dashboard' : '/register')}
+              onClick={() => navigate('/register')}
               className="text-white text-lg font-semibold px-12 py-6 rounded-lg shadow-lg hover:scale-105 transition-all"
               style={{ backgroundColor: '#3B82F6' }}
             >
