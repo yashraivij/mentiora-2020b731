@@ -199,11 +199,55 @@ const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
 const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
 
 const SAT_SUBJECTS = [
+  // Reading & Writing Topics (4)
   {
-    id: 'sat',
-    name: 'SAT',
+    id: 'sat-information-ideas',
+    name: 'Information & Ideas',
     examBoard: 'College Board',
-    emoji: '🎓'
+    emoji: '📖'
+  },
+  {
+    id: 'sat-craft-structure',
+    name: 'Craft & Structure',
+    examBoard: 'College Board',
+    emoji: '✍️'
+  },
+  {
+    id: 'sat-expression-ideas',
+    name: 'Expression of Ideas',
+    examBoard: 'College Board',
+    emoji: '💭'
+  },
+  {
+    id: 'sat-english-conventions',
+    name: 'Standard English Conventions',
+    examBoard: 'College Board',
+    emoji: '📝'
+  },
+  // Math Topics (4)
+  {
+    id: 'sat-algebra',
+    name: 'Algebra',
+    examBoard: 'College Board',
+    emoji: '🔢'
+  },
+  {
+    id: 'sat-advanced-math',
+    name: 'Advanced Math',
+    examBoard: 'College Board',
+    emoji: '📐'
+  },
+  {
+    id: 'sat-problem-solving-data',
+    name: 'Problem Solving & Data Analysis',
+    examBoard: 'College Board',
+    emoji: '📊'
+  },
+  {
+    id: 'sat-geometry-trigonometry',
+    name: 'Geometry & Trigonometry',
+    examBoard: 'College Board',
+    emoji: '📏'
   }
 ];
 
@@ -247,38 +291,31 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, [onboardingData, currentStep]);
 
-  // Auto-select SAT subject when SAT tab is selected, clear others
+  // Auto-select all 8 SAT topics when SAT tab is selected, clear others
   useEffect(() => {
     if (subjectLevel === 'sat') {
-      const hasSATSubject = onboardingData.subjects.some(s => s.id === 'sat');
-      const hasNonSATSubjects = onboardingData.subjects.some(s => s.id !== 'sat');
+      const hasSATSubjects = onboardingData.subjects.some(s => s.id.startsWith('sat-'));
+      const hasNonSATSubjects = onboardingData.subjects.some(s => !s.id.startsWith('sat-'));
       
-      // If switching to SAT and there are non-SAT subjects, clear them
-      if (hasNonSATSubjects) {
+      // If switching to SAT and there are non-SAT subjects, clear them and add all SAT topics
+      if (hasNonSATSubjects || !hasSATSubjects) {
+        const allSATTopics = SAT_SUBJECTS.map(topic => ({
+          id: topic.id,
+          targetGrade: '1600' // Default to best score
+        }));
+        
         setOnboardingData({
           ...onboardingData,
-          subjects: [{
-            id: 'sat',
-            targetGrade: '1400'
-          }]
-        });
-      } else if (!hasSATSubject) {
-        // Just add SAT if no subjects exist
-        setOnboardingData({
-          ...onboardingData,
-          subjects: [{
-            id: 'sat',
-            targetGrade: '1400'
-          }]
+          subjects: allSATTopics
         });
       }
     } else {
-      // If switching away from SAT, remove SAT subject
-      const hasSATSubject = onboardingData.subjects.some(s => s.id === 'sat');
-      if (hasSATSubject) {
+      // If switching away from SAT, remove all SAT subjects
+      const hasSATSubjects = onboardingData.subjects.some(s => s.id.startsWith('sat-'));
+      if (hasSATSubjects) {
         setOnboardingData({
           ...onboardingData,
-          subjects: onboardingData.subjects.filter(s => s.id !== 'sat')
+          subjects: onboardingData.subjects.filter(s => !s.id.startsWith('sat-'))
         });
       }
     }
@@ -361,12 +398,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             // Check if this is an A-Level or SAT subject
             const isALevel = subjectWithGrade.id.toLowerCase().includes('alevel');
-            const isSAT = subjectWithGrade.id === 'sat';
+            const isSAT = subjectWithGrade.id.startsWith('sat-');
             
             const subjectName = isALevel && subject?.name && !subject.name.includes('(A-Level)')
               ? `${subject.name} (A-Level)`
               : isSAT && subject?.name
-                ? subject.name
+                ? `SAT: ${subject.name}` // Prefix with "SAT: " for clarity
                 : subject?.name || subjectWithGrade.id;
             
             return {
@@ -653,7 +690,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       const isSelected = onboardingData.subjects.some(s => s.id === subject.id);
                       const subjectData = onboardingData.subjects.find(s => s.id === subject.id);
                       const isSelectingGrade = selectedSubjectForGrade === subject.id;
-                      const isSAT = subject.id === 'sat';
+                      const isSAT = subject.id.startsWith('sat-');
                       
                       return (
                         <div key={subject.id} className="space-y-2">
