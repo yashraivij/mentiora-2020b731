@@ -135,13 +135,19 @@ export function DiagnosticResults({ results, onContinue }: DiagnosticResultsProp
             </div>
           </Card>
 
-          <div className="text-center">
+          <div className="text-center space-y-4">
+            <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg mb-4">
+              <p className="text-sm text-foreground font-medium mb-1">
+                🎯 Your personalized study plan is ready!
+              </p>
+              <p className="text-xs text-muted-foreground">
+                We've created your first daily plan with targeted questions to help you improve
+              </p>
+            </div>
             <Button onClick={onContinue} size="lg" className="px-8">
-              View Your Dashboard
+              View My Study Plan
+              <Zap className="ml-2 h-5 w-5" />
             </Button>
-            <p className="text-sm text-muted-foreground mt-4">
-              We've created your first daily study plan. Let's get started!
-            </p>
           </div>
         </motion.div>
       </div>

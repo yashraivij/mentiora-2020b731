@@ -9,6 +9,7 @@ import { SATQuestion, SATAnswer } from '@/types/sat';
 import { Loader2, Clock } from 'lucide-react';
 import { DiagnosticResults } from '@/components/sat/DiagnosticResults';
 import { generateDiagnosticTest, scoreDigagnostic } from '@/services/satDiagnosticService';
+import { generateDailyPlan } from '@/services/satPlanGenerator';
 
 export default function SATDiagnostic() {
   const { user } = useAuth();
@@ -113,6 +114,13 @@ export default function SATDiagnostic() {
           sat_daily_minutes: diagnosticResults.recommended_daily_minutes,
         })
         .eq('id', user?.id);
+
+      // Generate first daily plan automatically
+      await generateDailyPlan(user.id!, {
+        sat_weak_domains: diagnosticResults.weaknesses.map(w => w.domain),
+        sat_strength_domains: diagnosticResults.strengths.map(s => s.domain),
+        sat_daily_minutes: diagnosticResults.recommended_daily_minutes
+      });
 
       setResults(diagnosticResults);
       setShowResults(true);

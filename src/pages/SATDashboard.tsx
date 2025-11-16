@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, Trophy, Target, Calendar, TrendingUp, BookOpen, Zap } from 'lucide-react';
 import { toast } from 'sonner';
+import { DailyPlan } from '@/components/sat/DailyPlan';
+import { generateDailyPlan, getTodaysPlan } from '@/services/satPlanGenerator';
 
 interface SATProfile {
   sat_baseline_score_low: number | null;
@@ -26,9 +28,12 @@ export default function SATDashboard() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<SATProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [dailyPlan, setDailyPlan] = useState<any>(null);
+  const [planLoading, setPlanLoading] = useState(true);
 
   useEffect(() => {
     loadProfile();
+    loadDailyPlan();
   }, [user?.id]);
 
   const loadProfile = async () => {
@@ -48,6 +53,26 @@ export default function SATDashboard() {
       toast.error('Failed to load your SAT profile');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadDailyPlan = async () => {
+    if (!user?.id) return;
+    setPlanLoading(true);
+    try {
+      // Try to get today's plan first
+      let plan = await getTodaysPlan(user.id);
+      
+      // If no plan exists and we have profile data, generate one
+      if (!plan && profile) {
+        plan = await generateDailyPlan(user.id, profile);
+      }
+      
+      setDailyPlan(plan);
+    } catch (error) {
+      console.error('Error loading daily plan:', error);
+    } finally {
+      setPlanLoading(false);
     }
   };
 
@@ -106,6 +131,9 @@ export default function SATDashboard() {
             </div>
           )}
         </div>
+
+        {/* Today's Study Plan - Featured Section */}
+        <DailyPlan plan={dailyPlan} loading={planLoading} />
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
