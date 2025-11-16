@@ -156,6 +156,11 @@ const Practice = () => {
     return subjectId?.toLowerCase().startsWith('sat-') || false;
   };
 
+  const isMCQ = (question: Question) => {
+    return question?.markingCriteria?.choices && 
+           typeof question.markingCriteria.choices === 'object';
+  };
+
   // Helper function to convert numeric grade to display format based on subject type
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
     // Handle SAT scores (400-1600 scale)
@@ -2060,13 +2065,49 @@ const Practice = () => {
             {/* Answer area - large white space */}
             <div className="min-h-[400px] mb-6">
               {!showFeedback ? (
-                <Textarea
-                  value={userAnswer}
-                  onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder=""
-                  disabled={showFeedback}
-                  className="w-full h-full min-h-[400px] border border-border focus:ring-0 text-base resize-none p-4 bg-background/50 dark:bg-background/30 rounded-md text-foreground"
-                />
+                isSAT(subjectId) && currentQuestion && isMCQ(currentQuestion) ? (
+                  // Multiple-choice button layout for SAT
+                  <div className="space-y-3">
+                    {['A', 'B', 'C', 'D'].map((letter) => {
+                      const choiceText = currentQuestion.markingCriteria.choices[letter];
+                      const isSelected = userAnswer === letter;
+                      
+                      return (
+                        <button
+                          key={letter}
+                          onClick={() => setUserAnswer(letter)}
+                          className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
+                            isSelected
+                              ? 'border-[hsl(var(--primary))] bg-blue-50 dark:bg-blue-950/30'
+                              : 'border-border hover:border-[hsl(var(--primary))]/50 bg-background/50 dark:bg-background/30'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm border-2 ${
+                              isSelected
+                                ? 'bg-[hsl(var(--primary))] text-primary-foreground border-[hsl(var(--primary))]'
+                                : 'bg-background border-border text-foreground'
+                            }`}>
+                              {letter}
+                            </span>
+                            <span className="text-base text-foreground leading-relaxed pt-0.5">
+                              {choiceText}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  // Regular textarea for non-MCQ questions
+                  <Textarea
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder=""
+                    disabled={showFeedback}
+                    className="w-full h-full min-h-[400px] border border-border focus:ring-0 text-base resize-none p-4 bg-background/50 dark:bg-background/30 rounded-md text-foreground"
+                  />
+                )
               ) : (
                 <div className="space-y-4">
                   {/* User's answer bubble */}
