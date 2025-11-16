@@ -1957,26 +1957,31 @@ const Dashboard = () => {
       
       return {
         id: subjectId,
-        name: (() => {
-          // Clean up subject name - remove all A-Level markers
-          let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
-          
-          // For A-Level subjects, add single A-Level marker with exam board
-          if (subjectId.includes('alevel')) {
-            return `${cleanName} (A-Level) (${subject.exam_board})`;
-          }
-          // Check if exam board is already in the subject name
-          const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
-          if (hasExamBoard) {
-            return subject.subject_name;
-          }
-          // Override for specific subjects
-          if (subjectId === 'music-eduqas-gcse') {
-            return `${subject.subject_name} (Eduqas)`;
-          }
-          // Add exam board for others
-          return `${subject.subject_name} (${subject.exam_board})`;
-        })(),
+            name: (() => {
+              // Clean up subject name - remove all A-Level markers
+              let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
+              
+              // For SAT topics, strip "SAT: " prefix and don't add exam board
+              if (subjectId.startsWith('sat-')) {
+                return cleanName.replace(/^SAT:\s*/i, '').trim();
+              }
+              
+              // For A-Level subjects, add single A-Level marker with exam board
+              if (subjectId.includes('alevel')) {
+                return `${cleanName} (A-Level) (${subject.exam_board})`;
+              }
+              // Check if exam board is already in the subject name
+              const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
+              if (hasExamBoard) {
+                return subject.subject_name;
+              }
+              // Override for specific subjects
+              if (subjectId === 'music-eduqas-gcse') {
+                return `${subject.subject_name} (Eduqas)`;
+              }
+              // Add exam board for others
+              return `${subject.subject_name} (${subject.exam_board})`;
+            })(),
         icon: getSubjectIconEmoji(subjectId),
         predicted: (() => {
           console.log(`🔍 [${subjectId}] FINAL predicted value:`, predicted, 'type:', typeof predicted);
