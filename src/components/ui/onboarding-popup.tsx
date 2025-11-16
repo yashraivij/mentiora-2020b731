@@ -892,9 +892,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                console.log('✅ Continue with tutor clicked, showing teaching styles');
-                                setShowTeachingStyle(true);
+                                console.log('✅ Continue with tutor clicked, advancing to Step 2');
                                 setShowTutorWelcome(false);
+                                setShowTeachingStyle(false);
+                                setShowConfirmation(false);
+                                setCurrentStep(1);
                               }}
                               className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90 text-base shadow-md hover:shadow-lg"
                               style={{ backgroundColor: tutor.color }}
