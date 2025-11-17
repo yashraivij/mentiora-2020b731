@@ -128,6 +128,7 @@ export type Database = {
           marks: number
           model_answer: string
           order_index: number
+          passage_text: string | null
           question: string
           spec_reference: string
           topic_id: string
@@ -142,6 +143,7 @@ export type Database = {
           marks: number
           model_answer: string
           order_index: number
+          passage_text?: string | null
           question: string
           spec_reference: string
           topic_id: string
@@ -156,6 +158,7 @@ export type Database = {
           marks?: number
           model_answer?: string
           order_index?: number
+          passage_text?: string | null
           question?: string
           spec_reference?: string
           topic_id?: string

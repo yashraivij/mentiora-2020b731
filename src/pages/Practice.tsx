@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCurriculum } from "@/hooks/useCurriculum";
 import type { Question } from "@/services/curriculumService";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, FileText } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -2049,6 +2049,21 @@ const Practice = () => {
                   </div>
                 </div>
                   
+                  {/* Passage section (if exists) */}
+                  {currentQuestion.passageText && (
+                    <div className="mb-6 p-6 bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 rounded-r-lg">
+                      <div className="flex items-start gap-3 mb-3">
+                        <FileText className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                        <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100 uppercase tracking-wide">
+                          Reading Passage
+                        </h4>
+                      </div>
+                      <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">
+                        {currentQuestion.passageText}
+                      </p>
+                    </div>
+                  )}
+
                   {/* Question text */}
                   <p className="text-base text-foreground leading-relaxed mb-2">
                     {currentQuestion.question}

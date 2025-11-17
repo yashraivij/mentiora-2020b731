@@ -11,6 +11,7 @@ export interface Question {
   specReference?: string;
   calculatorGuidance?: string;
   orderIndex?: number;
+  passageText?: string;
 }
 
 export interface Topic {
@@ -135,6 +136,7 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
               specReference: q.spec_reference,
               calculatorGuidance: q.calculator_guidance,
               orderIndex: q.order_index,
+              passageText: q.passage_text,
             }));
 
           return {
