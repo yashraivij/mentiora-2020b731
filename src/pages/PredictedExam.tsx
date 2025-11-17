@@ -7684,18 +7684,7 @@ Write a story about a moment of fear.
                 
                 {/* Question text */}
                 <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
-                  {(() => {
-                    // For SAT questions, separate passage from choices
-                    if (subjectId?.startsWith('sat-') && examQuestions[currentQuestion].marks === 1) {
-                      const fullText = examQuestions[currentQuestion].text;
-                      const aIndex = fullText.indexOf('A)');
-                      if (aIndex !== -1) {
-                        // Display only the passage/stem, choices shown below as buttons
-                        return fullText.substring(0, aIndex).trim();
-                      }
-                    }
-                    return examQuestions[currentQuestion].text;
-                  })()}
+                  {examQuestions[currentQuestion].text}
                 </p>
               </div>
               
@@ -7706,128 +7695,19 @@ Write a story about a moment of fear.
             </div>
           </div>
 
-          {/* Answer area - dynamic size based on marks OR multiple choice for SAT */}
+          {/* Answer area - dynamic size based on marks */}
           <div className="mb-6">
-            {subjectId?.startsWith('sat-') && examQuestions[currentQuestion].marks === 1 ? (
-              /* SAT Multiple Choice Options */
-              (() => {
-                const question = examQuestions[currentQuestion];
-                
-                // Helper to get choices from structured data or text extraction
-                const getChoices = () => {
-                  // Check if choices are in markingCriteria (SAT questions)
-                  if (question.markingCriteria?.choices) {
-                    const choices = question.markingCriteria.choices;
-                    
-                    // Handle array format (SAT Math questions)
-                    if (Array.isArray(choices)) {
-                      return {
-                        A: choices[0] || 'Choice A',
-                        B: choices[1] || 'Choice B',
-                        C: choices[2] || 'Choice C',
-                        D: choices[3] || 'Choice D'
-                      };
-                    }
-                    
-                    // Handle object format (fallback for other formats)
-                    if (typeof choices === 'object') {
-                      return {
-                        A: choices.A || 'Choice A',
-                        B: choices.B || 'Choice B',
-                        C: choices.C || 'Choice C',
-                        D: choices.D || 'Choice D'
-                      };
-                    }
-                  }
-                  
-                  // Otherwise, extract from question text (existing logic)
-                  const questionText = question.text;
-                  
-                  const extractChoice = (letter: string) => {
-                    const lastQuestionMark = questionText.lastIndexOf('?');
-                    const searchStart = lastQuestionMark > -1 ? lastQuestionMark : 0;
-                    const choiceStart = questionText.indexOf(`${letter})`, searchStart);
-                    if (choiceStart === -1) return `Choice ${letter}`;
-                    
-                    const nextLetters = ['A', 'B', 'C', 'D'];
-                    const currentIndex = nextLetters.indexOf(letter);
-                    let choiceEnd = questionText.length;
-                    
-                    for (let i = currentIndex + 1; i < nextLetters.length; i++) {
-                      const nextStart = questionText.indexOf(`\n${nextLetters[i]})`, choiceStart + 2);
-                      if (nextStart !== -1) {
-                        choiceEnd = nextStart;
-                        break;
-                      }
-                    }
-                    
-                    const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
-                    return choiceText.trim();
-                  };
-                  
-                  return {
-                    A: extractChoice('A'),
-                    B: extractChoice('B'),
-                    C: extractChoice('C'),
-                    D: extractChoice('D')
-                  };
-                };
-                
-                const choices = getChoices();
-
-        // Log if any extraction failed
-        if (Object.values(choices).some(c => c.startsWith('Choice '))) {
-          console.warn('⚠️ Failed to extract some SAT choices for question:', examQuestions[currentQuestion].id);
-          console.log('Question text preview:', question.text.substring(0, 500));
-        }
-
-                return (
-                  <div className="space-y-3">
-                    {(['A', 'B', 'C', 'D'] as const).map((option) => {
-                      const isSelected = getAnswer(examQuestions[currentQuestion].id) === option;
-                      return (
-                        <button
-                          key={option}
-                          onClick={() => handleAnswerChange(examQuestions[currentQuestion].id, option)}
-                          className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
-                            isSelected
-                              ? 'border-[#3B82F6] bg-[#3B82F6]/10 shadow-sm'
-                              : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold flex-shrink-0 ${
-                              isSelected
-                                ? 'border-[#3B82F6] bg-[#3B82F6] text-white'
-                                : 'border-gray-400 text-gray-700'
-                            }`}>
-                              {option}
-                            </div>
-                            <span className="text-base text-slate-900 pt-1">
-                              {choices[option]}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                );
-              })()
-            
-            ) : (
-              /* Regular Text Area for Non-SAT Questions */
-              <Textarea
-                value={getAnswer(examQuestions[currentQuestion].id)}
-                onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
-                placeholder=""
-                className={`w-full border border-gray-300 focus:ring-0 text-base resize-y p-4 bg-transparent rounded-md ${
-                  examQuestions[currentQuestion].marks <= 2 ? 'min-h-[150px]' :
-                  examQuestions[currentQuestion].marks <= 4 ? 'min-h-[250px]' :
-                  examQuestions[currentQuestion].marks <= 6 ? 'min-h-[350px]' :
-                  'min-h-[400px]'
-                }`}
-              />
-            )}
+            <Textarea
+              value={getAnswer(examQuestions[currentQuestion].id)}
+              onChange={(e) => handleAnswerChange(examQuestions[currentQuestion].id, e.target.value)}
+              placeholder=""
+              className={`w-full border border-gray-300 focus:ring-0 text-base resize-y p-4 bg-transparent rounded-md ${
+                examQuestions[currentQuestion].marks <= 2 ? 'min-h-[150px]' :
+                examQuestions[currentQuestion].marks <= 4 ? 'min-h-[250px]' :
+                examQuestions[currentQuestion].marks <= 6 ? 'min-h-[350px]' :
+                'min-h-[400px]'
+              }`}
+            />
           </div>
 
           {/* Bottom action area */}

@@ -290,69 +290,13 @@ Respond in this exact JSON format:
   "assessment": "[positive, motivating assessment that builds confidence]"
 }`;
 
-    // Detect and format multiple-choice information for SAT questions
-    let multipleChoiceInfo = '';
-    const hasMCQChoices = isSAT && markingCriteria.choices && 
-      (Array.isArray(markingCriteria.choices) || typeof markingCriteria.choices === 'object');
-    
-    if (hasMCQChoices) {
-      const isArray = Array.isArray(markingCriteria.choices);
-      const letterToIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
-      const letters = ['A', 'B', 'C', 'D'];
-      
-      // Get student's choice text
-      let studentChoiceText;
-      if (isArray) {
-        const studentChoiceIndex = letterToIndex[normalizedUserAnswer.toUpperCase()];
-        studentChoiceText = markingCriteria.choices[studentChoiceIndex] || normalizedUserAnswer;
-      } else {
-        studentChoiceText = markingCriteria.choices[normalizedUserAnswer.toUpperCase()] || normalizedUserAnswer;
-      }
-      
-      // Format all choices
-      let choicesFormatted;
-      if (isArray) {
-        choicesFormatted = markingCriteria.choices.map((choice, idx) => 
-          `${letters[idx]}) ${choice}`
-        ).join('\n');
-      } else {
-        choicesFormatted = letters.map(letter => 
-          `${letter}) ${markingCriteria.choices[letter] || 'N/A'}`
-        ).join('\n');
-      }
-      
-      // Get correct answer info - clean any "Explanation:" suffix from model answer
-      const cleanModelAnswer = modelAnswer.split('\n')[0].split('Explanation:')[0].trim();
-      let correctAnswerLetter;
-      let correctAnswerText;
-      
-      if (isArray) {
-        const correctAnswerIndex = markingCriteria.choices.indexOf(markingCriteria.answer || cleanModelAnswer);
-        correctAnswerLetter = letters[correctAnswerIndex >= 0 ? correctAnswerIndex : 0];
-        correctAnswerText = markingCriteria.answer || cleanModelAnswer;
-      } else {
-        // For object format, the correct answer is likely a key or the model answer itself
-        correctAnswerLetter = cleanModelAnswer;
-        correctAnswerText = markingCriteria.choices[cleanModelAnswer] || markingCriteria.answer || cleanModelAnswer;
-      }
-      
-      multipleChoiceInfo = `
-AVAILABLE CHOICES:
-${choicesFormatted}
-
-STUDENT'S ANSWER: ${normalizedUserAnswer} - "${studentChoiceText}"
-
-CORRECT ANSWER: ${correctAnswerLetter} - "${correctAnswerText}"
-
-${markingCriteria.explanation ? `EXPLANATION: ${markingCriteria.explanation}` : ''}`;
-    }
 
     const satPrompt = `You are an expert SAT examiner with extensive experience marking official College Board SAT tests. You must mark this answer with the same precision and standards as official SAT marking.
 
 SUBJECT: ${subject || 'SAT Subject'} - Apply SAT-specific marking criteria
 
 QUESTION: ${question}
-${multipleChoiceInfo || `
+
 STUDENT'S ANSWER: ${normalizedUserAnswer}
 
 MODEL ANSWER: ${modelAnswer}
@@ -361,35 +305,31 @@ MARKING CRITERIA:
 ${typeof markingCriteria === 'string' ? markingCriteria : 
   markingCriteria.explanation || 
   markingCriteria.answer || 
-  JSON.stringify(markingCriteria)}`}
+  JSON.stringify(markingCriteria)}
+
 
 TOTAL MARKS: ${totalMarks}
 
 SAT MARKING STANDARDS:
-1. MULTIPLE CHOICE QUESTIONS: The answer is either completely correct (full marks) or incorrect (zero marks). No partial credit.
+1. For all questions, evaluate whether the student's answer demonstrates correct understanding of the concept.
 2. PASSAGE-BASED QUESTIONS: Evaluate reading comprehension, textual evidence, and logical reasoning based on the passage.
 3. MATHEMATICS QUESTIONS: 
    - Accept mathematically equivalent answers (e.g., 0.5 = 1/2, 2π = 6.28...)
    - Accept answers in different but equivalent forms (simplified vs unsimplified)
-   - For grid-in questions, follow official SAT rules for acceptable answer formats
+   - Award marks for correct methodology even if final answer has minor errors
 4. WRITING & LANGUAGE QUESTIONS: Check if the answer improves clarity, follows standard English conventions, and enhances the passage's effectiveness.
 5. EVIDENCE-BASED QUESTIONS: Require that answers are directly supported by information in the passage or data provided.
 
-CRITICAL FEEDBACK REQUIREMENTS FOR MULTIPLE CHOICE:
-- Acknowledge what the student selected using the full choice text (not just the letter)
-- If CORRECT: Explain why this choice is right using 2-3 sentences that reference the question context
+FEEDBACK REQUIREMENTS:
+- Acknowledge what the student answered
+- If CORRECT: Explain why this answer is right using 2-3 sentences that reference the question context
 - If INCORRECT: 
-  * First, briefly explain why the student's selected choice is not the best answer (1-2 sentences)
-  * Then, explain why the correct answer is right using 2-3 sentences that reference specific details
+  * Briefly explain why the student's answer is not correct (1-2 sentences)
+  * Then, explain what the correct answer should be and why (2-3 sentences)
   * For Reading/Writing questions: Reference the passage or context directly
   * For Math questions: Show the logical reasoning or calculation steps
 - Make the feedback educational and detailed enough to help the student understand the concept
 - Minimum 3-4 sentences of substantive feedback
-
-FOR OTHER QUESTION TYPES:
-- For math questions, show the reasoning behind the correct answer
-- For reading questions, reference the passage to support the correct answer
-- Be specific about what concept or skill the student should review
 
 TONE AND LANGUAGE REQUIREMENTS:
 - Use encouraging, positive language throughout
