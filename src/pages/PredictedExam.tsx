@@ -23,6 +23,7 @@ interface ExamQuestion {
   text: string;
   marks: number;
   section?: string;
+  passageText?: string;
   markingCriteria?: {
     choices?: {
       A?: string;
@@ -4539,7 +4540,8 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
             id: curriculumQuestion.id,
             questionNumber: questionNumber++,
             text: curriculumQuestion.question,
-            marks: curriculumQuestion.marks
+            marks: curriculumQuestion.marks,
+            passageText: curriculumQuestion.passageText
           });
         });
         
@@ -6023,7 +6025,9 @@ Write a story about a moment of fear.
           questionNumber: index + 1,
           text: `**Module 1, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
           marks: 1, // SAT questions are always 1 mark
-          section: 'Module 1'
+          section: 'Module 1',
+          passageText: q.passageText,
+          markingCriteria: q.markingCriteria
         });
       });
       
@@ -6034,7 +6038,9 @@ Write a story about a moment of fear.
           questionNumber: questionsPerModule + index + 1,
           text: `**Module 2, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
           marks: 1,
-          section: 'Module 2'
+          section: 'Module 2',
+          passageText: q.passageText,
+          markingCriteria: q.markingCriteria
         });
       });
       
@@ -7660,6 +7666,21 @@ Write a story about a moment of fear.
                     </Badge>
                   )}
                 </div>
+                
+                {/* Passage section (if exists) */}
+                {examQuestions[currentQuestion].passageText && (
+                  <div className="mb-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                    <div className="flex items-start gap-3 mb-3">
+                      <FileText className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <h4 className="text-sm font-semibold text-blue-900 uppercase tracking-wide">
+                        Reading Passage
+                      </h4>
+                    </div>
+                    <p className="text-base text-gray-800 leading-relaxed whitespace-pre-wrap">
+                      {examQuestions[currentQuestion].passageText}
+                    </p>
+                  </div>
+                )}
                 
                 {/* Question text */}
                 <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
