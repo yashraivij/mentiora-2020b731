@@ -46,8 +46,23 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     return subjectId.toLowerCase().includes('alevel');
   };
 
-  // Grade to percentage mapping - supports both GCSE and A-Level
+  // Helper to check if subject is SAT
+  const isSATSubject = (subjectId: string): boolean => {
+    return subjectId.startsWith('sat-');
+  };
+
+  // Convert percentage to SAT score (400-1600)
+  const percentageToSATScore = (percentage: number): number => {
+    return Math.round(400 + (percentage / 100) * 1200);
+  };
+
+  // Grade to percentage mapping - supports GCSE, A-Level, and SAT
   const gradeToPercentage = (grade: string, subjectId?: string): number => {
+    if (subjectId && isSATSubject(subjectId)) {
+      // SAT scores are already 400-1600, convert to percentage
+      const score = parseInt(grade) || 400;
+      return ((score - 400) / 1200) * 100;
+    }
     if (subjectId && isALevel(subjectId)) {
       // A-Level letter grades
       switch (grade) {
@@ -78,8 +93,12 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     }
   };
 
-  // Percentage to grade mapping - supports both GCSE and A-Level
+  // Percentage to grade mapping - supports GCSE, A-Level, and SAT
   const percentageToGrade = (percentage: number, subjectId?: string): string => {
+    if (subjectId && isSATSubject(subjectId)) {
+      // Convert to SAT score (400-1600)
+      return percentageToSATScore(percentage).toString();
+    }
     if (subjectId && isALevel(subjectId)) {
       // A-Level letter grades
       if (percentage >= 90) return 'A*';
