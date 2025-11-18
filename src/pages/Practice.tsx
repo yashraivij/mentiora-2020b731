@@ -536,12 +536,14 @@ const Practice = () => {
       console.log('Filtered questions count:', filteredQuestions.length);
       console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
-      // For SAT subjects, limit to 10 questions
+      // For SAT subjects, shuffle first then take 10 random questions
       const questionsToUse = isSATSubject 
-        ? filteredQuestions.slice(0, 10)
+        ? shuffleArray(filteredQuestions).slice(0, 10)
         : filteredQuestions;
       
-      const shuffled = shuffleArray(questionsToUse);
+      const shuffled = isSATSubject 
+        ? questionsToUse  // Already shuffled above
+        : shuffleArray(questionsToUse);  // Shuffle non-SAT questions
       
       console.log('Shuffled questions count:', shuffled.length);
       console.log('Final shuffled questions:', shuffled.map(q => q.id));
