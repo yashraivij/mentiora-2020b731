@@ -601,7 +601,9 @@ const Practice = () => {
       
       const feedback = {
         modelAnswer: currentQuestion.modelAnswer,
-        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
+        whyThisGetsMark: Array.isArray(currentQuestion.markingCriteria) 
+          ? currentQuestion.markingCriteria.join('\n')
+          : currentQuestion.markingCriteria.breakdown?.join('\n') || 'No marking criteria available',
         whyYoursDidnt: markingResult.feedback,
         specLink: currentQuestion.specReference
       };
