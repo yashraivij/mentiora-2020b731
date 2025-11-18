@@ -273,12 +273,18 @@ const Practice = () => {
   const topic = topicId 
     ? subject?.topics.find(t => t.id === topicId)
     : (isSATSubject && subject 
-        ? {
-            id: `${subjectId}-all`,
-            name: subject.name,
-            order_index: 0,
-            questions: subject.topics.flatMap(t => t.questions || [])
-          }
+        ? (() => {
+            console.log('🎯 Creating virtual SAT topic for:', subjectId);
+            console.log('📚 Aggregating from topics:', subject.topics.map(t => t.name));
+            const allQuestions = subject.topics.flatMap(t => t.questions || []);
+            console.log('✅ Total questions in virtual topic:', allQuestions.length);
+            return {
+              id: `${subjectId}-all`,
+              name: subject.name,
+              orderIndex: 0,
+              questions: allQuestions
+            };
+          })()
         : undefined);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
