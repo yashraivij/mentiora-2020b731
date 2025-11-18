@@ -76,14 +76,15 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const gradeToNumber = (gradeString: string, subjectId: string): number => {
-    if (gradeString === 'U') return 0;
-    
     if (isSATSubject(subjectId)) {
+      if (gradeString === 'U') return 400; // SAT minimum
       // SAT scores are 400-1600, convert to 0-9 scale for internal calculations
       const score = parseInt(gradeString) || 400;
       const percentage = ((score - 400) / 1200) * 100;
       return 4 + (percentage / 100) * 5; // Map to 4-9 scale
     }
+    
+    if (gradeString === 'U') return 0;
     
     if (isALevel(subjectId)) {
       // Convert A-Level letter grades to numbers
@@ -176,8 +177,8 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
 
   const getPredictedGrade = (percentage: number, subjectId?: string): number => {
     if (isSATSubject(subjectId || '')) {
-      // For SAT, return the SAT score directly
-      return percentageToSATScore(percentage);
+      // For SAT, return the SAT score directly (minimum 400)
+      return Math.max(400, percentageToSATScore(percentage));
     }
     // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
     if (percentage >= 80) return 9; // A*

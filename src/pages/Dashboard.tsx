@@ -784,7 +784,8 @@ const Dashboard = () => {
         );
         const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
         
-        let predictedGradeValue = 0;
+        const isSATSubject = subjectIdToMatch.startsWith('sat-');
+        let predictedGradeValue = isSATSubject ? 400 : 0;
         let percentage = 0;
         
         if (hasAttempts) {
@@ -800,7 +801,10 @@ const Dashboard = () => {
             // Check if A-Level subject to use correct thresholds
             const isALevel = subject.id && subject.id.includes('alevel');
             
-            if (isALevel) {
+            if (isSATSubject) {
+              // SAT scoring: 0% = 400, 100% = 1600
+              predictedGradeValue = Math.round(400 + (currentAccuracy / 100) * 1200);
+            } else if (isALevel) {
               // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
               if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
               else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
@@ -3100,17 +3104,14 @@ const Dashboard = () => {
                                   pg.subject_id === baseSubjectName ||
                                   pg.subject_id.split('-')[0] === baseSubjectName
                                 );
-                                let predictedGradeValue = 0; // default to 0 if no grade yet
+                                let predictedGradeValue = isSATSubject ? 400 : 0;
                                 
                                 // CRITICAL FIX: Check if there's actual attempt data first
                                 const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
                                 const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
                                 
                                 // ONLY calculate if there are attempts - ALWAYS use current practice accuracy
-                                if (!hasAttempts) {
-                                  // No attempts - always default to U (0)
-                                  predictedGradeValue = 0;
-                                } else {
+                                if (hasAttempts) {
                                   // Calculate from CURRENT practice accuracy (most accurate)
                                   const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
                                   const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
@@ -3124,14 +3125,19 @@ const Dashboard = () => {
                                   });
                                   
                                   if (currentAccuracy > 0) {
-                                    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-                                    if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
-                                    else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
-                                    else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
-                                    else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
-                                    else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
-                                    else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
-                                    else predictedGradeValue = 0; // U
+                                    if (isSATSubject) {
+                                      // SAT scoring: 0% = 400, 100% = 1600
+                                      predictedGradeValue = Math.round(400 + (currentAccuracy / 100) * 1200);
+                                    } else {
+                                      // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
+                                      if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
+                                      else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
+                                      else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
+                                      else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
+                                      else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
+                                      else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
+                                      else predictedGradeValue = 0; // U
+                                    }
                                     
                                     console.log(`🎯 ${subjectIdToMatch} final grade:`, predictedGradeValue, 'from accuracy:', currentAccuracy);
                                   }
