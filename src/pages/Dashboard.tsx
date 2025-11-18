@@ -164,24 +164,10 @@ const Dashboard = () => {
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
   const [showAddSubjects, setShowAddSubjects] = useState(false);
   const [selectedSubjectGroup, setSelectedSubjectGroup] = useState<string | null>(null);
-  const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel' | 'sat'>('gcse');
+  const [activeSubjectLevel, setActiveSubjectLevel] = useState<'gcse' | 'alevel'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<{id: string, name: string, examBoard: string} | null>(null);
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
-
-  // SAT Topics and Scores constants
-  const SAT_TOPICS = [
-    { id: 'sat-information-ideas', name: 'Information & Ideas', emoji: '📖' },
-    { id: 'sat-craft-structure', name: 'Craft & Structure', emoji: '✍️' },
-    { id: 'sat-expression-ideas', name: 'Expression of Ideas', emoji: '💭' },
-    { id: 'sat-english-conventions', name: 'Standard English Conventions', emoji: '📝' },
-    { id: 'sat-algebra', name: 'Algebra', emoji: '🔢' },
-    { id: 'sat-advanced-math', name: 'Advanced Math', emoji: '📐' },
-    { id: 'sat-problem-solving-data', name: 'Problem Solving & Data Analysis', emoji: '📊' },
-    { id: 'sat-geometry-trigonometry', name: 'Geometry & Trigonometry', emoji: '📏' }
-  ];
-
-  const SAT_SCORES = ['1600', '1550', '1500', '1450', '1400', '1350', '1300', '1250', '1200', '1150', '1100', '1050', '1000'];
 
   // Track subject level changes and reset group selection
   useEffect(() => {
@@ -324,11 +310,6 @@ const Dashboard = () => {
       return `${name} (OCR)`;
     }
     
-    // For SAT subjects, don't add exam board
-    if (subject.id.startsWith('sat-')) {
-      return name;
-    }
-
     // For all other subjects (AQA), add (AQA)
     return `${name} (AQA)`;
   };
@@ -1832,15 +1813,6 @@ const Dashboard = () => {
       // Derive subject ID from name and exam board (same logic as loadUserSubjects)
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        
-        // Handle SAT topics first - check if subject name starts with "SAT:"
-        if (subjectName.startsWith('SAT:')) {
-          const topicName = subjectName.replace(/^SAT:\s*/i, '').replace(/\s*\(College Board\)/i, '').trim();
-          // Convert topic name to ID format
-          const topicId = topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-');
-          return `sat-${topicId}`;
-        }
-        
         // Normalize subject name (remove ALL duplicate A-Level markers)
         const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
@@ -1971,31 +1943,26 @@ const Dashboard = () => {
       
       return {
         id: subjectId,
-            name: (() => {
-              // Clean up subject name - remove all A-Level markers
-              let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
-              
-              // For SAT topics, strip "SAT: " prefix and don't add exam board
-              if (subjectId.startsWith('sat-')) {
-                return cleanName.replace(/^SAT:\s*/i, '').trim();
-              }
-              
-              // For A-Level subjects, add single A-Level marker with exam board
-              if (subjectId.includes('alevel')) {
-                return `${cleanName} (A-Level) (${subject.exam_board})`;
-              }
-              // Check if exam board is already in the subject name
-              const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
-              if (hasExamBoard) {
-                return subject.subject_name;
-              }
-              // Override for specific subjects
-              if (subjectId === 'music-eduqas-gcse') {
-                return `${subject.subject_name} (Eduqas)`;
-              }
-              // Add exam board for others
-              return `${subject.subject_name} (${subject.exam_board})`;
-            })(),
+        name: (() => {
+          // Clean up subject name - remove all A-Level markers
+          let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
+          
+          // For A-Level subjects, add single A-Level marker with exam board
+          if (subjectId.includes('alevel')) {
+            return `${cleanName} (A-Level) (${subject.exam_board})`;
+          }
+          // Check if exam board is already in the subject name
+          const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
+          if (hasExamBoard) {
+            return subject.subject_name;
+          }
+          // Override for specific subjects
+          if (subjectId === 'music-eduqas-gcse') {
+            return `${subject.subject_name} (Eduqas)`;
+          }
+          // Add exam board for others
+          return `${subject.subject_name} (${subject.exam_board})`;
+        })(),
         icon: getSubjectIconEmoji(subjectId),
         predicted: (() => {
           console.log(`🔍 [${subjectId}] FINAL predicted value:`, predicted, 'type:', typeof predicted);
@@ -2061,38 +2028,21 @@ const Dashboard = () => {
     
     console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
     
-    // Try to find in curriculum first
-    let subject = curriculum.find(s => s.id === subjectId);
-    
-    // If not found in curriculum, check if it's a SAT topic
-    if (!subject && subjectId.startsWith('sat-')) {
-      const satTopic = SAT_TOPICS.find(t => t.id === subjectId);
-      if (satTopic) {
-        // Create a mock subject object for SAT topics
-        subject = {
-          id: satTopic.id,
-          name: satTopic.name,
-          topics: []
-        };
-      }
-    }
-    
+    const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) {
-      console.error('❌ Subject not found in curriculum or SAT topics:', subjectId);
+      console.error('❌ Subject not found in curriculum:', subjectId);
       return;
     }
 
     console.log('✅ Found subject:', { id: subject.id, name: subject.name });
 
     try {
-      // CRITICAL FIX: Handle A-Level and SAT subject naming
+      // CRITICAL FIX: Append (A-Level) to subject name if it's an A-Level subject
+      // The curriculum stores A-Level subjects with "alevel" in the ID but not in the name
       const isALevel = subjectId.toLowerCase().includes('alevel');
-      const isSATTopic = subjectId.startsWith('sat-');
-      const subjectName = isSATTopic
-        ? subject.name.startsWith('SAT:') ? subject.name : `SAT: ${subject.name}`
-        : isALevel && !subject.name.includes('(A-Level)') 
-          ? `${subject.name} (A-Level)` 
-          : subject.name;
+      const subjectName = isALevel && !subject.name.includes('(A-Level)') 
+        ? `${subject.name} (A-Level)` 
+        : subject.name;
       
       // Check if subject already exists
       const { data: existing } = await supabase
@@ -3982,8 +3932,8 @@ const Dashboard = () => {
                     {/* Content */}
                     <div className="p-6 overflow-y-auto max-h-[calc(85vh-120px)]">
                       {!selectedSubjectGroup ? (
-                        <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel' | 'sat')} className="w-full">
-                          <TabsList className="grid w-full grid-cols-3 mb-6 bg-[#F1F5F9] dark:bg-gray-800 p-1 h-12 rounded-xl">
+                        <Tabs value={activeSubjectLevel} onValueChange={(value) => setActiveSubjectLevel(value as 'gcse' | 'alevel')} className="w-full">
+                          <TabsList className="grid w-full grid-cols-2 mb-6 bg-[#F1F5F9] dark:bg-gray-800 p-1 h-12 rounded-xl">
                             <TabsTrigger 
                               value="gcse"
                               className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
@@ -3996,17 +3946,11 @@ const Dashboard = () => {
                             >
                               A-Level Subjects
                             </TabsTrigger>
-                            <TabsTrigger 
-                              value="sat"
-                              className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-[#0F172A] dark:data-[state=active]:text-white data-[state=active]:shadow-sm text-[#64748B] dark:text-gray-400 font-semibold rounded-lg transition-all duration-200"
-                            >
-                              SAT Topics
-                            </TabsTrigger>
                           </TabsList>
                           
                           <TabsContent value="gcse" className="animate-fade-in">
                             {(() => {
-                              const gcseSubjects = availableSubjects.filter(s => !s.id.includes('alevel') && !s.id.startsWith('sat-'));
+                              const gcseSubjects = availableSubjects.filter(s => !s.id.includes('alevel'));
                               const groupedSubjects = new Map<string, typeof gcseSubjects>();
                               
                               gcseSubjects.forEach(subject => {
@@ -4099,7 +4043,7 @@ const Dashboard = () => {
 
                           <TabsContent value="alevel" className="animate-fade-in">
                             {(() => {
-                              const alevelSubjects = availableSubjects.filter(s => s.id.includes('alevel') && !s.id.startsWith('sat-'));
+                              const alevelSubjects = availableSubjects.filter(s => s.id.includes('alevel'));
                               const groupedSubjects = new Map<string, typeof alevelSubjects>();
                               
                               alevelSubjects.forEach(subject => {
@@ -4186,74 +4130,6 @@ const Dashboard = () => {
                                       </motion.div>
                                     );
                                   })}
-                                </div>
-                              );
-                            })()}
-                          </TabsContent>
-
-                          <TabsContent value="sat" className="animate-fade-in">
-                            {(() => {
-                              // Filter out SAT topics that user already has
-                              const availableSATTopics = SAT_TOPICS.filter(topic => {
-                                // Check if user already has this SAT topic
-                                return !userSubjects.some(userSubId => 
-                                  userSubId === topic.id || 
-                                  userSubjects.some(us => {
-                                    const userSubject = userSubjectsWithGrades.find(usf => usf.id === us);
-                                    return userSubject?.name?.includes(topic.name);
-                                  })
-                                );
-                              });
-
-                              if (availableSATTopics.length === 0) {
-                                return (
-                                  <div className="text-center py-12 px-4">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5 dark:from-[#16A34A]/30 dark:to-[#16A34A]/10 flex items-center justify-center">
-                                      <Check className="h-8 w-8 text-[#16A34A]" />
-                                    </div>
-                                    <p className="text-lg font-bold text-[#0F172A] dark:text-white">All SAT topics added!</p>
-                                    <p className="text-sm text-[#64748B] dark:text-gray-400 mt-2">You&apos;ve already added all SAT topics to your dashboard.</p>
-                                  </div>
-                                );
-                              }
-
-                              return (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                  {availableSATTopics.map((topic) => (
-                                    <motion.div
-                                      key={topic.id}
-                                      whileHover={{ scale: 1.02, y: -2 }}
-                                      whileTap={{ scale: 0.98 }}
-                                      transition={{ duration: 0.2 }}
-                                    >
-                                      <Card 
-                                        className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
-                                        onClick={() => setSelectedSubjectForGrade({
-                                          id: topic.id,
-                                          name: `SAT: ${topic.name}`,
-                                          examBoard: 'College Board'
-                                        })}
-                                      >
-                                        <CardHeader className="pb-3">
-                                          <div className="flex items-center justify-between mb-2">
-                                            <span className="text-4xl">{topic.emoji}</span>
-                                            <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] dark:bg-[#0EA5E9]/20 dark:text-[#0EA5E9] border-0 font-semibold px-3 py-1 hover:bg-[#0EA5E9]/20">
-                                              College Board
-                                            </Badge>
-                                          </div>
-                                          <CardTitle className="text-xl text-[#0F172A] dark:text-white group-hover:text-[#0EA5E9] dark:group-hover:text-[#0EA5E9] transition-colors duration-200 line-clamp-2">
-                                            {topic.name}
-                                          </CardTitle>
-                                        </CardHeader>
-                                        <CardContent>
-                                          <div className="flex items-center justify-between text-sm">
-                                            <span className="text-[#64748B] dark:text-gray-400 font-medium">SAT Section</span>
-                                            <ChevronRight className="h-5 w-5 text-[#0EA5E9] group-hover:translate-x-1 transition-transform duration-200" />
-                                          </div>
-                                        </CardContent>
-                                      </Card>
-                                    </motion.div>
-                                  ))}
                                 </div>
                               );
                             })()}
@@ -4468,14 +4344,11 @@ const Dashboard = () => {
                     <div className="p-8">
                       <div className="grid grid-cols-3 gap-3">
                         {(() => {
-                          // Check if subject is SAT, A-Level, or GCSE
-                          const isSATTopic = selectedSubjectForGrade.id.startsWith('sat-');
+                          // Check if subject is A-Level
                           const isALevel = selectedSubjectForGrade.id.toLowerCase().includes('alevel');
-                          const grades = isSATTopic 
-                            ? SAT_SCORES
-                            : isALevel 
-                              ? ['A*', 'A', 'B', 'C', 'D', 'E']
-                              : [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                          const grades = isALevel 
+                            ? ['A*', 'A', 'B', 'C', 'D', 'E']
+                            : [9, 8, 7, 6, 5, 4, 3, 2, 1];
                           
                           return grades.map((grade) => (
                             <motion.button

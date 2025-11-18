@@ -31,7 +31,7 @@ interface OnboardingData {
 }
 
 // Extract unique subjects from curriculum by level
-const getSubjectsByLevel = (curriculum: any[], level: 'gcse' | 'alevel' | 'igcse' | 'sat') => {
+const getSubjectsByLevel = (curriculum: any[], level: 'gcse' | 'alevel' | 'igcse') => {
   const subjectMap: { [key: string]: { id: string; name: string; examBoard: string; emoji: string } } = {};
   
   curriculum.forEach((subject) => {
@@ -86,11 +86,6 @@ const getSubjectsByLevel = (curriculum: any[], level: 'gcse' | 'alevel' | 'igcse
     }
   });
   
-  // Handle SAT separately as it doesn't come from curriculum
-  if (level === 'sat') {
-    return SAT_SUBJECTS;
-  }
-  
   return Object.values(subjectMap).sort((a, b) => a.name.localeCompare(b.name));
 };
 
@@ -108,10 +103,10 @@ const ACQUISITION_SOURCES = [
 ];
 
 const YEAR_GROUPS = [
-  { id: 'year10', label: 'Grade 9/Year 10 (GCSE)', emoji: '📚' },
-  { id: 'year11', label: 'Grade 10/Year 11 (GCSE)', emoji: '📚' },
-  { id: 'year12', label: 'Grade 11/Year 12 (SAT/A-Level/AS)', emoji: '🎓' },
-  { id: 'year13', label: 'Grade 12/Year 13 (SAT/A-Level)', emoji: '🎓' },
+  { id: 'year10', label: 'Year 10 (GCSE)', emoji: '📚' },
+  { id: 'year11', label: 'Year 11 (GCSE)', emoji: '📚' },
+  { id: 'year12', label: 'Year 12 (A-Level/AS)', emoji: '🎓' },
+  { id: 'year13', label: 'Year 13 (A-Level)', emoji: '🎓' },
   { id: 'other', label: 'Other (IGCSE, IB, etc.)', emoji: '🌍' },
 ];
 
@@ -198,65 +193,10 @@ const PROFILE_EMOJIS = [
 const GCSE_GRADES = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
 const ALEVEL_GRADES = ['A*', 'A', 'B', 'C', 'D', 'E'];
 
-const SAT_SUBJECTS = [
-  // Reading & Writing Topics (4)
-  {
-    id: 'sat-information-ideas',
-    name: 'Information & Ideas',
-    examBoard: 'College Board',
-    emoji: '📖'
-  },
-  {
-    id: 'sat-craft-structure',
-    name: 'Craft & Structure',
-    examBoard: 'College Board',
-    emoji: '✍️'
-  },
-  {
-    id: 'sat-expression-ideas',
-    name: 'Expression of Ideas',
-    examBoard: 'College Board',
-    emoji: '💭'
-  },
-  {
-    id: 'sat-english-conventions',
-    name: 'Standard English Conventions',
-    examBoard: 'College Board',
-    emoji: '📝'
-  },
-  // Math Topics (4)
-  {
-    id: 'sat-algebra',
-    name: 'Algebra',
-    examBoard: 'College Board',
-    emoji: '🔢'
-  },
-  {
-    id: 'sat-advanced-math',
-    name: 'Advanced Math',
-    examBoard: 'College Board',
-    emoji: '📐'
-  },
-  {
-    id: 'sat-problem-solving-data',
-    name: 'Problem Solving & Data Analysis',
-    examBoard: 'College Board',
-    emoji: '📊'
-  },
-  {
-    id: 'sat-geometry-trigonometry',
-    name: 'Geometry & Trigonometry',
-    examBoard: 'College Board',
-    emoji: '📏'
-  }
-];
-
-const SAT_SCORES = ['1600', '1550', '1500', '1450', '1400', '1350', '1300', '1250', '1200', '1150', '1100', '1050', '1000'];
-
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
   const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const [currentStep, setCurrentStep] = useState(0);
-  const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse' | 'sat'>('gcse');
+  const [subjectLevel, setSubjectLevel] = useState<'gcse' | 'alevel' | 'igcse'>('gcse');
   const [selectedSubjectForGrade, setSelectedSubjectForGrade] = useState<string | null>(null);
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     acquisitionSource: '',
@@ -290,36 +230,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
     }
   }, [onboardingData, currentStep]);
-
-  // Auto-select all 8 SAT topics when SAT tab is selected, clear others
-  useEffect(() => {
-    if (subjectLevel === 'sat') {
-      const hasSATSubjects = onboardingData.subjects.some(s => s.id.startsWith('sat-'));
-      const hasNonSATSubjects = onboardingData.subjects.some(s => !s.id.startsWith('sat-'));
-      
-      // If switching to SAT and there are non-SAT subjects, clear them and add all SAT topics
-      if (hasNonSATSubjects || !hasSATSubjects) {
-        const allSATTopics = SAT_SUBJECTS.map(topic => ({
-          id: topic.id,
-          targetGrade: '1600' // Default to best score
-        }));
-        
-        setOnboardingData({
-          ...onboardingData,
-          subjects: allSATTopics
-        });
-      }
-    } else {
-      // If switching away from SAT, remove all SAT subjects
-      const hasSATSubjects = onboardingData.subjects.some(s => s.id.startsWith('sat-'));
-      if (hasSATSubjects) {
-        setOnboardingData({
-          ...onboardingData,
-          subjects: onboardingData.subjects.filter(s => !s.id.startsWith('sat-'))
-        });
-      }
-    }
-  }, [subjectLevel]);
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -392,26 +302,22 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         }
 
         if (onboardingData.subjects.length > 0) {
-          const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS, ...SAT_SUBJECTS];
+          const allSubjects = [...GCSE_SUBJECTS, ...ALEVEL_SUBJECTS, ...IGCSE_SUBJECTS];
           const subjectEntries = onboardingData.subjects.map(subjectWithGrade => {
             const subject = allSubjects.find(s => s.id === subjectWithGrade.id);
             
-            // Check if this is an A-Level or SAT subject
+            // Check if this is an A-Level subject and append "(A-Level)" to the name
             const isALevel = subjectWithGrade.id.toLowerCase().includes('alevel');
-            const isSAT = subjectWithGrade.id.startsWith('sat-');
-            
             const subjectName = isALevel && subject?.name && !subject.name.includes('(A-Level)')
               ? `${subject.name} (A-Level)`
-              : isSAT && subject?.name
-                ? `SAT: ${subject.name}` // Prefix with "SAT: " for clarity
-                : subject?.name || subjectWithGrade.id;
+              : subject?.name || subjectWithGrade.id;
             
             return {
               user_id: user.id,
-              subject_id: subjectWithGrade.id,
+              subject_id: subjectWithGrade.id, // Keep the full subject ID (e.g., "biology-aqa-alevel")
               subject_name: subjectName,
               exam_board: subject?.examBoard || 'AQA',
-              predicted_grade: isSAT ? '1000' : 'U',
+              predicted_grade: 'U',
               target_grade: subjectWithGrade.targetGrade,
               priority_level: 3
             };
@@ -439,8 +345,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const getCurrentSubjects = () => {
-    if (curriculumLoading && subjectLevel !== 'sat') return [];
-    if (subjectLevel === 'sat') return SAT_SUBJECTS;
+    if (curriculumLoading) return [];
     return getSubjectsByLevel(curriculum, subjectLevel);
   };
 
@@ -660,16 +565,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                     IGCSE
                   </button>
-                  <button
-                    onClick={() => setSubjectLevel('sat')}
-                    className={`flex-1 py-2 px-4 rounded-lg font-semibold text-[14px] transition-all duration-200 ${
-                      subjectLevel === 'sat'
-                        ? 'bg-[#3B82F6] text-white shadow-md'
-                        : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'
-                    }`}
-                  >
-                    SAT
-                  </button>
                 </div>
 
                 {/* Search + grid */}
@@ -690,18 +585,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       const isSelected = onboardingData.subjects.some(s => s.id === subject.id);
                       const subjectData = onboardingData.subjects.find(s => s.id === subject.id);
                       const isSelectingGrade = selectedSubjectForGrade === subject.id;
-                      const isSAT = subject.id.startsWith('sat-');
                       
                       return (
                         <div key={subject.id} className="space-y-2">
                           <button
                             onClick={() => {
-                              if (isSAT) {
-                                // SAT subjects can't be deselected, only allow changing target score
-                                setSelectedSubjectForGrade(subject.id);
-                                return;
-                              }
-                              
                               if (isSelected) {
                                 // Remove subject
                                 const newSubjects = onboardingData.subjects.filter(s => s.id !== subject.id);
@@ -716,7 +604,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               isSelected
                                 ? 'border-[#3B82F6] bg-[#F0F9FF]'
                                 : 'border-[#E5E7EB] hover:border-[#3B82F6]'
-                            } ${isSAT ? 'cursor-default' : ''}`}
+                            }`}
                           >
                             <div className="flex items-center gap-2.5">
                               <span className="text-[18px]">{subject.emoji}</span>
@@ -741,34 +629,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               exit={{ opacity: 0, height: 0 }}
                               className="pl-4 pr-2"
                             >
-                              <p className="text-[12px] text-[#6B7280] mb-2 font-medium">
-                                {subjectLevel === 'sat' ? 'Select your target score:' : 'Select your target grade:'}
-                              </p>
+                              <p className="text-[12px] text-[#6B7280] mb-2 font-medium">Select your target grade:</p>
                               <div className="flex flex-wrap gap-2">
-                                {(subjectLevel === 'sat' 
-                                  ? SAT_SCORES 
-                                  : subjectLevel === 'alevel' 
-                                    ? ALEVEL_GRADES 
-                                    : GCSE_GRADES
-                                ).map((grade) => (
+                                {(subjectLevel === 'alevel' ? ALEVEL_GRADES : GCSE_GRADES).map((grade) => (
                                   <button
                                     key={grade}
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      const isSAT = subject.id.startsWith('sat-');
-                                      
-                                      if (isSAT) {
-                                        // Update existing SAT subject's target
-                                        const newSubjects = onboardingData.subjects.map(s => 
-                                          s.id === subject.id ? { ...s, targetGrade: grade } : s
-                                        );
-                                        setOnboardingData({ ...onboardingData, subjects: newSubjects });
-                                      } else {
-                                        // Add new non-SAT subject
-                                        const newSubjects = [...onboardingData.subjects, { id: subject.id, targetGrade: grade }];
-                                        setOnboardingData({ ...onboardingData, subjects: newSubjects });
-                                      }
-                                      
+                                      const newSubjects = [...onboardingData.subjects, { id: subject.id, targetGrade: grade }];
+                                      setOnboardingData({ ...onboardingData, subjects: newSubjects });
                                       setSelectedSubjectForGrade(null);
                                     }}
                                     className="px-3 py-1.5 text-[13px] font-semibold rounded-md border-2 border-[#E5E7EB] hover:border-[#3B82F6] hover:bg-[#F0F9FF] transition-all"

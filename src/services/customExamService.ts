@@ -93,27 +93,9 @@ export async function generateCustomExam(
 
     let topicQuestions = [...topic.questions];
 
-    // Apply difficulty filter with smart fallback
+    // Apply difficulty filter (except for predicted-2026 which is handled separately)
     if (config.difficultyFilter && config.difficultyFilter !== 'mixed' && config.difficultyFilter !== 'predicted-2026') {
-      let filteredQuestions = topicQuestions.filter(q => q.difficulty === config.difficultyFilter);
-      
-      // Smart fallback: if not enough questions, include adjacent difficulty
-      if (filteredQuestions.length < 5) {
-        console.log(`⚠️ Only ${filteredQuestions.length} ${config.difficultyFilter} questions found for ${topic.name}, including adjacent difficulties`);
-        
-        if (config.difficultyFilter === 'easy') {
-          const mediumQuestions = topicQuestions.filter(q => q.difficulty === 'medium');
-          filteredQuestions = [...filteredQuestions, ...mediumQuestions];
-        } else if (config.difficultyFilter === 'hard') {
-          const mediumQuestions = topicQuestions.filter(q => q.difficulty === 'medium');
-          filteredQuestions = [...filteredQuestions, ...mediumQuestions];
-        } else if (config.difficultyFilter === 'medium') {
-          const otherQuestions = topicQuestions.filter(q => q.difficulty !== 'medium');
-          filteredQuestions = [...filteredQuestions, ...otherQuestions];
-        }
-      }
-      
-      topicQuestions = filteredQuestions;
+      topicQuestions = topicQuestions.filter(q => q.difficulty === config.difficultyFilter);
     }
 
     if (topicQuestions.length > 0) {
@@ -122,7 +104,7 @@ export async function generateCustomExam(
   }
 
   if (questionsByTopic.size === 0) {
-    throw new Error('No questions match your criteria. Try selecting "Mixed" difficulty or choosing more topics.');
+    throw new Error('No questions match your criteria');
   }
 
   // For predicted-2026, handle separately with mixed difficulties
@@ -222,7 +204,7 @@ export async function generateCustomExam(
   const finalQuestions = shuffleArray(selectedQuestions);
 
   if (finalQuestions.length < 5) {
-    throw new Error(`Not enough questions generated. Only ${finalQuestions.length} questions available. Try selecting more topics or choosing "Mixed" difficulty.`);
+    throw new Error(`Not enough questions generated. Only ${finalQuestions.length} questions available.`);
   }
 
   return finalQuestions;
