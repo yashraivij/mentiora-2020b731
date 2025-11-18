@@ -2797,9 +2797,21 @@ const Dashboard = () => {
                           {(() => {
                             // Helper to check if subject is A-Level
                             const isALevel = selectedDrawerSubject.id.toLowerCase().includes('alevel');
+                            const isSATSubject = selectedDrawerSubject.id.startsWith('sat-');
                             
                             // Helper to convert numeric grade to display grade
                             const getDisplayGrade = (numericGrade: number | string) => {
+                              // Handle SAT scores first
+                              if (isSATSubject) {
+                                const score = typeof numericGrade === 'number' ? numericGrade : parseFloat(numericGrade);
+                                // If it's already a valid SAT score (400-1600), return it
+                                if (score >= 400 && score <= 1600) {
+                                  return score.toString();
+                                }
+                                // Otherwise return a default SAT score
+                                return '1600';
+                              }
+                              
                               // Handle string letter grades first
                               if (typeof numericGrade === 'string') {
                                 const upperGrade = numericGrade.trim().toUpperCase();
@@ -2868,10 +2880,25 @@ const Dashboard = () => {
                                     );
                                     
                                     if (subjectData) {
-                                      const valueToSave = isALevel ? letterToNumeric(value).toString() : value;
+                                      let valueToSave: string;
+                                      let newTarget: number;
+                                      
+                                      if (isSATSubject) {
+                                        // For SAT, save the score directly
+                                        valueToSave = value;
+                                        newTarget = parseInt(value);
+                                      } else if (isALevel) {
+                                        // For A-Level, convert letter to numeric
+                                        valueToSave = letterToNumeric(value).toString();
+                                        newTarget = letterToNumeric(value);
+                                      } else {
+                                        // For GCSE, use value as-is
+                                        valueToSave = value;
+                                        newTarget = parseInt(value);
+                                      }
+                                      
                                       updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
                                       
-                                      const newTarget = isALevel ? letterToNumeric(value) : parseInt(value);
                                       setSelectedDrawerSubject({
                                         ...selectedDrawerSubject,
                                         target: newTarget
@@ -2883,7 +2910,12 @@ const Dashboard = () => {
                                     <SelectValue>Target {getDisplayGrade(selectedDrawerSubject.target)}</SelectValue>
                                   </SelectTrigger>
                                   <SelectContent>
-                                    {isALevel ? (
+                                    {isSATSubject ? (
+                                      // SAT scores from 1600 down to 400 in increments of 50
+                                      Array.from({ length: 25 }, (_, i) => 1600 - (i * 50)).map(score => (
+                                        <SelectItem key={score} value={score.toString()}>Target {score}</SelectItem>
+                                      ))
+                                    ) : isALevel ? (
                                       ['A*', 'A', 'B', 'C', 'D', 'E'].map(grade => (
                                         <SelectItem key={grade} value={grade}>Target {grade}</SelectItem>
                                       ))
