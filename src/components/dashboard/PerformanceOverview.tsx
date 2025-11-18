@@ -18,13 +18,36 @@ interface PerformanceOverviewProps {
 }
 
 export const PerformanceOverview = ({ predictedGrades, userSubjects }: PerformanceOverviewProps) => {
+  // Helper to check if subject is SAT
+  const isSATSubject = (subjectId: string): boolean => {
+    return subjectId.startsWith('sat-');
+  };
+
+  // Convert percentage to SAT score (400-1600)
+  const percentageToSATScore = (percentage: number): number => {
+    return Math.round(400 + (percentage / 100) * 1200);
+  };
+
   // Prepare radar chart data
   const radarData = predictedGrades.map((prediction) => {
     const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
+    const isSAT = isSATSubject(prediction.subject_id);
+    
+    if (isSAT) {
+      // For SAT, convert percentage to SAT score
+      const currentScore = percentageToSATScore(prediction.percentage);
+      const targetScore = parseInt(userSubject?.target_grade || "1000");
+      
+      return {
+        subject: prediction.subject_id.slice(4, 16), // Remove 'sat-' prefix
+        current: currentScore,
+        target: targetScore,
+      };
+    }
+    
+    // For GCSE/A-Level
     const targetGrade = parseInt(userSubject?.target_grade || "7");
-    // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
     const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
-    // Treat "0", 0, "0.0" or "U" as ungraded
     const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
     const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
 
@@ -46,21 +69,31 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
     },
   };
 
-  const getStatusColor = (current: number, target: number) => {
+  const getStatusColor = (current: number, target: number, subjectId?: string) => {
+    const isSAT = subjectId && isSATSubject(subjectId);
+    const diff = isSAT ? current - target : current - target;
+    const threshold = isSAT ? 100 : 1; // 100 points for SAT, 1 grade for others
+    
     if (current >= target) return "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20";
-    if (current >= target - 1) return "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20";
+    if (current >= target - threshold) return "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20";
     return "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20";
   };
 
-  const getStatusIcon = (current: number, target: number) => {
+  const getStatusIcon = (current: number, target: number, subjectId?: string) => {
+    const isSAT = subjectId && isSATSubject(subjectId);
+    const threshold = isSAT ? 100 : 1;
+    
     if (current >= target) return <TrendingUp className="h-4 w-4" />;
-    if (current >= target - 1) return <Minus className="h-4 w-4" />;
+    if (current >= target - threshold) return <Minus className="h-4 w-4" />;
     return <TrendingDown className="h-4 w-4" />;
   };
 
-  const getStatusText = (current: number, target: number) => {
+  const getStatusText = (current: number, target: number, subjectId?: string) => {
+    const isSAT = subjectId && isSATSubject(subjectId);
+    const threshold = isSAT ? 100 : 1;
+    
     if (current >= target) return "On Track";
-    if (current >= target - 1) return "Close";
+    if (current >= target - threshold) return "Close";
     return "Needs Focus";
   };
 
@@ -86,7 +119,11 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
                   dataKey="subject" 
                   tick={{ fill: "hsl(var(--foreground))", fontSize: 12 }}
                 />
-                <PolarRadiusAxis angle={90} domain={[0, 9]} tick={{ fill: "hsl(var(--muted-foreground))" }} />
+                <PolarRadiusAxis 
+                  angle={90} 
+                  domain={[0, radarData.some(d => isSATSubject(predictedGrades.find(p => p.subject_id.slice(0, 12) === d.subject || p.subject_id.slice(4, 16) === d.subject)?.subject_id || '')) ? 1600 : 9]} 
+                  tick={{ fill: "hsl(var(--muted-foreground))" }} 
+                />
                 <Radar
                   name="Target"
                   dataKey="target"
@@ -114,10 +151,43 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {predictedGrades.map((prediction) => {
           const userSubject = userSubjects.find((s) => s.subject_name === prediction.subject_id);
+          const isSAT = isSATSubject(prediction.subject_id);
+          
+          if (isSAT) {
+            // SAT scoring logic
+            const currentScore = percentageToSATScore(prediction.percentage);
+            const targetScore = parseInt(userSubject?.target_grade || "1000");
+            const progressPercent = Math.min(((currentScore - 400) / (targetScore - 400)) * 100, 100);
+            
+            return (
+              <Card key={prediction.subject_id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="font-semibold text-lg">{prediction.subject_id.replace('sat-', 'SAT: ')}</h3>
+                      <Badge className={getStatusColor(currentScore, targetScore, prediction.subject_id)}>
+                        {getStatusIcon(currentScore, targetScore, prediction.subject_id)}
+                        <span className="ml-1">{getStatusText(currentScore, targetScore, prediction.subject_id)}</span>
+                      </Badge>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-primary">{currentScore}</div>
+                      <div className="text-xs text-muted-foreground">Target: {targetScore}</div>
+                    </div>
+                  </div>
+                  <Progress value={progressPercent} className="h-2" />
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="font-semibold">{Math.round(progressPercent)}%</span>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          }
+          
+          // GCSE/A-Level logic
           const targetGrade = parseInt(userSubject?.target_grade || "7");
-          // Use actual predicted grade from user's performance, fallback to target grade if not calculated yet
           const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
-          // Treat "0", 0, "0.0" or "U" as ungraded
           const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
           const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
@@ -128,9 +198,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1">{prediction.subject_id}</h3>
-                    <Badge className={getStatusColor(currentGrade, targetGrade)}>
-                      {getStatusIcon(currentGrade, targetGrade)}
-                      <span className="ml-1">{getStatusText(currentGrade, targetGrade)}</span>
+                    <Badge className={getStatusColor(currentGrade, targetGrade, prediction.subject_id)}>
+                      {getStatusIcon(currentGrade, targetGrade, prediction.subject_id)}
+                      <span className="ml-1">{getStatusText(currentGrade, targetGrade, prediction.subject_id)}</span>
                     </Badge>
                   </div>
                   <div className="text-right">

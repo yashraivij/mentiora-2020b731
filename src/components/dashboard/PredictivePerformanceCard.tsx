@@ -65,8 +65,25 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     return subjectId.toLowerCase().includes('alevel');
   };
 
+  // Helper to check if subject is SAT
+  const isSATSubject = (subjectId: string): boolean => {
+    return subjectId.startsWith('sat-');
+  };
+
+  // Convert percentage to SAT score (400-1600)
+  const percentageToSATScore = (percentage: number): number => {
+    return Math.round(400 + (percentage / 100) * 1200);
+  };
+
   const gradeToNumber = (gradeString: string, subjectId: string): number => {
     if (gradeString === 'U') return 0;
+    
+    if (isSATSubject(subjectId)) {
+      // SAT scores are 400-1600, convert to 0-9 scale for internal calculations
+      const score = parseInt(gradeString) || 400;
+      const percentage = ((score - 400) / 1200) * 100;
+      return 4 + (percentage / 100) * 5; // Map to 4-9 scale
+    }
     
     if (isALevel(subjectId)) {
       // Convert A-Level letter grades to numbers
@@ -105,7 +122,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     const practicePercentage = matchingProgress.length > 0
       ? Math.round(matchingProgress.reduce((sum, p) => sum + p.averageScore, 0) / matchingProgress.length)
       : 0;
-    const practiceGrade = getPredictedGrade(practicePercentage);
+    const practiceGrade = getPredictedGrade(practicePercentage, subjectId);
     
     // Get most recent predicted exam completion for this subject - also with flexible matching
     const recentExamCompletion = predictedExamCompletions
@@ -157,7 +174,11 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     return null;
   };
 
-  const getPredictedGrade = (percentage: number) => {
+  const getPredictedGrade = (percentage: number, subjectId?: string): number => {
+    if (isSATSubject(subjectId || '')) {
+      // For SAT, return the SAT score directly
+      return percentageToSATScore(percentage);
+    }
     // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
     if (percentage >= 80) return 9; // A*
     if (percentage >= 70) return 8; // A
