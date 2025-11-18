@@ -151,8 +151,25 @@ const Practice = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
+  // Helper function to convert percentage to SAT score (400-1600)
+  const percentageToSATScore = (percentage: number): number => {
+    // SAT scoring: 0% = 400, 100% = 1600
+    // Linear mapping: score = 400 + (percentage / 100) * 1200
+    return Math.round(400 + (percentage / 100) * 1200);
+  };
+
+  // Helper function to convert SAT score to percentage
+  const satScoreToPercentage = (score: number): number => {
+    // Reverse mapping: percentage = ((score - 400) / 1200) * 100
+    return Math.max(0, Math.min(100, ((score - 400) / 1200) * 100));
+  };
+
   // Helper function to convert numeric grade to letter grade for A-Level
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
+    // For SAT subjects, display as SAT score (400-1600)
+    if (isSATSubject) {
+      return Math.round(numericGrade).toString();
+    }
     if (!isALevel(subjectId)) {
       return numericGrade.toFixed(1);
     }
@@ -168,6 +185,9 @@ const Practice = () => {
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
+    if (isSATSubject) {
+      return { min: '400', max: '1600' };
+    }
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -176,6 +196,10 @@ const Practice = () => {
 
   // Helper function to calculate progress percentage
   const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
+    if (isSATSubject) {
+      // For SAT: grade is 400-1600, map to 0-100%
+      return Math.max(0, Math.min(100, ((grade - 400) / 1200) * 100));
+    }
     if (isALevel(subjectId)) {
       // Map 4-9 scale to E-A* (4=E, 9=A*)
       return Math.max(0, ((grade - 4) / 5) * 100);
@@ -185,6 +209,11 @@ const Practice = () => {
 
   // Helper function to get progress description
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
+    if (isSATSubject) {
+      const percentage = Math.max(0, Math.min(100, Math.round(((grade - 400) / 1200) * 100)));
+      return `Progress: ${percentage}% towards 1600`;
+    }
+    
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
     if (isALevel(subjectId)) {
       return `Progress: ${percentage}% towards grade A*`;
@@ -1393,10 +1422,17 @@ const Practice = () => {
     console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
-  // Helper function to convert percentage to GCSE/A-Level grade
+  // Helper function to convert percentage to GCSE/A-Level grade or SAT score
   // A-Level: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
   // GCSE: Similar scale with numeric grades 9-1
+  // SAT: 0% = 400, 100% = 1600
   const percentageToGrade = (percentage: number): number => {
+    // For SAT subjects, return SAT score (400-1600)
+    if (isSATSubject) {
+      return percentageToSATScore(percentage);
+    }
+    
+    // For GCSE/A-Level, return grade (1-9 scale)
     if (percentage >= 90) return 9.0;
     if (percentage >= 80) return 9.0; // A* = 9
     if (percentage >= 70) return 8.0 + ((percentage - 70) / 10); // A = 8.0-8.9
@@ -1575,7 +1611,9 @@ const Practice = () => {
                           style={{ 
                             width: '0%',
                             animation: 'fillProgress 1s ease-out 600ms forwards',
-                            '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
+                            '--target-width': isSATSubject 
+                              ? `${Math.max(0, ((oldPredictedGrade - 400) / 1200) * 100)}%`
+                              : `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
                           } as React.CSSProperties}
                         />
                       )}
@@ -1588,7 +1626,9 @@ const Practice = () => {
                           animation: isFirstPractice 
                             ? 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms'
                             : 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
-                          '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
+                          '--target-width': isSATSubject
+                            ? `${Math.max(0, ((newPredictedGrade - 400) / 1200) * 100)}%`
+                            : `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: isFirstPractice ? 'slideAndFade 2s infinite 2100ms' : 'slideAndFade 2s infinite 2700ms' }} />
@@ -1596,7 +1636,17 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
+                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>
+                          {isSATSubject
+                            ? Math.max(0, Math.round(((newPredictedGrade - 400) / 1200) * 100))
+                            : Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))
+                          }%
+                        </span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(
+                          `${isSATSubject
+                            ? Math.max(0, Math.round(((newPredictedGrade - 400) / 1200) * 100))
+                            : Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))
+                          }% `, ''
+                        )}
                       </p>
                     </div>
                   </div>
