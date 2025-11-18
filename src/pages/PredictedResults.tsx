@@ -157,7 +157,7 @@ const PredictedResults = () => {
           modelAnswer: modelAnswer,
           markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || '', question.marks),
           totalMarks: question.marks,
-          subjectId: subjectId
+          subject: subjectId
         }
       });
 
