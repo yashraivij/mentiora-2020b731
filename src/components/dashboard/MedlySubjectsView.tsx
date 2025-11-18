@@ -21,9 +21,7 @@ import {
   Play,
   X,
   Crown,
-  Rocket,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { SubjectDailyTasks } from "./SubjectDailyTasks";
 
 // Sparkline component
@@ -110,7 +108,6 @@ export function MedlySubjectsView({
   isPremium = false,
   onUpgradeToPremium,
 }: MedlySubjectsViewProps) {
-  const navigate = useNavigate();
   
   // Safe defaults for first-time users with no data
   const safeProfile = {
@@ -214,13 +211,6 @@ export function MedlySubjectsView({
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
-              </Button>
-              <Button 
-                onClick={() => navigate('/build-exam')}
-                className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 font-medium"
-              >
-                <Rocket className="h-4 w-4 mr-2" />
-                Build My Exam
               </Button>
               {!isPremium && onUpgradeToPremium && (
                 <Button 

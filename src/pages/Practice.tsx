@@ -151,25 +151,8 @@ const Practice = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  // Helper function to convert percentage to SAT score (400-1600)
-  const percentageToSATScore = (percentage: number): number => {
-    // SAT scoring: 0% = 400, 100% = 1600
-    // Linear mapping: score = 400 + (percentage / 100) * 1200
-    return Math.round(400 + (percentage / 100) * 1200);
-  };
-
-  // Helper function to convert SAT score to percentage
-  const satScoreToPercentage = (score: number): number => {
-    // Reverse mapping: percentage = ((score - 400) / 1200) * 100
-    return Math.max(0, Math.min(100, ((score - 400) / 1200) * 100));
-  };
-
   // Helper function to convert numeric grade to letter grade for A-Level
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
-    // For SAT subjects, display as SAT score (400-1600)
-    if (isSATSubject) {
-      return Math.round(numericGrade).toString();
-    }
     if (!isALevel(subjectId)) {
       return numericGrade.toFixed(1);
     }
@@ -185,9 +168,6 @@ const Practice = () => {
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
-    if (isSATSubject) {
-      return { min: '400', max: '1600' };
-    }
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -196,10 +176,6 @@ const Practice = () => {
 
   // Helper function to calculate progress percentage
   const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
-    if (isSATSubject) {
-      // For SAT: grade is 400-1600, map to 0-100%
-      return Math.max(0, Math.min(100, ((grade - 400) / 1200) * 100));
-    }
     if (isALevel(subjectId)) {
       // Map 4-9 scale to E-A* (4=E, 9=A*)
       return Math.max(0, ((grade - 4) / 5) * 100);
@@ -209,11 +185,6 @@ const Practice = () => {
 
   // Helper function to get progress description
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
-    if (isSATSubject) {
-      const percentage = Math.max(0, Math.min(100, Math.round(((grade - 400) / 1200) * 100)));
-      return `Progress: ${percentage}% towards 1600`;
-    }
-    
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
     if (isALevel(subjectId)) {
       return `Progress: ${percentage}% towards grade A*`;
@@ -254,38 +225,8 @@ const Practice = () => {
 
   const { showMPReward } = useMPRewards();
 
-  // Early return while curriculum is still loading
-  if (curriculumLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading questions...</p>
-        </div>
-      </div>
-    );
-  }
-
   const subject = curriculum.find(s => s.id === subjectId);
-  const isSATSubject = subjectId?.startsWith('sat-');
-  
-  // For SAT subjects without topicId, create a virtual topic with all questions
-  const topic = topicId 
-    ? subject?.topics.find(t => t.id === topicId)
-    : (isSATSubject && subject 
-        ? (() => {
-            console.log('🎯 Creating virtual SAT topic for:', subjectId);
-            console.log('📚 Aggregating from topics:', subject.topics.map(t => t.name));
-            const allQuestions = subject.topics.flatMap(t => t.questions || []);
-            console.log('✅ Total questions in virtual topic:', allQuestions.length);
-            return {
-              id: `${subjectId}-all`,
-              name: subject.name,
-              orderIndex: 0,
-              questions: allQuestions
-            };
-          })()
-        : undefined);
+  const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
   // Log subject/topic lookup results
@@ -471,11 +412,6 @@ const Practice = () => {
   };
 
   useEffect(() => {
-    // Don't run until curriculum is loaded
-    if (curriculumLoading) {
-      return;
-    }
-
     // Record activity when user visits practice page
     const recordVisit = async () => {
       if (user?.id) {
@@ -496,9 +432,7 @@ const Practice = () => {
     
     console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
     
-    const isSATSubject = subjectId?.startsWith('sat-');
-    
-    if (!subject || (!topic && !isSATSubject)) {
+    if (!subject || !topic) {
       console.error('❌ REDIRECT: Subject or topic not found');
       console.error('Looking for subjectId:', subjectId);
       console.error('Looking for topicId:', topicId);
@@ -507,15 +441,6 @@ const Practice = () => {
       if (subject) {
         console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
       }
-      setIsLoadingQuestions(false);
-      navigate('/dashboard');
-      return;
-    }
-    
-    // Additional check for SAT subjects without questions
-    if (isSATSubject && topic && (!topic.questions || topic.questions.length === 0)) {
-      console.error('❌ REDIRECT: No questions available for SAT subject');
-      toast.error('No questions available for this subject yet');
       setIsLoadingQuestions(false);
       navigate('/dashboard');
       return;
@@ -536,14 +461,7 @@ const Practice = () => {
       console.log('Filtered questions count:', filteredQuestions.length);
       console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
-      // For SAT subjects, shuffle first then take 10 random questions
-      const questionsToUse = isSATSubject 
-        ? shuffleArray(filteredQuestions).slice(0, 10)
-        : filteredQuestions;
-      
-      const shuffled = isSATSubject 
-        ? questionsToUse  // Already shuffled above
-        : shuffleArray(questionsToUse);  // Shuffle non-SAT questions
+      const shuffled = shuffleArray(filteredQuestions);
       
       console.log('Shuffled questions count:', shuffled.length);
       console.log('Final shuffled questions:', shuffled.map(q => q.id));
@@ -552,7 +470,7 @@ const Practice = () => {
     }
     
     setIsLoadingQuestions(false);
-  }, [subject, topic, navigate, topicId, user?.id, curriculumLoading]);
+  }, [subject, topic, navigate, topicId, user?.id]);
 
   // Save state whenever important values change
   useEffect(() => {
@@ -683,9 +601,7 @@ const Practice = () => {
       
       const feedback = {
         modelAnswer: currentQuestion.modelAnswer,
-        whyThisGetsMark: Array.isArray(currentQuestion.markingCriteria) 
-          ? currentQuestion.markingCriteria.join('\n')
-          : currentQuestion.markingCriteria.breakdown?.join('\n') || 'No marking criteria available',
+        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
         whyYoursDidnt: markingResult.feedback,
         specLink: currentQuestion.specReference
       };
@@ -1447,17 +1363,10 @@ const Practice = () => {
     console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
-  // Helper function to convert percentage to GCSE/A-Level grade or SAT score
+  // Helper function to convert percentage to GCSE/A-Level grade
   // A-Level: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
   // GCSE: Similar scale with numeric grades 9-1
-  // SAT: 0% = 400, 100% = 1600
   const percentageToGrade = (percentage: number): number => {
-    // For SAT subjects, return SAT score (400-1600)
-    if (isSATSubject) {
-      return percentageToSATScore(percentage);
-    }
-    
-    // For GCSE/A-Level, return grade (1-9 scale)
     if (percentage >= 90) return 9.0;
     if (percentage >= 80) return 9.0; // A* = 9
     if (percentage >= 70) return 8.0 + ((percentage - 70) / 10); // A = 8.0-8.9
@@ -1548,10 +1457,10 @@ const Practice = () => {
 
           {/* Predicted Grade Improvement - Premium Card */}
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <Card className="bg-gradient-to-br from-card via-[#3B82F6]/10 to-[#3B82F6]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#3B82F6]/20 to-[#60A5FA]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#60A5FA]/20 to-[#3B82F6]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
@@ -1636,9 +1545,7 @@ const Practice = () => {
                           style={{ 
                             width: '0%',
                             animation: 'fillProgress 1s ease-out 600ms forwards',
-                            '--target-width': isSATSubject 
-                              ? `${Math.max(0, ((oldPredictedGrade - 400) / 1200) * 100)}%`
-                              : `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
+                            '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
                           } as React.CSSProperties}
                         />
                       )}
@@ -1651,9 +1558,7 @@ const Practice = () => {
                           animation: isFirstPractice 
                             ? 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms'
                             : 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
-                          '--target-width': isSATSubject
-                            ? `${Math.max(0, ((newPredictedGrade - 400) / 1200) * 100)}%`
-                            : `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
+                          '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: isFirstPractice ? 'slideAndFade 2s infinite 2100ms' : 'slideAndFade 2s infinite 2700ms' }} />
@@ -1661,17 +1566,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>
-                          {isSATSubject
-                            ? Math.max(0, Math.round(((newPredictedGrade - 400) / 1200) * 100))
-                            : Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))
-                          }%
-                        </span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(
-                          `${isSATSubject
-                            ? Math.max(0, Math.round(((newPredictedGrade - 400) / 1200) * 100))
-                            : Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))
-                          }% `, ''
-                        )}
+                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
                       </p>
                     </div>
                   </div>

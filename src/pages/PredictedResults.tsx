@@ -51,29 +51,15 @@ const PredictedResults = () => {
   const [isMarking, setIsMarking] = useState(true);
   const { isPremium } = useSubscription();
   
-  const { questions, answers, timeElapsed, isReview, completion, totalMarks, isCustomExam, customExamTitle } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
 
   // Helper function to check if subject is A-Level
   const isALevel = (subjectId: string | undefined) => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  // Helper function to check if subject is SAT
-  const isSATSubject = (subjectId: string | undefined) => {
-    return subjectId?.startsWith('sat-') || false;
-  };
-
-  // Convert percentage to SAT score (400-1600)
-  const percentageToSATScore = (percentage: number): number => {
-    return Math.round(400 + (percentage / 100) * 1200);
-  };
-
   // Helper function to convert numeric grade to letter grade for A-Level
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
-    if (isSATSubject(subjectId)) {
-      const percentage = Math.max(0, ((numericGrade - 4) / 5) * 100);
-      return percentageToSATScore(percentage).toString();
-    }
     if (!isALevel(subjectId)) {
       return numericGrade.toFixed(1);
     }
@@ -91,9 +77,6 @@ const PredictedResults = () => {
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
-    if (isSATSubject(subjectId)) {
-      return { min: '400', max: '1600' };
-    }
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -103,9 +86,6 @@ const PredictedResults = () => {
   // Helper function to get progress description
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
-    if (isSATSubject(subjectId)) {
-      return `Progress: ${percentage}% towards 1600`;
-    }
     if (isALevel(subjectId)) {
       return `Progress: ${percentage}% towards grade A*`;
     }
@@ -177,7 +157,7 @@ const PredictedResults = () => {
           modelAnswer: modelAnswer,
           markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || '', question.marks),
           totalMarks: question.marks,
-          subject: subjectId
+          subjectId: subjectId
         }
       });
 
@@ -780,14 +760,10 @@ const PredictedResults = () => {
         {/* Hero Header */}
         <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
           <h1 className="text-3xl font-bold text-foreground">
-            {isCustomExam ? 'Custom Exam Complete!' : 'Predicted Exam Complete!'}
+            Predicted Exam Complete!
           </h1>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-            {isCustomExam ? (
-              <>You've just finished <span className="font-semibold text-[hsl(195,69%,54%)]">{customExamTitle}</span> — here's how you did.</>
-            ) : (
-              <>You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.</>
-            )}
+            You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.
           </p>
         </div>
 
@@ -799,16 +775,11 @@ const PredictedResults = () => {
               <div className="text-center space-y-3">
                 <div className="space-y-1">
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    {isCustomExam ? 'Your Exam Grade' : 'Overall Score'}
+                    Overall Score
                   </p>
                   <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
                     {percentage}%
                   </p>
-                  {isCustomExam && (
-                    <p className="text-sm font-semibold text-muted-foreground mt-2">
-                      If this was the actual exam, you would achieve: <span className="text-[hsl(195,69%,54%)] font-bold">Grade {grade}</span>
-                    </p>
-                  )}
                   <p className="text-sm text-muted-foreground">
                     {correctAnswers} out of {questions.length} questions correct
                   </p>

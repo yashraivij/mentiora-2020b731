@@ -784,8 +784,7 @@ const Dashboard = () => {
         );
         const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
         
-        const isSATSubject = subjectIdToMatch.startsWith('sat-');
-        let predictedGradeValue = isSATSubject ? 400 : 0;
+        let predictedGradeValue = 0;
         let percentage = 0;
         
         if (hasAttempts) {
@@ -801,10 +800,7 @@ const Dashboard = () => {
             // Check if A-Level subject to use correct thresholds
             const isALevel = subject.id && subject.id.includes('alevel');
             
-            if (isSATSubject) {
-              // SAT scoring: 0% = 400, 100% = 1600
-              predictedGradeValue = Math.round(400 + (currentAccuracy / 100) * 1200);
-            } else if (isALevel) {
+            if (isALevel) {
               // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
               if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
               else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
@@ -1848,18 +1844,6 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
-        // Handle SAT/College Board subjects
-        if (board === "college board") {
-          if (subjectName === "Algebra" || subjectName === "SAT: Algebra") return "sat-algebra";
-          if (subjectName === "Advanced Math" || subjectName === "SAT: Advanced Math") return "sat-advanced-math";
-          if (subjectName === "Geometry & Trigonometry" || subjectName === "SAT: Geometry & Trigonometry") return "sat-geometry-trigonometry";
-          if (subjectName === "Problem Solving & Data Analysis" || subjectName === "SAT: Problem Solving & Data Analysis") return "sat-problem-solving-data";
-          if (subjectName === "Information & Ideas" || subjectName === "SAT: Information & Ideas") return "sat-information-ideas";
-          if (subjectName === "Craft & Structure" || subjectName === "SAT: Craft & Structure") return "sat-craft-structure";
-          if (subjectName === "Standard English Conventions" || subjectName === "SAT: Standard English Conventions") return "sat-english-conventions";
-          if (subjectName === "Expression of Ideas" || subjectName === "SAT: Expression of Ideas") return "sat-expression-ideas";
-        }
-        
         // Fallback: try to find by name in curriculum
         const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
@@ -2801,21 +2785,9 @@ const Dashboard = () => {
                           {(() => {
                             // Helper to check if subject is A-Level
                             const isALevel = selectedDrawerSubject.id.toLowerCase().includes('alevel');
-                            const isSATSubject = selectedDrawerSubject.id.startsWith('sat-');
                             
                             // Helper to convert numeric grade to display grade
                             const getDisplayGrade = (numericGrade: number | string) => {
-                              // Handle SAT scores first
-                              if (isSATSubject) {
-                                const score = typeof numericGrade === 'number' ? numericGrade : parseFloat(numericGrade);
-                                // If it's already a valid SAT score (400-1600), return it
-                                if (score >= 400 && score <= 1600) {
-                                  return score.toString();
-                                }
-                                // Otherwise return a default SAT score
-                                return '1600';
-                              }
-                              
                               // Handle string letter grades first
                               if (typeof numericGrade === 'string') {
                                 const upperGrade = numericGrade.trim().toUpperCase();
@@ -2884,25 +2856,10 @@ const Dashboard = () => {
                                     );
                                     
                                     if (subjectData) {
-                                      let valueToSave: string;
-                                      let newTarget: number;
-                                      
-                                      if (isSATSubject) {
-                                        // For SAT, save the score directly
-                                        valueToSave = value;
-                                        newTarget = parseInt(value);
-                                      } else if (isALevel) {
-                                        // For A-Level, convert letter to numeric
-                                        valueToSave = letterToNumeric(value).toString();
-                                        newTarget = letterToNumeric(value);
-                                      } else {
-                                        // For GCSE, use value as-is
-                                        valueToSave = value;
-                                        newTarget = parseInt(value);
-                                      }
-                                      
+                                      const valueToSave = isALevel ? letterToNumeric(value).toString() : value;
                                       updateTargetGrade(subjectData.subject_name, subjectData.exam_board, valueToSave);
                                       
+                                      const newTarget = isALevel ? letterToNumeric(value) : parseInt(value);
                                       setSelectedDrawerSubject({
                                         ...selectedDrawerSubject,
                                         target: newTarget
@@ -2914,12 +2871,7 @@ const Dashboard = () => {
                                     <SelectValue>Target {getDisplayGrade(selectedDrawerSubject.target)}</SelectValue>
                                   </SelectTrigger>
                                   <SelectContent>
-                                    {isSATSubject ? (
-                                      // SAT scores from 1600 down to 400 in increments of 50
-                                      Array.from({ length: 25 }, (_, i) => 1600 - (i * 50)).map(score => (
-                                        <SelectItem key={score} value={score.toString()}>Target {score}</SelectItem>
-                                      ))
-                                    ) : isALevel ? (
+                                    {isALevel ? (
                                       ['A*', 'A', 'B', 'C', 'D', 'E'].map(grade => (
                                         <SelectItem key={grade} value={grade}>Target {grade}</SelectItem>
                                       ))
@@ -2946,9 +2898,7 @@ const Dashboard = () => {
                             <SelectContent className="bg-background border-border">
                               <SelectItem value="overview">Overview</SelectItem>
                               <SelectItem value="topics">Topics</SelectItem>
-                              {!selectedDrawerSubject?.id.startsWith('sat-') && (
-                                <SelectItem value="papers">Papers</SelectItem>
-                              )}
+                              <SelectItem value="papers">Papers</SelectItem>
                               <SelectItem value="plan">Plan</SelectItem>
                               <SelectItem value="notes">Notes</SelectItem>
                               <SelectItem value="flashcards">Flashcards</SelectItem>
@@ -2957,18 +2907,16 @@ const Dashboard = () => {
                         </div>
                         
                         {/* Desktop Tabs */}
-                        <TabsList className={`hidden sm:grid w-full ${selectedDrawerSubject?.id.startsWith('sat-') ? 'grid-cols-5' : 'grid-cols-6'} rounded-2xl p-1.5 bg-muted border border-border`}>
+                        <TabsList className="hidden sm:grid w-full grid-cols-6 rounded-2xl p-1.5 bg-muted border border-border">
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Overview
                           </TabsTrigger>
                           <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Topics
                           </TabsTrigger>
-                          {!selectedDrawerSubject?.id.startsWith('sat-') && (
-                            <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
-                              Papers
-                            </TabsTrigger>
-                          )}
+                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
+                            Papers
+                          </TabsTrigger>
                           <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Plan
                           </TabsTrigger>
@@ -3064,7 +3012,6 @@ const Dashboard = () => {
                                 
                                 // Helper to check if subject is A-Level
                                 const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
-                                const isSATSubject = subjectIdToMatch.startsWith('sat-');
                                 
                                 // Helper to convert numeric grade to display grade
                                 const getDisplayGrade = (numericGrade: number | string) => {
@@ -3104,14 +3051,17 @@ const Dashboard = () => {
                                   pg.subject_id === baseSubjectName ||
                                   pg.subject_id.split('-')[0] === baseSubjectName
                                 );
-                                let predictedGradeValue = isSATSubject ? 400 : 0;
+                                let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
                                 // CRITICAL FIX: Check if there's actual attempt data first
                                 const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
                                 const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
                                 
                                 // ONLY calculate if there are attempts - ALWAYS use current practice accuracy
-                                if (hasAttempts) {
+                                if (!hasAttempts) {
+                                  // No attempts - always default to U (0)
+                                  predictedGradeValue = 0;
+                                } else {
                                   // Calculate from CURRENT practice accuracy (most accurate)
                                   const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
                                   const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
@@ -3125,19 +3075,14 @@ const Dashboard = () => {
                                   });
                                   
                                   if (currentAccuracy > 0) {
-                                    if (isSATSubject) {
-                                      // SAT scoring: 0% = 400, 100% = 1600
-                                      predictedGradeValue = Math.round(400 + (currentAccuracy / 100) * 1200);
-                                    } else {
-                                      // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-                                      if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
-                                      else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
-                                      else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
-                                      else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
-                                      else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
-                                      else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
-                                      else predictedGradeValue = 0; // U
-                                    }
+                                    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
+                                    if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
+                                    else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
+                                    else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
+                                    else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
+                                    else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
+                                    else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
+                                    else predictedGradeValue = 0; // U
                                     
                                     console.log(`🎯 ${subjectIdToMatch} final grade:`, predictedGradeValue, 'from accuracy:', currentAccuracy);
                                   }
@@ -3159,12 +3104,7 @@ const Dashboard = () => {
                                       <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ 
-                                            width: predictedGradeValue === 0 ? '0%' : 
-                                              isSATSubject 
-                                                ? `${((predictedGradeValue - 400) / 1200) * 100}%`
-                                                : `${((predictedGradeValue - 1) / 8) * 100}%`
-                                          }}
+                                          animate={{ width: predictedGradeValue === 0 ? '0%' : `${((predictedGradeValue - 1) / 8) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.3 }}
                                           className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
                                         />
@@ -3178,11 +3118,7 @@ const Dashboard = () => {
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ 
-                                            width: isSATSubject
-                                              ? `${((Math.max(400, targetGradeValue) - 400) / 1200) * 100}%`
-                                              : `${((Math.max(1, targetGradeValue) - 1) / 8) * 100}%`
-                                          }}
+                                          animate={{ width: `${((Math.max(1, targetGradeValue) - 1) / 8) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.4 }}
                                           className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                                         />
@@ -3295,17 +3231,16 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="papers" className="space-y-4 mt-8">
-                          {!selectedDrawerSubject?.id.startsWith('sat-') ? (
-                             <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                               <CardHeader className="pb-4">
-                                 <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                                   Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
-                                 </CardTitle>
-                                 <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
-                                   Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
-                                 </CardDescription>
-                               </CardHeader>
-                               <CardContent className="space-y-3 p-6">
+                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                            <CardHeader className="pb-4">
+                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                                Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
+                              </CardTitle>
+                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
+                                Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-3 p-6">
                               {(() => {
                                 const subjectEmoji = getSubjectIconEmoji(selectedDrawerSubject.id);
                                 const subjectName = getSubjectDisplayName(selectedDrawerSubject);
@@ -3389,13 +3324,8 @@ const Dashboard = () => {
                                   </motion.div>
                                 );
                               })()}
-                             </CardContent>
-                           </Card>
-                         ) : (
-                           <div className="text-center py-12 text-muted-foreground">
-                             SAT subjects don't have predicted exam papers.
-                           </div>
-                         )}
+                            </CardContent>
+                          </Card>
                         </TabsContent>
 
                         <TabsContent value="plan" className="space-y-4 mt-8">

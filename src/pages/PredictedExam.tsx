@@ -31,18 +31,12 @@ interface ExamAnswer {
 }
 
 const PredictedExam = () => {
-  const { subjectId, configId } = useParams();
+  const { subjectId } = useParams();
   const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  
-  const [isCustomExam, setIsCustomExam] = useState(false);
-  const [customExamTitle, setCustomExamTitle] = useState("");
-  const [customTimerMinutes, setCustomTimerMinutes] = useState(90);
-  const [customTotalMarks, setCustomTotalMarks] = useState(100);
-  const [isLoadingCustomExam, setIsLoadingCustomExam] = useState(false);
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -60,8 +54,7 @@ const PredictedExam = () => {
   
   const subject = curriculum.find(s => s.id === subjectId || subjectId?.startsWith(s.id + '-paper-'));
   
-  // Only redirect if not a custom exam
-  if (!subject && !configId) {
+  if (!subject) {
     navigate('/predicted-questions');
     return null;
   }
@@ -90,13 +83,11 @@ const PredictedExam = () => {
     let marks = question.marks;
     
     // Try to find the original question in curriculum to get difficulty
-    if (subject && subject.topics) {
-      for (const topic of subject.topics) {
-        const originalQ = topic.questions.find(q => q.question === question.text);
-        if (originalQ) {
-          difficulty = originalQ.difficulty;
-          break;
-        }
+    for (const topic of subject.topics) {
+      const originalQ = topic.questions.find(q => q.question === question.text);
+      if (originalQ) {
+        difficulty = originalQ.difficulty;
+        break;
       }
     }
     
@@ -473,12 +464,10 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   // Helper function to get topic name from any question ID
   const getTopicNameFromQuestionId = (questionId: string): string => {
     // For regular curriculum questions, extract from the curriculum
-    if (subject && subject.topics) {
-      for (const topic of subject.topics) {
-        const foundQuestion = topic.questions.find(q => q.id === questionId);
-        if (foundQuestion) {
-          return topic.name;
-        }
+    for (const topic of subject.topics) {
+      const foundQuestion = topic.questions.find(q => q.id === questionId);
+      if (foundQuestion) {
+        return topic.name;
       }
     }
     
@@ -1510,7 +1499,7 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
     }
     
     // Special handling for English Literature premium exam format
-    if (subjectId === 'english-literature' && subject && subject.topics) {
+    if (subjectId === 'english-literature') {
       // Section A: Shakespeare plays
       const shakespearePlays = subject.topics.filter(topic => 
         ['macbeth', 'romeo-and-juliet', 'the-tempest', 'merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
@@ -6428,7 +6417,7 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subject && subject.topics && subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology' && subjectId !== 'psychology-aqa-alevel') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology' && subjectId !== 'psychology-aqa-alevel') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
@@ -6782,74 +6771,15 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
-    console.log('🔍 Route params:', { subjectId, configId, isCustomExam: configId && !subjectId });
-    
-    // Check if this is a custom exam (has configId but no subjectId)
-    if (configId && !subjectId) {
-      setIsCustomExam(true);
-      setIsLoadingCustomExam(true);
-      
-      // Load custom exam data from sessionStorage
-      const customExamData = sessionStorage.getItem(`custom-exam-${configId}`);
-      if (customExamData) {
-        try {
-          const questions = JSON.parse(customExamData);
-          console.log('✅ Loaded custom exam with', questions.length, 'questions');
-          setExamQuestions(questions);
-          
-          // Load config data from localStorage if available
-          const configData = localStorage.getItem(`custom-config-${configId}`);
-          if (configData) {
-            const config = JSON.parse(configData);
-            setCustomExamTitle(config.title || 'Custom Exam');
-            setCustomTimerMinutes(config.timerMinutes || 90);
-            setCustomTotalMarks(config.targetMarks || questions.reduce((sum: number, q: any) => sum + q.marks, 0));
-          } else {
-            // Calculate total marks from questions
-            const totalMarks = questions.reduce((sum: number, q: any) => sum + q.marks, 0);
-            setCustomTotalMarks(totalMarks);
-            setCustomExamTitle('Custom Exam');
-          }
-          setIsLoadingCustomExam(false);
-          return;
-        } catch (error) {
-          console.error('Error loading custom exam:', error);
-          toast({
-            title: "Error loading exam",
-            description: "Unable to load custom exam data",
-            variant: "destructive"
-          });
-          setIsLoadingCustomExam(false);
-          navigate('/build-exam');
-          return;
-        }
-      } else {
-        toast({
-          title: "Exam not found",
-          description: "Custom exam data not available",
-          variant: "destructive"
-        });
-        setIsLoadingCustomExam(false);
-        navigate('/build-exam');
-        return;
-      }
-    }
-    
-    // Regular predicted exam generation
     console.log('🔄 useEffect triggered for exam questions generation');
     console.log('Current subjectId:', subjectId);
     const newQuestions = generateExamQuestions();
     console.log('Setting exam questions, count:', newQuestions.length);
     console.log('First question preview:', newQuestions[0]?.text);
     setExamQuestions(newQuestions);
-  }, [subjectId, subject, configId]); // Added configId as dependency
+  }, [subjectId, subject]); // Added subject as dependency
 
   const getExamDuration = () => {
-    // Return custom timer for custom exams
-    if (isCustomExam) {
-      return customTimerMinutes;
-    }
-    
     const durations = {
       chemistry: 135, // 2h 15min
       biology: 105, // 1h 45min (AQA Biology Paper 1)
@@ -6883,11 +6813,6 @@ Write a story about a moment of fear.
   };
 
   const getTotalMarks = () => {
-    // Return custom marks for custom exams
-    if (isCustomExam) {
-      return customTotalMarks;
-    }
-    
     if (subjectId === 'english-language') {
       return 80; // Section A: 40 marks (4+8+8+20) + Section B: 40 marks
     }
@@ -7102,7 +7027,7 @@ Write a story about a moment of fear.
                 const marksLost = question.marks - markingResult.marksAwarded;
                 
                 // Handle personalized notification for wrong answers
-                if (marksLost > 0 && subject) {
+                if (marksLost > 0) {
                   const topicName = getTopicNameFromQuestionId(question.id);
                   handlePredictedExamWrongAnswer(
                     question.questionNumber,
@@ -7168,43 +7093,12 @@ Write a story about a moment of fear.
         questions: examQuestions, 
         answers: answers,
         timeElapsed: getExamDuration() * 60 - timeLeft,
-        totalMarks: getTotalMarks(),
-        isCustomExam: isCustomExam,
-        customExamTitle: customExamTitle
+        totalMarks: getTotalMarks()
       } 
     });
   };
 
   const progress = (answers.length / examQuestions.length) * 100;
-
-  // Show loading state while custom exam data is loading
-  if (isCustomExam && isLoadingCustomExam) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3BAFDA] mx-auto"></div>
-          <p className="text-muted-foreground">Loading your custom exam...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show error state if exam has no questions
-  if (examQuestions.length === 0 && !curriculumLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <AlertCircle className="h-12 w-12 text-destructive mx-auto" />
-          <h2 className="text-2xl font-bold">No Questions Found</h2>
-          <p className="text-muted-foreground">Unable to load exam questions</p>
-          <Button onClick={() => navigate('/predicted-questions')}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Exams
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   if (!examStarted) {
     return (
@@ -7234,16 +7128,10 @@ Write a story about a moment of fear.
               <div className="relative">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3BAFDA]/10 border border-[#3BAFDA]/20 mb-3">
                   <div className="w-2 h-2 rounded-full bg-[#3BAFDA] animate-pulse"></div>
-                  <span className="text-sm font-medium text-[#3BAFDA]">
-                    {isCustomExam ? 'Custom Paper' : 'Predicted Exam'}
-                  </span>
+                  <span className="text-sm font-medium text-[#3BAFDA]">Predicted Exam</span>
                 </div>
-                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
-                  {isCustomExam ? customExamTitle : (subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`)}
-                </h1>
-                <p className="text-muted-foreground text-lg">
-                  {isCustomExam ? `Custom Paper • ${getExamDuration()} minutes` : `${getBadgeText(subjectId || '')} • ${getExamDuration()} minutes`}
-                </p>
+                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">{subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History – Paper 1' : subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' : subjectId === 'maths-aqa-alevel' ? 'A-level Mathematics (AQA) - Paper 1: Pure Mathematics' : subjectId === 'computer-science' ? 'Computer Science Paper 1' : subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' : subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Paper 1' : `${subject.name} Predicted Exam`}</h1>
+                <p className="text-muted-foreground text-lg">{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</p>
               </div>
             </div>
 
@@ -7409,13 +7297,6 @@ Write a story about a moment of fear.
     );
   }
 
-  console.log('🎯 Rendering exam view:', { 
-    isCustomExam, 
-    customExamTitle, 
-    questionsCount: examQuestions.length,
-    hasSubject: !!subject 
-  });
-
   return (
     <div className={`min-h-screen ${isPremium ? 'pt-2' : 'pt-16'}`} style={{ backgroundColor: '#ffffff' }}>
       {/* Medly-style Top Navigation */}
@@ -7439,8 +7320,7 @@ Write a story about a moment of fear.
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <h1 className="text-lg font-semibold text-slate-900 truncate">
-                {isCustomExam ? (customExamTitle || 'Custom Exam') :
-                 subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
+                {subjectId === 'history-edexcel-gcse' ? 'Edexcel GCSE History Predicted Exam – Paper 1' :
                  subjectId === 'history' ? 'History Predicted Exam – Paper 1' : 
                  subjectId === 'religious-studies' ? 'Religious Studies Predicted Exam – Component 1' : 
                  subjectId === 'geography' ? `Geography Predicted Exam – ${geographyPaperType}` : 
@@ -7452,9 +7332,9 @@ Write a story about a moment of fear.
                  subjectId === 'computer-science' ? 'Computer Science Predicted Exam – Paper 1' :
                  subjectId === 'psychology' ? 'Psychology Predicted Exam – Component 01' :
                  subjectId === 'psychology-aqa-alevel' ? 'AQA Psychology A-Level Predicted Exam – Paper 1' :
-                 subjectId?.includes('-paper-2') ? `${subject?.name || 'Subject'} Predicted Exam – Paper 2` :
-                 subjectId?.includes('-paper-3') ? `${subject?.name || 'Subject'} Predicted Exam – Paper 3` :
-                 `${subject?.name || 'Subject'} Predicted Exam – Paper 1`}
+                 subjectId?.includes('-paper-2') ? `${subject.name} Predicted Exam – Paper 2` :
+                 subjectId?.includes('-paper-3') ? `${subject.name} Predicted Exam – Paper 3` :
+                 `${subject.name} Predicted Exam – Paper 1`}
               </h1>
             </div>
 
