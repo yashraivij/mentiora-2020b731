@@ -226,7 +226,19 @@ const Practice = () => {
   const { showMPReward } = useMPRewards();
 
   const subject = curriculum.find(s => s.id === subjectId);
-  const topic = subject?.topics.find(t => t.id === topicId);
+  const isSATSubject = subjectId?.startsWith('sat-');
+  
+  // For SAT subjects without topicId, create a virtual topic with all questions
+  const topic = topicId 
+    ? subject?.topics.find(t => t.id === topicId)
+    : (isSATSubject && subject 
+        ? {
+            id: `${subjectId}-all`,
+            name: subject.name,
+            order_index: 0,
+            questions: subject.topics.flatMap(t => t.questions || [])
+          }
+        : undefined);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
   
   // Log subject/topic lookup results
@@ -432,7 +444,9 @@ const Practice = () => {
     
     console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
     
-    if (!subject || !topic) {
+    const isSATSubject = subjectId?.startsWith('sat-');
+    
+    if (!subject || (!topic && !isSATSubject)) {
       console.error('❌ REDIRECT: Subject or topic not found');
       console.error('Looking for subjectId:', subjectId);
       console.error('Looking for topicId:', topicId);
@@ -441,6 +455,15 @@ const Practice = () => {
       if (subject) {
         console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
       }
+      setIsLoadingQuestions(false);
+      navigate('/dashboard');
+      return;
+    }
+    
+    // Additional check for SAT subjects without questions
+    if (isSATSubject && topic && (!topic.questions || topic.questions.length === 0)) {
+      console.error('❌ REDIRECT: No questions available for SAT subject');
+      toast.error('No questions available for this subject yet');
       setIsLoadingQuestions(false);
       navigate('/dashboard');
       return;
@@ -461,7 +484,12 @@ const Practice = () => {
       console.log('Filtered questions count:', filteredQuestions.length);
       console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
-      const shuffled = shuffleArray(filteredQuestions);
+      // For SAT subjects, limit to 10 questions
+      const questionsToUse = isSATSubject 
+        ? filteredQuestions.slice(0, 10)
+        : filteredQuestions;
+      
+      const shuffled = shuffleArray(questionsToUse);
       
       console.log('Shuffled questions count:', shuffled.length);
       console.log('Final shuffled questions:', shuffled.map(q => q.id));
