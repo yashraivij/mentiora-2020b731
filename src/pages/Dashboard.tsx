@@ -3060,6 +3060,7 @@ const Dashboard = () => {
                                 
                                 // Helper to check if subject is A-Level
                                 const isALevel = subjectIdToMatch.toLowerCase().includes('alevel');
+                                const isSATSubject = subjectIdToMatch.startsWith('sat-');
                                 
                                 // Helper to convert numeric grade to display grade
                                 const getDisplayGrade = (numericGrade: number | string) => {
@@ -3152,7 +3153,12 @@ const Dashboard = () => {
                                       <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: predictedGradeValue === 0 ? '0%' : `${((predictedGradeValue - 1) / 8) * 100}%` }}
+                                          animate={{ 
+                                            width: predictedGradeValue === 0 ? '0%' : 
+                                              isSATSubject 
+                                                ? `${((predictedGradeValue - 400) / 1200) * 100}%`
+                                                : `${((predictedGradeValue - 1) / 8) * 100}%`
+                                          }}
                                           transition={{ duration: 1, delay: 0.3 }}
                                           className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
                                         />
@@ -3166,7 +3172,11 @@ const Dashboard = () => {
                                       <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: `${((Math.max(1, targetGradeValue) - 1) / 8) * 100}%` }}
+                                          animate={{ 
+                                            width: isSATSubject
+                                              ? `${((Math.max(400, targetGradeValue) - 400) / 1200) * 100}%`
+                                              : `${((Math.max(1, targetGradeValue) - 1) / 8) * 100}%`
+                                          }}
                                           transition={{ duration: 1, delay: 0.4 }}
                                           className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
                                         />
