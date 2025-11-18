@@ -2910,7 +2910,9 @@ const Dashboard = () => {
                             <SelectContent className="bg-background border-border">
                               <SelectItem value="overview">Overview</SelectItem>
                               <SelectItem value="topics">Topics</SelectItem>
-                              <SelectItem value="papers">Papers</SelectItem>
+                              {!selectedDrawerSubject?.id.startsWith('sat-') && (
+                                <SelectItem value="papers">Papers</SelectItem>
+                              )}
                               <SelectItem value="plan">Plan</SelectItem>
                               <SelectItem value="notes">Notes</SelectItem>
                               <SelectItem value="flashcards">Flashcards</SelectItem>
@@ -2919,16 +2921,18 @@ const Dashboard = () => {
                         </div>
                         
                         {/* Desktop Tabs */}
-                        <TabsList className="hidden sm:grid w-full grid-cols-6 rounded-2xl p-1.5 bg-muted border border-border">
+                        <TabsList className={`hidden sm:grid w-full ${selectedDrawerSubject?.id.startsWith('sat-') ? 'grid-cols-5' : 'grid-cols-6'} rounded-2xl p-1.5 bg-muted border border-border`}>
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Overview
                           </TabsTrigger>
                           <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Topics
                           </TabsTrigger>
-                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
-                            Papers
-                          </TabsTrigger>
+                          {!selectedDrawerSubject?.id.startsWith('sat-') && (
+                            <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
+                              Papers
+                            </TabsTrigger>
+                          )}
                           <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Plan
                           </TabsTrigger>
@@ -3243,16 +3247,17 @@ const Dashboard = () => {
                         </TabsContent>
 
                         <TabsContent value="papers" className="space-y-4 mt-8">
-                          <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
-                            <CardHeader className="pb-4">
-                              <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-                                Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
-                              </CardTitle>
-                              <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
-                                Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
-                              </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-3 p-6">
+                          {!selectedDrawerSubject?.id.startsWith('sat-') ? (
+                             <Card className="rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-lg">
+                               <CardHeader className="pb-4">
+                                 <CardTitle className="text-xl font-bold text-[#0F172A] dark:text-white tracking-tight">
+                                   Predicted 2026 {selectedDrawerSubject.id === 'geography' ? 'Exams' : 'Exam'}
+                                 </CardTitle>
+                                 <CardDescription className="text-[#64748B] dark:text-gray-400 font-medium">
+                                   Practice with AI-generated predicted exam {selectedDrawerSubject.id === 'geography' ? 'papers' : 'paper'}
+                                 </CardDescription>
+                               </CardHeader>
+                               <CardContent className="space-y-3 p-6">
                               {(() => {
                                 const subjectEmoji = getSubjectIconEmoji(selectedDrawerSubject.id);
                                 const subjectName = getSubjectDisplayName(selectedDrawerSubject);
@@ -3336,8 +3341,13 @@ const Dashboard = () => {
                                   </motion.div>
                                 );
                               })()}
-                            </CardContent>
-                          </Card>
+                             </CardContent>
+                           </Card>
+                         ) : (
+                           <div className="text-center py-12 text-muted-foreground">
+                             SAT subjects don't have predicted exam papers.
+                           </div>
+                         )}
                         </TabsContent>
 
                         <TabsContent value="plan" className="space-y-4 mt-8">
