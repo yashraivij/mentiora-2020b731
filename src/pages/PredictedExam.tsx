@@ -23,16 +23,6 @@ interface ExamQuestion {
   text: string;
   marks: number;
   section?: string;
-  passageText?: string;
-  markingCriteria?: {
-    choices?: {
-      A?: string;
-      B?: string;
-      C?: string;
-      D?: string;
-    };
-    [key: string]: any;
-  };
 }
 
 interface ExamAnswer {
@@ -4540,8 +4530,7 @@ How does Blackman present gender and identity in Boys Don't Cry?`,
             id: curriculumQuestion.id,
             questionNumber: questionNumber++,
             text: curriculumQuestion.question,
-            marks: curriculumQuestion.marks,
-            passageText: curriculumQuestion.passageText
+            marks: curriculumQuestion.marks
           });
         });
         
@@ -5986,82 +5975,6 @@ Write a story about a moment of fear.
       return questions;
     }
     
-    // Special handling for SAT subjects - use actual MC questions from database
-    if (subjectId?.startsWith('sat-')) {
-      console.log('🎓 Generating SAT predicted exam...');
-      
-      const isMath = subjectId.includes('math');
-      const questionsPerModule = isMath ? 22 : 27; // Math: 22 per module, R&W: 27 per module
-      
-      // Get all questions from all topics for this subject
-      const allQuestions = subject?.topics.flatMap(topic => 
-        topic.questions.map(q => ({
-          ...q,
-          topicName: topic.name
-        }))
-      ) || [];
-      
-      console.log(`Found ${allQuestions.length} total SAT questions`);
-      
-      // Shuffle questions for variety
-      const shuffled = allQuestions.sort(() => Math.random() - 0.5);
-      
-      // Module 1: First set of questions (slightly easier)
-      const module1Questions = shuffled
-        .filter(q => q.difficulty === 'easy' || q.difficulty === 'medium')
-        .slice(0, questionsPerModule);
-      
-      // Module 2: Second set of questions (slightly harder)
-      const module2Questions = shuffled
-        .filter(q => q.difficulty === 'medium' || q.difficulty === 'hard')
-        .slice(0, questionsPerModule);
-      
-      const satQuestions: ExamQuestion[] = [];
-      
-      // Add Module 1 questions
-      module1Questions.forEach((q, index) => {
-        satQuestions.push({
-          id: q.id,
-          questionNumber: index + 1,
-          text: `**Module 1, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
-          marks: 1, // SAT questions are always 1 mark
-          section: 'Module 1',
-          passageText: q.passageText,
-          markingCriteria: q.markingCriteria
-        });
-      });
-      
-      // Add Module 2 questions
-      module2Questions.forEach((q, index) => {
-        satQuestions.push({
-          id: q.id,
-          questionNumber: questionsPerModule + index + 1,
-          text: `**Module 2, Question ${index + 1} of ${questionsPerModule}**\n\n${q.question}`,
-          marks: 1,
-          section: 'Module 2',
-          passageText: q.passageText,
-          markingCriteria: q.markingCriteria
-        });
-      });
-      
-      // Validate SAT question quality
-      const incompleteQuestions = satQuestions.filter(q => {
-        const text = q.text.toLowerCase();
-        return (
-          (text.includes('passage') || text.includes('extract') || text.includes('text above') || text.includes('according to the')) &&
-          !text.match(/[A-D]\)/) // Has reference to passage but no choices
-        );
-      });
-
-      if (incompleteQuestions.length > 0) {
-        console.warn(`⚠️ Found ${incompleteQuestions.length} incomplete SAT questions that reference missing passages:`, 
-          incompleteQuestions.map(q => ({ id: q.id, questionNumber: q.questionNumber })));
-      }
-
-      console.log(`✅ Generated ${satQuestions.length} SAT questions (${questionsPerModule} per module)`);
-      return satQuestions;
-    }
-
     // Generate realistic GCSE predicted exam questions - DIFFERENT from practice questions
     const generatePredictedExamQuestions = (subjectId: string, topics: any[]) => {
       const predictedQuestions: ExamQuestion[] = [];
@@ -6937,12 +6850,6 @@ Write a story about a moment of fear.
       return customTimerMinutes;
     }
     
-    // SAT subjects - specific timing per section
-    if (subjectId?.startsWith('sat-')) {
-      const isMath = subjectId.includes('math');
-      return isMath ? 70 : 64; // Math: 70 minutes (35 per module), R&W: 64 minutes (32 per module)
-    }
-    
     const durations = {
       chemistry: 135, // 2h 15min
       biology: 105, // 1h 45min (AQA Biology Paper 1)
@@ -7279,7 +7186,7 @@ Write a story about a moment of fear.
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50/20 dark:to-blue-950/20 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3B82F6] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3BAFDA] mx-auto"></div>
           <p className="text-muted-foreground">Loading your custom exam...</p>
         </div>
       </div>
@@ -7327,11 +7234,11 @@ Write a story about a moment of fear.
           <div className="space-y-6">
             {/* Title Section with Premium Badge */}
             <div className="relative">
-              <div className="absolute -top-2 -left-2 w-20 h-20 bg-[#3B82F6]/20 rounded-full blur-2xl"></div>
+              <div className="absolute -top-2 -left-2 w-20 h-20 bg-[#3BAFDA]/20 rounded-full blur-2xl"></div>
               <div className="relative">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 mb-3">
-                  <div className="w-2 h-2 rounded-full bg-[#3B82F6] animate-pulse"></div>
-                  <span className="text-sm font-medium text-[#3B82F6]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3BAFDA]/10 border border-[#3BAFDA]/20 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-[#3BAFDA] animate-pulse"></div>
+                  <span className="text-sm font-medium text-[#3BAFDA]">
                     {isCustomExam ? 'Custom Paper' : 'Predicted Exam'}
                   </span>
                 </div>
@@ -7346,28 +7253,28 @@ Write a story about a moment of fear.
 
             {/* Premium Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <Card className="border-2 border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/10 hover:border-[#3B82F6]/40 hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <FileText className="h-6 w-6 text-white" />
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <FileText className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-[#3B82F6]">{examQuestions.length}</p>
+                      <p className="text-3xl font-bold text-[#3BAFDA]">{examQuestions.length}</p>
                       <p className="text-sm text-muted-foreground font-medium">Questions</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="border-2 border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/10 hover:border-[#3B82F6]/40 hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300 group">
+              <Card className="border-2 border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/10 hover:border-[#3BAFDA]/40 hover:shadow-lg hover:shadow-[#3BAFDA]/10 transition-all duration-300 group">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-[#3B82F6] shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Clock className="h-6 w-6 text-white" />
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl bg-[#3BAFDA] shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-3xl font-bold text-[#3B82F6]">{getExamDuration()}min</p>
+                      <p className="text-3xl font-bold text-[#3BAFDA]">{getExamDuration()}min</p>
                       <p className="text-sm text-muted-foreground font-medium">Time Limit</p>
                     </div>
                   </div>
@@ -7376,27 +7283,17 @@ Write a story about a moment of fear.
             </div>
 
             {/* Instructions Card */}
-            <Card className="border-[#3B82F6]/20 bg-gradient-to-br from-card to-[#3B82F6]/5 shadow-lg">
-              <CardHeader className="border-b border-[#3B82F6]/10 bg-[#3B82F6]/5">
+            <Card className="border-[#3BAFDA]/20 bg-gradient-to-br from-card to-[#3BAFDA]/5 shadow-lg">
+              <CardHeader className="border-b border-[#3BAFDA]/10 bg-[#3BAFDA]/5">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-[#3B82F6] shadow-md">
+                  <div className="p-2 rounded-lg bg-[#3BAFDA] shadow-md">
                     <AlertCircle className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-[#3B82F6]">Exam Instructions</span>
+                  <span className="text-[#3BAFDA]">Exam Instructions</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
-                {subjectId?.startsWith('sat-') ? (
-                  <ul className="text-sm space-y-2">
-                    <li>• <strong>Digital SAT Format:</strong> This exam follows the official SAT structure</li>
-                    <li>• <strong>Module 1:</strong> {subjectId.includes('math') ? '22' : '27'} questions (Foundation level)</li>
-                    <li>• <strong>Module 2:</strong> {subjectId.includes('math') ? '22' : '27'} questions (Advanced level)</li>
-                    <li>• <strong>Time:</strong> {getExamDuration()} minutes total ({subjectId.includes('math') ? '35' : '32'} minutes per module)</li>
-                    <li>• <strong>Format:</strong> All questions are multiple choice (A, B, C, D)</li>
-                    <li>• <strong>Scoring:</strong> Each question is worth 1 mark</li>
-                    <li>• Select your answer by clicking on the choice buttons</li>
-                  </ul>
-                ) : subjectId === 'english-literature' ? (
+                {subjectId === 'english-literature' ? (
                   <ul className="text-sm space-y-2">
                     <li>• <strong>Section A:</strong> Choose ONE Shakespeare question to answer</li>
                     <li>• <strong>Section B:</strong> Choose ONE 19th Century novel question to answer</li>
@@ -7501,7 +7398,7 @@ Write a story about a moment of fear.
             <Button 
               onClick={startExam}
               size="lg"
-              className="w-full h-14 text-lg font-semibold bg-[#3B82F6] hover:bg-[#2563EB] text-white border-0 shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:scale-[1.02] transition-all duration-300"
+              className="w-full h-14 text-lg font-semibold bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white border-0 shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] hover:scale-[1.02] transition-all duration-300"
             >
               <span className="flex items-center gap-2">
                 Start Exam
@@ -7627,7 +7524,7 @@ Write a story about a moment of fear.
             </div>
             <Button
               onClick={handleSubmit}
-              className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-8 py-5 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Target className="h-4 w-4 mr-2" />
               Submit for Marking
@@ -7667,21 +7564,6 @@ Write a story about a moment of fear.
                   )}
                 </div>
                 
-                {/* Passage section (if exists) */}
-                {examQuestions[currentQuestion].passageText && (
-                  <div className="mb-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
-                    <div className="flex items-start gap-3 mb-3">
-                      <FileText className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <h4 className="text-sm font-semibold text-blue-900 uppercase tracking-wide">
-                        Reading Passage
-                      </h4>
-                    </div>
-                    <p className="text-base text-gray-800 leading-relaxed whitespace-pre-wrap">
-                      {examQuestions[currentQuestion].passageText}
-                    </p>
-                  </div>
-                )}
-                
                 {/* Question text */}
                 <p className="text-base text-slate-900 leading-relaxed mb-2 whitespace-pre-wrap">
                   {examQuestions[currentQuestion].text}
@@ -7719,7 +7601,7 @@ Write a story about a moment of fear.
             {currentQuestion === examQuestions.length - 1 ? (
               <Button
                 onClick={handleSubmit}
-                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-['Inter']"
               >
                 <Target className="h-4 w-4 mr-2" />
                 Submit for Marking
@@ -7727,7 +7609,7 @@ Write a story about a moment of fear.
             ) : (
               <Button
                 onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
-                className="bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                className="bg-[#3BAFDA] hover:bg-[#2E9DBF] text-white rounded-full px-10 py-6 font-semibold text-base shadow-[0_6px_24px_rgba(59,175,218,0.25)] hover:shadow-[0_8px_32px_rgba(59,175,218,0.35)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Next Question
               </Button>

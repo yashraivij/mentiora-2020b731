@@ -61,19 +61,8 @@ const PredictedResults = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  const isSAT = (subjectId: string | undefined) => {
-    return subjectId?.toLowerCase().startsWith('sat-') || false;
-  };
-
-  // Helper function to convert numeric grade to letter grade for A-Level or SAT score
-  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined, percentage?: number) => {
-    if (isSAT(subjectId)) {
-      // SAT shows raw score out of total questions (54 for full exam: 27 per module)
-      const totalQuestions = 54;
-      const rawScore = Math.round((percentage || 0) / 100 * totalQuestions);
-      return `${rawScore}/${totalQuestions}`;
-    }
-    
+  // Helper function to convert numeric grade to letter grade for A-Level
+  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
     if (!isALevel(subjectId)) {
       return numericGrade.toFixed(1);
     }
@@ -91,9 +80,6 @@ const PredictedResults = () => {
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
-    if (isSAT(subjectId)) {
-      return { min: '0/54', max: '54/54' };
-    }
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -101,16 +87,12 @@ const PredictedResults = () => {
   };
 
   // Helper function to get progress description
-  const getProgressDescription = (grade: number, subjectId: string | undefined, percentage?: number) => {
-    if (isSAT(subjectId)) {
-      const percentile = Math.min(99, Math.round(percentage || 0));
-      return `${percentile}th percentile (estimated)`;
-    }
-    const progressPercentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
+  const getProgressDescription = (grade: number, subjectId: string | undefined) => {
+    const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
     if (isALevel(subjectId)) {
-      return `Progress: ${progressPercentage}% towards grade A*`;
+      return `Progress: ${percentage}% towards grade A*`;
     }
-    return `Progress: ${progressPercentage}% towards grade 9`;
+    return `Progress: ${percentage}% towards grade 9`;
   };
   
   // If no state is provided, show a message instead of redirecting
@@ -169,24 +151,6 @@ const PredictedResults = () => {
 
   // Use exact same Smart marking system as Practice.tsx - OPTIMIZED
   const markAnswerWithSmart = async (question: ExamQuestion, answer: string, modelAnswer: string) => {
-    // For SAT multiple choice questions (1 mark), use simple letter comparison
-    if (isSAT(subjectId) && question.marks === 1) {
-      // Extract correct answer letter from model answer (e.g., "A)", "B)", etc.)
-      const correctLetterMatch = modelAnswer.match(/^([A-D])\)/);
-      const correctLetter = correctLetterMatch ? correctLetterMatch[1] : modelAnswer.trim().charAt(0).toUpperCase();
-      const userLetter = answer.trim().toUpperCase();
-      
-      const isCorrect = userLetter === correctLetter;
-      
-      return {
-        marksAwarded: isCorrect ? 1 : 0,
-        feedback: isCorrect 
-          ? `Correct! The answer is ${correctLetter}.`
-          : `Incorrect. The correct answer is ${correctLetter}.`,
-        assessment: isCorrect ? "Excellent" : "Needs Improvement"
-      };
-    }
-
     try {
       console.log('Calling Smart marking function with:', { 
         question: question.text || question.question, 
@@ -855,23 +819,14 @@ const PredictedResults = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
             <CardHeader className="border-b border-border/50 relative pb-4">
-                {/* Predicted Grade Improvement - Updated for SAT */}
-                <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
-                    <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
-                    <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">
-                      {isSAT(actualSubjectIdForGrading) ? 'Your Score' : 'Grade Improvement'}
-                    </span>
-                  </div>
-                  <CardTitle className="text-2xl font-bold">
-                    {isSAT(actualSubjectIdForGrading) ? 'Your SAT Score' : 'Predicted Grade'}
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    {isSAT(actualSubjectIdForGrading) 
-                      ? 'Your performance on this practice test' 
-                      : 'Based on your recent performance'}
-                  </p>
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
+                  <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
+                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
                 </div>
+                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
+                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
+              </div>
             </CardHeader>
             <CardContent className="p-6 relative">
               <div className="space-y-6">
@@ -879,12 +834,12 @@ const PredictedResults = () => {
                 <div className="flex items-center justify-center">
                   <div className="text-center space-y-2 group">
                     <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      {isSAT(actualSubjectIdForGrading) ? 'Your Score' : 'Your Predicted Grade'}
+                      Your Predicted Grade
                     </Badge>
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
                       <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(numericGrade, actualSubjectIdForGrading, percentage)}
+                        {getDisplayGrade(numericGrade, actualSubjectIdForGrading)}
                       </div>
                     </div>
                   </div>
@@ -912,11 +867,7 @@ const PredictedResults = () => {
                   </div>
                   <div className="text-center pt-1">
                     <p className="text-sm text-muted-foreground">
-                      <span className="font-bold text-[hsl(195,69%,54%)]">
-                        {isSAT(actualSubjectIdForGrading) 
-                          ? `${Math.min(99, Math.round(percentage))}th` 
-                          : `${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%`}
-                      </span> {getProgressDescription(numericGrade, actualSubjectIdForGrading, percentage).replace(/^\d+(?:th|%)?\s*/, '')}
+                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, actualSubjectIdForGrading).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
                     </p>
                   </div>
                 </div>
@@ -933,87 +884,6 @@ const PredictedResults = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* SAT Module Performance Breakdown */}
-        {subjectId?.startsWith('sat-') && (
-          <div className="space-y-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <h2 className="text-2xl font-bold text-foreground">Module Performance</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Module 1 Card */}
-              <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-[hsl(195,69%,54%)]" />
-                    Module 1
-                  </CardTitle>
-                  <CardDescription>Foundation Questions</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {(() => {
-                    const module1Attempts = attempts.filter(a => {
-                      const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
-                      return q?.section === 'Module 1';
-                    });
-                    const module1Correct = module1Attempts.filter(a => a.score === 1).length;
-                    const module1Total = module1Attempts.length;
-                    const module1Percentage = module1Total > 0 ? Math.round((module1Correct / module1Total) * 100) : 0;
-                    
-                    return (
-                      <>
-                        <div className="text-center mb-3">
-                          <div className="text-3xl font-bold text-[hsl(195,69%,54%)]">
-                            {module1Correct}/{module1Total}
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            {module1Percentage}% correct
-                          </div>
-                        </div>
-                        <Progress value={module1Percentage} className="h-2" />
-                      </>
-                    );
-                  })()}
-                </CardContent>
-              </Card>
-              
-              {/* Module 2 Card */}
-              <Card className="bg-card rounded-xl border shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                    <Target className="h-5 w-5 text-[hsl(195,69%,54%)]" />
-                    Module 2
-                  </CardTitle>
-                  <CardDescription>Advanced Questions</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {(() => {
-                    const module2Attempts = attempts.filter(a => {
-                      const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
-                      return q?.section === 'Module 2';
-                    });
-                    const module2Correct = module2Attempts.filter(a => a.score === 1).length;
-                    const module2Total = module2Attempts.length;
-                    const module2Percentage = module2Total > 0 ? Math.round((module2Correct / module2Total) * 100) : 0;
-                    
-                    return (
-                      <>
-                        <div className="text-center mb-3">
-                          <div className="text-3xl font-bold text-[hsl(195,69%,54%)]">
-                            {module2Correct}/{module2Total}
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            {module2Percentage}% correct
-                          </div>
-                        </div>
-                        <Progress value={module2Percentage} className="h-2" />
-                      </>
-                    );
-                  })()}
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        )}
 
         {/* Question Breakdown */}
         <div className="space-y-6 animate-fade-in" style={{ animationDelay: '600ms' }}>
@@ -1079,67 +949,7 @@ const PredictedResults = () => {
                         </div>
                         <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50">
                           <p className="text-foreground leading-relaxed">
-                            {isSAT(subjectId) && question.marks === 1 ? (
-                              /* SAT Multiple Choice - Show selected letter with full choice text */
-                              (() => {
-                                const userChoice = attempt.userAnswer;
-                                
-                                // Helper to get the choice text for the user's answer
-                                const getUserChoiceText = () => {
-                                  // Check if choices are in markingCriteria (SAT questions)
-                                  if (question.markingCriteria?.choices) {
-                                    const choices = question.markingCriteria.choices;
-                                    
-                                    // Handle array format (SAT Math questions)
-                                    if (Array.isArray(choices)) {
-                                      const letterIndex = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
-                                      const index = letterIndex[userChoice];
-                                      if (index !== undefined && choices[index]) {
-                                        return choices[index];
-                                      }
-                                    }
-                                    
-                                    // Handle object format (fallback for other formats)
-                                    if (typeof choices === 'object' && choices[userChoice]) {
-                                      return choices[userChoice];
-                                    }
-                                  }
-                                  
-                                  // Otherwise, extract from question text (existing logic)
-                                  const questionText = question.text || question.question || '';
-                                  const lastQuestionMark = questionText.lastIndexOf('?');
-                                  const searchStart = lastQuestionMark > -1 ? lastQuestionMark : 0;
-                                  const choiceStart = questionText.indexOf(`${userChoice})`, searchStart);
-                                  
-                                  if (choiceStart === -1) return '';
-                                  
-                                  const nextLetters = ['A', 'B', 'C', 'D'];
-                                  const currentIndex = nextLetters.indexOf(userChoice);
-                                  let choiceEnd = questionText.length;
-                                  
-                                  for (let i = currentIndex + 1; i < nextLetters.length; i++) {
-                                    const nextStart = questionText.indexOf(`\n${nextLetters[i]})`, choiceStart + 2);
-                                    if (nextStart !== -1) {
-                                      choiceEnd = nextStart;
-                                      break;
-                                    }
-                                  }
-                                  
-                                  const choiceText = questionText.substring(choiceStart + 2, choiceEnd);
-                                  return choiceText.trim();
-                                };
-                                
-                                const choiceText = userChoice ? getUserChoiceText() : '';
-                                return (
-                                  <span>
-                                    <span className="font-semibold">{userChoice})</span> {choiceText || <span className="text-muted-foreground italic font-normal">Not answered</span>}
-                                  </span>
-                                );
-                              })()
-                            ) : (
-                              /* Regular answer display */
-                              attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>
-                            )}
+                            {attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>}
                           </p>
                         </div>
                       </div>

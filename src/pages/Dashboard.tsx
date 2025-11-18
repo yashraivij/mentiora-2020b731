@@ -222,7 +222,6 @@ const Dashboard = () => {
   // Medly dashboard state
   const [subjectDrawerOpen, setSubjectDrawerOpen] = useState(false);
   const [selectedDrawerSubject, setSelectedDrawerSubject] = useState<any>(null);
-  const [drawerSubjectWithTopics, setDrawerSubjectWithTopics] = useState<any>(null);
   const [drawerTab, setDrawerTab] = useState<'overview' | 'topics' | 'papers' | 'plan' | 'notes' | 'flashcards'>('overview');
   const [insightFilter, setInsightFilter] = useState<string | null>(null);
   const [weekTasksCompleted, setWeekTasksCompleted] = useState<Set<string>>(new Set());
@@ -299,11 +298,6 @@ const Dashboard = () => {
     
     // For subjects that already have exam board in their name, return as-is
     if (name.includes('(AQA)') || name.includes('(Edexcel)') || name.includes('(OCR)') || name.includes('(Eduqas)')) {
-      return name;
-    }
-    
-    // For SAT subjects (College Board), return name without exam board
-    if (subject.id && subject.id.startsWith('sat-')) {
       return name;
     }
     
@@ -1535,74 +1529,6 @@ const Dashboard = () => {
     }
   }, [location.state, navigate, setActiveTab]);
 
-  // Fetch topics for drawer subject when it changes
-  useEffect(() => {
-    const fetchDrawerTopics = async () => {
-      if (!selectedDrawerSubject) {
-        setDrawerSubjectWithTopics(null);
-        return;
-      }
-
-    // Try to find subject in curriculum first
-    let subjectWithTopics = curriculum.find(s => s.id === selectedDrawerSubject.id);
-    
-    // If not found, OR found but has 0 topics, and it's a SAT subject, fetch topics directly from database
-    if ((!subjectWithTopics || (subjectWithTopics && subjectWithTopics.topics.length === 0)) && selectedDrawerSubject.id.startsWith('sat-')) {
-        console.log('🔍 SAT subject needs topics, fetching for:', selectedDrawerSubject.id, '| Name:', selectedDrawerSubject.name);
-        
-        let { data: topics, error } = await supabase
-          .from('curriculum_topics')
-          .select('id, name, order_index, subject_id')
-          .eq('subject_id', selectedDrawerSubject.id)
-          .order('order_index');
-        
-        if (!error && topics) {
-          console.log('✅ Fetched', topics.length, 'topics directly from database');
-          
-          // If 0 topics found, try alternate ID formats
-          if (topics.length === 0) {
-            const alternateId = selectedDrawerSubject.id
-              .replace('sat-standard-english-conventions', 'sat-english-conventions')
-              .replace('sat-expression-of-ideas', 'sat-expression-ideas')
-              .replace('sat-problem-solving-&-data-analysis', 'sat-problem-solving-data')
-              .replace('sat-geometry-&-trigonometry', 'sat-geometry-trigonometry');
-            
-            if (alternateId !== selectedDrawerSubject.id) {
-              console.log('🔄 Trying alternate ID:', alternateId);
-              const { data: altTopics, error: altError } = await supabase
-                .from('curriculum_topics')
-                .select('id, name, order_index, subject_id')
-                .eq('subject_id', alternateId)
-                .order('order_index');
-              
-              if (!altError && altTopics && altTopics.length > 0) {
-                topics = altTopics;
-                console.log('✅ Found', topics.length, 'topics with alternate ID');
-              }
-            }
-          }
-          
-          subjectWithTopics = {
-            id: selectedDrawerSubject.id,
-            name: selectedDrawerSubject.name,
-            topics: topics.map(t => ({
-              id: t.id,
-              name: t.name,
-              questions: [],
-              orderIndex: t.order_index
-            }))
-          };
-        } else if (error) {
-          console.error('❌ Error fetching topics:', error);
-        }
-      }
-      
-      setDrawerSubjectWithTopics(subjectWithTopics);
-    };
-
-    fetchDrawerTopics();
-  }, [selectedDrawerSubject, curriculum]);
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (user?.id) {
@@ -1891,15 +1817,6 @@ const Dashboard = () => {
       "psychology": "🧠",
       "psychology-aqa-alevel": "🧠",
       "spanish-aqa": "🇪🇸",
-      // SAT subjects
-      "sat-information-ideas": "📖",
-      "sat-craft-structure": "✍️",
-      "sat-expression-ideas": "💭",
-      "sat-english-conventions": "📝",
-      "sat-algebra": "🔢",
-      "sat-advanced-math": "📐",
-      "sat-problem-solving-data": "📊",
-      "sat-geometry-trigonometry": "📏",
     };
     return emojiMap[subjectId] || "📚";
   };
@@ -1914,24 +1831,9 @@ const Dashboard = () => {
         // Handle SAT topics first - check if subject name starts with "SAT:"
         if (subjectName.startsWith('SAT:')) {
           const topicName = subjectName.replace(/^SAT:\s*/i, '').replace(/\s*\(College Board\)/i, '').trim();
-          
-          // Map to exact database IDs
-          const satSubjectMap: {[key: string]: string} = {
-            'Information & Ideas': 'sat-information-ideas',
-            'Information and Ideas': 'sat-information-ideas',
-            'Craft & Structure': 'sat-craft-structure',
-            'Craft and Structure': 'sat-craft-structure',
-            'Expression of Ideas': 'sat-expression-ideas',
-            'Standard English Conventions': 'sat-english-conventions',
-            'Algebra': 'sat-algebra',
-            'Advanced Math': 'sat-advanced-math',
-            'Problem Solving & Data Analysis': 'sat-problem-solving-data',
-            'Problem Solving and Data Analysis': 'sat-problem-solving-data',
-            'Geometry & Trigonometry': 'sat-geometry-trigonometry',
-            'Geometry and Trigonometry': 'sat-geometry-trigonometry',
-          };
-          
-          return satSubjectMap[topicName] || `sat-${topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')}`;
+          // Convert topic name to ID format
+          const topicId = topicName.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-');
+          return `sat-${topicId}`;
         }
         
         // Normalize subject name (remove ALL duplicate A-Level markers)
@@ -2157,8 +2059,21 @@ const Dashboard = () => {
     // Try to find in curriculum first
     let subject = curriculum.find(s => s.id === subjectId);
     
+    // If not found in curriculum, check if it's a SAT topic
+    if (!subject && subjectId.startsWith('sat-')) {
+      const satTopic = SAT_TOPICS.find(t => t.id === subjectId);
+      if (satTopic) {
+        // Create a mock subject object for SAT topics
+        subject = {
+          id: satTopic.id,
+          name: satTopic.name,
+          topics: []
+        };
+      }
+    }
+    
     if (!subject) {
-      console.error('❌ Subject not found in curriculum:', subjectId);
+      console.error('❌ Subject not found in curriculum or SAT topics:', subjectId);
       return;
     }
 
@@ -3018,11 +2933,6 @@ const Dashboard = () => {
                         </div>
                       </SheetHeader>
 
-                      {/* Check if current subject is SAT */}
-                      {(() => {
-                        const isSATSubject = selectedDrawerSubject?.id?.startsWith('sat-');
-                        
-                        return (
                       <Tabs value={drawerTab} onValueChange={(v) => setDrawerTab(v as any)} className="mt-4 sm:mt-8">
                         {/* Mobile Dropdown */}
                         <div className="sm:hidden">
@@ -3033,7 +2943,7 @@ const Dashboard = () => {
                             <SelectContent className="bg-background border-border">
                               <SelectItem value="overview">Overview</SelectItem>
                               <SelectItem value="topics">Topics</SelectItem>
-                              {!isSATSubject && <SelectItem value="papers">Papers</SelectItem>}
+                              <SelectItem value="papers">Papers</SelectItem>
                               <SelectItem value="plan">Plan</SelectItem>
                               <SelectItem value="notes">Notes</SelectItem>
                               <SelectItem value="flashcards">Flashcards</SelectItem>
@@ -3042,18 +2952,16 @@ const Dashboard = () => {
                         </div>
                         
                         {/* Desktop Tabs */}
-                        <TabsList className={`hidden sm:grid w-full ${isSATSubject ? 'grid-cols-5' : 'grid-cols-6'} rounded-2xl p-1.5 bg-muted border border-border`}>
+                        <TabsList className="hidden sm:grid w-full grid-cols-6 rounded-2xl p-1.5 bg-muted border border-border">
                           <TabsTrigger value="overview" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Overview
                           </TabsTrigger>
                           <TabsTrigger value="topics" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Topics
                           </TabsTrigger>
-                          {!isSATSubject && (
-                            <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
-                              Papers
-                            </TabsTrigger>
-                          )}
+                          <TabsTrigger value="papers" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
+                            Papers
+                          </TabsTrigger>
                           <TabsTrigger value="plan" className="rounded-xl data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary font-semibold">
                             Plan
                           </TabsTrigger>
@@ -3288,9 +3196,9 @@ const Dashboard = () => {
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  // Use the pre-fetched subject with topics from state
-                                  const subject = drawerSubjectWithTopics;
-                                  console.log('Found subject in state?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
+                                  // Find subject in curriculum using the exact ID
+                                  const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
+                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
                                   
                                   if (subject) {
                                     console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
@@ -3558,16 +3466,7 @@ const Dashboard = () => {
                                   // Format topic name: remove prefixes like "c1-", "b2-" etc and capitalize
                                   const formatTopicName = (topicId: string) => {
                                     if (!topicId) return "Review Topics";
-                                    
-                                    // Look up actual topic name from drawerSubjectWithTopics first
-                                    if (drawerSubjectWithTopics?.topics) {
-                                      const topic = drawerSubjectWithTopics.topics.find(t => t.id === topicId);
-                                      if (topic?.name) {
-                                        return topic.name; // Use actual name from database
-                                      }
-                                    }
-                                    
-                                    // Fallback: Remove prefix patterns like c1-, b2-, p3- etc
+                                    // Remove prefix patterns like c1-, b2-, p3- etc
                                     const withoutPrefix = topicId.replace(/^[a-z]\d+-/i, '');
                                     // Replace hyphens with spaces and capitalize each word
                                     return withoutPrefix
@@ -3584,25 +3483,25 @@ const Dashboard = () => {
                                     // Monday - Kickstart
                                     [
                                       { text: `Create 10 flashcards on ${topicName}`, mins: 15, action: 'flashcards' },
-                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId, subjectId }
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
                                     ],
                                     // Tuesday - Strengthen Recall
                                     [
                                       { text: `Make and review flashcards on ${topicName}`, mins: 10, action: 'flashcards' },
-                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId, subjectId }
+                                      { text: `Practice questions on ${topicName}`, mins: 15, action: 'practice', topicId }
                                     ],
                                     // Wednesday - Mid-week Mastery
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 25, action: 'practice', topicId, subjectId }
+                                      { text: `Complete practice test on ${topicName}`, mins: 25, action: 'practice', topicId }
                                     ],
                                     // Thursday - Apply & Connect
                                     [
-                                      { text: `Practice questions on ${topicName}`, mins: 20, action: 'practice', topicId, subjectId },
+                                      { text: `Practice questions on ${topicName}`, mins: 20, action: 'practice', topicId },
                                       { text: `Review smart revision notes`, mins: 10, action: 'notebook' }
                                     ],
                                     // Friday - Checkpoint
                                     [
-                                      { text: `Complete practice test on ${topicName}`, mins: 35, action: 'practice', topicId, subjectId }
+                                      { text: `Complete practice test on ${topicName}`, mins: 35, action: 'practice', topicId }
                                     ],
                                     // Saturday - Light Review
                                     [
@@ -3610,7 +3509,7 @@ const Dashboard = () => {
                                     ],
                                     // Sunday - Reset & Plan
                                     [
-                                      { text: `Weekly recap practice on ${topicName}`, mins: 35, action: 'practice', topicId, subjectId }
+                                      { text: `Weekly recap practice on ${topicName}`, mins: 35, action: 'practice', topicId }
                                     ]
                                   ];
                                   return { activities: activitiesMap[dayIndex], subjectId };
@@ -3630,7 +3529,7 @@ const Dashboard = () => {
                                     } else if (activity.action === 'practice' && activity.topicId) {
                                       setSubjectDrawerOpen(false);
                                       // Navigate directly to practice page with subject and topic as path params
-                                      navigate(`/practice/${activity.subjectId}/${activity.topicId}`);
+                                      navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
                                       // Open the subject drawer with notes tab
                                       const subject = curriculum.find(s => s.id === subjectId);
@@ -4025,8 +3924,6 @@ const Dashboard = () => {
                           </Card>
                         </TabsContent>
                       </Tabs>
-                        );
-                      })()}
                     </>
                   )}
                 </SheetContent>

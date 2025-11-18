@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCurriculum } from "@/hooks/useCurriculum";
 import type { Question } from "@/services/curriculumService";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame, FileText } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -151,40 +151,23 @@ const Practice = () => {
     return subjectId?.toLowerCase().includes('alevel') || false;
   };
 
-  // Helper function to check if subject is SAT
-  const isSAT = (subjectId: string | undefined) => {
-    return subjectId?.toLowerCase().startsWith('sat-') || false;
-  };
-
-  // Helper function to convert numeric grade to display format based on subject type
+  // Helper function to convert numeric grade to letter grade for A-Level
   const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
-    // Handle SAT scores (400-1600 scale)
-    if (isSAT(subjectId)) {
-      const satScore = Math.max(400, Math.round(400 + ((numericGrade - 1) / 8) * 1200));
-      return satScore.toString();
+    if (!isALevel(subjectId)) {
+      return numericGrade.toFixed(1);
     }
     
-    // Handle A-Level letter grades
-    if (isALevel(subjectId)) {
-      if (numericGrade >= 8.5) return 'A*';
-      if (numericGrade >= 7.5) return 'A';
-      if (numericGrade >= 6.5) return 'B';
-      if (numericGrade >= 5.5) return 'C';
-      if (numericGrade >= 4.5) return 'D';
-      return 'E';
-    }
-    
-    // Default to GCSE numeric grades (1-9)
-    return numericGrade.toFixed(1);
+    // Convert 1-9 scale to A-Level letter grades
+    if (numericGrade >= 8.5) return 'A*';
+    if (numericGrade >= 7.5) return 'A';
+    if (numericGrade >= 6.5) return 'B';
+    if (numericGrade >= 5.5) return 'C';
+    if (numericGrade >= 4.5) return 'D';
+    return 'E';
   };
 
   // Helper function to get progress bar labels
   const getProgressBarLabels = (subjectId: string | undefined) => {
-    // SAT total scores
-    if (isSAT(subjectId)) {
-      return { min: '400', max: '1600' };
-    }
-    
     if (isALevel(subjectId)) {
       return { min: 'Grade E', max: 'Grade A*' };
     }
@@ -193,22 +176,15 @@ const Practice = () => {
 
   // Helper function to calculate progress percentage
   const getProgressPercentage = (grade: number, subjectId: string | undefined) => {
-    // For SAT: Grade 1 = 0%, Grade 9 = 100% (maps to 400-1600)
-    if (isSAT(subjectId)) {
-      return Math.max(0, Math.min(100, Math.round(((grade - 1) / 8) * 100)));
+    if (isALevel(subjectId)) {
+      // Map 4-9 scale to E-A* (4=E, 9=A*)
+      return Math.max(0, ((grade - 4) / 5) * 100);
     }
-    // For GCSE/A-Level: Grade 4 = 0%, Grade 9 = 100%
     return Math.max(0, ((grade - 4) / 5) * 100);
   };
 
   // Helper function to get progress description
   const getProgressDescription = (grade: number, subjectId: string | undefined) => {
-    // SAT description
-    if (isSAT(subjectId)) {
-      const percentage = getProgressPercentage(grade, subjectId);
-      return `Progress: ${percentage}% towards 1600 total score`;
-    }
-    
     const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
     if (isALevel(subjectId)) {
       return `Progress: ${percentage}% towards grade A*`;
@@ -376,9 +352,8 @@ const Practice = () => {
 
   // Save session state to localStorage
   const saveSessionState = () => {
-    if (!user?.id || !subjectId) return;
+    if (!user?.id || !subjectId || !topicId) return;
     
-    const topicKey = topicId || 'subject-level';
     const sessionState = {
       currentQuestionIndex,
       userAnswer,
@@ -389,16 +364,15 @@ const Practice = () => {
       lastSaved: new Date().toISOString()
     };
     
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
     localStorage.setItem(sessionKey, JSON.stringify(sessionState));
   };
 
   // Load session state from localStorage
   const loadSessionState = () => {
-    if (!user?.id || !subjectId) return false;
+    if (!user?.id || !subjectId || !topicId || !topic) return false;
     
-    const topicKey = topicId || 'subject-level';
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
     const savedState = localStorage.getItem(sessionKey);
     
     if (savedState) {
@@ -407,18 +381,7 @@ const Practice = () => {
         
         // Restore shuffled questions order and filter out diagram questions
         const restoredQuestions = state.shuffledQuestions
-          .map((id: string) => {
-            // For subject-level practice, search across all topics
-            if (!topic && subject) {
-              for (const t of subject.topics) {
-                const found = t.questions?.find(q => q.id === id);
-                if (found) return found;
-              }
-              return undefined;
-            }
-            // For topic-level practice (existing behavior)
-            return topic?.questions?.find(q => q.id === id);
-          })
+          .map((id: string) => topic.questions?.find(q => q.id === id))
           .filter((q: Question | undefined): q is Question => q !== undefined);
         const filteredRestoredQuestions = filterNonDiagramQuestions(restoredQuestions);
         
@@ -442,10 +405,9 @@ const Practice = () => {
 
   // Clear session state
   const clearSessionState = () => {
-    if (!user?.id || !subjectId) return;
+    if (!user?.id || !subjectId || !topicId) return;
     
-    const topicKey = topicId || 'subject-level';
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
     localStorage.removeItem(sessionKey);
   };
 
@@ -470,23 +432,12 @@ const Practice = () => {
     
     console.log('🔍 Practice page loaded:', { subjectId, topicId, hasSubject: !!subject, hasTopic: !!topic });
     
-    // Don't redirect if curriculum is still loading - wait for it
-    if (curriculumLoading) {
-      console.log('⏳ Waiting for curriculum to load...');
-      return;
-    }
-
-    // Check if this is a SAT subject
-    const isSATSubject = subject?.id.startsWith('sat-');
-    
-    // Allow SAT subjects without topicId for subject-level practice
-    if (!subject || (!topic && !isSATSubject)) {
+    if (!subject || !topic) {
       console.error('❌ REDIRECT: Subject or topic not found');
       console.error('Looking for subjectId:', subjectId);
       console.error('Looking for topicId:', topicId);
       console.error('Subject found:', !!subject, subject?.name);
       console.error('Topic found:', !!topic);
-      console.error('Is SAT subject:', isSATSubject);
       if (subject) {
         console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
       }
@@ -496,54 +447,30 @@ const Practice = () => {
     }
     
     // Debug logging
-    if (topic) {
-      console.log('Topic data:', topic);
-      console.log('Raw questions count:', topic.questions?.length || 0);
-      console.log('All questions:', topic.questions?.map(q => q.id) || []);
-    }
+    console.log('Topic data:', topic);
+    console.log('Raw questions count:', topic.questions?.length || 0);
+    console.log('All questions:', topic.questions?.map(q => q.id) || []);
     
     // Try to load existing session first
     const sessionRestored = loadSessionState();
     
     // Only shuffle questions if no session was restored
     if (!sessionRestored) {
-      let questionsToShuffle: Question[] = [];
-      
-      if (isSATSubject && !topicId) {
-        // SAT subject-level practice: collect questions from ALL topics
-        console.log('📚 Loading questions from all topics for SAT subject:', subject.name);
-        subject.topics.forEach(topic => {
-          if (topic.questions) {
-            questionsToShuffle.push(...topic.questions);
-          }
-        });
-        console.log(`Collected ${questionsToShuffle.length} questions from ${subject.topics.length} topics`);
-      } else if (topic) {
-        // Topic-level practice (existing behavior)
-        questionsToShuffle = topic.questions || [];
-      }
-      
-      const filteredQuestions = filterNonDiagramQuestions(questionsToShuffle);
+      const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
       
       console.log('Filtered questions count:', filteredQuestions.length);
       console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
       const shuffled = shuffleArray(filteredQuestions);
       
-      // Limit to 10 questions for SAT subjects only
-      const finalQuestions = isSATSubject 
-        ? shuffled.slice(0, 10) 
-        : shuffled;
-      
       console.log('Shuffled questions count:', shuffled.length);
-      console.log('Final questions count:', finalQuestions.length);
-      console.log('Final shuffled questions:', finalQuestions.map(q => q.id));
+      console.log('Final shuffled questions:', shuffled.map(q => q.id));
       
-      setShuffledQuestions(finalQuestions);
+      setShuffledQuestions(shuffled);
     }
     
     setIsLoadingQuestions(false);
-  }, [subject, topic, navigate, topicId, user?.id, curriculumLoading]);
+  }, [subject, topic, navigate, topicId, user?.id]);
 
   // Save state whenever important values change
   useEffect(() => {
@@ -674,11 +601,7 @@ const Practice = () => {
       
       const feedback = {
         modelAnswer: currentQuestion.modelAnswer,
-        whyThisGetsMark: currentQuestion.markingCriteria.breakdown 
-          ? currentQuestion.markingCriteria.breakdown.join('\n')
-          : (currentQuestion.markingCriteria.explanation || 
-             currentQuestion.markingCriteria.answer || 
-             'See model answer above'),
+        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
         whyYoursDidnt: markingResult.feedback,
         specLink: currentQuestion.specReference
       };
@@ -1456,20 +1379,6 @@ const Practice = () => {
     return percentage / 10; // 0-9% = 0.0-0.9 (U grade)
   };
 
-  // Show loading state while curriculum is loading or subject/topic not found
-  if (curriculumLoading || !subject || !topic) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
-          <p className="text-muted-foreground">
-            {curriculumLoading ? 'Loading curriculum...' : 'Loading practice questions...'}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   if (sessionComplete) {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
@@ -1520,21 +1429,21 @@ const Practice = () => {
               Section Complete!
             </h1>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              You've just finished <span className="font-semibold text-[#3B82F6]">{topic?.name}</span> — here's how you did.
+              You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{topic?.name}</span> — here's how you did.
             </p>
           </div>
 
           {/* Performance Summary Card - Overall Score Only */}
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/10 to-[#3B82F6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <CardContent className="p-6 relative">
                 <div className="text-center space-y-3">
                   <div className="space-y-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                       Overall Score
                     </p>
-                    <p className="text-5xl font-bold text-[#3B82F6]">
+                    <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
                       {Math.round(averagePercentage)}%
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -1548,16 +1457,16 @@ const Practice = () => {
 
           {/* Predicted Grade Improvement - Premium Card */}
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <Card className="bg-gradient-to-br from-card via-[#3B82F6]/10 to-[#3B82F6]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#3B82F6]/20 to-[#3B82F6]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20">
-                    <TrendingUp className="h-3 w-3 text-[#3B82F6]" />
-                    <span className="text-xs font-semibold text-[#3B82F6]">Grade Improvement</span>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
+                    <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
+                    <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
                   </div>
                   <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
                   <p className="text-sm text-muted-foreground">Based on your recent performance</p>
@@ -1570,12 +1479,12 @@ const Practice = () => {
                     /* First Practice - Show only current grade */
                     <div className="flex items-center justify-center">
                       <div className="text-center space-y-2 group">
-                        <Badge className="mb-1 bg-[#3B82F6] text-white border-0 text-xs">
+                        <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
                           Your Predicted Grade
                         </Badge>
                         <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/30 to-[#3B82F6]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-6xl font-bold text-[#3B82F6] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                          <div className={`relative text-6xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1585,12 +1494,12 @@ const Practice = () => {
                     /* Subsequent Practices - Show before/after comparison */
                     <div className="flex items-center justify-center gap-12">
                       <div className="text-center space-y-2 group">
-                        <Badge variant="outline" className="mb-1 border-[#3B82F6]/30 text-xs">
+                        <Badge variant="outline" className="mb-1 border-[hsl(195,69%,54%)]/30 text-xs">
                           Before
                         </Badge>
                         <div className="relative">
-                          <div className="absolute inset-0 bg-[#3B82F6]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-5xl font-bold text-[#3B82F6] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
+                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(oldPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1605,16 +1514,16 @@ const Practice = () => {
                           )}
                           <span className={!isPremium ? 'blur-sm' : ''}>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
                         </div>
-                        <ArrowRight className="h-6 w-6 text-[#3B82F6] animate-pulse" />
+                        <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                       </div>
 
                       <div className="text-center space-y-2 group">
-                        <Badge className="mb-1 bg-[#3B82F6] text-white border-0 text-xs">
+                        <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
                           Now
                         </Badge>
                         <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/30 to-[#3B82F6]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-5xl font-bold text-[#3B82F6] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1632,28 +1541,24 @@ const Practice = () => {
                       {/* Old grade position - only show if not first practice */}
                       {!isFirstPractice && (
                         <div 
-                          className="absolute top-0 bottom-0 bg-[#3B82F6]/30 rounded-full transition-all duration-1000 ease-out"
+                          className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)]/30 rounded-full transition-all duration-1000 ease-out"
                           style={{ 
                             width: '0%',
                             animation: 'fillProgress 1s ease-out 600ms forwards',
-                            '--target-width': isSAT(subjectId) 
-                              ? `${Math.max(0, ((oldPredictedGrade - 1) / 8) * 100)}%`
-                              : `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
+                            '--target-width': `${Math.max(0, ((oldPredictedGrade - 4) / 5) * 100)}%`
                           } as React.CSSProperties}
                         />
                       )}
                       {/* New grade position - animated bright fill */}
                       <div 
-                        className="absolute top-0 bottom-0 bg-gradient-to-r from-[#3B82F6] via-[#3B82F6] to-[#3B82F6] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[#3B82F6]/50"
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,60%,60%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[hsl(195,69%,54%)]/50"
                         style={{ 
                           width: '0%',
                           backgroundSize: '200% 100%',
                           animation: isFirstPractice 
                             ? 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms'
                             : 'fillProgress 1.5s ease-out 1200ms forwards, shimmer 3s infinite 2700ms',
-                          '--target-width': isSAT(subjectId)
-                            ? `${Math.max(0, ((newPredictedGrade - 1) / 8) * 100)}%`
-                            : `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
+                          '--target-width': `${Math.max(0, ((newPredictedGrade - 4) / 5) * 100)}%`
                         } as React.CSSProperties}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: isFirstPractice ? 'slideAndFade 2s infinite 2100ms' : 'slideAndFade 2s infinite 2700ms' }} />
@@ -1661,7 +1566,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{getProgressPercentage(newPredictedGrade, subjectId)}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${getProgressPercentage(newPredictedGrade, subjectId)}% `, '')}
+                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
                       </p>
                     </div>
                   </div>
@@ -1906,7 +1811,7 @@ const Practice = () => {
             <Button
               onClick={() => navigate('/dashboard')}
               size="lg"
-              className="px-10 py-6 rounded-xl text-base font-semibold bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white shadow-lg shadow-[#3B82F6]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="px-10 py-6 rounded-xl text-base font-semibold bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,48%)] text-white shadow-lg shadow-[hsl(195,69%,54%)]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Continue to Dashboard
               <ArrowRight className="h-5 w-5 ml-2" />
@@ -1915,8 +1820,8 @@ const Practice = () => {
 
           {/* Footer Message */}
           <div className="text-center py-6">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#3B82F6]/10 to-[#3B82F6]/20 dark:from-[#3B82F6]/10 dark:to-[#3B82F6]/20 border border-[#3B82F6]/30 dark:border-[#3B82F6]/30">
-              <Star className="h-5 w-5 text-[#3B82F6]" />
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
+              <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
               <p className="text-base font-medium text-foreground">
                 +{totalMPEarned} MP added for completing this section
               </p>
@@ -2080,21 +1985,6 @@ const Practice = () => {
                   </div>
                 </div>
                   
-                  {/* Passage section (if exists) */}
-                  {currentQuestion.passageText && (
-                    <div className="mb-6 p-6 bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 rounded-r-lg">
-                      <div className="flex items-start gap-3 mb-3">
-                        <FileText className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-                        <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100 uppercase tracking-wide">
-                          Reading Passage
-                        </h4>
-                      </div>
-                      <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">
-                        {currentQuestion.passageText}
-                      </p>
-                    </div>
-                  )}
-
                   {/* Question text */}
                   <p className="text-base text-foreground leading-relaxed mb-2">
                     {currentQuestion.question}
@@ -2127,9 +2017,9 @@ const Practice = () => {
                         <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
                       </div>
                       <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
-                        currentAttempt && currentAttempt.score === currentQuestion.marks
+                        currentAttempt.score === currentQuestion.marks
                           ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
-                          : currentAttempt && currentAttempt.score <= currentQuestion.marks / 2
+                          : currentAttempt.score <= currentQuestion.marks / 2
                           ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
                           : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
                       }`}>

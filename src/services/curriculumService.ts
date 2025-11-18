@@ -11,7 +11,6 @@ export interface Question {
   specReference?: string;
   calculatorGuidance?: string;
   orderIndex?: number;
-  passageText?: string;
 }
 
 export interface Topic {
@@ -62,7 +61,6 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
     }
 
     console.log(`✅ Fetched ${subjects.length} subjects`);
-    console.log('SAT subjects in curriculum:', subjects.filter(s => s.id.startsWith('sat-')).map(s => ({ id: s.id, name: s.name })));
 
     // Fetch all topics with pagination
     const allTopics: any[] = [];
@@ -136,7 +134,6 @@ export async function fetchCurriculumFromDatabase(): Promise<Subject[]> {
               specReference: q.spec_reference,
               calculatorGuidance: q.calculator_guidance,
               orderIndex: q.order_index,
-              passageText: q.passage_text,
             }));
 
           return {
