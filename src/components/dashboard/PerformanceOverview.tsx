@@ -187,9 +187,9 @@ export const PerformanceOverview = ({ predictedGrades, userSubjects }: Performan
           
           // GCSE/A-Level logic
           const targetGrade = parseInt(userSubject?.target_grade || "7");
-          const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || "0";
+          const gradeValue = prediction.grade || userSubject?.predicted_grade || userSubject?.target_grade || (isSATSubject(prediction.subject_id) ? "400" : "0");
           const isUngraded = gradeValue === 'U' || gradeValue === 0 || gradeValue === "0" || gradeValue === "0.0" || parseFloat(gradeValue as string) === 0;
-          const currentGrade = isUngraded ? 0 : parseInt(gradeValue as string);
+          const currentGrade = isUngraded ? (isSATSubject(prediction.subject_id) ? 400 : 0) : parseInt(gradeValue as string);
           const progressPercent = Math.min((currentGrade / targetGrade) * 100, 100);
 
           return (
