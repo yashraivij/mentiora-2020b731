@@ -324,6 +324,11 @@ const Dashboard = () => {
       return `${name} (OCR)`;
     }
     
+    // For SAT subjects, don't add exam board
+    if (subject.id.startsWith('sat-')) {
+      return name;
+    }
+
     // For all other subjects (AQA), add (AQA)
     return `${name} (AQA)`;
   };
