@@ -4001,7 +4001,7 @@ const Dashboard = () => {
                           
                           <TabsContent value="gcse" className="animate-fade-in">
                             {(() => {
-                              const gcseSubjects = availableSubjects.filter(s => !s.id.includes('alevel'));
+                              const gcseSubjects = availableSubjects.filter(s => !s.id.includes('alevel') && !s.id.startsWith('sat-'));
                               const groupedSubjects = new Map<string, typeof gcseSubjects>();
                               
                               gcseSubjects.forEach(subject => {
@@ -4094,7 +4094,7 @@ const Dashboard = () => {
 
                           <TabsContent value="alevel" className="animate-fade-in">
                             {(() => {
-                              const alevelSubjects = availableSubjects.filter(s => s.id.includes('alevel'));
+                              const alevelSubjects = availableSubjects.filter(s => s.id.includes('alevel') && !s.id.startsWith('sat-'));
                               const groupedSubjects = new Map<string, typeof alevelSubjects>();
                               
                               alevelSubjects.forEach(subject => {
