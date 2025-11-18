@@ -254,6 +254,18 @@ const Practice = () => {
 
   const { showMPReward } = useMPRewards();
 
+  // Early return while curriculum is still loading
+  if (curriculumLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
+
   const subject = curriculum.find(s => s.id === subjectId);
   const isSATSubject = subjectId?.startsWith('sat-');
   
@@ -453,6 +465,11 @@ const Practice = () => {
   };
 
   useEffect(() => {
+    // Don't run until curriculum is loaded
+    if (curriculumLoading) {
+      return;
+    }
+
     // Record activity when user visits practice page
     const recordVisit = async () => {
       if (user?.id) {
@@ -527,7 +544,7 @@ const Practice = () => {
     }
     
     setIsLoadingQuestions(false);
-  }, [subject, topic, navigate, topicId, user?.id]);
+  }, [subject, topic, navigate, topicId, user?.id, curriculumLoading]);
 
   // Save state whenever important values change
   useEffect(() => {
