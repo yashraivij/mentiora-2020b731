@@ -203,54 +203,77 @@ export function TopicMasteryDisplay() {
                 const subject = curriculum.find(s => s.id === progress.subjectId);
                 if (!subject || subject.topics.length === 0) return null;
                 
-                return (
-                  <div className="mt-4 space-y-3">
-                    <p className="text-xs font-medium text-muted-foreground">Topics:</p>
-                    <div className="space-y-2">
-                      {subject.topics.map((topic) => {
-                        const isMastered = progress.masteredTopics.includes(topic.id);
-                        
-                        return (
-                          <div 
-                            key={topic.id}
-                            className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                              isMastered
-                                ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800'
-                                : 'bg-muted/20 border-muted-foreground/20 hover:bg-muted/40'
-                            }`}
-                          >
-                            <div className="flex items-center space-x-2 flex-1">
-                              {isMastered ? (
-                                <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                              ) : (
-                                <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40 flex-shrink-0" />
-                              )}
-                              <span className={`text-sm font-medium ${
-                                isMastered
-                                  ? 'text-emerald-700 dark:text-emerald-300'
-                                  : 'text-foreground'
-                              }`}>
-                                {topic.name}
-                              </span>
-                            </div>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                navigate(`/practice/${progress.subjectId}/${topic.id}`);
-                              }}
-                              className="ml-2 flex-shrink-0 h-8 px-3 text-xs bg-background/50 hover:bg-background"
-                            >
-                              <BookOpen className="h-3 w-3 mr-1" />
-                              Revise
-                            </Button>
-                          </div>
-                        );
-                      })}
+                const isSATSubject = subject.id.startsWith('sat-');
+                
+                if (isSATSubject) {
+                  // SAT Subject - Show subject-level button only
+                  return (
+                    <div className="mt-4">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/practice/${progress.subjectId}`);
+                        }}
+                        className="w-full h-10 text-sm bg-background/50 hover:bg-background"
+                      >
+                        <BookOpen className="h-4 w-4 mr-2" />
+                        Start Practice
+                      </Button>
                     </div>
-                  </div>
-                );
+                  );
+                } else {
+                  // Non-SAT Subject - Show all topics
+                  return (
+                    <div className="mt-4 space-y-3">
+                      <p className="text-xs font-medium text-muted-foreground">Topics:</p>
+                      <div className="space-y-2">
+                        {subject.topics.map((topic) => {
+                          const isMastered = progress.masteredTopics.includes(topic.id);
+                          
+                          return (
+                            <div 
+                              key={topic.id}
+                              className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                                isMastered
+                                  ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800'
+                                  : 'bg-muted/20 border-muted-foreground/20 hover:bg-muted/40'
+                              }`}
+                            >
+                              <div className="flex items-center space-x-2 flex-1">
+                                {isMastered ? (
+                                  <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                                ) : (
+                                  <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40 flex-shrink-0" />
+                                )}
+                                <span className={`text-sm font-medium ${
+                                  isMastered
+                                    ? 'text-emerald-700 dark:text-emerald-300'
+                                    : 'text-foreground'
+                                }`}>
+                                  {topic.name}
+                                </span>
+                              </div>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  navigate(`/practice/${progress.subjectId}/${topic.id}`);
+                                }}
+                                className="ml-2 flex-shrink-0 h-8 px-3 text-xs bg-background/50 hover:bg-background"
+                              >
+                                <BookOpen className="h-3 w-3 mr-1" />
+                                Revise
+                              </Button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                }
               })()}
             </div>
           );
