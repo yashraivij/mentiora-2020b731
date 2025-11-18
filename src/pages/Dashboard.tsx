@@ -1844,6 +1844,18 @@ const Dashboard = () => {
         if (subjectName === "Computer Science") return "computer-science";
         if (subjectName === "Spanish") return "spanish-aqa";
         
+        // Handle SAT/College Board subjects
+        if (board === "college board") {
+          if (subjectName === "Algebra" || subjectName === "SAT: Algebra") return "sat-algebra";
+          if (subjectName === "Advanced Math" || subjectName === "SAT: Advanced Math") return "sat-advanced-math";
+          if (subjectName === "Geometry & Trigonometry" || subjectName === "SAT: Geometry & Trigonometry") return "sat-geometry-trigonometry";
+          if (subjectName === "Problem Solving & Data Analysis" || subjectName === "SAT: Problem Solving & Data Analysis") return "sat-problem-solving-data";
+          if (subjectName === "Information & Ideas" || subjectName === "SAT: Information & Ideas") return "sat-information-ideas";
+          if (subjectName === "Craft & Structure" || subjectName === "SAT: Craft & Structure") return "sat-craft-structure";
+          if (subjectName === "Standard English Conventions" || subjectName === "SAT: Standard English Conventions") return "sat-english-conventions";
+          if (subjectName === "Expression of Ideas" || subjectName === "SAT: Expression of Ideas") return "sat-expression-ideas";
+        }
+        
         // Fallback: try to find by name in curriculum
         const currSubject = curriculum.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
         return currSubject?.id || subjectName.toLowerCase().replace(/\s+/g, '-');
