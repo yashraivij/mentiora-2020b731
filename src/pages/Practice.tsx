@@ -376,8 +376,9 @@ const Practice = () => {
 
   // Save session state to localStorage
   const saveSessionState = () => {
-    if (!user?.id || !subjectId || !topicId) return;
+    if (!user?.id || !subjectId) return;
     
+    const topicKey = topicId || 'subject-level';
     const sessionState = {
       currentQuestionIndex,
       userAnswer,
@@ -388,15 +389,16 @@ const Practice = () => {
       lastSaved: new Date().toISOString()
     };
     
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
     localStorage.setItem(sessionKey, JSON.stringify(sessionState));
   };
 
   // Load session state from localStorage
   const loadSessionState = () => {
-    if (!user?.id || !subjectId || !topicId || !topic) return false;
+    if (!user?.id || !subjectId) return false;
     
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    const topicKey = topicId || 'subject-level';
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
     const savedState = localStorage.getItem(sessionKey);
     
     if (savedState) {
@@ -405,7 +407,18 @@ const Practice = () => {
         
         // Restore shuffled questions order and filter out diagram questions
         const restoredQuestions = state.shuffledQuestions
-          .map((id: string) => topic.questions?.find(q => q.id === id))
+          .map((id: string) => {
+            // For subject-level practice, search across all topics
+            if (!topic && subject) {
+              for (const t of subject.topics) {
+                const found = t.questions?.find(q => q.id === id);
+                if (found) return found;
+              }
+              return undefined;
+            }
+            // For topic-level practice (existing behavior)
+            return topic?.questions?.find(q => q.id === id);
+          })
           .filter((q: Question | undefined): q is Question => q !== undefined);
         const filteredRestoredQuestions = filterNonDiagramQuestions(restoredQuestions);
         
@@ -429,9 +442,10 @@ const Practice = () => {
 
   // Clear session state
   const clearSessionState = () => {
-    if (!user?.id || !subjectId || !topicId) return;
+    if (!user?.id || !subjectId) return;
     
-    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    const topicKey = topicId || 'subject-level';
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicKey}`;
     localStorage.removeItem(sessionKey);
   };
 
@@ -462,13 +476,17 @@ const Practice = () => {
       return;
     }
 
-    // Only redirect if curriculum is loaded AND subject/topic not found
-    if (!subject || !topic) {
+    // Check if this is a SAT subject
+    const isSATSubject = subject?.id.startsWith('sat-');
+    
+    // Allow SAT subjects without topicId for subject-level practice
+    if (!subject || (!topic && !isSATSubject)) {
       console.error('❌ REDIRECT: Subject or topic not found');
       console.error('Looking for subjectId:', subjectId);
       console.error('Looking for topicId:', topicId);
       console.error('Subject found:', !!subject, subject?.name);
       console.error('Topic found:', !!topic);
+      console.error('Is SAT subject:', isSATSubject);
       if (subject) {
         console.error('Available topics in subject:', subject.topics.map(t => ({ id: t.id, name: t.name })));
       }
@@ -478,24 +496,42 @@ const Practice = () => {
     }
     
     // Debug logging
-    console.log('Topic data:', topic);
-    console.log('Raw questions count:', topic.questions?.length || 0);
-    console.log('All questions:', topic.questions?.map(q => q.id) || []);
+    if (topic) {
+      console.log('Topic data:', topic);
+      console.log('Raw questions count:', topic.questions?.length || 0);
+      console.log('All questions:', topic.questions?.map(q => q.id) || []);
+    }
     
     // Try to load existing session first
     const sessionRestored = loadSessionState();
     
     // Only shuffle questions if no session was restored
     if (!sessionRestored) {
-      const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
+      let questionsToShuffle: Question[] = [];
+      
+      if (isSATSubject && !topicId) {
+        // SAT subject-level practice: collect questions from ALL topics
+        console.log('📚 Loading questions from all topics for SAT subject:', subject.name);
+        subject.topics.forEach(topic => {
+          if (topic.questions) {
+            questionsToShuffle.push(...topic.questions);
+          }
+        });
+        console.log(`Collected ${questionsToShuffle.length} questions from ${subject.topics.length} topics`);
+      } else if (topic) {
+        // Topic-level practice (existing behavior)
+        questionsToShuffle = topic.questions || [];
+      }
+      
+      const filteredQuestions = filterNonDiagramQuestions(questionsToShuffle);
       
       console.log('Filtered questions count:', filteredQuestions.length);
       console.log('Filtered questions:', filteredQuestions.map(q => q.id));
       
       const shuffled = shuffleArray(filteredQuestions);
       
-      // Limit to 10 questions for SAT topics only
-      const finalQuestions = subject?.id.startsWith('sat-') 
+      // Limit to 10 questions for SAT subjects only
+      const finalQuestions = isSATSubject 
         ? shuffled.slice(0, 10) 
         : shuffled;
       
