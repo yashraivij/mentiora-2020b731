@@ -67,7 +67,7 @@ const Login = () => {
             Welcome Back
           </CardTitle>
           <CardDescription className="text-gray-600 text-base">
-            Sign in to continue your GCSE revision journey
+            Sign in to pick up where you left off
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-4">
