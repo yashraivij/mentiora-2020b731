@@ -68,7 +68,7 @@ const Register = () => {
             Create Account
           </CardTitle>
           <CardDescription className="text-gray-600 text-base">
-            Start your personalized GCSE revision journey
+            Start preparing for your exams
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-4">
