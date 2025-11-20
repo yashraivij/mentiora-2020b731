@@ -106,6 +106,20 @@ const Index = () => {
             >
               🧪 Test Onboarding
             </Button>
+            <Button 
+              onClick={() => navigate('/diagnostic-test?type=reading')} 
+              variant="outline" 
+              className="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 font-semibold"
+            >
+              📖 Reading Test
+            </Button>
+            <Button 
+              onClick={() => navigate('/diagnostic-test?type=math')} 
+              variant="outline" 
+              className="border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold"
+            >
+              🔢 Math Test
+            </Button>
             
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#3B82F6' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
