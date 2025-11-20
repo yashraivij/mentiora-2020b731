@@ -7,14 +7,12 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
-import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const { register, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -39,19 +37,13 @@ const Register = () => {
     const success = await register(name, email, password);
     
     if (success) {
-      setShowOnboarding(true);
+      navigate("/onboarding");
     } else {
       toast.error("Registration failed. Please try again.");
     }
   };
 
-  const handleOnboardingComplete = () => {
-    setShowOnboarding(false);
-    navigate("/dashboard");
-  };
-
   return (
-    <>
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-lg border border-gray-100 bg-white rounded-2xl">
         <CardHeader className="text-center pb-2">
@@ -153,13 +145,6 @@ const Register = () => {
         </CardContent>
       </Card>
     </div>
-    
-    <OnboardingPopup
-      isOpen={showOnboarding}
-      onClose={handleOnboardingComplete}
-      onSubjectsAdded={handleOnboardingComplete}
-    />
-    </>
   );
 };
 
