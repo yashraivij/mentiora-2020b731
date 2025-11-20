@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { OwlCharacter } from "./OwlCharacter";
 
 interface TutorCharacterProps {
   pose?: "waving" | "listening" | "encouraging" | "excited" | "celebrating";
@@ -9,18 +10,10 @@ interface TutorCharacterProps {
   userName?: string;
 }
 
-const EMOJIS = {
-  waving: "🐌",
-  listening: "🐌",
-  encouraging: "🐌",
-  excited: "🐌",
-  celebrating: "🐌",
-};
-
 const SIZE_MAP = {
-  small: "text-[80px]",
-  medium: "text-[100px]",
-  large: "text-[150px]",
+  small: 80,
+  medium: 100,
+  large: 150,
 };
 
 export const TutorCharacter = ({
@@ -31,8 +24,7 @@ export const TutorCharacter = ({
   animated = true,
   userName,
 }: TutorCharacterProps) => {
-  const emoji = EMOJIS[pose];
-  const sizeClass = SIZE_MAP[size];
+  const characterSize = SIZE_MAP[size];
 
   // Personalize message with user's name if provided
   const personalizedMessage = message && userName 
@@ -94,13 +86,15 @@ export const TutorCharacter = ({
 
       {/* Character */}
       <motion.div
-        animate={{
-          ...floatAnimation,
-          ...celebrateAnimation,
+        animate={animated ? {
+          y: [0, -8, 0],
+        } : {}}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
         }}
-        className={sizeClass}
       >
-        {emoji}
+        <OwlCharacter pose={pose} size={characterSize} />
       </motion.div>
 
       {/* Confetti for celebration */}
