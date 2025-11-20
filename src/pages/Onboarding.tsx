@@ -176,15 +176,15 @@ export const Onboarding = () => {
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
                     <h1 className="text-[48px] font-bold text-white mb-4 leading-tight">
-                      Hey there!
+                      Hey there! 👋
                     </h1>
                     <p className="text-[20px] text-white leading-relaxed mb-12 opacity-90">
-                      I'm Linus. Let's kick things off with a few quick questions<br />about your study goals.
+                      Let's kick things off with a few quick questions<br />about your study goals.
                     </p>
                     
                     {/* Mascot */}
                     <div className="mb-16 flex justify-center">
-                      <div className="text-[120px]">
+                      <div className="text-[150px]">
                         🐌
                       </div>
                     </div>
@@ -204,123 +204,149 @@ export const Onboarding = () => {
 
               {/* Step 2: Name Input */}
               {currentStep === 2 && (
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What should we call you?</h2>
                   <p className="text-[18px] text-white/80 mb-8">We'll use this to personalize your experience</p>
                   
-                  <input
-                    type="text"
-                    placeholder="First name"
-                    value={onboardingData.firstName}
-                    onChange={(e) => setOnboardingData({ ...onboardingData, firstName: e.target.value })}
-                    className="w-full px-6 py-4 text-[18px] bg-transparent border-2 border-white text-white placeholder:text-white/60 rounded-xl focus:outline-none focus:border-white/90 transition-colors mb-8"
-                    autoFocus
-                  />
+                  <div className="w-full max-w-[480px]">
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      value={onboardingData.firstName}
+                      onChange={(e) => setOnboardingData({ ...onboardingData, firstName: e.target.value })}
+                      className="w-full px-6 py-4 text-[18px] bg-transparent border-2 border-white text-white placeholder:text-white/60 rounded-xl focus:outline-none focus:border-white/90 transition-colors mb-8 h-[56px]"
+                      autoFocus
+                    />
 
-                  <button
-                    onClick={handleNext}
-                    disabled={!canContinue()}
-                    className="w-full py-4 rounded-full text-[#0F4C45] font-semibold text-[18px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ backgroundColor: '#D4F663' }}
-                  >
-                    Continue →
-                  </button>
+                    <button
+                      onClick={handleNext}
+                      disabled={!canContinue()}
+                      className="w-full py-4 rounded-xl text-[#0F4C45] font-semibold text-[18px] transition-all disabled:opacity-50 disabled:cursor-not-allowed h-[56px]"
+                      style={{ backgroundColor: '#D4F663' }}
+                    >
+                      Continue →
+                    </button>
+                  </div>
                 </div>
               )}
 
               {/* Step 3: Grade Selection */}
               {currentStep === 3 && (
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What grade are you in?</h2>
                   <p className="text-[18px] text-white/80 mb-8">The more we know about you, the better we can guide your SAT journey!</p>
                   
-                  <div className="space-y-4 mb-8">
-                    {GRADES.map((grade) => (
-                      <button
-                        key={grade.id}
-                        onClick={() => setOnboardingData({ ...onboardingData, grade: grade.id })}
-                        className={`w-full flex items-center justify-center h-16 rounded-xl border-2 transition-all ${
-                          onboardingData.grade === grade.id
-                            ? 'border-[#D4F663] bg-[#D4F663]/20'
-                            : 'border-white/20 bg-white/10 hover:bg-white/15'
-                        }`}
-                      >
-                        <span className="text-[18px] text-white font-medium">{grade.label}</span>
-                      </button>
-                    ))}
+                  <div className="w-full max-w-[520px]">
+                    <div className="space-y-4 mb-8">
+                      {GRADES.map((grade) => (
+                        <button
+                          key={grade.id}
+                          onClick={() => setOnboardingData({ ...onboardingData, grade: grade.id })}
+                          className={`w-full flex items-center justify-center h-16 rounded-xl border-2 transition-all cursor-pointer ${
+                            onboardingData.grade === grade.id
+                              ? 'border-[#D4F663] bg-[#D4F663]/20'
+                              : 'border-white/20 bg-white/10 hover:bg-white/15'
+                          }`}
+                        >
+                          <span className="text-[18px] text-white font-medium">{grade.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={handleNext}
+                      disabled={!canContinue()}
+                      className="w-full py-4 rounded-xl text-[#0F4C45] font-semibold text-[18px] transition-all disabled:opacity-50 disabled:cursor-not-allowed h-[56px]"
+                      style={{ backgroundColor: '#D4F663' }}
+                    >
+                      Continue →
+                    </button>
                   </div>
                 </div>
               )}
 
               {/* Step 4: Experience */}
               {currentStep === 4 && (
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your experience with the SAT?</h2>
                   <p className="text-[18px] text-white/80 mb-8">Whether you're just starting out or giving it another go, we're here to help!</p>
                   
-                  <div className="space-y-4 mb-8">
-                    {SAT_EXPERIENCES.map((exp) => (
-                      <button
-                        key={exp.id}
-                        onClick={() => setOnboardingData({ ...onboardingData, satExperience: exp.id })}
-                        className={`w-full flex items-center justify-center h-16 rounded-xl border-2 transition-all ${
-                          onboardingData.satExperience === exp.id
-                            ? 'border-[#D4F663] bg-[#D4F663]/20'
-                            : 'border-white/20 bg-white/10 hover:bg-white/15'
-                        }`}
-                      >
-                        <span className="text-[18px] text-white font-medium">{exp.label}</span>
-                      </button>
-                    ))}
+                  <div className="w-full max-w-[520px]">
+                    <div className="space-y-4 mb-8">
+                      {SAT_EXPERIENCES.map((exp) => (
+                        <button
+                          key={exp.id}
+                          onClick={() => setOnboardingData({ ...onboardingData, satExperience: exp.id })}
+                          className={`w-full flex items-center justify-center h-16 rounded-xl border-2 transition-all cursor-pointer ${
+                            onboardingData.satExperience === exp.id
+                              ? 'border-[#D4F663] bg-[#D4F663]/20'
+                              : 'border-white/20 bg-white/10 hover:bg-white/15'
+                          }`}
+                        >
+                          <span className="text-[18px] text-white font-medium">{exp.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={handleNext}
+                      disabled={!canContinue()}
+                      className="w-full py-4 rounded-xl text-[#0F4C45] font-semibold text-[18px] transition-all disabled:opacity-50 disabled:cursor-not-allowed h-[56px]"
+                      style={{ backgroundColor: '#D4F663' }}
+                    >
+                      Continue →
+                    </button>
                   </div>
                 </div>
               )}
 
               {/* Step 5: Target Score */}
               {currentStep === 5 && !showCompletion && (
-                <div className="text-center">
+                <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your dream SAT score?</h2>
                   <p className="text-[18px] text-white/80 mb-8">Don't worry, we can adjust this later!</p>
                   
-                  <div className="bg-white/10 border border-white/20 rounded-2xl p-8 mb-6">
-                    <div className="text-center mb-8">
-                      <div className="text-[72px] font-bold text-white mb-2">
-                        {onboardingData.targetScore}
+                  <div className="w-full max-w-[520px]">
+                    <div className="bg-white/10 border border-white/20 rounded-2xl p-8 mb-6">
+                      <div className="text-center mb-8">
+                        <div className="text-[72px] font-bold text-white mb-2">
+                          {onboardingData.targetScore}
+                        </div>
+                        <div className="text-[16px] text-white/60">
+                          out of 1600
+                        </div>
                       </div>
-                      <div className="text-[16px] text-white/60">
-                        out of 1600
+                      
+                      <Slider
+                        value={[onboardingData.targetScore]}
+                        onValueChange={(value) => setOnboardingData({ ...onboardingData, targetScore: value[0] })}
+                        min={400}
+                        max={1600}
+                        step={10}
+                        className="mb-4"
+                      />
+                      
+                      <div className="flex justify-between text-[14px] text-white/60 font-medium">
+                        <span>400</span>
+                        <span>1600</span>
                       </div>
                     </div>
-                    
-                    <Slider
-                      value={[onboardingData.targetScore]}
-                      onValueChange={(value) => setOnboardingData({ ...onboardingData, targetScore: value[0] })}
-                      min={400}
-                      max={1600}
-                      step={10}
-                      className="mb-4"
-                    />
-                    
-                    <div className="flex justify-between text-[14px] text-white/60 font-medium">
-                      <span>400</span>
-                      <span>1600</span>
-                    </div>
-                  </div>
 
-                  <div className="bg-[#D4F663]/20 border border-[#D4F663]/40 rounded-xl p-4 flex gap-3 mb-8">
-                    <span className="text-[20px]">💡</span>
-                    <div className="text-[14px] text-white text-left">
-                      <strong>Tip:</strong> Average SAT score is ~1050. Top schools look for 1400+
+                    <div className="bg-[#D4F663]/20 border border-[#D4F663]/40 rounded-xl p-4 flex gap-3 mb-8">
+                      <span className="text-[20px]">💡</span>
+                      <div className="text-[14px] text-white text-left">
+                        <strong>Tip:</strong> Average SAT score is ~1050. Top schools look for 1400+
+                      </div>
                     </div>
-                  </div>
 
-                  <button
-                    onClick={handleNext}
-                    className="w-full py-4 rounded-full text-[#0F4C45] font-semibold text-[18px] transition-all"
-                    style={{ backgroundColor: '#D4F663' }}
-                  >
-                    Start my journey →
-                  </button>
+                    <button
+                      onClick={handleNext}
+                      className="w-full py-4 rounded-xl text-[#0F4C45] font-semibold text-[18px] transition-all h-[56px]"
+                      style={{ backgroundColor: '#D4F663' }}
+                    >
+                      Start my journey →
+                    </button>
+                  </div>
                 </div>
               )}
 
