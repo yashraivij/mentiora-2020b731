@@ -186,7 +186,7 @@ export const Onboarding = () => {
                     {/* Tutor Character */}
                     <div className="mb-16 flex justify-center">
                       <TutorCharacter 
-                        pose="waving"
+                        pose="greeting"
                         size="large"
                         position="center"
                         animated={true}
@@ -286,7 +286,7 @@ export const Onboarding = () => {
                   <div className="flex items-center justify-center gap-4 mb-6">
                     <h2 className="text-[36px] font-bold text-white">What's your experience with the SAT?</h2>
                     <TutorCharacter 
-                      pose="nodding"
+                      pose="explaining"
                       size="small"
                       message={onboardingData.firstName ? `Don't worry, ${onboardingData.firstName}!` : "Everyone starts somewhere!"}
                       position="side"
@@ -343,7 +343,7 @@ export const Onboarding = () => {
                         </div>
                       </div>
                       <TutorCharacter 
-                        pose="excited"
+                        pose="encouraging"
                         size="medium"
                         message={onboardingData.firstName ? `You got this, ${onboardingData.firstName}! 🎯` : "Let's aim high! 🎯"}
                         position="side"
@@ -405,7 +405,7 @@ export const Onboarding = () => {
                         
                         <div className="flex justify-center mb-8">
                           <TutorCharacter 
-                            pose="waving"
+                            pose="greeting"
                             size="large"
                             position="center"
                             animated={true}

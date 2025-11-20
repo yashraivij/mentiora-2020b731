@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { FoxCharacter } from "./FoxCharacter";
+import { TeacherOwl } from "./TeacherOwl";
 
 interface TutorCharacterProps {
-  pose?: "waving" | "listening" | "nodding" | "excited" | "celebrating";
+  pose?: "greeting" | "listening" | "explaining" | "encouraging" | "celebrating";
   size?: "small" | "medium" | "large";
   message?: string;
   position?: "center" | "top" | "side";
@@ -11,13 +11,13 @@ interface TutorCharacterProps {
 }
 
 const SIZE_MAP = {
-  small: 80,
-  medium: 100,
-  large: 180,
+  small: 90,
+  medium: 110,
+  large: 160,
 };
 
 export const TutorCharacter = ({
-  pose = "waving",
+  pose = "greeting",
   size = "large",
   message,
   position = "center",
@@ -65,28 +65,27 @@ export const TutorCharacter = ({
         position === "side" ? "flex-row gap-4" : "gap-3"
       }`}
     >
-      {/* Speech bubble */}
+      {/* Speech bubble - CLEAN version */}
       {personalizedMessage && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.3 }}
-          className="relative bg-white rounded-xl px-4 py-2.5 shadow-md"
-          style={{ maxWidth: "280px" }}
+          className="relative"
         >
-          <p className="text-[15px] font-medium text-[#0F4C45]">
-            {personalizedMessage}
-          </p>
-          {/* Speech bubble tail */}
-          <div 
-            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-white"
-          />
+          <div className="bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
+            <p className="text-gray-800 text-base font-medium leading-snug max-w-xs">
+              {personalizedMessage}
+            </p>
+          </div>
+          {/* Simple triangle tail */}
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] border-transparent border-t-white" />
         </motion.div>
       )}
 
       {/* Character */}
       <div>
-        <FoxCharacter pose={pose} size={characterSize} />
+        <TeacherOwl pose={pose} size={characterSize} />
       </div>
 
       {/* Confetti for celebration */}
@@ -111,7 +110,6 @@ export const TutorCharacter = ({
               transition={{
                 duration: 1.5,
                 delay: i * 0.1,
-                ease: "easeOut"
               }}
               className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full"
               style={{
