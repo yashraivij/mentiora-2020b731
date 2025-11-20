@@ -22,19 +22,28 @@ interface OnboardingData {
 }
 
 const GRADES = [
-  { id: '9th', label: '9th grade (Freshman)' },
-  { id: '10th', label: '10th grade (Sophomore)' },
-  { id: '11th', label: '11th grade (Junior)' },
-  { id: '12th', label: '12th grade (Senior)' },
-  { id: 'gap_year', label: 'Taking a gap year' },
-  { id: 'other', label: 'Other' },
+  { id: '9th', label: '9th grade (Freshman)', emoji: '📚' },
+  { id: '10th', label: '10th grade (Sophomore)', emoji: '📚' },
+  { id: '11th', label: '11th grade (Junior)', emoji: '🎓' },
+  { id: '12th', label: '12th grade (Senior)', emoji: '🎓' },
+  { id: 'gap_year', label: 'Taking a gap year', emoji: '🌍' },
+  { id: 'other', label: 'Other', emoji: '✨' },
 ];
 
 const SAT_EXPERIENCES = [
-  { id: 'taken_real', label: "I've taken the real SAT" },
-  { id: 'practice_tests', label: "I've taken practice tests" },
-  { id: 'both', label: "I've done both" },
-  { id: 'just_starting', label: "I'm just getting started" },
+  { id: 'taken_real', label: "I've taken the real SAT", emoji: '📝' },
+  { id: 'practice_tests', label: "I've taken practice tests", emoji: '📖' },
+  { id: 'both', label: "I've done both", emoji: '🎯' },
+  { id: 'just_starting', label: "I'm just getting started", emoji: '🌱' },
+];
+
+const PROFILE_EMOJIS = [
+  '😊', '😎', '🤓', '😄', '🥳', '😇', '🤩', '😁', '😀', '🙂',
+  '😌', '🤗', '🥰', '😏', '🤠', '🧐', '🤔', '🤫', '🤪', '😜',
+  '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐶', '🐱', '🐰', '🐸',
+  '🦄', '🐙', '🦉', '🦆', '🐧', '🦋', '🐝', '🦈', '🐬', '🦑',
+  '🎯', '⚡', '✨', '🔥', '💡', '🌟', '💫', '🎨', '🎸', '🎮',
+  '🚀', '🛸', '🌈', '⭐', '🌙', '☀️', '🌺', '🌻', '🍕', '🍔'
 ];
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
@@ -51,6 +60,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  // Load saved onboarding data from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('onboardingData');
     if (saved) {
@@ -63,6 +73,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   }, []);
 
+  // Save onboarding data to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
   }, [onboardingData]);
@@ -109,6 +120,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
+        // Update user profile with SAT-specific data
         await supabase
           .from('profiles')
           .update({
@@ -148,304 +160,308 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       }}
     >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 30 }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        className="bg-white rounded-[12px] w-[640px] max-h-[85vh] overflow-hidden flex flex-col"
-        style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)' }}
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 40, scale: 0.95 }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+        className="bg-white rounded-[24px] shadow-[0px_20px_80px_rgba(0,0,0,0.2)] w-[90%] max-w-[560px] p-10 max-h-[88vh] overflow-hidden flex flex-col"
       >
-        <div className="p-10 flex-1 overflow-y-auto">
-          {/* Progress Bar */}
-          {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
-            <div className="mb-8">
-              <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-3">
+        {/* Progress Bar */}
+        {currentStep >= 1 && currentStep <= 5 && !showCompletion && (
+          <div className="mb-6 flex-shrink-0">
+            <div className="w-full h-[6px] bg-[#E5E7EB] rounded-[3px] overflow-hidden mb-2">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#3B82F6] to-[#3B82F6]"
+                initial={{ width: 0 }}
+                animate={{ width: `${getProgressPercentage()}%` }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              />
+            </div>
+            <p className="text-[13px] text-[#6B7280] text-center font-medium">
+              Step {currentStep} of 5
+            </p>
+          </div>
+        )}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            className="flex-1 overflow-y-auto"
+          >
+            {/* Step 0: Welcome */}
+            {currentStep === 0 && (
+              <div className="text-center py-6">
                 <motion.div
-                  className="h-full bg-[#2563EB]"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${getProgressPercentage()}%` }}
-                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.15, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                  className="mb-8"
+                >
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-[20px] flex items-center justify-center bg-gradient-to-br from-[#3B82F6] to-[#2563EB] shadow-xl">
+                    <img
+                      src={mentioraLogo}
+                      alt="Mentiora"
+                      className="w-10 h-10 object-contain"
+                    />
+                  </div>
+                  <h1 className="text-[34px] font-bold text-black mb-3 leading-tight">
+                    Welcome to Mentiora! 👋
+                  </h1>
+                  <p className="text-[17px] text-[#6B7280] max-w-[400px] mx-auto leading-relaxed">
+                    Let's personalize your SAT prep journey in under a minute
+                  </p>
+                </motion.div>
+
+                <motion.button
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                  onClick={handleNext}
+                  className="w-full py-4 rounded-[14px] text-white font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                  style={{ backgroundColor: '#3B82F6' }}
+                >
+                  Let's go
+                  <span className="text-[18px]">→</span>
+                </motion.button>
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                  className="text-[13px] text-[#9CA3AF] mt-5"
+                >
+                  Takes about 60 seconds • Your info stays private 🔒
+                </motion.p>
+              </div>
+            )}
+
+            {/* Step 1: What's your name? */}
+            {currentStep === 1 && (
+              <div>
+                <h2 className="text-[26px] font-bold text-black mb-2">What should we call you?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">We'll use this to personalize your experience</p>
+                
+                <input
+                  type="text"
+                  placeholder="First name"
+                  value={onboardingData.firstName}
+                  onChange={(e) => setOnboardingData({ ...onboardingData, firstName: e.target.value })}
+                  className="w-full px-4 py-3 text-[15px] border-2 border-[#E5E7EB] rounded-[12px] focus:outline-none focus:border-[#3B82F6] transition-colors"
+                  autoFocus
                 />
               </div>
-              <p className="text-[14px] text-[#6B7280] text-center font-normal">
-                Step {currentStep} of 5
-              </p>
-            </div>
-          )}
+            )}
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            >
-              {/* Step 0: Welcome */}
-              {currentStep === 0 && (
-                <div className="text-center">
-                  <div className="mb-8">
-                    <div className="w-16 h-16 mx-auto mb-6 rounded-[12px] flex items-center justify-center bg-[#2563EB]">
-                      <img
-                        src={mentioraLogo}
-                        alt="Mentiora"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <h1 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                      Welcome to Mentiora
-                    </h1>
-                    <p className="text-[16px] text-[#6B7280] font-normal max-w-[420px] mx-auto" style={{ lineHeight: 1.6 }}>
-                      Let's personalize your SAT prep journey in under a minute
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={handleNext}
-                    className="w-full h-[56px] rounded-[12px] text-white font-semibold text-[17px] bg-[#2563EB] hover:bg-[#1D4ED8] transition-all duration-200"
-                  >
-                    Let's go →
-                  </button>
-
-                  <p className="text-[14px] text-[#9CA3AF] mt-5 font-normal">
-                    Takes about 60 seconds • Your info stays private
-                  </p>
+            {/* Step 2: What grade are you in? */}
+            {currentStep === 2 && (
+              <div>
+                <h2 className="text-[26px] font-bold text-black mb-2">What grade are you in?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">This helps us show you relevant content</p>
+                <div className="space-y-2.5">
+                  {GRADES.map((grade) => (
+                    <button
+                      key={grade.id}
+                      onClick={() => setOnboardingData({ ...onboardingData, grade: grade.id })}
+                      className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                        onboardingData.grade === grade.id
+                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-[24px]">{grade.emoji}</span>
+                        <span className="text-[15px] font-medium">{grade.label}</span>
+                      </div>
+                      {onboardingData.grade === grade.id && (
+                        <Check className="w-[20px] h-[20px] text-[#3B82F6]" />
+                      )}
+                    </button>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Step 1: What's your name? */}
-              {currentStep === 1 && (
-                <div>
-                  <h2 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                    What should we call you?
-                  </h2>
-                  <p className="text-[16px] text-[#6B7280] font-normal mb-8" style={{ lineHeight: 1.6 }}>
-                    We'll use this to personalize your experience
-                  </p>
+            {/* Step 3: What's your SAT experience? */}
+            {currentStep === 3 && (
+              <div>
+                <h2 className="text-[26px] font-bold text-black mb-2">What's your experience with the SAT?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-5">No worries if you're just starting—we'll meet you where you are!</p>
+                <div className="space-y-2.5">
+                  {SAT_EXPERIENCES.map((exp) => (
+                    <button
+                      key={exp.id}
+                      onClick={() => setOnboardingData({ ...onboardingData, satExperience: exp.id })}
+                      className={`w-full flex items-center justify-between p-4 rounded-[12px] border-2 transition-all ${
+                        onboardingData.satExperience === exp.id
+                          ? 'border-[#3B82F6] bg-[#F0F9FF]'
+                          : 'border-[#E5E7EB] hover:border-[#3B82F6]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-[24px]">{exp.emoji}</span>
+                        <span className="text-[15px] font-medium">{exp.label}</span>
+                      </div>
+                      {onboardingData.satExperience === exp.id && (
+                        <Check className="w-[20px] h-[20px] text-[#3B82F6]" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 4: What's your target score? */}
+            {currentStep === 4 && (
+              <div>
+                <h2 className="text-[26px] font-bold text-black mb-2">What's your dream SAT score?</h2>
+                <p className="text-[15px] text-[#6B7280] mb-6">Don't worry, we can adjust this later!</p>
+                
+                <div className="bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] rounded-[16px] p-8 mb-6">
+                  <div className="text-center mb-6">
+                    <div className="text-[56px] font-bold text-[#3B82F6] mb-2">
+                      {onboardingData.targetScore}
+                    </div>
+                    <div className="text-[13px] text-[#6B7280]">
+                      out of 1600
+                    </div>
+                  </div>
                   
-                  <input
-                    type="text"
-                    placeholder="First name"
-                    value={onboardingData.firstName}
-                    onChange={(e) => setOnboardingData({ ...onboardingData, firstName: e.target.value })}
-                    className="w-full h-[56px] px-4 text-[16px] font-medium border-2 border-[#E5E7EB] rounded-[12px] focus:outline-none focus:border-[#2563EB] transition-colors"
-                    autoFocus
+                  <Slider
+                    value={[onboardingData.targetScore]}
+                    onValueChange={(value) => setOnboardingData({ ...onboardingData, targetScore: value[0] })}
+                    min={400}
+                    max={1600}
+                    step={10}
+                    className="mb-4"
                   />
-                </div>
-              )}
-
-              {/* Step 2: What grade are you in? */}
-              {currentStep === 2 && (
-                <div>
-                  <h2 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                    What grade are you in?
-                  </h2>
-                  <p className="text-[16px] text-[#6B7280] font-normal mb-8" style={{ lineHeight: 1.6 }}>
-                    This helps us show you relevant content
-                  </p>
-                  <div className="space-y-4">
-                    {GRADES.map((grade) => (
-                      <button
-                        key={grade.id}
-                        onClick={() => setOnboardingData({ ...onboardingData, grade: grade.id })}
-                        className={`w-full h-[64px] flex items-center justify-between px-6 rounded-[12px] border-2 transition-all duration-200 ${
-                          onboardingData.grade === grade.id
-                            ? 'border-[#2563EB] bg-[#EFF6FF]'
-                            : 'border-[#E5E7EB] hover:border-[#93C5FD]'
-                        }`}
-                        style={{ boxShadow: onboardingData.grade === grade.id ? 'none' : '0 1px 3px rgba(0,0,0,0.1)' }}
-                      >
-                        <span className="text-[16px] font-medium text-[#111827]">{grade.label}</span>
-                        {onboardingData.grade === grade.id && (
-                          <Check className="w-5 h-5 text-[#2563EB]" strokeWidth={2.5} />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: What's your SAT experience? */}
-              {currentStep === 3 && (
-                <div>
-                  <h2 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                    What's your experience with the SAT?
-                  </h2>
-                  <p className="text-[16px] text-[#6B7280] font-normal mb-8" style={{ lineHeight: 1.6 }}>
-                    No worries if you're just starting—we'll meet you where you are
-                  </p>
-                  <div className="space-y-4">
-                    {SAT_EXPERIENCES.map((exp) => (
-                      <button
-                        key={exp.id}
-                        onClick={() => setOnboardingData({ ...onboardingData, satExperience: exp.id })}
-                        className={`w-full h-[64px] flex items-center justify-between px-6 rounded-[12px] border-2 transition-all duration-200 ${
-                          onboardingData.satExperience === exp.id
-                            ? 'border-[#2563EB] bg-[#EFF6FF]'
-                            : 'border-[#E5E7EB] hover:border-[#93C5FD]'
-                        }`}
-                        style={{ boxShadow: onboardingData.satExperience === exp.id ? 'none' : '0 1px 3px rgba(0,0,0,0.1)' }}
-                      >
-                        <span className="text-[16px] font-medium text-[#111827]">{exp.label}</span>
-                        {onboardingData.satExperience === exp.id && (
-                          <Check className="w-5 h-5 text-[#2563EB]" strokeWidth={2.5} />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 4: What's your target score? */}
-              {currentStep === 4 && (
-                <div>
-                  <h2 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                    What's your dream SAT score?
-                  </h2>
-                  <p className="text-[16px] text-[#6B7280] font-normal mb-8" style={{ lineHeight: 1.6 }}>
-                    Don't worry, we can adjust this later
-                  </p>
                   
-                  <div className="bg-[#F9FAFB] rounded-[12px] p-8 mb-6" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-                    <div className="text-center mb-8">
-                      <div className="text-[56px] font-bold text-[#2563EB] mb-2" style={{ lineHeight: 1 }}>
-                        {onboardingData.targetScore}
-                      </div>
-                      <div className="text-[14px] text-[#6B7280] font-normal">
-                        out of 1600
-                      </div>
-                    </div>
-                    
-                    <Slider
-                      value={[onboardingData.targetScore]}
-                      onValueChange={(value) => setOnboardingData({ ...onboardingData, targetScore: value[0] })}
-                      min={400}
-                      max={1600}
-                      step={10}
-                      className="mb-4"
-                    />
-                    
-                    <div className="flex justify-between text-[13px] text-[#9CA3AF] font-medium">
-                      <span>400</span>
-                      <span>1600</span>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#FEF3C7] border border-[#FDE68A] rounded-[12px] p-4">
-                    <div className="text-[14px] text-[#92400E] font-normal" style={{ lineHeight: 1.6 }}>
-                      <strong className="font-semibold">Tip:</strong> Average SAT score is ~1050. Top schools look for 1400+
-                    </div>
+                  <div className="flex justify-between text-[12px] text-[#9CA3AF] font-medium">
+                    <span>400</span>
+                    <span>1600</span>
                   </div>
                 </div>
-              )}
 
-              {/* Step 5: Completion animation */}
-              {showCompletion && (
-                <div className="text-center py-8">
-                  <AnimatePresence mode="wait">
-                    {completionStage === 1 && (
-                      <motion.div
-                        key="stage1"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="w-16 h-16 mx-auto mb-6 bg-[#2563EB] rounded-full flex items-center justify-center">
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            className="w-10 h-10 border-4 border-white border-t-transparent rounded-full"
-                          />
-                        </div>
-                        <h2 className="text-[28px] font-bold text-[#111827] mb-2" style={{ lineHeight: 1.4 }}>
-                          Setting up your personalized learning plan
-                        </h2>
-                        <p className="text-[16px] text-[#6B7280] font-normal" style={{ lineHeight: 1.6 }}>
-                          This will only take a moment
-                        </p>
-                      </motion.div>
-                    )}
+                <div className="bg-[#FEF3C7] border border-[#FDE68A] rounded-[12px] p-4 flex gap-3">
+                  <span className="text-[20px]">💡</span>
+                  <div className="text-[13px] text-[#92400E]">
+                    <strong>Tip:</strong> Average SAT score is ~1050. Top schools look for 1400+
+                  </div>
+                </div>
+              </div>
+            )}
 
-                    {completionStage === 2 && (
-                      <motion.div
-                        key="stage2"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="w-16 h-16 mx-auto mb-6 bg-[#2563EB] rounded-full flex items-center justify-center">
-                          <Check className="w-8 h-8 text-white" strokeWidth={3} />
-                        </div>
-                        <h2 className="text-[28px] font-bold text-[#111827] mb-2" style={{ lineHeight: 1.4 }}>
-                          Almost there
-                        </h2>
-                        <p className="text-[16px] text-[#6B7280] font-normal" style={{ lineHeight: 1.6 }}>
-                          Preparing your dashboard
-                        </p>
-                      </motion.div>
-                    )}
+            {/* Step 5: Completion animation */}
+            {showCompletion && (
+              <div className="text-center py-8">
+                <AnimatePresence mode="wait">
+                  {completionStage === 1 && (
+                    <motion.div
+                      key="stage1"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#3B82F6] rounded-full flex items-center justify-center">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="w-10 h-10 border-4 border-white border-t-transparent rounded-full"
+                        />
+                      </div>
+                      <h2 className="text-[24px] font-bold text-black mb-2">Setting up your personalized learning plan...</h2>
+                      <p className="text-[15px] text-[#6B7280]">This will only take a moment</p>
+                    </motion.div>
+                  )}
 
-                    {completionStage === 3 && (
-                      <motion.div
-                        key="stage3"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="text-[56px] mb-6">
-                          🎉
-                        </div>
-                        <h2 className="text-[32px] font-bold text-[#111827] mb-3" style={{ lineHeight: 1.4 }}>
-                          You're all set!
-                        </h2>
-                        <p className="text-[16px] text-[#6B7280] mb-10 font-normal" style={{ lineHeight: 1.6 }}>
-                          Let's start crushing your SAT prep
-                        </p>
-                        
-                        <button
-                          onClick={handleFinish}
-                          className="w-full h-[56px] rounded-[12px] text-white font-semibold text-[17px] bg-[#2563EB] hover:bg-[#1D4ED8] transition-all duration-200"
-                          style={{ boxShadow: '0 2px 8px rgba(37,99,235,0.3)' }}
+                  {completionStage === 2 && (
+                    <motion.div
+                      key="stage2"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="w-20 h-20 mx-auto mb-6 bg-[#3B82F6] rounded-full flex items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.5, type: "spring" }}
                         >
-                          Go to Dashboard →
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+                          <Check className="w-10 h-10 text-white" strokeWidth={3} />
+                        </motion.div>
+                      </div>
+                      <h2 className="text-[24px] font-bold text-black mb-2">Almost there...</h2>
+                      <p className="text-[15px] text-[#6B7280]">Preparing your dashboard</p>
+                    </motion.div>
+                  )}
 
-          {/* Navigation buttons */}
-          {currentStep > 0 && currentStep <= 5 && !showCompletion && (
-            <div className="flex gap-3 mt-10">
-              {currentStep > 1 && (
-                <button
-                  onClick={handleBack}
-                  className="px-6 h-[56px] rounded-[12px] font-semibold text-[17px] text-[#6B7280] border-2 border-[#E5E7EB] hover:border-[#D1D5DB] transition-all duration-200"
-                >
-                  ← Back
-                </button>
-              )}
-              
+                  {completionStage === 3 && (
+                    <motion.div
+                      key="stage3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
+                        className="text-[72px] mb-6"
+                      >
+                        🎉
+                      </motion.div>
+                      <h2 className="text-[32px] font-bold text-black mb-3">You're all set!</h2>
+                      <p className="text-[17px] text-[#6B7280] mb-8">Let's start crushing your SAT prep</p>
+                      
+                      <motion.button
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        onClick={handleFinish}
+                        className="w-full py-4 rounded-[14px] text-white font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300"
+                        style={{ backgroundColor: '#3B82F6' }}
+                      >
+                        Go to Dashboard →
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation buttons */}
+        {currentStep > 0 && currentStep <= 5 && !showCompletion && (
+          <div className="flex gap-3 mt-6 flex-shrink-0">
+            {currentStep > 1 && (
               <button
-                onClick={handleNext}
-                disabled={!canContinue()}
-                className={`flex-1 h-[56px] rounded-[12px] font-semibold text-[17px] text-white transition-all duration-200 ${
-                  canContinue()
-                    ? 'bg-[#2563EB] hover:bg-[#1D4ED8]'
-                    : 'bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed'
-                }`}
-                style={{ boxShadow: canContinue() ? '0 2px 8px rgba(37,99,235,0.3)' : 'none' }}
+                onClick={handleBack}
+                className="px-6 py-3 rounded-[12px] font-medium text-[15px] text-[#6B7280] border-2 border-[#E5E7EB] hover:border-[#D1D5DB] transition-all"
               >
-                {currentStep === 4 ? 'Start my journey →' : 'Continue →'}
+                ← Back
               </button>
-            </div>
-          )}
-        </div>
+            )}
+            
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className={`flex-1 py-3 rounded-[12px] font-semibold text-[15px] text-white transition-all duration-300 ${
+                canContinue()
+                  ? 'shadow-md hover:shadow-lg'
+                  : 'opacity-50 cursor-not-allowed'
+              }`}
+              style={{ backgroundColor: '#3B82F6' }}
+            >
+              {currentStep === 4 ? 'Start my journey →' : 'Continue →'}
+            </button>
+          </div>
+        )}
       </motion.div>
     </div>
   );
