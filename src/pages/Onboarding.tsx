@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Slider } from "@/components/ui/slider";
+import { TutorCharacter } from "@/components/onboarding/TutorCharacter";
 
 interface OnboardingData {
   firstName: string;
@@ -182,11 +183,14 @@ export const Onboarding = () => {
                       Let's kick things off with a few quick questions<br />about your study goals.
                     </p>
                     
-                    {/* Mascot */}
+                    {/* Tutor Character */}
                     <div className="mb-16 flex justify-center">
-                      <div className="text-[150px]">
-                        🐌
-                      </div>
+                      <TutorCharacter 
+                        pose="waving"
+                        size="large"
+                        position="center"
+                        animated={true}
+                      />
                     </div>
 
                     <div className="flex justify-end">
@@ -205,6 +209,17 @@ export const Onboarding = () => {
               {/* Step 2: Name Input */}
               {currentStep === 2 && (
                 <div className="text-center flex flex-col items-center">
+                  {/* Tutor Character with speech bubble */}
+                  <div className="mb-6">
+                    <TutorCharacter 
+                      pose="listening"
+                      size="medium"
+                      message="Nice to meet you! 👋"
+                      position="top"
+                      animated={true}
+                    />
+                  </div>
+                  
                   <h2 className="text-[36px] font-bold text-white mb-3">What should we call you?</h2>
                   <p className="text-[18px] text-white/80 mb-8">We'll use this to personalize your experience</p>
                   
@@ -268,7 +283,17 @@ export const Onboarding = () => {
               {/* Step 4: Experience */}
               {currentStep === 4 && (
                 <div className="text-center flex flex-col items-center">
-                  <h2 className="text-[36px] font-bold text-white mb-3">What's your experience with the SAT?</h2>
+                  <div className="flex items-center justify-center gap-4 mb-6">
+                    <h2 className="text-[36px] font-bold text-white">What's your experience with the SAT?</h2>
+                    <TutorCharacter 
+                      pose="encouraging"
+                      size="small"
+                      message={onboardingData.firstName ? `Don't worry, ${onboardingData.firstName}!` : "Everyone starts somewhere!"}
+                      position="side"
+                      animated={true}
+                      userName={onboardingData.firstName}
+                    />
+                  </div>
                   <p className="text-[18px] text-white/80 mb-8">Whether you're just starting out or giving it another go, we're here to help!</p>
                   
                   <div className="w-full max-w-[520px]">
@@ -307,14 +332,24 @@ export const Onboarding = () => {
                   <p className="text-[18px] text-white/80 mb-16">Don't worry, we can adjust this later!</p>
                   
                   <div className="w-full max-w-[520px]">
-                    {/* Score display - no box, floats on background */}
-                    <div className="text-center mb-12">
-                      <div className="text-[96px] font-bold text-white mb-2">
-                        {onboardingData.targetScore}
+                    {/* Score display with tutor character */}
+                    <div className="flex items-center justify-center gap-6 mb-12">
+                      <div className="text-center">
+                        <div className="text-[96px] font-bold text-white mb-2">
+                          {onboardingData.targetScore}
+                        </div>
+                        <div className="text-[16px] text-white/50">
+                          out of 1600
+                        </div>
                       </div>
-                      <div className="text-[16px] text-white/50">
-                        out of 1600
-                      </div>
+                      <TutorCharacter 
+                        pose="excited"
+                        size="medium"
+                        message={onboardingData.firstName ? `You got this, ${onboardingData.firstName}! 🎯` : "Let's aim high! 🎯"}
+                        position="side"
+                        animated={true}
+                        userName={onboardingData.firstName}
+                      />
                     </div>
                     
                     {/* Yellow slider */}
@@ -369,9 +404,12 @@ export const Onboarding = () => {
                         <p className="text-[18px] text-white/80 mb-8">Let's finish strong and make those college dreams real. 💪</p>
                         
                         <div className="flex justify-center mb-8">
-                          <div className="text-[120px] animate-bounce">
-                            🐌
-                          </div>
+                          <TutorCharacter 
+                            pose="waving"
+                            size="large"
+                            position="center"
+                            animated={true}
+                          />
                         </div>
                       </motion.div>
                     )}
@@ -383,14 +421,16 @@ export const Onboarding = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
-                          className="text-[72px] mb-6"
-                        >
-                          🎉
-                        </motion.div>
+                        {/* Celebrating tutor character */}
+                        <div className="relative mb-8">
+                          <TutorCharacter 
+                            pose="celebrating"
+                            size="large"
+                            position="center"
+                            animated={true}
+                          />
+                        </div>
+                        
                         <h2 className="text-[36px] font-bold text-white mb-3">You're all set!</h2>
                         <p className="text-[18px] text-white/80 mb-12">Let's start crushing your SAT prep</p>
                         
