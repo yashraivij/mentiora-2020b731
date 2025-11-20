@@ -304,35 +304,38 @@ export const Onboarding = () => {
               {currentStep === 5 && !showCompletion && (
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your dream SAT score?</h2>
-                  <p className="text-[18px] text-white/80 mb-8">Don't worry, we can adjust this later!</p>
+                  <p className="text-[18px] text-white/80 mb-16">Don't worry, we can adjust this later!</p>
                   
                   <div className="w-full max-w-[520px]">
-                    <div className="bg-white/10 border border-white/20 rounded-2xl p-8 mb-6">
-                      <div className="text-center mb-8">
-                        <div className="text-[72px] font-bold text-white mb-2">
-                          {onboardingData.targetScore}
-                        </div>
-                        <div className="text-[16px] text-white/60">
-                          out of 1600
-                        </div>
+                    {/* Score display - no box, floats on background */}
+                    <div className="text-center mb-12">
+                      <div className="text-[96px] font-bold text-white mb-2">
+                        {onboardingData.targetScore}
                       </div>
-                      
+                      <div className="text-[16px] text-white/50">
+                        out of 1600
+                      </div>
+                    </div>
+                    
+                    {/* Yellow slider */}
+                    <div className="mb-8">
                       <Slider
                         value={[onboardingData.targetScore]}
                         onValueChange={(value) => setOnboardingData({ ...onboardingData, targetScore: value[0] })}
                         min={400}
                         max={1600}
                         step={10}
-                        className="mb-4"
+                        className="mb-4 [&>span:first-child]:h-1 [&>span:first-child]:bg-white/20 [&_span_span]:bg-[#D4F663] [&_[role=slider]]:h-5 [&_[role=slider]]:w-5 [&_[role=slider]]:bg-white [&_[role=slider]]:border-0 [&_[role=slider]]:shadow-md"
                       />
                       
-                      <div className="flex justify-between text-[14px] text-white/60 font-medium">
+                      <div className="flex justify-between text-[14px] text-white/50 font-medium">
                         <span>400</span>
                         <span>1600</span>
                       </div>
                     </div>
 
-                    <div className="bg-[#D4F663]/20 border border-[#D4F663]/40 rounded-xl p-4 flex gap-3 mb-8">
+                    {/* Minimal tip box */}
+                    <div className="bg-[#D4F663]/[0.08] border border-[#D4F663]/25 rounded-lg px-[18px] py-[14px] flex gap-3 mb-10">
                       <span className="text-[20px]">💡</span>
                       <div className="text-[14px] text-white text-left">
                         <strong>Tip:</strong> Average SAT score is ~1050. Top schools look for 1400+
