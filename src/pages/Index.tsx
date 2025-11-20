@@ -25,7 +25,6 @@ import {
   User
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
@@ -44,7 +43,6 @@ const Index = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const [sliderMonths, setSliderMonths] = useState(6);
 
   const fadeInUp = {
@@ -102,7 +100,7 @@ const Index = () => {
 
           <div className="hidden md:flex items-center gap-4">
             <Button 
-              onClick={() => setShowOnboarding(true)} 
+              onClick={() => navigate('/onboarding')} 
               variant="outline" 
               className="border-2 border-purple-500 text-purple-600 hover:bg-purple-50 font-semibold"
             >
@@ -1672,14 +1670,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-
-      <OnboardingPopup 
-        isOpen={showOnboarding} 
-        onClose={() => setShowOnboarding(false)} 
-        onSubjectsAdded={() => {
-          setShowOnboarding(false);
-        }} 
-      />
     </div>
   );
 };

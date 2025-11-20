@@ -9,6 +9,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { MPRewardsProvider } from "@/hooks/useMPRewards";
 import Index from "./pages/Index";
+import { Onboarding } from "./pages/Onboarding";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
@@ -42,6 +43,7 @@ const App: React.FC = () => (
             
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/reset-password" element={<ResetPassword />} />
