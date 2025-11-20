@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Slider } from "@/components/ui/slider";
 import { TutorCharacter } from "@/components/onboarding/TutorCharacter";
+import { CharacterSelection } from "@/components/onboarding/CharacterSelection";
 
 interface OnboardingData {
   firstName: string;
@@ -13,6 +14,8 @@ interface OnboardingData {
   satExperience: string;
   targetScore: number;
   profileEmoji: string;
+  selectedTeacher: 'bear' | 'fox' | 'penguin' | 'raccoon' | '';
+  teacherName: string;
 }
 
 const GRADES = [
@@ -39,6 +42,8 @@ export const Onboarding = () => {
     satExperience: '',
     targetScore: 1200,
     profileEmoji: '😊',
+    selectedTeacher: '',
+    teacherName: '',
   });
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionStage, setCompletionStage] = useState(1);
@@ -64,9 +69,9 @@ export const Onboarding = () => {
   }, [onboardingData]);
 
   const handleNext = () => {
-    if (currentStep < 5) {
+    if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
-    } else if (currentStep === 5) {
+    } else if (currentStep === 6) {
       handleComplete();
     }
   };
@@ -82,12 +87,14 @@ export const Onboarding = () => {
       case 1:
         return true;
       case 2:
-        return onboardingData.firstName.trim().length > 0;
+        return onboardingData.selectedTeacher !== '';
       case 3:
-        return onboardingData.grade !== '';
+        return onboardingData.firstName.trim().length > 0;
       case 4:
-        return onboardingData.satExperience !== '';
+        return onboardingData.grade !== '';
       case 5:
+        return onboardingData.satExperience !== '';
+      case 6:
         return onboardingData.targetScore >= 400 && onboardingData.targetScore <= 1600;
       default:
         return true;
@@ -111,6 +118,7 @@ export const Onboarding = () => {
             first_name: onboardingData.firstName,
             profile_emoji: onboardingData.profileEmoji,
             exam_type: 'SAT',
+            selected_tutor_id: onboardingData.selectedTeacher,
             updated_at: new Date().toISOString(),
           })
           .eq('id', user.id);
@@ -127,7 +135,7 @@ export const Onboarding = () => {
   };
 
   const getProgressPercentage = () => {
-    return (currentStep / 5) * 100;
+    return (currentStep / 6) * 100;
   };
 
   return (
@@ -135,7 +143,7 @@ export const Onboarding = () => {
       background: 'linear-gradient(135deg, #0F4C45 0%, #15685E 100%)'
     }}>
       {/* Progress Bar */}
-      {currentStep >= 2 && currentStep <= 5 && !showCompletion && (
+      {currentStep >= 2 && currentStep <= 6 && !showCompletion && (
         <div className="fixed top-0 left-0 w-full h-[6px] bg-white/20 z-50">
           <motion.div
             className="h-full"
@@ -148,7 +156,7 @@ export const Onboarding = () => {
       )}
 
       {/* Back Button */}
-      {currentStep > 1 && currentStep <= 5 && !showCompletion && (
+      {currentStep > 1 && currentStep <= 6 && !showCompletion && (
         <button
           onClick={handleBack}
           className="fixed top-6 left-6 z-50 w-10 h-10 flex items-center justify-center text-white hover:opacity-80 transition-opacity"
@@ -206,8 +214,37 @@ export const Onboarding = () => {
                 </div>
               )}
 
-              {/* Step 2: Name Input */}
+              {/* Step 2: Choose Your Teacher */}
               {currentStep === 2 && (
+                <div>
+                  <CharacterSelection
+                    selectedTeacher={onboardingData.selectedTeacher}
+                    onSelect={(type, name) => {
+                      setOnboardingData({ 
+                        ...onboardingData, 
+                        selectedTeacher: type,
+                        teacherName: name
+                      });
+                    }}
+                  />
+                  
+                  {/* Continue button */}
+                  {onboardingData.selectedTeacher && (
+                    <div className="flex justify-center mt-8">
+                      <button
+                        onClick={handleNext}
+                        className="px-12 py-4 rounded-xl text-[#0F4C45] font-semibold text-[18px] transition-all hover:opacity-90"
+                        style={{ backgroundColor: '#D4F663' }}
+                      >
+                        Continue with {onboardingData.teacherName} →
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Step 3: Name Input */}
+              {currentStep === 3 && (
                 <div className="text-center flex flex-col items-center">
                   {/* Tutor Character with speech bubble */}
                   <div className="mb-6">
@@ -245,8 +282,8 @@ export const Onboarding = () => {
                 </div>
               )}
 
-              {/* Step 3: Grade Selection */}
-              {currentStep === 3 && (
+              {/* Step 4: Grade Selection */}
+              {currentStep === 4 && (
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What grade are you in?</h2>
                   <p className="text-[18px] text-white/80 mb-8">The more we know about you, the better we can guide your SAT journey!</p>
@@ -280,8 +317,8 @@ export const Onboarding = () => {
                 </div>
               )}
 
-              {/* Step 4: Experience */}
-              {currentStep === 4 && (
+              {/* Step 5: Experience */}
+              {currentStep === 5 && (
                 <div className="text-center flex flex-col items-center">
                   <div className="flex items-center justify-center gap-4 mb-6">
                     <h2 className="text-[36px] font-bold text-white">What's your experience with the SAT?</h2>
@@ -325,8 +362,8 @@ export const Onboarding = () => {
                 </div>
               )}
 
-              {/* Step 5: Target Score */}
-              {currentStep === 5 && !showCompletion && (
+              {/* Step 6: Target Score */}
+              {currentStep === 6 && !showCompletion && (
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your dream SAT score?</h2>
                   <p className="text-[18px] text-white/80 mb-16">Don't worry, we can adjust this later!</p>
