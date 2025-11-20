@@ -104,11 +104,7 @@ const App: React.FC = () => (
                   <Flashcards />
                 </ProtectedRoute>
               } />
-              <Route path="/diagnostic-test" element={
-                <ProtectedRoute>
-                  <DiagnosticTest />
-                </ProtectedRoute>
-              } />
+              <Route path="/diagnostic-test" element={<DiagnosticTest />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
