@@ -9,237 +9,256 @@ export const TeacherOwl = ({
   pose = 'greeting', 
   size = 140,
 }: TeacherOwlProps) => {
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationClass, setAnimationClass] = useState('');
 
   useEffect(() => {
-    // Small delay then trigger animation
-    const startDelay = setTimeout(() => {
-      setIsAnimating(true);
-    }, 100);
+    // Reset animation
+    setAnimationClass('');
+    
+    // Trigger animation after small delay
+    const timer = setTimeout(() => {
+      setAnimationClass('animate');
+    }, 50);
 
-    // Stop after animation completes
-    const stopDelay = setTimeout(() => {
-      setIsAnimating(false);
-    }, pose === 'celebrating' ? 2500 : 1800);
-
-    return () => {
-      clearTimeout(startDelay);
-      clearTimeout(stopDelay);
-    };
+    return () => clearTimeout(timer);
   }, [pose]);
 
   return (
     <div 
-      className={`teacher-owl inline-block ${isAnimating ? 'animating' : ''}`}
+      className={`owl-container ${animationClass}`}
       data-pose={pose}
       style={{ width: size, height: size * 1.3 }}
     >
       <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Body - taller, more distinguished */}
-        <ellipse cx="100" cy="150" rx="55" ry="75" fill="#8B6F47"/>
-        
-        {/* Cream belly */}
-        <ellipse cx="100" cy="160" rx="35" ry="50" fill="#F5E6D3"/>
-        
-        {/* Head - larger for glasses */}
-        <ellipse cx="100" cy="75" rx="50" ry="48" fill="#8B6F47"/>
-        
-        {/* Ear tufts */}
-        <path d="M 60 40 L 55 15 L 70 35 Z" fill="#8B6F47"/>
-        <path d="M 140 40 L 145 15 L 130 35 Z" fill="#8B6F47"/>
-        
-        {/* Eye patches (lighter area for eyes) */}
-        <circle cx="80" cy="70" r="22" fill="#A0826D"/>
-        <circle cx="120" cy="70" r="22" fill="#A0826D"/>
-        
-        {/* Eyes - wise and kind */}
-        <ellipse cx="80" cy="70" rx="12" ry="16" fill="#FFFFFF"/>
-        <ellipse cx="120" cy="70" rx="12" ry="16" fill="#FFFFFF"/>
-        
-        {/* Pupils */}
-        <circle cx="80" cy="72" r="8" fill="#2C2C2C"/>
-        <circle cx="120" cy="72" r="8" fill="#2C2C2C"/>
-        
-        {/* Eye shine - makes it alive */}
-        <circle cx="78" cy="68" r="3" fill="#FFFFFF"/>
-        <circle cx="118" cy="68" r="3" fill="#FFFFFF"/>
-        
-        {/* GLASSES - CRITICAL FEATURE */}
-        <g className="glasses">
-          {/* Left lens */}
-          <circle cx="80" cy="70" r="18" fill="none" stroke="#2C2C2C" strokeWidth="3"/>
-          {/* Right lens */}
-          <circle cx="120" cy="70" r="18" fill="none" stroke="#2C2C2C" strokeWidth="3"/>
-          {/* Bridge */}
-          <line x1="98" y1="70" x2="102" y2="70" stroke="#2C2C2C" strokeWidth="3"/>
-          {/* Left temple */}
-          <path d="M 62 70 L 50 68" stroke="#2C2C2C" strokeWidth="3" strokeLinecap="round"/>
-          {/* Right temple */}
-          <path d="M 138 70 L 150 68" stroke="#2C2C2C" strokeWidth="3" strokeLinecap="round"/>
-          {/* Slight glare on lenses */}
-          <circle cx="75" cy="65" r="4" fill="#FFFFFF" opacity="0.4"/>
-          <circle cx="115" cy="65" r="4" fill="#FFFFFF" opacity="0.4"/>
+        {/* Body */}
+        <g className="owl-body">
+          <ellipse cx="100" cy="150" rx="55" ry="75" fill="#8B6F47"/>
+          <ellipse cx="100" cy="160" rx="35" ry="50" fill="#F5E6D3"/>
         </g>
         
-        {/* Beak */}
-        <path d="M 100 85 L 95 92 L 105 92 Z" fill="#FFB84D"/>
+        {/* Head - this will tilt for listening */}
+        <g className="owl-head">
+          <ellipse cx="100" cy="75" rx="50" ry="48" fill="#8B6F47"/>
+          
+          {/* Ear tufts */}
+          <path d="M 60 40 L 55 15 L 70 35 Z" fill="#8B6F47"/>
+          <path d="M 140 40 L 145 15 L 130 35 Z" fill="#8B6F47"/>
+          
+          {/* Eye patches */}
+          <circle cx="80" cy="70" r="22" fill="#A0826D"/>
+          <circle cx="120" cy="70" r="22" fill="#A0826D"/>
+          
+          {/* Eyes */}
+          <ellipse cx="80" cy="70" rx="12" ry="16" fill="#FFFFFF"/>
+          <ellipse cx="120" cy="70" rx="12" ry="16" fill="#FFFFFF"/>
+          
+          {/* Pupils */}
+          <circle cx="80" cy="72" r="8" fill="#2C2C2C"/>
+          <circle cx="120" cy="72" r="8" fill="#2C2C2C"/>
+          
+          {/* Eye shine */}
+          <circle cx="78" cy="68" r="3" fill="#FFFFFF"/>
+          <circle cx="118" cy="68" r="3" fill="#FFFFFF"/>
+          
+          {/* GLASSES */}
+          <g>
+            <circle cx="80" cy="70" r="18" fill="none" stroke="#2C2C2C" strokeWidth="3"/>
+            <circle cx="120" cy="70" r="18" fill="none" stroke="#2C2C2C" strokeWidth="3"/>
+            <line x1="98" y1="70" x2="102" y2="70" stroke="#2C2C2C" strokeWidth="3"/>
+            <path d="M 62 70 L 50 68" stroke="#2C2C2C" strokeWidth="3" strokeLinecap="round"/>
+            <path d="M 138 70 L 150 68" stroke="#2C2C2C" strokeWidth="3" strokeLinecap="round"/>
+          </g>
+          
+          {/* Beak */}
+          <path d="M 100 85 L 95 92 L 105 92 Z" fill="#FFB84D"/>
+          
+          {/* Smile - appears during greeting/celebrating */}
+          {(pose === 'greeting' || pose === 'celebrating') && (
+            <path d="M 90 95 Q 100 100 110 95" stroke="#8B6F47" strokeWidth="2" fill="none" className="owl-smile"/>
+          )}
+        </g>
         
-        {/* Bow tie - professional touch */}
-        <g className="bow-tie">
+        {/* Bow tie */}
+        <g>
           <path d="M 85 115 L 75 120 L 85 125 Z" fill="#0F4C45"/>
           <path d="M 115 115 L 125 120 L 115 125 Z" fill="#0F4C45"/>
           <rect x="97" y="118" width="6" height="4" rx="1" fill="#0F4C45"/>
         </g>
         
-        {/* Wings */}
-        <g className="wings">
-          <ellipse cx="50" cy="155" rx="18" ry="35" fill="#8B6F47" className="left-wing"/>
-          <ellipse cx="150" cy="155" rx="18" ry="35" fill="#8B6F47" className="right-wing"/>
+        {/* LEFT WING - will wave for greeting */}
+        <g className="left-wing">
+          <ellipse cx="50" cy="155" rx="18" ry="35" fill="#8B6F47" transform="rotate(-10 50 155)"/>
+        </g>
+        
+        {/* RIGHT WING */}
+        <g className="right-wing">
+          <ellipse cx="150" cy="155" rx="18" ry="35" fill="#8B6F47" transform="rotate(10 150 155)"/>
         </g>
         
         {/* Feet */}
-        <g className="feet">
-          <ellipse cx="85" cy="225" rx="12" ry="8" fill="#FFB84D"/>
-          <ellipse cx="115" cy="225" rx="12" ry="8" fill="#FFB84D"/>
-        </g>
-        
-        {/* Tail feathers */}
-        <path d="M 100 220 L 95 240 L 100 235 L 105 240 Z" fill="#8B6F47"/>
+        <ellipse cx="85" cy="225" rx="12" ry="8" fill="#FFB84D"/>
+        <ellipse cx="115" cy="225" rx="12" ry="8" fill="#FFB84D"/>
         
         {/* Celebration sparkles */}
-        {pose === 'celebrating' && (
+        {pose === 'celebrating' && animationClass === 'animate' && (
           <>
-            <circle className="sparkle sparkle-1" cx="40" cy="50" r="4" fill="#D4F663"/>
-            <circle className="sparkle sparkle-2" cx="160" cy="50" r="4" fill="#D4F663"/>
-            <circle className="sparkle sparkle-3" cx="100" cy="20" r="4" fill="#D4F663"/>
-            <path className="sparkle sparkle-4" d="M 30 80 L 32 85 L 37 87 L 32 89 L 30 94 L 28 89 L 23 87 L 28 85 Z" fill="#FFD700"/>
-            <path className="sparkle sparkle-5" d="M 170 80 L 172 85 L 177 87 L 172 89 L 170 94 L 168 89 L 163 87 L 168 85 Z" fill="#FFD700"/>
+            <circle className="sparkle" cx="40" cy="50" r="5" fill="#D4F663"/>
+            <circle className="sparkle" cx="160" cy="50" r="5" fill="#D4F663"/>
+            <circle className="sparkle" cx="100" cy="20" r="5" fill="#D4F663"/>
+            <circle className="sparkle" cx="50" cy="100" r="4" fill="#FFD700"/>
+            <circle className="sparkle" cx="150" cy="100" r="4" fill="#FFD700"/>
           </>
         )}
       </svg>
 
       <style>{`
-        .teacher-owl {
+        .owl-container {
           display: inline-block;
+          position: relative;
         }
 
-        /* Greeting - gentle wave with body sway */
-        .teacher-owl[data-pose="greeting"].animating {
-          animation: gentleSway 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        /* GREETING ANIMATION - BIG WAVE */
+        .owl-container[data-pose="greeting"].animate {
+          animation: bodyWiggle 2s ease-in-out;
         }
-        
-        .teacher-owl[data-pose="greeting"].animating .left-wing {
-          animation: wingWave 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+        .owl-container[data-pose="greeting"].animate .left-wing {
+          animation: bigWave 2s ease-in-out;
           transform-origin: 50px 155px;
         }
 
-        @keyframes gentleSway {
+        .owl-container[data-pose="greeting"].animate .owl-smile {
+          animation: smileAppear 0.5s ease-out 0.3s both;
+        }
+
+        @keyframes bigWave {
+          0%, 100% { transform: rotate(-10deg); }
+          15%, 45%, 75% { transform: rotate(-70deg); }
+          30%, 60%, 90% { transform: rotate(-30deg); }
+        }
+
+        @keyframes bodyWiggle {
           0%, 100% { transform: rotate(0deg); }
-          20% { transform: rotate(-2deg); }
-          40% { transform: rotate(2deg); }
-          60% { transform: rotate(-2deg); }
-          80% { transform: rotate(2deg); }
+          25% { transform: rotate(-3deg); }
+          50% { transform: rotate(3deg); }
+          75% { transform: rotate(-3deg); }
         }
 
-        @keyframes wingWave {
+        @keyframes smileAppear {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        /* LISTENING ANIMATION - HEAD TILT */
+        .owl-container[data-pose="listening"].animate .owl-head {
+          animation: headTilt 1.5s ease-in-out;
+          transform-origin: 100px 90px;
+        }
+
+        @keyframes headTilt {
           0%, 100% { transform: rotate(0deg); }
-          15%, 45% { transform: rotate(-25deg); }
-          30%, 60% { transform: rotate(-5deg); }
+          50% { transform: rotate(-15deg); }
         }
 
-        /* Listening - attentive head tilt */
-        .teacher-owl[data-pose="listening"].animating {
-          animation: attentiveTilt 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        /* EXPLAINING ANIMATION - NOD UP AND DOWN */
+        .owl-container[data-pose="explaining"].animate .owl-head {
+          animation: nod 1.8s ease-in-out;
+          transform-origin: 100px 90px;
         }
 
-        @keyframes attentiveTilt {
-          0%, 100% { transform: rotate(0deg); }
-          50% { transform: rotate(-8deg); }
-        }
-
-        /* Explaining - confident nod */
-        .teacher-owl[data-pose="explaining"].animating {
-          animation: teacherNod 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes teacherNod {
+        @keyframes nod {
           0%, 100% { transform: translateY(0); }
-          15%, 45% { transform: translateY(-12px); }
-          30%, 60% { transform: translateY(-2px); }
-          75% { transform: translateY(-8px); }
+          20%, 60% { transform: translateY(-15px); }
+          40%, 80% { transform: translateY(0); }
         }
 
-        /* Encouraging - warm bounce */
-        .teacher-owl[data-pose="encouraging"].animating {
-          animation: encouragingBounce 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        /* ENCOURAGING ANIMATION - BIG JUMP */
+        .owl-container[data-pose="encouraging"].animate {
+          animation: encouragingJump 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        @keyframes encouragingBounce {
+        .owl-container[data-pose="encouraging"].animate .left-wing,
+        .owl-container[data-pose="encouraging"].animate .right-wing {
+          animation: wingsFlap 1.2s ease-in-out;
+        }
+
+        @keyframes encouragingJump {
           0%, 100% { transform: translateY(0) scale(1); }
-          40% { transform: translateY(-15px) scale(1.02); }
-          60% { transform: translateY(-5px) scale(1); }
+          40% { transform: translateY(-30px) scale(1.05); }
+          60% { transform: translateY(-10px) scale(1.02); }
         }
 
-        /* Celebrating - excited dance */
-        .teacher-owl[data-pose="celebrating"].animating {
-          animation: celebrateDance 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        @keyframes wingsFlap {
+          0%, 100% { transform: rotate(0deg); }
+          30% { transform: rotate(-30deg); }
+          60% { transform: rotate(0deg); }
         }
 
-        .teacher-owl[data-pose="celebrating"].animating .left-wing {
-          animation: wingCelebrate 0.8s cubic-bezier(0.4, 0, 0.2, 1) 3;
+        /* CELEBRATING ANIMATION - DANCE + SPIN */
+        .owl-container[data-pose="celebrating"].animate {
+          animation: celebrationDance 3s ease-in-out;
+        }
+
+        .owl-container[data-pose="celebrating"].animate .left-wing {
+          animation: wingCelebrate 0.6s ease-in-out infinite;
           transform-origin: 50px 155px;
         }
 
-        .teacher-owl[data-pose="celebrating"].animating .right-wing {
-          animation: wingCelebrate 0.8s cubic-bezier(0.4, 0, 0.2, 1) 3;
+        .owl-container[data-pose="celebrating"].animate .right-wing {
+          animation: wingCelebrate 0.6s ease-in-out infinite;
           transform-origin: 150px 155px;
         }
 
-        @keyframes celebrateDance {
+        .owl-container[data-pose="celebrating"].animate .owl-smile {
+          opacity: 1;
+        }
+
+        @keyframes celebrationDance {
           0%, 100% { transform: rotate(0deg) scale(1); }
-          10%, 30%, 50% { transform: rotate(-8deg) scale(1.05); }
-          20%, 40%, 60% { transform: rotate(8deg) scale(1.05); }
+          10% { transform: rotate(-15deg) scale(1.08); }
+          20% { transform: rotate(15deg) scale(1.08); }
+          30% { transform: rotate(-15deg) scale(1.08); }
+          40% { transform: rotate(15deg) scale(1.08); }
+          50% { transform: rotate(-10deg) scale(1.05); }
+          60% { transform: rotate(10deg) scale(1.05); }
+          70% { transform: rotate(-10deg) scale(1.05); }
+          80% { transform: rotate(10deg) scale(1.05); }
         }
 
         @keyframes wingCelebrate {
           0%, 100% { transform: rotate(0deg); }
-          50% { transform: rotate(-30deg); }
+          50% { transform: rotate(-50deg); }
         }
 
-        /* Sparkle animations - smooth like Duolingo */
+        /* SPARKLES */
         .sparkle {
-          animation: sparkleFloat 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          animation: sparkleFloat 1.5s ease-out;
+          animation-fill-mode: forwards;
         }
-
-        .sparkle-1 { animation-delay: 0s; }
-        .sparkle-2 { animation-delay: 0.1s; }
-        .sparkle-3 { animation-delay: 0.2s; }
-        .sparkle-4 { animation-delay: 0.15s; }
-        .sparkle-5 { animation-delay: 0.25s; }
 
         @keyframes sparkleFloat {
           0% {
             opacity: 0;
             transform: translate(0, 0) scale(0);
           }
-          30% {
+          20% {
             opacity: 1;
-            transform: translate(0, -10px) scale(1);
+            transform: translate(0, -5px) scale(1);
           }
           100% {
             opacity: 0;
-            transform: translate(0, -30px) scale(1.5);
+            transform: translate(0, -40px) scale(1.5);
           }
         }
 
-        /* Subtle breathing when not animating */
-        .teacher-owl:not(.animating) {
-          animation: subtleBreath 3s ease-in-out infinite;
+        /* Idle breathing (subtle) */
+        .owl-container:not(.animate) {
+          animation: subtleBreath 4s ease-in-out infinite;
         }
 
         @keyframes subtleBreath {
           0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.02); }
+          50% { transform: scale(1.015); }
         }
       `}</style>
     </div>
