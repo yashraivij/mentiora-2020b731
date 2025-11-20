@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { OwlCharacter } from "./OwlCharacter";
+import { FoxCharacter } from "./FoxCharacter";
 
 interface TutorCharacterProps {
-  pose?: "waving" | "listening" | "encouraging" | "excited" | "celebrating";
+  pose?: "waving" | "listening" | "nodding" | "excited" | "celebrating";
   size?: "small" | "medium" | "large";
   message?: string;
   position?: "center" | "top" | "side";
@@ -13,7 +13,7 @@ interface TutorCharacterProps {
 const SIZE_MAP = {
   small: 80,
   medium: 100,
-  large: 150,
+  large: 180,
 };
 
 export const TutorCharacter = ({
@@ -85,17 +85,9 @@ export const TutorCharacter = ({
       )}
 
       {/* Character */}
-      <motion.div
-        animate={animated ? {
-          y: [0, -8, 0],
-        } : {}}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-        }}
-      >
-        <OwlCharacter pose={pose} size={characterSize} />
-      </motion.div>
+      <div>
+        <FoxCharacter pose={pose} size={characterSize} />
+      </div>
 
       {/* Confetti for celebration */}
       {pose === "celebrating" && (
