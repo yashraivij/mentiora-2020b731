@@ -101,6 +101,14 @@ const Index = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Button 
+              onClick={() => setShowOnboarding(true)} 
+              variant="outline" 
+              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-50 font-semibold"
+            >
+              🧪 Test Onboarding
+            </Button>
+            
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#3B82F6' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
@@ -109,7 +117,7 @@ const Index = () => {
               <>
                 <Button 
                   onClick={() => navigate("/login")} 
-                  variant="ghost" 
+                  variant="ghost"
                   className="hover:bg-transparent hover:text-[#3B82F6] transition-colors duration-200"
                 >
                   Login
