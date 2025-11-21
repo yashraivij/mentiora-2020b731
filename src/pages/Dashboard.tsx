@@ -92,7 +92,6 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
-import { TodaysPlan } from "@/components/dashboard/TodaysPlan";
 
 interface UserProgress {
   subjectId: string;
@@ -2700,21 +2699,9 @@ const Dashboard = () => {
       <div className="w-full">
         <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
-            <div className="max-w-7xl mx-auto space-y-8">
+            <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
-                <TodaysPlan
-                  userId={user?.id || ''}
-                  userSubjects={mockSubjects}
-                  onStartPractice={(subjectId) => {
-                    const subject = curriculum.find(s => s.id === subjectId);
-                    if (subject) {
-                      setSelectedDrawerSubject(subject);
-                      setSubjectDrawerOpen(true);
-                      setDrawerTab('topics');
-                    }
-                  }}
-                />
                 <MedlySubjectsView
                   profile={profile}
                   mockSubjects={mockSubjects}
