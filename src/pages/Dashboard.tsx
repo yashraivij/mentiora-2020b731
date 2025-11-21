@@ -92,6 +92,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import { TodaysPlanCard } from "@/components/dashboard/TodaysPlanCard";
 
 interface UserProgress {
   subjectId: string;
@@ -2702,6 +2703,48 @@ const Dashboard = () => {
             <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
+                {/* Today's Plan Hero Card */}
+                <TodaysPlanCard
+                  dayNumber={12}
+                  streak={currentStreak}
+                  focusTopic="Problem Solving"
+                  focusReason="your weakest area"
+                  sessions={[
+                    {
+                      id: "session-1-xyz",
+                      number: 1,
+                      type: "Learn",
+                      title: "Problem Solving fundamentals",
+                      duration: 5,
+                      xp: 15,
+                      status: "not_started",
+                      completedAt: null,
+                    },
+                    {
+                      id: "session-2-xyz",
+                      number: 2,
+                      type: "Practice",
+                      title: "10 practice questions",
+                      duration: 12,
+                      xp: 25,
+                      status: "locked",
+                      completedAt: null,
+                    },
+                    {
+                      id: "session-3-xyz",
+                      number: 3,
+                      type: "Review",
+                      title: "Review your mistakes",
+                      duration: 3,
+                      xp: 10,
+                      status: "locked",
+                      completedAt: null,
+                    },
+                  ]}
+                  totalXP={50}
+                  allCompleted={false}
+                />
+                
                 <MedlySubjectsView
                   profile={profile}
                   mockSubjects={mockSubjects}
