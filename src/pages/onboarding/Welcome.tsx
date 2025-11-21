@@ -60,7 +60,7 @@ export const OnboardingWelcome = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-6">
+      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,18 +72,18 @@ export const OnboardingWelcome = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-            className="text-[64px] mb-6"
+            className="text-[64px] mb-5"
           >
             👋
           </motion.div>
 
           {/* Heading */}
-          <h1 className="text-[48px] font-bold text-white mb-6">
+          <h1 className="text-[48px] font-bold text-white mb-5">
             Hey there!
           </h1>
 
           {/* Subheading */}
-          <div className="space-y-2 mb-16">
+          <div className="space-y-2 mb-12">
             <p className="text-[20px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5 }}>
               I'm your SAT prep assistant.
             </p>
@@ -93,7 +93,7 @@ export const OnboardingWelcome = () => {
           </div>
 
           {/* Question */}
-          <p className="text-[24px] font-medium text-white mb-6">
+          <p className="text-[24px] font-medium text-white mb-4">
             What should I call you?
           </p>
 

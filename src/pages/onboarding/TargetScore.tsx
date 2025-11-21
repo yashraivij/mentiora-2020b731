@@ -56,12 +56,12 @@ export const OnboardingTargetScore = () => {
       </button>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-6">
+      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh] max-h-[90vh] overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-center max-w-[700px] w-full"
+          className="text-center max-w-[700px] w-full pb-12"
         >
           {/* Heading */}
           <h1 className="text-[36px] font-bold text-white mb-4">
@@ -69,7 +69,7 @@ export const OnboardingTargetScore = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="text-[18px] mb-16" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <p className="text-[18px] mb-8" style={{ color: 'rgba(255,255,255,0.8)' }}>
             We'll help you build a plan to get there
           </p>
 
@@ -79,10 +79,10 @@ export const OnboardingTargetScore = () => {
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="mb-4"
+            className="mb-12"
           >
             <div 
-              className="text-[96px] font-bold mb-2"
+              className="text-[84px] font-bold mb-2"
               style={{
                 color: '#00D9FF',
                 textShadow: '0 0 40px rgba(0, 217, 255, 0.5)',
@@ -100,7 +100,7 @@ export const OnboardingTargetScore = () => {
           </motion.div>
 
           {/* Slider */}
-          <div className="max-w-[600px] mx-auto mb-10">
+          <div className="max-w-[600px] mx-auto mb-8">
             <Slider
               value={[targetScore]}
               onValueChange={(value) => setTargetScore(value[0])}
@@ -126,7 +126,7 @@ export const OnboardingTargetScore = () => {
 
           {/* Info Box */}
           <div 
-            className="max-w-[520px] mx-auto rounded-xl p-6 mb-12 text-left"
+            className="max-w-[520px] mx-auto rounded-xl p-6 mb-8 text-left"
             style={{
               background: 'rgba(0, 217, 255, 0.1)',
               border: '1px solid rgba(0, 217, 255, 0.2)',
