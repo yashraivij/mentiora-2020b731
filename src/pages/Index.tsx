@@ -120,6 +120,13 @@ const Index = () => {
             >
               🔢 Math Test
             </Button>
+            <Button 
+              onClick={() => navigate('/diagnostic/results')} 
+              variant="outline" 
+              className="border-2 border-cyan-500 text-cyan-600 hover:bg-cyan-50 font-semibold"
+            >
+              📊 Results Page
+            </Button>
             
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#3B82F6' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
