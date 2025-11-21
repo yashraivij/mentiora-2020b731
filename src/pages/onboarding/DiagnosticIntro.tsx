@@ -56,7 +56,7 @@ export const OnboardingDiagnosticIntro = () => {
       </button>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-6">
+      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,67 +64,66 @@ export const OnboardingDiagnosticIntro = () => {
           className="text-center max-w-[700px] w-full"
         >
           {/* Heading */}
-          <h1 className="text-[36px] font-bold text-white mb-4">
+          <h1 className="text-[40px] font-bold text-white mb-5">
             Almost there, {firstName}!
           </h1>
 
           {/* Subheading */}
-          <p className="text-[20px] mb-12" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <p className="text-[20px] mb-14" style={{ color: 'rgba(255,255,255,0.85)' }}>
             Let's figure out where you're starting from
           </p>
 
-          {/* Info Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="max-w-[600px] mx-auto rounded-2xl p-10 mb-8 text-left"
-            style={{
-              background: 'rgba(255, 255, 255, 0.95)',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)',
-            }}
-          >
-            {/* Icon */}
-            <div className="text-[32px] mb-4">📊</div>
+          {/* Section Divider */}
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="w-[60px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
+            <h2 className="text-[22px] text-white">Quick Diagnostic Tests</h2>
+            <div className="w-[60px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          </div>
 
-            {/* Card Heading */}
-            <h2 className="text-[28px] font-bold text-[#0A1628] mb-6">
-              Quick Diagnostic Tests
-            </h2>
-
-            {/* Body Content */}
-            <div className="text-[18px] text-[#8899A6] space-y-4" style={{ lineHeight: 1.7 }}>
-              <p className="text-[#0A1628] font-medium">You'll take two short tests:</p>
-              
-              <p>1️⃣ Math (8-10 questions, ~8 mins)</p>
-              <p>2️⃣ Reading & Writing (8-10 questions, ~8 mins)</p>
-              
-              <div className="py-2" />
-              
-              <p className="text-[#0A1628] font-medium">Total time: ~15-18 minutes</p>
-              
-              <div className="py-2" />
-              
-              <p className="text-[#0A1628] font-medium">This helps us:</p>
-              <p className="flex items-start gap-2">
-                <span className="text-[#00E676] mt-1">✓</span>
-                <span>Identify your weak areas</span>
+          {/* Test Info */}
+          <div className="mb-12 space-y-6">
+            <p className="text-[18px]" style={{ color: 'rgba(255,255,255,0.9)' }}>
+              You'll take two short tests:
+            </p>
+            
+            <div className="space-y-4">
+              <p className="text-[18px] text-white">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-[14px] mr-3">1</span>
+                Math (8-10 questions, ~8 mins)
               </p>
-              <p className="flex items-start gap-2">
-                <span className="text-[#00E676] mt-1">✓</span>
-                <span>Estimate your current score</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="text-[#00E676] mt-1">✓</span>
-                <span>Build your perfect study plan</span>
+              <p className="text-[18px] text-white">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-[14px] mr-3">2</span>
+                Reading & Writing (8-10 questions, ~8 mins)
               </p>
             </div>
-          </motion.div>
 
-          {/* Primary Button */}
+            <p className="text-[16px] pt-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
+              Total time: ~15-18 minutes
+            </p>
+          </div>
+
+          {/* Benefits */}
+          <div className="mb-12">
+            <p className="text-[18px] mb-5" style={{ color: 'rgba(255,255,255,0.9)' }}>
+              This helps us:
+            </p>
+            <div className="space-y-3" style={{ lineHeight: 2 }}>
+              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                • Identify your weak areas
+              </p>
+              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                • Estimate your current score
+              </p>
+              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                • Build your perfect study plan
+              </p>
+            </div>
+          </div>
+
+          {/* Buttons */}
           <button
             onClick={handleStart}
-            className="w-[320px] h-[64px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all mb-4"
+            className="w-[320px] h-[60px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all mb-4"
             style={{
               background: 'linear-gradient(135deg, #B4FF39 0%, #9AE834 100%)',
               boxShadow: '0 4px 16px rgba(180, 255, 57, 0.4)',
@@ -133,10 +132,9 @@ export const OnboardingDiagnosticIntro = () => {
             Start diagnostic tests →
           </button>
 
-          {/* Secondary Link */}
           <button
             onClick={handleSkip}
-            className="text-[15px] transition-opacity hover:opacity-100 underline"
+            className="text-[15px] hover:underline transition-opacity"
             style={{ color: 'rgba(255,255,255,0.6)' }}
           >
             I'll do this later
