@@ -100,7 +100,7 @@ const Index = () => {
 
           <div className="hidden md:flex items-center gap-4">
             <Button 
-              onClick={() => navigate('/onboarding')} 
+              onClick={() => navigate('/onboarding/welcome')} 
               variant="outline" 
               className="border-2 border-purple-500 text-purple-600 hover:bg-purple-50 font-semibold"
             >
