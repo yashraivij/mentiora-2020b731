@@ -60,13 +60,12 @@ export const OnboardingWelcome = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh]">
+      <div className="flex-1 flex items-center justify-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-[600px]"
-          style={{ transform: 'translateY(-120px)' }}
+          transition={{ duration: 0.4 }}
+          className="text-center max-w-[600px] w-full"
         >
           {/* Wave Emoji */}
           <motion.div
