@@ -84,7 +84,7 @@ import { StrengthsWeaknesses } from "@/components/dashboard/StrengthsWeaknesses"
 import { StudyInsights } from "@/components/dashboard/StudyInsights";
 import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
-import { TodaysPlan } from "@/components/dashboard/TodaysPlan";
+import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
@@ -2702,7 +2702,24 @@ const Dashboard = () => {
             <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
-                <TodaysPlan userId={user?.id || ''} />
+                <MedlySubjectsView
+                  profile={profile}
+                  mockSubjects={mockSubjects}
+                  weekPlan={weekPlan}
+                  getStatusColor={getStatusColor}
+                  weekTasksCompleted={weekTasksCompleted}
+                  setWeekTasksCompleted={setWeekTasksCompleted}
+                  setShowAddSubjects={setShowAddSubjects}
+                  setSelectedDrawerSubject={setSelectedDrawerSubject}
+                  setSubjectDrawerOpen={setSubjectDrawerOpen}
+                  setDrawerTab={setDrawerTab}
+                  insightFilter={insightFilter}
+                  setInsightFilter={setInsightFilter}
+                  removeSubject={removeSubject}
+                  isPremium={isPremium}
+                  onUpgradeToPremium={() => navigate('/pricing')}
+                  userId={user?.id || ''}
+                />
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
