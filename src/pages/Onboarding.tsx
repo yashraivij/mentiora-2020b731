@@ -160,15 +160,15 @@ export const Onboarding = () => {
       <div className="min-h-screen w-full flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-[580px]">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            >
-              {/* Step 1: Welcome */}
-              {currentStep === 1 && (
+            {/* Step 1: Welcome */}
+            {currentStep === 1 && (
+              <motion.div
+                key="step1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center w-full flex flex-col items-center justify-center min-h-[80vh]">
                   {/* Main Greeting */}
                   <motion.h1
@@ -237,10 +237,18 @@ export const Onboarding = () => {
                     Takes about 2 minutes
                   </motion.p>
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Step 2: Name Input */}
-              {currentStep === 2 && (
+            {/* Step 2: Name Input */}
+            {currentStep === 2 && (
+              <motion.div
+                key="step2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What should we call you?</h2>
                   <p className="text-[18px] text-white/80 mb-8">We'll use this to personalize your experience</p>
@@ -264,10 +272,18 @@ export const Onboarding = () => {
                     </button>
                   </div>
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Step 3: Grade Selection */}
-              {currentStep === 3 && (
+            {/* Step 3: Grade Selection */}
+            {currentStep === 3 && (
+              <motion.div
+                key="step3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What grade are you in?</h2>
                   <p className="text-[18px] text-white/80 mb-8">The more we know about you, the better we can guide your SAT journey!</p>
@@ -298,10 +314,18 @@ export const Onboarding = () => {
                     </button>
                   </div>
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Step 4: Experience */}
-              {currentStep === 4 && (
+            {/* Step 4: Experience */}
+            {currentStep === 4 && (
+              <motion.div
+                key="step4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your experience with the SAT?</h2>
                   <p className="text-[18px] text-white/80 mb-8">Whether you're just starting out or giving it another go, we're here to help!</p>
@@ -332,10 +356,18 @@ export const Onboarding = () => {
                     </button>
                   </div>
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Step 5: Target Score */}
-              {currentStep === 5 && !showCompletion && (
+            {/* Step 5: Target Score */}
+            {currentStep === 5 && !showCompletion && (
+              <motion.div
+                key="step5"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center flex flex-col items-center">
                   <h2 className="text-[36px] font-bold text-white mb-3">What's your dream SAT score?</h2>
                   <p className="text-[18px] text-white/80 mb-16">Don't worry, we can adjust this later!</p>
@@ -384,10 +416,18 @@ export const Onboarding = () => {
                     </button>
                   </div>
                 </div>
-              )}
+              </motion.div>
+            )}
 
-              {/* Step 6: Loading/Success */}
-              {showCompletion && (
+            {/* Step 6: Loading/Success */}
+            {showCompletion && (
+              <motion.div
+                key="completion"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <div className="text-center py-12">
                   <AnimatePresence mode="wait">
                     {completionStage === 1 && (
@@ -437,8 +477,8 @@ export const Onboarding = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              )}
-            </motion.div>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </div>
