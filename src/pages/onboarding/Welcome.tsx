@@ -66,34 +66,35 @@ export const OnboardingWelcome = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-[600px]"
+          style={{ transform: 'translateY(-120px)' }}
         >
           {/* Wave Emoji */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-            className="text-[64px] mb-5"
+            className="text-[48px] mb-4"
           >
             👋
           </motion.div>
 
           {/* Heading */}
-          <h1 className="text-[48px] font-bold text-white mb-5">
+          <h1 className="text-[44px] font-bold text-white mb-4">
             Hey there!
           </h1>
 
           {/* Subheading */}
-          <div className="space-y-2 mb-12">
-            <p className="text-[20px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5 }}>
+          <div className="space-y-1 mb-10">
+            <p className="text-[18px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5 }}>
               I'm your SAT prep assistant.
             </p>
-            <p className="text-[20px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5 }}>
+            <p className="text-[18px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.5 }}>
               Let's build your perfect study plan.
             </p>
           </div>
 
           {/* Question */}
-          <p className="text-[24px] font-medium text-white mb-4">
+          <p className="text-[22px] font-medium text-white mb-4">
             What should I call you?
           </p>
 
@@ -105,7 +106,7 @@ export const OnboardingWelcome = () => {
             onChange={(e) => setFirstName(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleContinue()}
             autoFocus
-            className="w-full max-w-[400px] h-[56px] px-6 rounded-xl text-white text-[16px] placeholder:text-white/50 focus:outline-none transition-all mb-8"
+            className="w-full max-w-[400px] h-[54px] px-6 rounded-xl text-white text-[16px] placeholder:text-white/50 focus:outline-none transition-all mb-8"
             style={{
               background: 'rgba(255,255,255,0.1)',
               border: '2px solid rgba(255,255,255,0.2)',
@@ -124,7 +125,7 @@ export const OnboardingWelcome = () => {
           <button
             onClick={handleContinue}
             disabled={firstName.length < 2}
-            className="w-[280px] h-[64px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-[280px] h-[56px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: firstName.length >= 2 
                 ? 'linear-gradient(135deg, #B4FF39 0%, #9AE834 100%)' 
