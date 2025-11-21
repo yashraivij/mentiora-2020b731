@@ -9,7 +9,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { MPRewardsProvider } from "@/hooks/useMPRewards";
 import Index from "./pages/Index";
-import { Onboarding } from "./pages/Onboarding";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
@@ -25,9 +24,17 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
-import DiagnosticTest from "./pages/DiagnosticTest";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import { Signup } from "./pages/Signup";
+import { OnboardingWelcome } from "./pages/onboarding/Welcome";
+import { OnboardingGrade } from "./pages/onboarding/Grade";
+import { OnboardingTargetScore } from "./pages/onboarding/TargetScore";
+import { OnboardingDiagnosticIntro } from "./pages/onboarding/DiagnosticIntro";
+import { MathDiagnostic } from "./pages/diagnostic/MathDiagnostic";
+import { ReadingWritingDiagnostic } from "./pages/diagnostic/ReadingWritingDiagnostic";
+import { DiagnosticTransition } from "./pages/diagnostic/DiagnosticTransition";
+import { DiagnosticResults } from "./pages/diagnostic/DiagnosticResults";
 
 
 const queryClient = new QueryClient();
@@ -44,10 +51,18 @@ const App: React.FC = () => (
             
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/onboarding/welcome" element={<OnboardingWelcome />} />
+              <Route path="/onboarding/grade" element={<OnboardingGrade />} />
+              <Route path="/onboarding/target-score" element={<OnboardingTargetScore />} />
+              <Route path="/onboarding/diagnostic-intro" element={<OnboardingDiagnosticIntro />} />
+              <Route path="/diagnostic/math" element={<MathDiagnostic />} />
+              <Route path="/diagnostic/reading-writing" element={<ReadingWritingDiagnostic />} />
+              <Route path="/diagnostic/transition" element={<DiagnosticTransition />} />
+              <Route path="/diagnostic/results" element={<DiagnosticResults />} />
               <Route path="/dashboard" element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -102,11 +117,6 @@ const App: React.FC = () => (
               <Route path="/flashcards" element={
                 <ProtectedRoute>
                   <Flashcards />
-                </ProtectedRoute>
-              } />
-              <Route path="/diagnostic-test" element={
-                <ProtectedRoute>
-                  <DiagnosticTest />
                 </ProtectedRoute>
               } />
               <Route path="*" element={<NotFound />} />
