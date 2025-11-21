@@ -188,7 +188,7 @@ export function MedlySubjectsView({
                 transition={{ delay: 0.1 }}
                 className="text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight"
               >
-                Your Subjects
+                Today's Plan
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0 }}
@@ -196,7 +196,7 @@ export function MedlySubjectsView({
                 transition={{ delay: 0.2 }}
                 className="text-lg text-[#64748B] dark:text-gray-400 font-light"
               >
-                Predicted grades, weak topics & weekly plan at a glance.
+                Complete your daily tasks to reach your target grades.
               </motion.p>
             </div>
             <motion.div 
@@ -224,7 +224,7 @@ export function MedlySubjectsView({
             </motion.div>
           </div>
 
-          {/* KPI Belt */}
+          {/* Today's Plan Sections */}
           <TooltipProvider>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
@@ -238,37 +238,26 @@ export function MedlySubjectsView({
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
-                        <Target className="h-5 w-5 text-[#3B82F6]" />
+                        <Brain className="h-5 w-5 text-[#3B82F6]" />
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Overall Progress</span>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Part 1: Diagnostic</span>
                     </div>
                     <div className="flex items-baseline gap-3">
                       <motion.span 
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.3, type: "spring" }}
-                        className="text-3xl font-bold text-foreground"
+                        className="text-2xl font-bold text-foreground"
                       >
-                        {safeProfile.overallPred}
+                        5 questions
                       </motion.span>
-                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">→</span>
-                      <span className="text-xl font-bold text-[#3B82F6]">{safeProfile.overallTarget}</span>
                     </div>
-                    <div className="mt-3 flex gap-2">
-                      <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
-                          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
-                        />
-                      </div>
-                    </div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-2 font-medium">3 mins • +25 XP</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Average predicted grade across all subjects</p>
-                  <p className="text-xs text-muted-foreground">Calculated from your exam completions and practice performance compared to your target grades</p>
+                  <p className="font-medium mb-1">Quick assessment</p>
+                  <p className="text-xs text-muted-foreground">Set today's difficulty based on your current level</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -283,24 +272,24 @@ export function MedlySubjectsView({
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-                        <Brain className="h-5 w-5 text-[#16A34A]" />
+                        <Target className="h-5 w-5 text-[#16A34A]" />
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Retention</span>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Part 2: Focus Practice</span>
                     </div>
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.35, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
+                      className="text-2xl font-bold text-foreground"
                     >
-                      {Math.round(safeProfile.retention * 100)}%
+                      12 questions
                     </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Last 7 days</div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-2 font-medium">8 mins • +60 XP</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Your knowledge retention rate</p>
-                  <p className="text-xs text-muted-foreground">Average accuracy from all practice attempts in the last 7 days</p>
+                  <p className="font-medium mb-1">Deep practice session</p>
+                  <p className="text-xs text-muted-foreground">Focus on your weakest areas with targeted practice</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -317,22 +306,22 @@ export function MedlySubjectsView({
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
                         <Clock className="h-5 w-5 text-[#F59E0B]" />
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">You perform best at</span>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Part 3: Retention Check</span>
                     </div>
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.4, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
+                      className="text-2xl font-bold text-foreground"
                     >
-                      {safeProfile.bestWindow}
+                      8 questions
                     </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Your peak focus hours</div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-2 font-medium">6 mins • +40 XP</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">We think you perform best at this time</p>
-                  <p className="text-xs text-muted-foreground">Based on your practice history, this 2-hour window is when you achieve your highest scores. Try scheduling important study sessions during these peak hours!</p>
+                  <p className="font-medium mb-1">Review past topics</p>
+                  <p className="text-xs text-muted-foreground">Reinforce what you learned in previous sessions</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -343,28 +332,28 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.25 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#8B5CF6]/20 dark:border-[#8B5CF6]/30 shadow-sm hover:shadow-md hover:shadow-[#8B5CF6]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
-                        <Calendar className="h-5 w-5 text-[#3B82F6]" />
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#8B5CF6]/20 to-[#8B5CF6]/5">
+                        <TrendingUp className="h-5 w-5 text-[#8B5CF6]" />
                       </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week</span>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Part 4: Challenge Round</span>
                     </div>
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.45, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
+                      className="text-2xl font-bold text-foreground"
                     >
-                      {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
+                      5 questions
                     </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Time saved</div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-2 font-medium">5 mins • +50 XP</div>
                   </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Total time saved this week</p>
-                  <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
+                  <p className="font-medium mb-1">Test yourself with harder questions</p>
+                  <p className="text-xs text-muted-foreground">Push your limits with challenging practice</p>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -439,91 +428,44 @@ export function MedlySubjectsView({
                     {subject.name.replace(/\s*\(A-Level\)/g, '')}
                   </h3>
                   
-                  {/* Dual Progress Bars */}
-                  <div className="space-y-4 mb-5 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className={`text-base font-bold text-foreground ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                  {/* Unified Progress Bar with Target Indicator */}
+                  <div className="space-y-2 mb-5 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Progress to Target</span>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-sm font-bold text-[#3B82F6] ${!isPremium ? 'blur-sm select-none' : ''}`}>
                           {(() => {
-                            console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
-                            
-                            // Handle string 'U' directly - don't try to parse it
-                            if (subject.predicted === 'U' || subject.predicted === 'u') {
-                              return 'U';
-                            }
-                            
+                            if (subject.predicted === 'U' || subject.predicted === 'u') return 'U';
                             const isALevel = subject.id.toLowerCase().includes('alevel');
                             let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            
-                            // Convert percentage grades (e.g., "37%") to numeric
                             if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
                               const percentage = parseFloat(subject.predicted);
                               if (!isNaN(percentage)) {
                                 numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
                               }
                             }
-                            
-                            console.log(`🎯 [${subject.id}] isALevel: ${isALevel}, numericPred: ${numericPred}`);
-                            
                             if (!isALevel) {
                               const rounded = Math.round(numericPred);
                               return rounded === 0 ? 'U' : rounded;
                             }
-                            // Convert numeric grade (1-9) to A-Level letter grade
                             if (numericPred >= 8.5) return 'A*';
                             if (numericPred >= 7.5) return 'A';
                             if (numericPred >= 6.5) return 'B';
                             if (numericPred >= 5.5) return 'C';
                             if (numericPred >= 4.5) return 'D';
                             if (numericPred >= 3.5) return 'E';
-                            console.log(`🎯 [${subject.id}] Returning U because numericPred < 3.5`);
                             return 'U';
                           })()}
                         </span>
-                      </div>
-                      <div className={`w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: (() => {
-                            // Handle string 'U' - show 0% progress
-                            if (subject.predicted === 'U' || subject.predicted === 'u') {
-                              return '0%';
-                            }
-                            
-                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            
-                            // Convert percentage grades to numeric
-                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
-                              const percentage = parseFloat(subject.predicted);
-                              if (!isNaN(percentage)) {
-                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
-                              }
-                            }
-                            
-                            return `${((Math.max(1, numericPred) - 1) / 8) * 100}%`;
-                          })() }}
-                          transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target</span>
-                        <span className="text-base font-bold text-foreground">
+                        <ChevronRight className="h-3 w-3 text-[#64748B]" />
+                        <span className="text-sm font-bold text-[#16A34A]">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            
-                            // For A-Level subjects, always convert to letter grades
                             if (isALevel) {
-                              // Check if target_grade is already a valid letter grade
                               const targetGrade = subject.target_grade?.toString().trim().toUpperCase();
                               if (targetGrade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(targetGrade)) {
                                 return targetGrade;
                               }
-                              
-                              // Convert numeric target to letter grade for A-Level
                               const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
                               const rounded = Math.round(numericTarget);
                               const numToLetterMap: {[key: number]: string} = {
@@ -531,22 +473,52 @@ export function MedlySubjectsView({
                               };
                               return numToLetterMap[rounded] || 'U';
                             }
-                            
-                            // For GCSE, use numeric grades
                             const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
                             const rounded = Math.round(numericTarget);
                             return rounded === 0 ? 'U' : rounded;
                           })()}
                         </span>
                       </div>
-                      <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${((Math.max(1, subject.target) - 1) / 8) * 100}%` }}
-                          transition={{ duration: 1.2, delay: 0.3 * index, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
-                        />
-                      </div>
+                    </div>
+                    
+                    {/* Progress Bar Container */}
+                    <div className={`relative w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-visible shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                      {/* Current Progress Fill */}
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: (() => {
+                          if (subject.predicted === 'U' || subject.predicted === 'u') return '0%';
+                          let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                          if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
+                            const percentage = parseFloat(subject.predicted);
+                            if (!isNaN(percentage)) {
+                              numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
+                            }
+                          }
+                          return `${((Math.max(1, numericPred) - 1) / 8) * 100}%`;
+                        })() }}
+                        transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
+                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
+                      />
+                      
+                      {/* Target Indicator */}
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1,
+                          left: `${((Math.max(1, subject.target) - 1) / 8) * 100}%`
+                        }}
+                        transition={{ duration: 0.8, delay: 0.4 * index, type: "spring" }}
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#16A34A] border-2 border-white dark:border-gray-800 rounded-full shadow-lg z-10"
+                        style={{ left: `${((Math.max(1, subject.target) - 1) / 8) * 100}%` }}
+                      >
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                          <div className="px-1.5 py-0.5 bg-[#16A34A] text-white text-[10px] font-bold rounded shadow-sm">
+                            Target
+                          </div>
+                        </div>
+                      </motion.div>
                     </div>
                   </div>
                   
