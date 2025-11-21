@@ -56,7 +56,7 @@ export const OnboardingTargetScore = () => {
       </button>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh] max-h-[90vh] overflow-y-auto">
+      <div className="flex-1 flex items-start justify-center px-6 pt-[12vh] max-h-[90vh] overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,12 +64,12 @@ export const OnboardingTargetScore = () => {
           className="text-center max-w-[700px] w-full pb-12"
         >
           {/* Heading */}
-          <h1 className="text-[36px] font-bold text-white mb-4">
+          <h1 className="text-[34px] font-bold text-white mb-3">
             What's your target SAT score, {firstName}?
           </h1>
 
           {/* Subheading */}
-          <p className="text-[18px] mb-8" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <p className="text-[17px] mb-8" style={{ color: 'rgba(255,255,255,0.8)' }}>
             We'll help you build a plan to get there
           </p>
 
@@ -79,10 +79,10 @@ export const OnboardingTargetScore = () => {
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="mb-12"
+            className="mb-8"
           >
             <div 
-              className="text-[84px] font-bold mb-2"
+              className="text-[72px] font-bold mb-2"
               style={{
                 color: '#00D9FF',
                 textShadow: '0 0 40px rgba(0, 217, 255, 0.5)',
@@ -90,17 +90,17 @@ export const OnboardingTargetScore = () => {
             >
               {targetScore}
             </div>
-            <div className="text-[16px]" style={{ color: 'rgba(255,255,255,0.6)' }}>
+            <div className="text-[15px]" style={{ color: 'rgba(255,255,255,0.6)' }}>
               out of 1600
             </div>
             <div 
-              className="w-[80px] h-[1px] mx-auto my-6"
+              className="w-[80px] h-[1px] mx-auto my-8"
               style={{ background: '#00D9FF' }}
             />
           </motion.div>
 
           {/* Slider */}
-          <div className="max-w-[600px] mx-auto mb-8">
+          <div className="max-w-[600px] mx-auto mb-7">
             <Slider
               value={[targetScore]}
               onValueChange={(value) => setTargetScore(value[0])}
@@ -126,18 +126,16 @@ export const OnboardingTargetScore = () => {
 
           {/* Info Box */}
           <div 
-            className="max-w-[520px] mx-auto rounded-xl p-6 mb-8 text-left"
+            className="max-w-[520px] mx-auto rounded-xl p-4 mb-7 text-center"
             style={{
               background: 'rgba(0, 217, 255, 0.1)',
               border: '1px solid rgba(0, 217, 255, 0.2)',
             }}
           >
-            <div className="flex gap-4">
-              <div className="text-[24px]">💡</div>
-              <div className="text-[15px] space-y-2" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.8 }}>
-                <p>Average SAT: ~1050</p>
-                <p>Top schools: 1400+</p>
-                <p>Ivy League: 1500+</p>
+            <div className="flex items-center justify-center gap-3">
+              <div className="text-[20px]">💡</div>
+              <div className="text-[14px]" style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.6 }}>
+                Average: ~1050 | Top schools: 1400+ | Ivy League: 1500+
               </div>
             </div>
           </div>
@@ -145,7 +143,7 @@ export const OnboardingTargetScore = () => {
           {/* Continue Button */}
           <button
             onClick={handleContinue}
-            className="w-[280px] h-[64px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all"
+            className="w-[280px] h-[56px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all"
             style={{
               background: 'linear-gradient(135deg, #B4FF39 0%, #9AE834 100%)',
               boxShadow: '0 4px 16px rgba(180, 255, 57, 0.4)',

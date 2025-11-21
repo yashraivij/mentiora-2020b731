@@ -56,7 +56,7 @@ export const OnboardingDiagnosticIntro = () => {
       </button>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-start justify-center px-6 pt-[15vh]">
+      <div className="flex-1 flex items-start justify-center px-6 pt-[10vh]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,57 +64,57 @@ export const OnboardingDiagnosticIntro = () => {
           className="text-center max-w-[700px] w-full"
         >
           {/* Heading */}
-          <h1 className="text-[40px] font-bold text-white mb-5">
+          <h1 className="text-[36px] font-bold text-white mb-3">
             Almost there, {firstName}!
           </h1>
 
           {/* Subheading */}
-          <p className="text-[20px] mb-14" style={{ color: 'rgba(255,255,255,0.85)' }}>
+          <p className="text-[18px] mb-8" style={{ color: 'rgba(255,255,255,0.85)' }}>
             Let's figure out where you're starting from
           </p>
 
           {/* Section Divider */}
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <div className="w-[60px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
-            <h2 className="text-[22px] text-white">Quick Diagnostic Tests</h2>
-            <div className="w-[60px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="w-[50px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
+            <h2 className="text-[20px] text-white">Quick Diagnostic Tests</h2>
+            <div className="w-[50px] h-[1px]" style={{ background: 'rgba(255,255,255,0.3)' }} />
           </div>
 
           {/* Test Info */}
-          <div className="mb-12 space-y-6">
-            <p className="text-[18px]" style={{ color: 'rgba(255,255,255,0.9)' }}>
+          <div className="mb-6">
+            <p className="text-[17px] mb-4" style={{ color: 'rgba(255,255,255,0.9)' }}>
               You'll take two short tests:
             </p>
             
-            <div className="space-y-4">
-              <p className="text-[18px] text-white">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-[14px] mr-3">1</span>
-                Math (8-10 questions, ~8 mins)
+            <div className="flex items-center justify-center gap-6 mb-5">
+              <p className="text-[16px] text-white">
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-[13px] mr-2">1</span>
+                Math (8-10 questions)
               </p>
-              <p className="text-[18px] text-white">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-[14px] mr-3">2</span>
-                Reading & Writing (8-10 questions, ~8 mins)
+              <p className="text-[16px] text-white">
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-[13px] mr-2">2</span>
+                Reading & Writing (8-10 questions)
               </p>
             </div>
 
-            <p className="text-[16px] pt-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
-              Total time: ~15-18 minutes
+            <p className="text-[15px]" style={{ color: 'rgba(255,255,255,0.8)' }}>
+              Total: ~15-18 minutes
             </p>
           </div>
 
           {/* Benefits */}
-          <div className="mb-12">
-            <p className="text-[18px] mb-5" style={{ color: 'rgba(255,255,255,0.9)' }}>
+          <div className="mb-8">
+            <p className="text-[17px] mb-3" style={{ color: 'rgba(255,255,255,0.9)' }}>
               This helps us:
             </p>
-            <div className="space-y-3" style={{ lineHeight: 2 }}>
-              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            <div className="space-y-2" style={{ lineHeight: 1.8 }}>
+              <p className="text-[15px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
                 • Identify your weak areas
               </p>
-              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              <p className="text-[15px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
                 • Estimate your current score
               </p>
-              <p className="text-[17px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              <p className="text-[15px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
                 • Build your perfect study plan
               </p>
             </div>
@@ -123,7 +123,7 @@ export const OnboardingDiagnosticIntro = () => {
           {/* Buttons */}
           <button
             onClick={handleStart}
-            className="w-[320px] h-[60px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all mb-4"
+            className="w-[320px] h-[56px] rounded-xl font-bold text-[16px] text-[#0A1628] transition-all mb-3"
             style={{
               background: 'linear-gradient(135deg, #B4FF39 0%, #9AE834 100%)',
               boxShadow: '0 4px 16px rgba(180, 255, 57, 0.4)',
