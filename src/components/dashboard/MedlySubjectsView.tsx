@@ -142,215 +142,493 @@ export function MedlySubjectsView({
   const progressPercent = (completedTasks / totalTasks) * 100;
 
   return (
-    <div className="space-y-8">
-      {/* TODAY'S PLAN CARD */}
+    <div className="space-y-10">
+      {/* Hero Ribbon */}
       <motion.div 
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20"
       >
-        <Card className="rounded-2xl border shadow-sm">
-          <CardContent className="p-6">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-foreground">📋 Today's Plan</h2>
-              <div className="flex items-center gap-1.5 text-sm font-semibold text-destructive">
-                <span>🔥</span>
-                <span>2-Day Streak</span>
-              </div>
+        {/* Premium gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#3B82F6]/5 pointer-events-none" />
+        
+        {/* Animated background elements */}
+        <motion.div 
+          className="absolute top-0 right-0 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-0 left-0 w-64 h-64 bg-[#60A5FA]/5 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        
+        <div className="relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
+            <div>
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight"
+              >
+                Your Subjects
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-[#64748B] dark:text-gray-400 font-light"
+              >
+                Predicted grades, weak topics & weekly plan at a glance.
+              </motion.p>
             </div>
-            
-            {/* Subheading */}
-            <p className="text-muted-foreground mb-6">
-              Day 2 • Focus: <span className="font-semibold text-foreground">Linear Equations</span> (your weakest area)
-            </p>
-            
-            {/* 4 Session Cards */}
-            <div className="space-y-3 mb-6">
-              {/* Part 1 - Active/Clickable */}
-              <div className="bg-[#F9FAFB] dark:bg-muted/30 border-2 border-primary rounded-xl p-4 cursor-pointer hover:bg-primary/5 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-foreground mb-1">Part 1: Diagnostic</h3>
-                    <p className="text-sm text-muted-foreground">5 questions • 3 mins</p>
-                  </div>
-                  <div className="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center">
-                    <Play className="h-4 w-4 text-primary" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Part 2 - Locked */}
-              <div className="bg-[#F9FAFB] dark:bg-muted/30 border rounded-xl p-4 opacity-60 cursor-not-allowed">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-foreground mb-1">Part 2: Focus Practice</h3>
-                    <p className="text-sm text-muted-foreground">12 questions • 8 mins</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🔒</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Part 3 - Locked */}
-              <div className="bg-[#F9FAFB] dark:bg-muted/30 border rounded-xl p-4 opacity-60 cursor-not-allowed">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-foreground mb-1">Part 3: Retention</h3>
-                    <p className="text-sm text-muted-foreground">8 questions • 6 mins</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🔒</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Part 4 - Locked */}
-              <div className="bg-[#F9FAFB] dark:bg-muted/30 border rounded-xl p-4 opacity-60 cursor-not-allowed">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-foreground mb-1">Part 4: Challenge</h3>
-                    <p className="text-sm text-muted-foreground">5 questions • 3 mins</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🔒</span>
-                  </div>
-                </div>
-              </div>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap items-center gap-3"
+            >
+              <Button 
+                onClick={() => setShowAddSubjects(true)}
+                className="rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/25 hover:shadow-xl hover:shadow-[#3B82F6]/30 transition-all duration-300 font-medium"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Add Subject
+              </Button>
+              {!isPremium && onUpgradeToPremium && (
+                <Button 
+                  onClick={onUpgradeToPremium}
+                  className="rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 font-medium"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade to Premium
+                </Button>
+              )}
+            </motion.div>
+          </div>
+
+          {/* KPI Belt */}
+          <TooltipProvider>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
+                        <Target className="h-5 w-5 text-[#3B82F6]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Overall Progress</span>
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                      <motion.span 
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, type: "spring" }}
+                        className="text-3xl font-bold text-foreground"
+                      >
+                        {safeProfile.overallPred}
+                      </motion.span>
+                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">→</span>
+                      <span className="text-xl font-bold text-[#3B82F6]">{safeProfile.overallTarget}</span>
+                    </div>
+                    <div className="mt-3 flex gap-2">
+                      <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
+                          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Average predicted grade across all subjects</p>
+                  <p className="text-xs text-muted-foreground">Calculated from your exam completions and practice performance compared to your target grades</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                        <Brain className="h-5 w-5 text-[#16A34A]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Retention</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35, type: "spring" }}
+                      className="text-3xl font-bold text-foreground"
+                    >
+                      {Math.round(safeProfile.retention * 100)}%
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Last 7 days</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Your knowledge retention rate</p>
+                  <p className="text-xs text-muted-foreground">Average accuracy from all practice attempts in the last 7 days</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
+                        <Clock className="h-5 w-5 text-[#F59E0B]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">You perform best at</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4, type: "spring" }}
+                      className="text-3xl font-bold text-foreground"
+                    >
+                      {safeProfile.bestWindow}
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Your peak focus hours</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">We think you perform best at this time</p>
+                  <p className="text-xs text-muted-foreground">Based on your practice history, this 2-hour window is when you achieve your highest scores. Try scheduling important study sessions during these peak hours!</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.25 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
+                        <Calendar className="h-5 w-5 text-[#3B82F6]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.45, type: "spring" }}
+                      className="text-3xl font-bold text-foreground"
+                    >
+                      {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Time saved</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Total time saved this week</p>
+                  <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
-            
-            {/* Start Button */}
-            <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base">
-              Start Diagnostic →
-            </Button>
-          </CardContent>
-        </Card>
-      </motion.div>
-      
-      {/* ONE-LINE PROGRESS BAR */}
-      <motion.div 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-      >
-        <Card className="rounded-2xl border shadow-sm">
-          <CardContent className="p-4">
-            <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">Current: 790</span>
-              <span>→</span>
-              <span className="font-semibold text-foreground">Target: 1300</span>
-              <span className="text-muted-foreground/50">|</span>
-              <span>58 days to exam</span>
-              <span className="text-muted-foreground/50">|</span>
-              <span className="flex items-center gap-1">
-                🔥 <span className="font-semibold text-foreground">2 streak</span>
-              </span>
-            </div>
-          </CardContent>
-        </Card>
+          </TooltipProvider>
+        </div>
       </motion.div>
 
-      {/* TWO SAT SECTION CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Math Section Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Card 
-            className="rounded-2xl border hover:shadow-md transition-all duration-300 cursor-pointer"
-            onClick={() => {
-              // Navigate to Math practice
-            }}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">📐</span>
-                    <h3 className="text-xl font-bold text-foreground">Math</h3>
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-foreground">410</span>
-                    <span className="text-muted-foreground">/800</span>
-                  </div>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="mb-4">
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: "51%" }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-primary rounded-full"
-                  />
-                </div>
-              </div>
-              
-              {/* Weak Area */}
-              <div className="flex items-center gap-2">
-                <Badge variant="destructive" className="font-normal">
-                  Weak: Algebra
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+      {/* Subject Grid */}
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Your Subjects</h2>
+          {insightFilter && (
+            <Button 
+              variant="ghost"
+              size="sm"
+              onClick={() => setInsightFilter(null)}
+              className="text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl"
+            >
+              Clear filter <X className="h-4 w-4 ml-1" />
+            </Button>
+          )}
+        </div>
         
-        {/* Reading & Writing Section Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <Card 
-            className="rounded-2xl border hover:shadow-md transition-all duration-300 cursor-pointer"
-            onClick={() => {
-              // Navigate to Reading & Writing practice
-            }}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredMockSubjects.map((subject, index) => (
+            <motion.div
+              key={subject.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index }}
+            >
+              <Card 
+                className="group relative rounded-3xl border border-border hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/40 hover:shadow-[0_16px_48px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-background to-muted/20"
+                onClick={() => {
+                  setSelectedDrawerSubject(subject);
+                  setSubjectDrawerOpen(true);
+                }}
+              >
+                {/* Premium shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
+                {/* Remove button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-3 right-3 z-10 w-8 h-8 rounded-lg text-[#64748B] dark:text-gray-400 hover:text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-red-900/20 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeSubject(subject.id);
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+
+                <CardContent className="p-7 relative">
+                  {/* Top Row: Icon + Badge */}
+                  <div className="flex items-start justify-between mb-5">
+                    <motion.div 
+                      className="flex items-center gap-3"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{subject.icon}</div>
+                      <Badge className={`text-xs px-3 py-1 rounded-lg font-semibold ${getStatusColor(subject.status)} shadow-sm`}>
+                        {subject.status}
+                      </Badge>
+                    </motion.div>
+                  </div>
+                  
+                   {/* Subject Name */}
+                  <h3 className="text-xl font-bold text-foreground mb-4 line-clamp-2 tracking-tight">
+                    {subject.name.replace(/\s*\(A-Level\)/g, '')}
+                  </h3>
+                  
+                  {/* Dual Progress Bars */}
+                  <div className="space-y-4 mb-5 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
+                        <span className={`text-base font-bold text-foreground ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                          {(() => {
+                            console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
+                            
+                            // Handle string 'U' directly - don't try to parse it
+                            if (subject.predicted === 'U' || subject.predicted === 'u') {
+                              return 'U';
+                            }
+                            
+                            const isALevel = subject.id.toLowerCase().includes('alevel');
+                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                            
+                            // Convert percentage grades (e.g., "37%") to numeric
+                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
+                              const percentage = parseFloat(subject.predicted);
+                              if (!isNaN(percentage)) {
+                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
+                              }
+                            }
+                            
+                            console.log(`🎯 [${subject.id}] isALevel: ${isALevel}, numericPred: ${numericPred}`);
+                            
+                            if (!isALevel) {
+                              const rounded = Math.round(numericPred);
+                              return rounded === 0 ? 'U' : rounded;
+                            }
+                            // Convert numeric grade (1-9) to A-Level letter grade
+                            if (numericPred >= 8.5) return 'A*';
+                            if (numericPred >= 7.5) return 'A';
+                            if (numericPred >= 6.5) return 'B';
+                            if (numericPred >= 5.5) return 'C';
+                            if (numericPred >= 4.5) return 'D';
+                            if (numericPred >= 3.5) return 'E';
+                            console.log(`🎯 [${subject.id}] Returning U because numericPred < 3.5`);
+                            return 'U';
+                          })()}
+                        </span>
+                      </div>
+                      <div className={`w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: (() => {
+                            // Handle string 'U' - show 0% progress
+                            if (subject.predicted === 'U' || subject.predicted === 'u') {
+                              return '0%';
+                            }
+                            
+                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
+                            
+                            // Convert percentage grades to numeric
+                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
+                              const percentage = parseFloat(subject.predicted);
+                              if (!isNaN(percentage)) {
+                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
+                              }
+                            }
+                            
+                            return `${((Math.max(1, numericPred) - 1) / 8) * 100}%`;
+                          })() }}
+                          transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target</span>
+                        <span className="text-base font-bold text-foreground">
+                          {(() => {
+                            const isALevel = subject.id.toLowerCase().includes('alevel');
+                            
+                            // For A-Level subjects, always convert to letter grades
+                            if (isALevel) {
+                              // Check if target_grade is already a valid letter grade
+                              const targetGrade = subject.target_grade?.toString().trim().toUpperCase();
+                              if (targetGrade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(targetGrade)) {
+                                return targetGrade;
+                              }
+                              
+                              // Convert numeric target to letter grade for A-Level
+                              const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
+                              const rounded = Math.round(numericTarget);
+                              const numToLetterMap: {[key: number]: string} = {
+                                9: 'A*', 8: 'A', 7: 'B', 6: 'C', 5: 'D', 4: 'E', 3: 'E', 2: 'E', 1: 'U', 0: 'U'
+                              };
+                              return numToLetterMap[rounded] || 'U';
+                            }
+                            
+                            // For GCSE, use numeric grades
+                            const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
+                            const rounded = Math.round(numericTarget);
+                            return rounded === 0 ? 'U' : rounded;
+                          })()}
+                        </span>
+                      </div>
+                      <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${((Math.max(1, subject.target) - 1) / 8) * 100}%` }}
+                          transition={{ duration: 1.2, delay: 0.3 * index, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Daily Tasks */}
+                  <div className="mb-5">
+                    <SubjectDailyTasks subjectId={subject.id} userId={userId} />
+                  </div>
+                  
+                  {/* Actions */}
+                  <div className="flex flex-col gap-2 pt-2">
+                    <Button 
+                      size="sm"
+                      variant="ghost"
+                      className="w-full rounded-xl text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 justify-center font-semibold border border-[#3B82F6]/20 hover:border-[#3B82F6]/30 transition-all duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedDrawerSubject(subject);
+                        setSubjectDrawerOpen(true);
+                      }}
+                    >
+                      View insights
+                    </Button>
+                    <Button 
+                      size="sm"
+                      className="w-full rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-md shadow-[#3B82F6]/25 hover:shadow-lg hover:shadow-[#3B82F6]/30 transition-all duration-300"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedDrawerSubject(subject);
+                        setDrawerTab('topics');
+                        setSubjectDrawerOpen(true);
+                      }}
+                    >
+                      Topics
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+          
+          {/* Add Subject Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * filteredMockSubjects.length }}
           >
-            <CardContent className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">📖</span>
-                    <h3 className="text-xl font-bold text-foreground">Reading & Writing</h3>
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-foreground">380</span>
-                    <span className="text-muted-foreground">/800</span>
-                  </div>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="mb-4">
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: "48%" }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-primary rounded-full"
-                  />
-                </div>
-              </div>
-              
-              {/* Weak Area */}
-              <div className="flex items-center gap-2">
-                <Badge variant="destructive" className="font-normal">
-                  Weak: Grammar
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+            <Card 
+              className="group rounded-3xl border-2 border-dashed border-[#3B82F6]/30 hover:border-[#3B82F6]/60 hover:bg-gradient-to-br hover:from-[#3B82F6]/5 hover:to-[#60A5FA]/5 transition-all duration-500 cursor-pointer h-full"
+              onClick={() => setShowAddSubjects(true)}
+            >
+              <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[400px]">
+                <motion.div 
+                  className="p-6 rounded-full bg-gradient-to-br from-[#3B82F6]/10 to-[#60A5FA]/10 mb-6 group-hover:scale-110 transition-transform duration-300"
+                  whileHover={{ rotate: 90 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <Plus className="h-10 w-10 text-[#3B82F6]" />
+                </motion.div>
+                <h3 className="text-xl font-bold text-foreground mb-2">Add subject</h3>
+                <p className="text-sm text-muted-foreground text-center font-medium">
+                  Start tracking a new subject
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </div>
+
+
+      {/* Footer Nudge */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="text-center py-12 px-6"
+      >
+        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#3B82F6]/5 via-white to-[#60A5FA]/5 dark:from-[#3B82F6]/10 dark:via-gray-800 dark:to-[#60A5FA]/10 border border-[#3B82F6]/10 dark:border-[#3B82F6]/20">
+          <p className="text-lg text-[#475569] dark:text-gray-300 font-medium leading-relaxed">
+            Small, consistent study sessions beat cramming. <span className="text-[#3B82F6] font-bold">You've got this.</span>
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 }
