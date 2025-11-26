@@ -2758,10 +2758,12 @@ const Dashboard = () => {
                   </div>
                 )}
               </div>
+            </div>
           )}
 
-          {/* Progress tab */}
-                <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
+          {/* Subject Detail Drawer */}
+          <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+            <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
                   {selectedDrawerSubject && (
                     <>
                       <SheetHeader className="space-y-3 sm:space-y-6 pb-4 sm:pb-8 border-b border-border">
@@ -4410,10 +4412,10 @@ const Dashboard = () => {
                   </motion.div>
                 </div>
               )}
-                    </>
-                  )}
-                </SheetContent>
-              </Sheet>
+              </>
+            )}
+          </SheetContent>
+        </Sheet>
 
           {/* Progress tab */}
           {activeTab === "progress" && (
@@ -6050,7 +6052,6 @@ const Dashboard = () => {
         }}
         streakCount={currentStreak}
       />
-      </div>
     </div>
   );
 };
