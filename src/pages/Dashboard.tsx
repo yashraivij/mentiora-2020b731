@@ -2758,11 +2758,9 @@ const Dashboard = () => {
                   </div>
                 )}
               </div>
-            </div>
           )}
 
-          {/* Subject Detail Drawer */}
-          <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+          {/* Progress tab */}
                 <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
                   {selectedDrawerSubject && (
                     <>
@@ -4412,12 +4410,12 @@ const Dashboard = () => {
                   </motion.div>
                 </div>
               )}
-              </>
-            )}
-          </SheetContent>
-        </Sheet>
+                    </>
+                  )}
+                </SheetContent>
+              </Sheet>
 
-        {/* Progress tab */}
+          {/* Progress tab */}
           {activeTab === "progress" && (
             <div className="bg-gradient-to-br from-background via-background to-muted/20 min-h-screen -m-8 p-8">
               {/* Header */}
