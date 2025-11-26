@@ -10,7 +10,7 @@ import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 
 interface Goal {
   id: string;
@@ -34,7 +34,6 @@ const PRESET_TIMES = [
 
 export function GoalsSection() {
   const { user } = useAuth();
-  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const [goals, setGoals] = useState<Goal[]>([]);
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);

@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -140,7 +140,6 @@ interface NotebookEntryData {
 
 const Dashboard = () => {
   const { user, logout, isPremium } = useAuth();
-  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
   const { showMPReward } = useMPRewards();

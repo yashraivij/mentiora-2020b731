@@ -25,6 +25,7 @@ import {
   User
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
@@ -43,6 +44,7 @@ const Index = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [sliderMonths, setSliderMonths] = useState(6);
 
   const fadeInUp = {
@@ -99,35 +101,6 @@ const Index = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Button 
-              onClick={() => navigate('/onboarding/welcome')} 
-              variant="outline" 
-              className="border-2 border-purple-500 text-purple-600 hover:bg-purple-50 font-semibold"
-            >
-              🧪 Test Onboarding
-            </Button>
-            <Button 
-              onClick={() => navigate('/diagnostic-test?type=reading')} 
-              variant="outline" 
-              className="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 font-semibold"
-            >
-              📖 Reading Test
-            </Button>
-            <Button 
-              onClick={() => navigate('/diagnostic-test?type=math')} 
-              variant="outline" 
-              className="border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold"
-            >
-              🔢 Math Test
-            </Button>
-            <Button 
-              onClick={() => navigate('/diagnostic/results')} 
-              variant="outline" 
-              className="border-2 border-cyan-500 text-cyan-600 hover:bg-cyan-50 font-semibold"
-            >
-              📊 Results Page
-            </Button>
-            
             {user ? (
               <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#3B82F6' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
@@ -136,7 +109,7 @@ const Index = () => {
               <>
                 <Button 
                   onClick={() => navigate("/login")} 
-                  variant="ghost"
+                  variant="ghost" 
                   className="hover:bg-transparent hover:text-[#3B82F6] transition-colors duration-200"
                 >
                   Login
@@ -1691,6 +1664,14 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <OnboardingPopup 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
+        onSubjectsAdded={() => {
+          setShowOnboarding(false);
+        }} 
+      />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { X, MessageCircle, Send, Bot, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import type { Question } from "@/services/curriculumService";
+import { Question } from "@/data/curriculum";
 
 interface Message {
   id: string;

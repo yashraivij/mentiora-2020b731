@@ -26,15 +26,6 @@ import Settings from "./pages/Settings";
 import Flashcards from "./pages/Flashcards";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
-import { Signup } from "./pages/Signup";
-import { OnboardingWelcome } from "./pages/onboarding/Welcome";
-import { OnboardingGrade } from "./pages/onboarding/Grade";
-import { OnboardingTargetScore } from "./pages/onboarding/TargetScore";
-import { OnboardingDiagnosticIntro } from "./pages/onboarding/DiagnosticIntro";
-import { MathDiagnostic } from "./pages/diagnostic/MathDiagnostic";
-import { ReadingWritingDiagnostic } from "./pages/diagnostic/ReadingWritingDiagnostic";
-import { DiagnosticTransition } from "./pages/diagnostic/DiagnosticTransition";
-import { DiagnosticResults } from "./pages/diagnostic/DiagnosticResults";
 
 
 const queryClient = new QueryClient();
@@ -51,18 +42,9 @@ const App: React.FC = () => (
             
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/onboarding/welcome" element={<OnboardingWelcome />} />
-              <Route path="/onboarding/grade" element={<OnboardingGrade />} />
-              <Route path="/onboarding/target-score" element={<OnboardingTargetScore />} />
-              <Route path="/onboarding/diagnostic-intro" element={<OnboardingDiagnosticIntro />} />
-              <Route path="/diagnostic/math" element={<MathDiagnostic />} />
-              <Route path="/diagnostic/reading-writing" element={<ReadingWritingDiagnostic />} />
-              <Route path="/diagnostic/transition" element={<DiagnosticTransition />} />
-              <Route path="/diagnostic/results" element={<DiagnosticResults />} />
               <Route path="/dashboard" element={
                 <ProtectedRoute>
                   <Dashboard />

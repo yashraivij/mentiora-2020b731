@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Lock, Crown, LineChart, Star, Trophy } from "lucide-react";
-import { useCurriculum } from "@/hooks/useCurriculum";
+import { curriculum } from "@/data/curriculum";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
@@ -21,7 +21,6 @@ interface PredictivePerformanceCardProps {
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
   const { user } = useAuth();
-  const { curriculum, isLoading: curriculumLoading } = useCurriculum();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
 
   useEffect(() => {
