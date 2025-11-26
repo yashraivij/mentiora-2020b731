@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -165,7 +166,7 @@ const Index = () => {
             initial={{ opacity: 0, x: -50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute top-[-70px] left-[-380px] hidden xl:block z-10"
+            className="absolute top-[-70px] left-[-380px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -8, 0] }}
@@ -211,7 +212,7 @@ const Index = () => {
             initial={{ opacity: 0, x: 50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="absolute top-[-50px] right-[-280px] hidden xl:block z-10"
+            className="absolute top-[-50px] right-[-280px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
@@ -259,7 +260,7 @@ const Index = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-lg mb-8"
               style={{ 
-                color: '#6b7280',
+                color: '#4b5563',
                 lineHeight: '1.6'
               }}
             >
@@ -301,10 +302,15 @@ const Index = () => {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* UNIVERSITY STRIP SECTION */}
+        {/* TESTIMONIALS SECTION */}
+        <section className="py-8 bg-slate-50">
+          <DynamicTestimonials />
+        </section>
+
+        {/* UNIVERSITY STRIP SECTION */}
       <section 
         className="py-8 px-6 overflow-hidden"
         style={{
