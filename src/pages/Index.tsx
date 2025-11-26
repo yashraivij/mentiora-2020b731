@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
-import { TodaysPlanPreview } from "@/components/landing/TodaysPlanPreview";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import bristolLogo from "@/assets/bristol-logo.png";
 import newcastleLogo from "@/assets/newcastle-logo.svg";
@@ -234,81 +233,73 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Two Column Layout */}
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-20">
-            {/* Left Column: Today's Plan Preview */}
-            <div className="hidden lg:block lg:w-[45%] flex-shrink-0">
-              <TodaysPlanPreview />
-            </div>
+          {/* Main Content - Centered */}
+          <div className="text-center relative z-20">
+            {/* Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6 text-5xl lg:text-6xl"
+              style={{
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em'
+              }}
+            >
+              <span className="block" style={{ color: '#000000' }}>
+                Your revision, finally made <span style={{ color: '#3B82F6' }}>personal</span>
+              </span>
+            </motion.h1>
 
-            {/* Right Column: Main Content */}
-            <div className="flex-1 text-center lg:text-left">
-              {/* Main Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-6 text-4xl lg:text-5xl"
-                style={{
-                  fontWeight: 700,
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.02em'
-                }}
-              >
-                <span className="block" style={{ color: '#000000' }}>
-                  Your revision, finally made <span style={{ color: '#3B82F6' }}>personal</span>
-                </span>
-              </motion.h1>
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-lg mb-8"
+              style={{ 
+                color: '#6b7280',
+                lineHeight: '1.6'
+              }}
+            >
+              Mentiora adapts to you—whether you're acing it or falling behind—with personalised study plans, instant 24/7 marking, smart predictions and adaptive flashcards.
+            </motion.p>
 
-              {/* Subheadline */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-lg mb-8"
-                style={{ 
-                  color: '#6b7280',
-                  lineHeight: '1.6'
-                }}
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <Button 
+                onClick={() => navigate("/register")} 
+                size="lg"
+                style={{ backgroundColor: '#3B82F6' }}
+                className="text-white text-lg px-10 py-6 rounded-xl font-semibold shadow-[0_4px_14px_0_rgba(59,130,246,0.4)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.5)] hover:opacity-90 transition-all duration-200"
               >
-                Mentiora adapts to you—whether you're acing it or falling behind—with personalised study plans, instant 24/7 marking, smart predictions and adaptive flashcards.
-              </motion.p>
+                Start Free Trial
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
 
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-4 lg:justify-start justify-center items-center"
-              >
-                <Button 
-                  onClick={() => navigate("/register")} 
-                  size="lg"
-                  style={{ backgroundColor: '#3B82F6' }}
-                  className="text-white text-lg px-10 py-6 rounded-xl font-semibold shadow-[0_4px_14px_0_rgba(59,130,246,0.4)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.5)] hover:opacity-90 transition-all duration-200"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </motion.div>
-
-              {/* Social Proof */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-10"
-              >
-                <p className="text-sm text-gray-500 mb-4">Trusted by students at</p>
-                <div className="flex flex-wrap items-center lg:justify-start justify-center gap-8 opacity-60">
-                  <img src={oxfordLogo} alt="Oxford University" className="h-10 grayscale" />
-                  <img src={bristolLogo} alt="Bristol University" className="h-10 grayscale" />
-                  <img src={bathLogo} alt="Bath University" className="h-10 grayscale" />
-                  <img src={newcastleLogo} alt="Newcastle University" className="h-10 grayscale" />
-                  <img src={birminghamLogo} alt="Birmingham University" className="h-10 grayscale" />
-                </div>
-              </motion.div>
-            </div>
+            {/* Social Proof */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-10"
+            >
+              <p className="text-sm text-gray-500 mb-4">Trusted by students at</p>
+              <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+                <img src={oxfordLogo} alt="Oxford University" className="h-10 grayscale" />
+                <img src={bristolLogo} alt="Bristol University" className="h-10 grayscale" />
+                <img src={bathLogo} alt="Bath University" className="h-10 grayscale" />
+                <img src={newcastleLogo} alt="Newcastle University" className="h-10 grayscale" />
+                <img src={birminghamLogo} alt="Birmingham University" className="h-10 grayscale" />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
