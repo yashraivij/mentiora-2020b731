@@ -85,7 +85,6 @@ import { StudyInsights } from "@/components/dashboard/StudyInsights";
 import { WeeklyPlan } from "@/components/dashboard/WeeklyPlan";
 import { PersonalizedSummary } from "@/components/dashboard/PersonalizedSummary";
 import { MedlySubjectsView } from "@/components/dashboard/MedlySubjectsView";
-import { DashboardTodaysPlan } from "@/components/dashboard/DashboardTodaysPlan";
 import { FlashcardInsights } from "@/components/dashboard/FlashcardInsights";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
@@ -2697,39 +2696,29 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="w-full">
-        <div className={`max-w-full mx-auto ${isMobile ? 'p-4' : 'p-4 lg:p-8'}`}>
+        <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
-            <div className="max-w-full mx-auto">
+            <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
-                <div className="flex flex-col lg:flex-row gap-6">
-                  {/* Left Column: Today's Plan (fixed width ~340px) */}
-                  <div className="w-full lg:w-[340px] lg:flex-shrink-0">
-                    <DashboardTodaysPlan />
-                  </div>
-                  
-                  {/* Right Column: Main Dashboard Content */}
-                  <div className="flex-1 min-w-0">
-                    <MedlySubjectsView
-                      profile={profile}
-                      mockSubjects={mockSubjects}
-                      weekPlan={weekPlan}
-                      getStatusColor={getStatusColor}
-                      weekTasksCompleted={weekTasksCompleted}
-                      setWeekTasksCompleted={setWeekTasksCompleted}
-                      setShowAddSubjects={setShowAddSubjects}
-                      setSelectedDrawerSubject={setSelectedDrawerSubject}
-                      setSubjectDrawerOpen={setSubjectDrawerOpen}
-                      setDrawerTab={setDrawerTab}
-                      insightFilter={insightFilter}
-                      setInsightFilter={setInsightFilter}
-                      removeSubject={removeSubject}
-                      isPremium={isPremium}
-                      onUpgradeToPremium={() => navigate('/pricing')}
-                      userId={user?.id || ''}
-                    />
-                  </div>
-                </div>
+                <MedlySubjectsView
+                  profile={profile}
+                  mockSubjects={mockSubjects}
+                  weekPlan={weekPlan}
+                  getStatusColor={getStatusColor}
+                  weekTasksCompleted={weekTasksCompleted}
+                  setWeekTasksCompleted={setWeekTasksCompleted}
+                  setShowAddSubjects={setShowAddSubjects}
+                  setSelectedDrawerSubject={setSelectedDrawerSubject}
+                  setSubjectDrawerOpen={setSubjectDrawerOpen}
+                  setDrawerTab={setDrawerTab}
+                  insightFilter={insightFilter}
+                  setInsightFilter={setInsightFilter}
+                  removeSubject={removeSubject}
+                  isPremium={isPremium}
+                  onUpgradeToPremium={() => navigate('/pricing')}
+                  userId={user?.id || ''}
+                />
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)

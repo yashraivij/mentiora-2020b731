@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -153,28 +152,30 @@ const Index = () => {
 
       {/* HERO SECTION - ChronoTask Style */}
       <section 
-        className="relative py-20 px-4 min-h-[700px] flex items-center overflow-hidden"
+        className="relative py-20 px-4 min-h-[600px] flex items-center overflow-hidden"
         style={{
           backgroundColor: '#f8f9fa',
           backgroundImage: 'radial-gradient(#d1d5db 1px, transparent 1px)',
           backgroundSize: '20px 20px'
         }}
       >
-        <div className="max-w-7xl mx-auto w-full relative">
+        <div className="max-w-[900px] mx-auto w-full relative">
           {/* Floating Element 1 - Top Left: Chat Conversation */}
           <motion.div
             initial={{ opacity: 0, x: -50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute top-[-70px] left-[-380px] hidden lg:block z-10"
+            className="absolute top-[-70px] left-[-220px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
+              {/* Chat Conversation */}
               <div className="space-y-3" style={{ width: '240px' }}>
+                {/* User Message */}
                 <div className="flex justify-end">
-                  <div 
+                <div 
                     className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-md max-w-[180px]"
                     style={{
                       backgroundColor: '#3B82F6',
@@ -186,6 +187,8 @@ const Index = () => {
                     </p>
                   </div>
                 </div>
+                
+                {/* Mentiora Response */}
                 <div className="flex justify-start">
                   <div 
                     className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-md max-w-[200px]"
@@ -207,17 +210,18 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating Element 3 - Top Right: Study Insights */}
+          {/* Floating Element 3 - Top Right: Study Insights (Real Dashboard Component) */}
           <motion.div
             initial={{ opacity: 0, x: 50, y: -50 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="absolute top-[-50px] right-[-280px] hidden lg:block z-10"
+            className="absolute top-[-50px] right-[-250px] hidden lg:block z-10"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
+              {/* Mini "You Perform Best At" Card - Exact Dashboard Design */}
               <div 
                 className="w-[200px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-5 border border-gray-100"
                 style={{ transform: 'rotate(3deg)' }}
@@ -234,14 +238,173 @@ const Index = () => {
             </motion.div>
           </motion.div>
 
+          {/* Floating Element 4 - Bottom Left: Weekly Plan Card (Real Dashboard Component) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, y: 50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="absolute bottom-[-100px] left-[-230px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              {/* Mini Weekly Plan Card - Drawer Style */}
+              <div 
+                className="w-[300px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-gray-100"
+                style={{ transform: 'rotate(-4deg)' }}
+              >
+                <div className="p-3 space-y-2.5">
+                  {/* Day Header */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-black text-sm">Mon</span>
+                      <span className="text-gray-500 text-xs ml-1.5">— Kickstart Week</span>
+                    </div>
+                    <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold" style={{ color: '#3B82F6', border: '1.5px solid #3B82F6' }}>
+                      30 mins
+                    </span>
+                  </div>
+                  
+                  {/* Task 1 */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-xs font-medium text-black">Create 10 flashcards on Bonding Structure</span>
+                          <span className="px-1 py-0 rounded text-[9px] font-semibold bg-red-100 text-red-600">
+                            Priority
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#3B82F6' }}>
+                        <span>▶</span> Start
+                      </button>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {/* Task 2 */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-xs font-medium text-black">Practice questions on Bonding Structure</span>
+                          <span className="px-1 py-0 rounded text-[9px] font-semibold bg-red-100 text-red-600">
+                            Priority
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-gray-500">15 mins • Current: 56%</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#3B82F6' }}>
+                        <span>▶</span> Start
+                      </button>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Element 5 - Bottom Right: Subject Card with Predicted/Target Grades (Real Dashboard Component) */}
+          <motion.div
+            initial={{ opacity: 0, x: 50, y: 50 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="absolute bottom-[-120px] right-[-230px] hidden lg:block z-10"
+          >
+            <motion.div
+              animate={{ y: [0, -7, 0] }}
+              transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              {/* Mini Subject Card - Exact Dashboard Design */}
+              <div 
+                className="w-[170px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+                style={{ transform: 'rotate(5deg)' }}
+              >
+                {/* Content */}
+                <div className="p-3 space-y-2.5">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-base">🧪</span>
+                      <h3 className="text-xs font-bold text-black">Chemistry</h3>
+                    </div>
+                  </div>
+                  
+                  {/* Predicted Section */}
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
+                      <span className="text-lg font-bold text-black">7</span>
+                    </div>
+                    <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full rounded-full"
+                        style={{ width: '78%', backgroundColor: '#3B82F6' }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Target Section */}
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Target</span>
+                      <span className="text-lg font-bold text-black">9</span>
+                    </div>
+                    <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-green-500 rounded-full"
+                        style={{ width: '70%' }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Last 6 Attempts Section */}
+                  <div className="bg-gray-100 rounded-lg px-2.5 py-1.5">
+                    <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider block mb-1.5">Last 6 Attempts</span>
+                    <div className="h-8 relative">
+                      <svg width="100%" height="100%" viewBox="0 0 140 32" preserveAspectRatio="none">
+                        <polyline
+                          fill="none"
+                          stroke="#3B82F6"
+                          strokeWidth="2"
+                          points="0,26 28,23 56,19 84,14 112,9 140,5"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Topics Button */}
+                  <button 
+                    className="w-full py-1.5 rounded-lg font-bold text-[10px] text-white"
+                    style={{ backgroundColor: '#3B82F6' }}
+                  >
+                    Topics
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
           {/* Main Content - Centered */}
-          <div className="text-center relative z-20">
+          <div className="text-center relative z-20 py-16 md:py-12 px-4 mx-auto">
             {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 text-5xl lg:text-6xl"
+              className="mb-6 text-5xl mx-auto"
               style={{
                 fontWeight: 700,
                 lineHeight: 1.1,
@@ -253,64 +416,53 @@ const Index = () => {
               </span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Subheading */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-lg mb-8"
-              style={{ 
-                color: '#4b5563',
-                lineHeight: '1.6'
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mx-auto mb-10 text-lg px-4"
+              style={{
+                fontWeight: 400,
+                color: '#4a4a4a',
+                maxWidth: '600px'
               }}
             >
-              Mentiora adapts to you—whether you're acing it or falling behind—with personalised study plans, instant 24/7 marking, smart predictions and adaptive flashcards.
+              Personalised GCSE & A-Level revision built to help you reach your best results.
             </motion.p>
 
             {/* CTA Button */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex justify-center"
             >
-              <Button 
-                onClick={() => navigate("/register")} 
+              <Button
                 size="lg"
-                style={{ backgroundColor: '#3B82F6' }}
-                className="text-white text-lg px-10 py-6 rounded-xl font-semibold shadow-[0_4px_14px_0_rgba(59,130,246,0.4)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.5)] hover:opacity-90 transition-all duration-200"
+                className="px-8 py-3.5 text-base font-semibold transition-all duration-200 w-full md:w-auto"
+                style={{
+                  backgroundColor: '#3B82F6',
+                  color: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '0px 2px 8px rgba(59, 130, 246, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#2563EB';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#3B82F6';
+                }}
+                onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
+                Try now for free
               </Button>
             </motion.div>
-
-            {/* Social Proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-10"
-            >
-              <p className="text-sm text-gray-500 mb-4">Trusted by students at</p>
-              <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-                <img src={oxfordLogo} alt="Oxford University" className="h-10 grayscale" />
-                <img src={bristolLogo} alt="Bristol University" className="h-10 grayscale" />
-                <img src={bathLogo} alt="Bath University" className="h-10 grayscale" />
-                <img src={newcastleLogo} alt="Newcastle University" className="h-10 grayscale" />
-                <img src={birminghamLogo} alt="Birmingham University" className="h-10 grayscale" />
-              </div>
-            </motion.div>
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        {/* TESTIMONIALS SECTION */}
-        <section className="py-8 bg-slate-50">
-          <DynamicTestimonials />
-        </section>
-
-        {/* UNIVERSITY STRIP SECTION */}
+      {/* UNIVERSITY STRIP SECTION */}
       <section 
         className="py-8 px-6 overflow-hidden"
         style={{
