@@ -92,7 +92,6 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
-import { TodaysPlanSidebar } from "@/components/dashboard/TodaysPlanSidebar";
 
 interface UserProgress {
   subjectId: string;
@@ -2699,71 +2698,55 @@ const Dashboard = () => {
       <div className="w-full">
         <div className={`max-w-7xl mx-auto ${isMobile ? 'p-4' : 'p-8'}`}>
           {activeTab === "learn" && (
-            <div className={`${isMobile ? '' : 'flex gap-6'}`}>
-              {/* Left Sidebar - Today's Plan (Desktop only) */}
-              {!isMobile && !selectedSubject && (
-                <div className="w-80 flex-shrink-0">
-                  <TodaysPlanSidebar 
-                    dayNumber={2}
-                    focusTopic="Linear Equations"
-                    focusReason="Your weakest area"
-                  />
-                </div>
-              )}
-              
-              {/* Main Content - slightly compressed */}
-              <div className="flex-1 min-w-0">
-                {!selectedSubject ? (
-                  <>
-                  <MedlySubjectsView
-                    profile={profile}
-                    mockSubjects={mockSubjects}
-                    weekPlan={weekPlan}
-                    getStatusColor={getStatusColor}
-                    weekTasksCompleted={weekTasksCompleted}
-                    setWeekTasksCompleted={setWeekTasksCompleted}
-                    setShowAddSubjects={setShowAddSubjects}
-                    setSelectedDrawerSubject={setSelectedDrawerSubject}
-                    setSubjectDrawerOpen={setSubjectDrawerOpen}
-                    setDrawerTab={setDrawerTab}
-                    insightFilter={insightFilter}
-                    setInsightFilter={setInsightFilter}
-                    removeSubject={removeSubject}
-                    isPremium={isPremium}
-                    onUpgradeToPremium={() => navigate('/pricing')}
-                    userId={user?.id || ''}
-                  />
-                  </>
-                ) : (
-                  // Subject Path View (when a subject is selected for practice)
-                  <div>
-                    <div className="flex items-center mb-8">
-                      <Button
-                        variant="ghost"
-                        onClick={() => setSelectedSubject(null)}
-                        className="text-muted-foreground hover:text-foreground mr-4 rounded-xl"
-                      >
-                        ← Back
-                      </Button>
-                      <h2 className="text-3xl font-semibold text-foreground">
-                        {curriculum.find(s => s.id === selectedSubject)?.name}
-                      </h2>
-                    </div>
+            <div className="max-w-7xl mx-auto">
+              {!selectedSubject ? (
+                <>
+                <MedlySubjectsView
+                  profile={profile}
+                  mockSubjects={mockSubjects}
+                  weekPlan={weekPlan}
+                  getStatusColor={getStatusColor}
+                  weekTasksCompleted={weekTasksCompleted}
+                  setWeekTasksCompleted={setWeekTasksCompleted}
+                  setShowAddSubjects={setShowAddSubjects}
+                  setSelectedDrawerSubject={setSelectedDrawerSubject}
+                  setSubjectDrawerOpen={setSubjectDrawerOpen}
+                  setDrawerTab={setDrawerTab}
+                  insightFilter={insightFilter}
+                  setInsightFilter={setInsightFilter}
+                  removeSubject={removeSubject}
+                  isPremium={isPremium}
+                  onUpgradeToPremium={() => navigate('/pricing')}
+                  userId={user?.id || ''}
+                />
+                </>
+              ) : (
+                // Subject Path View (when a subject is selected for practice)
+                <div>
+                  <div className="flex items-center mb-8">
+                    <Button
+                      variant="ghost"
+                      onClick={() => setSelectedSubject(null)}
+                      className="text-muted-foreground hover:text-foreground mr-4 rounded-xl"
+                    >
+                      ← Back
+                    </Button>
+                    <h2 className="text-3xl font-semibold text-foreground">
+                      {curriculum.find(s => s.id === selectedSubject)?.name}
+                    </h2>
+                  </div>
 
-                    <div className="flex justify-center">
-                      <div className="max-w-md">
-                        {renderTopicPath(curriculum.find(s => s.id === selectedSubject))}
-                      </div>
+                  <div className="flex justify-center">
+                    <div className="max-w-md">
+                      {renderTopicPath(curriculum.find(s => s.id === selectedSubject))}
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
-          )}
+                </div>
+              )}
 
-          {/* Subject Detail Drawer */}
-          <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
-            <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
+              {/* Subject Detail Drawer */}
+              <Sheet open={subjectDrawerOpen} onOpenChange={setSubjectDrawerOpen}>
+                <SheetContent side="right" className={`w-full ${isDrawerMaximized ? 'sm:max-w-full' : 'sm:max-w-3xl'} overflow-y-auto bg-gradient-to-br from-background to-muted/30 transition-all duration-300 p-4 sm:p-6`}>
                   {selectedDrawerSubject && (
                     <>
                       <SheetHeader className="space-y-3 sm:space-y-6 pb-4 sm:pb-8 border-b border-border">
@@ -4412,10 +4395,8 @@ const Dashboard = () => {
                   </motion.div>
                 </div>
               )}
-              </>
-            )}
-          </SheetContent>
-        </Sheet>
+            </div>
+          )}
 
           {/* Progress tab */}
           {activeTab === "progress" && (
@@ -6052,6 +6033,7 @@ const Dashboard = () => {
         }}
         streakCount={currentStreak}
       />
+      </div>
     </div>
   );
 };
