@@ -92,6 +92,7 @@ import { DailyStreakNotification } from "@/components/ui/daily-streak-notificati
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
 import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
 import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import { TodaysPlan } from "@/components/dashboard/TodaysPlan";
 
 interface UserProgress {
   subjectId: string;
@@ -2701,24 +2702,39 @@ const Dashboard = () => {
             <div className="max-w-7xl mx-auto">
               {!selectedSubject ? (
                 <>
-                <MedlySubjectsView
-                  profile={profile}
-                  mockSubjects={mockSubjects}
-                  weekPlan={weekPlan}
-                  getStatusColor={getStatusColor}
-                  weekTasksCompleted={weekTasksCompleted}
-                  setWeekTasksCompleted={setWeekTasksCompleted}
-                  setShowAddSubjects={setShowAddSubjects}
-                  setSelectedDrawerSubject={setSelectedDrawerSubject}
-                  setSubjectDrawerOpen={setSubjectDrawerOpen}
-                  setDrawerTab={setDrawerTab}
-                  insightFilter={insightFilter}
-                  setInsightFilter={setInsightFilter}
-                  removeSubject={removeSubject}
-                  isPremium={isPremium}
-                  onUpgradeToPremium={() => navigate('/pricing')}
-                  userId={user?.id || ''}
-                />
+                <div className="flex flex-col lg:flex-row gap-6">
+                  {/* Today's Plan Sidebar */}
+                  <aside className="w-full lg:w-80 lg:flex-shrink-0">
+                    <TodaysPlan 
+                      userId={user?.id} 
+                      subjects={mockSubjects}
+                      userProgress={userProgress}
+                    />
+                  </aside>
+                  
+                  {/* Main Content */}
+                  <main className="flex-1 min-w-0">
+                    <MedlySubjectsView
+                      profile={profile}
+                      mockSubjects={mockSubjects}
+                      weekPlan={weekPlan}
+                      getStatusColor={getStatusColor}
+                      weekTasksCompleted={weekTasksCompleted}
+                      setWeekTasksCompleted={setWeekTasksCompleted}
+                      setShowAddSubjects={setShowAddSubjects}
+                      setSelectedDrawerSubject={setSelectedDrawerSubject}
+                      setSubjectDrawerOpen={setSubjectDrawerOpen}
+                      setDrawerTab={setDrawerTab}
+                      insightFilter={insightFilter}
+                      setInsightFilter={setInsightFilter}
+                      removeSubject={removeSubject}
+                      isPremium={isPremium}
+                      onUpgradeToPremium={() => navigate('/pricing')}
+                      userId={user?.id || ''}
+                      isCompact={true}
+                    />
+                  </main>
+                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
