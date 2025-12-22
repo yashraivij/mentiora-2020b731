@@ -6,57 +6,65 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    /* Notebook theme - warm cream background */
+    --background: 40 33% 98%;
+    --foreground: 0 0% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 217 91% 60%;
+    /* Primary pink accent */
+    --primary: 330 81% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 40 20% 96%;
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 0 0% 96%;
+    --muted: 40 20% 94%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 217 91% 60%;
+    --accent: 330 81% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 217 91% 60%;
+    --border: 40 15% 88%;
+    --input: 40 15% 90%;
+    --ring: 330 81% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Medly gradients - clean and minimal */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 54%));
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 100%));
-    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 85% 65%));
-    --gradient-background: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 100%));
+    /* Sticky note colors */
+    --sticky-yellow: 48 96% 89%;
+    --sticky-yellow-border: 45 93% 58%;
+    --sticky-pink: 326 78% 95%;
+    --sticky-pink-border: 330 90% 76%;
+    --sticky-green: 152 76% 91%;
+    --sticky-green-border: 160 84% 57%;
+    --sticky-blue: 210 100% 95%;
+    --sticky-blue-border: 210 100% 70%;
+    --sticky-purple: 270 76% 94%;
+    --sticky-purple-border: 270 70% 72%;
 
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(330 81% 60%), hsl(330 81% 54%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(40 33% 98%));
+    --gradient-accent: linear-gradient(135deg, hsl(330 81% 60%), hsl(330 70% 65%));
+    --gradient-background: linear-gradient(135deg, hsl(40 33% 98%), hsl(40 20% 96%));
+
+    /* Sidebar */
     --sidebar-background: 0 0% 100%;
-
-    --sidebar-foreground: 0 0% 10%;
-
-    --sidebar-primary: 217 91% 60%;
-
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: 330 81% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-
-    --sidebar-accent: 0 0% 96%;
-
-    --sidebar-accent-foreground: 0 0% 10%;
-
-    --sidebar-border: 0 0% 90%;
-
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 330 78% 95%;
+    --sidebar-accent-foreground: 330 81% 40%;
+    --sidebar-border: 40 15% 90%;
+    --sidebar-ring: 330 81% 60%;
   }
 
   /* Color Theme Variants */
