@@ -88,7 +88,6 @@ interface MedlySubjectsViewProps {
   isPremium?: boolean;
   onUpgradeToPremium?: () => void;
   userId: string;
-  isCompact?: boolean;
 }
 
 export function MedlySubjectsView({
@@ -108,7 +107,6 @@ export function MedlySubjectsView({
   removeSubject,
   isPremium = false,
   onUpgradeToPremium,
-  isCompact = false,
 }: MedlySubjectsViewProps) {
   
   // Safe defaults for first-time users with no data
@@ -149,7 +147,7 @@ export function MedlySubjectsView({
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 ${isCompact ? 'p-6' : 'p-8 md:p-10'} shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20`}
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20"
       >
         {/* Premium gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#3B82F6]/5 pointer-events-none" />
@@ -228,7 +226,7 @@ export function MedlySubjectsView({
 
           {/* KPI Belt */}
           <TooltipProvider>
-            <div className={`grid grid-cols-1 sm:grid-cols-2 ${isCompact ? 'lg:grid-cols-2' : 'lg:grid-cols-4'} gap-4`}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.div 
@@ -236,7 +234,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl ${isCompact ? 'p-4' : 'p-5'} border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300`}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
@@ -281,7 +279,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.15 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl ${isCompact ? 'p-4' : 'p-5'} border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300`}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
@@ -313,7 +311,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl ${isCompact ? 'p-4' : 'p-5'} border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300`}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
@@ -345,7 +343,7 @@ export function MedlySubjectsView({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.25 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl ${isCompact ? 'p-4' : 'p-5'} border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300`}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
@@ -390,7 +388,7 @@ export function MedlySubjectsView({
           )}
         </div>
         
-        <div className={`grid grid-cols-1 ${isCompact ? 'md:grid-cols-1 lg:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMockSubjects.map((subject, index) => (
             <motion.div
               key={subject.id}
@@ -399,7 +397,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className={`group relative rounded-3xl border border-border hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/40 hover:shadow-[0_16px_48px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-background to-muted/20`}
+                className="group relative rounded-3xl border border-border hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/40 hover:shadow-[0_16px_48px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-background to-muted/20"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -421,7 +419,7 @@ export function MedlySubjectsView({
                   <X className="h-4 w-4" />
                 </Button>
 
-                <CardContent className={`${isCompact ? 'p-5' : 'p-7'} relative`}>
+                <CardContent className="p-7 relative">
                   {/* Top Row: Icon + Badge */}
                   <div className="flex items-start justify-between mb-5">
                     <motion.div 

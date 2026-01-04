@@ -17,10 +17,9 @@ export default {
 				'2xl': '1400px'
 			}
 		},
-	extend: {
+		extend: {
 			fontFamily: {
 				'nunito': ['Nunito', 'sans-serif'],
-				'playfair': ['Playfair Display', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -65,28 +64,7 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Sticky note colors
-				'sticky-yellow': {
-					DEFAULT: 'hsl(var(--sticky-yellow))',
-					border: 'hsl(var(--sticky-yellow-border))'
-				},
-				'sticky-pink': {
-					DEFAULT: 'hsl(var(--sticky-pink))',
-					border: 'hsl(var(--sticky-pink-border))'
-				},
-				'sticky-green': {
-					DEFAULT: 'hsl(var(--sticky-green))',
-					border: 'hsl(var(--sticky-green-border))'
-				},
-				'sticky-blue': {
-					DEFAULT: 'hsl(var(--sticky-blue))',
-					border: 'hsl(var(--sticky-blue-border))'
-				},
-				'sticky-purple': {
-					DEFAULT: 'hsl(var(--sticky-purple))',
-					border: 'hsl(var(--sticky-purple-border))'
-				},
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
