@@ -58,6 +58,7 @@ interface MedlySubjectsViewProps {
     bestWindow: string;
     weekMinutes: number;
   };
+  userName?: string;
   mockSubjects: Array<{
     id: string;
     name: string;
@@ -111,6 +112,7 @@ export function MedlySubjectsView({
   
   // Safe defaults for first-time users with no data
   const safeProfile = {
+    name: profile.name || "there",
     overallPred: profile.overallPred || 0,
     overallTarget: profile.overallTarget || 0,
     retention: profile.retention || 0,
@@ -140,6 +142,45 @@ export function MedlySubjectsView({
   const totalTasks = Object.values(weekPlan).flat().length;
   const completedTasks = weekTasksCompleted.size;
   const progressPercent = (completedTasks / totalTasks) * 100;
+
+  // Generate today's personalized study plan based on weak topics
+  const getTodaysPlan = () => {
+    const weakSubjects = mockSubjects.filter(s => s.status === "Off target" || s.focus);
+    const strongSubjects = mockSubjects.filter(s => s.status === "On track");
+    
+    if (mockSubjects.length === 0) {
+      return {
+        subject: null,
+        topic: null,
+        reason: "Add your subjects to get a personalized study plan",
+        questions: 0,
+        duration: "0 mins"
+      };
+    }
+    
+    // Prioritize weak subjects, then subjects with focus areas
+    let prioritySubject = weakSubjects[0] || strongSubjects[0] || mockSubjects[0];
+    let focusTopic = prioritySubject?.focus || prioritySubject?.strong || "core concepts";
+    
+    // Calculate questions based on priority
+    const isWeak = prioritySubject?.status === "Off target";
+    const questionCount = isWeak ? 15 : 10;
+    const estimatedMins = questionCount * 3; // ~3 mins per question
+    
+    const reason = isWeak 
+      ? `Focus on ${focusTopic} to close the gap to your target grade`
+      : `Reinforce your understanding of ${focusTopic}`;
+    
+    return {
+      subject: prioritySubject?.name || "your subjects",
+      topic: focusTopic,
+      reason,
+      questions: questionCount,
+      duration: `${estimatedMins} mins`
+    };
+  };
+  
+  const todaysPlan = getTodaysPlan();
 
   return (
     <div className="space-y-10">
@@ -180,25 +221,58 @@ export function MedlySubjectsView({
         />
         
         <div className="relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
-            <div>
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-6">
+            <div className="flex-1">
               <motion.h1 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight"
+                className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight"
               >
-                Your Subjects
+                Welcome back, {safeProfile.name} 👋
               </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+              
+              {/* Today's Study Plan */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg text-[#64748B] dark:text-gray-400 font-light"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-5 border border-[#3B82F6]/15 dark:border-[#3B82F6]/25 max-w-2xl"
               >
-                Predicted grades, weak topics & weekly plan at a glance.
-              </motion.p>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="p-1.5 rounded-lg bg-[#3B82F6]/10">
+                    <Calendar className="h-4 w-4 text-[#3B82F6]" />
+                  </div>
+                  <span className="text-sm font-semibold text-[#3B82F6] uppercase tracking-wide">Today's Focus</span>
+                </div>
+                
+                {todaysPlan.subject ? (
+                  <div className="space-y-3">
+                    <p className="text-lg text-foreground font-medium">
+                      Study <span className="text-[#3B82F6] font-bold">{todaysPlan.subject}</span> — focusing on <span className="font-semibold">{todaysPlan.topic}</span>
+                    </p>
+                    <p className="text-[#64748B] dark:text-gray-400 text-sm">
+                      {todaysPlan.reason}
+                    </p>
+                    <div className="flex items-center gap-4 pt-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Target className="h-4 w-4 text-[#16A34A]" />
+                        <span className="text-foreground font-medium">{todaysPlan.questions} questions</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Clock className="h-4 w-4 text-[#F59E0B]" />
+                        <span className="text-foreground font-medium">~{todaysPlan.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-[#64748B] dark:text-gray-400">
+                    {todaysPlan.reason}
+                  </p>
+                )}
+              </motion.div>
             </div>
+            
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -223,152 +297,6 @@ export function MedlySubjectsView({
               )}
             </motion.div>
           </div>
-
-          {/* KPI Belt */}
-          <TooltipProvider>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
-                        <Target className="h-5 w-5 text-[#3B82F6]" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Overall Progress</span>
-                    </div>
-                    <div className="flex items-baseline gap-3">
-                      <motion.span 
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3, type: "spring" }}
-                        className="text-3xl font-bold text-foreground"
-                      >
-                        {safeProfile.overallPred}
-                      </motion.span>
-                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">→</span>
-                      <span className="text-xl font-bold text-[#3B82F6]">{safeProfile.overallTarget}</span>
-                    </div>
-                    <div className="mt-3 flex gap-2">
-                      <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
-                          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Average predicted grade across all subjects</p>
-                  <p className="text-xs text-muted-foreground">Calculated from your exam completions and practice performance compared to your target grades</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.15 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
-                        <Brain className="h-5 w-5 text-[#16A34A]" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Retention</span>
-                    </div>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.35, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
-                    >
-                      {Math.round(safeProfile.retention * 100)}%
-                    </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Last 7 days</div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Your knowledge retention rate</p>
-                  <p className="text-xs text-muted-foreground">Average accuracy from all practice attempts in the last 7 days</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
-                        <Clock className="h-5 w-5 text-[#F59E0B]" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">You perform best at</span>
-                    </div>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.4, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
-                    >
-                      {safeProfile.bestWindow}
-                    </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Your peak focus hours</div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">We think you perform best at this time</p>
-                  <p className="text-xs text-muted-foreground">Based on your practice history, this 2-hour window is when you achieve your highest scores. Try scheduling important study sessions during these peak hours!</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.25 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#3B82F6]/20 dark:border-[#3B82F6]/30 shadow-sm hover:shadow-md hover:shadow-[#3B82F6]/10 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
-                        <Calendar className="h-5 w-5 text-[#3B82F6]" />
-                      </div>
-                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week</span>
-                    </div>
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.45, type: "spring" }}
-                      className="text-3xl font-bold text-foreground"
-                    >
-                      {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
-                    </motion.div>
-                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Time saved</div>
-                  </motion.div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-medium mb-1">Total time saved this week</p>
-                  <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
         </div>
       </motion.div>
 
