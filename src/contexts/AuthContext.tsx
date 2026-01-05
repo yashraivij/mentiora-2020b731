@@ -105,8 +105,8 @@ const refreshSubscription = async (userId?: string) => {
             
             if (result.awarded > 0) {
               console.log(`Daily login bonus: +${result.awarded} MP`);
-              // Trigger MP counter update in header
-              window.dispatchEvent(new CustomEvent('mpEarned'));
+              // Show MP reward toast with sound and progress animation
+              showMPReward(result.awarded, "Daily quest complete: Sign in today");
             } else {
               console.log('Daily login already awarded today');
             }
@@ -132,16 +132,8 @@ const refreshSubscription = async (userId?: string) => {
       
       if (session?.user) {
         await refreshSubscription(session.user.id);
-        
-        // Check if user was just created (within last 10 seconds) to avoid daily login on first signup
-        const userCreatedAt = new Date(session.user.created_at);
-        const now = new Date();
-        const secondsSinceCreation = (now.getTime() - userCreatedAt.getTime()) / 1000;
-        
-        // Only check for daily login reward for existing users (not brand new signups)
-        if (secondsSinceCreation > 10) {
-          await checkDailyLoginReward(session.user.id);
-        }
+        // Check for daily login reward on page load for existing sessions
+        await checkDailyLoginReward(session.user.id);
       }
       
       setIsLoading(false);
@@ -162,17 +154,7 @@ const refreshSubscription = async (userId?: string) => {
             // Handle daily login MP reward server-side (only once per day)
             if (event === 'SIGNED_IN') {
               console.log('New sign-in detected for user:', session.user.email);
-              
-              // Check if user was just created (within last 10 seconds) to avoid showing notification on first signup
-              const userCreatedAt = new Date(session.user.created_at);
-              const now = new Date();
-              const secondsSinceCreation = (now.getTime() - userCreatedAt.getTime()) / 1000;
-              
-              if (secondsSinceCreation > 10) {
-                await checkDailyLoginReward(session.user.id);
-              } else {
-                console.log('Skipping daily login notification for new user signup');
-              }
+              await checkDailyLoginReward(session.user.id);
             }
           }, 0);
         } else if (event === 'SIGNED_OUT') {

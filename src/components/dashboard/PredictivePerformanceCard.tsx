@@ -92,31 +92,17 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const calculateCombinedGrade = (subjectId: string) => {
-    // Get practice progress - match both exact ID and base subject name
-    const baseSubjectName = subjectId.split('-')[0];
-    const matchingProgress = userProgress.filter(p => 
-      p.subjectId === subjectId || 
-      p.subjectId === baseSubjectName ||
-      p.subjectId.split('-')[0] === baseSubjectName
-    );
-    
-    // Calculate practice percentage from matching progress
-    const practicePercentage = matchingProgress.length > 0
-      ? Math.round(matchingProgress.reduce((sum, p) => sum + p.averageScore, 0) / matchingProgress.length)
-      : 0;
+    // Get practice progress
+    const practicePercentage = getSubjectProgress(subjectId);
     const practiceGrade = getPredictedGrade(practicePercentage);
     
-    // Get most recent predicted exam completion for this subject - also with flexible matching
+    // Get most recent predicted exam completion for this subject
     const recentExamCompletion = predictedExamCompletions
-      .filter(completion => 
-        completion.subject_id === subjectId ||
-        completion.subject_id === baseSubjectName ||
-        completion.subject_id.split('-')[0] === baseSubjectName
-      )
+      .filter(completion => completion.subject_id === subjectId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
-    // Check if there's actual practice data with attempts > 0
-    const hasPracticeData = matchingProgress.some(p => p.attempts > 0);
+    // If no practice data and no exam completion, don't show subject
+    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
     if (!hasPracticeData && !recentExamCompletion) {
       return null;
     }
@@ -157,14 +143,15 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
   };
 
   const getPredictedGrade = (percentage: number) => {
-    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-    if (percentage >= 80) return 9; // A*
-    if (percentage >= 70) return 8; // A
-    if (percentage >= 60) return 7; // B
-    if (percentage >= 50) return 6; // C
-    if (percentage >= 40) return 5; // D
-    if (percentage >= 30) return 4; // E
-    return 0; // U
+    if (percentage >= 85) return 9;
+    if (percentage >= 75) return 8;
+    if (percentage >= 65) return 7;
+    if (percentage >= 55) return 6;
+    if (percentage >= 45) return 5;
+    if (percentage >= 35) return 4;
+    if (percentage >= 25) return 3;
+    if (percentage >= 15) return 2;
+    return 0; // Return 0 for U grade
   };
 
   const getGradeColor = (grade: number) => {

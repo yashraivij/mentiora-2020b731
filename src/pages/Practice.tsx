@@ -9,8 +9,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion, MessageCircle, Send, CheckCircle2, TrendingUp, TrendingDown, Target, Zap, AlertCircle, Brain, ArrowRight, BarChart3, NotebookPen, Clock, Lightbulb, RotateCcw, Flame } from "lucide-react";
 import mentioraLogo from "@/assets/mentiora-logo.png";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -21,8 +19,6 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
 import { useSubscription } from "@/hooks/useSubscription";
-import { SubjectDailyTasks } from "@/components/dashboard/SubjectDailyTasks";
-import { PricingModal } from "@/components/ui/pricing-modal";
 
 interface QuestionAttempt {
   questionId: string;
@@ -72,49 +68,6 @@ const Practice = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const [showPricingModal, setShowPricingModal] = useState(false);
-  const [selectedTutorId, setSelectedTutorId] = useState<string>('miss_patel');
-  const [tutorName, setTutorName] = useState<string>('Miss Patel');
-  const [showTutorModal, setShowTutorModal] = useState(false);
-  const [tutorAvatar, setTutorAvatar] = useState<string>('/lovable-uploads/miss-patel-avatar.png');
-  
-  const TUTOR_OPTIONS = [
-    { 
-      id: 'miss_patel', 
-      name: 'Miss Patel', 
-      avatar: '/lovable-uploads/miss-patel-avatar.png',
-      personality: 'Encouraging and patient, loves breaking down complex topics',
-      specialty: 'Science & Maths'
-    },
-    { 
-      id: 'mr_chen', 
-      name: 'Mr. Chen', 
-      avatar: '/lovable-uploads/mr-chen-avatar.png',
-      personality: 'Logical and systematic, excels at step-by-step explanations',
-      specialty: 'Maths & Physics'
-    },
-    { 
-      id: 'ms_johnson', 
-      name: 'Ms. Johnson', 
-      avatar: '/lovable-uploads/ms-johnson-avatar.png',
-      personality: 'Creative and engaging, makes learning fun',
-      specialty: 'English & Humanities'
-    },
-    { 
-      id: 'mr_williams', 
-      name: 'Mr. Williams', 
-      avatar: '/lovable-uploads/mr-williams-avatar.png',
-      personality: 'Direct and clear, gets straight to the point',
-      specialty: 'All subjects'
-    },
-    { 
-      id: 'dr_singh', 
-      name: 'Dr. Singh', 
-      avatar: '/lovable-uploads/dr-singh-avatar.png',
-      personality: 'Analytical and thorough, ensures deep understanding',
-      specialty: 'Sciences & Research'
-    }
-  ];
   
   // Subject colors mapping
   const subjectColors: { [key: string]: { bg: string } } = {
@@ -211,7 +164,6 @@ const Practice = () => {
   const [savedGradeData, setSavedGradeData] = useState<{ oldGrade: number; newGrade: number; isFirst: boolean } | null>(null);
   const [beforeSessionGrade, setBeforeSessionGrade] = useState<number | null>(null);
   const [isFirstPracticeSession, setIsFirstPracticeSession] = useState<boolean>(false);
-  const [totalMPEarned, setTotalMPEarned] = useState<number>(0);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -264,50 +216,6 @@ const Practice = () => {
     };
     fetchExistingGrade();
   }, [sessionComplete, user?.id, subjectId]);
-
-  // Fetch selected tutor from profile
-  useEffect(() => {
-    const fetchSelectedTutor = async () => {
-      if (user?.id) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('selected_tutor_id')
-          .eq('id', user.id)
-          .single();
-        
-        if (data?.selected_tutor_id) {
-          setSelectedTutorId(data.selected_tutor_id);
-          const tutor = TUTOR_OPTIONS.find(t => t.id === data.selected_tutor_id);
-          if (tutor) {
-            setTutorName(tutor.name);
-            setTutorAvatar(tutor.avatar);
-          }
-        }
-      }
-    };
-    fetchSelectedTutor();
-  }, [user?.id]);
-
-  // Handler to change tutor
-  const handleTutorChange = async (newTutorId: string) => {
-    if (!user?.id) return;
-    
-    const { error } = await supabase
-      .from('profiles')
-      .update({ selected_tutor_id: newTutorId })
-      .eq('id', user.id);
-    
-    if (!error) {
-      setSelectedTutorId(newTutorId);
-      const tutor = TUTOR_OPTIONS.find(t => t.id === newTutorId);
-      if (tutor) {
-        setTutorName(tutor.name);
-        setTutorAvatar(tutor.avatar);
-        setShowTutorModal(false);
-        toast.success(`Switched to ${tutor.name}`);
-      }
-    }
-  };
 
   // Confetti effect when session completes
   useEffect(() => {
@@ -584,8 +492,7 @@ const Practice = () => {
           .from('user_activities')
           .insert({
             user_id: user.id,
-            activity_type: 'exam_question_answered',
-            metadata: { subject_id: subjectId }
+            activity_type: 'question_answered'
           });
       } catch (error) {
         console.error('Error recording activity:', error);
@@ -617,32 +524,6 @@ const Practice = () => {
       // Play celebratory sound if user got marks (but not if they got zero)
       if (markingResult.marksAwarded > 0) {
         playCelebratorySound();
-      }
-      
-      // Show MP reward notification if user got full marks
-      if (markingResult.marksAwarded === currentQuestion.marks) {
-        showMPReward(10, "Perfect answer! +10 MP");
-        setTotalMPEarned(prev => prev + 10);
-        
-        // Award MP via edge function and update header
-        if (user?.id) {
-          supabase.functions.invoke('award-mp', {
-            body: {
-              action: 'subject_task_completed',
-              userId: user.id,
-              mpAmount: 10,
-              taskId: `practice_${currentQuestion.id}`,
-              subjectId: subjectId || 'unknown'
-            }
-          }).then(({ data, error }) => {
-            if (!error) {
-              console.log('MP awarded successfully:', data);
-              window.dispatchEvent(new CustomEvent('mpEarned'));
-            } else {
-              console.error('Error awarding MP:', error);
-            }
-          });
-        }
       }
       
       // Generate notebook notes if marks were lost
@@ -778,6 +659,40 @@ const Practice = () => {
     
     // DON'T clear session state yet - need user data for saving
     // clearSessionState();
+    
+    // Handle MP rewards for practice completion server-side
+    if (user?.id && subjectId && topicId) {
+      try {
+        const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+        const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId, marksEarned, totalMarks);
+        
+        if (result.awarded > 0) {
+          console.log(`Practice completion rewards: +${result.awarded} MP`);
+          
+          // Show toast for practice completion (main reward)
+          if (result.breakdown?.practice > 0) {
+            showMPReward(result.breakdown.practice, "Quest complete: Complete 1 practice set");
+          }
+          
+          if (result.breakdown) {
+            console.log('MP Breakdown:', result.breakdown);
+            
+            // Show additional toasts for weekly bonuses with proper delays
+            if (result.breakdown.weeklyTopics > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly quest: Practice 3 different topics"), 500);
+            }
+            if (result.breakdown.weeklyPractice > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly quest: Complete 5 practice sets"), 1000);
+            }
+            if (result.breakdown.streak > 0) {
+              setTimeout(() => showMPReward(result.breakdown.streak, "Epic quest: 7 day practice streak"), 1500);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error awarding practice completion MP:', error);
+      }
+    }
     
     // Save progress to both database and localStorage
     const progressKey = `mentiora_progress_${user?.id}`;
@@ -1040,7 +955,7 @@ const Practice = () => {
         
         // Use the before session grade that was captured when questions were generated
         const oldGrade = beforeSessionGrade !== null ? beforeSessionGrade : 0;
-        const isFirstSession = beforeSessionGrade === null;
+        const isFirstSession = beforeSessionGrade === null || beforeSessionGrade === 0;
         
         let newPredictedGrade: number;
         
@@ -1121,11 +1036,10 @@ const Practice = () => {
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
       const filteredTopics = weakTopics.filter((id: string) => id !== topicId);
       localStorage.setItem(weakTopicsKey, JSON.stringify(filteredTopics));
-    }
       
-    // Track topic mastery and complete daily tasks
-    if (user?.id && subjectId && topicId) {
-      try {
+      // Track topic mastery (85%+ score)
+      if (user?.id && subjectId && topicId) {
+        try {
           await supabase
             .from('daily_topic_mastery')
             .upsert(
@@ -1141,217 +1055,12 @@ const Practice = () => {
               }
             );
           
-          // Auto-complete "score_topic" daily task if threshold met
-          const scoreThresholds: Record<string, number> = {
-            'physics': 75,
-            'physics-aqa': 75,
-            'physics-edexcel': 75,
-            'chemistry': 75,
-            'chemistry-edexcel': 75,
-            'biology': 70,
-            'biology-edexcel': 70,
-            'biology-aqa-alevel': 75,
-            'mathematics': 80,
-            'maths-edexcel': 80,
-            'maths-aqa-alevel': 75,
-            'english-language': 70,
-            'english-literature': 70,
-            'geography': 70,
-            'geography-paper-2': 70,
-            'history': 70,
-            'religious-studies': 70,
-            'business-edexcel-igcse': 70,
-            'computer-science': 75,
-            'psychology': 70,
-            'music-eduqas-gcse': 70
-          };
-
-          const requiredScore = scoreThresholds[subjectId] || 70;
-          
-          if (averagePercentage >= requiredScore) {
-            console.log(`✓ Score ${averagePercentage.toFixed(1)}% meets threshold ${requiredScore}% - completing score_topic task`);
-            
-            const today = new Date().toISOString().split('T')[0];
-            
-            // Check if task already completed
-            const { data: existingTask } = await supabase
-              .from('subject_daily_tasks')
-              .select('completed')
-              .eq('user_id', user.id)
-              .eq('subject_id', subjectId)
-              .eq('task_id', 'score_topic')
-              .eq('date', today)
-              .maybeSingle();
-            
-            if (!existingTask?.completed) {
-              // Mark task as complete
-              const { error: taskError } = await supabase
-                .from('subject_daily_tasks')
-                .upsert({
-                  user_id: user.id,
-                  subject_id: subjectId,
-                  task_id: 'score_topic',
-                  date: today,
-                  completed: true,
-                  mp_awarded: 25
-                }, {
-                  onConflict: 'user_id,subject_id,task_id,date'
-                });
-
-              if (!taskError) {
-                // Award 25 MP
-                const { data: existingPoints } = await supabase
-                  .from('user_points')
-                  .select('total_points')
-                  .eq('user_id', user.id)
-                  .maybeSingle();
-
-                if (existingPoints) {
-                  await supabase
-                    .from('user_points')
-                    .update({
-                      total_points: existingPoints.total_points + 25,
-                      updated_at: new Date().toISOString()
-                    })
-                    .eq('user_id', user.id);
-                } else {
-                  await supabase
-                    .from('user_points')
-                    .insert({
-                      user_id: user.id,
-                      total_points: 25,
-                      created_at: new Date().toISOString(),
-                      updated_at: new Date().toISOString()
-                    });
-                }
-
-                setTotalMPEarned(prev => prev + 25);
-                console.log('✓ score_topic task completed and 25 MP awarded');
-              }
-            }
-          }
-
-          // Check and complete "complete_questions" task
-          console.log('🔍 Starting complete_questions task check');
-          const questionThresholds: Record<string, number> = {
-            'physics': 15,
-            'physics-aqa': 15,
-            'physics-edexcel': 15,
-            'chemistry': 15,
-            'chemistry-edexcel': 15,
-            'biology': 15,
-            'biology-edexcel': 15,
-            'biology-aqa-alevel': 12,
-            'mathematics': 25,
-            'maths-edexcel': 25,
-            'maths-aqa-alevel': 18,
-            'english-language': 10,
-            'english-literature': 8,
-            'geography': 20,
-            'geography-paper-2': 20,
-            'history': 12,
-            'religious-studies': 10,
-            'business-edexcel-igcse': 15,
-            'computer-science': 20,
-            'psychology': 15,
-            'music-eduqas-gcse': 12
-          };
-
-          const requiredQuestions = questionThresholds[subjectId] || 15;
-          
-          // Check total questions answered today by summing total_marks from all topic_practiced activities
-          const today = new Date().toISOString().split('T')[0];
-          const { data: todaysActivities } = await supabase
-            .from('user_activities')
-            .select('metadata')
-            .eq('user_id', user.id)
-            .eq('activity_type', 'topic_practiced')
-            .gte('created_at', `${today}T00:00:00`)
-            .lte('created_at', `${today}T23:59:59`);
-
-          console.log('📊 Checking complete_questions task:', {
-            subjectId,
-            requiredQuestions,
-            todaysActivities: todaysActivities?.length || 0,
-            activities: todaysActivities?.map(a => ({ subject: (a.metadata as any)?.subject_id, marks: (a.metadata as any)?.total_marks }))
-          });
-
-          // Sum up total_marks from all activities where subject_id matches
-          const questionsAnsweredToday = todaysActivities?.reduce((sum, activity) => {
-            const metadata = activity.metadata as any;
-            if (metadata?.subject_id && metadata.subject_id.includes(subjectId.split('-')[0])) {
-              console.log(`  ✓ Counting ${metadata.total_marks} questions from ${metadata.subject_id}`);
-              return sum + (metadata.total_marks || 0);
-            }
-            return sum;
-          }, 0) || 0;
-          
-          console.log(`📊 Total questions answered today: ${questionsAnsweredToday}/${requiredQuestions}`);
-          
-          if (questionsAnsweredToday >= requiredQuestions) {
-            console.log(`✓ Questions ${questionsAnsweredToday} meets threshold ${requiredQuestions} - completing complete_questions task`);
-            
-            // Check if task already completed
-            const { data: existingTask } = await supabase
-              .from('subject_daily_tasks')
-              .select('completed')
-              .eq('user_id', user.id)
-              .eq('subject_id', subjectId)
-              .eq('task_id', 'complete_questions')
-              .eq('date', today)
-              .maybeSingle();
-            
-            if (!existingTask?.completed) {
-              // Mark task as complete
-              const { error: taskError } = await supabase
-                .from('subject_daily_tasks')
-                .upsert({
-                  user_id: user.id,
-                  subject_id: subjectId,
-                  task_id: 'complete_questions',
-                  date: today,
-                  completed: true,
-                  mp_awarded: 20
-                }, {
-                  onConflict: 'user_id,subject_id,task_id,date'
-                });
-
-              if (!taskError) {
-                // Award 20 MP
-                const { data: existingPoints } = await supabase
-                  .from('user_points')
-                  .select('total_points')
-                  .eq('user_id', user.id)
-                  .maybeSingle();
-
-                if (existingPoints) {
-                  await supabase
-                    .from('user_points')
-                    .update({
-                      total_points: existingPoints.total_points + 20,
-                      updated_at: new Date().toISOString()
-                    })
-                    .eq('user_id', user.id);
-                } else {
-                  await supabase
-                    .from('user_points')
-                    .insert({
-                      user_id: user.id,
-                      total_points: 20,
-                      created_at: new Date().toISOString(),
-                      updated_at: new Date().toISOString()
-                    });
-                }
-
-                setTotalMPEarned(prev => prev + 20);
-                console.log('✓ complete_questions task completed and 20 MP awarded');
-              }
-            }
-          }
+          // Celebratory feedback removed - keeping it clean
         } catch (error) {
           console.error('Error tracking topic mastery:', error);
         }
       }
+    }
     
     setSessionComplete(true);
     
@@ -1361,19 +1070,17 @@ const Practice = () => {
     console.log('🏁 finishSession END - sessionComplete set to true');
   };
 
-  // Helper function to convert percentage to GCSE/A-Level grade
-  // A-Level: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
-  // GCSE: Similar scale with numeric grades 9-1
+  // Helper function to convert percentage to GCSE grade
   const percentageToGrade = (percentage: number): number => {
     if (percentage >= 90) return 9.0;
-    if (percentage >= 80) return 9.0; // A* = 9
-    if (percentage >= 70) return 8.0 + ((percentage - 70) / 10); // A = 8.0-8.9
-    if (percentage >= 60) return 7.0 + ((percentage - 60) / 10); // B = 7.0-7.9
-    if (percentage >= 50) return 6.0 + ((percentage - 50) / 10); // C = 6.0-6.9
-    if (percentage >= 40) return 5.0 + ((percentage - 40) / 10); // D = 5.0-5.9
-    if (percentage >= 30) return 4.0 + ((percentage - 30) / 10); // E = 4.0-4.9
-    if (percentage >= 20) return 3.0 + ((percentage - 20) / 10);
-    if (percentage >= 10) return 2.0 + ((percentage - 10) / 10);
+    if (percentage >= 80) return 8.0 + ((percentage - 80) / 10);
+    if (percentage >= 70) return 7.0 + ((percentage - 70) / 10);
+    if (percentage >= 60) return 6.0 + ((percentage - 60) / 10);
+    if (percentage >= 50) return 5.0 + ((percentage - 50) / 10);
+    if (percentage >= 40) return 4.0 + ((percentage - 40) / 10);
+    if (percentage >= 30) return 3.0 + ((percentage - 30) / 10);
+    if (percentage >= 20) return 2.0 + ((percentage - 20) / 10);
+    if (percentage >= 10) return 1.0 + ((percentage - 10) / 10);
     return percentage / 10; // 0-9% = 0.0-0.9 (U grade)
   };
 
@@ -1457,8 +1164,8 @@ const Practice = () => {
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
             <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
               {/* Animated background elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
               
               <CardHeader className="border-b border-border/50 relative pb-4">
                 <div className="space-y-1">
@@ -1482,7 +1189,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-6xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1497,7 +1204,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-[hsl(195,69%,54%)]/20 blur-2xl rounded-full group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
                             {getDisplayGrade(oldPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1510,7 +1217,7 @@ const Practice = () => {
                           ) : (
                             <TrendingDown className="h-4 w-4" />
                           )}
-                          <span className={!isPremium ? 'blur-sm' : ''}>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
+                          <span>{gradeImprovement >= 0 ? '+' : ''}{gradeImprovement.toFixed(1)}</span>
                         </div>
                         <ArrowRight className="h-6 w-6 text-[hsl(195,69%,54%)] animate-pulse" />
                       </div>
@@ -1521,7 +1228,7 @@ const Practice = () => {
                         </Badge>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                          <div className={`relative text-5xl font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className="relative text-5xl font-bold text-[hsl(195,69%,54%)]">
                             {getDisplayGrade(newPredictedGrade, subjectId)}
                           </div>
                         </div>
@@ -1532,10 +1239,10 @@ const Practice = () => {
                   {/* Animated Progress Bar */}
                   <div className="space-y-3">
                     <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                      <span className={!isPremium ? 'blur-sm' : ''}>{getProgressBarLabels(subjectId).min}</span>
-                      <span className={!isPremium ? 'blur-sm' : ''}>{getProgressBarLabels(subjectId).max}</span>
+                      <span>{getProgressBarLabels(subjectId).min}</span>
+                      <span>{getProgressBarLabels(subjectId).max}</span>
                     </div>
-                    <div className={`relative h-4 bg-muted rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                    <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
                       {/* Old grade position - only show if not first practice */}
                       {!isFirstPractice && (
                         <div 
@@ -1564,7 +1271,7 @@ const Practice = () => {
                     </div>
                     <div className="text-center pt-1">
                       <p className="text-sm text-muted-foreground">
-                        <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
+                        <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}%</span> {getProgressDescription(newPredictedGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((newPredictedGrade - 4) / 5) * 100))}% `, '')}
                       </p>
                     </div>
                   </div>
@@ -1573,33 +1280,66 @@ const Practice = () => {
                   <div className="flex justify-center pt-2">
                     <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
                       <p className="text-sm text-center">
-                        <span className="text-xl">👏</span> You scored better than <span className={`font-bold text-[hsl(195,69%,54%)] ${!isPremium ? 'blur-sm' : ''}`}>{percentileRank}%</span> of students this week
+                        <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
                       </p>
                     </div>
                   </div>
-
-                  {/* Unlock CTA for non-premium users */}
-                  {!isPremium && (
-                    <div className="flex justify-center pt-4">
-                      <Button 
-                        onClick={() => navigate('/pricing')}
-                        className="bg-[hsl(195,69%,54%)] hover:bg-[hsl(195,69%,64%)] text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
-                      >
-                        Unlock for Free
-                      </Button>
-                    </div>
-                  )}
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Daily Tasks Checklist */}
-          <div className="animate-fade-in" style={{ animationDelay: '600ms' }}>
-            <h2 className="text-2xl font-bold text-foreground mb-4">Daily Tasks</h2>
-            {user?.id && subjectId && (
-              <SubjectDailyTasks subjectId={subjectId} userId={user.id} />
-            )}
+          {/* Performance Summary */}
+          <div className="space-y-5 animate-fade-in" style={{ animationDelay: '600ms' }}>
+            <h2 className="text-2xl font-bold text-foreground">{isFirstPractice ? 'Your Performance' : 'Performance Comparison'}</h2>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Predicted Grade */}
+              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/5 to-[hsl(195,60%,60%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <CardContent className="p-8 relative">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                        Predicted Grade
+                      </p>
+                      <span className="text-3xl font-bold text-[hsl(195,69%,54%)]">
+                        {getDisplayGrade(newPredictedGrade, subjectId)}
+                      </span>
+                    </div>
+                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className="absolute top-0 bottom-0 bg-[hsl(195,69%,54%)] rounded-full transition-all duration-1500"
+                        style={{ width: `${(newPredictedGrade / 9) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Target Grade */}
+              <Card className="bg-white dark:bg-gray-900 rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <CardContent className="p-8 relative">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                        Target Grade
+                      </p>
+                      <span className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                        9
+                      </span>
+                    </div>
+                    <div className="relative h-3 bg-slate-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-1500"
+                        style={{ width: '100%' }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Performance Breakdown */}
@@ -1821,7 +1561,7 @@ const Practice = () => {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
               <Star className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
               <p className="text-base font-medium text-foreground">
-                +{totalMPEarned} MP added for completing this section
+                +30 MP added for completing this section
               </p>
             </div>
           </div>
@@ -2008,48 +1748,48 @@ const Practice = () => {
                 />
               ) : (
                 <div className="space-y-4">
-                  {/* User's answer bubble */}
-                  <div className="flex justify-start">
-                    <div className="max-w-[85%] space-y-2">
-                      <div className="flex items-center gap-2 px-1">
-                        <span className="text-xs font-semibold text-muted-foreground">Your Answer</span>
-                      </div>
-                      <div className={`rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border ${
-                        currentAttempt.score === currentQuestion.marks
-                          ? 'bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 border-emerald-200/50 dark:border-emerald-800/50'
-                          : currentAttempt.score <= currentQuestion.marks / 2
-                          ? 'bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50'
-                          : 'bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/50 dark:to-amber-900/30 border-amber-200/50 dark:border-amber-800/50'
-                      }`}>
-                        <p className="text-foreground leading-relaxed">{userAnswer}</p>
-                      </div>
-                    </div>
+                  {/* User's answer - color based on performance */}
+                  <div className={`p-5 rounded-[20px] shadow-sm border ${
+                    currentAttempt.score === currentQuestion.marks
+                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200/50 dark:border-emerald-800/50'
+                      : currentAttempt.score <= currentQuestion.marks / 2
+                      ? 'bg-red-50 dark:bg-red-950/30 border-red-200/50 dark:border-red-800/50'
+                      : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200/50 dark:border-amber-800/50'
+                  }`}>
+                    <h4 className={`font-bold mb-3 text-sm uppercase tracking-wide ${
+                      currentAttempt.score === currentQuestion.marks
+                        ? 'text-emerald-700 dark:text-emerald-400'
+                        : currentAttempt.score <= currentQuestion.marks / 2
+                        ? 'text-red-700 dark:text-red-400'
+                        : 'text-amber-700 dark:text-amber-400'
+                    }`}>Your Answer</h4>
+                    <p className="text-foreground font-medium leading-relaxed">{userAnswer}</p>
                   </div>
                   
-                   {/* Marks display */}
+                  {/* Marks display inline */}
                   {currentAttempt && (
-                    <div className="flex justify-start px-1">
-                      <div className="flex items-center gap-2">
-                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
+                    <>
+                      <div className="flex items-center gap-3 mt-4">
+                        <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${
                           currentAttempt.score === currentQuestion.marks 
-                            ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800' 
+                            ? 'bg-emerald-50 border border-emerald-200' 
                             : currentAttempt.score <= currentQuestion.marks / 2
-                            ? 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
-                            : 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
+                            ? 'bg-red-50 border border-red-200'
+                            : 'bg-amber-50 border border-amber-200'
                         }`}>
-                          <span className={`font-bold text-sm ${
+                          <span className={`font-bold text-base ${
                             currentAttempt.score === currentQuestion.marks 
-                              ? 'text-emerald-600 dark:text-emerald-400' 
+                              ? 'text-emerald-600' 
                               : currentAttempt.score <= currentQuestion.marks / 2
-                              ? 'text-red-600 dark:text-red-400'
-                              : 'text-amber-600 dark:text-amber-400'
+                              ? 'text-red-600'
+                              : 'text-amber-600'
                           }`}>{currentAttempt.score}/{currentQuestion.marks}</span>
-                          <span className={`text-xs font-medium ${
+                          <span className={`text-sm font-medium ${
                             currentAttempt.score === currentQuestion.marks 
-                              ? 'text-emerald-600 dark:text-emerald-400' 
+                              ? 'text-emerald-600' 
                               : currentAttempt.score <= currentQuestion.marks / 2
-                              ? 'text-red-600 dark:text-red-400'
-                              : 'text-amber-600 dark:text-amber-400'
+                              ? 'text-red-600'
+                              : 'text-amber-600'
                           }`}>marks</span>
                         </div>
                         <button 
@@ -2057,42 +1797,33 @@ const Practice = () => {
                             setShowFeedback(false);
                             setUserAnswer("");
                           }}
-                          className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-full hover:bg-muted"
-                          title="Try again"
+                          className={
+                            currentAttempt.score === currentQuestion.marks 
+                              ? 'text-emerald-500 hover:text-emerald-600' 
+                              : currentAttempt.score <= currentQuestion.marks / 2
+                              ? 'text-red-500 hover:text-red-600'
+                              : 'text-amber-500 hover:text-amber-600'
+                          }
                         >
-                          <RotateCcw className="w-4 h-4" />
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
                         </button>
                       </div>
-                    </div>
-                  )}
-                  
-                  {currentAttempt && (
-                    <>
-                      {/* Model answer bubble */}
+                      
+                      {/* Model answer */}
                       {currentAttempt.feedback?.modelAnswer && (
-                        <div className="flex justify-start mt-6">
-                          <div className="max-w-[85%] space-y-2">
-                            <div className="flex items-center gap-2 px-1">
-                              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Model Answer</span>
-                            </div>
-                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
-                            </div>
-                          </div>
+                        <div className="mt-6 p-5 bg-emerald-50 dark:bg-emerald-950/30 rounded-[20px] shadow-sm border border-emerald-200/50 dark:border-emerald-800/50">
+                          <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3 text-sm uppercase tracking-wide">Model Answer</h4>
+                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.modelAnswer}</p>
                         </div>
                       )}
                       
-                      {/* Teacher feedback bubble */}
+                      {/* Teacher feedback */}
                       {currentAttempt.feedback?.whyYoursDidnt && (
-                        <div className="flex justify-start">
-                          <div className="max-w-[85%] space-y-2">
-                            <div className="flex items-center gap-2 px-1">
-                              <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Teacher Feedback</span>
-                            </div>
-                            <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
-                              <p className="text-foreground leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
-                            </div>
-                          </div>
+                        <div className="mt-6 p-5 bg-blue-50 dark:bg-blue-950/30 rounded-[20px] shadow-sm border border-blue-200/50 dark:border-blue-800/50">
+                          <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-3 text-sm uppercase tracking-wide">Teacher Feedback</h4>
+                          <p className="text-foreground font-medium leading-relaxed">{currentAttempt.feedback.whyYoursDidnt}</p>
                         </div>
                       )}
                     </>
@@ -2115,23 +1846,11 @@ const Practice = () => {
             ) : null}
           </div>
 
-          {/* Right Pane: Ask tutor */}
+          {/* Right Pane: Ask mentiora */}
           <aside className="flex flex-col h-[600px]">
-            {/* Header with tutor selector */}
-            <div className="mb-4 flex items-center gap-3">
-              <Avatar className="w-8 h-8">
-                <AvatarImage src={tutorAvatar} alt={tutorName} />
-                <AvatarFallback>{tutorName[0]}</AvatarFallback>
-              </Avatar>
-              <h2 className="text-base font-semibold text-foreground">Ask {tutorName}</h2>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowTutorModal(true)}
-                className="ml-auto text-xs"
-              >
-                Change
-              </Button>
+            {/* Header */}
+            <div className="mb-4">
+              <h2 className="text-base font-semibold text-foreground">Ask mentiora</h2>
             </div>
 
             {/* Feedback content or chat messages */}
@@ -2300,44 +2019,6 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
-
-      {/* Tutor Selection Modal */}
-      <Dialog open={showTutorModal} onOpenChange={setShowTutorModal}>
-        <DialogContent className="sm:max-w-[600px]">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-semibold">Choose Your Tutor</DialogTitle>
-          </DialogHeader>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {TUTOR_OPTIONS.map((tutor) => (
-              <button
-                key={tutor.id}
-                onClick={() => handleTutorChange(tutor.id)}
-                className={`flex flex-col items-center gap-3 p-4 rounded-lg border-2 transition-all hover:scale-105 ${
-                  selectedTutorId === tutor.id 
-                    ? 'border-primary bg-primary/5' 
-                    : 'border-border hover:border-primary/50'
-                }`}
-              >
-                <Avatar className="w-20 h-20">
-                  <AvatarImage src={tutor.avatar} alt={tutor.name} />
-                  <AvatarFallback className="text-xl">{tutor.name[0]}</AvatarFallback>
-                </Avatar>
-                <div className="text-center">
-                  <h3 className="font-semibold text-sm mb-1">{tutor.name}</h3>
-                  <p className="text-xs text-muted-foreground mb-2">{tutor.personality}</p>
-                  <Badge variant="secondary" className="text-xs">{tutor.specialty}</Badge>
-                </div>
-              </button>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Pricing Modal */}
-      <PricingModal 
-        open={showPricingModal} 
-        onOpenChange={setShowPricingModal} 
-      />
     </div>
   );
 };

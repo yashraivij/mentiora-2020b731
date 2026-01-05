@@ -22,7 +22,6 @@ import {
   X,
   Crown,
 } from "lucide-react";
-import { SubjectDailyTasks } from "./SubjectDailyTasks";
 
 // Sparkline component
 const Sparkline = ({ data, className = "" }: { data: number[]; className?: string }) => {
@@ -58,27 +57,21 @@ interface MedlySubjectsViewProps {
     bestWindow: string;
     weekMinutes: number;
   };
-  userName?: string;
   mockSubjects: Array<{
     id: string;
     name: string;
-    icon?: string;
+    icon: string;
+    predicted: number | string;
     target: number;
-    target_grade?: string; // Original letter grade for A-Level subjects
-    pred?: number;
-    predicted?: string | number;
-    ums?: number;
-    umsTarget?: number;
-    progress?: number;
     trend: number[];
-    strong?: string;
-    focus?: string;
+    strong: string;
+    focus: string;
     status: string;
   }>;
-  weekPlan: any;
-  getStatusColor: (subject: any) => string;
+  weekPlan: Record<string, Array<{ s: string; t: string; m: number }>>;
+  getStatusColor: (status: string) => string;
   weekTasksCompleted: Set<string>;
-  setWeekTasksCompleted: (completed: Set<string>) => void;
+  setWeekTasksCompleted: (tasks: Set<string>) => void;
   setShowAddSubjects: (show: boolean) => void;
   setSelectedDrawerSubject: (subject: any) => void;
   setSubjectDrawerOpen: (open: boolean) => void;
@@ -88,7 +81,6 @@ interface MedlySubjectsViewProps {
   removeSubject: (subjectId: string) => void;
   isPremium?: boolean;
   onUpgradeToPremium?: () => void;
-  userId: string;
 }
 
 export function MedlySubjectsView({
@@ -101,7 +93,6 @@ export function MedlySubjectsView({
   setShowAddSubjects,
   setSelectedDrawerSubject,
   setSubjectDrawerOpen,
-  userId,
   setDrawerTab,
   insightFilter,
   setInsightFilter,
@@ -112,7 +103,6 @@ export function MedlySubjectsView({
   
   // Safe defaults for first-time users with no data
   const safeProfile = {
-    name: profile.name || "there",
     overallPred: profile.overallPred || 0,
     overallTarget: profile.overallTarget || 0,
     retention: profile.retention || 0,
@@ -143,59 +133,20 @@ export function MedlySubjectsView({
   const completedTasks = weekTasksCompleted.size;
   const progressPercent = (completedTasks / totalTasks) * 100;
 
-  // Generate today's personalized study plan based on weak topics
-  const getTodaysPlan = () => {
-    const weakSubjects = mockSubjects.filter(s => s.status === "Off target" || s.focus);
-    const strongSubjects = mockSubjects.filter(s => s.status === "On track");
-    
-    if (mockSubjects.length === 0) {
-      return {
-        subject: null,
-        topic: null,
-        reason: "Add your subjects to get a personalized study plan",
-        questions: 0,
-        duration: "0 mins"
-      };
-    }
-    
-    // Prioritize weak subjects, then subjects with focus areas
-    let prioritySubject = weakSubjects[0] || strongSubjects[0] || mockSubjects[0];
-    let focusTopic = prioritySubject?.focus || prioritySubject?.strong || "core concepts";
-    
-    // Calculate questions based on priority
-    const isWeak = prioritySubject?.status === "Off target";
-    const questionCount = isWeak ? 15 : 10;
-    const estimatedMins = questionCount * 3; // ~3 mins per question
-    
-    const reason = isWeak 
-      ? `Focus on ${focusTopic} to close the gap to your target grade`
-      : `Reinforce your understanding of ${focusTopic}`;
-    
-    return {
-      subject: prioritySubject?.name || "your subjects",
-      topic: focusTopic,
-      reason,
-      questions: questionCount,
-      duration: `${estimatedMins} mins`
-    };
-  };
-  
-  const todaysPlan = getTodaysPlan();
-
   return (
     <div className="space-y-10">
       {/* Hero Ribbon */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#3B82F6]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#3B82F6]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(59,130,246,0.12)] border border-[#3B82F6]/10 dark:border-[#3B82F6]/20"
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#0EA5E9]/5 dark:from-gray-900 dark:via-gray-900 dark:to-[#0EA5E9]/10 p-8 md:p-10 shadow-[0_8px_32px_rgba(14,165,233,0.12)] border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20"
       >
         {/* Premium gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#3B82F6]/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0EA5E9]/5 pointer-events-none" />
         
         {/* Animated background elements */}
         <motion.div 
-          className="absolute top-0 right-0 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-[#0EA5E9]/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
@@ -207,7 +158,7 @@ export function MedlySubjectsView({
           }}
         />
         <motion.div 
-          className="absolute bottom-0 left-0 w-64 h-64 bg-[#60A5FA]/5 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-64 h-64 bg-[#38BDF8]/5 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.4, 0.2]
@@ -221,58 +172,25 @@ export function MedlySubjectsView({
         />
         
         <div className="relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-6">
-            <div className="flex-1">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8">
+            <div>
               <motion.h1 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight"
+                className="text-4xl md:text-5xl font-bold text-[#0F172A] dark:text-white mb-3 tracking-tight"
               >
-                Welcome back, {safeProfile.name} 👋
+                Your Subjects
               </motion.h1>
-              
-              {/* Today's Study Plan */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-5 border border-[#3B82F6]/15 dark:border-[#3B82F6]/25 max-w-2xl"
+                className="text-lg text-[#64748B] dark:text-gray-400 font-light"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="p-1.5 rounded-lg bg-[#3B82F6]/10">
-                    <Calendar className="h-4 w-4 text-[#3B82F6]" />
-                  </div>
-                  <span className="text-sm font-semibold text-[#3B82F6] uppercase tracking-wide">Today's Focus</span>
-                </div>
-                
-                {todaysPlan.subject ? (
-                  <div className="space-y-3">
-                    <p className="text-lg text-foreground font-medium">
-                      Study <span className="text-[#3B82F6] font-bold">{todaysPlan.subject}</span> — focusing on <span className="font-semibold">{todaysPlan.topic}</span>
-                    </p>
-                    <p className="text-[#64748B] dark:text-gray-400 text-sm">
-                      {todaysPlan.reason}
-                    </p>
-                    <div className="flex items-center gap-4 pt-2">
-                      <div className="flex items-center gap-2 text-sm">
-                        <Target className="h-4 w-4 text-[#16A34A]" />
-                        <span className="text-foreground font-medium">{todaysPlan.questions} questions</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <Clock className="h-4 w-4 text-[#F59E0B]" />
-                        <span className="text-foreground font-medium">~{todaysPlan.duration}</span>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-[#64748B] dark:text-gray-400">
-                    {todaysPlan.reason}
-                  </p>
-                )}
-              </motion.div>
+                Predicted grades, weak topics & weekly plan at a glance.
+              </motion.p>
             </div>
-            
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -281,7 +199,7 @@ export function MedlySubjectsView({
             >
               <Button 
                 onClick={() => setShowAddSubjects(true)}
-                className="rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/25 hover:shadow-xl hover:shadow-[#3B82F6]/30 transition-all duration-300 font-medium"
+                className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subject
@@ -297,19 +215,165 @@ export function MedlySubjectsView({
               )}
             </motion.div>
           </div>
+
+          {/* KPI Belt */}
+          <TooltipProvider>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                        <Target className="h-5 w-5 text-[#0EA5E9]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Overall Progress</span>
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                      <motion.span 
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, type: "spring" }}
+                        className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                      >
+                        {safeProfile.overallPred}
+                      </motion.span>
+                      <span className="text-sm text-[#64748B] dark:text-gray-400 font-medium">→</span>
+                      <span className="text-xl font-bold text-[#0EA5E9]">{safeProfile.overallTarget}</span>
+                    </div>
+                    <div className="mt-3 flex gap-2">
+                      <div className="flex-1 h-2 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${safeProfile.overallPred > 0 ? (safeProfile.overallPred / 10) * 100 : 0}%` }}
+                          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Average predicted grade across all subjects</p>
+                  <p className="text-xs text-muted-foreground">Calculated from your exam completions and practice performance compared to your target grades</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#16A34A]/20 dark:border-[#16A34A]/30 shadow-sm hover:shadow-md hover:shadow-[#16A34A]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#16A34A]/20 to-[#16A34A]/5">
+                        <Brain className="h-5 w-5 text-[#16A34A]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">Retention</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
+                      {Math.round(safeProfile.retention * 100)}%
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Last 7 days</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Your knowledge retention rate</p>
+                  <p className="text-xs text-muted-foreground">Average accuracy from all practice attempts in the last 7 days</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#F59E0B]/20 dark:border-[#F59E0B]/30 shadow-sm hover:shadow-md hover:shadow-[#F59E0B]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5">
+                        <Clock className="h-5 w-5 text-[#F59E0B]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">You perform best at</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
+                      {safeProfile.bestWindow}
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Your peak focus hours</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">We think you perform best at this time</p>
+                  <p className="text-xs text-muted-foreground">Based on your practice history, this 2-hour window is when you achieve your highest scores. Try scheduling important study sessions during these peak hours!</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.25 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-5 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 shadow-sm hover:shadow-md hover:shadow-[#0EA5E9]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                        <Calendar className="h-5 w-5 text-[#0EA5E9]" />
+                      </div>
+                      <span className="text-xs font-semibold text-[#64748B] dark:text-gray-400 uppercase tracking-wider">This Week</span>
+                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.45, type: "spring" }}
+                      className="text-3xl font-bold text-[#0F172A] dark:text-white"
+                    >
+                      {Math.floor(safeProfile.weekMinutes / 60)}h {safeProfile.weekMinutes % 60}m
+                    </motion.div>
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mt-1 font-medium">Time saved</div>
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="font-medium mb-1">Total time saved this week</p>
+                  <p className="text-xs text-muted-foreground">Time saved through auto-generated notes that help you learn faster and revise efficiently</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </TooltipProvider>
         </div>
       </motion.div>
 
       {/* Subject Grid */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold text-foreground tracking-tight">Your Subjects</h2>
+          <h2 className="text-3xl font-bold text-[#0F172A] dark:text-white tracking-tight">Your Subjects</h2>
           {insightFilter && (
             <Button 
               variant="ghost"
               size="sm"
               onClick={() => setInsightFilter(null)}
-              className="text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl"
+              className="text-[#64748B] dark:text-gray-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-gray-700 rounded-xl"
             >
               Clear filter <X className="h-4 w-4 ml-1" />
             </Button>
@@ -325,7 +389,7 @@ export function MedlySubjectsView({
               transition={{ delay: 0.1 * index }}
             >
               <Card 
-                className="group relative rounded-3xl border border-border hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/40 hover:shadow-[0_16px_48px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-background to-muted/20"
+                className="group relative rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_16px_48px_rgba(14,165,233,0.15)] hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900"
                 onClick={() => {
                   setSelectedDrawerSubject(subject);
                   setSubjectDrawerOpen(true);
@@ -362,9 +426,9 @@ export function MedlySubjectsView({
                     </motion.div>
                   </div>
                   
-                   {/* Subject Name */}
-                  <h3 className="text-xl font-bold text-foreground mb-4 line-clamp-2 tracking-tight">
-                    {subject.name.replace(/\s*\(A-Level\)/g, '')}
+                  {/* Subject Name */}
+                  <h3 className="text-xl font-bold text-[#0F172A] dark:text-white mb-4 line-clamp-2 tracking-tight">
+                    {subject.name}
                   </h3>
                   
                   {/* Dual Progress Bars */}
@@ -372,28 +436,10 @@ export function MedlySubjectsView({
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted</span>
-                        <span className={`text-base font-bold text-foreground ${!isPremium ? 'blur-sm select-none' : ''}`}>
+                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
                           {(() => {
-                            console.log(`🎯 [${subject.id}] MedlySubjectsView received predicted:`, subject.predicted, 'type:', typeof subject.predicted);
-                            
-                            // Handle string 'U' directly - don't try to parse it
-                            if (subject.predicted === 'U' || subject.predicted === 'u') {
-                              return 'U';
-                            }
-                            
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            
-                            // Convert percentage grades (e.g., "37%") to numeric
-                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
-                              const percentage = parseFloat(subject.predicted);
-                              if (!isNaN(percentage)) {
-                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
-                              }
-                            }
-                            
-                            console.log(`🎯 [${subject.id}] isALevel: ${isALevel}, numericPred: ${numericPred}`);
-                            
+                            const numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
                             if (!isALevel) {
                               const rounded = Math.round(numericPred);
                               return rounded === 0 ? 'U' : rounded;
@@ -404,66 +450,39 @@ export function MedlySubjectsView({
                             if (numericPred >= 6.5) return 'B';
                             if (numericPred >= 5.5) return 'C';
                             if (numericPred >= 4.5) return 'D';
-                            if (numericPred >= 3.5) return 'E';
-                            console.log(`🎯 [${subject.id}] Returning U because numericPred < 3.5`);
+                            if (numericPred >= 2.5) return 'E';
                             return 'U';
                           })()}
                         </span>
                       </div>
-                      <div className={`w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                      <div className="w-full h-2.5 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-700 dark:to-gray-600 rounded-full overflow-hidden shadow-inner">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={{ width: (() => {
-                            // Handle string 'U' - show 0% progress
-                            if (subject.predicted === 'U' || subject.predicted === 'u') {
-                              return '0%';
-                            }
-                            
-                            let numericPred = typeof subject.predicted === 'number' ? subject.predicted : parseFloat(subject.predicted as string) || 0;
-                            
-                            // Convert percentage grades to numeric
-                            if (typeof subject.predicted === 'string' && subject.predicted.includes('%')) {
-                              const percentage = parseFloat(subject.predicted);
-                              if (!isNaN(percentage)) {
-                                numericPred = percentage >= 80 ? 9 : percentage >= 70 ? 8 : percentage >= 60 ? 7 : percentage >= 50 ? 6 : percentage >= 40 ? 5 : percentage >= 30 ? 4 : 0;
-                              }
-                            }
-                            
-                            return `${((Math.max(1, numericPred) - 1) / 8) * 100}%`;
-                          })() }}
+                          animate={{ width: typeof subject.predicted === 'number' ? `${((Math.max(1, subject.predicted) - 1) / 8) * 100}%` : '0%' }}
                           transition={{ duration: 1.2, delay: 0.2 * index, ease: "easeOut" }}
-                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
+                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                         />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Target</span>
-                        <span className="text-base font-bold text-foreground">
+                        <span className="text-base font-bold text-[#0F172A] dark:text-white">
                           {(() => {
                             const isALevel = subject.id.toLowerCase().includes('alevel');
-                            
-                            // For A-Level subjects, always convert to letter grades
-                            if (isALevel) {
-                              // Check if target_grade is already a valid letter grade
-                              const targetGrade = subject.target_grade?.toString().trim().toUpperCase();
-                              if (targetGrade && ['A*', 'A', 'B', 'C', 'D', 'E', 'U'].includes(targetGrade)) {
-                                return targetGrade;
-                              }
-                              
-                              // Convert numeric target to letter grade for A-Level
-                              const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
-                              const rounded = Math.round(numericTarget);
-                              const numToLetterMap: {[key: number]: string} = {
-                                9: 'A*', 8: 'A', 7: 'B', 6: 'C', 5: 'D', 4: 'E', 3: 'E', 2: 'E', 1: 'U', 0: 'U'
-                              };
-                              return numToLetterMap[rounded] || 'U';
-                            }
-                            
-                            // For GCSE, use numeric grades
                             const numericTarget = typeof subject.target === 'number' ? subject.target : parseFloat(subject.target as string) || 0;
-                            const rounded = Math.round(numericTarget);
-                            return rounded === 0 ? 'U' : rounded;
+                            if (!isALevel) {
+                              const rounded = Math.round(numericTarget);
+                              return rounded === 0 ? 'U' : rounded;
+                            }
+                            // Convert numeric grade (1-9) to A-Level letter grade
+                            if (subject.target >= 8.5) return 'A*';
+                            if (subject.target >= 7.5) return 'A';
+                            if (subject.target >= 6.5) return 'B';
+                            if (subject.target >= 5.5) return 'C';
+                            if (subject.target >= 4.5) return 'D';
+                            if (subject.target >= 2.5) return 'E';
+                            return 'U';
                           })()}
                         </span>
                       </div>
@@ -478,9 +497,10 @@ export function MedlySubjectsView({
                     </div>
                   </div>
                   
-                  {/* Daily Tasks */}
-                  <div className="mb-5">
-                    <SubjectDailyTasks subjectId={subject.id} userId={userId} />
+                  {/* Sparkline */}
+                  <div className="mb-5 p-4 rounded-2xl bg-gradient-to-br from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
+                    <div className="text-xs text-[#64748B] dark:text-gray-400 mb-2 font-semibold uppercase tracking-wider">Last 6 attempts</div>
+                    <Sparkline data={subject.trend} className="text-[#0EA5E9] opacity-80" />
                   </div>
                   
                   {/* Actions */}
@@ -488,7 +508,7 @@ export function MedlySubjectsView({
                     <Button 
                       size="sm"
                       variant="ghost"
-                      className="w-full rounded-xl text-[#3B82F6] hover:bg-[#3B82F6]/10 dark:hover:bg-[#3B82F6]/20 justify-center font-semibold border border-[#3B82F6]/20 hover:border-[#3B82F6]/30 transition-all duration-200"
+                      className="w-full rounded-xl text-[#0EA5E9] hover:bg-[#0EA5E9]/10 dark:hover:bg-[#0EA5E9]/20 justify-center font-semibold border border-[#0EA5E9]/20 hover:border-[#0EA5E9]/30 transition-all duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -499,7 +519,7 @@ export function MedlySubjectsView({
                     </Button>
                     <Button 
                       size="sm"
-                      className="w-full rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-md shadow-[#3B82F6]/25 hover:shadow-lg hover:shadow-[#3B82F6]/30 transition-all duration-300"
+                      className="w-full rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25 hover:shadow-lg hover:shadow-[#0EA5E9]/30 transition-all duration-300"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedDrawerSubject(subject);
@@ -522,19 +542,19 @@ export function MedlySubjectsView({
             transition={{ delay: 0.1 * filteredMockSubjects.length }}
           >
             <Card 
-              className="group rounded-3xl border-2 border-dashed border-[#3B82F6]/30 hover:border-[#3B82F6]/60 hover:bg-gradient-to-br hover:from-[#3B82F6]/5 hover:to-[#60A5FA]/5 transition-all duration-500 cursor-pointer h-full"
+              className="group rounded-3xl border-2 border-dashed border-[#0EA5E9]/30 hover:border-[#0EA5E9]/60 hover:bg-gradient-to-br hover:from-[#0EA5E9]/5 hover:to-[#38BDF8]/5 transition-all duration-500 cursor-pointer h-full"
               onClick={() => setShowAddSubjects(true)}
             >
               <CardContent className="flex flex-col items-center justify-center p-6 h-full min-h-[400px]">
                 <motion.div 
-                  className="p-6 rounded-full bg-gradient-to-br from-[#3B82F6]/10 to-[#60A5FA]/10 mb-6 group-hover:scale-110 transition-transform duration-300"
+                  className="p-6 rounded-full bg-gradient-to-br from-[#0EA5E9]/10 to-[#38BDF8]/10 mb-6 group-hover:scale-110 transition-transform duration-300"
                   whileHover={{ rotate: 90 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
-                  <Plus className="h-10 w-10 text-[#3B82F6]" />
+                  <Plus className="h-10 w-10 text-[#0EA5E9]" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Add subject</h3>
-                <p className="text-sm text-muted-foreground text-center font-medium">
+                <h3 className="text-xl font-bold text-[#0F172A] mb-2">Add subject</h3>
+                <p className="text-sm text-[#64748B] text-center font-medium">
                   Start tracking a new subject
                 </p>
               </CardContent>
@@ -551,9 +571,9 @@ export function MedlySubjectsView({
         transition={{ delay: 0.6 }}
         className="text-center py-12 px-6"
       >
-        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#3B82F6]/5 via-white to-[#60A5FA]/5 dark:from-[#3B82F6]/10 dark:via-gray-800 dark:to-[#60A5FA]/10 border border-[#3B82F6]/10 dark:border-[#3B82F6]/20">
+        <div className="max-w-2xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-[#0EA5E9]/5 via-white to-[#38BDF8]/5 dark:from-[#0EA5E9]/10 dark:via-gray-800 dark:to-[#38BDF8]/10 border border-[#0EA5E9]/10 dark:border-[#0EA5E9]/20">
           <p className="text-lg text-[#475569] dark:text-gray-300 font-medium leading-relaxed">
-            Small, consistent study sessions beat cramming. <span className="text-[#3B82F6] font-bold">You've got this.</span>
+            Small, consistent study sessions beat cramming. <span className="text-[#0EA5E9] font-bold">You've got this.</span>
           </p>
         </div>
       </motion.div>

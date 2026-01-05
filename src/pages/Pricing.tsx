@@ -95,17 +95,16 @@ const Pricing = () => {
   };
 
   const features = [
-    "A personalised weekly study plan that adjusts to your learning pace, subjects, and target grades.",
-    "Practice that mirrors the real exam, with thousands of carefully written, exam-style questions per subject.",
-    "Instant feedback and worked solutions that help you understand why an answer is correct, not just what it is.",
-    "Progress analytics built for results — track your predicted grades, weak topics, and improvement over time.",
-    "24/7 expert support and explanations, available whenever you get stuck or need clarity.",
-    "Exclusive 2026 Predicted Papers, written by experienced exam specialists to reflect your exact specification.",
-    "Custom flashcards with spaced repetition, ensuring the right topics resurface just before you forget them.",
-    "Condensed revision notes for every topic, written around what examiners actually reward.",
-    "Adaptive study insights that balance challenge and progress to help maintain focus and reduce burnout.",
-    "Full access to 40+ GCSE, IGCSE, and A Level subjects across AQA, Edexcel, and OCR exam boards.",
-    "Start instantly. Cancel or change your plan anytime — no hidden fees, no commitment."
+    "Get an adaptive personalised weekly study plan tailored to your learning pace and exam goals.",
+    "Practice with 2,500+ exam-style questions per subject with instant marking and feedback.",
+    "Track your performance with real-time analytics showing strengths, weaknesses and predicted grades.",
+    "Access 24/7 tutoring with step-by-step explanations for every concept and question.",
+    "Get exclusive access to Mentiora's 2026 Predicted Papers.",
+    "Create and review custom flashcards powered by spaced repetition for better retention.",
+    "Study efficiently with exam-focused notes for every topic in your curriculum.",
+    "Monitor stress levels with adaptive learning recommendations to maintain optimal study performance.",
+    "Access 40+ subjects from GCSEs, IGCSEs, and A Levels across multiple examination boards including AQA, Edexcel, and OCR.",
+    "Start immediately - change or cancel your plan anytime."
   ];
 
   const fadeInUp = {
@@ -141,7 +140,7 @@ const Pricing = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-[900px] mx-auto px-6 py-12">
         {/* Main Headline */}
         <motion.div 
           className="flex items-center justify-center gap-4 mb-4"
@@ -156,7 +155,7 @@ const Pricing = () => {
           </h1>
           {/* Mentiora Logo Graphic */}
           <div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
+            <div className="w-20 h-20 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform">
               <img 
                 src={mentioraLogo} 
                 alt="Mentiora" 
@@ -177,7 +176,7 @@ const Pricing = () => {
           variants={fadeInUp}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Get complete revision support for less than the cost of one tutoring session.
+          Pay just once to get all-in-one access until the final day of your exams, or subscribe to on-the-go learning.
         </motion.p>
 
         {/* Ask My Parents Link */}
@@ -191,7 +190,7 @@ const Pricing = () => {
         >
           <button
             onClick={() => document.getElementById('parents-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-[#3B82F6] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
+            className="text-[#00A8FF] font-medium flex items-center gap-1 mx-auto hover:opacity-80 transition-opacity"
           >
             Ask my parents <ChevronRight className="w-4 h-4" />
           </button>
@@ -230,7 +229,7 @@ const Pricing = () => {
 
         {/* Pricing Cards */}
         <motion.div 
-          className="grid md:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-2 gap-6 mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -240,20 +239,20 @@ const Pricing = () => {
           {/* Monthly */}
           <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold mb-2">7-Day Free Trial</h3>
-            <p className="text-gray-600 mb-6">Start free, then £9.99/month.</p>
+            <p className="text-gray-600 mb-6">Start free, then £19.99/month.</p>
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2">
                 <span className="text-5xl font-bold text-gray-900">£0</span>
                 <span className="text-gray-600">/week</span>
               </div>
-              <p className="text-sm text-gray-500 mt-2">Then £9.99/month</p>
+              <p className="text-sm text-gray-500 mt-2">Then £19.99/month</p>
             </div>
 
             <Button
               onClick={handleUpgrade}
               variant="outline"
-              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#3B82F6] hover:bg-white transition-colors"
+              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:text-[#00A8FF] hover:bg-white transition-colors"
             >
               Start Free Trial
             </Button>
@@ -264,8 +263,8 @@ const Pricing = () => {
           </Card>
 
           {/* 2026 Exams */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#3B82F6] text-white relative hover:shadow-xl transition-shadow">
-            <div className="absolute top-4 right-4 bg-white text-[#3B82F6] px-4 py-1 rounded-full text-sm font-bold z-10">
+          <Card className="border-2 border-gray-200 rounded-3xl p-8 bg-[#00A8FF] text-white relative hover:shadow-xl transition-shadow">
+            <div className="absolute top-6 right-6 bg-white text-[#00A8FF] px-4 py-1 rounded-full text-sm font-bold">
               Save {examYear === "2026" ? "15%" : "20%"}
             </div>
             
@@ -276,7 +275,7 @@ const Pricing = () => {
             
             <div className="mb-8">
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-5xl font-bold">£{examYear === "2026" ? "79.99" : "179.99"}</span>
+                <span className="text-5xl font-bold">£{examYear === "2026" ? "169.99" : "349.99"}</span>
                 <span className="text-white/90">once</span>
               </div>
               <span className="text-white/70 line-through text-lg">{examYear === "2026" ? "199.99" : "449.99"}</span>
@@ -284,40 +283,13 @@ const Pricing = () => {
 
             <Button
               onClick={handleOneTimePayment}
-              className="w-full h-14 rounded-full text-base font-semibold bg-white text-[#3B82F6] hover:bg-gray-50"
+              className="w-full h-14 rounded-full text-base font-semibold bg-white text-[#00A8FF] hover:bg-gray-50"
             >
               Get Exam Access
             </Button>
 
             <p className="text-sm text-white/80 mt-4 text-center">
-              £{examYear === "2026" ? "79.99" : "179.99"} billed once.
-            </p>
-          </Card>
-
-          {/* Enterprise for Schools */}
-          <Card className="border-2 border-gray-200 rounded-3xl p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-2xl font-bold mb-2">Enterprise</h3>
-            <p className="text-gray-600 mb-6">For schools and institutions.</p>
-            
-            <div className="mb-8">
-              <p className="text-lg font-semibold text-gray-900 mb-3">
-                Schools get 25% off with a free discount code.
-              </p>
-              <p className="text-sm text-gray-500">
-                Custom pricing and volume discounts available for larger institutions.
-              </p>
-            </div>
-
-            <Button
-              onClick={() => window.location.href = 'mailto:yash@mentiora.com?subject=Enterprise Inquiry for Schools'}
-              variant="outline"
-              className="w-full h-14 rounded-full text-base font-semibold border-2 border-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
-            >
-              Contact Sales
-            </Button>
-
-            <p className="text-sm text-gray-500 mt-4 text-center">
-              Get your school discount code today.
+              £{examYear === "2026" ? "169.99" : "349.99"} billed once.
             </p>
           </Card>
         </motion.div>
@@ -331,23 +303,20 @@ const Pricing = () => {
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
         >
-          <div className="divide-y divide-gray-200">
-            {features.map((feature, i) => {
-              const firstSentencePart = feature.split(/[,.]/, 1)[0];
-              const restOfFeature = feature.substring(firstSentencePart.length);
-              
-              return (
-                <div key={i} className="py-6 first:pt-0 last:pb-0 flex items-start gap-4">
-                  <Check className="w-5 h-5 text-[#3B82F6] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                  <p className="text-gray-700 text-base leading-relaxed">
-                    <span className="font-semibold text-gray-900">{firstSentencePart}</span>
-                    {restOfFeature}
-                  </p>
-                </div>
-              );
-            })}
+          <div className="space-y-4">
+            {features.map((feature, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <Check className="w-6 h-6 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700 text-base leading-relaxed">{feature}</p>
+              </div>
+            ))}
           </div>
 
+          <p className="text-center mt-12 text-gray-600">
+            <a href="mailto:contact@mentiora.com" className="underline hover:text-gray-900">
+              Interested for a school or classroom? Contact us here.
+            </a>
+          </p>
         </motion.div>
 
         {/* Want Help Asking Your Parents Section */}
@@ -360,29 +329,29 @@ const Pricing = () => {
             variants={fadeInUp}
             transition={{ duration: 0.5 }}
           >
-            Let's tell your parents together.
+            Want help asking your parents?
           </motion.h2>
 
           <motion.div 
-            className="flex flex-col md:flex-row items-start justify-center gap-8 max-w-6xl mx-auto"
+            className="grid md:grid-cols-2 gap-12 items-start"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* Form Card */}
-            <div className="w-full md:w-[480px] bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-              <h3 className="text-xl font-bold mb-3 text-gray-900">
-                Not sure how to ask?
+            {/* Left Column - Form */}
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">
+                Most students have their subscription covered by their parents.
               </h3>
               
-              <p className="text-gray-600 mb-3 leading-relaxed">
-                We get it – asking for help with subscription costs can feel awkward.
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                We understand that conversations about subscriptions can be awkward.
               </p>
               
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Let us do the talking. We'll send a professional email to your parent or guardian explaining what Mentiora is and how it helps with exam prep.
+                Mentiora can send an email on your behalf to explain the subscription details.
               </p>
 
               <div className="space-y-4 mb-6">
@@ -414,101 +383,272 @@ const Pricing = () => {
 
               <Button 
                 onClick={handleSendParentEmail}
-                className="w-full h-14 rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-base"
+                className="w-full h-14 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-white font-semibold text-base"
               >
                 Send Email
               </Button>
             </div>
 
-            {/* iPhone Mockup */}
-            <div className="relative flex-shrink-0">
-              {/* iPhone Frame */}
-              <div className="relative w-[280px] bg-black rounded-[3rem] p-3 shadow-2xl">
-                {/* Screen */}
-                <div className="relative bg-white rounded-[2.5rem] overflow-hidden">
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
-                  
-                  {/* Status Bar */}
-                  <div className="relative bg-white pt-8 px-6 pb-2 flex items-center justify-between text-xs">
-                    <span className="font-semibold">9:41</span>
-                    <div className="flex items-center gap-1">
-                      <div className="flex gap-0.5">
-                        <div className="w-1 h-3 bg-black rounded-full"></div>
-                        <div className="w-1 h-3 bg-black rounded-full"></div>
-                        <div className="w-1 h-3 bg-black rounded-full"></div>
-                        <div className="w-1 h-3 bg-gray-300 rounded-full"></div>
-                      </div>
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                        <rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" strokeWidth="2"/>
-                        <path d="M22 10v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Email App Content */}
-                  <div className="bg-white h-[500px] overflow-hidden">
-                    {/* Email Header */}
-                    <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                          M
+            {/* Right Column - Email on Laptop */}
+            <div className="relative flex items-center justify-center pt-8">
+              <div className="relative w-full max-w-xl">
+                {/* Laptop Screen */}
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-t-lg p-2 shadow-2xl">
+                  {/* Screen bezel */}
+                  <div className="bg-black rounded-lg p-1 shadow-inner">
+                    {/* Browser Chrome */}
+                    <div className="bg-white rounded-md overflow-hidden">
+                      {/* Browser toolbar */}
+                      <div className="flex items-center gap-2 px-2 py-1.5 bg-gray-100 border-b border-gray-200">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-gray-900 text-sm truncate">Mentiora</div>
-                          <div className="text-xs text-gray-500 truncate">yash@mentiora.com</div>
+                        <div className="flex-1 bg-white rounded px-2 py-0.5 text-[9px] text-gray-600">
+                          mently.app/get-parent
                         </div>
                       </div>
-                      <div className="text-xs text-gray-500 mb-1">To: Parent/Guardian</div>
-                      <h3 className="text-base font-bold text-gray-900">
-                        Supporting {studentName || "Your Child"}'s Revision
-                      </h3>
-                    </div>
-                    
-                      {/* Email Body */}
-                      <div className="px-6 py-4 space-y-3 text-xs text-gray-700 leading-relaxed">
-                      <p className="text-gray-600">Hi there,</p>
                       
-                      <p>My name is Yash, and I'm the founder of Mentiora. {studentName || "Your child"} has asked me to reach out about our revision platform. Mentiora is used by thousands of students preparing for their exams. Here's what they get access to:</p>
-                      
-                  <div className="space-y-2.5">
-                    <div className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
-                      <span className="text-xs leading-relaxed">Practice that mirrors the real exam, with thousands of carefully written, exam-style questions per subject.</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
-                      <span className="text-xs leading-relaxed">Instant feedback and worked solutions that help you understand why an answer is correct, not just what it is.</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
-                      <span className="text-xs leading-relaxed">Progress analytics built for results — track your predicted grades, weak topics, and improvement over time.</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
-                      <span className="text-xs leading-relaxed">24/7 expert support and explanations, available whenever you get stuck or need clarity.</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-[#3B82F6] flex-shrink-0 mt-1" />
-                      <span className="text-xs leading-relaxed">Exclusive 2026 Predicted Papers, written by experienced exam specialists to reflect your exact specification.</span>
+                      {/* Email Content */}
+                      <div className="p-4 bg-white h-[240px] overflow-hidden">
+                        {/* Email Header */}
+                        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
+                          <div className="w-7 h-7 bg-gradient-to-br from-[#00A8FF] to-[#0096E6] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                            M
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-900 text-xs">Mentiora</div>
+                            <div className="text-[9px] text-gray-500">hello@mentiora.com</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <div>
+                            <div className="text-[8px] text-gray-500 mb-0.5">To: Parent/Guardian</div>
+                            <h3 className="text-xs font-bold text-gray-900">
+                              Help Your Child Get Through GCSEs
+                            </h3>
+                          </div>
+                          
+                          <div className="space-y-1.5 text-[10px] text-gray-700 leading-relaxed">
+                            <p className="text-gray-600">Dear parent or guardian,</p>
+                            
+                            <p>Your child has expressed interest in using Mentiora for GCSE prep...</p>
+                            
+                            <div className="space-y-1">
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">2,500+ exam-style questions with instant marking</span>
+                              </div>
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">24/7 tutoring with step-by-step explanations</span>
+                              </div>
+                              <div className="flex items-start gap-1.5">
+                                <Check className="w-2.5 h-2.5 text-[#00A8FF] flex-shrink-0 mt-0.5" />
+                                <span className="text-[9px]">Predicted Papers & performance analytics</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                      
-                      <p>It costs <span className="font-bold">£9.99/month</span> – about what you'd spend on one coffee per week, and far less than a single tutoring session. If you have any questions, feel free to reply to this email.</p>
-                      
-                      <p className="pt-2">
-                        <span className="block">Best regards,</span>
-                        <span className="block font-semibold">Yash</span>
-                        <span className="block text-[10px] text-gray-500">Founder, Mentiora</span>
-                      </p>
+                </div>
+                
+                {/* Laptop Base */}
+                <div className="relative">
+                  {/* Keyboard section */}
+                  <div className="bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 px-4 py-3 rounded-b-md shadow-2xl">
+                    {/* Keyboard keys */}
+                    <div className="space-y-0.5 opacity-30">
+                      <div className="flex gap-0.5 justify-center">
+                        {[...Array(13)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-0.5 justify-center px-2">
+                        {[...Array(12)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                      </div>
+                      <div className="flex gap-0.5 justify-center">
+                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        {[...Array(10)].map((_, i) => (
+                          <div key={i} className="w-6 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                        ))}
+                        <div className="w-8 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                      </div>
+                      <div className="flex gap-0.5 justify-center px-12">
+                        <div className="flex-1 h-4 bg-gray-600 rounded-sm shadow-sm"></div>
+                      </div>
                     </div>
+                    {/* Trackpad */}
+                    <div className="mt-1.5 mx-auto w-24 h-12 bg-gray-700 rounded border border-gray-600 opacity-20 shadow-inner"></div>
                   </div>
+                  {/* Bottom edge */}
+                  <div className="mx-auto w-2/3 h-1.5 bg-gradient-to-b from-gray-700 to-gray-800 rounded-b-lg shadow-2xl opacity-80"></div>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
 
+        {/* Russell Group Section */}
+        <div className="mb-32">
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-12 text-gray-900"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
+            Helping GCSE & A-Level students<br />get into Russell Group universities
+          </motion.h2>
+
+          {/* University Logos Strip */}
+          <motion.div 
+            className="py-8 px-6 overflow-hidden bg-white"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="relative">
+              <motion.div
+                className="flex items-center gap-12"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 25,
+                    ease: "linear",
+                  },
+                }}
+              >
+                {/* First set of logos */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                {/* Second set - duplicate for seamless loop */}
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bristolLogo} 
+                    alt="University of Bristol" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={newcastleLogo} 
+                    alt="Newcastle University" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={birminghamLogo} 
+                    alt="University of Birmingham" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={oxfordLogo} 
+                    alt="University of Oxford" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+                <div className="h-12 flex items-center justify-center flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" style={{ width: '180px' }}>
+                  <img 
+                    src={bathLogo} 
+                    alt="University of Bath" 
+                    className="w-auto object-contain"
+                    style={{ height: '40px', maxWidth: '160px' }}
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Teacher Section */}
+          <motion.div 
+            className="flex items-center justify-center gap-8 max-w-[700px] mx-auto bg-gray-50 rounded-2xl p-8 mt-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex-1">
+              <h3 className="text-xl font-bold mb-4 text-gray-900">
+                Ask your teacher for your school's 20% discount code.
+              </h3>
+              
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                School teachers in every country are eligible to receive a free, personalised discount code offering students 20% off any Mently subscription.
+              </p>
+              
+              <p className="text-gray-600">
+                No school code yet? Ask them to email{" "}
+                <a href="mailto:yash@mentiora.com" className="text-[#00A8FF] font-medium hover:underline">
+                  yash@mentiora.com
+                </a>{" "}
+                for one.
+              </p>
+            </div>
+            
+            {/* Teacher Emoji */}
+            <div className="flex-shrink-0">
+              <div className="text-8xl">👩‍🏫</div>
+            </div>
+          </motion.div>
+        </div>
 
         {/* FAQs Section */}
         <div className="mb-24 max-w-[800px] mx-auto">
@@ -531,14 +671,14 @@ const Pricing = () => {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* FAQ 1 */}
+            {/* FAQ Item 1 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 0 ? null : 0)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  What makes Mentiora different from other study apps?
+                  Is Mentiora specific to the GCSE and A-Level specification?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 0 ? 180 : 0 }}
@@ -557,21 +697,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Mentiora is fully aligned with your exact exam board and specification, so every question, note, and paper matches what you'll be tested on. Nothing extra, nothing missing.
+                      Yes! Mentiora is designed specifically for UK GCSE and A-Level students. Our content covers all major exam boards including AQA, Edexcel, OCR, and more. Every question, flashcard, and note is aligned with the official specification for your chosen exam board, ensuring you're learning exactly what you need for your exams.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ 2 */}
+            {/* FAQ Item 2 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 1 ? null : 1)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  Can Mentiora really replace a private tutor?
+                  How are answers marked on Mentiora?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 1 ? 180 : 0 }}
@@ -590,21 +730,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      It's designed to. Mentiora gives step-by-step feedback, weekly study plans, and real predicted grades, all personalised to your progress. Many students use it alongside school or tutoring, but it's built to stand alone.
+                      Mentiora uses advanced AI technology to mark your answers instantly, just like a real examiner would. Our marking system follows the official mark schemes from exam boards, awarding marks for key points, accuracy, and exam technique. You'll receive detailed feedback on every answer, showing where you gained or lost marks, plus step-by-step explanations to help you improve.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ 3 */}
+            {/* FAQ Item 3 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 2 ? null : 2)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  How accurate are the predicted grades?
+                  Can I cancel my subscription at any time?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 2 ? 180 : 0 }}
@@ -623,21 +763,21 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Your predicted grades update as you answer more questions. They're based on exam-board mark schemes and your past performance, so you can see how close you are to your target at any time.
+                      Absolutely! You can cancel your monthly subscription at any time with no penalties or fees. Simply go to your account settings and click "Manage Subscription." Your access will continue until the end of your current billing period. If you choose the one-time exam access payment, you'll have access until the end of your exam period with no recurring charges.
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* FAQ 4 */}
+            {/* FAQ Item 4 */}
             <div className="border-b border-gray-200">
               <button 
                 onClick={() => setExpandedFAQ(expandedFAQ === 3 ? null : 3)}
                 className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
               >
                 <span className="text-lg font-medium text-gray-900 pr-8">
-                  How often is the content updated?
+                  Which exam boards does Mentiora support?
                 </span>
                 <motion.div
                   animate={{ rotate: expandedFAQ === 3 ? 180 : 0 }}
@@ -656,238 +796,7 @@ const Pricing = () => {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      We keep Mentiora fully up-to-date with the latest exam specifications and question trends. New questions and topics are added regularly, especially before each exam season.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 5 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 4 ? null : 4)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  Can parents track progress too?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 4 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 4 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes, you can share progress summaries with parents. They'll see improvement over time, current predicted grades, and areas for focus.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 6 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 5 ? null : 5)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  What if my child's subject isn't listed?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 5 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 5 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      You can request any subject. Our team adds new subjects based on student demand, so if it's not available yet, it likely will be soon.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 7 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 6 ? null : 6)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  How is my data kept safe?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 6 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 6 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      We take privacy seriously. Your data is never shared or sold, and all progress and personal information are securely stored.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 8 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 7 ? null : 7)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  Can I cancel anytime?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 7 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 7 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Absolutely. There's no contract. You can cancel or change your plan whenever you like, directly from your account settings.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 9 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 8 ? null : 8)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  Does Mentiora work on phones and tablets?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 8 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 8 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes! Mentiora is fully responsive, so you can revise from your laptop, tablet, or phone whenever it suits you.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 10 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 9 ? null : 9)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  Do you offer discounts for families or schools?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 9 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 9 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Yes, we offer flexible pricing for siblings, small groups, and schools. Just get in touch to find out more.
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FAQ 11 */}
-            <div className="border-b border-gray-200">
-              <button 
-                onClick={() => setExpandedFAQ(expandedFAQ === 10 ? null : 10)}
-                className="w-full py-6 flex items-center justify-between text-left hover:opacity-70 transition-opacity"
-              >
-                <span className="text-lg font-medium text-gray-900 pr-8">
-                  What if I need help while using Mentiora?
-                </span>
-                <motion.div
-                  animate={{ rotate: expandedFAQ === 10 ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-6 h-6 text-gray-900 flex-shrink-0" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {expandedFAQ === 10 && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-6 px-2 text-gray-600 leading-relaxed">
-                      Our support team is here 24/7. Whether it's a technical issue or a study question, you can reach out anytime from within the app.
+                      Mentiora supports all major UK exam boards including AQA, Edexcel (Pearson), OCR, WJEC, CCEA, and Cambridge IGCSE. We cover 40+ subjects across GCSEs, IGCSEs, and A-Levels. When you sign up, you can select your specific exam board for each subject to ensure all content is tailored to your exact specification.
                     </div>
                   </motion.div>
                 )}

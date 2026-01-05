@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain, Trophy, Home, CheckCircle2, FileText, TrendingUp, ArrowRight, Star } from "lucide-react";
+import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -51,81 +51,33 @@ const PredictedResults = () => {
   const { isPremium } = useSubscription();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
-
-  // Helper function to check if subject is A-Level
-  const isALevel = (subjectId: string | undefined) => {
-    return subjectId?.toLowerCase().includes('alevel') || false;
-  };
-
-  // Helper function to convert numeric grade to letter grade for A-Level
-  const getDisplayGrade = (numericGrade: number, subjectId: string | undefined) => {
-    if (!isALevel(subjectId)) {
-      return numericGrade.toFixed(1);
-    }
-    
-    // Convert 1-9 scale to A-Level letter grades
-    // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
-    if (numericGrade >= 9) return 'A*';
-    if (numericGrade >= 8) return 'A';
-    if (numericGrade >= 7) return 'B';
-    if (numericGrade >= 6) return 'C';
-    if (numericGrade >= 5) return 'D';
-    if (numericGrade >= 4) return 'E';
-    return 'U';
-  };
-
-  // Helper function to get progress bar labels
-  const getProgressBarLabels = (subjectId: string | undefined) => {
-    if (isALevel(subjectId)) {
-      return { min: 'Grade E', max: 'Grade A*' };
-    }
-    return { min: 'Grade 4.0', max: 'Grade 9.0' };
-  };
-
-  // Helper function to get progress description
-  const getProgressDescription = (grade: number, subjectId: string | undefined) => {
-    const percentage = Math.max(0, Math.round(((grade - 4) / 5) * 100));
-    if (isALevel(subjectId)) {
-      return `Progress: ${percentage}% towards grade A*`;
-    }
-    return `Progress: ${percentage}% towards grade 9`;
-  };
   
   // If no state is provided, show a message instead of redirecting
   if (!questions || !answers) {
     return (
-      <div className={`min-h-screen bg-white ${isPremium ? '' : 'pt-12'}`}>
-        <div className="container mx-auto px-6 py-16">
-          <div className="max-w-2xl mx-auto">
-            <Card className="border border-gray-200 shadow-sm">
-              <CardHeader className="text-center pb-6">
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-gray-100">
-                    <Target className="h-8 w-8 text-gray-400" />
-                  </div>
-                </div>
-                <CardTitle className="text-2xl font-bold text-black mb-2">No Exam Results Found</CardTitle>
-                <CardDescription className="text-gray-600 text-base">
+      <div className={`min-h-screen bg-gradient-to-br from-background via-background to-muted/10 ${isPremium ? '' : 'pt-12'}`}>
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">No Exam Results Found</CardTitle>
+                <CardDescription className="text-center">
                   It looks like you haven't completed an exam yet or the session expired.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="text-center space-y-4 pb-8">
-                <div className="flex flex-col gap-3">
-                  <Button 
-                    onClick={() => navigate('/predicted-questions')}
-                    className="h-12 text-base font-semibold"
-                    style={{ backgroundColor: '#0BA5E9', color: 'white' }}
-                  >
-                    Take a Predicted Exam
-                  </Button>
-                  <Button 
-                    onClick={() => navigate(-1)} 
-                    variant="outline"
-                    className="h-12 text-base font-semibold border-2 border-gray-200"
-                  >
-                    Go Back
-                  </Button>
-                </div>
+              <CardContent className="text-center space-y-4">
+                <Button 
+                  onClick={() => navigate('/predicted-questions')}
+                  className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
+                >
+                  Take a Predicted Exam
+                </Button>
+                <Button 
+                  onClick={() => navigate(-1)} 
+                  variant="outline"
+                >
+                  Back
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -317,17 +269,22 @@ const PredictedResults = () => {
     
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
   };
+  
+  // Helper to check if subject is A-Level - simple string check
+  const isALevel = (subjectId?: string): boolean => {
+    if (!subjectId) return false;
+    return subjectId.toLowerCase().includes('alevel');
+  };
 
   const getGrade = (percentage: number, subjectId?: string): string => {
     if (isALevel(subjectId)) {
       // A-Level letter grades
-      // 80%+ = A*, 70%+ = A, 60%+ = B, 50%+ = C, 40%+ = D, 30%+ = E
-      if (percentage >= 80) return "A*";
-      if (percentage >= 70) return "A";
-      if (percentage >= 60) return "B";
-      if (percentage >= 50) return "C";
-      if (percentage >= 40) return "D";
-      if (percentage >= 30) return "E";
+      if (percentage >= 90) return "A*";
+      if (percentage >= 80) return "A";
+      if (percentage >= 70) return "B";
+      if (percentage >= 60) return "C";
+      if (percentage >= 50) return "D";
+      if (percentage >= 40) return "E";
       return "U";
     } else {
       // GCSE number grades
@@ -381,123 +338,13 @@ const PredictedResults = () => {
 
       if (error) {
         console.error('Database error saving exam completion:', error);
+        toast.error("Failed to save exam results to database");
       } else {
-        console.log('✓ Exam completion saved successfully to database');
-        
-        // Mark daily task complete - FIXED approach
-        const today = new Date().toISOString().split('T')[0];
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('DAILY TASK MARKING STARTED');
-        console.log('Subject ID:', subjectId);
-        console.log('User ID:', user.id);
-        console.log('Date:', today);
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        
-        // Check if task already exists
-        const { data: existingTask } = await supabase
-          .from('subject_daily_tasks')
-          .select('id')
-          .eq('user_id', user.id)
-          .eq('subject_id', subjectId)
-          .eq('task_id', 'predicted_exam')
-          .eq('date', today)
-          .maybeSingle();
-        
-        if (existingTask) {
-          // Update existing task
-          console.log(`🔄 UPDATING EXISTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
-          const { data: updatedTask, error: taskError } = await supabase
-            .from('subject_daily_tasks')
-            .update({
-              completed: true,
-              mp_awarded: 30,
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', existingTask.id)
-            .select();
-          
-          console.log('📊 UPDATE RESPONSE - Data:', updatedTask, 'Error:', taskError);
-          
-          if (taskError) {
-            console.error('✗ ERROR updating task:', taskError);
-          } else if (!updatedTask || updatedTask.length === 0) {
-            console.error('⚠️ Update returned success but no data');
-          } else {
-            console.log('✓ Task updated in database:', updatedTask);
-          }
-        } else {
-          // Insert new task
-          console.log(`📝 INSERTING TASK with subject_id: "${subjectId}" | task_id: "predicted_exam"`);
-          const { data: insertedTask, error: taskError } = await supabase
-            .from('subject_daily_tasks')
-            .insert({
-              user_id: user.id,
-              subject_id: subjectId,
-              task_id: 'predicted_exam',
-              date: today,
-              completed: true,
-              mp_awarded: 30
-            })
-            .select();
-          
-          console.log('📊 INSERT RESPONSE - Data:', insertedTask, 'Error:', taskError);
-          
-          if (taskError) {
-            console.error('❌ Error inserting task:', taskError);
-          } else if (!insertedTask || insertedTask.length === 0) {
-            console.error('⚠️ Insert returned success but no data - likely RLS issue');
-          } else {
-            console.log('✅ Task inserted successfully:', insertedTask);
-          }
-        }
-        
-        // Award 30 MP - Check if user exists first
-        const { data: existingPoints } = await supabase
-          .from('user_points')
-          .select('total_points')
-          .eq('user_id', user.id)
-          .maybeSingle();
-        
-        if (existingPoints) {
-          // Update existing points
-          const newTotal = existingPoints.total_points + 30;
-          const { error: pointsError } = await supabase
-            .from('user_points')
-            .update({
-              total_points: newTotal,
-              updated_at: new Date().toISOString()
-            })
-            .eq('user_id', user.id);
-          
-          if (pointsError) {
-            console.error('✗ ERROR updating MP:', pointsError);
-          } else {
-            console.log('✓ Updated MP | New total:', newTotal);
-          }
-        } else {
-          // Insert new points record
-          const { error: pointsError } = await supabase
-            .from('user_points')
-            .insert({
-              user_id: user.id,
-              total_points: 30,
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
-            });
-          
-          if (pointsError) {
-            console.error('✗ ERROR inserting MP:', pointsError);
-          } else {
-            console.log('✓ Created MP record | Total: 30');
-          }
-        }
-        
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('DAILY TASK MARKING COMPLETE');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('Exam completion saved successfully');
       }
     } catch (error) {
       console.error('Error saving exam completion:', error);
+      toast.error("Failed to save exam results");
     }
   };
 
@@ -651,38 +498,21 @@ const PredictedResults = () => {
 
   if (isMarking) {
     return (
-      <div className={`min-h-screen bg-white flex items-center justify-center ${isPremium ? '' : 'pt-12'}`}>
-        <Card className="max-w-lg w-full border border-gray-200 shadow-sm">
-          <CardHeader className="text-center pb-6">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E0F2FE' }}>
-                <Clock className="h-8 w-8 animate-pulse" style={{ color: '#0BA5E9' }} />
-              </div>
-            </div>
-            <CardTitle className="text-2xl font-bold text-black mb-2">
-              Marking Your Exam
-            </CardTitle>
-            <CardDescription className="text-gray-600 text-base">
-              Analyzing your answers with advanced marking intelligence
+      <div className={`min-h-screen bg-background flex items-center justify-center ${isPremium ? '' : 'pt-12'}`}>
+        <Card className="max-w-md w-full">
+          <CardHeader className="text-center">
+            <Clock className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
+            <CardTitle className="text-foreground">Marking Your Predicted 2026 Exam</CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Analyzing your answers with premium marking intelligence...
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-center space-y-6 pb-8">
-            <div className="space-y-3">
-              <div className="text-base font-medium text-gray-900">
-                Applying AQA mark schemes
+          <CardContent className="text-center space-y-4">
+            <div className="space-y-2">
+              <div className="text-lg font-medium text-foreground">
+                Applying AQA mark schemes with advanced analysis
               </div>
-              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                <div 
-                  className="h-full rounded-full animate-pulse"
-                  style={{ 
-                    width: '100%',
-                    backgroundColor: '#0BA5E9'
-                  }}
-                />
-              </div>
-              <p className="text-sm text-gray-500 mt-4">
-                This usually takes 10-30 seconds
-              </p>
+              <Progress value={100} className="w-full animate-pulse" />
             </div>
           </CardContent>
         </Card>
@@ -694,326 +524,274 @@ const PredictedResults = () => {
   const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
   const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
+
+
   const grade = getGrade(percentage, subjectId);
-  
-  // Convert grade string to number for display (e.g., "7" -> 7, "A" -> 7.5)
-  const gradeToNumber = (gradeStr: string): number => {
-    if (gradeStr === 'U') return 0;
-    
-    // Handle A-Level grades - must match numberToGrade in PredictedGradesGraph
-    // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
-    if (gradeStr === 'A*') return 9;
-    if (gradeStr === 'A') return 8;
-    if (gradeStr === 'B') return 7;
-    if (gradeStr === 'C') return 6;
-    if (gradeStr === 'D') return 5;
-    if (gradeStr === 'E') return 4;
-    
-    // Handle GCSE numeric grades
-    const num = parseFloat(gradeStr);
-    return isNaN(num) ? 0 : num;
-  };
-  
-  const numericGrade = gradeToNumber(grade);
-  const percentileRank = Math.min(Math.round(percentage * 0.9), 95);
-  const correctAnswers = attempts.filter(a => {
-    const q = questions.find((qu: ExamQuestion) => qu.id === a.questionId);
-    return q && a.score === q.marks;
-  }).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-muted/20">
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      <header className="bg-card shadow-sm border-b border-border">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/dashboard')}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Dashboard
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
               </Button>
-              <div className="h-6 w-px bg-border" />
-              <h1 className="text-lg font-semibold text-foreground">
-                Predicted Results
-              </h1>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">
+                  {subject?.name} - Predicted Exam Results
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  
+                </p>
+              </div>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/')}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <Home className="w-4 h-4" />
-            </Button>
+            <div className="flex items-center space-x-4">
+              <div className="text-right">
+                <div className="text-2xl font-bold text-foreground">
+                  {achievedMarks}/{examTotalMarks}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {percentage}%
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-5xl mx-auto p-6 md:p-8 space-y-8">
-        {/* Hero Header */}
-        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0ms' }}>
-          <h1 className="text-3xl font-bold text-foreground">
-            Predicted Exam Complete!
-          </h1>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-            You've just finished <span className="font-semibold text-cyan-600 dark:text-cyan-400">{subject?.name} Predicted 2026 Exam</span> — here's how you did.
-          </p>
-        </div>
-
-        {/* Performance Summary Card - Overall Score Only */}
-        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <Card className="bg-card rounded-2xl border-0 shadow-lg hover:shadow-xl transition-all duration-500 group overflow-hidden relative w-full max-w-md">
-            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <CardContent className="p-6 relative">
-              <div className="text-center space-y-3">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Overall Score
-                  </p>
-                  <p className="text-5xl font-bold text-[hsl(195,69%,54%)]">
-                    {percentage}%
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {correctAnswers} out of {questions.length} questions correct
-                  </p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Grade Display Banner */}
+          <Card className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 text-white border-0 shadow-xl">
+            <CardContent className="py-8">
+              <div className="text-center space-y-4">
+                <div className="text-6xl font-bold drop-shadow-lg">
+                  Grade {grade}
+                </div>
+                <div className="text-xl drop-shadow-md">
+                  {achievedMarks}/{examTotalMarks} marks ({percentage}%)
+                </div>
+                <div className="text-lg opacity-90 drop-shadow-md">
+                  {subject?.name} Predicted 2026 Exam
                 </div>
               </div>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Predicted Grade Improvement - Premium Card */}
-        <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <Card className="bg-gradient-to-br from-card via-[hsl(195,69%,54%)]/10 to-[hsl(195,69%,54%)]/5 rounded-3xl border-0 shadow-2xl overflow-hidden relative">
-            {/* Animated background elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[hsl(195,69%,54%)]/20 to-[hsl(195,60%,60%)]/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[hsl(195,60%,60%)]/20 to-[hsl(195,69%,54%)]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-            
-            <CardHeader className="border-b border-border/50 relative pb-4">
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(195,69%,54%)]/10 border border-[hsl(195,69%,54%)]/20">
-                  <TrendingUp className="h-3 w-3 text-[hsl(195,69%,54%)]" />
-                  <span className="text-xs font-semibold text-[hsl(195,69%,54%)]">Grade Improvement</span>
-                </div>
-                <CardTitle className="text-2xl font-bold">Predicted Grade</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on your recent performance</p>
-              </div>
+          {/* Results Summary */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Crown className="h-5 w-5 text-yellow-500" />
+                Detailed Results Breakdown
+              </CardTitle>
             </CardHeader>
-            <CardContent className="p-6 relative">
-              <div className="space-y-6">
-                {/* Grade Display - Show only current grade */}
-                <div className="flex items-center justify-center">
-                  <div className="text-center space-y-2 group">
-                    <Badge className="mb-1 bg-[hsl(195,69%,54%)] text-white border-0 text-xs">
-                      Your Predicted Grade
-                    </Badge>
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,69%,54%)]/30 to-[hsl(195,60%,60%)]/30 blur-2xl rounded-full animate-pulse group-hover:scale-110 transition-transform duration-500" />
-                      <div className="relative text-6xl font-bold text-[hsl(195,69%,54%)]">
-                        {getDisplayGrade(numericGrade, subjectId)}
-                      </div>
-                    </div>
-                  </div>
+            <CardContent>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{achievedMarks}</div>
+                  <div className="text-sm text-muted-foreground">Marks Achieved</div>
                 </div>
-
-                {/* Animated Progress Bar */}
-                <div className="space-y-3">
-                  <div className="flex justify-between text-xs font-semibold text-muted-foreground">
-                    <span>{getProgressBarLabels(subjectId).min}</span>
-                    <span>{getProgressBarLabels(subjectId).max}</span>
-                  </div>
-                  <div className="relative h-4 bg-muted rounded-full overflow-hidden shadow-inner">
-                    {/* Grade position - animated bright fill */}
-                    <div 
-                      className="absolute top-0 bottom-0 bg-gradient-to-r from-[hsl(195,69%,54%)] via-[hsl(195,60%,60%)] to-[hsl(195,69%,54%)] rounded-full transition-all duration-1500 ease-out shadow-lg shadow-[hsl(195,69%,54%)]/50"
-                      style={{ 
-                        width: '0%',
-                        backgroundSize: '200% 100%',
-                        animation: 'fillProgress 1.5s ease-out 600ms forwards, shimmer 3s infinite 2100ms',
-                        '--target-width': `${Math.max(0, ((numericGrade - 4) / 5) * 100)}%`
-                      } as React.CSSProperties}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0" style={{ animation: 'slideAndFade 2s infinite 2100ms' }} />
-                    </div>
-                  </div>
-                  <div className="text-center pt-1">
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-bold text-[hsl(195,69%,54%)]">{Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}%</span> {getProgressDescription(numericGrade, subjectId).replace('Progress: ', '').replace(`${Math.max(0, Math.round(((numericGrade - 4) / 5) * 100))}% `, '')}
-                    </p>
-                  </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{examTotalMarks}</div>
+                  <div className="text-sm text-muted-foreground">Total Marks</div>
                 </div>
-
-                {/* Percentile Badge */}
-                <div className="flex justify-center pt-2">
-                  <div className="px-5 py-2 rounded-2xl bg-[hsl(195,69%,54%)]/5 border border-[hsl(195,69%,54%)]/20">
-                    <p className="text-sm text-center">
-                      <span className="text-xl">👏</span> You scored better than <span className="font-bold text-[hsl(195,69%,54%)]">{percentileRank}%</span> of students this week
-                    </p>
-                  </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{percentage}%</div>
+                  <div className="text-sm text-muted-foreground">Percentage</div>
                 </div>
               </div>
+              <Progress value={percentage} className="mt-4" />
             </CardContent>
           </Card>
-        </div>
 
-        {/* Question Breakdown */}
-        <div className="space-y-6 animate-fade-in" style={{ animationDelay: '600ms' }}>
-          <h2 className="text-2xl font-bold text-foreground">Question Breakdown</h2>
-          
-          <div className="space-y-6">
-            {attempts.map((attempt, index) => {
-              const question = questions[index];
-              const marksPercentage = (attempt.score / question.marks) * 100;
-              
-              return (
-                <Card key={attempt.questionId} className="bg-card rounded-2xl border shadow-sm hover:shadow-md transition-all overflow-hidden">
-                  <CardHeader className="border-b bg-muted/20 pb-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="flex items-center gap-1">
-                            {(index + 1).toString().padStart(2, '0').split('').map((digit, idx) => (
-                              <span key={idx} className="inline-block border-2 border-foreground px-3 py-1 text-base font-mono font-semibold text-foreground dark:border-foreground/80">
-                                {digit}
-                              </span>
-                            ))}
-                          </div>
-                          <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
-                            marksPercentage >= 70
-                              ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800'
-                              : marksPercentage >= 40
-                              ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
-                              : 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
-                          }`}>
-                            <span className={`font-bold text-sm ${
-                              marksPercentage >= 70
-                                ? 'text-emerald-600 dark:text-emerald-400'
-                                : marksPercentage >= 40
-                                ? 'text-amber-600 dark:text-amber-400'
-                                : 'text-red-600 dark:text-red-400'
-                            }`}>{attempt.score}/{question.marks}</span>
-                            <span className={`text-xs font-medium ${
-                              marksPercentage >= 70
-                                ? 'text-emerald-600 dark:text-emerald-400'
-                                : marksPercentage >= 40
-                                ? 'text-amber-600 dark:text-amber-400'
-                                : 'text-red-600 dark:text-red-400'
-                            }`}>marks</span>
-                          </div>
-                        </div>
-                        <p className="text-base text-foreground leading-relaxed">
-                          {question.text || question.question}
-                        </p>
-                      </div>
-                      <div className="text-sm font-semibold text-foreground whitespace-nowrap">
-                        [{question.marks} marks]
-                      </div>
+          {/* Question by Question Feedback */}
+          {attempts.map((attempt, index) => (
+            <Card key={attempt.questionId} className="mb-6">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-semibold">
+                      {index + 1}
                     </div>
-                  </CardHeader>
-                  
-                  <CardContent className="p-8 space-y-4">
-                    {/* Your Answer Bubble */}
-                    <div className="flex justify-start">
-                      <div className="max-w-[85%] space-y-2">
-                        <div className="flex items-center gap-2 px-1">
-                          <span className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase">Your Answer</span>
-                        </div>
-                        <div className="rounded-3xl rounded-tl-md px-5 py-4 shadow-sm backdrop-blur-sm border bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/50 dark:to-red-900/30 border-red-200/50 dark:border-red-800/50">
-                          <p className="text-foreground leading-relaxed">
-                            {attempt.userAnswer || <span className="text-muted-foreground italic">No answer provided</span>}
-                          </p>
-                        </div>
-                      </div>
+                    Question {index + 1}
+                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">
+                      {attempt.score}/{questions[index]?.marks || 5} marks
+                    </Badge>
+                    <Badge 
+                      variant={attempt.score >= (questions[index]?.marks || 5) * 0.85 ? "default" : 
+                             attempt.score >= (questions[index]?.marks || 5) * 0.6 ? "secondary" : "destructive"}
+                    >
+                      {attempt.score >= (questions[index]?.marks || 5) * 0.85 ? "Excellent" : 
+                       attempt.score >= (questions[index]?.marks || 5) * 0.6 ? "Good" : "Needs Work"}
+                    </Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Question */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 mr-2">
+                      <HelpCircle className="h-4 w-4 text-white" />
                     </div>
+                    Question
+                  </h4>
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                    <p className="text-foreground">{questions[index]?.text || questions[index]?.question}</p>
+                  </div>
+                </div>
 
-                    {/* Marks Display - matching practice page */}
-                    <div className="flex justify-start px-1">
-                      <div className="flex items-center gap-2">
-                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${
-                          marksPercentage >= 70
-                            ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800'
-                            : marksPercentage >= 40
-                            ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800'
-                            : 'bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800'
-                        }`}>
-                          <span className={`font-bold text-sm ${
-                            marksPercentage >= 70
-                              ? 'text-emerald-600 dark:text-emerald-400'
-                              : marksPercentage >= 40
-                              ? 'text-amber-600 dark:text-amber-400'
-                              : 'text-red-600 dark:text-red-400'
-                          }`}>{attempt.score}/{question.marks}</span>
-                          <span className={`text-xs font-medium ${
-                            marksPercentage >= 70
-                              ? 'text-emerald-600 dark:text-emerald-400'
-                              : marksPercentage >= 40
-                              ? 'text-amber-600 dark:text-amber-400'
-                              : 'text-red-600 dark:text-red-400'
-                          }`}>marks</span>
-                        </div>
-                      </div>
+                {/* Student Answer */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 mr-2">
+                      <User className="h-4 w-4 text-white" />
                     </div>
+                    Your Answer
+                  </h4>
+                  <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500 shadow-sm">
+                    <p className="text-foreground">{attempt.userAnswer}</p>
+                  </div>
+                </div>
 
-                    {/* Model Answer Bubble */}
-                    {attempt.feedback.modelAnswer && (
-                      <div className="flex justify-start mt-6">
-                        <div className="max-w-[85%] space-y-2">
-                          <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase">Model Answer</span>
-                          </div>
-                          <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/50 dark:to-emerald-900/30 px-5 py-4 shadow-sm border border-emerald-200/50 dark:border-emerald-800/50 backdrop-blur-sm">
-                            <p className="text-foreground leading-relaxed">{attempt.feedback.modelAnswer}</p>
-                          </div>
-                        </div>
-                      </div>
+                {/* Model Answer */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <Book className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
+                    ✅ Model Answer
+                  </h4>
+                  <div className="bg-emerald-50 dark:bg-emerald-950/20 p-4 rounded-lg border-l-4 border-emerald-500">
+                    <div className="text-foreground space-y-2">
+                      {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                        <p key={index} className="leading-relaxed">{sentence.trim()}{index < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Why This Gets Marks */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 mr-2">
+                      <CheckCircle className="h-4 w-4 text-white" />
+                    </div>
+                    🎯 Why This Gets Full Marks
+                  </h4>
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                    <pre className="text-foreground whitespace-pre-wrap font-sans">
+                      {attempt.feedback.whyThisGetsMark}
+                    </pre>
+                  </div>
+                </div>
+
+                {/* Smart Feedback - Conditional based on performance */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    {attempt.feedback.fullMarks ? (
+                      <>
+                        <CheckCircle className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
+                        ✅ Teacher Feedback - Well Done!
+                      </>
+                    ) : (
+                      <>
+                        <Lightbulb className="h-4 w-4 mr-2 text-yellow-600" />
+                        ❌ Why Your Answer Didn't Get Full Marks
+                      </>
                     )}
+                  </h4>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    attempt.feedback.fullMarks 
+                      ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-500' 
+                      : 'bg-amber-50 dark:bg-amber-950/20 border-amber-500'
+                  }`}>
+                    <p className="text-foreground">{attempt.feedback.whyYoursDidnt}</p>
+                  </div>
+                </div>
 
-                    {/* Teacher Feedback Bubble */}
-                    {attempt.feedback.whyYoursDidnt && (
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] space-y-2">
-                          <div className="flex items-center gap-2 px-1">
-                            <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase">Teacher Feedback</span>
-                          </div>
-                          <div className="rounded-3xl rounded-tl-md bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/50 dark:to-blue-900/30 px-5 py-4 shadow-sm border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
-                            <p className="text-foreground leading-relaxed">{attempt.feedback.whyYoursDidnt}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
+                {/* Spec Reference */}
+                <div>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <Book className="h-4 w-4 mr-2 text-indigo-600" />
+                    🔗 Specification Reference
+                  </h4>
+                  <Badge variant="outline" className="text-sm">
+                    {attempt.feedback.specLink}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+
+          {/* Weak Topics Summary */}
+          {!isReview && attempts.some(attempt => {
+            const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
+            return question && attempt.score < question.marks;
+          }) && (
+            <Card className="bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50 dark:from-green-950/30 dark:via-blue-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-700/50 shadow-lg">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="flex items-center justify-center gap-3 text-green-800 dark:text-green-200 text-xl">
+                  <div className="p-2 bg-green-100 dark:bg-green-900/50 rounded-full">
+                    <Brain className="h-6 w-6" />
+                  </div>
+                  Smart Revision Notes Generated
+                </CardTitle>
+                <CardDescription className="text-green-700 dark:text-green-300 text-base">
+                  Smart system has automatically created revision notes for topics where you lost marks
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-center space-y-4">
+                <div className="text-green-800 dark:text-green-200 text-lg font-medium">
+                  Review personalized notes to strengthen weak areas and improve your Grade 9 performance
+                </div>
+                <Button 
+                  onClick={() => navigate('/dashboard?tab=notes')}
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                  size="lg"
+                >
+                  <Brain className="h-5 w-5 mr-2" />
+                  View Smart Notebook
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+            {/* Action Buttons */}
+          <div className="flex justify-center space-x-6 mt-12">
+            <Button 
+              onClick={() => {
+                console.log('Retake button clicked for subject:', subjectId);
+                // Handle geography-paper-2 case specifically
+                const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
+                navigate(`/predicted-exam/${examSubjectId}`);
+              }}
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
+            >
+              <RotateCcw className="h-5 w-5 mr-2" />
+              Retake This Exam
+            </Button>
+            <Button 
+              onClick={() => navigate('/dashboard')}
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 hover:from-emerald-600 hover:to-emerald-700 text-white"
+            >
+              <BookOpen className="h-5 w-5 mr-2" />
+              Try Another Subject
+            </Button>
+            <Button 
+              onClick={() => navigate('/dashboard')} 
+              variant="outline"
+            >
+              <Target className="h-5 w-5 mr-2" />
+              Back
+            </Button>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex justify-center items-center pt-8 animate-fade-in" style={{ animationDelay: '800ms' }}>
-          <Button
-            onClick={() => navigate('/dashboard')}
-            size="lg"
-            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Back to Dashboard
-          </Button>
-        </div>
-
-        {/* MP Reward Footer */}
-        <div className="text-center py-6 animate-fade-in" style={{ animationDelay: '900ms' }}>
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/50">
-            <p className="text-base font-medium text-foreground">
-              +30 MP added for completing this exam
-            </p>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   );
 };

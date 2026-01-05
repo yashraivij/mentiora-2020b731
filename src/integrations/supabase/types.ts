@@ -118,166 +118,6 @@ export type Database = {
           },
         ]
       }
-      curriculum_questions: {
-        Row: {
-          calculator_guidance: string | null
-          created_at: string | null
-          difficulty: string
-          id: string
-          marking_criteria: Json
-          marks: number
-          model_answer: string
-          order_index: number
-          passage_text: string | null
-          question: string
-          spec_reference: string
-          topic_id: string
-          updated_at: string | null
-        }
-        Insert: {
-          calculator_guidance?: string | null
-          created_at?: string | null
-          difficulty: string
-          id: string
-          marking_criteria: Json
-          marks: number
-          model_answer: string
-          order_index: number
-          passage_text?: string | null
-          question: string
-          spec_reference: string
-          topic_id: string
-          updated_at?: string | null
-        }
-        Update: {
-          calculator_guidance?: string | null
-          created_at?: string | null
-          difficulty?: string
-          id?: string
-          marking_criteria?: Json
-          marks?: number
-          model_answer?: string
-          order_index?: number
-          passage_text?: string | null
-          question?: string
-          spec_reference?: string
-          topic_id?: string
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "curriculum_questions_topic_id_fkey"
-            columns: ["topic_id"]
-            isOneToOne: false
-            referencedRelation: "curriculum_topics"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      curriculum_subjects: {
-        Row: {
-          created_at: string | null
-          exam_board: string | null
-          id: string
-          name: string
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          exam_board?: string | null
-          id: string
-          name: string
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          exam_board?: string | null
-          id?: string
-          name?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      curriculum_topics: {
-        Row: {
-          created_at: string | null
-          id: string
-          name: string
-          order_index: number
-          subject_id: string
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id: string
-          name: string
-          order_index: number
-          subject_id: string
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          name?: string
-          order_index?: number
-          subject_id?: string
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "curriculum_topics_subject_id_fkey"
-            columns: ["subject_id"]
-            isOneToOne: false
-            referencedRelation: "curriculum_subjects"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      custom_exam_configs: {
-        Row: {
-          created_at: string
-          difficulty_filter: string
-          exam_board: string | null
-          id: string
-          last_taken_at: string | null
-          question_count: number
-          selected_topics: string[]
-          subject_id: string
-          target_marks: number
-          timer_minutes: number
-          title: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          difficulty_filter?: string
-          exam_board?: string | null
-          id?: string
-          last_taken_at?: string | null
-          question_count?: number
-          selected_topics?: string[]
-          subject_id: string
-          target_marks?: number
-          timer_minutes?: number
-          title: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          difficulty_filter?: string
-          exam_board?: string | null
-          id?: string
-          last_taken_at?: string | null
-          question_count?: number
-          selected_topics?: string[]
-          subject_id?: string
-          target_marks?: number
-          timer_minutes?: number
-          title?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       daily_topic_mastery: {
         Row: {
           created_at: string
@@ -903,17 +743,13 @@ export type Database = {
           created_at: string | null
           current_period_end: string | null
           email: string
-          exam_type: string | null
-          first_name: string | null
           full_name: string | null
           id: string
           is_premium: boolean | null
           parent_email: string | null
           plan: string | null
           premium_until: string | null
-          profile_emoji: string | null
           purchased_package: string | null
-          selected_tutor_id: string | null
           stripe_customer_id: string | null
           stripe_payment_id: string | null
           subscription_status: string | null
@@ -925,17 +761,13 @@ export type Database = {
           created_at?: string | null
           current_period_end?: string | null
           email: string
-          exam_type?: string | null
-          first_name?: string | null
           full_name?: string | null
           id: string
           is_premium?: boolean | null
           parent_email?: string | null
           plan?: string | null
           premium_until?: string | null
-          profile_emoji?: string | null
           purchased_package?: string | null
-          selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
           subscription_status?: string | null
@@ -947,17 +779,13 @@ export type Database = {
           created_at?: string | null
           current_period_end?: string | null
           email?: string
-          exam_type?: string | null
-          first_name?: string | null
           full_name?: string | null
           id?: string
           is_premium?: boolean | null
           parent_email?: string | null
           plan?: string | null
           premium_until?: string | null
-          profile_emoji?: string | null
           purchased_package?: string | null
-          selected_tutor_id?: string | null
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
           subscription_status?: string | null
@@ -1213,42 +1041,6 @@ export type Database = {
           id?: string
           mode?: string
           started_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      subject_daily_tasks: {
-        Row: {
-          completed: boolean
-          created_at: string
-          date: string
-          id: string
-          mp_awarded: number
-          subject_id: string
-          task_id: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          completed?: boolean
-          created_at?: string
-          date?: string
-          id?: string
-          mp_awarded?: number
-          subject_id: string
-          task_id: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          completed?: boolean
-          created_at?: string
-          date?: string
-          id?: string
-          mp_awarded?: number
-          subject_id?: string
-          task_id?: string
-          updated_at?: string
           user_id?: string
         }
         Relationships: []
@@ -1517,7 +1309,6 @@ export type Database = {
           id: string
           predicted_grade: string
           priority_level: number | null
-          subject_id: string | null
           subject_name: string
           target_grade: string | null
           updated_at: string
@@ -1529,7 +1320,6 @@ export type Database = {
           id?: string
           predicted_grade: string
           priority_level?: number | null
-          subject_id?: string | null
           subject_name: string
           target_grade?: string | null
           updated_at?: string
@@ -1541,7 +1331,6 @@ export type Database = {
           id?: string
           predicted_grade?: string
           priority_level?: number | null
-          subject_id?: string | null
           subject_name?: string
           target_grade?: string | null
           updated_at?: string
@@ -1695,19 +1484,6 @@ export type Database = {
       calculate_subject_accuracy: {
         Args: { exam_board?: string; subject: string; user_uuid: string }
         Returns: number
-      }
-      create_custom_exam_config: {
-        Args: {
-          p_difficulty_filter: string
-          p_exam_board: string
-          p_question_count: number
-          p_selected_topics: string[]
-          p_subject_id: string
-          p_target_marks: number
-          p_timer_minutes: number
-          p_title: string
-        }
-        Returns: string
       }
       delete_user_account: {
         Args: { user_id_to_delete: string }

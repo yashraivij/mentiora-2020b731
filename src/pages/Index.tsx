@@ -19,10 +19,7 @@ import {
   Send,
   Zap,
   Circle,
-  Sparkles,
-  MessageCircle,
-  Bot,
-  User
+  Sparkles
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { OnboardingPopup } from "@/components/ui/onboarding-popup";
@@ -35,7 +32,6 @@ import bathLogo from "@/assets/bath-logo.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -45,7 +41,6 @@ const Index = () => {
   const [expandedSection, setExpandedSection] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [sliderMonths, setSliderMonths] = useState(6);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -102,7 +97,7 @@ const Index = () => {
 
           <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#3B82F6' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
+              <Button onClick={() => navigate("/dashboard")} style={{ backgroundColor: '#0BA5E9' }} className="text-white px-6 rounded-lg font-semibold hover:opacity-90">
                 Dashboard
               </Button>
             ) : (
@@ -110,13 +105,13 @@ const Index = () => {
                 <Button 
                   onClick={() => navigate("/login")} 
                   variant="ghost" 
-                  className="hover:bg-transparent hover:text-[#3B82F6] transition-colors duration-200"
+                  className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
                 >
                   Login
                 </Button>
                 <Button 
                   onClick={() => navigate("/register")} 
-                  style={{ backgroundColor: '#3B82F6' }}
+                  style={{ backgroundColor: '#0BA5E9' }}
                   className="text-white px-6 rounded-lg font-semibold hover:opacity-90"
                 >
                   Try Mentiora
@@ -131,7 +126,7 @@ const Index = () => {
               <Button 
                 onClick={() => navigate("/dashboard")} 
                 size="sm"
-                style={{ backgroundColor: '#3B82F6' }} 
+                style={{ backgroundColor: '#0BA5E9' }} 
                 className="text-white px-4 rounded-lg font-semibold hover:opacity-90"
               >
                 Dashboard
@@ -140,7 +135,7 @@ const Index = () => {
               <Button 
                 onClick={() => navigate("/login")} 
                 size="sm"
-                style={{ backgroundColor: '#3B82F6' }} 
+                style={{ backgroundColor: '#0BA5E9' }} 
                 className="text-white px-4 rounded-lg font-semibold hover:opacity-90"
               >
                 Sign In
@@ -175,10 +170,10 @@ const Index = () => {
               <div className="space-y-3" style={{ width: '240px' }}>
                 {/* User Message */}
                 <div className="flex justify-end">
-                <div 
+                  <div 
                     className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-md max-w-[180px]"
                     style={{
-                      backgroundColor: '#3B82F6',
+                      backgroundColor: '#0BA5E9',
                       color: 'white'
                     }}
                   >
@@ -261,7 +256,7 @@ const Index = () => {
                       <span className="font-bold text-black text-sm">Mon</span>
                       <span className="text-gray-500 text-xs ml-1.5">— Kickstart Week</span>
                     </div>
-                    <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold" style={{ color: '#3B82F6', border: '1.5px solid #3B82F6' }}>
+                    <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold" style={{ color: '#0BA5E9', border: '1.5px solid #0BA5E9' }}>
                       30 mins
                     </span>
                   </div>
@@ -280,7 +275,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex gap-1.5">
-                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#3B82F6' }}>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
                         <span>▶</span> Start
                       </button>
                       <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
@@ -303,7 +298,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex gap-1.5">
-                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#3B82F6' }}>
+                      <button className="px-2 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center gap-1" style={{ backgroundColor: '#0BA5E9' }}>
                         <span>▶</span> Start
                       </button>
                       <button className="px-2 py-1 rounded-lg text-[10px] font-semibold" style={{ color: '#10b981', border: '1.5px solid #10b981' }}>
@@ -351,7 +346,7 @@ const Index = () => {
                     <div className="h-1.5 bg-gray-300 rounded-full overflow-hidden">
                       <div 
                         className="h-full rounded-full"
-                        style={{ width: '78%', backgroundColor: '#3B82F6' }}
+                        style={{ width: '78%', backgroundColor: '#0BA5E9' }}
                       />
                     </div>
                   </div>
@@ -377,7 +372,7 @@ const Index = () => {
                       <svg width="100%" height="100%" viewBox="0 0 140 32" preserveAspectRatio="none">
                         <polyline
                           fill="none"
-                          stroke="#3B82F6"
+                          stroke="#0BA5E9"
                           strokeWidth="2"
                           points="0,26 28,23 56,19 84,14 112,9 140,5"
                         />
@@ -388,7 +383,7 @@ const Index = () => {
                   {/* Topics Button */}
                   <button 
                     className="w-full py-1.5 rounded-lg font-bold text-[10px] text-white"
-                    style={{ backgroundColor: '#3B82F6' }}
+                    style={{ backgroundColor: '#0BA5E9' }}
                   >
                     Topics
                   </button>
@@ -412,7 +407,7 @@ const Index = () => {
               }}
             >
               <span className="block" style={{ color: '#000000' }}>
-                Your revision, finally made <span style={{ color: '#3B82F6' }}>personal</span>
+                Your revision, finally made <span style={{ color: '#0BA5E9' }}>personal</span>
               </span>
             </motion.h1>
 
@@ -442,16 +437,16 @@ const Index = () => {
                 size="lg"
                 className="px-8 py-3.5 text-base font-semibold transition-all duration-200 w-full md:w-auto"
                 style={{
-                  backgroundColor: '#3B82F6',
+                  backgroundColor: '#0BA5E9',
                   color: 'white',
                   borderRadius: '8px',
-                  boxShadow: '0px 2px 8px rgba(59, 130, 246, 0.3)'
+                  boxShadow: '0px 2px 8px rgba(11, 165, 233, 0.3)'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#2563EB';
+                  e.currentTarget.style.backgroundColor = '#0891C7';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#3B82F6';
+                  e.currentTarget.style.backgroundColor = '#0BA5E9';
                 }}
                 onClick={() => navigate(user ? '/dashboard' : '/register')}
               >
@@ -576,10 +571,9 @@ const Index = () => {
       </section>
 
 
-      {/* HOW MENTIORA WORKS SECTION */}
-      <section id="about" className="py-20 px-6 bg-gradient-to-br from-blue-50/30 to-white">
+      {/* UNLIKE ANY OTHER APP SECTION */}
+      <section id="about" className="py-24 px-6" style={{ backgroundColor: '#F0F9FF' }}>
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -587,215 +581,103 @@ const Index = () => {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-3">
-              How Mentiora Works
+            <h2 className="text-5xl font-bold text-black mb-5 leading-tight">
+              Unlike any other app<br />
+              A <span style={{ color: '#0BA5E9' }}>personalised tutor</span>.
             </h2>
-            <p className="text-xl text-gray-600">
-              Everything you need to revise smarter, not harder.
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Mentiora teaches you how to answer every question
+              in your exams to get full marks.
             </p>
           </motion.div>
 
-          {/* 3-Column Grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-12"
+            className="grid md:grid-cols-3 gap-8"
           >
-            {/* Column 1: Smart Question Bank */}
-            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
-              <div className="text-5xl mb-4">📝</div>
-              <h3 className="text-2xl font-bold text-black mb-3">Practice Real Exam Questions</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Work through realistic, exam-style questions written to match your exact specification. Each one is built to reflect the style, difficulty, and wording of upcoming exams, so you're always revising what's most likely to appear.
-              </p>
-              
-              {/* Question Mockup */}
-              <div className="w-full max-w-[400px] bg-white rounded-xl shadow-lg p-6 space-y-4">
-                {/* Question Card */}
-                <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="text-sm text-black font-medium flex-1">
-                      Explain the difference between ionic and covalent bonding. Include reference to electron transfer and sharing.
-                    </p>
-                    <span className="px-2 py-1 rounded-md text-xs font-bold text-white whitespace-nowrap" style={{ backgroundColor: '#3B82F6' }}>
-                      [6 marks]
-                    </span>
-                  </div>
-                </div>
-                
-                {/* Text Area */}
-                <div className="border border-gray-300 rounded-lg p-3 bg-white min-h-[120px]">
-                  <p className="text-sm text-gray-400">Your answer appears here...</p>
-                </div>
-                
-                {/* Submit Button */}
-                <div className="flex justify-end">
-                  <button 
-                    className="px-6 py-2.5 rounded-lg font-semibold text-sm text-white shadow-sm"
-                    style={{ backgroundColor: '#3B82F6' }}
-                  >
-                    Submit Answer
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Column 2: AI Study Helper */}
-            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
-              <div className="text-5xl mb-4">💬</div>
-              <h3 className="text-2xl font-bold text-black mb-3">Get Unstuck, Instantly</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Stuck on a concept? Ask your tutor anything. It won't give away answers, it guides you with hints and questions until you understand it yourself.
-              </p>
-              
-              {/* Chat Mockup */}
-              <div className="w-full max-w-[400px] bg-white rounded-xl shadow-lg p-6 space-y-3">
-                {/* Student Message 1 */}
-                <div className="flex justify-end">
-                  <div 
-                    className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-sm max-w-[280px]"
-                    style={{
-                      backgroundColor: '#3B82F6',
-                      color: 'white'
-                    }}
-                  >
-                    <p className="text-sm font-medium">
-                      I don't understand ionic bonding 😅
-                    </p>
-                  </div>
-                </div>
-                
-                {/* AI Response 1 */}
-                <div className="flex justify-start">
-                  <div 
-                    className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm max-w-[280px]"
-                    style={{
-                      backgroundColor: '#ffffff',
-                      color: '#000000',
-                      border: '1px solid #e5e7eb'
-                    }}
-                  >
-                    <p className="text-sm font-medium mb-1">
-                      Let me help! 💡
-                    </p>
-                    <p className="text-xs text-gray-600">
-                      What do you know about electrons and atoms?
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Student Message 2 */}
-                <div className="flex justify-end">
-                  <div 
-                    className="px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-sm max-w-[280px]"
-                    style={{
-                      backgroundColor: '#3B82F6',
-                      color: 'white'
-                    }}
-                  >
-                    <p className="text-sm font-medium">
-                      Atoms want full outer shells?
-                    </p>
-                  </div>
-                </div>
-                
-                {/* AI Response 2 */}
-                <div className="flex justify-start">
-                  <div 
-                    className="px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm max-w-[280px]"
-                    style={{
-                      backgroundColor: '#ffffff',
-                      color: '#000000',
-                      border: '1px solid #e5e7eb'
-                    }}
-                  >
-                    <p className="text-sm font-medium">
-                      Exactly! Now, what happens when one atom gives electrons to another?
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Input Box */}
-                <div className="border border-gray-300 rounded-lg p-3 bg-white">
-                  <p className="text-sm text-gray-400">Ask a question...</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Column 3: Track Your Progress */}
-            <motion.div variants={fadeInUp} className="flex flex-col items-center text-center">
-              <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-2xl font-bold text-black mb-3">Watch Your Grade Improve</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                See your predicted grade update in real-time as you practice. Track which topics you've mastered and which need work, all calculated automatically.
-              </p>
-              
-              {/* Dashboard Subject Card Mockup */}
-              <div className="w-full max-w-[280px] bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="p-6 space-y-4">
-                  {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">🧪</span>
-                      <h3 className="text-lg font-bold text-black">Chemistry</h3>
+            {[
+              {
+                icon: "📕",
+                title: "Your Personal Tutor",
+                description: "Mentiora teaches you based on your weakest topics so you feel confident with every topic on your Exam Syllabus.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div style={{ backgroundColor: '#0BA5E9' }} className="rounded-lg p-3 mb-4 text-white text-sm">
+                      Hi Mentiora, What did this question mean by potential energy?
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="font-bold text-sm mb-2">Potential energy</p>
+                      <p className="text-xs text-gray-700 leading-relaxed">
+                        When a liquid turns into a solid, the particles lose energy and move closer together...
+                      </p>
                     </div>
                   </div>
-                  
-                  {/* Predicted Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Predicted</span>
-                      <span className="text-2xl font-bold text-black">7</span>
+                )
+              },
+              {
+                icon: "📝",
+                title: "Your Exam Guide",
+                description: "Mentiora takes you through each topic in your syllabus so that you learn how to answer every exam question to get full marks.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="border-b border-gray-200 pb-2 mb-3">
+                      <div className="font-semibold text-sm">Unit 1: Cell Biology</div>
                     </div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full rounded-full"
-                        style={{ width: '78%', backgroundColor: '#3B82F6' }}
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Target Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Target</span>
-                      <span className="text-2xl font-bold text-black">9</span>
-                    </div>
-                    <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-green-500 rounded-full"
-                        style={{ width: '70%' }}
-                      />
+                    <div className="space-y-2">
+                      <div style={{ color: '#0BA5E9', backgroundColor: '#E0F2FE' }} className="text-sm px-3 py-2 rounded">
+                        Eukaryotes and prokaryoti...
+                      </div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Animal and plant cells</div>
+                      <div className="text-sm px-3 py-2 text-gray-700">Cell specialisation</div>
                     </div>
                   </div>
-                  
-                  {/* Last 6 Attempts Section */}
-                  <div className="bg-gray-100 rounded-lg px-4 py-3">
-                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Last 6 Attempts</span>
-                    <div className="h-12 relative">
-                      <svg width="100%" height="100%" viewBox="0 0 200 48" preserveAspectRatio="none">
-                        <polyline
-                          fill="none"
-                          stroke="#3B82F6"
-                          strokeWidth="3"
-                          points="0,40 40,35 80,28 120,20 160,12 200,6"
-                        />
-                      </svg>
+                )
+              },
+              {
+                icon: "✍️",
+                title: "Your Examiner",
+                description: "Mentiora marks your work immediately based on your exam syllabus and provides feedback to help you improve your answer.",
+                visual: (
+                  <div className="bg-white rounded-xl p-6 mt-6">
+                    <div className="font-semibold text-sm mb-4">Your marks awarded</div>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Leaves become damaged</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <span className="text-sm">Less chloroplasts</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4" />
+                        <span className="text-sm text-gray-400">Less photosynthesis</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700">
+                      You got 2 out of 3 marks. Remember to mention what happens when plants have fewer chloroplasts!
                     </div>
                   </div>
-                  
-                  {/* Topics Button */}
-                  <button 
-                    className="w-full py-3 rounded-lg font-bold text-sm text-white"
-                    style={{ backgroundColor: '#3B82F6' }}
-                  >
-                    Topics
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+                )
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+              >
+                <Card className="bg-white border-0 shadow-lg rounded-2xl overflow-hidden h-full">
+                  <CardContent className="p-8">
+                    <div className="text-5xl mb-6">{feature.icon}</div>
+                    <h3 className="text-2xl font-bold text-black mb-4">{feature.title}</h3>
+                    <p className="text-base text-gray-600 leading-relaxed mb-6">{feature.description}</p>
+                    {feature.visual}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -812,11 +694,12 @@ const Index = () => {
             className="text-center mb-12"
           >
             <h2 className="text-5xl font-bold text-black mb-4 leading-tight">
-              Study what <span style={{ color: '#3B82F6' }}>actually gets marks</span>.
+              The only tutor that's<br />
+              <span style={{ color: '#0BA5E9' }}>specific to your exam curriculum</span>
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Aligned to your <span style={{ color: '#3B82F6' }}>exact exam board</span>. No filler. No wasted time.<br />
-              Don't see your subject? <a href="mailto:yash@mentiora.com?subject=Subject Request" style={{ color: '#3B82F6' }} className="underline hover:opacity-80 transition-opacity">Request it here</a>.
+              Other tutoring platforms are not based on Exam Board Curriculums.<br />
+              Don't see your subject? <a href="mailto:yash@mentiora.com?subject=Subject Request" style={{ color: '#0BA5E9' }} className="underline hover:opacity-80 transition-opacity">Request it here</a>.
             </p>
           </motion.div>
 
@@ -839,7 +722,7 @@ const Index = () => {
                   <motion.div
                     key={i}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#3B82F6] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl px-6 py-4 hover:border-[#0BA5E9] hover:shadow-lg transition-all duration-300 cursor-pointer"
                   >
                     <div className="text-xl font-bold text-black mb-1">{board.name}</div>
                     <div className="text-xs text-gray-500">{board.level}</div>
@@ -871,7 +754,7 @@ const Index = () => {
                   <motion.div
                     key={i}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#3B82F6] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-[#0BA5E9] hover:shadow-md transition-all duration-300 cursor-pointer text-center"
                   >
                     <div className="text-3xl mb-2">{subject.emoji}</div>
                     <div className="text-xs font-medium text-gray-900">{subject.name}</div>
@@ -898,7 +781,7 @@ const Index = () => {
             <h2 className="text-5xl font-bold leading-tight mb-5">
               <span className="text-black">A learning system that</span>
               <br />
-              <span className="text-black"><span style={{ color: '#3B82F6' }}>never stops improving</span></span>
+              <span className="text-black"><span style={{ color: '#0BA5E9' }}>never stops improving</span></span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed max-w-[800px] mx-auto">
               Every question you answer makes Mentiora smarter about how you learn.
@@ -961,7 +844,7 @@ const Index = () => {
                   <Button
                     size="sm"
                     className="text-white font-semibold rounded-full px-6"
-                    style={{ backgroundColor: '#3B82F6' }}
+                    style={{ backgroundColor: '#0BA5E9' }}
                   >
                     Submit Answer
                   </Button>
@@ -1164,7 +1047,7 @@ const Index = () => {
                       <div className="h-2 bg-gray-300 rounded-full overflow-hidden">
                         <motion.div 
                           className="h-full rounded-full"
-                          style={{ backgroundColor: '#3B82F6' }}
+                          style={{ backgroundColor: '#0BA5E9' }}
                           initial={{ width: 0 }}
                           whileInView={{ width: '78%' }}
                           viewport={{ once: true }}
@@ -1194,7 +1077,7 @@ const Index = () => {
                         <svg width="100%" height="100%" viewBox="0 0 140 48" preserveAspectRatio="none">
                           <polyline
                             fill="none"
-                            stroke="#3B82F6"
+                            stroke="#0BA5E9"
                             strokeWidth="2.5"
                             points="0,39 28,35 56,29 84,21 112,14 140,8"
                           />
@@ -1205,7 +1088,7 @@ const Index = () => {
                     {/* Topics Button */}
                     <button 
                       className="w-full py-2 rounded text-xs text-white hover:opacity-90 transition-opacity mt-auto"
-                      style={{ backgroundColor: '#3B82F6' }}
+                      style={{ backgroundColor: '#0BA5E9' }}
                     >
                       Topics
                     </button>
@@ -1239,7 +1122,7 @@ const Index = () => {
                           </h4>
                           <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#64748B] dark:text-gray-400">
                             <span className="flex items-center gap-1">
-                              <div className="h-1 w-1 rounded-full bg-[#3B82F6]" />
+                              <div className="h-1 w-1 rounded-full bg-[#0EA5E9]" />
                               Systems Architecture
                             </span>
                             <span className="flex items-center gap-1">
@@ -1286,13 +1169,13 @@ const Index = () => {
                       {/* Key Points to Remember */}
                       <div className="space-y-1.5 flex-1">
                         <div className="flex items-center gap-1.5">
-                          <div className="p-1 rounded bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5">
-                            <Sparkles className="h-3 w-3 text-[#3B82F6]" />
+                          <div className="p-1 rounded bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5">
+                            <Sparkles className="h-3 w-3 text-[#0EA5E9]" />
                           </div>
                           <h5 className="text-xs text-[#0F172A] dark:text-white">Key Points</h5>
                         </div>
-                        <div className="flex gap-2 p-2 rounded bg-white dark:bg-gray-800/50 border border-[#3B82F6]/20 shadow-sm">
-                          <div className="flex-shrink-0 h-5 w-5 rounded bg-gradient-to-br from-[#3B82F6] to-[#60A5FA] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                        <div className="flex gap-2 p-2 rounded bg-white dark:bg-gray-800/50 border border-[#0EA5E9]/20 shadow-sm">
+                          <div className="flex-shrink-0 h-5 w-5 rounded bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
                             1
                           </div>
                           <p className="text-xs text-[#1E293B] dark:text-gray-200 leading-relaxed flex-1">
@@ -1326,7 +1209,7 @@ const Index = () => {
                         <span className="text-black text-sm">Mon</span>
                         <span className="text-gray-500 text-xs ml-1.5">— Kickstart</span>
                       </div>
-                      <span className="px-2 py-0.5 rounded text-[10px]" style={{ color: '#3B82F6', border: '1px solid #3B82F6' }}>
+                      <span className="px-2 py-0.5 rounded text-[10px]" style={{ color: '#0BA5E9', border: '1px solid #0BA5E9' }}>
                         30 mins
                       </span>
                     </div>
@@ -1345,7 +1228,7 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#3B82F6' }}>
+                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
                           <span>▶</span> Start
                         </button>
                         <button className="px-2.5 py-1 rounded text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1px solid #10b981' }}>
@@ -1368,7 +1251,7 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#3B82F6' }}>
+                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
                           <span>▶</span> Start
                         </button>
                         <button className="px-2.5 py-1 rounded text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1px solid #10b981' }}>
@@ -1386,7 +1269,7 @@ const Index = () => {
                         <span className="text-black text-sm">Tue</span>
                         <span className="text-gray-500 text-xs ml-1.5">— Build Momentum</span>
                       </div>
-                      <span className="px-2 py-0.5 rounded text-[10px]" style={{ color: '#3B82F6', border: '1px solid #3B82F6' }}>
+                      <span className="px-2 py-0.5 rounded text-[10px]" style={{ color: '#0BA5E9', border: '1px solid #0BA5E9' }}>
                         25 mins
                       </span>
                     </div>
@@ -1402,7 +1285,7 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#3B82F6' }}>
+                        <button className="px-2.5 py-1 rounded text-[10px] text-white flex items-center gap-1 hover:opacity-90 transition-opacity" style={{ backgroundColor: '#0BA5E9' }}>
                           <span>▶</span> Start
                         </button>
                         <button className="px-2.5 py-1 rounded text-[10px] hover:opacity-80 transition-opacity" style={{ color: '#10b981', border: '1px solid #10b981' }}>
@@ -1432,176 +1315,241 @@ const Index = () => {
       </section>
 
 
-      {/* VALUE CALCULATOR SECTION */}
-      <section id="pricing" className="py-20 px-6 relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
-        
-        <div className="max-w-4xl mx-auto relative z-10">
+      {/* PRICING SECTION */}
+      <section id="pricing" className="py-20 px-6 bg-white">
+        <div className="max-w-[1200px] mx-auto">
           {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold leading-tight mb-5 text-black">
-              Calculate your savings
+            <h2 className="text-5xl font-bold leading-tight mb-5">
+              <span className="text-black">Personalised tutoring</span>
+              <br />
+              <span style={{ color: '#0BA5E9' }}>at a fraction of the cost</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              See how much you'll save compared to private tutoring
+              Trained to be more effective than personal tutoring,
+              <br />
+              at just 5% of the cost of private tuition.
             </p>
           </motion.div>
 
-          {/* Main Calculator Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg"
-          >
-            {/* Large Animated Savings Display */}
-            <div className="text-center mb-8">
-              <div className="text-gray-500 text-sm uppercase tracking-wider mb-3">
-                Total Savings
-              </div>
-              <motion.div
-                key={sliderMonths}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
-              >
-                £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </motion.div>
-              <div className="text-gray-600 text-lg mt-2">
-                over {sliderMonths} {sliderMonths === 1 ? 'month' : 'months'}
-              </div>
-            </div>
+          {/* Main Comparison - Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            
+            {/* LEFT COLUMN: Effectiveness Graph */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="w-full"
+            >
+              {/* Graph Title */}
+              <h3 className="text-2xl font-bold mb-6 md:mb-8" style={{ color: '#0BA5E9' }}>
+                68% grade improvement
+              </h3>
 
-            {/* Interactive Slider */}
-            <div className="mb-10 px-4">
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-black font-semibold text-lg">
-                  How many months will you study?
-                </label>
-                <div className="text-3xl font-bold text-blue-400">
-                  {sliderMonths}
-                </div>
-              </div>
-              <Slider
-                value={[sliderMonths]}
-                onValueChange={(value) => setSliderMonths(value[0])}
-                min={1}
-                max={12}
-                step={1}
-                className="cursor-pointer"
-              />
-              <div className="flex justify-between text-sm text-gray-500 mt-2">
-                <span>1 month</span>
-                <span>12 months</span>
-              </div>
-            </div>
-
-            {/* Breakdown Cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Private Tutoring Cost */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-red-50 border border-red-200 rounded-xl p-6"
-              >
-                <div className="text-red-600 text-sm font-semibold mb-2">
-                  Private Tutoring
-                </div>
-                <motion.div
-                  key={`tutoring-${sliderMonths}`}
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-black mb-1"
+              {/* Graph Container */}
+              <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-8 h-auto min-h-[300px] md:h-[450px]">
+                <svg
+                  viewBox="0 0 600 380"
+                  className="w-full h-full"
+                  preserveAspectRatio="xMidYMid meet"
                 >
-                  £{(500 * sliderMonths).toLocaleString('en-GB')}
-                </motion.div>
-                <div className="text-gray-500 text-sm">
-                  £500/month × {sliderMonths}
-                </div>
-              </motion.div>
+                  {/* Y-axis label (rotated) */}
+                  <text
+                    x="-190"
+                    y="25"
+                    transform="rotate(-90)"
+                    className="text-sm fill-gray-500"
+                    textAnchor="middle"
+                    fontSize="14"
+                  >
+                    Average grades
+                  </text>
 
-              {/* Mentiora Cost */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="bg-blue-50 border border-blue-200 rounded-xl p-6"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <img src={mentioraLogo} alt="Mentiora" className="h-4 w-4" />
-                  <div className="text-blue-600 text-sm font-semibold">
-                    Mentiora
-                  </div>
-                </div>
-                <motion.div
-                  key={`mentiora-${sliderMonths}`}
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-black mb-1"
-                >
-                  £{(9.99 * sliderMonths).toFixed(2)}
-                </motion.div>
-                <div className="text-gray-500 text-sm">
-                  £9.99/month × {sliderMonths}
-                </div>
-              </motion.div>
+                  {/* X-axis label */}
+                  <text
+                    x="350"
+                    y="365"
+                    className="text-sm fill-gray-500"
+                    textAnchor="middle"
+                    fontSize="14"
+                  >
+                    Hours spent learning
+                  </text>
 
-              {/* Your Savings */}
+                  {/* Gray curve - Non-personal education */}
+                  <motion.path
+                    d="M 80,300 Q 200,240 350,210 Q 480,190 560,185"
+                    fill="none"
+                    stroke="#D1D5DB"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                  />
+
+                  {/* Blue curve - Personalised education */}
+                  <motion.path
+                    d="M 80,300 Q 180,120 300,70 Q 420,30 520,20"
+                    fill="none"
+                    stroke="#0BA5E9"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                  />
+
+                  {/* Personalised education label */}
+                  <motion.g
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ delay: 1.7, duration: 0.4 }}
+                  >
+                    {/* Mentiora logo image */}
+                    <image
+                      href={mentioraLogo}
+                      x="355"
+                      y="56"
+                      width="20"
+                      height="20"
+                    />
+                    
+                    {/* Label text */}
+                    <text
+                      x="382"
+                      y="71"
+                      className="text-base fill-black font-semibold"
+                      fontSize="16"
+                    >
+                      Personalised education
+                    </text>
+                  </motion.g>
+
+                  {/* Non-personal education label */}
+                  <motion.g
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ delay: 1.9, duration: 0.4 }}
+                  >
+                    {/* Label text */}
+                    <text
+                      x="295"
+                      y="246"
+                      className="text-base fill-black font-semibold"
+                      fontSize="16"
+                    >
+                      Non-personal education
+                    </text>
+                  </motion.g>
+                </svg>
+              </div>
+            </motion.div>
+
+            {/* RIGHT COLUMN: Cost Comparison */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center justify-center"
+            >
+              {/* Title above bar chart */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: -10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="bg-blue-50 border border-blue-200 rounded-xl p-6"
+                className="mb-8"
               >
-                <div className="text-blue-600 text-sm font-semibold mb-2">
-                  You Save
-                </div>
-                <motion.div
-                  key={`savings-${sliderMonths}`}
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-3xl font-bold text-black mb-1"
-                >
-                  £{((500 - 9.99) * sliderMonths).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </motion.div>
-                <div className="text-gray-500 text-sm">
-                  {Math.round(((500 - 9.99) / 500) * 100)}% cheaper
-                </div>
+                <h3 className="text-2xl font-bold text-center leading-tight">
+                  <span className="text-black">95% cheaper than</span>
+                  <br />
+                  <span style={{ color: '#0BA5E9' }}>private tutoring</span>
+                </h3>
               </motion.div>
-            </div>
 
-            {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="text-center mt-10"
-            >
-              <Button 
-                size="lg"
-                onClick={() => navigate(user ? '/dashboard' : '/register')}
-                className="text-white text-lg font-semibold px-12 py-6 rounded-lg shadow-lg hover:scale-105 transition-all"
-                style={{ backgroundColor: '#3B82F6' }}
-              >
-                Start saving today
-              </Button>
+              {/* Bar Chart */}
+              <div className="flex items-end gap-12 h-[350px]">
+                {/* Personal Tutoring - Tall Gray Bar */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="mb-3"
+                  >
+                    <div className="text-2xl font-bold text-gray-700">
+                      £500<span className="text-base">/month</span>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="bg-gray-300 rounded-t-md relative"
+                    style={{ width: '80px', height: '240px' }}
+                    initial={{ scaleY: 0, originY: 1 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                  />
+                  
+                  <div className="text-sm text-gray-600 mt-3 font-medium">Personal tutoring</div>
+                </div>
+
+                {/* Mentiora - Small Blue Bar */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1 }}
+                    className="mb-3"
+                  >
+                    <div className="text-2xl font-bold text-black">
+                      £9.99<span className="text-base">/month</span>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="rounded-t-md relative"
+                    style={{ width: '80px', height: '48px', backgroundColor: '#0BA5E9' }}
+                    initial={{ scaleY: 0, originY: 1 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+                  />
+                  
+                  <motion.div 
+                    className="flex items-center gap-2 mt-3"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.4 }}
+                  >
+                    <img 
+                      src={mentioraLogo} 
+                      alt="Mentiora" 
+                      className="h-5 w-5"
+                    />
+                    <span className="text-base font-bold" style={{ color: '#0BA5E9' }}>mentiora</span>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -1626,7 +1574,7 @@ const Index = () => {
               size="lg"
               onClick={() => navigate(user ? '/dashboard' : '/register')}
               className="text-white text-lg font-semibold px-12 py-6 rounded-lg shadow-lg hover:scale-105 transition-all"
-              style={{ backgroundColor: '#3B82F6' }}
+              style={{ backgroundColor: '#0BA5E9' }}
             >
               Try now for free
             </Button>

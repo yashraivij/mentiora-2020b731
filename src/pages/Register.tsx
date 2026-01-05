@@ -56,8 +56,8 @@ const Register = () => {
       <Card className="w-full max-w-md shadow-lg border border-gray-100 bg-white rounded-2xl">
         <CardHeader className="text-center pb-2">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: '#3B82F6' }}>
-              <img
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: '#0BA5E9' }}>
+              <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
                 className="w-8 h-8 object-contain"
@@ -84,7 +84,7 @@ const Register = () => {
                 required
                 className="h-12 rounded-lg border-gray-200"
                 style={{ 
-                  borderColor: name ? '#3B82F6' : undefined,
+                  borderColor: name ? '#0BA5E9' : undefined,
                 }}
               />
             </div>
@@ -99,7 +99,7 @@ const Register = () => {
                 required
                 className="h-12 rounded-lg border-gray-200"
                 style={{ 
-                  borderColor: email ? '#3B82F6' : undefined,
+                  borderColor: email ? '#0BA5E9' : undefined,
                 }}
               />
             </div>
@@ -114,7 +114,7 @@ const Register = () => {
                 required
                 className="h-12 rounded-lg border-gray-200"
                 style={{ 
-                  borderColor: password ? '#3B82F6' : undefined,
+                  borderColor: password ? '#0BA5E9' : undefined,
                 }}
               />
             </div>
@@ -129,14 +129,14 @@ const Register = () => {
                 required
                 className="h-12 rounded-lg border-gray-200"
                 style={{ 
-                  borderColor: confirmPassword ? '#3B82F6' : undefined,
+                  borderColor: confirmPassword ? '#0BA5E9' : undefined,
                 }}
               />
             </div>
             <Button 
               type="submit" 
               className="w-full h-12 text-white font-semibold rounded-lg shadow-lg hover:opacity-90 transition-all duration-300" 
-              style={{ backgroundColor: '#3B82F6' }}
+              style={{ backgroundColor: '#0BA5E9' }}
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
@@ -145,7 +145,7 @@ const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="hover:underline font-semibold" style={{ color: '#3B82F6' }}>
+              <Link to="/login" className="hover:underline font-semibold" style={{ color: '#0BA5E9' }}>
                 Sign in here
               </Link>
             </p>

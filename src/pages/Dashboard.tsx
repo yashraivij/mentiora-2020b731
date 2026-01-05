@@ -69,6 +69,7 @@ import {
   Menu,
   MoreVertical,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -90,8 +91,8 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { PremiumWelcomeNotification } from "@/components/ui/premium-welcome-notification";
 import { DailyStreakNotification } from "@/components/ui/daily-streak-notification";
 import { HeaderStreakBadge } from "@/components/ui/header-streak-badge";
-import { HeaderMPBadge } from "@/components/ui/header-mp-badge";
-import { SubjectRankCard } from "@/components/dashboard/SubjectRankCard";
+import { LeaderboardTable } from "@/components/dashboard/LeaderboardTable";
+import { DailyQuests } from "@/components/dashboard/DailyQuests";
 
 interface UserProgress {
   subjectId: string;
@@ -168,18 +169,6 @@ const Dashboard = () => {
   const [editingTargetGrade, setEditingTargetGrade] = useState(false);
   const isMobile = useIsMobile();
 
-  // Track subject level changes and reset group selection
-  useEffect(() => {
-    console.log('🔄 activeSubjectLevel changed to:', activeSubjectLevel);
-    // Clear selected subject group when level changes to prevent mismatches
-    setSelectedSubjectGroup(null);
-  }, [activeSubjectLevel]);
-
-  // Track subject group selection
-  useEffect(() => {
-    console.log('🔄 selectedSubjectGroup changed to:', selectedSubjectGroup);
-  }, [selectedSubjectGroup]);
-
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [notebookLoading, setNotebookLoading] = useState(false);
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
@@ -221,8 +210,8 @@ const Dashboard = () => {
   const [streakBadgeMilestone, setStreakBadgeMilestone] = useState(false);
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-[#DBEAFE] dark:bg-[#3B82F6]/10", textColor: "text-[#3B82F6] dark:text-[#60A5FA]", activeColor: "bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] dark:bg-gradient-to-r dark:from-[#3B82F6] dark:to-[#60A5FA]" },
-    { id: "leaderboards", label: "RANK", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
     { id: "flashcards", label: "FLASHCARDS", icon: Brain, bgColor: "bg-purple-50 dark:bg-purple-900/20", textColor: "text-purple-700 dark:text-purple-300", activeColor: "bg-purple-400 dark:bg-purple-600" },
     { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary dark:bg-primary/70" },
@@ -279,7 +268,7 @@ const Dashboard = () => {
 
   // Function to get subject display name with exam board
   const getSubjectDisplayName = (subject: any) => {
-    let name = subject.name.replace(/\s*\(A-Level\)/g, ''); // Remove (A-Level) suffix
+    let name = subject.name;
     
     // For subjects that already have exam board in their name, return as-is
     if (name.includes('(AQA)') || name.includes('(Edexcel)') || name.includes('(OCR)') || name.includes('(Eduqas)')) {
@@ -575,7 +564,7 @@ const Dashboard = () => {
     try {
       const { data, error } = await supabase
         .from("user_subjects")
-        .select("subject_id, subject_name, exam_board, predicted_grade, target_grade")
+        .select("subject_name, exam_board, predicted_grade, target_grade")
         .eq("user_id", user.id)
         .order('created_at', { ascending: true });
       
@@ -623,15 +612,11 @@ const Dashboard = () => {
         // Helper to get subject_id from name and exam board
         const getSubjectId = (subjectName: string, examBoard: string): string => {
           const board = examBoard.toLowerCase();
-          // Normalize subject name (remove ALL duplicate A-Level markers)
-          const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
           
           // Handle A-level subjects
-          if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-          if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-          if (normalizedName === "Chemistry (A-Level)" && board === "aqa") return "chemistry-aqa-alevel";
-          if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-          if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+          if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+          if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+          if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
           
           // Handle subjects with exam board in name
           if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -660,15 +645,13 @@ const Dashboard = () => {
         
         // Merge performance data with subject data (including last_6_scores)
         const enrichedData = subjectsWithTrends.map(subject => {
-          // Use subject_id from database if available, otherwise derive it from name
-          const expectedSubjectId = subject.subject_id || getSubjectId(subject.subject_name, subject.exam_board);
+          const expectedSubjectId = getSubjectId(subject.subject_name, subject.exam_board);
           const perf = perfData?.find(p => 
             p.subject_id === expectedSubjectId && 
             p.exam_board.toLowerCase() === subject.exam_board.toLowerCase()
           );
           return {
             ...subject,
-            subject_id: expectedSubjectId, // Ensure subject_id is always set
             study_hours: perf?.study_hours || 0,
             accuracy_rate: perf?.accuracy_rate || 0,
             last_6_scores: subject.last_6_scores // Keep the last_6_scores from earlier query
@@ -683,20 +666,13 @@ const Dashboard = () => {
         
         const subjectIds = subjectsWithTrends
           .map((record) => {
-            // Use subject_id from database if available, otherwise derive it from name
-            if (record.subject_id) return record.subject_id;
-            
             const examBoard = record.exam_board.toLowerCase();
             const subjectName = record.subject_name;
-            // Normalize subject name (remove ALL duplicate A-Level markers)
-            const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
             
             // Handle A-level subjects
-            if (normalizedName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
-            if (normalizedName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
-            if (normalizedName === "Chemistry (A-Level)" && examBoard === "aqa") return "chemistry-aqa-alevel";
-            if (normalizedName === "Physics (A-Level)" && examBoard === "aqa") return "physics-aqa-alevel";
-            if (normalizedName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
+            if (subjectName === "Biology (A-Level)" && examBoard === "aqa") return "biology-aqa-alevel";
+            if (subjectName === "Mathematics (A-Level)" && examBoard === "aqa") return "maths-aqa-alevel";
+            if (subjectName === "Psychology (A-Level)" && examBoard === "aqa") return "psychology-aqa-alevel";
             
             // Handle subjects with exam board in name
             if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -770,71 +746,31 @@ const Dashboard = () => {
     try {
       console.log('📊 Loading predicted grades for user:', user.id);
       
-      // Calculate predicted grades from current userProgress instead of database
-      const gradesBySubject = userSubjects.map((subject: any) => {
-        const subjectIdToMatch = subject.id || '';
-        
-        // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
-        const baseSubjectName = subjectIdToMatch.split('-')[0];
-        const subjectProgressData = userProgress.filter(p => 
-          p.subjectId === subjectIdToMatch || 
-          p.subjectId === baseSubjectName ||
-          p.subjectId.split('-')[0] === baseSubjectName
-        );
-        const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
-        
-        let predictedGradeValue = 0;
-        let percentage = 0;
-        
-        if (hasAttempts) {
-          // Calculate from CURRENT practice accuracy (most accurate)
-          const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
-          const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
-          const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
-          percentage = currentAccuracy;
-          
-          console.log(`📊 ${subject.name} (${subjectIdToMatch}): accuracy=${currentAccuracy}%, attempts=${totalAttempts}`);
-          
-          if (currentAccuracy > 0) {
-            // Check if A-Level subject to use correct thresholds
-            const isALevel = subject.id && subject.id.includes('alevel');
-            
-            if (isALevel) {
-              // A-Level thresholds: E=40%, D=50%, C=60%, B=70%, A=80%, A*=90%
-              if (currentAccuracy >= 90) predictedGradeValue = 9; // A*
-              else if (currentAccuracy >= 80) predictedGradeValue = 8; // A
-              else if (currentAccuracy >= 70) predictedGradeValue = 7; // B
-              else if (currentAccuracy >= 60) predictedGradeValue = 6; // C
-              else if (currentAccuracy >= 50) predictedGradeValue = 5; // D
-              else if (currentAccuracy >= 40) predictedGradeValue = 4; // E
-              else predictedGradeValue = 0; // U
-            } else {
-              // GCSE thresholds: Grade 4=30%, Grade 5=40%, etc.
-              if (currentAccuracy >= 80) predictedGradeValue = 9;
-              else if (currentAccuracy >= 70) predictedGradeValue = 8;
-              else if (currentAccuracy >= 60) predictedGradeValue = 7;
-              else if (currentAccuracy >= 50) predictedGradeValue = 6;
-              else if (currentAccuracy >= 40) predictedGradeValue = 5;
-              else if (currentAccuracy >= 30) predictedGradeValue = 4;
-              else predictedGradeValue = 0;
-            }
-            
-            console.log(`📊 ${subject.name} final grade: ${predictedGradeValue} (${currentAccuracy}%)`);
-          }
-        }
-        
-        return {
-          subject_id: subject.name || subjectIdToMatch,
-          grade: predictedGradeValue.toString(),
-          percentage: percentage,
-          target_grade: subject.target || '7',
-          created_at: new Date().toISOString()
-        };
-      });
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
 
-      console.log('📊 Calculated grades from userProgress:', gradesBySubject);
+      if (error) {
+        console.error('Error loading predicted grades:', error);
+        return;
+      }
+
+      console.log('📊 Raw predicted exam completions:', data);
+
+      // Group by subject_id and get the latest prediction for each subject
+      const latestGrades = data?.reduce((acc: any, grade: any) => {
+        if (!acc[grade.subject_id] || new Date(grade.created_at) > new Date(acc[grade.subject_id].created_at)) {
+          acc[grade.subject_id] = grade;
+        }
+        return acc;
+      }, {});
+
+      console.log('📊 Latest grades by subject:', latestGrades);
+      console.log('📊 User subjects from curriculum:', userSubjects);
       
-      setPredictedGrades(gradesBySubject);
+      setPredictedGrades(Object.values(latestGrades || {}));
     } catch (error) {
       console.error('Error loading predicted grades:', error);
     }
@@ -960,14 +896,22 @@ const Dashboard = () => {
 
       if (error) {
         console.error('Error loading notebook entries:', error);
-        // Silently fail - notebook entries are pre-loaded but not critical
+        toast({
+          title: "Error",
+          description: "Failed to load notebook entries",
+          variant: "destructive"
+        });
         return;
       }
 
       setEntries(data || []);
     } catch (error) {
       console.error('Error loading notebook entries:', error);
-      // Silently fail - notebook entries are pre-loaded but not critical
+      toast({
+        title: "Error", 
+        description: "Failed to load notebook entries",
+        variant: "destructive"
+      });
     } finally {
       setNotebookLoading(false);
     }
@@ -1608,12 +1552,32 @@ const Dashboard = () => {
     const interval = setInterval(() => {
       setStudyTimeMinutes(prev => {
         const newTime = prev + 1;
+        
+        // Award MP when reaching 30 minutes
+        if (newTime === 30 && !hasAwardedStudyTime) {
+          (async () => {
+            const { data } = await supabase.functions.invoke('award-mp', {
+              body: { 
+                action: 'study_time_30min', 
+                userId: user.id
+              }
+            });
+            
+            if (data?.success) {
+              setHasAwardedStudyTime(true);
+              showMPReward(35, 'Studied for 30 minutes! 📚');
+              setQuestNotificationCount(prev => prev + 1);
+              loadUserStats();
+            }
+          })();
+        }
+        
         return newTime >= 30 ? 30 : newTime;
       });
     }, 60000); // Every minute
     
     return () => clearInterval(interval);
-  }, [user?.id, hasAwardedStudyTime]);
+  }, [user?.id, hasAwardedStudyTime, showMPReward]);
 
   const handleLogout = () => {
     logout();
@@ -1648,13 +1612,9 @@ const Dashboard = () => {
       // Get subject ID to find progress
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove ALL duplicate A-Level markers)
-        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
-        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
-        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
         if (subjectName === "Physics (Edexcel)") return "physics-edexcel";
         if (subjectName === "Mathematics") return board === "edexcel" ? "maths-edexcel" : "maths";
@@ -1776,13 +1736,12 @@ const Dashboard = () => {
     const emojiMap: { [key: string]: string } = {
       "physics": "🧲",
       "physics-edexcel": "🧲",
-      "physics-aqa-alevel": "⚛️",
       "chemistry": "🧪",
       "chemistry-edexcel": "🧪",
       "biology": "🧬",
       "biology-edexcel": "🧬",
       "biology-aqa-alevel": "🧬",
-      "combined-science-aqa": "🔬",
+      "combined-science-aqa": "💻",
       "mathematics": "📐",
       "maths-edexcel": "📐",
       "maths": "📐",
@@ -1793,7 +1752,6 @@ const Dashboard = () => {
       "english-literature": "📖",
       "geography": "🌍",
       "geography-paper-2": "🌍",
-      "geography-aqa-alevel": "🌍",
       "history": "⏳",
       "religious-studies": "⛪",
       "business-edexcel-igcse": "💼",
@@ -1812,16 +1770,11 @@ const Dashboard = () => {
       // Derive subject ID from name and exam board (same logic as loadUserSubjects)
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove ALL duplicate A-Level markers)
-        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
         // Handle A-level subjects
-        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (normalizedName === "Chemistry (A-Level)" && board === "aqa") return "chemistry-aqa-alevel";
-        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
-        if (normalizedName === "Geography (A-Level)" && board === "aqa") return "geography-aqa-alevel";
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -1850,6 +1803,11 @@ const Dashboard = () => {
       
       const subjectId = getSubjectId(subject.subject_name, subject.exam_board);
       
+      // Parse target grade
+      const target = typeof subject.target_grade === 'string'
+        ? parseFloat(subject.target_grade) || 7
+        : subject.target_grade || 7;
+      
       // Helper function to convert letter grades (A-Level) to numeric
       const convertGradeToNumeric = (grade: any): number => {
         if (typeof grade === 'number') return grade;
@@ -1865,60 +1823,43 @@ const Dashboard = () => {
         }
         
         const numericGrade = parseFloat(gradeStr);
-        return isNaN(numericGrade) ? 7 : numericGrade;
+        return isNaN(numericGrade) ? 0 : numericGrade;
       };
       
-      // Parse target grade using the same conversion function
-      const target = convertGradeToNumeric(subject.target_grade) || 7;
-      
-      
       // Calculate predicted grade using same logic as PredictedGradesGraph
-      let predicted: number | string = 0; // Start with 'U' for new subjects
+      let predicted: number | string = target;
       
-      // Get practice progress for this subject - match both exact ID and base subject name
-      const baseSubjectName = subjectId.split('-')[0];
-      const subjectProgress = userProgress.filter(p => 
-        p.subjectId === subjectId || 
-        p.subjectId === baseSubjectName ||
-        p.subjectId.split('-')[0] === baseSubjectName
-      );
+      // Get practice progress for this subject
+      const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
       const currSubject = curriculum.find(s => s.id === subjectId);
+      const totalTopics = currSubject?.topics.length || 1;
       const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
-      const attemptedTopics = subjectProgress.length; // Number of topics actually attempted
-      const practicePercentage = attemptedTopics > 0 ? Math.round(totalScore / attemptedTopics) : 0;
+      const practicePercentage = Math.round(totalScore / totalTopics);
       
-      // Get most recent predicted exam completion for this subject - also with flexible matching
+      // Get most recent predicted exam completion for this subject
       const recentExamCompletion = predictedGrades
-        .filter(pg => 
-          pg.subject_id === subjectId ||
-          pg.subject_id === baseSubjectName ||
-          pg.subject_id.split('-')[0] === baseSubjectName
-        )
+        .filter(pg => pg.subject_id === subjectId)
         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
       
-      // CRITICAL FIX: Check if there's actual attempt data with attempts > 0
-      const hasPracticeData = subjectProgress.some(p => p.attempts > 0);
+      console.log(`🔍 ${subjectId} - recentExamCompletion:`, recentExamCompletion?.grade, 'type:', typeof recentExamCompletion?.grade);
+      
+      const hasPracticeData = subjectProgress.length > 0;
       
       // Calculate combined grade with same weighted average as PredictedGradesGraph (70% exam, 30% practice)
       if (recentExamCompletion && hasPracticeData) {
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
-        // Use correct A-Level grade thresholds: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
-        const isALevel = subjectId.includes('alevel');
-        const practiceGradeNum = isALevel 
-          ? (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0)
-          : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
+        const practiceGradeNum = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
         const combinedGrade = Math.round((examGradeNum * 0.7) + (practiceGradeNum * 0.3));
         predicted = combinedGrade === 0 ? 'U' : combinedGrade;
+        console.log(`📊 ${subjectId} predicted (combined):`, predicted, 'from exam:', examGradeNum, 'practice:', practiceGradeNum);
       } else if (recentExamCompletion) {
         // Only exam completion exists
         const examGradeNum = convertGradeToNumeric(recentExamCompletion.grade);
         predicted = examGradeNum === 0 ? 'U' : examGradeNum;
+        console.log(`📊 ${subjectId} predicted (exam only):`, predicted, 'from grade:', recentExamCompletion.grade);
       } else if (hasPracticeData) {
-        // Only practice data exists - use correct A-Level grade thresholds: 80%=A*, 70%=A, 60%=B, 50%=C, 40%=D, 30%=E
-        const isALevel = subjectId.includes('alevel');
-        const practiceGrade = isALevel
-          ? (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0)
-          : (practicePercentage >= 80 ? 9 : practicePercentage >= 70 ? 8 : practicePercentage >= 60 ? 7 : practicePercentage >= 50 ? 6 : practicePercentage >= 40 ? 5 : practicePercentage >= 30 ? 4 : 0);
+        // Only practice data exists
+        const practiceGrade = practicePercentage >= 90 ? 9 : practicePercentage >= 80 ? 8 : practicePercentage >= 70 ? 7 : practicePercentage >= 60 ? 6 : practicePercentage >= 50 ? 5 : practicePercentage >= 40 ? 4 : practicePercentage >= 30 ? 3 : practicePercentage >= 20 ? 2 : practicePercentage >= 10 ? 1 : 0;
         predicted = practiceGrade === 0 ? 'U' : practiceGrade;
       } else {
         // No exam or practice data - use predicted_grade from user_subjects
@@ -1943,32 +1884,29 @@ const Dashboard = () => {
       return {
         id: subjectId,
         name: (() => {
-          // Clean up subject name - remove all A-Level markers
-          let cleanName = subject.subject_name.replace(/\(A-Level\)/g, '').trim();
-          
-          // For A-Level subjects, add single A-Level marker with exam board
-          if (subjectId.includes('alevel')) {
-            return `${cleanName} (A-Level) (${subject.exam_board})`;
+          // For A-Level subjects, replace "(A-Level)" with the exam board
+          if (subject.subject_name.includes('(A-Level)')) {
+            const baseName = subject.subject_name.replace('(A-Level)', '').trim();
+            return `${baseName} (${subject.exam_board})`;
           }
-          // Check if exam board is already in the subject name
+          // Check if exam board is already in the subject name (for other subjects)
           const hasExamBoard = subject.subject_name.includes('(') && subject.subject_name.includes(')');
           if (hasExamBoard) {
             return subject.subject_name;
           }
-          // Override for specific subjects
+          // Override exam board display for specific subjects
           if (subjectId === 'music-eduqas-gcse') {
             return `${subject.subject_name} (Eduqas)`;
           }
-          // Add exam board for others
+          // Use database exam board for others
           return `${subject.subject_name} (${subject.exam_board})`;
         })(),
         icon: getSubjectIconEmoji(subjectId),
         predicted: (() => {
-          console.log(`🔍 [${subjectId}] FINAL predicted value:`, predicted, 'type:', typeof predicted);
+          console.log(`✅ ${subjectId} final predicted:`, predicted, 'type:', typeof predicted);
           return predicted;
         })(),
         target: target,
-        target_grade: subject.target_grade, // Preserve original letter grade for display
         trend: trend,
         strong: "Various topics",
         focus: "Core concepts",
@@ -2003,18 +1941,6 @@ const Dashboard = () => {
     return "Off target";
   };
 
-  // Sync selectedDrawerSubject with latest mockSubjects data when drawer is open
-  useEffect(() => {
-    if (subjectDrawerOpen && selectedDrawerSubject && mockSubjects.length > 0) {
-      const freshSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
-      if (freshSubject && freshSubject.predicted !== selectedDrawerSubject.predicted) {
-        // Update with fresh predicted grade
-        setSelectedDrawerSubject(freshSubject);
-      }
-    }
-  }, [mockSubjects, subjectDrawerOpen, selectedDrawerSubject]);
-
-
   const filteredSubjects = userSubjects.length > 0
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
@@ -2025,23 +1951,13 @@ const Dashboard = () => {
   const addSubject = async (subjectId: string, targetGrade: string, examBoard: string = "AQA") => {
     if (!user?.id) return;
     
-    console.log('🟢 addSubject called with:', { subjectId, targetGrade, examBoard, activeSubjectLevel });
-    
     const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) {
-      console.error('❌ Subject not found in curriculum:', subjectId);
-      return;
-    }
-
-    console.log('✅ Found subject:', { id: subject.id, name: subject.name });
+    if (!subject) return;
 
     try {
-      // CRITICAL FIX: Append (A-Level) to subject name if it's an A-Level subject
-      // The curriculum stores A-Level subjects with "alevel" in the ID but not in the name
-      const isALevel = subjectId.toLowerCase().includes('alevel');
-      const subjectName = isALevel && !subject.name.includes('(A-Level)') 
-        ? `${subject.name} (A-Level)` 
-        : subject.name;
+      // Determine if this is an A-level subject and modify the name accordingly
+      const isALevel = subjectId.includes('alevel');
+      const subjectName = isALevel ? `${subject.name} (A-Level)` : subject.name;
       
       // Check if subject already exists
       const { data: existing } = await supabase
@@ -2064,7 +1980,6 @@ const Dashboard = () => {
           .from("user_subjects")
           .insert({
             user_id: user.id,
-            subject_id: subjectId, // Store the full subject ID (e.g., "biology-aqa-alevel")
             subject_name: subjectName,
             exam_board: examBoard,
             predicted_grade: "0", // Start at 0 since no practice data yet
@@ -2145,14 +2060,11 @@ const Dashboard = () => {
     const dbSubject = userSubjectsWithGrades.find((subject) => {
       const getSubjectId = (subjectName: string, examBoard: string): string => {
         const board = examBoard.toLowerCase();
-        // Normalize subject name (remove ALL duplicate A-Level markers)
-        const normalizedName = subjectName.replace(/\(A-Level\)/g, '').trim() + (subjectName.includes('(A-Level)') ? ' (A-Level)' : '');
         
         // Handle A-level subjects
-        if (normalizedName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
-        if (normalizedName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
-        if (normalizedName === "Physics (A-Level)" && board === "aqa") return "physics-aqa-alevel";
-        if (normalizedName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
+        if (subjectName === "Biology (A-Level)" && board === "aqa") return "biology-aqa-alevel";
+        if (subjectName === "Mathematics (A-Level)" && board === "aqa") return "maths-aqa-alevel";
+        if (subjectName === "Psychology (A-Level)" && board === "aqa") return "psychology-aqa-alevel";
         
         // Handle subjects with exam board in name
         if (subjectName === "Chemistry (Edexcel)") return "chemistry-edexcel";
@@ -2541,11 +2453,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Main Content Area */}
-      <div className="w-full">
-        {/* Header */}
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-          <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+      {/* Header */}
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="flex items-center justify-between px-4 lg:px-8 py-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
@@ -2564,8 +2474,7 @@ const Dashboard = () => {
               isMilestone={streakBadgeMilestone}
             />
             
-            {/* MP Badge */}
-            <HeaderMPBadge isVisible={showStreakBadge} />
+            <ThemeToggle />
             
             {/* Dropdown Menu */}
             <DropdownMenu>
@@ -2573,7 +2482,7 @@ const Dashboard = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="hover:bg-transparent hover:text-[#3B82F6] transition-colors duration-200"
+                  className="hover:bg-transparent hover:text-[#0EA5E9] transition-colors duration-200"
                 >
                   <MoreVertical className="h-5 w-5" />
                 </Button>
@@ -2625,14 +2534,12 @@ const Dashboard = () => {
               isMilestone={streakBadgeMilestone}
             />
             
-            {/* MP Badge for Mobile */}
-            <HeaderMPBadge isVisible={showStreakBadge} />
-            
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="hover:bg-transparent hover:text-[#3B82F6]"
+              className="hover:bg-transparent hover:text-[#0EA5E9]"
             >
               <Menu className="h-5 w-5" />
             </Button>
@@ -2717,8 +2624,41 @@ const Dashboard = () => {
                   removeSubject={removeSubject}
                   isPremium={isPremium}
                   onUpgradeToPremium={() => navigate('/pricing')}
-                  userId={user?.id || ''}
                 />
+                
+                {/* Community Section with Tabs */}
+                <div className="mt-12">
+                  <Tabs defaultValue="quests" className="w-full">
+                    <div className="flex gap-6">
+                      {/* Left Side Navigation */}
+                      <TabsList className="flex flex-col h-fit w-48 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-2 rounded-2xl shadow-[0_8px_32px_rgba(14,165,233,0.12)]">
+                        <TabsTrigger 
+                          value="quests" 
+                          className="w-full justify-start rounded-xl px-4 py-3 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#0F172A] dark:text-gray-300 hover:bg-[#0EA5E9]/10 transition-all"
+                        >
+                          Daily Quests
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="leaderboard" 
+                          className="w-full justify-start rounded-xl px-4 py-3 text-sm font-semibold data-[state=active]:bg-[#0EA5E9] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-[#0EA5E9]/30 text-[#0F172A] dark:text-gray-300 hover:bg-[#0EA5E9]/10 transition-all"
+                        >
+                          Leaderboards
+                        </TabsTrigger>
+                      </TabsList>
+                      
+                      {/* Right Side Content */}
+                      <div className="flex-1">
+                        <TabsContent value="quests" className="mt-0">
+                          <DailyQuests userId={user?.id || ''} />
+                        </TabsContent>
+                        
+                        <TabsContent value="leaderboard" className="mt-0">
+                          <LeaderboardTable userId={user?.id || ''} />
+                        </TabsContent>
+                      </div>
+                    </div>
+                  </Tabs>
+                </div>
                 </>
               ) : (
                 // Subject Path View (when a subject is selected for practice)
@@ -2806,13 +2746,12 @@ const Dashboard = () => {
                               if (!isALevel) return num.toString();
                               
                               // Convert numeric grade (1-9) to A-Level letter grade
-                              // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
-                              if (num >= 9) return 'A*';
-                              if (num >= 8) return 'A';
-                              if (num >= 7) return 'B';
-                              if (num >= 6) return 'C';
-                              if (num >= 5) return 'D';
-                              if (num >= 4) return 'E';
+                              if (num >= 8.5) return 'A*';
+                              if (num >= 7.5) return 'A';
+                              if (num >= 6.5) return 'B';
+                              if (num >= 5.5) return 'C';
+                              if (num >= 4.5) return 'D';
+                              if (num >= 2.5) return 'E';
                               return 'U';
                             };
                             
@@ -2826,24 +2765,12 @@ const Dashboard = () => {
                             
                             return (
                               <>
-                                {isPremium ? (
-                                  <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
-                                    Predicted {(() => {
-                                      // ALWAYS get fresh predicted value from mockSubjects array
-                                      const freshSubject = mockSubjects.find(s => s.id === selectedDrawerSubject.id);
-                                      const predictedValue = freshSubject?.predicted ?? selectedDrawerSubject.predicted;
-                                      return getDisplayGrade(predictedValue);
-                                    })()}
-                                  </Badge>
-                                ) : (
-                                  <Button
-                                    size="sm"
-                                    onClick={() => navigate('/pricing')}
-                                    className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 h-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm"
-                                  >
-                                    Unlock My Results
-                                  </Button>
-                                )}
+                                <Badge className="rounded-lg sm:rounded-xl px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-sm text-xs sm:text-sm">
+                                  Predicted {(() => {
+                                    console.log(`🎯 Drawer Badge - selectedDrawerSubject.predicted:`, selectedDrawerSubject.predicted, 'type:', typeof selectedDrawerSubject.predicted);
+                                    return getDisplayGrade(selectedDrawerSubject.predicted);
+                                  })()}
+                                </Badge>
                                 <Select
                                   value={getDisplayGrade(selectedDrawerSubject.target)}
                                   onValueChange={(value) => {
@@ -2935,22 +2862,86 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.1 }}
                             >
-                              <SubjectRankCard 
-                                selectedDrawerSubject={selectedDrawerSubject}
-                                userProgress={userProgress}
-                                userId={user?.id}
-                              />
+                              {(() => {
+                                const subjectId = selectedDrawerSubject?.id || '';
+                                
+                                // Get all progress for this subject with scores > 0
+                                const subjectProgress = userProgress.filter(p => 
+                                  p.subjectId === subjectId && p.averageScore > 0
+                                );
+                                
+                                if (subjectProgress.length === 0) {
+                                  return (
+                                    <Card className="rounded-3xl border border-[#94A3B8]/20 bg-gradient-to-br from-white to-[#94A3B8]/5 dark:from-gray-900 dark:to-[#94A3B8]/10 shadow-sm hover:shadow-lg transition-all duration-300">
+                                      <CardContent className="p-5">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <div className="p-1.5 rounded-lg bg-[#94A3B8]/10">
+                                            <TrendingUp className="h-4 w-4 text-[#94A3B8]" />
+                                          </div>
+                                          <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
+                                        </div>
+                                        <div className="text-3xl font-bold text-[#94A3B8]">
+                                          --
+                                        </div>
+                                      </CardContent>
+                                    </Card>
+                                  );
+                                }
+                                
+                                // Sort by last attempt date
+                                const sorted = [...subjectProgress].sort((a, b) => 
+                                  new Date(b.lastAttempt).getTime() - new Date(a.lastAttempt).getTime()
+                                );
+                                
+                                // Get last 3 attempts average
+                                const recentAttempts = sorted.slice(0, 3);
+                                const recentAvg = recentAttempts.reduce((sum, p) => sum + p.averageScore, 0) / recentAttempts.length;
+                                
+                                // Get overall average
+                                const overallAvg = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length;
+                                
+                                // Calculate difference
+                                const change = recentAvg - overallAvg;
+                                const isPositive = change >= 0;
+                                const sign = isPositive ? '+' : '';
+                                
+                                return (
+                                  <Card className={`rounded-3xl border shadow-sm hover:shadow-lg transition-all duration-300 ${
+                                    isPositive 
+                                      ? 'border-[#16A34A]/20 bg-gradient-to-br from-white to-[#16A34A]/5 dark:from-gray-900 dark:to-[#16A34A]/10 hover:shadow-[#16A34A]/10'
+                                      : 'border-[#EF4444]/20 bg-gradient-to-br from-white to-[#EF4444]/5 dark:from-gray-900 dark:to-[#EF4444]/10 hover:shadow-[#EF4444]/10'
+                                  }`}>
+                                    <CardContent className="p-5">
+                                      <div className="flex items-center gap-2 mb-2">
+                                        <div className={`p-1.5 rounded-lg ${isPositive ? 'bg-[#16A34A]/10' : 'bg-[#EF4444]/10'}`}>
+                                          {isPositive ? (
+                                            <TrendingUp className={`h-4 w-4 ${isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'}`} />
+                                          ) : (
+                                            <TrendingDown className="h-4 w-4 text-[#EF4444]" />
+                                          )}
+                                        </div>
+                                        <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Recent Trend</div>
+                                      </div>
+                                      <div className={`text-3xl font-bold flex items-center gap-2 ${
+                                        isPositive ? 'text-[#16A34A]' : 'text-[#EF4444]'
+                                      }`}>
+                                        {sign}{Math.abs(change).toFixed(1)}%
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                );
+                              })()}
                             </motion.div>
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.15 }}
                             >
-                              <Card className="rounded-3xl border border-[#3B82F6]/20 bg-gradient-to-br from-white to-[#3B82F6]/5 dark:from-gray-900 dark:to-[#3B82F6]/10 shadow-sm hover:shadow-lg hover:shadow-[#3B82F6]/10 transition-all duration-300">
+                              <Card className="rounded-3xl border border-[#0EA5E9]/20 bg-gradient-to-br from-white to-[#0EA5E9]/5 dark:from-gray-900 dark:to-[#0EA5E9]/10 shadow-sm hover:shadow-lg hover:shadow-[#0EA5E9]/10 transition-all duration-300">
                                 <CardContent className="p-5">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <div className="p-1.5 rounded-lg bg-[#3B82F6]/10">
-                                      <Target className="h-4 w-4 text-[#3B82F6]" />
+                                    <div className="p-1.5 rounded-lg bg-[#0EA5E9]/10">
+                                      <Target className="h-4 w-4 text-[#0EA5E9]" />
                                     </div>
                                     <div className="text-xs text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Accuracy</div>
                                   </div>
@@ -3032,58 +3023,44 @@ const Dashboard = () => {
                                   if (!isALevel) return num.toFixed(1);
                                   
                                   // Convert numeric grade (1-9) to A-Level letter grade
-                                  // Grade 9 = A*, 8 = A, 7 = B, 6 = C, 5 = D, 4 = E
-                                  if (num >= 9) return 'A*';
-                                  if (num >= 8) return 'A';
-                                  if (num >= 7) return 'B';
-                                  if (num >= 6) return 'C';
-                                  if (num >= 5) return 'D';
-                                  if (num >= 4) return 'E';
+                                  if (num >= 8.5) return 'A*';
+                                  if (num >= 7.5) return 'A';
+                                  if (num >= 6.5) return 'B';
+                                  if (num >= 5.5) return 'C';
+                                  if (num >= 4.5) return 'D';
+                                  if (num >= 2.5) return 'E';
                                   return 'U';
                                 };
                                 
-                                // Get user's predicted grade for this subject using flexible matching
-                                // Match both exact ID and base subject name (e.g., "biology" matches "biology-aqa-alevel")
-                                const baseSubjectName = subjectIdToMatch.split('-')[0]; // Extract "biology" from "biology-aqa-alevel"
-                                const userPredictedGrade = predictedGrades.find(pg => 
-                                  pg.subject_id === subjectIdToMatch || 
-                                  pg.subject_id === baseSubjectName ||
-                                  pg.subject_id.split('-')[0] === baseSubjectName
-                                );
+                                // Get user's predicted grade for this subject using the direct subject ID
+                                const userPredictedGrade = predictedGrades.find(pg => pg.subject_id === subjectIdToMatch);
                                 let predictedGradeValue = 0; // default to 0 if no grade yet
                                 
-                                // CRITICAL FIX: Check if there's actual attempt data first
-                                const subjectProgressData = userProgress.filter(p => p.subjectId === subjectIdToMatch);
-                                const hasAttempts = subjectProgressData.some(p => p.attempts > 0);
-                                
-                                // ONLY calculate if there are attempts - ALWAYS use current practice accuracy
-                                if (!hasAttempts) {
-                                  // No attempts - always default to U (0)
-                                  predictedGradeValue = 0;
+                                if (userPredictedGrade) {
+                                  // Parse the grade
+                                  if (typeof userPredictedGrade.grade === 'string') {
+                                    const numGrade = parseFloat(userPredictedGrade.grade);
+                                    if (!isNaN(numGrade)) {
+                                      predictedGradeValue = numGrade;
+                                    } else {
+                                      // Convert letter grade to number
+                                      const gradeMap: {[key: string]: number} = {
+                                        'A*': 9, 'A': 8, 'B': 7, 'C': 6, 'D': 5, 'E': 4, 'F': 3, 'G': 2, 'U': 1
+                                      };
+                                      predictedGradeValue = gradeMap[userPredictedGrade.grade.toUpperCase()] || 0;
+                                    }
+                                  } else {
+                                    predictedGradeValue = userPredictedGrade.grade || 0;
+                                  }
                                 } else {
-                                  // Calculate from CURRENT practice accuracy (most accurate)
-                                  const totalAttempts = subjectProgressData.reduce((sum, p) => sum + p.attempts, 0);
-                                  const totalScore = subjectProgressData.reduce((sum, p) => sum + (p.averageScore * p.attempts), 0);
-                                  const currentAccuracy = totalAttempts > 0 ? (totalScore / totalAttempts) : 0;
-                                  
-                                  console.log(`🎯 ${subjectIdToMatch} accuracy calculation:`, {
-                                    totalAttempts,
-                                    totalScore,
-                                    currentAccuracy,
-                                    subjectProgressData
+                                  // Fallback: calculate from subject performance
+                                  const subjectPerf = userSubjectsWithGrades.find(s => {
+                                    return curriculumSubject && s.subject_name === curriculumSubject.name;
                                   });
                                   
-                                  if (currentAccuracy > 0) {
-                                    // Convert accuracy percentage to A-Level grade (30-39% = E = 4, 40-49% = D = 5, etc.)
-                                    if (currentAccuracy >= 80) predictedGradeValue = 9; // A*
-                                    else if (currentAccuracy >= 70) predictedGradeValue = 8; // A
-                                    else if (currentAccuracy >= 60) predictedGradeValue = 7; // B
-                                    else if (currentAccuracy >= 50) predictedGradeValue = 6; // C
-                                    else if (currentAccuracy >= 40) predictedGradeValue = 5; // D
-                                    else if (currentAccuracy >= 30) predictedGradeValue = 4; // E
-                                    else predictedGradeValue = 0; // U
-                                    
-                                    console.log(`🎯 ${subjectIdToMatch} final grade:`, predictedGradeValue, 'from accuracy:', currentAccuracy);
+                                  if (subjectPerf?.accuracy_rate && subjectPerf.accuracy_rate > 0) {
+                                    // Rough conversion: accuracy to grade (70% = grade 4, 90% = grade 9)
+                                    predictedGradeValue = Math.max(1, Math.min(9, Math.round((subjectPerf.accuracy_rate / 10) - 3)));
                                   }
                                 }
                                 
@@ -3096,16 +3073,16 @@ const Dashboard = () => {
                                 return (
                                   <>
                                     <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
-                                       <div className="flex items-center justify-between mb-2">
+                                      <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Predicted Grade</span>
-                                        <span className={`text-lg font-bold text-[#0F172A] dark:text-white ${!isPremium ? 'blur-sm select-none' : ''}`}>{getDisplayGrade(predictedGradeValue)}</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(predictedGradeValue)}</span>
                                       </div>
-                                      <div className={`w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner ${!isPremium ? 'blur-sm' : ''}`}>
+                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
                                         <motion.div 
                                           initial={{ width: 0 }}
-                                          animate={{ width: predictedGradeValue === 0 ? '0%' : `${((predictedGradeValue - 1) / 8) * 100}%` }}
+                                          animate={{ width: `${((Math.max(1, predictedGradeValue) - 1) / 8) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.3 }}
-                                          className="h-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#3B82F6] rounded-full shadow-sm"
+                                          className="h-full bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8] to-[#0EA5E9] rounded-full shadow-sm"
                                         />
                                       </div>
                                     </div>
@@ -3120,6 +3097,20 @@ const Dashboard = () => {
                                           animate={{ width: `${((Math.max(1, targetGradeValue) - 1) / 8) * 100}%` }}
                                           transition={{ duration: 1, delay: 0.4 }}
                                           className="h-full bg-gradient-to-r from-[#16A34A] to-[#22C55E] rounded-full shadow-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="space-y-3 p-4 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700">
+                                      <div className="flex items-center justify-between mb-2">
+                                        <span className="text-sm text-[#64748B] dark:text-gray-400 font-semibold uppercase tracking-wider">Mentiora Average</span>
+                                        <span className="text-lg font-bold text-[#0F172A] dark:text-white">{getDisplayGrade(classMedianValue)}</span>
+                                      </div>
+                                      <div className="w-full h-3 bg-gradient-to-r from-[#F1F5F9] to-[#E2E8F0] dark:from-gray-800 dark:to-gray-700 rounded-full overflow-hidden shadow-inner">
+                                        <motion.div 
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${((Math.max(1, classMedianValue) - 1) / 8) * 100}%` }}
+                                          transition={{ duration: 1, delay: 0.5 }}
+                                          className="h-full bg-gradient-to-r from-[#64748B] to-[#94A3B8] rounded-full shadow-sm"
                                         />
                                       </div>
                                     </div>
@@ -3138,24 +3129,12 @@ const Dashboard = () => {
                             </CardHeader>
                             <CardContent className="space-y-4 p-6">
                               {(() => {
-                                // DEBUGGING: Log when Topics tab is viewed
-                                console.log('=== TOPICS TAB RENDERING ===');
-                                console.log('selectedDrawerSubject:', selectedDrawerSubject);
-                                console.log('selectedDrawerSubject.id:', selectedDrawerSubject?.id);
-                                console.log('selectedDrawerSubject.name:', selectedDrawerSubject?.name);
-                                console.log('Curriculum has physics-aqa-alevel?', curriculum.some(s => s.id === 'physics-aqa-alevel'));
-                                console.log('Total curriculum subjects:', curriculum.length);
-                                
                                 // Get topics only from the selected drawer subject
                                 const topicsList: { name: string; mastery: number; color: string; subjectId: string; topicId: string }[] = [];
                                 
                                 if (selectedDrawerSubject) {
-                                  // Find subject in curriculum using the exact ID
                                   const subject = curriculum.find(s => s.id === selectedDrawerSubject.id);
-                                  console.log('Found subject in curriculum?', subject ? `YES - ${subject.name} with ${subject.topics?.length} topics` : 'NO');
-                                  
                                   if (subject) {
-                                    console.log('📚 Subject topics:', subject.topics.map(t => ({ id: t.id, name: t.name })));
                                     subject.topics.forEach(topic => {
                                       const topicProgress = userProgress.find(
                                         p => p.subjectId === selectedDrawerSubject.id && p.topicId === topic.id
@@ -3208,7 +3187,7 @@ const Dashboard = () => {
                                         <Button 
                                           size="sm" 
                                           onClick={() => navigate(`/practice/${topic.subjectId}/${topic.topicId}`)}
-                                          className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-md shadow-[#3B82F6]/25"
+                                          className="rounded-xl h-8 px-3 text-xs bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-md shadow-[#0EA5E9]/25"
                                         >
                                           Revise
                                         </Button>
@@ -3252,10 +3231,10 @@ const Dashboard = () => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         onClick={() => isPremium ? navigate('/predicted-exam/geography') : navigate('/pricing')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -3264,7 +3243,7 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
                                             Start
                                           </Badge>
                                         </div>
@@ -3274,10 +3253,10 @@ const Dashboard = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.1 }}
                                         onClick={() => isPremium ? navigate('/predicted-exam/geography-paper-2') : navigate('/pricing')}
-                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                        className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                       >
                                         <div className="flex items-center gap-4">
-                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                             {subjectEmoji}
                                           </div>
                                           <div>
@@ -3286,7 +3265,7 @@ const Dashboard = () => {
                                           </div>
                                         </div>
                                         <div className="text-right">
-                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
+                                          <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
                                             Start
                                           </Badge>
                                         </div>
@@ -3304,10 +3283,10 @@ const Dashboard = () => {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     onClick={() => isPremium ? navigate(`/predicted-exam/${selectedDrawerSubject.id}`) : navigate('/pricing')}
-                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
+                                    className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 cursor-pointer group"
                                   >
                                     <div className="flex items-center gap-4">
-                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#3B82F6]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
+                                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0EA5E9]/20 to-[#0EA5E9]/5 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 text-2xl">
                                         {subjectEmoji}
                                       </div>
                                       <div>
@@ -3316,7 +3295,7 @@ const Dashboard = () => {
                                       </div>
                                     </div>
                                     <div className="text-right">
-                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white font-semibold text-xs">
+                                      <Badge className="rounded-xl px-3 py-1 bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] text-white font-semibold text-xs">
                                         Start
                                       </Badge>
                                     </div>
@@ -3477,41 +3456,35 @@ const Dashboard = () => {
                                   
                                   const handleStartActivity = (activity: any) => {
                                     if (activity.action === 'flashcards') {
-                                      // Open the subject drawer with flashcards tab
-                                      setDrawerTab('flashcards');
-                                      setSubjectDrawerOpen(true);
+                                      setActiveTab('flashcards');
+                                      setSubjectDrawerOpen(false);
                                     } else if (activity.action === 'practice' && activity.topicId) {
                                       setSubjectDrawerOpen(false);
                                       // Navigate directly to practice page with subject and topic as path params
                                       navigate(`/practice/${subjectId}/${activity.topicId}`);
                                     } else if (activity.action === 'notebook') {
-                                      // Open the subject drawer with notes tab
-                                      const subject = curriculum.find(s => s.id === subjectId);
-                                      if (subject) {
-                                        setSelectedDrawerSubject(subject);
-                                        setDrawerTab('notes');
-                                        setSubjectDrawerOpen(true);
-                                      }
+                                      setActiveTab('notebook');
+                                      setSubjectDrawerOpen(false);
                                     }
                                   };
                                   
                                   // Determine if this item should be blurred (all except first Monday item)
                                   const shouldBlur = !isPremium && i > 0;
                                   
-                                  const dayCard = (
+                                  return (
                                     <motion.div 
                                       key={day}
                                       initial={{ opacity: 0, x: -20 }}
                                       animate={{ opacity: 1, x: 0 }}
                                       transition={{ delay: i * 0.05 }}
-                                      className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm' : ''}`}
+                                      className={`p-5 rounded-2xl border border-[#E2E8F0]/50 dark:border-gray-700 bg-gradient-to-br from-[#F8FAFC] to-white dark:from-gray-800 dark:to-gray-900 hover:border-[#0EA5E9]/30 hover:shadow-md transition-all duration-300 ${shouldBlur ? 'blur-sm' : ''}`}
                                     >
                                       <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E2E8F0]/50 dark:border-gray-700">
                                         <div>
                                           <span className="font-bold text-lg text-[#0F172A] dark:text-white">{day}</span>
                                           <span className="text-xs text-[#64748B] dark:text-gray-400 ml-2">— {dayThemes[i]}</span>
                                         </div>
-                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#3B82F6] text-[#3B82F6] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
+                                        <Badge className="text-xs px-3 py-1 rounded-lg border-2 border-[#0EA5E9] text-[#0EA5E9] bg-white dark:bg-gray-950 font-semibold">{totalDuration} mins</Badge>
                                       </div>
                                       
                                       <div className="space-y-3">
@@ -3547,7 +3520,7 @@ const Dashboard = () => {
                                               <div className="flex gap-2 flex-shrink-0">
                                                 <Button 
                                                   size="sm" 
-                                                  className="rounded-lg bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-sm text-xs px-3 h-8"
+                                                  className="rounded-lg bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm text-xs px-3 h-8"
                                                   onClick={() => handleStartActivity(activity)}
                                                 >
                                                   <Play className="h-3 w-3 mr-1" />
@@ -3604,38 +3577,26 @@ const Dashboard = () => {
                                       </div>
                                     </motion.div>
                                   );
-                                  
-                                  // Insert Premium CTA after Monday for non-premium users
-                                  if (i === 0 && !isPremium) {
-                                    return (
-                                      <>
-                                        {dayCard}
-                                        <motion.div
-                                          initial={{ opacity: 0, y: 10 }}
-                                          animate={{ opacity: 1, y: 0 }}
-                                          transition={{ delay: 0.1 }}
-                                          className="p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm"
-                                        >
-                                          <div className="text-center space-y-3">
-                                            <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Your Full Week</h4>
-                                            <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
-                                              Start your free trial to unlock all notes, complete study plans, and detailed insights
-                                            </p>
-                                            <Button 
-                                              className="rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/25 hover:shadow-xl hover:shadow-[#3B82F6]/30 transition-all duration-300 font-medium"
-                                              onClick={() => navigate('/pricing')}
-                                            >
-                                              Start Free Trial
-                                            </Button>
-                                          </div>
-                                        </motion.div>
-                                      </>
-                                    );
-                                  }
-                                  
-                                  return dayCard;
                                 });
                               })()}
+                              
+                              {/* Premium CTA Overlay for non-premium users */}
+                              {!isPremium && (
+                                <div className="mt-6 p-6 rounded-2xl border-2 border-[#E2E8F0]/50 dark:border-gray-800 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-900 dark:to-gray-950 shadow-sm">
+                                  <div className="text-center space-y-3">
+                                    <h4 className="text-base font-bold text-[#0F172A] dark:text-white">Unlock Full Access</h4>
+                                    <p className="text-sm text-[#64748B] dark:text-gray-400 max-w-md mx-auto">
+                                      Upgrade to Premium to unlock all notes, detailed insights, and personalized recommendations
+                                    </p>
+                                    <Button 
+                                      className="rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/25 hover:shadow-xl hover:shadow-[#0EA5E9]/30 transition-all duration-300 font-medium"
+                                      onClick={() => navigate('/pricing')}
+                                    >
+                                      Upgrade Now
+                                    </Button>
+                                  </div>
+                                </div>
+                              )}
                             </CardContent>
                           </Card>
                         </TabsContent>
@@ -3674,7 +3635,7 @@ const Dashboard = () => {
                                           setSubjectDrawerOpen(false);
                                           setActiveTab("learn");
                                         }}
-                                        className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] hover:from-[#1d4ed8] hover:to-[#3B82F6] text-white font-semibold shadow-sm"
+                                        className="bg-gradient-to-r from-[#0EA5E9] to-[#38BDF8] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-semibold shadow-sm"
                                       >
                                         Start Practicing
                                       </Button>
@@ -3980,7 +3941,7 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
-                                "Combined Science": "🔬",
+                                "Combined Science": "💻",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
                                 "Statistics": "📊",
@@ -4073,7 +4034,7 @@ const Dashboard = () => {
                                 "Physics": "⚛️",
                                 "Chemistry": "🧪",
                                 "Biology": "🔬",
-                                "Combined Science": "🔬",
+                                "Combined Science": "💻",
                                 "Mathematics": "🔢",
                                 "Maths": "🔢",
                                 "Statistics": "📊",
@@ -4104,7 +4065,6 @@ const Dashboard = () => {
                                         <Card 
                                           className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[0_8px_24px_rgba(14,165,233,0.15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
                                           onClick={() => {
-                                            console.log('🔵 A-Level subject clicked:', baseName, 'activeSubjectLevel:', activeSubjectLevel);
                                             setSelectedSubjectGroup(baseName);
                                           }}
                                         >
@@ -4141,42 +4101,10 @@ const Dashboard = () => {
                               // Exclude geography-paper-2 from exam board selection
                               if (subject.id === 'geography-paper-2') return false;
                               
-                              // CRITICAL: Explicitly exclude base 'geography' (GCSE) when in A-level tab
-                              if (activeSubjectLevel === 'alevel' && subject.id === 'geography') {
-                                console.log('❌ Excluding GCSE geography from A-level tab:', subject.id);
-                                return false;
-                              }
-                              
-                              // CRITICAL: When selecting Geography in A-Level tab, ONLY show geography-aqa-alevel
-                              if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
-                                // Must be exactly 'geography-aqa-alevel'
-                                if (subject.id !== 'geography-aqa-alevel') {
-                                  console.log('❌ Excluding non-A-level geography:', subject.id);
-                                  return false;
-                                }
-                                console.log('✅ Showing A-level geography:', subject.id);
-                              }
-                              
-                              // CRITICAL: When selecting Geography in GCSE tab, exclude geography-aqa-alevel
-                              if (activeSubjectLevel === 'gcse' && selectedSubjectGroup === 'Geography') {
-                                if (subject.id === 'geography-aqa-alevel') {
-                                  console.log('❌ Excluding A-level geography from GCSE tab:', subject.id);
-                                  return false;
-                                }
-                              }
-                              
-                              console.log(`🔍 Filtering subject ${subject.id} (${subject.name}):`, {
-                                activeSubjectLevel,
-                                includesAlevel: subject.id.includes('alevel'),
-                                selectedSubjectGroup
-                              });
-                              
                               // Filter by level first
                               const isCorrectLevel = activeSubjectLevel === 'gcse' 
                                 ? !subject.id.includes('alevel') 
                                 : subject.id.includes('alevel');
-                              
-                              console.log(`  isCorrectLevel: ${isCorrectLevel}`);
                               
                               if (!isCorrectLevel) return false;
                               
@@ -4186,14 +4114,7 @@ const Dashboard = () => {
                               if (baseName.startsWith('Geography')) baseName = 'Geography';
                               // Normalize Maths to Mathematics for matching
                               if (baseName === 'Maths') baseName = 'Mathematics';
-                              
-                              // CRITICAL FIX: selectedSubjectGroup is just the base name (e.g., "Biology")
-                              // but we need to ensure we're matching the right level
-                              // The level filtering above (lines 4074-4080) already ensures correct level
-                              // so here we just match the base name
-                              const matches = baseName === selectedSubjectGroup;
-                              console.log(`  baseName: ${baseName}, matches selectedSubjectGroup: ${matches}`);
-                              return matches;
+                              return baseName === selectedSubjectGroup;
                             })
                             .sort((a, b) => {
                               // AQA always comes first
@@ -4242,54 +4163,13 @@ const Dashboard = () => {
                                 >
                                   <Card 
                                     className="cursor-pointer rounded-3xl border border-[#E2E8F0]/50 dark:border-gray-700 hover:border-[#0EA5E9]/30 dark:hover:border-[#0EA5E9]/40 hover:shadow-[#0EA5E9]/15)] transition-all duration-300 bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 group"
-                                onClick={() => {
-                                console.log('📗 Exam board clicked:', {
-                                  subjectId: subject.id,
-                                  subjectName: subject.name,
-                                  examBoard: examBoard,
-                                  activeSubjectLevel,
-                                  isAlevelId: subject.id.includes('alevel')
-                                });
-                                
-                                // CRITICAL SAFEGUARD: Prevent wrong Geography subject from being selected
-                                if (selectedSubjectGroup === 'Geography' && activeSubjectLevel === 'alevel') {
-                                  if (subject.id !== 'geography-aqa-alevel') {
-                                    console.error('❌ BLOCKED: Attempted to select wrong Geography subject in A-level mode:', subject.id);
-                                    toast({
-                                      title: "Error",
-                                      description: "Invalid subject selected. Please try again.",
-                                      variant: "destructive"
-                                    });
-                                    return;
-                                  }
-                                }
-                                
-                                // Safety check: ensure correct level subject is selected
-                                const expectedHasAlevel = activeSubjectLevel === 'alevel';
-                                const actualHasAlevel = subject.id.includes('alevel');
-                                
-                                if (expectedHasAlevel !== actualHasAlevel) {
-                                  console.error('⚠️ Level mismatch! Expected:', activeSubjectLevel, 'but got subject:', subject.id);
-                                  toast({
-                                    title: "Error",
-                                    description: "Subject level mismatch. Please try again.",
-                                    variant: "destructive"
-                                  });
-                                  return;
-                                }
-                                
-                                console.log('✅ Setting selected subject for grade:', {
-                                  id: subject.id,
-                                  name: subject.name,
-                                  examBoard: examBoard
-                                });
-                                
-                                setSelectedSubjectForGrade({
-                                  id: subject.id,
-                                  name: subject.name,
-                                  examBoard: examBoard
-                                });
-                              }}
+                                    onClick={() => {
+                                      setSelectedSubjectForGrade({
+                                        id: subject.id,
+                                        name: subject.name,
+                                        examBoard: examBoard
+                                      });
+                                    }}
                                   >
                                     <CardContent className="p-6">
                                       <div className="text-center">
@@ -4355,29 +4235,7 @@ const Dashboard = () => {
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
-                                // CRITICAL SAFEGUARD: Double-check subject ID before adding
-                                let finalSubjectId = selectedSubjectForGrade.id;
-                                
-                                // If in A-level mode and Geography, force use of geography-aqa-alevel
-                                if (activeSubjectLevel === 'alevel' && selectedSubjectGroup === 'Geography') {
-                                  if (finalSubjectId !== 'geography-aqa-alevel') {
-                                    console.error('🚨 CRITICAL: Wrong Geography ID detected, correcting from', finalSubjectId, 'to geography-aqa-alevel');
-                                    finalSubjectId = 'geography-aqa-alevel';
-                                  }
-                                }
-                                
-                                const logData = {
-                                  originalSubjectId: selectedSubjectForGrade.id,
-                                  finalSubjectId: finalSubjectId,
-                                  subjectName: selectedSubjectForGrade.name,
-                                  grade: grade.toString(),
-                                  examBoard: selectedSubjectForGrade.examBoard,
-                                  activeSubjectLevel,
-                                  isAlevelId: finalSubjectId.includes('alevel')
-                                };
-                                console.log('✅ Adding subject with grade:', logData);
-                                
-                                addSubject(finalSubjectId, grade.toString(), selectedSubjectForGrade.examBoard);
+                                addSubject(selectedSubjectForGrade.id, grade.toString(), selectedSubjectForGrade.examBoard);
                                 setSelectedSubjectForGrade(null);
                                 setShowAddSubjects(false);
                                 setSelectedSubjectGroup(null);
@@ -5295,594 +5153,429 @@ const Dashboard = () => {
 
           {activeTab === "quests" && (
             <div className="space-y-6">
-              {/* Hero Section with Stats */}
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0EA5E9]/10 via-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/20 dark:via-[#0EA5E9]/10 border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 p-8">
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <h1 className="text-3xl font-bold text-[#0F172A] dark:text-white mb-2">
-                        Quest Center
-                      </h1>
-                      <p className="text-sm text-[#64748B] dark:text-gray-400">
-                        Complete quests to level up your learning journey
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-[#0EA5E9]/20">
-                      <Flame className="h-4 w-4 text-[#0EA5E9]" />
-                      <span className="text-sm font-bold text-[#0F172A] dark:text-white">{currentStreak} Day Streak</span>
-                    </div>
+              {/* Header Bar */}
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold text-foreground">Quests</h2>
+                <div className="flex items-center space-x-6">
+                  {/* MP Balance */}
+                  <div className="flex items-center space-x-2 bg-card rounded-2xl px-6 py-3 shadow-lg border-2 border-border">
+                    <Gem className="h-6 w-6 text-cyan-400" />
+                    <span className="text-xl font-bold text-foreground" data-mp-counter>{userGems} MP</span>
                   </div>
-
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    {/* Daily Progress */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Daily Goal</span>
-                        <Trophy className="h-4 w-4 text-[#0EA5E9]" />
-                      </div>
-                      <div className="flex items-baseline gap-1 mb-2">
-                        <span className="text-2xl font-bold text-[#0EA5E9]">{Math.min(todayEarnedMP, 50)}</span>
-                        <span className="text-sm text-[#64748B] dark:text-gray-400">/ 50 MP</span>
-                      </div>
-                      <Progress value={Math.min((todayEarnedMP / 50) * 100, 100)} className="h-1.5" />
-                    </motion.div>
-
-                    {/* Total Balance */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Total MP</span>
-                        <Gem className="h-4 w-4 text-[#0EA5E9]" />
-                      </div>
-                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
-                        {userGems.toLocaleString()}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3 text-green-500" />
-                        <span className="text-xs text-green-500">+{todayEarnedMP} today</span>
-                      </div>
-                    </motion.div>
-
-                    {/* Completion Rate */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Quest Rate</span>
-                        <Target className="h-4 w-4 text-[#0EA5E9]" />
-                      </div>
-                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
-                        {(() => {
-                          const loginComplete = userStats?.loginToday ? 1 : 0;
-                          const practiceComplete = userStats?.practiceToday ? 1 : 0;
-                          const topicsComplete = (userStats?.weeklyTopicsCount || 0) >= 3 ? 1 : 0;
-                          const total = loginComplete + practiceComplete + topicsComplete;
-                          return Math.round((total / 3) * 100);
-                        })()}%
-                      </div>
-                      <span className="text-xs text-[#64748B] dark:text-gray-400">Today's completion</span>
-                    </motion.div>
-
-                    {/* Weekly Streak */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/50 dark:border-gray-700/50"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-[#64748B] dark:text-gray-400">Active Days</span>
-                        <Flame className="h-4 w-4 text-[#0EA5E9]" />
-                      </div>
-                      <div className="text-2xl font-bold text-[#0F172A] dark:text-white mb-1">
-                        {currentStreak}
-                      </div>
-                      <span className="text-xs text-[#64748B] dark:text-gray-400">Don't break the chain!</span>
-                    </motion.div>
+                  {/* Streak Chip */}
+                  <div className="flex items-center space-x-2 bg-card rounded-2xl px-6 py-3 shadow-lg border-2 border-border">
+                    <Flame className="h-6 w-6 text-orange-400" />
+                    <span className="text-lg font-bold text-card-foreground">{currentStreak} days in a row</span>
                   </div>
                 </div>
               </div>
 
-              {/* Main Content Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Left Column - Daily Quests */}
-                <div className="lg:col-span-2 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-bold text-[#0F172A] dark:text-white flex items-center gap-2">
-                      <Zap className="h-5 w-5 text-[#0EA5E9]" />
-                      Today's Quests
-                    </h2>
-                    <Badge variant="outline" className="border-[#0EA5E9]/30 text-[#0EA5E9]">
-                      {(() => {
-                        const loginComplete = userStats?.loginToday ? 1 : 0;
-                        const practiceComplete = userStats?.practiceToday ? 1 : 0;
-                        const topicsComplete = (userStats?.weeklyTopicsCount || 0) >= 3 ? 1 : 0;
-                        return loginComplete + practiceComplete + topicsComplete;
-                      })()}/3 Complete
-                    </Badge>
-                  </div>
-
-                  {/* Quest Cards Grid */}
-                  <div className="grid gap-4">
-                    {/* Quest 1 - Login */}
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 hover:shadow-lg transition-all"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`p-4 rounded-xl transition-all ${
-                          userStats?.loginToday 
-                            ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
-                            : 'bg-[#0EA5E9]/10 group-hover:bg-[#0EA5E9]/20'
-                        }`}>
-                          {userStats?.loginToday ? (
-                            <Check className="h-6 w-6 text-white" />
-                          ) : (
-                            <Check className="h-6 w-6 text-[#0EA5E9]" />
-                          )}
-                        </div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h3 className="font-bold text-lg text-[#0F172A] dark:text-white mb-1">Daily Login</h3>
-                              <p className="text-sm text-[#64748B] dark:text-gray-400">Sign in to start your day</p>
-                            </div>
-                            <Badge className={userStats?.loginToday ? "bg-[#0EA5E9] text-white" : "bg-[#0EA5E9]/10 text-[#0EA5E9]"}>
-                              +10 MP
-                            </Badge>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-[#64748B] dark:text-gray-400">Progress</span>
-                              <span className="font-bold text-[#0EA5E9]">{(userStats?.loginToday || todayEarnedMP >= 10) ? '100' : '0'}%</span>
-                            </div>
-                            <Progress 
-                              value={(userStats?.loginToday || todayEarnedMP >= 10) ? 100 : 0} 
-                              className="h-2"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    {/* Quest 2 - Rotating Daily */}
-                    {(() => {
-                      const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
-                      const questIndex = dayOfYear % 4;
-                      
-                      const dailyQuests = [
-                        {
-                          title: "Practice Master",
-                          description: "Complete 1 practice set today",
-                          icon: BookOpen,
-                          reward: 40,
-                          isComplete: userStats?.practiceToday,
-                          progress: userStats?.practiceToday ? 100 : 0,
-                          current: userStats?.practiceToday ? 1 : 0,
-                          target: 1,
-                          action: () => {
-                            if (userSubjects.length > 0) {
-                              setSelectedSubject(userSubjects[0]);
-                              setSubjectDrawerOpen(true);
-                              setDrawerTab('topics');
-                            }
-                          }
-                        },
-                        {
-                          title: "Flashcard Creator",
-                          description: "Create 5 flashcards on any subject",
-                          icon: NotebookPen,
-                          reward: 30,
-                          isComplete: weeklyFlashcardCount >= 5,
-                          progress: Math.min((weeklyFlashcardCount / 5) * 100, 100),
-                          current: Math.min(weeklyFlashcardCount, 5),
-                          target: 5,
-                          action: () => {
-                            if (userSubjects.length > 0) {
-                              setSelectedSubject(userSubjects[0]);
-                              setSubjectDrawerOpen(true);
-                              setDrawerTab('flashcards');
-                            }
-                          }
-                        },
-                        {
-                          title: "Study Session",
-                          description: "Study for 30 minutes",
-                          icon: Clock,
-                          reward: 35,
-                          isComplete: hasAwardedStudyTime,
-                          progress: Math.min((studyTimeMinutes / 30) * 100, 100),
-                          current: Math.min(studyTimeMinutes, 30),
-                          target: 30,
-                          action: () => {
-                            if (userSubjects.length > 0) {
-                              setSelectedSubject(userSubjects[0]);
-                              setSubjectDrawerOpen(true);
-                              setDrawerTab('topics');
-                            }
-                          }
-                        },
-                        {
-                          title: "High Achiever",
-                          description: "Score 80%+ on any topic",
-                          icon: Target,
-                          reward: 50,
-                          isComplete: false,
-                          progress: 0,
-                          current: 0,
-                          target: 1,
-                          action: () => {
-                            if (userSubjects.length > 0) {
-                              setSelectedSubject(userSubjects[0]);
-                              setSubjectDrawerOpen(true);
-                              setDrawerTab('topics');
-                            }
-                          }
-                        }
-                      ];
-                      
-                      const quest = dailyQuests[questIndex];
-                      const QuestIcon = quest.icon;
-                      
-                      return (
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 }}
-                          className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700 hover:border-[#0EA5E9]/50 hover:shadow-lg transition-all"
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className={`p-4 rounded-xl transition-all ${
-                              quest.isComplete 
-                                ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
-                                : 'bg-[#0EA5E9]/10 group-hover:bg-[#0EA5E9]/20'
-                            }`}>
-                              {quest.isComplete ? (
-                                <Check className="h-6 w-6 text-white" />
-                              ) : (
-                                <QuestIcon className="h-6 w-6 text-[#0EA5E9]" />
-                              )}
-                            </div>
-                            
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between mb-3">
-                                <div>
-                                  <h3 className="font-bold text-lg text-[#0F172A] dark:text-white mb-1">{quest.title}</h3>
-                                  <p className="text-sm text-[#64748B] dark:text-gray-400">{quest.description}</p>
-                                </div>
-                                <Badge className={quest.isComplete ? "bg-[#0EA5E9] text-white" : "bg-[#0EA5E9]/10 text-[#0EA5E9]"}>
-                                  +{quest.reward} MP
-                                </Badge>
-                              </div>
-                              
-                              <div className="space-y-2">
-                                <div className="flex items-center justify-between text-xs">
-                                  <span className="text-[#64748B] dark:text-gray-400">Progress: {quest.current}/{quest.target}</span>
-                                  <span className="font-bold text-[#0EA5E9]">{Math.round(quest.progress)}%</span>
-                                </div>
-                                <Progress value={quest.progress} className="h-2" />
-                              </div>
-
-                              {!quest.isComplete && (
-                                <Button 
-                                  size="sm" 
-                                  className="mt-3 bg-[#0EA5E9] hover:bg-[#0284c7] text-white"
-                                  onClick={quest.action}
-                                >
-                                  <Play className="h-3 w-3 mr-1" />
-                                  Start
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })()}
-
-                    {/* Quest 3 - Weekly Topics */}
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="group relative bg-gradient-to-br from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 rounded-2xl p-6 border border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40 hover:shadow-lg transition-all"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`p-4 rounded-xl transition-all ${
-                          (userStats?.weeklyTopicsCount || 0) >= 3
-                            ? 'bg-gradient-to-br from-[#0EA5E9] to-[#0284c7] shadow-lg shadow-[#0EA5E9]/20' 
-                            : 'bg-white dark:bg-gray-700 group-hover:bg-[#0EA5E9]/10'
-                        }`}>
-                          {(userStats?.weeklyTopicsCount || 0) >= 3 ? (
-                            <Check className="h-6 w-6 text-white" />
-                          ) : (
-                            <Star className="h-6 w-6 text-[#0EA5E9]" />
-                          )}
-                        </div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-bold text-lg text-[#0F172A] dark:text-white">Weekly Challenge</h3>
-                                <Badge variant="secondary" className="text-xs">7 Days</Badge>
-                              </div>
-                              <p className="text-sm text-[#64748B] dark:text-gray-400">Complete 3 different topics this week</p>
-                            </div>
-                            <Badge className="bg-[#0EA5E9] text-white">
-                              +100 MP
-                            </Badge>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-[#64748B] dark:text-gray-400">
-                                Progress: {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 topics
-                              </span>
-                              <span className="font-bold text-[#0EA5E9]">
-                                {Math.round(Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100))}%
-                              </span>
-                            </div>
-                            <Progress 
-                              value={Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)} 
-                              className="h-2"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
+              {/* Daily Goal Card */}
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-card-foreground">Daily Goal</h3>
+                       <p className="text-muted-foreground">
+                         50 MP goal — {Math.min(todayEarnedMP, 50)}/50 completed
+                       </p>
+                    </div>
                   </div>
                 </div>
+                <div className="w-full bg-muted rounded-full h-4">
+                  <div 
+                    className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
+                    style={{width: `${Math.min(todayEarnedMP / 50 * 100, 100)}%`}}
+                  ></div>
+                </div>
+              </div>
 
-                {/* Right Column - Quick Stats & Weekly Challenges */}
-                <div className="space-y-4">
-                  {/* Performance Summary */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="bg-gradient-to-br from-white to-[#F8FAFC] dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 border border-[#E2E8F0] dark:border-gray-700"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-bold text-[#0F172A] dark:text-white">This Week</h3>
-                      <Badge className="bg-[#0EA5E9]/10 text-[#0EA5E9] border-0">
-                        <TrendingUp className="h-3 w-3 mr-1" />
-                        Active
-                      </Badge>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
-                        <div className="flex items-center gap-2">
-                          <BookOpen className="h-4 w-4 text-[#0EA5E9]" />
-                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Practice Sets</span>
-                        </div>
-                        <span className="text-lg font-bold text-[#0EA5E9]">{userStats?.weeklyPracticeCount || 0}</span>
+              {/* Daily Quests */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-card-foreground">Today's Quests</h3>
+                
+                 {/* Quest 1 - Login (Always present) */}
+                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                   <div className="flex items-center justify-between">
+                     <div className="flex items-center space-x-4">
+                       <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                         <Check className="w-6 h-6 text-green-600" />
+                       </div>
+                       <div>
+                          <h4 className="text-lg font-bold text-card-foreground">Log in today</h4>
+                          <p className="text-muted-foreground">Log in to earn MP</p>
+                       </div>
+                     </div>
+                     <div className="flex items-center space-x-2">
+                       <span className="text-lg font-bold text-green-600">+10 MP</span>
+                       {userStats?.loginToday && (
+                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                           <Check className="w-4 h-4 text-white" />
+                         </div>
+                       )}
+                     </div>
+                   </div>
+                   <div className="mt-4">
+                       <div className="w-full bg-muted rounded-full h-2">
+                         <div 
+                           className={`${(userStats?.loginToday || todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                           style={{width: (userStats?.loginToday || todayEarnedMP >= 10) ? '100%' : '0%'}}
+                         ></div>
                       </div>
+                   </div>
+                 </div>
 
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
-                        <div className="flex items-center gap-2">
-                          <Brain className="h-4 w-4 text-[#0EA5E9]" />
-                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Topics Learned</span>
-                        </div>
-                        <span className="text-lg font-bold text-[#0EA5E9]">{userStats?.weeklyTopicsCount || 0}</span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-white/50 dark:bg-gray-700/50">
-                        <div className="flex items-center gap-2">
-                          <NotebookPen className="h-4 w-4 text-[#0EA5E9]" />
-                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">Flashcards</span>
-                        </div>
-                        <span className="text-lg font-bold text-[#0EA5E9]">{weeklyFlashcardCount}</span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-[#0EA5E9]/10 to-transparent">
-                        <div className="flex items-center gap-2">
-                          <Gem className="h-4 w-4 text-[#0EA5E9]" />
-                          <span className="text-sm font-medium text-[#0F172A] dark:text-white">MP Earned</span>
-                        </div>
-                        <span className="text-lg font-bold text-[#0EA5E9]">+{todayEarnedMP}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Weekly Mega Challenges */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="bg-gradient-to-br from-[#0EA5E9]/10 via-white to-white dark:from-[#0EA5E9]/20 dark:via-gray-800 dark:to-gray-800 rounded-2xl p-6 border-2 border-[#0EA5E9]/30 dark:border-[#0EA5E9]/40"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-bold text-[#0F172A] dark:text-white flex items-center gap-2">
-                        <Crown className="h-5 w-5 text-[#0EA5E9]" />
-                        Mega Challenges
-                      </h3>
-                      <Badge className="bg-gradient-to-r from-[#0EA5E9] to-[#0284c7] text-white border-0">
-                        2x Rewards
-                      </Badge>
-                    </div>
-
-                    <div className="space-y-3">
-                      {/* Rotating Weekly Challenge 1 */}
-                      {(() => {
-                        const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
-                        const challenge1Index = weekOfYear % 4;
-                    
-                    const weeklyChallenges1 = [
+                 {/* Quest 2 - Rotating Daily Quest */}
+                 {(() => {
+                   const dayOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+                   const questIndex = dayOfYear % 4;
+                   
+                   const dailyQuests = [
+                     {
+                       title: "Complete 1 practice set",
+                       description: "Answer questions to earn MP",
+                       icon: BookOpen,
+                       color: "blue-400",
+                       reward: 40,
+                       isComplete: userStats?.practiceToday,
+                       progress: userStats?.practiceToday ? 100 : 0
+                     },
                       {
-                        title: "Complete 5 practice sets",
-                        icon: Trophy,
-                        reward: 250,
-                        target: 5,
-                        current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
-                        isComplete: (userStats?.weeklyPracticeCount || 0) >= 5
-                      },
-                      {
-                        title: "Practice 8 different topics",
-                        icon: Brain,
-                        reward: 250,
-                        target: 8,
-                        current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
-                        isComplete: (userStats?.weeklyTopicsCount || 0) >= 8
-                      },
-                      {
-                        title: "Study for 3 hours total",
-                        icon: Clock,
-                        reward: 250,
-                        target: 180,
-                        current: 0,
-                        isComplete: false
-                      },
-                      {
-                        title: "Create 20 flashcards",
+                        title: "Create 5 flashcards",
+                        description: "Build your flashcard collection",
                         icon: NotebookPen,
-                        reward: 250,
-                        target: 20,
-                        current: weeklyFlashcardCount,
-                        isComplete: weeklyFlashcardCount >= 20
-                      }
-                    ];
-                    
-                    const challenge = weeklyChallenges1[challenge1Index];
-                    const ChallengeIcon = challenge.icon;
-                    
-                    return (
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="bg-gradient-to-r from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 rounded-2xl p-5 hover:shadow-md transition-all"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-xl ${challenge.isComplete ? 'bg-[#0EA5E9]' : 'bg-white dark:bg-gray-700'} transition-colors shadow-sm`}>
-                            {challenge.isComplete ? (
-                              <Check className="h-5 w-5 text-white" />
-                            ) : (
-                              <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
-                            )}
+                        color: "indigo-400",
+                        reward: 30,
+                        isComplete: weeklyFlashcardCount >= 5,
+                        progress: Math.min((weeklyFlashcardCount / 5) * 100, 100)
+                      },
+                      {
+                        title: "Study for 30 minutes",
+                        description: "Focus on your learning goals",
+                        icon: Clock,
+                        color: "cyan-400",
+                        reward: 35,
+                        isComplete: hasAwardedStudyTime,
+                        progress: (studyTimeMinutes / 30) * 100
+                      },
+                     {
+                       title: "Score 80%+ on any topic",
+                       description: "Demonstrate topic mastery",
+                       icon: Trophy,
+                       color: "amber-400",
+                       reward: 50,
+                       isComplete: false, // TODO: Track high scores
+                       progress: 0
+                     }
+                   ];
+                   
+                   const quest = dailyQuests[questIndex];
+                   const QuestIcon = quest.icon;
+                   
+                   return (
+                     <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                       <div className="flex items-center justify-between">
+                         <div className="flex items-center space-x-4">
+                           <div className={`w-12 h-12 ${quest.isComplete ? 'bg-green-100' : `bg-${quest.color}`} rounded-2xl flex items-center justify-center`}>
+                             {quest.isComplete ? (
+                               <Check className="w-6 h-6 text-green-600" />
+                             ) : (
+                               <QuestIcon className="w-6 h-6 text-white" />
+                             )}
+                           </div>
+                           <div>
+                              <h4 className="text-lg font-bold text-card-foreground">{quest.title}</h4>
+                               <p className="text-muted-foreground">{quest.description}</p>
+                           </div>
+                         </div>
+                         <div className="flex items-center space-x-2">
+                           <span className={`text-lg font-bold ${quest.isComplete ? 'text-green-600' : 'text-blue-500'}`}>
+                             +{quest.reward} MP
+                           </span>
+                           {quest.isComplete && (
+                             <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                               <Check className="w-4 h-4 text-white" />
+                             </div>
+                           )}
+                         </div>
+                       </div>
+                       <div className="mt-4">
+                           <div className="w-full bg-muted rounded-full h-2">
+                             <div 
+                               className={`${quest.isComplete ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                               style={{width: `${quest.progress}%`}}
+                             ></div>
                           </div>
-                          
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-bold text-[#0F172A] dark:text-white">{challenge.title}</h3>
-                              <Badge className="bg-[#0EA5E9] text-white border-0 text-xs">
-                                +{challenge.reward} MP
-                              </Badge>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <Progress 
-                                value={Math.min((challenge.current / challenge.target) * 100, 100)} 
-                                className="h-2 flex-1"
-                              />
-                              <span className="text-xs font-bold text-[#0EA5E9] whitespace-nowrap">
-                                {challenge.current}/{challenge.target}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })()}
+                       </div>
+                     </div>
+                   );
+                 })()}
 
-                  {/* Rotating Weekly Challenge 2 */}
-                  {(() => {
-                    const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
-                    const challenge2Index = (weekOfYear + 2) % 4;
-                    
-                    const weeklyChallenges2 = [
-                      {
-                        title: "Maintain 7-day streak",
-                        icon: Flame,
-                        reward: 500,
-                        target: 7,
-                        current: Math.min(userStats?.currentStreak || 0, 7),
-                        isComplete: (userStats?.currentStreak || 0) >= 7
-                      },
-                      {
-                        title: "Complete 10 practice sets",
-                        icon: Zap,
-                        reward: 500,
-                        target: 10,
-                        current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
-                        isComplete: (userStats?.weeklyPracticeCount || 0) >= 10
-                      },
-                      {
-                        title: "Review 30 flashcards",
-                        icon: Eye,
-                        reward: 500,
-                        target: 30,
-                        current: 0,
-                        isComplete: false
-                      },
-                      {
-                        title: "Practice every day this week",
-                        icon: Calendar,
-                        reward: 500,
-                        target: 7,
-                        current: Math.min(userStats?.currentStreak || 0, 7),
-                        isComplete: (userStats?.currentStreak || 0) >= 7
-                      }
-                    ];
-                    
-                    const challenge = weeklyChallenges2[challenge2Index];
-                    const ChallengeIcon = challenge.icon;
-                    
-                    return (
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-gradient-to-r from-[#0EA5E9]/5 to-transparent dark:from-[#0EA5E9]/10 dark:to-transparent border border-[#0EA5E9]/20 dark:border-[#0EA5E9]/30 rounded-2xl p-5 hover:shadow-md transition-all"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className={`p-3 rounded-xl ${challenge.isComplete ? 'bg-[#0EA5E9]' : 'bg-white dark:bg-gray-700'} transition-colors shadow-sm`}>
-                            {challenge.isComplete ? (
-                              <Check className="h-5 w-5 text-white" />
-                            ) : (
-                              <ChallengeIcon className="h-5 w-5 text-[#0EA5E9]" />
-                            )}
+                {/* Quest 3 - Bonus Weekly */}
+                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-purple-200">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                         <h4 className="text-lg font-bold text-card-foreground">Bonus: Do 3 topics</h4>
+                         <p className="text-muted-foreground">
+                           Weekly challenge — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
+                         </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-purple-500">+100 MP</span>
+                      {(userStats?.weeklyTopicsCount || 0) >= 3 && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className="bg-purple-400 h-2 rounded-full" 
+                        style={{width: `${Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)}%`}}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Weekly Quests */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-card-foreground">This Week's Challenges</h3>
+                
+                {/* Rotating Weekly Challenge 1 */}
+                {(() => {
+                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                  const challenge1Index = weekOfYear % 4;
+                  
+                  const weeklyChallenges1 = [
+                    {
+                      title: "Complete 5 practice sets",
+                      description: "{current}/5 completed this week",
+                      icon: Trophy,
+                      color: "orange-400",
+                      reward: 250,
+                      target: 5,
+                      current: Math.min(userStats?.weeklyPracticeCount || 0, 5),
+                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 5
+                    },
+                    {
+                      title: "Practice 8 different topics",
+                      description: "{current}/8 topics this week",
+                      icon: Brain,
+                      color: "purple-400",
+                      reward: 250,
+                      target: 8,
+                      current: Math.min(userStats?.weeklyTopicsCount || 0, 8),
+                      isComplete: (userStats?.weeklyTopicsCount || 0) >= 8
+                    },
+                    {
+                      title: "Study for 3 hours total",
+                      description: "{current}/180 minutes this week",
+                      icon: Clock,
+                      color: "blue-400",
+                      reward: 250,
+                      target: 180,
+                      current: 0, // TODO: Track weekly study time
+                      isComplete: false
+                    },
+                    {
+                      title: "Create 20 flashcards",
+                      description: `${weeklyFlashcardCount}/20 flashcards this week`,
+                      icon: NotebookPen,
+                      color: "indigo-400",
+                      reward: 250,
+                      target: 20,
+                      current: weeklyFlashcardCount,
+                      isComplete: weeklyFlashcardCount >= 20
+                    }
+                  ];
+                  
+                  const challenge = weeklyChallenges1[challenge1Index];
+                  const ChallengeIcon = challenge.icon;
+                  
+                  return (
+                    <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-12 h-12 bg-${challenge.color} rounded-2xl flex items-center justify-center`}>
+                            <ChallengeIcon className="w-6 h-6 text-white" />
                           </div>
-                          
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-bold text-[#0F172A] dark:text-white">{challenge.title}</h3>
-                              <Badge className="bg-[#0EA5E9] text-white border-0 text-xs">
-                                +{challenge.reward} MP
-                              </Badge>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <Progress 
-                                value={Math.min((challenge.current / challenge.target) * 100, 100)} 
-                                className="h-2 flex-1"
-                              />
-                              <span className="text-xs font-bold text-[#0EA5E9] whitespace-nowrap">
-                                {challenge.current}/{challenge.target}
-                              </span>
-                            </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-card-foreground">{challenge.title}</h4>
+                            <p className="text-muted-foreground">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
                           </div>
                         </div>
-                      </motion.div>
-                    );
-                      })()}
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-bold ${challenge.isComplete ? 'text-green-500' : 'text-orange-500'}`}>
+                            +{challenge.reward} MP
+                          </span>
+                          {challenge.isComplete && (
+                            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="w-full bg-muted rounded-full h-3">
+                          <div 
+                            className={`bg-${challenge.color} h-3 rounded-full`}
+                            style={{width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%`}}
+                          ></div>
+                        </div>
+                      </div>
                     </div>
-                  </motion.div>
+                  );
+                })()}
+
+                {/* Rotating Weekly Challenge 2 */}
+                {(() => {
+                  const weekOfYear = Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (7 * 86400000));
+                  const challenge2Index = (weekOfYear + 2) % 4; // Offset to get different challenge
+                  
+                  const weeklyChallenges2 = [
+                    {
+                      title: "Maintain 7-day streak",
+                      description: "{current}/7 days completed",
+                      icon: Flame,
+                      color: "green-400",
+                      reward: 500,
+                      target: 7,
+                      current: Math.min(userStats?.currentStreak || 0, 7),
+                      isComplete: (userStats?.currentStreak || 0) >= 7
+                    },
+                    {
+                      title: "Complete 10 practice sets",
+                      description: "{current}/10 completed this week",
+                      icon: Zap,
+                      color: "yellow-400",
+                      reward: 500,
+                      target: 10,
+                      current: Math.min(userStats?.weeklyPracticeCount || 0, 10),
+                      isComplete: (userStats?.weeklyPracticeCount || 0) >= 10
+                    },
+                    {
+                      title: "Review 30 flashcards",
+                      description: "{current}/30 reviewed this week",
+                      icon: Eye,
+                      color: "pink-400",
+                      reward: 500,
+                      target: 30,
+                      current: 0, // TODO: Track flashcard reviews
+                      isComplete: false
+                    },
+                    {
+                      title: "Practice every day this week",
+                      description: "{current}/7 days with practice",
+                      icon: Calendar,
+                      color: "teal-400",
+                      reward: 500,
+                      target: 7,
+                      current: Math.min(userStats?.currentStreak || 0, 7),
+                      isComplete: (userStats?.currentStreak || 0) >= 7
+                    }
+                  ];
+                  
+                  const challenge = weeklyChallenges2[challenge2Index];
+                  const ChallengeIcon = challenge.icon;
+                  
+                  return (
+                    <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-12 h-12 bg-${challenge.color} rounded-2xl flex items-center justify-center`}>
+                            <ChallengeIcon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-card-foreground">{challenge.title}</h4>
+                            <p className="text-muted-foreground">
+                              {challenge.description.replace('{current}', challenge.current.toString())}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-bold ${challenge.isComplete ? 'text-green-500' : 'text-purple-500'}`}>
+                            +{challenge.reward} MP
+                          </span>
+                          {challenge.isComplete && (
+                            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="w-full bg-muted rounded-full h-3">
+                          <div 
+                            className={`bg-${challenge.color} h-3 rounded-full`}
+                            style={{width: `${Math.min((challenge.current / challenge.target) * 100, 100)}%`}}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Leaderboard Preview */}
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                      <Trophy className="w-6 h-6 text-yellow-800" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-card-foreground">Weekly Leaderboard</h3>
+                      <p className="text-muted-foreground">
+                        You're ranked #{(() => {
+                          // Calculate user's rank from weekly leaderboard data
+                          let players = leaderboardData.filter(p => {
+                            // Real users appear in both leaderboards
+                            if (p.isRealUser) return true;
+                            
+                            // Filter fake users for weekly leaderboard
+                            return p.leaderboardType === 'weekly';
+                          });
+                          
+                          // Add current user if not present
+                          const userExists = players.some(p => p.isCurrentUser);
+                          if (!userExists && user) {
+                            const currentUserData = {
+                              name: getFirstName(),
+                              mp: userGems,
+                              streak: currentStreak,
+                              isCurrentUser: true,
+                              isRealUser: true
+                            };
+                            players.push(currentUserData);
+                          }
+                          
+                          // Sort and find user rank
+                          players.sort((a, b) => b.mp - a.mp);
+                          const userRank = players.findIndex(p => p.isCurrentUser) + 1;
+                          return userRank || players.length;
+                        })()} this week
+                      </p>
+                    </div>
+                  </div>
+                  <Button 
+                    className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-3 px-6 rounded-2xl"
+                    onClick={() => setActiveTab("leaderboards")}
+                  >
+                    View Leaderboard
+                  </Button>
                 </div>
               </div>
             </div>
@@ -6033,7 +5726,6 @@ const Dashboard = () => {
         }}
         streakCount={currentStreak}
       />
-      </div>
     </div>
   );
 };
